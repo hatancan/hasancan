@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi, Yeniden Oluşturma ve Örtüşme — hasancan.net</title>
+<meta name="description" content="Yrd. Doç. Dr. Selda Güney&#x27;in EEM308 örnekleme sunumu: dürtü katarı örneklemesi, Nyquist hızı ωs &gt; 2ωM, ideal alçak geçiren süzgeçle ve sıfırıncı dereceden tutmayla yeniden oluşturma, örtüşme (aliasing), C/D–D/C dönüşümü, dijital türev alıcı, yarı-örneklem gecikmesi, ondalıklama ve ara değerleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-ornekleme-teorisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi, Yeniden Oluşturma ve Örtüşme">
+<meta property="og:description" content="Yrd. Doç. Dr. Selda Güney&#x27;in EEM308 örnekleme sunumu: dürtü katarı örneklemesi, Nyquist hızı ωs &gt; 2ωM, ideal alçak geçiren süzgeçle ve sıfırıncı dereceden tutmayla yeniden oluşturma, örtüşme (aliasing), C/D–D/C dönüşümü, dijital türev alıcı, yarı-örneklem gecikmesi, ondalıklama ve ara değerleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-ornekleme-teorisi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi, Yeniden Oluşturma ve Örtüşme", "description": "Yrd. Doç. Dr. Selda Güney'in EEM308 örnekleme sunumu: dürtü katarı örneklemesi, Nyquist hızı ωs > 2ωM, ideal alçak geçiren süzgeçle ve sıfırıncı dereceden tutmayla yeniden oluşturma, örtüşme (aliasing), C/D–D/C dönüşümü, dijital türev alıcı, yarı-örneklem gecikmesi, ondalıklama ve ara değerleme.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-ornekleme-teorisi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem308-ornekleme-teorisi.pdf", "contentUrl": "https://hasancan.net/arsiv/eem308-ornekleme-teorisi/eem308-ornekleme-teorisi.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi, Yeniden Oluşturma ve Örtüşme">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM308</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.05.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#neden-ornekleme">Neden örnekleme?</a></li><li><a href="#1-1-durtu-katari-orneklemesi">1.1 Dürtü katarı örneklemesi</a></li><li><a href="#1-2-sifirinci-dereceden-tutmali-ornekleme">1.2 Sıfırıncı dereceden tutmalı örnekleme</a></li><li><a href="#2-sinyalin-yeniden-olusturulmasi">2. Sinyalin yeniden oluşturulması</a></li><li><a href="#ortusme-aliasing">Örtüşme (aliasing)</a></li><li><a href="#surekli-zaman-sinyallerinin-ayrik-zaman-islemesi">Sürekli zaman sinyallerinin ayrık zaman işlemesi</a></li><li><a href="#ayrik-zaman-sinyallerinin-orneklenmesi">Ayrık zaman sinyallerinin örneklenmesi</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi, Yeniden Oluşturma ve Örtüşme</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 07.05.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 308 Sinyaller ve Sistemler II</strong> dersinde <strong>Yrd. Doç. Dr. Selda Güney</strong>'in kullandığı 41 slaytlık <strong>"Örnekleme"</strong> sunumunu metin olarak aktarıyor. Sunumun 8 Mayıs 2014 tarihli bir sürümü ve 7 Mayıs 2015 tarihli, neredeyse aynı içerikteki güncel sürümü vardı; burada 2015 sürümü esas alındı. Grafiklerin çoğu ders kitabı Oppenheim &amp; Willsky'nin <em>Signals &amp; Systems</em> kitabının 7. bölümündeki (Sampling) şekillerden alınmış. Sunumun PDF'i yazının sonunda indirilebilir.</p>
+<p>Sunumun içeriği:</p>
+<ul><li>Örnekleme teoremi</li><li>Sinyalin yeniden oluşturulması</li><li>Örtüşme (aliasing)</li><li>Sürekli zaman sinyallerinin ayrık zaman işlemesi</li><li>Ayrık zaman sinyallerinin örneklenmesi</li></ul>
+<h2 id="neden-ornekleme">Neden örnekleme?</h2>
+<p>Sayısal işaret işleme zinciri: <strong>sürekli sinyal → (örnekleme) → ayrık sinyal → (kod) → sayısal sinyal → DSP → (D/A) → sürekli sinyal</strong>. Ancak örnekleme tek başına sinyali belirlemez: farklı x₁(t), x₂(t), x₃(t) sinyalleri aynı anlarda aynı değerleri alabilir, yani x₁(nT) = x₂(nT) = x₃(nT) iken x₁(t) ≠ x₂(t) ≠ x₃(t) olabilir. Örnekleme teoremi, hangi koşulda örneklerin sinyali <strong>tek türlü</strong> belirlediğini söyler.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Farklı üç sürekli sinyalin aynı örnek değerlerinden geçmesi; sürekli–ayrık–sayısal sinyal zinciri"><figcaption>Aynı örneklerden geçen farklı sinyaller</figcaption></figure>
+<h2 id="1-1-durtu-katari-orneklemesi">1.1 Dürtü katarı örneklemesi</h2>
+<p>x(t), periyodik dürtü katarı p(t) ile çarpılır:</p>
+<p>p(t) = δ_T(t) = Σₙ δ(t − nT)</p>
+<p><strong>Zaman domeninde:</strong></p>
+<p>x_p(t) = x(t)·p(t) = Σₙ x(nT) δ(t − nT)</p>
+<p><strong>Frekans domeninde:</strong> Çarpma, frekansta konvolüsyona dönüşür: X_p(jω) = (1/2π)[X(jω) ∗ P(jω)]. Periyodik dürtü katarının Fourier dönüşümü yine bir dürtü katarıdır:</p>
+<p>P(jω) = (2π/T) Σₖ δ(ω − kω_s) = ω_s Σₖ δ(ω − kω_s), ω_s = 2π/T</p>
+<p>Dolayısıyla:</p>
+<p><strong>X_p(jω) = (1/T) Σₖ X(j(ω − kω_s))</strong></p>
+<p>Örneklenmiş sinyalin spektrumu, X(jω)'nın ω_s aralıklarla ötelenmiş ve 1/T ile ölçeklenmiş kopyalarının toplamıdır. ω_s &gt; 2ω_M ise kopyalar üst üste binmez; ω_s &lt; 2ω_M ise kopyalar örtüşür.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="X(jω), P(jω) ve ωs &gt; 2ωM ile ωs &lt; 2ωM durumlarında Xp(jω)"><figcaption>Örneklenmiş sinyalin spektrumu: örtüşmesiz ve örtüşmeli durum</figcaption></figure>
+<h3 id="ornekleme-teoremi">Örnekleme teoremi</h3>
+<blockquote><p>x(t), |ω| &gt; ω_M için X(jω) = 0 olan <strong>bant sınırlı</strong> bir sinyal olsun. ω_s &gt; 2ω_M (ω_s = 2π/T) ise x(t), x(nT), n = 0, ±1, ±2, … örnekleri tarafından tek türlü oluşturulabilir.</p></blockquote>
+<p><strong>2ω_M</strong> değerine <strong>Nyquist hızı</strong> (Nyquist frekansı) denir.</p>
+<h2 id="1-2-sifirinci-dereceden-tutmali-ornekleme">1.2 Sıfırıncı dereceden tutmalı örnekleme</h2>
+<p>Pratikte dar dürtüler üretmek zor olduğu için <strong>sıfırıncı dereceden tutma</strong> (zero-order hold) kullanılır: her örnek değeri bir sonraki örnekleme anına kadar sabit tutulur. Bu, x_p(t)'nin genişliği T, yüksekliği 1 olan dikdörtgen h₀(t) darbesiyle konvolüsyonudur:</p>
+<p>x₀(t) = x_p(t) ∗ h₀(t) = Σₙ x(nT) h₀(t − nT)</p>
+<p>H₀(jω) = e^{−jωT/2} [2 sin(ωT/2) / ω]</p>
+<p>x(t)'yi x₀(t)'den geri elde etmek için kullanılacak <strong>yeniden oluşturma süzgeci</strong> h_r(t), h₀(t) ile birlikte ideal alçak geçiren süzgeç H(jω)'yı vermelidir:</p>
+<p><strong>H_r(jω) = e^{jωT/2} H(jω) / (2 sin(ωT/2) / ω)</strong>, ω_M &lt; ω_c &lt; ω_s − ω_M</p>
+<p>Bu süzgecin genliği ±ω_s/2 bandında ortada 1'den başlayıp kenarlara doğru yükselen, fazı ise doğrusal (eğim T/2) bir süzgeçtir.</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Sıfırıncı dereceden tutma + yeniden oluşturma süzgecinin, örnekleme + LPF ile eşdeğerliği"><figcaption>Zero-order hold ve yeniden oluşturma süzgeci</figcaption></figure>
+<h2 id="2-sinyalin-yeniden-olusturulmasi">2. Sinyalin yeniden oluşturulması</h2>
+<h3 id="bant-sinirli-ara-degerleme">Bant sınırlı ara değerleme</h3>
+<p>x_p(t), kazancı T ve kesim frekansı ω_c olan ideal alçak geçiren süzgeçten geçirilir (ω_M &lt; ω_c &lt; ω_s − ω_M). Süzgecin darbe yanıtı h(t) = T sin(ω_c t)/(πt) olduğundan:</p>
+<p>x_r(t) = x_p(t) ∗ h(t) = Σₙ x(nT) h(t − nT) = Σₙ x(nT) · T sin[ω_c(t − nT)] / [π(t − nT)]</p>
+<p>Yani yeniden oluşturulan sinyal, her örneğe yerleştirilmiş sinc fonksiyonlarının toplamıdır. Sunumda aynı fikir üç ara değerleme türüyle karşılaştırılıyor: <strong>ideal (bant sınırlı) ara değerleme</strong> (sinc), <strong>sıfırıncı dereceden tutma</strong> (merdiven biçimli yaklaşım) ve <strong>birinci dereceden tutma</strong> (first-order hold; örnekleri doğru parçalarıyla birleştiren üçgen darbe, doğrusal ara değerleme).</p>
+<figure class="yazi-gorsel"><img src="s-18.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Zero-order hold ile ideal ara değerleme süzgecinin frekans yanıtları ve yeniden oluşturma süzgecinin genlik/fazı"><figcaption>Zero-order hold ve recover filter</figcaption></figure>
+<h2 id="ortusme-aliasing">Örtüşme (aliasing)</h2>
+<blockquote><p>Eğer bir sinyal Nyquist hızından (frekansından) daha düşük bir hızda örneklenirse, spektral örtüşme meydana gelir.</p></blockquote>
+<p>Sunumdaki örnekte x(t) = cos(ω₀t) sinüsü farklı ω₀ değerleri için örnekleniyor ve ideal alçak geçiren süzgeçle yeniden oluşturuluyor:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ω₀</th><th scope="col">Yeniden oluşturulan sinyal</th></tr></thead><tbody><tr><th scope="row">ω_s/6</th><td>cos(ω₀t): doğru</td></tr><tr><th scope="row">2ω_s/6</th><td>cos(ω₀t): doğru</td></tr><tr><th scope="row">4ω_s/6</th><td>cos((ω_s − ω₀)t) = cos(ω_s t/3): örtüşme, daha düşük frekans</td></tr><tr><th scope="row">5ω_s/6</th><td>cos((ω_s − ω₀)t) = cos(ω_s t/6): örtüşme</td></tr></tbody></table></div>
+<p>ω₀ &gt; ω_s/2 olduğunda süzgeç çıkışında ω_s − ω₀ frekanslı bir kosinüs görünür.</p>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="ω0 = 4ωs/6 ve 5ωs/6 için örneklenen ve yeniden oluşturulan sinüsler"><figcaption>Örtüşme: Nyquist hızının altında örnekleme</figcaption></figure>
+<h2 id="surekli-zaman-sinyallerinin-ayrik-zaman-islemesi">Sürekli zaman sinyallerinin ayrık zaman işlemesi</h2>
+<p>Sürekli zamanlı bir sinyal üç adımda işlenir:</p>
+<ol><li><strong>C/D dönüşümü</strong> (sürekli → ayrık): x_d[n] = x_c(nT)</li><li><strong>Ayrık zaman sistemi:</strong> H_d(e^{jΩ}), çıkış y_d[n]</li><li><strong>D/C dönüşümü</strong> (ayrık → sürekli): y_d[n] dürtü katarına çevrilir ve kazancı T, kesim frekansı ω_s/2 olan ideal alçak geçiren süzgeçten geçirilir; y_c(t) elde edilir.</li></ol>
+<p>C/D dönüşümünde ayrık zamanlı dizinin spektrumu, x_p(t)'nin spektrumunun frekans ekseninde ölçeklenmiş hâlidir: X_d(e^{jΩ}) = X_p(jΩ/T), yani Ω = ωT. Sürekli zamanda ω_s'de tekrarlayan kopyalar ayrık zamanda 2π'de tekrarlar.</p>
+<p>Örtüşme yoksa tüm sistem, sürekli zamanlı eşdeğer bir süzgeç gibi davranır:</p>
+<p>H_c(jω) = H_d(e^{jωT}) (|ω| &lt; ω_s/2), aksi hâlde 0.</p>
+<figure class="yazi-gorsel"><img src="s-28.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Xc(jω), Xp(jω), Xd(e^jΩ), Hd(e^jΩ) ve sonuçta Yc(jω)&#x27;nın oluşumu"><figcaption>Ayrık zaman işlemenin frekans domeninde gösterimi</figcaption></figure>
+<h3 id="dijital-turev-alici">Dijital türev alıcı</h3>
+<p>Bant sınırlı bir sinyalin türevini alan sürekli zamanlı sistem H_c(jω) = jω (|ω| &lt; ω_c) ile tanımlanır; genliği |ω|, fazı ±π/2'dir. Ayrık zamandaki karşılığı, |Ω| &lt; π için H_d(e^{jΩ}) = jΩ/T'dir.</p>
+<figure class="yazi-gorsel"><img src="s-30.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Sürekli zamanlı türev alıcı Hc(jω) ve ayrık zaman eşdeğeri H(e^jΩ): genlik ve faz"><figcaption>Dijital türev alıcı</figcaption></figure>
+<h3 id="yari-orneklem-gecikmesi">Yarı-örneklem gecikmesi</h3>
+<p>Sinyali Δ kadar geciktiren sistem: H_c(jω) = e^{−jωΔ} (|ω| &lt; ω_c). Ayrık karşılığı H_d(e^{jΩ}) = e^{−jΩΔ/T}. Δ/T bir tam sayı değilse (ör. Δ = T/2), ayrık zamanda "yarım örnek" gecikme tanımsız gibi görünür; ama bant sınırlı sinyal için anlamı açıktır: y_c(t) = x_c(t − T/2) ve y_d[n] = y_c(nT) = x_c((n − ½)T), yani örnekler arasındaki sürekli sinyalin değerleri.</p>
+<h2 id="ayrik-zaman-sinyallerinin-orneklenmesi">Ayrık zaman sinyallerinin örneklenmesi</h2>
+<h3 id="1-durtu-katari-orneklemesi">1. Dürtü katarı örneklemesi</h3>
+<p>Ayrık zamanlı x[n], p[n] = Σₖ δ[n − kN] ile çarpılır: x_p[n] = x[n] için n, N'nin katıysa, aksi hâlde 0. Frekans domeninde:</p>
+<p>X_p(e^{jω}) = (1/N) Σₖ X(e^{j(ω − kω_s)}), ω_s = 2π/N</p>
+<p>Sürekli zamandaki gibi, ω_s &gt; 2ω_M ise kopyalar örtüşmez ve x[n], kazancı N ve kesim frekansı ω_s/2 olan ideal alçak geçiren süzgeçle x_p[n]'den tam olarak geri elde edilir; ω_s &lt; 2ω_M ise örtüşme olur.</p>
+<figure class="yazi-gorsel"><img src="s-34.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="X(e^jω), P(e^jω) ve ωs &gt; 2ωM ile ωs &lt; 2ωM durumunda Xp(e^jω)"><figcaption>Ayrık zamanlı dürtü katarı örneklemesi</figcaption></figure>
+<h3 id="2-ayrik-zamanli-ondaliklama-ve-ara-degerleme">2. Ayrık zamanlı ondalıklama ve ara değerleme</h3>
+<p><strong>Ondalıklama (decimation):</strong> x_p[n]'deki sıfırlar atılarak x_b[n] = x_p[nN] = x[nN] dizisi oluşturulur. Bu, spektrumu frekansta N kat genişletir: X_b(e^{jω}) = X_p(e^{jω/N}). Örtüşme olmaması için x[n]'in bandı yeterince dar olmalıdır (Nω_M &lt; π). Örneğin bir sürekli sinyal gereğinden hızlı örneklenmiş ve ardından alçak geçiren süzgeçle bandı daraltılmışsa, örnek sayısı ondalıklamayla azaltılabilir.</p>
+<p><strong>Ara değerleme (interpolation, upsampling):</strong> Ters işlem; x_b[n]'nin örnekleri arasına N − 1 sıfır eklenerek x_p[n] elde edilir ve bu dizi ideal alçak geçiren süzgeçten geçirilerek x[n] oluşturulur. Sunumdaki örnekte N = 2: X_p(e^{jω}) spektrumu ±π/2'de kesilen, kazancı 2 olan süzgeçten geçirilir ve tepe değeri 2A olan X(e^{jω}) elde edilir.</p>
+<p>Sunum bir örnekle bitiyor: X(e^{jω}) spektrumu |ω| &lt; 2π/9 bandında olan bir dizi. Bu dizi örtüşmesiz olarak en fazla 4 kat ondalıklanabilir; X_b(e^{jω}) spektrumu ±8π/9'a kadar genişler, π'ye kadar hâlâ boşluk kalır. Örnek sayısını daha da azaltmak için dizi önce 2 kat ara değerlenir (X_u(e^{jω}) bandı ±π/9'a daralır), ardından 9 kat ondalıklanır; sonuçtaki X_ub(e^{jω}) spektrumu tüm (−π, π) aralığını doldurur. Böylece toplamda 9/2 oranında, tam sayı olmayan bir örnekleme hızı azaltması elde edilir.</p>
+<figure class="yazi-gorsel"><img src="s-41.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Örnek: X(e^jω), ondalıklanmış Xb(e^jω), ara değerlenmiş Xu(e^jω) ve Xub(e^jω) spektrumları"><figcaption>Ondalıklama ve ara değerleme örneği</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem308-ornekleme-teorisi.pdf" download>eem308-ornekleme-teorisi.pdf</a></p>
+              <p class="kucuk">PDF · 1.3 MB · 41 <span data-i18n="arch.pagesLower"></span> · 07.05.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem308-ornekleme-teorisi.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

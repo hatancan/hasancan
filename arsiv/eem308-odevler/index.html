@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Ödevler (2013–2014), Laplace, z-Dönüşümü ve MATLAB — hasancan.net</title>
+<meta name="description" content="EEM308 Sinyaller ve Sistemler II dersinin 2013 ve 2014 ödevleri: ters Laplace dönüşümü, RC devresi, transfer fonksiyonu, z-dönüşümüyle sistem tepkesi; MATLAB ile laplace/ilaplace, tf2zp, residue, Bode çizimi ve kaskat FIR süzgeçler; öğrenci çözümlerinden notlarla.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-odevler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Ödevler (2013–2014), Laplace, z-Dönüşümü ve MATLAB">
+<meta property="og:description" content="EEM308 Sinyaller ve Sistemler II dersinin 2013 ve 2014 ödevleri: ters Laplace dönüşümü, RC devresi, transfer fonksiyonu, z-dönüşümüyle sistem tepkesi; MATLAB ile laplace/ilaplace, tf2zp, residue, Bode çizimi ve kaskat FIR süzgeçler; öğrenci çözümlerinden notlarla.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-odevler/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Ödevler (2013–2014), Laplace, z-Dönüşümü ve MATLAB", "description": "EEM308 Sinyaller ve Sistemler II dersinin 2013 ve 2014 ödevleri: ters Laplace dönüşümü, RC devresi, transfer fonksiyonu, z-dönüşümüyle sistem tepkesi; MATLAB ile laplace/ilaplace, tf2zp, residue, Bode çizimi ve kaskat FIR süzgeçler; öğrenci çözümlerinden notlarla.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-odevler/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem308-odevler.zip", "contentUrl": "https://hasancan.net/arsiv/eem308-odevler/eem308-odevler.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Ödevler (2013–2014), Laplace, z-Dönüşümü ve MATLAB">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM308</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.02.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#2013-odev-1-laplace-donusumu">2013 – Ödev 1: Laplace dönüşümü</a></li><li><a href="#2013-odev-2-z-donusumuyle-sistem-tepkesi">2013 – Ödev 2: z-dönüşümüyle sistem tepkesi</a></li><li><a href="#2014-odev-1-4">2014 – Ödev 1–4</a></li><li><a href="#2014-matlab-odevi-7-soru">2014 – MATLAB ödevi (7 soru)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Ödevler (2013–2014), Laplace, z-Dönüşümü ve MATLAB</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 28.02.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 308 Sinyaller ve Sistemler II</strong> dersinde 2013 ve 2014 bahar dönemlerinde verilen ödevleri bir araya getiriyor:</p>
+<ul><li><strong>2013:</strong> Bölümün resmî ödev formuyla verilen <em>Ödev Nu. 1</em> (Laplace dönüşümü, teslim 8 Mart 2013) ve <em>Ödev Nu. 2</em> (z-dönüşümü, teslim 29 Mart 2013); ikisi de 28 Şubat 2013 tarihli.</li><li><strong>2014:</strong> Elle yazılmış dört kısa ödev (Ödev-1…4, Mart 2014) ve dönem sonuna doğru verilen, MATLAB ağırlıklı yedi soruluk "EEM 308 Ödev" (teslim tarihi: EEM 308 finalinin yapıldığı gün).</li></ul>
+<p>2014 ödevleri için bir öğrencinin el yazısı çözüm fotoğrafları ve MATLAB ekran görüntüleri de vardı; bunlardan çıkan sonuçlar aşağıda notlarla birlikte aktarıldı (çözümlerde ad veya numara yok; belge özellikleri temizlendi). Fotoğraflar arşivde saklanıyor, yayınlanmıyor; ödev belgeleri ve MATLAB çözümü yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="2013-odev-1-laplace-donusumu">2013 – Ödev 1: Laplace dönüşümü</h2>
+<p><strong>Soru 1:</strong> s-uzayında tanımı verilen fonksiyonun zaman uzayındaki x(t) tanımını ters Laplace dönüşümünü kullanarak bulunuz.</p>
+<p>X(s) = (5s + 13) / (s(s² + 4s + 13)); yakınsama bölgesi: Re(s) &gt; 0</p>
+<p><strong>Soru 2:</strong> Aynı şekilde x(t)'yi bulunuz.</p>
+<p>X(s) = (s² + 6s + 7) / (s² + 3s + 2); yakınsama bölgesi: Re(s) &gt; −1</p>
+<p><strong>Soru 3:</strong> Aşağıdaki devre için Laplace dönüşüm yöntemini kullanarak V_c(t) gerilimini bulunuz.</p>
+<figure class="yazi-gorsel"><img src="hw1-devre.jpg" width="736" height="190" loading="lazy" decoding="async" alt="Seri RC devresi: V·u(t) kaynağı, R direnci, i(t) akımı ve V_c(t) gerilimli kapasitör"><figcaption>Ödev 1, Soru 3: RC devresi</figcaption></figure>
+<p><strong>Soru 4:</strong> Zaman uzayında dinamiği verilen sistemin, giriş x(t) ve çıkış y(t) olmak üzere, giriş-çıkış ilişkisini veren s-uzayındaki transfer fonksiyonunu H(s) bulunuz. Başlangıç koşulları sıfırdır.</p>
+<p>d²y(t)/dt² + 10 dy/dt + 5y(t) = x(t)</p>
+<p>Ödev kâğıdının sonunda x(t) → [h(t)] → y(t) ve X(s) → [H(s)] → Y(s) blok gösterimleri yer alıyor.</p>
+<h2 id="2013-odev-2-z-donusumuyle-sistem-tepkesi">2013 – Ödev 2: z-dönüşümüyle sistem tepkesi</h2>
+<p><strong>Soru 1:</strong> Ayrık zamanlı doğrusal zamanla değişmeyen bir sisteme giriş sinyali olarak x[n] = aⁿ uygulanmaktadır. Sistemin dürtü tepkesinin h[n] = a⁻ⁿ u[−n] olduğu bilinmektedir. z-dönüşümü yöntemini kullanarak sistemin tepkesi y[n]'i bulunuz. (Not: 0 &lt; a &lt; 1)</p>
+<h2 id="2014-odev-1-4">2014 – Ödev 1–4</h2>
+<p><strong>Ödev-1</strong> (MATLAB: <code>laplace</code>, <code>ilaplace</code>, <code>syms</code>, <code>residue</code>): f(t) = 2e⁻ᵗ cos 10t − t⁴ + 6e^{−(t−10)} fonksiyonunun Laplace dönüşümünü bulunuz.</p>
+<p><strong>Ödev-2:</strong> F(s) = (s² + 9s + 19) / ((s + 1)(s + 2)(s + 4)) ise f(t) = ?</p>
+<p><strong>Ödev-3:</strong> y‴(t) + 4y″(t) + 6y′(t) + 4y(t) = 0, ẏ(0) = 0, ÿ(0) = −1. Y(s)'yi elle bulunuz.</p>
+<p><strong>Ödev-4:</strong> Seri bağlı e(t) kaynağı, R, L ve C'den oluşan devrede e(t) = −2v(t), R = 1 Ω, L = 0,5 H, C = 0,2 F, v(0) = 5 V, v̇(0) = 0. v(t)'nin t'ye göre değişimini çiziniz; v(t) = ?</p>
+<h3 id="ogrenci-cozumunden-sonuclar">Öğrenci çözümünden sonuçlar</h3>
+<p><strong>Ödev-1 (MATLAB):</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>syms t s
+f = 2*exp(-1*t)*cos(10*t) - t^4 + 6*exp(-1*(t-10));
+F = laplace(f, t, s)
+simplify(F)
+pretty(ans)</code></pre>
+<pre class="kod"><code>F =
+(2*(s + 1))/((s + 1)^2 + 100) - 24/s^5 + (6*exp(10))/(s + 1)</code></pre>
+<p>Yani F(s) = 2(s + 1)/((s + 1)² + 100) − 24/s⁵ + 6e¹⁰/(s + 1). Son terim, e^{−(t−10)} = e¹⁰·e⁻ᵗ yazılarak elde ediliyor.</p>
+<p><strong>Ödev-2 (MATLAB):</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>clear
+syms t s
+F = ( s^2 + 9*s + 19 ) / ((s+1)*(s+2)*(s+4));
+ilaplace(F)</code></pre>
+<pre class="kod"><code>ans =
+(11*exp(-t))/3 - (5*exp(-2*t))/2 - exp(-4*t)/6</code></pre>
+<p>f(t) = (11/3)e⁻ᵗ − (5/2)e⁻²ᵗ − (1/6)e⁻⁴ᵗ, t ≥ 0. Elle kontrol: s = −1'deki kalıntı (1 − 9 + 19)/(1·3) = 11/3, s = −2'deki (4 − 18 + 19)/((−1)·2) = −5/2, s = −4'teki (16 − 36 + 19)/((−3)(−2)) = −1/6.</p>
+<figure class="yazi-gorsel"><img src="matlab-laplace.jpg" width="1366" height="768" loading="lazy" decoding="async" alt="MATLAB R2013a: syms t s, laplace(f,t,s), simplify ve pretty çıktısı"><figcaption>Ödev-1: laplace komutu</figcaption></figure>
+<figure class="yazi-gorsel"><img src="matlab-ilaplace.jpg" width="1366" height="768" loading="lazy" decoding="async" alt="MATLAB R2013a: ilaplace(F), simplify ve pretty çıktısı"><figcaption>Ödev-2: ilaplace komutu</figcaption></figure>
+<p><strong>Ödev-3 (elle):</strong> Her terimin Laplace dönüşümü alınır:</p>
+<p>[s³Y(s) − s²y(0) − sẏ(0) − ÿ(0)] + 4[s²Y(s) − sy(0) − ẏ(0)] + 6[sY(s) − y(0)] + 4Y(s) = 0</p>
+<p>ẏ(0) = 0 ve ÿ(0) = −1 yerine konunca:</p>
+<p><strong>Y(s) = (s²y(0) + 4s·y(0) + 6y(0) − 1) / (s³ + 4s² + 6s + 4)</strong></p>
+<p>y(0) verilmediği için sonuç y(0)'a bağlı kalıyor; y(0) = 0 alınırsa Y(s) = −1/(s³ + 4s² + 6s + 4) olur.</p>
+<p><em>Not: Öğrencinin ilk sayfasında y(0) = 0 durumu için Y(s) = 1/(s³ + 4s² + 6s + 4) yazılmış; ÿ(0) = −1 olduğundan pay −1 olmalıdır. İkinci sayfadaki genel ifade (yukarıdaki) doğrudur. Payda s³ + 4s² + 6s + 4 = (s + 2)(s² + 2s + 2) şeklinde çarpanlarına ayrılır.</em></p>
+<p><strong>Ödev-4:</strong> Öğrenci çözümünde e(t) = −2v(t) koşulu türevli bir ifade gibi yazılıp v(t) = (e(t) + 5)/(2s) sonucuna ulaşılmış; bu sonuç hatalı.</p>
+<p><em>Not: Seri devrede KVL: e(t) = R·i + L·di/dt + v, i = C·dv/dt. e = −2v konunca LC·v″ + RC·v′ + 3v = 0, yani 0,1v″ + 0,2v′ + 3v = 0 ⇒ v″ + 2v′ + 30v = 0. Karakteristik kökler s = −1 ± j√29. v(0) = 5, v̇(0) = 0 ile Laplace dönüşümünden V(s) = 5(s + 2)/(s² + 2s + 30) ve v(t) = 5e⁻ᵗ [cos(√29 t) + (1/√29) sin(√29 t)], t ≥ 0: genliği e⁻ᵗ ile sönen, açısal frekansı √29 ≈ 5,39 rad/s olan bir salınım.</em></p>
+<h2 id="2014-matlab-odevi-7-soru">2014 – MATLAB ödevi (7 soru)</h2>
+<p>Puanları sorunun yanında daire içinde verilen ödev:</p>
+<ol><li><strong>(20)</strong> Aşağıdaki transfer fonksiyonunu çarpım şeklinde ifade edin, kutup ve sıfırlarını çiziniz. Yakınsama bölgesini belirtiniz. H(z) = (2z⁴ + 16z³ + 44z² + 56z + 32) / (3z⁴ + 3z³ − 15z² + 18z − 12). İpucu: <code>tf2zp</code>, <code>zp2sos</code>, <code>zplane</code> (MATLAB'da çözülecek).</li><li><strong>(40)</strong> Yukarıdaki transfer fonksiyonuna benzer, pay ve paydanın derecesi okul numaranızın son rakamı olacak şekilde rasyonel bir transfer fonksiyonu oluşturun; 1. soruda yaptıklarınızı bu fonksiyon için tekrarlayınız (son rakamı 0 olanlar 8 kullanmalı).</li><li><strong>(40)</strong> Kutupları p₁ = −0,45, p₂ = 0,67, p₃ = 0,81 + j0,72 olan, sıfırları okul numaranızın 5., 6. ve 7. rakamları olan, K kazancı 2,2 olan sistemin transfer fonksiyonunu elde ediniz. Birim dürtü ve birim basamak cevaplarını çiziniz.</li><li><strong>(20)</strong> z bölgesindeki G(z) = 18z³ / (18z³ + 3z² − 4z − 1) fonksiyonunu MATLAB kullanarak kısmi kesirlere ayırınız.</li><li><strong>(20)</strong> X(e^{jω}) = (0,008 − 0,033e^{−jω} + 0,05e^{−j2ω} − 0,033e^{−j3ω} + 0,008e^{−j4ω}) / (1 + 2,37e^{−jω} + 2,7e^{−j2ω} + 1,6e^{−j3ω} + 0,41e^{−j4ω}) ayrık zaman Fourier dönüşümlü işaretin Bode genlik ve faz diyagramını çiziniz.</li><li><strong>(20)</strong> H(z) = (z − 0,2) / (z²(z − 0,7)) ile verilen sistemin girişine x[n] = (0,9)ⁿ u[n] uygulanırsa y[n]'i elde ediniz (elde hesaplayınız).</li><li><strong>(40)</strong> İki filtre kaskat bağlanmıştır. Birinci filtrenin birim dürtü çıkışı h₁[n] = 0,75δ[n] − 1,75δ[n−1] + 1,75δ[n−2] − 0,25δ[n−3], ikinci filtreninki h₂[n] = 0,25δ[n] + 0,25δ[n−1] + 0,25δ[n−2] + 0,25δ[n−3] ise: a) H₁(z) ve H₂(z)'yi bulun, sıfır ve kutuplarını MATLAB ile bulup ayrı ayrı alçak mı yüksek geçiren mi olduğunu bulunuz. b) H(z) = H₁(z)H₂(z)'yi elde ediniz; sıfır, kutup, genlik ve faz cevabını MATLAB'da çizdiriniz. Filtrenin alçak, yüksek, bant geçiren veya bant durduran süzgeç olup olmadığını belirtiniz.</li></ol>
+<h3 id="bir-ogrenci-cozumunden-matlab-sonuclari">Bir öğrenci çözümünden MATLAB sonuçları</h3>
+<p><strong>Soru 1:</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>pay = [2 16 44 56 32];
+payda = [3 3 -15 18 -12];
+[z,p,k] = tf2zp(pay,payda)
+zplane(pay,payda)</code></pre>
+<pre class="kod"><code>z =
+  -4.0000
+  -2.0000
+  -1.0000 + 1.0000i
+  -1.0000 - 1.0000i
+
+p =
+  -3.2361
+   1.2361
+   0.5000 + 0.8660i
+   0.5000 - 0.8660i
+
+k =
+    0.6667</code></pre>
+<p>Çarpım biçiminde: H(z) = (2/3) · (z + 4)(z + 2)(z² + 2z + 2) / ((z² + 2z − 4)(z² − z + 1)). Kutuplar −1 ± √5 (≈ 1,2361 ve −3,2361) ile 0,5 ± j0,866 (birim çember üzerinde, e^{±jπ/3}).</p>
+<p><em>Not: Öğrenci çözümünde ROC yazılmamış. Kutupların en büyük genliği |−3,2361| olduğundan, sistem nedensel kabul edilirse ROC |z| &gt; 3,2361'dir; bu ROC birim çemberi içermediği için nedensel sistem kararlı değildir.</em></p>
+<p><strong>Soru 4:</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>n = [18];
+d = [18 3 -4 -1];
+[r,p,k] = residue(n,d)</code></pre>
+<pre class="kod"><code>r =
+    1.4400
+   -1.4400
+   -1.2000
+p =
+    0.5000
+   -0.3333
+   -0.3333
+k =
+     []</code></pre>
+<p><em>Not: <code>residue(18, [18 3 -4 -1])</code> aslında 18/(18z³ + 3z² − 4z − 1) = G(z)/z³ ifadesini z'nin kuvvetlerinde açar: 1,44/(z − 0,5) − 1,44/(z + 1/3) − 1,2/(z + 1/3)². z⁻¹ cinsinden açılım için <code>residuez(18, [18 3 -4 -1])</code> kullanılmalıdır; bu durumda G(z) = 0,36/(1 − 0,5z⁻¹) + 0,24/(1 + ⅓z⁻¹) + 0,4/(1 + ⅓z⁻¹)² elde edilir (iki açılım da sayısal olarak doğrulandı).</em></p>
+<p><strong>Soru 5:</strong> Çözümde <code>x = tf(pay,payda)</code> ve <code>bode(x), grid</code> kullanılmış.</p>
+<p><em>Not: Çözümdeki pay vektörü <code>[0.008 -0.033 0.05 -0.033 0.080]</code> yazılmış; soruda son katsayı 0,008'dir. Ayrıca <code>tf(pay,payda)</code> sürekli zamanlı (s) bir sistem oluşturur; ayrık zaman Fourier dönüşümü için <code>freqz(pay,payda)</code> ya da örnekleme süresi verilerek <code>tf(pay,payda,1,'Variable','z^-1')</code> kullanılmalıdır.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem308-odevler.zip" download>eem308-odevler.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 403 KB · 28.02.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem308-odevler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (403 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

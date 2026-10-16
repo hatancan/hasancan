@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 5 – Kutuplar, Sıfırlar ve Zaman Yanıtı; Birinci ve İkinci Dereceden Sistemler — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 5 (Hamit Erdem, 2013): kutup ve sıfırların zaman yanıtına etkisi, birinci dereceden sistemde zaman sabiti, yükselme ve yerleşme süresi; ikinci dereceden sistemlerde aşırı sönümlü, sönümlü, kritik sönümlü ve sönümsüz yanıtlar, doğal frekans, sönüm oranı, tepe zamanı, yüzde aşım ve çözümlü örnekler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 5 – Kutuplar, Sıfırlar ve Zaman Yanıtı; Birinci ve İkinci Dereceden Sistemler">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 5 (Hamit Erdem, 2013): kutup ve sıfırların zaman yanıtına etkisi, birinci dereceden sistemde zaman sabiti, yükselme ve yerleşme süresi; ikinci dereceden sistemlerde aşırı sönümlü, sönümlü, kritik sönümlü ve sönümsüz yanıtlar, doğal frekans, sönüm oranı, tepe zamanı, yüzde aşım ve çözümlü örnekler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 5 – Kutuplar, Sıfırlar ve Zaman Yanıtı; Birinci ve İkinci Dereceden Sistemler", "description": "EEM322 Denetim Sistemleri ders notu 5 (Hamit Erdem, 2013): kutup ve sıfırların zaman yanıtına etkisi, birinci dereceden sistemde zaman sabiti, yükselme ve yerleşme süresi; ikinci dereceden sistemlerde aşırı sönümlü, sönümlü, kritik sönümlü ve sönümsüz yanıtlar, doğal frekans, sönüm oranı, tepe zamanı, yüzde aşım ve çözümlü örnekler.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "EEM322L5.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/EEM322L5.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 5 – Kutuplar, Sıfırlar ve Zaman Yanıtı; Birinci ve İkinci Dereceden Sistemler">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#test-giris-fonksiyonlari">Test giriş fonksiyonları</a></li><li><a href="#transfer-fonksiyonu-kutuplar-ve-sifirlar">Transfer fonksiyonu, kutuplar ve sıfırlar</a></li><li><a href="#birinci-dereceden-sistemler">Birinci dereceden sistemler</a></li><li><a href="#i-kinci-dereceden-sistemler">İkinci dereceden sistemler</a></li><li><a href="#genel-ikinci-dereceden-sistem-dogal-frekans-ve-sonum-orani">Genel ikinci dereceden sistem: doğal frekans ve sönüm oranı</a></li><li><a href="#sonumlu-ikinci-dereceden-sistemin-basarim-olcutleri">Sönümlü ikinci dereceden sistemin başarım ölçütleri</a></li><li><a href="#kutuplarin-yeri-ile-basarim-olcutleri-arasindaki-iliski">Kutupların yeri ile başarım ölçütleri arasındaki ilişki</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 5 – Kutuplar, Sıfırlar ve Zaman Yanıtı; Birinci ve İkinci Dereceden Sistemler</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>5. ders notudur</strong> ("EEM322: Lecture 5"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 15.07.2013 tarihi var. Ders notu İngilizce ve Türkçe karışık, sayfa başına iki slayt yerleştirilmiş 20 sayfalık bir PDF; bazı slaytlarda Prof. Dr. Galip Cansever'in ders notlarına ve Nise'nin kitabına kaynak gösteriliyor. Aşağıda içerik Türkçe olarak özetlendi ve sayısal örnekler yazıya döküldü; yanıt eğrileri için sayfa görselleri eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Konular: transfer fonksiyonunun sıfırları ve kutupları, zaman yanıtı, birinci ve ikinci dereceden sistemler, geçici yanıt, yükselme süresi, yerleşme süresi, kalıcı durum ve test giriş fonksiyonları.</p>
+<h2 id="test-giris-fonksiyonlari">Test giriş fonksiyonları</h2>
+<ul><li><strong>Dürtü:</strong> r(t) = aδ(t), a sabit</li><li><strong>Basamak:</strong> r(t) = au(t), a sabit</li><li><strong>Rampa:</strong> t ≥ 0 için r(t) = at, t &lt; 0 için 0; basamak fonksiyonunun integralidir</li><li><strong>Parabol:</strong> t ≥ 0 için r(t) = at², t &lt; 0 için 0; rampa fonksiyonunun integralidir</li></ul>
+<p>Dürtü ve basamak girişleri geçici yanıtı (yükselme ve yerleşme süresi), rampa ve parabol girişleri kalıcı durum hatasını incelemek için kullanılır.</p>
+<h2 id="transfer-fonksiyonu-kutuplar-ve-sifirlar">Transfer fonksiyonu, kutuplar ve sıfırlar</h2>
+<p><strong>Transfer fonksiyonu</strong>, başlangıç koşulları sıfır kabul edilerek bir sistemin yanıt fonksiyonu (çıkış) ile sürücü fonksiyonu (giriş) arasındaki Laplace dönüşümlerinin oranıdır. Sistemin dinamik özelliklerini tanımlar ve sistemin kendi özelliğidir; fiziksel yapısı hakkında bilgi vermez, farklı fiziksel sistemlerin transfer fonksiyonları aynı olabilir.</p>
+<p>Diferansiyel denklem çözmek ya da ters Laplace dönüşümü almak zahmetli ve zaman alıcıdır. Kutupları ve sıfırları ve bunların zaman yanıtıyla ilişkisini kullanmak çok daha kolay bir yöntemdir.</p>
+<ul><li><strong>Kutuplar:</strong> Transfer fonksiyonunu sonsuz yapan s değerleri; paydanın kökleri. Karmaşık kutuplar sistemin doğal frekanslarıdır; enerjinin sistemin farklı iç enerji depolama elemanları arasında serbestçe dolaştığı frekansları temsil eder.</li><li><strong>Sıfırlar:</strong> Transfer fonksiyonunu sıfır yapan s değerleri; payın kökleri.</li></ul>
+<p>Örnek: G(s) = K(s + 1)(s + 15) / (s(s + 3)(s + 5)(s + 8)²) için sıfırlar −1 ve −15, kutuplar 0, −3, −5 ve −8'dir (−8 çift katlı).</p>
+<p><strong>Kutuplar yanıtın niteliğini belirler:</strong> Giriş fonksiyonunun kutupları <strong>zorlanmış yanıtın</strong>, transfer fonksiyonunun kutupları <strong>doğal yanıtın</strong> biçimini belirler.</p>
+<p><strong>Örnek:</strong> G(s) = (s + 2)/(s + 5) sistemine birim basamak uygulanırsa:</p>
+<p>C(s) = (s + 2)/(s(s + 5)) = (2/5)/s + (3/5)/(s + 5)  →  c(t) = 2/5 + (3/5)e^(−5t)</p>
+<p>Bu örnekten çıkan sonuçlar:</p>
+<ol><li>Giriş fonksiyonunun kutbu zorlanmış çözümün biçimini üretir (orijindeki birim basamak kutbu çıkışta bir basamak fonksiyonu oluşturur).</li><li>Transfer fonksiyonunun kutbu doğal yanıtı üretir (−5'teki kutup e^(−5t)'yi üretir).</li><li>Gerçel eksendeki bir kutup e^(−αt) biçiminde üstel bir yanıt üretir; kutup orijinden ne kadar soldaysa üstel geçici yanıt o kadar hızlı söner.</li><li>Sıfır, hem kalıcı durumda hem geçici rejimde yanıtın genliklerinin oluşmasına katkıda bulunur.</li></ol>
+<h3 id="yaniti-kutuplardan-yazmak">Yanıtı kutuplardan yazmak</h3>
+<p>Gerçel eksendeki her sistem kutbu, doğal yanıtın bileşeni olan bir üstel terim üretir; giriş kutbu zorlanmış yanıtı üretir. Örneğin (s + 3)/((s + 2)(s + 4)(s + 5)) sistemine birim basamak uygulanırsa c(t) ≡ K₁ + K₂e^(−2t) + K₃e^(−4t) + K₄e^(−5t) olur: ilk terim zorlanmış, diğerleri doğal yanıttır.</p>
+<p><strong>Problem:</strong> G(s) = 10(s + 4)(s + 6) / ((s + 1)(s + 7)(s + 8)(s + 10)) sisteminin birim basamak yanıtını genel biçimde yazın.</p>
+<p><strong>Cevap:</strong> c(t) ≡ A + Be^(−t) + Ce^(−7t) + De^(−8t) + Ee^(−10t)</p>
+<h2 id="birinci-dereceden-sistemler">Birinci dereceden sistemler</h2>
+<p>Sıfırı olmayan birinci dereceden sistem G(s) = a/(s + a). Birim basamak yanıtı:</p>
+<p>C(s) = a/(s(s + a))  →  c(t) = c_f(t) + c_n(t) = 1 − e^(−at)</p>
+<p>Orijindeki giriş kutbu zorlanmış yanıtı c_f(t) = 1, −a'daki sistem kutbu doğal yanıtı c_n(t) = −e^(−at) üretir. Geçici yanıtı tanımlamak için gereken tek parametre a'dır.</p>
+<ul><li><strong>Zaman sabiti (τ = 1/a):</strong> t = 1/a'da e^(−at) = e^(−1) = 0.37, dolayısıyla c(t) = 1 − 0.37 = 0.63. Zaman sabiti, e^(−at)'nin başlangıç değerinin %37'sine düşmesi ya da basamak yanıtının son değerinin %63'üne yükselmesi için geçen süredir. a = 1 ise sistem 1 saniye mertebesinde, a = 100 ise 0.01 saniye mertebesinde yanıt verir; hızlı sistemlerin a değeri büyüktür.</li><li><strong>Yükselme süresi (T_r):</strong> Yanıtın son değerinin 0.1'inden 0.9'una çıkması için geçen süre. 0.1 = 1 − e^(−at) için t₁ = 0.11/a, 0.9 = 1 − e^(−at) için t₂ = 2.31/a, dolayısıyla T_r = 2.31/a − 0.11/a = <strong>2.2/a</strong>.</li><li><strong>Yerleşme süresi (T_s):</strong> Yanıtın son değerinin ±%2'sine ulaşıp orada kalması için geçen süre. c(t) = 0.98 için −at = ln 0.02 = −3.912, dolayısıyla T_s = <strong>4/a</strong>.</li></ul>
+<p>Birinci dereceden sistem genel olarak G(s) = K/(τs + 1) biçiminde de yazılır; K sistem kazancı, τ zaman sabitidir. Kutup-sıfır biçimi G(s) = K_p/(s + a) ise K_p = K/τ, a = 1/τ'dur. Toplam yanıt y(t) = y_zorlanmış(t) + y_serbest(t) olarak ayrılır.</p>
+<h2 id="i-kinci-dereceden-sistemler">İkinci dereceden sistemler</h2>
+<p>Birinci dereceden bir sistemin parametresini değiştirmek yalnızca yanıtın hızını değiştirir. İkinci dereceden sistemde ise parametrelerin değişmesi yanıtın <strong>biçimini</strong> değiştirebilir: yanıt birinci dereceden bir sistem gibi olabileceği gibi, eleman değerlerine bağlı olarak sönümlü ya da saf salınımlar da gösterebilir.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="İkinci dereceden sistemlerin dört yanıt türü: aşırı sönümlü, sönümlü, sönümsüz ve kritik sönümlü"><figcaption>İkinci dereceden sistemlerin yanıt türleri</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Tür</th><th scope="col">Kutuplar</th><th scope="col">Doğal yanıt c(t)</th></tr></thead><tbody><tr><th scope="row">Aşırı sönümlü (overdamped)</th><td>İki ayrı gerçel kök: −σ₁, −σ₂</td><td>K₁e^(−σ₁t) + K₂e^(−σ₂t)</td></tr><tr><th scope="row">Sönümlü (underdamped)</th><td>Karmaşık eşlenik: −σ_d ± jω_d</td><td>Ae^(−σ_d t) cos(ω_d t − φ)</td></tr><tr><th scope="row">Sönümsüz (undamped)</th><td>Sanal eksende: ± jω₁</td><td>A cos(ω₁t − φ)</td></tr><tr><th scope="row">Kritik sönümlü (critically damped)</th><td>Katlı gerçel kök: −σ₁</td><td>K₁e^(−σ₁t) + K₂te^(−σ₁t)</td></tr></tbody></table></div>
+<ul><li><strong>Aşırı sönümlü:</strong> İki kök gerçel eksen üzerindeyken oluşur. Notun örneğinde 9/(s² + 9s + 9) sisteminin kutupları −7.854 ve −1.146'dır.</li><li><strong>Sönümsüz (salınımlı):</strong> İki kök sanal eksen üzerindeyken oluşur; sönüm olmasaydı saf sinüs biçiminde bir yanıt elde edilirdi. Örnek: 9/(s² + 9), kutuplar ±j3.</li><li><strong>Kritik sönümlü:</strong> Negatif gerçel eksende iki katlı kök vardır. Kritik sönümlü yanıtlar, sönümlü yanıta özgü aşım olmadan elde edilebilecek en hızlı yanıtlardır. Örnek: 9/(s² + 6s + 9), kutuplar −3 (çift).</li><li><strong>Sönümlü:</strong> Karmaşık eşlenik kutuplar vardır. Kutbun gerçel kısmı sinüsün genliğinin üstel sönüm frekansına, sanal kısmı sinüsün salınım frekansına karşılık gelir. Sinüsün frekansına <strong>sönümlü salınım frekansı</strong> ω_d denir. Örnek: 9/(s² + 2s + 9).</li></ul>
+<p><strong>Örnek (sönümlü yanıtın biçimi):</strong> 200/(s² + 10s + 200) sisteminin kutupları s = −5 ± j13.23'tür. Gerçel kısım −5 sönümün üstel frekansıdır ve salınımların sönüm zaman sabitinin tersidir; sanal kısım 13.23 sinüs salınımlarının açısal frekansıdır. Birim basamak yanıtı:</p>
+<p>c(t) = K₁ + e^(−5t)(K₂ cos 13.23t + K₃ sin 13.23t) = K₁ + K₄e^(−5t) cos(13.23t − φ),  φ = tan⁻¹(K₃/K₂), K₄ = √(K₂² + K₃²)</p>
+<p><strong>Örnekler (birim basamak yanıtının genel biçimi):</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Transfer fonksiyonu</th><th scope="col">Yanıtın biçimi</th></tr></thead><tbody><tr><th scope="row">G(s) = 400/(s² + 12s + 400)</th><td>c(t) = A + Be^(−6t) cos(19.08t + φ)</td></tr><tr><th scope="row">G(s) = 900/(s² + 90s + 900)</th><td>c(t) = A + Be^(−78.54t) + Ce^(−11.46t)</td></tr><tr><th scope="row">G(s) = 225/(s² + 30s + 225)</th><td>c(t) = A + Be^(−15t) + Cte^(−15t)</td></tr><tr><th scope="row">G(s) = 625/(s² + 625)</th><td>c(t) = A + B cos(25t + φ)</td></tr></tbody></table></div>
+<h2 id="genel-ikinci-dereceden-sistem-dogal-frekans-ve-sonum-orani">Genel ikinci dereceden sistem: doğal frekans ve sönüm oranı</h2>
+<p>İkinci dereceden geçici yanıtı tanımlamak için, birinci dereceden sistemdeki zaman sabiti gibi, fiziksel anlamı olan iki büyüklük tanımlanır:</p>
+<ul><li><strong>Doğal frekans (ω_n):</strong> İkinci dereceden sistemin sönüm olmadığındaki salınım frekansı. Örneğin direnci kısa devre edilmiş bir seri RLC devresinin salınım frekansı doğal frekanstır.</li><li><strong>Sönüm oranı (ζ):</strong> ζ = üstel düşüm frekansı / doğal frekans (rad/s) = (1/2π) · doğal periyot / üstel zaman sabiti. Sönümlü sistemlerde ζ, 0 ile 1 arasındadır.</li></ul>
+<p>Genel sistem G(s) = b/(s² + as + b) için sönüm yokken (a = 0) kutuplar ±j√b'de olduğundan ω_n = √b, b = ω_n²'dir. Sönümlü sistemde karmaşık kutupların gerçel kısmı σ = −a/2 olduğundan ζ = |σ|/ω_n = (a/2)/ω_n, yani a = 2ζω_n. Genel ikinci dereceden transfer fonksiyonu:</p>
+<p>G(s) = ω_n² / (s² + 2ζω_n s + ω_n²),  s₁,₂ = −ζω_n ± ω_n√(ζ² − 1)</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Sönüm oranına göre ikinci dereceden yanıtın durumları ve kutup yerleri"><figcaption>ζ'ye göre yanıt türleri</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ζ</th><th scope="col">Yanıt</th></tr></thead><tbody><tr><th scope="row">ζ = 0</th><td>Sönümsüz</td></tr><tr><th scope="row">0 &lt; ζ &lt; 1</th><td>Sönümlü</td></tr><tr><th scope="row">ζ = 1</th><td>Kritik sönümlü</td></tr><tr><th scope="row">ζ &gt; 1</th><td>Aşırı sönümlü</td></tr></tbody></table></div>
+<p><strong>Örnek:</strong> G(s) = 36/(s² + 4.2s + 36) için ω_n² = 36 → ω_n = 6 ve 2ζω_n = 4.2 → ζ = 4.2/(2 × 6) = 0.35.</p>
+<p><strong>Örnek:</strong> 12/(s² + 8s + 12) sisteminde ζ = 8/(2√12) = 1.155 &gt; 1 olduğundan yanıt <strong>aşırı sönümlüdür</strong>. 16/(s² + 8s + 16) sisteminde ζ = 8/(2√16) = 1 olduğundan yanıt <strong>kritik sönümlüdür</strong>.</p>
+<p><strong>Örnek:</strong> Aşağıdaki sistemler için ζ ve ω_n:</p>
+<ol><li>400/(s² + 12s + 400): ζ = 0.3, ω_n = 20; sönümlü.</li><li>900/(s² + 90s + 900): ζ = 1.5, ω_n = 30; aşırı sönümlü.</li><li>225/(s² + 30s + 225): ζ = 1, ω_n = 15; kritik sönümlü.</li><li>625/(s² + 625): ζ = 0, ω_n = 25; sönümsüz.</li></ol>
+<h2 id="sonumlu-ikinci-dereceden-sistemin-basarim-olcutleri">Sönümlü ikinci dereceden sistemin başarım ölçütleri</h2>
+<p>Genel sistemin basamak yanıtı kısmi kesirlere açılıp ters Laplace dönüşümü alınarak bulunur:</p>
+<p>c(t) = 1 − (1/√(1 − ζ²)) e^(−ζω_n t) cos(ω_n√(1 − ζ²) t − φ),  φ = tan⁻¹(ζ/√(1 − ζ²))</p>
+<p>ζ ne kadar küçükse yanıt o kadar salınımlıdır. Sönümlü yanıtla ilişkili diğer parametreler:</p>
+<ul><li><strong>Yükselme süresi T_r:</strong> Yanıtın son değerin 0.1'inden 0.9'una çıkması için geçen süre (sistem yanıtının %10'undan %90'ına).</li><li><strong>Tepe zamanı T_p:</strong> Yanıtın ilk (en büyük) tepeye ulaşması için geçen süre.</li><li><strong>Yüzde aşım (%OS):</strong> Yanıtın tepe zamanında kalıcı durum değerini ne kadar aştığı, kalıcı durum değerinin yüzdesi olarak.</li><li><strong>Yerleşme süresi T_s:</strong> Geçici sönümlü salınımların kalıcı durum değerinin ±%2'sine ulaşıp orada kalması için geçen süre.</li></ul>
+<p>Bu bilgiler, tasarımcının yanıtın hızının ya da niteliğinin sistem başarımını düşürüp düşürmediğine karar vermesi için önemlidir. Örneğin bir CD okuyucu kafasının bilgiyi okumak için kararlı hâle gelme süresi bütün bilgisayarın başarımını etkiler.</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Sönümlü ikinci dereceden yanıtın T_r, T_p, %OS ve T_s özellikleri ve formülleri"><figcaption>Sönümlü yanıtın başarım ölçütleri</figcaption></figure>
+<p><strong>T_p'nin bulunması:</strong> c(t)'nin türevi alınıp t = 0'dan sonraki ilk sıfır geçişi bulunur; bu iş frekans düzleminde "türev alarak" (sC(s)) kolaylaştırılır:</p>
+<p>ċ(t) = (ω_n/√(1 − ζ²)) e^(−ζω_n t) sin(ω_n√(1 − ζ²) t)</p>
+<p>Türev sıfıra eşitlenirse ω_n√(1 − ζ²) t = nπ, yani t = nπ/(ω_n√(1 − ζ²)). n'nin her değeri yerel bir maksimum ya da minimumu gösterir; n = 0, t = 0 anına karşılık gelir ve orada eğim sıfırdır; n = 1 birinci tepe zamanını verir:</p>
+<p>T_p = π / (ω_n√(1 − ζ²))</p>
+<p><strong>%OS:</strong> %OS = (c_max − c_final)/c_final × 100 = e^(−ζπ/√(1 − ζ²)) × 100. Tersine, ζ = −ln(%OS/100) / √(π² + ln²(%OS/100)).</p>
+<p><strong>T_s:</strong> Yerleşme süresini bulmak için c(t)'nin kalıcı durum değerinin %2'sine ulaştığı zaman hesaplanır; tanım gereği sönümlü sinüzoidin zarfı 0.02'ye ulaştığında yerleşme olur. Sonuç: T_s = 4/(ζω_n).</p>
+<p><strong>T_r:</strong> Yükselme süresi ile sönüm oranı arasında basit analitik bir ilişki yoktur; notta ω_n·T_r'nin ζ'ye göre değişimini veren bir tablo ve grafik veriliyor.</p>
+<h3 id="ornek-g-s-100-s-15s-100">Örnek: G(s) = 100/(s² + 15s + 100)</h3>
+<p>ω_n = √100 = 10, ζ = 15/(2√100) = 0.75</p>
+<ul><li>T_p = π / (10√(1 − 0.75²)) = 0.475 s</li><li>%OS = e^(−0.75π/√(1 − 0.75²)) × 100 = 2.838</li><li>T_s = 4/(0.75 × 10) = 0.533 s</li><li>Şekilden (normalize yükselme süresi grafiğinden) T_r = 2.3/10 = 0.23 s</li></ul>
+<h2 id="kutuplarin-yeri-ile-basarim-olcutleri-arasindaki-iliski">Kutupların yeri ile başarım ölçütleri arasındaki ilişki</h2>
+<p>Sönümlü ikinci dereceden sistemin kutupları s₁,₂ = −σ_d ± jω_d'dir; burada σ_d = ζω_n <strong>üstel sönüm frekansı</strong>, ω_d = ω_n√(1 − ζ²) <strong>sönümlü salınım frekansıdır</strong>. Orijinden kutba olan radyal uzaklık doğal frekans ω_n'ye eşittir ve kutbu orijine bağlayan doğrunun negatif gerçel eksenle yaptığı açı için cos θ = ζ'dir. Böylece:</p>
+<p>T_p = π/ω_d,  T_s = 4/σ_d</p>
+<p>Buradan şu sonuçlar çıkar: Kutuplar sanal eksene paralel (σ_d sabit) hareket ederse zarf aynı kalır ve yerleşme süresi değişmez; gerçel eksene paralel (ω_d sabit) hareket ederse salınım frekansı ve tepe zamanı aynı kalır; orijinden geçen aynı doğru (ζ sabit) üzerinde hareket ederse yüzde aşım aynı kalır.</p>
+<figure class="yazi-gorsel"><img src="s-20.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Kutupların sanal eksene paralel, gerçel eksene paralel ve sabit sönüm doğrusu boyunca hareketinin yanıta etkisi; kutup çizimi örneği"><figcaption>Kutup hareketi ve yanıt</figcaption></figure>
+<h3 id="ornek-kutuplari-3-j7-olan-sistem">Örnek: kutupları −3 ± j7 olan sistem</h3>
+<ul><li>ζ = cos θ = cos(arctan(7/3)) = 0.394</li><li>ω_n = √(7² + 3²) = 7.616 rad/s</li><li>T_p = π/ω_d = π/7 = 0.449 s</li><li>%OS = e^(−0.394π/√(1 − 0.394²)) × 100 = %26.018</li><li>T_s = 4/σ_d = 4/3 = 1.33 s</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="EEM322L5.pdf" download>EEM322L5.pdf</a></p>
+              <p class="kucuk">PDF · 1.5 MB · 20 <span data-i18n="arch.pagesLower"></span> · 15.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM322L5.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Devre Teorisi II: PSpice Ödevleri 1–4 (RLC Tepkisi, RC-RL, Üç Fazlı Devreler, Trafolar) — hasancan.net</title>
+<meta name="description" content="EEM202 Devre Teorisi II laboratuvarının dört PSpice ödev föyü: paralel RLC doğal ve basamak tepkisi (eksik, kritik ve aşırı sönüm), kare dalgayla RC ve RL devreleri, üç fazlı devre analizi ve benzetimi, ideal ve doğrusal trafoların benzetimi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-pspice-odevleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Devre Teorisi II: PSpice Ödevleri 1–4 (RLC Tepkisi, RC-RL, Üç Fazlı Devreler, Trafolar)">
+<meta property="og:description" content="EEM202 Devre Teorisi II laboratuvarının dört PSpice ödev föyü: paralel RLC doğal ve basamak tepkisi (eksik, kritik ve aşırı sönüm), kare dalgayla RC ve RL devreleri, üç fazlı devre analizi ve benzetimi, ideal ve doğrusal trafoların benzetimi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-pspice-odevleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Devre Teorisi II: PSpice Ödevleri 1–4 (RLC Tepkisi, RC-RL, Üç Fazlı Devreler, Trafolar)", "description": "EEM202 Devre Teorisi II laboratuvarının dört PSpice ödev föyü: paralel RLC doğal ve basamak tepkisi (eksik, kritik ve aşırı sönüm), kare dalgayla RC ve RL devreleri, üç fazlı devre analizi ve benzetimi, ideal ve doğrusal trafoların benzetimi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-pspice-odevleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "eem202-pspice-odevleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem202-pspice-odevleri/eem202-pspice-odevleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM202 Devre Teorisi II: PSpice Ödevleri 1–4 (RLC Tepkisi, RC-RL, Üç Fazlı Devreler, Trafolar)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM202</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.04.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#pspice-odev-1-rlc-dogal-ve-basamak-tepkisi">PSpice Ödev-1: RLC doğal ve basamak tepkisi</a></li><li><a href="#pspice-odev-2-rc-ve-rl-devreleri">PSpice Ödev-2: RC ve RL devreleri</a></li><li><a href="#pspice-odev-3-3-fazli-devreler">PSpice Ödev-3: 3 fazlı devreler</a></li><li><a href="#pspice-odev-4-trafolar">PSpice Ödev-4: Trafolar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM202 Devre Teorisi II: PSpice Ödevleri 1–4 (RLC Tepkisi, RC-RL, Üç Fazlı Devreler, Trafolar)</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 11.04.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM-202 Devre Teorisi-2 Laboratuvarı</strong>'nda verilen dört <strong>PSpice ödevinin</strong> föylerini bir araya getiriyor: Ödev-1 RLC doğal ve basamak tepkisi, Ödev-2 RC ve RL devreleri, Ödev-3 üç fazlı devreler, Ödev-4 trafolar. Ödev-3 ve Ödev-4 föyleri Nisan 2013 tarihli; föylerdeki teslim tarihleri de o döneme ait. Föy metinleri aktarıldı, PSpice şemaları görsel olarak eklendi. Dört föyün orijinal dosyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="pspice-odev-1-rlc-dogal-ve-basamak-tepkisi">PSpice Ödev-1: RLC doğal ve basamak tepkisi</h2>
+<figure class="yazi-gorsel"><img src="odev1-sekil1.jpg" width="792" height="512" loading="lazy" decoding="async" alt="Şekil-1: paralel R = 20 kΩ, L = 8 H, C = 0.125 µF devresi; iR, iL, iC akımları ve v(t) gerilimi"><figcaption>Ödev-1, Şekil-1: paralel RLC devresi</figcaption></figure>
+<h3 id="bolum-1-dogal-tepki">Bölüm-1: Doğal tepki</h3>
+<p><strong>Soru 1.</strong> PSpice kullanarak V₀ = 0, I₀ = −12.25 mA (8 H değerindeki bobin üzerinden geçen akımın başlangıç değeri), C = 0.125 µF, L = 8 H, R = 20 kΩ değerleri için Şekil-1'deki devreyi kurun.</p>
+<ul><li>a. Zamana karşı v(t) grafiğini 0 &lt; t &lt; 11 ms aralığında çizdirin.</li><li>b. Zamana karşı v(t) grafiğini 0 &lt; t &lt; 1 s aralığında çizdirin.</li><li>c. Zamana karşı i_L(t) grafiğini 0 &lt; t &lt; 11 ms aralığında çizdirin.</li><li>d. Grafiklere ve değerlere bakarak devrenin sönüm tepkisini (damping response) belirtin.</li></ul>
+<p><strong>Soru 2.</strong> Aynı devrenin kritik sönümlü durumunu görmek istersek: (a) yeni R değerini hesaplayın; (b) v(t) ve (c) i_L(t) grafiklerini 0 &lt; t &lt; 1 s aralığında çizdirin.</p>
+<p><strong>Soru 3.</strong> Aynı devrenin aşırı sönümlü durumunu görmek istersek: (a) yeni R değerini hesaplayın; (b) v(t) ve (c) i_L(t) grafiklerini 0 &lt; t &lt; 1 s aralığında çizdirin.</p>
+<h3 id="bolum-2-basamak-tepkisi">Bölüm-2: Basamak tepkisi</h3>
+<figure class="yazi-gorsel"><img src="odev1-sekil2.jpg" width="784" height="488" loading="lazy" decoding="async" alt="Şekil-2: aynı paralel RLC devresine I akım kaynağı bağlanmış hâli"><figcaption>Ödev-1, Şekil-2: basamak tepkisi devresi</figcaption></figure>
+<ol><li>Şekil-2'deki devrede, daha önceki devreye I = 20 mA'lik bir akım kaynağı bağlanmıştır. Buna göre R = 20 kΩ, R = 4 Ω ve R = 1 Ω için sönüm tepkilerini elde edin.</li><li>i_R(t), i_L(t) ve i_C(t)'yi uygun zaman aralığında çizdirin.</li><li>Sonuçları rapor hâline getirin (üç farklı sönüm tepkisi ve üç farklı PSpice grafiği) ve yorumlayın.</li></ol>
+<p><em>Not: Bu devrede α = 1/(2RC), ω₀ = 1/√(LC) = 1000 rad/s olduğundan kritik sönüm R = 4 kΩ'da oluşur (R = 20 kΩ'da α = 200 s⁻¹, eksik sönüm). Bölüm-2'deki "R = 4 Ω ve R = 1 Ω" değerleri büyük olasılıkla 4 kΩ ve 1 kΩ olmalıydı; 4 Ω ve 1 Ω ile iki durum da çok aşırı sönümlü olur. Föy hâliyle bırakıldı.</em></p>
+<blockquote><p>Ödev teslimi: Ödevi her iki şube de 9 Mart Cuma, saat 16.30'a kadar teslim etmelidir. Geç verilen ödevler düşük notlandırılır.</p></blockquote>
+<h2 id="pspice-odev-2-rc-ve-rl-devreleri">PSpice Ödev-2: RC ve RL devreleri</h2>
+<p><strong>Soru 1.</strong> PSpice kullanarak V_pulse = 12 V (kare dalga), C = 1 µF, R = 1 kΩ değerleri için Şekil-1'deki devreyi kurun.</p>
+<ul><li>a. (20 puan) Zamana karşı V_R(t), V_C(t), I_C(t) grafiğini çizdirin. (En az 5 periyot gözlenmeli. Periyot için τ'nun değerini dikkate alınız. İpucu: 5τ)</li><li>b. (15 puan) Kapasitöre 0.5 µF, 1 µF, 1.5 µF değerlerini vererek V_o grafiğini aynı koordinat düzleminde çizdirin. τ'nun değişimini hesaplayın.</li><li>c. (15 puan) Bir önceki bölümde C değerlerini değiştirdiğimizde elde edilen grafik üzerine yorum yapın.</li></ul>
+<figure class="yazi-gorsel"><img src="odev2-sekil1.jpg" width="784" height="306" loading="lazy" decoding="async" alt="Şekil-1: VPULSE kaynağı (V1 = 0, V2 = 12, PW = 6 ms, PER = 10 ms), 1 kΩ direnç ve parametrik C1 = {cdeg}"><figcaption>Ödev-2, Şekil-1: RC devresi</figcaption></figure>
+<p><strong>Soru 2.</strong> PSpice kullanarak V_pulse = 12 V (kare dalga), L = 1 H, R = 1 kΩ değerleri için Şekil-2'deki devreyi kurun.</p>
+<ul><li>a. (20 puan) Zamana karşı V_R(t), V_L(t), I_L(t) grafiğini çizdirin.</li><li>b. (15 puan) Bobine 0.5 H, 1 H, 1.5 H değerlerini vererek V_o grafiğini aynı koordinat düzleminde çizdirin. τ'nun değişimini hesaplayın.</li><li>c. (15 puan) Bobin voltajı ve kapasitör akımlarının grafiklerine bakarak aralarındaki benzerlik hakkında yorum yapın.</li></ul>
+<figure class="yazi-gorsel"><img src="odev2-sekil2.jpg" width="704" height="376" loading="lazy" decoding="async" alt="Şekil-2: VPULSE kaynağı (V1 = 0, V2 = 100, PW = 5 ms, PER = 10 ms), parametrik R2 = {rdeg} = 1 kΩ ve L1 = 1 H"><figcaption>Ödev-2, Şekil-2: RL devresi</figcaption></figure>
+<p><em>Not: Föyün metninde RL devresi için de V_pulse = 12 V yazıyor; Şekil-2'deki PSpice kaynağında ise V2 = 100 V görünüyor. Föy hâliyle bırakıldı.</em></p>
+<h2 id="pspice-odev-3-3-fazli-devreler">PSpice Ödev-3: 3 fazlı devreler</h2>
+<p>Aşağıda verilen devreyi (hat başına 6 mH ve 1.5 Ω; yük kollarında 85.5 Ω ve 350 mH):</p>
+<figure class="yazi-gorsel"><img src="odev3-devre.jpg" width="992" height="383" loading="lazy" decoding="async" alt="Üç fazlı devre: üç kaynak, 6 mH + 1.5 Ω hatlar ve 85.5 Ω + 350 mH yük kolları"><figcaption>Ödev-3: üç fazlı devre</figcaption></figure>
+<ul><li>a) Analiz ediniz: (1) Devre dengeli mi? (2) Kaynak nasıl bağlı? (Yıldız-üçgen) (3) Yük nasıl bağlı? (Yıldız-üçgen)</li><li>b) Faz ve hat akımlarını hesaplayınız.</li><li>c) PSpice ile çiziniz ve benzetimini (simülasyon) yapınız. Faz ve hat akımlarının (yükteki), faz ve hat gerilimlerinin (kaynaktaki) büyüklük ve fazlarını bulunuz.</li><li>d) Yük ve kaynaktaki aktif, reaktif ve karmaşık güçleri bulunuz.</li></ul>
+<blockquote><p>Ödev teslimi: Ödevi her iki şube de 19 Nisan 2013 saat 17:00'ye kadar teslim etmelidir. Geç verilen ödevler düşük notlandırılır.</p></blockquote>
+<h2 id="pspice-odev-4-trafolar">PSpice Ödev-4: Trafolar</h2>
+<p><strong>Amaç:</strong> Bu çalışmanın amacı, ideal ve doğrusal trafoların benzetimini yaparak nasıl çalıştıklarını anlamaktır.</p>
+<h3 id="bolum-1">Bölüm-1</h3>
+<p><strong>A.</strong> Aşağıda verilen devreyi L1 = 20 H, L2 = 2000 H, k = 1 için kurunuz.</p>
+<ol><li>v₁(t) ve v₂(t) sinyallerini elde ediniz. Genlik ve faz değerlerini karşılaştırınız.</li><li>i₁(t) ve i₂(t) akımlarını bulunuz. Aynı şekilde karşılaştırınız.</li></ol>
+<figure class="yazi-gorsel"><img src="odev4-devre.jpg" width="809" height="376" loading="lazy" decoding="async" alt="Trafo devresi: VAMPL = 311 V, FREQ = 50 Hz kaynak, R1 = 100 Ω, TX1 trafosu ve R2 = 10 kΩ yük"><figcaption>Ödev-4: trafo benzetim devresi</figcaption></figure>
+<p><strong>B.</strong> Aynı devreyi bu kez L1 = 10 H, L2 = 1 H, k = 0.85 için kurunuz.</p>
+<ol><li>v₁(t) ve v₂(t) gerilimlerinin genlik ve fazı nasıl değişti?</li><li>i₁(t) ve i₂(t) akımlarını karşılaştırınız.</li></ol>
+<p>Çalışmanızı detaylı bir şekilde raporlayınız. Puanınızı raporunuzun içeriği ve düzeni belirleyecektir.</p>
+<blockquote><p>Ödev teslimi: Ödevi her iki şube de 3 Mayıs 2013 saat 17:00'ye kadar teslim etmelidir. Geç verilen ödevler düşük notlandırılır.</p></blockquote>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem202-pspice-odevleri.zip" download>eem202-pspice-odevleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 219 KB · 11.04.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem202-pspice-odevleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (219 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

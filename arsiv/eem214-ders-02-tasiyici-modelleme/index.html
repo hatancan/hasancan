@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Ders 2 – Taşıyıcı Modelleme (Carrier Modelling) — hasancan.net</title>
+<meta name="description" content="EEM214 Elektronik I dersinin ikinci sunumu: kristal silisyum, enerji seviyeleri ve bantlar, elektron ve delik, yalıtkan-yarıiletken-metal bant yapıları, içsel taşıyıcı yoğunluğu, katkılama (donor/akseptör), Fermi seviyesi ve n/p tipi yarıiletkende taşıyıcı yoğunluğu hesabı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-ders-02-tasiyici-modelleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Ders 2 – Taşıyıcı Modelleme (Carrier Modelling)">
+<meta property="og:description" content="EEM214 Elektronik I dersinin ikinci sunumu: kristal silisyum, enerji seviyeleri ve bantlar, elektron ve delik, yalıtkan-yarıiletken-metal bant yapıları, içsel taşıyıcı yoğunluğu, katkılama (donor/akseptör), Fermi seviyesi ve n/p tipi yarıiletkende taşıyıcı yoğunluğu hesabı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-ders-02-tasiyici-modelleme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Ders 2 – Taşıyıcı Modelleme (Carrier Modelling)", "description": "EEM214 Elektronik I dersinin ikinci sunumu: kristal silisyum, enerji seviyeleri ve bantlar, elektron ve delik, yalıtkan-yarıiletken-metal bant yapıları, içsel taşıyıcı yoğunluğu, katkılama (donor/akseptör), Fermi seviyesi ve n/p tipi yarıiletkende taşıyıcı yoğunluğu hesabı.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem214-ders-02-tasiyici-modelleme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "Lecture2_carriermodelling.ppt", "contentUrl": "https://hasancan.net/arsiv/eem214-ders-02-tasiyici-modelleme/Lecture2_carriermodelling.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Ders 2 – Taşıyıcı Modelleme (Carrier Modelling)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM214</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.02.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#semiconductor-physics">Semiconductor physics</a></li><li><a href="#review-of-electrostatics">Review of electrostatics</a></li><li><a href="#energy-levels">Energy levels</a></li><li><a href="#covalent-bonding-and-energy-bands">Covalent bonding and energy bands</a></li><li><a href="#carriers-and-electrical-properties">Carriers and electrical properties</a></li><li><a href="#doping">Doping</a></li><li><a href="#fermi-level">Fermi level</a></li><li><a href="#computing-carrier-density-in-extrinsic-semiconductors">Computing carrier density in extrinsic semiconductors</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Ders 2 – Taşıyıcı Modelleme (Carrier Modelling)</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 11.02.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM214 Elektronik I</strong> dersinin <em>Lecture 2: Carrier Modelling</em> sunumunun içeriğidir. Sunum dersin öğretim elemanı Yrd. Doç. Dr. Derya Yılmaz'ın ders slaytları arasında yer alıyor; son düzenleme tarihi Şubat 2013. Konu, diyot denkleminin arkasındaki yarıiletken fiziği: akımı belirleyen taşıyıcıların sayısı ve dağılımı. Slaytlar İngilizce olduğu için metinler de İngilizce aktarıldı, formüller düz metin olarak yazıldı; bant diyagramları sayfa görselleriyle verildi. Sunumun orijinal dosyası yazının sonunda indirilebilir.</p>
+<h2 id="semiconductor-physics">Semiconductor physics</h2>
+<p>How do we go from a p-n junction picture to the diode equation?</p>
+<p>i_D = I_S·(e^(v_D/ηV_T) − 1)</p>
+<p>What determines current?</p>
+<ul><li>Number of charge carriers – state and carrier distribution</li><li>Speed of charge carriers – mobility, drift, diffusion</li></ul>
+<h3 id="crystalline-silicon">Crystalline silicon</h3>
+<ul><li>3D lattice: each Si atom bonded to 4 neighbors (tetrahedral coordination)</li><li>Density: 5×10²² atoms/cm³</li><li>Distance between atoms: 0.235 nm</li><li>Q: If Si transistor gate is 15 nm wide, how many atoms wide is the gate?</li></ul>
+<h2 id="review-of-electrostatics">Review of electrostatics</h2>
+<ul><li><strong>Charge</strong> – basic unit: Coulomb; q (charge of an electron) = 1.6×10⁻¹⁹ C</li><li><strong>Current</strong> – 1 A = 1 C / 1 sec</li><li><strong>Electric field:</strong> force per unit charge, |ε on Q₂| = Q₁ / (4π·ε₀·r²)</li><li><strong>Energy = Work:</strong> force × distance – basic unit: Joules</li><li><strong>Potential = Work per unit charge</strong> – basic unit: 1 Volt = 1 J / 1 C</li></ul>
+<p>Moving the negative charge Q₂ away from the positive charge Q₁ means increasing energy, lower potential.</p>
+<h2 id="energy-levels">Energy levels</h2>
+<p>For the hydrogen atom:</p>
+<p>E_H = −13.6/n² eV, n = 1, 2, 3, …</p>
+<p>1 eV = 1 electron-volt = 1.6×10⁻¹⁹ joules. There are actually sublevels within these levels.</p>
+<h3 id="rules-for-electrons">Rules for electrons</h3>
+<ul><li>Tend to settle to lowest levels.</li><li>Need extra energy (light or thermal energy) to move to higher levels.</li><li>Can move to lower or equal energy levels if not filled. Give up energy when moving to lower levels.</li></ul>
+<h3 id="periodic-table-and-the-isolated-si-atom">Periodic table and the isolated Si atom</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">II</th><th scope="col">III</th><th scope="col">IV</th><th scope="col">V</th><th scope="col">VI</th></tr></thead><tbody><tr><th scope="row">Be⁴</th><td>B⁵</td><td>C⁶</td><td>N⁷</td><td>O⁸</td></tr><tr><th scope="row">Mg¹²</th><td>Al¹³</td><td><strong>Si¹⁴</strong></td><td>P¹⁵</td><td>S¹⁶</td></tr><tr><th scope="row">Zn³⁰</th><td>Ga³¹</td><td>Ge³²</td><td>As³³</td><td>Se³⁴</td></tr><tr><th scope="row">Cd⁴⁸</th><td>In⁴⁹</td><td>Sn⁵⁰</td><td>Sb⁵¹</td><td>Te⁵²</td></tr></tbody></table></div>
+<p>The Roman numeral at the top of each column indicates the number of valence electrons. The isolated Si atom (+14) has 2 electrons in n = 1, 8 electrons in n = 2 and 4 electrons in n = 3, where 8 electrons are allowed (4 states empty).</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Yalıtılmış Si atomu: n=1&#x27;de 2, n=2&#x27;de 8, n=3&#x27;te 4 elektron; n=3 seviyesinde 4 boş yer"><figcaption>Isolated Si atom</figcaption></figure>
+<h2 id="covalent-bonding-and-energy-bands">Covalent bonding and energy bands</h2>
+<p>Each Si atom shares 4 electrons with its 4 neighbors, filling in 4 previously empty n = 3 levels (covalent bond).</p>
+<p>As many Si atoms are brought closer together, the energy levels for every atom shift: at the crystal spacing d = 0.235 nm the n = 3 level splits into a filled band (E_bottom … E_v) and an empty band (E_c … E_top), separated by the band gap E_G.</p>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Si atomları yaklaştıkça n=3 seviyesinin dolu valans ve boş iletim bandına ayrılması, d = 0.235 nm"><figcaption>Transition from monatomic to crystalline Si</figcaption></figure>
+<p><strong>Crystalline Si (N atoms):</strong> 4N allowed states in the conduction band (mostly empty, between E_c and E_top) and 4N allowed states in the valence band (mostly filled, between E_bottom and E_v). In the simplified version only E_c and E_v are drawn.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="N atomlu kristal Si için iletim ve valans bantları, E_G bant aralığı ve basitleştirilmiş gösterim"><figcaption>Crystalline Si (N atoms)</figcaption></figure>
+<h3 id="si-in-2d-electrons-and-holes">Si in 2D, electrons and holes</h3>
+<p>In the 2D simplification each line represents a shared electron and each circle represents a Si nucleus and core electrons. <strong>Thermal generation:</strong> thermal energy breaks a bond, an electron rises to E_c and leaves a hole at E_v.</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Si kristalinin 2 boyutlu gösterimi ve ısıl üretimle elektron-delik çifti oluşması"><figcaption>Si in 2D: thermal generation</figcaption></figure>
+<ul><li>Holes "move" when a shared electron moves to fill it in.</li><li>Electrons move faster than holes.</li></ul>
+<p>In the energy band diagram: no carriers means an empty E_c and a completely filled E_v; an excited electron in the conduction band leaves a hole in the valence band.</p>
+<h3 id="energy-bands-for-different-materials">Energy bands for different materials</h3>
+<ul><li><strong>Insulator:</strong> wide gap, E_G ≈ 8 eV (SiO₂), E_G ≈ 5 eV (Diamond)</li><li><strong>Semiconductor:</strong> E_G = 1.42 eV (GaAs), 1.12 eV (Si), 0.66 eV (Ge) at room temperature</li><li><strong>Metal:</strong> E_c and E_v overlap, or the bands are partially filled</li></ul>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Yalıtkan, yarıiletken ve metal için enerji bandı diyagramları"><figcaption>Energy bands for different materials</figcaption></figure>
+<h2 id="carriers-and-electrical-properties">Carriers and electrical properties</h2>
+<ul><li>More carriers = higher conductivity</li><li>Can also increase the number of carriers by doping (introducing impurities)</li><li>Purity of Si used in chips: 99.9999999%! (less than 1 non-Si atom in 10⁹ Si atoms)</li><li>Pure Si: <strong>intrinsic</strong> semiconductor; doped Si: <strong>extrinsic</strong> semiconductor</li></ul>
+<h3 id="intrinsic-carrier-concentration">Intrinsic carrier concentration</h3>
+<p>Thermal excitation creates electron-hole pairs: n = number of free electrons/cm³, p = number of free holes/cm³. Intrinsic carrier concentration at room temperature:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Material</th><th scope="col">n_i</th></tr></thead><tbody><tr><th scope="row">GaAs</th><td>≈ 2×10⁶ /cm³</td></tr><tr><th scope="row">Si</th><td>≈ 1×10¹⁰ /cm³</td></tr><tr><th scope="row">Ge</th><td>≈ 2×10¹³ /cm³</td></tr></tbody></table></div>
+<p>For Si at room temperature, less than 1 bond in 10¹³ is broken (assuming 5×10²² atoms/cm³).</p>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Si ve GaAs için içsel taşıyıcı yoğunluğu n_i&#x27;nin 0–50 °C arasında sıcaklıkla değişimi (Pierret&#x27;ten uyarlanmış)"><figcaption>n_i dependence on T</figcaption></figure>
+<h2 id="doping">Doping</h2>
+<p>Group III elements (B, Al, Ga, In) are <strong>acceptor dopants</strong>, group V elements (N, P, As, Sb) are <strong>donor dopants</strong>. 1 in 10³ to 1 in 10⁸ dopants are typically introduced to alter Si's electrical properties.</p>
+<ul><li><strong>Donor (electron-increasing dopant):</strong> e.g. As, |E_B| = 0.054 eV. N_D = donor dopant density. n ≈ N_D for typical dopings at room temperature.</li><li><strong>Acceptor (hole-increasing dopant):</strong> e.g. B, |E_B| = 0.045 eV. N_A = acceptor dopant density. p ≈ N_A for typical dopings at room temperature.</li></ul>
+<figure class="yazi-gorsel"><img src="s-21.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Donör katkılama: As atomunun fazla elektronu iletim bandına çıkıyor"><figcaption>Doping: donor action</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="Akseptör katkılama: B atomu valans bandından elektron alıp delik oluşturuyor"><figcaption>Doping: acceptor action</figcaption></figure>
+<h3 id="carrier-distribution">Carrier distribution</h3>
+<p>In the intrinsic material E_F lies near the middle of the gap; in n-type material it moves toward E_c (more electrons), in p-type toward E_v (more holes).</p>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="1587" height="1192" loading="lazy" decoding="async" alt="İçsel, n tipi ve p tipi yarıiletkende taşıyıcı dağılımı ve Fermi seviyesinin konumu"><figcaption>Carrier distribution: schematic representation</figcaption></figure>
+<h2 id="fermi-level">Fermi level</h2>
+<p>Carrier density and E_F are related – need one to solve the other:</p>
+<ul><li>n = n_i·e^((E_F − E_i)/kT)</li><li>p = n_i·e^((E_i − E_F)/kT)</li><li>E_i ≈ (E_c + E_v)/2</li></ul>
+<p>E_F = Fermi energy/level, k = Boltzmann constant = 8.617×10⁻⁵ eV/K, T = temperature in Kelvin. Q: Show that np = n_i².</p>
+<p>Assumes a <strong>non-degenerate</strong> semiconductor: E_F not too close to E_c or E_v (more than 3kT away).</p>
+<h2 id="computing-carrier-density-in-extrinsic-semiconductors">Computing carrier density in extrinsic semiconductors</h2>
+<ul><li>Previous equations apply to both intrinsic and extrinsic semiconductors.</li><li>Charge neutrality relationship (assuming total ionization):</li></ul>
+<p>p − n + N_D − N_A = 0, where N_D = number of donors/cm³ and N_A = number of acceptors/cm³.</p>
+<ul><li>Carrier concentrations, assuming non-degenerate and N_D or N_A ≫ n_i:</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Majority</th><th scope="col">Minority</th></tr></thead><tbody><tr><th scope="row">n-type</th><td>n ≈ N_D</td><td>p ≈ n_i²/N_D</td></tr><tr><th scope="row">p-type</th><td>p ≈ N_A</td><td>n ≈ n_i²/N_A</td></tr></tbody></table></div>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="Lecture2_carriermodelling.ppt" download>Lecture2_carriermodelling.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 1.6 MB · 25 <span data-i18n="arch.slidesLower"></span> · 11.02.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Lecture2_carriermodelling.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (1.6 MB)</a>
+            <a class="buton" href="Lecture2_carriermodelling.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (804 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

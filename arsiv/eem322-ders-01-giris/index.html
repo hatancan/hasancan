@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 1 – Sistem Kavramı, Açık ve Kapalı Çevrim Denetim, Tasarım Süreci — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 1 (Hamit Erdem, 2013): sistem ve denetim sistemi tanımları, doğrusal/dinamik/zamanla değişmeyen sistemler, açık ve kapalı çevrim karşılaştırması, servomekanizma ve regülatör, geçici ve kalıcı durum yanıtı, kararlılık, tasarım adımları ve histerezisli aç-kapa denetleyici.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-01-giris/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 1 – Sistem Kavramı, Açık ve Kapalı Çevrim Denetim, Tasarım Süreci">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 1 (Hamit Erdem, 2013): sistem ve denetim sistemi tanımları, doğrusal/dinamik/zamanla değişmeyen sistemler, açık ve kapalı çevrim karşılaştırması, servomekanizma ve regülatör, geçici ve kalıcı durum yanıtı, kararlılık, tasarım adımları ve histerezisli aç-kapa denetleyici.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-01-giris/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 1 – Sistem Kavramı, Açık ve Kapalı Çevrim Denetim, Tasarım Süreci", "description": "EEM322 Denetim Sistemleri ders notu 1 (Hamit Erdem, 2013): sistem ve denetim sistemi tanımları, doğrusal/dinamik/zamanla değişmeyen sistemler, açık ve kapalı çevrim karşılaştırması, servomekanizma ve regülatör, geçici ve kalıcı durum yanıtı, kararlılık, tasarım adımları ve histerezisli aç-kapa denetleyici.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-01-giris/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322new1.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-01-giris/eem322new1.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 1 – Sistem Kavramı, Açık ve Kapalı Çevrim Denetim, Tasarım Süreci">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kaynaklar">Kaynaklar</a></li><li><a href="#sistem-ve-blok-diyagrami">Sistem ve blok diyagramı</a></li><li><a href="#modelleme-ornegi-otomobil-atesleme-sistemi">Modelleme örneği: otomobil ateşleme sistemi</a></li><li><a href="#dogrusal-ve-dogrusal-olmayan-sistemler">Doğrusal ve doğrusal olmayan sistemler</a></li><li><a href="#zamanla-degismeyen-ve-zamanla-degisen-sistemler">Zamanla değişmeyen ve zamanla değişen sistemler</a></li><li><a href="#dinamik-ve-statik-sistemler">Dinamik ve statik sistemler</a></li><li><a href="#denetim-sistemi-tanimi-ve-basarim-olcutleri">Denetim sistemi tanımı ve başarım ölçütleri</a></li><li><a href="#servomekanizma-ve-regulator">Servomekanizma ve regülatör</a></li><li><a href="#denetim-yasalari-ve-guc-donusumu">Denetim yasaları ve güç dönüşümü</a></li><li><a href="#analog-ve-sayisal-denetim-sistemleri">Analog ve sayısal denetim sistemleri</a></li><li><a href="#analiz-ve-tasarim-hedefleri">Analiz ve tasarım hedefleri</a></li><li><a href="#tasarim-sureci">Tasarım süreci</a></li><li><a href="#denetleyici-turleri-ve-ac-kapa-denetleyici">Denetleyici türleri ve aç-kapa denetleyici</a></li><li><a href="#tanimlar">Tanımlar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 1 – Sistem Kavramı, Açık ve Kapalı Çevrim Denetim, Tasarım Süreci</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 01.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>1. ders notudur</strong> ("Lecture 1"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 01.07.2013 tarihi var (2013 yaz dönemi). Ders notu İngilizce, sayfa başına iki slayt yerleştirilmiş 19 sayfalık bir PDF. Aşağıda içerik Türkçe olarak özetlendi, İngilizce terimler parantez içinde verildi; şemalar için ilgili sayfaların görselleri eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<h2 id="kaynaklar">Kaynaklar</h2>
+<ol><li>Ogata, K., <em>Modern Control Engineering</em>, Prentice-Hall, 4. baskı, 2002.</li><li>Dorf, R. C., Bishop, R. H., <em>Modern Control Systems</em>, Prentice-Hall.</li><li>Norman S. Nise, <em>Control Systems Engineering</em>, 6. baskı, Wiley &amp; Sons.</li><li>Uraz, A., <em>Control Systems</em>, Hacettepe Üniversitesi, 2003.</li><li>Web: ders notları (Hamit Erdem).</li></ol>
+<h2 id="sistem-ve-blok-diyagrami">Sistem ve blok diyagramı</h2>
+<p><strong>Sistem</strong>, belirli bir işlevi yerine getirmek için birbirine bağlanmış bileşenlerden oluşan yapıdır; bir bütün olarak davranacak biçimde düzenlenmiş fiziksel bileşenler topluluğudur. <strong>Denetim sistemi</strong> (control system) ise kendisini ya da başka bir sistemi yönetecek, yönlendirecek veya düzenleyecek biçimde bağlanmış fiziksel bileşenlerdir.</p>
+<ul><li>Bir sistemin girişleri ve çıkışları vardır.</li><li>Sistem, bir giriş işaretine karşılık bir çıkış işareti üretir.</li><li>Sistemin, girişleri çıkışlara bağlayan bir matematiksel modeli vardır.</li></ul>
+<p><strong>Blok diyagramı</strong>, fiziksel bir sistemin girişi ile çıkışı arasındaki neden-sonuç ilişkisinin kısa yoldan, resimli gösterimidir. Denetim sisteminin bileşenleri arasındaki işlevsel ilişkileri anlatmanın kolay bir yoludur; en basit biçimi tek girişli, tek çıkışlı tek bloktur.</p>
+<p>Sistemler birbirinden bağımsız şu kategorilere ayrılır:</p>
+<ol><li>Doğrusal ya da doğrusal olmayan (linear / non-linear)</li><li>Dinamik ya da statik (dynamic / static)</li><li>Zamanla değişmeyen ya da zamanla değişen (time invariant / time-varying)</li><li>Sürekli zamanlı ya da ayrık zamanlı (continuous time / discrete time)</li><li>Belirlenimci ya da olasılıksal (deterministic / stochastic)</li></ol>
+<h2 id="modelleme-ornegi-otomobil-atesleme-sistemi">Modelleme örneği: otomobil ateşleme sistemi</h2>
+<p>Sistemin ana bileşenleri buji, ateşleme bobini, yaylı kontak noktaları (platin), motorla dönen kam, kondansatör ve aküdür. Kamın kontakları açıp kapaması bobinin primer akımında ani değişime yol açar ve sekonder sargıda çok yüksek bir gerilim indükler; bu gerilim bujide kıvılcımı oluşturur. Kontaklar arasına bağlanan kondansatör, kontaklarda ark oluşmasını ve aşınmayı önler. İncelemede tek bir bujinin doğrudan bobine bağlı olduğu varsayılır.</p>
+<p>Bu (tek değişkenli) sistemin başarımını anlamak için sorulan sorular:</p>
+<ol><li>Buji uçlarındaki gerilim zamana göre nasıl değişir, dalga biçimi nedir?</li><li>Bu gerilimin en büyük değeri nedir ve ne zaman oluşur?</li><li>Dalga biçimi, tepe değeri ve tepe zamanı; kam hızına, akü gerilimine, primer ve sekonder sarım sayılarına ve kondansatör değerine nasıl bağlıdır?</li></ol>
+<p>Devre modelinde <strong>çıkış değişkeni</strong> sekonder gerilimi v₂, <strong>giriş değişkeni</strong> akü gerilimi E, <strong>iç değişkenler</strong> primer akımı i ve kondansatör gerilimi v'dir; sistem değişkenleri zamanın fonksiyonudur. Sistemin davranışı, sistem değişkenlerinden bağımsız sabit büyüklüklere (R, L, C) bağlıdır; bunlar <strong>sistemin parametreleridir</strong>.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Otomobil ateşleme sisteminin şeması ve devre modeli; doğrusallık için homojenlik ve süperpozisyon blokları"><figcaption>Ateşleme sistemi devre modeli ve doğrusallık</figcaption></figure>
+<h2 id="dogrusal-ve-dogrusal-olmayan-sistemler">Doğrusal ve doğrusal olmayan sistemler</h2>
+<p>Bir F sistemi şu iki özelliği sağlıyorsa doğrusaldır:</p>
+<ol><li><strong>Homojenlik:</strong> u herhangi bir işaret ve a herhangi bir skaler ise F(au) = aF(u).</li><li><strong>Süperpozisyon:</strong> u ve ũ herhangi iki işaret ise F(u + ũ) = Fu + Fũ.</li></ol>
+<p>Yani ölçeklemeyi ya da toplamayı sistemden önce veya sonra yapmak aynı sonucu verir. Doğrusal sistem örnekleri: ölçekleyici, türev alıcı, integral alıcı, kayan ortalama, zaman kaydırma, konvolüsyon, toplayıcı, fark sistemleri. Doğrusal olmayan örnekler: işaret dedektörü, çarpıcı, karşılaştırıcı.</p>
+<h2 id="zamanla-degismeyen-ve-zamanla-degisen-sistemler">Zamanla değişmeyen ve zamanla değişen sistemler</h2>
+<p>Parametreler, sistem elemanlarının özelliklerine bağlı olan, sistem değişkenlerine bağlı olmayan büyüklüklerdir. Örneğin L·d²i/dt² + R·di/dt + i/C = 0 denkleminde R, L ve C katsayı olarak görünür. Bu parametreler bağımlı değişken i(t)'nin fonksiyonu olursa sistem doğrusal olmaz. Parametreler sabitse, yani zamanla değişmiyorsa sistem <strong>zamanla değişmeyen</strong> (time invariant), bir ya da daha fazla parametre zamanın fonksiyonuysa <strong>zamanla değişen</strong> (time-varying) sistemdir. Bunlar için durağan (stationary) ve durağan olmayan (non-stationary) terimleri de kullanılır. (Kaynak: A. N. Tripathi, <em>Linear Systems Analysis</em>.)</p>
+<p><strong>Giriş</strong>, bir denetim sistemine belirli bir yanıt elde etmek için, genellikle dış bir enerji kaynağından uygulanan uyarı ya da komuttur. <strong>Çıkış</strong>, denetim sisteminden elde edilen gerçek yanıttır; girişin ima ettiği istenen yanıta eşit olabilir ya da olmayabilir.</p>
+<ul><li><strong>Elektrik anahtarı:</strong> Elektrik akışını denetleyen, üretilmiş bir denetim sistemidir. Anahtarı açıp kapatmak giriş (açık/kapalı), elektriğin akması ya da akmaması çıkıştır. En temel denetim sistemlerinden biridir.</li><li><strong>Termostatlı ısıtıcı:</strong> Giriş, termostatla ayarlanan referans sıcaklık; çıkış, odanın gerçek sıcaklığıdır. Termostat çıkışın girişten küçük olduğunu algıladığında ısıtıcı çalışır, sıcaklık referansa ulaşınca kapanır, biraz düşünce yeniden açılır.</li></ul>
+<h2 id="dinamik-ve-statik-sistemler">Dinamik ve statik sistemler</h2>
+<p>Dinamik bir denetim sistemi, girişe kalıcı duruma ulaşmadan önce bir <strong>geçici yanıt</strong> vererek karşılık verir:</p>
+<ul><li>Modelleri diferansiyel (ya da fark) denklemleriyle verilir; bağımsız değişken zamandır.</li><li>Giriş sabit olsa bile çıkış her zaman zamanın fonksiyonudur; bir "hareket" vardır.</li><li>Çıkış yalnızca girişe değil, başlangıç koşullarına da bağlıdır (n. mertebeden bir diferansiyel denklemin çözümü bağımlı değişkenin ve türevlerinin başlangıç değerlerini gerektirir). Sistem geçmiş girişlerini "hatırlar", yani belleği vardır.</li></ul>
+<p>Tek bir endüktans ya da kapasitans içeren devre dinamik bir sistemdir: enerji depolayan bir elemanın varlığı sistemi dinamik yapar. Mekanik sistemde kütle ve yay enerji depolar. Enerji depolanmasıyla ilgili değişkenler (kondansatör gerilimi, bobin akımı, kütlenin hızı, yay kuvveti) ani olarak değişemez; bobin akımındaki ani bir değişim sonsuz enerji değişim hızı, yani sonsuz güç anlamına gelirdi. Bu yüzden dinamik sistemler anlık (instantaneous) değildir.</p>
+<h2 id="denetim-sistemi-tanimi-ve-basarim-olcutleri">Denetim sistemi tanımı ve başarım ölçütleri</h2>
+<p>Denetim sistemi, belirli bir giriş verildiğinde istenen başarımla istenen çıkışı elde etmek için bir araya getirilmiş alt sistemlerden ve süreçlerden (plant) oluşur. <strong>Asansör örneği:</strong> Birinci katta dördüncü kat düğmesine basmak, istenen çıkışı temsil eden bir basamak (step) girişidir. Asansör yolcu konforuna uygun bir hız ve kat hizalama doğruluğuyla dördüncü kata çıkar. İki temel başarım ölçütü:</p>
+<ol><li><strong>Geçici yanıt</strong> (transient response): Çok hızlıysa yolcu konforu, çok yavaşsa yolcunun sabrı feda edilir.</li><li><strong>Kalıcı durum hatası</strong> (steady-state error): Asansör katla düzgün hizalanmazsa yolcu güvenliği ve rahatı feda edilir.</li></ol>
+<h3 id="acik-ve-kapali-cevrim-ornekleri">Açık ve kapalı çevrim örnekleri</h3>
+<ul><li><strong>Ekmek kızartma makinesi:</strong> Çoğu otomatik ekmek kızartıcı bir zamanlayıcıyla denetlendiği için <strong>açık çevrimdir</strong>. Süreyi sistemin parçası olmayan kullanıcı tahmin eder; süre ayarlandıktan sonra kızarmanın kalitesi (çıkış) üzerinde denetim kalmaz.</li><li><strong>Otopilot:</strong> Otopilot ve denetlediği uçak <strong>kapalı çevrim</strong> (geri beslemeli) bir sistemdir; uçağın gerçek rotasını sürekli ölçüp dümen ve kanatçıkları ayarlayarak istenen rotayı korur. Otopilotu ayarlayan pilot sistemin parçası değildir.</li><li><strong>İnsan vücudunun terleme sistemi:</strong> Cilt dışındaki hava çok ısındığında ter bezleri salgıyı artırır, buharlaşmayla cilt soğur; istenen soğuma sağlanınca salgı azalır.</li><li><strong>Araba süren insan:</strong> Giriş yolun (şerit çizgilerinin) yönü, çıkış otomobilin yönüdür. Sürücü çıkışı gözü ve beyniyle sürekli ölçer, elleriyle direksiyonda düzeltir.</li></ul>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Açık çevrim ve kapalı çevrim denetim sistemlerinin blok diyagramları ve geri beslemeli süreç denetimi"><figcaption>Açık ve kapalı çevrim blok diyagramları</figcaption></figure>
+<p>Denetim kuramı; sıcaklık, akış, hareket, kuvvet, gerilim, basınç, gerginlik ve akım gibi büyüklükleri düzenleyen geri beslemeli sistemlerin analizinde ve tasarımında kullanılır. Basit bir kapalı çevrim süreç denetiminin ana parçaları:</p>
+<ul><li>Referans değer</li><li>Denetleyici (analog / sayısal)</li><li>Eyleyici (actuator)</li><li>Süreç ya da tesis (plant; denetlenen ortam)</li><li>Ölçüm (algılayıcı, sensor)</li><li>Hata algılama ve hesaplama devresi (analog / sayısal)</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kapalı çevrim sistem</th><th scope="col">Açık çevrim sistem</th></tr></thead><tbody><tr><th scope="row">Geri besleme yolu vardır</th><td>Geri besleme yolu yoktur</td></tr><tr><th scope="row">Çıkış yanıtı daha doğrudur</th><td>Çıkış yanıtı doğru değildir</td></tr><tr><th scope="row">Gürültüye, bozuculara ve ortam değişimlerine daha az duyarlıdır</th><td>Gürültüye, bozuculara ve ortam değişimlerine duyarlıdır</td></tr><tr><th scope="row">Çıkışı girişle karşılaştırıp fark varsa düzeltme yapabilir</th><td>Bozucuların etkisini düzeltemez</td></tr><tr><th scope="row">Daha karmaşık ve pahalıdır</th><td>Basit ve ucuzdur</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Çok çevrimli (iç ve dış çevrimli) ve çok değişkenli denetim sistemleri; tipik ve genel blok diyagramı; kapalı ve açık çevrim karşılaştırması"><figcaption>Çok çevrimli ve çok değişkenli sistemler</figcaption></figure>
+<p>Notta ayrıca otomobil direksiyon denetimi, DC motorlu hız denetimi (açık ve kapalı çevrim), örüntü tanımalı robot kolu, sıcaklık denetim sistemi, ulusal gelir geri besleme modeli ve video oyunu oynayan bir insanın blok diyagramı örnek olarak veriliyor. Denetim mühendisliğinde tasarımın amacı, gerçek bir ihtiyacı karşılayacak sistemin yapısını, özelliklerini ve kilit parametrelerini belirlemektir.</p>
+<h2 id="servomekanizma-ve-regulator">Servomekanizma ve regülatör</h2>
+<p><strong>Servomekanizma</strong>, denetlenen değişkeni mekanik konum ya da konumun bir türevi (hız, ivme) olan, güç yükselten geri beslemeli bir denetim sistemidir. Otomobilin hidrolik direksiyonu bir servomekanizmadır: komut girişi direksiyon simidinin açısal konumudur; simide uygulanan küçük tork hidrolik olarak yükseltilir ve ön tekerleklerin açısal konumunu değiştirecek kuvvete dönüşür.</p>
+<p><strong>Regülatör</strong> (düzenleyici sistem), referans girişi uzun süre, çoğu zaman sistemin çalıştığı sürenin tamamında sabit kalan geri beslemeli sistemdir; bu girişe <strong>ayar noktası</strong> (setpoint) denir. Regülatörün asıl işi çıkışı sabit tutmak, servomekanizmanınki ise çıkışın değişen bir girişi izlemesini sağlamaktır.</p>
+<h2 id="denetim-yasalari-ve-guc-donusumu">Denetim yasaları ve güç dönüşümü</h2>
+<p>Denetleyici hem denetim yasalarını (örneğin oransal-integral-türevsel, <strong>PID</strong> denetim) hem de güç dönüşümünü içerir. Denetim yasaları bilgi üretir; ama tesisi denetlemek için güç uygulanmalıdır, bu yüzden hemen bütün denetleyicilerde güç dönüştürücü bulunur. Kazançlar, hızlı ve kararlı bir komut yanıtı elde etmek ve bozucuları bastırmak için ayarlanır. Gürbüz (robust) çalışma için denetim yasaları, tesis ve güç dönüştürücüsündeki makul değişimleri karşılayacak paylarla tasarlanmalıdır.</p>
+<h2 id="analog-ve-sayisal-denetim-sistemleri">Analog ve sayısal denetim sistemleri</h2>
+<ul><li><strong>Sürekli zamanlı (analog) işaret:</strong> Bağımsız değişken t'nin sürekli değerlerine bağlı işaret.</li><li><strong>Ayrık zamanlı (örneklenmiş, sayısal) işaret:</strong> Yalnızca t'nin belirli ayrık anlarında tanımlı işaret.</li><li><strong>Sürekli zamanlı denetim sistemleri</strong> yalnızca analog işaret ve bileşen içerir; <strong>ayrık zamanlı denetim sistemlerinin</strong> bir ya da daha fazla noktasında ayrık zamanlı işaret vardır. Bazı sistemler ikisinin birleşimidir (hibrit).</li></ul>
+<p>Denetim sistemi modelleri: diferansiyel denklemler, fark denklemleri, Laplace ve z dönüşümleri gibi matematiksel modeller; blok diyagramları; işaret akış grafikleri.</p>
+<h2 id="analiz-ve-tasarim-hedefleri">Analiz ve tasarım hedefleri</h2>
+<p><strong>Analiz</strong>, bir sistemin başarımının belirlenmesidir (örneğin geçici yanıtın ve kalıcı durum hatasının istenen özellikleri karşılayıp karşılamadığı). <strong>Tasarım</strong>, başarımın oluşturulması ya da değiştirilmesidir; özellikler karşılanmıyorsa parametreler değiştirilir ya da ek bileşenler eklenir.</p>
+<ul><li><strong>Geçici yanıt:</strong> Asansörde yavaş geçici yanıt yolcuları sabırsızlandırır, aşırı hızlısı rahatsız eder.</li><li><strong>Kalıcı durum yanıtı:</strong> Geçici bileşenler sıfıra söndükten sonra kalan, girişe benzeyen yanıttır (dördüncü kata yakın duran asansör, doğru izde duran disk kafası).</li><li><strong>Kararlılık:</strong> Toplam yanıt = doğal yanıt + zorlanmış yanıt. Doğal yanıt sistemin enerjiyi nasıl harcadığını ya da kazandığını anlatır ve yalnızca sisteme bağlıdır; zorlanmış yanıt girişe bağlıdır. Kullanışlı bir denetim sisteminde doğal yanıt ya sonunda sıfıra gitmeli ya da salınım yapmalıdır. Doğal yanıt sınırsız büyürse sistem <strong>kararsızdır</strong>; bu durum, sınır durdurucular yoksa fiziksel aygıtın kendini tahrip etmesine yol açabilir (asansörün tabana çakılması, uçağın denetimsiz yuvarlanması, hedefe kilitlenen antenin giderek büyüyen salınımlarla hasar görmesi gibi).</li></ul>
+<h2 id="tasarim-sureci">Tasarım süreci</h2>
+<ol><li>Gereksinimleri fiziksel bir sisteme dönüştür.</li><li>İşlevsel bir blok diyagramı çiz.</li><li>Bir şema (schematic) oluştur.</li><li>Matematiksel modeli (blok diyagramı) geliştir: Kirchhoff'un gerilim yasası (kapalı bir yol boyunca gerilimlerin toplamı sıfırdır), Kirchhoff'un akım yasası (bir düğümden çıkan akımların toplamı sıfırdır), Newton yasaları (bir cisme etkiyen kuvvetlerin ve momentlerin toplamı sıfırdır).</li><li>Blok diyagramını indirge.</li><li>Analiz ve tasarım yap: Yanıt özellikleri basit parametre ayarlarıyla karşılanamıyorsa istenen başarımı sağlayacak ek donanım tasarlanır.</li></ol>
+<p>Tasarımı doğrulamak için analizde ve testte <strong>standart test girişleri</strong> kullanılır: dürtü (impulse), basamak (step), rampa, parabol ve sinüs. Birim dürtü t = 0'da sonsuz, başka her yerde sıfırdır ve altındaki alan 1'dir; sisteme başlangıç enerjisi vermek ve yalnızca geçici yanıtı görmek için kullanılır. Basamak girişi konum, hız ya da ivme gibi sabit bir komutu temsil eder.</p>
+<h3 id="ornek-anten-azimut-konum-denetimi">Örnek: anten azimut konum denetimi</h3>
+<p>Konum denetim sistemi, bir konum komutunu konum çıkışına dönüştürür; antenlerde, robot kollarında ve bilgisayar disk sürücülerinde yaygındır. Notta radyo teleskobu anteninin işlevsel blok diyagramı ve yüksek ve düşük denetleyici kazancının çıkış yanıtına etkisi gösteriliyor.</p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Anten azimut konum denetim sisteminin işlevsel blok diyagramı ve kazancın yanıta etkisi; denetim sistemlerinde kullanılan test dalga biçimleri"><figcaption>Anten azimut denetimi ve test girişleri</figcaption></figure>
+<h2 id="denetleyici-turleri-ve-ac-kapa-denetleyici">Denetleyici türleri ve aç-kapa denetleyici</h2>
+<ul><li><strong>Süreksiz denetim (aç-kapa, ON-OFF):</strong> En basit denetim.</li><li><strong>Sürekli denetleyiciler (P, PI, PD, PID):</strong> Tasarım ve analiz gerektirir.</li></ul>
+<p>Uygulama örneği basit bir aç-kapa sıcaklık denetleyicisidir: NTC termistör (sıcaklık algılayıcı), referans değeri ayarlayan potansiyometre ve geri beslemesiz bir op-amp karşılaştırıcı; çıkışta gösterge LED'i ve röle. Pratik devrede ölü bölgeli (<strong>histerezisli</strong>) aç-kapa denetleyici kullanılır.</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Op-amp karşılaştırıcılı aç-kapa sıcaklık denetleyicisi ve histerezisli (ölü bölgeli) pratik devre"><figcaption>Op-amp ile aç-kapa ve histerezisli denetleyici</figcaption></figure>
+<h2 id="tanimlar">Tanımlar</h2>
+<ul><li><strong>Tesis (plant, süreç, denetlenen sistem):</strong> Geri beslemeli denetim sisteminin denetlediği sistem, alt sistem, süreç ya da nesne. Sistem yanıtını üreten ve genellikle güç harcayan elemanlardır (mekanik bir aygıt, ısıtma fırını, kimyasal reaktör, uzay aracı…).</li><li><strong>Denetlenen çıkış (c):</strong> Tesisin, geri beslemeli sistemin denetimi altındaki çıkış değişkeni.</li><li><strong>İleri yol (forward path):</strong> Toplama noktasından denetlenen çıkışa giden iletim yolu.</li><li><strong>Dönüştürücü (transducer):</strong> Bir enerji biçimini başka birine dönüştüren aygıt.</li><li><strong>Denetlenen değişken ve ayarlanan değişken:</strong> Denetlenen değişken ölçülen ve denetlenen büyüklüktür; ayarlanan (manipulated) değişken, denetlenen değişkeni etkilemek için denetleyicinin değiştirdiği büyüklüktür.</li><li><strong>Modelleme:</strong> Sistemin matematiksel tanımını elde etmek. <strong>Analiz:</strong> Sistemin özelliklerini incelemek. <strong>Tasarım:</strong> Verilen bir tesis için başarım özelliklerine göre denetleyici tasarlamak.</li><li><strong>Sistem:</strong> Birlikte çalışıp belirli bir amacı yerine getiren bileşenler bütünü; yalnızca fiziksel değil, ekonomi gibi soyut ve dinamik olgular için de kullanılır.</li></ul>
+<p>Notun son sayfası, denetim sistemleriyle ilgili temel terimlerin (automation, closed-loop, feedback signal, plant, process, stability, specifications vb.) İngilizce tanımlarını içeren bir sözlük tablosudur.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem322new1.pdf" download>eem322new1.pdf</a></p>
+              <p class="kucuk">PDF · 910 KB · 19 <span data-i18n="arch.pagesLower"></span> · 01.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322new1.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (910 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

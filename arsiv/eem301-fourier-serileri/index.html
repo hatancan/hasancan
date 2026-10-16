@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Serileri (CTFS), Özellikleri ve Gibbs Olayı — hasancan.net</title>
+<meta name="description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;Fourier Series&quot;: karmaşık üstellerin LTI sistemlerin özfonksiyonları olması, sürekli zamanlı periyodik sinyallerin Fourier serisi, sentez ve analiz denklemleri, Dirichlet koşulları, CTFS özellikleri, Parseval bağıntısı, periyodik konvolüsyon, simetri avantajı ve Gibbs olayı; üçgen, darbe ve testere dişi dalga örnekleriyle.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-fourier-serileri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Serileri (CTFS), Özellikleri ve Gibbs Olayı">
+<meta property="og:description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;Fourier Series&quot;: karmaşık üstellerin LTI sistemlerin özfonksiyonları olması, sürekli zamanlı periyodik sinyallerin Fourier serisi, sentez ve analiz denklemleri, Dirichlet koşulları, CTFS özellikleri, Parseval bağıntısı, periyodik konvolüsyon, simetri avantajı ve Gibbs olayı; üçgen, darbe ve testere dişi dalga örnekleriyle.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-fourier-serileri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Serileri (CTFS), Özellikleri ve Gibbs Olayı", "description": "EEM301 Sinyaller ve Sistemler I ders sunumu \"Fourier Series\": karmaşık üstellerin LTI sistemlerin özfonksiyonları olması, sürekli zamanlı periyodik sinyallerin Fourier serisi, sentez ve analiz denklemleri, Dirichlet koşulları, CTFS özellikleri, Parseval bağıntısı, periyodik konvolüsyon, simetri avantajı ve Gibbs olayı; üçgen, darbe ve testere dişi dalga örnekleriyle.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-fourier-serileri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "EEM301-FS.ppt", "contentUrl": "https://hasancan.net/arsiv/eem301-fourier-serileri/EEM301-FS.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Serileri (CTFS), Özellikleri ve Gibbs Olayı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM301</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.10.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#the-eigenfunctions-k-t-and-their-properties">The eigenfunctions φk(t) and their properties</a></li><li><a href="#fourier-series-representation-of-ct-periodic-signals">Fourier series representation of CT periodic signals</a></li><li><a href="#alternative-forms">Alternative forms</a></li><li><a href="#examples">Examples</a></li><li><a href="#dirichlet-conditions-for-convergence">Dirichlet conditions for convergence</a></li><li><a href="#properties-of-ct-fourier-series">Properties of CT Fourier series</a></li><li><a href="#periodic-convolution">Periodic convolution</a></li><li><a href="#symmetry-advantage">Symmetry advantage</a></li><li><a href="#worked-examples-matlab-plots">Worked examples (MATLAB plots)</a></li><li><a href="#gibbs-phenomenon">Gibbs phenomenon</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Serileri (CTFS), Özellikleri ve Gibbs Olayı</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 18.10.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM301 Sinyaller ve Sistemler I</strong> dersinin <strong>"Fourier Series"</strong> (Fourier Serileri) sunumudur. Sunumu dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong> hazırlamış (Ekim 2005). Slaytların neredeyse tamamı görsel olduğu için içerik metne döküldü; formüller düz metne çevrildi, kısmi Fourier serisi grafikleri için slayt görselleri eklendi. Sunum İngilizce olduğundan içerik İngilizce aktarıldı. Orijinal PowerPoint dosyası yazının sonunda indirilebilir.</p>
+<p>Sunumun konuları:</p>
+<ul><li>Complex Exponentials as Eigenfunctions of LTI Systems</li><li>Fourier Series of CT Periodic Signals</li><li>CT Fourier Series Properties</li><li>Periodic Convolution</li><li>Symmetry Advantage</li><li>Gibbs Phenomenon</li></ul>
+<h2 id="the-eigenfunctions-k-t-and-their-properties">The eigenfunctions φk(t) and their properties</h2>
+<p>(Focus on CT systems now, but the results apply to DT systems as well.)</p>
+<p>φk(t) → System → λk φk(t), where λk is the <strong>eigenvalue</strong> and φk(t) the <strong>eigenfunction</strong>: eigenfunction in → same function out with a "gain".</p>
+<p>From the superposition property of LTI systems:</p>
+<p>x(t) = Σk ak φk(t) → LTI → y(t) = Σk λk ak φk(t)</p>
+<p>Now the task of finding the response of LTI systems is to determine λk.</p>
+<h3 id="complex-exponentials-as-the-eigenfunctions-of-any-lti-system">Complex exponentials as the eigenfunctions of any LTI system</h3>
+<p>CT: x(t) = e^(st) → h(t) →</p>
+<p>y(t) = ∫ h(τ) e^(s(t−τ)) dτ = [∫ h(τ) e^(−sτ) dτ] e^(st) = <strong>H(s) e^(st)</strong> (eigenvalue H(s), eigenfunction e^(st))</p>
+<p>DT: x[n] = zⁿ → h[n] →</p>
+<p>y[n] = Σm h[m] z^(n−m) = [Σm h[m] z^(−m)] zⁿ = <strong>H(z) zⁿ</strong></p>
+<p>So, with H(s) = ∫ (−∞…∞) h(t) e^(−st) dt:</p>
+<p>x(t) = Σk ak e^(sk t) → y(t) = Σk H(sk) ak e^(sk t)</p>
+<p>and with H(z) = Σ (n = −∞…∞) h[n] z^(−n):</p>
+<p>x[n] = Σk ak zkⁿ → y[n] = Σk H(zk) ak zkⁿ</p>
+<h3 id="what-kinds-of-signals-can-we-represent-as-sums-of-complex-exponentials">What kinds of signals can we represent as "sums" of complex exponentials?</h3>
+<p>For now, focus on restricted sets of complex exponentials of magnitude 1:</p>
+<ul><li>CT: s = jω — purely imaginary, i.e. signals of the form e^(jωt)</li><li>DT: z = e^(jω), i.e. signals of the form e^(jωn)</li></ul>
+<p>⇒ CT &amp; DT Fourier series (for periodic signals) and transforms.</p>
+<p>CT complex exponential (sinusoid): x(t) = e^(st) at s = jω = e^(jωt) = cos(ωt) + j sin(ωt); s = jω ⇒ Re{s} = 0, Im{s} = ω.</p>
+<p>DT complex exponential (sinusoid): zⁿ = (|z| e^(j∠z))ⁿ = |z|ⁿ e^(jωn), ω = ∠z, |z| = 1 ⇒ x[n] = e^(jωn) = cos(ωn) + j sin(ωn).</p>
+<h2 id="fourier-series-representation-of-ct-periodic-signals">Fourier series representation of CT periodic signals</h2>
+<p>x(t) = x(t + T) for all t:</p>
+<ul><li>the smallest such T is the <strong>fundamental period</strong></li><li>ω0 = 2π/T is the <strong>fundamental frequency</strong></li></ul>
+<p>e^(jωt) is periodic with period T ⇔ ω = kω0. Hence</p>
+<p><strong>x(t) = Σ (k = −∞…∞) ak e^(jkω0t) = Σ ak e^(jk2πt/T)</strong></p>
+<ul><li>periodic with period T</li><li>{ak} are the <strong>Fourier (series) coefficients</strong>, or spectral coefficients</li><li>k = 0: DC; k = ±1: first harmonic; k = ±2: second harmonic</li></ul>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="x(t) = e^(jt) için temel, 2. ve 3. harmoniğin gerçel kısımları"><figcaption>Example x(t) = e^(jt): real part of complex exponential harmonics</figcaption></figure>
+<h3 id="question-1-how-do-we-find-the-fourier-coefficients">Question #1: how do we find the Fourier coefficients?</h3>
+<p>First, for simple periodic signals consisting of a few sinusoidal terms, use Euler's relation (memorize!):</p>
+<p>x(t) = cos 4πt + 2 sin 8πt = (1/2)[e^(j4πt) + e^(−j4πt)] + (2/2j)[e^(j8πt) − e^(−j8πt)]</p>
+<p>ω0 = 4π, T = 2π/ω0 = 2π/4π = 1/2</p>
+<ul><li>a0 = 0 — no dc component</li><li>a1 = 1/2, a−1 = 1/2</li><li>a2 = 1/j, a−2 = −1/j</li><li>a3 = 0, a−3 = 0, …</li></ul>
+<p>For <em>real</em> periodic signals there are two other commonly used forms:</p>
+<p>x(t) = a0 + Σ (k = 1…∞) [αk cos kω0t + βk sin kω0t] or x(t) = a0 + Σ (k = 1…∞) γk cos(kω0t + θk)</p>
+<p>Because of the eigenfunction property of e^(jωt), we will usually use the complex exponential form. A consequence is that we need to include terms for <em>both</em> positive and negative frequencies, e^(jkω0t) and e^(−jkω0t). Remember:</p>
+<p>cos(kω0t) = (1/2)(e^(jkω0t) + e^(−jkω0t)), sin(kω0t) = (1/2j)(e^(jkω0t) − e^(−jkω0t))</p>
+<h3 id="the-complete-answer-to-question-1-given-x-t-how-to-find-ak">The complete answer to Question #1 (given x(t), how to find ak?)</h3>
+<p>Suppose x(t) = Σ ak e^(jkω0t). (1) Multiply both sides by e^(−jnω0t), (2) integrate over one period:</p>
+<p>∫T x(t) e^(−jnω0t) dt = ∫T (Σk ak e^(jkω0t)) e^(−jnω0t) dt = Σk ak (∫T e^(j(k−n)ω0t) dt)</p>
+<p>(Here ∫T denotes the integral over <em>any</em> interval of length T, one period.) Next note the <strong>orthogonality</strong>:</p>
+<p>∫T e^(j(k−n)ω0t) dt = T if k = n, 0 if k ≠ n; i.e. = T δ[k − n]</p>
+<p>so ∫T x(t) e^(−jnω0t) dt = Σk ak T δ[k − n] = an T.</p>
+<p><strong>CT Fourier series pair (ω0 = 2π/T):</strong></p>
+<ul><li><strong>x(t) = Σ (k = −∞…∞) ak e^(jkω0t)</strong> (synthesis equation)</li><li><strong>ak = (1/T) ∫T x(t) e^(−jkω0t) dt</strong> (analysis equation)</li></ul>
+<p>Shorthand: x(t) ↔FS↔ ak.</p>
+<h2 id="alternative-forms">Alternative forms</h2>
+<p><strong>Amplitude-phase.</strong> Since a−k = ak* for real x(t):</p>
+<p>x(t) = Σ ak e^(jkωt) = a0 + Σ (k = 1…∞) ak e^(jkωt) + Σ (k = 1…∞) a−k e^(−jkωt) = a0 + Σ [(ak e^(jkωt)) + (ak e^(jkωt))*] = a0 + 2 Σ Re{ak e^(jkωt)} = a0 + 2 Σ |ak| Re{e^(j(kωt + θk))} = <strong>a0 + 2 Σ (k = 1…∞) Ak cos(kωt + θk)</strong></p>
+<p>where Ak ≜ |ak| and θk ≜ ∠ak is the complex phase angle of ak.</p>
+<p><strong>Trigonometric.</strong></p>
+<p>x(t) = a0 + 2 Σ Re{ak e^(jkωt)} = a0 + 2 Σ [Re{ak} cos(kωt) − Im{ak} sin(kωt)] = <strong>a0 + 2 Σ (k = 1…∞) [Bk cos(kωt) − Ck sin(kωt)]</strong></p>
+<p>where Bk ≜ Re{ak} and Ck ≜ Im{ak}.</p>
+<p><strong>Summary:</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Form</th><th scope="col">x(t)</th></tr></thead><tbody><tr><th scope="row">Exponential</th><td>Σ (k = −∞…∞) ak e^(jkωt)</td></tr><tr><th scope="row">Amplitude-phase</th><td>a0 + 2 Σ (k = 1…∞) Ak cos(kωt + θk)</td></tr><tr><th scope="row">Trigonometric</th><td>a0 + 2 Σ (k = 1…∞) Bk cos(kωt) − Ck sin(kωt)</td></tr></tbody></table></div>
+<p>ak = Ak e^(jθk) = Bk + jCk; Ak = √(Bk² + Ck²) = |ak|; θk = ∠(Bk + jCk) = ∠ak; Bk = Ak cos θk = Re{ak}; Ck = Ak sin θk = Im{ak}.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="periodic-square-wave">Periodic square wave</h3>
+<p>x(t) = 1 for |t| &lt; T1, 0 for T1 &lt; |t| &lt; T/2, periodic with period T.</p>
+<ul><li>For k = 0: a0 = (1/T) ∫ (−T/2…T/2) x(t) dt = 2T1/T — the DC component is just the average.</li><li>For k ≠ 0: ak = (1/T) ∫ (−T1…T1) e^(−jkω0t) dt = −(1/(jkω0T)) e^(−jkω0t) from −T1 to T1 = <strong>sin(kω0T1)/(kπ)</strong>, ω0 = 2π/T</li></ul>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Periyodik kare dalga ve T = 8T1 için Fourier katsayıları"><figcaption>Ex: periodic square wave and its coefficients for T = 8T1</figcaption></figure>
+<h3 id="periodic-impulse-train-important">Periodic impulse train (important!)</h3>
+<p>x(t) = Σ (n = −∞…∞) δ(t − nT) — the <em>sampling function</em>, important for sampling.</p>
+<p>ak = (1/T) ∫ (−T/2…T/2) δ(t) e^(−jkω0t) dt = <strong>1/T for all k!</strong></p>
+<p>⇒ x(t) = (1/T) Σ e^(jkω0t): all components have (1) the same amplitude and (2) the same phase.</p>
+<h2 id="dirichlet-conditions-for-convergence">Dirichlet conditions for convergence</h2>
+<p>The Fourier series of a periodic signal x(t) converges if <em>all</em> of the following conditions are met:</p>
+<ol><li>∫T0 |x(t)| dt &lt; ∞</li><li>Finite number of discontinuities in a period T0</li><li>Finite number of distinct maxima and minima in T0</li><li>x(t) is single valued</li></ol>
+<p>These are sufficient, but not necessary, conditions, and they are usually satisfied in practice. When they are satisfied, the truncated Fourier series with a finite number (N) of terms is the best approximation to the original function, using the total squared-error magnitude over one period for comparison:</p>
+<p>J = ∫T [x(t) − xN(t)]² dt, xN(t) = Σ (k = −N…N) ak e^(jkωt)</p>
+<h2 id="properties-of-ct-fourier-series">Properties of CT Fourier series</h2>
+<ul><li><strong>Linearity:</strong> x(t) ↔ ak, y(t) ↔ bk ⇒ αx(t) + βy(t) ↔ αak + βbk</li><li><strong>Conjugate symmetry:</strong> x(t) real ⇒ a−k = ak*. With ak = Re{ak} + j Im{ak} = |ak| e^(j∠ak): Re{ak} is even and Im{ak} is odd, or |ak| is even and ∠ak is odd.</li><li><strong>Time shift:</strong> x(t − t0) ↔ ak e^(−jkω0t0) = ak e^(−jk2πt0/T) — introduces a linear phase shift ∝ t0.</li></ul>
+<p><strong>Example — shift by half period:</strong> y(t) = x(t − T/2) ↔ ak e^(−jkπ) = (−1)ᵏ ak, using e^(−jkω0T/2) = e^(−jkπ). For the impulse train shifted by T/2, ak = 1/T, so y(t) ↔ (−1)ᵏ/T.</p>
+<ul><li><strong>Time reversal:</strong> y(t) = x(−t), the period T is unchanged: y(t) = Σ ak e^(−jkωt) = Σ a−m e^(jmωt) (substituting k = −m). So x(t) ↔ ak ⇒ x(−t) ↔ a−k. If x(t) is even, a−k = ak; if x(t) is odd, a−k = −ak.</li><li><strong>Time scaling:</strong> for a positive real α, x(αt) is periodic with period T/α and fundamental frequency αω: x(αt) = Σ ak e^(jk(αω)t). The Fourier coefficients have not changed but the Fourier series representation <em>has</em> changed.</li><li><strong>Parseval's relation</strong> (applies to power signals): P = (1/T) ∫T |x(t)|² dt = Σ (k = −∞…∞) |ak|² — average signal power equals the sum of the powers in the harmonics. Energy is the same whether measured in the time domain or in the frequency domain.</li><li><strong>Multiplication property:</strong> if x(t) ↔ ak and y(t) ↔ bk (both periodic with the same period T), then x(t)·y(t) ↔ ck = Σ (l = −∞…∞) al b(k−l) = ak ∗ bk. Proof: Σl al e^(jlω0t) · Σm bm e^(jmω0t) = Σ(l,m) al bm e^(j(l+m)ω0t) = (with l + m = k) Σk [Σl al b(k−l)] e^(jkω0t).</li></ul>
+<h2 id="periodic-convolution">Periodic convolution</h2>
+<p>For x(t), y(t) periodic with period T, the ordinary convolution x(t) ∗ y(t) = ∫ (−∞…∞) x(τ) y(t − τ) dτ is not useful: e.g. if both x(t) and y(t) are positive, x(t) ∗ y(t) = ∞.</p>
+<p><strong>Periodic convolution:</strong> integrate over <em>any</em> one period (e.g. −T/2 to T/2):</p>
+<p>z(t) = ∫ (−T/2…T/2) x(τ) y(t − τ) dτ = ∫ (−∞…∞) xT(τ) y(t − τ) dτ, where xT(t) = x(t) for −T/2 &lt; t &lt; T/2 and 0 otherwise.</p>
+<p>Facts:</p>
+<ol><li>z(t) is periodic with period T (for LTI systems x(t) = x(t + T) → y(t) = y(t + T); in the convolution treat y(t) as the input and xT(t) as h(t)).</li><li>It doesn't matter over which period we integrate: z(t) = ∫T x(τ) y(t − τ) dτ = x(t) ⊗ y(t).</li><li>Periodic convolution in time ⇔ multiplication in frequency: with x(t) ↔ ak, y(t) ↔ bk, z(t) ↔ ck,</li></ol>
+<p>ck = (1/T) ∫T z(t) e^(−jkω0t) dt = ∫T [(1/T) ∫T y(t − τ) e^(−jkω0(t−τ)) dt] x(τ) e^(−jkω0τ) dτ = ∫T bk x(τ) e^(−jkω0τ) dτ = <strong>T ak bk</strong></p>
+<h2 id="symmetry-advantage">Symmetry advantage</h2>
+<h3 id="products-of-even-and-odd-signals">Products of even and odd signals</h3>
+<p>The product of even and odd signals is either even or odd:</p>
+<ul><li>x(t) even, y(t) even ⇒ even: p(t) ≜ x(t)y(t) = x(−t)y(−t) = p(−t)</li><li>x(t) even, y(t) odd ⇒ odd: p(t) = x(−t)[−y(−t)] = −p(−t)</li><li>x(t) odd, y(t) even ⇒ odd: p(t) = [−x(−t)] y(−t) = −p(−t)</li><li>x(t) odd, y(t) odd ⇒ even: p(t) = [−x(−t)][−y(−t)] = p(−t)</li></ul>
+<p>The same relations hold for discrete-time signals.</p>
+<ul><li>Conceptually, the FS coefficients are integrals of products.</li><li>The integral is nothing more than the area under the curve of this product.</li><li>If the product is odd, the total area is zero.</li><li>If the product is even, the total area is twice that of the left/right half.</li></ul>
+<h3 id="symmetry-fs-coefficients">Symmetry &amp; FS coefficients</h3>
+<p>x(t) = a0 + 2 Σ [Bk cos(kωt) − Ck sin(kωt)]</p>
+<p>Bk = (1/T0) ∫T0 x(t) cos(kωt) dt = (1/T0) ∫ (−T0/2…T0/2) xe(t) cos(kωt) dt = (2/T0) ∫ (0…T0/2) xe(t) cos(kωt) dt</p>
+<p>Ck = −(1/T0) ∫T0 x(t) sin(kωt) dt = −(1/T0) ∫ (−T0/2…T0/2) xo(t) sin(kωt) dt = −(2/T0) ∫ (0…T0/2) xo(t) sin(kωt) dt</p>
+<ul><li>Symmetry can simplify the calculation of the FS coefficients.</li><li>If x(t) is even, Ck = 0.</li><li>If x(t) is odd, Bk = 0.</li><li>Each product within the non-zero integrals is even.</li></ul>
+<h2 id="worked-examples-matlab-plots">Worked examples (MATLAB plots)</h2>
+<h3 id="example-triangle-waveform">Example: triangle waveform</h3>
+<p><em>What is the fundamental period of x(t)? What type of symmetry does the signal have? Find the trigonometric Fourier series coefficients. Plot the partial Fourier series sum for N = 1, 5, 10 &amp; 50.</em> Hint: ∫ t cos(ωt) dt = (1/ω²) cos(ωt) + (t/ω) sin(ωt) + C.</p>
+<figure class="yazi-gorsel"><img src="s-33.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Tepe değeri ±1 olan, periyodu 2 s üçgen dalga"><figcaption>Example: triangle waveform</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-34.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Üçgen dalganın Bk katsayı spektrumu: en büyük değerler k = ±1&#x27;de yaklaşık 0,4"><figcaption>Coefficient spectrum of the triangle wave</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-37.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Üçgen dalga için N = 50 terimli kısmi Fourier serisi"><figcaption>Partial Fourier series, N = 50</figcaption></figure>
+<h3 id="example-pulse-waveform">Example: pulse waveform</h3>
+<p><em>What is the fundamental period of x(t)? What type of symmetry does the signal have? Find the trigonometric Fourier series coefficients. Plot the partial Fourier series sum for N = 1, 5, 10, 25, 50 &amp; 100.</em></p>
+<figure class="yazi-gorsel"><img src="s-38.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Genişliği 0,5 s, periyodu 2 s olan darbe dizisi"><figcaption>Example: pulse waveform</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-39.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Darbe dizisinin Bk katsayı spektrumu (a0 = 0,25)"><figcaption>Coefficient spectrum of the pulse waveform</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-41.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Darbe dizisi için N = 5 terimli kısmi Fourier serisi"><figcaption>Partial Fourier series, N = 5</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-44.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Darbe dizisi için N = 100 terimli kısmi Fourier serisi; kenarlarda aşma görülüyor"><figcaption>Partial Fourier series, N = 100</figcaption></figure>
+<h2 id="gibbs-phenomenon">Gibbs phenomenon</h2>
+<ul><li>For finite Fourier series estimates there is apparent overshoot.</li><li>As N increases, the edges become sharper and more accurate.</li><li>The maximum overshoot (error) does not decrease as N → ∞.</li><li>This is called <strong>Gibbs phenomenon</strong>.</li></ul>
+<h3 id="example-sawtooth-waveform">Example: sawtooth waveform</h3>
+<p><em>What is the fundamental period of x(t)? What type of symmetry does the signal have? Find the trigonometric Fourier series coefficients. Plot the partial Fourier series sum for N = 1, 5, 10 &amp; 50.</em> Hints: ∫ t cos(ωt) dt = (1/ω²) cos(ωt) + (t/ω) sin(ωt) + C and ∫ t sin(ωt) dt = (1/ω²) sin(ωt) − (t/ω) cos(ωt) + C.</p>
+<figure class="yazi-gorsel"><img src="s-46.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="0&#x27;dan 1&#x27;e yükselen, periyodu 2 s testere dişi dalga"><figcaption>Example: sawtooth waveform</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-47.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Testere dişi dalganın Ck katsayıları; Bk = 0, a0 = 0,5"><figcaption>Coefficient spectrum: Bk = 0, a0 = 0.5</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-50.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Testere dişi dalga için N = 100 terimli kısmi Fourier serisi; süreksizliklerde Gibbs aşması"><figcaption>Partial Fourier series, N = 100</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="EEM301-FS.ppt" download>EEM301-FS.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 1.2 MB · 51 <span data-i18n="arch.slidesLower"></span> · 18.10.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM301-FS.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (1.2 MB)</a>
+            <a class="buton" href="EEM301-FS.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (1011 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

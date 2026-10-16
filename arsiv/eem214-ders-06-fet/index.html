@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Ders 6 – FET ve MOSFET Transistörler — hasancan.net</title>
+<meta name="description" content="EEM214 Elektronik I dersinin FET sunumu: JFET transfer ve savak karakteristikleri, JFET–BJT karşılaştırması, azaltıcı (depletion) ve çoğaltıcı (enhancement) tip MOSFET yapısı, karakteristikleri ve sembolleri, CMOS evirici, VMOS ve MESFET transistörler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-ders-06-fet/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Ders 6 – FET ve MOSFET Transistörler">
+<meta property="og:description" content="EEM214 Elektronik I dersinin FET sunumu: JFET transfer ve savak karakteristikleri, JFET–BJT karşılaştırması, azaltıcı (depletion) ve çoğaltıcı (enhancement) tip MOSFET yapısı, karakteristikleri ve sembolleri, CMOS evirici, VMOS ve MESFET transistörler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-ders-06-fet/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Ders 6 – FET ve MOSFET Transistörler", "description": "EEM214 Elektronik I dersinin FET sunumu: JFET transfer ve savak karakteristikleri, JFET–BJT karşılaştırması, azaltıcı (depletion) ve çoğaltıcı (enhancement) tip MOSFET yapısı, karakteristikleri ve sembolleri, CMOS evirici, VMOS ve MESFET transistörler.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem214-ders-06-fet/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "Lecture6_fet.ppt", "contentUrl": "https://hasancan.net/arsiv/eem214-ders-06-fet/Lecture6_fet.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Ders 6 – FET ve MOSFET Transistörler">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM214</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.05.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#jfet-karakteristikleri">JFET karakteristikleri</a></li><li><a href="#depletion-mosfet-insulated-gate-fet-igfet">Depletion MOSFET (Insulated-Gate FET, IGFET)</a></li><li><a href="#enhancement-mosfet-insulated-gate-fet-igfet">Enhancement MOSFET (Insulated-Gate FET, IGFET)</a></li><li><a href="#cmos-transistorler-complementary-mos">CMOS transistörler (Complementary MOS)</a></li><li><a href="#vmos-transistorler-vertical-metal-oxide-silicon-fet">VMOS transistörler (Vertical Metal Oxide Silicon FET)</a></li><li><a href="#mesfet-transistorler-metal-semiconductor-field-effect-transistors">MESFET transistörler (Metal Semiconductor Field Effect Transistors)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Ders 6 – FET ve MOSFET Transistörler</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 06.05.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM214 Elektronik I</strong> dersinin <em>Lecture 6</em> (FET) sunumunun içeriğidir. Sunumu dersin öğretim elemanı Yrd. Doç. Dr. Derya Yılmaz hazırlamış; son düzenleme tarihi Mayıs 2013. Sunum büyük ölçüde ek ders kitabı olan Boylestad &amp; Nashelsky'nin <em>Electronic Devices and Circuit Theory</em> kitabından taranmış şekillerden (Fig. 6.27–6.38) oluşuyor; metin yalnızca birkaç slaytta var. Bu yüzden şekiller sayfa görselleriyle verildi, içerdikleri bilgiler ve formüller metin olarak yazıldı. Sunumun orijinal dosyası yazının sonunda indirilebilir.</p>
+<h2 id="jfet-karakteristikleri">JFET karakteristikleri</h2>
+<p>İlk slayt, n kanallı bir JFET'in transfer karakteristiğini (I_D – V_GS) savak karakteristiklerinden (I_D – V_DS) nasıl elde edildiğini gösteriyor. Örnekte I_DSS = 8 mA ve V_P = −4 V: V_GS = 0 V'ta I_D = I_DSS, V_GS = V_P'de I_D = 0 mA.</p>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="JFET savak karakteristiklerinden transfer eğrisinin elde edilmesi: I_DSS = 8 mA, V_P = −4 V"><figcaption>JFET transfer ve savak karakteristikleri</figcaption></figure>
+<h3 id="jfet-ve-bjt-karsilastirmasi">JFET ve BJT karşılaştırması</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">JFET</th><th scope="col"></th><th scope="col">BJT</th></tr></thead><tbody><tr><th scope="row">I_D = I_DSS·(1 − V_GS/V_P)²</th><td>⇔</td><td>I_C = β·I_B</td></tr><tr><th scope="row">I_D = I_S</th><td>⇔</td><td>I_C ≅ I_E</td></tr><tr><th scope="row">I_G ≅ 0 A</th><td>⇔</td><td>V_BE ≅ 0.7 V</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="JFET ve BJT&#x27;nin uç akımları ve kontrol bağıntılarının karşılaştırması"><figcaption>JFET (a) ve BJT (b)</figcaption></figure>
+<h2 id="depletion-mosfet-insulated-gate-fet-igfet">Depletion MOSFET (Insulated-Gate FET, IGFET)</h2>
+<p>n kanallı azaltıcı tip MOSFET'te p tipi alttaş (substrate, SS) üzerinde iki n katkılı bölge (savak D ve kaynak S) arasında katkılanmış bir n kanalı bulunur; kapı (G), SiO₂ yalıtkan katmanla kanaldan ayrılmıştır.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="n kanallı azaltıcı tip MOSFET&#x27;in yapısı: SiO₂, n kanalı, p alttaş ve metal kontaklar (Fig. 6.27)"><figcaption>n-Channel depletion-type MOSFET</figcaption></figure>
+<p>V_GS = 0 V'ta savağa V_DD uygulandığında kanaldan I_D = I_S = I_DSS akımı akar.</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="V_GS = 0 V ve V_DD uygulanmış azaltıcı tip MOSFET&#x27;te elektron akışı (Fig. 6.28)"><figcaption>n-Channel depletion-type MOSFET with V_GS = 0 V and applied voltage V_DD</figcaption></figure>
+<p>Azaltıcı tip MOSFET hem azaltma (V_GS &lt; 0) hem çoğaltma (V_GS &gt; 0) modunda çalışabilir. Örnekte I_DSS = 8 mA, V_P = −6 V; V_GS = +1 V'ta I_D = 10.9 mA, V_GS = V_P/2 = −3 V'ta I_D = I_DSS/4 = 2 mA.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="n kanallı azaltıcı tip MOSFET&#x27;in savak ve transfer karakteristikleri (Fig. 6.29)"><figcaption>Drain and transfer characteristics for an n-channel depletion-type MOSFET</figcaption></figure>
+<p>p kanallı azaltıcı tip MOSFET'te alttaş n tipidir; örnek karakteristikte I_DSS = 6 mA ve V_P = +6 V, akım V_GS arttıkça azalıyor.</p>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="p kanallı azaltıcı tip MOSFET&#x27;in yapısı, transfer ve savak karakteristikleri"><figcaption>p kanallı azaltıcı tip MOSFET</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="n ve p kanallı azaltıcı tip MOSFET sembolleri, alttaş ucu ayrı ve kaynağa bağlı"><figcaption>Depletion-type MOSFET sembolleri</figcaption></figure>
+<h2 id="enhancement-mosfet-insulated-gate-fet-igfet">Enhancement MOSFET (Insulated-Gate FET, IGFET)</h2>
+<p>Çoğaltıcı tip MOSFET'te savak ve kaynak bölgeleri arasında katkılanmış bir kanal yoktur ("no-channel"); kanal, kapıya eşik geriliminin (V_T) üzerinde pozitif gerilim uygulanınca oluşur.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="n kanallı çoğaltıcı tip MOSFET&#x27;in yapısı: kanalsız p tipi alttaş, n katkılı savak ve kaynak (Fig. 6.35)"><figcaption>n-Channel enhancement-type MOSFET</figcaption></figure>
+<p>Sabit bir V_GS için V_DS arttıkça savak tarafında boşaltılmış bölge genişler ve kanal daralarak kısılmaya (pinch-off) başlar.</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="V_DS arttıkça kanalın ve boşaltılmış bölgenin değişimi, kısılmanın başlangıcı (Fig. 6.37)"><figcaption>Change in channel and depletion region with increasing V_DS for a fixed V_GS</figcaption></figure>
+<p>Doyma noktalarının yeri: V_DSsat = V_GS − V_T. Örnek karakteristikte V_T = 2 V ve k = 0.278×10⁻³ A/V²; V_GS = +8 V'ta I_D ≈ 10 mA.</p>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="V_T = 2 V ve k = 0.278×10⁻³ A/V² olan n kanallı çoğaltıcı tip MOSFET&#x27;in savak karakteristikleri (Fig. 6.38)"><figcaption>Drain characteristics of an n-channel enhancement-type MOSFET</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="n ve p kanallı çoğaltıcı tip MOSFET sembolleri"><figcaption>Enhancement-type MOSFET sembolleri</figcaption></figure>
+<h2 id="cmos-transistorler-complementary-mos">CMOS transistörler (Complementary MOS)</h2>
+<p>N ve P kanallı MOSFET transistörlerin bir arada kullanılması ile oluşturulur. Düşük güç harcamasına sahiptir. Sayısal devre tasarımlarında sıkça kullanılırlar.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Aynı n tipi alttaş üzerinde p kanallı ve n kanallı MOSFET&#x27;ten oluşan CMOS yapısı"><figcaption>CMOS yapısı</figcaption></figure>
+<h3 id="cmos-inverter">CMOS inverter</h3>
+<p>V_SS = 5 V ile beslenen evirici: girişe 5 V (1 durumu) uygulandığında n kanallı Q₁ iletimde (R₁ düşük), p kanallı Q₂ kesimde (R₂ yüksek) olur ve çıkış V_o = R₁·V_SS/(R₁ + R₂) ≅ 0 V (0 durumu) olur.</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="CMOS evirici devresi ve giriş 5 V iken eşdeğer direnç modeli"><figcaption>CMOS inverter</figcaption></figure>
+<h2 id="vmos-transistorler-vertical-metal-oxide-silicon-fet">VMOS transistörler (Vertical Metal Oxide Silicon FET)</h2>
+<ul><li>MOSFET'lere göre kanal dirençleri küçüktür ve yüksek akım ve güç oranına sahiptirler.</li><li>Pozitif sıcaklık katsayısına sahiptirler.</li><li>Anahtarlama zamanları oldukça kısadır.</li></ul>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="V oluklu kapı yapısıyla dikey kanallı VMOS transistörün kesiti"><figcaption>VMOS transistör yapısı</figcaption></figure>
+<h2 id="mesfet-transistorler-metal-semiconductor-field-effect-transistors">MESFET transistörler (Metal Semiconductor Field Effect Transistors)</h2>
+<ul><li>MOSFET'lere göre kanal dirençleri küçüktür ve yüksek akım ve güç oranına sahiptirler.</li><li>Pozitif sıcaklık katsayısına sahiptirler.</li><li>Anahtarlama zamanları oldukça kısadır.</li></ul>
+<p><em>Not: MESFET slaytındaki maddeler VMOS slaytındakilerle birebir aynı; büyük olasılıkla kopyalanıp düzeltilmeden bırakılmış. MESFET'in ayırt edici özelliği, kapının yalıtkan yerine doğrudan yarıiletkenle Schottky eklemi oluşturan bir metalden (şekilde tungsten) yapılması ve GaAs alttaş sayesinde yüksek frekanslarda kullanılmasıdır.</em></p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="GaAs alttaş üzerinde tungsten kapılı MESFET yapısı"><figcaption>MESFET yapısı</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="Lecture6_fet.ppt" download>Lecture6_fet.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 6.8 MB · 15 <span data-i18n="arch.slidesLower"></span> · 06.05.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Lecture6_fet.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (6.8 MB)</a>
+            <a class="buton" href="Lecture6_fet.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (805 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

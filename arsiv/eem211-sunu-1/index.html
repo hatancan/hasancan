@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Mantık Kapıları ve Tümdevreler (Sunu 1) — hasancan.net</title>
+<meta name="description" content="EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli 1. sunusu: AND, OR, NOT, NAND, NOR, XOR, XNOR kapılarının sembolleri ve doğruluk tabloları, yalnız NAND veya NOR ile gerçekleştirme, diyot ve transistörlü kapılar, 7400 serisi tümdevre bacak bağlantıları ve f = x1x2 + x2&#x27;x3 örneği.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-sunu-1/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Mantık Kapıları ve Tümdevreler (Sunu 1)">
+<meta property="og:description" content="EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli 1. sunusu: AND, OR, NOT, NAND, NOR, XOR, XNOR kapılarının sembolleri ve doğruluk tabloları, yalnız NAND veya NOR ile gerçekleştirme, diyot ve transistörlü kapılar, 7400 serisi tümdevre bacak bağlantıları ve f = x1x2 + x2&#x27;x3 örneği.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-sunu-1/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Mantık Kapıları ve Tümdevreler (Sunu 1)", "description": "EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli 1. sunusu: AND, OR, NOT, NAND, NOR, XOR, XNOR kapılarının sembolleri ve doğruluk tabloları, yalnız NAND veya NOR ile gerçekleştirme, diyot ve transistörlü kapılar, 7400 serisi tümdevre bacak bağlantıları ve f = x1x2 + x2'x3 örneği.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-sunu-1/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "Sunu1_eem211.pdf", "contentUrl": "https://hasancan.net/arsiv/eem211-sunu-1/Sunu1_eem211.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Mantık Kapıları ve Tümdevreler (Sunu 1)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM211</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.10.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#temel-mantik-kapilari">Temel mantık kapıları</a></li><li><a href="#yalniz-nand-kapilariyla-mantik-esdegerleri">Yalnız NAND kapılarıyla mantık eşdeğerleri</a></li><li><a href="#yalniz-nor-kapilariyla-mantik-esdegerleri">Yalnız NOR kapılarıyla mantık eşdeğerleri</a></li><li><a href="#diyotlu-kapilar-ve-7-parcali-gosterge">Diyotlu kapılar ve 7 parçalı gösterge</a></li><li><a href="#74xx-tumdevrelerinin-bacak-baglantilari">74xx tümdevrelerinin bacak bağlantıları</a></li><li><a href="#not-kapisi-ve-transistorlu-kapilar">NOT kapısı ve transistörlü kapılar</a></li><li><a href="#bir-fonksiyonun-tumdevrelerle-gerceklestirilmesi">Bir fonksiyonun tümdevrelerle gerçekleştirilmesi</a></li><li><a href="#programlanabilir-mantikta-gerceklestirme">Programlanabilir mantıkta gerçekleştirme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Mantık Kapıları ve Tümdevreler (Sunu 1)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 17.10.2012 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM211 Sayısal Mantık Tasarımı</strong> dersinin 17 Ekim 2012 tarihli 1. sunusudur; PDF'in yazar bilgisinde dersin hocası Hamit Erdem'in adı (hamit) geçiyor. Sunu dokuz slayttan oluşuyor ve neredeyse tamamı şekil: temel mantık kapıları, NAND/NOR eşdeğerleri, kapıların diyot ve transistörlerle yapılışı ve laboratuvarda kullanılan 74xx tümdevrelerinin bacak bağlantıları. Şekillerin içerdiği bilgiler aşağıda metin olarak da verildi. Sununun orijinal PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="temel-mantik-kapilari">Temel mantık kapıları</h2>
+<p>İlk slayt yedi temel kapıyı, ortak (common) sembolü ve IEEE sembolüyle yan yana gösteriyor. IEEE sembolünde kapının işlevi kutunun içindeki işaretle anlatılır: AND için <code>&amp;</code>, OR için <code>≥1</code>, NOT için <code>1</code>, XOR için <code>=1</code>; çıkıştaki küçük daire tersleme (değil) anlamına gelir.</p>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Temel mantık kapılarının ortak ve IEEE sembolleri ile doğruluk tabloları"><figcaption>AND, OR, NOT, NAND, NOR, XOR ve XNOR: ortak sembol, IEEE sembolü ve doğruluk tablosu</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kapı</th><th scope="col">Çıkış</th><th scope="col">IEEE işareti</th></tr></thead><tbody><tr><th scope="row">AND</th><td>f = A·B</td><td>&amp;</td></tr><tr><th scope="row">OR</th><td>f = A + B</td><td>≥1</td></tr><tr><th scope="row">NOT</th><td>f = A'</td><td>1 (çıkışta daire)</td></tr><tr><th scope="row">NAND</th><td>f = (A·B)'</td><td>&amp; (çıkışta daire)</td></tr><tr><th scope="row">NOR</th><td>f = (A + B)'</td><td>≥1 (çıkışta daire)</td></tr><tr><th scope="row">Exclusive-OR (XOR)</th><td>f = A ⊕ B</td><td>=1</td></tr><tr><th scope="row">Exclusive-NOR (XNOR)</th><td>f = (A ⊕ B)'</td><td>=1 (çıkışta daire)</td></tr></tbody></table></div>
+<p>Slaytın sağındaki doğruluk tabloları:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">x</th><th scope="col">y</th><th scope="col">AND</th><th scope="col">OR</th><th scope="col">NAND</th><th scope="col">NOR</th><th scope="col">XOR</th><th scope="col">XNOR</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>NOT kapısı için: x = 0 ise F = 1, x = 1 ise F = 0.</p>
+<h2 id="yalniz-nand-kapilariyla-mantik-esdegerleri">Yalnız NAND kapılarıyla mantık eşdeğerleri</h2>
+<p>NAND kapısı "evrensel" kapıdır: diğer bütün kapılar yalnız NAND ile kurulabilir.</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="NOT, OR ve AND kapılarının yalnız NAND kapılarıyla eşdeğerleri"><figcaption>Logic equivalents using NAND gates</figcaption></figure>
+<ul><li><strong>NOT:</strong> NAND'ın iki girişi birleştirilir: (A·A)' = A'</li><li><strong>İki girişli OR:</strong> Her giriş bir NAND ile terslenir, sonra bir NAND'dan geçirilir: (A'·B')' = A + B</li><li><strong>İki girişli AND:</strong> NAND çıkışı ikinci bir NAND ile terslenir: ((A·B)')' = A·B</li><li><strong>Invert-OR:</strong> Girişleri terslenmiş OR kapısı, NAND kapısının ta kendisidir: A' + B' = (A·B)'</li></ul>
+<h2 id="yalniz-nor-kapilariyla-mantik-esdegerleri">Yalnız NOR kapılarıyla mantık eşdeğerleri</h2>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="NOT, OR ve AND kapılarının yalnız NOR kapılarıyla eşdeğerleri"><figcaption>Logic equivalents using NOR gates</figcaption></figure>
+<ul><li><strong>NOT:</strong> NOR'un iki girişi birleştirilir: (A + A)' = A'</li><li><strong>OR:</strong> NOR çıkışı ikinci bir NOR ile terslenir: ((A + B)')' = A + B</li><li><strong>AND:</strong> Her giriş bir NOR ile terslenir, sonra bir NOR'dan geçirilir: (A' + B')' = A·B</li><li><strong>Invert-AND:</strong> Girişleri terslenmiş AND kapısı, NOR kapısının ta kendisidir: A'·B' = (A + B)'</li></ul>
+<h2 id="diyotlu-kapilar-ve-7-parcali-gosterge">Diyotlu kapılar ve 7 parçalı gösterge</h2>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Diyot anahtar modeli, diyotlu OR ve AND kapıları, ortak katot ve ortak anot 7 parçalı gösterge bağlantısı"><figcaption>Diyotlu OR ve AND kapıları; ortak katot ve ortak anot 7 parçalı gösterge</figcaption></figure>
+<ul><li>Diyot, anottan katoda doğru iletimdeyken kapalı bir anahtar gibi düşünülebilir.</li><li><strong>Diyotlu OR kapısı:</strong> A ve B girişleri D1 ve D2 diyotları üzerinden ortak çıkışa bağlanır, çıkış R direnciyle toprağa çekilir: C = A + B.</li><li><strong>Diyotlu AND işlemi:</strong> Çıkış bir dirençle +V'ye çekilir, A ve B girişleri ters yönlü diyotlarla çıkışa bağlanır: Y = A·B.</li><li><strong>7 parçalı gösterge:</strong> a–g parçalarının her biri bir LED'dir. <em>Ortak katot</em> tipinde LED'lerin katotları toprağa, <em>ortak anot</em> tipinde anotları +5 V'a bağlıdır; her parça bir R direnci üzerinden sürülür.</li></ul>
+<h2 id="74xx-tumdevrelerinin-bacak-baglantilari">74xx tümdevrelerinin bacak bağlantıları</h2>
+<p>Laboratuvarda kullanılan 14 bacaklı TTL/CMOS tümdevrelerinde her kılıfta dört adet iki girişli kapı vardır; 14. bacak VCC, 7. bacak GND'dir.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="74HC32/74LS32 OR, 74HC08/74LS08 AND, 74HC02/74LS02 NOR ve 74HC00/74LS00 NAND tümdevrelerinin bacak diyagramları"><figcaption>Pin diagram: 74HC32, 74HC08, 74HC02, 74HC00</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Tümdevre</th><th scope="col">Kapı</th></tr></thead><tbody><tr><th scope="row">74HC32 / 74LS32</th><td>4 adet iki girişli OR</td></tr><tr><th scope="row">74HC08 / 74LS08</th><td>4 adet iki girişli AND</td></tr><tr><th scope="row">74HC02 / 74LS02</th><td>4 adet iki girişli NOR, C = (A + B)'</td></tr><tr><th scope="row">74HC00 / 74LS00</th><td>4 adet iki girişli NAND, C = (A·B)'</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="XOR ve XNOR sembolleri ile 74HC86/74LS86 ve 74HC266/74LS266 bacak diyagramları"><figcaption>XOR (74HC86) ve XNOR (74HC266) tümdevreleri</figcaption></figure>
+<ul><li><strong>XOR sembolü:</strong> C = A ⊕ B; tümdevresi 74HC86 / 74LS86.</li><li><strong>XNOR kapısı:</strong> C = (A ⊕ B)'; tümdevresi 74HC266 / 74LS266.</li></ul>
+<h2 id="not-kapisi-ve-transistorlu-kapilar">NOT kapısı ve transistörlü kapılar</h2>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="7404 tümdevresinin yapısı, transistörlü NOT kapısı, transistörlü NOR ve diyot-transistörlü NAND kapısı"><figcaption>Not gate: 7404 yapısı ve transistörlü kapılar</figcaption></figure>
+<ul><li><strong>7404:</strong> Bir kılıfta altı adet NOT (tersleyici) kapısı vardır.</li><li>Tek transistörlü tersleyici: giriş V_IN, R_B üzerinden tabana uygulanır; çıkış kollektörden (R_C üzerinden VCC'ye çekili) alınır.</li><li>İki girişin dirençlerle aynı transistörün tabanına bağlandığı devre NOR işlevi verir: Y = (A + B)'.</li><li>Diyotlu AND girişinin ardından transistörlü tersleyici kullanılan devre NAND işlevi verir: Y = (A·B)'.</li></ul>
+<h2 id="bir-fonksiyonun-tumdevrelerle-gerceklestirilmesi">Bir fonksiyonun tümdevrelerle gerçekleştirilmesi</h2>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="f = x1x2 + x2&#x27;x3 fonksiyonunun 7404, 7408 ve 7432 tümdevreleriyle bağlantı şeması"><figcaption>An implementation of f = x1x2 + x2'x3</figcaption></figure>
+<p>f = x1·x2 + x2'·x3 fonksiyonu üç tümdevreyle kurulur:</p>
+<ul><li><strong>7404</strong> (NOT): x2'yi üretir.</li><li><strong>7408</strong> (AND): x1·x2 ve x2'·x3 çarpımlarını üretir.</li><li><strong>7432</strong> (OR): iki çarpımı toplayarak f çıkışını verir.</li></ul>
+<h2 id="programlanabilir-mantikta-gerceklestirme">Programlanabilir mantıkta gerçekleştirme</h2>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="x1–x4 girişli NOR düzlemiyle P1–P6 çarpım terimlerinden f1 ve f2 çıkışlarının üretilmesi"><figcaption>Implementation in FPGAs: NOR plane</figcaption></figure>
+<p>Son slayt ("Implementation in FPGAs"), x1–x4 girişlerinin ve tümleyenlerinin programlanabilir bir <strong>NOR düzlemine</strong> bağlandığını gösteriyor. Düzlemde P1–P6 terimleri üretiliyor; P1–P3 bir kapıda birleşerek <strong>f1</strong>, P4–P6 bir başka kapıda birleşerek <strong>f2</strong> çıkışını oluşturuyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Sunu1_eem211.pdf" download>Sunu1_eem211.pdf</a></p>
+              <p class="kucuk">PDF · 241 KB · 9 <span data-i18n="arch.pagesLower"></span> · 17.10.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Sunu1_eem211.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (241 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

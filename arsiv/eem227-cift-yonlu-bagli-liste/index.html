@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Çift Yönlü ve Dairesel Çift Yönlü Bağlı Liste (Hafta 13) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 13. haftasına ait C++ programları (Aralık 2007): çift yönlü bağlı listeye (doubly linked list) ve dairesel çift yönlü bağlı listeye (circular doubly linked list) sıralı ekleme, iki yönde yazdırma ve eleman silme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-cift-yonlu-bagli-liste/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Çift Yönlü ve Dairesel Çift Yönlü Bağlı Liste (Hafta 13)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 13. haftasına ait C++ programları (Aralık 2007): çift yönlü bağlı listeye (doubly linked list) ve dairesel çift yönlü bağlı listeye (circular doubly linked list) sıralı ekleme, iki yönde yazdırma ve eleman silme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-cift-yonlu-bagli-liste/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Çift Yönlü ve Dairesel Çift Yönlü Bağlı Liste (Hafta 13)", "description": "EEM227 Veri Yapıları dersinin 13. haftasına ait C++ programları (Aralık 2007): çift yönlü bağlı listeye (doubly linked list) ve dairesel çift yönlü bağlı listeye (circular doubly linked list) sıralı ekleme, iki yönde yazdırma ve eleman silme.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-cift-yonlu-bagli-liste/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-cift-yonlu-bagli-liste.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-cift-yonlu-bagli-liste/eem227-cift-yonlu-bagli-liste.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Çift Yönlü ve Dairesel Çift Yönlü Bağlı Liste (Hafta 13)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.12.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cift-yonlu-bagli-liste">Çift yönlü bağlı liste</a></li><li><a href="#dairesel-cift-yonlu-bagli-liste">Dairesel çift yönlü bağlı liste</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Çift Yönlü ve Dairesel Çift Yönlü Bağlı Liste (Hafta 13)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 16.12.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz dönemi 13. hafta klasöründeki iki C++ programını içeriyor: <strong>çift yönlü bağlı liste</strong> (doubly linked list) ve <strong>dairesel çift yönlü bağlı liste</strong> (circular doubly linked list). Her ikisi de 12. haftadaki sıralı ekleme sorusunun devamı: düğümlere bir de önceki düğümü gösteren <code>pre</code> işaretçisi ekleniyor. Programların başında örnek çalışmalar yorum olarak verilmiş. Kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cift-yonlu-bagli-liste">Çift yönlü bağlı liste</h2>
+<p>Her düğüm hem sonraki (<code>next</code>) hem önceki (<code>pre</code>) düğümü gösteriyor; ilk düğümün <code>pre</code>'si ve son düğümün <code>next</code>'i <code>NULL</code>. Sıralı eklemede tek yönlü listedeki dört durum aynı, yalnızca her bağlantı iki yönlü kuruluyor: başa eklerken eski head'in <code>pre</code>'si yeni düğüme, araya eklerken hem <code>pre-&gt;next</code> hem <code>curr-&gt;pre</code> yeni düğüme bağlanıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include&lt;iostream&gt;
+#include&lt;ctime&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class node
+{
+private:
+      T nodeValue;      // data held by the node
+      node&lt;T&gt; *next;    // next node in the list
+      node&lt;T&gt; *pre;     // previous node in the list
+public:
+
+ node(const T&amp; item, node&lt;T&gt; *nextNode=NULL, node&lt;T&gt; *previousNode=NULL)
+      {
+         nodeValue=item;
+		 next=nextNode;
+		 pre=previousNode;
+	  }
+
+static T LLSiraliEkle(T value, node&lt;T&gt; * &amp;ptr)
+{
+
+node&lt;T&gt; *curr=ptr,*pre=ptr,*s;
+
+ if( ptr == NULL) // Liste boş ise ilk nodu heade yerleştir.
+      {
+       ptr = new node&lt;T&gt; (value);
+       ptr-&gt;next = NULL;
+       ptr-&gt;pre = NULL;
+      }
+
+ else if (ptr-&gt;nodeValue &gt;= value) // Başa ekle (sola)
+     {
+       s = new node&lt;T&gt; (value);
+       s-&gt;next = ptr;
+       ptr-&gt;pre = s;
+       s-&gt;pre = NULL;
+       ptr = s;
+     }
+
+else
+ {
+  while (curr-&gt;nodeValue &lt;= value &amp;&amp; curr-&gt;next!=NULL)
+    {
+      pre = curr;
+      curr = curr-&gt;next;
+     }
+
+   if(curr-&gt;next == NULL &amp;&amp; curr-&gt;nodeValue &lt;= value) // sona ekle
+       {
+         s = new node&lt;T&gt; (value);
+         s-&gt;next = NULL;
+         curr-&gt;next = s;
+         s-&gt;pre = curr;
+       }
+
+   else  // araya ekle
+         {
+          s = new node&lt;T&gt; (value);
+          pre-&gt;next = s;
+          s-&gt;pre = pre;
+          s-&gt;next = curr;
+          curr-&gt;pre = s;
+         }
+
+ } // ELSE
+}
+
+static T printList(node&lt;T&gt; *ptr)
+      {
+        cout&lt;&lt;"NULL&lt;-";
+        while (ptr-&gt;next != NULL) // Araya ok koymak için bu şekilde yaptık...
+        {
+         cout &lt;&lt; ptr-&gt;nodeValue&lt;&lt;"&lt;=&gt;" ;
+         ptr = ptr-&gt;next;
+        }
+         cout&lt;&lt;ptr-&gt;nodeValue&lt;&lt;"-&gt;NULL" ;
+           cout &lt;&lt; endl;
+       }
+
+static T node&lt;T&gt;::ListedenSil(node&lt;T&gt;* &amp;ptr, T value)
+  {
+
+node&lt;T&gt; *curr=ptr,*pre=ptr,*s;
+
+ if( ptr == NULL) // Liste boş ise
+         cout&lt;&lt;"Liste yaratilmamis !" ;
+
+ else if (ptr-&gt;nodeValue == value) // İlk eleman silinecek
+     {
+       ptr = ptr-&gt;next;
+       delete curr;
+       ptr-&gt;pre = NULL;
+       cout&lt;&lt;"Silme islemi basarili"&lt;&lt;endl;
+     }
+
+else
+ {
+  while (curr-&gt;nodeValue != value &amp;&amp; curr-&gt;next!=NULL)
+    {
+      pre = curr;
+      curr = curr-&gt;next;
+     }
+
+   if(curr-&gt;next == NULL &amp;&amp; curr-&gt;nodeValue == value) // sondakini sil
+       {
+         pre-&gt;next = NULL;
+         delete curr;
+       }
+
+   else  // silinecek eleman arada ise
+         {
+          pre-&gt;next = curr-&gt;next;
+          curr-&gt;next-&gt;pre = pre;
+          delete curr;
+         }
+         cout&lt;&lt;"Silme islemi basarili"&lt;&lt;endl;
+
+ } // ELSE
+
+  }
+
+};
+
+int main()
+{
+ node&lt;int&gt; *head=NULL;
+
+  int SilinecekDeger;
+  int adet,deger;
+
+ srand(time(NULL));
+ cout&lt;&lt;"Kac eleman listeye eklenecek ? ";
+ cin&gt;&gt;adet;
+
+ for(int i=0; i&lt;adet; i++)
+ {
+    cout&lt;&lt;"Listeye eklenecek degeri giriniz: ";
+    cin&gt;&gt;deger;
+    node&lt;int&gt;::LLSiraliEkle(deger,head);
+    node&lt;int&gt;::printList(head);
+ }
+
+ cout&lt;&lt;endl;
+ cout&lt;&lt;"Tum Liste\n";
+     node&lt;int&gt;::printList(head);
+ cout&lt;&lt;"\n Silinecek Degeri Giriniz : ";
+ cin&gt;&gt;SilinecekDeger;
+
+ if( node&lt;int&gt;::ListedenSil(head,SilinecekDeger) )
+     node&lt;int&gt;::printList(head);
+ else
+    cout&lt;&lt;" Silinecek deger listede bulunamadı !\n";
+
+  system("pause");
+  return 0;
+}</code></pre>
+<p>Dosyanın başındaki örnek çalışma:</p>
+<pre class="kod"><code>Kac eleman listeye eklenecek ? 7
+Listeye eklenecek degeri giriniz: 35
+Listeye eklenecek degeri giriniz: 888
+Listeye eklenecek degeri giriniz: 41
+Listeye eklenecek degeri giriniz: 2
+Listeye eklenecek degeri giriniz: 7
+Listeye eklenecek degeri giriniz: 98
+Listeye eklenecek degeri giriniz: 45
+NULL&lt;-2&lt;=&gt;7&lt;=&gt;35&lt;=&gt;41&lt;=&gt;45&lt;=&gt;98&lt;=&gt;888-&gt;NULL
+
+ Silinecek Degeri Giriniz : 45
+Silme islemi basarili
+NULL&lt;-2&lt;=&gt;7&lt;=&gt;35&lt;=&gt;41&lt;=&gt;98&lt;=&gt;888-&gt;NULL
+Press any key to continue . . .</code></pre>
+<p>Bu örnek çalışma programın önceki bir sürümünden alınmış görünüyor: dosyadaki son sürüm her eklemeden sonra listeyi yazdırıyor ve tüm listeden önce "Tum Liste" başlığını basıyor.</p>
+<p><em>Not: Silinecek değer listede yoksa döngü son düğümde durur ve kod "arada" dalına girer: <code>curr-&gt;next</code> <code>NULL</code> olduğu için <code>curr-&gt;next-&gt;pre</code> satırı programı çökertir (bulunamadı durumu ayrıca kontrol edilmeli). Listede tek eleman varken o silinirse <code>ptr</code> <code>NULL</code> olur ve <code>ptr-&gt;pre = NULL;</code> yine çöker. <code>ListedenSil</code> ve diğer fonksiyonlar <code>T</code> döndüreceklerini bildirdiği hâlde <code>return</code> içermiyor; <code>main</code>'deki <code>if</code> bu yüzden tanımsız bir değere bakıyor.</em></p>
+<h2 id="dairesel-cift-yonlu-bagli-liste">Dairesel çift yönlü bağlı liste</h2>
+<p>Dairesel listede son düğümün <code>next</code>'i yeniden head'i, head'in <code>pre</code>'si de son düğümü gösteriyor; <code>NULL</code> yok. Bu yüzden döngülerin bitiş koşulu <code>curr-&gt;next != ptr</code> (head'e geri dönüldü mü?) şeklinde yazılıyor. Liste iki yönde yazdırılabiliyor: <code>printList</code> saat yönünde (<code>next</code> ile), <code>printListT</code> saat yönünün tersinde (<code>pre</code> ile).</p>
+<p>Başa ekleme durumunda yeni düğümün <code>pre</code>'sini bağlamak için önce listenin son düğümü bulunuyor (saat yönünde dolaşılıp head'den bir önceki düğüme geliniyor), sonra hem son düğüm hem eski head yeni düğüme bağlanıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include&lt;iostream&gt;
+#include&lt;ctime&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class node
+{
+private:
+      T nodeValue;      // data held by the node
+      node&lt;T&gt; *next;    // next node in the list
+      node&lt;T&gt; *pre;     // previous node in the list
+public:
+
+ node(const T&amp; item, node&lt;T&gt; *nextNode=NULL, node&lt;T&gt; *previousNode=NULL)
+      {
+         nodeValue=item;
+		 next=nextNode;
+		 pre=previousNode;
+	  }
+
+static T LLSiraliEkle(T value, node&lt;T&gt; * &amp;ptr)
+{
+
+node&lt;T&gt; *curr=ptr,*pre=ptr,*s;
+
+ if( ptr == NULL) // Liste boş ise ilk nodu heade yerleştir.
+      {
+       ptr = new node&lt;T&gt; (value);
+       ptr-&gt;next = ptr;
+       ptr-&gt;pre = ptr;
+      }
+
+ else if (ptr-&gt;nodeValue &gt;= value) //  (headın solu gibi düşün)
+     {
+     while(curr-&gt;nodeValue &gt;= value &amp;&amp; curr-&gt;next != ptr)
+        curr = curr-&gt;next; // Saat yönünde dolanıp head den 1 önceye geldik.
+
+       s = new node&lt;T&gt; (value);
+       s-&gt;next = ptr;
+       s-&gt;pre = curr;
+       curr-&gt;next = s;
+       ptr-&gt;pre = s;
+       ptr = s;
+     }
+
+else
+ {
+  while (curr-&gt;nodeValue &lt;= value &amp;&amp; curr-&gt;next!=ptr)
+    {
+      pre = curr;
+      curr = curr-&gt;next;
+     }
+
+   if(curr-&gt;next == ptr &amp;&amp; curr-&gt;nodeValue &lt;= value) // saat yönünde git
+       {
+         s = new node&lt;T&gt; (value);
+         s-&gt;next = ptr;
+         s-&gt;pre = curr;
+         ptr-&gt;pre = s;
+         curr-&gt;next = s;
+       }
+
+   else  // araya ekle
+         {
+          s = new node&lt;T&gt; (value);
+          pre-&gt;next = s;
+          s-&gt;pre = pre;
+          s-&gt;next = curr;
+          curr-&gt;pre = s;
+         }
+
+ } // ELSE
+}
+
+static T printList(node&lt;T&gt; *ptr) // Saat Yonunde listeyi yazdır
+      {
+        cout&lt;&lt;"&lt;-";
+        node&lt;T&gt;*curr = ptr;
+        while (curr-&gt;next != ptr) // Araya ok koymak için bu şekilde yaptık...
+        {
+         cout &lt;&lt; curr-&gt;nodeValue&lt;&lt;"&lt;=&gt;" ;
+         curr = curr-&gt;next;
+        }
+         cout&lt;&lt;curr-&gt;nodeValue&lt;&lt;"-&gt;" ;
+           cout &lt;&lt; endl;
+       }
+
+static T printListT(node&lt;T&gt; *ptr) // Saat yonunun tersinde listeyi yazdırma
+      {
+        cout&lt;&lt;"&lt;-";
+        node&lt;T&gt;*curr = ptr;
+        while (curr-&gt;pre != ptr) // Araya ok koymak için bu şekilde yaptık...
+        {
+         cout &lt;&lt; curr-&gt;nodeValue&lt;&lt;"&lt;=&gt;" ;
+         curr = curr-&gt;pre;
+        }
+         cout&lt;&lt;curr-&gt;nodeValue&lt;&lt;"-&gt;" ;
+           cout &lt;&lt; endl;
+       }
+
+static T node&lt;T&gt;::ListedenSil(T value,node&lt;T&gt;* &amp;ptr)
+  {
+
+node&lt;T&gt; *curr=ptr,*pre=ptr,*s;
+
+ if( ptr == NULL) // Liste boş ise
+         cout&lt;&lt;"Liste yaratilmamis !" ;
+
+ else if (ptr-&gt;nodeValue == value &amp;&amp; ptr-&gt;next!=ptr) // İlk eleman silinecek
+     {
+       ptr = ptr-&gt;next;
+       curr-&gt;pre-&gt;next = curr-&gt;next ;
+       curr-&gt;next-&gt;pre = curr-&gt;pre;
+       delete curr;
+//       ptr-&gt;pre = ptr;
+  //     ptr-&gt;next = ptr;
+       cout&lt;&lt;"Silme islemi basarili"&lt;&lt;endl;
+     }
+
+else
+ {
+  while (curr-&gt;nodeValue != value &amp;&amp; curr-&gt;next!=ptr)
+    {
+      pre = curr;
+      curr = curr-&gt;next;
+     }
+
+   if(curr-&gt;next == ptr &amp;&amp; curr-&gt;nodeValue == value) // sondakini sil
+       {
+         pre-&gt;next = ptr;
+         ptr-&gt;pre = pre;
+         delete curr;
+       }
+
+   else  // silinecek eleman arada ise
+         {
+          pre-&gt;next = curr-&gt;next;
+          curr-&gt;next-&gt;pre = pre;
+          delete curr;
+         }
+         cout&lt;&lt;"Silme islemi basarili"&lt;&lt;endl;
+
+ } // ELSE
+
+  }
+
+};
+
+int main()
+{
+ node&lt;int&gt; *head=NULL;
+
+  int SilinecekDeger;
+  int adet,deger;
+
+ srand(time(NULL));
+ cout&lt;&lt;"Kac eleman listeye eklenecek ? ";
+ cin&gt;&gt;adet;
+
+ for(int i=0; i&lt;adet; i++)
+ {
+    cout&lt;&lt;"Listeye eklenecek degeri giriniz: ";
+    cin&gt;&gt;deger;
+    node&lt;int&gt;::LLSiraliEkle(deger,head);
+ }
+
+     cout&lt;&lt;"Saat Yonunde Yazdıralım\n";
+     node&lt;int&gt;::printList(head);
+     cout&lt;&lt;"Saat Yonu Tersi Yazdıralım\n";
+     node&lt;int&gt;::printListT(head);
+
+ cout&lt;&lt;"\n Silinecek Degeri Giriniz : ";
+ cin&gt;&gt;SilinecekDeger;
+
+ if( node&lt;int&gt;::ListedenSil(SilinecekDeger,head ) )
+    {
+     cout&lt;&lt;"Saat Yonunde Yazdıralım\n";
+     node&lt;int&gt;::printList(head);
+     cout&lt;&lt;"Saat Yonu Tersi Yazdıralım\n";
+     node&lt;int&gt;::printListT(head);
+     }
+ else
+    cout&lt;&lt;" Silinecek deger listede bulunamadı !\n";
+
+  system("pause");
+  return 0;
+}</code></pre>
+<p>Dosyanın başındaki örnek çalışma (13, 12, 42, 34 girilip 12 siliniyor):</p>
+<pre class="kod"><code>Kac eleman listeye eklenecek ? 4
+Listeye eklenecek degeri giriniz: 13
+Listeye eklenecek degeri giriniz: 12
+Listeye eklenecek degeri giriniz: 42
+Listeye eklenecek degeri giriniz: 34
+Saat Yonunde Yazdıralım
+&lt;-12&lt;=&gt;13&lt;=&gt;34&lt;=&gt;42-&gt;
+Saat Yonu Tersi Yazdıralım
+&lt;-12&lt;=&gt;42&lt;=&gt;34&lt;=&gt;13-&gt;
+
+  Silinecek Degeri Giriniz : 12
+Silme islemi basarili
+Saat Yonunde Yazdıralım
+&lt;-13&lt;=&gt;34&lt;=&gt;42-&gt;
+Saat Yonu Tersi Yazdıralım
+&lt;-13&lt;=&gt;42&lt;=&gt;34-&gt;
+Press any key to continue . . .</code></pre>
+<p>Saat yönünün tersinde yazdırma head'den (en küçük eleman) başlayıp <code>pre</code> ile önce en büyük elemana geçtiği için ters çıktı "12, 42, 34, 13" sırasında. Kod izlendiğinde örnek çalışmadaki çıktılar doğrulanıyor.</p>
+<p><em>Not: Silinecek değer listede yoksa döngü son düğümde durur ve kod "arada" dalına girerek son düğümü siler, ardından "Silme islemi basarili" yazar; bulunamadı durumu ayrıca kontrol edilmeli. Tek elemanlı listede o eleman silinirse head silinen düğümü göstermeye devam eder. Çift yönlü listedeki gibi fonksiyonların <code>return</code> deyimi yok ve <code>main</code>'deki <code>if</code> tanımsız bir değere bakıyor.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-cift-yonlu-bagli-liste.zip" download>eem227-cift-yonlu-bagli-liste.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3 KB · 16.12.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-cift-yonlu-bagli-liste.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

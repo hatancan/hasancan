@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: C++ Sınıf Soruları ve Çözümleri (Soru 3–6, Lab 1) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin C++ sınıflar konusundaki çözümlü soruları (Eylül 2007): const ve static üyeler, friend fonksiyon, Kitap sınıfı ve ISBN üretimi, Ali ile Veli&#x27;nin top çekme oyunu için Torba sınıfı; ayrıca rasyonel sayı ve karmaşık sayı sınıfı lab programları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-sinif-sorulari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: C++ Sınıf Soruları ve Çözümleri (Soru 3–6, Lab 1)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin C++ sınıflar konusundaki çözümlü soruları (Eylül 2007): const ve static üyeler, friend fonksiyon, Kitap sınıfı ve ISBN üretimi, Ali ile Veli&#x27;nin top çekme oyunu için Torba sınıfı; ayrıca rasyonel sayı ve karmaşık sayı sınıfı lab programları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-sinif-sorulari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: C++ Sınıf Soruları ve Çözümleri (Soru 3–6, Lab 1)", "description": "EEM227 Veri Yapıları dersinin C++ sınıflar konusundaki çözümlü soruları (Eylül 2007): const ve static üyeler, friend fonksiyon, Kitap sınıfı ve ISBN üretimi, Ali ile Veli'nin top çekme oyunu için Torba sınıfı; ayrıca rasyonel sayı ve karmaşık sayı sınıfı lab programları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-sinif-sorulari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-sinif-sorulari.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-sinif-sorulari/eem227-sinif-sorulari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: C++ Sınıf Soruları ve Çözümleri (Soru 3–6, Lab 1)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>30.09.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#soru-3-a-sinifi-uzerindeki-deyimler-dogru-mu">Soru 3: A sınıfı üzerindeki deyimler doğru mu?</a></li><li><a href="#soru-4-kutuphane-icin-kitap-sinifi">Soru 4: Kütüphane için Kitap sınıfı</a></li><li><a href="#soru-5-friend-fonksiyon-ve-const-nesne">Soru 5: friend fonksiyon ve const nesne</a></li><li><a href="#soru-6-ali-ile-veli-nin-top-oyunu-torba-sinifi-35-puan">Soru 6: Ali ile Veli'nin top oyunu (Torba sınıfı, 35 puan)</a></li><li><a href="#lab-1-cevabi-rasyonel-sayi-sinifi">Lab 1 cevabı: rasyonel sayı sınıfı</a></li><li><a href="#karmasik-sayi-sinifi-operator-yukleme">Karmaşık sayı sınıfı (operatör yükleme)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: C++ Sınıf Soruları ve Çözümleri (Soru 3–6, Lab 1)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 30.09.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz döneminde paylaşılan <strong>çözümlü sınav tipi sorularını</strong> bir araya getiriyor. Soru 3–6 sayfaları <strong>Öğr. Gör. Oğul Göçmen</strong> imzalı ve 30 Eylül 2007 tarihli; hepsi C++'ta sınıflar (class), const ve static üyeler, friend fonksiyonlar üzerine. Yazının sonunda aynı haftanın klasöründeki iki lab programı da var: rasyonel sayı sınıfı (Lab 1 cevabı) ve operatör yüklemeli karmaşık sayı sınıfı. Soruların orijinal PDF'leri ve kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="soru-3-a-sinifi-uzerindeki-deyimler-dogru-mu">Soru 3: A sınıfı üzerindeki deyimler doğru mu?</h2>
+<p>Aşağıda A sınıfına ait tanımlamalar verilmiştir. Bu tanımlamalara göre, size verilen ana (main) fonksiyon içerisinde A sınıfı üzerinde tanımlanan deyimlerle yapılan işlemlerin doğru olup olmadıklarını yazınız. Eğer yapılan işlem yanlışsa nedenini kısaca açıklayınız.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class A {
+   private:
+       int a;
+       float b;
+       char s[15];
+       static char ch;
+   public:
+       double d;
+       const unsigned c;
+       A(int=0, float=1.2);
+       int getA() const;
+       void setMembers(int, char *);
+       static void p();
+};
+
+// Bu kısımda sınıf(class) tanımı içinde yer alan fonksiyonlar gerçekleştiriliyor.
+// ...</code></pre>
+<p>Çözüm:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Deyim</th><th scope="col">Doğru/Yanlış</th><th scope="col">Yanlışın nedeni</th></tr></thead><tbody><tr><th scope="row"><code>A obj1;</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>const A obj2(24);</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>A obj3(12, 2.2);</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>obj1.a = 12;</code></th><td>YANLIŞ</td><td>Private üyeye erişilemez</td></tr><tr><th scope="row"><code>obj3.d = obj2.getA();</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>obj2.setMembers(3,"aaa");</code></th><td>YANLIŞ</td><td>Const nesne const olmayan fonksiyonu çağıramaz</td></tr><tr><th scope="row"><code>obj1.p();</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>A::p();</code></th><td>DOĞRU</td><td></td></tr><tr><th scope="row"><code>obj3.c = 'x';</code></th><td>YANLIŞ</td><td>Const üyeye atama yapılamaz</td></tr><tr><th scope="row"><code>A::setMembers(1,"bbb");</code></th><td>YANLIŞ</td><td>Fonksiyon statik değil</td></tr></tbody></table></div>
+<h2 id="soru-4-kutuphane-icin-kitap-sinifi">Soru 4: Kütüphane için Kitap sınıfı</h2>
+<p>Bir kütüphanedeki kitapların organizasyonunu gerçekleştirmek amacıyla, ismi "Kitap" olan bir sınıf ve bu sınıfa ait fonksiyonları C++ programı olarak gerçekleştirmek istiyoruz. Buna göre kütüphanedeki sistem şu şekilde işlemektedir:</p>
+<ul><li>Kütüphane içerisindeki her bir kitabın en fazla 100 karakterden oluşan bir adı, en fazla 14 karakterden oluşan ISBN kodu, basım yılı ve sayfa sayısı bilgileri bulunmaktadır.</li><li>14 karakterden oluşan ISBN kodları ISBN-2006-2987 biçiminde tutulmaktadır. Buna göre her ISBN numarası birbirinden tire (-) ile ayrılmış 3 alandan oluşmaktadır. Birinci alan bütün kodlarda aynı biçimde 'I', 'S', 'B', 'N' karakterlerinden, ikinci alan kitabın yılından, son alan ise ilgili kitabın kütüphaneye kaydedilen kaçıncı kitap olduğunu ifade eden bir numaradan oluşmaktadır. Örneğin 2006 yılında kütüphaneye kaydedilen ve kütüphanedeki 15. kitap olan kitabın ISBN kodu ISBN-2006-15 biçiminde olmalıdır.</li><li>Kütüphane içerisine yeni bir kitap ekleneceği zaman ilgili kitabın ISBN numarasının program tarafından otomatik olarak üretilip atanması gerekmektedir (2006 yılında olduğumuzu varsayabilirsiniz).</li><li>Herhangi bir kitabın kütüphaneye kaydedilebilmesi için kitap adı, basım yılı ve sayfa sayısının girilmesi zorunludur.</li><li>Bir kitap kütüphaneye kaydedildiğinde sayfa sayısı kesin olarak belirlenmekte ve bir daha değiştirilmemesi istenmektedir.</li><li>Kütüphanede kayıtlı toplam kitap sayısının program tarafından ekranda gösterilebilmesi beklenmektedir.</li></ul>
+<p>Yukarıda belirlenen kısıtlara göre, sınıf içerisinde tanımlayacağınız bütün değişkenlerin private olacağını varsayarak, ilgili sınıf tanımı ve gerekli fonksiyonları yazınız.</p>
+<p><strong>NOT:</strong> Bu programı gerçekleştirirken eğer int bir sayıyı string olarak dönüştürmeye gereksinim duyarsanız, aşağıda prototipi verilen fonksiyonu sanki programınız içinde gerçekleştirilmiş gibi kullanabilirsiniz: <code>char * IntToString (int number)</code>. Bu fonksiyon int bir sayıyı (number) parametre olarak almakta ve ilgili sayıyı string olarak geri döndürmektedir.</p>
+<p>Çözüm:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+class Kitap{
+      private:
+                 char KitapAd[100];
+                 char ISBN[15];
+                 unsigned BasimYili;
+                 const unsigned SayfaSayisi;
+                 static unsigned KitapSayisi;
+      public:
+                Kitap(char *ad, unsigned yil, unsigned ss);
+                static void ToplamKitapSayisi();
+};
+
+unsigned Kitap::KitapSayisi = 0;
+
+Kitap::Kitap(char *ad, unsigned yil, unsigned ss):SayfaSayisi(ss)
+{
+     strcpy(KitapAd,ad);
+     strcpy(ISBN,"ISBN-2006-");
+     strcat(ISBN,IntToStr(KitapNo));
+     BasimYili = yil;
+     KitapSayisi++;
+}
+
+void Kitap::ToplamKitapSayisi()
+{
+     cout&lt;&lt;"Toplam Kitap Sayisi:"&lt;&lt;KitapSayisi&lt;&lt;endl;
+}</code></pre>
+<p>Sayfa sayısının sonradan değiştirilememesi <code>const unsigned SayfaSayisi</code> ile (kurucunun ilk değer listesinde atanarak), toplam kitap sayısı ise bütün nesnelerin paylaştığı <code>static unsigned KitapSayisi</code> ile sağlanıyor. Toplamı gösteren fonksiyon da static olduğu için nesne olmadan <code>Kitap::ToplamKitapSayisi()</code> diye çağrılabilir.</p>
+<p><em>Not: Çözümdeki <code>IntToStr(KitapNo)</code> çağrısında hem fonksiyon adı soruda verilen <code>IntToString</code> ile uyuşmuyor hem de <code>KitapNo</code> diye bir değişken tanımlı değil. Kitabın sıra numarası <code>KitapSayisi + 1</code> olmalı (ya da <code>KitapSayisi++</code> satırı önce yapılıp <code>IntToString(KitapSayisi)</code> kullanılmalı).</em></p>
+<h2 id="soru-5-friend-fonksiyon-ve-const-nesne">Soru 5: friend fonksiyon ve const nesne</h2>
+<p>Aşağıdaki sınıf (class) tanımlamasına göre, main fonksiyon içerisinde yazılan ifadelerden yanlış olanların nedenlerini yazınız.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class A
+{
+    friend void MyFunc(A &amp;a, double b);
+    public:
+      float var1;
+      A(int, double=1.2);
+      A();
+      int getValue() const;
+      void setValue(int, char *);
+      static void print();
+    private:
+      int var2;
+      double var3;
+      char MyStr[15];
+      static char MyChar;
+}
+
+void MyFunc(A &amp;a, double b)//Dikkat Bu fonksiyon Sınıfın üyesi değildir.
+{    a.var3 = b; }
+
+int main()
+{
+    A c(35);
+    const A Nesne1;
+    A Nesne2(18);
+    A Nesne3(29, 4.2);
+    Nesne1.var2=29;
+    Nesne3.var1 = Nesne1.getValue();
+    Nesne1.setValue(5, "yyy", MyStr);
+    Nesne3.print();
+    MyFunc(5.8, c);
+    A::print();
+    Nesne3.MyChar = 'x';
+    A::setValue(1, "zzz");
+    return 0;
+}</code></pre>
+<p>Çözüm (her yanlış 5 puan):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Deyim</th><th scope="col">Yanlışın nedeni</th></tr></thead><tbody><tr><th scope="row"><code>Nesne1.var2=29;</code></th><td>Nesne private üyeye doğrudan erişemez. Nesne const olduğundan değeri değiştirilemez.</td></tr><tr><th scope="row"><code>Nesne1.setValue(5, "yyy", MyStr);</code></th><td>MyStr fazla yazılmış. Const nesnenin const olmayan fonksiyonu çağrılamaz.</td></tr><tr><th scope="row"><code>MyFunc(5.8, c);</code></th><td><code>MyFunc(c,5.8)</code> olmalı.</td></tr><tr><th scope="row"><code>Nesne3.MyChar = 'x';</code></th><td>Nesne private üyeye doğrudan erişemez.</td></tr><tr><th scope="row"><code>A::setValue(1, "zzz");</code></th><td>Fonksiyon static değil.</td></tr></tbody></table></div>
+<p>Diğer satırlar (<code>A c(35);</code>, <code>const A Nesne1;</code>, <code>A Nesne2(18);</code>, <code>A Nesne3(29, 4.2);</code>, <code>Nesne3.var1 = Nesne1.getValue();</code>, <code>Nesne3.print();</code>, <code>A::print();</code>) doğrudur.</p>
+<p><em>Not: Sorudaki sınıf tanımının kapanış parantezinden sonra <code>;</code> eksik (<code>};</code> olmalı).</em></p>
+<h2 id="soru-6-ali-ile-veli-nin-top-oyunu-torba-sinifi-35-puan">Soru 6: Ali ile Veli'nin top oyunu (Torba sınıfı, 35 puan)</h2>
+<p>Ali ve Veli bir şans oyunu oynamaktadır. Ali'nin elindeki A torbasında 10 kırmızı, 6 sarı, 3 adet de mavi renkli top vardır. Veli'nin elindeki B torbasında 10 kırmızı, 3 sarı, 6 adet de mavi renkli top vardır. Bu oyunun kuralı şu şekildedir: Oyuna herhangi bir kişi başlar ve sırayla birer top çekilir. Kendi torbasından rastgele bir top çeker. Çektiği top kırmızı ise topu torba dışına çıkartır, değilse torbaya geri bırakır. Çektiği top kırmızı olsa da olmasa da sıra diğer oyuncuya geçer. Herhangi bir kişi torba dışında toplamda 3 kırmızı topa sahip olursa oyunu kazanır.</p>
+<p>Bu oyunu gerçekleştirecek bir C++ programı yazmanız isteniyor. Bu program içerisinde "Torba" isimli bir sınıf yazınız; bu sınıfın üye fonksiyonlarını (member functions) public, üye verilerini (data members) private olarak tanımlayınız. Buna göre:</p>
+<ul><li>Bu sınıfın kurucu fonksiyonu (constructor) sırası ile kırmızı, sarı ve mavi renkli topların miktarlarını parametre olarak alır. Eğer herhangi bir renkteki top sayısı parametre olarak verilmez ise, o topun torba içerisindeki miktarını 10 olarak belirler.</li><li>"Goster" isimli üye fonksiyon, bir torbanın içerisinde hangi renk toptan kaç adet olduğunu ve torbadaki toplam top sayısını ekranda yazdırır.</li><li>"ToplamTop" isimli üye fonksiyon, bir torbanın içerisinde bulunan toplam top miktarını döndürür.</li><li>"ToplarinOrani" isimli üye fonksiyon, bir torba içerisinde her renkteki top için o rengin toplam top sayısına olan yüzdelik oranını hesaplar ve ekranda yazdırır.</li><li>"TopCek" isimli üye fonksiyon, bir torbadan rastgele renkte bir tane top çeker ve değeri döndürür.</li><li>"TopCikart" isimli üye fonksiyon, kendisine parametre olarak verilen değerdeki topu torbadan çıkartır.</li><li>"TopEkle" isimli fonksiyon, kendisine parametre olarak verilen değerdeki topu torbaya ekler.</li></ul>
+<p>Buna göre oyun bittiğinde kazanan kişiyi, torbası içerisindeki topların sayısını ve torbasındaki topların yüzdelik oranını ekrana yazdıran bir program yazınız. <strong>Dikkat:</strong> Yazacağınız kodu parçalara bölünmüş şekilde yazınız ("main.cpp", "Torba.h", "Torba.cpp").</p>
+<h3 id="torba-h">Torba.h</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// --------- Torba.h -----------------------------------
+#ifndef TORBA_H
+#define TORBA_H
+class Torba {
+   public:
+        void ToplarinOrani();
+        int ToplamTop();
+        Torba( int, int, int);
+        int TopCek( );
+        void TopCikart( int );
+        void TopEkle ( int );
+        void Goster();
+        int KirmiziAdeti();
+   private:
+        int KSM[3]; // Kırmızı[0] Sarı[1] Mavi[2] top adeti
+};
+#endif</code></pre>
+<h3 id="torba-cpp">Torba.cpp</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;time.h&gt;
+using namespace std;
+#include "Torba.h"
+
+void Torba::ToplarinOrani()
+{
+  Goster();
+  if(ToplamTop()&gt;0){
+    cout&lt;&lt;" YUZDELIK ORANLAR "&lt;&lt;endl;
+    cout&lt;&lt;" KIRMIZI : % "&lt;&lt;(1.0*(KSM[0])/ToplamTop())*100&lt;&lt;endl;
+    cout&lt;&lt;"     SARI : % "&lt;&lt;(1.0*(KSM[1])/ToplamTop())*100&lt;&lt;endl;
+    cout&lt;&lt;"     MAVi : % "&lt;&lt;(1.0*(KSM[2])/ToplamTop())*100&lt;&lt;endl;
+  }
+  else{
+    cout&lt;&lt;" YUZDELIK ORANLAR "&lt;&lt;endl;
+    cout&lt;&lt;" KIRMIZI : % 0"&lt;&lt;endl;
+    cout&lt;&lt;"     SARI : % 0"&lt;&lt;endl;
+    cout&lt;&lt;"     MAVi : % 0"&lt;&lt;endl;
+  }
+}
+
+int Torba::ToplamTop()
+{       return KSM[0] + KSM[1] + KSM[2];     }
+
+int Torba::TopCek ()
+{
+  srand(time(NULL));
+  switch(rand()%3){
+     case 0: KSM[0]--; return 0; break;      //   ÇEKİLEN TOP KIRMIZI ÇIKTI
+     case 1: KSM[1]--; return 1; break;      //   ÇEKİLEN TOP SARI ÇIKTI
+     case 2: KSM[2]--; return 2; break;      //   ÇEKİLEN TOP MAVI ÇIKTI
+  }
+}
+
+void Torba::TopCikart( int renkkodu)
+{
+  KSM[renkkodu]--;
+}
+
+void Torba::TopEkle( int renkkodu)
+{
+  KSM[renkkodu]++;
+}
+
+void Torba::Goster ()
+{
+   cout&lt;&lt;endl;
+   cout&lt;&lt;" Kirmizi = "&lt;&lt;KSM[0]&lt;&lt;endl;
+   cout&lt;&lt;" Sari    = "&lt;&lt;KSM[1]&lt;&lt;endl;
+   cout&lt;&lt;" Mavi    = "&lt;&lt;KSM[2]&lt;&lt;endl;
+   cout&lt;&lt;" Toplam = "&lt;&lt;ToplamTop()&lt;&lt;endl;
+   cout&lt;&lt;endl;
+}
+Torba::Torba(int k=10, int s=10, int m=10)
+{
+   KSM[0] = k;
+   KSM[1] = s;
+   KSM[2] = m;
+   Goster();
+}</code></pre>
+<h3 id="main-cpp">main.cpp</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// --------- Main.cpp   -----------------------------------------
+#include &lt;iostream&gt;
+#include &lt;time.h&gt;
+#include "Torba.h"
+using namespace std;
+
+int main()
+{
+  cout&lt;&lt;" \n\n Oyuna baslamadan once, Ali'nin torbasi icindeki toplar...";
+  Torba A(10,6,3);
+  cout&lt;&lt;" Oyuna baslamadan once, Veli'nin torbasi icindeki toplar...";
+  Torba B(10,3,6);
+  int sira =1,renkkodu=0,Aadet=0,Badet=0;
+  cout&lt;&lt;" Oyun basliyor...\n";
+
+  while(Aadet!=3 &amp;&amp; Badet!=3){
+
+      // ALİNİN ELİNDEKİ A TORBASI İÇİN GEREKLİ İŞLEMLER
+
+      if(sira%2){
+         renkkodu=A.TopCek();
+         if( renkkodu == 0 ){ //- KIRMIZI TOP İSE
+            A.TopEkle(renkkodu); // TopCekin azalttığı değeri engelle
+            A.TopCikart(renkkodu);
+            Aadet++;
+
+            if(Aadet == 3){
+               cout&lt;&lt;" OYUNU ALI KAZANDI.";
+               A.ToplarinOrani();
+               cout&lt;&lt;" Oyun bitti !\n\n";
+            }
+         }
+         else
+             A.TopEkle(renkkodu);
+         }
+//************************************************************************
+// VELİNİN ELİNDEKİ B TORBASI İÇİN GEREKLİ İŞLEMLER
+
+      else{
+         renkkodu=B.TopCek();
+         if( renkkodu == 0 ){
+            B.TopEkle(renkkodu);
+            B.TopCikart(renkkodu);
+            Badet++;
+            if(Badet == 3){
+                cout&lt;&lt;" OYUNU VELI KAZANDI.";
+                B.ToplarinOrani();
+                cout&lt;&lt;" Oyun bitti !\n\n";
+            }
+         }
+         else
+              B.TopEkle(renkkodu);
+      }
+ //************************************************************************
+      sira ++;
+  }
+  return 0; }</code></pre>
+<p><em>Not: Çözümdeki <code>TopCek</code> rengi torbadaki top sayılarıyla orantılı seçmiyor; <code>rand()%3</code> ile üç renkten birini eşit olasılıkla seçiyor (Ali'nin torbasında kırmızı çekme olasılığı 10/19 olmalıyken 1/3 oluyor; o renkten top kalmamışsa sayı eksiye de düşebilir). Ayrıca <code>srand(time(NULL))</code> her çekilişte yeniden çağrıldığı için aynı saniye içindeki çekilişler hep aynı sonucu verir; <code>srand</code> programın başında bir kez çağrılmalı. Kurucunun varsayılan değerleri (<code>=10</code>) yalnızca Torba.cpp'deki tanımda yazıldığı için main.cpp'den görünmez; sorudaki "verilmezse 10" kuralı için varsayılanlar Torba.h'deki bildirimde olmalı.</em></p>
+<h2 id="lab-1-cevabi-rasyonel-sayi-sinifi">Lab 1 cevabı: rasyonel sayı sınıfı</h2>
+<p>Klasördeki <code>EEM227_Lab1_Cevap.cpp</code> dosyası (Ekim 2006 tarihli), pay ve paydayı tutan, sadeleştiren, iki rasyonel sayının eşitliğini sınayan, çarpan ve bölen bir <code>rasyonel</code> sınıfı. Toplama fonksiyonu yorum satırına alınmış.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+using namespace std;
+#define TRUE  1
+#define FALSE 0
+
+class rasyonel
+{
+private :
+  long pay;
+  long payda;
+  long payilk;
+  long paydailk;
+  void indirge(void);
+
+public :
+//void topla(rasyonel);
+  void carp(rasyonel);
+  void bol(rasyonel);
+   int esit(rasyonel);
+  void degerata(long, long);
+  void yazdir(void);
+};
+
+/*
+void rasyonel::topla(rasyonel r)
+{
+  int k, tpay, tpayda;
+  rasyonel rnl;
+
+  // Her iki rasyonel sayının en küçük terimlerine indirgenmesi
+  indirge();
+  r.indirge();
+
+  rnl.degerata(payda, r.payda);
+  rnl.indirge();
+  k=rnl.payda;
+
+  tpayda = payda * k;
+  tpay = pay*k + r.pay*(tpayda/r.payda);
+  cout&lt;&lt;tpayda,tpay;
+  rnl.degerata(tpay, tpayda);
+  rnl.indirge();
+}
+*/
+
+void rasyonel::bol(rasyonel r)
+{
+  rasyonel rnl;
+  rnl.degerata(r.payda, r.pay);
+  //cout&lt;&lt;"Bolme Sonucu : "&lt;&lt;endl;
+  carp(rnl);
+}
+
+void rasyonel::carp(rasyonel r)
+{
+  rasyonel rnl, rnl1, rnl2;
+  int py, pyd;
+  // Her iki rasyonel sayının en küçük terimlerine indirgenmesi
+  indirge();
+  r.indirge();
+
+  rnl1.degerata(pay, r.payda);
+  rnl.indirge();
+  rnl2.degerata(r.pay, payda);
+  rnl2.indirge();
+
+  py  = rnl1.pay * rnl2.pay;
+  pyd = rnl1.payda * rnl2.payda;
+
+  if(pyd==1)
+     cout&lt;&lt;"Sonuc : "&lt;&lt;py;
+  else
+     cout&lt;&lt;"Sonuc : "&lt;&lt;py&lt;&lt;"/"&lt;&lt;pyd&lt;&lt;endl;
+}
+
+void rasyonel::degerata(long n, long d)
+  {
+    if(d==0) cout &lt;&lt; "Hata! payda 0 olamaz";
+    pay = n;
+    payda = d;
+    payilk=n;
+    paydailk=d;
+    indirge();
+  };
+
+ void rasyonel::yazdir(void) {
+       cout&lt;&lt;"\nGirilen degerler:\n" ;
+       cout&lt;&lt;"------------------";
+       cout&lt;&lt;"\nPay : "&lt;&lt;payilk&lt;&lt;endl;
+       cout&lt;&lt;"Payda : "&lt;&lt;paydailk&lt;&lt;endl;
+       if(payda==1)
+       cout&lt;&lt;"Sadelesmis Hali : "&lt;&lt;pay&lt;&lt;endl;
+       else
+       cout &lt;&lt;"Sadelesmis Hali : " &lt;&lt;pay &lt;&lt; "/" &lt;&lt; payda &lt;&lt; endl;
+       };
+
+void rasyonel::indirge(void)
+{
+  int a, b, r, sign;
+  if (pay==0) payda = 1;
+  sign = 1;
+  if(pay&lt;0 &amp;&amp; payda&lt;0) { pay = -pay; payda = -payda; };
+  if(pay&lt;0) { pay = -pay; sign = -1; };
+  if(payda&lt;0) { payda = -payda; sign = -1; };
+  if(pay&gt;payda) { a=pay; b=payda; } else { a=payda; b=pay; };
+  while(b!=0) { r = a%b; a=b; b=r; };
+  pay = sign*pay / a;
+  payda = payda / a;
+}
+  int payilk,paydailk; // Global tanımladık...
+
+  int rasyonel::esit(rasyonel r)
+{
+  // Her iki rasyonel sayının en küçük terimlerine indirgenmesi
+  indirge();
+  r.indirge();
+  if (pay==r.pay &amp;&amp; payda==r.payda) return TRUE; else return FALSE;
+}
+
+int main()
+{
+  rasyonel r1;
+  cout&lt;&lt;"1.Sayinin Pay Degeri : ? ";
+  cin&gt;&gt;payilk;
+  cout&lt;&lt;"\n1.Sayinin Payda Degeri : ?";
+  cin&gt;&gt;paydailk;
+  r1.degerata(payilk,paydailk);
+  r1.yazdir();
+
+  rasyonel r2;
+  cout&lt;&lt;"\n2.Sayinin Pay Degeri : ? ";
+  cin&gt;&gt;payilk;
+  cout&lt;&lt;"\n2.Sayinin Payda Degeri : ?";
+  cin&gt;&gt;paydailk;
+  r2.degerata(payilk,paydailk);
+  r2.yazdir();
+
+  cout&lt;&lt;"\n Sayilar esitmi (0=H, 1=E)? : "&lt;&lt;r1.esit(r2);
+  cout&lt;&lt;"\n";
+  cout&lt;&lt;"\n Carpma Sonucu: "&lt;&lt;endl;
+  r1.carp(r2);
+  cout&lt;&lt;"\n Bolme Sonucu: "&lt;&lt;endl;
+  r1.bol(r2);
+/*
+  cout&lt;&lt;"\n\n Toplama Sonucu: ";
+  r1.topla(r2);
+*/
+  cout&lt;&lt;"\n \n";
+  system("pause");
+return 0;
+}</code></pre>
+<p>Çarpma, çapraz sadeleştirme ile yapılıyor: birinci sayının payı ikinci sayının paydasıyla, ikinci sayının payı birinci sayının paydasıyla ayrı ayrı sadeleştirilip sonra çarpılıyor. Sadeleştirmede <code>indirge</code> fonksiyonu Öklid algoritmasıyla en büyük ortak böleni buluyor.</p>
+<p><em>Not: <code>carp</code> fonksiyonunda <code>rnl1.degerata(...)</code> satırından sonra <code>rnl1.indirge();</code> yerine yanlışlıkla <code>rnl.indirge();</code> yazılmış (rnl1 zaten <code>degerata</code> içinde sadeleştiği için sonuç değişmiyor, ama satır ilk değeri verilmemiş <code>rnl</code> nesnesi üzerinde çalışıyor).</em></p>
+<h2 id="karmasik-sayi-sinifi-operator-yukleme">Karmaşık sayı sınıfı (operatör yükleme)</h2>
+<p>Aynı klasördeki <code>karmasik.cpp</code> (Ekim 2007), +, - ve * operatörlerini ve &lt;&lt; ile &gt;&gt; stream operatörlerini karmaşık sayılar için yüklüyor. Program üç karmaşık sayı okuyup a+b+c toplamını, a-(b+c) farkını ve a·b + b·c değerini yazdırıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include&lt;iostream&gt;
+#include&lt;stdlib.h&gt;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::istream;
+using std::ostream;
+class Karmasik
+{
+      friend istream&amp; operator&gt;&gt;(istream&amp; oku,Karmasik&amp; nesne);
+      friend ostream&amp; operator&lt;&lt;(ostream&amp; yaz,Karmasik&amp; nesne);
+      private:
+              int gercel,sanal;
+      public:
+             Karmasik(int a=0,int b=0)
+             {
+                   gercel=a;
+                   sanal=b;
+             }
+             int retsanal()
+             {
+                 return sanal;
+             }
+             int retgercel()
+             {
+                 return gercel;
+             }
+             Karmasik operator+(Karmasik&amp; nesne)
+             {
+                       Karmasik top;
+                       top.gercel=gercel+nesne.retgercel();
+                       top.sanal=sanal+nesne.retsanal();
+                       return top;
+             }
+             Karmasik operator-(Karmasik&amp; nesne)
+             {
+                       Karmasik cik;
+                       cik.gercel=gercel-nesne.retgercel();
+                       cik.sanal=sanal-nesne.retsanal();
+                       return cik;
+             }
+             Karmasik operator*(Karmasik&amp; nesne)
+             {
+                       Karmasik carp;
+                       carp.gercel=(gercel*nesne.retgercel())-(sanal*nesne.retsanal());
+                       carp.sanal=(gercel*nesne.retsanal())+(sanal*nesne.retgercel());
+                       return carp;
+             }
+};
+istream&amp;operator&gt;&gt;(istream&amp; oku,Karmasik&amp; nesne)
+      {
+             oku&gt;&gt;nesne.gercel&gt;&gt;nesne.sanal;;
+      }
+ostream&amp;operator&lt;&lt;(ostream&amp; yaz,Karmasik&amp; nesne)
+      {
+             if(nesne.sanal&gt;=0)
+             yaz&lt;&lt;nesne.gercel&lt;&lt;"+"&lt;&lt;nesne.sanal&lt;&lt;"i";
+             else
+             yaz&lt;&lt;nesne.gercel&lt;&lt;nesne.sanal&lt;&lt;"i";
+      }
+
+int main()
+{
+    Karmasik a,b,c,d,s,f;
+    cout&lt;&lt;"Birinci Sayiyi Gir"&lt;&lt;endl;
+    cin&gt;&gt;a;
+    cout&lt;&lt;"Ikinci Sayiyi Gir"&lt;&lt;endl;
+    cin&gt;&gt;b;
+    cout&lt;&lt;"Ucuncu Sayiyi Gir"&lt;&lt;endl;
+    cin&gt;&gt;c;
+    d=a+b;
+    d=d+c;
+    cout&lt;&lt;"Toplam:"; cout&lt;&lt;d; cout&lt;&lt;endl;
+    s=b+c;
+    d=a-s;
+    cout&lt;&lt;"Fark:"; cout&lt;&lt;d; cout&lt;&lt;endl;
+    s=a*b;
+    d=b*c;
+    f=s+d;
+    cout&lt;&lt;"Carpim:"; cout&lt;&lt;f; cout&lt;&lt;endl;
+    system("PAUSE");
+    return 0;
+}</code></pre>
+<p><em>Not: <code>operator&gt;&gt;</code> ve <code>operator&lt;&lt;</code> fonksiyonları referans döndüreceklerini bildirdikleri hâlde <code>return oku;</code> / <code>return yaz;</code> satırları eksik; bu tanımsız davranıştır. Bu yüzden programda <code>cout&lt;&lt;d&lt;&lt;endl</code> gibi zincirleme yerine çıktılar ayrı ayrı yazdırılmış.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-sinif-sorulari.zip" download>eem227-sinif-sorulari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.2 MB · 30.09.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-sinif-sorulari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

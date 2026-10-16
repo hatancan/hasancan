@@ -126,5 +126,7 @@ window.I18N.tr = {
   "arch.downloadPpt": "Sunumu indir",
   "arch.downloadPdf": "PDF olarak indir",
   "arch.pagesLower": "sayfa",
-  "arch.downloadFile": "Dosyayı indir"
+  "arch.downloadFile": "Dosyayı indir",
+  "arch.source": "Kaynak",
+  "arch.photoSource": "Bu yazı fotoğraflanmış sayfalardan metne aktarıldı. Fotoğrafların kendisi arşivde saklanıyor, yayınlanmıyor."
 };

@@ -298,6 +298,8 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 
 def ikon_sinifi(k):
     tur = k.get('tur', 'sunum')
+    if not k.get('dosya'):
+        return 'txt'
     if tur == 'belge':
         return 'xls' if k['dosya'].lower().endswith(('.xls', '.xlsx', '.ods')) else 'doc'
     return {'pdf': 'pdf', 'sunum': 'ppt'}.get(tur, 'zip')
@@ -324,6 +326,8 @@ def yazi_sayfasi(k, on, govde, icindekiler):
         'associatedMedia': {'@type': 'MediaObject', 'name': k['dosya'], 'contentUrl': f'{SITE}{url}{k["dosya"]}'},
     }, ensure_ascii=False)
     tur = k.get('tur', 'sunum')
+    if not k.get('dosya'):   # kaynağı yalnız fotoğraf olan yazılar: fotoğraflar yayınlanmaz, indirme yok
+        return _yazi_sayfasi_metin(k, on, govde, icindekiler)
     pdf_kaynak = not k.get('pdf')   # PDF kopyası yoksa tek indirme düğmesi
     ikon = ikon_sinifi(k)
     birim = 'arch.pagesLower' if tur == 'pdf' else 'arch.slidesLower'
@@ -385,6 +389,18 @@ def yazi_sayfasi(k, on, govde, icindekiler):
                  f'<script type="application/ld+json">{ld}</script>\n')
 
 
+def _yazi_sayfasi_metin(k, on, govde, icindekiler):
+    """yazi_sayfasi'nın indirme kutusu olmayan sürümü."""
+    sahte = dict(k, dosya='-', boyut=0, pdf=None, sayfa=None, bicim=k.get('bicim') or 'Fotoğraf')
+    html_ = yazi_sayfasi(sahte, on, govde, icindekiler)
+    html_ = re.sub(r'<section class="kutu indir-kutu" id="indir">.*?</section>',
+                   '<section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2>'
+                   '<div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>', html_, flags=re.S)
+    html_ = re.sub(r'<div class="kutu-ic"><a class="buton turuncu indir-yan".*?</div>', '', html_, flags=re.S)
+    html_ = re.sub(r',\s*"associatedMedia": \{[^}]*\}', '', html_)
+    return html_
+
+
 def arsiv_dizini(kayitlar):
     satirlar = []
     hazir = [k for k in kayitlar if k.get('baslik')]
@@ -392,7 +408,7 @@ def arsiv_dizini(kayitlar):
         satirlar.append(f'<tr class="sinif-satir" id="sinif-{sinif}"><td colspan="4">{sinif}. <span data-i18n="arch.yearSuffix"></span></td></tr>')
         for k in sorted((k for k in hazir if k['sinif'] == sinif), key=lambda k: (k['ders'], k['slug'])):
             satirlar.append(f'''<tr><td><span class="mini-ikon {ikon_sinifi(k)}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
-              <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut'])}</td></tr>''')
+              <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut']) if k.get('dosya') else '–'}</td></tr>''')
     son = max(hazir, key=lambda k: k['eklenme'])['baslik'] if hazir else '–'
     govde = f'''  <div class="kolonlar iki" id="ust">
     <aside class="sol">

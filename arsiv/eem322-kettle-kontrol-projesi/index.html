@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Dönem Projesi – Arduino ve DS18B20 ile Kettle (Su Isıtıcı) Sıcaklık Kontrolü — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri 2015 dönem projesi raporu: Arduino UNO, DS18B20 1-Wire sıcaklık sensörü, röle ve rezistansla suyu 90 °C&#x27;ye kadar ısıtıp bekleyen aç-kapa kettle kontrol sistemi; akış şeması, donanım, Arduino kodu ve seri port çıktısı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Dönem Projesi – Arduino ve DS18B20 ile Kettle (Su Isıtıcı) Sıcaklık Kontrolü">
+<meta property="og:description" content="EEM322 Denetim Sistemleri 2015 dönem projesi raporu: Arduino UNO, DS18B20 1-Wire sıcaklık sensörü, röle ve rezistansla suyu 90 °C&#x27;ye kadar ısıtıp bekleyen aç-kapa kettle kontrol sistemi; akış şeması, donanım, Arduino kodu ve seri port çıktısı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Dönem Projesi – Arduino ve DS18B20 ile Kettle (Su Isıtıcı) Sıcaklık Kontrolü", "description": "EEM322 Denetim Sistemleri 2015 dönem projesi raporu: Arduino UNO, DS18B20 1-Wire sıcaklık sensörü, röle ve rezistansla suyu 90 °C'ye kadar ısıtıp bekleyen aç-kapa kettle kontrol sistemi; akış şeması, donanım, Arduino kodu ve seri port çıktısı.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-kettle-kontrol-projesi.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/eem322-kettle-kontrol-projesi.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Dönem Projesi – Arduino ve DS18B20 ile Kettle (Su Isıtıcı) Sıcaklık Kontrolü">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.05.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#projenin-tanimi">Projenin tanımı</a></li><li><a href="#proje-elemanlari">Proje elemanları</a></li><li><a href="#projenin-isleyisi">Projenin işleyişi</a></li><li><a href="#sistem-modelleme">Sistem modelleme</a></li><li><a href="#benzetim-sonuclari-seri-port-ekran-ciktisi">Benzetim sonuçları (seri port ekran çıktısı)</a></li><li><a href="#arduino-kodu-ek-1">Arduino kodu (EK-1)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Dönem Projesi – Arduino ve DS18B20 ile Kettle (Su Isıtıcı) Sıcaklık Kontrolü</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.05.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin 2015 bahar dönemi projelerinden birinin raporudur. Projeler dersin öğretim üyesi <strong>Doç. Dr. Mustafa Doğan</strong>'ın 11 Mart 2015'te açıkladığı listeye göre gruplar hâlinde hazırlanıp 15 Mayıs 2015'te rapor, kod, deney ve sunum olarak teslim edilmişti. Bu rapor, dört arkadaşın hazırladığı <strong>"Kettle Kontrol"</strong> projesine ait (15/05/2015); kapaktaki ad ve öğrenci numaraları kapatıldı, raporun sonundaki üretici veri sayfası (DS18B20 datasheet, EK-2) çıkarıldı. Maskelenmiş rapor PDF olarak yazının sonunda indirilebilir.</p>
+<h2 id="projenin-tanimi">Projenin tanımı</h2>
+<p>Kettle kontrol projesiyle haznedeki suyun sıcaklığı ölçülüyor ve su belirlenen sıcaklıkta bir süre tutuluyor. Sistem, bir sıcaklık sensörünün ölçümüne göre bir röle üzerinden 220 V'luk bir rezistansı açıp kapatan <strong>aç-kapa (on-off) denetim</strong> örneğidir.</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Kettle kontrol projesinin akış şeması: haznedeki su 5 °C üstünde mi, röle açık, suyun sıcaklığı, su 90 °C&#x27;ye ulaştı mı, röle kapalı, sistem beklemede"><figcaption>Akış şeması</figcaption></figure>
+<h2 id="proje-elemanlari">Proje elemanları</h2>
+<ul><li><strong>Arduino UNO:</strong> ATmega328 işlemcili Arduino çeşidi. 14 dijital giriş/çıkış pini (6'sı PWM çıkışı olarak kullanılabilir), 6 analog giriş, 16 MHz kristal osilatör, USB bağlantısı, 2.1 mm güç girişi, ICSP başlığı ve reset butonu var. DC 7–12 V'luk bir kaynağa bağlamak yeterli; 1 kB EEPROM hafızası var.</li><li><strong>Rezistans:</strong> Elektrik enerjisini ısı enerjisine dönüştüren direnç tellerine verilen genel ad. Yüksek sıcaklıklara dayanıklıdır; içinde nikel, demir, krom ve alüminyum alaşımları bulunur.</li><li><strong>Sıcaklık sensörü (DS18B20 dijital sıcaklık sensörü):</strong> Su geçirmez dijital sensör. Çalışma gerilimi 3.0–5.0 V; 12 bitlik okuma yapılabiliyor, 0.5 °C hassasiyetle ölçüm yapabiliyor; tepki süresi 750 ms'den kısa.</li><li><strong>Röle:</strong> Başka bir elektrik devresini açıp kapatan elektriksel anahtar. Bobinine uygun gerilim uygulandığında bobin mıknatıslanır, karşısındaki metal paleti çekerek kontakları birbirine bağlar.</li><li><strong>Su haznesi:</strong> Plastik bir kap.</li><li><strong>Jumper ve kablolar:</strong> Sensör ve röleyi Arduino'ya bağlamak için erkek-dişi jumper'lar.</li></ul>
+<p><em>Not: Raporda sensörün "−10 °C ile 125 °C arasında" 0.5 °C hassasiyetle ölçüm yaptığı yazıyor. DS18B20 veri sayfasına göre ölçüm aralığı −55 °C ile +125 °C, ±0.5 °C doğruluk ise −10 °C ile +85 °C arasında geçerlidir.</em></p>
+<h2 id="projenin-isleyisi">Projenin işleyişi</h2>
+<p>Hazneye konan suyun sıcaklığı sensörle ölçülür. Ölçülen sıcaklık 0 °C'nin üstündeyse Arduino'dan gelen sinyal röleyi tetikler; röle 220 V şehir şebekesini rezistansa vererek suyu ısıtmaya başlar. Sıcaklık ölçülmeye devam eder; su 90 °C'ye ulaştığında Arduino röleyi keser, rezistans kapanır ve seri port ekranında "Kaynama" yazısı görülür. Sistem belirlenen süre kadar kendini beklemeye alır. Süre bitince suyun sıcaklığı yeniden ölçülür; 90 °C'nin altındaysa Arduino röleyi açar ve rezistans suyu yeniden ısıtır. Böylece haznedeki su sürekli sıcak tutulur.</p>
+<h2 id="sistem-modelleme">Sistem modelleme</h2>
+<h3 id="yazilim">Yazılım</h3>
+<p>Sistem yazılımı Arduino programıyla yazıldı. Sıcaklık sensörü için <strong>1-Wire</strong> arayüzü kullanıldı; bekleme süreleri <code>delay</code> komutlarıyla gerçekleştirildi.</p>
+<h3 id="donanim">Donanım</h3>
+<p>Dijital sıcaklık sensörü, röle ve rezistansın bağlantıları yapıldı. Sensör için 1-Wire arayüzü sayesinde haberleşmede tek bir veri pini (dijital pin 2), 5 V besleme ve toprak (GND) kullanıldı. Röle için bir dijital çıkış pini (dijital pin 7) ve GND kullanıldı. Rezistansın kablo bağlantıları 220 V ile çalışacak şekilde yapıldı; Arduino'dan gelen sinyalle rezistansın çalışabilmesi için şebekeden gelen fazlardan birine röle bağlandı. Röle Arduino'dan gelen sinyalle kapanıp 220 V'u rezistansa iletiyor. İşlemler Arduino programındaki seri port ekranından izlenebiliyor.</p>
+<p>Yazılım ve bağlantılar tamamlandıktan sonra hazne delinerek rezistans ve sensör haznenin içine yerleştirildi; yalıtım yapılıp 220 V kablosu çekilerek sistem çalışmaya hazır hâle getirildi.</p>
+<figure class="yazi-gorsel"><img src="gorsel-1-arduino.jpg" width="900" height="510" loading="lazy" decoding="async" alt="Arduino UNO pin bağlantıları: sensör veri hattı, direnç ve röle kabloları"><figcaption>Görsel 1 – Arduino pin bağlantıları</figcaption></figure>
+<figure class="yazi-gorsel"><img src="gorsel-2-role.jpg" width="900" height="510" loading="lazy" decoding="async" alt="Rölenin şebeke kablosunun fazına bağlanması"><figcaption>Görsel 2 – Röle bağlantısı</figcaption></figure>
+<figure class="yazi-gorsel"><img src="gorsel-3-hazne.jpg" width="900" height="512" loading="lazy" decoding="async" alt="Rezistansın ve sıcaklık sensörünün plastik hazneye yerleştirilmesi"><figcaption>Görsel 3 – Rezistans ve sensörün hazneye yerleştirilmesi</figcaption></figure>
+<figure class="yazi-gorsel"><img src="gorsel-4-yalitim.jpg" width="900" height="512" loading="lazy" decoding="async" alt="Hazne, yalıtılmış bağlantılar, röle ve Arduino&#x27;nun son hâli"><figcaption>Görsel 4 – Yalıtım işlemi</figcaption></figure>
+<h2 id="benzetim-sonuclari-seri-port-ekran-ciktisi">Benzetim sonuçları (seri port ekran çıktısı)</h2>
+<p>Raporda sistemin çalışması sırasında seri port ekranından alınan çıktı veriliyor. Sıcaklık önce 82 °C civarından yaklaşık 70 °C'ye kadar düşüyor, ardından röle devreye girince yükselip 91.25 °C'ye ulaşıyor; bu noktada "Kaynama" ve "Beklemede" yazıları görülüyor:</p>
+<pre class="kod"><code>Sicaklik: 81.44
+Sicaklik: 82.44
+Sicaklik: 82.12
+Sicaklik: 81.12
+Sicaklik: 79.75
+Sicaklik: 78.12
+Sicaklik: 76.44
+Sicaklik: 74.75
+Sicaklik: 73.12
+Sicaklik: 72.00
+Sicaklik: 71.62
+Sicaklik: 70.81
+Sicaklik: 70.56
+Sicaklik: 71.06
+Sicaklik: 70.69
+Sicaklik: 70.31
+Sicaklik: 70.44
+Sicaklik: 70.87
+Sicaklik: 70.87
+Sicaklik: 70.62
+Sicaklik: 70.50
+Sicaklik: 71.06
+Sicaklik: 71.19
+Sicaklik: 70.87
+Sicaklik: 70.94
+Sicaklik: 70.69
+Sicaklik: 70.06
+Sicaklik: 69.56
+Sicaklik: 69.56
+Sicaklik: 69.87
+Sicaklik: 70.81
+Sicaklik: 71.19
+Sicaklik: 70.94
+Sicaklik: 70.44
+Sicaklik: 69.87
+Sicaklik: 69.25
+Sicaklik: 69.81
+Sicaklik: 71.94
+Sicaklik: 74.75
+Sicaklik: 79.12
+Sicaklik: 85.25
+Sicaklik: 91.25
+Sicaklik: 91.25
+Kaynama
+Beklemede</code></pre>
+<h2 id="arduino-kodu-ek-1">Arduino kodu (EK-1)</h2>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;OneWire.h&gt; // OneWire kütüphanesini ekliyoruz.
+
+// Sıcaklık sensörünü bağladığımız dijital pini 2 olarak belirliyoruz.
+int DS18S20_Pin = 2; 
+
+// Sıcaklık Sensörü Giriş-Çıkışı
+OneWire ds(DS18S20_Pin);  // 2. Dijital pinde.
+
+// Role için 7 numaralı pin belirlenmiştir.
+int role = 7;
+
+void setup(void) {
+  Serial.begin(9600); // Seri iletişimi başlatıyoruz.
+  pinMode(role,OUTPUT);
+}
+
+void loop(void) {
+  // temperature değişkenini sıcaklık değerini alma fonksiyonuna bağlıyoruz.
+  float temperature = getTemp();
+  // Sensörden gelen sıcaklık değerini Serial monitörde yazdırıyoruz.
+  Serial.print("Sicaklik: ");
+  Serial.println(temperature);
+  // 1 saniye bekliyoruz. Monitörde saniyede 1 sıcaklık değeri yazmaya devam edecek.
+  delay(1000);
+  
+   if(temperature &gt; 0 &amp;&amp; temperature &lt;= 90) // sensörden ölçülen sıcaklık 0 dereceden büyük 90 dereceden küçükse röleyi aktifleştiriyoruz.
+  {
+    digitalWrite(role,HIGH); // ilgili pin HIGH yapılarak röle aktifleştirildi.
+  }
+  
+  if(temperature &gt;= 91) // suyun sıcaklığı 91 dereceye ulaştığında röleyi 10 saniye daha çalıştırıyoruz.
+  {
+    digitalWrite(role,HIGH);
+    Serial.print("Sicaklik: "); // serial monitörde sıcaklık değeri yazdırılıyor
+    Serial.println(temperature);
+    Serial.print("Kaynama\n");  // serial monitorde ''kaynama'' yazdırılıyor.
+    delay(10000);
+    
+    digitalWrite(role,LOW);  // belirlenen süre bittiğinde röleyi kapatarak sistemi beklemeye alıyoruz
+    Serial.print("Beklemede\n"); // serial monitorde ''beklemede'' yazdırılıyor.
+    delay(60000);    
+  }
+}
+
+//  **Sensörden gelen verileri Celcius cinsinden sıcaklık değerlerine çeviriyoruz
+float getTemp(){
+  // suyun sıcaklığını Celcius cinsinden sensörden bu fonksiyonla alıyoruz
+
+  byte data[12];
+  byte addr[8];
+
+  if ( !ds.search(addr)) {
+      // tek sensör kullanıyoruz bu noktada aramayı resetliyoruz
+      ds.reset_search();
+      return -1000;
+  }
+
+  if ( OneWire::crc8( addr, 7) != addr[7]) {
+      Serial.println("CRC is not valid!");
+      return -1000;
+  }
+
+  if ( addr[0] != 0x10 &amp;&amp; addr[0] != 0x28) {
+      Serial.print("Device is not recognized");
+      return -1000;
+  }
+
+  ds.reset();
+  ds.select(addr);
+  ds.write(0x44,1); // 
+
+  byte present = ds.reset();
+  ds.select(addr);    
+  ds.write(0xBE); // 
+
+  for (int i = 0; i &lt; 9; i++) { // 9 byte kullanılacak
+    data[i] = ds.read();
+  }
+
+  ds.reset_search();
+
+  byte MSB = data[1];
+  byte LSB = data[0];
+
+  float tempRead = ((MSB &lt;&lt; 8) | LSB); // iki komplimentini alıyoruz 
+  float TemperatureSum = tempRead / 16;
+
+  return TemperatureSum;
+
+}```
+
+Kodda `getTemp()` fonksiyonu 1-Wire hattındaki sensörü arar, adresin CRC'sini ve aygıt türünü (0x10 ya da 0x28) denetler, 0x44 komutuyla sıcaklık dönüşümünü başlatır, 0xBE komutuyla 9 baytlık scratchpad'i okur ve ilk iki bayttan oluşan ham değeri 16'ya bölerek °C cinsinden sıcaklığı döndürür (DS18B20'nin 12 bit çözünürlüğünde 1 LSB = 0.0625 °C).
+
+*Not: Kod ile metin ve akış şeması arasında küçük farklar var. Akış şemasında ilk koşul "haznedeki su 5 °C üstünde mi?", kodda ise 0 °C'dir. Metinde röle 90 °C'de kesiliyor; kodda ise röle 90 °C'ye kadar açık tutuluyor, sıcaklık 91 °C ve üstüne çıkınca röle 10 saniye daha çalıştırılıp sonra kapatılıyor ve sistem 60 saniye bekliyor. 90 ile 91 °C arasındaki ölçümlerde hiçbir koşul sağlanmadığından röle önceki durumunu koruyor. Raporun ilk cümlesinde proje "Cattle kontrol" diye yazılmış; doğrusu "Kettle (su ısıtıcı) kontrol"dür.*
+</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-kettle-kontrol-projesi.pdf" download>eem322-kettle-kontrol-projesi.pdf</a></p>
+              <p class="kucuk">PDF · 1.0 MB · 15 <span data-i18n="arch.pagesLower"></span> · 15.05.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-kettle-kontrol-projesi.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

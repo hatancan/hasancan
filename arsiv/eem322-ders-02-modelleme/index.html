@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 2 – Sistemlerin Frekans Düzleminde Modellenmesi, Laplace Dönüşümü ve Transfer Fonksiyonu — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 2 (Hamit Erdem, 2013): matematiksel model, Laplace ve ters Laplace dönüşümü, kısmi kesirler, transfer fonksiyonu; elektrik devreleri (çevre/düğüm analizi, op-amp), öteleme ve dönme mekanik sistemleri, elektriksel benzeşimler, dişli sistemler, sıvı seviye sistemi ve DC motor.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-02-modelleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 2 – Sistemlerin Frekans Düzleminde Modellenmesi, Laplace Dönüşümü ve Transfer Fonksiyonu">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 2 (Hamit Erdem, 2013): matematiksel model, Laplace ve ters Laplace dönüşümü, kısmi kesirler, transfer fonksiyonu; elektrik devreleri (çevre/düğüm analizi, op-amp), öteleme ve dönme mekanik sistemleri, elektriksel benzeşimler, dişli sistemler, sıvı seviye sistemi ve DC motor.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-02-modelleme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 2 – Sistemlerin Frekans Düzleminde Modellenmesi, Laplace Dönüşümü ve Transfer Fonksiyonu", "description": "EEM322 Denetim Sistemleri ders notu 2 (Hamit Erdem, 2013): matematiksel model, Laplace ve ters Laplace dönüşümü, kısmi kesirler, transfer fonksiyonu; elektrik devreleri (çevre/düğüm analizi, op-amp), öteleme ve dönme mekanik sistemleri, elektriksel benzeşimler, dişli sistemler, sıvı seviye sistemi ve DC motor.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-02-modelleme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322new2.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-02-modelleme/eem322new2.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 2 – Sistemlerin Frekans Düzleminde Modellenmesi, Laplace Dönüşümü ve Transfer Fonksiyonu">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#modelleme-ve-matematiksel-model">Modelleme ve matematiksel model</a></li><li><a href="#frekans-duzleminde-modelleme-ve-laplace-donusumu">Frekans düzleminde modelleme ve Laplace dönüşümü</a></li><li><a href="#transfer-fonksiyonu">Transfer fonksiyonu</a></li><li><a href="#elektrik-devrelerinin-transfer-fonksiyonlari">Elektrik devrelerinin transfer fonksiyonları</a></li><li><a href="#oteleme-mekanik-sistemleri">Öteleme mekanik sistemleri</a></li><li><a href="#donme-mekanik-sistemleri">Dönme mekanik sistemleri</a></li><li><a href="#disli-sistemler-ve-diger-dinamik-elemanlar">Dişli sistemler ve diğer dinamik elemanlar</a></li><li><a href="#sivi-seviye-sistemleri-ve-dc-motor">Sıvı seviye sistemleri ve DC motor</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 2 – Sistemlerin Frekans Düzleminde Modellenmesi, Laplace Dönüşümü ve Transfer Fonksiyonu</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 01.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>2. ders notudur</strong> ("Lecture 2: Modeling of Systems – Modeling in Frequency Domain"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 01.07.2013 tarihi var. Ders notu İngilizce ve sayfa başına iki slayt yerleştirilmiş 25 sayfalık bir PDF; örneklerin önemli bir kısmı Nise'nin <em>Control Systems Engineering</em> ve Ogata'nın <em>Modern Control Engineering</em> kitaplarından alınmış. Aşağıda içerik Türkçe olarak özetlendi, çözümlü örnekler yazıya döküldü; devre ve mekanik şemalar için sayfa görselleri eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Bu bölümde üç konu işleniyor:</p>
+<ul><li>Transfer fonksiyonu</li><li>Laplace dönüşümü</li><li>Ters Laplace dönüşümü</li></ul>
+<h2 id="modelleme-ve-matematiksel-model">Modelleme ve matematiksel model</h2>
+<p>Bir sistemin davranışını incelemek için farklı değişkenler arasında işlevsel ilişkiler kurmak gerekir. Bu ilişkiler, sistemin <strong>matematiksel modeli</strong> denen bir denklem takımıyla verilir. Matematiksel model, deney yapmadan sistemin davranışını incelemeye yarayan bir araçtır; sistemdeki ölçülebilir fiziksel büyüklükler (uzaklık, akım, debi, hatta işsizlik oranı…) arasındaki ilişkileri matematiksel bağıntılar olarak anlatır.</p>
+<p>Model kurmak her zaman belirli çalışma koşulları için geçerli yaklaşıklıklar ve basitleştirici varsayımlar içerir; çünkü fiziksel gerçeklik, bütün ayrıntılarıyla ele alınabilecek bir model kurulamayacak kadar karmaşıktır. Model geliştirirken incelenecek temel etkenler:</p>
+<ul><li>Yapı</li><li>Bileşenler ve aralarındaki bağlantılar</li><li>Parametreler</li><li>Değişkenler</li><li>Girişler ve çıkışlar</li><li>Başlangıç koşulları</li></ul>
+<p>Dinamik bir sistem, bilinen diferansiyel denklemlerle ya da deneysel test verileriyle tam olarak tanımlanabilir. Sistemi analiz edip başarımını belirleyebilmek, özelliklerinin matematiksel olarak ne kadar iyi ifade edildiğine bağlıdır.</p>
+<p><strong>Benzeşik sistemler (analogous systems):</strong> İkinci mertebeden bir sistem için geliştirilen bir analiz yöntemi, sistem elektriksel, mekanik, ısıl ya da hidrolik olsun, her ikinci mertebeden sisteme uygulanabilir. Analiz yöntemini modelin türüne göre geliştirmek; mühendisliğin farklı dallarındaki, hatta biyolojik, ekonomik ve yönetim sistemlerindeki problemleri ortak bir sistem yaklaşımıyla incelemeyi mümkün kılar.</p>
+<p>Matematiksel model, sistemdeki değişkenleri birbirine bağlayan ve o sisteme uygulanan fizik yasalarıyla (örneğin Kirchhoff yasaları) belirlenen denklemler takımıdır. Notta seri RLC devresi için Kirchhoff gerilim yasasından L·di/dt + Ri + (1/C)∫i dt = E denklemi yazılıyor; anahtar bir süre kapalı kaldıktan sonra açıldığında ise kondansatör R ve L ile seri kalır ve devre denklemi değişir. Varsayım: L akımdan bağımsızdır, yani endüktans doğrusaldır.</p>
+<h3 id="ornek-otomobil-suspansiyon-sistemi">Örnek: otomobil süspansiyon sistemi</h3>
+<p>Amaç, bozuk yol yüzeyinin araçta oluşturduğu titreşim ve sarsıntıları sönümlemek ve yolculara iletilmesini önlemektir.</p>
+<ul><li>Araç gövdesi ve yolcuların kütlesi M kütlesiyle,</li><li>süspansiyon yayları yay sabiti K olan ideal bir yayla,</li><li>amortisör, viskoz sürtünme katsayısı D olan ideal bir sönümleyiciyle (dash-pot) gösterilir.</li></ul>
+<p>Sistem değişkenleri yer değiştirme x, hız u ve ivme a'dır. Giriş, yol yüzeyindeki dalgalanmalardan kaynaklanan dingilin düşey yer değiştirmesi x₁(t); çıkış, M kütlesinin düşey hareketi x₂(t)'dir. Matematiksel model bu giriş ve çıkış değişkenlerini birbirine bağlamalıdır; notta kütle-yay-sönümleyici denklemi M·d²x/dt² + D·dx/dt + Kx = 0 olarak veriliyor.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Otomobil süspansiyon modeli ve modelleme aşamalarını gösteren Türkçe akış şeması: fiziksel sistem, matematiksel model, transfer fonksiyonu ve durum değişkeni modelleri, çözüm aşaması"><figcaption>Süspansiyon modeli ve modelleme aşamaları</figcaption></figure>
+<p>Akış şemasının özeti: Fiziksel sistem, her birinin matematiksel davranışı bilinen ideal elemanlardan oluşan bir fiziksel modelle temsil edilir. Doğrusallaştırmadan sonra adi diferansiyel denklemler elde edilir. Buradan iki yol vardır: Laplace (ya da Fourier) dönüşümüyle <strong>transfer fonksiyonu modeli</strong> G(s) (karmaşık ya da frekans düzlemi) veya <strong>durum değişkeni modeli</strong> dX/dt = AX(t) + Bu(t), y = CX(t) + Du(t) (zaman düzlemi). Modeller arasında dönüşüm yapılabilir. Çözüm aşamasında transfer fonksiyonu modelinde test girişine yanıt Y(s) = G(s)·R(s) olarak bulunup ters dönüşümle y(t) elde edilir; durum modelinde zaman düzleminde (iteratif) çözüm yapılır. Zaman düzlemi ve frekans düzlemi, aynı dinamik sisteme iki farklı bakış biçimidir.</p>
+<h2 id="frekans-duzleminde-modelleme-ve-laplace-donusumu">Frekans düzleminde modelleme ve Laplace dönüşümü</h2>
+<p>Transfer fonksiyonu iki işaret arasındaki ilişkiyi s'nin fonksiyonu olarak anlatır. Frekans düzlemindeki transfer fonksiyonu yalnızca <strong>doğrusal ve zamanla değişmeyen</strong> elemanları tanımlayabilir. Laplace dönüşümü, sistem kuramında diferansiyel denklemlerin çözümünü kolaylaştırmak için kullanılır. Çözüm üç adımdır:</p>
+<ol><li>Laplace dönüşümüyle diferansiyel denklem cebirsel denkleme çevrilir.</li><li>Cebirsel denklem çözümün Laplace dönüşümü için çözülür; kısmi kesirlerle çözüm temel bileşenlerine ayrılır.</li><li>Her temel bileşenin ters Laplace dönüşümü alınarak zaman düzlemindeki çözüm bulunur.</li></ol>
+<p>Tanım: L[f(t)] = F(s) = ∫₀^∞ f(t) e^(−st) dt, burada s = σ + jω karmaşık değişkendir. <strong>Transfer fonksiyonu</strong>, başlangıç koşulları sıfır kabul edilerek çıkışın Laplace dönüşümü C(s)'nin girişin Laplace dönüşümü R(s)'ye oranıdır. Notun 5. ve 6. sayfalarında Laplace dönüşüm çifti tabloları yer alıyor.</p>
+<h3 id="ters-laplace-ornekleri">Ters Laplace örnekleri</h3>
+<p><strong>Örnek 1:</strong> G(s) = (s³ + 5s² + 9s + 7) / ((s + 1)(s + 2)) = s + 2 + (s + 3)/((s + 1)(s + 2)).</p>
+<p>Birim dürtünün Laplace dönüşümü 1, dδ(t)/dt'nin dönüşümü s olduğundan:</p>
+<p>g(t) = dδ(t)/dt + 2δ(t) + 2e^(−t) − e^(−2t),  t ≥ 0⁻</p>
+<p><strong>Örnek 2:</strong> F(s) = (2s + 12) / (s² + 2s + 5). Payda (s + 1)² + 2² biçiminde yazılır ve L[e^(−at) sin ωt] = ω/((s + a)² + ω²), L[e^(−at) cos ωt] = (s + a)/((s + a)² + ω²) çiftleri kullanılır:</p>
+<p>F(s) = [10 + 2(s + 1)] / ((s + 1)² + 2²) = 5·2/((s + 1)² + 2²) + 2·(s + 1)/((s + 1)² + 2²)</p>
+<p>f(t) = 5e^(−t) sin 2t + 2e^(−t) cos 2t,  t ≥ 0</p>
+<p><strong>Örnek 3 (diferansiyel denklem çözümü):</strong> Başlangıç koşulları sıfırken d²y/dt² + 12 dy/dt + 32y = 32u(t) denklemini çözün.</p>
+<p>s²Y(s) + 12sY(s) + 32Y(s) = 32/s  →  Y(s) = 32 / (s(s + 4)(s + 8)) = K₁/s + K₂/(s + 4) + K₃/(s + 8)</p>
+<ul><li>K₁ = 32/((s + 4)(s + 8)) |s→0 = 1</li><li>K₂ = 32/(s(s + 8)) |s→−4 = −2</li><li>K₃ = 32/(s(s + 4)) |s→−8 = 1</li></ul>
+<p>y(t) = (1 − 2e^(−4t) + e^(−8t)) u(t)</p>
+<h3 id="katli-kutuplu-kismi-kesir-acilimi">Katlı kutuplu kısmi kesir açılımı</h3>
+<p><strong>Örnek 4:</strong> F(s) = (s² + 2s + 3)/(s + 1)³ = b₁/(s + 1) + b₂/(s + 1)² + b₃/(s + 1)³</p>
+<ul><li>b₃ = [(s + 1)³ F(s)] at s = −1 = (s² + 2s + 3) at s = −1 = 2</li><li>b₂ = d/ds[(s² + 2s + 3)] at s = −1 = (2s + 2) at s = −1 = 0</li><li>b₁ = (1/2!)·d²/ds²[(s² + 2s + 3)] at s = −1 = (1/2)·2 = 1</li></ul>
+<p>f(t) = e^(−t) + 0 + t²e^(−t) = (1 + t²) e^(−t),  t ≥ 0</p>
+<p><strong>Örnek 5 (paydanın kökleri gerçel ve katlı):</strong> F(s) = 2/((s + 1)(s + 2)²) = K₁/(s + 1) + K₂/(s + 2)² + K₃/(s + 2)</p>
+<p>K₁ = 2 bulunur. K₂ için iki taraf (s + 2)² ile çarpılır: 2/(s + 1) = (s + 2)²K₁/(s + 1) + K₂ + (s + 2)K₃; s → −2 için K₂ = −2. K₃ için bu ifadenin s'ye göre türevi alınır: −2/(s + 1)² = (s + 2)s·K₁/(s + 1)² + K₃; s → −2 için K₃ = −2.</p>
+<p>f(t) = 2e^(−t) − 2te^(−2t) − 2e^(−2t)</p>
+<h2 id="transfer-fonksiyonu">Transfer fonksiyonu</h2>
+<p>Genel n. mertebeden, doğrusal, zamanla değişmeyen bir diferansiyel denklem (c(t) çıkış, r(t) giriş):</p>
+<p>aₙ dⁿc/dtⁿ + aₙ₋₁ dⁿ⁻¹c/dtⁿ⁻¹ + … + a₀c(t) = bₘ dᵐr/dtᵐ + bₘ₋₁ dᵐ⁻¹r/dtᵐ⁻¹ + … + b₀r(t)</p>
+<p>Bütün başlangıç koşulları sıfır kabul edilirse:</p>
+<p>G(s) = C(s)/R(s) = (bₘsᵐ + bₘ₋₁sᵐ⁻¹ + … + b₀) / (aₙsⁿ + aₙ₋₁sⁿ⁻¹ + … + a₀),  C(s) = R(s)G(s)</p>
+<p>Transfer fonksiyonu, girişi R(s), çıkışı C(s) olan tek bir blokla gösterilebilir.</p>
+<p><strong>Örnek:</strong> dc/dt + 2c(t) = r(t) sisteminin transfer fonksiyonu: sC(s) + 2C(s) = R(s) → G(s) = 1/(s + 2). Giriş birim basamak (r(t) = u(t)) ise C(s) = 1/(s(s + 2)) = (1/2)/s − (1/2)/(s + 2) ve c(t) = 1/2 − (1/2)e^(−2t).</p>
+<h2 id="elektrik-devrelerinin-transfer-fonksiyonlari">Elektrik devrelerinin transfer fonksiyonları</h2>
+<p>Direnç, bobin ve kondansatör pasif (iç enerji kaynağı yok) ve doğrusal elemanlardır. Empedansları sırasıyla R, Ls ve 1/(Cs); admitans (Y) empedansın tersidir ve bir devrenin akımı ne kadar kolay geçirdiğinin ölçüsüdür.</p>
+<p><strong>Tek çevreli devre:</strong> Seri RLC devresinde kondansatör gerilimi Vc(s) ile giriş gerilimi V(s) arasındaki transfer fonksiyonu:</p>
+<p>Vc(s)/V(s) = (1/LC) / (s² + (R/L)s + 1/LC)</p>
+<p><strong>Çevre (mesh) analiziyle karmaşık devreler:</strong></p>
+<ol><li>Pasif eleman değerlerini empedanslarıyla değiştir.</li><li>Bütün kaynakları ve zaman değişkenlerini Laplace dönüşümleriyle değiştir.</li><li>Her çevrede bir dönüşüm akımı ve yönü varsay.</li><li>Her çevre etrafında Kirchhoff gerilim yasasını yaz.</li><li>Eşzamanlı denklemleri çıkış için çöz.</li></ol>
+<p>Çevre denklemleri, "çevredeki empedansların toplamı × o çevrenin akımı − ortak empedanslar × komşu çevre akımları = çevredeki uygulanan gerilimlerin toplamı" kalıbıyla doğrudan yazılabilir. <strong>Düğüm (nodal) analizinde</strong> düğümden çıkan akımlar pozitif, giren akımlar negatif alınarak akımlar toplanır; birden fazla düğüm ve gerilim kaynağı varsa, Norton teoremiyle empedansla seri gerilim kaynakları admitansla paralel akım kaynaklarına çevrilir ve kalıp "düğüme bağlı admitansların toplamı × düğüm gerilimi − ortak admitanslar × komşu düğüm gerilimleri = düğüme giren uygulanan akımların toplamı" olur.</p>
+<p><strong>İşlemsel yükselteçli devreler:</strong> Eviren yükselteçte V₀(s)/Vi(s) = −Z₂(s)/Z₁(s), evirmeyen yükselteçte V₀(s)/Vi(s) = (Z₁(s) + Z₂(s))/Z₁(s). Notta eviren yükselteç örneğinde (C₁ = 5.6 µF ∥ R₁ = 360 kΩ girişte, R₂ = 220 kΩ ile C₂ = 0.1 µF seri geri beslemede) Z₁(s) = 360×10³/(2.016s + 1), Z₂(s) = 220×10³ + 10⁷/s ve V₀(s)/Vi(s) = −1.232 (s² + 45.95s + 22.55)/s bulunuyor. Evirmeyen yükselteçte A sonlu kazançla V₀/Vi = A/(1 + AZ₁/(Z₁ + Z₂)) yazılır; A → ∞ için yukarıdaki sonuç elde edilir. Bir başka örnekte, 1 Ω'luk iki direnç ve 1 H'lik üç bobinden oluşan devre için VL(s)/V(s) = (s² + 2s + 1)/(s² + 5s + 2) veriliyor.</p>
+<h2 id="oteleme-mekanik-sistemleri">Öteleme mekanik sistemleri</h2>
+<p>Mekanik sistemler elektrik devrelerine öyle benzer ki elemanlar ve değişkenler arasında benzeşimler kurulabilir. Mekanik sistemlerin de üç pasif, doğrusal elemanı vardır: yay ve kütle enerji depolar, viskoz sönümleyici enerji harcar.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Eleman</th><th scope="col">Kuvvet–hız</th><th scope="col">Kuvvet–yer değiştirme</th><th scope="col">Empedans Z_M(s) = F(s)/X(s)</th></tr></thead><tbody><tr><th scope="row">Yay (K)</th><td>f(t) = K∫v dτ</td><td>f(t) = Kx(t)</td><td>K</td></tr><tr><th scope="row">Viskoz sönümleyici (f_v)</th><td>f(t) = f_v·v(t)</td><td>f(t) = f_v·dx/dt</td><td>f_v·s</td></tr><tr><th scope="row">Kütle (M)</th><td>f(t) = M·dv/dt</td><td>f(t) = M·d²x/dt²</td><td>Ms²</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Kuvvet-hız ile gerilim-akım sütunlarının karşılaştırılması: mekanik-elektrik benzeşimleri"><figcaption>Elektriksel ve mekanik benzeşimler</figcaption></figure>
+<p><strong>Benzeşimler:</strong> Kuvvet–hız sütunu gerilim–akım sütunuyla karşılaştırılırsa kuvvet gerilime, hız akıma; kuvvet–yer değiştirme sütunu gerilim–yük sütunuyla karşılaştırılırsa yer değiştirme yüke benzer. Yay kondansatöre, viskoz sönümleyici dirence, kütle bobine karşılık gelir; hız cinsinden yazılan kuvvet toplamları çevre denklemlerine benzer (<strong>seri benzeşim</strong>). Kuvvet–hız sütunu akım–gerilim sütunuyla ters sırada karşılaştırılırsa kuvvet akıma, hız gerilime; yay bobine, sönümleyici dirence, kütle kondansatöre karşılık gelir ve mekanik denklemler düğüm denklemlerine benzer (<strong>paralel benzeşim</strong>).</p>
+<p><strong>Örnek (tek kütle):</strong> Kütle-yay-sönümleyici sisteminde X(s)/F(s) bulunur. Pozitif hareket yönü (örneğin sağ) seçilir; bu, elektrik devresinde akım yönü seçmeye benzer. Serbest cisim diyagramı çizilir: yalnızca uygulanan kuvvet sağa doğrudur, yay, sönümleyici ve ivmeden doğan kuvvetler hareketi engeller ve sola doğrudur. Newton yasasıyla kuvvetler toplanır ve sıfıra eşitlenir; başlangıç koşulları sıfırken Laplace dönüşümü alınır:</p>
+<p>(Ms² + f_v s + K) X(s) = F(s)  →  G(s) = X(s)/F(s) = 1/(Ms² + f_v s + K)</p>
+<p>Genel kalıp: [Hareketteki empedansların toplamı] · X(s) = [Uygulanan kuvvetlerin toplamı].</p>
+<h3 id="cok-serbestlik-dereceli-sistemler">Çok serbestlik dereceli sistemler</h3>
+<p>Mekanik sistemlerde gereken hareket denklemi sayısı, doğrusal bağımsız hareket sayısına, yani <strong>serbestlik derecesine</strong> eşittir. Doğrusal bağımsızlık, diğer bütün hareket noktaları sabit tutulduğunda bir noktanın hâlâ hareket edebilmesi demektir; bu hareketlerin birbirinden bağımsız olduğu anlamına gelmez, genelde birbirlerine bağlıdırlar (iki çevreli bir devrede çevre akımlarının birbirine bağlı olması gibi).</p>
+<p>Çözüm için her hareket noktasının serbest cisim diyagramı çizilir ve süperpozisyon kullanılır: önce diğer noktalar sabitken cismin kendi hareketinden doğan kuvvetler bulunur; sonra cisim sabitken komşu noktalar teker teker hareket ettirilir ve bu hareketlerin cisme uyguladığı kuvvetler eklenir. İki kütleli (M₁, M₂) örnekte hareket denklemleri:</p>
+<ul><li>[M₁s² + (f_v1 + f_v3)s + (K₁ + K₂)] X₁(s) − (f_v3 s + K₂) X₂(s) = F(s)</li><li>−(f_v3 s + K₂) X₁(s) + [M₂s² + (f_v2 + f_v3)s + (K₂ + K₃)] X₂(s) = 0</li></ul>
+<p><em>Not: Ders notundaki ilk denklemde M₁s² ile (f_v1 + f_v3)s arasındaki "+" işareti eksik yazılmış; yukarıda düzeltilmiş hâli verildi.</em></p>
+<p>Buradan Cramer kuralıyla G(s) = X₂(s)/F(s) = (f_v3 s + K₂)/Δ bulunur; Δ katsayılar matrisinin determinantıdır. Bu denklemler elektrik çevre denklemlerine benzer; notta sistemin seri ve paralel elektrik benzeşik devreleri de çiziliyor.</p>
+<h2 id="donme-mekanik-sistemleri">Dönme mekanik sistemleri</h2>
+<p>Dönme sistemleri öteleme sistemleri gibi ele alınır; yalnızca kuvvetin yerini tork, öteleme yer değiştirmesinin yerini açısal yer değiştirme alır. Bir P noktasına uygulanan F kuvvetinin torku T = F·R'dir (kuvvet yarıçapa dik ise). Dönen bir cismin eylemsizlik momenti J = m₁r₁² + m₂r₂² + m₃r₃² + …, toplam kinetik enerjisi K = (1/2)Jω²'dir.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Eleman</th><th scope="col">Tork–açısal hız</th><th scope="col">Tork–açısal yer değiştirme</th><th scope="col">Empedans Z_M(s) = T(s)/θ(s)</th></tr></thead><tbody><tr><th scope="row">Yay (K)</th><td>T(t) = K∫ω dτ</td><td>T(t) = Kθ(t)</td><td>K</td></tr><tr><th scope="row">Viskoz sönümleyici (D)</th><td>T(t) = Dω(t)</td><td>T(t) = D·dθ/dt</td><td>Ds</td></tr><tr><th scope="row">Eylemsizlik (J)</th><td>T(t) = J·dω/dt</td><td>T(t) = J·d²θ/dt²</td><td>Js²</td></tr></tbody></table></div>
+<p>İki eylemsizlikli (J₁, J₂) örnekte de serbest cisim diyagramları süperpozisyonla çizilir (J₁ dönerken J₂ sabit, J₂ dönerken J₁ sabit) ve θ₂(s)/T(s) = K/Δ biçiminde transfer fonksiyonu bulunur.</p>
+<h2 id="disli-sistemler-ve-diger-dinamik-elemanlar">Dişli sistemler ve diğer dinamik elemanlar</h2>
+<p>Dişliler dönme sistemlerine mekanik avantaj sağlar. 10 vitesli bisiklet kullanan herkes dişlinin etkisini bilir: yokuş yukarı daha çok tork ve daha az hız için, düz yolda daha çok hız ve daha az tork için vites değiştirilir. Dişliler, sürücü sistemle yükü eşleştirmeyi, yani <strong>hız ile tork arasında bir ödünleşimi</strong> sağlar.</p>
+<p>Her dişlinin çevresi boyunca alınan yol aynıdır: r₁θ₁ = r₂θ₂, dolayısıyla θ₂/θ₁ = r₁/r₂ = N₁/N₂. Dişliler kayıpsız kabul edilirse (enerji soğurmaz ya da depolamazlar) Dişli 1'e giren enerji Dişli 2'den çıkan enerjiye eşittir: T₁θ₁ = T₂θ₂, buradan T₂/T₁ = θ₁/θ₂ = N₂/N₁.</p>
+<figure class="yazi-gorsel"><img src="s-24.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Dişli sistemi; op-amp integral ve türev alıcılar, potansiyometre, kremayer-dişli ve takometre transfer fonksiyonları"><figcaption>Dişliler ve dinamik elemanların transfer fonksiyonları</figcaption></figure>
+<p>Dinamik elemanların transfer fonksiyonu örnekleri:</p>
+<ul><li>Op-amp integral alıcı: V₂(s)/V₁(s) = −1/(RCs)</li><li>Op-amp türev alıcı: V₂(s)/V₁(s) = −RCs</li><li>Potansiyometre: V₂(s)/V₁(s) = R₂/R = R₂/(R₁ + R₂), R₂/R = θ/θ_max</li><li>Kremayer-dişli: x = rθ</li><li>Takometre (hız algılayıcı): V₂(s) = K_t ω(s) = K_t s θ(s), K_t sabit</li></ul>
+<h2 id="sivi-seviye-sistemleri-ve-dc-motor">Sıvı seviye sistemleri ve DC motor</h2>
+<p>İki tankı birleştiren kısa bir borudaki akış için <strong>direnç</strong> R, debide birim değişiklik oluşturmak için gereken seviye farkı değişimi olarak tanımlanır. Sıvı seviye sistemi ile RC devresi aynı biçimde birinci mertebeden bir denklemle tanımlanır:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Sıvı seviye sistemi</th><th scope="col">Elektriksel RC devresi</th></tr></thead><tbody><tr><th scope="row">Giriş işareti</th><td>Debi qᵢ(t)</td><td>Giriş gerilimi vᵢ(t)</td></tr><tr><th scope="row">Çıkış işareti</th><td>Yükseklik h(t)</td><td>Çıkış gerilimi v₀(t)</td></tr><tr><th scope="row">Diferansiyel denklem</th><td>RA·dh/dt + h(t) = R·qᵢ(t)</td><td>RC·dv₀/dt + v₀(t) = vᵢ(t)</td></tr><tr><th scope="row">Genel denklem</th><td>τ·dy/dt + y(t) = Ku(t)</td><td>τ·dy/dt + y(t) = Ku(t)</td></tr></tbody></table></div>
+<p>Alan denetimli DC motor için θ(s)/V_f(s) = K_m / (s(Js + b)(L_f s + R_f)). Endüvi denetimli DC motor için ise θ(s)/V(s) = K_m / (s[(R_a + L_a s)(Js + b) + K_b K_m]).</p>
+<figure class="yazi-gorsel"><img src="s-25.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Sıvı seviye sistemi ve elektriksel benzeşimi; alan denetimli ve endüvi denetimli DC motor modelleri"><figcaption>Sıvı seviye sistemi ve DC motor</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem322new2.pdf" download>eem322new2.pdf</a></p>
+              <p class="kucuk">PDF · 1.5 MB · 25 <span data-i18n="arch.pagesLower"></span> · 01.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322new2.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

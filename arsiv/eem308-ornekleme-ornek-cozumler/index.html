@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi Çözümlü Örnekler — hasancan.net</title>
+<meta name="description" content="EEM308 Sinyaller ve Sistemler II dersinin örnekleme konusundaki altı çözümlü örneği: Nyquist hızı hesabı, çarpım sinyalinin örnekleme aralığı, ayrık zamanda örtüşmesiz örnekleme aralığı N, h[2n] süzgecinin frekans yanıtı ve sıfır ekleme + seyreltme sistemi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-ornekleme-ornek-cozumler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi Çözümlü Örnekler">
+<meta property="og:description" content="EEM308 Sinyaller ve Sistemler II dersinin örnekleme konusundaki altı çözümlü örneği: Nyquist hızı hesabı, çarpım sinyalinin örnekleme aralığı, ayrık zamanda örtüşmesiz örnekleme aralığı N, h[2n] süzgecinin frekans yanıtı ve sıfır ekleme + seyreltme sistemi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-ornekleme-ornek-cozumler/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi Çözümlü Örnekler", "description": "EEM308 Sinyaller ve Sistemler II dersinin örnekleme konusundaki altı çözümlü örneği: Nyquist hızı hesabı, çarpım sinyalinin örnekleme aralığı, ayrık zamanda örtüşmesiz örnekleme aralığı N, h[2n] süzgecinin frekans yanıtı ve sıfır ekleme + seyreltme sistemi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-ornekleme-ornek-cozumler/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem308-ornekleme-ornek-cozumler.pdf", "contentUrl": "https://hasancan.net/arsiv/eem308-ornekleme-ornek-cozumler/eem308-ornekleme-ornek-cozumler.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi Çözümlü Örnekler">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM308</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>22.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ornek-1-ornekleme-frekansindan-bant-siniri">Örnek 1: Örnekleme frekansından bant sınırı</a></li><li><a href="#ornek-2-nyquist-hizlari">Örnek 2: Nyquist hızları</a></li><li><a href="#ornek-3-carpim-sinyalinin-ornekleme-araligi">Örnek 3: Çarpım sinyalinin örnekleme aralığı</a></li><li><a href="#ornek-4-ayrik-zamanda-ortusmesiz-ornekleme-araligi">Örnek 4: Ayrık zamanda örtüşmesiz örnekleme aralığı</a></li><li><a href="#ornek-5-h-2n-suzgecinin-frekans-yaniti">Örnek 5: h[2n] süzgecinin frekans yanıtı</a></li><li><a href="#ornek-6-sifir-ekleme-suzme-ve-seyreltme">Örnek 6: Sıfır ekleme, süzme ve seyreltme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Örnekleme Teoremi Çözümlü Örnekler</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 22.03.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 308 Sinyaller ve Sistemler II</strong> dersinin örnekleme konusuna ait üç sayfalık el yazısı <strong>"Örnekler"</strong> notunu aktarıyor. Not, dersin "Örnekleme" sunumuyla birlikte dağıtılmış; soruların çoğu ders kitabı Oppenheim &amp; Willsky'nin 7. bölüm problemlerine dayanıyor. Hazırlayanın adı belgede yazmıyor; el yazısı aynı dönemin kısa sınav cevap anahtarlarıyla aynı. Taranmış notun PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="ornek-1-ornekleme-frekansindan-bant-siniri">Örnek 1: Örnekleme frekansından bant sınırı</h2>
+<p><strong>Soru:</strong> x(t) sinyalinin örnekleme frekansı ω_s = 10000π olduğu bilinmektedir. ω'nın hangi değeri için X(jω) = 0'dır?</p>
+<p><strong>Çözüm:</strong> Nyquist kriterine göre ω_s ≥ 2ω olmalıdır; |ω| &gt; ω_s/2 için X(jω) = 0 ise işaret yeniden oluşturulabilir. Bu yüzden <strong>ω &gt; 5000π</strong> için X(jω) = 0 olmalıdır.</p>
+<h2 id="ornek-2-nyquist-hizlari">Örnek 2: Nyquist hızları</h2>
+<p>Aşağıdaki fonksiyonların Nyquist hızlarını bulunuz.</p>
+<p><strong>a)</strong> x(t) = 1 + cos(2000πt) + sin(10000πt)</p>
+<p>En yüksek frekans ω_M = 10000π, dolayısıyla ω_N = 2ω_M = <strong>20000π</strong>.</p>
+<p><strong>b)</strong> x(t) = sin(4000πt)/(πt)</p>
+<p>X(jω), −4000π ile 4000π arasında dikdörtgen bir fonksiyondur; ω_N = 2ω_M = <strong>8000π</strong>.</p>
+<p><strong>c)</strong> x(t) = (sin(4000πt)/(πt))²</p>
+<p>x(t) = x₁(t)·x₂(t), x₁ = x₂ = sin(4000πt)/(πt). Zamanda çarpım frekansta konvolüsyondur: X(jω) = (1/2π) X₁(jω) ∗ X₂(jω). Genişliği ±4000π olan iki dikdörtgenin konvolüsyonu ±8000π'ye kadar uzanır; böylece |ω| &gt; 8000π için X(jω) = 0 olur ve ω_N = 2ω_M = <strong>16000π</strong> bulunur.</p>
+<h2 id="ornek-3-carpim-sinyalinin-ornekleme-araligi">Örnek 3: Çarpım sinyalinin örnekleme aralığı</h2>
+<p><strong>Soru:</strong> x₁(t) ve x₂(t) çarpılarak w(t) elde ediliyor, sonra w(t) p(t) = Σ δ(t − nT) dürtü katarıyla örneklenerek w_p(t) oluşturuluyor. X₁(jω) = 0 (|ω| ≥ ω₁) ve X₂(jω) = 0 (|ω| ≥ ω₂) ise, w(t)'nin w_p(t)'den alçak geçiren süzgeç kullanılarak elde edilebilmesi için T'nin en yüksek örnekleme aralığını belirleyin.</p>
+<p><strong>Çözüm:</strong> Çarpımın spektrumu konvolüsyon olduğundan W(jω) = 0, |ω| &gt; ω₁ + ω₂. w(t)'nin örnekleme frekansı ω_s &gt; 2(ω₁ + ω₂) olmalıdır:</p>
+<p>2π/T &gt; 2(ω₁ + ω₂) ⇒ T &lt; π/(ω₁ + ω₂), yani <strong>T_max = π/(ω₁ + ω₂)</strong>.</p>
+<h2 id="ornek-4-ayrik-zamanda-ortusmesiz-ornekleme-araligi">Örnek 4: Ayrık zamanda örtüşmesiz örnekleme aralığı</h2>
+<p><strong>Soru:</strong> x[n]'in etkin örneklemesi için g[n] = Σₖ x[n] δ[n − kN] yaklaşımı kullanılmış olsun. 3π/7 ≤ |ω| ≤ π için X(e^{jω}) = 0 kabul edilirse, örtüşme olmayacağını varsayarak N örnekleme aralığının en büyük değerini belirleyiniz.</p>
+<p><strong>Çözüm:</strong> ω_M = 3π/7. Örtüşme olmaması için 2π/N ≥ 2ω_M = 6π/7 ⇒ N ≤ 7/3. N tam sayı olmak zorunda olduğundan <strong>N = 2</strong>.</p>
+<h2 id="ornek-5-h-2n-suzgecinin-frekans-yaniti">Örnek 5: h[2n] süzgecinin frekans yanıtı</h2>
+<p><strong>Soru:</strong> −π ≤ ω ≤ π frekans aralığında ideal ayrık zaman bant söndüren (band-stop) süzgeç</p>
+<p>H(e^{jω}) = 1 (|ω| ≤ π/4 ve |ω| ≥ 3π/4), 0 (diğer)</p>
+<p>ile tanımlı olsun. Birim dürtü yanıtı h[2n] olan süzgecin frekans yanıtını belirleyin.</p>
+<p><strong>Çözüm (nottaki):</strong> h_p[n] = h[2n] ⇒ H_p(e^{jω}) = H(e^{jω/2}). Çizimde H_p(e^{jω}), |ω| ≤ π/2 için 1, π/2 &lt; |ω| &lt; 3π/2 için 0 olan ve 2π ile tekrarlayan bir <strong>alçak geçiren</strong> süzgeç olarak gösterilmiş.</p>
+<p><em>Not: Ondalıklamanın tam ifadesi H_p(e^{jω}) = ½[H(e^{jω/2}) + H(e^{j(ω−2π)/2})]'dir; nottaki formülde ikinci (örtüşen) terim ve ½ çarpanı yazılmamış. Bu süzgeçte |ω| ≤ π/2 bandında iki terim de 1, π/2 &lt; |ω| ≤ π'de ikisi de 0 olduğu için sonuç değişmiyor: h[2n], kesim frekansı π/2 ve kazancı 1 olan ideal alçak geçiren süzgeçtir.</em></p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1192" height="1682" loading="lazy" decoding="async" alt="Örnek 3&#x27;ün spektrum çizimleri, Örnek 4 ve Örnek 5: bant söndüren H(e^jω) ve h[2n] süzgecinin Hp(e^jω) yanıtı"><figcaption>Örnekler, sayfa 2</figcaption></figure>
+<h2 id="ornek-6-sifir-ekleme-suzme-ve-seyreltme">Örnek 6: Sıfır ekleme, süzme ve seyreltme</h2>
+<p><strong>Soru:</strong> Girişi x[n], çıkışı y[n] olan ve şekilde verilen sistemi göz önünde bulundurun. Sıfır eklemeli sistemin, x[n]'in birbirini takip eden değerleri arasına sıfır genlikli iki nokta eklediğini düşünelim. Örnek seyreltmenin y[n] = w[5n] şeklinde tanımlandığını kabul edelim. Eğer x[n] = sin(ω₁n)/(πn) ise ω₁ değerleri için y[n] çıktılarını belirleyiniz.</p>
+<p>Sistem: x[n] → <strong>sıfır ekleme</strong> (her örnek arasına 2 sıfır) → x₁[n] → <strong>H(e^{jω})</strong> (kesim frekansı π/5, kazancı 1 olan ideal alçak geçiren süzgeç) → w[n] → <strong>seyreltme</strong> → y[n].</p>
+<p><strong>Çözüm (ω₁ ≤ 3π/5 için):</strong></p>
+<ul><li>X(e^{jω}) = 1 (|ω| ≤ ω₁), 0 (diğer).</li><li>2 sıfır eklenince 3 örnekleme zamanı araya girer: zamanda 3 kat genişleyen işaretin spektrumu frekansta 1/3 oranında daralır. X₁(e^{jω}) = X(e^{j3ω}): bantlar ±ω₁/3 ve ±2π/3 çevresinde tekrarlanır.</li><li>ω₁/3 ≤ π/5 olduğundan süzgeç ana bandı olduğu gibi geçirir, ±2π/3 çevresindeki kopyaları atar: W(e^{jω}) = 1 (|ω| ≤ ω₁/3), yani w[n] = sin(ω₁n/3)/(πn).</li><li>y[n] = w[5n]: spektrum 5 kat genişler ve 1/5 ile ölçeklenir. Y(e^{jω}) = 1/5 (|ω| ≤ 5ω₁/3).</li></ul>
+<p><strong>y[n] = sin(5ω₁n/3) / (5πn) = (1/5) · sin(5ω₁n/3)/(πn)</strong></p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1192" height="1682" loading="lazy" decoding="async" alt="Örnek 6: sistemin blok şeması ve X, X1, W, Y spektrumları"><figcaption>Örnekler, sayfa 3</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem308-ornekleme-ornek-cozumler.pdf" download>eem308-ornekleme-ornek-cozumler.pdf</a></p>
+              <p class="kucuk">PDF · 227 KB · 3 <span data-i18n="arch.pagesLower"></span> · 22.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem308-ornekleme-ornek-cozumler.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (227 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

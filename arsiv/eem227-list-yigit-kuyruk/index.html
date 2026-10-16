@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: STL list, stack ve queue Örnekleri (Hafta 7–8) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 7. ve 8. haftalarına ait C++ STL programları (Kasım 2007): list ve vector üzerinde iterator ile dolaşma, insert ve erase, stack ve queue fonksiyonlarının açıklamaları, sayıyı queue ile tersten yazdırma ve vector ile kendi kuyruk sınıfını yazma.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-list-yigit-kuyruk/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: STL list, stack ve queue Örnekleri (Hafta 7–8)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 7. ve 8. haftalarına ait C++ STL programları (Kasım 2007): list ve vector üzerinde iterator ile dolaşma, insert ve erase, stack ve queue fonksiyonlarının açıklamaları, sayıyı queue ile tersten yazdırma ve vector ile kendi kuyruk sınıfını yazma.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-list-yigit-kuyruk/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: STL list, stack ve queue Örnekleri (Hafta 7–8)", "description": "EEM227 Veri Yapıları dersinin 7. ve 8. haftalarına ait C++ STL programları (Kasım 2007): list ve vector üzerinde iterator ile dolaşma, insert ve erase, stack ve queue fonksiyonlarının açıklamaları, sayıyı queue ile tersten yazdırma ve vector ile kendi kuyruk sınıfını yazma.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-list-yigit-kuyruk/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-list-yigit-kuyruk.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-list-yigit-kuyruk/eem227-list-yigit-kuyruk.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: STL list, stack ve queue Örnekleri (Hafta 7–8)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>04.11.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#iterator-ile-list-ve-vector-yazdirma">Iterator ile list ve vector yazdırma</a></li><li><a href="#sablon-fonksiyon-ve-iterator-ile-liste-elemanlarini-degistirme">Şablon fonksiyon ve iterator ile liste elemanlarını değiştirme</a></li><li><a href="#insert-ve-erase-islemleri">insert ve erase işlemleri</a></li><li><a href="#stack-yigit">stack (yığıt)</a></li><li><a href="#queue-kuyruk">queue (kuyruk)</a></li><li><a href="#soru-sayiyi-queue-ile-tersten-yazdirma-hafta-8">Soru: sayıyı queue ile tersten yazdırma (Hafta 8)</a></li><li><a href="#soru-vector-ile-kendi-kuyruk-yapisini-olusturma-hafta-8">Soru: vector ile kendi kuyruk yapısını oluşturma (Hafta 8)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: STL list, stack ve queue Örnekleri (Hafta 7–8)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 04.11.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz döneminde 7. ve 8. hafta klasörlerindeki C++ programlarını bir araya getiriyor. Konu STL'in <strong>list</strong> kabı ve tekrarlayıcıları (iterator), <strong>stack</strong> (yığıt) ve <strong>queue</strong> (kuyruk) uyarlayıcı kapları. Programların çoğunda açıklamalar ve ekran çıktısı yorum olarak yazılmış; burada açıklamalar metne, çıktılar konsol penceresine alındı. Kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="iterator-ile-list-ve-vector-yazdirma">Iterator ile list ve vector yazdırma</h2>
+<p>Listelerde indis operatörü olmadığı için elemanlara iterator ile ulaşılır. Bu program bir int listesini baştan sona (while ve for döngüsüyle), bir double listesini sondan başa ve bir vektörü indis kullanmadan iterator ile yazdırıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// iterator kullanarak liste ve vector elemanlarını yazdırma yontemi...
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main()
+{
+int a[5]={1,3,5,7,9};
+double b[5]={2.2,4.4,6.6,8.8,10.10};
+
+int sizea=sizeof(a)/sizeof(int);
+int sizeb=sizeof(b)/sizeof(double);
+
+  list&lt;int&gt; listA(a,a+sizea);   // int listenin değerlerini belirledik.
+  list&lt;double&gt; listB(b,b+sizeb);// double listenin değerlerini belirledik.
+vector&lt;int&gt; Avector(a,a+sizea); // vectorün değerlerini belirledik.
+
+  list&lt;int&gt;::iterator iterA;    // int liste için iterator tanımladık
+  list&lt;double&gt;::iterator iterB; // double liste için iterator tanımladık
+vector&lt;int&gt;::iterator Vec_it;   // vectorler içinde iteratorler kullanılabilir !
+
+//-----------------------------------------------------
+// int Listeyi başından sonuna doğru listeyi yazdıralım
+// listelerde indis ile değere ulaşamadığımız için iterator kullanmak zorunludur
+   iterA = listA.begin();
+   cout &lt;&lt; "int Liste bastan sona dogru   : ";
+  while(iterA!=listA.end())
+   {
+    cout&lt;&lt;*iterA&lt;&lt;" ";
+    iterA++;
+   }
+
+cout&lt;&lt;"\nfor dongusu ile ayni listeyi tekrar yazdiralim \n";
+   for ( iterA = listA.begin(); iterA != listA.end(); iterA ++ ) {
+    cout &lt;&lt; *iterA &lt;&lt; "  ";
+  }
+//------------------------------------------------------
+
+   cout&lt;&lt;endl&lt;&lt;endl;
+
+//-----------------------------------------------------------------------------
+// Liste sonundan başına doğru listeyi eksiksiz yazdıralım...
+   iterB = listB.end();
+   iterB--;
+   cout &lt;&lt; "double Liste Sondan basa dogru: ";
+   // Listelerde tanımlı olan indis yöntemi olmadığı için begin ve end gibi
+   // fonksiyonlarla iteratörümüzü konumlandırıyoruz.
+   // end fonksiyonu listenin sonundaki elemandan bir sonraki konumu gösterir,
+   // dolayısıyla yazdırmaya başlamadan önce bir kez iteratoru geri çektik...
+   while(iterB!=listB.begin())
+   {
+    cout &lt;&lt; * iterB &lt;&lt; " ";
+    iterB --;
+   }
+   cout &lt;&lt; *iterB; // ilk elemanıda yazdırabilmek için koyduk...
+//-----------------------------------------------------------------------------
+
+cout&lt;&lt;endl&lt;&lt;endl;
+//--------------------------------------------------------------------
+// Bir vektörü indis operatörü olmadan iterator yardımı ile yazdıralım
+  Vec_it = Avector.begin();
+  cout &lt;&lt; "int Vector bastan sona dogru  : " ;
+while(Vec_it!=Avector.end())
+   {
+    cout &lt;&lt; *Vec_it &lt;&lt; " ";
+    Vec_it ++;
+   }
+//---------------------------------------------------------------------
+
+   cout&lt;&lt;endl&lt;&lt;endl;
+
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>int Liste bastan sona dogru   : 1 3 5 7 9
+for dongusu ile ayni listeyi tekrar yazdiralim
+1  3  5  7  9
+
+double Liste Sondan basa dogru: 10.1 8.8 6.6 4.4 2.2
+
+int Vector bastan sona dogru  : 1 3 5 7 9
+
+Press any key to continue . . .</code></pre>
+<h2 id="sablon-fonksiyon-ve-iterator-ile-liste-elemanlarini-degistirme">Şablon fonksiyon ve iterator ile liste elemanlarını değiştirme</h2>
+<p>Şablon fonksiyon kullanarak, iterator yardımı ile liste elemanlarının değerlerini değiştirmeye yönelik bir örnek: <code>degistir</code> her elemanı bir arttırıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;list&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+void yaz(T&amp; Ref)
+{
+    list&lt;int&gt;::iterator p;
+    for (p = Ref.begin ( ); p != Ref.end ( ); p++)
+	cout &lt;&lt;setw(5)&lt;&lt; *p ;
+	cout&lt;&lt;endl;
+}
+
+template &lt;typename T&gt;
+void degistir(T&amp; Ref)
+{
+    list&lt;int&gt;::iterator p;
+    for (p = Ref.begin ( ); p != Ref.end ( ); p++)
+	(*p)++;
+}
+
+int main () {
+
+    list&lt;int&gt;L;
+    L.push_back (9);
+    L.push_back (7);
+    L.push_back (5);
+    L.push_back (3);
+
+    cout&lt;&lt;"Orjinal Liste : ";
+    yaz(L);
+    degistir(L);
+    cout&lt;&lt;"Degismis Liste: ";
+    yaz(L);
+    system("pause");
+    return 0;
+}</code></pre>
+<pre class="kod"><code>Orjinal Liste :     9    7    5    3
+Degismis Liste:    10    8    6    4
+Press any key to continue . . .</code></pre>
+<h2 id="insert-ve-erase-islemleri">insert ve erase işlemleri</h2>
+<p>Bu program bir liste oluşturduktan sonra, bu listeye istenilen konuma eleman ekleme işlemi ve istenilen konumdaki elemanı silme işlemi yapar. İndis operatörü olmadığından dolayı liste elemanları üzerinde dolanırken iteratorlerden faydalanılır. Listenin fonksiyonları olan <code>insert()</code> ve <code>erase()</code> fonksiyonları parametre olarak işlem yapılacak liste üzerinde tanımlanmış bir iteratoru almalıdır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;list&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+void yaz(T&amp; Ref)
+{
+    list&lt;int&gt;::iterator p;
+    for (p = Ref.begin ( ); p != Ref.end ( ); p++)
+	cout &lt;&lt;setw(5)&lt;&lt; *p ;
+	cout&lt;&lt;endl;
+}
+
+int main () {
+
+    list&lt;int&gt;L;
+    L.push_back (10);
+    L.push_front (20);
+    L.push_back (40);
+    L.push_back (5);
+    L.push_front (15);
+    L.push_front (50);
+
+    cout&lt;&lt;"Orjinal Liste: "&lt;&lt;endl;
+    yaz(L);
+
+list&lt;int&gt;::iterator iter1,iter2;
+    iter1 = L.begin(); // iterator listenin ilk elemanını gösterir
+    iter1 ++; // iterator bir sonraki elemanı işaret etmektedir.
+
+    cout&lt;&lt;"3 eklenmeden once iteratorun gosterdigi deger : "&lt;&lt;*iter1&lt;&lt;endl;
+    L.insert(iter1,3); // insert işlemi iteratorun gösterdiği yerden önceki
+                       // konuma yapılır !!! Listenin boyu 1 artar
+                       // ekleme noktasının sağında kalan değerler 1 sağa shift
+                       // ettirilir..
+
+   cout&lt;&lt;"Eklendikten sonra iteratorun gosterdigi deger : "&lt;&lt;*iter1&lt;&lt;endl&lt;&lt;endl;
+                    // ekleme işlemi yapıldıktan sonra iteratörün gösterdiği
+                       // değer değişmez !!! iteratorde 1 kez sola kaymıştır.
+
+    cout&lt;&lt;"3 eklendikten sonra Listenin durumu: "&lt;&lt;endl;
+    yaz(L);
+
+    iter2 = L.end(); // listenin en son elemanından sonraki konuma konuşlanır.
+    iter2-- ; // iteratoru listenin en son elemanı olacak şekilde 1 kez çektik.
+    iter2-- ; // iteratoru sondan 1 önceki elemana çeker.
+    cout&lt;&lt;"Silmeden once iteratorun gosterdigi deger : "&lt;&lt;*iter2&lt;&lt;endl;
+
+    L.erase(iter2); // ve iteratorun gösterdiği eleman silinir.
+    cout&lt;&lt;"Sildikten sonra iteratorun gosterdigi deger : "&lt;&lt;*iter2&lt;&lt;endl&lt;&lt;endl;
+    // silme işleminden sonra itertorun gosterdiği değer listeden çıkartılır,
+    // fakat o iterator silinen elemanı hala göstermektedir...
+
+    cout&lt;&lt;"Silme isleminden sonra Listenin durumu: "&lt;&lt;endl;
+    yaz(L);
+
+    system("pause");
+    return 0;
+}</code></pre>
+<pre class="kod"><code>Orjinal Liste:
+   50   15   20   10   40    5
+3 eklenmeden once iteratorun gosterdigi deger : 15
+Eklendikten sonra iteratorun gosterdigi deger : 15
+
+3 eklendikten sonra Listenin durumu:
+   50    3   15   20   10   40    5
+Silmeden once iteratorun gosterdigi deger : 40
+Sildikten sonra iteratorun gosterdigi deger : 40
+
+Silme isleminden sonra Listenin durumu:
+   50    3   15   20   10    5
+Press any key to continue . . .</code></pre>
+<p><em>Not: <code>erase</code> ile silinen elemanı gösteren iterator geçersiz (invalid) olur; programdaki gibi <code>*iter2</code> ile okunması tanımsız davranıştır. Çıktıda 40 görünmesi o derleyicide belleğin henüz üzerine yazılmamasından kaynaklanıyor. Doğru kullanım <code>iter2 = L.erase(iter2);</code> ile silinen elemandan sonraki konumu almaktır.</em></p>
+<h2 id="stack-yigit">stack (yığıt)</h2>
+<h3 id="stack-fonksiyonlari">stack fonksiyonları</h3>
+<p>Dosyanın başındaki açıklamalar:</p>
+<ul><li><code>void pop();</code> Yığıtın en üstündeki elemanı yığıttan çıkartır. Ön koşul (precondition): stack boş olmamalı. Son durum (postcondition): stack boş olabilir (tek eleman varsa), stack'in en üstündeki eleman değişir, stack'teki eleman sayısı 1 azalır.</li><li><code>void push( const T &amp; item);</code> Parametre olarak verilen değeri stack'in en üstüne ekler. Son durum: stack'in tepesinde yeni bir eleman olur.</li><li><code>T&amp; top();</code> En üstteki elemana referans olacak değer döndürür. Ön koşul: stack boş olmamalıdır.</li><li><code>const T&amp; top() const;</code> Diğerinin const versiyonudur.</li><li><code>bool empty() const;</code> Stack boş ise true döndürür.</li><li><code>int size() const;</code> Stack'te bulunan eleman sayısını döndürür.</li></ul>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+
+using namespace std;
+
+int main()
+{
+
+stack&lt;int&gt; s;
+
+s.push(1);
+s.push(2);
+s.push(3);
+
+cout&lt;&lt; s.top()&lt;&lt;endl;
+s.pop();
+cout&lt;&lt; s.top()&lt;&lt;endl;
+s.pop();
+cout&lt;&lt; s.top()&lt;&lt;endl;
+s.pop();
+
+   if(s.empty()==1)
+     cout&lt;&lt;"Stack bos !!"&lt;&lt;endl;
+   else
+     cout&lt;&lt;"Dolu"&lt;&lt;endl;
+
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>3
+2
+1
+Stack bos !!</code></pre>
+<h3 id="while-dongusuyle-10-elemanli-yigit">while döngüsüyle 10 elemanlı yığıt</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Stack için STL Classı
+
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+
+#define boy 10
+
+using namespace std;
+
+int main()
+{
+stack&lt;int&gt; yigin;
+
+/*
+stack&lt;int&gt; sayi[10]; //ismi sayi olan 5 adet birbirinden farkli stack oluşturur
+
+Pointer array mantığı gibi düşün !!
+*/
+
+for(int i=0;i&lt;boy;i++)
+yigin.push(i);
+cout&lt;&lt;"Yigin boyu: "&lt;&lt;yigin.size()&lt;&lt;endl;
+
+while(!yigin.empty())
+{
+  cout&lt;&lt;yigin.top()&lt;&lt;" ";
+  yigin.pop();
+}
+
+cout&lt;&lt;endl;
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>Yigin boyu: 10
+9 8 7 6 5 4 3 2 1 0
+Press any key to continue . . .</code></pre>
+<p>Son giren ilk çıktığı için (LIFO) sayılar girildikleri sıranın tersinde yazdırılıyor.</p>
+<p><em>Not: Yorumdaki <code>stack&lt;int&gt; sayi[10];</code> tanımı 5 değil, 10 adet ayrı stack oluşturur.</em></p>
+<h2 id="queue-kuyruk">queue (kuyruk)</h2>
+<p>Kuyruk fonksiyonları (dosyadaki açıklamalardan):</p>
+<ul><li><code>bool empty() const;</code> Kuyruk boş ise true, değilse false.</li><li><code>T&amp; front();</code> Kuyruğun en önündeki elemana referans döndürür. Ön koşul: kuyruk boş olmamalı.</li><li><code>const T&amp; front() const;</code> front() fonksiyonunun sabit olanıdır.</li><li><code>void pop();</code> Kuyruğun en önünden eleman siler. Ön koşul: kuyruk boş olmamalı.</li><li><code>void push(const T &amp; item);</code> item isimli argümanı kuyruğun en sonuna ekler. Son durum: kuyruğun en sonunda yeni bir eleman oluşur.</li><li><code>int size() const;</code> Kuyruktaki eleman sayısını döndürür.</li></ul>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Queue için STL Classı
+
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+
+#define boy 10
+
+using namespace std;
+
+int main()
+{
+queue&lt;int&gt; kuyruk;
+
+for(int i=0;i&lt;boy;i++)
+kuyruk.push(i); // Önce 0 eklenir sonra arkasına 1 sonra arkasına 2 ...
+
+cout&lt;&lt;"kuyruk boyu: "&lt;&lt;kuyruk.size()&lt;&lt;endl;
+
+while(!kuyruk.empty())
+{
+  cout&lt;&lt;kuyruk.front()&lt;&lt;" ";
+  kuyruk.pop();
+}
+
+cout&lt;&lt;endl;
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>kuyruk boyu: 10
+0 1 2 3 4 5 6 7 8 9
+Press any key to continue . . .</code></pre>
+<p>Kuyrukta ilk giren ilk çıktığı için (FIFO) sayılar girildikleri sırayla yazdırılıyor.</p>
+<h2 id="soru-sayiyi-queue-ile-tersten-yazdirma-hafta-8">Soru: sayıyı queue ile tersten yazdırma (Hafta 8)</h2>
+<blockquote><p>Klavyeden girilen N basamaklı bir sayıyı tersten yazdırabilen bir programı queue veri yapısı kullanarak kodlayınız.</p></blockquote>
+<p>Sayının basamakları 10'a göre mod alınarak sondan başa doğru ayrılıp kuyruğa ekleniyor; kuyruk FIFO olduğu için basamaklar ayrıldıkları sırayla, yani sayının tersi olarak yazdırılıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;queue&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+int sayi,bas=0;
+queue&lt;int&gt; Bque;
+cout&lt;&lt;"Max. 10 basamakli bir sayi giriniz : ";
+cin&gt;&gt;sayi;
+do{
+          if(sayi!=0)
+          {
+           bas=sayi%10;
+           sayi/=10;
+           Bque.push(bas);
+          }
+          else
+           break;
+  }while((sayi!=0));
+
+cout&lt;&lt;"Tersten Sayi : ";
+while(!Bque.empty())
+{
+ cout&lt;&lt;Bque.front();
+ Bque.pop();
+}
+cout&lt;&lt;endl;
+system("pause");
+return 0;
+}</code></pre>
+<p>Örneğin 12345 girilirse kuyruğa sırasıyla 5, 4, 3, 2, 1 eklenir ve ekrana "Tersten Sayi : 54321" yazılır.</p>
+<p><em>Not: <code>int</code> en fazla 2147483647 değerini tutabildiği için 10 basamaklı sayıların bir kısmı (2147483647'den büyük olanlar) taşar; "Max. 10 basamaklı" sınırı için <code>long long</code> gerekir.</em></p>
+<h2 id="soru-vector-ile-kendi-kuyruk-yapisini-olusturma-hafta-8">Soru: vector ile kendi kuyruk yapısını oluşturma (Hafta 8)</h2>
+<blockquote><p>Vector veri yapısını kullanarak, kendi Queue yapınızı oluşturun.</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class MyQueue
+{
+      vector&lt;T&gt; data;
+   public:
+     void Add(T const &amp;);
+     void Remove();
+     void Print();
+};
+
+template &lt;typename T&gt;
+void MyQueue&lt;T&gt; ::Add(T const &amp;d)
+{
+     data.push_back(d);
+}
+
+template &lt;typename T&gt;
+void MyQueue&lt;T&gt;::Remove()
+{
+     data.erase(data.begin( ) + 0,data.begin( ) + 1); //en başdan 1.elemanı sil
+}
+
+template &lt;typename T&gt;
+void MyQueue&lt;T&gt;::Print()
+{
+     vector &lt;int&gt;::iterator It1;
+     It1 = data.begin();
+     for ( It1 = data.begin( ) ; It1 != data.end( ) ; It1++ )
+        cout &lt;&lt; " " &lt;&lt; *It1&lt;&lt;endl;
+}
+
+int main()
+{
+     MyQueue&lt;int&gt; q;
+     q.Add(1);
+     q.Add(24);
+     q.Add(32);
+     q.Add(11);
+     q.Add(72);
+     q.Add(3);
+
+     cout&lt;&lt;"Veriler (Silmeden Once)"&lt;&lt;endl;
+     q.Print();
+
+     q.Remove();
+     cout&lt;&lt;"Veriler (Sildikten Sonra)"&lt;&lt;endl;
+     q.Print();
+system("pause");
+return 0;
+}</code></pre>
+<p>Kodu izleyerek beklenen çıktı:</p>
+<pre class="kod"><code>Veriler (Silmeden Once)
+ 1
+ 24
+ 32
+ 11
+ 72
+ 3
+Veriler (Sildikten Sonra)
+ 24
+ 32
+ 11
+ 72
+ 3</code></pre>
+<p>Ekleme vektörün sonuna (<code>push_back</code>), silme baştan (<code>erase</code> ile ilk eleman) yapıldığı için yapı bir kuyruk gibi davranıyor.</p>
+<p><em>Not: <code>Print</code> fonksiyonunda iterator <code>vector&lt;T&gt;::iterator</code> yerine <code>vector&lt;int&gt;::iterator</code> olarak tanımlanmış; sınıf bu hâliyle yalnızca <code>MyQueue&lt;int&gt;</code> için derlenir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-list-yigit-kuyruk.zip" download>eem227-list-yigit-kuyruk.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 6 KB · 04.11.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-list-yigit-kuyruk.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (6 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

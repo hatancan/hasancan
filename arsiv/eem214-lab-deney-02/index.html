@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Laboratuvar Deney 2 – Diyot Karakteristikleri — hasancan.net</title>
+<meta name="description" content="EEM214 Elektronik I laboratuvarının ikinci deney föyü: pn eklem diyotun i-v karakteristiği, diyot denklemi, ideal, sabit gerilim düşümü ve parçalı doğrusal modeller, PSPICE ön çalışması, DMM ile diyot testi ve 1N4148 için ileri ve ters yön ölçümleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-deney-02/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Laboratuvar Deney 2 – Diyot Karakteristikleri">
+<meta property="og:description" content="EEM214 Elektronik I laboratuvarının ikinci deney föyü: pn eklem diyotun i-v karakteristiği, diyot denklemi, ideal, sabit gerilim düşümü ve parçalı doğrusal modeller, PSPICE ön çalışması, DMM ile diyot testi ve 1N4148 için ileri ve ters yön ölçümleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-deney-02/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Laboratuvar Deney 2 – Diyot Karakteristikleri", "description": "EEM214 Elektronik I laboratuvarının ikinci deney föyü: pn eklem diyotun i-v karakteristiği, diyot denklemi, ideal, sabit gerilim düşümü ve parçalı doğrusal modeller, PSPICE ön çalışması, DMM ile diyot testi ve 1N4148 için ileri ve ters yön ölçümleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem214-lab-deney-02/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "Deney2.pdf", "contentUrl": "https://hasancan.net/arsiv/eem214-lab-deney-02/Deney2.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Laboratuvar Deney 2 – Diyot Karakteristikleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM214</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>14.03.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#aim">Aim</a></li><li><a href="#theory">Theory</a></li><li><a href="#preliminary-work">Preliminary work</a></li><li><a href="#experimental-work">Experimental work</a></li><li><a href="#lab-instruments-and-components">Lab instruments and components</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Laboratuvar Deney 2 – Diyot Karakteristikleri</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 14.03.2012 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM214 Elektronik I</strong> laboratuvarının <em>Experiment 2: Diode Characteristics</em> deney föyüdür (Mart 2012). Föyde kısa bir teori bölümü, PSPICE benzetimi içeren bir ön çalışma ve 1N4148 diyotla yapılan ölçümler var. Föy İngilizce olduğu için metin de İngilizce aktarıldı; şekiller sayfa görselleriyle verildi. Föyün orijinal PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="aim">Aim</h2>
+<p>The aim of this experiment is to investigate the i-v characteristics of the diode.</p>
+<h2 id="theory">Theory</h2>
+<p>The diode is a device formed from a junction of n-type and p-type semiconductor material. The lead connected to the p-type material is called the anode and the lead connected to the n-type material is the cathode. In general, the cathode of a diode is marked by a solid line on the diode. The pn junction diode is the electronic equivalent of a mechanical check valve: it permits current flow in one direction in a circuit, but prevents movement of current in the opposite direction.</p>
+<p>The current i_D in the diode is determined by the voltage v_D applied across its terminals (Fig. 1a). The relationship between them is called the i-v characteristics of the diode (Fig. 1b), and it is not linear. As the voltage increases above zero, the current remains nearly zero until v_D exceeds approximately 0.5 to 0.7 V. At this point the diode current increases rapidly and the voltage across the diode becomes almost independent of current. The voltage required to bring the diode into significant conduction is called the turn-on voltage. As the voltage decreases below zero (reverse voltage increases), the diode enters the reverse bias region. The current there is not actually zero but reaches a limiting, very small value I_s, the saturation current. Further increase in the reverse voltage can result in damage to the diode.</p>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="pn eklem diyota uygulanan gerilim (a) ve ileri/ters kutuplama bölgeleriyle i-v karakteristiği (b)"><figcaption>Figure 1: pn junction diode with applied voltage v_D and its i-v characteristics</figcaption></figure>
+<h3 id="mathematical-model">Mathematical model</h3>
+<p>i_D = I_s·(e^(v_D/ηV_T) − 1)</p>
+<ul><li>I_s is the reverse saturation current; its value is constant for a specific diode and usually very small, since virtually no current flows in the reverse direction.</li><li>η (n) is a constant whose value ranges from 1 to 2 depending on the material of the diode.</li><li>V_T is the thermal equivalent voltage, V_T = kT/q, where k is Boltzmann's constant (1.38×10⁻²³ J/K), T is the temperature in kelvins and q is the electronic charge (1.6×10⁻¹⁹ C). At room temperature V_T is usually taken as 26 mV.</li><li>v_D is the applied voltage between the terminals and i_D is the diode current.</li></ul>
+<p>There are two operation regions, forward and reverse bias; the zero bias condition v_D = 0 V is the boundary between them.</p>
+<ul><li>For v_D &lt; 0 the diode is reverse biased. Only a very small reverse leakage current flows, small enough that we usually think of the diode as non-conducting (off): i_D = I_s·(e^(v_D/ηV_T) − 1) ≅ −I_s.</li><li>For v_D &gt; 0 the diode is forward biased and a large current can be present: i_D = I_s·(e^(v_D/ηV_T) − 1) ≅ I_s·e^(v_D/ηV_T).</li></ul>
+<h3 id="diode-equivalent-models">Diode equivalent models</h3>
+<p>Diodes can be modeled as an ideal diode (Fig. 2), with the constant voltage drop model (an ideal diode in series with V_on, Fig. 3) or with the piecewise linear model (Fig. 4), where</p>
+<ul><li>r_f = average resistance of the diode when conduction is established (bulk resistance), r_f = ΔV_d1/ΔI_d1</li><li>r_r = average resistance of the diode in non-conduction, r_r = ΔV_d2/ΔI_d2</li></ul>
+<p>Figure 5 shows how the piecewise linear equivalent circuit is defined by approximating the characteristic curve with straight-line segments.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="İdeal diyot, sabit gerilim düşümü ve parçalı doğrusal diyot modellerinin i-v karakteristikleri; r_f ve r_r&#x27;nin karakteristik eğriden bulunması"><figcaption>Figures 2–5: diode equivalent models</figcaption></figure>
+<h2 id="preliminary-work">Preliminary work</h2>
+<ol><li>Review sections 3.2, 3.3 and 3.4 of the textbook.</li><li>a) The reverse saturation current I_s of a pn junction diode is 10⁻¹⁵ A at room temperature; use n = 1. Calculate and plot the i-v characteristics using the mathematical model (calculate i_D for v_D = −0.4, −0.2, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85 V). b) Simulate the circuit in Fig. 6a using PSPICE. Generate a graph of diode voltage versus diode current, where V_in ranges between −10 V and 3 V, R = 220 Ω and the diode is D1N4148 (use DC Sweep analysis).</li><li>Determine the piecewise linear model parameters r_f, r_r and V_0 of this diode using the i-v plot from 2a.</li><li>a) For the circuit in Fig. 6b, draw the input and output waveforms (explain briefly how you obtain them), assuming the constant voltage drop model, v_in(t) = 10·sin(200πt) and R_L = 1 kΩ. What is the circuit used for? b) Simulate the circuit in PSPICE with a 20 V peak-to-peak, 100 Hz sinusoidal input and obtain v_in and v_out. Check your drawing against the simulation.</li><li>Read the experimental work.</li></ol>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Şekil 6a: seri R ve D1N4148 ile diyot karakteristiği ölçüm devresi; Şekil 6b: D1N4148 ve R_L ile yarım dalga devresi"><figcaption>Figure 6: circuits for the preliminary and experimental work</figcaption></figure>
+<h2 id="experimental-work">Experimental work</h2>
+<ol><li>A quick way of determining whether a diode is defective is to use the DMM's diode check function, in which an internal voltage source of the DMM provides the current for the reading. When the diode is forward biased (Fig. 7a), a good silicon diode produces a forward voltage drop reading between 0.500 and 0.900. When it is reverse biased (Fig. 7b), a good diode makes "000.0" flicker. Check whether the diode is good or defective and record the displayed values.</li><li>Set up the circuit in Fig. 6a with R = 220 Ω to obtain the forward i-v characteristics. Increase the supply voltage until the diode voltage is 0.35 V; record the diode voltage and current. Continue in 0.05 V steps up to 0.90 V (0.35, 0.40, …, 0.90 V), measuring and recording the current each time.</li><li>In the circuit of Fig. 6a, change the series resistor to 1 MΩ to obtain the reverse i-v characteristics. At very low current it is often better to measure the voltage across a known resistor than to attempt a direct current measurement. Measure the resistor voltage and calculate the diode current and voltage for source voltages of 0, −1, −2, −3, −4, −5, −10, −15, −20 and −25 V (all values negative).</li><li>Plot the i-v characteristics of the diode on millimetric paper and clearly indicate the regions (Excel may be used).</li><li>Set up the circuit in Fig. 6b with a 100 Hz, 5 V peak-to-peak sinusoidal input and R_L = 1 kΩ. Observe and plot v_in and v_out on the oscilloscope and explain the differences between them.</li></ol>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="DMM&#x27;nin diyot test işleviyle ileri (a) ve ters (b) yönde diyot kontrolü; kırmızı ve siyah prob bağlantıları"><figcaption>Figure 7: diode check with a DMM</figcaption></figure>
+<h2 id="lab-instruments-and-components">Lab instruments and components</h2>
+<ul><li><strong>Instruments:</strong> breadboard, oscilloscope, signal generator, multimeter, DC power supply</li><li><strong>Components:</strong> 220 Ω, 1N4148, 1 MΩ, 1 kΩ</li></ul>
+<p>The last page of the sheet is an "Experiment Results" form with the diode check readings, the forward (0.35–0.90 V) and reverse (0 to −25 V) measurement tables, and fields for the student's name, number and signature.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Deney2.pdf" download>Deney2.pdf</a></p>
+              <p class="kucuk">PDF · 304 KB · 8 <span data-i18n="arch.pagesLower"></span> · 14.03.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Deney2.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (304 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

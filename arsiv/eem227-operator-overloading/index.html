@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Operatörlere Yeni İşlevler Yüklenmesi (Operator Overloading) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 3. hafta C++ ders notu (Öğr. Gör. Oğul Göçmen, Ekim 2007): kopyalama kurucusu, ++ önek/sonek, +, =, [ ], () ve &lt;&lt; &gt;&gt; operatörlerine işlev yükleme; 15 örnek program ve ekran çıktıları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-operator-overloading/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Operatörlere Yeni İşlevler Yüklenmesi (Operator Overloading)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 3. hafta C++ ders notu (Öğr. Gör. Oğul Göçmen, Ekim 2007): kopyalama kurucusu, ++ önek/sonek, +, =, [ ], () ve &lt;&lt; &gt;&gt; operatörlerine işlev yükleme; 15 örnek program ve ekran çıktıları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-operator-overloading/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Operatörlere Yeni İşlevler Yüklenmesi (Operator Overloading)", "description": "EEM227 Veri Yapıları dersinin 3. hafta C++ ders notu (Öğr. Gör. Oğul Göçmen, Ekim 2007): kopyalama kurucusu, ++ önek/sonek, +, =, [ ], () ve << >> operatörlerine işlev yükleme; 15 örnek program ve ekran çıktıları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-operator-overloading/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "Hafta3.pdf", "contentUrl": "https://hasancan.net/arsiv/eem227-operator-overloading/Hafta3.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Operatörlere Yeni İşlevler Yüklenmesi (Operator Overloading)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#operator-yukleme-nedir">Operatör yükleme nedir?</a></li><li><a href="#kopyalama-kurucusu-copy-constructor">Kopyalama kurucusu (copy constructor)</a></li><li><a href="#bir-operandli-unary-operatorlere-islev-yukleme">Bir operandlı (unary) operatörlere işlev yükleme</a></li><li><a href="#operatorune-yeni-bir-islev-yuklenmesi">+ operatörüne yeni bir işlev yüklenmesi</a></li><li><a href="#atama-operatorune-yeni-bir-islev-yuklenmesi">Atama operatörüne (=) yeni bir işlev yüklenmesi</a></li><li><a href="#i-ndis-operatorune-yeni-bir-islev-yuklenmesi">İndis operatörüne ([ ]) yeni bir işlev yüklenmesi</a></li><li><a href="#fonksiyon-cagirma-operatorune-yeni-bir-islev-yuklenmesi">Fonksiyon çağırma operatörüne ( () ) yeni bir işlev yüklenmesi</a></li><li><a href="#stream-operatorlerini-ve-asiri-yuklemek">Stream operatörlerini (&lt;&lt; ve &gt;&gt;) aşırı yüklemek</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Operatörlere Yeni İşlevler Yüklenmesi (Operator Overloading)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 05.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz dönemi 3. hafta ders notudur. Hazırlayan <strong>Öğr. Gör. Oğul Göçmen</strong>, tarih 5 Ekim 2007. O yıl ders C++ ile işleniyordu (arşivdeki 2014 tarihli EEM227 yazıları ise Java dönemine ait). Konu, C++'ta <strong>operatörlere yeni işlevler yüklenmesi</strong> (operator overloading). Notlardaki açıklamalar ve örnek programlar aşağıda metin olarak verildi. Ders notunun orijinal PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="operator-yukleme-nedir">Operatör yükleme nedir?</h2>
+<p>C++'da hazır olarak var olan operatörlere (+, -, *, /, !, &lt;&lt;, ++ vs.) ilişkin fonksiyonlar yazarak bu operatörlerin sizin belirlediğiniz işlemleri yapmasını sağlayabilirsiniz. Operatör fonksiyonları bir sınıfın üyesi de olabilirler. Böylece o sınıftan yaratılan nesneler üzerinde işlemler yapan operatörler tanımlanmış olur. C++'da operatör kullanımı fonksiyon çağrılarına karşı düşmektedir. Operatörlere yeni işlevler yükleyerek yapılabilecek her şey normal fonksiyonlar ile de yapılabilir. Fonksiyon isimleri yerine operatörleri kullanmak programın yazılmasını ve okunmasını kolaylaştırabilir. Bu nedenle bir operatöre işlev yüklemek, eğer program daha kolay okunur ve anlaşılır olacaksa tercih edilmelidir.</p>
+<h3 id="sinirlamalar">Sınırlamalar</h3>
+<ul><li>C++'da olmayan operatörlere işlev yüklenemez. Örneğin üs alma işlemi için <code>^</code> simgesine ya da <code>**</code> simgesine bir işlev yüklenemez.</li><li>C++'da var olan operatörlerden bazılarına da yeni işlev yüklenemez. Bunlar: nokta operatörü <code>.</code>, yaşam alanı belirleme operatörü <code>::</code>, koşul operatörü <code>? :</code> ve boyut operatörü <code>sizeof</code>.</li><li>C++ operatörleri birli ve ikili olmak üzere iki gruba ayrılabilir. Birli operatörler tek operand alırlar (örneğin <code>-a</code>, <code>a++</code>, <code>!a</code>); ikili operatörler ise iki operand alırlar (<code>a+b</code>, <code>a/b</code> gibi).</li><li>Operatörlere işlev yüklerken operand sayısı değiştirilemez.</li><li>Operatörlerin öncelikleri değiştirilemez.</li><li>Derleyicinin hazır veri tipleri üzerinde işlem yapan operatörlere yeni işlev yüklenemez. Örneğin iki tamsayıyı toplayan + operatörü değiştirilemez.</li><li>Oluşturulan operatörlerin en az bir operandının tipi bir sınıf olmalıdır.</li></ul>
+<h3 id="operator-fonksiyonlar-uye-mi-friend-mi">Operatör fonksiyonlar: üye mi, friend mi?</h3>
+<ul><li><code>( )</code>, <code>[ ]</code>, <code>-&gt;</code> ya da atama operatörleri aşırı yükleniyorsa mutlaka üye fonksiyon kullanılmalı.</li><li>Üye fonksiyon kullanılacaksa, operatörün sol tarafı mutlaka kendi sınıfından bir nesne olmalıdır. Eğer sol taraf kendi sınıfından bir nesne değilse, operatör fonksiyonu kesinlikle üye olamaz.</li><li>Üye fonksiyon olmayacaksa ve public ya da private üyelere erişilmesi gerekiyorsa mutlaka friend fonksiyon olmalıdır; operandlarına ulaşma hakkı olmalıdır.</li></ul>
+<h2 id="kopyalama-kurucusu-copy-constructor">Kopyalama kurucusu (copy constructor)</h2>
+<p>Bu işlemlere başlamadan önce kopyalama kurucusunu tanıyalım. Kopyalama kurucusu başka bir çeşit kurucu fonksiyondur. Tek farkı, kendinden önce yaratılmış nesnenin değerleri ile yeni nesneyi sınıftan oluşturmamızı sağlamasıdır; bir nevi klonlama işlemidir. Bir sınıf içerisinde tanımlanan fonksiyonların aşırı yüklenmesi durumundaki kural burada da geçerlidir: nesneyi oluşturma biçiminize göre derleyici hangi kurucunun çalışacağını otomatik olarak kendisi belirler.</p>
+<h3 id="ornek-1">Örnek 1</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+// Bu örnek içerisinde copy constructor kullanımı gösterilmiştir...
+using namespace std;
+class deneme
+      {
+      private:
+              int x,y;
+      public:
+              deneme(deneme &amp;); //kopyalama kurucusu (copy constructor)
+              deneme(); // parametresiz kurucu fonksiyon (constructor)
+              deneme(int ,int); // parametreli kurucu fonksiyon
+             ~deneme();// yıkıcı(destructor)
+      };
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+   cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+   x=alias.x;
+   y=alias.y;
+   cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+   cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+      cout&lt;&lt;"d diye bir nesne yaratacagim ve c de onun kopyasi olacak\n";
+      deneme d,c(d); // c nesnesi d nin değerleri ile doğuyor...
+      cout&lt;&lt;"simdi e yi c nesnesini kullanarak kopyaliyoruz...\n";
+      deneme e(c); // e nesnesi kopyalanmış c den doğdu.
+      cout&lt;&lt;"alt kisimda f nesnesini 3 ve 4 ilk degerleri ile yaratiyoruz..\n";
+      deneme f(3,4); // parametre alarak yaratılan f nesnesi
+      cout&lt;&lt;"g nesnesi ise f den kopyalaniyor, klonlaniyor...\n";
+      deneme g(f); // ve görüldüğü gibi bunun kopyası olan g...
+// dikkat ! nesnenin yaşam alanı biterse yıkıcı fonksiyon çalışacak ve
+// nesneyi hafızadan silecektir, kopyalama kurucusunu kullanırken buna
+// dikkat etmeyi unutmayınız...
+      system("pause");
+      return 0;
+      }</code></pre>
+<p>Programın çıktısı:</p>
+<pre class="kod"><code>d diye bir nesne yaratacagim ve c de onun kopyasi olacak
+Kurucu fonksiyon calisti..
+x=5
+y=10
+Kopyalama kurucusu calisti
+x=5
+y=10
+simdi e yi c nesnesini kullanarak kopyaliyoruz...
+Kopyalama kurucusu calisti
+x=5
+y=10
+alt kisimda f nesnesini 3 ve 4 ilk degerleri ile yaratiyoruz..
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=4
+g nesnesi ise f den kopyalaniyor, klonlaniyor...
+Kopyalama kurucusu calisti
+x=3
+y=4
+Press any key to continue . . .</code></pre>
+<h2 id="bir-operandli-unary-operatorlere-islev-yukleme">Bir operandlı (unary) operatörlere işlev yükleme</h2>
+<p>Birli operatörlere örnekler: arttırma (<code>++</code>), azaltma (<code>--</code>), eksileme (<code>-5</code>), mantıksal tümleme (<code>!</code>) vs. Bu operatörlere ilişkin fonksiyonlar bir sınıfın üyesi olarak yazıldıklarında hiç parametre almazlar, çünkü üzerinde çağrıldıkları nesne üzerinde işlem yaparlar. Bu operatörler normalde nesnenin solunda yer alırlar: <code>!n</code>, <code>-n</code>, <code>++n</code> gibi.</p>
+<h3 id="ornek-2-deger-dondurmeyen-onek">Örnek 2: değer döndürmeyen önek ++</h3>
+<p>Bu program önek (prefix) olarak değeri arttırır, fakat fonksiyon void olduğu için geriye değer döndüremez.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// countpp1.cpp
+// ++ operatörü ile değer arttırma. Ör: ++sayac
+#include &lt;iostream&gt;
+using namespace std;
+////////////////////////////////////////////////////////////////
+class Counter
+   {
+   private:
+      unsigned int count;              //count
+   public:
+      Counter() : count(0)             //constructor
+         { }
+      unsigned int get_count()         //return count
+         { return count; }
+      void operator ++ ()              //arttır ön ek (prefix)
+         {
+         ++count;
+         }
+   };
+////////////////////////////////////////////////////////////////
+int main()
+   {
+   Counter c1, c2;                     //define and initialize
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();             //göster
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                //increment c1
+   ++c2;                                //increment c2
+   ++c2;                                //increment c2
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count(); //tekrar göster
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   system("pause");
+   return 0;
+   }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=1
+c2=2</code></pre>
+<p>Bu örneğin bir dezavantajı <code>c2=++c1</code> şeklinde bir atama işlemi yapılamamasıdır. Şimdi bunu nasıl çözeceğimize bakalım.</p>
+<h3 id="ornek-3-ile-arttirma-ve-degeri-geri-dondurme">Örnek 3: ++ ile arttırma ve değeri geri döndürme</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+using namespace std;
+class Counter
+   {
+   private:
+      unsigned int count;               //count
+   public:
+      Counter() : count(0)              //constructor
+           { }
+        unsigned int get_count() //return count
+           { return count; }
+        Counter operator ++ ()           //increment count
+           {
+           ++count;                      //increment count
+           Counter temp;                 //make a temporary Counter
+           temp.count = count;           //give it same value as this obj
+           return temp;                  //return the copy
+           }
+   };
+int main()
+   {
+   Counter c1, c2;                                 //c1=0, c2=0
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();              //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                           //c1=1
+   c2 = ++c1;                                      //c1=2, c2=2 Artık bu tarz işlem OK!
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display again
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   return 0;
+   }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2</code></pre>
+<h3 id="ornek-4-isimsiz-gecici-nesne-dondurme">Örnek 4: isimsiz geçici nesne döndürme</h3>
+<p>Bu işlemi kökten çözmenin yöntemi: <code>count</code> değişkenini ++ operatörü ile arttırma, değer aktarma ve isimsiz geçici nesneler kullanma. Burada ek olarak bir de değer alan kurucu kondu.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// countpp3.cpp
+#include &lt;iostream&gt;
+using namespace std;
+////////////////////////////////////////////////////////////////
+class Counter
+   {
+   private:
+      unsigned int count;        //count değişkeni
+   public:
+      Counter() : count(0)    //constructor değer almayan {count=0;} ile aynı
+         { }
+      Counter(int c)            //constructor, bir değer alan
+         { count=c; }
+      int get_count()            //return count
+         { return count; }
+      Counter operator ++ ()     //count değerini arttır
+         {
+         ++count;                // count değerini arttır ve
+         return Counter(count); // geçici bir tampon obje döndür
+         }                       // ve objeyi tek değer alan kurucu ile kur
+   };
+////////////////////////////////////////////////////////////////
+int main()
+   {
+   Counter c1, c2;                                    //c1=0, c2=0
+    cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();                //göster
+    cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+    ++c1;                                             //c1=1
+    c2 = ++c1;                                        //c1=2, c2=2
+    cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //tekrar göster
+    cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+    return 0;
+    }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2</code></pre>
+<h3 id="operatoru-icin-onek-ve-sonek-i-i">++ operatörü için önek ve sonek (++i, i++)</h3>
+<p>Aşağıdaki sınıfta ++ operatörü hem önek hem sonek olarak yüklenmiş ve değeri döndürüyor; <code>c2=++c1;</code> veya <code>c2=c1++;</code> gibi eşitleme işlemleri yapılabilir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+using namespace std;
+class Counter
+   {
+   private:
+      unsigned int count;         //count
+   public:
+      Counter() : count(0)        //constructor no args
+         { }
+      Counter(int c) : count(c)   //constructor, one arg
+         { }
+      unsigned int get_count() const //return count
+         { return count; }
+        Counter operator ++ ()      //count değerini arttır (prefix)
+           {
+           return Counter(++count); //isimsiz geçici obje döndür
+           }                        //ve count değerini initialize et
+        Counter operator ++ (int)   //(postfix)
+           {                        //isimsiz geçici obje döndür
+           return Counter(count++); //bu count değeri ile objeyi initialize et
+           }                        //count değerini arttır
+   };
+int main()
+   {
+   Counter c1, c2;                                    //c1=0, c2=0
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();                 //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                              //c1=1
+   c2 = ++c1;                                         //c1=2, c2=2 (prefix)
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   c2 = c1++;                            //c1=3, c2=2 (postfix)
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display again
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   return 0;    }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2
+c1=3
+c2=2</code></pre>
+<h3 id="ornek-5-karmasik-sayinin-reel-kismini-arttiran">Örnek 5: karmaşık sayının reel kısmını arttıran ++</h3>
+<p>Aşağıdaki örnekte ++ operatörüne, karmaşık sayıların reel kısmını 0.1 arttırma işlevi yüklenmiştir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>void ComplexT::operator++()
+{
+  re=re+0.1;
+}
+int main()
+{
+ComplexT z(1.2, 0.5);
+++z; // operator++ fonksiyonu canlanir
+z.goster();
+return 0;
+}</code></pre>
+<h3 id="ornek-6-nesnenin-referansini-dondurme">Örnek 6: nesnenin referansını döndürme</h3>
+<p>Eğer bu operatörün bir atama deyiminde kullanılması isteniyorsa, operatöre ilişkin fonksiyon nesnenin referansını geri döndürmelidir (Örnek 4'teki kullanıma ek olarak böyle de yapılabilir).</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>  //  ++ operatörüne yeni bir işlev yüklenmesi
+  // Operatör karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+  #include &lt;iostream&gt;
+  using namespace std;
+  // Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+  class ComplexT{
+      double re,im;            // reel ve sanal kısımlar
+   public:
+      ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+          {};                  // Kurucu (gövdesi boş)
+       const ComplexT&amp; operator++( );      // ++ Operatörü
+       void goster() const;
+  };
+  // ++ operatörü
+  // Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+  const ComplexT &amp; ComplexT::operator++()
+  {
+     re=re+0.1;                 // reel kısım arttırılıyor
+     return *this;              // Nesnenin referansı döndürülüyor
+  }
+  // Nesne ile ilgili bilgileri ekrana çıkaran metot
+  void ComplexT::goster() const
+  {
+    cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+  }
+  //---- Ana Program -----
+  int main()
+  {
+    ComplexT z1(1.2,0.5),z2;
+    z1.goster();
+    z2= ++z1;
+    z1.goster();
+    z2.goster();
+    return 0;
+  }</code></pre>
+<pre class="kod"><code>re=1.2 im=0.5
+re=1.3 im=0.5
+re=1.3 im=0.5</code></pre>
+<p>Bilindiği gibi ++ ve -- operatörleri operandların hem soluna hem de sağına yazılabilirler. Bir atama deyimi ile birlikte kullanıldıklarında operatörlerin yazılma şekli önemli olur. Buna göre önceden arttırma (azaltma) ya da sonradan arttırma (azaltma) anlamına gelirler:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>z2= ++ z1; // önceden arttırma
+z2 = z1++; // sonradan arttırma
+z2= -- z1; // önceden azaltma
+z2 = z1--; // sonradan azaltma</code></pre>
+<p>Operatör fonksiyonu <code>operator++()</code> şeklinde parametresiz olarak yazılırsa, önceden arttırma operatörüne bir işlev yüklenmiş olur. Sonradan arttırma operatörüne bir işlev yüklemek için fonksiyon bir parametreli olarak yazılır: <code>operator++(int)</code>. Buradaki parametrenin amacı sadece iki fonksiyonu birbirinden ayırmaktır. Fonksiyon çağrılırken herhangi bir parametre gönderilmez.</p>
+<h3 id="ornek-7-karmasik-sayilarda-onek-ve-sonek">Örnek 7: karmaşık sayılarda önek ve sonek ++</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// ++ operatörünün hem önceden hem de sonradan arttırma için kullanılması
+// Operatör karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+      double re,im;     // reel ve sanal kısımlar
+ public:
+      ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+      {};               // Kurucu (gövdesi boş)
+      const ComplexT&amp; operator++();       // önceden arttırma ++ operatörü
+      ComplexT operator++(int);           // sonradan arttırma ++ operatörü
+      void goster() const;
+};
+// Önceden arttırma ++ operatörü
+// Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+const ComplexT &amp; ComplexT::operator++()
+{
+      re=re+0.1;                    // reel kısım arttırılıyor
+      return *this;                 // Nesnenin referansı döndürülüyor
+}
+// Sonradan arttırma ++ operatörü
+// Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+ComplexT ComplexT::operator++(int)     // sonradan arttırma operatörü
+{
+      ComplexT gecici;
+   gecici = *this;      // nesnenin orijinal değeri
+   re=re+0.1;           // reel kısım arttırılıyor
+   return gecici;       // eski (artmamış) değer döndürülüyor
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+      cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+}
+//---- Ana Program -----
+int main()
+{
+      ComplexT z1(1.2,0.5),z2;
+      z2= ++z1;          // operator ++() çalışır
+      z1.goster();
+      z2.goster();
+      z2= z1++;          // operator ++(int) çalışır
+      z1.goster();
+      z2.goster();
+      return 0;
+}</code></pre>
+<pre class="kod"><code>re=1.3 im=0.5
+re=1.3 im=0.5
+re=1.4 im=0.5
+re=1.3 im=0.5</code></pre>
+<p><em>Not: Ders notundaki ekran çıktısında en başta bir de "re=1.2 im=0.5" satırı var; ancak bu programda ilk <code>goster()</code> çağrısı <code>++z1</code>'den sonra geldiği için o satır basılmaz (Örnek 6'nın çıktısından kalmış görünüyor).</em></p>
+<h2 id="operatorune-yeni-bir-islev-yuklenmesi">+ operatörüne yeni bir işlev yüklenmesi</h2>
+<h3 id="ornek-8-iki-nesneyi-ile-toplamak">Örnek 8: iki nesneyi + ile toplamak</h3>
+<p>Bu örnekte basit olarak iki tamsayı değerli nesne olacak ve biz bunları sanki tamsayı topluyormuş gibi + operatörü ile toplatacağız. Kopyalama kurucusu da kullanıldı.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// + operatörüne yeni bir işlev yüklenmesi. Kopyalama kurucusu da kullanıldı…
+#include &lt;iostream&gt;
+using namespace std;
+class deneme
+      {
+      private:
+              int x,y;
+      public:
+              deneme(deneme &amp;); //kopyalama kurucusu (copy constructor)
+              deneme(); // parametresiz kurucu fonksiyon (constructor)
+              deneme(int ,int); // parametreli kurucu fonksiyon
+             ~deneme();// yıkıcı(destructor)
+              deneme&amp; deneme::operator+(deneme&amp;);// + operatorü için overloading
+      };
+// bu sayede nesneleri sanki sayıymış gibi toplayabileceğiz...
+deneme&amp; deneme::operator+(deneme&amp; s)
+{
+  cout&lt;&lt;"+ operatoru calisti"&lt;&lt;endl;
+  int xx,yy;
+  xx=x+s.x;
+  yy=y+s.y;
+  cout&lt;&lt;" xx= "&lt;&lt;xx&lt;&lt;" yy= "&lt;&lt;yy&lt;&lt;endl;
+}
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+    cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+    x=alias.x;
+    y=alias.y;
+    cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+    cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+    deneme d,c(3,2),e; // c nesnesi d nin değerleri ile doğuyor...
+     e=d+c;
+     // aslinda alt kisim ile ust kisim ayni isi yapiyor...
+     e=d.operator+(c);
+     deneme x; // yeni bir nesne oluşturalım
+     // eğer sınıf içerisinde pointer yoksa; eşittir işlemi için
+     // ek olarak operator overload etmenize gerek yoktur...
+     d=c; // gördüğünüz gibi bu işlem nesneleri birbirine sorunsuzca eşitliyor.
+     x=d+c;
+     system("pause");
+     return 0;     }</code></pre>
+<pre class="kod"><code>Kurucu fonksiyon calisti..
+x=5
+y=10
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=2
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+ xx= 8 yy= 12
++ operatoru calisti
+ xx= 8 yy= 12
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+ xx= 6 yy= 4</code></pre>
+<p><em>Not: Bu örnekte <code>operator+</code> fonksiyonu <code>deneme&amp;</code> döndüreceğini bildirdiği hâlde hiçbir <code>return</code> deyimi içermiyor; toplamı yalnızca ekrana yazıyor. Sonucun <code>e=d+c</code> ile bir nesneye atanması tanımsız davranıştır. Ayrıca sınıf içindeki <code>deneme&amp; deneme::operator+(deneme&amp;);</code> bildirimindeki <code>deneme::</code> niteleyicisi sınıf gövdesinde fazladır; güncel derleyiciler bunu hata sayar.</em></p>
+<h3 id="ornek-9-karmasik-sayilari-ile-toplamak">Örnek 9: karmaşık sayıları + ile toplamak</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>//     + operatörüne yeni bir işlev yüklenmesi
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+       double re,im;                                  // reel ve sanal kısımlar
+ public:
+       ComplexT(double re_in=0,double im_in=1);      // Kurucu
+       ComplexT operator+(const ComplexT &amp; ) const; // + operatörünün fonksiyonu
+       void goster() const;
+};
+//Parametresiz çağırılabilen kurucu. Çünkü ilk değerleri var.
+ComplexT::ComplexT(double re_in,double im_in)
+{
+       re=re_in;
+       im=im_in;
+       cout&lt;&lt; endl &lt;&lt; "Kurucu calisti. ";
+}
+// + operatörü
+ComplexT ComplexT::operator+(const ComplexT &amp;c) const
+{
+       double yeni_re, yeni_im;
+       yeni_re=re+c.re;
+       yeni_im=im+c.im;
+       return ComplexT(yeni_re,yeni_im);
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+       cout &lt;&lt; endl &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im;
+}
+int main()
+{
+       ComplexT z1(1,1),z2(2,2),z3;
+       z3=z1+z2;                             // z3=z1.operator+(z2);  yapmakla aynıdır
+       z3.goster();
+       return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti.
+Kurucu calisti.
+Kurucu calisti.
+Kurucu calisti.
+re=3 im=3</code></pre>
+<p>Bu örnekte ComplexT sınıfına + operatörü için bir metot eklenmiştir. Böylece + operatörünün karmaşık sayıları toplaması sağlanmıştır.</p>
+<h2 id="atama-operatorune-yeni-bir-islev-yuklenmesi">Atama operatörüne (=) yeni bir işlev yüklenmesi</h2>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>void ComplexT::operator=(const ComplexT&amp; z) // Gereksiz
+{
+re = z.re;
+im = z.im;
+}</code></pre>
+<p>Bu fonksiyon yazılmasaydı derleyicinin yerleştireceği fonksiyon da aynı işi yapardı. Eğer sınıfta bir atama fonksiyonu varsa, artık derleyici tüm atama işleri için bu fonksiyonu kullanır.</p>
+<h3 id="ornek-10">Örnek 10</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>//     Atama operatörüne yeni bir işlev yüklenmesi
+// Karmaşık sayılar sınıfı ComplexT'ye = operatörü için bir metot eklenmiştir.
+// Bu sınıf için bu metodun yazılması gereksizdir.
+// Bu fonksiyon sınıftan kaldırılsa da ana program doğru olarak çalışır.
+// Bu program sadece atama fonksiyonunun yazılımını göstermek için hazırlanmıştır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+       double re,im; // reel ve sanal kısımlar
+ public:
+       ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+       {};    // Kurucu (gövdesi boş)
+       void operator=(const ComplexT &amp; ); // = Operatörü
+       void goster() const;
+};
+// = operatörü
+void ComplexT::operator=(const ComplexT &amp;c)
+{
+       re = c.re;                              // Atamalar yapılıyor
+       im = c.im;
+       cout &lt;&lt; "Atama fonksiyonu calisti" &lt;&lt; endl; // Çalıştığını ekranda görmek için
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+       cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+}
+int main()
+{
+       ComplexT z1(1,2),z2;
+       z2.goster(); // Atamadan önceki içerik
+       z2=z1;
+       z2.goster(); // Atamadan sonraki içerik
+       return 0;
+}</code></pre>
+<pre class="kod"><code>re=0 im=1
+Atama fonksiyonu calisti
+re=1 im=2</code></pre>
+<p>Atama işlemi programlarda çok sık kullanıldığından C++ derleyicisi her sınıfa atama operatörü için bir fonksiyon yerleştirir. Derleyicinin yerleştirdiği fonksiyon bir nesnenin verilerini var olan başka bir nesnenin veri alanlarına bire bir kopyalar. Eğer bu bire bir atama işlemi o sınıf için yeterli ise programcının atama operatörü için bir fonksiyon yazmasına gerek kalmaz. İçinde işaretçi olmayan sınıflar için genellikle derleyicinin sağladığı fonksiyon yeterlidir. Örneğin karmaşık sayılar için yukarıda gösterilen atama fonksiyonu gereksizdir.</p>
+<p>Ancak her sınıf için derleyicinin sağladığı atama fonksiyonu yeterli olmayabilir. Özellikle içinde işaretçi olan sınıflarda programcının atama operatörüne ilişkin fonksiyonu yazması gerekebilir. Kopyalama kurucusundakine benzer bir problem burada da vardır. Aşağıda örnek String sınıfı için atama fonksiyonu yazılmıştır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String{     // Örnek (karakter katarı) String sınıfı
+   int boy;       // Katarın boyu
+   char *icerik; // Katarın içeriği
+public:
+   String();      // Parametresiz kurucu
+   String(const char *);            // Kurucu
+   String(const String &amp;);          // Kopyalama kurucusu
+   void operator=(const String &amp;); // Atama operatörü
+   void goster();                  // Katarları ekrana çıkaran üye fonksiyon
+ ~String();                        // Yok edici fonksiyon
+};
+// Atama Operatörü
+void String::operator=(const String &amp;gelen_nesne)
+{
+cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+boy = gelen_nesne.boy;
+delete [] icerik;               // Eski içerik belleğe iade ediliyor
+icerik = new char[boy + 1];     // +1 null karakteri icin
+strcpy(icerik, gelen_nesne.icerik);
+}</code></pre>
+<p>Bu atama fonksiyonu geriye bir değer döndürmemektedir (void). Bu nedenle bu operatörü kaskad olarak yazmak (<code>a = b = c</code> gibi) mümkün değildir. Operatörleri kaskad bağlayabilmek için operatöre ilişkin fonksiyon, üzerinde işlem yapılan nesnenin referansını geri göndermelidir. Eğer operatör fonksiyonlarının geri dönüş değeri tipleri void olarak yazılırsa bu operatörler peş peşe bağlanamaz.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Atama Operatörü
+const String&amp; String::operator=(const String &amp;gelen_nesne)
+{
+cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+boy = gelen_nesne.boy;
+delete [] icerik; // Eski içerik belleğe iade ediliyor
+icerik = new char[boy + 1]; // +1 null karakteri icin
+strcpy(icerik, gelen_nesne.icerik);
+return *this; // Kendi adresini geri gönderiyor
+}</code></pre>
+<p>Atama operatörü ile kopyalama kurucusu benzer işler yapmakla beraber farklı zamanlarda canlanırlar. Kopyalama kurucusu yeni bir nesne yaratılırken canlanır ve eski bir nesnedeki bilgileri yeni nesneye kopyalar. Atama operatörü ise var olan bir nesneye başka bir nesnedeki değerler atanırken canlanır.</p>
+<h3 id="ornek-11-string-sinifi-icin-atama-operatoru">Örnek 11: String sınıfı için atama operatörü</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Atama operatörünün "=" Katar dizileri (String) için yüklenmesi
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;                       // string fonksiyonları için
+using namespace std;
+class String{                  // Örnek (karakter katarı) String sınıfı
+   int boy;              // Katarın boyu
+   char *icerik;         // Katarın içeriği
+ public:
+   String();                    // Parametresiz kurucu
+   String(const char *);        // Kurucu
+   String(const String &amp;);     // Kopyalama kurucusu
+   const String&amp; operator=(const String &amp;);      // Atama operatörü
+   void goster();    // Katarları ekrana çıkaran üye fonksiyon
+   ~String();        // Yok edici fonksiyon
+};
+// Parametresiz Kurucu Fonksiyon
+// Sadece NULL içeren bir boş katar oluşturur
+String::String()
+{
+  cout&lt;&lt; "Parametresiz Kurucu calisti" &lt;&lt; endl;
+  boy = 0;                     // boş katarın boyu sıfır
+  icerik = new char[1];        // icerik için yer ayrıldı, null icin
+  strcpy(icerik, "");          // boş katar
+}
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+boy = strlen(gelen_veri); // gelen katarın boyu hesaplandı
+icerik = new char[boy +1]; // icerik için yer ayrıldı, +1 null icin
+strcpy(icerik, gelen_veri);//gelenveri icerik'in gosterdigi yere kopyalanıyor
+}
+// Kopyalama kurucusu
+String::String(const String &amp;gelen_nesne)
+{
+  cout&lt;&lt; "Kopyalama Kurucusu calisti" &lt;&lt; endl;
+  boy = gelen_nesne.boy;
+  icerik = new char[boy + 1];         // +1 null karakteri icin
+  strcpy(icerik, gelen_nesne.icerik);
+}
+// Atama Operatörü
+const String&amp; String::operator=(const String &amp;gelen_nesne)
+{
+  cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+  boy = gelen_nesne.boy;
+  delete [] icerik;      // Eski içerik belleğe iade ediliyor
+  icerik = new char[boy + 1];         // +1 null karakteri icin
+  strcpy(icerik, gelen_nesne.icerik);
+  return *this;          // Kendi adresini geri gönderiyor
+}
+void String::goster()
+{
+  cout&lt;&lt; icerik &lt;&lt; ", " &lt;&lt; boy &lt;&lt; endl;      // Katar ve boyu ekrana yazılıyor
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+       cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+       delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()               // Ana fonksiyon
+{
+   String s1("Katar 1");
+      String s2 = s1;          // Kopyalama kurucusu çalışır
+      s2.goster();
+      String s3 , s4;
+      s3 = s4= s2;             // Atama operatörü 2 defa çalışır
+      s3.goster();
+      s4.goster();
+   return 0;
+ }</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Kopyalama Kurucusu calisti
+Katar 1, 7
+Parametresiz Kurucu calisti
+Parametresiz Kurucu calisti
+Atama operatoru calisti
+Atama operatoru calisti
+Katar 1, 7
+Katar 1, 7</code></pre>
+<h2 id="i-ndis-operatorune-yeni-bir-islev-yuklenmesi">İndis operatörüne ([ ]) yeni bir işlev yüklenmesi</h2>
+<p>Tüm operatör fonksiyonları için aynı kurallar geçerli olduğundan hepsini ayrı ayrı anlatmaya gerek yoktur; ancak ilginç ve yararlı olabilecek bazı operatörler açıklanmıştır. Bunlardan biri de indis (subscript) operatörüdür. Bu operatöre ilişkin fonksiyon iki farklı yapıda olabilir:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class C{
+dönüş tipi &amp; operator [] (parametre tipi);
+ya da
+const dönüş tipi &amp; operator [] (parametre tipi) const; };</code></pre>
+<p>Birinci yazım şekli, eğer bu operatör ile nesnenin verileri değiştirilecekse kullanılır; bu durumda operatör bir atama operatörünün solunda yer alabilir. İkinci yazım şeklinde ise fonksiyon sabit olarak tanımlanmıştır; bu durumda operatör ile nesnenin verileri sadece okunabilir. c bir nesne olmak üzere <code>c[i]</code> ifadesi <code>c.operator[](i)</code> anlamına gelir.</p>
+<h3 id="ornek-12">Örnek 12</h3>
+<p>İndis operatörüne String sınıfında kullanılmak üzere bir işlev yüklenecektir. Bu operatör bir katardaki i. karaktere erişilmesini sağlayacaktır. Eğer i sıfırdan küçük verilirse katardaki ilk elemana, eğer i katarın boyundan büyük verilirse katardaki son elemana erişilmiş olacaktır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// İndis operatörünün "[]" Katar dizileri (String) için yüklenmesi
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;                        // string fonksiyonları için
+using namespace std;
+class String{           // Örnek (karakter katarı) String sınıfı
+        int boy;       // Katarın boyu
+        char *icerik; // Katarın içeriği
+ public:
+        String(const char *);      // Kurucu
+        char &amp; operator[](int i); // İndis operatörü
+        void goster();            // Katarları ekrana çıkaran üye fonksiyon
+        ~String();               // Yok edici fonksiyon
+};
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+        cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+        boy = strlen(gelen_veri); // gelen katarın boyu hesaplandı
+        icerik = new char[boy +1];// icerik için yer ayrıldı, +1 null icin
+        strcpy(icerik, gelen_veri);// gelen veri icerik'in gosterdigi yere kopyalanıyor
+}
+// İndis Operatörü
+char&amp; String::operator[](int i)
+{
+       cout &lt;&lt; "Indis operatoru calisti" &lt;&lt; endl;
+       if(i &lt; 0)
+              return icerik[0];          // İlk eleman gönderiliyor
+       if(i &gt;= boy)
+              return icerik[boy-1];      // Son eleman gönderiliyor
+       return icerik[i];                // i. eleman gönderiliyor
+}
+void String::goster()
+{
+        cout&lt;&lt; icerik &lt;&lt; ", " &lt;&lt; boy &lt;&lt; endl;              // Katar ve boyu ekrana yazılıyor
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+        cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+        delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()                 // Ana fonksiyon
+{
+   String s1("Katar 1");
+       s1[1] = 'X';               // Katarın 2. karakteri 'X' oldu
+       s1.goster();
+       cout &lt;&lt; "Katarin 3 numarali elemani = " &lt;&lt; s1[3] &lt;&lt; endl;
+   return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Indis operatoru calisti
+KXtar 1, 7
+Indis operatoru calisti
+Katarin 3 numarali elemani = a</code></pre>
+<h2 id="fonksiyon-cagirma-operatorune-yeni-bir-islev-yuklenmesi">Fonksiyon çağırma operatörüne ( () ) yeni bir işlev yüklenmesi</h2>
+<p>Bu operatörü diğerlerinden ayıran özellik, operand sayısının programcı tarafından belirlenebilmesidir. Bu operatöre ilişkin fonksiyon aşağıdaki yapıda olur:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class C
+{
+   dönüş tipi operator () (parametre tipleri);
+};</code></pre>
+<p>c bir nesne olmak üzere <code>c(i,j,k)</code> ifadesi <code>c.operator()(i,j,k)</code> anlamına gelir.</p>
+<h3 id="ornek-13-parametresiz-operatoru">Örnek 13: parametresiz () operatörü</h3>
+<p>Aşağıdaki örnekte fonksiyon çağırma operatörüne, karmaşık sayıları ekrana çıkarma işlevi yüklenmiştir. Bu örnekte operatör parametre almamaktadır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// () operatörüne yeni bir işlev yüklenmesi
+// Bu örnekte () operatörü karmaşık sayıları ekrana çıkarmak
+// için kullanılmaktadır. Operatörün fonksiyonu parametre almamaktadır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+      double re,im;           // reel ve sanal kısımlar
+public:
+ ComplexT(double re_in=0,double im_in=0):re(re_in),im(im_in)
+                  {};         // Kurucu, gövdesi boş
+ ComplexT operator+(const ComplexT &amp; ) const;    // + operatörünün fonksiyonu
+ void operator()() const;     // () operatörünün fonksiyonu
+};
+// + operatörü
+ComplexT ComplexT::operator+(const ComplexT &amp;c) const
+{
+      double yeni_re, yeni_im;
+      yeni_re=re+c.re;
+      yeni_im=im+c.im;
+      return ComplexT(yeni_re,yeni_im);
+}
+// () operatörü
+// Parametresiz fonksiyon çağırma operatörü, karmaşık sayıları ekrana yazar
+void ComplexT::operator()() const
+{
+      cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl ;
+}
+int main()
+{
+      ComplexT z1(1,1),z2(2,2),z3;
+      z1();
+      z2();
+      z3=z1+z2;
+      z3();
+      return 0;
+}</code></pre>
+<pre class="kod"><code>re=1 im=1
+re=2 im=2
+re=3 im=3</code></pre>
+<h3 id="ornek-14-iki-parametreli-operatoru">Örnek 14: iki parametreli () operatörü</h3>
+<p>Bu örnekte fonksiyon çağırma operatörünün parametreli olarak kullanımı gösterilmiştir. Örnekteki operatör, bir karakter katarının (String) istenen bir miktarını istenen bir bellek bölgesine kopyalamaktadır; 2 adet parametre almaktadır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Fonksiyon çağırma operatörünün "()" Katar dizileri (String) için yüklenmesi
+// Operatör, katarın bir kısmını istenen bir bellek bölgesine kopyalar
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;               // string fonksiyonları için
+using namespace std;
+class String{               // Örnek (karakter katarı) String sınıfı
+         int boy;           // Katarın boyu
+         char *icerik;      // Katarın içeriği
+  public:
+         String();                // Parametresiz kurucu
+         String(const char *);    // Kurucu
+         void operator()(char *, int) const;    // () operatörü
+         ~String();              // Yok edici fonksiyon
+};
+// Parametresiz Kurucu Fonksiyon
+// Sadece NULL içeren bir boş katar oluşturur
+String::String()
+{
+       cout&lt;&lt; "Parametresiz Kurucu calisti" &lt;&lt; endl;
+       boy = 0;                        // boş katarın boyu sıfır
+       icerik = new char[1];           // icerik için yer ayrıldı, null icin
+       strcpy(icerik, "");             // boş katar
+}
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+  cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+  boy = strlen(gelen_veri);        // gelen katarın boyu hesaplandı
+  icerik = new char[boy +1];       // icerik için yer ayrıldı, +1 null icin
+  strcpy(icerik, gelen_veri);      // gelen veri icerik'in gosterdigi yere kopyalanıyor
+}
+// Fonksiyon çağırma operatörü(): Bir katarın içeriğinin belli bir kısmını
+// verilen bir bellek bölgesine kopyalar
+// Parametre olarak hedef belleğin adresini ve kopyalanacak karakter sayısını alır
+void String::operator()(char * hedef, int sayi) const
+{
+       if (sayi&gt;boy) sayi=boy;                 // sayi katarın boyundan uzunsa
+       for (int k=0; k&lt; sayi; k++) hedef[k]= icerik[k];
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+        cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+        delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()                 // Ana fonksiyon
+{
+  String s1("Ornek Program");
+  char *c = new char[8];          // Hedef bellek bölgesi
+  s1(c,7);                        // 7 karakter kopyalandı
+  c[7]='\0';                      // Katar sonunu belirtmek için (null)
+  cout &lt;&lt; c &lt;&lt; endl;              // Kopyalanan karakterler ekrana yazılıyor
+  delete c;                       // Alınan bellek bölgesi iade ediliyor
+  return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Ornek P</code></pre>
+<p><em>Not: <code>new char[8]</code> ile alınan dizi <code>delete[] c;</code> ile geri verilmelidir; notta <code>delete c;</code> yazıyor.</em></p>
+<h2 id="stream-operatorlerini-ve-asiri-yuklemek">Stream operatörlerini (&lt;&lt; ve &gt;&gt;) aşırı yüklemek</h2>
+<figure class="yazi-gorsel"><img src="s-20.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Sınıf yapısının sağladıklarını gösteren şema ve PhoneNumber sınıfı örneğinin kod görüntüsü"><figcaption>Ders notunun 20. sayfası: sınıf yapısının sağladıkları ve Örnek 16'nın başı</figcaption></figure>
+<p>Ders notunda bu bölümden önce bir şema yer alıyor: gerçek dünyadaki nesnelerin bilgisayarda bir sınıfla (modelle) temsil edilmesi. Sınıf yapısının sağladıkları:</p>
+<ul><li>Modelleme kolaylığı</li><li>Kolay okunur ve anlaşılır programlar</li><li>Özel verilerin korunması</li><li>Hataların yöresel kalması</li><li>Grup çalışmalarında kolaylık</li><li>Yeni veri tipleri yaratma yeteneği</li></ul>
+<p>&lt;&lt; ve &gt;&gt; operatörlerini aşırı yükleyerek kullanıcı tanımlı tiplerle giriş çıkış işlemi yapabiliriz.</p>
+<ul><li>Sol tarafın türü <code>ostream &amp;</code> ve <code>istream &amp;</code> olacak.</li><li>Sol taraf kendi sınıfından olmadığından, üye fonksiyon olarak tanımlayamayız.</li><li>Private veri üyelerine ulaşmak için friend fonksiyon olmalılar.</li><li>Eğer friend fonksiyon olarak tanımlanmamışlarsa, public'te tanımlı set ve get fonksiyonları üzerinden private veriye ulaşırlar. Performans gereksinimi nedeniyle bu fonksiyonlar inline yapılır.</li></ul>
+<h3 id="ornek-16-phonenumber-sinifi">Örnek 16: PhoneNumber sınıfı</h3>
+<p>Örnek 16, notta kod görüntüsü olarak verilmiş: telefon numarasını alan kodu, santral ve hat numarası olarak tutan bir <code>PhoneNumber</code> sınıfı. <code>operator&lt;&lt;</code> ve <code>operator&gt;&gt;</code> friend fonksiyon olarak bildiriliyor; <code>operator&gt;&gt;</code> girişteki parantez, boşluk ve tireyi <code>ignore()</code> ile atlayıp parçaları <code>setw</code> ile okuyor. Nottaki açıklama kutuları: "&lt;&lt; ve &gt;&gt; operatörlerinin fonksiyon prototipine dikkat edin: friend fonksiyon olmaları gereklidir." ve "Fonksiyon çağırılırken <code>cin &gt;&gt; phone;</code> şeklinde, tanımlanırken <code>operator&gt;&gt;(cin, phone);</code> şeklinde olduğuna dikkat edin! cin fonksiyon içinde input, phone ise num adı ile fonksiyon tanımında yeralıyor."</p>
+<figure class="yazi-gorsel"><img src="s-21.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="PhoneNumber örneğinin operator&lt;&lt; ve operator&gt;&gt; tanımları, main fonksiyonu ve ekran çıktısı"><figcaption>Ders notunun 21. sayfası: Örnek 16'nın devamı ve Örnek 15'in başı</figcaption></figure>
+<pre class="kod"><code>Enter phone number in the form (123) 456-7890:
+(800) 555-1212
+The phone number entered was: (800) 555-1212</code></pre>
+<h3 id="ornek-15-ve-ile-nesneye-veri-okuma-ve-yazdirma">Örnek 15: &lt;&lt; ve &gt;&gt; ile nesneye veri okuma ve yazdırma</h3>
+<p>&lt;&lt; ve &gt;&gt; operatörlerini kullanarak nesneye veri okuyabiliyoruz ve nesneyi bir değişkenmiş gibi ekrana yazdırabiliyoruz. Bu örnek, toplama için kullanılan örneğe (Örnek 8) ek olarak yapılmıştır; +, &lt;&lt;, &gt;&gt; ve kopyalama kurucusu için tüm işlemler sergilenmektedir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+// &gt;&gt; ve &lt;&lt; operatorleri için overload işlemini diğer örnekle birleştirelim
+// bu örnekte +,&lt;&lt;,&gt;&gt; ve kopyalama kurucusu için tüm işlemler sergilenmektedir.
+using namespace std;
+class deneme
+      {
+      private:
+               int x,y;
+      public:
+               deneme(deneme &amp;); //kopyalama kurucusu (copy constructor)
+               deneme(); // parametresiz kurucu fonksiyon (constructor)
+               deneme(int ,int); // parametreli kurucu fonksiyon
+              ~deneme();// yıkıcı(destructor)
+               deneme&amp; deneme::operator+(deneme&amp;);// + operatorü için overloading
+/* Not!
+  ------
+  &lt;&lt; ve &gt;&gt; operatorlerini overload etmek için friend function olarak
+  tanımlamalısın...
+  Nesnenin iç yapısına göre input ve output işlemlerinde alınacak veya ekranda
+  gösterilecek değerler programcıya kalmıştır...
+    */
+              friend ostream&amp; operator&lt;&lt;(ostream&amp; yaz, deneme&amp; );
+              friend istream&amp; operator&gt;&gt;(istream&amp; oku, deneme&amp;);
+         };
+istream&amp; operator&gt;&gt;(istream&amp; oku, deneme&amp; nesne)
+{
+oku&gt;&gt;nesne.x&gt;&gt;nesne.y;
+return oku;
+}
+ostream&amp; operator&lt;&lt;(ostream&amp; yaz,deneme&amp; nesne)
+{
+   yaz&lt;&lt;nesne.x&lt;&lt;':'&lt;&lt;nesne.y&lt;&lt;endl;
+   return yaz;
+}
+// bu sayede nesneleri sanki sayıymış gibi toplayabileceğiz...
+deneme&amp; deneme::operator+(deneme&amp; s)
+{
+  cout&lt;&lt;"+ operatoru calisti"&lt;&lt;endl;
+  int xx,yy;
+  xx=x+s.x;
+  yy=y+s.y;
+cout&lt;&lt;endl;
+  cout&lt;&lt;" xx= "&lt;&lt;xx&lt;&lt;"   yy= "&lt;&lt;yy&lt;&lt;endl;
+}
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+   cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+   x=alias.x;
+   y=alias.y;
+   cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+   cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+    deneme d,c(3,2),e; // c nesnesi d nin değerleri ile doğuyor...
+    e=d+c;
+    // aslinda alt kisim ile ust kisim ayni isi yapiyor...
+    e=d.operator+(c);
+    deneme x; // yeni bir nesne oluşturalım
+    // eğer sınıf içerisinde pointer yoksa; eşittir işlemi için
+    // ek olarak operator overload etmenize gerek yoktur...
+    d=c; // gördüğünüz gibi bu işlem nesneleri birbirine sorunsuzca eşitliyor.
+    x=d+c;
+    cout&lt;&lt;c;
+    cin&gt;&gt;c;
+    cout&lt;&lt;c;
+    system("pause");
+    return 0;
+    }</code></pre>
+<p>Ekran çıktısı (111 ve 6789 değerleri klavyeden girilmiş; ekrana yazdırırken araya <code>:</code> konmuş):</p>
+<pre class="kod"><code>Kurucu fonksiyon calisti..
+x=5
+y=10
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=2
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+
+ xx= 8   yy= 12
++ operatoru calisti
+
+ xx= 8   yy= 12
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+
+ xx= 6   yy= 4
+3:2
+111
+6789
+111:6789
+Press any key to continue . . .</code></pre>
+<p><em>Not: Örnek 8'deki gibi burada da <code>operator+</code> bir değer döndürmüyor (<code>return</code> yok); yalnızca toplamı ekrana yazıyor.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Hafta3.pdf" download>Hafta3.pdf</a></p>
+              <p class="kucuk">PDF · 546 KB · 23 <span data-i18n="arch.pagesLower"></span> · 05.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Hafta3.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (546 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

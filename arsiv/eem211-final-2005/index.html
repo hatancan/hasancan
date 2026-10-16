@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Yarıyıl Sonu Sınavı Yanıtları (11 Ocak 2005) — hasancan.net</title>
+<meta name="description" content="EEM211 Sayısal Mantık Tasarımı dersinin 11 Ocak 2005 yarıyıl sonu (final) sınavı ve yanıtları: kanonik biçimler, MUX ile XOR, Hamming denetim bitleri, Gray-ikili çevirici, durum indirgeme, JK flip-flop&#x27;lu 0-2-4-6-5-3-1 sayacı, 101/010 dizi algılayıcı, PLA, ROM ile tam toplayıcı ve kaydırma yazmaçları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-final-2005/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Yarıyıl Sonu Sınavı Yanıtları (11 Ocak 2005)">
+<meta property="og:description" content="EEM211 Sayısal Mantık Tasarımı dersinin 11 Ocak 2005 yarıyıl sonu (final) sınavı ve yanıtları: kanonik biçimler, MUX ile XOR, Hamming denetim bitleri, Gray-ikili çevirici, durum indirgeme, JK flip-flop&#x27;lu 0-2-4-6-5-3-1 sayacı, 101/010 dizi algılayıcı, PLA, ROM ile tam toplayıcı ve kaydırma yazmaçları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-final-2005/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Yarıyıl Sonu Sınavı Yanıtları (11 Ocak 2005)", "description": "EEM211 Sayısal Mantık Tasarımı dersinin 11 Ocak 2005 yarıyıl sonu (final) sınavı ve yanıtları: kanonik biçimler, MUX ile XOR, Hamming denetim bitleri, Gray-ikili çevirici, durum indirgeme, JK flip-flop'lu 0-2-4-6-5-3-1 sayacı, 101/010 dizi algılayıcı, PLA, ROM ile tam toplayıcı ve kaydırma yazmaçları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-final-2005/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "Orneksorular.doc", "contentUrl": "https://hasancan.net/arsiv/eem211-final-2005/Orneksorular.doc"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Yarıyıl Sonu Sınavı Yanıtları (11 Ocak 2005)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM211</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.01.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>Word (.doc)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#soru-1-asagidaki-sorulari-yanitlayiniz-her-sik-5-puan-toplam-25">Soru 1: Aşağıdaki soruları yanıtlayınız (her şık 5 puan, toplam 25)</a></li><li><a href="#soru-2-asagidaki-sorulari-yanitlayiniz-toplam-37-puan">Soru 2: Aşağıdaki soruları yanıtlayınız (toplam 37 puan)</a></li><li><a href="#soru-3-pla-18-puan">Soru 3: PLA (18 puan)</a></li><li><a href="#soru-4-toplam-20-puan">Soru 4 (toplam 20 puan)</a></li><li><a href="#puanlar">Puanlar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Yarıyıl Sonu Sınavı Yanıtları (11 Ocak 2005)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 11.01.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 211 Sayısal Mantık Tasarımı</strong> dersinin <strong>11 Ocak 2005</strong> tarihli yarıyıl sonu (final) sınavının sorularını ve yanıtlarını içeriyor. Sınav Türkçe, süresi 120 dakika. Yanıtlar belgede her sorunun altında çerçeve içinde verilmiş; durum çizgesi ve PLA gibi bazı çizimler el yazısı. Orijinal Word dosyası yazının sonunda indirilebilir.</p>
+<h2 id="soru-1-asagidaki-sorulari-yanitlayiniz-her-sik-5-puan-toplam-25">Soru 1: Aşağıdaki soruları yanıtlayınız (her şık 5 puan, toplam 25)</h2>
+<h3 id="a-kanonik-bicimler">a) Kanonik biçimler</h3>
+<blockquote><p>F(x,y,z) = x'(y'+z) olduğuna göre, F'(x,y,z) ifadesinin özbiçimsel toplamların-çarpımı (canonical product-of-sums) ve özbiçimsel çarpımların-toplamı (canonical sum-of-products) ifadelerini ∏ ve Σ standart kalıplarında yazınız.</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">#</th><th scope="col">x y z</th><th scope="col">F = x'(y' + z)</th><th scope="col">F'</th></tr></thead><tbody><tr><th scope="row">0</th><td>000</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>001</td><td>1</td><td>0</td></tr><tr><th scope="row">2</th><td>010</td><td>0</td><td>1</td></tr><tr><th scope="row">3</th><td>011</td><td>1</td><td>0</td></tr><tr><th scope="row">4</th><td>100</td><td>0</td><td>1</td></tr><tr><th scope="row">5</th><td>101</td><td>0</td><td>1</td></tr><tr><th scope="row">6</th><td>110</td><td>0</td><td>1</td></tr><tr><th scope="row">7</th><td>111</td><td>0</td><td>1</td></tr></tbody></table></div>
+<ul><li>F'(x, y, z) = <strong>Σ(2, 4, 5, 6, 7)</strong></li><li>F'(x, y, z) = <strong>∏(0, 1, 3)</strong></li></ul>
+<h3 id="b-mux-ile-xor">b) MUX ile XOR</h3>
+<blockquote><p>XOR işlevini, X, Y değişkenleri için i) 2x1 MUX ile, ii) 4x1 MUX ile oluşturunuz. (girdilerde 0-1 kullanabilirsiniz)</p></blockquote>
+<ul><li>2x1 MUX: I0 = Y, I1 = Y', seçme girişi S = X.</li><li>4x1 MUX: I0 = 0, I1 = 1, I2 = 1, I3 = 0; seçme girişleri S1 = X, S0 = Y.</li></ul>
+<figure class="yazi-gorsel"><img src="xor-mux.jpg" width="709" height="313" loading="lazy" decoding="async" alt="XOR işlevinin 2x1 ve 4x1 çoklayıcıyla gerçekleştirilmesi"><figcaption>f = X ⊕ Y: 2x1 MUX (solda) ve 4x1 MUX (sağda)</figcaption></figure>
+<h3 id="c-hamming-denetim-bitleri">c) Hamming denetim bitleri</h3>
+<blockquote><p>Hamming kodda, 6-bit veri sözcüğüne kaç adet denetim biti eklemek gerekir? Bu denetim bitleri hangi pozisyonlara yerleşir?</p></blockquote>
+<blockquote><p>2ᵏ ≥ m + k + 1 olacağına göre, 2⁴ = 16 &gt; 6 + 4 + 1 koşulu, 4 denetim biti ile sağlanır. Bu bitler, 2'nin kuvvetleri olan pozisyonlara, yani 1, 2, 4 ve 8. pozisyonlara yerleşir.</p></blockquote>
+<h3 id="d-i-saret-genlikten-2-ye-tumleyene">d) İşaret-genlikten 2'ye tümleyene</h3>
+<blockquote><p>İşaret-genlik (signed magnitude) yapısındaki gösterimi 00110 olan sayının işaretli 2'ye tümleyen (signed 2's complement) yapısında karşılığı ne olur?</p></blockquote>
+<blockquote><p>Yine 00110 olarak kalır. Çünkü en anlamlı bit 0 olduğundan sayı pozitiftir.</p></blockquote>
+<h3 id="e-gray-den-ikiliye-cevirici">e) Gray'den ikiliye çevirici</h3>
+<blockquote><p>Yalnızca 3 adet XOR geçidi kullanarak bir 4-bit Gray-to-Binary kod dönüştürücü çiziniz.</p></blockquote>
+<ul><li>Bn = Gn (MSB)</li><li>Bi = Gi ⊕ Bi+1, i = 0, …, n−1</li></ul>
+<p>Yani B3 = G3, B2 = G2 ⊕ B3, B1 = G1 ⊕ B2, B0 = G0 ⊕ B1 (devre, 2007 final sınavındaki çizimle aynı).</p>
+<h2 id="soru-2-asagidaki-sorulari-yanitlayiniz-toplam-37-puan">Soru 2: Aşağıdaki soruları yanıtlayınız (toplam 37 puan)</h2>
+<h3 id="a-durum-indirgeme-10-puan">a) Durum indirgeme (10 puan)</h3>
+<blockquote><p>Yandaki durum çizelgesi ile tanımlanan "sequential" devrede gereksiz durumlar bulunup bulunmadığını araştırınız ve şayet varsa, devrenin gereksiz durumları bulunmayan eşdeğerine karşılık gelen indirgenmiş durum çizelgesini bulunuz.</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Şimdiki durum</th><th scope="col">Gelecek, x = 0</th><th scope="col">Gelecek, x = 1</th><th scope="col">Çıktı, x = 0</th><th scope="col">Çıktı, x = 1</th></tr></thead><tbody><tr><th scope="row">a</th><td>f</td><td>b</td><td>0</td><td>0</td></tr><tr><th scope="row">b</th><td>d</td><td>c</td><td>0</td><td>0</td></tr><tr><th scope="row">c</th><td>f</td><td>e</td><td>0</td><td>0</td></tr><tr><th scope="row">d</th><td>g</td><td>a</td><td>1</td><td>0</td></tr><tr><th scope="row">e</th><td>d</td><td>c</td><td>0</td><td>0</td></tr><tr><th scope="row">f</th><td>f</td><td>b</td><td>1</td><td>1</td></tr><tr><th scope="row">g</th><td>g</td><td>h</td><td>0</td><td>1</td></tr><tr><th scope="row">h</th><td>g</td><td>a</td><td>1</td><td>0</td></tr></tbody></table></div>
+<blockquote><p>Verilen çizelgedeki durumları, aynı girdi dizilerine karşın aynı çıktı dizileri üretip üretmediklerine bakarak denklik kümeleri içinde toparlarsak:</p></blockquote>
+<ul><li>P0 = (abcdefgh)</li><li>P1 = (abce)(dh)(f)(g)</li><li>P2 = (ac)(be)(dh)(f)(g)</li></ul>
+<blockquote><p>buluruz. Bu da verilen "sequential" devrenin kendisine denk olan 5 durumlu bir devreye indirgenebileceğini gösterir. Her küme içinden bir durum seçer ve gelecek durumlarla çıktıları buna göre yeniden düzenleyerek indirgenmiş çizelgeyi oluştururuz:</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Şimdiki durum</th><th scope="col">Gelecek, x = 0</th><th scope="col">Gelecek, x = 1</th><th scope="col">Çıktı, x = 0</th><th scope="col">Çıktı, x = 1</th></tr></thead><tbody><tr><th scope="row">a</th><td>f</td><td>b</td><td>0</td><td>0</td></tr><tr><th scope="row">b</th><td>d</td><td>a</td><td>0</td><td>0</td></tr><tr><th scope="row">d</th><td>g</td><td>a</td><td>1</td><td>0</td></tr><tr><th scope="row">f</th><td>f</td><td>b</td><td>1</td><td>1</td></tr><tr><th scope="row">g</th><td>g</td><td>d</td><td>0</td><td>1</td></tr></tbody></table></div>
+<h3 id="b-jk-flip-flop-lu-senkron-sayac-15-puan">b) JK flip-flop'lu senkron sayaç (15 puan)</h3>
+<blockquote><p>J-K flip-floplar kullanarak, 0-2-4-6-5-3-1 dizisini (binary) art arda yineleyen bir senkron sayaç tasarlayınız. J-K flip-floplarda yalnızca J, K ve saat girişleri bulunmaktadır. Tasarımınıza önce durum ve uyarı (J-K giriş sinyalleri) çizelgesini oluşturarak başlayınız ve devrenizin (combinational bölüm) hem minimal olmasına, hem de kullanılmayan durumdan çıkabilmesine özen gösteriniz.</p></blockquote>
+<p>Durum ve uyarı çizelgesi (ŞD: şimdiki durum, GD: gelecek durum, "-": fark etmez):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">#</th><th scope="col">Q2Q1Q0</th><th scope="col">GD</th><th scope="col">J2K2</th><th scope="col">J1K1</th><th scope="col">J0K0</th></tr></thead><tbody><tr><th scope="row">0</th><td>000</td><td>010</td><td>0 -</td><td>1 -</td><td>0 -</td></tr><tr><th scope="row">2</th><td>010</td><td>100</td><td>1 -</td><td>- 1</td><td>0 -</td></tr><tr><th scope="row">4</th><td>100</td><td>110</td><td>- 0</td><td>1 -</td><td>0 -</td></tr><tr><th scope="row">6</th><td>110</td><td>101</td><td>- 0</td><td>- 1</td><td>1 -</td></tr><tr><th scope="row">5</th><td>101</td><td>011</td><td>- 1</td><td>1 -</td><td>- 0</td></tr><tr><th scope="row">3</th><td>011</td><td>001</td><td>0 -</td><td>- 1</td><td>- 0</td></tr><tr><th scope="row">1</th><td>001</td><td>000</td><td>0 -</td><td>0 -</td><td>- 1</td></tr><tr><th scope="row">7</th><td>111</td><td>- - -</td><td>- -</td><td>- -</td><td>- -</td></tr></tbody></table></div>
+<blockquote><p>Yandaki çizelgeden görüleceği gibi: K2 = Q0, K1 = Q1 olmaktadır.</p></blockquote>
+<p>Karnaugh haritalarından:</p>
+<ul><li>J0 = Q1Q2</li><li>K0 = Q1'Q2'</li><li>J1 = Q0' + Q2</li><li>J2 = Q1Q2'</li></ul>
+<blockquote><p>Q2Q1Q0 = 111 iken J0 = 1, K0 = 0, J1 = 1, K1 = 1, J2 = 0, K2 = 1 olacağından, gelecek durum Q2Q1Q0 = 100 olur. Bu da geçerli bir durumdur.</p></blockquote>
+<figure class="yazi-gorsel"><img src="jk-sayac.jpg" width="923" height="523" loading="lazy" decoding="async" alt="Durum ve uyarı çizelgesi ile J0, K0, J1, J2 Karnaugh haritaları"><figcaption>0-2-4-6-5-3-1 sayacının JK uyarı çizelgesi ve haritaları</figcaption></figure>
+<p><em>Not: J2 için haritada yalnız Q2Q1Q0 = 010 durumunda 1 var (011 durumunda J2 = 0 olmalı); bu yüzden J2 = Q1Q0' olmalı. Belgedeki J2 = Q1Q2' ifadesi 011 → 001 geçişinde J2 = 1 verip sayacı yanlış duruma götürür. Ayrıca belgede verilen değerlerle 111 durumunda Q2 sıfırlanır (J2 = 0, K2 = 1), Q1 tersine döner (1 → 0) ve Q0 1 olur; yani gelecek durum Q2Q1Q0 = 001'dir (yine geçerli bir durum). Belgedeki "100" sonucu bitlerin Q0Q1Q2 sırasıyla yazılmış hâli gibi görünüyor.</em></p>
+<h3 id="c-101-010-dizi-algilayici-12-puan">c) 101 / 010 dizi algılayıcı (12 puan)</h3>
+<blockquote><p>İletilen bitleri girdi ucundan seri olarak alan ve her 101 veya 010 dizisini algılayışında 1 çıktısı, bunun dışında ise 0 çıktısı veren bir "sequential" devrenin durum çizgesini (state diagram) oluşturunuz. Diziler iç içe (overlapping) olabilir. Çizgeniz minimum sayıda durum içermelidir.</p></blockquote>
+<p>ÖRNEK (en soldaki bit, ilk giren bittir):</p>
+<pre class="kod"><code>girdi dizisi: 0 0 1 0 1 0 1 1 1 0 1 1 0 0 . . .
+çıktı dizisi: 0 0 0 1 1 1 1 0 0 0 1 0 0 0 . . .</code></pre>
+<p>Yanıtta beş durumlu (A–E) el çizimi bir Mealy durum çizgesi veriliyor; geçişler girdi/çıktı biçiminde etiketli.</p>
+<figure class="yazi-gorsel"><img src="dizi-algilayici.jpg" width="907" height="281" loading="lazy" decoding="async" alt="101 ve 010 dizilerini algılayan beş durumlu (A, B, C, D, E) Mealy durum çizgesi, el çizimi"><figcaption>101 / 010 dizi algılayıcının durum çizgesi</figcaption></figure>
+<h2 id="soru-3-pla-18-puan">Soru 3: PLA (18 puan)</h2>
+<blockquote><p>Aşağıda verilen A, B, C ve D işlevlerini gerçekleştiren bir PLA devresi çiziniz. Devrenizdeki çarpım terimleri (product terms) minimal olmalıdır. A(x,y,z) = Σ(0,2,4,6,7), B(x,y,z) = Σ(1,3,5), C(x,y,z) = Σ(0,1,6,7), D(x,y,z) = Σ(1,3,5,7)</p></blockquote>
+<p>Karnaugh haritaları (satırlar x, sütunlar yz = 00, 01, 11, 10):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">00</th><th scope="col">01</th><th scope="col">11</th><th scope="col">10</th></tr></thead><tbody><tr><th scope="row">A, x = 0</th><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">A, x = 1</th><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">B, x = 0</th><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">B, x = 1</th><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope="row">C, x = 0</th><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope="row">C, x = 1</th><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">D, x = 0</th><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">D, x = 1</th><td>0</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>
+<blockquote><p>Karnaugh çizgeleri üzerinden minimal işlevleri yazarsak:</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">İşlev</th><th scope="col">Tümleyeni</th></tr></thead><tbody><tr><th scope="row"><strong>A = z' + xy</strong></th><td>A' = x'z + y'z</td></tr><tr><th scope="row">B = x'z + y'z</th><td><strong>B' = z' + xy</strong></td></tr><tr><th scope="row"><strong>C = xy + x'y'</strong></th><td>C' = x'y + xy'</td></tr><tr><th scope="row">D = z</th><td><strong>D' = z'</strong></td></tr></tbody></table></div>
+<blockquote><p>Bold ifadeler en az çarpım terimi gerektirmektedir.</p></blockquote>
+<p>Böylece PLA'da yalnızca üç çarpım terimi (z', xy, x'y') kullanılıyor; B ve D, B' ve D' toplamlarının çıkıştaki XOR kapılarıyla terslenmesiyle elde ediliyor.</p>
+<figure class="yazi-gorsel"><img src="pla.jpg" width="900" height="670" loading="lazy" decoding="async" alt="z&#x27;, xy ve x&#x27;y&#x27; çarpım terimleriyle A, B, C, D çıkışlarını üreten PLA, el çizimi"><figcaption>PLA: üç çarpım terimi ve çıkış XOR kapıları</figcaption></figure>
+<h2 id="soru-4-toplam-20-puan">Soru 4 (toplam 20 puan)</h2>
+<h3 id="a-rom-ile-tam-toplayici-12-puan">a) ROM ile tam toplayıcı (12 puan)</h3>
+<blockquote><p>Aşağıda verilen devrenin tam toplayıcı (full adder) olabilmesi için, ROM1 ve ROM2 gözlerine ve ? işareti ile belirlenen yerlere gereken bitleri (0-1) yazınız.</p></blockquote>
+<p>Devrede Y ve Z adres girişli iki adet 4x2 ROM, bir 2x1 MUX, bir NOT kapısı, dört AND ve iki OR kapısı var; çıkışlar S ve C.</p>
+<figure class="yazi-gorsel"><img src="rom-tam-toplayici.jpg" width="706" height="712" loading="lazy" decoding="async" alt="İki adet 4x2 ROM, 2x1 MUX ve kapılardan oluşan tam toplayıcı devresi"><figcaption>ROM1, ROM2 ve 2x1 MUX ile tam toplayıcı</figcaption></figure>
+<p>Yanıt:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Word</th><th scope="col">ROM1</th><th scope="col">ROM2</th></tr></thead><tbody><tr><th scope="row">0</th><td>0 0</td><td>0 1</td></tr><tr><th scope="row">1</th><td>0 1</td><td>1 0</td></tr><tr><th scope="row">2</th><td>0 1</td><td>1 0</td></tr><tr><th scope="row">3</th><td>1 0</td><td>1 1</td></tr></tbody></table></div>
+<p>2x1 MUX'un girişleri: I0 = 0, I1 = 1, seçme girişi S = X (çıkış out).</p>
+<figure class="yazi-gorsel"><img src="rom-cevap.jpg" width="632" height="258" loading="lazy" decoding="async" alt="ROM1 ve ROM2 içerikleri ile MUX girişlerinin yanıtı"><figcaption>ROM1, ROM2 ve MUX için yanıt</figcaption></figure>
+<h3 id="b-kaydirma-yazmaclari-8-puan">b) Kaydırma yazmaçları (8 puan)</h3>
+<blockquote><p>Aşağıdaki devrede Shift control = 1 olduktan sonra gelen T1, T2 ve T3 saat vurularında A ve B yazmaçlarının içeriği ne olur? (başlangıçta A = 1100 ve B = 1110 yüklüdür.)</p></blockquote>
+<blockquote><p>3 clock darbesinden sonra A = 1101 ve B = 1101 olur.</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Darbe</th><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody><tr><th scope="row">Başlangıç</th><td>1100</td><td>1110</td></tr><tr><th scope="row">T1</th><td>0110</td><td>0111</td></tr><tr><th scope="row">T2</th><td>1011</td><td>1011</td></tr><tr><th scope="row">T3</th><td>1101</td><td>1101</td></tr></tbody></table></div>
+<h2 id="puanlar">Puanlar</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Soru</th><th scope="col">Puan</th></tr></thead><tbody><tr><th scope="row">Soru 1</th><td>25 (her şık 5)</td></tr><tr><th scope="row">Soru 2</th><td>37: a) 10, b) 15, c) 12</td></tr><tr><th scope="row">Soru 3</th><td>18</td></tr><tr><th scope="row">Soru 4</th><td>20: a) 12, b) 8</td></tr></tbody></table></div>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon doc" aria-hidden="true">DOC</span>
+            <div>
+              <p class="indir-ad"><a href="Orneksorular.doc" download>Orneksorular.doc</a></p>
+              <p class="kucuk">Word (.doc) · 473 KB · 5 <span data-i18n="arch.slidesLower"></span> · 11.01.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Orneksorular.doc" download>⬇ <span data-i18n="arch.downloadFile"></span> (473 KB)</a>
+            <a class="buton" href="Orneksorular.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (414 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

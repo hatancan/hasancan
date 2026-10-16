@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Sıralama ve Arama Algoritmaları (Hafta 4) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 4. hafta ders notu ve programları (Öğr. Gör. Oğul Göçmen, Ekim 2007): bubble sort, selection sort, quick sort, shell sort, sıralı arama, ikili arama ve merge algoritmaları; C ve vector şablonlu C++ kodlarıyla.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-siralama-arama/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Sıralama ve Arama Algoritmaları (Hafta 4)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 4. hafta ders notu ve programları (Öğr. Gör. Oğul Göçmen, Ekim 2007): bubble sort, selection sort, quick sort, shell sort, sıralı arama, ikili arama ve merge algoritmaları; C ve vector şablonlu C++ kodlarıyla.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-siralama-arama/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Sıralama ve Arama Algoritmaları (Hafta 4)", "description": "EEM227 Veri Yapıları dersinin 4. hafta ders notu ve programları (Öğr. Gör. Oğul Göçmen, Ekim 2007): bubble sort, selection sort, quick sort, shell sort, sıralı arama, ikili arama ve merge algoritmaları; C ve vector şablonlu C++ kodlarıyla.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-siralama-arama/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-siralama-arama.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-siralama-arama/eem227-siralama-arama.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Sıralama ve Arama Algoritmaları (Hafta 4)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#siralama-sort-ve-arama-search-algoritmalari">Sıralama (sort) ve arama (search) algoritmaları</a></li><li><a href="#bubble-sort-algoritmasi">Bubble sort algoritması</a></li><li><a href="#selection-sort-algoritmasi">Selection sort algoritması</a></li><li><a href="#quick-sort-algoritmasi">Quick sort algoritması</a></li><li><a href="#shell-sort-algoritmasi">Shell sort algoritması</a></li><li><a href="#arama-algoritmalari">Arama algoritmaları</a></li><li><a href="#merge-birlestirme-algoritmasi">Merge (birleştirme) algoritması</a></li><li><a href="#klasordeki-ek-programlar-stl-vector-ile">Klasördeki ek programlar (STL vector ile)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Sıralama ve Arama Algoritmaları (Hafta 4)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 21.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz dönemi <strong>4. hafta ders notudur</strong>: sıralama (sort) ve arama (search) algoritmaları. Hazırlayan <strong>Öğr. Gör. Oğul Göçmen</strong>, tarih 21 Ekim 2007. Notun metni ve örnek programları aşağıda; sonda aynı haftanın klasöründeki STL (vector) ile yazılmış ek programlar da var. Ders notunun PDF'i ve bütün kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="siralama-sort-ve-arama-search-algoritmalari">Sıralama (sort) ve arama (search) algoritmaları</h2>
+<p>Düzensiz olarak verilmiş dizi elemanlarını küçükten büyüğe veya büyükten küçüğe doğru sıralamak, bir düzene koymak için çeşitli sıralama algoritmaları geliştirilmiştir. Sıralanan bilgilerde arama işlemleri de kolaylaşmaktadır. En çok kullanılan sıralama algoritmaları aşağıdaki algoritmalardır:</p>
+<ol><li>Bubble sort (kabarcık sıralama)</li><li>Shell sort (ikili bölerek sıralama)</li><li>Selection sort (seçerek sıralama)</li><li>Quick sort (hızlı sıralama)</li></ol>
+<h2 id="bubble-sort-algoritmasi">Bubble sort algoritması</h2>
+<p>Dizide yer alan her eleman, sırayla kendisinden sonra gelen elemanla karşılaştırılır ve gerekiyorsa yer değiştirilir. Sıralama işlemi yer değiştirme olduğu sürece devam eder. Herhangi bir sıralama yönteminin etkinliğini analiz ederken kaç kez karşılaştırma ve yer değiştirme (takas) yapıldığına bakılır. Kabarcık sıralamada karşılaştırma sayısı daima aynıdır. Verilen dizi sıralı olsa bile kullanılan iki for döngüsü belirtilen sayıda tekrar yapar. Bu da yöntemin (n² – n)/2 karşılaştırma yapacağı anlamına gelir. Buradaki n sıralanacak eleman sayısıdır. Bu formüle dıştaki döngünün n-1 kez, içteki döngünün de ortalama n/2 kez çalıştığı düşünülerek varılmıştır.</p>
+<p>Kabarcık sıralamanın bir n² algoritması olduğu söylenmektedir, çünkü çalışma süresi sıraladığı eleman sayısının karesiyle orantılıdır. Dolayısıyla dizi elemanlarının sayısının fazla olması durumunda işlem zamanı fazlalaşan bir algoritmadır. Sırası tamamen bozuk bir veri yapısı için, yani en kötü durum için bu algoritmanın Büyük-O notasyonu (Big-O notation) O(n²)'dir.</p>
+<p>(n-1) + (n-2) + … + 2 + 1 = n·(n-1)/2 = O(n²)</p>
+<p><em>Not: Ders notunda bu toplam n·(n-2)/2 olarak yazılmış; doğrusu n·(n-1)/2'dir (yukarıdaki (n² – n)/2 ile aynı).</em></p>
+<p>Özel bir durum olarak, eğer verinin belli kısmı sıralı ise, n adet verinin c tanesi sıralı değil ise algoritmanın karmaşıklığı O(cn) olmaktadır.</p>
+<h3 id="ornek-1-1-rastgele-elemanli-diziyi-bubble-sort-ile-siralama">Örnek 1.1: rastgele elemanlı diziyi bubble sort ile sıralama</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+//--------------------------- bubbleSort -----------------------------
+//
+// Amaç     : Verilen değerlerin, küçükten büyüğe sıraya koymak
+//
+// Giriş parametresi : Değerlerin yazılı olduğu vektör
+//
+// Dönüş değeri : void
+//
+// Fonksiyonda sıralama işlemi, Bubble Sort algoritması ile
+// gerçeklenmiştir.
+//
+//-----------------------------------------------------------------------
+
+void bubbleSort ( int dizi[],int size)
+{
+      int temp;
+// for her dönüşünde, sıraya sokulmamış elemanların ilkinden başlayarak
+// her elemanı sağdaki komşusu ile karşılaştırıyor. Eğer komşusundan
+// daha büyük bir değere sahipse, onunla yer değiştiriliyor.
+      for (int i = size; i &gt; 2; i --)
+      {
+// Buradaki i, sıraya sokulmamış eleman sayısını gösteriyor, yani
+// (i-1). terime kadar olan elemanlar henüz sıralı değiller.
+// Sıraya girmemiş elemanların herbiri, sağındaki komşusu ile
+// karşılaştırılıyor. Eğer değeri komşusundan büyükse, onunla yer
+// değiştiriliyor. Sıraya sokulmamış elemanların değerce en büyük
+// olanı, (i-1). terime kadar tüm elemanlar ile yer değiştireceği
+// için, sıralı elemanların başına kadar ulaşır. Daha önceden
+// sıraya girmiş elemanların her biri zaten bu elemandan daha
+// büyük bir değere sahip olduğu için, bu eleman da artık sıralıdır.
+            for (int j = 0; j &lt; i - 1; j ++)
+            {
+            // Komşusu ile yer değiştiriyor. (swap)
+                  if (dizi[j] &gt; dizi[j + 1])
+                  {
+                        temp = dizi[j + 1];
+                        dizi[j + 1] = dizi[j];
+                        dizi[j] = temp;
+                  }
+            }
+      }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+     int d[20];
+
+// 20 elemanlı, rasgele bir katar oluşturuluyor.
+     for (int i = 0; i &lt; 20; i ++)
+     d[i]=(rand () % 1000);
+     bubbleSort (d,20);
+
+     for (int i = 0; i &lt; 20; i ++)
+     cout&lt;&lt;d[i]&lt;&lt;" ";
+     cout&lt;&lt;endl;
+     system("pause");
+     return 0;
+}</code></pre>
+<p><em>Not: Dış döngünün koşulu <code>i &gt; 2</code> olduğu için son geçiş (yalnızca <code>dizi[0]</code> ile <code>dizi[1]</code>'i karşılaştıran i = 2 adımı) hiç yapılmıyor; ilk iki eleman ters sırada kalabilir. Örneğin {3, 2, 1} dizisi {2, 1, 3} olarak kalır. Koşul <code>i &gt; 1</code> olmalı. Aynı hata Örnek 1.2'de ve klasördeki BubbleSortSTL.cpp'de de var.</em></p>
+<h3 id="ornek-1-2-bubble-sort-vector-sablonu-ile">Örnek 1.2: bubble sort (vector şablonu ile)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+template &lt;class T&gt;
+void bubbleSort (vector&lt;T&gt;&amp; dizi)
+{     for (int i = dizi.size (); i &gt; 2; i --)
+      { for (int j = 0; j &lt; i - 1; j ++)
+            { if (dizi[j] &gt; dizi[j + 1])
+                  {     T temp = dizi[j + 1];
+                        dizi[j + 1] = dizi[j];
+                        dizi[j] = temp;
+                  }
+            }
+      }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+      vector&lt;int&gt; D;
+
+// 20 elemanlı, rasgele bir katar oluşturuluyor.
+      for (int i = 0; i &lt; 20; i ++) D.push_back (rand () % 10);
+      bubbleSort (D);
+      return 0;
+}</code></pre>
+<h2 id="selection-sort-algoritmasi">Selection sort algoritması</h2>
+<p>Seçerek sıralamada, eğer dizi küçükten büyüğe sıralanacaksa, ilk eleman alınır ve geri kalanlar arasında en küçük değerli eleman aranır; eğer bulunursa ilk elemanla yer değiştirilir. Daha sonra kalan n-1 elemandan en küçük olan bulunur ve ikinci elemanla yer değiştirilir. İşlem bu şekilde devam eder. Bu yöntem de (n² – n)/2 sayıda karşılaştırma gerektirir. Kabarcık sıralamaya göre karşılaştırma sayısı aynı olsa bile ortalama yer değiştirme sayısı daha azdır.</p>
+<p>T(n) = 2·(n-1) + 2·(n-2) + 2·(n-3) + … + 2·(n-(n-2)) + 2·(n-(n-1)) = 2·((n-1) + (n-2) + (n-3) + … + 2 + 1) (ilk n-1 tamsayının toplamının 2 katı) = 2·((n-1)·n/2) = n² – n</p>
+<p>Dolayısıyla bu algoritmanın karmaşıklığı O(n²)'dir.</p>
+<h3 id="ornek-2-1-selection-sort-ile-kucukten-buyuge-siralama-c">Örnek 2.1: selection sort ile küçükten büyüğe sıralama (C)</h3>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include&lt;stdio.h&gt;
+/* selection sort ile diziyi kucukten buyuye dogru siralar */
+int main(void)
+{
+int d[10];
+int i,j,n,min,yer;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf(" dizi elemanlarini giriniz \n");
+for (i=0;i&lt;n;i++)
+   scanf("%d",&amp;d[i]);
+for(i=0;i&lt;n-1;i++)
+{
+   yer=i;
+   min=d[i];
+     for(j=i+1;j&lt;n;j++)
+         if(d[j]&lt;min)
+         {
+              yer=j;
+              min=d[j];
+          }
+       d[yer]=d[i];
+       d[i]=min;
+     }
+  printf(" sirali dizi \n\n");
+
+for(i=0;i&lt;n;i++)
+printf("%4d",d[i]);
+
+return 0;
+ }</code></pre>
+<h3 id="ornek-2-2-selection-sort-vector-sablonu-ile">Örnek 2.2: selection sort (vector şablonu ile)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+//--------------------------- selectionSort -----------------------------
+//
+// Amaç     : Verilen değerlerin, küçükten büyüğe sıraya koymak
+//
+// Giriş parametresi : Değerlerin yazılı olduğu vektör
+//
+// Dönüş değeri : void
+//
+// Fonksiyonda sıralama işlemi, Selection Sort algoritması ile
+// gerçeklenmiştir.
+//
+//-----------------------------------------------------------------------
+template &lt;class T&gt;
+void selectionSort (vector&lt;T&gt;&amp; dizi)
+{
+      int minIndex;
+
+       // for her dönüşünde, sıraya sokulmamış elemanlar içerisinden en
+       // küçük olanını buluyor ve bu değerin vektör üzerindeki yerini
+       // minIndex isimli değişkende saklıyor.
+       for (int i = 0; i &lt; dizi.size () - 1; i ++)
+       {
+             minIndex = i;
+
+              // vektörün sıraya sokulmamış kısmında (i+1'den itibaren),
+              // en küçük değerli eleman bulunuyor. Ilk olarak, sıralanmamış
+              // kısımdaki ilk elemanın en küçük olduğu varsayılıyor. Bu
+              // elemandan itibaren diğer elemanlara bakılıyor. Eğer daha
+              // küçük bir değer ile karşılaşılırsa, artık bu elemanın yeri
+              // minIndex isimli değişkene atanıyor. Böylece, sıralanmamış
+              // kısımdaki en küçük eleman bulunmuş olunuyor.
+              for (int j = i + 1; j &lt; dizi.size (); j ++)
+                    if (dizi [minIndex] &gt; dizi [j]) minIndex = j;
+
+              // swap işlemi
+              // bulunan bu yeni eleman ile sıraya sokulmamış ilk eleman
+              // yer değiştiriliyor. Zaten ikisi de aynı eleman ise, bu
+              // değişime gerek yoktur.
+              if (minIndex != i)
+              {
+                    T temp = dizi[i];
+                    dizi[i] = dizi[minIndex];
+                    dizi[minIndex] = temp;
+              }
+       }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+      vector&lt;int&gt; D;
+
+       // 20 elemanlı, rasgele bir katar oluşturuluyor.
+       for (int i = 0; i &lt; 20; i ++) D.push_back (rand () % 10);
+
+       selectionSort (D);
+
+       return 0;
+}</code></pre>
+<h2 id="quick-sort-algoritmasi">Quick sort algoritması</h2>
+<p>Geliştirilmiş sıralama algoritmalarının en iyisi olarak bilinen bir algoritmadır. Genel işleyişinde karşılaştırma değeri (comparand) adı verilen bir değer seçilir ve sonra dizi ikiye ayrılır. Karşılaştırma değerinden büyük ya da eşit olanlar bir tarafa, küçük olanlar diğer tarafa yerleştirilir. Bu işlem geriye kalan her bölme üzerinde tekrarlanır. Karşılaştırma değeri ya rastgele seçilir ya da dizideki az sayıda elemanın değerinin ortalaması alınır.</p>
+<p>Quick sort algoritması için ortalama karşılaştırma sayısı n log n ve ortalama yer değiştirme sayısı n/6 log n olarak verilebilir. Yöntemde dikkat edilmesi gereken husus karşılaştırma değerinin iyi seçilmesidir. Her bölüm için karşılaştırılan değer en büyük değer ise yöntem yavaşlayacaktır. Verilerin yapısına göre uygun bir sıralama algoritmasının seçilmesi isabetli olacaktır. Quick sort algoritması en etkin algoritma olmasına rağmen az sayıda elemana sahip dizilerde tekrarlanan çağrılarından ötürü randımanlı olmayabilir. Bu tip dizilerde (eleman sayısı 100 veya daha az) bubble sort veya selection sort daha iyi sonuç verecektir.</p>
+<h3 id="ornek-3-1-quick-sort-ile-katar-string-siralama">Örnek 3.1: quick sort ile katar (string) sıralama</h3>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include&lt;iomanip&gt;
+/*karakter dizisini quick sort ile siralar */
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+void quick_str(char dizi[][10],int say);
+void qs_string(char dizi[][10],int sol,int sag);
+char str[][10]={"tulay","pelin","aysu","can","beril","ogul"};
+int main(void)
+{
+
+int i;
+quick_str(str,sizeof(str));
+printf("siralanmis dizi\n");
+for (i=0;i&lt;sizeof(str);i++)
+printf("%s\n",str[i]);
+system("pause");
+return 0;
+
+}
+
+void quick_str(char dizi[][10],int say)
+{
+qs_string(dizi,0,say-1);
+}
+
+void qs_string(char dizi[][10],int sol,int sag)
+{
+int i,j;
+char *x;
+char yedek[10];
+i=sol;j=sag;
+x=dizi[(sol+sag)/2];
+do {
+  while((strcmp(dizi[i],x)&lt; 0) &amp;&amp; (i&lt; sag))i++;
+  while((strcmp(dizi[j],x)&gt; 0) &amp;&amp; (j &gt; sol))j--;
+      if(i &lt;= j)
+        {
+       strcpy( yedek,dizi[i]);
+       strcpy( dizi[i],dizi[j]);
+       strcpy( dizi[j],yedek);
+          i++; j--;
+        }
+     }while(i &lt;= j);
+     if(sol &lt; j) qs_string(dizi,sol,j);
+     if(i &lt; sag) qs_string(dizi,i,sag);
+}</code></pre>
+<p>Beklenen sıralı çıktı: aysu, beril, can, ogul, pelin, tulay.</p>
+<p><em>Not: <code>sizeof(str)</code> dizinin eleman sayısını değil bayt cinsinden boyutunu verir (6 × 10 = 60). Hem <code>quick_str</code> çağrısında hem de yazdırma döngüsünde eleman sayısı olarak <code>sizeof(str)/sizeof(str[0])</code> (yani 6) kullanılmalı; aksi hâlde dizinin dışına taşılır. Ayrıca pivot <code>x</code> bir kopya değil, dizideki bir satırı gösteren işaretçi; takaslar sırasında o satırın içeriği değişebildiği için pivotun önce <code>yedek</code> gibi ayrı bir diziye kopyalanması daha güvenlidir.</em></p>
+<h3 id="ornek-3-2-quick-sort-vector-sablonu-ile">Örnek 3.2: quick sort (vector şablonu ile)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+//---------------------------- quickSort --------------------------------
+//
+// Amaç     : Verilen değerleri, küçükten büyüğe doğru sıraya koymak
+//
+// Giriş parametresi : Değerlerin yazılı olduğu vektör
+//
+//-----------------------------------------------------------------------
+
+template &lt;class T&gt;
+void quickSort (vector&lt;T&gt;&amp; dizi)
+{
+      quickSort (dizi, 0, dizi.size () - 1);
+}
+
+//---------------------------- quickSort --------------------------------
+//
+// Giriş parametreleri : Değerlerin yazılı olduğu vektör. Bu vektörün
+//                       hangi aralığı ile ilgilendiğimizi gösteren
+//                       sol ve sag isimli iki değişken. Bu aralık
+//                       içerisinden bir pivot seçilip, bu aralık da
+//                       iki parçaya bölünecek.
+//
+//-----------------------------------------------------------------------
+
+template &lt;class T&gt;
+void quickSort (vector&lt;T&gt;&amp; dizi, int sol, int sag)
+{
+      int x = sol;
+      int y = sag;
+      T pivot = dizi[x]; // Verilen aralığın ilk elemanı pivot olarak seçiliyor
+
+       // Pivottan büyük elemanların sağ tarafa, pivottan küçük
+       // elemanların ise sol tarafa alınması sağlanıyor. En sonda
+       // ise pivot, oluşan yeni iki gurubun ortasına yerleşecek.
+       while (x &lt; y)
+       {
+             // Sağda pivottan küçük ilk elemanı bul
+             while ((dizi[y] &gt;= pivot) &amp;&amp; (x &lt; y)) y --;
+
+              // Bu elemanı sola al
+              if (x != y)
+              {
+                    dizi[x] = dizi[y];
+                    x ++;
+              }
+
+              // Solda pivottan büyük ilk elemanı bul
+              while ((dizi[x] &lt;= pivot) &amp;&amp; (x &lt; y)) x ++;
+
+              // bu elemanı sağa al
+              if (x != y)
+              {
+                    dizi[y] = dizi[x];
+                    y --;
+              }
+       }
+
+       dizi[x] = pivot; // pivot buraya taşındı
+
+       int pivotIndis = x; // pivotun yeni yeri
+
+       // Pivottan küçük elemanlar [sol,pivotIndis-1] aralığına yerleşti.
+       // Pivottan büyük elemanlar [pivotIndis+1,sag] aralığına yerleşti.
+       // Her iki aralık değeri için, eğer aralığın boyu birden büyükse,
+       // quickSort fonksiyonu özyinelemeli olarak yeniden çağırılıyor
+
+       if (sol + 1 &lt; pivotIndis)
+             quickSort (dizi, sol, pivotIndis - 1); // pivotun sol tarafı
+
+       if (sag - 1 &gt; pivotIndis)
+             quickSort (dizi, pivotIndis+1, sag); // pivotun sağ tarafı
+}
+
+//------------------------------ main -----------------------------------
+
+int main()
+{
+      vector&lt;int&gt; D;
+
+       // 100 elemanlı, rasgele bir katar oluşturuluyor.
+       for (unsigned int i = 0; i &lt; 100 ; i ++) D.push_back (rand ()%10);
+
+       quickSort (D);
+
+       return 0;
+}</code></pre>
+<h2 id="shell-sort-algoritmasi">Shell sort algoritması</h2>
+<p>Bu sıralama, algoritmayı geliştiren D. L. Shell'in adını almasına karşın, bu isimle anılması işleyiş şeklinin üst üste yığılmış deniz kabuklarına (shell) benzemesindendir. n adet elemanı sıralamak için yöntemin çalışma süresinin n^1.2 ile orantılı olduğu söylenebilir. Bu durumda shell sort algoritmasının n-kare algoritmalarına göre iyileştirilmiş bir algoritma olduğu görülmektedir.</p>
+<p>Ders notunda shell sort için kod yok; klasördeki <code>ShellSort.cpp</code> diziyi büyükten küçüğe sıralıyor. Aralık (<code>orta</code>) önce (n-1)/2 alınıyor ve her turda yarıya indiriliyor; her aralık için o kadar uzaktaki elemanlar karşılaştırılıp gerekirse yer değiştiriliyor.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include &lt;stdio.h&gt;
+/* shell sort algoritmasi ile buyukten kucuge siralama yapar */
+int main (void)
+{
+int a[10],i,j,n,orta,k,yedek;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf("Diziyi  giriniz\n");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+orta=(n-1)/2;
+     while(orta &gt;0){
+	  for(i=orta+1;i&lt;n;i++){
+              j=i-orta;
+	      while(j&gt;0){
+                k=(j-1)+orta;
+	        if(a[j-1]&gt;=a[k]) j=0;
+	        else {
+		yedek=a[j-1];
+		a[j-1]=a[k];
+                a[k]=yedek;
+                j=j-orta;
+	       }
+	    }
+	 }
+    orta=orta/2;
+    }
+printf("Siralanmis Dizi\n");
+for(i=0;i&lt;n;i++)
+printf("%3d",a[i]);
+scanf("%d",&amp;n);
+return 0;
+}</code></pre>
+<p><em>Not: Başlangıç aralığı <code>(n-1)/2</code> olduğundan n = 2 için aralık 0 olur ve döngü hiç çalışmaz; iki elemanlı dizi sıralanmaz. Başlangıç aralığı <code>n/2</code> alınmalı.</em></p>
+<h2 id="arama-algoritmalari">Arama algoritmaları</h2>
+<p>Sıralanmamış bir dizide bilgi aramak iki şekilde mümkündür: ya ilk elemandan başlayarak eşiti bulunduğunda sona eren ya da dizinin sonuna gelindiğinde aramayı bitiren bir sıralı arama (sequential search) yapılır. Sıralı bir dizi kullanılıyorsa ikili arama (binary search) algoritması ile daha kısa zamanda sonuç alınabilmektedir.</p>
+<h3 id="sirali-arama">Sıralı arama</h3>
+<p>Eleman sayısı bilinen bir dizide istenilen bilgi bulununcaya kadar arama yapan basit bir algoritmadır.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code># include &lt;stdio.h&gt;
+# include &lt;stdlib.h&gt;
+/* sirali arama yapar */
+int sirali_ara (int a[],int n)
+{
+int sonuc,x,j;
+printf("aranacak sayiyi Giriniz:\n");
+scanf("%d",&amp;x);
+for(j=0;j&lt;n;j++){
+if(a[j]==x){
+sonuc=j;
+break;
+}
+else sonuc=-1;
+}
+return(sonuc);
+}
+int main (void)
+{
+int n,i,dizi[10],x,bul;
+printf("dizinin eleman sayisini giriniz &lt; 10:\n");
+scanf("%d",&amp;n);
+printf("dizi elemanlarini Giriniz:\n");
+for (i=0;i&lt;n;i++)
+scanf("%d",&amp;dizi[i]);
+bul=sirali_ara(dizi,n);
+if(bul==-1)printf(" aranan sayi dizide yer almiyor\n");
+else
+printf(" aranan sayi dizinin %d . elemanidir",bul);
+return 0;
+}</code></pre>
+<p><em>Not: Ders notunda iki karşılaştırma <code>= =</code> (arada boşlukla) yazılmış; C'de bu derlenmez, <code>==</code> olmalı (yukarıda düzeltilmiş hâli var).</em></p>
+<h3 id="i-kili-arama">İkili arama</h3>
+<p>Bu yöntemde önce sıralı dizide tam ortadaki eleman alınır, aranan sayı ile karşılaştırılır. Aranan sayı ortadaki elemandan büyükse, tekrar ikinci yarının orta elemanı bulunarak karşılaştırma yapılır. İşlem aranan sayı bulununcaya kadar devam eder. İkili aramada en kötü durumda karşılaştırma sayısı log₂n'dir.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include &lt;stdio.h&gt;
+/* binary search algoritmasi ile sirali dizide arama yapar */
+int main (void)
+{
+int a[10],i,bas,son,x,orta,bul,n;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf("Diziyi sirali olarak giriniz\n");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+printf("\n aranacak sayıyı giriniz\n");
+scanf("%d",&amp;x);
+     bas=0;son=n;
+     bul=0;
+     while(bas &lt;= son &amp;&amp; bul==0){
+        orta=(bas+son)/2;
+        if(x==a[orta]) bul=1 ;
+        else
+        if(x&gt;a[orta]) bas=orta+1;
+        else
+          son=orta-1;
+        }
+     if(x==a[orta]) printf("aranan sayı%3d dizideki indisi:%3d",x,orta);
+     else printf("bulunamadı");
+scanf("%d",&amp;x); // ekranı durdurma
+return 0;
+}</code></pre>
+<p><em>Not: Son indis <code>son=n</code> değil <code>son=n-1</code> olmalı; aranan sayı dizideki en büyük elemandan büyükse program dizinin dışındaki <code>a[n]</code> elemanını okur.</em></p>
+<h2 id="merge-birlestirme-algoritmasi">Merge (birleştirme) algoritması</h2>
+<p>Girilen iki sıralı diziyi birleştiren bir algoritmadır.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code># include &lt;stdio.h&gt;
+/* merge algoritmasi ile iki sirali diziyi birlestirir */
+// Not Her iki girilen dizide kendi içinde sıralı olmalıdır...
+
+int main (void)
+{
+int a[10],b[10],d[20];
+int n,m,i,j,l;
+printf("ilk dizinin boyutu &lt; 10 ?\n");
+scanf("%d",&amp;n);
+printf("ikinci dizinin boyutu &lt;10 ?\n");
+scanf("%d",&amp;m);
+printf(" birinci dizinin elemanlari\n ");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+printf(" ikinci dizinin elemanlari\n ");
+for(i=0;i&lt;m;i++)
+scanf("%d",&amp;b[i]);
+a[n]=b[m-1];
+b[m]=a[n-1];
+i=0;
+j=0;
+for(l=0;l&lt;n+m;l++)
+   if(a[i]&lt;=b[j]){
+      d[l]=a[i];
+      i++;
+      }
+      else
+      { d[l]=b[j];
+         j++;
+      }
+printf(" birlestirilmis dizi \n\n" );
+for(i=0;i&lt;n+m;i++)
+printf("%5d",d[i]);
+scanf("%d",&amp;n); // ekranı durdurmak için
+return 0; }</code></pre>
+<p>Program her dizinin sonuna, öbür dizinin son (en büyük) elemanını bir "bekçi" (sentinel) değer olarak koyuyor; böylece dizilerden biri bittiğinde ayrıca sınır kontrolü yapmadan diğerinden okumaya devam ediliyor.</p>
+<p><em>Not: Bekçi değer, ilk dizi bittiğinde ikinci dizide bekçiye eşit değerler kaldıysa yine seçilip <code>i</code> dizinin dışına ilerleyebiliyor; ayrıca boyut olarak 10 girilirse <code>a[10]</code>/<code>b[10]</code> taşar. Güvenli sürümde döngü <code>i&lt;n</code> ve <code>j&lt;m</code> koşullarıyla yazılır.</em></p>
+<h2 id="klasordeki-ek-programlar-stl-vector-ile">Klasördeki ek programlar (STL vector ile)</h2>
+<p>Aynı haftanın klasöründe ders notundaki programların .cpp dosyalarının yanında, STL vector kullanan birkaç ek program var.</p>
+<h3 id="stl-ve-vector">STL ve vector</h3>
+<p><code>STL.cpp</code> dosyasının başındaki açıklama:</p>
+<blockquote><p>STL (Standart Template Library) Standart Şablon Kütüphanesi, verileri işlemek için kullanılan genel bir rutinler kümesidir. Vektör, deque, list konteyner sınıflarıdır.</p></blockquote>
+<blockquote><p>Vektörler akıllı diziler olarak düşünülebilir. Vektörler verileri ekler veya çıkartırken vektör boyutunu genişletip daraltarak bellekte yer ayırma işlemini sizin adınıza gerçekleştirirler. Vektör elemanlarına [] operatörü ile erişerek vektörleri dizilere çok benzer şekilde kullanabilirsiniz. Bu tür rastgele erişimler vektörlerle çok hızlıdır. Vektörlerin sonuna (arkasına) yeni elemanlar eklemek de ayrıca hızlıdır. Bu tür bir durum karşısında, yeni veri öğesini tutmak için vektör boyutu otomatik olarak arttırılır.</p></blockquote>
+<blockquote><p>D vektörünü tanımlamak için vektörün varsayılan kurucu fonksiyonu (argümansız) kullanılır. Tüm STL konteynerlarda olduğu gibi, konteynerin tutacağı değişken tipini (bu örnekte int tipi) belirtmek için şablon (template) biçimi kullanılır. Konteynerin büyüklüğü açıkça belirtilmez; bu nedenle konteyner 0'dan başlar.</p></blockquote>
+<blockquote><p>push_back() üye fonksiyonu aldığı parametreyi vektörün sonuna ekler. Vektörün arkası (sonu) en yüksek indeks numarasına sahip olan elemanın bulunduğu yerdir. Vektörün önü 0 indeks numarasına sahip olduğu yerdir ve yeni eleman eklemek için kullanılmaz.</p></blockquote>
+<blockquote><p>Vektör veri içermeye başlar başlamaz, bu veriler tıpkı bir dizi içerisindeymiş gibi, aşırı yüklenmiş [] operatörü yardımıyla okuma ve yazmak için erişilebilir hâle gelir. size() üye fonksiyonu hâlihazırda konteynerde bulunan elemanların sayısını döndürür.</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;typename T&gt;
+void foo(vector&lt;T&gt;&amp; dizi)
+{
+  for(int i=0;i&lt;dizi.size();i++)
+    cout&lt;&lt;dizi[i]&lt;&lt;" ";
+}
+
+int main()
+{
+    vector&lt;int&gt; v;
+    v.push_back(10);
+    v.push_back(112);
+    v.push_back(15);
+    v.push_back(56);
+    v.push_back(17);
+    v.push_back(19);
+    v.push_back(33);
+
+    foo(v);
+
+    system("pause");
+    return 0;
+}</code></pre>
+<pre class="kod"><code>10 112 15 56 17 19 33</code></pre>
+<h3 id="sirali-arama-vector-sablonu-ile">Sıralı arama (vector şablonu ile)</h3>
+<p><code>seqSearch</code>, [ilk, son) aralığında aranan değeri bulursa indisini, bulamazsa <code>son</code> değerini döndürüyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Sequential Search...
+//-----------------------
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt; // setw fonksiyonu için
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;class T&gt;
+int seqSearch (vector&lt;T&gt;&amp; dizi,int ilk, int son, int aranan)
+{
+	int i=ilk;
+	while(i != son &amp;&amp; dizi[i] != aranan)
+	i++;
+
+	return i;
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+    vector&lt;int&gt; D;
+    int x;
+
+    // 20 elemanlı, rasgele bir katar oluşturuluyor.
+	for (int i = 0; i &lt; 10; i ++)
+     D.push_back (rand () % 150);
+
+	for(int i=0;i&lt;D.size();i++)
+	cout&lt;&lt;setw(4)&lt;&lt;'['&lt;&lt;i&lt;&lt;']'&lt;&lt;setw(5)&lt;&lt;D[i]&lt;&lt;"\n";
+	cout&lt;&lt;"Aranacak Deger ? ";
+	cin&gt;&gt;x;
+	cout&lt;&lt;"Indis No : "&lt;&lt; seqSearch(D,0,D.size(),x)&lt;&lt;endl;
+    system("pause");
+	return 0;
+}</code></pre>
+<p>Dosyadaki örnek çalışma (rastgele 10 değer; bulamazsa "Indis No : 10" der):</p>
+<pre class="kod"><code>   [0]   41
+   [1]   17
+   [2]   34
+   [3]  100
+   [4]  119
+   [5]  124
+   [6]   78
+   [7]  108
+   [8]  112
+   [9]   14
+Aranacak Deger ? 119
+Indis No : 4
+Press any key to continue . . .</code></pre>
+<h3 id="i-kili-arama-vector-sablonu-ile">İkili arama (vector şablonu ile)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Binary  Search...
+// Sıralı dizi içerisinde aranan değeri bulma kodu
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt; // setw fonksiyonu için
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;class T&gt;
+int binSearch (vector&lt;T&gt;&amp; dizi,int ilk, int son, int aranan)
+{
+	int orta; // orta noktanın indeksi
+	T ortadeger; // dizi[orta] ye atanacak değer
+	int origSon=son; // orjinal son değeri sakla
+
+	while(ilk &lt; son)
+	{
+    orta=(ilk+son)/2;
+	ortadeger=dizi[orta];
+
+	if(aranan==ortadeger)
+	   return orta;
+    else if ( aranan &lt; ortadeger)
+       {
+       son=orta; // alt alt listede arama yap
+       binSearch (dizi,ilk,son,aranan);
+       }
+    if ( aranan &gt; ortadeger)
+       {
+       ilk=orta+1; // üst alt listede arama yap
+       binSearch (dizi,ilk,son,aranan);
+       }
+    }
+    return origSon; // aranan bulunamadı...
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+    vector&lt;int&gt; D;
+    int x;
+
+    // 20 elemanlı, sıralı bir dizi oluşturuluyor.
+	for (int i = 0; i &lt; 20; i ++)
+     D.push_back (i*10-3);
+
+	for(int i=0;i&lt;D.size();i++)
+	cout&lt;&lt;setw(4)&lt;&lt;'['&lt;&lt;i&lt;&lt;']'&lt;&lt;setw(6)&lt;&lt;D[i]&lt;&lt;"\n";
+	cout&lt;&lt;"Aranacak Deger ? ";
+	cin&gt;&gt;x;
+	cout&lt;&lt;"Indis No : "&lt;&lt; binSearch(D,0,D.size(),x)&lt;&lt;endl;
+    system("pause");
+	return 0;
+}</code></pre>
+<p>Dosyadaki örnek çalışma (bulamazsa "Indis No : 20" der):</p>
+<pre class="kod"><code>   [0]    -3
+   [1]     7
+   [2]    17
+   [3]    27
+   [4]    37
+   [5]    47
+   [6]    57
+   [7]    67
+   [8]    77
+   [9]    87
+   [10]    97
+   [11]   107
+   [12]   117
+   [13]   127
+   [14]   137
+   [15]   147
+   [16]   157
+   [17]   167
+   [18]   177
+   [19]   187
+Aranacak Deger ? 127
+Indis No : 13
+Press any key to continue . . .</code></pre>
+<p><em>Not: Fonksiyonun içindeki özyinelemeli <code>binSearch(...)</code> çağrılarının dönüş değeri kullanılmıyor; sonucu asıl bulan, <code>ilk</code> ve <code>son</code> güncellendiği için <code>while</code> döngüsünün kendisi. Bu çağrılar gereksiz yere aynı aramayı tekrarlıyor.</em></p>
+<h3 id="diger-dosyalar">Diğer dosyalar</h3>
+<ul><li><code>BubbleSortSTL.cpp</code>: bubble sort'un vector sürümü; sıralamadan önce ve sonra ilk 10 elemanı yazdırıyor.</li><li><code>STLSelectionSort.cpp</code>: selection sort'un vector sürümü; 10'dan 1'e azalan diziyi sıralarken her turun sonunda diziyi yazdırıyor.</li><li><code>QuickSortTemplate.cpp</code>: Örnek 3.2'deki quick sort'un şablonsuz, int dizisiyle yazılmış hâli; rastgele 20 sayıyı sıralayıp yazdırıyor.</li></ul>
+<p><em>Not: <code>BubbleSortSTL.cpp</code>'de vektörü dolduran <code>for(int i=10;i&gt;0;i++)</code> döngüsü hiç bitmez (<code>i--</code> olmalı). Bu dosyada ve <code>STLSelectionSort.cpp</code>'de fonksiyonlar <code>T</code> döndüreceğini bildirdiği hâlde <code>return</code> yok (<code>void</code> olmalı). <code>QuickSortTemplate.cpp</code>'de <code>quickSort(d,0,20)</code> çağrısı son indis olarak 20 veriyor; 20 elemanlı dizide son indis 19'dur.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-siralama-arama.zip" download>eem227-siralama-arama.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 306 KB · 21.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-siralama-arama.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (306 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

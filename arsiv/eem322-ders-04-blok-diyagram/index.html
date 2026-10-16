@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 4 – Blok Diyagramları, Blok Diyagramı İndirgeme, İşaret Akış Grafikleri ve Mason Kuralı — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 4 (Hamit Erdem, 2013): seri, paralel ve geri beslemeli bağlantılar, yükleme etkisi, blokların toplama ve ayrılma noktalarından kaydırılması, blok diyagramı indirgeme örnekleri, blok diyagramından işaret akış grafiğine geçiş ve Mason kazanç kuralı çözümlü örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 4 – Blok Diyagramları, Blok Diyagramı İndirgeme, İşaret Akış Grafikleri ve Mason Kuralı">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 4 (Hamit Erdem, 2013): seri, paralel ve geri beslemeli bağlantılar, yükleme etkisi, blokların toplama ve ayrılma noktalarından kaydırılması, blok diyagramı indirgeme örnekleri, blok diyagramından işaret akış grafiğine geçiş ve Mason kazanç kuralı çözümlü örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 4 – Blok Diyagramları, Blok Diyagramı İndirgeme, İşaret Akış Grafikleri ve Mason Kuralı", "description": "EEM322 Denetim Sistemleri ders notu 4 (Hamit Erdem, 2013): seri, paralel ve geri beslemeli bağlantılar, yükleme etkisi, blokların toplama ve ayrılma noktalarından kaydırılması, blok diyagramı indirgeme örnekleri, blok diyagramından işaret akış grafiğine geçiş ve Mason kazanç kuralı çözümlü örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "EEM322L4.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/EEM322L4.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 4 – Blok Diyagramları, Blok Diyagramı İndirgeme, İşaret Akış Grafikleri ve Mason Kuralı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#blok-diyagrami-mi-isaret-akis-grafigi-mi">Blok diyagramı mı, işaret akış grafiği mi?</a></li><li><a href="#blok-diyagraminin-elemanlari">Blok diyagramının elemanları</a></li><li><a href="#temel-baglanti-bicimleri">Temel bağlantı biçimleri</a></li><li><a href="#blok-diyagrami-indirgeme">Blok diyagramı indirgeme</a></li><li><a href="#i-saret-akis-grafikleri">İşaret akış grafikleri</a></li><li><a href="#mason-kazanc-kurali">Mason kazanç kuralı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 4 – Blok Diyagramları, Blok Diyagramı İndirgeme, İşaret Akış Grafikleri ve Mason Kuralı</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 09.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>4. ders notudur</strong> ("EEM322 – Lecture 4"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 09.07.2013 tarihi var. Ders notu İngilizce, sayfa başına iki slayt yerleştirilmiş 18 sayfalık bir PDF; örneklerin çoğu Nise'nin <em>Control Systems Engineering</em> kitabından. Aşağıda içerik Türkçe olarak özetlendi, sonuçlar yazıya döküldü; diyagramlar için sayfa görselleri eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Konular:</p>
+<ul><li>Sistemlerin blok diyagramıyla gösterimi</li><li>İşaret akış grafikleri (signal-flow graphs)</li><li>Blok diyagramı indirgeme</li><li>İşaret akış grafiği indirgeme</li><li>Mason kuralı</li></ul>
+<h2 id="blok-diyagrami-mi-isaret-akis-grafigi-mi">Blok diyagramı mı, işaret akış grafiği mi?</h2>
+<p>Birden çok alt sistem iki şekilde gösterilir: <strong>blok diyagramları</strong> (genellikle frekans düzlemi analizinde) ve <strong>işaret akış grafikleri</strong> (genellikle durum uzayı analizinde). İşaret akış grafikleri transfer fonksiyonlarını çizgilerle, işaretleri küçük dairesel düğümlerle gösterir; toplama örtüktür. Bir sistemin transfer fonksiyonu tek bir blokla gösterilebilir; ama durum uzayında her durum değişkeninin ayrıca gösterilmesi gerekir. Notun örneğinde 24/(s³ + 9s² + 26s + 24) transfer fonksiyonunun durum değişkenlerini açıkça göstermek için yedi blok ve bir toplama noktası gerekiyor. Bu yüzden işaret akış grafikleri daha hızlı çizilir, daha derli topludur ve durum değişkenlerini öne çıkarır.</p>
+<h2 id="blok-diyagraminin-elemanlari">Blok diyagramının elemanları</h2>
+<p>Bir alt sistem; girişi, çıkışı ve transfer fonksiyonu olan bir blokla gösterilir. Alt sistemler birbirine bağlandığında iki yeni eleman eklenir: <strong>toplama noktası</strong> (summing junction) ve <strong>ayrılma noktası</strong> (pickoff point). Doğrusal, zamanla değişmeyen bir sistemin blok diyagramı bu dört elemandan oluşur: işaretler, sistem (blok), toplama noktası ve ayrılma noktası.</p>
+<h2 id="temel-baglanti-bicimleri">Temel bağlantı biçimleri</h2>
+<h3 id="seri-kaskad-baglanti">Seri (kaskad) bağlantı</h3>
+<p>Eşdeğer transfer fonksiyonu alt sistemlerin transfer fonksiyonlarının çarpımıdır: G_e(s) = G₃(s)G₂(s)G₁(s). Bu sonuç, alt sistemlerin birbirini <strong>yüklemediği</strong> varsayımıyla elde edilmiştir; yani bir alt sistemin çıkışı, sonraki alt sistem bağlansa da bağlanmasa da aynı kalmalıdır. Çıkış değişiyorsa sonraki alt sistem öncekini yükler ve eşdeğer transfer fonksiyonu tek tek transfer fonksiyonlarının çarpımı olmaz.</p>
+<p>Notta iki RC devresi örnek veriliyor: Her biri tek başına G₁(s) = (1/R₁C₁)/(s + 1/R₁C₁) ve G₂(s) = (1/R₂C₂)/(s + 1/R₂C₂) transfer fonksiyonuna sahip. Doğrudan bağlandıklarında çevre ya da düğüm denklemleriyle bulunan doğru sonuç</p>
+<p>G(s) = (1/R₁C₁R₂C₂) / (s² + (1/R₁C₁ + 1/R₂C₂ + 1/R₂C₁)s + 1/R₁C₁R₂C₂)</p>
+<p>olur ve G₁G₂ çarpımından farklıdır (fark, 1/R₂C₁ terimidir). <strong>Yüklemeyi önlemenin</strong> bir yolu iki devre arasına bir yükselteç koymaktır: Yükseltecin giriş empedansı yüksek olduğu için önceki devreyi yüklemez; çıkış empedansı düşük olduğu için sonraki devreye saf bir gerilim kaynağı gibi görünür. Bu durumda eşdeğer transfer fonksiyonu, transfer fonksiyonları ile yükselteç kazancı K'nın çarpımıdır: G(s) = K·G₁(s)G₂(s).</p>
+<h3 id="paralel-baglanti">Paralel bağlantı</h3>
+<p>Paralel alt sistemlerin girişi ortaktır; çıkış, bütün alt sistem çıkışlarının cebirsel toplamıdır: G_e(s) = ±G₁(s) ± G₂(s) ± G₃(s).</p>
+<h3 id="geri-beslemeli-baglanti">Geri beslemeli bağlantı</h3>
+<p>E(s) = R(s) ∓ C(s)H(s) ve C(s) = E(s)G(s) yazılıp E(s) yok edilirse:</p>
+<p>C(s)/R(s) = G(s) / (1 ± G(s)H(s))</p>
+<p>Paydaki işaret negatif geri besleme için +, pozitif geri besleme için −'dir. Genel tek girişli tek çıkışlı geri beslemeli sistemde R(s) referans giriş, Y(s) denetlenen çıkış, E(s) hata (eyletim) işareti, B(s) geri besleme değişkeni, G(s) ileri yol transfer fonksiyonu (FTF), H(s) geri besleme transfer fonksiyonu, G(s)H(s) çevrim ya da açık çevrim transfer fonksiyonu (OLTF), Y(s)/R(s) ise kapalı çevrim transfer fonksiyonudur (CLTF):</p>
+<p>Y(s)/R(s) = G(s)/(1 + G(s)H(s)) = FTF/(1 + OLTF),  karakteristik denklem: 1 + G(s)H(s) = 0</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Geri beslemeli sistem ve genel blok diyagramı; blokların toplama ve ayrılma noktalarından kaydırılması"><figcaption>Geri besleme ve blok kaydırma kuralları</figcaption></figure>
+<h2 id="blok-diyagrami-indirgeme">Blok diyagramı indirgeme</h2>
+<p>Tanıdık biçimler (seri, paralel, geri besleme) oluşturmak için bloklar toplama noktalarının sağına ya da soluna, ayrılma noktalarının önüne ya da arkasına kaydırılır. Notta "blok diyagramı cebiri" tablosu veriliyor: seri blokların birleştirilmesi, ileri yolda toplama ya da çıkarma, ayrılma noktasının bloğun önüne ya da arkasına kaydırılması, toplama noktasının bloğun önüne ya da arkasına kaydırılması, geri besleme çevriminin kaldırılması ve geri besleme yolunun yok edilmesi.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Üç toplama noktasının birleştirilmesi ve paralel geri besleme fonksiyonlarıyla indirgeme örneği; blok diyagramı cebiri tablosu"><figcaption>Blok diyagramı indirgeme örneği ve cebir tablosu</figcaption></figure>
+<p><strong>Örnek 1 (toplama noktalarını birleştirme):</strong> Üç toplama noktası tek bir toplama noktasında birleştirilir; H₁(s), H₂(s) ve H₃(s) geri besleme fonksiyonları ortak bir işaretten beslendikleri ve çıkışları toplandığı için paraleldir; son olarak geri besleme sistemi indirgenir:</p>
+<p>C(s)/R(s) = G₃G₂G₁ / (1 + G₃G₂[H₁ − H₂ + H₃])</p>
+<p><strong>Örnek 2 (ayrılma noktasını kaydırma):</strong> a ayrılma noktası c'ye taşınır ve çerçevelenen geri besleme çevrimi sadeleştirilir:</p>
+<p>Y/R = G₁G₂ / (1 + G₁ + G₂)</p>
+<p><strong>Örnek 3 (blokları kaydırarak indirgeme):</strong> Önce G₂(s) ayrılma noktasının soluna kaydırılarak paralel alt sistemler oluşturulur ve G₃(s), H₃(s)'ten oluşan geri besleme sistemi indirgenir. Sonra 1/G₂(s) ile birimin paralel çifti indirgenir ve G₁(s) toplama noktasının sağına itilerek geri beslemede paralel alt sistemler oluşturulur. Sonuç:</p>
+<p>C(s)/R(s) = G₁G₃[1 + G₂] / ([1 + G₂H₂ + G₁G₂H₁][1 + G₃H₃])</p>
+<p><strong>Kapalı çevrim transfer fonksiyonu (çevrimler iç içe ve ileri yolla temas hâlindeyse):</strong></p>
+<p>C(s)/R(s) = (ileri yoldaki transfer fonksiyonlarının çarpımı) / (1 − Σ her çevredeki transfer fonksiyonlarının çarpımı)</p>
+<p>Not: Pozitif geri besleme çevrimi paydada negatif bir terim verir.</p>
+<p><strong>Örnek 4:</strong> İleri yolunda 2s + 4 ve 1/s² bulunan birim geri beslemeli sistem:</p>
+<p>T(s) = [(2s + 4)/s²] / [1 + (2s + 4)/s²] = (2s + 4)/(s² + 2s + 4)</p>
+<p><strong>Örnek 5:</strong> Notun 10. sayfasındaki sistem için ayrılma noktaları kaydırılarak T(s) = (G₁G₂G₅ + G₁G₆)/(1 − G₁G₃ + G₁G₂G₄) bulunuyor.</p>
+<h2 id="i-saret-akis-grafikleri">İşaret akış grafikleri</h2>
+<p>İşaret akış grafiği yalnızca <strong>dallardan</strong> (sistemleri temsil eder) ve <strong>düğümlerden</strong> (işaretleri temsil eder) oluşur. Bir düğümdeki işaret, o düğüme giren dalların işaret × kazanç toplamıdır; örneğin V(s) = R₁(s)G₁(s) − R₂(s)G₂(s) + R₃(s)G₃(s).</p>
+<p>Blok diyagramından işaret akış grafiğine geçiş:</p>
+<ol><li>Önce işaret düğümleri (toplama noktalarının çıkışları, blokların çıkışları, giriş ve çıkış) belirlenip işaretlenir.</li><li>Düğümler, aralarındaki transfer fonksiyonlarını taşıyan dallarla bağlanır; çıkarma için dal kazancına eksi işareti konur.</li><li>Gereksiz düğümler kaldırılarak grafik sadeleştirilir.</li></ol>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Seri, paralel ve geri beslemeli blok diyagramlarının işaret akış grafiği karşılıkları"><figcaption>Blok diyagramlarının işaret akış grafiklerine dönüştürülmesi</figcaption></figure>
+<p>Notta bir de ödev var: verilen işaret akış grafiğini sadeleştirin ve verilen blok diyagramını işaret akış grafiğine çevirin.</p>
+<h2 id="mason-kazanc-kurali">Mason kazanç kuralı</h2>
+<p>Mason kuralı, bir işaret akış grafiğini tek bir formülle tek bir transfer fonksiyonuna indirger:</p>
+<p>M = C(s)/R(s) = Σⱼ Mⱼ Δⱼ / Δ</p>
+<ul><li>M: sistemin transfer fonksiyonu (kazancı)</li><li>Mⱼ: j. ileri yolun kazancı</li><li>j: ileri yolları numaralandıran tam sayı</li><li>Δ = 1 − Σ çevrim kazançları + Σ ikişer alınan temas etmeyen çevrim kazançları − Σ üçer alınan temas etmeyen çevrim kazançları + Σ dörder alınan … </li><li>Δⱼ: j. yol çıkarıldığında geriye kalan çevrimlerle oluşturulan Δ; hiç çevrim kalmıyorsa Δⱼ = 1.</li></ul>
+<p>Tanımlar:</p>
+<ul><li><strong>Yol:</strong> Aynı yönde, ardışık dallardan oluşan bağlantı.</li><li><strong>Çevrim:</strong> Hiçbir düğümden iki kez geçmeyen kapalı yol; çevrim kazancı, bir düğümden başlayıp aynı düğümde biten yol boyunca dal kazançlarının çarpımıdır.</li><li><strong>İleri yol:</strong> Giriş (kaynak) düğümünden çıkış (yutak) düğümüne, hiçbir düğümden bir kereden fazla geçmeden giden yol; ileri yol kazancı bu yol boyunca kazançların çarpımıdır.</li><li><strong>Temas etmeyen çevrimler:</strong> Ortak düğümü olmayan çevrimler. Bir çevrim ile bir yol da ortak düğümleri yoksa temas etmez.</li><li><strong>Temas etmeyen çevrim kazancı:</strong> İkişer, üçer, dörder… alınan temas etmeyen çevrimlerin kazanç çarpımı.</li></ul>
+<h3 id="ornek-1">Örnek 1</h3>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Mason kuralı örneği: iki ileri yolu ve beş çevrimi olan blok diyagramı"><figcaption>Mason kuralı: ileri yollar ve çevrimler</figcaption></figure>
+<p>İki ileri yol vardır: M₁ = G₁G₂G₃ ve M₂ = G₄. Beş çevrim vardır:</p>
+<ul><li>Çevrim 1 = −G₁G₂H₁</li><li>Çevrim 2 = −G₂G₃H₂</li><li>Çevrim 3 = −G₁G₂G₃H₃</li><li>Çevrim 4 = −G₄H₃</li><li>Çevrim 5 = G₄H₂G₂H₁</li></ul>
+<p>Her iki yol çıkarıldığında da tam bir çevrim kalmadığından Δ₁ = Δ₂ = 1. Temas etmeyen çevrim çifti olmadığından Δ yalnızca bir eksi çevrim kazançlarının toplamıdır:</p>
+<p>C(s)/R(s) = (G₁G₂G₃ + G₄) / (1 + G₁G₂H₁ + G₂G₃H₂ + G₁G₂G₃H₃ + G₄H₃ − G₄H₂G₂H₁)</p>
+<h3 id="ornek-2">Örnek 2</h3>
+<p>Notun 15.–17. sayfalarındaki işaret akış grafiğinde ileri yol G₁G₂G₃G₄G₅'tir; dört çevrim vardır: L₁ = G₂H₁, L₂ = G₄H₂, L₃ = G₇H₄, L₄ = G₂G₃G₄G₅G₆G₇G₈. İkişer temas etmeyen çevrimler L₁L₂, L₁L₃ ve L₂L₃; üçer temas etmeyen çevrimler L₁L₂L₃'tür. Buna göre:</p>
+<p>Δ = 1 − [G₂H₁ + G₄H₂ + G₇H₄ + G₂G₃G₄G₅G₆G₇G₈] + [G₂H₁G₄H₂ + G₂H₁G₇H₄ + G₄H₂G₇H₄] − [G₂H₁G₄H₂G₇H₄]</p>
+<p>İleri yola değmeyen tek çevrim L₃ olduğundan Δ₁ = 1 − G₇H₄ ve C(s)/R(s) = G₁G₂G₃G₄G₅(1 − G₇H₄)/Δ.</p>
+<h3 id="ornek-3-mason-formulunun-uygulanmasi">Örnek 3: Mason formülünün uygulanması</h3>
+<p>İleri yolda K kazancı ve (s + 1)/(s² + 5s + 8) bloğu, iç çevrimde K₁ geri beslemesi, dış çevrimde birim geri besleme bulunan sistem için H(s) = Σ ileri yollar / (1 − Σ kapalı çevrimler):</p>
+<p>H(s) = K(s + 1)/(s² + 5s + 8) / [1 − (−K(s + 1)/(s² + 5s + 8) − K₁(s + 1)/(s² + 5s + 8))]</p>
+<p>H(s) = (Ks + K) / (s² + (5 + K + K₁)s + (8 + K + K₁))</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Mason formülünün K ve K₁ geri beslemeli sisteme uygulanması"><figcaption>Mason formülünün uygulanması</figcaption></figure>
+<p>Son sayfadaki örnekte aynı sisteme N(s) bozucu girişi eklenerek çıkışın hem R(s)'ye hem N(s)'ye göre yanıtı süperpozisyonla bulunuyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="EEM322L4.pdf" download>EEM322L4.pdf</a></p>
+              <p class="kucuk">PDF · 1.1 MB · 18 <span data-i18n="arch.pagesLower"></span> · 09.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM322L4.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

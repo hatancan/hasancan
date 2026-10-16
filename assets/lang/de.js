@@ -125,5 +125,7 @@ window.I18N.de = {
   "arch.downloadPpt": "Präsentation herunterladen",
   "arch.downloadPdf": "Als PDF herunterladen",
   "arch.pagesLower": "Seiten",
-  "arch.downloadFile": "Datei herunterladen"
+  "arch.downloadFile": "Datei herunterladen",
+  "arch.source": "Quelle",
+  "arch.photoSource": "Dieser Beitrag wurde aus fotografierten Seiten abgeschrieben. Die Fotos selbst werden im Archiv aufbewahrt und nicht veröffentlicht."
 };

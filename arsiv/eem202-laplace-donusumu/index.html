@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Devre Teorisi II: Laplace Dönüşümü — hasancan.net</title>
+<meta name="description" content="EEM202 Devre Teorisi II dersinin Laplace dönüşümü sunumu (Yrd. Doç. Dr. Selda Güney, 2014): tanım, basamak ve dürtü fonksiyonları, fonksiyonel ve işlemsel dönüşüm tabloları, kısmi kesirlerle ters Laplace örnekleri, kutup-sıfırlar, başlangıç ve son değer teoremleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-laplace-donusumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Devre Teorisi II: Laplace Dönüşümü">
+<meta property="og:description" content="EEM202 Devre Teorisi II dersinin Laplace dönüşümü sunumu (Yrd. Doç. Dr. Selda Güney, 2014): tanım, basamak ve dürtü fonksiyonları, fonksiyonel ve işlemsel dönüşüm tabloları, kısmi kesirlerle ters Laplace örnekleri, kutup-sıfırlar, başlangıç ve son değer teoremleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-laplace-donusumu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Devre Teorisi II: Laplace Dönüşümü", "description": "EEM202 Devre Teorisi II dersinin Laplace dönüşümü sunumu (Yrd. Doç. Dr. Selda Güney, 2014): tanım, basamak ve dürtü fonksiyonları, fonksiyonel ve işlemsel dönüşüm tabloları, kısmi kesirlerle ters Laplace örnekleri, kutup-sıfırlar, başlangıç ve son değer teoremleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-laplace-donusumu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "EEM202_laplace.pdf", "contentUrl": "https://hasancan.net/arsiv/eem202-laplace-donusumu/EEM202_laplace.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM202 Devre Teorisi II: Laplace Dönüşümü">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM202</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>14.05.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#konular">Konular</a></li><li><a href="#laplace-donusumu-tanimi">Laplace dönüşümü tanımı</a></li><li><a href="#basamak-fonksiyonu-step-function">Basamak fonksiyonu (step function)</a></li><li><a href="#durtu-fonksiyonu-impulse-function">Dürtü fonksiyonu (impulse function)</a></li><li><a href="#fonksiyonel-donusumler">Fonksiyonel dönüşümler</a></li><li><a href="#i-slemsel-donusumler">İşlemsel dönüşümler</a></li><li><a href="#laplace-donusumunun-devrelere-uygulanmasi">Laplace dönüşümünün devrelere uygulanması</a></li><li><a href="#ters-laplace-donusumu">Ters Laplace dönüşümü</a></li><li><a href="#s-duzleminde-kutup-ve-sifirlar-poles-zeros">s-düzleminde kutup ve sıfırlar (poles/zeros)</a></li><li><a href="#baslangic-ve-son-deger-teoremleri">Başlangıç ve son değer teoremleri</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM202 Devre Teorisi II: Laplace Dönüşümü</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 14.05.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM202 Devre Teorisi II</strong> dersinde Yrd. Doç. Dr. Selda Güney'in hazırladığı <strong>Laplace Dönüşümü</strong> sunumunun içeriğidir (Mayıs 2014). Formüller ve dönüşüm tabloları metin olarak yazıldı; grafikler ve devre şeması görsel olarak eklendi. 33 slaytlık orijinal PDF yazının sonunda indirilebilir.</p>
+<h2 id="konular">Konular</h2>
+<ul><li>Laplace dönüşümü tanımı</li><li>Basamak fonksiyonu</li><li>Dürtü fonksiyonu</li><li>Fonksiyonel dönüşümler</li><li>İşlemsel dönüşümler</li><li>Laplace dönüşümünün devrelere uygulanması</li><li>Ters Laplace dönüşümü</li><li>F(s)'nin kutup ve sıfırları</li><li>Başlangıç ve son değer teoremleri</li></ul>
+<h2 id="laplace-donusumu-tanimi">Laplace dönüşümü tanımı</h2>
+<p>Sunum, devrelerde karşılaşılan işaretlerle başlar:</p>
+<ul><li>Elektriksel işaretler: analog, sayısal (ses, görüntü, ışık, radyasyon, ultrason; dönüştürücüler; Fourier dönüşümü; sinüsoidal işaretler)</li><li>Kaynaklar: DC kaynak + anahtar (birim basamak), süreksizlik noktası; süreksizlik noktasında türev (Dirac delta fonksiyonu, impulse); süreksizlik noktasında integral (bir boyutu sıfır olan alan); AC</li><li>Lineer devrelerde görülen işaretler: doğru gerilim/akım, AC gerilim/akım (sönümlü), üstel gerilim/akım</li></ul>
+<p>Öyle bir dönüşüm olsun ki diferansiyel denklemin tam çözümünü versin; tanım, çevre ve düğüm denklemleri cebirsel olsun:</p>
+<ul><li>L{f(t)} = ∫₀^∞ f(t)·e^(−st) dt</li><li>F(s) = L{f(t)}</li><li>f(t) = L⁻¹{F(s)}</li></ul>
+<p>Alt limit, t = 0'da süreklilik/süreksizlik durumuna göre seçilir:</p>
+<ul><li>t = 0⁻ alt limit alınır</li><li>t &lt; 0⁻: ilk koşulların oluşumu</li><li>t = 0⁻ ile t = 0⁺ aralığında integral: (0)</li><li>İstisna: impulse function (Dirac delta)</li></ul>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Orijinde sürekli ve orijinde süreksiz e^(−at) fonksiyonları"><figcaption>Orijinde sürekli (a) ve süreksiz (b) fonksiyon</figcaption></figure>
+<h2 id="basamak-fonksiyonu-step-function">Basamak fonksiyonu (step function)</h2>
+<ul><li>Ku(t) = 0, t &lt; 0</li><li>Ku(t) = K, t &gt; 0</li><li>K = 1 için <strong>birim basamak fonksiyonu</strong> (unit step function)</li></ul>
+<p>Basamak fonksiyonu bir matematik modeldir; devrelerdeki karşılığı anahtarlamadır: doğru gerilim kaynağının (DC) bir anahtarla devreye uygulanması. Teori ile uygulamanın uyumluluğu için Ku(0) = 0,5K alınır.</p>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="0⁻ ile 0⁺ arasında doğrusal yükselen basamak: Ku(0) = 0,5K"><figcaption>Teori ile uygulama uyumluluğu: Ku(0) = 0.5K</figcaption></figure>
+<p>Kaydırılmış basamak:</p>
+<ul><li>Ku(t − a) = 0, t &lt; a; Ku(t − a) = K, t &gt; a</li><li>Ku(a − t) = K, t &lt; a; Ku(a − t) = 0, t &gt; a</li></ul>
+<p><strong>Örnek:</strong> Şekildeki üçgen dalga, basamak fonksiyonlarıyla şöyle yazılır:</p>
+<p>f(t) = 2t[u(t) − u(t−1)] + (−2t + 4)[u(t−1) − u(t−3)] + (2t − 8)[u(t−3) − u(t−4)]</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Örnek: 0–4 s arasında üçgen dalga ve onu oluşturan 2t, −2t+4 ve 2t−8 doğruları"><figcaption>Basamak fonksiyonu örneği</figcaption></figure>
+<h2 id="durtu-fonksiyonu-impulse-function">Dürtü fonksiyonu (impulse function)</h2>
+<p>f′(0) = δ(t), ε → 0. Değişken parametreli fonksiyon δ(t): değişken parametre 0'a giderken</p>
+<ul><li>fonksiyon t = 0'da sonsuza gider,</li><li>fonksiyonun değişim aralığı 0'a gider,</li><li>fonksiyon altındaki alan 1'dir.</li></ul>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Dürtü fonksiyonunun limit olarak tanımı: genişliği 2ε, yüksekliği 1/2ε olan darbe"><figcaption>Dürtü fonksiyonu: değişken parametreli fonksiyonun limiti</figcaption></figure>
+<ul><li>∫ Kδ(t) dt = K (−∞'dan ∞'a), δ(t) = 0, t ≠ 0; K: şiddet (strength)</li><li>Dirac delta fonksiyonunun zamanda kayma özelliği (shifting/sifting property): f(t), t = a'da sürekli ise ∫ f(t)·δ(t − a) dt = f(a)</li></ul>
+<h2 id="fonksiyonel-donusumler">Fonksiyonel dönüşümler</h2>
+<ul><li>L{δ(t)} = ∫₀^∞ δ(t)·e^(−st) dt = ∫ δ(t)·1 dt = <strong>1</strong></li><li>L{δ′(t)} = s; genelleştirilmişi L{δ⁽ⁿ⁾(t)} = sⁿ</li><li>ε → 0 iken f(t) → u(t) ve f′(t) → δ(t); yani δ(t) = du(t)/dt</li></ul>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="ε → 0 limitinde rampa basamağa, türevi dürtüye dönüşür"><figcaption>f(t) → u(t), f′(t) → δ(t)</figcaption></figure>
+<ul><li>L{u(t)} = ∫₀^∞ e^(−st) dt = [−(1/s)e^(−st)]₀^∞ = −(1/s)(0 − 1) = <strong>1/s</strong></li><li>L{e^(−at)} = <strong>1/(s + a)</strong></li><li>e^(jωt) = cos ωt + j sin ωt, e^(−jωt) = cos ωt − j sin ωt; cos ωt = ½(e^(jωt) + e^(−jωt)), sin ωt = (1/2j)(e^(jωt) − e^(−jωt))</li><li>L{sin ωt} = <strong>ω/(s² + ω²)</strong>, L{cos ωt} = <strong>s/(s² + ω²)</strong></li><li>Rampa: ∫₀^∞ t·e^(−st) dt kısmi integrasyonla (u = e^(−st), dv = dt) hesaplanır ve <strong>1/s²</strong> bulunur.</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Fonksiyon</th><th scope="col">f(t)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Impulse</th><td>δ(t)</td><td>1</td></tr><tr><th scope="row">Step</th><td>u(t)</td><td>1/s</td></tr><tr><th scope="row">Ramp</th><td>t</td><td>1/s²</td></tr><tr><th scope="row">Exponential</th><td>e^(−at)</td><td>1/(s+a)</td></tr><tr><th scope="row">Sine</th><td>sin ωt</td><td>ω/(s²+ω²)</td></tr><tr><th scope="row">Cosine</th><td>cos ωt</td><td>s/(s²+ω²)</td></tr><tr><th scope="row">Damped ramp</th><td>t·e^(−at)</td><td>1/(s+a)²</td></tr><tr><th scope="row">Damped sine</th><td>e^(−at) sin ωt</td><td>ω/((s+a)²+ω²)</td></tr><tr><th scope="row">Damped cosine</th><td>e^(−at) cos ωt</td><td>(s+a)/((s+a)²+ω²)</td></tr></tbody></table></div>
+<h2 id="i-slemsel-donusumler">İşlemsel dönüşümler</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">İşlem</th><th scope="col">f(t)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Bir sabit ile çarpma</th><td>K·f(t)</td><td>K·F(s)</td></tr><tr><th scope="row">Toplama ve çıkarma</th><td>f₁(t) + f₂(t) − f₃(t)</td><td>F₁(s) + F₂(s) − F₃(s)</td></tr><tr><th scope="row">Türev alma</th><td>df(t)/dt</td><td>sF(s) − f(0⁻)</td></tr><tr><th scope="row">2. dereceden türev alma</th><td>d²f(t)/dt²</td><td>s²F(s) − s·f(0⁻) − df(0⁻)/dt</td></tr><tr><th scope="row">n. dereceden türev alma</th><td>dⁿf(t)/dtⁿ</td><td>sⁿF(s) − sⁿ⁻¹f(0⁻) − sⁿ⁻²·df(0⁻)/dt − … − dⁿ⁻¹f(0⁻)/dtⁿ⁻¹</td></tr><tr><th scope="row">İntegral alma</th><td>∫₀ᵗ f(x) dx</td><td>F(s)/s</td></tr><tr><th scope="row">Zaman bölgesinde kaydırma</th><td>f(t−a)u(t−a), a &gt; 0</td><td>e^(−as)F(s)</td></tr><tr><th scope="row">s bölgesinde kaydırma</th><td>e^(−at)f(t)</td><td>F(s+a)</td></tr><tr><th scope="row">Ölçek değiştirme</th><td>f(at), a &gt; 0</td><td>(1/a)F(s/a)</td></tr><tr><th scope="row">s bölgesinde 1. türev alma</th><td>t·f(t)</td><td>−dF(s)/ds</td></tr><tr><th scope="row">s bölgesinde n. türev alma</th><td>tⁿf(t)</td><td>(−1)ⁿ dⁿF(s)/dsⁿ</td></tr><tr><th scope="row">s bölgesinde integral alma</th><td>f(t)/t</td><td>∫ₛ^∞ F(u) du</td></tr></tbody></table></div>
+<h2 id="laplace-donusumunun-devrelere-uygulanmasi">Laplace dönüşümünün devrelere uygulanması</h2>
+<p>t = 0'da anahtarı açılan bir I_dc akım kaynağı, paralel R, L, C elemanlarını besler:</p>
+<ul><li>i_dc = I_dc·u(t) → I_dc(s) = I_dc/s</li><li>İlk koşullar 0 ise: V_L(s) = sL·I_L(s), I_C(s) = sC·V_C(s), V_R(s) = R·I_R(s)</li><li>Sonuç: <strong>v(s) = (I_dc/C) / (s² + (1/RC)s + 1/LC)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-21.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Paralel RLC devresi: t = 0&#x27;da Idc akım kaynağı devreye giriyor, çıkış v(t)"><figcaption>Laplace dönüşümünün paralel RLC devresine uygulanması</figcaption></figure>
+<h2 id="ters-laplace-donusumu">Ters Laplace dönüşümü</h2>
+<p>Devre çözümleri s-domeninde rasyonel fonksiyonlardır:</p>
+<p>F(s) = N(s)/D(s) = (aₙsⁿ + aₙ₋₁sⁿ⁻¹ + … + a₁s + a₀) / (bₘsᵐ + bₘ₋₁sᵐ⁻¹ + … + b₁s + b₀)</p>
+<ul><li>Proper rational: n &lt; m</li><li>Improper rational: m &lt; n</li></ul>
+<p>Rasyonel fonksiyonlar basit kesirler (partial fraction expansion) toplamı biçiminde yazılabilir. Bu basit kesirlerden de Laplace dönüşümünün doğrusallığından yararlanarak t domenine geçilebilir.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kök türü</th><th scope="col">Terim</th><th scope="col">Ters Laplace</th></tr></thead><tbody><tr><th scope="row">Reel kök</th><td>K/(s+a)</td><td>K·e^(−at)u(t)</td></tr><tr><th scope="row">Katlı reel kök</th><td>K/(s+a)²</td><td>K·t·e^(−at)u(t)</td></tr><tr><th scope="row">Kompleks kök</th><td>K/(s+α−jβ) + K*/(s+α+jβ)</td><td>2∣K∣e^(−αt) cos(βt+θ)u(t)</td></tr><tr><th scope="row">Katlı kompleks kök</th><td>K/(s+α−jβ)² + K*/(s+α+jβ)²</td><td>2t∣K∣e^(−αt) cos(βt+θ)u(t)</td></tr></tbody></table></div>
+<p>Burada K = |K|∠θ. K'nın s = −α + jβ köküne ait olduğu unutulmamalıdır!</p>
+<p>Rasyonel fonksiyonun kutupları:</p>
+<ul><li>reel ise ters Laplace eksponansiyel,</li><li>kompleks ise eksponansiyel sönümlü sinüsoidal,</li><li>imajiner ise sinüsoidaldir.</li></ul>
+<h3 id="katsiz-reel-kokler">Katsız reel kökler</h3>
+<p>F(s) = 96(s+5)(s+12) / [s(s+8)(s+6)] = K₁/s + K₂/(s+8) + K₃/(s+6)</p>
+<p>L⁻¹{F(s)} = (120 − 72e^(−8t) + 48e^(−6t))u(t)</p>
+<h3 id="katsiz-ve-katli-reel-kokler">Katsız ve katlı reel kökler</h3>
+<p>s+6 / [s(s+3)(s+1)²] = K₁/s + K₂/(s+3) + K₃/(s+1)² + K₄/(s+1) → (K₁ + K₂e^(−3t) + K₃te^(−t) + K₄e^(−t))u(t)</p>
+<p>Kullanılan dönüşümler: L⁻¹{1/(s+a)} = e^(−at), L⁻¹{1/(s+a)²} = te^(−at), genel olarak L⁻¹{1/(s+a)ⁿ} = tⁿ⁻¹e^(−at)/(n−1)!</p>
+<p>100(s+25) / [s(s+5)³] = K₁/s + K₂/(s+5)³ + K₃/(s+5)² + K₄/(s+5)</p>
+<ul><li>K₁ = 20, K₂ = −400, K₃ = −100, K₄ = −20</li><li>L⁻¹ = [20 − 200t²e^(−5t) − 100te^(−5t) − 20e^(−5t)]u(t)</li></ul>
+<h3 id="eslenik-kompleks-kokler">Eşlenik kompleks kökler</h3>
+<p>Katsız eşlenik kompleks kök: L⁻¹{K/(s+α−jβ) + K*/(s+α+jβ)} = 2|K|e^(−αt) cos(βt + θ)u(t)</p>
+<p>Katlı eşlenik kompleks kök: L⁻¹{K/(s+α−jβ)ʳ + K*/(s+α+jβ)ʳ} = [2|K|tʳ⁻¹/(r−1)!]·e^(−αt) cos(βt + θ)u(t), K = |K|e^(jθ)</p>
+<blockquote><p>Yorum: Eşlenik kompleks köklerden −α+jβ'ya ait K katsayısını bulmak yeter, K*'ı bulmaya gerek yok; bu veri ile ters Laplace doğrudan yazılabilir. Kökler yalnız imajiner olursa sonuç?</p></blockquote>
+<p><strong>Örnek (eşlenik kompleks kutuplar):</strong></p>
+<p>F(s) = 100(s+3) / [(s+6)(s² + 6s + 25)], s² + 6s + 25 = (s+3−j4)(s+3+j4)</p>
+<p>F(s) = K₁/(s+6) + K₂/(s+3−j4) + K₃/(s+3+j4)</p>
+<ul><li>K₁ = −12</li><li>K₂ = 6 − j8 = 10e^(−j53°)</li><li>K₃ = 6 + j8 = 10e^(j53°) = K₂*</li><li>L⁻¹{F(s)} = [−12e^(−6t) + 20e^(−3t) cos(4t − 53°)]u(t)</li></ul>
+<p><strong>Örnek (katlı kompleks kutup):</strong></p>
+<p>F(s) = 768 / (s² + 6s + 25)² = 768 / [(s+3−j4)²(s+3+j4)²] = K₁/(s+3−j4)² + K₂/(s+3−j4) + K₁*/(s+3+j4)² + K₂*/(s+3+j4)</p>
+<ul><li>K₁ = −12, K₂ = −j3 = 3e^(−j90°)</li><li>K₁* = −12, K₂* = j3 = 3e^(j90°)</li><li>f(t) = [−24te^(−3t) cos 4t + 6e^(−3t) cos(4t − 90°)]u(t)</li></ul>
+<h3 id="payin-derecesi-paydaninkinden-buyukse">Payın derecesi paydanınkinden büyükse</h3>
+<ul><li>Payın derecesi paydanınkinden büyük ise bölme işlemi yapılarak polinom uygun rasyonel fonksiyona dönüştürülür.</li><li>Polinomun ters dönüşümünden Dirac delta fonksiyonunun türevleri ve/veya kendisi gelir.</li><li>Uygun rasyonel fonksiyonun ters dönüşümü ise önce yapıldığı gibidir.</li></ul>
+<p><strong>Örnek:</strong></p>
+<p>F(s) = (s⁴ + 13s³ + 66s² + 200s + 300) / (s² + 9s + 20)</p>
+<p>F(s) = s² + 4s + 10 + (30s + 10)/(s² + 9s + 20) = s² + 4s + 10 − 20/(s+4) + 50/(s+5)</p>
+<p>f(t) = d²δ(t)/dt² + 4·dδ(t)/dt + 10δ(t) − (20e^(−4t) − 50e^(−5t))u(t)</p>
+<p><em>Not: Slayttaki kalan terimde pay 30s + 10 yazılmış; bölme işleminin kalanı aslında 30s + 100'dür. Sonraki satırdaki −20/(s+4) + 50/(s+5) açılımı ve f(t) sonucu 30s + 100 ile tutarlıdır.</em></p>
+<h2 id="s-duzleminde-kutup-ve-sifirlar-poles-zeros">s-düzleminde kutup ve sıfırlar (poles/zeros)</h2>
+<p>F(s) = K(s+z₁)(s+z₂)…(s+zₙ) / [(s+p₁)(s+p₂)…(s+pₙ)]</p>
+<p>Örnek: F(s) = 10(s+5)(s+3−j4)(s+3+j4) / [s(s+10)(s+6−j8)(s+6+j8)]</p>
+<p>Sıfırlar: −5, −3 ± j4; kutuplar: 0, −10, −6 ± j8.</p>
+<figure class="yazi-gorsel"><img src="s-32.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="F(s)&#x27;nin s-düzleminde kutupları (×) ve sıfırları (○)"><figcaption>S-düzleminde kutup ve sıfırlar</figcaption></figure>
+<h2 id="baslangic-ve-son-deger-teoremleri">Başlangıç ve son değer teoremleri</h2>
+<ul><li>Bulunan sonuçları test etmekte kullanabiliriz.</li><li>F(s)'nin ve f(t)'nin 0 ve ∞'daki davranışını belirlememizde yardımcı olur.</li><li>F(s)'nin ters dönüşümünü almadan f(t)'nin başlangıç ve son değerlerini, bilinen devre davranışından kontrol ederek uyumlu olup olmadıklarını gözlemleyebiliriz.</li></ul>
+<p>Başlangıç değer teoremi: lim(t→0⁺) f(t) = lim(s→∞) sF(s)</p>
+<p>Son değer teoremi: lim(t→∞) f(t) = lim(s→0) sF(s)</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="EEM202_laplace.pdf" download>EEM202_laplace.pdf</a></p>
+              <p class="kucuk">PDF · 1.9 MB · 33 <span data-i18n="arch.pagesLower"></span> · 14.05.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM202_laplace.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

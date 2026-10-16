@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM224 Elektromanyetik I: Alan Kavramı, Gradyant, Diverjans, Bukle ve Stokes–Diverjans Teoremleri (El Yazısı Ders Notu) — hasancan.net</title>
+<meta name="description" content="EEM224 Elektromanyetik I el yazısı ders notu: skaler ve vektörel alan, nabla operatörü ve birimi, gradyant, diverjans ve bukle (curl), solenoidal ve irrotasyonel alanlar, diverjans teoremi, Stokes teoremi, iki sıfır özdeşliği ve Helmholtz teoremi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem224-gradyant-diverjans-bukle/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM224 Elektromanyetik I: Alan Kavramı, Gradyant, Diverjans, Bukle ve Stokes–Diverjans Teoremleri (El Yazısı Ders Notu)">
+<meta property="og:description" content="EEM224 Elektromanyetik I el yazısı ders notu: skaler ve vektörel alan, nabla operatörü ve birimi, gradyant, diverjans ve bukle (curl), solenoidal ve irrotasyonel alanlar, diverjans teoremi, Stokes teoremi, iki sıfır özdeşliği ve Helmholtz teoremi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem224-gradyant-diverjans-bukle/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM224 Elektromanyetik I: Alan Kavramı, Gradyant, Diverjans, Bukle ve Stokes–Diverjans Teoremleri (El Yazısı Ders Notu)", "description": "EEM224 Elektromanyetik I el yazısı ders notu: skaler ve vektörel alan, nabla operatörü ve birimi, gradyant, diverjans ve bukle (curl), solenoidal ve irrotasyonel alanlar, diverjans teoremi, Stokes teoremi, iki sıfır özdeşliği ve Helmholtz teoremi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem224-gradyant-diverjans-bukle/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM224 – Elektromanyetik I", "associatedMedia": {"@type": "MediaObject", "name": "eem224-gradyant-diverjans-bukle.zip", "contentUrl": "https://hasancan.net/arsiv/eem224-gradyant-diverjans-bukle/eem224-gradyant-diverjans-bukle.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM224 Elektromanyetik I: Alan Kavramı, Gradyant, Diverjans, Bukle ve Stokes–Diverjans Teoremleri (El Yazısı Ders Notu)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM224</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM224 – Elektromanyetik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#alan-field-kavrami">Alan (field) kavramı</a></li><li><a href="#del-delta-veya-nabla-operatoru">Del, delta veya nabla operatörü</a></li><li><a href="#skaler-bir-alanin-gradyanti">Skaler bir alanın gradyantı</a></li><li><a href="#vektorel-bir-alanin-diverjansi">Vektörel bir alanın diverjansı</a></li><li><a href="#vektorel-bir-alanin-buklesi">Vektörel bir alanın buklesi</a></li><li><a href="#vektorel-alanlarin-diverjans-ve-buklelerine-gore-siniflandirilmasi">Vektörel alanların diverjans ve buklelerine göre sınıflandırılması</a></li><li><a href="#diverjans-teoremi">Diverjans teoremi</a></li><li><a href="#stokes-teoremi">Stokes teoremi</a></li><li><a href="#i-ki-0-esitligi">İki "0" eşitliği</a></li><li><a href="#helmholtz-teoremi">Helmholtz teoremi</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM224</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM224 Elektromanyetik I: Alan Kavramı, Gradyant, Diverjans, Bukle ve Stokes–Diverjans Teoremleri (El Yazısı Ders Notu)</h1>
+            <p class="kucuk">EEM224 – Elektromanyetik I · 17.03.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM224 Elektromanyetik I</strong> dersine ait el yazısı ders notlarının iki bölümünü bir araya getiriyor: <strong>"Alan Kavramı – Gradyant – Diverjans – Bukle"</strong> (3 sayfa) ve <strong>"Alanların Sınıflandırılması – Stokes ve Diverjans Teoremleri"</strong> (3 sayfa). Notlarda hazırlayanın adı ve tarih yazmıyor. Notların içeriği metne döküldü; taranmış orijinal PDF'ler yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="alan-field-kavrami">Alan (field) kavramı</h2>
+<p><strong>Alan:</strong> uzamsal bir dağılım; bir başka deyişle "uzay koordinatlarına" bağımlı bir fonksiyon.</p>
+<ul><li>g = f(x, y, z), x = x₀, y = y₀, z = z₀ noktasında skaler bir değerdir; <strong>f skaler alandır</strong> (<em>scalar field</em>). Örneğin bir hacimdeki sıcaklık fonksiyonu.</li><li>Ḡ = F̄(x, y, z), aynı noktada vektörel bir değerdir; <strong>F̄ vektörel alandır</strong> (<em>vector field</em>). Örneğin bir hacimdeki rüzgâr fonksiyonu.</li></ul>
+<p>Bir alan statik olabileceği gibi zaman bağımlı da olabilir: f(x, y, z; t) zaman bağımlı skaler alan, F̄(x, y, z; t) zaman bağımlı vektörel alandır.</p>
+<p><strong>Statik alan:</strong> konuma göre değişiklik gösterebilir, ancak zamana göre değişiklik göstermez.</p>
+<p>Vektörel bir alanın her bir bileşeninin şiddeti bir skaler alandır:</p>
+<p>F̄(x, y, z) = â_x f_x(x, y, z) + â_y f_y(x, y, z) + â_z f_z(x, y, z)</p>
+<p>Burada f_x, f_y, f_z sırasıyla x, y ve z yönündeki bileşenlerin şiddetleridir (skaler alanlar).</p>
+<p><strong>Önemli not:</strong> x yönündeki bileşen sadece x'e bağlı bir fonksiyon olmak zorunda değildir. Bu örnekte olduğu gibi x, y ve z'ye bağlı bir fonksiyon olabilir.</p>
+<h2 id="del-delta-veya-nabla-operatoru">Del, delta veya nabla operatörü</h2>
+<p>Nabla operatörü (∇ ile gösterilir), Kartezyen koordinatlarda şu şekilde ifade edilen vektörel bir operatördür:</p>
+<p>∇ = â_x ∂/∂x + â_y ∂/∂y + â_z ∂/∂z</p>
+<p><strong>Soru: ∇'nın birimi nedir?</strong> Tanıma bakıldığında ∇ operatörünün x, y ve z'ye göre türev terimleri içerdiği görülmektedir. x, y, z uzunluk değişkenleri olduğundan birimleri "metre" olarak ifade edilebilir. Dolayısıyla x, y, z'ye göre türev almak aslında "metre"ye bölmek demektir. Bu nedenle ∇ operatörünün birimi <strong>1/metre</strong>'dir. (Genel olarak: bir değişkene göre türev almak, o değişkenin birimine bölmek demektir.)</p>
+<h2 id="skaler-bir-alanin-gradyanti">Skaler bir alanın gradyantı</h2>
+<p>Gradyant, skaler bir alanın değişimi yönündeki vektörel bir alandır.</p>
+<p>Örneğin bir bölgedeki sıcaklık fonksiyonunu ele alalım: T(x, y, z). Sabit yükseklikte sıcaklık sabit olsun, ancak yükseklik (z) arttıkça sıcaklık artıyor olsun. Bu durumda sıcaklık fonksiyonunun gradyantı â_z yönünde bir vektörel alan olacaktır.</p>
+<p>Matematiksel olarak (Kartezyen koordinatlarda) bir skaler alanın gradyantı:</p>
+<p>∇f(x, y, z) = â_x ∂f/∂x + â_y ∂f/∂y + â_z ∂f/∂z</p>
+<p>Sonuç vektöreldir. ∇ (vektör) ile f (skaler) arasına, aynen bir vektör ile bir skalerin çarpımında olduğu gibi, hiçbir işaret konulmaz.</p>
+<h2 id="vektorel-bir-alanin-diverjansi">Vektörel bir alanın diverjansı</h2>
+<p>Vektörel bir alanın diverjansı, söz konusu vektörel alanın her bir bileşeninin kendi yönünde değişimi olup olmadığını belirten bir ölçüttür. Ā(x, y, z) = â_x A_x(x, y, z) + â_y A_y(x, y, z) + â_z A_z(x, y, z) olsun:</p>
+<p>∇ · Ā = (â_x ∂/∂x + â_y ∂/∂y + â_z ∂/∂z) · (â_x A_x + â_y A_y + â_z A_z) = ∂A_x/∂x + ∂A_y/∂y + ∂A_z/∂z</p>
+<p>Terimler sırasıyla x yönündeki bileşenin x yönündeki değişimi, y yönündeki bileşenin y yönündeki değişimi ve z yönündeki bileşenin z yönündeki değişimidir. ∇ (vektör) ile Ā (vektör) arasında skaler çarpım vardır; <strong>sonuç skalerdir</strong>.</p>
+<h2 id="vektorel-bir-alanin-buklesi">Vektörel bir alanın buklesi</h2>
+<p>Vektörel bir alanın buklesi, söz konusu vektörel alanın rotasyonel bir değişim içerisinde olup olmadığını belirten bir ölçüttür. Kartezyen koordinatlarda:</p>
+<p>∇ × Ā = (â_x ∂/∂x + â_y ∂/∂y + â_z ∂/∂z) × (â_x A_x + â_y A_y + â_z A_z)</p>
+<pre class="kod"><code>        | â_x    â_y    â_z  |
+∇ × Ā = | ∂/∂x   ∂/∂y   ∂/∂z |
+        | A_x    A_y    A_z  |</code></pre>
+<p>∇ (vektör) ile Ā (vektör) arasında vektörel çarpım vardır; <strong>sonuç vektöreldir</strong>.</p>
+<h2 id="vektorel-alanlarin-diverjans-ve-buklelerine-gore-siniflandirilmasi">Vektörel alanların diverjans ve buklelerine göre sınıflandırılması</h2>
+<ul><li>Diverjansı 0'a eşit olan bir vektörel alan <strong>"solenoidal"</strong> olarak adlandırılır: ∇ · Ā(x, y, z) = 0 ise Ā(x, y, z) solenoidal bir alandır.</li><li>Buklesi 0'a eşit olan bir vektörel alan <strong>"irrotasyonel"</strong> veya <strong>"konservatif"</strong> olarak adlandırılır: ∇ × Ā(x, y, z) = 0 ise Ā(x, y, z) irrotasyonel veya konservatif bir alandır.</li></ul>
+<p>Not: Bazı kaynaklarda bukle (∇×) operatörü "rotasyonel" olarak da anılmaktadır. Buklesi 0 olan alanlara bu nedenle "irrotasyonel", yani "rotasyonelsiz" adı verilmektedir.</p>
+<h2 id="diverjans-teoremi">Diverjans teoremi</h2>
+<p>v bir hacim, S de v hacmini çevreleyen kapalı yüzey olsun. Herhangi bir Ā(x, y, z) vektörel alanı için:</p>
+<p>∫_v (∇ · Ā) dv = ∮_S Ā · ds̄</p>
+<p>Yani Ā(x, y, z)'nin kapalı S yüzeyi üzerinde oluşturduğu toplam akı, ∇ · Ā(x, y, z)'nin v üzerindeki hacim integrali ile bulunabilir.</p>
+<p>Kolay hatırlamak için: sol tarafta ∇ · Ā skaler alan, dv skalerdir; hacim integralinde operandlar skaler olmalı. Sağ tarafta Ā vektörel alan, ds̄ vektördür ve aralarında skaler çarpım vardır; yüzey integralinde operandlar vektörel olmalı.</p>
+<p><strong>Birimler cinsinden düşünürsek</strong> (Ā'nın birimi "Kappa" olsun): sol tarafta ∇ · Ā'nın birimi Kappa/m, dv'nin birimi m³, toplam Kappa·m². Sağ tarafta Ā Kappa, ds̄ m², toplam yine Kappa·m². Sol taraftaki terimde ∇'dan ötürü fazladan bir türev terimi var, ancak 3 katlı integral var; sağ taraftaki terimde 2 katlı integral var.</p>
+<h2 id="stokes-teoremi">Stokes teoremi</h2>
+<p>S bir yüzey, C de S yüzeyini çevreleyen kapalı kontur olsun. Herhangi bir Ā(x, y, z) vektörel alanı için:</p>
+<p>∫_S (∇ × Ā) · ds̄ = ∮_C Ā · dl̄</p>
+<p>Yani kapalı bir C konturu üzerinde ilerleme sonucu Ā(x, y, z)'ye karşı yapılan toplam iş, ∇ × Ā(x, y, z)'nin S üzerinde oluşturduğu akıya eşittir.</p>
+<p>Kolay hatırlamak için (Ā'nın birimi Kappa olsun): sol tarafta ∇ × Ā Kappa/m, ds̄ m², toplam Kappa·m; sağ tarafta Ā Kappa, dl̄ m, toplam Kappa·m. Sol terimde ∇'dan ötürü fazladan bir türev terimi var, ancak 2 katlı integral var; sağ terimde tek katlı integral var.</p>
+<h2 id="i-ki-0-esitligi">İki "0" eşitliği</h2>
+<p><strong>1. Skaler bir alanın gradyantının buklesi 0'dır.</strong> f(x, y, z) bir skaler alan olsun:</p>
+<p>∇ × (∇f(x, y, z)) = 0</p>
+<p>Dolayısıyla buklesi 0 olan bir vektörel alan, bir skaler alanın gradyantı olarak ifade edilebilir. Yani ∇ × Ā(x, y, z) = 0 ise Ā(x, y, z) = ∇f(x, y, z) koşulunu sağlayan bir f(x, y, z) skaler alanı vardır.</p>
+<p><strong>2. Vektörel bir alanın buklesinin diverjansı 0'dır.</strong> Ā(x, y, z) bir vektörel alan olsun:</p>
+<p>∇ · (∇ × Ā(x, y, z)) = 0</p>
+<p>Dolayısıyla diverjansı 0 olan bir vektörel alan, başka bir vektörel alanın buklesi olarak ifade edilebilir. Yani ∇ · B̄(x, y, z) = 0 ise B̄(x, y, z) = ∇ × Ā(x, y, z) koşulunu sağlayan bir Ā(x, y, z) vektörel alanı vardır.</p>
+<h2 id="helmholtz-teoremi">Helmholtz teoremi</h2>
+<p>(i) ∇ × Ā(x, y, z) ve (ii) ∇ · Ā(x, y, z) her yerde biliniyorsa Ā(x, y, z) de her yerde hesaplanabilir.</p>
+<p>Bir başka deyişle, bir vektörel alanın buklesini ve diverjansını uzayın her yerinde tanımlamak, söz konusu vektörel alanın kendisini tanımlamaya eşdeğerdir.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem224-gradyant-diverjans-bukle.zip" download>eem224-gradyant-diverjans-bukle.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.7 MB · 17.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem224-gradyant-diverjans-bukle.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

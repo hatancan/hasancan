@@ -125,5 +125,7 @@ window.I18N.en = {
   "arch.downloadPpt": "Download slides",
   "arch.downloadPdf": "Download as PDF",
   "arch.pagesLower": "pages",
-  "arch.downloadFile": "Download file"
+  "arch.downloadFile": "Download file",
+  "arch.source": "Source",
+  "arch.photoSource": "This post was transcribed from photographed pages. The photos themselves are kept in the archive and are not published."
 };

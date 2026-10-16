@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 6 – Kararlılık, Hurwitz Testi ve Routh-Hurwitz Kriteri — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 6 (Hamit Erdem, 2013): kararlı, kararsız ve marjinal kararlı sistem tanımları, BIBO kararlılığı, kutup yerleri, Hurwitz testi, Routh tablosu, ilk elemanın sıfır olduğu ve satırın tamamen sıfır olduğu özel durumlar, K kazancının kararlılık aralığı ve durum uzayında kararlılık.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 6 – Kararlılık, Hurwitz Testi ve Routh-Hurwitz Kriteri">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 6 (Hamit Erdem, 2013): kararlı, kararsız ve marjinal kararlı sistem tanımları, BIBO kararlılığı, kutup yerleri, Hurwitz testi, Routh tablosu, ilk elemanın sıfır olduğu ve satırın tamamen sıfır olduğu özel durumlar, K kazancının kararlılık aralığı ve durum uzayında kararlılık.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 6 – Kararlılık, Hurwitz Testi ve Routh-Hurwitz Kriteri", "description": "EEM322 Denetim Sistemleri ders notu 6 (Hamit Erdem, 2013): kararlı, kararsız ve marjinal kararlı sistem tanımları, BIBO kararlılığı, kutup yerleri, Hurwitz testi, Routh tablosu, ilk elemanın sıfır olduğu ve satırın tamamen sıfır olduğu özel durumlar, K kazancının kararlılık aralığı ve durum uzayında kararlılık.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-06-kararlilik/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322L6.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-06-kararlilik/eem322L6.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 6 – Kararlılık, Hurwitz Testi ve Routh-Hurwitz Kriteri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kararlilik-neden-en-onemli-ozellik">Kararlılık neden en önemli özellik?</a></li><li><a href="#kutup-yerleri-ve-kararlilik">Kutup yerleri ve kararlılık</a></li><li><a href="#hurwitz-testi">Hurwitz testi</a></li><li><a href="#routh-hurwitz-kriteri">Routh-Hurwitz kriteri</a></li><li><a href="#routh-hurwitz-kriterinde-ozel-durumlar">Routh-Hurwitz kriterinde özel durumlar</a></li><li><a href="#kararlilik-icin-k-kazancinin-araligi">Kararlılık için K kazancının aralığı</a></li><li><a href="#ozet">Özet</a></li><li><a href="#durum-uzayinda-kararlilik">Durum uzayında kararlılık</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 6 – Kararlılık, Hurwitz Testi ve Routh-Hurwitz Kriteri</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 18.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>6. ders notudur</strong> ("EEM322: Lecture 6 – Stability"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 18.07.2013 tarihi var. Ders notu İngilizce ve Türkçe karışık, sayfa başına iki slayt yerleştirilmiş 13 sayfalık bir PDF. Aşağıda içerik Türkçe olarak özetlendi ve Routh tabloları yazıya döküldü. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Konular: kapalı çevrim sistem kararlılığı; kutup yerleri; Hurwitz yöntemi; Routh-Hurwitz kriteri.</p>
+<h2 id="kararlilik-neden-en-onemli-ozellik">Kararlılık neden en önemli özellik?</h2>
+<p>Bir denetim sisteminin tasarımına üç gereksinim girer: <strong>geçici yanıt</strong>, <strong>kararlılık</strong> ve <strong>kalıcı durum hatası</strong>. Kararlılık bunların en önemlisidir: Sistem kararsızsa geçici yanıt ve kalıcı durum hatası tartışmaya bile değmez; kararsız bir sistem belirli bir geçici yanıt ya da kalıcı durum hatası için tasarlanamaz.</p>
+<p>Sistemin toplam yanıtı zorlanmış ve doğal yanıtların toplamıdır: c(t) = c_zorlanmış(t) + c_doğal(t).</p>
+<ul><li>Doğrusal, zamanla değişmeyen bir sistem, zaman sonsuza giderken doğal yanıtı sıfıra gidiyorsa <strong>kararlıdır</strong>. Bu durumda doğal çözüm sıfıra ulaşacağından toplam yanıt zorlanmış yanıta eşit olur.</li><li>Doğal yanıt zaman sonsuza giderken sınırsız büyüyorsa sistem <strong>kararsızdır</strong>.</li><li>Doğal yanıt ne söner ne büyür, sabit kalır ya da salınım yapıyorsa sistem <strong>marjinal kararlıdır</strong>. Bu sistemler parametre değişimine duyarlı oldukları için pratikte kararsız kabul edilir.</li></ul>
+<p>Fiziksel olarak, doğal yanıtı sınırsız olan kararsız sistemler kendilerine, çevredeki araç gereçlere ya da insanlara zarar verebilir. Doğrusal sistemlerde kararlılık sistemin kendi özelliğidir: kararlı bir doğrusal sistemin denge noktasına bir bozucu etki ederse sistem zamanla kendiliğinden denge noktasına döner. Notta bunu anlatan bir şekil var: bir eğri üzerindeki tepe noktalarında duran top kararsız, çukurlarda duran kararlı, düz bölgede duran ise nötr kararlıdır.</p>
+<p><strong>BIBO tanımı:</strong> Sistemin girişine uygulanan bütün sınırlı giriş işaretleri için çıkış sınırlı kalıyorsa sistem kararlıdır; sınırlı herhangi bir giriş sınırsız bir çıkış üretiyorsa sistem kararsızdır.</p>
+<h2 id="kutup-yerleri-ve-kararlilik">Kutup yerleri ve kararlılık</h2>
+<ul><li>Kapalı çevrim kutupları sol yarı düzlemdeyse (gerçel kısımları negatifse) sistem <strong>kararlıdır</strong>.</li><li>Sağ yarı düzlemdeki kutuplar ya saf üstel artan ya da üstel artan sinüs biçiminde doğal yanıtlar üretir; bunlar zamanla sonsuza gider ve sistem <strong>kararsızdır</strong>.</li><li>Sanal eksen üzerindeki tek katlı kutuplar, genliği ne artan ne azalan saf sinüs salınımları üretir; yalnızca sanal eksende tek katlı kutupları ve sol yarı düzlemde kutupları olan sistemler <strong>marjinal kararlıdır</strong>.</li><li>Bir sistemin kararsız olması için en az bir kutbunun sağ yarı düzlemde olması ya da sanal eksen üzerinde katlı bir kökünün bulunması yeterlidir. Sanal eksendeki katlı kök At^n cos(ωt + φ) biçiminde, zamanla sonsuza giden bir yanıt üretir.</li></ul>
+<p><strong>Örnek:</strong> Açık çevrim transfer fonksiyonu 7/(s(s + 1)(s + 2)) olan birim geri beslemeli sistemde kapalı çevrim transfer fonksiyonu 7/(s³ + 3s² + 2s + 7) olur. Kutuplar s₁ = −3.087 ve s₂,₃ = 0.0434 ± j1.505'tir; iki kutup sağ yarı düzlemde olduğundan sistem <strong>kararsızdır</strong> ve basamak yanıtı genliği büyüyen salınımlar gösterir.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Sağ yarı düzlemde kutbu olan kararsız sistem örneği ve basamak yanıtı"><figcaption>Kararsız sistem örneği</figcaption></figure>
+<h2 id="hurwitz-testi">Hurwitz testi</h2>
+<p>Kapalı çevrim transfer fonksiyonunun bütün kutupları sol yarı düzlemdeyse sistemin paydasındaki polinom, yani karakteristik denklem, (s + aᵢ) biçiminde çarpanlara ayrılabilir; aᵢ'ler pozitif ya da pozitif gerçel kısımlı karmaşık sayılardır. Bu çarpanlar çarpıldığında bütün katsayıları pozitif olan bir polinom elde edilir; ayrıca s'nin bütün kuvvetleri var olmalıdır.</p>
+<p>Buradan: katsayılardan birinin negatif olması sistemin kararsız olduğunu söylemeye yeter. s'nin kuvvetlerinden biri eksikse sistem ya kararsızdır ya da marjinal kararlıdır.</p>
+<p><strong>Kısaca Hurwitz testi:</strong> Kararlı bir sistemin karakteristik polinomunun bütün katsayıları var olmalı ve pozitif olmalıdır. Bu koşul kararlılık için <strong>gereklidir ama yeterli değildir</strong>.</p>
+<h2 id="routh-hurwitz-kriteri">Routh-Hurwitz kriteri</h2>
+<p>Bu yöntem (Routh-Hurwitz kriteri, 1905) iki adımdan oluşur: Routh tablosunu oluşturmak ve tabloyu yorumlamak. Yöntemle kapalı çevrim kutuplarını çözmeden sistemin kararlılığı hakkında bilgi edinilir; ayrıca sistemin kaç kutbunun sol yarı düzlemde, kaçının sağ yarı düzlemde ve kaçının sanal eksen üzerinde olduğu bulunabilir.</p>
+<p>Kapalı çevrim transfer fonksiyonu N(s)/(a₄s⁴ + a₃s³ + a₂s² + a₁s + a₀) için tablo şöyle kurulur:</p>
+<ul><li>İlk sütuna s'nin en yüksek kuvvetinden başlayarak s⁰'a kadar kuvvetler yazılır.</li><li>Birinci satıra en yüksek dereceli terimin katsayısı ve birer atlayarak diğer katsayılar (a₄, a₂, a₀) yazılır.</li><li>İkinci satıra en yüksek ikinci dereceli terimin katsayısı ve birer atlayarak diğerleri (a₃, a₁, 0) yazılır.</li><li>Sonraki her eleman, üstteki iki satırdan alınan 2×2 determinantın eksi işaretlisinin, hemen üstteki satırın ilk elemanına bölünmesiyle bulunur. Örneğin b₁ = −(a₄a₁ − a₂a₃)/a₃ = −det[a₄ a₂; a₃ a₁]/a₃.</li></ul>
+<p><strong>Yorum:</strong> Polinomun sağ yarı düzlemdeki kök sayısı, tablonun <strong>birinci sütunundaki işaret değişimi sayısına</strong> eşittir. Birinci sütunda işaret değişimi yoksa sistem kararlıdır.</p>
+<h3 id="ornek-1">Örnek 1</h3>
+<p>İleri yolu 1000/((s + 2)(s + 3)(s + 5)) olan birim geri beslemeli sistemde C(s)/R(s) = 1000/(s³ + 10s² + 31s + 1030). Kolaylık için s² satırı 10'a bölünebilir (bir satırı pozitif bir sayıyla çarpmak ya da bölmek sonucu değiştirmez):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>31</td></tr><tr><th scope="row">s²</th><td>10 → 1</td><td>1030 → 103</td></tr><tr><th scope="row">s¹</th><td>−72</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>103</td><td>0</td></tr></tbody></table></div>
+<p>Birinci sütun 1, 1, −72, 103: iki işaret değişimi vardır, yani sistemin sağ yarı düzlemde iki kutbu vardır ve sistem <strong>kararsızdır</strong>.</p>
+<h2 id="routh-hurwitz-kriterinde-ozel-durumlar">Routh-Hurwitz kriterinde özel durumlar</h2>
+<h3 id="1-bir-satirin-ilk-elemaninin-sifir-olmasi">1. Bir satırın ilk elemanının sıfır olması</h3>
+<p>Sıfıra bölmeyi önlemek için sıfır yerine küçük bir ε yazılır. <strong>Örnek:</strong> T(s) = 10/(s⁵ + 2s⁴ + 3s³ + 6s² + 5s + 3)</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁵</th><td>1</td><td>3</td><td>5</td></tr><tr><th scope="row">s⁴</th><td>2</td><td>6</td><td>3</td></tr><tr><th scope="row">s³</th><td>0 → ε</td><td>7/2</td><td>0</td></tr><tr><th scope="row">s²</th><td>(6ε − 7)/ε</td><td>3</td><td>0</td></tr><tr><th scope="row">s¹</th><td>(42ε − 49 − 6ε²)/(12ε − 14)</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>3</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>ε pozitif seçilirse birinci sütunun işaretleri +, +, +, −, +, + olur ve iki işaret değişimi vardır. ε negatif seçilse de iki işaret değişimi çıkar; yani sistem her durumda <strong>kararsızdır</strong> (sağ yarı düzlemde iki kutup).</p>
+<p>Notta ayrıca bir başka yaklaşım gösteriliyor: paydanın köklerinin terslerini kök olarak alan polinom yazılır (katsayılar ters sırada). D(s) = 3s⁵ + 5s⁴ + 6s³ + 3s² + 2s + 1 polinomunun Routh tablosunun birinci sütunu 3, 5, 4.2, 1.33, −1.75, 1'dir; işaret iki kez değiştiğinden sistem kararsızdır (sağ yarı düzlemde iki kutup).</p>
+<h3 id="2-bir-satirin-tamamen-sifir-olmasi">2. Bir satırın tamamen sıfır olması</h3>
+<ul><li>Bir önceki satıra gidilip <strong>yardımcı polinom</strong> oluşturulur.</li><li>Polinom, ilgili satırın s derecesiyle başlar ve birer atlayarak devam eder.</li><li>Sonra polinomun s'ye göre türevi alınır.</li><li>Bu türevin katsayıları, tamamen sıfır olan satırda kullanılır.</li></ul>
+<p><strong>Örnek:</strong> T(s) = 10/(s⁵ + 7s⁴ + 6s³ + 42s² + 8s + 56)</p>
+<p>s⁴ satırı (7, 42, 56) 7'ye bölünerek (1, 6, 8) olur ve s³ satırı tamamen sıfır çıkar. Yardımcı polinom P(s) = s⁴ + 6s² + 8, türevi dP/ds = 4s³ + 12s'dir; s³ satırına 4, 12 (ya da 4'e bölünerek 1, 3) yazılır:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁵</th><td>1</td><td>6</td><td>8</td></tr><tr><th scope="row">s⁴</th><td>7 → 1</td><td>42 → 6</td><td>56 → 8</td></tr><tr><th scope="row">s³</th><td>0 → 4 → 1</td><td>0 → 12 → 3</td><td>0</td></tr><tr><th scope="row">s²</th><td>3</td><td>8</td><td>0</td></tr><tr><th scope="row">s¹</th><td>1/3</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>8</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p><strong>Not:</strong> Routh tablosunda bir satırın tamamen sıfır olması, polinomda yalnızca tek ya da yalnızca çift dereceli terimlerden oluşan bir çarpan bulunmasından kaynaklanır (örneğin s⁴ + s² + 7). Çift dereceli polinomun kökleri orijine göre simetriktir; bu simetri (a) gerçel eksene göre simetrik, (b) sanal eksene göre simetrik ya da (c) dört bölgeli olabilir. Sıfır satırı, kökleri orijine göre simetrik olan çift dereceli bir polinomun varlığını gösterir.</p>
+<h3 id="ornek-sekizinci-dereceden-sistem">Örnek: sekizinci dereceden sistem</h3>
+<p>T(s) = 20/(s⁸ + s⁷ + 12s⁶ + 22s⁵ + 39s⁴ + 59s³ + 48s² + 38s + 20) kapalı çevrim sisteminin kararlılığını Routh tablosuyla belirleyin.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁸</th><td>1</td><td>12</td><td>39</td><td>48</td><td>20</td></tr><tr><th scope="row">s⁷</th><td>1</td><td>22</td><td>59</td><td>38</td><td>0</td></tr><tr><th scope="row">s⁶</th><td>−10 → −1</td><td>−20 → −2</td><td>10 → 1</td><td>20 → 2</td><td>0</td></tr><tr><th scope="row">s⁵</th><td>20 → 1</td><td>60 → 3</td><td>40 → 2</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁴</th><td>1</td><td>3</td><td>2</td><td>0</td><td>0</td></tr><tr><th scope="row">s³</th><td>0 → 4 → 2</td><td>0 → 6 → 3</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s²</th><td>3/2 → 3</td><td>2 → 4</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s¹</th><td>1/3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>s³ satırı tamamen sıfır olduğundan yardımcı polinom P(s) = s⁴ + 3s² + 2 ve türevi dP/ds = 4s³ + 6s kullanılır.</p>
+<p>Yorum: s⁴'ten s⁰'a kadar işaret değişimi olmadığından yardımcı polinomun (dördüncü dereceden çift polinomun) sağ yarı düzlemde kökü yoktur; sağ yarı düzlemde kökü olsaydı simetriden dolayı sol yarı düzlemde de olması gerekirdi. Buradan dört kökün jω ekseni üzerinde olduğu anlaşılır. Diğer kutuplar s⁸'den s⁴'e kadar olan satırlardadır: bu satırlar arasında iki işaret değişimi vardır, yani sağ yarı düzlemde iki kök bulunur. Sonuç olarak transfer fonksiyonunun iki sol yarı düzlem, iki sağ yarı düzlem ve dört sanal eksen kutbu vardır; en az bir kutbun sağ yarı düzlemde olması sistemin <strong>kararsız</strong> olduğunu söylemek için yeterlidir.</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Sekizinci dereceden sistemin Routh tablosu ve yardımcı polinom ile tamamlanması"><figcaption>Sıfır satırı özel durumu</figcaption></figure>
+<h2 id="kararlilik-icin-k-kazancinin-araligi">Kararlılık için K kazancının aralığı</h2>
+<p><strong>Örnek:</strong> İleri yolu K/(s(s + 7)(s + 11)) olan birim geri beslemeli sistemin kararlı, kararsız ve marjinal kararlı olduğu K aralıklarını bulun (K &gt; 0).</p>
+<p>T(s) = K/(s³ + 18s² + 77s + K)</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>77</td></tr><tr><th scope="row">s²</th><td>18</td><td>K</td></tr><tr><th scope="row">s¹</th><td>(1386 − K)/18</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K</td><td>0</td></tr></tbody></table></div>
+<ul><li><strong>K &lt; 1386:</strong> Birinci sütundaki bütün terimler pozitif, işaret değişimi yok; üç kutup da sol yarı düzlemde, sistem <strong>kararlı</strong>.</li><li><strong>K &gt; 1386:</strong> İki işaret değişimi; iki kutup sağ yarı düzlemde, bir kutup sol yarı düzlemde, sistem <strong>kararsız</strong>.</li><li><strong>K = 1386:</strong> s¹ satırının bütün elemanları sıfır olur. Yardımcı polinom P(s) = 18s² + 1386, türevi dP/ds = 36s'dir. s²'li terimden sonra işaret değişimi olmadığından çift polinomun kökü jω ekseni üzerindedir (s = ±j√77); s²'li terimin üzerinde de işaret değişimi olmadığından diğer kök sol yarı düzlemdedir. Sistem <strong>marjinal kararlıdır</strong>.</li></ul>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="K kazancına göre kararlılık aralığının Routh tablosuyla bulunması"><figcaption>K'nın kararlılık aralığı</figcaption></figure>
+<h2 id="ozet">Özet</h2>
+<p>Doğrusal, zamanla değişmeyen sistemler için kararlılık tanımları:</p>
+<p><strong>Doğal yanıta göre:</strong></p>
+<ol><li>Doğal yanıt zaman sonsuza giderken sıfıra gidiyorsa sistem kararlıdır.</li><li>Doğal yanıt zaman sonsuza giderken sonsuza gidiyorsa sistem kararsızdır.</li><li>Doğal yanıt ne sönüyor ne büyüyorsa, sabit kalıyor ya da salınım yapıyorsa sistem marjinal kararlıdır.</li></ol>
+<p><strong>Toplam yanıta göre (BIBO):</strong></p>
+<ol><li>Her sınırlı giriş sınırlı bir çıkış veriyorsa sistem kararlıdır.</li><li>Herhangi bir sınırlı giriş sınırsız bir çıkış veriyorsa sistem kararsızdır.</li></ol>
+<p>Doğrusal kapalı çevrim sistemlerin kararlılığı kutuplarının s düzlemindeki konumuyla belirlenir. Kutuplardan herhangi biri sağ yarı düzlemdeyse geçici rejim yanıtı monoton olarak artar ya da artan genlikli salınım yapar. Kararsız bir sistem çalıştırıldığında çıkış zamanla artar; bir doyum fonksiyonu ya da mekanik sınırlama yoksa fiziksel sistem hasar görebilir. Bu yüzden kapalı çevrim kutuplarının sağ yarı düzlemde olmasından kaçınılır. Bütün kutuplar jω ekseninin solundaysa her türlü geçici rejim sönümlenerek denge noktasına ulaşır.</p>
+<p>Kararlılık sistemin kendi özelliğidir ve giriş fonksiyonundan bağımsızdır; giriş, sistemin kararlı ya da kararsız olmasını etkileyemez ama çözümde kendini gösterir. Matematiksel olarak jω ekseni üzerindeki kutuplar genliği ne artan ne azalan salınımlara yol açar; pratikte, yani gürültülü ortamda, gürültü seviyesine göre salınımın genliği artar. Bu yüzden bir denetim sistemi jω ekseni üzerinde kutup içermemelidir.</p>
+<h2 id="durum-uzayinda-kararlilik">Durum uzayında kararlılık</h2>
+<p>det(sI − A) = 0 denkleminin kökleri sistem matrisi A'nın <strong>özdeğerleridir</strong> ve sistemin transfer fonksiyonunun kutuplarına eşittir. Bu denklem A matrisinin karakteristik denklemidir; n kökü λᵢ (i = 1 … n) özdeğerlerdir.</p>
+<p><strong>Örnek:</strong> A = [0, 1; −6, −5] için |λI − A| = (λ + 2)(λ + 3) = 0, dolayısıyla λ₁ = −2 ve λ₂ = −3.</p>
+<p><strong>Problem:</strong> A = [0, 3, 1; 2, 8, 1; −10, −5, −2], B = [10; 0; 0], y = [1 0 0]x sisteminin kaç kutbunun sol yarı düzlemde, sağ yarı düzlemde ve jω ekseni üzerinde olduğunu bulun.</p>
+<p>sI − A = [s, −3, −1; −2, s − 8, −1; 10, 5, s + 2] ve det(sI − A) = s³ − 6s² − 7s − 52. Bu polinom kolayca çarpanlara ayrılamadığından Routh-Hurwitz kriteri uygulanır. Routh tablosunun birinci sütununda bir işaret değişimi vardır; sistemin bir sağ yarı düzlem ve iki sol yarı düzlem kutbu vardır, dolayısıyla <strong>kararsızdır</strong>.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem322L6.pdf" download>eem322L6.pdf</a></p>
+              <p class="kucuk">PDF · 767 KB · 13 <span data-i18n="arch.pagesLower"></span> · 18.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322L6.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (767 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

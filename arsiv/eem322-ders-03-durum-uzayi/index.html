@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 3 – Durum Uzayı Modelleri, Transfer Fonksiyonu Dönüşümleri ve Durum Geçiş Matrisi — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 3a, 3b ve 3c (Hamit Erdem, Temmuz 2013): durum değişkenleri ve durum denklemleri, RLC devreleri ve kütle-yay sistemi için durum modeli, durum uzayından transfer fonksiyonuna ve transfer fonksiyonundan faz değişkeni biçimine dönüşüm, durum geçiş matrisi e^(At); ek olarak Türkçe çözümlü modelleme örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 3 – Durum Uzayı Modelleri, Transfer Fonksiyonu Dönüşümleri ve Durum Geçiş Matrisi">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 3a, 3b ve 3c (Hamit Erdem, Temmuz 2013): durum değişkenleri ve durum denklemleri, RLC devreleri ve kütle-yay sistemi için durum modeli, durum uzayından transfer fonksiyonuna ve transfer fonksiyonundan faz değişkeni biçimine dönüşüm, durum geçiş matrisi e^(At); ek olarak Türkçe çözümlü modelleme örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 3 – Durum Uzayı Modelleri, Transfer Fonksiyonu Dönüşümleri ve Durum Geçiş Matrisi", "description": "EEM322 Denetim Sistemleri ders notu 3a, 3b ve 3c (Hamit Erdem, Temmuz 2013): durum değişkenleri ve durum denklemleri, RLC devreleri ve kütle-yay sistemi için durum modeli, durum uzayından transfer fonksiyonuna ve transfer fonksiyonundan faz değişkeni biçimine dönüşüm, durum geçiş matrisi e^(At); ek olarak Türkçe çözümlü modelleme örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-ders-03-durum-uzayi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/eem322-ders-03-durum-uzayi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 3 – Durum Uzayı Modelleri, Transfer Fonksiyonu Dönüşümleri ve Durum Geçiş Matrisi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM322</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#klasik-ve-modern-yaklasim">Klasik ve modern yaklaşım</a></li><li><a href="#durum-durum-degiskenleri-ve-durum-vektoru">Durum, durum değişkenleri ve durum vektörü</a></li><li><a href="#elektrik-devreleri-icin-durum-denklemleri">Elektrik devreleri için durum denklemleri</a></li><li><a href="#mekanik-sistem-icin-durum-modeli">Mekanik sistem için durum modeli</a></li><li><a href="#durum-uzayindan-transfer-fonksiyonuna">Durum uzayından transfer fonksiyonuna</a></li><li><a href="#transfer-fonksiyonundan-durum-uzayina-faz-degiskenleri">Transfer fonksiyonundan durum uzayına: faz değişkenleri</a></li><li><a href="#durum-gecis-denklemi-ve-durum-gecis-matrisi">Durum geçiş denklemi ve durum geçiş matrisi</a></li><li><a href="#ek-sistem-modelleme-ornekleri-turkce-foy">Ek: Sistem modelleme örnekleri (Türkçe föy)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 3 – Durum Uzayı Modelleri, Transfer Fonksiyonu Dönüşümleri ve Durum Geçiş Matrisi</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 03.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>3. haftasına</strong> ait üç ders notunu ve bir çözümlü örnek föyünü bir araya getiriyor. Notlar dersi veren <strong>Hamit Erdem</strong>'e ait:</p>
+<ul><li><strong>Lecture 3</strong> (3a, 03.07.2013): Zaman düzleminde modelleme, durum değişkeni modelleri.</li><li><strong>Lecture 3b</strong> (08.07.2013): Durum uzayından transfer fonksiyonuna ve transfer fonksiyonundan durum uzayına dönüşüm.</li><li><strong>Lecture 3C</strong> (09.07.2013): Durum geçiş denklemi ve durum geçiş matrisi.</li><li><strong>Sistem modelleme örnekleri</strong> (9 Temmuz 2013, "solution"): Seri RLC devresi, kütle-yay-sönümleyici ve DC motor için diferansiyel denklem, transfer fonksiyonu ve durum uzayı modelleri (Türkçe).</li></ul>
+<p>Notlar İngilizce ve Türkçe karışık; aşağıda içerik Türkçe olarak özetlendi, çözümlü örnekler yazıya döküldü. Dört dosyanın PDF'leri yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="klasik-ve-modern-yaklasim">Klasik ve modern yaklaşım</h2>
+<p>Geri beslemeli denetim sistemlerinin analizi ve tasarımı için iki yaklaşım vardır. <strong>Klasik (frekans düzlemi) yaklaşımın</strong> en büyük avantajı kararlılık ve geçici yanıt bilgisini hızla vermesidir; sistem parametrelerini değiştirmenin etkisi hemen görülür. Dezavantajı uygulanabilirliğinin sınırlı olmasıdır: yalnızca doğrusal, zamanla değişmeyen sistemlere ya da böyle yaklaşıklanabilen sistemlere uygulanabilir.</p>
+<p><strong>Durum uzayı (zaman düzlemi, modern) yaklaşımı</strong> ise doğrusal ve doğrusal olmayan, zamanla değişen ve değişmeyen ve çok değişkenli sistemlerde kullanılabilir. Doğrusal sistem için durum ve çıkış denklemleri:</p>
+<p>ẋ(t) = A(t)x(t) + B(t)u(t) y(t) = C(t)x(t) + D(t)u(t)</p>
+<p>Burada x(t) durum vektörü, y(t) çıkış vektörü, u(t) giriş vektörü, A(t) durum (sistem) matrisi, B(t) giriş matrisi, C(t) çıkış matrisi ve D(t) doğrudan iletim (ileri besleme) matrisidir.</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Durum uzayı modelinin blok diyagramı: B, integral alıcı, C ve geri besleme yolundaki A matrisi"><figcaption>Durum uzayı modelinin blok diyagramı</figcaption></figure>
+<h2 id="durum-durum-degiskenleri-ve-durum-vektoru">Durum, durum değişkenleri ve durum vektörü</h2>
+<ul><li><strong>Durum:</strong> Dinamik bir sistemin durumu, t = t₀ anındaki bilgisi t ≥ t₀ için giriş bilgisiyle birlikte sistemin davranışını tamamen belirleyen en küçük değişken (durum değişkenleri) kümesidir.</li><li><strong>Durum değişkenleri:</strong> Sistemin durumunu belirleyen en küçük değişken kümesi. Davranışı tanımlamak için en az n değişken gerekiyorsa bu n değişken bir durum değişkenleri kümesidir.</li><li><strong>Durum vektörü:</strong> n durum değişkenini bileşen kabul eden x vektörü.</li><li><strong>Durum denklemleri:</strong> n. mertebeden bir sistem için durum değişkenleri cinsinden yazılan n tane eşzamanlı, birinci mertebeden diferansiyel denklem.</li></ul>
+<p>Notlar:</p>
+<ul><li>Gereken en az durum değişkeni sayısı diferansiyel denklemin mertebesine eşittir; ikinci mertebeden sistem için en az iki durum değişkeni gerekir.</li><li>Durum değişkenleri doğrusal bağımsız olmalıdır; hiçbiri diğerlerinin doğrusal birleşimi olarak yazılamaz. Durum kavramı fiziksel sistemlerle sınırlı değildir; biyolojik, ekonomik ve sosyal sistemlere de uygulanır.</li><li>Durum uzayı gösterimi tek değildir; farklı durum değişkeni seçimi aynı sistemin farklı bir gösterimini verir.</li><li>Durum değişkenlerinin fiziksel olarak ölçülebilir ya da gözlenebilir olması gerekmez; ama mümkünse kolay ölçülen büyüklükleri seçmek pratiktir, çünkü optimal denetim yasaları bütün durum değişkenlerinin uygun ağırlıklarla geri beslenmesini gerektirir.</li><li><strong>Durum uzayı</strong>, eksenleri durum değişkenleri olan n boyutlu uzaydır. <strong>Durum yörüngesi</strong>, x(t) durum vektörünün zamanla durum uzayında çizdiği yoldur; iki boyutlu durumda bunlara faz düzlemi ve faz yörüngesi denir.</li><li>Fiziksel değişken yönteminde durum değişkenleri, sistemin <strong>enerji depolayan elemanlarına</strong> göre seçilir.</li></ul>
+<h2 id="elektrik-devreleri-icin-durum-denklemleri">Elektrik devreleri için durum denklemleri</h2>
+<p><strong>Örnek 1 – Seri RL devresi:</strong> Tek enerji depolayan eleman bobindir; tek durum değişkeni x₁ = i vardır (n = 1). u = e alınırsa çevre denklemi Rx₁ + Lẋ₁ = u, yani ẋ₁ = −(R/L)x₁ + (1/L)u olur.</p>
+<p><strong>Örnek 2 – Seri RLC devresi:</strong> İki enerji depolayan eleman olduğundan iki durum değişkeni vardır: x₁ = v_C (kondansatör gerilimi), x₂ = i_L (bobin akımı). Bobin akımının türevini içeren bir çevre denklemi, kondansatör geriliminin türevini içeren bir düğüm denklemi yazılır. Yazılması gereken çevre denklemi sayısı akım olan durum değişkeni sayısına, düğüm denklemi sayısı gerilim olan durum değişkeni sayısına eşittir.</p>
+<p>Cẋ₁ = x₂,  Lẋ₂ + Rx₂ + x₁ = u</p>
+<p>ẋ₁ = (1/C)x₂,  ẋ₂ = −(1/L)x₁ − (R/L)x₂ + (1/L)u</p>
+<p>Matris biçiminde ẋ = Ax + bu; burada A = [0, 1/C; −1/L, −R/L], b = [0; 1/L]. Çıkış kondansatör gerilimi ise y = [1 0]x + [0]u, yani cᵀ = [1 0], d = 0. (Kaynak: <em>Linear Control System Analysis and Design with MATLAB</em>.)</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Seri RL ve RLC devreleri için durum değişkenlerinin seçimi ve durum denklemlerinin matris biçimi"><figcaption>RL ve RLC devrelerinin durum denklemleri</figcaption></figure>
+<p>Genel yöntem beş adımdır:</p>
+<ol><li>Devredeki bütün kol akımlarını etiketle.</li><li>Durum değişkenlerini (enerji depolayan L ve C elemanları) seç ve türev denklemlerini yaz: C·dv_C/dt = i_C, L·di_L/dt = v_L.</li><li>Durum olmayan değişkenleri (i_C ve v_L) durum değişkenlerinin (v_C ve i_L) ve girişin doğrusal birleşimi olarak ifade et.</li><li>Yerine koyup düzenleyerek durum denklemlerini elde et.</li><li>Çıkış denklemini bul.</li></ol>
+<p>Notta ayrıca üç durum değişkenli (x₁ = i₁, x₂ = i₂, x₃ = v_C) bir devre, akım kaynaklı beş durum değişkenli bir devre, iki girişli (e₁, e₂) ve üç çıkışlı (v₁, v₂, v_C) bir devre ve iki kondansatör ile bir bobin içeren bir devre örneği çözülüyor. m girişli ve l çıkışlı çok girişli çok çıkışlı (MIMO) sistemde A n×n tesis matrisi, B n×m denetim matrisi, C l×n çıkış matrisi, D l×m ileri besleme matrisi, u m boyutlu denetim vektörü ve y l boyutlu çıkış vektörüdür.</p>
+<h2 id="mekanik-sistem-icin-durum-modeli">Mekanik sistem için durum modeli</h2>
+<p>Yay-kütle-sönümleyici sistemi M·d²y/dt² + b·dy/dt + ky = u(t) denklemiyle tanımlanır. Durum değişkenleri konum ve hız seçilir: x₁ = y(t), x₂ = dy/dt. Buradan iki birinci mertebeden denklem elde edilir:</p>
+<p>ẋ₁ = x₂,  ẋ₂ = −(k/M)x₁ − (b/M)x₂ + (1/M)u</p>
+<p>Matris biçiminde A = [0, 1; −k/M, −b/M], B = [0; 1/M], y = [1 0]x. Notta iki kütleli (M₁, M₂) bir sistem için de dört durum değişkenli (x₁, v₁, x₂, v₂) model yazılıyor.</p>
+<h2 id="durum-uzayindan-transfer-fonksiyonuna">Durum uzayından transfer fonksiyonuna</h2>
+<p>Bir sistemin durum değişkenlerinin farklı seçimleri, durum denklemlerinin farklı kanonik biçimlerde yazılmasını sağlar; yani bir sistemin çok sayıda durum modeli vardır, ama transfer fonksiyonu gösterimi <strong>tektir</strong>.</p>
+<p>ẋ = Ax + Bu, y = Cx + Du denklemlerine Laplace dönüşümü uygulanırsa:</p>
+<p>sX(s) − x(0) = AX(s) + BU(s),  Y(s) = CX(s) + DU(s)</p>
+<p>X(s) = (sI − A)⁻¹x(0) + (sI − A)⁻¹BU(s)</p>
+<p>Y(s) = C(sI − A)⁻¹x(0) + C(sI − A)⁻¹BU(s) + DU(s)</p>
+<p>Transfer fonksiyonunun tanımı gereği x(0) = 0 alınırsa Y(s) = [C(sI − A)⁻¹B + D]U(s). Tek girişli tek çıkışlı sistemde:</p>
+<p>G(s) = Y(s)/U(s) = C(sI − A)⁻¹B + D,  (sI − A)⁻¹ = Adj(sI − A)/|sI − A|</p>
+<p>G(s) = [C·Adj(sI − A)·B + |sI − A|·D] / |sI − A|</p>
+<p>Transfer fonksiyonunun paydası <strong>karakteristik denklem</strong> olarak tanımlanır. det(sI − A) = 0 denklemi A matrisinin karakteristik denklemidir, kökleri A'nın <strong>özdeğerleridir</strong>; dolayısıyla sistemin kutupları durum matrisinin özdeğerleriyle aynıdır. C(sI − A)⁻¹B + D matrisine, çıkış vektörünü giriş vektörüne bağladığı için <strong>transfer fonksiyonu matrisi</strong> denir.</p>
+<p><strong>Örnek 1:</strong> A = [0, 1; −2, −3], B = [0; 1], C = [3 1], D = 0.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">sI − A</th><th scope="col">= s(s + 3) + 2 = s² + 3s + 2,  Adj(sI − A) = [s + 3, 1; −2, s]</th></tr></thead><tbody></tbody></table></div>
+<p>G(s) = [3 1] · (1/(s² + 3s + 2)) · [s + 3, 1; −2, s] · [0; 1] = (s + 3)/(s² + 3s + 2)</p>
+<p><strong>Örnek 2:</strong> A = [−4, −1.5; 4, 0], B = [2; 0], C = [1.5 0.625].</p>
+<p>det(sI − A) = s(s + 4) + 6 = s² + 4s + 6,  C·Adj(sI − A)·B = [1.5 0.625]·[2s; 8] = 3s + 5</p>
+<p>G(s) = (3s + 5)/(s² + 4s + 6)</p>
+<p>Notta ayrıca üçüncü mertebeden iki örnek daha var: A = [0, 1, 0; 0, 0, 1; −1, −2, −3], B = [10; 0; 0], C = [1 0 0] için T(s) = 10(s² + 3s + 2)/(s³ + 3s² + 2s + 1); bir başka sistem için G(s) = (s + 2)/(s³ + 3s² + 2s + 10).</p>
+<h2 id="transfer-fonksiyonundan-durum-uzayina-faz-degiskenleri">Transfer fonksiyonundan durum uzayına: faz değişkenleri</h2>
+<p>n. mertebeden dⁿy/dtⁿ + aₙ₋₁dⁿ⁻¹y/dtⁿ⁻¹ + … + a₁dy/dt + a₀y = b₀u denkleminde çıkış y(t) ve (n − 1) türevi durum değişkeni seçilir; buna <strong>faz değişkeni</strong> seçimi denir:</p>
+<p>x₁ = y, x₂ = dy/dt, x₃ = d²y/dt², …, xₙ = dⁿ⁻¹y/dtⁿ⁻¹</p>
+<p>İki taraf türetilirse ẋ₁ = x₂, ẋ₂ = x₃, …, ẋₙ₋₁ = xₙ ve ẋₙ = −a₀x₁ − a₁x₂ − … − aₙ₋₁xₙ + b₀u elde edilir. Bu biçim; köşegen üstündeki 1'ler, geri kalan 0'lar ve son satırda ters sırada yazılmış, işareti değiştirilmiş diferansiyel denklem katsayılarından oluşan özgün yapısıyla kolayca tanınır. Çıkış y = [1 0 0 … 0]x'tir.</p>
+<p>Özetle: transfer fonksiyonu çapraz çarpılıp başlangıç koşulları sıfırken ters Laplace dönüşümü alınarak diferansiyel denkleme çevrilir; sonra diferansiyel denklem faz değişkeni biçiminde durum uzayında gösterilir.</p>
+<p><strong>Örnek (payda sabit terim):</strong> C(s)/R(s) = 24/(s³ + 9s² + 26s + 24).</p>
+<ol><li>Çapraz çarpım: (s³ + 9s² + 26s + 24)C(s) = 24R(s); ters Laplace ile c⃛ + 9c̈ + 26ċ + 24c = 24r.</li><li>Durum değişkenleri: x₁ = c, x₂ = ċ, x₃ = c̈. Böylece ẋ₁ = x₂, ẋ₂ = x₃, ẋ₃ = −24x₁ − 26x₂ − 9x₃ + 24r, y = c = x₁.</li></ol>
+<p>Vektör-matris biçiminde A = [0, 1, 0; 0, 0, 1; −24, −26, −9], B = [0; 0; 24], C = [1 0 0]. Sistem matrisinin üçüncü satırında transfer fonksiyonunun paydasındaki katsayılar ters sırada ve negatif olarak yer alır.</p>
+<figure class="yazi-gorsel"><img src="s-20.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Faz değişkeni biçimindeki durum denklemleri ve 24/(s³+9s²+26s+24) sisteminin integral alıcılı blok diyagramı"><figcaption>Faz değişkeni biçimi ve blok diyagramı</figcaption></figure>
+<p><strong>Örnek (payda polinom):</strong> Pay polinomunun derecesi paydanınkinden küçükse sistem iki seri bloğa ayrılır: birincisi yalnızca paydayı, ikincisi yalnızca payı içerir. Birinci blok faz değişkeni biçimine çevrilir (x₁ çıkış, diğerleri iç değişkenler); ikinci blok çıkışı faz değişkenlerinin doğrusal birleşimi olarak verir. C(s)/R(s) = (s² + 7s + 2)/(s³ + 9s² + 26s + 24) için birinci bloğun payı önceki örneğinkinin 1/24'ü olduğundan giriş matrisi B = [0; 0; 1] olur; ikinci blok (b₂ = 1, b₁ = 7, b₀ = 2) ters Laplace ile c = x₃ + 7x₂ + 2x₁ verir, yani y = [2 7 1]x.</p>
+<h2 id="durum-gecis-denklemi-ve-durum-gecis-matrisi">Durum geçiş denklemi ve durum geçiş matrisi</h2>
+<p>Durum geçiş denklemi, doğrusal homojen olmayan durum denkleminin çözümüdür. Doğrusal zamanla değişmeyen sistem ẋ(t) = Ax(t) + Bu(t), y(t) = Cx(t) + Du(t) için durum denklemi diferansiyel denklem yöntemleriyle ya da Laplace dönüşümüyle çözülebilir:</p>
+<p>x(t) = L⁻¹[(sI − A)⁻¹]x(0) + L⁻¹{(sI − A)⁻¹BU(s)}</p>
+<p>x(t) = e^(At)x(0) + ∫₀ᵗ e^(A(t−τ))Bu(τ)dτ,  t ≥ 0</p>
+<p>İlk terim <strong>doğal çözüm</strong>, ikinci terim <strong>zorlanmış çözümdür</strong>. Çıkış denklemi:</p>
+<p>y(t) = Ce^(At)x(0) + ∫₀ᵗ Ce^(A(t−τ))Bu(τ)dτ + Du(t),  t ≥ 0</p>
+<p><strong>Durum geçiş matrisi</strong> Φ(t) = e^(At) = L⁻¹{(sI − A)⁻¹} ters Laplace dönüşümüyle hesaplanabilir. Özellikleri:</p>
+<ol><li>Φ(t₁ + t₂) = Φ(t₁)Φ(t₂), yani e^(A(t₁+t₂)) = e^(At₁)e^(At₂)</li><li>dΦ(t)/dt = AΦ(t), yani d(e^(At))/dt = Ae^(At)</li><li>Φ(0) = e^(A·0) = I</li><li>dΦ(t)/dt |t=0 = A</li></ol>
+<p>Matris üstel fonksiyonu, üstel fonksiyonun Taylor açılımına benzer biçimde tanımlanır: e^(At) = I + At + A²t²/2! + … + Aᵏtᵏ/k! + …</p>
+<p><strong>Örnek:</strong> A = [0, 1; −2, −3], B = [0; 1] olan sistemde t ≥ 0 için u(t) = 1 iken e^(At) ve x(t)'yi bulun.</p>
+<p>(sI − A)⁻¹ = (1/(s² + 3s + 2)) · [s + 3, 1; −2, s]</p>
+<p>e^(At) = [2e^(−t) − e^(−2t), e^(−t) − e^(−2t); −2e^(−t) + 2e^(−2t), −e^(−t) + 2e^(−2t)]</p>
+<p>Zorlanmış çözümü bulmanın bir yolu da L⁻¹[(sI − A)⁻¹BU(s)] ifadesini hesaplamaktır:</p>
+<p>L⁻¹{(1/(s(s² + 3s + 2))) · [1; s]} = [0.5 − e^(−t) + 0.5e^(−2t); e^(−t) − e^(−2t)],  t ≥ 0</p>
+<p><strong>Örnek (RLC devresi, R = 3, L = 1, C = 0.5):</strong> A = [0, −1/C; 1/L, −R/L] = [0, −2; 1, −3], B = [1/C; 0].</p>
+<p>det(sI − A) = s(s + 3) + 2 = s² + 3s + 2 = (s + 1)(s + 2)</p>
+<p>Φ(s) = [(s + 3)/((s + 1)(s + 2)), −2/((s + 1)(s + 2)); 1/((s + 1)(s + 2)), s/((s + 1)(s + 2))]</p>
+<p>Φ(t) = [2e^(−t) − e^(−2t), −2e^(−t) + 2e^(−2t); e^(−t) − e^(−2t), −e^(−t) + 2e^(−2t)]</p>
+<p>Başlangıç koşulu yanıtı x(t) = Φ(t)·x(0); durumlar için genel çözüm X(s) = Φ(s)·x(0) + Φ(s)·B·U(s).</p>
+<p><em>Not: Ders notunun bu sayfasında A matrisi bir yerde [0, 2; 1, −3] olarak yazılmış; doğrusu [0, −2; 1, −3]'tür (sI − A ve Φ(s) bu doğru matrisle hesaplanmış). Ayrıca 3C'nin 2. sayfasında sI − A ifadesi yanlışlıkla (sI − A)⁻¹ diye etiketlenmiş.</em></p>
+<p>Notun son sayfası durum modellerinden işaret akış grafiği çizmeyi gösteriyor: bazı fiziksel uygulamalarda durum denklemlerini yazmak, tek bir transfer fonksiyonu tanımlamaktan daha kolay olabilir.</p>
+<figure class="yazi-gorsel"><img src="s-26.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="RLC devresinin transfer fonksiyonunun durum modelinden bulunması ve durum modelinden işaret akış grafiği"><figcaption>Durum modelinden transfer fonksiyonu ve işaret akış grafiği</figcaption></figure>
+<h2 id="ek-sistem-modelleme-ornekleri-turkce-foy">Ek: Sistem modelleme örnekleri (Türkçe föy)</h2>
+<h3 id="ornek-1-seri-rlc-devresi">Örnek 1: Seri RLC devresi</h3>
+<p>Kirchhoff yasasına göre dinamik denklemler: Ri(t) + L·di/dt + (1/C)∫i dt = e(t), (1/C)∫i dt = v(t). Buradan i(t) = C·dv/dt ve:</p>
+<p>d²v/dt² + (R/L)·dv/dt + (1/LC)·v(t) = (1/LC)·e(t)  (diferansiyel denklem modeli)</p>
+<p>V(s)/E(s) = (1/LC) / (s² + (R/L)s + 1/LC)  (transfer fonksiyonu modeli)</p>
+<p>Diferansiyel denklemin giriş tarafı türev içermediğinden x₁ = v, x₂ = v̇ seçilir: ẋ₁ = x₂, ẋ₂ = −(1/LC)x₁ − (R/L)x₂ + (1/LC)e; A = [0, 1; −1/LC, −R/L], B = [0; 1/LC], v = [1 0]x.</p>
+<h3 id="ornek-2-kutle-yay-sonumleyici">Örnek 2: Kütle-yay-sönümleyici</h3>
+<p>Newton'un hareket yasası ΣF = Ma'ya göre f(t) − f_B(t) − f_K(t) = Ma; burada f_B = B·dx/dt, f_K = Kx. Buradan f(t) − B·dx/dt − Kx = M·d²x/dt². Föyde model şöyle veriliyor:</p>
+<p>d²x/dt² + (B/M)·dx/dt + (K/M)·x(t) = (1/K)·f(t),  X(s)/F(s) = (1/K) / (s² + (B/M)s + K/M)</p>
+<p>x₁ = x, x₂ = ẋ seçilerek A = [0, 1; −K/M, −B/M], B = [0; 1/K], x = [1 0]x elde ediliyor.</p>
+<p><em>Not: f − B·dx/dt − Kx = M·d²x/dt² denklemi M'ye bölündüğünde sağ taraf (1/M)·f(t) olmalıdır; föydeki 1/K katsayısı hatalıdır. Doğrusu X(s)/F(s) = (1/M)/(s² + (B/M)s + K/M) = 1/(Ms² + Bs + K) ve giriş matrisi [0; 1/M]'dir (2. dersteki 1/(Ms² + f_v s + K) sonucuyla da uyumlu).</em></p>
+<h3 id="ornek-3-dc-motor-elektromekanik-sistem">Örnek 3: DC motor (elektromekanik sistem)</h3>
+<p>Kirchhoff yasasından e_g = R_g i_g + L_g·di_g/dt + e_b, burada e_b = K_b·dθ/dt zıt elektromotor kuvvet gerilimidir. Newton yasasından M = J·d²θ/dt² + B·dθ/dt, burada M = K_m i_g motorun ürettiği döndürme momentidir. i_g çekilip birinci denklemde yerine konursa:</p>
+<p>e_g = R_g[(J/K_m)·d²θ/dt² + (B/K_m)·dθ/dt] + L_g[(J/K_m)·d³θ/dt³ + (B/K_m)·d²θ/dt²] + K_b·dθ/dt</p>
+<p>Föy bu noktada sona eriyor (sayfa 15–17).</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-ders-03-durum-uzayi.zip" download>eem322-ders-03-durum-uzayi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.4 MB · 03.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-ders-03-durum-uzayi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Radix Sort, Öncelikli Kuyruk ve Bağlı Liste Düğümleri (Hafta 10–11) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 10. ve 11. haftalarına ait C++ programları (Kasım–Aralık 2007): queue dizisiyle radix sort, priority_queue ile normal queue farkı ve priority_queue ile sıralama, node şablon sınıfıyla başa ve sona ekleyerek bağlı liste oluşturma soruları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-radix-oncelik-bagli-liste/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Radix Sort, Öncelikli Kuyruk ve Bağlı Liste Düğümleri (Hafta 10–11)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 10. ve 11. haftalarına ait C++ programları (Kasım–Aralık 2007): queue dizisiyle radix sort, priority_queue ile normal queue farkı ve priority_queue ile sıralama, node şablon sınıfıyla başa ve sona ekleyerek bağlı liste oluşturma soruları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-radix-oncelik-bagli-liste/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Radix Sort, Öncelikli Kuyruk ve Bağlı Liste Düğümleri (Hafta 10–11)", "description": "EEM227 Veri Yapıları dersinin 10. ve 11. haftalarına ait C++ programları (Kasım–Aralık 2007): queue dizisiyle radix sort, priority_queue ile normal queue farkı ve priority_queue ile sıralama, node şablon sınıfıyla başa ve sona ekleyerek bağlı liste oluşturma soruları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-radix-oncelik-bagli-liste/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-radix-oncelik-bagli-liste.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-radix-oncelik-bagli-liste/eem227-radix-oncelik-bagli-liste.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Radix Sort, Öncelikli Kuyruk ve Bağlı Liste Düğümleri (Hafta 10–11)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>02.12.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#radix-sort-tabana-gore-siralama">Radix sort (tabana göre sıralama)</a></li><li><a href="#oncelikli-kuyruk-priority-queue">Öncelikli kuyruk (priority queue)</a></li><li><a href="#bagli-liste-linked-list-sorulari">Bağlı liste (linked list) soruları</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Radix Sort, Öncelikli Kuyruk ve Bağlı Liste Düğümleri (Hafta 10–11)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 02.12.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz döneminde 10. ve 11. haftalara ait klasördeki ("227_10_11") C++ programlarını içeriyor. Üç konu var: kuyruklarla çalışan <strong>radix sort</strong> (tabana göre sıralama), STL <strong>priority_queue</strong> (öncelikli kuyruk) ve <code>node</code> şablon sınıfıyla <strong>bağlı liste</strong> (linked list) oluşturma soruları. Programların başındaki açıklamalar ve sonundaki ekran çıktıları kaynak dosyalardan alındı. Kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="radix-sort-tabana-gore-siralama">Radix sort (tabana göre sıralama)</h2>
+<p>Dosyanın başındaki açıklama:</p>
+<ul><li>d basamaklı sayılar için çalışma zamanı O(2·d·n) = O(n) kadardır.</li><li>Lineer bir algoritmadır.</li><li>Sayıları karşılaştırarak sıralama işlemi yapmadığı için hızlı çalışır.</li></ul>
+<p>Her turda sayılar, o turdaki basamaklarına (önce birler, sonra onlar...) göre 0–9 numaralı 10 kuyruğa dağıtılıyor (<code>distribute</code>), sonra kuyruklar sırayla boşaltılarak vektöre geri toplanıyor (<code>collect</code>). Kuyruklar FIFO olduğu için bir önceki turun sırası korunuyor; d tur sonunda vektör sıralanmış oluyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;time.h&gt;
+using namespace std;
+
+void distribute(const vector&lt;int&gt;&amp; v, queue&lt;int&gt; digitQueue[],int power)
+{
+	int i;
+	for (i = 0; i &lt; v.size(); i++)
+		digitQueue[(v[i] / power) % 10].push(v[i]);
+}
+
+void collect(queue&lt;int&gt; digitQueue[], vector&lt;int&gt;&amp; v)
+{
+	int i = 0, digit;
+	for (digit = 0; digit &lt; 10; digit++)
+
+		while (!digitQueue[digit].empty())
+		{
+			v[i] = digitQueue[digit].front();
+			digitQueue[digit].pop();
+			i++;
+		}
+}
+
+void radixSort(vector&lt;int&gt;&amp; v, int d)
+{
+	int i;
+	int power = 1;
+	queue&lt;int&gt; digitQueue[10]; // 10 adet  queue yaratıldı
+
+	for (i=0;i &lt; d;i++)
+	{
+		distribute(v, digitQueue, power);
+		collect(digitQueue, v);
+		power *= 10;
+	}
+}
+
+void displayVector(const vector&lt;int&gt;&amp; v)
+{
+	int i;
+
+	for (i=0; i &lt; v.size(); i++)
+	{
+		cout &lt;&lt; setw(12) &lt;&lt; v[i];
+		if ((i+1) % 6 == 0)		// newline every 6 numbers
+			cout &lt;&lt; endl;
+	}
+	cout &lt;&lt; endl;
+}
+
+int main()
+{
+	vector&lt;int&gt; intVector;
+
+	srand(time(NULL));
+	int bnumber=2; // sağdan kaç basamağa göre sıralama yapılacak
+	int i;
+	for (i = 0; i &lt; 20; i++)
+		intVector.push_back(rand()%100);
+	cout&lt;&lt;"SIRALAMADAN ONCE VEKTORUN ICINDEKI BILGI \n";
+    displayVector(intVector);
+
+    cout&lt;&lt;"SIRALANDIKTAN SONRA VECTORUN ICINDEKI BILGI \n";
+	radixSort(intVector, bnumber);
+	displayVector(intVector);
+	system("pause");
+	return 0;
+}</code></pre>
+<p>Dosyadaki örnek çalışma:</p>
+<pre class="kod"><code>SIRALAMADAN ONCE VEKTORUN ICINDEKI BILGI
+          13          68          47          48          72          48
+          64          91          32          56          28          75
+          23          75          31          61          60          80
+          66          69
+SIRALANDIKTAN SONRA VECTORUN ICINDEKI BILGI
+          13          23          28          31          32          47
+          48          48          56          60          61          64
+          66          68          69          72          75          75
+          80          91
+Press any key to continue . . .</code></pre>
+<p><em>Not: Dosyanın başındaki açıklamada "3 basamağa kadar olan 20 adet random sayı" yazıyor; program ise <code>rand()%100</code> ile en fazla 2 basamaklı sayılar üretip 2 tur (<code>bnumber=2</code>) sıralıyor. 3 basamaklı sayılar için <code>rand()%1000</code> ve <code>bnumber=3</code> kullanılmalı.</em></p>
+<h2 id="oncelikli-kuyruk-priority-queue">Öncelikli kuyruk (priority queue)</h2>
+<p>Dosyadaki açıklama: Yüksek öncelikli olanlar priority queue'nun en üstünde bulunur, yani işleme en önce girecek değerler bunlardır. Dolayısıyla kuyruğa push edilen değerleri push edilme sırasına göre değil, önceliğine göre kuyruktan çıkarır (<code>top()</code>). Normal kuyrukta bulunan FIFO kuralı priority queue'da geçerli değildir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;queue&gt;
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int main()
+{
+
+// ÖNCELİKLİ KUYRUK
+// FIFO olarak ÇALIŞMAZ !!!
+priority_queue&lt;int&gt; pq;
+pq.push(10);
+pq.push(30); // ---&gt; En yüksek prioritye sahip olan değer bu !!! En üsttedir
+pq.push(5);
+pq.push(3);
+cout&lt;&lt;"PRIORITY QUEUE"&lt;&lt;endl;
+cout&lt;&lt;"Size : "&lt;&lt;pq.size()&lt;&lt;endl&lt;&lt;"Yuksek Oncelikli Olan : "&lt;&lt;pq.top()&lt;&lt;endl;
+
+// NORMAL KUYRUK
+//---------------
+// Dikkat normal queue nun top fonksiyonu yoktur !!! front() fonksiyonu vardır.
+queue&lt;int&gt; s;
+s.push(10); // ----&gt; ilk giren bu First In, İlk çıkacak da bu !
+s.push(30);
+s.push(5);
+s.push(3);
+
+int x=s.front();
+cout&lt;&lt;endl&lt;&lt;"NORMAL QUEUE"&lt;&lt;endl;
+cout&lt;&lt;"Size : "&lt;&lt;s.size()&lt;&lt;endl&lt;&lt;"FIFO dan dolayi kuyruktan cikan : "&lt;&lt;x&lt;&lt;endl;
+
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>PRIORITY QUEUE
+Size : 4
+Yuksek Oncelikli Olan : 30
+
+NORMAL QUEUE
+Size : 4
+FIFO dan dolayi kuyruktan cikan : 10</code></pre>
+<h3 id="priority-queue-ile-siralama">priority_queue ile sıralama</h3>
+<p>Priority queue içerisine aktarım işlemi zaten önceliğe, yani büyüklüğe göre sıralı bir şekilde otomatik olarak yapıldığı için ekstradan bir karşılaştırma işlemi yapmamıza gerek yoktur. Elemanlar kuyruğa atılıp her seferinde en büyüğü (<code>top()</code>) alınarak vektörün sonundan başına doğru yerleştiriliyor; böylece vektör küçükten büyüğe sıralanıyor. Döngü baştan sona kurulursa büyükten küçüğe sıralanır.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;queue&gt;
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+priority_queue&lt;int&gt; pq;
+//int arr[]={16,29,14,32,18,14,87,50,64,35};
+int arr[]={1,1,10,9,8,7,6,5,4,3,2,1};
+int arrsize=sizeof(arr)/sizeof(int);
+vector&lt;int&gt; v(arr,arr+arrsize);
+
+int i, n=v.size();
+
+cout&lt;&lt;"Vektor ilk Hali (Sirasiz): ";
+  	for(i = 0; i &lt; n; i++)
+		cout &lt;&lt; v[i] &lt;&lt; "  ";
+ 	cout &lt;&lt; endl;
+
+// Sıralayan kısım-----------
+for(int i=0 ; i&lt;n ; i++)
+
+  pq.push(v[i]);
+
+for(int i=n-1 ; i&gt;=0 ; i--) // Küçükten büyüğe sıralar
+//for(int i=0 ; i&lt;n ; i++)  // Büyükten küçüğe sıralar
+{
+ v[i] = pq.top();
+ pq.pop();
+} // Sıralama bitti------------
+
+cout&lt;&lt;"Vektor Son hali (Sirali) : ";
+ 	for(i = 0; i &lt; n; i++)
+		cout &lt;&lt; v[i] &lt;&lt; "  ";
+ 	cout &lt;&lt; endl;
+
+system("pause");
+return 0;
+}</code></pre>
+<pre class="kod"><code>Vektor ilk Hali (Sirasiz): 1  1  10  9  8  7  6  5  4  3  2  1
+Vektor Son hali (Sirali) : 1  1  1  2  3  4  5  6  7  8  9  10</code></pre>
+<h2 id="bagli-liste-linked-list-sorulari">Bağlı liste (linked list) soruları</h2>
+<p>Bu sorularda aynı <code>node</code> şablon sınıfı kullanılıyor: her düğüm bir değer (<code>nodeValue</code>) ve sonraki düğümü gösteren bir işaretçi (<code>next</code>) tutuyor. Listeyi yazdıran <code>printList</code> fonksiyonu static tanımlanmış; böylece sınıftan türemiş bir nesne olmadan <code>node&lt;int&gt;::printList(...)</code> şeklinde, kapsam çözünürlük operatörüyle çağrılabiliyor. Düğümler arasına ok koymak için son düğüm döngüden sonra ayrıca yazdırılıyor.</p>
+<h3 id="soru-1-bagli-liste-olusturun">Soru 1: bağlı liste oluşturun</h3>
+<p>Düğümler listenin başına eklenerek oluşturuluyor: her yeni düğümün <code>next</code>'i bir önceki düğümü gösteriyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include&lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class node
+{
+
+  private:
+      T nodeValue;      // data held by the node
+      node&lt;T&gt; *next,*curr;    // next node in the list
+
+   public:
+      node(const T&amp; item, node&lt;T&gt; *nextNode=NULL)
+      {
+         nodeValue=item;
+		 next=nextNode;
+	  }
+
+/*
+ fonksiyona Class dan türemiş nesne olmadan erişmek için fonksiyonu static
+tanımladık */
+static void printList(node&lt;T&gt; *ptr)
+      {
+        while (ptr-&gt;next != NULL) // Araya ok koymak için bu şekilde yaptık...
+        {
+         cout &lt;&lt; ptr-&gt;nodeValue&lt;&lt;" -&gt; " ;
+         ptr = ptr-&gt;next;
+        }
+         cout&lt;&lt;ptr-&gt;nodeValue&lt;&lt;" -&gt; NULL" ;
+           cout &lt;&lt; endl;
+       }
+
+};
+
+int main()
+{
+// Listenin başına ekleyen yapı...
+
+ node&lt;int&gt; *p = new node&lt;int&gt;(10);
+ node&lt;int&gt; *q = new node&lt;int&gt;(20,p);
+ node&lt;int&gt; *r = new node&lt;int&gt;(30,q);
+
+// nesne kullanmadan scope resolution ile fonksiyona eriştik
+ node&lt;int&gt;::printList(r);
+
+ system("pause");
+ return 0;
+}</code></pre>
+<pre class="kod"><code>30 -&gt; 20 -&gt; 10 -&gt; NULL
+Press any key to continue . . .</code></pre>
+<h3 id="soru-2-10-rastgele-float-sayidan-bagli-liste-basa-ekleme">Soru 2: 10 rastgele float sayıdan bağlı liste (başa ekleme)</h3>
+<blockquote><p>10 adet random float sayıdan oluşan bir link list oluşturun, ekranda listeleyin. Listeyi oluştururken elemanları başa ekle yöntemini kullanarak LL'e ekleyin.</p></blockquote>
+<p>Klasörde bu sorunun iki sürümü var. İlk sürümde (<code>LL_STL_2_10RandomFloat.cpp</code>) liste doğrudan <code>P</code> işaretçisi üzerinde kuruluyor; düzeltilmiş sürümde (<code>LL_STL_2_50Random.cpp</code>) listenin başı <code>NULL</code> ile başlatılan bir <code>head</code> işaretçisinde tutuluyor. Sınıf iki sürümde de aynı (Soru 1'deki <code>node</code> sınıfının <code>curr</code> alanı olmayan hâli, <code>printList</code> burada <code>static T</code> olarak bildirilmiş).</p>
+<p>İlk sürümün <code>main</code> fonksiyonu:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>int main()
+{
+
+node&lt;float&gt; *P;
+
+for(int i=0 ; i&lt;10 ; i++)
+ P = new node&lt;float&gt; (15.0/(rand()%40*1.0),P);
+
+// nesne kullanmadan scope resolution ile static fonksiyona eriştik...
+ node&lt;float&gt;::printList(P);
+
+ system("pause");
+ return 0;
+}</code></pre>
+<p>Düzeltilmiş sürüm:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>int main()
+{
+
+node&lt;float&gt; *P,*head=NULL;
+
+for(int i=0 ; i&lt;10 ; i++)
+{
+  P = new node&lt;float&gt; (15.0/(rand()%40*1.0),head);
+  head = P;
+}
+// nesne kullanmadan scope resolution ile static fonksiyona eriştik...
+ node&lt;float&gt;::printList(head);
+
+ system("pause");
+ return 0;
+}</code></pre>
+<pre class="kod"><code>0.625-&gt;7.5-&gt;0.394737-&gt;0.394737-&gt;3.75-&gt;1.66667-&gt;0.75-&gt;1.07143-&gt;0.555556-&gt;15-&gt;NULL
+Press any key to continue . . .</code></pre>
+<p>Başa ekleme yapıldığı için ilk üretilen sayı (15) listenin sonunda görünüyor.</p>
+<p><em>Not: İlk sürümde <code>P</code> ilk değer verilmeden kullanıldığı için listenin ilk eklenen düğümünün <code>next</code>'i rastgele bir adresi gösterir; <code>printList</code> listenin sonunu bulamaz. Ayrıca <code>rand()%40</code> sıfır çıkarsa 15.0/0 ile sonsuz (inf) değer oluşur. Her iki dosyada <code>printList</code> <code>T</code> döndüreceğini bildirdiği hâlde <code>return</code> içermiyor (<code>void</code> olmalı).</em></p>
+<h3 id="soru-10-rastgele-karakterden-bagli-liste">Soru: 10 rastgele karakterden bağlı liste</h3>
+<blockquote><p>10 elemanlık rastgele karakter değerlerinden oluşmuş LL oluşturun. Sona ekle yöntemi ile yapınız.</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>int main()
+{
+
+node&lt;char&gt; *P,*head=NULL;
+
+srand(time(NULL));
+for(int i=1 ; i&lt;10 ; i++)
+{
+ P = new node&lt;char&gt; (65+rand()%26,head);
+ head = P;
+}
+
+// nesne kullanmadan scope resolution ile static fonksiyona eriştik...
+ node&lt;char&gt;::printList(head);
+
+ system("pause");
+ return 0;
+}</code></pre>
+<p><code>65+rand()%26</code> ifadesi 'A' ile 'Z' arasında rastgele bir büyük harf üretir. Dosyadaki örnek çıktı:</p>
+<pre class="kod"><code>Q-&gt;Q-&gt;J-&gt;H-&gt;T-&gt;S-&gt;U-&gt;A-&gt;U-&gt;NULL
+Press any key to continue . . .</code></pre>
+<p><em>Not: Döngü <code>i=1</code>'den <code>i&lt;10</code>'a kadar döndüğü için 10 değil 9 düğüm oluşuyor (örnek çıktıda da 9 harf var). Ayrıca soruda sona ekleme isteniyor, ama kod her yeni düğümü <code>head</code>'in önüne, yani başa ekliyor.</em></p>
+<h3 id="soru-4-tam-sayilardan-sona-ekleyerek-liste-fonksiyonsuz">Soru 4: tam sayılardan sona ekleyerek liste (fonksiyonsuz)</h3>
+<blockquote><p>Tam sayılardan oluşan 10 elemanlık bir listeyi sona ekleyerek oluşturun.</p></blockquote>
+<p>Bu sürümde <code>node</code> sınıfının üyeleri public yapılmış; böylece <code>main</code> içinde <code>next</code> alanına doğrudan erişilerek listenin sonu bulunuyor ve yeni düğüm oraya bağlanıyor.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include&lt;iostream&gt;
+#include&lt;ctime&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class node
+{
+   public:
+
+      T nodeValue;      // data held by the node
+      node&lt;T&gt; *next;    // next node in the list
+
+      node(const T&amp; item, node&lt;T&gt; *nextNode=NULL)
+      {
+         nodeValue=item;
+		 next=nextNode;
+	  }
+
+/*
+ fonksiyona Class dan türemiş nesne olmadan erişmek için fonksiyonu static
+tanımladık */
+static T printList(node&lt;T&gt; *ptr)
+      {
+
+        while (ptr-&gt;next != NULL) // Araya ok koymak için bu şekilde yaptık...
+        {
+         cout &lt;&lt; ptr-&gt;nodeValue&lt;&lt;"-&gt;" ;
+         ptr = ptr-&gt;next;
+        }
+         cout&lt;&lt;ptr-&gt;nodeValue&lt;&lt;"-&gt;NULL" ;
+           cout &lt;&lt; endl;
+
+       }
+
+};
+
+int main()
+{
+
+node&lt;int&gt; *head=NULL,*curr;
+
+srand(time(NULL));
+
+for(int i=1 ; i&lt;=10 ; i++)
+{
+
+ if(head == NULL)
+   head = new node&lt;int&gt; (i);
+
+ else
+ {
+ curr = head;
+
+ while(curr-&gt;next!=NULL)
+   curr = curr-&gt;next;
+
+ curr-&gt;next = new node&lt;int&gt; (i); ;
+ }
+}
+
+// nesne kullanmadan scope resolution ile static fonksiyona eriştik...
+ node&lt;int&gt;::printList(head);
+
+ system("pause");
+ return 0;
+}</code></pre>
+<pre class="kod"><code>1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8-&gt;9-&gt;10-&gt;NULL
+Press any key to continue . . .</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-radix-oncelik-bagli-liste.zip" download>eem227-radix-oncelik-bagli-liste.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 7 KB · 02.12.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-radix-oncelik-bagli-liste.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

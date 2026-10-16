@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Şablon (Template) Sınıflar ve vector Fonksiyonları — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 5. ve 6. haftalarına ait C++ programları (Ekim–Kasım 2007): farklı tipteki sayıları toplayan Sayi şablon sınıfı, &lt;&lt; ve &gt;&gt; yüklenmiş Bilgi şablon sınıfı ve STL vector için şablon fonksiyonlar (yazdırma, boş mu, ekleme, resize).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-sablon-siniflar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Şablon (Template) Sınıflar ve vector Fonksiyonları">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 5. ve 6. haftalarına ait C++ programları (Ekim–Kasım 2007): farklı tipteki sayıları toplayan Sayi şablon sınıfı, &lt;&lt; ve &gt;&gt; yüklenmiş Bilgi şablon sınıfı ve STL vector için şablon fonksiyonlar (yazdırma, boş mu, ekleme, resize).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-sablon-siniflar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Şablon (Template) Sınıflar ve vector Fonksiyonları", "description": "EEM227 Veri Yapıları dersinin 5. ve 6. haftalarına ait C++ programları (Ekim–Kasım 2007): farklı tipteki sayıları toplayan Sayi şablon sınıfı, << ve >> yüklenmiş Bilgi şablon sınıfı ve STL vector için şablon fonksiyonlar (yazdırma, boş mu, ekleme, resize).", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-sablon-siniflar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-sablon-siniflar.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-sablon-siniflar/eem227-sablon-siniflar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Şablon (Template) Sınıflar ve vector Fonksiyonları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#soru-1-farkli-tipteki-sayilari-toplayan-sablon-sinif">Soru 1: farklı tipteki sayıları toplayan şablon sınıf</a></li><li><a href="#soru-2-her-tipte-bilgiyi-saklayip-yazdiran-sablon-sinif">Soru 2: her tipte bilgiyi saklayıp yazdıran şablon sınıf</a></li><li><a href="#vector-icin-sablon-fonksiyonlar">vector için şablon fonksiyonlar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Şablon (Template) Sınıflar ve vector Fonksiyonları</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 21.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz döneminde 5. ve 6. haftaların klasörlerinde bulunan üç C++ programını içeriyor. Konu <strong>şablonlar (template)</strong>: herhangi bir veri tipiyle çalışan sınıflar ve STL <code>vector</code> üzerinde çalışan şablon fonksiyonlar. İlk iki programın başında soru metni, sonunda ekran çıktısı yorum olarak yazılmış. Kaynak dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="soru-1-farkli-tipteki-sayilari-toplayan-sablon-sinif">Soru 1: farklı tipteki sayıları toplayan şablon sınıf</h2>
+<blockquote><p>Farklı tipteki sayıların toplamını yapabilen ve sonucu aşırı yüklenmiş &lt;&lt; operatörü sayesinde bastırabilen bir şablon sınıf yazınız.</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class Sayi
+{
+
+ friend ostream &amp;operator&lt;&lt;( ostream &amp;, Sayi&lt;T&gt; &amp; obje);
+
+  public :
+
+         Sayi(T a,T b) // Constructorda inline olarak bildirdik
+         {
+           data1 = a;
+           data2 = b;
+         };
+  /* Şablon sınıfında aşırı yüklediğimiz &lt;&lt; operatörünü inline olarak sınıf ADT
+     si içerisinde bildirdik...
+  */
+ friend ostream &amp;operator&lt;&lt;( ostream &amp; yaz, Sayi&lt;T&gt; &amp; obje)
+     { yaz&lt;&lt;"Toplam Sonucu :"&lt;&lt; obje.data1 + obje.data2&lt;&lt;endl;
+       return yaz;}
+
+  private :
+          T data1;
+          T data2;
+
+};
+
+int main()
+{
+
+Sayi&lt;int&gt; Sayi1(3,5); // Dikkat !!! Tür yazılmalıdır...
+cout&lt;&lt;"Tamsayi "&lt;&lt;Sayi1;
+
+Sayi&lt;float&gt; Sayi2(1.3,5.8); // Tür yazılmalıdır...
+cout&lt;&lt;"Float "&lt;&lt;Sayi2;
+
+Sayi&lt;double&gt; Sayi3(45.343,62346.83); // Tür yazılmalıdır...
+cout&lt;&lt;"Double "&lt;&lt;Sayi3;
+
+system("pause");
+return 0;
+}</code></pre>
+<p>Ekran çıktısı:</p>
+<pre class="kod"><code>Tamsayi Toplam Sonucu :8
+Float Toplam Sonucu :7.1
+Double Toplam Sonucu :62392.2
+Press any key to continue . . .</code></pre>
+<p>Son satırda gerçek toplam 62392.173'tür; <code>cout</code> varsayılan olarak 6 anlamlı basamak gösterdiği için 62392.2 olarak yazılıyor.</p>
+<h2 id="soru-2-her-tipte-bilgiyi-saklayip-yazdiran-sablon-sinif">Soru 2: her tipte bilgiyi saklayıp yazdıran şablon sınıf</h2>
+<blockquote><p>Klavyeden girilen herhangi tipte bir bilgiyi depolayıp, bu bilgiyi ekranda tekrar bastırabilen bir şablon sınıfı tasarlayınız. Bu sınıf için klavyeden bilgi alma ve ekrana yazdırma işleminde kullanılmak üzere kullanılacak olan &gt;&gt; ve &lt;&lt; operatörlerine aşırı yükleme uygulayınız. Klavyeden girilen farklı tipteki bilgiler için sınıfınızın çalıştığını gösteren ana programı kodlayınız (int, float, double, char, string).</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class Bilgi
+{
+ friend ostream &amp;operator&lt;&lt;( ostream &amp;, Bilgi&lt;T&gt; &amp; obje);
+ friend istream &amp;operator&gt;&gt;( ostream &amp;, Bilgi&lt;T&gt; &amp; obje);
+
+  public :
+
+   friend ostream &amp;operator&lt;&lt;( ostream &amp; yaz, Bilgi&lt;T&gt; &amp; obje)
+     { yaz&lt;&lt;"Girilen Bilgi :"&lt;&lt; obje.data&lt;&lt;endl;
+       return yaz;}
+
+   friend istream &amp;operator&gt;&gt;( istream &amp; al, Bilgi&lt;T&gt; &amp; obje)
+     { al&gt;&gt;obje.data;
+       return al;}
+
+  private :
+          T data;
+};
+
+int main()
+{
+
+cout&lt;&lt;"String :";
+Bilgi&lt;string&gt; Nesne1;
+cin&gt;&gt;Nesne1;
+cout&lt;&lt;Nesne1;
+
+cout&lt;&lt;"Char : ";
+Bilgi&lt;char&gt; Nesne2;
+cin&gt;&gt;Nesne2;
+cout&lt;&lt;Nesne2;
+
+cout&lt;&lt;"int :";
+Bilgi&lt;int&gt; Nesne3;
+cin&gt;&gt;Nesne3;
+cout&lt;&lt;Nesne3;
+
+cout&lt;&lt;"float : ";
+Bilgi&lt;float&gt; Nesne4;
+cin&gt;&gt;Nesne4;
+cout&lt;&lt;Nesne4;
+
+system("pause");
+return 0;
+}</code></pre>
+<p>Ekran çıktısı (Merhaba, W, 56 ve 34.67 klavyeden girilmiş):</p>
+<pre class="kod"><code>String :Merhaba
+Girilen Bilgi :Merhaba
+Char : W
+Girilen Bilgi :W
+int :56
+Girilen Bilgi :56
+float : 34.67
+Girilen Bilgi :34.67
+Press any key to continue . . .</code></pre>
+<p><em>Not: Sınıfın başındaki ikinci friend bildiriminde <code>operator&gt;&gt;</code>'ın ilk parametresi yanlışlıkla <code>ostream &amp;</code> yazılmış; asıl tanım <code>istream &amp;</code> ile yapıldığı için program çalışıyor, ama bu iki satırlık ön bildirim gereksiz. Soruda istenen tipler arasında double da var; ana programda double denenmemiş.</em></p>
+<h2 id="vector-icin-sablon-fonksiyonlar">vector için şablon fonksiyonlar</h2>
+<p>6. hafta klasöründeki <code>Vectorler.cpp</code>, STL <code>vector</code> ile çalışan küçük şablon fonksiyonlar tanımlıyor: vektörü yazdırma, boş olup olmadığını sınama ve sona eleman ekleme. Diziden vektör oluşturma, <code>back()</code> ve <code>resize()</code> da gösteriliyor. Eleman çıkaran <code>Cikart</code> fonksiyonu yorum satırına alınmış (<code>pop_back()</code> değer döndürmediği için bu hâliyle derlenmez).</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;typename T&gt;
+void PrintVector(vector&lt;T&gt;&amp; Ref)
+{
+      for(int i=0; i&lt;Ref.size(); i++)
+       cout&lt;&lt;Ref[i]&lt;&lt;" ";
+      cout&lt;&lt;endl;
+}
+
+template &lt;typename T&gt;
+bool BosmuDolumu(vector&lt;T&gt;&amp; Ref)
+{
+  if(Ref.empty()==0)
+   return true;
+  else
+   return false;
+}
+
+template &lt;typename T&gt;
+void Ekle(vector&lt;T&gt;&amp; Ref,T value)
+{
+  Ref.push_back(value);
+}
+
+/*
+template &lt;typename T&gt;
+T Cikart(vector&lt;T&gt;&amp; Ref)
+{
+  T x;
+  x=Ref.pop_back();
+  return x;
+}
+*/
+
+int main()
+{
+
+int a[5]={1,3,5,7,9};
+double b[5]={2.2,4.4,6.6,8.8,10.10};
+
+int sizea=sizeof(a)/sizeof(int);
+int sizeb=sizeof(b)/sizeof(double);
+
+vector&lt;int&gt; VecA(a,a+sizea);
+vector&lt;double&gt; VecB(b,b+sizeb);
+
+PrintVector(VecA);
+PrintVector(VecB);
+
+cout&lt;&lt;"Back of A : "&lt;&lt; VecA.back()&lt;&lt;endl;
+cout&lt;&lt;"Back of B : "&lt;&lt; VecB.back()&lt;&lt;endl;
+
+cout&lt;&lt;" Empty ? :"&lt;&lt; BosmuDolumu(VecA)&lt;&lt;endl;
+cout&lt;&lt;" Empty ? :"&lt;&lt; BosmuDolumu(VecB)&lt;&lt;endl;
+
+VecA.resize(10,0);
+PrintVector(VecA);
+
+VecB.resize(4,0);
+PrintVector(VecB);
+
+Ekle(VecA,5);
+PrintVector(VecA);
+
+Ekle(VecB,7.7);
+PrintVector(VecB);
+
+cout&lt;&lt;"\n";
+system("pause");
+return 0;
+}</code></pre>
+<p>Ekran çıktısı:</p>
+<pre class="kod"><code>1 3 5 7 9
+2.2 4.4 6.6 8.8 10.1
+Back of A : 9
+Back of B : 10.1
+ Empty ? :1
+ Empty ? :1
+1 3 5 7 9 0 0 0 0 0
+2.2 4.4 6.6 8.8
+1 3 5 7 9 0 0 0 0 0 5
+2.2 4.4 6.6 8.8 7.7
+
+Press any key to continue . . .</code></pre>
+<p><code>resize(10,0)</code> vektörü 10 elemana büyütüp yeni yerleri 0 ile dolduruyor; <code>resize(4,0)</code> ise 5 elemanlı vektörü 4 elemana küçültüyor (son eleman 10.1 atılıyor).</p>
+<p><em>Not: <code>BosmuDolumu</code> fonksiyonu vektör <strong>dolu</strong> iken true döndürüyor (<code>empty()==0</code> dolu demektir). Bu yüzden iki dolu vektör için de "Empty ? :1" yazılıyor; soruya göre çıktı yanıltıcı. "Boş mu?" sorusu için doğrudan <code>return Ref.empty();</code> yazılmalı.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem227-sablon-siniflar.zip" download>eem227-sablon-siniflar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2 KB · 21.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem227-sablon-siniflar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

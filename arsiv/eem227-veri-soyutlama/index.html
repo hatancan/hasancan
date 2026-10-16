@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Veri Yapılarına Giriş, Veri Soyutlama ve Operatör Aşırı Yükleme (Hafta 3 Ek Notlar) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin 3. hafta ek ders notu (Ekim 2007): veri, yapı ve algoritma, soyut veri tipleri, veri soyutlama ve bilgi gizleme, C++&#x27;ta operatör aşırı yükleme kuralları, tipler arası dönüşüm ile Dizi, String ve Date sınıfı örnek çalışmaları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-veri-soyutlama/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Veri Yapılarına Giriş, Veri Soyutlama ve Operatör Aşırı Yükleme (Hafta 3 Ek Notlar)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin 3. hafta ek ders notu (Ekim 2007): veri, yapı ve algoritma, soyut veri tipleri, veri soyutlama ve bilgi gizleme, C++&#x27;ta operatör aşırı yükleme kuralları, tipler arası dönüşüm ile Dizi, String ve Date sınıfı örnek çalışmaları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-veri-soyutlama/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Veri Yapılarına Giriş, Veri Soyutlama ve Operatör Aşırı Yükleme (Hafta 3 Ek Notlar)", "description": "EEM227 Veri Yapıları dersinin 3. hafta ek ders notu (Ekim 2007): veri, yapı ve algoritma, soyut veri tipleri, veri soyutlama ve bilgi gizleme, C++'ta operatör aşırı yükleme kuralları, tipler arası dönüşüm ile Dizi, String ve Date sınıfı örnek çalışmaları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-veri-soyutlama/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "Hafta3 Ek DersNotları.pdf", "contentUrl": "https://hasancan.net/arsiv/eem227-veri-soyutlama/Hafta3 Ek DersNotları.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Veri Yapılarına Giriş, Veri Soyutlama ve Operatör Aşırı Yükleme (Hafta 3 Ek Notlar)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#veri-yapilari">Veri yapıları</a></li><li><a href="#veri-soyutlamak-ve-bilgi-gizlemek">Veri soyutlamak ve bilgi gizlemek</a></li><li><a href="#operator-asiri-yuklemesi-operator-overloading">Operatör aşırı yüklemesi (operator overloading)</a></li><li><a href="#ornek-calisma-dizi-sinifi">Örnek çalışma: Dizi sınıfı</a></li><li><a href="#tipler-arasi-donusum">Tipler arası dönüşüm</a></li><li><a href="#ornek-calisma-string-sinifi">Örnek çalışma: String sınıfı</a></li><li><a href="#asiri-yukleme-ve">Aşırı yükleme (++ ve --)</a></li><li><a href="#ornek-calisma-date-sinifi">Örnek çalışma: Date sınıfı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Veri Yapılarına Giriş, Veri Soyutlama ve Operatör Aşırı Yükleme (Hafta 3 Ek Notlar)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 05.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinin 2007 güz dönemi 3. haftasına ait <strong>ek ders notudur</strong> (5 Ekim 2007). Not iki sütunlu bir özet biçiminde: önce veri yapılarının temel kavramlarını, sonra C++'ta veri soyutlama ve operatör aşırı yükleme kurallarını anlatıyor. Örnek çalışmaların (Dizi, String ve Date sınıfları) kodları notta kitap sayfası görüntüsü olarak yer aldığı için burada sayfa görselleriyle verildi. Aynı haftanın ana ders notu için "Operatörlere Yeni İşlevler Yüklenmesi" yazısına bakabilirsiniz. Ek notun orijinal PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="veri-yapilari">Veri yapıları</h2>
+<p>Bilgisayar ortamında verilerin etkin olarak depolanması ve işlenmesi için kullanılan yapılardır. Genellikle seçilen veri yapısı, algoritmanın etkin çalışabilmesi için önemlidir.</p>
+<p><strong>Algoritma:</strong> Bir problemin çözümünde kullanılan komutlar dizisi. Bir problemi çözmek için geliştirilmiş kesin bir yöntemdir. Bir algoritma, bir programlama dilinde (C, Pascal gibi) ifade edildiğinde program adını alır.</p>
+<p><strong>Veri:</strong> Algoritmalar tarafından işlenen en temel elemanlar (sayısal bilgiler, metinsel bilgiler, resimler, sesler ve girdi, çıktı olarak veya ara hesaplamalarda kullanılan diğer bilgiler). Bir algoritmanın etkin, anlaşılır ve doğru olabilmesi için, algoritmanın işleyeceği verilerin düzenlenmesi gerekir.</p>
+<p><strong>Veri yapıları:</strong> Verilerin düzenlenme biçimini belirleyen yapıtaşlarıdır. Bir program değişkeni bile basit bir veri yapısı olarak kabul edilebilir. Değişik algoritmalarda verilerin diziler, yığıtlar, kuyruklar, ağaçlar ve çizgeler gibi veri yapıları şeklinde düzenlenmesi gerekebilir.</p>
+<h3 id="veri-yapi-ve-algoritma">Veri, yapı ve algoritma</h3>
+<p>Bir programda veri, yapı ve algoritma birbirinden ayrılmaz bileşenlerdir ve her biri önemlidir. Verilerin düzenlenme biçimleri önemlidir, çünkü yapı iyi tasarlandığında etkin, doğru, anlaşılır ve hızlı çalışıp az kaynak kullanan algoritma geliştirmek kolaylaşır.</p>
+<h3 id="veri-tiplerinden-veri-yapilarina">Veri tiplerinden veri yapılarına</h3>
+<ul><li><strong>Veri tipleri:</strong> Tamsayı, gerçel sayı, karakter...</li><li><strong>Bileşik veri tipleri:</strong> Dizi, yapı (kayıt), ...</li><li><strong>Veri yapıları:</strong> Liste, yığıt, kuyruk, ağaç, çizge vb.</li></ul>
+<p><strong>Liste:</strong> Sonlu sayıda elemandan oluşan ve elemanları doğrusal sırada yerleştirilmiş veri yapısı. Herhangi bir elemanına erişimde sınırlama yoktur.</p>
+<p><strong>Yığıt:</strong> Elemanlarına erişim sınırlaması olan, liste uyarlı veri yapısı. LIFO listesi.</p>
+<p><strong>Kuyruk:</strong> Elemanlarına erişim sınırlaması olan, liste uyarlı veri yapısı. FIFO listesi.</p>
+<p><strong>Veri tabanı (database):</strong> Kısaca, işlenecek ve işlenmiş verilerden oluşan bilgi bankası olarak tanımlanabilir. Veri yapıları, yani verilerin düzenlenme biçimleri, veri tabanları için de önemlidir. Örnek olarak bir bankadaki müşterilerin bilgileri, bir üniversitenin öğretim elemanları, çalışanları, dersleri... veri tabanlarında tutulup işlenir.</p>
+<p>Veri yapıları <strong>statik veri yapıları</strong> ve <strong>dinamik veri yapıları</strong> tipinde olabilir.</p>
+<h3 id="soyut-veri-yapisi-abstract-data-type-nedir">Soyut veri yapısı (abstract data type) nedir?</h3>
+<p>Nasıl bir şey olduğu, üzerinde hangi işlemlerin ne şekilde tanımlandığı belli olan ama bilgisayar ortamında nasıl tutulacağı belirtilmeyen veri yapılarıdır. Ağaç yapısı ya da öncelik kuyrukları (priority queue) buna örnek olarak verilebilir. Diğerleri:</p>
+<ul><li>String</li><li>List</li><li>Linked list</li><li>Stack</li><li>Queue</li><li>Binary search tree</li><li>Priority queue</li><li>Complex number</li><li>Associative array</li><li>Multimap</li></ul>
+<h2 id="veri-soyutlamak-ve-bilgi-gizlemek">Veri soyutlamak ve bilgi gizlemek</h2>
+<p>Veri soyutlamak ve bilgi gizlemek (data abstraction and information hiding), sınıf ve fonksiyonların içeriğine fazla bağımlı olmayan programlar yazılabilmesini sağlar, kullanım hatalarını önler. Sadece gerekli detaylar (LIFO [last-in, first-out] yapısı) gösterilerek kullanılmaları sağlanır.</p>
+<ul><li>Soyut veri tiplerine (ADT) int, float örnek olarak verilebilir.</li><li>Örneğin int: matematikteki anlamı farklı, bilgisayardaki integer farklıdır.</li><li>C++ yeni veri türleri oluşturularak genişleyebilen bir dildir.</li></ul>
+<h3 id="ornek-soyut-dizi-veri-turu">Örnek: soyut dizi veri türü</h3>
+<p>Programcı bir ADT dizisi oluşturabilir ve standart dizi yapısına yeni kapasiteler ilave eder:</p>
+<ul><li>Aralık kontrolü</li><li>Dizinin herhangi bir sayıdan başlayabilmesi</li><li>Dizi–dizi ataması yapabilme</li><li>Dizi–dizi karşılaştırması yapabilme</li><li>Dizi giriş/çıkış işlemleri</li><li>Kendi büyüklüğünü bilme</li><li>Daha fazla elemanı kapsamak için genişleyebilme</li></ul>
+<h3 id="ornek-soyut-string-veri-turu">Örnek: soyut string veri türü</h3>
+<ul><li>C++'da hazır string tipi yoktur. Bu, maksimum performans içindir.</li><li>Ancak string soyut veri türünü oluşturmak ve tamamlamak için mekanizmalar mevcuttur.</li><li>C++'da ANSI/ISO standartlarında string sınıfı da vardır.</li></ul>
+<h3 id="ornek-queue-adt-tipi">Örnek: queue ADT tipi</h3>
+<p>Bir kuyrukta beklemeye benzer: ilk giren ilk çıkar (FIFO [first in, first out]).</p>
+<ul><li><strong>Enqueue:</strong> Her seferinde bir elemanı kuyruğun arkasına koyar.</li><li><strong>Dequeue:</strong> Her seferinde bir elemanı kuyruğun önünden alır.</li><li>İşlemlerin ayrıntısı gizlidir. Kullanırken veri yapısına doğrudan erişilemez.</li><li>Sadece queue üye fonksiyonları gizli iç yapıya erişebilirler.</li></ul>
+<h3 id="ne-amacliyoruz">Ne amaçlıyoruz?</h3>
+<p>Nesne yönelimli programlamanın (OOP) en önemli avantajı, yazılan kodun maksimum miktarda tekrar kullanılabilir olmasıdır. Bunu sağlamak için genel yapı soyutlanır, bilgiler gizlenir. Yapıyı kullanan kişiler, isteseler bile, kodunuza sıkı sıkıya bağlı programlar yazamazlar. Bu ise nesneleri yazan programcılara, istedikleri zaman nesnelerin ara yüzlerini değiştirmeden tüm iç yapıyı değiştirebilme olanağı sağlar. Kullanımda ise değişik nesnelere standart bir ara yüz sunarak programlamayı kolaylaştırır.</p>
+<h2 id="operator-asiri-yuklemesi-operator-overloading">Operatör aşırı yüklemesi (operator overloading)</h2>
+<p>Operatör aşırı yüklemesi C++'a operatörlerin nesneler üzerinde de çalışabilmesi yeteneğini sağlar. Bu sayede geleneksel operatörler, kullanıcıların tanımladığı nesnelerle de çalışabilir. Ancak çok özen gerektirir; program kolayca anlaşılmaz bir hâl alabilir.</p>
+<p>C++'ta zaten aşırı yüklenmiş operatörler vardır:</p>
+<ul><li><code>&lt;&lt;</code> hem stream girişi operatörü hem de bitwise shift operatörü olarak çalışır.</li><li><code>+</code>, <code>–</code> vb. operatörler değişik türlerle çalışır.</li></ul>
+<h3 id="nasil-yapilir">Nasıl yapılır?</h3>
+<ul><li>Normalde olduğu gibi bir fonksiyon yazın.</li><li>Fonksiyon ismini <code>operator</code> anahtar kelimesine bitişik olarak operatör ismi olarak verin. Mesela <code>operator+</code> adlı fonksiyon <code>+</code> operatörünü aşırı yükler.</li><li>Kullanırken: nesnelerle çalışırken <code>=</code> ve <code>&amp;</code> dışındaki tüm operatörlerin aşırı yüklenmesi zorunludur.</li></ul>
+<p>Notta bu noktada aşırı yüklenebilen ve yüklenemeyen operatörlerin tablosu var. Aşırı yüklenemeyen operatörler: <code>.</code>, <code>.*</code>, <code>::</code>, <code>?:</code> ve <code>sizeof</code>.</p>
+<h3 id="kurallar">Kurallar</h3>
+<ul><li><code>&amp;</code>, <code>*</code>, <code>+</code>, <code>-</code> operatörlerinin unary ve binary versiyonları vardır ve ayrı ayrı aşırı yüklenirler.</li><li>Operatör öncelikleri aşırı yükleme ile değiştirilemez.</li><li>Operatörlerin işlem yönü değiştirilemez.</li><li>Operand sayısı değiştirilemez: iki operandlı operatörler tek operandlı, tek operandlı operatörler iki operandlı yapılamaz.</li><li>Yeni operatör tanımlanamaz. Sadece var olanlar aşırı yüklenebilir.</li><li>Var olan tipler için operatörler aşırı yüklenemez. Mesela iki integer'ın toplanma yöntemi değiştirilemez; derleyici hata verir.</li></ul>
+<h3 id="operator-fonksiyonlar-uye-ya-da-friend-fonksiyon">Operatör fonksiyonlar: üye ya da friend fonksiyon?</h3>
+<ul><li><code>( )</code>, <code>[ ]</code>, <code>-&gt;</code> ya da atama operatörleri aşırı yükleniyorsa mutlaka üye fonksiyon kullanılmalı.</li><li>Üye fonksiyon kullanılacaksa, operatörün sol tarafı mutlaka kendi sınıfından bir nesne olmalıdır. Eğer sol taraf kendi sınıfından bir nesne değilse, operatör fonksiyonu kesinlikle üye olamaz.</li><li>Üye fonksiyon olmayacaksa ve public ya da private üyelere erişilmesi gerekiyorsa mutlaka friend fonksiyon olmalıdır; operandlarına ulaşma hakkı olmalıdır.</li></ul>
+<h3 id="stream-operatorlerini-asiri-yuklemek">Stream operatörlerini aşırı yüklemek</h3>
+<p>&lt;&lt; ve &gt;&gt; operatörlerini aşırı yükleyerek kullanıcı tanımlı tiplerle giriş çıkış işlemi yapabiliriz.</p>
+<ul><li>Sol tarafın türü <code>ostream &amp;</code> ve <code>istream &amp;</code> olacak.</li><li>Sol taraf kendi sınıfından olmadığından üye fonksiyon olarak tanımlayamayız.</li><li>Private veri üyelerine ulaşmak için friend fonksiyon olmalılar.</li><li>Eğer friend fonksiyon olarak tanımlanmamışlarsa, public'te tanımlı set ve get fonksiyonları üzerinden private veriye ulaşırlar. Performans gereksinimi nedeniyle bu fonksiyonlar inline yapılır.</li></ul>
+<p>Örnek program olarak notta telefon numarasını <code>(800) 555-1212</code> biçiminde okuyup yazan <code>PhoneNumber</code> sınıfı veriliyor (bu örnek ana ders notunda da var).</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Operatör tablosu, PhoneNumber sınıfı örneği ve tek/iki operandlı operatörlerin aşırı yüklenmesi"><figcaption>Ek notun 4. sayfası: PhoneNumber örneği, tek ve iki operandlı operatörler</figcaption></figure>
+<h3 id="tek-operandli-operatorleri-asiri-yuklemek">Tek operandlı operatörleri aşırı yüklemek</h3>
+<ul><li>Tek operandlı ya da operandsız olarak tanımlanabilir. Genel olarak aşırı yükleme üye fonksiyonu ile gerçekleştirilmelidir.</li><li>Sınıf içeriğinin kapalı mimarisini deleceğinden friend fonksiyon kullanmaktan kaçının.</li><li>Non-statik üye fonksiyon olarak bildirilir, çünkü non-statik veriye erişmesi gerekir.</li></ul>
+<p>Bir üye fonksiyonu olarak bildirim örneği:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String {
+public:
+bool operator!() const;
+...
+};</code></pre>
+<p>Üye olmayan fonksiyon ile bildirim örneği:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String {
+friend bool operator!( const String &amp; )
+...
+}</code></pre>
+<h3 id="i-ki-operandli-operatorleri-asiri-yuklemek">İki operandlı operatörleri aşırı yüklemek</h3>
+<p>İki operandlı non-static üye fonksiyona örnek olarak <code>+=</code>'i aşırı yükleyelim:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String
+{
+public:
+    const String &amp;operator+=( const String &amp; );
+...
+};</code></pre>
+<p><code>y += z</code> ile <code>y.operator+=( z )</code> yazmak aynıdır. Non-statik veriye ulaşmak için <code>operator+=</code> non-statik üye fonksiyon şeklinde kullanılır.</p>
+<p>İki operandlı non-member fonksiyona örnek, <code>+=</code> aşırı yüklemesi (non-member olarak):</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String
+ { friend const String &amp;operator+=(String &amp;, const String &amp;);
+...
+};</code></pre>
+<p><code>y += z</code> ile <code>operator+=( y, z )</code> aynıdır.</p>
+<h2 id="ornek-calisma-dizi-sinifi">Örnek çalışma: Dizi sınıfı</h2>
+<p>Bir Dizi sınıfı oluşturalım. Bu sınıf standart dizilere göre fazladan şu özellikleri içersin:</p>
+<ul><li>Sınır kontrolü</li><li>Dizi–dizi atanabilme</li><li>Kendi eleman sayısını bilme</li><li><code>&lt;&lt;</code> ve <code>&gt;&gt;</code> ile tüm dizinin okunup yazdırılabilmesi</li><li><code>==</code> ve <code>!=</code> ile dizi–dizi karşılaştırılabilmesi</li></ul>
+<p>Notta <code>Array</code> sınıfının başlık dosyası (array1.h), üye fonksiyonları (array1.cpp) ve sürücü programı (fig08_04.cpp) kod görüntüsü olarak yer alıyor. Açıklama kutusundan biri: "Dikkat: bütün operatörler sınıf içinde tanımlanmış." Sürücü program iki diziyi (7 ve 10 elemanlı) oluşturup boyutlarını ve içeriklerini yazdırıyor, klavyeden 17 tamsayı okuyor, <code>!=</code> ve <code>==</code> ile karşılaştırıyor, <code>integers1 = integers2</code> ataması yapıyor, <code>integers1[5]</code> elemanını okuyup 1000 yapıyor ve son olarak aralık dışı <code>integers1[15]</code> ataması denendiğinde programın <code>assert</code> ile sonlandığını gösteriyor.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Array sınıfının başlık ve uygulama dosyalarının kod görüntüleri"><figcaption>Ek notun 5. sayfası: Array sınıfının tanımı ve üye fonksiyonları</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Array sınıfının karşılaştırma, indis, giriş-çıkış operatörleri ve sürücü programı ile ekran çıktısı"><figcaption>Ek notun 6. sayfası: Array sınıfının devamı ve sürücü program</figcaption></figure>
+<h2 id="tipler-arasi-donusum">Tipler arası dönüşüm</h2>
+<p><strong>Tip operatörü:</strong></p>
+<ul><li>Standart tiplere dönüştürmeye zorlar.</li><li>Standart tiplerle kullanıcının tanımladığı türler arasındaki dönüşüm ilişkisini tanımlar.</li><li>Dönüşüm operatörü (veya cast operatörü) statik olmayan bir üye fonksiyon olmalıdır; friend olamaz.</li><li>Dönüş türü olamaz. Bu tür, dönüştürülen nesnenin türüdür.</li><li>Kullanıcı tarafından tanımlanan A sınıfı için <code>A::operator char *() const;</code> A nesnesini bir <code>char *</code>'a dönüştüren tip dönüşüm fonksiyonu tanımlanıyor.</li><li>Built-in veri tiplerini birbirine dönüştürme işlemi cast operatörleriyle yapılır; ama kullanıcının tanımladığı veri tiplerinde durum ne olacak?</li><li>User-defined types → built-in types bu iş conversion constructor'ları (dönüşüm constructor) ile yapılır.</li><li><code>A::operator int() const;</code> A nesnesini bir integer'a dönüştüren tip dönüşüm fonksiyonu tanımlanıyor.</li><li><code>A::operator otherClass() const;</code> A nesnesini otherClass sınıfına dönüştüren tip dönüşüm fonksiyonu tanımlanıyor.</li><li>Tip dönüşümü aşırı yükleme zorunluluğunu kaldırabilir.</li></ul>
+<p><em>Not: Burada yön karışmış görünüyor: kullanıcı tanımlı bir türü built-in türe çeviren, hemen ardından anlatılan dönüşüm operatörleridir (<code>operator int()</code> gibi). Dönüşüm constructor'ı ise tersini, yani başka bir türden (örneğin <code>char *</code>) kullanıcı tanımlı türe dönüşümü yapar.</em></p>
+<h2 id="ornek-calisma-string-sinifi">Örnek çalışma: String sınıfı</h2>
+<p><code>cout &lt;&lt; s;</code> gibi normalde <code>char *</code> tipinde veri beklenen bir yerde string tipinden olan s nesnesi kullanılırsa, derleyici tip dönüşüm fonksiyonunu (<code>operator char *</code>) çağırarak s'yi <code>char *</code> tipine çevirerek kullanır.</p>
+<p>Zaten C++ standart kütüphanesinde bir string sınıfı vardır, ama aşırı yükleme ile kendi string sınıfımızı yazabiliriz.</p>
+<p><strong>Dönüşüm constructor fonksiyonu:</strong> bir nesneyi başka bir sınıfa döndürmeye yarayan tek argümanlı bir constructor'dur.</p>
+<p>Notta <code>String</code> sınıfının başlık dosyası (string1.h), üye fonksiyonları (string1.cpp) ve sürücü programı (fig08_05.cpp) kod görüntüsü olarak yer alıyor. Açıklama kutuları: "Dönüşüm constructor'ı: String'den char *'a", "Constructor'ların çalışması ekrana yazılıyor", "Aşırı yükleme sebebiyle operatör'ün nasıl tanımlandığına dikkat edin!". Sürücü program "happy" ve " birthday" dizgileriyle karşılaştırma operatörlerini (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>), boş dizgi testini (<code>!</code>), <code>+=</code> ile birleştirmeyi, <code>()</code> operatörüyle alt dizgi almayı ve <code>[]</code> ile karakter değiştirmeyi gösteriyor; sonunda aralık dışı indis denemesi <code>assert</code> ile programı sonlandırıyor.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="String sınıfının başlık dosyası ve kurucu fonksiyonlarının kod görüntüsü"><figcaption>Ek notun 8. sayfası: String sınıfı</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="String sınıfının operatörleri, sürücü programı ve ekran çıktısı"><figcaption>Ek notun 9. sayfası: String sınıfının devamı ve ekran çıktısı</figcaption></figure>
+<h2 id="asiri-yukleme-ve">Aşırı yükleme (++ ve --)</h2>
+<p>Önce ya da sonra artıran/eksilten operatörleri de aşırı yükleyebiliriz. Ancak önce ya da sonra artıran/eksilten operatörlerin arasında fark vardır.</p>
+<p>Önce işlem yapan türde operatörler diğer tek operandlı operatörler gibi tanımlanırlar:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>d1.operator++(); // for ++d1
+Date &amp;operator++();    // örnek (member function)</code></pre>
+<p>Sonra işlem yapan türde operatörleri görünce derleyici şu şekilde bir fonksiyon arar:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>d1.operator++( 0 ); // for d1++
+Date operator++( int );    // örnek (member function)</code></pre>
+<p>Buradaki 0 değeri, önce ve sonra versiyonları arasında derleyicinin ayırım yapabilmesi içindir.</p>
+<h2 id="ornek-calisma-date-sinifi">Örnek çalışma: Date sınıfı</h2>
+<p>Aşağıdaki özelliklere sahip bir Date sınıfı oluşturacağız:</p>
+<ul><li>Aşırı yüklenmiş bir artım operatörü ile gün, ay ve yıl değerleri değişecek,</li><li>Aşırı yüklenmiş <code>+=</code> operatörü,</li><li>Artık yılı test etmek için bir fonksiyon,</li><li>Herhangi bir ayın son günü olup olmadığını sınayan bir fonksiyon olacak.</li></ul>
+<p>Notta date1.h, date1.cpp ve fig08_06.cpp kod görüntüsü olarak yer alıyor. Sonek <code>operator++( int )</code> için açıklama kutusu: "artım operatörü kullanmayacak int türünden bir parametreye sahiptir." Artık yıl testi <code>y % 400 == 0 || ( y % 100 != 0 &amp;&amp; y % 4 == 0 )</code> koşuluyla yapılıyor.</p>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Date sınıfının başlık dosyası, üye fonksiyonları ve sürücü programının kod görüntüsü"><figcaption>Ek notun 11. sayfası: Date sınıfı</figcaption></figure>
+<p>Sürücü programın ekran çıktısı:</p>
+<pre class="kod"><code>d1 is January 1, 1900
+d2 is December 27, 1992
+d3 is January 1, 1900
+
+d2 += 7 is January 3, 1993
+
+  d3 is February 28, 1992
+++d3 is February 29, 1992
+
+Testing the preincrement operator:
+  d4 is March 18, 1969
+++d4 is March 19, 1969
+  d4 is March 19, 1969
+
+Testing the postincrement operator:
+  d4 is March 19, 1969
+d4++ is March 19, 1969
+  d4 is March 20, 1969</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Hafta3 Ek DersNotları.pdf" download>Hafta3 Ek DersNotları.pdf</a></p>
+              <p class="kucuk">PDF · 749 KB · 12 <span data-i18n="arch.pagesLower"></span> · 05.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Hafta3 Ek DersNotları.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (749 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Ayrık Zamanlı Fourier Dönüşümü (DTFT), Özellikleri ve Frekans Yanıtı — hasancan.net</title>
+<meta name="description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;DT Fourier Transform&quot;: DTFT çiftinin türetilmesi, ayrık zamanda alçak ve yüksek frekans kavramı, temel DTFT örnekleri, periyodik sinyallerin DTFT&#x27;si, periyodiklik, kaydırma, zaman genişletme, Parseval, konvolüsyon ve çarpma özellikleri, fark denklemli LTI sistemler, Fourier analizinde dualite, genlik/faz ve Bode çizimleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-ayrik-fourier-donusumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Ayrık Zamanlı Fourier Dönüşümü (DTFT), Özellikleri ve Frekans Yanıtı">
+<meta property="og:description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;DT Fourier Transform&quot;: DTFT çiftinin türetilmesi, ayrık zamanda alçak ve yüksek frekans kavramı, temel DTFT örnekleri, periyodik sinyallerin DTFT&#x27;si, periyodiklik, kaydırma, zaman genişletme, Parseval, konvolüsyon ve çarpma özellikleri, fark denklemli LTI sistemler, Fourier analizinde dualite, genlik/faz ve Bode çizimleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-ayrik-fourier-donusumu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Ayrık Zamanlı Fourier Dönüşümü (DTFT), Özellikleri ve Frekans Yanıtı", "description": "EEM301 Sinyaller ve Sistemler I ders sunumu \"DT Fourier Transform\": DTFT çiftinin türetilmesi, ayrık zamanda alçak ve yüksek frekans kavramı, temel DTFT örnekleri, periyodik sinyallerin DTFT'si, periyodiklik, kaydırma, zaman genişletme, Parseval, konvolüsyon ve çarpma özellikleri, fark denklemli LTI sistemler, Fourier analizinde dualite, genlik/faz ve Bode çizimleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-ayrik-fourier-donusumu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "EEM301-DTFT4.ppt", "contentUrl": "https://hasancan.net/arsiv/eem301-ayrik-fourier-donusumu/EEM301-DTFT4.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Ayrık Zamanlı Fourier Dönüşümü (DTFT), Özellikleri ve Frekans Yanıtı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM301</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>23.10.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#the-discrete-time-fourier-transform">The discrete-time Fourier transform</a></li><li><a href="#examples-parallel-with-the-ct-examples">Examples (parallel with the CT examples)</a></li><li><a href="#dtft-of-periodic-signals">DTFT of periodic signals</a></li><li><a href="#properties-of-the-dt-fourier-transform">Properties of the DT Fourier transform</a></li><li><a href="#the-convolution-property">The convolution property</a></li><li><a href="#dt-lti-systems-described-by-lccdes">DT LTI systems described by LCCDEs</a></li><li><a href="#dtft-multiplication-property">DTFT multiplication property</a></li><li><a href="#duality-in-fourier-analysis">Duality in Fourier analysis</a></li><li><a href="#magnitude-and-phase-of-ft-and-frequency-response">Magnitude and phase of FT, and frequency response</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Ayrık Zamanlı Fourier Dönüşümü (DTFT), Özellikleri ve Frekans Yanıtı</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 23.10.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM301 Sinyaller ve Sistemler I</strong> dersinin son bölümü olan <strong>"DT Fourier Transform"</strong> (Ayrık Zamanlı Fourier Dönüşümü) sunumudur. Sunumu dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong> hazırlamış (Ekim 2005). Slaytların neredeyse tamamı görsel olduğu için içerik metne döküldü; formüller düz metne çevrildi, grafikler için slayt görselleri eklendi. Sunum İngilizce olduğundan içerik İngilizce aktarıldı. Orijinal PowerPoint dosyası yazının sonunda indirilebilir.</p>
+<p>Sunumun konuları:</p>
+<ul><li>Derivation of DT Fourier Transform pair</li><li>DTFT of Periodic Signals</li><li>Properties of DTFT</li><li>Convolution Property</li><li>DT LTI Systems</li><li>Duality in Fourier Analysis</li><li>Magnitude/Phase of FT and Frequency Response</li></ul>
+<h2 id="the-discrete-time-fourier-transform">The discrete-time Fourier transform</h2>
+<p>Derivation (analogous to the CTFT, except that e^(jωn) = e^(j(ω+2π)n)):</p>
+<ul><li>x[n] is aperiodic and (for simplicity) of finite duration.</li><li>N is large enough so that x[n] = 0 if |n| ≥ N/2.</li><li>x̃[n] = x[n] for |n| ≤ N/2 and periodic with period N.</li><li>x̃[n] = x[n] for <em>any</em> n as N → ∞.</li></ul>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Sonlu süreli x[n] ve onun N periyotla tekrarlanmış hâli x̃[n]"><figcaption>DTFT derivation: x[n] and its periodic extension</figcaption></figure>
+<p>From the DTFS:</p>
+<p>x̃[n] = Σ (k = ⟨N⟩) ak e^(jkω0n), ω0 = 2π/N (DTFS synthesis eq.)</p>
+<p>ak = (1/N) Σ (n = ⟨N⟩) x̃[n] e^(−jkω0n) = (1/N) Σ (n = −N1…N2) x̃[n] e^(−jkω0n) = (1/N) Σ (n = −∞…∞) x[n] e^(−jkω0n) (DTFS analysis eq.)</p>
+<p>Define <strong>X(e^(jω)) = Σ (n = −∞…∞) x[n] e^(−jωn)</strong> — periodic in ω with period 2π. Then ak = (1/N) X(e^(jkω0)), and</p>
+<p>x̃[n] = Σ (k = ⟨N⟩) (1/N) X(e^(jkω0)) e^(jkω0n) = (1/2π) Σ (k = ⟨N⟩) X(e^(jkω0)) e^(jkω0n) ω0 (∗)</p>
+<p>As N → ∞: x̃[n] → x[n] for every n, ω0 → 0 and Σ ω0 → ∫ dω, so the sum in (∗) becomes an integral. <strong>The DTFT pair:</strong></p>
+<ul><li><strong>x[n] = (1/2π) ∫2π X(e^(jω)) e^(jωn) dω</strong> — synthesis equation (inverse FT; over any 2π interval in ω)</li><li><strong>X(e^(jω)) = Σ (n = −∞…∞) x[n] e^(−jωn)</strong> — analysis equation (FT)</li></ul>
+<h3 id="observations">Observations</h3>
+<ul><li>These are called the <strong>analysis</strong> and <strong>synthesis</strong> equations, respectively.</li><li>Recall that e^(jωn) = e^(j(ω+ℓ2π)n) for any pair of integers ℓ and n.</li><li>Thus X(e^(jω)) is a periodic function of ω with a fundamental period of 2π.</li><li>Unlike the DT Fourier series, the frequency ω is continuous.</li><li>Recall that the CT Fourier transform X(jω) was not periodic.</li><li>Thus the DT <em>synthesis</em> integral can be taken over any continuous interval of length 2π.</li><li>This is similar to the CT Fourier series analysis equation.</li></ul>
+<h3 id="discrete-time-frequency-concepts">Discrete-time frequency concepts</h3>
+<ul><li>Recall that e^(j(ω+ℓ2π)n) = e^(jωn).</li><li>If seemingly very high-frequency DT signals, cos((ω + ℓ2π)n), are equal to low-frequency DT signals, cos(ωn), what do low and high frequency mean in discrete time?</li><li>Note that the units of ω are <em>radians per sample</em>.</li><li>A sinusoid with a frequency of 0.1 radians per sample is the same as one with a frequency of (0.1 + 2π) radians per sample.</li><li>Recall that cos(πn) = (−1)ⁿ.</li><li>No DT signal can oscillate "faster" between two samples.</li><li>No DT signal can oscillate "slower" than 0 radians per sample.</li><li>Thus ω = π = ℓ(π + 2π) is the highest perceivable DT frequency, and ω = 0 = ℓ(2π) is the lowest perceivable frequency.</li></ul>
+<p><em>Not: Bu iki ifade ω = π + ℓ2π ve ω = ℓ2π biçiminde olmalı.</em></p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="ω = 0 çevresinde (alçak frekans) ve ω = ±π çevresinde (yüksek frekans) yoğunlaşan iki DTFT"><figcaption>Discrete-time frequency concepts</figcaption></figure>
+<ul><li>Low frequencies are those near 0.</li><li>High frequencies are those near ±π.</li><li>Intermediate frequencies are those in between.</li><li>The highest frequency, π radians per sample, equals 0.5 cycles per sample.</li><li>We will encounter this concept again when we discuss sampling.</li></ul>
+<h3 id="convergence-issues">Convergence issues</h3>
+<ul><li>Synthesis equation: none, since we integrate over a finite interval.</li><li>Analysis equation: needs conditions analogous to the CTFT, e.g. Σ |x[n]|² &lt; ∞ (finite energy) or Σ |x[n]| &lt; ∞ (absolutely summable).</li></ul>
+<h2 id="examples-parallel-with-the-ct-examples">Examples (parallel with the CT examples)</h2>
+<ol><li><strong>x[n] = δ[n]:</strong> X(e^(jω)) = Σ δ[n] e^(−jωn) = 1.</li><li><strong>x[n] = δ[n − n0]</strong> (shifted unit sample): X(e^(jω)) = e^(−jωn0) — the same amplitude (= 1) as above, but with a <em>linear</em> phase −ωn0.</li><li><strong>x[n] = aⁿ u[n], |a| &lt; 1</strong> — exponentially decaying function. Using the infinite sum formula (|a e^(−jω)| &lt; 1):</li></ol>
+<p>X(e^(jω)) = Σ (n = 0…∞) (a e^(−jω))ⁿ = 1/(1 − a e^(−jω)) = 1/((1 − a cos ω) + j a sin ω)</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">X(e^(jω))</th><th scope="col">= 1/√(1 − 2a cos ω + a²); at ω = 0: 1/(1 − a); at ω = π: 1/(1 + a). For a &gt; 0 this is lowpass, for a &lt; 0 highpass.</th></tr></thead><tbody></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="aⁿu[n] dizisinin DTFT genliği: a &gt; 0 ve a &lt; 0 durumları"><figcaption>Exponentially decaying sequence: |X(e^(jω))| for a &gt; 0 and a &lt; 0</figcaption></figure>
+<p>4) <strong>DT rectangular pulse</strong> x[n] = 1 for |n| ≤ N1 (drawn for N1 = 2):</p>
+<p>X(e^(jω)) = Σ (n = −N1…N1) e^(−jωn) = <strong>sin ω(N1 + 1/2) / sin(ω/2)</strong> = X(e^(j(ω−2π))), with X(e^(j0)) = 2N1 + 1 = 5.</p>
+<p>5) <strong>Ideal lowpass spectrum:</strong> X(e^(jω)) = 1 for |ω| &lt; W (repeated every 2π):</p>
+<p>x[n] = (1/2π) ∫ (−W…W) e^(jωn) dω = <strong>sin Wn / πn</strong>, x[0] = (1/2π) ∫ (−W…W) X(e^(jω)) dω = W/π.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Ayrık dikdörtgen darbenin DTFT&#x27;si sin ω(N1 + 1/2)/sin(ω/2), N1 = 2"><figcaption>DT rectangular pulse and its DTFT</figcaption></figure>
+<h2 id="dtft-of-periodic-signals">DTFT of periodic signals</h2>
+<p><strong>DTFTs of sums of complex exponentials.</strong> Recall the CT result x(t) = e^(jω0t) ↔ X(jω) = 2πδ(ω − ω0). What about DT, x[n] = e^(jω0n) ↔ X(e^(jω)) = ?</p>
+<ol><li>We expect an impulse (of area 2π) at ω = ω0.</li><li>But X(e^(jω)) must be periodic with period 2π.</li></ol>
+<p>In fact <strong>X(e^(jω)) = 2π Σ (m = −∞…∞) δ(ω − ω0 − 2πm)</strong>.</p>
+<p>Note: the integration in the synthesis equation is over a 2π period, so we only need X(e^(jω)) in <em>one</em> 2π period. Thus x[n] = (1/2π) ∫ (−π…π) 2π Σ δ(ω − ω0 − 2πm) e^(jωn) dω = e^(jω0n).</p>
+<p><strong>Periodic signals,</strong> x[n] = x[n + N]: x[n] = Σ (k = ⟨N⟩) ak e^(jkω0n), ω0 = 2π/N (DTFS synthesis eq.). From the last result, e^(jkω0n) ↔ 2π Σm δ(ω − kω0 − 2πm), so by linearity of the DTFT:</p>
+<p>X(e^(jω)) = Σ (k = ⟨N⟩) ak [2π Σm δ(ω − kω0 − 2πm)] = <strong>2π Σ (k = −∞…∞) ak δ(ω − kω0) = 2π Σ ak δ(ω − 2πk/N)</strong></p>
+<p><strong>Example — DT sine function:</strong> x[n] = sin ω0n = (1/2j) e^(jω0n) − (1/2j) e^(−jω0n)</p>
+<p>X(e^(jω)) = (π/j) Σm δ(ω − ω0 − 2πm) − (π/j) Σm δ(ω + ω0 − 2πm)</p>
+<p><strong>Example — DT periodic impulse train:</strong> x[n] = Σ (k = −∞…∞) δ[n − kN], ω0 = 2π/N.</p>
+<p>ak = (1/N) Σ (n = ⟨N⟩) x[n] e^(−jkω0n) = (1/N) Σ (n = 0…N−1) δ[n] e^(−jkω0n) = 1/N</p>
+<p>⇒ X(e^(jω)) = (2π/N) Σ (k = −∞…∞) δ(ω − 2πk/N) — also a periodic impulse train, in the frequency domain!</p>
+<h2 id="properties-of-the-dt-fourier-transform">Properties of the DT Fourier transform</h2>
+<ol><li><strong>Periodicity:</strong> X(e^(j(ω+2π))) = X(e^(jω)) — different from the CTFT.</li><li><strong>Linearity:</strong> a x1[n] + b x2[n] ↔ a X1(e^(jω)) + b X2(e^(jω))</li><li><strong>Time shifting:</strong> x[n − n0] ↔ e^(−jωn0) X(e^(jω))</li><li><strong>Frequency shifting:</strong> e^(jω0n) x[n] ↔ X(e^(j(ω−ω0))) — important implications in DT because of periodicity. Example: with ω0 = π, y[n] = e^(jπn) x[n] = (−1)ⁿ x[n], and Y(e^(jω)) = X(e^(j(ω−π))): the low-frequency (LF) and high-frequency (HF) parts of the spectrum swap places.</li><li><strong>Time reversal:</strong> x[−n] ↔ X(e^(−jω))</li><li><strong>Conjugate symmetry:</strong> x[n] real ⇒ X(e^(jω)) = X*(e^(−jω)). Hence |X(e^(jω))| and Re{X(e^(jω))} are even functions, ∠X(e^(jω)) and Im{X(e^(jω))} are odd functions; x[n] real and even ⇔ X(e^(jω)) real and even; x[n] real and odd ⇔ X(e^(jω)) purely imaginary and odd.</li></ol>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="(−1)ⁿ ile çarpmanın spektrumu π kadar kaydırması: alçak ve yüksek frekansların yer değiştirmesi"><figcaption>Frequency shifting example: ω0 = π</figcaption></figure>
+<p><strong>7) Time expansion.</strong> Recall the CT property x(at) ↔ (1/|a|) X(j(ω/a)) — time scale in CT is infinitely fine. But in DT, x[n/2] makes no sense and x[2n] misses the odd values of x[n]. We can "slow" a DT signal down by inserting zeros: for an integer k ≥ 1, x(k)[n] inserts (k − 1) zeros between successive values (two zeros for k = 3):</p>
+<p>x(k)[n] = x[n/k] if n is an integer multiple of k, 0 otherwise — stretched by a factor of k in the time domain.</p>
+<p>X(k)(e^(jω)) = Σn x(k)[n] e^(−jωn) = (n = mk) Σm x(k)[mk] e^(−jωmk) = Σm x[m] e^(−j(kω)m) = <strong>X(e^(jkω))</strong> — compressed by a factor of k in the frequency domain.</p>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="x[n] ile araya ikişer sıfır eklenmiş x(3)[n] ve spektrumun 3 kat sıkışması X(e^(j3ω))"><figcaption>Time expansion: X(3)(e^(jω)) = X(e^(j3ω))</figcaption></figure>
+<p><strong>8) Differentiation in frequency.</strong> X(e^(jω)) = Σ x[n] e^(−jωn) ⇒ dX(e^(jω))/dω = −j Σ n x[n] e^(−jωn). Multiplying both sides by j:</p>
+<p>n x[n] ↔ j dX(e^(jω))/dω (multiplication by n ⇔ differentiation in frequency)</p>
+<p><strong>9) Parseval's relation:</strong></p>
+<p>Σ (n = −∞…∞) |x[n]|² = (1/2π) ∫2π |X(e^(jω))|² dω (total energy in the time domain = total energy in the frequency domain)</p>
+<p><strong>Differencing:</strong> x[n] − x[n − 1] ↔ (1 − e^(−jω)) X(e^(jω)) — similar to a continuous-time derivative.</p>
+<p><strong>Accumulation:</strong> Σ (m = −∞…n) x[m] ↔ (1/(1 − e^(−jω))) X(e^(jω)) + π X(e^(j0)) Σ (ℓ = −∞…∞) δ(ω − 2πℓ) — similar to continuous-time integration.</p>
+<h2 id="the-convolution-property">The convolution property</h2>
+<p>x[n] → h[n] → y[n] = h[n] ∗ x[n] ⇔ <strong>Y(e^(jω)) = H(e^(jω)) X(e^(jω))</strong></p>
+<p>⇒ the frequency response H(e^(jω)) is the DTFT of the unit sample response.</p>
+<p><strong>Example:</strong> x[n] = e^(jω0n) ↔ X(e^(jω)) = 2π Σk δ(ω − ω0 − 2πk)</p>
+<p>Y(e^(jω)) = H(e^(jω)) 2π Σk δ(ω − ω0 − 2πk) = 2π Σk H(e^(j(ω0+2πk))) δ(ω − ω0 − 2πk) = (H periodic) H(e^(jω0)) 2π Σk δ(ω − ω0 − 2πk) ⇒ <strong>y[n] = H(e^(jω0)) e^(jω0n)</strong></p>
+<p><strong>Example — ideal lowpass filter:</strong> H(e^(jω)) = 1 for |ω| &lt; ωc (repeated every 2π) ⇒ h[n] = (1/2π) ∫ (−ωc…ωc) e^(jωn) dω = sin ωcn / πn.</p>
+<p><strong>Example:</strong> (sin(πn/4)/πn) ∗ (sin(πn/2)/πn) = sin(πn/4)/πn, since in frequency a lowpass of width ±π/4 times a lowpass of width ±π/2 gives the lowpass of width ±π/4.</p>
+<p><strong>Convolution property example:</strong> h[n] = αⁿ u[n], x[n] = βⁿ u[n], |α|, |β| &lt; 1.</p>
+<p>H(e^(jω)) = 1/(1 − α e^(−jω)), X(e^(jω)) = 1/(1 − β e^(−jω)) ⇒ Y(e^(jω)) = (1/(1 − α e^(−jω)))(1/(1 − β e^(−jω))) — a ratio of polynomials in e^(−jω).</p>
+<ul><li>β ≠ α: by partial fraction expansion (PFE), Y(e^(jω)) = A/(1 − α e^(−jω)) + B/(1 − β e^(−jω)), with A, B determined by the PFE ⇒ y[n] = A αⁿ u[n] + B βⁿ u[n].</li><li>β = α: Y(e^(jω)) = (1/(1 − α e^(−jω)))²; using n x[n] ↔ j dX(e^(jω))/dω ⇒ <strong>y[n] = (n + 1) αⁿ u[n]</strong>.</li></ul>
+<h2 id="dt-lti-systems-described-by-lccdes">DT LTI systems described by LCCDEs</h2>
+<p>Σ (k = 0…N) ak y[n − k] = Σ (k = 0…M) bk x[n − k]</p>
+<p>From the time-shifting property x[n − k] ↔ e^(−jωk) X(e^(jω)):</p>
+<p>Σ ak e^(−jkω) Y(e^(jω)) = Σ bk e^(−jkω) X(e^(jω)) ⇒ Y(e^(jω)) = [Σ (k = 0…M) bk e^(−jkω) / Σ (k = 0…N) ak e^(−jkω)] X(e^(jω))</p>
+<p>The bracket is H(e^(jω)), the <strong>DT transfer function</strong> — a rational function of e^(−jω); use PFE to get h[n].</p>
+<p><strong>Example — first-order recursive system:</strong> y[n] − α y[n − 1] = x[n], |α| &lt; 1, with the condition of initial rest (⇔ causal):</p>
+<p>(1 − α e^(−jω)) Y(e^(jω)) = X(e^(jω)) ⇒ H(e^(jω)) = Y(e^(jω))/X(e^(jω)) = 1/(1 − α e^(−jω)) ⇒ <strong>h[n] = αⁿ u[n]</strong></p>
+<h2 id="dtft-multiplication-property">DTFT multiplication property</h2>
+<p>y[n] = x1[n]·x2[n] ↔ Y(e^(jω)) = (1/2π) ∫2π X1(e^(jθ)) X2(e^(j(ω−θ))) dθ = (1/2π) X1(e^(jω)) ⊗ X2(e^(jω)) — a <strong>periodic convolution</strong>.</p>
+<p>Derivation:</p>
+<p>Y(e^(jω)) = Σn x1[n] x2[n] e^(−jωn) = Σn ((1/2π) ∫2π X1(e^(jθ)) e^(jθn) dθ) x2[n] e^(−jωn) = (1/2π) ∫2π X1(e^(jθ)) (Σn x2[n] e^(−j(ω−θ)n)) dθ = (1/2π) ∫2π X1(e^(jθ)) X2(e^(j(ω−θ))) dθ</p>
+<p><strong>Calculating periodic convolutions.</strong> Integrating from −π to π:</p>
+<p>Y(e^(jω)) = (1/2π) ∫ (−π…π) X1(e^(jθ)) X2(e^(j(ω−θ))) dθ = (1/2π) ∫ (−∞…∞) X̂1(e^(jθ)) X2(e^(j(ω−θ))) dθ, where X̂1(e^(jθ)) = X1(e^(jθ)) for |θ| ≤ π and 0 otherwise.</p>
+<p><strong>Example:</strong> y[n] = (sin(πn/4)/πn)² = x1[n]·x2[n], x1[n] = x2[n] = sin(πn/4)/πn. Y(e^(jω)) = (1/2π) X1(e^(jω)) ⊗ X2(e^(jω)) is a triangle between −π/2 and π/2 with peak value 1/4 (repeated every 2π).</p>
+<figure class="yazi-gorsel"><img src="s-33.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="İki ideal alçak geçiren spektrumun periyodik konvolüsyonu: tepe değeri 1/4 olan üçgen"><figcaption>Multiplication example: periodic convolution of two rectangles</figcaption></figure>
+<h2 id="duality-in-fourier-analysis">Duality in Fourier analysis</h2>
+<p>The Fourier transform is highly symmetric.</p>
+<p><strong>CTFT:</strong> <em>both</em> time and frequency are continuous and in general <em>aperiodic</em>. x(t) = (1/2π) ∫ X(jω) e^(jωt) dω and X(jω) = ∫ x(t) e^(−jωt) dt are the same except for the factor 1/2π and the sign of the exponent. Suppose f(·) and g(·) are related by f(r) = ∫ g(τ) e^(−jrτ) dτ. Then:</p>
+<ul><li>with τ = t and r = ω: x1(t) = g(t) ↔ X1(jω) = f(ω)</li><li>with τ = −ω and r = t: x2(t) = f(t) ↔ X2(jω) = 2π g(−ω)</li></ul>
+<p>Example of CTFT duality: a square pulse in either the time or the frequency domain (pulse ↔ sinc, sinc ↔ pulse).</p>
+<p><strong>DTFS:</strong> <em>discrete &amp; periodic</em> in time ↔ <em>periodic &amp; discrete</em> in frequency: x[n] = Σ (k = ⟨N⟩) ak e^(jkω0n) = x[n + N], ω0 = 2π/N; ak = (1/N) Σ (n = ⟨N⟩) x[n] e^(−jkω0n) = a(k+N).</p>
+<p><strong>Duality in DTFS.</strong> Suppose f[·] and g[·] are related by f[m] = (1/N) Σ (r = ⟨N⟩) g[r] e^(−jrω0m) ⇒ g[r] = Σ (m = ⟨N⟩) f[m] e^(jrω0m). Then:</p>
+<ul><li>with m = n and r = −k: x1[n] = f[n] ↔ ak = (1/N) g[−k]</li><li>with r = n and m = k: x2[n] = g[n] ↔ ak = f[k]</li></ul>
+<p><strong>Duality between CTFS and DTFT:</strong></p>
+<ul><li>CTFS: x(t) = Σ ak e^(jkω0t) = x(t + T), ω0 = 2π/T; ak = (1/T) ∫T x(t) e^(−jkω0t) dt — <em>periodic</em> in time ↔ <em>discrete</em> in frequency.</li><li>DTFT: x[n] = (1/2π) ∫2π X(e^(jω)) e^(jωn) dω; X(e^(jω)) = Σ x[n] e^(−jωn) = X(e^(j(ω+2π))) — <em>discrete</em> in time ↔ <em>periodic</em> in frequency.</li></ul>
+<p><strong>CTFS–DTFT duality.</strong> Suppose f(·) is a CT signal and g[·] a DT sequence related by f(τ) = Σ (m = −∞…∞) g[m] e^(jmτ) = f(τ + 2π). Then x(t) = f(t) ↔ ak = g[k] (periodic with period 2π), and x[n] = g[n] ↔ X(e^(jω)) = f(−ω).</p>
+<h2 id="magnitude-and-phase-of-ft-and-frequency-response">Magnitude and phase of FT, and frequency response</h2>
+<ul><li>CT: x(t) = (1/2π) ∫ X(jω) e^(jωt) dω, X(jω) = |X(jω)| e^(j∠X(jω)). Parseval relation: ∫ |x(t)|² dt = ∫ (1/2π) |X(jω)|² dω, where (1/2π)|X(jω)|² is the energy density in ω.</li><li>DT: x[n] = (1/2π) ∫2π X(e^(jω)) e^(jωn) dω, X(e^(jω)) = |X(e^(jω))| e^(j∠X(e^(jω))). Parseval relation: Σ |x[n]|² = ∫2π (1/2π) |X(e^(jω))|² dω.</li></ul>
+<p><strong>Log-magnitude and phase.</strong> For x(t) → H(jω) → y(t): |Y(jω)| = |H(jω)|·|X(jω)|, or log|Y(jω)| = log|H(jω)| + log|X(jω)|, and ∠Y(jω) = ∠H(jω) + ∠X(jω). For cascaded H1(jω) and H2(jω): log|H(jω)| = log|H1(jω)| + log|H2(jω)| and ∠H(jω) = ∠H1(jω) + ∠H2(jω) — easy to add.</p>
+<h3 id="plotting-log-magnitude-and-phase">Plotting log-magnitude and phase</h3>
+<ol><li>For real-valued signals and systems, |H(−jω)| = |H(jω)| and ∠H(−jω) = −∠H(jω) ⇒ plot for ω ≥ 0, often with a <em>logarithmic</em> frequency scale in CT.</li><li>In DT, we need only plot for 0 ≤ ω ≤ π (with a <em>linear</em> scale).</li><li>For historical reasons, log-magnitude is usually plotted in <strong>decibels (dB)</strong> (1 bel = 10 decibels: output power/input power = 10): 10 log10 |H(jω)|² = 20 log10 |H(jω)| (power vs. magnitude).</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Magnitude of H(jω)</th><th scope="col">dB</th></tr></thead><tbody><tr><th scope="row">1</th><td>0 dB</td></tr><tr><th scope="row">√2</th><td>~3 dB</td></tr><tr><th scope="row">2</th><td>~6 dB</td></tr><tr><th scope="row">10</th><td>20 dB</td></tr><tr><th scope="row">100</th><td>40 dB</td></tr></tbody></table></div>
+<p>So 20 dB, or 2 bels, means 10 times amplitude gain = 100 times power gain.</p>
+<figure class="yazi-gorsel"><img src="s-42.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="İkinci dereceden bir CT sistemin Bode çizimi: 40 dB/dekad eğim ve −π faz değişimi"><figcaption>A typical Bode plot for a second-order CT system</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-43.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="İkinci dereceden bir DT frekans yanıtının genlik (dB) ve faz grafiği; gerçel sinyaller için 0–π aralığı yeterli"><figcaption>Magnitude and phase of a second-order DT frequency response</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="EEM301-DTFT4.ppt" download>EEM301-DTFT4.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 2.4 MB · 44 <span data-i18n="arch.slidesLower"></span> · 23.10.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM301-DTFT4.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (2.4 MB)</a>
+            <a class="buton" href="EEM301-DTFT4.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (1.3 MB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

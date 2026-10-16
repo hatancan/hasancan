@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: BCD Kodları, Gray Kodu ve Boole Cebri Teoremleri — hasancan.net</title>
+<meta name="description" content="EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli sunusu: BCD, Excess-3, 84-2-1 ve 2421 kodları; Gray kodu tabloları, ikiliden Gray koduna ve Gray kodundan ikiliye dönüşüm örnekleri; tek değişkenli teoremler, Boole cebri postülaları, De Morgan ve uzlaşma (consensus) teoremi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-gray-kodu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: BCD Kodları, Gray Kodu ve Boole Cebri Teoremleri">
+<meta property="og:description" content="EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli sunusu: BCD, Excess-3, 84-2-1 ve 2421 kodları; Gray kodu tabloları, ikiliden Gray koduna ve Gray kodundan ikiliye dönüşüm örnekleri; tek değişkenli teoremler, Boole cebri postülaları, De Morgan ve uzlaşma (consensus) teoremi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-gray-kodu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: BCD Kodları, Gray Kodu ve Boole Cebri Teoremleri", "description": "EEM211 Sayısal Mantık Tasarımı dersinin Ekim 2012 tarihli sunusu: BCD, Excess-3, 84-2-1 ve 2421 kodları; Gray kodu tabloları, ikiliden Gray koduna ve Gray kodundan ikiliye dönüşüm örnekleri; tek değişkenli teoremler, Boole cebri postülaları, De Morgan ve uzlaşma (consensus) teoremi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-gray-kodu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "eem211.pdf", "contentUrl": "https://hasancan.net/arsiv/eem211-gray-kodu/eem211.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: BCD Kodları, Gray Kodu ve Boole Cebri Teoremleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM211</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.10.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-kili-kodlanmis-ondalik-bcd-kodlar">İkili kodlanmış ondalık (BCD) kodlar</a></li><li><a href="#gray-kodu">Gray kodu</a></li><li><a href="#i-kiliden-gray-koduna-donusum">İkiliden Gray koduna dönüşüm</a></li><li><a href="#gray-kodundan-ikiliye-donusum">Gray kodundan ikiliye dönüşüm</a></li><li><a href="#tek-degiskenli-teoremler">Tek değişkenli teoremler</a></li><li><a href="#degisme-birlesme-dagilma-ve-yutma">Değişme, birleşme, dağılma ve yutma</a></li><li><a href="#boole-cebri-postulalari-ve-teoremleri-tablo-2-2">Boole cebri postülaları ve teoremleri (Tablo 2.2)</a></li><li><a href="#birlestirme-de-morgan-ve-uzlasma-teoremleri">Birleştirme, De Morgan ve uzlaşma teoremleri</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: BCD Kodları, Gray Kodu ve Boole Cebri Teoremleri</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 05.10.2012 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM211 Sayısal Mantık Tasarımı</strong> dersinin 5 Ekim 2012 tarihli sunusudur (PDF'in yazar bilgisinde dersin hocası Hamit Erdem'in adı geçiyor). Dokuz slaytlık sunu iki konuyu kapsıyor: <strong>ikili kodlar ve Gray kodu</strong>, ardından <strong>Boole cebrinin temel teoremleri</strong>. Slaytlar İngilizce; tablolar ve formüller aşağıda metin olarak verildi. Sununun orijinal PDF'i yazının sonunda indirilebilir.</p>
+<h2 id="i-kili-kodlanmis-ondalik-bcd-kodlar">İkili kodlanmış ondalık (BCD) kodlar</h2>
+<p>Sununun ilk slaytı, bir ondalık basamağın dört bitle kodlanmasının farklı yollarını yan yana veriyor.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Decimal digit</th><th scope="col">(BCD) 8421</th><th scope="col">Excess-3</th><th scope="col">84-2-1</th><th scope="col">2421</th></tr></thead><tbody><tr><th scope="row">0</th><td>0000</td><td>0011</td><td>0000</td><td>0000</td></tr><tr><th scope="row">1</th><td>0001</td><td>0100</td><td>0111</td><td>0001</td></tr><tr><th scope="row">2</th><td>0010</td><td>0101</td><td>0110</td><td>0010</td></tr><tr><th scope="row">3</th><td>0011</td><td>0110</td><td>0101</td><td>0011</td></tr><tr><th scope="row">4</th><td>0100</td><td>0111</td><td>0100</td><td>0100</td></tr><tr><th scope="row">5</th><td>0101</td><td>1000</td><td>1011</td><td>1011</td></tr><tr><th scope="row">6</th><td>0110</td><td>1001</td><td>1010</td><td>1100</td></tr><tr><th scope="row">7</th><td>0111</td><td>1010</td><td>1001</td><td>1101</td></tr><tr><th scope="row">8</th><td>1000</td><td>1011</td><td>1000</td><td>1110</td></tr><tr><th scope="row">9</th><td>1001</td><td>1100</td><td>1111</td><td>1111</td></tr></tbody></table></div>
+<h2 id="gray-kodu">Gray kodu</h2>
+<p>Gray kodunda ardışık iki sayı arasında yalnızca <strong>bir bit</strong> değişir. Sunudaki ilk tablo ("Three bit Gray code") 0–9 arası ondalık basamaklar için bir döngüsel (cyclic) kod veriyor; ikinci tablo dört bitlik Gray kodunu gösteriyor.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Decimal</th><th scope="col">Cyclic</th></tr></thead><tbody><tr><th scope="row">0</th><td>0000</td></tr><tr><th scope="row">1</th><td>0001</td></tr><tr><th scope="row">2</th><td>0011</td></tr><tr><th scope="row">3</th><td>0010</td></tr><tr><th scope="row">4</th><td>0110</td></tr><tr><th scope="row">5</th><td>0100</td></tr><tr><th scope="row">6</th><td>1100</td></tr><tr><th scope="row">7</th><td>1110</td></tr><tr><th scope="row">8</th><td>1010</td></tr><tr><th scope="row">9</th><td>1000</td></tr></tbody></table></div>
+<p><em>Not: Slayt başlığı "Three bit Gray code" olsa da tablodaki kod sözcükleri dört bitliktir. Ayrıca bu tablo standart (yansıtılmış) Gray kodu değil, 0–9 basamakları için bir döngüsel koddur: komşu satırlar (9'dan 0'a dönüş dahil) tek bit farklıdır, ama örneğin 5'in standart Gray karşılığı 0111'dir.</em></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Decimal</th><th scope="col">Binary</th><th scope="col">Gray</th></tr></thead><tbody><tr><th scope="row">0</th><td>0000</td><td>0000</td></tr><tr><th scope="row">1</th><td>0001</td><td>0001</td></tr><tr><th scope="row">2</th><td>0010</td><td>0011</td></tr><tr><th scope="row">3</th><td>0011</td><td>0010</td></tr><tr><th scope="row">4</th><td>0100</td><td>0110</td></tr><tr><th scope="row">5</th><td>0101</td><td>0111</td></tr><tr><th scope="row">6</th><td>0110</td><td>0101</td></tr><tr><th scope="row">7</th><td>0111</td><td>0100</td></tr><tr><th scope="row">8</th><td>1000</td><td>1100</td></tr><tr><th scope="row">9</th><td>1001</td><td>1101</td></tr><tr><th scope="row">10</th><td>1010</td><td>1111</td></tr><tr><th scope="row">11</th><td>1011</td><td>1110</td></tr><tr><th scope="row">12</th><td>1100</td><td>1010</td></tr><tr><th scope="row">13</th><td>1101</td><td>1011</td></tr><tr><th scope="row">14</th><td>1110</td><td>1001</td></tr><tr><th scope="row">15</th><td>1111</td><td>1000</td></tr></tbody></table></div>
+<blockquote><p>Except for the most significant bit position, all columns are "reflected" about the midpoint; in the most significant bit position, the top half is all 0's and the bottom half all 1's.</p></blockquote>
+<p>Yani en anlamlı bit dışında bütün sütunlar tablonun ortasına göre "yansıtılmıştır"; en anlamlı bit sütununda üst yarı tamamen 0, alt yarı tamamen 1'dir.</p>
+<h2 id="i-kiliden-gray-koduna-donusum">İkiliden Gray koduna dönüşüm</h2>
+<blockquote><p>A decimal number can be converted to Gray code by first converting it to binary. The binary number is converted to the Gray code by performing a modulo-2 sum of each digit (starting with the least significant digit) with its adjacent digit.</p></blockquote>
+<p>Ondalık sayı önce ikiliye çevrilir; sonra her bit, en anlamsız bitten başlayarak komşusuyla modulo-2 toplanır (XOR). Sayının ikili gösterimi b3 b2 b1 b0 ise:</p>
+<ul><li>G3 = b3</li><li>G2 = b3 ⊕ b2</li><li>G1 = b2 ⊕ b1</li><li>G0 = b1 ⊕ b0</li></ul>
+<p>Burada ⊕ özel VEYA (exclusive-OR) işlemidir: 0 ⊕ 0 = 0, 0 ⊕ 1 = 1, 1 ⊕ 0 = 1, 1 ⊕ 1 = 0.</p>
+<p><strong>Örnek: ondalık 14'ü Gray koduna çevirmek.</strong> 14 = (1110)₂, yani b3 = 1, b2 = 1, b1 = 1, b0 = 0.</p>
+<ul><li>G3 = b3 = 1</li><li>G2 = b3 ⊕ b2 = 1 ⊕ 1 = 0</li><li>G1 = b2 ⊕ b1 = 1 ⊕ 1 = 0</li><li>G0 = b1 ⊕ b0 = 1 ⊕ 0 = 1</li></ul>
+<p>Sonuç: 14'ün Gray kodu <strong>1001</strong>.</p>
+<figure class="yazi-gorsel"><img src="ikili-gray-donusumu.jpg" width="1020" height="770" loading="lazy" decoding="async" alt="Ondalık 14&#x27;ün ikili ve Gray koduna dönüşümünü gösteren slayt"><figcaption>Code conversion: decimal 14 → binary 1110 → Gray 1001</figcaption></figure>
+<h2 id="gray-kodundan-ikiliye-donusum">Gray kodundan ikiliye dönüşüm</h2>
+<blockquote><p>The conversion of a Gray code word to its decimal equivalent is done by following this sequence in reverse. In other words, the Gray code word is converted to binary and …</p></blockquote>
+<p>Gray kodu önce ikiliye çevrilir. Bu kez her ikili bit, bir üstteki <em>ikili</em> bit ile o konumdaki Gray bitinin XOR'udur. Örnek: Gray kodu G3 G2 G1 G0 = 1110.</p>
+<ul><li>b3 = G3 = 1</li><li>G2 = b3 ⊕ b2 olduğundan b2 = G2 ⊕ b3 (çünkü G2 ⊕ b3 = b3 ⊕ b2 ⊕ b3) = 1 ⊕ 1 = 0</li><li>G1 = b2 ⊕ b1 olduğundan b1 = G1 ⊕ b2 = 1 ⊕ 0 = 1</li><li>G0 = b1 ⊕ b0 olduğundan b0 = G0 ⊕ b1 = 0 ⊕ 1 = 1</li></ul>
+<p>Sonuç: Gray kodu 1110'un ikili karşılığı <strong>1011</strong>, yani ondalık <strong>11</strong>.</p>
+<figure class="yazi-gorsel"><img src="gray-ikili-donusumu.jpg" width="1020" height="770" loading="lazy" decoding="async" alt="Gray kodu 1110&#x27;un ikili karşılığının bulunmasını gösteren slayt"><figcaption>Gray 1110 → binary 1011 → decimal 11</figcaption></figure>
+<h2 id="tek-degiskenli-teoremler">Tek değişkenli teoremler</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Sabitlerle</th><th scope="col">Bir değişkenle</th></tr></thead><tbody><tr><th scope="row">0 · 0 = 0</th><td>x · 0 = 0</td></tr><tr><th scope="row">1 + 1 = 1</th><td>x + 1 = 1</td></tr><tr><th scope="row">1 · 1 = 1</th><td>x · 1 = x</td></tr><tr><th scope="row">0 + 0 = 0</th><td>x + 0 = x</td></tr><tr><th scope="row">0 · 1 = 1 · 0 = 0</th><td>x · x = x</td></tr><tr><th scope="row">1 + 0 = 0 + 1 = 1</th><td>x + x = x</td></tr><tr><th scope="row">x = 0 ise x' = 1</th><td>x · x' = 0</td></tr><tr><th scope="row">x = 1 ise x' = 0</th><td>x + x' = 1</td></tr><tr><th scope="row"></th><td>(x')' = x</td></tr></tbody></table></div>
+<h2 id="degisme-birlesme-dagilma-ve-yutma">Değişme, birleşme, dağılma ve yutma</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Özellik</th><th scope="col">İfadeler</th></tr></thead><tbody><tr><th scope="row">Commutative (değişme)</th><td>x · y = y · x; x + y = y + x</td></tr><tr><th scope="row">Associative (birleşme)</th><td>x · (y · z) = (x · y) · z; x + (y + z) = (x + y) + z</td></tr><tr><th scope="row">Distributive (dağılma)</th><td>x · (y + z) = x · y + x · z; x + y · z = (x + y) · (x + z)</td></tr><tr><th scope="row">Absorption (yutma)</th><td>x + x · y = x</td></tr></tbody></table></div>
+<h2 id="boole-cebri-postulalari-ve-teoremleri-tablo-2-2">Boole cebri postülaları ve teoremleri (Tablo 2.2)</h2>
+<p>Her ifadenin yanında ikizi (dual) verilmiştir: ikiz, + ile · ve 0 ile 1 yer değiştirilerek elde edilir.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Expression</th><th scope="col">Dual</th></tr></thead><tbody><tr><th scope="row">P2</th><td>a + 0 = a</td><td>a · 1 = a</td></tr><tr><th scope="row">P3</th><td>a + b = b + a</td><td>ab = ba</td></tr><tr><th scope="row">P4</th><td>a + (b + c) = (a + b) + c</td><td>a(bc) = (ab)c</td></tr><tr><th scope="row">P5</th><td>a + bc = (a + b)(a + c)</td><td>a(b + c) = ab + ac</td></tr><tr><th scope="row">P6</th><td>a + a' = 1</td><td>a · a' = 0</td></tr><tr><th scope="row">T1</th><td>a + a = a</td><td>a · a = a</td></tr><tr><th scope="row">T2</th><td>a + 1 = 1</td><td>a · 0 = 0</td></tr><tr><th scope="row">T3</th><td>(a')' = a</td><td></td></tr><tr><th scope="row">T4</th><td>a + ab = a</td><td>a(a + b) = a</td></tr><tr><th scope="row">T5</th><td>a + a'b = a + b</td><td>a(a' + b) = ab</td></tr><tr><th scope="row">T6</th><td>ab + ab' = a</td><td>(a + b)(a + b') = a</td></tr><tr><th scope="row">T7</th><td>ab + ab'c = ab + ac</td><td>(a + b)(a + b' + c) = (a + b)(a + c)</td></tr><tr><th scope="row">T8</th><td>(a + b)' = a'b'</td><td>(ab)' = a' + b'</td></tr><tr><th scope="row">T9</th><td>ab + a'c + bc = ab + a'c</td><td>(a + b)(a' + c)(b + c) = (a + b)(a' + c)</td></tr><tr><th scope="row">T10</th><td>f(x1, x2, …, xn) = x1 · f(1, x2, …, xn) + x1' · f(0, x2, …, xn)</td><td>f(x1, x2, …, xn) = [x1 + f(0, x2, …, xn)] · [x1' + f(1, x2, …, xn)]</td></tr></tbody></table></div>
+<h2 id="birlestirme-de-morgan-ve-uzlasma-teoremleri">Birleştirme, De Morgan ve uzlaşma teoremleri</h2>
+<p><strong>Combining (birleştirme):</strong></p>
+<ul><li>x · (x + y) = x</li><li>x · y + x · y' = x</li><li>(x + y) · (x + y') = x</li></ul>
+<p><strong>De Morgan teoremi:</strong></p>
+<ul><li>(x · y)' = x' + y'</li><li>(x + y)' = x' · y'</li></ul>
+<p><strong>Consensus (uzlaşma):</strong></p>
+<ul><li>x + x' · y = x + y</li><li>x · (x' + y) = x · y</li><li>x · y + y · z + x' · z = x · y + x' · z</li><li>(x + y) · (y + z) · (x' + z) = (x + y) · (x' + z)</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem211.pdf" download>eem211.pdf</a></p>
+              <p class="kucuk">PDF · 318 KB · 5 <span data-i18n="arch.pagesLower"></span> · 05.10.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem211.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (318 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

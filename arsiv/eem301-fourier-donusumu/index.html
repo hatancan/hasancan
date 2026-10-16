@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Dönüşümü (CTFT), Özellikleri ve Dualite — hasancan.net</title>
+<meta name="description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;Fourier Transform&quot;: Fourier serisinden Fourier integraline geçiş, CTFT analiz ve sentez denklemleri, üstel, kare darbe ve Gauss sinyallerinin dönüşümleri, periyodik sinyallerin Fourier dönüşümü, doğrusallık, zaman kaydırma, ölçekleme, modülasyon, konvolüsyon ve çarpma özellikleri, Parseval bağıntısı, ideal alçak geçiren süzgeç ve dualite.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-fourier-donusumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Dönüşümü (CTFT), Özellikleri ve Dualite">
+<meta property="og:description" content="EEM301 Sinyaller ve Sistemler I ders sunumu &quot;Fourier Transform&quot;: Fourier serisinden Fourier integraline geçiş, CTFT analiz ve sentez denklemleri, üstel, kare darbe ve Gauss sinyallerinin dönüşümleri, periyodik sinyallerin Fourier dönüşümü, doğrusallık, zaman kaydırma, ölçekleme, modülasyon, konvolüsyon ve çarpma özellikleri, Parseval bağıntısı, ideal alçak geçiren süzgeç ve dualite.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-fourier-donusumu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Dönüşümü (CTFT), Özellikleri ve Dualite", "description": "EEM301 Sinyaller ve Sistemler I ders sunumu \"Fourier Transform\": Fourier serisinden Fourier integraline geçiş, CTFT analiz ve sentez denklemleri, üstel, kare darbe ve Gauss sinyallerinin dönüşümleri, periyodik sinyallerin Fourier dönüşümü, doğrusallık, zaman kaydırma, ölçekleme, modülasyon, konvolüsyon ve çarpma özellikleri, Parseval bağıntısı, ideal alçak geçiren süzgeç ve dualite.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-fourier-donusumu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "EEM301-FT.ppt", "contentUrl": "https://hasancan.net/arsiv/eem301-fourier-donusumu/EEM301-FT.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Dönüşümü (CTFT), Özellikleri ve Dualite">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM301</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.12.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#fourier-s-derivation-of-the-ct-fourier-transform">Fourier's derivation of the CT Fourier transform</a></li><li><a href="#examples">Examples</a></li><li><a href="#ct-fourier-transforms-of-periodic-signals">CT Fourier transforms of periodic signals</a></li><li><a href="#properties-of-the-ct-fourier-transform">Properties of the CT Fourier transform</a></li><li><a href="#convolution-property">Convolution property</a></li><li><a href="#parseval-s-relation-and-the-multiplication-property">Parseval's relation and the multiplication property</a></li><li><a href="#duality">Duality</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Sürekli Zamanlı Fourier Dönüşümü (CTFT), Özellikleri ve Dualite</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 08.12.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM301 Sinyaller ve Sistemler I</strong> dersinin <strong>"Fourier Transform"</strong> (Fourier Dönüşümü) sunumudur. Sunum dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong> tarafından hazırlanmış; dosyanın son düzenlemesi Aralık 2005 tarihli. Slaytların neredeyse tamamı görsel olduğu için içerik metne döküldü; formüller düz metne çevrildi, grafikler için slayt görselleri eklendi. Sunum İngilizce olduğundan içerik İngilizce aktarıldı. Orijinal PowerPoint dosyası yazının sonunda indirilebilir.</p>
+<p>Sunumun konuları:</p>
+<ul><li>Derivation of CT Fourier Transform pair</li><li>Fourier Transforms of Periodic Signals</li><li>Properties of CT Fourier Transform</li><li>Convolution Property</li><li>Frequency Response and LTI Systems</li><li>Multiplication Property and Parseval's Relation</li><li>Duality</li></ul>
+<h2 id="fourier-s-derivation-of-the-ct-fourier-transform">Fourier's derivation of the CT Fourier transform</h2>
+<ul><li>x(t) is an aperiodic signal — view it as the limit of a periodic signal as T → ∞.</li><li>For a periodic signal, the harmonic components are spaced ω0 = 2π/T apart.</li><li>As T → ∞, ω0 → 0, and the harmonic components are spaced closer and closer in frequency.</li></ul>
+<p>⇒ Fourier series → Fourier integral.</p>
+<h3 id="motivating-example-square-wave">Motivating example: square wave</h3>
+<p>For the periodic square wave (pulse half-width T1 kept fixed, period T increasing):</p>
+<p>ak = 2 sin(kω0T1)/(kω0T) ⇒ T·ak = (2 sin ωT1/ω) at ω = kω0</p>
+<p>The discrete frequency points become denser in ω as T increases (T = 4T1, 8T1, 16T1), while the envelope T·ak stays the same.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="T = 4T1, 8T1 ve 16T1 için kare dalganın T·ak katsayıları: frekans noktaları sıklaşıyor"><figcaption>Motivating example: square wave</figcaption></figure>
+<h3 id="derivation">Derivation</h3>
+<p>For simplicity, assume x(t) has a finite duration (zero outside −T1 &lt; t &lt; T1). Define x̃(t) = x(t) for −T/2 &lt; t &lt; T/2, extended periodically for |t| &gt; T/2. As T → ∞, x̃(t) = x(t) for all t.</p>
+<p>x̃(t) = Σ (k = −∞…∞) ak e^(jkω0t), ω0 = 2π/T</p>
+<p>ak = (1/T) ∫ (−T/2…T/2) x̃(t) e^(−jkω0t) dt = (1/T) ∫ (−T/2…T/2) x(t) e^(−jkω0t) dt (x̃(t) = x(t) in this interval) = (1/T) ∫ (−∞…∞) x(t) e^(−jkω0t) dt (1)</p>
+<p>If we define X(jω) = ∫ (−∞…∞) x(t) e^(−jωt) dt, then Eq. (1) gives ak = X(jkω0)/T. Thus, for −T/2 &lt; t &lt; T/2:</p>
+<p>x(t) = x̃(t) = Σ (1/T) X(jkω0) e^(jkω0t) = (1/2π) Σ ω0 X(jkω0) e^(jkω0t)</p>
+<p>As T → ∞, Σ ω0 → ∫ dω, and we get the <strong>CT Fourier transform pair</strong>:</p>
+<ul><li><strong>x(t) = (1/2π) ∫ (−∞…∞) X(jω) e^(jωt) dω</strong> — synthesis equation (inverse FT)</li><li><strong>X(jω) = ∫ (−∞…∞) x(t) e^(−jωt) dt</strong> — analysis equation (FT)</li></ul>
+<h3 id="for-what-kinds-of-signals-can-we-do-this">For what kinds of signals can we do this?</h3>
+<p>It works even if x(t) has infinite duration, provided that:</p>
+<ol><li><strong>Finite energy:</strong> ∫ |x(t)|² dt &lt; ∞. In this case there is <em>zero</em> energy in the error e(t) = x(t) − (1/2π) ∫ X(jω) e^(jωt) dω: ∫ |e(t)|² dt = 0.</li><li><strong>Dirichlet conditions:</strong> (i) (1/2π) ∫ X(jω) e^(jωt) dω = x(t) at points of continuity; (ii) it equals the midpoint at a discontinuity; (iii) Gibbs phenomenon.</li><li>By allowing impulses in x(t) or in X(jω), we can represent even <em>more</em> signals — e.g. it allows us to consider the FT of <em>periodic</em> signals.</li></ol>
+<h2 id="examples">Examples</h2>
+<p><strong>(a) x(t) = δ(t):</strong> X(jω) = ∫ δ(t) e^(−jωt) dt = 1 ⇒ δ(t) = (1/2π) ∫ e^(jωt) dω — the synthesis equation for δ(t).</p>
+<p><strong>(b) x(t) = δ(t − t0):</strong> X(jω) = ∫ δ(t − t0) e^(−jωt) dt = e^(−jωt0).</p>
+<p><strong>Exponential function:</strong> x(t) = e^(−at) u(t), a &gt; 0</p>
+<p>X(jω) = ∫ (0…∞) e^(−at) e^(−jωt) dt = −(1/(a + jω)) e^(−(a+jω)t) from 0 to ∞ = <strong>1/(a + jω)</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">X(jω)</th><th scope="col">= 1/(a² + ω²)^(1/2) (even symmetry, equal to 1/(a√2) at ω = ±a); ∠X(jω) = −tan⁻¹(ω/a) (odd symmetry, ∓π/4 at ω = ±a).</th></tr></thead><tbody></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="e^(−at)u(t) sinyali, genlik ve faz spektrumu"><figcaption>Example: exponential function</figcaption></figure>
+<p><strong>A square pulse in the time domain:</strong> x(t) = 1 for |t| &lt; T1:</p>
+<p>X(jω) = ∫ (−T1…T1) e^(−jωt) dt = <strong>2 sin ωT1 / ω</strong></p>
+<p>Note the inverse relation between the two widths (pulse width 2T1 in time, main lobe between −π/T1 and π/T1 in frequency) ⇒ <em>uncertainty principle</em>.</p>
+<p>Useful facts about CTFTs:</p>
+<ul><li>X(0) = ∫ x(t) dt. Example above: ∫ x(t) dt = 2T1 = X(0).</li><li>x(0) = (1/2π) ∫ X(jω) dω. Example above: x(0) = 1 = (1/2π) ∫ X(jω) dω = (1/2π) × (area of the triangle).</li></ul>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Kare darbe ve dönüşümü 2 sin(ωT1)/ω; ana lob altındaki alan"><figcaption>Example: a square pulse in the time domain</figcaption></figure>
+<p><strong>A Gaussian:</strong> x(t) = e^(−at²) — important in probability, optics, etc.</p>
+<p>X(jω) = ∫ e^(−at²) e^(−jωt) dt = ∫ e^(−a[t² + j(ω/a)t + (jω/2a)²] + a(jω/2a)²) dt = [∫ e^(−a(t + jω/2a)²) dt] · e^(−ω²/4a) = <strong>√(π/a) e^(−ω²/4a)</strong></p>
+<p>Also a Gaussian! (Pulse width in t)·(pulse width in ω): Δt·Δω ~ (1/a^(1/2))·(a^(1/2)) = 1. <strong>Uncertainty principle!</strong> We cannot make <em>both</em> Δt and Δω arbitrarily small.</p>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Gauss sinyali ve dönüşümü; yarı güç genişlikleri ±√(ln2/2a) ve ±√(2a ln2)"><figcaption>Example: Gaussian</figcaption></figure>
+<h3 id="symmetry">Symmetry</h3>
+<ul><li>xe(t) = (1/2)(x(t) + x(−t)) ↔ Re{X(jω)}</li><li>xo(t) = (1/2)(x(t) − x(−t)) ↔ Im{X(jω)}</li></ul>
+<p>The Fourier transform exhibits the same symmetry as the Fourier series. If x(t) is real, then Re{X(jω)} is even and Im{X(jω)} is odd. Because of this symmetry, X(jω) is often plotted only for positive frequencies; X(jω) for ω &lt; 0 can be inferred from these plots.</p>
+<h2 id="ct-fourier-transforms-of-periodic-signals">CT Fourier transforms of periodic signals</h2>
+<p>Suppose X(jω) = δ(ω − ω0). Then x(t) = (1/2π) ∫ δ(ω − ω0) e^(jωt) dω = (1/2π) e^(jω0t) — periodic in t with frequency ω0. That is,</p>
+<p><strong>e^(jω0t) ↔ 2π δ(ω − ω0)</strong> — all the energy is concentrated in one frequency, ω0.</p>
+<p>More generally:</p>
+<p><strong>x(t) = Σ ak e^(jkω0t) ↔ X(jω) = Σ 2π ak δ(ω − kω0)</strong></p>
+<p><strong>Example:</strong> x(t) = cos ω0t = (1/2)e^(jω0t) + (1/2)e^(−jω0t) ↔ X(jω) = π δ(ω − ω0) + π δ(ω + ω0) — a "line spectrum".</p>
+<p><strong>Example — sampling function:</strong> x(t) = Σ (n = −∞…∞) δ(t − nT). Its FS coefficients are ak = (1/T) ∫ (−T/2…T/2) x(t) e^(−jkω0t) dt = 1/T, so</p>
+<p>X(jω) = Σ (2π/T) δ(ω − k2π/T)</p>
+<p>The same function in the frequency domain! Note: (period in t) T ⇔ (period in ω) 2π/T — inverse relationship again.</p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Örnekleme fonksiyonu (dürtü dizisi) ve frekans uzayında yine bir dürtü dizisi olan dönüşümü"><figcaption>Example: sampling function</figcaption></figure>
+<h2 id="properties-of-the-ct-fourier-transform">Properties of the CT Fourier transform</h2>
+<ol><li><strong>Linearity:</strong> a x(t) + b y(t) ↔ a X(jω) + b Y(jω)</li><li><strong>Time shifting:</strong> x(t − t0) ↔ e^(−jωt0) X(jω). Proof: ∫ x(t − t0) e^(−jωt) dt = e^(−jωt0) ∫ x(t′) e^(−jωt′) dt′ (t′ = t − t0). The FT magnitude is unchanged, |e^(−jωt0) X(jω)| = |X(jω)|; the FT phase changes linearly, ∠(e^(−jωt0) X(jω)) = ∠X(jω) − ωt0.</li><li><strong>Conjugate symmetry:</strong> x(t) real ⇔ X(−jω) = X*(jω) ⇒ |X(−jω)| = |X(jω)| (even), ∠X(−jω) = −∠X(jω) (odd), Re{X(−jω)} = Re{X(jω)} (even), Im{X(−jω)} = −Im{X(jω)} (odd).</li><li><strong>Time scaling:</strong> x(at) ↔ (1/|a|) X(jω/a). E.g. a &gt; 1 → at &gt; t: compressed in time ⇔ stretched in frequency. With a = −1: x(−t) ↔ X(−jω).</li></ol>
+<p>Hence:</p>
+<ul><li>x(t) real and even, x(t) = x(−t) ⇒ X(jω) = X(−jω) = X*(jω) — real &amp; even</li><li>x(t) real and odd, x(t) = −x(−t) ⇒ X(jω) = −X(−jω) = −X*(jω) — purely imaginary &amp; odd</li><li>for real x(t): X(jω) = Re{X(jω)} + j Im{X(jω)}, where Re{X(jω)} ↔ Ev{x(t)} and j Im{X(jω)} ↔ Od{x(t)}</li></ul>
+<h3 id="frequency-translation-modulation">Frequency translation (modulation)</h3>
+<p>e^(jω0t) x(t) ↔ X(j(ω − ω0))</p>
+<ul><li>Multiplication by a complex exponential shifts the Fourier transform origin to the specified frequency.</li><li>This is the basis of amplitude modulation (think AM radio band).</li><li>It is a convenient method for merging multiple bandlimited signals into a single signal.</li><li>The signal can then be recovered by bandpass filtering and AM demodulation.</li></ul>
+<p><strong>Example — transform of a modulated pulse.</strong> We found the transform of a pulse earlier:</p>
+<p>p(t) = u(t + T) − u(t − T) (1 for |t| &lt; T, 0 for |t| &gt; T), P(jω) = 2T sin(ωT)/(ωT) = 2T sinc(ωT/π)</p>
+<p>Plot y(t) = cos(ω0t) p(t) versus time and its Fourier transform for f0 = 10 Hz and T = 0.5 s. Both signals are even, so Im{X(jω)} = Im{P(jω)} = 0.</p>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="p(t) darbesi ve cos(ω0t)p(t) modüleli darbe (ω0 = 62,832 rad/s, T = 0,5 s)"><figcaption>Modulated pulse signal</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="P(jω) ve Y(jω) spektrumları: Y(jω), P(jω)&#x27;nin ±62,8 rad/s&#x27;ye kaydırılmış yarı genlikli kopyaları"><figcaption>Modulated pulse spectrum</figcaption></figure>
+<h2 id="convolution-property">Convolution property</h2>
+<p><strong>y(t) = h(t) ∗ x(t) ↔ Y(jω) = H(jω) X(jω)</strong>, where h(t) ↔ H(jω).</p>
+<p>A consequence of the eigenfunction property: x(t) = ∫ ((1/2π) X(jω) dω) e^(jωt) is a sum of exponentials with coefficients a = (1/2π) X(jω) dω. Each a e^(jωt) passes through h(t) as H(jω) a e^(jωt), so</p>
+<p>y(t) = ∫ (H(jω) (1/2π) X(jω) dω) e^(jωt) = (1/2π) ∫ H(jω) X(jω) e^(jωt) dω — the synthesis equation for y(t), with Y(jω) = H(jω) X(jω).</p>
+<h3 id="the-frequency-response-revisited">The frequency response revisited</h3>
+<p>x(t) → h(t) (impulse response) → y(t) = h(t) ∗ x(t); Y(jω) = H(jω) X(jω), where H(jω) is the <strong>frequency response</strong>. The frequency response of a CT LTI system is simply the Fourier transform of its impulse response.</p>
+<p><strong>Example:</strong> x(t) = e^(jω0t). Recall e^(jω0t) ↔ 2πδ(ω − ω0), so Y(jω) = H(jω) 2πδ(ω − ω0) = 2πH(jω0) δ(ω − ω0), and by the inverse FT, y(t) = H(jω0) e^(jω0t).</p>
+<p><strong>Example — a differentiator:</strong> y(t) = dx(t)/dt is an LTI system. Differentiation property: Y(jω) = jω X(jω) ⇒ H(jω) = jω.</p>
+<ol><li>Amplifies high frequencies (enhances sharp edges) — larger at high ω0.</li><li>+π/2 phase shift (j = e^(jπ/2)): (d/dt) sin ω0t = ω0 cos ω0t = ω0 sin(ω0t + π/2); (d/dt) cos ω0t = −ω0 sin ω0t = ω0 cos(ω0t + π/2).</li></ol>
+<p><strong>Example — impulse response of an ideal lowpass filter:</strong> H(jω) = 1 for |ω| &lt; ωc, 0 otherwise.</p>
+<p>h(t) = (1/2π) ∫ (−ωc…ωc) e^(jωt) dω = sin ωct / πt = (ωc/π) sinc(ωct/π), where sinc(θ) = sin πθ / πθ.</p>
+<p>Questions:</p>
+<ol><li>Is this a causal system? <strong>No.</strong></li><li>What is h(0)? h(0) = (1/2π) ∫ H(jω) dω = 2ωc/2π = ωc/π.</li><li>What is the steady-state value of the step response, s(∞)? s(t) = ∫ (−∞…t) h(τ) dτ ⇒ s(∞) = ∫ (−∞…∞) h(t) dt = H(j0) = 1.</li></ol>
+<figure class="yazi-gorsel"><img src="s-27.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="İdeal alçak geçiren süzgecin frekans yanıtı ve sinc biçimli dürtü yanıtı"><figcaption>Impulse response of an ideal lowpass filter</figcaption></figure>
+<p><strong>Example — cascading filtering operations:</strong> H1(jω) followed by H2(jω) gives H(jω) = H1(jω) H2(jω). E.g. with H1(jω) = H2(jω), H(jω) = H1²(jω) has a sharper frequency selectivity.</p>
+<p><strong>Example:</strong> (sin 4πt / πt) ∗ (sin 8πt / πt) = ? Here x(t) = sin 4πt/πt has X(jω) = 1 for |ω| &lt; 4π, and h(t) = sin 8πt/πt has H(jω) = 1 for |ω| &lt; 8π. Hence Y(jω) = X(jω) H(jω) = X(jω) ⇒ <strong>y(t) = x(t)</strong>.</p>
+<p><strong>Example:</strong> e^(−at²) ∗ e^(−bt²) = ? In frequency: √(π/a) e^(−ω²/4a) × √(π/b) e^(−ω²/4b) = (π/√(ab)) e^(−(ω²/4)(1/a + 1/b)) ⇒ e^(−at²) ∗ e^(−bt²) = √(π/(a+b)) · e^(−(ab/(a+b))t²). Gaussian × Gaussian = Gaussian ⇒ Gaussian ∗ Gaussian = Gaussian.</p>
+<p><strong>Example:</strong> h(t) = e^(−t) u(t), x(t) = e^(−2t) u(t), y(t) = h(t) ∗ x(t).</p>
+<p>Y(jω) = H(jω) X(jω) = 1/((1 + jω)(2 + jω)) — a rational function of jω (ratio of polynomials in jω). By partial fraction expansion,</p>
+<p>Y(jω) = 1/(1 + jω) − 1/(2 + jω) ⇒ (inverse FT) <strong>y(t) = [e^(−t) − e^(−2t)] u(t)</strong></p>
+<h3 id="lti-systems-described-by-lccdes">LTI systems described by LCCDEs</h3>
+<p>(Linear constant-coefficient differential equations)</p>
+<p>Σ (k = 0…N) ak d^k y(t)/dt^k = Σ (k = 0…M) bk d^k x(t)/dt^k</p>
+<p>Using the differentiation property d^k x(t)/dt^k ↔ (jω)^k X(jω) and transforming both sides:</p>
+<p>Σ ak (jω)^k Y(jω) = Σ bk (jω)^k X(jω) ⇒ Y(jω) = [Σ (k = 0…M) bk (jω)^k / Σ (k = 0…N) ak (jω)^k] X(jω) = H(jω) X(jω)</p>
+<ol><li>H(jω) is rational, so we can use partial fraction expansion to get h(t).</li><li>If X(jω) is rational, e.g. x(t) = Σ cl e^(−at) u(t), then Y(jω) is also rational.</li></ol>
+<h2 id="parseval-s-relation-and-the-multiplication-property">Parseval's relation and the multiplication property</h2>
+<p><strong>Parseval's relation:</strong></p>
+<p>∫ (−∞…∞) |x(t)|² dt = (1/2π) ∫ (−∞…∞) |X(jω)|² dω</p>
+<p>(total energy in the time domain = total energy in the frequency domain); (1/2π)|X(jω)|² is the <em>spectral density</em>.</p>
+<p><strong>Multiplication property.</strong> The FT is highly symmetric: x(t) = (1/2π) ∫ X(jω) e^(jωt) dω and X(jω) = ∫ x(t) e^(−jωt) dt. We already know that x(t) ∗ y(t) ↔ X(jω)·Y(jω). Then it isn't a surprise that</p>
+<p><strong>x(t)·y(t) ↔ (1/2π) X(jω) ∗ Y(jω) = (1/2π) ∫ X(jθ) Y(j(ω − θ)) dθ</strong> (convolution in ω) — a consequence of <em>duality</em>.</p>
+<p><strong>Examples of the multiplication property:</strong> r(t) = s(t)·p(t) ↔ R(jω) = (1/2π)[S(jω) ∗ P(jω)]. For p(t) = cos ω0t ↔ P(jω) = πδ(ω − ω0) + πδ(ω + ω0), for any s(t):</p>
+<p>R(jω) = (1/2) S(j(ω − ω0)) + (1/2) S(j(ω + ω0))</p>
+<p>This is <strong>amplitude modulation (AM)</strong>. All of the information in s(t) is preserved when it is multiplied by a sinusoid (drawn assuming ω0 − ω1 &gt; 0, i.e. ω0 &gt; ω1, where ω1 is the bandwidth of s(t)).</p>
+<figure class="yazi-gorsel"><img src="s-35.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Genlik modülasyonu: S(jω), P(jω) ve ±ω0&#x27;a kaydırılmış yarı genlikli kopyalardan oluşan R(jω)"><figcaption>Amplitude modulation (AM)</figcaption></figure>
+<h3 id="integration">Integration</h3>
+<p>First note that x(t) ∗ u(t) = ∫ x(τ) u(t − τ) dτ = ∫ (−∞…t) x(τ) dτ. Thus, by the convolution property,</p>
+<p>F{∫ (−∞…t) x(τ) dτ} = X(jω)·U(jω) = X(jω)(πδ(ω) + 1/jω) = <strong>(1/jω) X(jω) + π X(0) δ(ω)</strong></p>
+<p>The lower limit of the integral is different from the integral defined for the Laplace transform.</p>
+<h2 id="duality">Duality</h2>
+<p>F{x(t)} = X(jω) ≜ ∫ x(t) e^(−jωt) dt, F⁻¹{X(jω)} = x(t) ≜ (1/2π) ∫ X(jω) e^(jωt) dω</p>
+<ul><li>We have already seen several examples where a Fourier transform pair had almost the exact inverse relationship. For example: p_T(t) ↔ 2T sinc(ωT/π) and 2W sinc(tW/π) ↔ 2π p_W(ω).</li><li>This symmetry applies to Fourier transforms in general.</li><li>It is due to the similarity of the synthesis and analysis equations.</li></ul>
+<figure class="yazi-gorsel"><img src="s-39.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="CTFT dualitesi: zamanda kare darbe ↔ frekansta sinc, zamanda sinc ↔ frekansta kare darbe"><figcaption>Example of CTFT duality</figcaption></figure>
+<p><strong>Duality derived.</strong> Suppose x(t) ↔ X(jω). Solve for the Fourier transform of X(jt) as a function of x(ω):</p>
+<p>F{X(jt)} = Ψ(jω) = ∫ X(jt) e^(−jωt) dt ⇒ Ψ(ju) = ∫ X(jt) e^(−jut) dt = ∫ X(jω) e^(−juω) dω = 2π((1/2π) ∫ X(jω) e^(jω(−u)) dω) = 2π x(−u)</p>
+<p>⇒ Ψ(jω) = 2π x(−ω), i.e. <strong>F{X(jt)} = 2π x(−ω)</strong>. Thus</p>
+<p>x(t) ↔ X(jω), X(jt) ↔ 2π x(−ω), X(−jt) ↔ 2π x(ω)</p>
+<p>This is a handy property: if we know x(t) ↔ X(jω), we can easily find the Fourier transform of X(jt).</p>
+<p><strong>Signal multiplication &amp; frequency convolution derived.</strong> Use duality to determine the Fourier transform of a product (hint: use duality and the convolution property applied to x(t) ∗ h(t)):</p>
+<ul><li>y(t) = x(t) ∗ h(t) ↔ Y(jω) = X(jω)·H(jω)</li><li>Y(jt) ↔ 2π y(−ω)</li><li>X(jt)·H(jt) ↔ 2π (x(−ω) ∗ h(−ω)) = (1/2π)(2π x(−ω)) ∗ (2π h(−ω))</li><li>⇒ x(t)·w(t) ↔ (1/2π) X(jω) ∗ W(jω)</li></ul>
+<p>This property is important for modulation &amp; sampling, to be discussed later.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="EEM301-FT.ppt" download>EEM301-FT.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 2.1 MB · 43 <span data-i18n="arch.slidesLower"></span> · 08.12.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM301-FT.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (2.1 MB)</a>
+            <a class="buton" href="EEM301-FT.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (1.2 MB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

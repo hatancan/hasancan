@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Devre Teorisi II: Laplace Dönüşümüyle Devre Analizi — hasancan.net</title>
+<meta name="description" content="EEM202 Devre Teorisi II dersinin s bölgesinde devre analizi sunumu (Yrd. Doç. Dr. Selda Güney, 2014): R, L, C elemanlarının s bölgesi eşdeğerleri, RC ve paralel RLC doğal tepkisi, çok ağlı devre, Thevenin eşdeğeri, karşılıklı endüktans, süperpozisyon ve transfer fonksiyonu örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-laplace-devre-analizi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Devre Teorisi II: Laplace Dönüşümüyle Devre Analizi">
+<meta property="og:description" content="EEM202 Devre Teorisi II dersinin s bölgesinde devre analizi sunumu (Yrd. Doç. Dr. Selda Güney, 2014): R, L, C elemanlarının s bölgesi eşdeğerleri, RC ve paralel RLC doğal tepkisi, çok ağlı devre, Thevenin eşdeğeri, karşılıklı endüktans, süperpozisyon ve transfer fonksiyonu örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-laplace-devre-analizi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Devre Teorisi II: Laplace Dönüşümüyle Devre Analizi", "description": "EEM202 Devre Teorisi II dersinin s bölgesinde devre analizi sunumu (Yrd. Doç. Dr. Selda Güney, 2014): R, L, C elemanlarının s bölgesi eşdeğerleri, RC ve paralel RLC doğal tepkisi, çok ağlı devre, Thevenin eşdeğeri, karşılıklı endüktans, süperpozisyon ve transfer fonksiyonu örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-laplace-devre-analizi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "6_laplace dönüşümü devre analizi.pdf", "contentUrl": "https://hasancan.net/arsiv/eem202-laplace-devre-analizi/6_laplace dönüşümü devre analizi.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM202 Devre Teorisi II: Laplace Dönüşümüyle Devre Analizi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM202</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.05.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-cerik">İçerik</a></li><li><a href="#s-bolgesinde-devre-elemanlari">s bölgesinde devre elemanları</a></li><li><a href="#s-bolgesinde-devre-analizi-ve-uygulamalar">s bölgesinde devre analizi ve uygulamalar</a></li><li><a href="#transfer-aktarim-fonksiyonu">Transfer (aktarım) fonksiyonu</a></li><li><a href="#kismi-kesir-acilimi-ve-transfer-fonksiyonu">Kısmi kesir açılımı ve transfer fonksiyonu</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM202 Devre Teorisi II: Laplace Dönüşümüyle Devre Analizi</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 21.05.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM202 Devre Teorisi II</strong> dersinde Yrd. Doç. Dr. Selda Güney'in hazırladığı <strong>Laplace dönüşümünün devre analizinde kullanımı</strong> sunumunun içeriğidir (Mayıs 2014). Sunum, dersin kaynak kitabı Nilsson &amp; Riedel <em>Electric Circuits</em> (10. baskı) şekilleri üzerine kurulu; slaytlarda yalnızca başlıklar ve şekiller var. Bu yüzden yazıda başlıklar ve şekillerdeki eleman değerleri metin olarak verildi, şemalar görsel olarak eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<h2 id="i-cerik">İçerik</h2>
+<ul><li>s bölgesinde devre elemanları</li><li>s bölgesinde devre analizi ve uygulamalar</li><li>Aktarım (transfer) fonksiyonu</li><li>Kısmi kesirlere açılım ve aktarım fonksiyonu</li></ul>
+<h2 id="s-bolgesinde-devre-elemanlari">s bölgesinde devre elemanları</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Eleman</th><th scope="col">Zaman bölgesi</th><th scope="col">s bölgesi, seri eşdeğer</th><th scope="col">s bölgesi, paralel eşdeğer</th></tr></thead><tbody><tr><th scope="row">Direnç</th><td>v = Ri</td><td>V = RI</td><td>–</td></tr><tr><th scope="row">İndüktör</th><td>v = L di/dt, i = (1/L)∫₀ᵗ v dx + I₀</td><td>V = sLI − LI₀</td><td>I = V/(sL) + I₀/s</td></tr><tr><th scope="row">Kapasitör</th><td>i = C dv/dt, v = (1/C)∫₀ᵗ i dx + V₀</td><td>V = I/(sC) + V₀/s</td><td>I = sCV − CV₀</td></tr></tbody></table></div>
+<ul><li><strong>İndüktör:</strong> Seri eşdeğerde sL empedansına seri LI₀ gerilim kaynağı; paralel eşdeğerde sL'ye paralel I₀/s akım kaynağı bulunur. Depolanmış başlangıç enerjisi sıfırsa yalnızca sL kalır.</li><li><strong>Kapasitör:</strong> Seri eşdeğerde 1/sC empedansına seri V₀/s gerilim kaynağı; paralel eşdeğerde 1/sC'ye paralel CV₀ akım kaynağı bulunur. Depolanmış başlangıç enerjisi sıfırsa yalnızca 1/sC kalır.</li></ul>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="s bölgesi eşdeğer devrelerinin özet tablosu (Nilsson Tablo 13.1): R, L ve C için zaman bölgesi ve frekans bölgesi modelleri"><figcaption>s bölgesi eşdeğer devrelerinin özeti</figcaption></figure>
+<h2 id="s-bolgesinde-devre-analizi-ve-uygulamalar">s bölgesinde devre analizi ve uygulamalar</h2>
+<h3 id="rc-devrenin-dogal-tepkisi">RC devrenin doğal tepkisi</h3>
+<p>Başlangıçta V₀ gerilimiyle yüklü C kapasitörü, t = 0'da kapanan anahtarla R direnci üzerinden boşalır. Sunumda devre s bölgesinde iki şekilde çizilir:</p>
+<ul><li><strong>Seri eşdeğer gösterim:</strong> 1/sC ile seri V₀/s kaynağı, R üzerinden I akımı</li><li><strong>Paralel eşdeğer gösterim:</strong> CV₀ akım kaynağı, 1/sC ve R paralel; çıkış V</li></ul>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="RC devrenin doğal tepkisi: V0 ile yüklü C, t = 0&#x27;da R&#x27;ye bağlanıyor"><figcaption>RC devrenin doğal tepkisi</figcaption></figure>
+<h3 id="paralel-devrenin-dogal-tepkisi">Paralel devrenin doğal tepkisi</h3>
+<p>I_dc = 24 mA akım kaynağı t = 0'da açılan anahtarla paralel C = 25 nF, R = 625 Ω, L = 25 mH devresini besler; i_L akımı aranır. s bölgesi eşdeğerinde kaynak I_dc/s, elemanlar 1/sC, R ve sL olur.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Paralel RLC devresi: 24 mA kaynak, 25 nF, 625 ohm, 25 mH"><figcaption>Paralel devrenin doğal tepkisi</figcaption></figure>
+<h3 id="cok-agli-bir-devrenin-basamak-tepkisi">Çok ağlı bir devrenin basamak tepkisi</h3>
+<p>336 V kaynak t = 0'da devreye girer; 8,4 H ve 10 H endüktanslar ile 42 Ω ve 48 Ω dirençlerden oluşan iki gözlü devrede i₁ ve i₂ aranır. s bölgesinde kaynak 336/s, endüktanslar 8,4s ve 10s olur; I₁ ve I₂ göz akımlarıyla çözülür.</p>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Çok ağlı devre: 336 V, 8,4 H, 42 ohm, 10 H, 48 ohm"><figcaption>Çok ağlı bir devrenin basamak tepkisi</figcaption></figure>
+<h3 id="thevenin-esdegerinin-kullanimi">Thevenin eşdeğerinin kullanımı</h3>
+<p>480 V kaynak, 20 Ω, t = 0'da kapanan anahtar, 2 mH endüktans ve 60 Ω üzerinden 5 µF kapasitörü besler; i_C ve v_C aranır. s bölgesinde kaynak 480/s, endüktans 0,002s, kapasitör 2×10⁵/s olur. a-b uçlarına göre Thevenin eşdeğeri:</p>
+<ul><li>V_Th = 480/(s + 10⁴)</li><li>Z_Th = 80(s + 7500)/(s + 10⁴)</li></ul>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Thevenin örneği: 480 V, 20 ohm, 2 mH, 60 ohm ve 5 µF"><figcaption>Thevenin eşdeğerinin kullanımı: zaman bölgesi devresi</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-18.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Thevenin eşdeğeri: 480/(s+10⁴) kaynak ve 80(s+7500)/(s+10⁴) empedans, yük 2×10⁵/s"><figcaption>s bölgesinde Thevenin eşdeğeri</figcaption></figure>
+<h3 id="karsilikli-enduktansli-bir-devre">Karşılıklı endüktanslı bir devre</h3>
+<p>60 V kaynak, 9 Ω ve 3 Ω dirençler, t = 0'da a konumundan b konumuna geçen anahtar; 2 H ve 8 H sargılar arasında M = 2 H karşılıklı endüktans, ikinci tarafta 2 Ω ve 10 Ω. Karşılıklı endüktans T eşdeğeriyle değiştirilir: (L₁ − M) = 0 H, M = 2 H, (L₂ − M) = 6 H. s bölgesinde ortak kol 2s empedansı ve başlangıç akımından gelen 10 V'luk kaynakla gösterilir.</p>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Karşılıklı endüktanslı devre: 60 V, 9 ohm, 3 ohm, 2 H ve 8 H sargılar, M = 2 H, 2 ohm ve 10 ohm"><figcaption>Karşılıklı endüktanslı bir devre</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-20.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="T eşdeğeri: (L1−M) = 0 H, M = 2 H, (L2−M) = 6 H"><figcaption>Karşılıklı endüktansın T eşdeğeri</figcaption></figure>
+<p>Sonuçta i₂ akımı sıfırdan başlayıp t = 549,31 ms'de en büyük değeri olan 481,13 mA'e ulaşır ve sonra sönümlenir.</p>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="i2(t) grafiği: 549,31 ms&#x27;de 481,13 mA tepe değeri"><figcaption>i₂ akımının zamana göre değişimi</figcaption></figure>
+<h3 id="superpozisyon-kullanimi">Süperpozisyon kullanımı</h3>
+<p>v_g gerilim kaynağı, R₁, L (başlangıç akımı ρ), C (başlangıç gerilimi γ), R₂ ve i_g akım kaynağından oluşan devrede v₂ aranır. s bölgesi eşdeğer devresinde endüktansın başlangıç koşulu ρ/s akım kaynağı, kapasitörünki γC akım kaynağı olarak gösterilir.</p>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Süperpozisyon örneği: vg, R1, L, C, R2 ve ig"><figcaption>Süperpozisyon kullanımı: zaman bölgesi devresi</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-24.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="s bölgesi eşdeğeri: Vg, R1, sL, ρ/s, 1/sC, γC, R2 ve Ig"><figcaption>S bölgesi eşdeğer devresi</figcaption></figure>
+<p>V₂, dört kaynağın etkisinin toplamı olarak bulunur:</p>
+<ol><li>Sadece devrede V_g gerilim kaynağı bırakılırsa → V₂′</li><li>Sadece devrede I_g akım kaynağı bırakılırsa → V₂″</li><li>Sadece devrede endüktansın başlangıç akım kaynağı (ρ/s) bırakılırsa → V₂‴</li><li>Sadece devrede kondansatörün başlangıç akım kaynağı (γC) bırakılırsa → V₂⁗</li></ol>
+<h2 id="transfer-aktarim-fonksiyonu">Transfer (aktarım) fonksiyonu</h2>
+<p>Sunumda transfer fonksiyonu, V_g kaynağı, R, sL ve 1/sC'den oluşan seri devre üzerinde gösterilir; I akımı ya da kapasitör gerilimi V çıkış olarak alınabilir.</p>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Seri RLC: Vg, R, sL, 1/sC; çıkış I veya V"><figcaption>Transfer (aktarım) fonksiyonu</figcaption></figure>
+<p><strong>Örnek:</strong> v_g kaynağı 1000 Ω üzerinden, 250 Ω + 50 mH seri kolu ile 1 µF kapasitörün paralel bağlı olduğu düğümü besler; çıkış v_o. s bölgesinde 50 mH → 0,05s, 1 µF → 10⁶/s olur.</p>
+<figure class="yazi-gorsel"><img src="s-30.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Transfer fonksiyonu örneği: 1000 ohm, 250 ohm + 50 mH, 1 µF; çıkış vo"><figcaption>Transfer fonksiyonu örneği</figcaption></figure>
+<h2 id="kismi-kesir-acilimi-ve-transfer-fonksiyonu">Kısmi kesir açılımı ve transfer fonksiyonu</h2>
+<p>Son slayttaki grafik, örnek devrenin v_o çıkışını gösterir: v_o, başlangıçtaki geçici bölümden sonra (10 000t − 0,4) mV doğrusuna oturur.</p>
+<figure class="yazi-gorsel"><img src="s-32.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="vo(t) grafiği ve (10 000t − 0,4) mV kararlı durum doğrusu"><figcaption>Kısmi kesir açılımı ve transfer fonksiyonu: vo(t)</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="6_laplace dönüşümü devre analizi.pdf" download>6_laplace dönüşümü devre analizi.pdf</a></p>
+              <p class="kucuk">PDF · 4.0 MB · 32 <span data-i18n="arch.pagesLower"></span> · 21.05.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="6_laplace dönüşümü devre analizi.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
