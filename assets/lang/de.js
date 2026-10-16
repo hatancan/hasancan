@@ -1,0 +1,103 @@
+/* Deutsch. Schlüssel mit tr.js synchron halten. */
+window.I18N = window.I18N || {};
+window.I18N.de = {
+  'meta.title': 'Hasan Can Öztürk — hasancan.net',
+  'meta.desc': 'Persönliche Seite von Hasan Can Öztürk. Seit Anfang der 2000er mit Begeisterung dabei.',
+  'site.slogan': 'Von ping localhost bis heute · seit Anfang der 2000er mit Begeisterung dabei',
+  'lang.label': 'Sprache wählen',
+
+  'nav.label': 'Hauptmenü',
+  'nav.home': 'Startseite',
+  'nav.about': 'Über mich',
+  'nav.skills': 'Fähigkeiten',
+  'nav.projects': 'Projekte',
+  'nav.blog': 'Tagebuch',
+  'nav.guestbook': 'Gästebuch',
+  'nav.contact': 'Kontakt',
+
+  'ticker.label': 'EILMELDUNG',
+  'ticker.text': 'hasancan.net ist online! · Die Seite ist im Aufbau, Inhalte folgen nach und nach. · Vergiss nicht, dich ins Gästebuch einzutragen :)',
+
+  'profile.title': 'Profil',
+  'profile.photo': '[FOTO: Profilbild]',
+  'profile.name': 'Hasan Can Öztürk',
+  'profile.online': 'Online',
+  'profile.statusLabel': 'Status:',
+  'profile.status': 'programmiert gerade seine neue Website…',
+  'profile.statusTime': 'gerade eben',
+  'profile.wink': 'Zuzwinkern ;)',
+  'profile.winked': 'Du hast gezwinkert! ;)',
+  'profile.add': '+ Als Freund hinzufügen',
+
+  'info.title': 'Infos',
+  'info.city': 'Stadt',
+  'info.cityVal': '[INHALT: Stadt]',
+  'info.job': 'Beruf',
+  'info.jobVal': '[INHALT: Titel / Firma]',
+  'info.since': 'Im Netz',
+  'info.sinceVal': 'seit Anfang der 2000er',
+  'info.langs': 'Sprachen',
+  'info.langsVal': '[INHALT: Sprachen, die du sprichst]',
+
+  'char.title': 'Charakter',
+  'char.classVal': 'Klasse: Webmaster',
+  'char.hp': 'HP',
+  'char.xp': 'EP',
+  'char.note': '[INHALT: Level = Jahre im Netz, EP = Fortschritt zum nächsten Ziel]',
+
+  'about.title': 'Über mich',
+  'about.p1': '[INHALT: kurze Vorstellung in 2–3 Sätzen. Wer bist du, was machst du heute?]',
+  'about.p2': '[INHALT: der Anfang. Anfang der 2000er, erster Computer, erste Website, IRC, LAN-Partys…]',
+  'about.p3': '[INHALT: die Jahre 2005–2010. Yonja, Hattrick, Knight Online, die frühen Facebook-Tage; was bedeuten sie dir?]',
+
+  'skills.title': 'Fähigkeiten',
+  'skills.note': 'Im Hattrick-Stil: von „katastrophal“ bis „Weltklasse“.',
+  'skills.col1': 'Fähigkeit',
+  'skills.col2': 'Stufe',
+  'skills.row': '[Fähigkeit]',
+  'skills.level': '[Stufe]',
+
+  'projects.title': 'Projekte',
+  'projects.name': '[Projektname]',
+  'projects.desc': '[INHALT: Beschreibung in einem Satz]',
+  'projects.visit': 'Ansehen »',
+
+  'blog.title': 'Tagebuch',
+  'blog.month10': 'Okt',
+  'blog.p1.title': 'Hallo Welt!',
+  'blog.p1.body': 'hasancan.net ist eröffnet. Das Design ist bewusst im Stil von 2005–2010: glänzende Buttons, Gästebuch, Besucherzähler, alles da. Die Inhalte kommen nach und nach.',
+  'blog.more': 'Weiterlesen »',
+  'blog.comments': '0 Kommentare',
+  'blog.p2.title': '[INHALT: Titel des zweiten Beitrags]',
+  'blog.p2.body': '[INHALT: kurze Zusammenfassung, 1–2 Sätze]',
+
+  'contact.title': 'Kontakt',
+  'contact.text': 'So erreichst du mich am einfachsten:',
+  'contact.mail': '[INHALT: E-Mail-Adresse (veröffentlichen?)]',
+
+  'counter.title': 'Besucherzähler',
+  'counter.note': '[Zähler noch nicht angebunden]',
+
+  'music.title': 'Läuft gerade',
+  'music.track': '[INHALT: Künstler – Titel]',
+
+  'gb.title': 'Gästebuch',
+  'gb.sampleName': '[Besucher]',
+  'gb.sampleMsg': '[Beispiel: „Tolle Seite, weckt Erinnerungen!“]',
+  'gb.name': 'Dein Name',
+  'gb.msg': 'Deine Nachricht',
+  'gb.send': 'Senden',
+  'gb.soon': 'Das Gästebuch öffnet bald!',
+
+  'poll.title': 'Umfrage der Woche',
+  'poll.q': 'Was war dein erstes soziales Netzwerk?',
+  'poll.other': 'Andere',
+  'poll.vote': 'Abstimmen (bald)',
+
+  'links.title': 'Links',
+  'links.more': '[INHALT: weitere Links]',
+
+  'footer.best': 'Diese Seite wird am besten bei 1024×768 dargestellt.',
+  'footer.rights': 'Alle Rechte vorbehalten.',
+  'footer.gen': 'Seite in {s} Sekunden erstellt.'
+};

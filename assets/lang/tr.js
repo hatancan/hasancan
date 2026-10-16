@@ -1,0 +1,104 @@
+/* Türkçe (varsayılan). Yeni anahtar eklerken en.js ve de.js'e de ekle.
+   [İÇERİK: …] ile başlayanlar doldurulmayı bekleyen alanlardır. */
+window.I18N = window.I18N || {};
+window.I18N.tr = {
+  'meta.title': 'Hasan Can Öztürk — hasancan.net',
+  'meta.desc': "Hasan Can Öztürk'ün kişisel sitesi. 2000'lerin başından beri bu işlerin meraklısı.",
+  'site.slogan': "ping localhost'tan bugüne · 2000'lerin başından beri bu işlerin meraklısı",
+  'lang.label': 'Dil seçimi',
+
+  'nav.label': 'Ana menü',
+  'nav.home': 'Ana Sayfa',
+  'nav.about': 'Hakkımda',
+  'nav.skills': 'Yetenekler',
+  'nav.projects': 'Projeler',
+  'nav.blog': 'Günlük',
+  'nav.guestbook': 'Ziyaretçi Defteri',
+  'nav.contact': 'İletişim',
+
+  'ticker.label': 'SON DAKİKA',
+  'ticker.text': 'hasancan.net yayında! · Site yapım aşamasında, içerikler yavaş yavaş doluyor. · Ziyaretçi defterine uğramayı unutmayın :)',
+
+  'profile.title': 'Profil',
+  'profile.photo': '[FOTO: profil fotoğrafı]',
+  'profile.name': 'Hasan Can Öztürk',
+  'profile.online': 'Çevrimiçi',
+  'profile.statusLabel': 'Durum:',
+  'profile.status': 'yeni sitesini kodluyor…',
+  'profile.statusTime': 'az önce',
+  'profile.wink': 'Göz kırp ;)',
+  'profile.winked': 'Göz kırptın! ;)',
+  'profile.add': '+ Arkadaş ekle',
+
+  'info.title': 'Bilgiler',
+  'info.city': 'Şehir',
+  'info.cityVal': '[İÇERİK: şehir]',
+  'info.job': 'Meslek',
+  'info.jobVal': '[İÇERİK: unvan / şirket]',
+  'info.since': 'İnternette',
+  'info.sinceVal': "2000'lerin başından beri",
+  'info.langs': 'Diller',
+  'info.langsVal': '[İÇERİK: konuştuğun diller]',
+
+  'char.title': 'Karakter',
+  'char.classVal': 'Sınıf: Webmaster',
+  'char.hp': 'HP',
+  'char.xp': 'XP',
+  'char.note': '[İÇERİK: Level = internette geçen yıl, XP = bir sonraki hedefe ilerleme]',
+
+  'about.title': 'Hakkımda',
+  'about.p1': '[İÇERİK: 2–3 cümlelik kısa tanıtım. Kimsin, bugün ne yapıyorsun?]',
+  'about.p2': "[İÇERİK: Hikâyenin başı. 2000'lerin başı, ilk bilgisayar, ilk site, IRC, LAN partileri…]",
+  'about.p3': '[İÇERİK: 2005–2010 dönemi. Yonja, Hattrick, Knight Online, Facebook\'un ilk günleri; senin için ne ifade ediyor?]',
+
+  'skills.title': 'Yetenekler',
+  'skills.note': 'Hattrick usulü: seviyeler “berbat”tan “dünya klası”na.',
+  'skills.col1': 'Yetenek',
+  'skills.col2': 'Seviye',
+  'skills.row': '[yetenek]',
+  'skills.level': '[seviye]',
+
+  'projects.title': 'Projeler',
+  'projects.name': '[Proje adı]',
+  'projects.desc': '[İÇERİK: tek cümle açıklama]',
+  'projects.visit': 'İncele »',
+
+  'blog.title': 'Günlük',
+  'blog.month10': 'Eki',
+  'blog.p1.title': 'Merhaba Dünya!',
+  'blog.p1.body': "hasancan.net açıldı. Tasarım bilerek 2005–2010 ruhunda: parlak butonlar, ziyaretçi defteri, sayaç, hepsi burada. İçerikler yavaş yavaş gelecek.",
+  'blog.more': 'Devamını oku »',
+  'blog.comments': '0 yorum',
+  'blog.p2.title': '[İÇERİK: ikinci yazının başlığı]',
+  'blog.p2.body': '[İÇERİK: kısa özet, 1–2 cümle]',
+
+  'contact.title': 'İletişim',
+  'contact.text': 'Bana ulaşmanın en kolay yolları:',
+  'contact.mail': '[İÇERİK: e-posta adresi (yayınlansın mı?)]',
+
+  'counter.title': 'Ziyaretçi Sayacı',
+  'counter.note': '[sayaç henüz bağlı değil]',
+
+  'music.title': 'Şu An Çalıyor',
+  'music.track': '[İÇERİK: Sanatçı – Şarkı]',
+
+  'gb.title': 'Ziyaretçi Defteri',
+  'gb.sampleName': '[ziyaretçi]',
+  'gb.sampleMsg': '[örnek mesaj: “Siteye bayıldım, eski günler geldi aklıma!”]',
+  'gb.name': 'Adın',
+  'gb.msg': 'Mesajın',
+  'gb.send': 'Gönder',
+  'gb.soon': 'Defter çok yakında açılıyor!',
+
+  'poll.title': 'Haftanın Anketi',
+  'poll.q': 'İlk sosyal ağın hangisiydi?',
+  'poll.other': 'Diğer',
+  'poll.vote': 'Oy ver (yakında)',
+
+  'links.title': 'Bağlantılar',
+  'links.more': '[İÇERİK: diğer bağlantılar]',
+
+  'footer.best': 'Bu site en iyi 1024×768 çözünürlükte görüntülenir.',
+  'footer.rights': 'Tüm hakları saklıdır.',
+  'footer.gen': 'Bu sayfa {s} saniyede oluşturuldu.'
+};

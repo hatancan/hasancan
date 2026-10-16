@@ -1,0 +1,103 @@
+/* English. Keep keys in sync with tr.js. */
+window.I18N = window.I18N || {};
+window.I18N.en = {
+  'meta.title': 'Hasan Can Öztürk — hasancan.net',
+  'meta.desc': 'Personal site of Hasan Can Öztürk. Hooked on this stuff since the early 2000s.',
+  'site.slogan': 'From ping localhost to today · hooked on this stuff since the early 2000s',
+  'lang.label': 'Choose language',
+
+  'nav.label': 'Main menu',
+  'nav.home': 'Home',
+  'nav.about': 'About me',
+  'nav.skills': 'Skills',
+  'nav.projects': 'Projects',
+  'nav.blog': 'Blog',
+  'nav.guestbook': 'Guestbook',
+  'nav.contact': 'Contact',
+
+  'ticker.label': 'BREAKING',
+  'ticker.text': 'hasancan.net is live! · Under construction, content is coming bit by bit. · Don\'t forget to sign the guestbook :)',
+
+  'profile.title': 'Profile',
+  'profile.photo': '[PHOTO: profile picture]',
+  'profile.name': 'Hasan Can Öztürk',
+  'profile.online': 'Online',
+  'profile.statusLabel': 'Status:',
+  'profile.status': 'is coding his new website…',
+  'profile.statusTime': 'just now',
+  'profile.wink': 'Wink ;)',
+  'profile.winked': 'You winked! ;)',
+  'profile.add': '+ Add as friend',
+
+  'info.title': 'Info',
+  'info.city': 'City',
+  'info.cityVal': '[CONTENT: city]',
+  'info.job': 'Occupation',
+  'info.jobVal': '[CONTENT: title / company]',
+  'info.since': 'Online',
+  'info.sinceVal': 'since the early 2000s',
+  'info.langs': 'Languages',
+  'info.langsVal': '[CONTENT: languages you speak]',
+
+  'char.title': 'Character',
+  'char.classVal': 'Class: Webmaster',
+  'char.hp': 'HP',
+  'char.xp': 'XP',
+  'char.note': '[CONTENT: Level = years online, XP = progress to the next goal]',
+
+  'about.title': 'About me',
+  'about.p1': '[CONTENT: a 2–3 sentence intro. Who are you, what do you do today?]',
+  'about.p2': '[CONTENT: where it started. Early 2000s, first computer, first website, IRC, LAN parties…]',
+  'about.p3': '[CONTENT: the 2005–2010 years. Yonja, Hattrick, Knight Online, early Facebook; what did they mean to you?]',
+
+  'skills.title': 'Skills',
+  'skills.note': 'Hattrick style: from “disastrous” to “world class”.',
+  'skills.col1': 'Skill',
+  'skills.col2': 'Level',
+  'skills.row': '[skill]',
+  'skills.level': '[level]',
+
+  'projects.title': 'Projects',
+  'projects.name': '[Project name]',
+  'projects.desc': '[CONTENT: one-line description]',
+  'projects.visit': 'View »',
+
+  'blog.title': 'Blog',
+  'blog.month10': 'Oct',
+  'blog.p1.title': 'Hello World!',
+  'blog.p1.body': 'hasancan.net is open. The design is deliberately 2005–2010: glossy buttons, a guestbook, a hit counter, it\'s all here. Content will follow bit by bit.',
+  'blog.more': 'Read more »',
+  'blog.comments': '0 comments',
+  'blog.p2.title': '[CONTENT: second post title]',
+  'blog.p2.body': '[CONTENT: short summary, 1–2 sentences]',
+
+  'contact.title': 'Contact',
+  'contact.text': 'The easiest ways to reach me:',
+  'contact.mail': '[CONTENT: e-mail address (publish it?)]',
+
+  'counter.title': 'Hit Counter',
+  'counter.note': '[counter not connected yet]',
+
+  'music.title': 'Now Playing',
+  'music.track': '[CONTENT: Artist – Song]',
+
+  'gb.title': 'Guestbook',
+  'gb.sampleName': '[visitor]',
+  'gb.sampleMsg': '[sample message: “Love the site, brings back memories!”]',
+  'gb.name': 'Your name',
+  'gb.msg': 'Your message',
+  'gb.send': 'Send',
+  'gb.soon': 'The guestbook opens very soon!',
+
+  'poll.title': 'Poll of the Week',
+  'poll.q': 'What was your first social network?',
+  'poll.other': 'Other',
+  'poll.vote': 'Vote (soon)',
+
+  'links.title': 'Links',
+  'links.more': '[CONTENT: more links]',
+
+  'footer.best': 'This site is best viewed at 1024×768.',
+  'footer.rights': 'All rights reserved.',
+  'footer.gen': 'Page generated in {s} seconds.'
+};
