@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Ödev 3, MATLAB ile Özilinti, Çapraz İlinti ve Beyaz Gürültü (2016) — hasancan.net</title>
+<meta name="description" content="2016 tarihli EEM301 Sinyaller ve Sistemler I Ödev 3&#x27;ün MATLAB kodları ve grafikleri: kosinüs sinyalinin özilintisi (autocorr) ve periodogram ile güç spektrumu, iki kosinüsün çapraz ilintisi (xcorr) ve beyaz gürültünün güç spektral yoğunluğu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Ödev 3, MATLAB ile Özilinti, Çapraz İlinti ve Beyaz Gürültü (2016)">
+<meta property="og:description" content="2016 tarihli EEM301 Sinyaller ve Sistemler I Ödev 3&#x27;ün MATLAB kodları ve grafikleri: kosinüs sinyalinin özilintisi (autocorr) ve periodogram ile güç spektrumu, iki kosinüsün çapraz ilintisi (xcorr) ve beyaz gürültünün güç spektral yoğunluğu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Ödev 3, MATLAB ile Özilinti, Çapraz İlinti ve Beyaz Gürültü (2016)", "description": "2016 tarihli EEM301 Sinyaller ve Sistemler I Ödev 3'ün MATLAB kodları ve grafikleri: kosinüs sinyalinin özilintisi (autocorr) ve periodogram ile güç spektrumu, iki kosinüsün çapraz ilintisi (xcorr) ve beyaz gürültünün güç spektral yoğunluğu.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-korelasyon-odevi.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/eem301-korelasyon-odevi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Ödev 3, MATLAB ile Özilinti, Çapraz İlinti ve Beyaz Gürültü (2016)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.05.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ozilinti-ve-guc-spektrumu">Özilinti ve güç spektrumu</a></li><li><a href="#capraz-ilinti">Çapraz ilinti</a></li><li><a href="#beyaz-gurultunun-guc-spektral-yogunlugu">Beyaz gürültünün güç spektral yoğunluğu</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Ödev 3, MATLAB ile Özilinti, Çapraz İlinti ve Beyaz Gürültü (2016)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 21.05.2016 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM301 Sinyaller ve Sistemler I</strong> klasöründeki Mayıs 2016 tarihli <strong>Ödev 3</strong> dosyalarını içeriyor: Hasan Can Öztürk'ün MATLAB kodları ve ekran görüntüleri ile bir arkadaşın aynı ödev için yazdığı kodlar ve grafikler (kişisel bilgiler çıkarıldı). Konular özilinti (autocorrelation), çapraz ilinti (cross-correlation), periodogram ile güç spektrumu ve beyaz gürültünün güç spektral yoğunluğu (PSD). Kodlar ve grafikler yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="ozilinti-ve-guc-spektrumu">Özilinti ve güç spektrumu</h2>
+<p>Kosinüs sinyali 0–100 aralığında 50 noktada örnekleniyor; <code>autocorr</code> ile özilintisi, <code>periodogram</code> ile güç spektrumu (dB) çiziliyor:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=linspace(0,100,50);
+x=10*cos(300*t+72);
+figure(1);
+N = length(x);
+xlim([0,N])
+Y=autocorr(x);
+plot(Y)
+figure(2)
+[Pxx,F] = periodogram(x,[],length(x));
+plot(F,10*log10(Pxx));</code></pre>
+<p>Klasördeki kendi <code>korelasyon.m</code> dosyasında aynı kod x = 10cos(0·t + 0), yani sabit bir sinyal için duruyor; ekran görüntüleri ise kosinüslü sürüme ait.</p>
+<figure class="yazi-gorsel"><img src="grafik-1.jpg" width="1028" height="802" loading="lazy" decoding="async" alt="Periodogram: 0–π aralığında güç spektrumu, yaklaşık 2.8 rad/örnekte tepe"><figcaption>Kosinüs sinyalinin periodogramı (dB)</figcaption></figure>
+<figure class="yazi-gorsel"><img src="grafik-2.jpg" width="1030" height="780" loading="lazy" decoding="async" alt="autocorr ile hesaplanan özilinti, 0–20 gecikme"><figcaption>Kosinüs sinyalinin özilintisi</figcaption></figure>
+<p><em>Not: Örnekleme aralığı 100/49 ≈ 2.04 s olduğundan cos(300t) gibi yüksek frekanslı sinyaller ciddi biçimde örtüşmeye (aliasing) uğrar; periodogramdaki tepe asıl frekansın değil, örtüşmüş frekansın yerini gösterir. Gerçek frekansı görmek için örnekleme aralığı π/300'den küçük olmalıdır.</em></p>
+<h2 id="capraz-ilinti">Çapraz ilinti</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=linspace(0,100,50);
+x=10*cos(900*t+0);
+y=5*cos(900*t+0);
+figure(1);
+N = length(x);
+xlim([0,N])
+[acor,lag]=xcorr(x,y);
+plot(lag,acor)</code></pre>
+<p>Aynı frekanslı iki kosinüsün çapraz ilintisi, sıfır gecikmede en büyük değeri alan ve kenarlara doğru üçgensel olarak azalan salınımlı bir dizi verir (−49…49 gecikme). Arkadaşın sürümünde frekanslar ve fazlar farklı: x = 10cos(900t + 52), y = 5cos(400t + 37).</p>
+<figure class="yazi-gorsel"><img src="grafik-3.jpg" width="1042" height="778" loading="lazy" decoding="async" alt="xcorr ile hesaplanan çapraz ilinti, −50…50 gecikme, sıfırda tepe yaklaşık 1200"><figcaption>Aynı frekanslı iki kosinüsün çapraz ilintisi</figcaption></figure>
+<h2 id="beyaz-gurultunun-guc-spektral-yogunlugu">Beyaz gürültünün güç spektral yoğunluğu</h2>
+<p>Arkadaşın <code>beyazgurultu.m</code> dosyası, standart sapması σ = 1000 olan 4372 örneklik Gauss gürültüsünün PSD'sini FFT ile hesaplayıp kuramsal değer σ² ve ortalama PSD ile karşılaştırıyor:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>sigma = 1000;
+L = 4372;
+noise= randn(1,L) * sigma;
+PSD = abs(fft(noise)).^2/length(noise);
+vect_freq = linspace(0,pi,length(PSD));
+plot(vect_freq,PSD,'-.g');
+hold on, plot([vect_freq(1) vect_freq(end)],[sigma^2 sigma^2],'r');
+hold on, plot([vect_freq(1) vect_freq(end)],[mean(PSD) mean(PSD)],'-.b');</code></pre>
+<p>PSD değerleri bütün frekanslarda rastgele dalgalanır ama ortalaması σ² = 10⁶ çizgisine oturur; beyaz gürültünün spektrumu düzdür.</p>
+<figure class="yazi-gorsel"><img src="grafik-4.jpg" width="1028" height="800" loading="lazy" decoding="async" alt="Beyaz gürültünün FFT ile hesaplanan PSD&#x27;si; kırmızı çizgi σ² = 10⁶"><figcaption>Beyaz gürültünün güç spektral yoğunluğu</figcaption></figure>
+<p><em>Not: <code>linspace(0,pi,length(PSD))</code> FFT'nin bütün 0–2π aralığını 0–π'ye sıkıştırır; doğru eksen <code>linspace(0,2*pi,L)</code> (ya da yalnız ilk yarının çizilmesi) olmalıdır. Düz spektrumda bu, grafiğin görünüşünü değiştirmez.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-korelasyon-odevi.zip" download>eem301-korelasyon-odevi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 439 KB · 21.05.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-korelasyon-odevi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (439 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

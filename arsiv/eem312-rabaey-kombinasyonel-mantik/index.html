@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: Kombinasyonel Mantık Devreleri Tasarımı (UC Berkeley EE141, Jan Rabaey) — hasancan.net</title>
+<meta name="description" content="Jan Rabaey&#x27;in UC Berkeley EE141 slaytlarından derlenen, EEM312&#x27;de 2005&#x27;te dağıtılan &quot;Designing Combinational Logic Circuits&quot; notları: statik CMOS, PUN/PDN, fan-in/fan-out, mantıksal efor, güç ve anahtarlama etkinliği, oranlı mantık, DCVSL, geçiş transistörlü mantık ve iletim kapıları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rabaey-kombinasyonel-mantik/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: Kombinasyonel Mantık Devreleri Tasarımı (UC Berkeley EE141, Jan Rabaey)">
+<meta property="og:description" content="Jan Rabaey&#x27;in UC Berkeley EE141 slaytlarından derlenen, EEM312&#x27;de 2005&#x27;te dağıtılan &quot;Designing Combinational Logic Circuits&quot; notları: statik CMOS, PUN/PDN, fan-in/fan-out, mantıksal efor, güç ve anahtarlama etkinliği, oranlı mantık, DCVSL, geçiş transistörlü mantık ve iletim kapıları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rabaey-kombinasyonel-mantik/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: Kombinasyonel Mantık Devreleri Tasarımı (UC Berkeley EE141, Jan Rabaey)", "description": "Jan Rabaey'in UC Berkeley EE141 slaytlarından derlenen, EEM312'de 2005'te dağıtılan \"Designing Combinational Logic Circuits\" notları: statik CMOS, PUN/PDN, fan-in/fan-out, mantıksal efor, güç ve anahtarlama etkinliği, oranlı mantık, DCVSL, geçiş transistörlü mantık ve iletim kapıları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rabaey-kombinasyonel-mantik/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "dosya_7_EEM312.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-rabaey-kombinasyonel-mantik/dosya_7_EEM312.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: Kombinasyonel Mantık Devreleri Tasarımı (UC Berkeley EE141, Jan Rabaey)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>23.05.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#combinational-vs-sequential-logic">Combinational vs. sequential logic</a></li><li><a href="#static-cmos-circuits">Static CMOS circuits</a></li><li><a href="#delay-of-static-cmos-gates">Delay of static CMOS gates</a></li><li><a href="#fast-complex-gates">Fast complex gates</a></li><li><a href="#logical-effort">Logical effort</a></li><li><a href="#power-dissipation-and-switching-activity">Power dissipation and switching activity</a></li><li><a href="#ratioed-logic">Ratioed logic</a></li><li><a href="#pass-transistor-logic">Pass-transistor logic</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: Kombinasyonel Mantık Devreleri Tasarımı (UC Berkeley EE141, Jan Rabaey)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 23.05.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> dersinde Prof. Dr. Emin Akata'nın Mayıs 2005'te PDF olarak dağıttığı "Designing Combinational Logic Circuits" ders notunun içeriğidir. Slaytlar <strong>Jan M. Rabaey</strong>'in <strong>UC Berkeley EE141 (Digital Integrated Circuits)</strong> dersi slaytlarından derlenmiştir (sayfalarda "EE141" altbilgisi vardır); aralara açıklama sayfaları eklenmiştir. Slayt metinleri İngilizce olarak konu başlıklarıyla aktarıldı, formüller düz metne çevrildi; yalnız metne dökülemeyen devre şemaları görsel olarak kondu. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="combinational-vs-sequential-logic">Combinational vs. sequential logic</h2>
+<ul><li>Combinational: Output = f(In).</li><li>Sequential: Output = f(In, Previous In); the logic circuit has a feedback path through a <em>state</em> element.</li></ul>
+<h2 id="static-cmos-circuits">Static CMOS circuits</h2>
+<ul><li>At every point in time (except during the switching transients) each gate output is connected to either V_DD or V_SS via a low-resistive path.</li><li>The outputs of the gates assume at all times the value of the Boolean function implemented by the circuit (ignoring, once again, the transient effects during switching periods).</li><li>This is in contrast to the <em>dynamic</em> circuit class, which relies on temporary storage of signal values on the capacitance of high-impedance circuit nodes.</li></ul>
+<h3 id="cmos-circuit-styles">CMOS circuit styles</h3>
+<ul><li><strong>Static complementary CMOS:</strong> except during switching, the output is connected to either V_DD or GND via a low-resistance path.</li></ul>
+<p>  - high noise margins: full rail-to-rail swing; V_OH and V_OL are at V_DD and GND, respectively   - low output impedance, high input impedance   - no steady-state path between V_DD and GND (no static power consumption)   - delay a function of load capacitance and transistor resistance   - comparable rise and fall times (under the appropriate transistor sizing conditions)</p>
+<ul><li><strong>Dynamic CMOS:</strong> relies on temporary storage of signal values on the capacitance of high-impedance circuit nodes.</li></ul>
+<p>  - simpler, faster gates   - increased sensitivity to noise</p>
+<h3 id="static-complementary-cmos-pun-and-pdn">Static complementary CMOS: PUN and PDN</h3>
+<ul><li><strong>Pull-up network (PUN)</strong>, PMOS transistors only: makes a connection from V_DD to F when F(In1, In2, … InN) = 1.</li><li><strong>Pull-down network (PDN)</strong>, NMOS transistors only: makes a connection from F to GND when F(In1, In2, … InN) = 0.</li><li>PUN and PDN are <em>dual</em> logic networks. One and only one of the networks is conducting in steady state.</li></ul>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Statik tümleyen CMOS kapının PUN ve PDN yapısı"><figcaption>Static complementary CMOS: pull-up network (PMOS) and pull-down network (NMOS)</figcaption></figure>
+<h3 id="threshold-drops">Threshold drops</h3>
+<p>An NMOS in the PUN can only pull the output up to V_DD − V_Tn (0 → V_DD − V_Tn), while a PMOS pulls it fully to V_DD. Likewise a PMOS in the PDN can only pull the output down to |V_Tp| (V_DD → |V_Tp|), while an NMOS pulls it fully to 0. This is why the PUN is built from PMOS and the PDN from NMOS transistors.</p>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="PUN ve PDN&#x27;de eşik gerilimi düşümü"><figcaption>Threshold drops: NMOS in the PUN reaches V_DD − V_Tn, PMOS in the PDN reaches |V_Tp|</figcaption></figure>
+<h3 id="nmos-and-pmos-transistors-in-series-parallel-connection">NMOS and PMOS transistors in series/parallel connection</h3>
+<p>Transistors can be thought of as switches controlled by their gate signal.</p>
+<ul><li>An NMOS switch closes when the switch control input is high: in series, Y = X if A AND B; in parallel, Y = X if A OR B. NMOS transistors pass a "strong" 0 but a "weak" 1.</li><li>A PMOS switch closes when the switch control input is low: in series, Y = X if Ā AND B̄ = (A + B)'; in parallel, Y = X if Ā OR B̄ = (AB)'. PMOS transistors pass a "strong" 1 but a "weak" 0.</li></ul>
+<h3 id="construction-of-the-pdn">Construction of the PDN</h3>
+<ul><li>NMOS devices in series implement a NAND function: (A·B)'.</li><li>NMOS devices in parallel implement a NOR function: (A + B)'.</li></ul>
+<h3 id="dual-pun-and-pdn">Dual PUN and PDN</h3>
+<ul><li>PUN and PDN are dual networks (DeMorgan's theorems):</li></ul>
+<p>  - (A + B)' = A' · B'   - (A · B)' = A' + B'   - a parallel connection of transistors in the PUN corresponds to a series connection in the PDN.</p>
+<ul><li>The complementary gate is naturally inverting (NAND, NOR, XNOR): AND = NAND + INV.</li><li>The number of transistors for an N-input logic gate is 2N.</li></ul>
+<h3 id="cmos-nand-and-nor">CMOS NAND and NOR</h3>
+<p>CMOS NAND: two parallel PMOS in the PUN, two series NMOS in the PDN, F = (A·B)'.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">F (NAND)</th><th scope="col">F (NOR)</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>CMOS NOR: two series PMOS in the PUN, two parallel NMOS in the PDN, F = (A + B)'.</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="CMOS NAND kapısı"><figcaption>CMOS NAND: devre, doğruluk tablosu ve sembol</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="CMOS NOR kapısı"><figcaption>CMOS NOR: devre, doğruluk tablosu ve sembol</figcaption></figure>
+<h3 id="complex-cmos-gate">Complex CMOS gate</h3>
+<p>OUT = (D + A·(B + C))': in the PDN, B and C are in parallel, this pair is in series with A, and the whole branch is in parallel with D. The PUN is the dual: B and C in series, in parallel with A, and this group in series with D (internal nodes SN1 … SN4).</p>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Karmaşık CMOS kapı: OUT = (D + A·(B + C))&#x27;"><figcaption>Complex CMOS gate: PUN as the dual of the PDN</figcaption></figure>
+<h2 id="delay-of-static-cmos-gates">Delay of static CMOS gates</h2>
+<h3 id="the-vtc-is-data-dependent">The VTC is data-dependent</h3>
+<p>For a 2-input NAND (NMOS 0.5 µm/0.25 µm, PMOS 0.75 µm/0.25 µm) the VTC depends on which inputs switch: A, B: 0 → 1 together; B = 1, A: 0 → 1; A = 1, B: 0 → 1 (weaker PUN when only one PMOS is on).</p>
+<ul><li>The threshold voltage of M2 (upper NMOS) is higher than that of M1 due to the body effect (γ):</li></ul>
+<p>  - V_Tn1 = V_Tn0   - V_Tn2 = V_Tn0 + γ(√(|2φ_F| + V_int) − √|2φ_F|)   - since V_SB of M2 is not zero (when V_B = 0) due to the presence of C_int.</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="NAND kapısının VTC&#x27;sinin giriş verisine bağımlılığı"><figcaption>VTC is data-dependent: 2-input NAND for different input transitions</figcaption></figure>
+<h3 id="switch-delay-model">Switch delay model</h3>
+<p>Each transistor is replaced by an equivalent resistance (R_p for PMOS, R_n for NMOS) in series with an ideal switch. For the NAND2, the two R_p are in parallel and the two R_n are in series (internal capacitance C_int between them); for the NOR2 it is the opposite.</p>
+<h3 id="input-pattern-effects-on-delay">Input pattern effects on delay</h3>
+<p>Delay is dependent on the pattern of inputs (2-input NAND):</p>
+<ul><li>Low-to-high transition:</li></ul>
+<p>  - both inputs go low: delay is 0.69 (R_p/2) C_L   - one input goes low: delay is 0.69 R_p C_L</p>
+<ul><li>High-to-low transition:</li></ul>
+<p>  - both inputs go high: delay is 0.69 · 2R_n · C_L</p>
+<p>Adding devices in series slows down the circuit, and devices must be made wider to avoid a performance penalty. When sizing the transistors in a gate with multiple inputs, we should pick the combination of inputs that triggers the worst-case conditions. For the NAND gate to have the same pull-down delay (t_pHL) as an inverter, the NMOS devices in the PDN stack must be made twice as wide (2.5 times, if velocity saturation is effective). PMOS devices can remain unchanged. (Extra capacitance introduced by widening is ignored here, which is not a good assumption.)</p>
+<h3 id="delay-dependence-on-input-patterns">Delay dependence on input patterns</h3>
+<p>NAND gate, NMOS = 0.5 µm/0.25 µm, PMOS = 0.75 µm/0.25 µm, C_L = 100 fF:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Input data pattern</th><th scope="col">Delay (ps)</th></tr></thead><tbody><tr><th scope="row">A = B = 0 → 1</th><td>69</td></tr><tr><th scope="row">A = 1, B = 0 → 1</th><td>62</td></tr><tr><th scope="row">A = 0 → 1, B = 1</th><td>50</td></tr><tr><th scope="row">A = B = 1 → 0</th><td>35</td></tr><tr><th scope="row">A = 1, B = 1 → 0</th><td>76</td></tr><tr><th scope="row">A = 1 → 0, B = 1</th><td>57</td></tr></tbody></table></div>
+<h3 id="transistor-sizing">Transistor sizing</h3>
+<p>Taking the inverter (NMOS 1, PMOS 2) as reference:</p>
+<ul><li>NAND2: PMOS 2 and 2 (parallel), NMOS 2 and 2 (series).</li><li>NOR2: PMOS 4 and 4 (series), NMOS 1 and 1 (parallel).</li></ul>
+<p>For the complex gate OUT = (D + A·(B + C))' the PDN sizes are A = 2, B = 2, C = 2, D = 1; the PUN sizes are B = 8, C = 8, A = 4, D = 4 (or alternatively B = 6, C = 6, A = 3, D = 6).</p>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Karmaşık CMOS kapıda transistör boyutlandırma"><figcaption>Transistor sizing a complex CMOS gate: OUT = (D + A·(B + C))'</figcaption></figure>
+<h3 id="fan-in-considerations">Fan-in considerations</h3>
+<p>For a 4-input NAND, the PDN is a chain of 4 NMOS transistors with node capacitances C1, C2, C3 and C_L. Using the distributed RC model (Elmore delay):</p>
+<p>t_pHL = 0.69 [R1 C1 + (R1 + R2) C2 + (R1 + R2 + R3) C3 + (R1 + R2 + R3 + R4) C_L]</p>
+<p>Assuming all NMOS devices of equal size: t_pHL = 0.69 R_eqn (C1 + 2C2 + 3C3 + 4C_L).</p>
+<p>Propagation delay deteriorates rapidly as a function of fan-in: quadratically in the worst case.</p>
+<ul><li>t_p of a CMOS NAND as a function of fan-in (assuming a fixed fan-out of one inverter): t_pHL grows quadratically, t_pLH linearly. Gates with a fan-in greater than 4 should be avoided.</li><li>t_p as a function of fan-out (NOR2, NAND2, INV, all with the same drive current): linear; the slope is a function of the "driving strength".</li><li>Fan-in: quadratic due to increasing resistance and capacitance.</li><li>Fan-out: each additional fan-out gate adds two gate capacitances to C_L.</li></ul>
+<h2 id="fast-complex-gates">Fast complex gates</h2>
+<h3 id="design-technique-1-transistor-sizing">Design technique 1: transistor sizing</h3>
+<ul><li>Transistor sizing: as long as fan-out capacitance dominates.</li><li>Progressive sizing (distributed RC line): M1 &gt; M2 &gt; M3 &gt; … &gt; MN (the FET closest to the output is the smallest). Can reduce delay by more than 20%; decreasing gains as technology shrinks.</li></ul>
+<h3 id="design-technique-2-transistor-ordering">Design technique 2: transistor ordering</h3>
+<p>An input signal is called "critical" if it is the last signal to assume a stable value; the path which determines the ultimate speed is called the "critical path". If the critical input drives the transistor closest to ground (M1), the delay is determined by the time to discharge C_L, C1 and C2 (all charged). If the critical input drives the transistor closest to the output (M3), C1 and C2 are already discharged and the delay is determined by the time to discharge C_L only. So put the critical signal closest to the output.</p>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Transistör sıralaması ve kritik yol"><figcaption>Design technique 2: transistor ordering</figcaption></figure>
+<h3 id="design-technique-3-alternative-logic-structures">Design technique 3: alternative logic structures</h3>
+<p>F = ABCDEFGH can be built as a single 8-input gate or as a tree of smaller NAND/NOR gates; the alternatives have different delays.</p>
+<h3 id="design-technique-4-buffer-insertion">Design technique 4: buffer insertion</h3>
+<p>Isolating fan-in from fan-out using buffer insertion: a large fan-in gate does not drive C_L directly but through an inverter chain.</p>
+<h2 id="logical-effort">Logical effort</h2>
+<p>t_p = t_p0 (1 + C_ext/(γ C_g)) = t_p0 (1 + f/γ)</p>
+<p>t_p = t_p0 (p + g f/γ)</p>
+<ul><li>p: ratio of the intrinsic (unloaded) delays of the complex gate and the simple inverter</li><li>g: <strong>logical effort</strong>, how much more input capacitance a gate presents to deliver the same output current as an inverter (how much worse it is at producing output current than an inverter)</li><li>f: effective fan-out (C_ext/C_g) (electrical effort)</li></ul>
+<p>Normalize everything to an inverter: g_inv = 1, p_inv = 1; p = n for n-input NAND and NOR gates. Assume γ = 1.</p>
+<ul><li>The inverter has the smallest logical effort and intrinsic delay of all static CMOS gates.</li><li>The logical effort of a gate represents the ratio of its input capacitance to the inverter capacitance when sized to deliver the same current.</li><li>Logical effort increases with the gate complexity.</li></ul>
+<h3 id="delay-in-a-logic-gate">Delay in a logic gate</h3>
+<ul><li>Gate delay: d = h + p (effort delay + intrinsic delay)</li><li>Effort delay (gate effort): h = g f (logical effort × effective fan-out, f = C_out/C_in)</li><li>Logical effort is a function of topology, independent of sizing. Effective fan-out (electrical effort) is a function of load/gate size.</li></ul>
+<p>Assuming a PMOS/NMOS ratio of 2, the input capacitance of a minimum-sized symmetrical inverter equals 3 times the gate capacitance of a minimum-sized NMOS (called C_unit):</p>
+<ul><li>Inverter (PMOS 2, NMOS 1): g = 1 (3 C_unit)</li><li>2-input NAND (PMOS 2, NMOS 2): g = 4/3 (4 C_unit)</li><li>2-input NOR (PMOS 4, NMOS 1): g = 5/3 (5 C_unit)</li></ul>
+<figure class="yazi-gorsel"><img src="s-35.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Tersleyici, NAND2 ve NOR2&#x27;nin mantıksal eforu"><figcaption>Logical effort: inverter g = 1, 2-input NAND g = 4/3, 2-input NOR g = 5/3</figcaption></figure>
+<h3 id="intrinsic-delay-term-p">Intrinsic delay term p</h3>
+<p>The more involved the structure of the complex gate, the higher the intrinsic delay compared to an inverter (ignoring second-order effects such as internal node capacitances):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gate type</th><th scope="col">p</th></tr></thead><tbody><tr><th scope="row">Inverter</th><td>1</td></tr><tr><th scope="row">n-input NAND</th><td>n</td></tr><tr><th scope="row">n-input NOR</th><td>n</td></tr><tr><th scope="row">n-way mux</th><td>2n</td></tr><tr><th scope="row">XOR, XNOR</th><td>n · 2^(n−1)</td></tr></tbody></table></div>
+<h3 id="logical-effort-of-gates">Logical effort of gates</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gate type</th><th scope="col">1 input</th><th scope="col">2 inputs</th><th scope="col">3 inputs</th><th scope="col">n inputs</th></tr></thead><tbody><tr><th scope="row">Inverter</th><td>1</td><td></td><td></td><td></td></tr><tr><th scope="row">NAND</th><td></td><td>4/3</td><td>5/3</td><td>(n + 2)/3</td></tr><tr><th scope="row">NOR</th><td></td><td>5/3</td><td>7/3</td><td>(2n + 1)/3</td></tr><tr><th scope="row">Multiplexer</th><td></td><td>2</td><td>2</td><td>2</td></tr><tr><th scope="row">XOR</th><td></td><td>4</td><td>12</td><td></td></tr></tbody></table></div>
+<p>For the same input capacitance, 2-input NAND and NOR gates have 4/3 and 5/3 less driving strength than the inverter.</p>
+<h3 id="delay-as-a-function-of-fan-out">Delay as a function of fan-out</h3>
+<ul><li>NAND2: g = 4/3, p = 2, d = (4/3) f + 2; inverter: g = 1, p = 1, d = f + 1.</li><li>The slope of the line is the logical effort of the gate (d = p + f g).</li><li>The y-axis intercept is the intrinsic delay.</li><li>The delay can be adjusted by adjusting the effective fan-out (by sizing) or by choosing a gate with a different logical effort.</li><li>Gate effort: h = f g.</li></ul>
+<h3 id="multistage-networks">Multistage networks</h3>
+<p>Total delay of a path: t_p = Σ t_p,j = t_p0 Σ (p_j + f_j g_j / γ), j = 1 … N</p>
+<p>Using a similar procedure as for the sizing of the inverter chain (finding N − 1 partial derivatives and equating them to zero), we find that each stage should bear the same gate effort: f1 g1 = f2 g2 = … = fN gN.</p>
+<p>Definitions:</p>
+<ul><li>Path effective fan-out (path electrical effort): F = C_L / C_g1</li><li>Path logical effort: G = g1 g2 … gN = Π g_i</li><li>Branching effort of a logic gate on a path: b = (C_on-path + C_off-path) / C_on-path</li><li>Path branching effort: B = Π b_i</li><li>The path electrical effort can now be related to the electrical and branching efforts: F = Π (f_i / b_i) = Π f_i / B</li><li>Total path effort: H = Π h_i = Π g_i f_i = G F B</li></ul>
+<p>From here on, the analysis can be carried out as in the case of the inverter chain. The gate effort that minimizes the path delay is h = H^(1/N), and the minimum delay through the path is</p>
+<p>D = t_p0 (Σ p_j + N · H^(1/N) / γ)</p>
+<p>We assume that a unit-size gate has a driving capability equal to a minimum-size inverter. This means that its input capacitance is g times larger than that of the reference inverter (C_ref). With s1 the sizing factor of the first gate in the chain, the input capacitance of the chain can be written as C_g1 = g1 s1 C_ref. Including the branching effort, the input capacitance of gate 2 will be f1/b1 times larger:</p>
+<p>g2 s2 C_ref = (f1/b1) g1 s1 C_ref</p>
+<p>For gate i in the chain: s_i = (g1 s1 / g_i) · Π (f_j / b_j), j = 1 … i − 1</p>
+<h3 id="example-optimize-path">Example: optimize path</h3>
+<p>A path of an inverter (g = 1), a 3-input NAND a (g = 5/3), a 2-input NOR b (g = 5/3) and an inverter c (g = 1) drives a load of 5 (C_g1 = 1):</p>
+<ul><li>Effective fan-out F = 5</li><li>G = 1 × (5/3) × (5/3) × 1 = 25/9</li><li>H = G F B (no branching) = 125/9 = 13.9</li><li>h = H^(1/4) = 1.93</li><li>since f1 g1 = f2 g2 = f3 g3 = f4 g4 = h: f1 = 1.93, f2 = 1.93 × (3/5) = 1.16, f3 = 1.16, f4 = 1.93</li><li>a = s2 = f1 g1 / g2 = 1.16</li><li>b = s3 = f1 f2 g1 / g3 = 1.34</li><li>c = s4 = f1 f2 f3 g1 / g4 = 2.60</li></ul>
+<figure class="yazi-gorsel"><img src="s-44.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Yol optimizasyonu örneği"><figcaption>Example: optimize path (g = 1, 5/3, 5/3, 1; load 5)</figcaption></figure>
+<h3 id="path-logical-effort-variation-with-restructuring-8-input-and">Path logical effort variation with restructuring (8-input AND)</h3>
+<ul><li>(a) 8-input NAND (g = 10/3) + inverter (g = 1): G = 3.33</li><li>(b) two 4-input NANDs (g = 2) + 2-input NOR (g = 5/3): G = 3.33</li><li>(c) 2-input NANDs (g = 4/3) + 2-input NORs (g = 5/3) + 2-input NAND (g = 4/3) + inverter (g = 1): G = 2.96</li></ul>
+<figure class="yazi-gorsel"><img src="s-45.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="8 girişli AND&#x27;in farklı yapılarla gerçeklenmesi"><figcaption>Path logical effort variation with restructuring (8-input AND)</figcaption></figure>
+<h2 id="power-dissipation-and-switching-activity">Power dissipation and switching activity</h2>
+<h3 id="dynamic-power-consumption-is-data-dependent">Dynamic power consumption is data dependent</h3>
+<p>Switching activity P_0→1 has two components:</p>
+<ul><li>a static component: function of the logic topology</li><li>a dynamic component: function of the timing behavior (glitching)</li></ul>
+<p>P_dyn = C_L V_DD² f_0→1 = C_L V_DD² P_0→1 f = C_EFF V_DD² f</p>
+<p>Static transition probability: P_0→1 = P_out=0 × P_out=1 = P_0 × (1 − P_0)</p>
+<p>For a 2-input NOR gate (truth table: only A = B = 0 gives Out = 1), with input signal probabilities P_A=1 = 1/2 and P_B=1 = 1/2, the NOR static transition probability is 3/4 × 1/4 = 3/16.</p>
+<p>N_0 and N_1 are the number of zero and one entries in the output column of the truth table of the function. Assuming that the N inputs are independent and uniformly distributed (all possible input states are equally likely):</p>
+<p>P_0→1 = (N_0 / 2^N) × (N_1 / 2^N) = N_0 (2^N − N_0) / 2^(2N)</p>
+<h3 id="nor-gate-transition-probabilities">NOR gate transition probabilities</h3>
+<p>Switching activity is a strong function of the input signal statistics. With P_A and P_B the probabilities that inputs A and B are one:</p>
+<ul><li>P_1 = (1 − P_A)(1 − P_B)</li><li>P_0→1 = P_0 × P_1 = (1 − (1 − P_A)(1 − P_B)) (1 − P_A)(1 − P_B)</li></ul>
+<h3 id="transition-probabilities-for-some-basic-gates">Transition probabilities for some basic gates</h3>
+<p>P_0→1 = P_out=0 × P_out=1:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gate</th><th scope="col">P_0→1</th></tr></thead><tbody><tr><th scope="row">NOR</th><td>(1 − (1 − P_A)(1 − P_B)) × (1 − P_A)(1 − P_B)</td></tr><tr><th scope="row">OR</th><td>(1 − P_A)(1 − P_B) × (1 − (1 − P_A)(1 − P_B))</td></tr><tr><th scope="row">NAND</th><td>P_A P_B × (1 − P_A P_B)</td></tr><tr><th scope="row">AND</th><td>(1 − P_A P_B) × P_A P_B</td></tr><tr><th scope="row">XOR</th><td>(1 − (P_A + P_B − 2 P_A P_B)) × (P_A + P_B − 2 P_A P_B)</td></tr></tbody></table></div>
+<p>Example: A (0.5) drives an inverter whose output X goes, together with B (0.5), into an AND gate with output Z.</p>
+<ul><li>For X: P_0→1 = P_0 × P_1 = (1 − P_A) P_A = 0.5 × 0.5 = 0.25</li><li>For Z: P_0→1 = P_0 × P_1 = (1 − P_X P_B) P_X P_B = (1 − 0.5 × 0.5) × (0.5 × 0.5) = 3/16</li></ul>
+<h3 id="inter-signal-correlations">Inter-signal correlations</h3>
+<p>Determining switching activity is complicated by the fact that signals exhibit correlation in space and time.</p>
+<ul><li>If B is not connected to A: P(Z = 1) = P(B = 1, C = 1) = 1/4.</li><li>Reconvergent fan-out (B = A, C = Ā): P(Z = 1) = P(C = 1 | B = 1) · P(B = 1) = 0.</li><li>We have to use conditional probabilities.</li></ul>
+<h3 id="glitching">Glitching</h3>
+<p>In a chain of NAND gates, the outputs Out1 … Out5 show spurious transitions (glitches) before settling, because the signals arrive at the gates at different times.</p>
+<h3 id="balanced-delay-paths-to-reduce-glitching">Balanced delay paths to reduce glitching</h3>
+<p>Glitching is due to a mismatch in the path lengths in the logic network; if all input signals of a gate change simultaneously, no glitching occurs. So equalize the lengths of timing paths through the logic (a tree F1, F2 → F3 instead of a chain F1 → F2 → F3).</p>
+<h3 id="logic-restructuring">Logic restructuring</h3>
+<p>Logic restructuring: changing the topology of a logic network to reduce transitions. For AND: P_0→1 = P_0 × P_1 = (1 − P_A P_B) × P_A P_B. With all inputs at probability 0.5:</p>
+<ul><li>Chain (A·B → W, W·C → X, X·D → F): W: (1 − 0.25) × 0.25 = 3/16, X: 7/64, F: 15/256.</li><li>Tree (A·B → Y, C·D → Z, Y·Z → F): Y: 3/16, Z: 3/16, F: 15/256.</li></ul>
+<p>The chain implementation has a lower overall switching activity than the tree implementation for random inputs (this ignores glitching effects).</p>
+<h3 id="input-ordering">Input ordering</h3>
+<ul><li>A (0.5) and B (0.2) first, then C (0.1): P_X = (1 − 0.5 × 0.2) × (0.5 × 0.2) = 0.09</li><li>B (0.2) and C (0.1) first, then A (0.5): P_X = (1 − 0.2 × 0.1) × (0.2 × 0.1) = 0.0196</li></ul>
+<p>It is beneficial to postpone the introduction of signals with a high transition rate (signals with signal probability close to 0.5).</p>
+<h2 id="ratioed-logic">Ratioed logic</h2>
+<p>A PDN is combined with a single load device: (a) resistive load R_L, (b) depletion-load NMOS (V_T &lt; 0), (c) PMOS load (pseudo-NMOS). Nominal V_OH = V_DD but nominal V_OL ≠ 0. Goal: to reduce the number of devices over complementary CMOS.</p>
+<p>With a resistive load:</p>
+<ul><li>N transistors + load</li><li>V_OH = V_DD</li><li>V_OL = R_PN / (R_PN + R_L) · V_DD</li><li>asymmetrical response</li><li>static power consumption</li><li>t_pL = 0.69 R_L C_L</li></ul>
+<h3 id="pseudo-nmos">Pseudo-NMOS</h3>
+<p>A pseudo-NMOS NOR gate uses a PMOS with grounded gate as load: smaller area and load, but static power dissipation!</p>
+<p>To obtain V_OL, equate the currents of the load (PMOS) and the driver (NMOS) when V_in = V_DD. It is reasonable to assume the NMOS is in the linear region (the output should be close to 0 V) and the PMOS is in saturation:</p>
+<p>k_n ((V_DD − V_Tn) V_OL − V_OL²/2) + k_p ((−V_DD − V_Tp) V_DSATp − V_DSATp²/2) = 0</p>
+<p>Assuming that V_OL &lt;&lt; (V_DD − V_T), V_DSATp &lt;&lt; (V_DD − V_T) and |V_Tn| = |V_Tp|:</p>
+<p>V_OL ≈ k_p (V_DD + V_Tp) V_DSATp / (k_n (V_DD − V_Tn)) ≈ (μ_p W_p / μ_n W_n) V_DSATp</p>
+<p>In order to make V_OL small, the PMOS must be sized much smaller than the NMOS. But this has a negative effect on the propagation delay. A major disadvantage of pseudo-NMOS is the static power dissipation when the output is low:</p>
+<p>P_static = V_DD I_low ≈ V_DD k_p ((−V_DD − V_Tp) V_DSATp − V_DSATp²/2)</p>
+<figure class="yazi-gorsel"><img src="s-57.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Sözde-NMOS NOR kapısı"><figcaption>Pseudo-NMOS NOR gate</figcaption></figure>
+<h3 id="pseudo-nmos-vtc-inverter">Pseudo-NMOS VTC (inverter)</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">W/L_p</th><th scope="col">V_OL (V)</th><th scope="col">P (µW)</th><th scope="col">t_pLH (ps)</th></tr></thead><tbody><tr><th scope="row">4</th><td>0.69</td><td>564</td><td>14</td></tr><tr><th scope="row">2</th><td>0.27</td><td>298</td><td>56</td></tr><tr><th scope="row">1</th><td>0.13</td><td>160</td><td>123</td></tr><tr><th scope="row">0.5</th><td>0.06</td><td>80</td><td>268</td></tr><tr><th scope="row">0.25</th><td>0.03</td><td>41</td><td>569</td></tr></tbody></table></div>
+<p>A wider PMOS load gives a faster rising output but a higher V_OL and more static power.</p>
+<figure class="yazi-gorsel"><img src="s-59.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Sözde-NMOS tersleyicinin VTC eğrileri"><figcaption>Pseudo-NMOS VTC for W/L_p = 4, 2, 1, 0.5, 0.25</figcaption></figure>
+<h3 id="improved-loads-dcvsl">Improved loads: DCVSL</h3>
+<p>Differential Cascode Voltage Switch Logic (DCVSL): two cross-coupled PMOS loads M1 and M2 and two complementary pull-down networks PDN1 and PDN2 driven by the inputs and their complements. One output is pulled to 0, which turns on the opposite PMOS and pulls the other output to 1; there is no static current in steady state.</p>
+<figure class="yazi-gorsel"><img src="s-60.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="DCVSL yapısı"><figcaption>Improved loads: Differential Cascode Voltage Switch Logic (DCVSL)</figcaption></figure>
+<p>DCVSL example, XOR-XNOR gate: Out = AB + A'B', Out' = AB' + A'B.</p>
+<figure class="yazi-gorsel"><img src="s-61.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="DCVSL XOR-XNOR kapısı"><figcaption>DCVSL example: XOR-NXOR gate</figcaption></figure>
+<h2 id="pass-transistor-logic">Pass-transistor logic</h2>
+<h3 id="nmos-and-pmos-transistors-in-series-parallel">NMOS and PMOS transistors in series/parallel</h3>
+<ul><li>Primary inputs drive both gate and source/drain terminals.</li><li>An NMOS switch closes when the gate input is high: in series X = Y if A and B; in parallel X = Y if A or B. Remember: NMOS transistors pass a strong 0 but a weak 1.</li><li>A PMOS switch closes when the gate input is low: in series X = Y if Ā and B̄ = (A + B)'; in parallel X = Y if Ā or B̄ = (A·B)'. Remember: PMOS transistors pass a strong 1 but a weak 0.</li></ul>
+<h3 id="pass-transistor-logic">Pass-transistor logic</h3>
+<p>The inputs drive a switch network whose output feeds an inverter:</p>
+<ul><li>N transistors</li><li>no static consumption</li></ul>
+<p><strong>Example, AND gate:</strong> one pass transistor controlled by B passes A, another controlled by B' passes 0, F = AB. It requires 4 transistors (including the inverter for B'), whereas the AND function requires 6 transistors in CMOS (NAND-INVERT).</p>
+<h3 id="pass-transistor-pt-logic-properties">Pass transistor (PT) logic properties</h3>
+<ul><li>The gate is static: a low-impedance path exists to both supply rails under all circumstances.</li><li>N transistors instead of 2N.</li><li>No static power consumption.</li><li>Ratioless.</li><li>Bidirectional (versus unidirectional).</li></ul>
+<h3 id="nmos-only-pt-driving-an-inverter">NMOS-only PT driving an inverter</h3>
+<ul><li>V_x does not pull up to V_DD, but to V_DD − V_Tn.</li><li>The threshold voltage drop causes static power consumption (M2 may be weakly conducting, forming a path from V_DD to GND).</li><li>Notice that V_Tn of the pass transistor increases due to the body effect (V_SB).</li></ul>
+<h3 id="voltage-swing-of-a-pt-driving-an-inverter">Voltage swing of a PT driving an inverter</h3>
+<p>With In = 0 → V_DD (pass transistor 0.5/0.25, inverter 1.5/0.25 and 0.5/0.25), node x only reaches 1.8 V.</p>
+<ul><li>Body effect: large V_SB at x when pulling high (B is tied to GND and S is charged up close to V_DD).</li><li>So the voltage drop is even worse: V_x = V_DD − (V_Tn0 + γ(√(|2φ_f| + V_x) − √|2φ_f|))</li></ul>
+<h3 id="cascaded-nmos-only-pts">Cascaded NMOS-only PTs</h3>
+<ul><li>If the output of one pass transistor drives the <em>gate</em> of the next: swing on y = V_DD − V_Tn1 − V_Tn2.</li><li>If the pass transistors are in series (source to drain): swing on y = V_DD − V_Tn2.</li><li>Pass-transistor gates should never be cascaded as in the first case.</li><li>Logic as in the second case suffers from static power dissipation and reduced noise margins.</li></ul>
+<h3 id="vtc-of-the-pass-transistor-and-gate">VTC of the pass-transistor AND gate</h3>
+<p>For the pass-transistor AND gate (pass transistors 0.5 µm/0.25 µm, output inverter 1.5 µm/0.25 µm and 0.5 µm/0.25 µm), assuming V_M of the inverter = V_DD/2, the VTC depends on which input switches: for B = V_DD, A = 0 → V_DD the output simply follows the input, while for A = V_DD, B = 0 → V_DD and A = B = 0 → V_DD it switches more sharply. Pure pass-transistor gates are not regenerative.</p>
+<h3 id="differential-pt-logic-cpl">Differential PT logic (CPL)</h3>
+<p>A PT network and an inverse PT network are driven by the inputs and their complements (A, Ā, B, B̄) and produce F and F̄, each buffered by an inverter. The same topology implements AND/NAND (F = AB), OR/NOR (F = A + B) and XOR/XNOR (F = A ⊕ B); only the inputs are permuted.</p>
+<figure class="yazi-gorsel"><img src="s-71.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Diferansiyel geçiş transistörlü mantık (CPL)"><figcaption>Differential PT logic (CPL): AND/NAND, OR/NOR, XOR/XNOR</figcaption></figure>
+<p>The slides also show the layout of a 4-input AND/NAND gate in CPL.</p>
+<p>CPL properties:</p>
+<ul><li>Differential, so complementary data inputs and outputs are always available (no extra inverters needed).</li><li>Still static, since the output-defining nodes are always tied to V_DD or GND through a low-resistance path.</li><li>Design is modular; all gates use the same topology, only the inputs are permuted.</li><li>A simple XOR makes it attractive for structures like adders.</li><li>Fast (assuming the number of transistors in series is small).</li><li>Additional routing overhead for complementary signals.</li><li>Still have static power dissipation problems.</li></ul>
+<h3 id="level-restoration">Level restoration</h3>
+<p>A PMOS feedback transistor M_r from V_DD to node X, controlled by the inverter output, restores the high level. When A goes high, all nodes are either 0 or V_DD. To pull node X down, M_n needs to be stronger than M_r. That requires careful transistor sizing: if R_r is too small with respect to R_n, it is impossible to bring V_x below the switching threshold of the inverter.</p>
+<h3 id="transmission-gates-tgs">Transmission gates (TGs)</h3>
+<ul><li>The most widely used solution for level restoration: an NMOS (gate C) and a PMOS (gate C̄) in parallel.</li><li>With C = V_DD (C̄ = GND), A = V_DD is passed to B through the PMOS as a strong 1, and A = GND is passed through the NMOS as a strong 0.</li><li>Full-swing bidirectional switch controlled by the gate signal C: A = B if C = 1.</li></ul>
+<figure class="yazi-gorsel"><img src="s-74.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="İletim kapısı (transmission gate)"><figcaption>Transmission gates: full swing bidirectional switch</figcaption></figure>
+<p>Other transmission-gate circuits on the slides:</p>
+<ul><li>Transmission gate 2-input inverting multiplexer: two TGs controlled by S and S̄ select A or B, followed by an inverter (M1, M2): F = (AS + BS')'.</li><li>Transmission gate XOR: an inverter-like pair M1/M2 supplied by B and B̄, plus a TG (M3/M4) controlled by B: F = A'B + AB'.</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dosya_7_EEM312.pdf" download>dosya_7_EEM312.pdf</a></p>
+              <p class="kucuk">PDF · 710 KB · 77 <span data-i18n="arch.pagesLower"></span> · 23.05.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dosya_7_EEM312.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (710 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

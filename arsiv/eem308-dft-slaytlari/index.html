@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Ayrık Fourier Dönüşümü (DFT) ve DCT Ders Slaytları (Kaynağı Belirsiz) — hasancan.net</title>
+<meta name="description" content="EEM308 arşivindeki yazarı belirtilmemiş İngilizce DFT slaytları (2010): ayrık Fourier serisi (DFS) ve özellikleri, periyodik sinyallerin Fourier dönüşümü, sonlu uzunluklu dizilerin DFT&#x27;si, dairesel kaydırma, dualite, dairesel konvolüsyon, DCT-1/DCT-2 ve enerji yoğunlaştırma özelliği.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-dft-slaytlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Ayrık Fourier Dönüşümü (DFT) ve DCT Ders Slaytları (Kaynağı Belirsiz)">
+<meta property="og:description" content="EEM308 arşivindeki yazarı belirtilmemiş İngilizce DFT slaytları (2010): ayrık Fourier serisi (DFS) ve özellikleri, periyodik sinyallerin Fourier dönüşümü, sonlu uzunluklu dizilerin DFT&#x27;si, dairesel kaydırma, dualite, dairesel konvolüsyon, DCT-1/DCT-2 ve enerji yoğunlaştırma özelliği.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-dft-slaytlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Ayrık Fourier Dönüşümü (DFT) ve DCT Ders Slaytları (Kaynağı Belirsiz)", "description": "EEM308 arşivindeki yazarı belirtilmemiş İngilizce DFT slaytları (2010): ayrık Fourier serisi (DFS) ve özellikleri, periyodik sinyallerin Fourier dönüşümü, sonlu uzunluklu dizilerin DFT'si, dairesel kaydırma, dualite, dairesel konvolüsyon, DCT-1/DCT-2 ve enerji yoğunlaştırma özelliği.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-dft-slaytlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "DFT.ppt", "contentUrl": "https://hasancan.net/arsiv/eem308-dft-slaytlari/DFT.ppt"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Ayrık Fourier Dönüşümü (DFT) ve DCT Ders Slaytları (Kaynağı Belirsiz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.02.2010</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#course-outline">Course outline</a></li><li><a href="#from-ctft-to-dtft-to-dft">From CTFT to DTFT to DFT</a></li><li><a href="#the-discrete-fourier-series-of-periodic-sequences">The Discrete Fourier Series of periodic sequences</a></li><li><a href="#properties-of-the-discrete-fourier-series">Properties of the Discrete Fourier Series</a></li><li><a href="#the-fourier-transform-of-periodic-signals">The Fourier transform of periodic signals</a></li><li><a href="#the-dft-of-finite-duration-sequences">The DFT of finite-duration sequences</a></li><li><a href="#properties-of-the-dft">Properties of the DFT</a></li><li><a href="#the-discrete-cosine-transform">The Discrete Cosine Transform</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Ayrık Fourier Dönüşümü (DFT) ve DCT Ders Slaytları (Kaynağı Belirsiz)</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 15.02.2010 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM308 Sinyaller ve Sistemler II</strong> dersinin arşiv klasöründe bulunan, yazarı slaytlarda belirtilmemiş İngilizce ders slaytlarından <strong>Ayrık Fourier Dönüşümü (Discrete Fourier Transform, DFT)</strong> sunumudur (39 slayt). Dosya son olarak 15 Şubat 2010'da kaydedilmiş; PowerPoint dosyasının özelliklerinde yazar olarak <em>İsmail Avcıbaş</em> adı görünüyor, ancak slaytların neredeyse tamamı başka bir ders sunumundan alınmış ekran görüntüleridir ve asıl hazırlayanın kim olduğu (kurum, hoca) slaytlarda yazmıyor. Kırmızı başlıklı, mavi vurgulu madde düzeni bir üniversitenin "Signals and Systems / DSP" ders slaytlarına benziyor. Tablo ve şekiller Oppenheim, Schafer &amp; Buck'ın <em>Discrete-Time Signal Processing</em> (1999) kitabının 8. bölümünden (Tablo 8.1, 8.2, Şekil 8.25) alınmış. Slayt içeriği İngilizce olarak metne döküldü; gerekli birkaç şekil için slayt görselleri eklendi. Orijinal PowerPoint dosyası yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p><em>Not: Dosyanın ilk slaytında başlık olarak "SAMPLING" yazıyor; dosya örnekleme sunumunun kopyası üzerine hazırlanmış ve başlık değiştirilmemiş. İçerik tamamen DFT'dir.</em></p>
+<h2 id="course-outline">Course outline</h2>
+<ul><li>Fourier Series of CT Periodic Signals</li></ul>
+<p>  - Fourier Series of DT Periodic Signals</p>
+<ul><li>CT Fourier Transform</li></ul>
+<p>  - DT Fourier Transform</p>
+<ul><li>Laplace Transform</li></ul>
+<p>  - z-Transform</p>
+<ul><li><strong>Discrete Fourier Transform</strong></li></ul>
+<h2 id="from-ctft-to-dtft-to-dft">From CTFT to DTFT to DFT</h2>
+<p>The same rectangular pulse is shown in three domains:</p>
+<ul><li>h(t) ↔ H(jω) (CTFT)</li><li>sampling with t = nT, ω_s = 2π/T and Ω = ωT gives h[n] ↔ H(e^{jΩ}) (DTFT)</li><li>sampling the DTFT at Ω = (2π/N)k gives h[n] ↔ H(k) (DFT)</li></ul>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Dikdörtgen darbenin CTFT, DTFT ve DFT gösterimleri; ω_s = 2π/T, t = nT, Ω = ωT ve Ω = 2πk/N bağıntıları"><figcaption>CTFT → DTFT → DFT</figcaption></figure>
+<p>Table of contents of <em>"Discrete-Time Signal Processing"</em> by Oppenheim, Schafer and Buck, 1999:</p>
+<ol><li>Introduction</li><li>Discrete-Time Signals and Systems</li><li>The z-Transform</li><li>Sampling of Continuous-Time Signals</li><li>Transform Analysis of Linear Time-Invariant Systems</li><li>Structures for Discrete-Time Systems</li><li>Filter Design Techniques</li><li><strong>The Discrete Fourier Transform</strong> (bu sunumun konusu)</li><li>Computation of the Discrete Fourier Transform</li><li>Fourier Analysis of Signals Using the Discrete Fourier Transform</li><li>Discrete Hilbert Transforms</li></ol>
+<p>Outline of the lecture:</p>
+<ul><li>The Discrete Fourier Series of Periodic Sequences</li><li>Properties of the Discrete Fourier Series</li><li>The Fourier Transform of Periodic Signals</li><li>The Discrete Fourier Transform of Finite-Duration Sequences</li><li>Properties of the Discrete Fourier Transform</li><li>The Discrete Cosine Transform</li></ul>
+<h2 id="the-discrete-fourier-series-of-periodic-sequences">The Discrete Fourier Series of periodic sequences</h2>
+<h3 id="review-dtft">Review: DTFT</h3>
+<p>For the rectangular pulse x[n] = 1 for |n| ≤ N₁ and 0 for |n| &gt; N₁:</p>
+<p>x[n] ↔ X(e^{jω}) = sin(ω(N₁ + 1/2)) / sin(ω/2)</p>
+<ul><li>The <strong>synthesis</strong> equation: x[n] = (1/2π) ∫_{2π} X(e^{jω}) e^{jωn} dω</li><li>The <strong>analysis</strong> equation: X(e^{jω}) = Σ_{n=−∞}^{+∞} x[n] e^{−jωn}</li></ul>
+<h3 id="review-dt-fourier-series">Review: DT Fourier series</h3>
+<p>For the periodic square wave x[n] = 1 for −N₁ ≤ n ≤ N₁ and 0 for the other values in one period ⟨N⟩:</p>
+<p>a_k = (1/N) Σ_{n=−N₁}^{N₁} e^{−jk(2π/N)n}</p>
+<ul><li>The <strong>synthesis</strong> equation: x[n] = Σ_{k=⟨N⟩} a_k e^{jkω₀n} = Σ_{k=⟨N⟩} a_k e^{jk(2π/N)n}</li><li>The <strong>analysis</strong> equation: a_k = (1/N) Σ_{n=⟨N⟩} x[n] e^{−jkω₀n} = (1/N) Σ_{n=⟨N⟩} x[n] e^{−jk(2π/N)n}, and a_k = a_{k+N}</li></ul>
+<h3 id="periodic-and-finite-length-sequences-the-dfs-pair">Periodic and finite-length sequences: the DFS pair</h3>
+<p>With W_N = e^{−j(2π/N)}, a periodic sequence x̃[n] with period N and its DFS coefficients X̃[k] satisfy x̃[n] ↔ X̃[k] (DFS):</p>
+<ul><li>The <strong>synthesis</strong> equation: x̃[n] = (1/N) Σ_{k=0}^{N−1} X̃[k] W_N^{−kn}</li><li>The <strong>analysis</strong> equation: X̃[k] = Σ_{n=0}^{N−1} x̃[n] W_N^{kn}</li></ul>
+<p>(Example in the figure: a period-10 sequence with five ones; |X̃[k]| has the value 5 at k = 0, and the phase is indeterminate where the magnitude is zero.)</p>
+<h3 id="periodic-complex-exponentials">Periodic complex exponentials</h3>
+<p>W_N = e^{−j(2π/N)}</p>
+<p>e_k[n] = e^{−j(2π/N)kn} = (W_N)^{kn} = W_N^{kn}</p>
+<p>e_k[n + rN] = e^{−j(2π/N)k(n+rN)} = e^{−j(2π/N)kn} e^{−j(2πr)} = e_k[n]  (periodic in n)</p>
+<p>e_{k+lN}[n] = e^{−j(2π/N)(k+lN)n} = e^{−j(2π/N)kn} e^{−j(2πl)} = e_k[n]  (periodic in k)</p>
+<h2 id="properties-of-the-discrete-fourier-series">Properties of the Discrete Fourier Series</h2>
+<p>Let x̃[n] and ỹ[n] be periodic sequences with period N, x̃[n] ↔ X̃[k] and ỹ[n] ↔ Ỹ[k] (DFS).</p>
+<ul><li><strong>Linearity:</strong> z̃[n] = A x̃[n] + B ỹ[n] ↔ Z̃[k] = A X̃[k] + B Ỹ[k]</li><li><strong>Shift of a sequence:</strong> x̃[n − m] ↔ W_N^{km} X̃[k], and W_N^{−ln} x̃[n] ↔ X̃[k − l]</li><li><strong>Duality:</strong> writing the synthesis equation as N x̃[−n] = Σ_{k=0}^{N−1} X̃[k] W_N^{kn} and swapping n and k, N x̃[−k] = Σ_{n=0}^{N−1} X̃[n] W_N^{kn}. Hence X̃[n] ↔ N x̃[−k].</li></ul>
+<p>Table 8.1 (Oppenheim–Schafer) summarises the DFS properties:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">#</th><th scope="col">Periodic sequence (period N)</th><th scope="col">DFS coefficients (period N)</th></tr></thead><tbody><tr><th scope="row">1</th><td>x̃[n]</td><td>X̃[k], periodic with period N</td></tr><tr><th scope="row">3</th><td>a x̃₁[n] + b x̃₂[n]</td><td>a X̃₁[k] + b X̃₂[k]</td></tr><tr><th scope="row">4</th><td>X̃[n]</td><td>N x̃[−k]</td></tr><tr><th scope="row">5</th><td>x̃[n − m]</td><td>W_N^{km} X̃[k]</td></tr><tr><th scope="row">6</th><td>W_N^{−ln} x̃[n]</td><td>X̃[k − l]</td></tr><tr><th scope="row">7</th><td>Σ_{m=0}^{N−1} x̃₁[m] x̃₂[n − m] (periodic convolution)</td><td>X̃₁[k] X̃₂[k]</td></tr><tr><th scope="row">8</th><td>x̃₁[n] x̃₂[n]</td><td>(1/N) Σ_{l=0}^{N−1} X̃₁[l] X̃₂[k − l] (periodic convolution)</td></tr><tr><th scope="row">9</th><td>x̃*[n]</td><td>X̃*[−k]</td></tr><tr><th scope="row">10</th><td>x̃*[−n]</td><td>X̃*[k]</td></tr><tr><th scope="row">11</th><td>Re{x̃[n]}</td><td>X̃_e[k] = ½(X̃[k] + X̃*[−k])</td></tr><tr><th scope="row">12</th><td>j Im{x̃[n]}</td><td>X̃_o[k] = ½(X̃[k] − X̃*[−k])</td></tr><tr><th scope="row">13</th><td>x̃_e[n] = ½(x̃[n] + x̃*[−n])</td><td>Re{X̃[k]}</td></tr><tr><th scope="row">14</th><td>x̃_o[n] = ½(x̃[n] − x̃*[−n])</td><td>j Im{X̃[k]}</td></tr></tbody></table></div>
+<p>For real x̃[n] (properties 15–17): X̃[k] = X̃*[−k], Re{X̃[k]} = Re{X̃[−k]}, Im{X̃[k]} = −Im{X̃[−k]}, |X̃[k]| = |X̃[−k]|, ∠X̃[k] = −∠X̃[−k]; the even part ½(x̃[n] + x̃[−n]) ↔ Re{X̃[k]} and the odd part ½(x̃[n] − x̃[−n]) ↔ j Im{X̃[k]}.</p>
+<h2 id="the-fourier-transform-of-periodic-signals">The Fourier transform of periodic signals</h2>
+<p>Compare a periodic sequence x̃[n] with one period x[n] (zero outside 0 ≤ n ≤ N−1):</p>
+<ul><li>x̃[n] ↔ X̃[k] (DFS): x̃[n] = (1/N) Σ_{k=0}^{N−1} X̃[k] e^{j(2π/N)kn}, X̃[k] = Σ_{n=0}^{N−1} x̃[n] e^{−j(2π/N)kn}</li><li>x[n] ↔ X(e^{jω}) (DTFT): x[n] = (1/2π) ∫_{2π} X(e^{jω}) e^{jωn} dω, X(e^{jω}) = Σ_{n=−∞}^{+∞} x[n] e^{−jωn}</li></ul>
+<p>So the DFS coefficients are <strong>samples of the DTFT of one period</strong>:</p>
+<p>X̃[k] = X(e^{j(2π/N)k}) = X(e^{jω}) |_{ω = (2π/N)k}</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Periyot 10, beş birimlik darbe dizisinin |X(e^jω)| ve ∠X(e^jω) eğrileri ile bunların ω = 2πk/10 noktalarındaki örnekleri X̃[k]"><figcaption>DFS katsayıları DTFT'nin örnekleridir</figcaption></figure>
+<h2 id="the-dft-of-finite-duration-sequences">The DFT of finite-duration sequences</h2>
+<p>A finite-length sequence x[n] (length N) is treated as one period of x̃[n]. With W_N = e^{−j(2π/N)}:</p>
+<p>X[k] = X̃[k] for 0 ≤ k ≤ N−1, 0 otherwise;  x[n] = x̃[n] for 0 ≤ n ≤ N−1, 0 otherwise.</p>
+<p>Hence the <strong>DFT pair</strong> x[n] ↔ X[k]:</p>
+<ul><li>X[k] = Σ_{n=0}^{N−1} x[n] W_N^{kn}, 0 ≤ k ≤ N−1 (0 otherwise)</li><li>x[n] = (1/N) Σ_{k=0}^{N−1} X[k] W_N^{−kn}, 0 ≤ n ≤ N−1 (0 otherwise)</li></ul>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Beş noktalı darbe x[n] (n = 0…4), N = 5 ve N = 10 için periyodik uzantılar ve DFT genlik/faz değerleri (5; 3,24; 1,24; ±0,2π; ±0,4π)"><figcaption>Sonlu uzunluklu bir dizinin DFT'si; N seçimine bağlılık</figcaption></figure>
+<p>In the example, with N = 5 the periodic extension is a constant and the DFT is X[0] = 5, X[k] = 0 for k ≠ 0; with N = 10 the DFT samples the DTFT at ten points (|X[k]| = 5, 3.24, 0, 1.24, 0, 1, …).</p>
+<h2 id="properties-of-the-dft">Properties of the DFT</h2>
+<ul><li><strong>Linearity:</strong> for x[n] ↔ X[k] and y[n] ↔ Y[k], z[n] = A x[n] + B y[n] ↔ Z[k] = A X[k] + B Y[k].</li></ul>
+<p><em>Not: Slaytta DFT doğrusallığı için de "x[n], y[n]: periodic sequences with period N" yazıyor (DFS slaytından kopyalanmış); DFT için doğrusu "N uzunluklu sonlu diziler"dir (uzunlukları farklıysa kısa olan sıfırla N'ye tamamlanır).</em></p>
+<h3 id="circular-shift-of-a-sequence">Circular shift of a sequence</h3>
+<p>x[((n − m))_N], 0 ≤ n ≤ N−1  ↔  e^{−j(2πk/N)m} X[k]</p>
+<p>Derivation through the DFS: x̃[n] = x[((n))_N] ↔ X̃[k] = X[((k))_N]; ỹ[n] = y[((n))_N] ↔ Ỹ[k] = Y[((k))_N]. If Y[k] = e^{−j(2πk/N)m} X[k], then Ỹ[k] = e^{−j(2π((k))_N/N)m} X̃[((k))_N] = e^{−j(2πk/N)m} X̃[k], so ỹ[n] = x̃[n − m] and</p>
+<p>y[n] = ỹ[n] = x[((n − m))_N] for 0 ≤ n ≤ N−1, 0 otherwise.</p>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Dairesel kaydırma: x[n], periyodik uzantısı x̃[n], kaydırılmış x̃[n+2] ve bir periyodun alınmasıyla elde edilen x₁[n]"><figcaption>Dairesel kaydırma</figcaption></figure>
+<h3 id="duality">Duality</h3>
+<p>For the DFS: x̃[n] = x[((n))_N] ↔ X̃[k] and X̃[n] ↔ N x̃[−k]. Let ỹ[n] = X̃[n], i.e. y[n] = X[n]; then Ỹ[k] = N x̃[−k] and</p>
+<p>Y[k] = N x̃[−k] = N x[((−k))_N] for 0 ≤ k ≤ N−1, 0 otherwise.</p>
+<p>So for the DFT: x[n] ↔ X[k] and <strong>X[n] ↔ N x[((−k))_N]</strong>, 0 ≤ k ≤ N−1.</p>
+<p><em>Not: Slayttaki Y[k] ifadesinde aralık "0 ≤ n ≤ N − 1" yazılmış; Y[k] k'nin fonksiyonu olduğundan doğrusu 0 ≤ k ≤ N − 1'dir.</em></p>
+<p>(The figure example: x[n] = 1 for n = 0…4, N = 10; Re{X[k]} and Im{X[k]} are samples of the DTFT; the dual sequence x₁[n] = X[n] has the DFT X₁[k] = 10 x[((−k))₁₀], i.e. 10 at k = 0, 6, 7, 8, 9.)</p>
+<h3 id="circular-convolution">Circular convolution</h3>
+<p>z[n] = Σ_{m=0}^{N−1} x[m] y[((n − m))_N] = x[n] Ⓝ y[n]</p>
+<ul><li>x[n] Ⓝ y[n] ↔ X[k] Y[k]</li><li>x[n] y[n] ↔ (1/N) X[k] Ⓝ Y[k]</li></ul>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="İki uzunluk-L darbenin N noktalı dairesel konvolüsyonu: x₂[((−n))_N], x₂[((2−n))_N] ve sonuç x₃[n] = x₁[n] Ⓝ x₂[n]"><figcaption>Dairesel konvolüsyon örneği</figcaption></figure>
+<p>When both pulses have length N, their N-point circular convolution is the constant N over 0 ≤ n ≤ N−1; when the pulses have length L and N = 2L, the circular convolution equals the linear convolution (a triangle with peak L).</p>
+<h3 id="table-8-2-properties-of-the-n-point-dft">Table 8.2: properties of the N-point DFT</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">#</th><th scope="col">Finite-length sequence (length N)</th><th scope="col">N-point DFT (length N)</th></tr></thead><tbody><tr><th scope="row">1</th><td>x[n]</td><td>X[k]</td></tr><tr><th scope="row">3</th><td>a x₁[n] + b x₂[n]</td><td>a X₁[k] + b X₂[k]</td></tr><tr><th scope="row">4</th><td>X[n]</td><td>N x[((−k))_N]</td></tr><tr><th scope="row">5</th><td>x[((n − m))_N]</td><td>W_N^{km} X[k]</td></tr><tr><th scope="row">6</th><td>W_N^{−ln} x[n]</td><td>X[((k − l))_N]</td></tr><tr><th scope="row">7</th><td>Σ_{m=0}^{N−1} x₁(m) x₂[((n − m))_N]</td><td>X₁[k] X₂[k]</td></tr><tr><th scope="row">8</th><td>x₁[n] x₂[n]</td><td>(1/N) Σ_{l=0}^{N−1} X₁(l) X₂[((k − l))_N]</td></tr><tr><th scope="row">9</th><td>x*[n]</td><td>X*[((−k))_N]</td></tr><tr><th scope="row">10</th><td>x*[((−n))_N]</td><td>X*[k]</td></tr><tr><th scope="row">11</th><td>Re{x[n]}</td><td>X_ep[k] = ½{X[((k))_N] + X*[((−k))_N]}</td></tr><tr><th scope="row">12</th><td>j Im{x[n]}</td><td>X_op[k] = ½{X[((k))_N] − X*[((−k))_N]}</td></tr><tr><th scope="row">13</th><td>x_ep[n] = ½{x[n] + x*[((−n))_N]}</td><td>Re{X[k]}</td></tr><tr><th scope="row">14</th><td>x_op[n] = ½{x[n] − x*[((−n))_N]}</td><td>j Im{X[k]}</td></tr></tbody></table></div>
+<p>For real x[n] (15–17): X[k] = X*[((−k))_N], Re{X[k]} = Re{X[((−k))_N]}, Im{X[k]} = −Im{X[((−k))_N]}, |X[k]| = |X[((−k))_N]|, ∠X[k] = −∠X[((−k))_N]; x_ep[n] = ½{x[n] + x[((−n))_N]} ↔ Re{X[k]}, x_op[n] = ½{x[n] − x[((−n))_N]} ↔ j Im{X[k]}.</p>
+<h2 id="the-discrete-cosine-transform">The Discrete Cosine Transform</h2>
+<p>General orthogonal-transform form (compare with the DFS pair X̃[k] = Σ x̃[n] W_N^{kn}, x̃[n] = (1/N) Σ X̃[k] W_N^{−kn}):</p>
+<ul><li>A[k] = Σ_{n=0}^{N−1} x[n] φ_k*[n]</li><li>x[n] = (1/N) Σ_{k=0}^{N−1} A[k] φ_k[n]</li><li>(1/N) Σ_{n=0}^{N−1} φ_k[n] φ_m*[n] = 1 for m = k, 0 for m ≠ k</li></ul>
+<p>For the DCT the basis sequences φ_k[n] are cosines: <strong>even symmetric and periodic</strong>.</p>
+<h3 id="dct-1-2-3-4">DCT-1, 2, 3, 4</h3>
+<p>A four-point sequence can be extended both periodically and symmetrically in four ways (Oppenheim–Schafer, Figure 8.25): type-1 extension (period 2N − 2) for DCT-1, type-2 (period 2N) for DCT-2, type-3 and type-4 (period 4N) for DCT-3 and DCT-4.</p>
+<figure class="yazi-gorsel"><img src="s-34.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Dört noktalı bir dizinin DCT-1 (2N−2), DCT-2 (2N), DCT-3 ve DCT-4 (4N) için periyodik-simetrik uzantıları"><figcaption>DCT türleri için dört uzantı biçimi</figcaption></figure>
+<h3 id="dct-1">DCT-1</h3>
+<p>X^{c1}[k] = 2 Σ_{n=0}^{N−1} α[n] x[n] cos(πkn / (N − 1)),  0 ≤ k ≤ N−1</p>
+<p>x[n] = (1/(N − 1)) Σ_{k=0}^{N−1} α[k] X^{c1}[k] cos(πkn / (N − 1)),  0 ≤ n ≤ N−1</p>
+<p>α[n] = 1/2 for n = 0 and N − 1;  1 for 1 ≤ n ≤ N − 2</p>
+<h3 id="dct-2">DCT-2</h3>
+<p>X^{c2}[k] = 2 Σ_{n=0}^{N−1} x[n] cos(πk(2n + 1) / 2N),  0 ≤ k ≤ N−1</p>
+<p>x[n] = (1/N) Σ_{k=0}^{N−1} β[k] X^{c2}[k] cos(πk(2n + 1) / 2N),  0 ≤ n ≤ N−1</p>
+<p>β[k] = 1/2 for k = 0;  1 for 1 ≤ k ≤ N − 1</p>
+<p><em>Not: Slaytta iki ters dönüşüm formülünün yanında da aralık "0 ≤ k ≤ N−1" yazılmış; ters dönüşüm n'nin fonksiyonu olduğundan doğrusu 0 ≤ n ≤ N−1'dir. Ayrıca baz dizileri slaytta φ_k[n] = cos(k, n) gibi kısaltılmış; açık biçimleri yukarıdaki kosinüslerdir.</em></p>
+<h3 id="energy-compaction-property-of-the-dct-2">Energy compaction property of the DCT-2</h3>
+<p>The example compares the DFT and DCT-2 of the same 32-point test sequence: the DCT-2 coefficients are concentrated in a few low indices, and when coefficients are set to zero, the DCT truncation error stays near zero much longer than the DFT truncation error.</p>
+<figure class="yazi-gorsel"><img src="s-38.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Test dizisi, DFT ve DCT-2 katsayıları; sıfırlanan katsayı sayısına göre DCT ve DFT kesme hataları"><figcaption>DCT-2'nin enerji yoğunlaştırma özelliği</figcaption></figure>
+<ul><li>Hence, the major application of the DCT-2 is in <strong>signal compression</strong>,</li><li>due to its <strong>energy concentration</strong> property.</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="DFT.ppt" download>DFT.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 2.2 MB · 39 <span data-i18n="arch.slidesLower"></span> · 15.02.2010</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="DFT.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (2.2 MB)</a>
+            <a class="buton" href="DFT.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (1.3 MB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

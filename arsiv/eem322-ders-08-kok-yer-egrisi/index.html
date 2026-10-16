@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 8 – Kök Yer Eğrisi (Root Locus), Açı ve Genlik Koşulu, Çizim Adımları — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 8a ve 8b (Hamit Erdem, 2013): kök yer eğrisinin tanımı, kazanç K ile kapalı çevrim kutuplarının hareketi, karmaşık sayıların vektör gösterimi, açı ve genlik koşulu; kol sayısı, gerçek eksen kolları, asimptotlar, ayrılma noktası, ayrılma açıları ve Routh ile sanal eksen kesişimi adımlarıyla katlı kutuplu, sıfırlı ve karmaşık kutuplu çözümlü örnekler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 8 – Kök Yer Eğrisi (Root Locus), Açı ve Genlik Koşulu, Çizim Adımları">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 8a ve 8b (Hamit Erdem, 2013): kök yer eğrisinin tanımı, kazanç K ile kapalı çevrim kutuplarının hareketi, karmaşık sayıların vektör gösterimi, açı ve genlik koşulu; kol sayısı, gerçek eksen kolları, asimptotlar, ayrılma noktası, ayrılma açıları ve Routh ile sanal eksen kesişimi adımlarıyla katlı kutuplu, sıfırlı ve karmaşık kutuplu çözümlü örnekler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 8 – Kök Yer Eğrisi (Root Locus), Açı ve Genlik Koşulu, Çizim Adımları", "description": "EEM322 Denetim Sistemleri ders notu 8a ve 8b (Hamit Erdem, 2013): kök yer eğrisinin tanımı, kazanç K ile kapalı çevrim kutuplarının hareketi, karmaşık sayıların vektör gösterimi, açı ve genlik koşulu; kol sayısı, gerçek eksen kolları, asimptotlar, ayrılma noktası, ayrılma açıları ve Routh ile sanal eksen kesişimi adımlarıyla katlı kutuplu, sıfırlı ve karmaşık kutuplu çözümlü örnekler.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-ders-08-kok-yer-egrisi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/eem322-ders-08-kok-yer-egrisi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 8 – Kök Yer Eğrisi (Root Locus), Açı ve Genlik Koşulu, Çizim Adımları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kok-yer-egrisi-nedir">Kök yer eğrisi nedir?</a></li><li><a href="#karmasik-sayilar-ve-vektor-gosterimi">Karmaşık sayılar ve vektör gösterimi</a></li><li><a href="#aci-ve-genlik-kosulu">Açı ve genlik koşulu</a></li><li><a href="#kok-yer-egrisi-cizim-adimlari">Kök yer eğrisi çizim adımları</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 8 – Kök Yer Eğrisi (Root Locus), Açı ve Genlik Koşulu, Çizim Adımları</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 26.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>8. ders notlarını</strong> bir araya getiriyor: "EEM322L8: Root locus (kök yer eğrisi)" ve "EEM322L8b: Root locus – çizim yöntemi ve adımları". Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 26.07.2013 tarihi var. İlki İngilizce ağırlıklı 10, ikincisi Türkçe 15 sayfalık, sayfa başına iki slayt yerleştirilmiş PDF'ler; <a href="/arsiv/eem322-ders-07-surekli-hal-hatalari/">Ders 7</a> notunun devamıdır. Aşağıda içerik aktarıldı, hesaplar ve kök yer eğrisi çizimleri yazıya döküldü. Orijinal PDF'ler yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="kok-yer-egrisi-nedir">Kök yer eğrisi nedir?</h2>
+<p>Frekans bölgesinde analiz için dört temel grafik yöntem vardır: kök yer eğrisi, Bode diyagramları, Nyquist diyagramları ve Nichols diyagramları. Kök yer eğrisi, <strong>kapalı çevrim kutuplarının değişimini</strong> gösterir: kapalı çevrimin karakteristik denklemi</p>
+<ul><li>1 + K G(s) = 0</li></ul>
+<p>olmak üzere kök yer eğrisi, K parametresi 0'dan sonsuza değiştirilirken bu denklemin köklerinin izlediği yollardır.</p>
+<p>İleri yolda K ve G(s), geri beslemede H(s) olan sistemde açık çevrim transfer fonksiyonu T₁(s) = K G(s)H(s), kapalı çevrim transfer fonksiyonu T(s) = KG(s)/(1 + KG(s)H(s))'dir. Denetim probleminin özü şudur:</p>
+<ul><li>Açık çevrim transfer fonksiyonunun kutupları paydaya bakarak kolayca bulunur ve sistem kazancındaki değişimden etkilenmez.</li><li>Kapalı çevrim transfer fonksiyonunun kutuplarını bulmak daha zordur ve kazanca bağlıdır.</li></ul>
+<p>Kök yer eğrisi, bir sistem parametresi değiştikçe kapalı çevrim kutuplarının yerini gösteren grafik bir yöntemdir; birinci ve ikinci dereceden sistemlere olduğu kadar yüksek dereceli sistemlere de uygulanabilir. Sistem başarımının nitel bir tanımını, kararlılığın grafik gösterimini ve kararlılık/kararsızlık aralıklarını verir.</p>
+<p><strong>Tanım:</strong> Kök yer eğrisi, sistem parametrelerinin değişimiyle kapalı döngü köklerinin s düzlemindeki yerini gösteren grafiktir. Kapalı döngü sistemlerin geçici rejim cevap karakteristikleri kapalı döngü kutuplarının yerlerine bağlıdır; sistem değişken kazançlıysa kutuplar seçilen kazanca göre değişir. <strong>Amaç:</strong> istenen sistem cevabını elde etmek için uygun kutupları seçmek ve bu kutuplar için sistem kazancını belirlemektir.</p>
+<h3 id="ornek-k-s-s-2">Örnek: K/(s(s + 2))</h3>
+<p>Kapalı çevrim C(s)/R(s) = K/(s(s + 2) + K), karakteristik denklem s² + 2s + K = 0, kökler s = −1 ± √(1 − K).</p>
+<ul><li>K = 0'da kapalı çevrim kutupları açık çevrim kutuplarındadır (0 ve −2).</li><li>0 &lt; K &lt; 1'de kutuplar gerçel eksendedir.</li><li>K &gt; 1'de kutuplar karmaşıktır; gerçel kısmı −1'dir, sanal kısmı K ile artar. Basamak yanıtları K = 0,5; 1; 2; 15 ve 50 için çizilmiş: K büyüdükçe aşım artar.</li></ul>
+<h3 id="ornek-k-s-1-s-2-s-3">Örnek: K/((s + 1)(s + 2)(s + 3))</h3>
+<p>Birim geri beslemeli sistemde açık çevrim G(s) = K/(s³ + 6s² + 11s + 6), karakteristik denklem s³ + 6s² + 11s + 6 + K = 0. Tesisin üç kutbu (−1, −2, −3) negatif olduğundan geri beslemesiz sistem kararlıdır. K arttıkça kapalı çevrim kutupları:</p>
+<ol><li>K = 0: s₁ = −1, s₂ = −2, s₃ = −3 (açık çevrim kutupları)</li><li>K = 6: s₁,₂ = −1 ± j√2, s₃ = −4</li><li>K = 24: s₁,₂ = −0,5 ± j√23/2, s₃ = −5</li><li>K = 60: s₁,₂ = ±j√11, s₃ = −6</li></ol>
+<figure class="yazi-gorsel"><img src="kok-yer-ornek-k60.jpg" width="724" height="548" loading="lazy" decoding="async" alt="K = 6, 24 ve 60 için kapalı çevrim kutuplarının s düzlemindeki hareketi; K = 60&#x27;ta kutuplar sanal ekseni ±j√11&#x27;de keser"><figcaption>Kapalı çevrim kutuplarının yer eğrisi</figcaption></figure>
+<p>K &gt; 60 için kapalı çevrim kutupları sağ yarı düzleme geçer ve sistem <strong>kararsız</strong> olur.</p>
+<h3 id="ornek-cameraman-kamera-sistemi">Örnek: CameraMan kamera sistemi</h3>
+<p>Kızılötesi algılayıcı taşıyan kişiyi otomatik izleyen bir kamera sisteminde açık çevrim G₀(s) = K₁K₂/(s(s + 10)) = K/(s(s + 10)), kapalı çevrim G_c(s) = K/(s² + 10s + K). K değiştikçe kutup yerleri:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">K</th><th scope="col">Kutup 1</th><th scope="col">Kutup 2</th></tr></thead><tbody><tr><th scope="row">0</th><td>−10</td><td>0</td></tr><tr><th scope="row">5</th><td>−9,47</td><td>−0,53</td></tr><tr><th scope="row">10</th><td>−8,87</td><td>−1,13</td></tr><tr><th scope="row">15</th><td>−8,16</td><td>−1,84</td></tr><tr><th scope="row">20</th><td>−7,24</td><td>−2,76</td></tr><tr><th scope="row">25</th><td>−5</td><td>−5</td></tr><tr><th scope="row">30</th><td>−5 + j2,24</td><td>−5 − j2,24</td></tr><tr><th scope="row">35</th><td>−5 + j3,16</td><td>−5 − j3,16</td></tr><tr><th scope="row">40</th><td>−5 + j3,87</td><td>−5 − j3,87</td></tr><tr><th scope="row">45</th><td>−5 + j4,47</td><td>−5 − j4,47</td></tr><tr><th scope="row">50</th><td>−5 + j5</td><td>−5 − j5</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="kok-yer-kamera.jpg" width="724" height="548" loading="lazy" decoding="async" alt="K/(s(s + 10)) sisteminin kök yer eğrisi: kutuplar −10 ve 0&#x27;dan başlayıp K = 25&#x27;te −5&#x27;te buluşur, sonra dikey olarak ayrılır"><figcaption>CameraMan sisteminin kök yer eğrisi</figcaption></figure>
+<p>Gözlemler: K &lt; 25 iken sistem aşırı sönümlü, K = 25'te kritik sönümlü, K &gt; 25'te az sönümlüdür.</p>
+<h2 id="karmasik-sayilar-ve-vektor-gosterimi">Karmaşık sayılar ve vektör gösterimi</h2>
+<p>Her karmaşık sayı σ + jω bir vektörle gösterilebilir. (s + a) karmaşık bir sayıdır ve fonksiyonun −a'daki sıfırından s noktasına çizilen vektörle temsil edilir; kutupsal biçimde M∠θ yazılabilir. Örneğin F(s) = s + 7 fonksiyonu s = 5 + j2 noktasında 12 + j2 olur.</p>
+<p>F(s) = ∏(s + zᵢ) / ∏(s + pⱼ) (m sıfır, n kutup) için her çarpan bir vektördür ve F(s)'nin herhangi bir s noktasındaki değeri:</p>
+<ul><li><strong>Genlik:</strong> M = |F(s)| = ∏|s + zᵢ| / ∏|s + pⱼ| = (sıfır uzunlukları çarpımı) / (kutup uzunlukları çarpımı)</li><li><strong>Açı:</strong> θ = Σ∠(s + zᵢ) − Σ∠(s + pⱼ) = (sıfır açıları toplamı) − (kutup açıları toplamı)</li></ul>
+<p><strong>Örnek:</strong> F(s) = (s + 1)/(s(s + 2)), s = −3 + j4 noktasında:</p>
+<ul><li>−1'deki sıfır: √20∠116,6°; orijindeki kutup: 5∠126,9°; −2'deki kutup: √17∠104,0°</li><li>|F(s)|∠F(s) = √20/(5√17) ∠(116,6° − 126,9° − 104,0°) = <strong>0,217∠−114,3°</strong></li></ul>
+<p><strong>Örnek:</strong> F(s) = (s + 2)(s + 4)/(s(s + 3)(s + 6)), s = −7 + j9 noktasında doğrudan yerine koyarak ya da vektörlerle hesaplandığında F(s) = −0,0339 − j0,0899 = <strong>0,096∠−110,7°</strong>.</p>
+<h2 id="aci-ve-genlik-kosulu">Açı ve genlik koşulu</h2>
+<p>T(s) = KG(s)/(1 + KG(s)H(s)) paydası sıfır olduğunda:</p>
+<ul><li>KG(s)H(s) = −1 = 1∠(2k + 1)180°, k = 0, ±1, ±2, …</li></ul>
+<p>Kapalı çevrim kutupları iki koşulu sağlamalıdır:</p>
+<ul><li><strong>Genlik koşulu:</strong> |KG(s)H(s)| = 1 ⇒ K = 1/(|G(s)||H(s)|)</li><li><strong>Açı koşulu:</strong> ∠KG(s)H(s) = (2k + 1)180°</li></ul>
+<p>Bir s değeri KG(s)H(s)'de yerine konduğunda bir karmaşık sayı çıkar; açısı 180°'nin tek katıysa o s, belli bir K için sistemin kutbudur. K skaler olduğundan açı koşulu yalnız G(s)H(s)'e bakar; K ise kutup yerine konduğunda G(s)H(s) genliğinin tersidir.</p>
+<p><strong>Örnek:</strong> KG(s)H(s) = K/(s(s + 10)) için K = 5'te kapalı çevrim kutupları −9,47 ve −0,53'tedir; s = −9,47 ve K = 5 konursa KG(s)H(s) = −1 çıkar (tablodaki diğer noktalar için de aynı sonuç elde edilir).</p>
+<p><strong>Örnek:</strong> KG(s)H(s) = K(s + 3)(s + 4)/((s + 1)(s + 2)), kapalı çevrim T(s) = K(s + 3)(s + 4)/[(1 + K)s² + (3 + 7K)s + (2 + 12K)].</p>
+<ul><li>s = −2 + j3 noktası için sıfır açıları eksi kutup açıları: θ₁ + θ₂ − θ₃ − θ₄ = 56,31° + 71,57° − 90° − 108,43° = −70,55°. Bu 180°'nin tek katı olmadığından <strong>−2 + j3 kapalı çevrim kutbu değildir</strong>.</li><li>s = −2 + j(√2/2) noktası ise kök yer eğrisi üzerindedir: K = (kutup uzunlukları)/(sıfır uzunlukları) = L₃L₄/(L₁L₂) = (√2/2)(1,22)/((2,12)(1,22)) = <strong>0,33</strong>.</li></ul>
+<h2 id="kok-yer-egrisi-cizim-adimlari">Kök yer eğrisi çizim adımları</h2>
+<p>Ele alınan sistem: G(s) = 1/((s + 1)(s + 3)(s + 4)), H(s) = 1. Özyapısal (karakteristik) denklem:</p>
+<ul><li>1 + K/((s + 1)(s + 3)(s + 4)) = 0 ⇒ s³ + 8s² + 19s + (12 + K) = 0</li></ul>
+<p>Notta K = 0, 1, 2, 2,11, 5, 15, 45, 140 ve 200 için köklerin yerleri MATLAB çizimleriyle tek tek gösteriliyor: iki kök −1,78'de buluşup gerçek eksenden ayrılıyor, K = 140'ta sanal ekseni ±j4,36'da kesiyor.</p>
+<ol><li><strong>Kol sayısı:</strong> Özyapısal denklemin derecesi (açık döngü kutup sayısı) kol sayısını verir; burada <strong>3 kol</strong>.</li><li><strong>Başlangıç ve bitiş noktaları:</strong> Açık döngü kutupları başlangıç (K = 0, "x" ile), sıfırları bitiş (K = ∞, "o" ile) noktalarıdır. Burada −1, −3 ve −4'te üç kutup var, sıfır yok.</li><li><strong>Gerçek eksen üzerindeki kollar:</strong> Gerçek eksende en soldaki kutup ya da sıfırın solundan başlayarak test noktaları seçilir; noktanın sağındaki toplam kutup ve sıfır sayısı <strong>tekse</strong> kök yer eğrisi oradan geçer, çiftse geçmez. Karmaşık kutup ve sıfırlar bu teste dahil edilmez. Burada kollar −∞ ile −4 arasında ve −3 ile −1 arasındadır.</li><li><strong>Asimptot açıları:</strong> α = 180°(2k + 1)/(n − m); n = 3, m = 0 için α = 60°(2k + 1): 60°, 180°, 300°.</li><li><strong>Asimptotların gerçek ekseni kestiği nokta:</strong> σ = (Σpᵢ − Σzᵢ)/(n − m) = (−1 − 3 − 4)/3 = −8/3 ≈ <strong>−2,66</strong>.</li><li><strong>Gerçek eksenden ayrılma noktası:</strong> K = −(s³ + 8s² + 19s + 12), dK/ds = −(3s² + 16s + 19) = 0 ⇒ s = −1,78 ve s = −3,54. −3,54 kök yer eğrisinin olmadığı bir bölgede kaldığından ayrılma noktası <strong>−1,78</strong>'dir.</li><li><strong>Kutuplardan ayrılma açıları:</strong> Açı koşulu uygulanır. −4'teki kutup için φ₋₁ + φ₋₃ + φ₋₄ = −180°, burada −180 − 180 + φ₋₄ = −180 (toplamı 360° olan açılar göz ardı edilir) ⇒ φ₋₄ = −180°; benzer şekilde φ₋₃ = 0° ve φ₋₁ = −180°. Bir noktada karşı karşıya gelen eğriler tam zıt yönlerde hareket eder.</li><li><strong>Sanal eksen kesişimi:</strong> Routh-Hurwitz kriteri uygulanır:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Satır</th><th scope="col">1. sütun</th><th scope="col">2. sütun</th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>19</td></tr><tr><th scope="row">s²</th><td>8</td><td>12 + K</td></tr><tr><th scope="row">s¹</th><td>35/2 − K/8</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>12 + K</td><td>0</td></tr></tbody></table></div>
+<p>s¹ satırının sıfır olduğu <strong>K = 140</strong> kararlılık sınırıdır. Bu K ile 8s² + 152 = 0 ⇒ eğri sanal ekseni <strong>±j4,36</strong>'da keser.</p>
+<figure class="yazi-gorsel"><img src="kok-yer-ornek1.jpg" width="724" height="548" loading="lazy" decoding="async" alt="s³ + 8s² + 19s + 12 + K = 0 için Routh tablosu ve tamamlanmış kök yer eğrisi: asimptot merkezi −2,66, ayrılma noktası −1,78, sanal eksen kesişimi ±j4,36 (K = 140)"><figcaption>Örnek 1: tamamlanmış kök yer eğrisi</figcaption></figure>
+<h3 id="katli-kutup-durumu">Katlı kutup durumu</h3>
+<p>G(s) = 1/((s + 1)(s + 3)²(s + 4)), H(s) = 1.</p>
+<ol><li>Kol sayısı 4 (açık döngü kutup sayısı).</li><li>−1 ve −4'te tek katlı, −3'te çift katlı olmak üzere 4 kutup var.</li><li>Gerçek eksen kolları −4 ile −3 ve −3 ile −1 arasında.</li><li>α = 180°(2k + 1)/4 = 45°(2k + 1): 45°, 135°, 225°, 315°.</li><li>σ = (−1 − 3 − 3 − 4)/4 = −11/4 = <strong>−2,75</strong>.</li><li>K = −(s⁴ + 11s³ + 43s² + 69s + 36); dK/ds = 0'dan s₁ = −3,69, s₂ = −3,00 (kutbun kendisi, olamaz), s₃ = −1,56. Ayrılma noktaları <strong>−3,69</strong> ve <strong>−1,56</strong>.</li><li>Ayrılma açıları: φ₋₁ + φ₋₃₁ + φ₋₃₂ + φ₋₄ = −180 ⇒ φ₋₄ = 0°, φ₋₁ = −180°. Katlı kutupların olduğu noktada eğri zıt yönlerde hareket eder: φ₋₃₁ = −180°, φ₋₃₂ = 0°.</li><li>s⁴ + 11s³ + 43s² + 69s + 36 + K = 0 için Routh tablosu:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Satır</th><th scope="col">1. sütun</th><th scope="col">2. sütun</th></tr></thead><tbody><tr><th scope="row">s⁴</th><td>1</td><td>43</td><td>K + 36</td></tr><tr><th scope="row">s³</th><td>11</td><td>69</td><td>0</td></tr><tr><th scope="row">s²</th><td>404/11</td><td>K + 36</td><td>0</td></tr><tr><th scope="row">s¹</th><td>5880/101 − 121K/404</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K + 36</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>Buradan kararlılık sınırı <strong>K = 194,38</strong>; s² satırıyla eğrinin sanal ekseni kestiği değerler <strong>±j2,5</strong> bulunur.</p>
+<figure class="yazi-gorsel"><img src="kok-yer-katli-kutup.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Katlı kutuplu sistemin kök yer eğrisi: ayrılma noktaları −3,69 ve −1,56, asimptot merkezi −2,75"><figcaption>Katlı kutup durumu</figcaption></figure>
+<h3 id="sifir-olmasi-durumu">Sıfır olması durumu</h3>
+<p>G(s) = (s + 2)/((s + 1)(s + 3)(s + 4)), H(s) = 1.</p>
+<ol><li>Kol sayısı yine 3.</li><li>−1, −3 ve −4'te üç kutup (K = 0), −2'de bir sıfır (K = ∞).</li><li>Gerçek eksen kolları −4 ile −3 ve −2 ile −1 arasında.</li><li>n = 3, m = 1 için α = 90°(2k + 1): 90° ve 270°.</li><li>σ = (−1 − 3 − 4 − (−2))/(3 − 1) = <strong>−3</strong>.</li><li>K = −(s³ + 8s² + 19s + 12)/(s + 2); dK/ds = 0'dan s₁ = −3,47 ve s₂,₃ = −1,77 ± j0,79 (olamaz). Ayrılma noktası <strong>−3,47</strong>.</li><li>Ayrılma ve sıfıra varma açıları: φ₋₁ + φ₋₃ + φ₋₄ − θ₋₂ = −180 ⇒ φ₋₄ = −180°; benzer adımlarla φ₋₃ = −180°, θ₋₂ = 0°, φ₋₁ = −180°.</li><li>Kök yer eğrisi sanal ekseni kesmediğinden bu noktalar ve K değeri bulunmaz; sistem her K için kararlıdır.</li></ol>
+<figure class="yazi-gorsel"><img src="kok-yer-sifirli.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Sıfırlı sistemin kök yer eğrisi: −3,47&#x27;de ayrılan dikey kollar ve MATLAB rlocus çizimi"><figcaption>Sıfır olması durumu</figcaption></figure>
+<h3 id="karmasik-kutup-durumu">Karmaşık kutup durumu</h3>
+<p>G(s) = 1/((s + 0,5)(s² + 4s + 8)(s + 4)), H(s) = 1.</p>
+<ol><li>Kol sayısı 4.</li><li>−0,5 ve −4'te tekil, −2 ± j2'de karmaşık olmak üzere 4 kutup var.</li><li>Gerçek eksende yalnız −4 ile −0,5 arasında kol var (karmaşık kutup ve sıfırlar bu tespitte hesaba katılmaz).</li><li>α = 45°(2k + 1): 45°, 135°, 225°, 315°.</li><li>σ = (Σpᵢ)/4; notta (−1 − 4 − 2 − 2)/4 = −9/4 = −2,25 bulunuyor.</li><li>K = −(s⁴ + 8,5s³ + 28s² + 44s + 16); dK/ds = 0'dan s₁ = −2,69, s₂,₃ = −1,84 ± j0,83 (olamaz). Ayrılma noktası <strong>−2,69</strong>.</li><li>Ayrılma açıları: gerçek kutuplar için φ₋₀,₅ = −180° ve φ₋₄ = 0°. −2 + j2'deki kutup için açı kuralı: [180 − arctan(2/1,5)] + arctan(2/2) + φ₋₂₁ + arctan(4/0) = −180 ⇒ φ₋₂₁ + 126,87 + 45 + 90 = −180 ⇒ <strong>φ₋₂₁ = −81,87°</strong>, <strong>φ₋₂₂ = +81,87°</strong>.</li><li>s⁴ + 8,5s³ + 28s² + 44s + 16 + K = 0 için Routh tablosu:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Satır</th><th scope="col">1. sütun</th><th scope="col">2. sütun</th></tr></thead><tbody><tr><th scope="row">s⁴</th><td>1</td><td>28</td><td>K + 16</td></tr><tr><th scope="row">s³</th><td>17/2</td><td>44</td><td>0</td></tr><tr><th scope="row">s²</th><td>388/17</td><td>K + 16</td><td>0</td></tr><tr><th scope="row">s¹</th><td>3690/97 − 289K/776</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K + 16</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>Kararlılık sınırı <strong>K = 102,15</strong>; s² satırıyla sanal eksen kesişimi <strong>±j2,28</strong> bulunur.</p>
+<figure class="yazi-gorsel"><img src="kok-yer-karmasik-kutup.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Karmaşık kutuplu sistemin kök yer eğrisi: −2 ± j2 kutuplarından −81,87° ve +81,87° ile ayrılan kollar, ayrılma noktası −2,69"><figcaption>Karmaşık kutup durumu</figcaption></figure>
+<p><em>Not: Karmaşık kutup örneğinde asimptot merkezi hesabında −0,5'teki kutup −1 olarak yazılmış. Doğrusu σ = (−0,5 − 4 − 2 − 2)/4 = −8,5/4 = −2,125'tir (karakteristik denklemdeki s³ katsayısı 8,5 ile de uyumlu). Ayrıca son çizimde sanal eksen kesişimi ±2,5j olarak etiketlenmiş; Routh tablosundan bulunan değer ±j2,28'dir (K + 16 = 118,15 ve (388/17)s² + 118,15 = 0 ⇒ s ≈ ±j2,275).</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-ders-08-kok-yer-egrisi.zip" download>eem322-ders-08-kok-yer-egrisi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.5 MB · 26.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-ders-08-kok-yer-egrisi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

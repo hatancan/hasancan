@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: BJT ve MOSFET Ders Notları – NPN Çalışması, MOSFET DC Analizi, Küçük Sinyal Modelleri, Akım Aynaları (Keith W. Whites, EE 320, 2009) — hasancan.net</title>
+<meta name="description" content="Keith W. Whites&#x27;ın EE 320 Electronics I dersinden altı ders notu: BJT yapısı ve NPN&#x27;nin fiziksel çalışması, MOSFET sembolleri ve i_D–v_DS bölgeleri, MOSFET DC devre tasarım örnekleri, MOSFET yükselteç ve küçük sinyal π modeli, çözümlü yükselteç örnekleri, ayrık ve tümleşik devrelerde kutuplama ve MOSFET akım aynası.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-whites-ee320-bjt-mosfet-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: BJT ve MOSFET Ders Notları – NPN Çalışması, MOSFET DC Analizi, Küçük Sinyal Modelleri, Akım Aynaları (Keith W. Whites, EE 320, 2009)">
+<meta property="og:description" content="Keith W. Whites&#x27;ın EE 320 Electronics I dersinden altı ders notu: BJT yapısı ve NPN&#x27;nin fiziksel çalışması, MOSFET sembolleri ve i_D–v_DS bölgeleri, MOSFET DC devre tasarım örnekleri, MOSFET yükselteç ve küçük sinyal π modeli, çözümlü yükselteç örnekleri, ayrık ve tümleşik devrelerde kutuplama ve MOSFET akım aynası.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-whites-ee320-bjt-mosfet-notlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: BJT ve MOSFET Ders Notları – NPN Çalışması, MOSFET DC Analizi, Küçük Sinyal Modelleri, Akım Aynaları (Keith W. Whites, EE 320, 2009)", "description": "Keith W. Whites'ın EE 320 Electronics I dersinden altı ders notu: BJT yapısı ve NPN'nin fiziksel çalışması, MOSFET sembolleri ve i_D–v_DS bölgeleri, MOSFET DC devre tasarım örnekleri, MOSFET yükselteç ve küçük sinyal π modeli, çözümlü yükselteç örnekleri, ayrık ve tümleşik devrelerde kutuplama ve MOSFET akım aynası.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem214-whites-ee320-bjt-mosfet-notlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "Whites_EE320_BJT_MOSFET.zip", "contentUrl": "https://hasancan.net/arsiv/eem214-whites-ee320-bjt-mosfet-notlari/Whites_EE320_BJT_MOSFET.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: BJT ve MOSFET Ders Notları – NPN Çalışması, MOSFET DC Analizi, Küçük Sinyal Modelleri, Akım Aynaları (Keith W. Whites, EE 320, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.09.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#lecture-10-bjt-construction-npn-physical-operation">Lecture 10: BJT Construction, NPN Physical Operation</a></li><li><a href="#lecture-26-mosfet-circuit-symbols-i-d-v-ds-characteristics">Lecture 26: MOSFET Circuit Symbols, i_D–v_DS Characteristics</a></li><li><a href="#lecture-27-mosfet-circuits-at-dc">Lecture 27: MOSFET Circuits at DC</a></li><li><a href="#lecture-28-mosfet-as-an-amplifier-small-signal-equivalent-circuit-models">Lecture 28: MOSFET as an Amplifier, Small-Signal Equivalent Circuit Models</a></li><li><a href="#lecture-29-mosfet-small-signal-amplifier-examples">Lecture 29: MOSFET Small-Signal Amplifier Examples</a></li><li><a href="#lecture-30-biasing-mosfet-amplifiers-mosfet-current-mirrors">Lecture 30: Biasing MOSFET Amplifiers, MOSFET Current Mirrors</a></li><li><a href="#i-ndirme">İndirme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: BJT ve MOSFET Ders Notları – NPN Çalışması, MOSFET DC Analizi, Küçük Sinyal Modelleri, Akım Aynaları (Keith W. Whites, EE 320, 2009)</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 16.09.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM214 Elektronik I dersinin klasöründe bulunan, <strong>Keith W. Whites</strong>'ın (South Dakota School of Mines and Technology) <strong>EE 320 Electronics I</strong> dersi için 2009 güz döneminde hazırladığı İngilizce ders notlarından transistörlerle ilgili altı tanesini (Lecture 10 ve 26–30) tanıtıyor. Notlar Sedra &amp; Smith'in <em>Microelectronic Circuits</em> kitabını izliyor. Aşağıda her dersin ana fikirleri ve çözümlü örneklerin sonuçları Türkçe özetlendi; PDF'ler yazının sonunda ZIP olarak indirilebilir. Aynı yazarın diyot notları için: <a href="/arsiv/eem214-whites-ee320-diyot-notlari/">Whites EE 320 diyot notları</a>.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="lecture-10-bjt-construction-npn-physical-operation">Lecture 10: BJT Construction, NPN Physical Operation</h2>
+<p>Transistör üç uçlu bir elemandır; bir uçtaki akım ya da gerilim, diğer iki uç arasındaki akımı kontrol eder ("elektronik vana"). İki ana aile vardır: BJT ve FET (derste yaklaşık 13 ders BJT, 12 ders FET). BJT, silisyum üzerinde üç katkılı bölgeden (npn ya da pnp) oluşur; arka arkaya iki pn eklemi içerir: <strong>emetör–baz eklemi (EBJ)</strong> ve <strong>kolektör–baz eklemi (CBJ)</strong>. Bu çizim William Shockley'nin ABD patentine (2,569,347) kadar uzanır. Yapı simetrik görünse de değildir (eklem alanları ve katkılar farklıdır), bu yüzden ters aktif mod kolektör ile emetörün yer değiştirmesiyle aynı değildir. Eklemlerin durumuna göre dört mod vardır: kesim, aktif, doyum ve ters aktif. Sayısal devrelerde transistör kesim ile doyum arasında anahtarlanır, doğrusal yükselteçlerde aktif bölgede çalışır. Notun sonunda aktif moddaki npn transistörün fiziksel çalışması anlatılıyor.</p>
+<h2 id="lecture-26-mosfet-circuit-symbols-i-d-v-ds-characteristics">Lecture 26: MOSFET Circuit Symbols, i_D–v_DS Characteristics</h2>
+<p>Zenginleştirilmiş (enhancement) n kanallı MOSFET sembolünde oklu uç kaynağı ve okun yönü n tipini gösterir; kapıdaki boşluk oksit tabakasını temsil eder. Gövde genellikle kaynağa bağlıdır, bu yüzden daha basit bir sembol yaygındır. Üç çalışma bölgesi:</p>
+<ol><li><strong>Kesim:</strong> v_GS &lt; V_t, kanal yok, i_D = 0.</li><li><strong>Triyot:</strong> v_GS &gt; V_t ve kanal savak ucunda da sürekli (v_GD &gt; V_t, yani v_DS &lt; v_GS − V_t): i_D = k_n′(W/L)[(v_GS − V_t)v_DS − v_DS²/2]; küçük v_DS'te i_D ≈ k_n′(W/L)(v_GS − V_t)v_DS = v_DS / r_DS, yani gerilimle kontrol edilen bir direnç.</li><li><strong>Doyum:</strong> kanal savak ucunda daralmış (v_GD ≤ V_t): i_D = ½k_n′(W/L)(v_GS − V_t)²; eleman ideal bir gerilim kontrollü akım kaynağı gibi davranır.</li></ol>
+<h2 id="lecture-27-mosfet-circuits-at-dc">Lecture 27: MOSFET Circuits at DC</h2>
+<ul><li><strong>Örnek N27.1:</strong> I_D = 0.4 mA ve V_D = 1 V olacak tasarım (V_t = 2 V, µ_nC_ox = 20 µA/V², W/L = 400/10). V_GD = −1 V &lt; V_t olduğundan doyum varsayılır; (V_GS − 2)² = 1'in uygun kökü <strong>V_GS = 3 V</strong>, V_S = −3 V ve −5 V kaynağa göre R_S = (−3 + 5)/0.4 mA = 5 kΩ.</li><li><strong>Örnek N27.2:</strong> Kapısı savağına bağlı MOSFET'te V_GD = 0 &lt; V_t, doyum: (V_GS − 2)² = 4 ⇒ <strong>V_GS = 4 V</strong>, V_D = 4 V.</li><li><strong>Örnek N27.3:</strong> V_D = 0.1 V için tasarım (V_t = 1 V, k_n′W/L = 1 mA/V²); V_GS = 5 V ile kanal savakta kesilmediği için triyot bölgesi; r_DS hesaplanıyor.</li></ul>
+<h2 id="lecture-28-mosfet-as-an-amplifier-small-signal-equivalent-circuit-models">Lecture 28: MOSFET as an Amplifier, Small-Signal Equivalent Circuit Models</h2>
+<p>"Kavramsal" MOSFET yükseltecinde (V_GS ile kutuplama ve R_D) eleman doyumda kutuplanır ve tüm salınım boyunca v_GD ≤ V_t kalmalıdır. Kapıya v_gs eklenince i_D = ½k_n′(W/L)[(V_GS − V_t) + v_gs]² açılımındaki v_gs² terimi doğrusal olmadığından küçük kalmalıdır: v_gs &lt;&lt; 2(V_GS − V_t). Bu koşulda akımın AC bileşeni i_d = g_m·v_gs, <strong>g_m = k_n′(W/L)(V_GS − V_t)</strong> (taşma gerilimi V_OV ile g_m = 2I_D/V_OV) ve kazanç A_v ∝ g_m. Doyumda MOSFET gerilim kontrollü akım kaynağıdır; küçük sinyal π modeli (kapı açık devre, savakta g_m·v_gs akım kaynağı ve ona paralel r_o = V_A/I_D) ve T modeli tanıtılıyor.</p>
+<h2 id="lecture-29-mosfet-small-signal-amplifier-examples">Lecture 29: MOSFET Small-Signal Amplifier Examples</h2>
+<p><strong>Örnek N29.1:</strong> Savaktan kapıya 10 MΩ geri beslemeli yükselteç (V_t = 1.5 V, k_n′W/L = 0.25 mA/V², V_A = 50 V, V_DD = 15 V, R_D = 10 kΩ). V_GS = V_DS olduğundan I_D = 1.25×10⁻⁴(15 − 10000·I_D − 1.5)²; iki kökten fiziksel olanı <strong>I_D = 1.06 mA, V_GS = V_DS = 4.4 V</strong>. g_m = 0.25 mA/V² × (4.4 − 1.5) = 0.725 mS; r_o ∥ R_D ∥ R_L ≈ 4521 Ω ile <strong>A_v ≈ −3.28 V/V</strong>; ardından giriş direncinin v_gs = 0 alınmadan, i_i'nin v_i cinsinden bulunarak hesaplanması gösteriliyor.</p>
+<h2 id="lecture-30-biasing-mosfet-amplifiers-mosfet-current-mirrors">Lecture 30: Biasing MOSFET Amplifiers, MOSFET Current Mirrors</h2>
+<p>Ayrık devrelerde kutuplama BJT'dekine benzer yöntemlerle yapılır; tümleşik devrelerde direnç ve büyük kondansatör pahalı olduğu için DC akım kaynakları kullanılır.</p>
+<ul><li><strong>Örnek N30.1:</strong> I_D = 1 mA, ±2 V savak salınımı ve 1 MΩ giriş direnci (k_n′W/L = 0.5 mA/V², V_t = 2 V). Kazancı büyütmek için V_D = 0 seçilir; V_GD,min = −2 V &lt; V_t olduğundan salınım boyunca doyum korunur. V_G = 0, V_GS = 4 V, V_S = −4 V ve R_G = 1 MΩ.</li><li><strong>MOSFET akım aynası:</strong> Kapısı savağına bağlı Q1 doyumda çalışır; I_REF onun V_GS'ini belirler. Aynı V_GS'i paylaşan Q2'nin akımı I_O = I_REF·(W/L)₂/(W/L)₁ olur; tümleşik devrelerde bir "altın akım" bu yolla birçok kata kopyalanır.</li></ul>
+<h2 id="i-ndirme">İndirme</h2>
+<p>ZIP dosyasında altı ders notunun orijinal PDF'leri (320Lecture10 ve 320Lecture26–30) bulunuyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="Whites_EE320_BJT_MOSFET.zip" download>Whites_EE320_BJT_MOSFET.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 927 KB · 16.09.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Whites_EE320_BJT_MOSFET.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (927 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

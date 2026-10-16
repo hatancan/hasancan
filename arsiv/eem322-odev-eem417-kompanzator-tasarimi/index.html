@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: EEM417 Dengeleyici Tasarımı Ödevi ve MATLAB Projesi (Uraz) – Öğrenci Çözümleri — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Alper Uraz&#x27;ın EEM417 ödevi: G(s) = K/s(s+a)(s+b) sistemi için kök yer eğrisi ve Bode ile faz ilerleten, faz geciktiren, PD ve PI dengeleyici tasarımı; öğrencilere a, b ve tasarım setine göre dağıtılan ödev tablosu, iki öğrencinin el yazısı çözümleri ve MATLAB çıktıları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: EEM417 Dengeleyici Tasarımı Ödevi ve MATLAB Projesi (Uraz) – Öğrenci Çözümleri">
+<meta property="og:description" content="Prof. Dr. Alper Uraz&#x27;ın EEM417 ödevi: G(s) = K/s(s+a)(s+b) sistemi için kök yer eğrisi ve Bode ile faz ilerleten, faz geciktiren, PD ve PI dengeleyici tasarımı; öğrencilere a, b ve tasarım setine göre dağıtılan ödev tablosu, iki öğrencinin el yazısı çözümleri ve MATLAB çıktıları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: EEM417 Dengeleyici Tasarımı Ödevi ve MATLAB Projesi (Uraz) – Öğrenci Çözümleri", "description": "Prof. Dr. Alper Uraz'ın EEM417 ödevi: G(s) = K/s(s+a)(s+b) sistemi için kök yer eğrisi ve Bode ile faz ilerleten, faz geciktiren, PD ve PI dengeleyici tasarımı; öğrencilere a, b ve tasarım setine göre dağıtılan ödev tablosu, iki öğrencinin el yazısı çözümleri ve MATLAB çıktıları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-odev-eem417-kompanzator-tasarimi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/eem322-odev-eem417-kompanzator-tasarimi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: EEM417 Dengeleyici Tasarımı Ödevi ve MATLAB Projesi (Uraz) – Öğrenci Çözümleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.11.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#odev">Ödev</a></li><li><a href="#birinci-ogrenci-cozumu-a-1-b-2-set-a">Birinci öğrenci çözümü: a = 1, b = 2 (Set A)</a></li><li><a href="#i-kinci-ogrenci-cozumu-a-2-b-3-set-f">İkinci öğrenci çözümü: a = 2, b = 3 (Set F)</a></li><li><a href="#matlab-ciktilari-a-1-2-b-2-set-b">MATLAB çıktıları: a = 1.2, b = 2 (Set B)</a></li><li><a href="#cozum-parcasi-bode-ile-faz-ilerleten-dengeleyici">Çözüm parçası: Bode ile faz ilerleten dengeleyici</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: EEM417 Dengeleyici Tasarımı Ödevi ve MATLAB Projesi (Uraz) – Öğrenci Çözümleri</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.11.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri klasörünün "Control" alt klasöründe bulunan bir <strong>dengeleyici (kompanzatör) tasarımı ödevini</strong> ve bu ödeve ait öğrenci çözümlerini bir araya getiriyor. Ödev kâğıdının başlığı "Başkent Üniversitesi: EEM417 Homework"; yani belge EEM322'nin devamı olan ileri denetim dersine ait, ama aynı klasörde saklandığı için burada yer alıyor. Ödevi dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong> hazırlamış. Klasörde ödev kâğıdı, iki farklı öğrencinin taranmış el yazısı çözümleri (biri 15.11.2007 tarihli Bode kâğıdı üzerinde), bir öğrencinin MATLAB çıktıları ve bir çözüm parçası vardı; öğrenci adları belgelerde geçmiyor. Bütün dosyalar yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="odev">Ödev</h2>
+<p><strong>1.</strong> Açık döngü transfer fonksiyonu</p>
+<blockquote><p>G(s) = K / [s(s + a)(s + b)]</p></blockquote>
+<p>olan birim geri beslemeli bir sistem için, a ∈ [1, 3] ve b ∈ [2, 10] olmak üzere aşağıdaki dengeleyici setlerini tasarlayın:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Set</th><th scope="col">Tasarımlar</th></tr></thead><tbody><tr><th scope="row">A</th><td>1, 2, 5, 6</td></tr><tr><th scope="row">B</th><td>1, 4, 5, 7</td></tr><tr><th scope="row">C</th><td>2, 3, 5, 6</td></tr><tr><th scope="row">D</th><td>3, 4, 5, 6</td></tr><tr><th scope="row">E</th><td>1, 2, 5, 7</td></tr><tr><th scope="row">F</th><td>1, 4, 5, 6</td></tr><tr><th scope="row">G</th><td>2, 3, 5, 7</td></tr></tbody></table></div>
+<p>Tasarımlar: 1 – RL-LEAD (kök yer eğrisiyle faz ilerleten), 2 – RL-LAG (kök yer eğrisiyle faz geciktiren), 3 – RL-PD, 4 – RL-PI, 5 – BODE-LEAD, 6 – BODE-LAG, 7 – BODE-PI. İstenen özellikler (uygulanabildiği yerde): <strong>ζ = 0.5, ωn = 4, Kv = 5 ve pm = 40°</strong>.</p>
+<p><strong>2.</strong> (a) Kök yer / Bode diyagramlarını elle çizin, (b) dengelenmiş ve dengelenmemiş sistemlerin birim basamak yanıtlarını bulun.</p>
+<p><strong>3. MATLAB projesi:</strong> 1. soruda yapılacak tasarımın her adımı için MATLAB kodu verin; 2. soruda istenen, dengelenmemiş ve dengelenmiş sistemlerin bütün çizimlerini ekleyin. Ödevler ve MATLAB projeleri 11. haftanın cuma gününe kadar teslim edilecek.</p>
+<p>Her öğrenciye bir ödev numarası veriliyordu; tabloda numaraya göre a, b ve set şöyle dağılıyor: 1–8 numaralarda a = 1.0, 9–16'da a = 1.2, 17–24'te a = 1.5, 25–32'de a = 1.8, 33–36'da a = 2.0; b her grupta 2'den 9'a kadar birer artıyor (33–36'da 2, 3, 4, 5) ve setler A'dan G'ye sırayla dönüyor (1 → A, 2 → B, … 7 → G, 8 → A, …, 36 → A).</p>
+<h2 id="birinci-ogrenci-cozumu-a-1-b-2-set-a">Birinci öğrenci çözümü: a = 1, b = 2 (Set A)</h2>
+<p>Sistem G(s) = K / [s(s + 1)(s + 2)] (ödev no. 1, Set A: RL-LEAD, RL-LAG, BODE-LEAD, BODE-LAG). Her tasarımda Kv = lim(s→0) sG(s) = K/2 = 5 ⇒ <strong>K = 10</strong>.</p>
+<h3 id="rl-lead">RL-LEAD</h3>
+<ol><li>İstenen kapalı döngü kutupları: −ζωn ± jωn√(1 − ζ²) = −2 ± j4√0.75 = <strong>−2 ± j3.46</strong>.</li><li>Açı koşulu çözümde −tan⁻¹(3.46/−2) − tan⁻¹(3.46/−1) − 90° = +60° + 74° − 90° = 44° olarak hesaplanmış.</li><li>Bu 44° iki eşit parçaya (22° + 22°) bölünerek sıfır ve kutup yerleştirilmiş: tan 8° = a/(2√3) ⇒ a = 0.48, tan 52° = b/(2√3) ⇒ b = 4.43.</li><li>Sonuç: 1/T = 2.48 (T = 0.403), 1/(aT) = 6.43, a = 0.38 ⇒ <strong>Gc(s) = (s + 2.48)/(s + 6.43)</strong>.</li></ol>
+<p><em>Not: Açı koşulunda işaret hatası var. s = −2 + j3.46'da kutupların açıları 0'dan 120°, −1'den 106.1°, −2'den 90°'dir; toplam faz −316.1°, yani gerekli açı katkısı 136°'dir (44° değil). Bu kadar büyük bir eksik tek kademeli faz ilerleten dengeleyiciyle sağlanamaz; tasarlanan (s + 2.48)/(s + 6.43) yalnız yaklaşık 44° ekler.</em></p>
+<h3 id="bode-lead">BODE-LEAD</h3>
+<ol><li>Çizimlerden gm = 10 dB, pm = 27° okunmuş. Gereken ek faz 40° − 27° = 13°, 5° güvenlik payıyla φm = 18°.</li><li>sin 18° = (1 − a)/(1 + a) = 0.309 ⇒ a = 0.53; 10 log a = −2.75 dB ⇒ ωm = 2.72 rad/s.</li><li>1/T = √a·ωm = 1.98, 1/(aT) = 3.74 ⇒ Gc(s) = a(1 + Ts)/(1 + aTs) = 0.53(1 + 0.5s)/(1 + 0.265s) = (s + 2)/(s + 3.7).</li><li>Yeni faz payı ωm = 2.72'de hesaplanmış: pm′ = 180° − 90° − 69.8° − 36.3° = −16.1°; kuvvetlendirici kazancı Kc = 1/a = 1.89.</li></ol>
+<p><em>Not: K = 10 iken sistem zaten kararsızdır: s³ + 3s² + 2s + K için kritik kazanç 6'dır. Tam hesapla faz kesim frekansı √2 rad/s ve kazanç payı ≈ −4.4 dB, faz payı negatiftir; "gm = 10 dB, pm = 27°" okuması hatalı. Çözümün kendi bulduğu pm′ = −16.1° da tek faz ilerleten dengeleyicinin bu özellikleri sağlayamadığını gösteriyor.</em></p>
+<h3 id="bode-lag">BODE-LAG</h3>
+<ol><li>G(s) = 10/[s(s + 1)(s + 2)] = 5/[s(1 + s)(1 + s/2)], 20 log 5 = 13.9 dB.</li><li>pm = 40° + 5° (güvenlik) = 45°. ωg′ = 0.45 rad/s'de 21 dB zayıflatma gerekir ⇒ b = 10^(21/20) = 11.2.</li><li>1/T = ωg′/10 = 0.045, 1/(bT) = 0.004 ⇒ Gc(s) = (1/11.2)(s + 0.045)/(s + 0.004).</li><li>Yeni faz payı çözümde pm′ = 180° + tan⁻¹(ωg′/0.045) − tan⁻¹(ωg′/0.004) = 180° + 84.3° − 89.5° = 174.8° olarak yazılmış.</li></ol>
+<p><em>Not: Yeni faz payına sistemin kendi fazı da katılmalıdır: ωg′ = 0.45'te ∠G = −90° − 24.2° − 12.7° = −126.9°, dengeleyicinin katkısı ≈ −5.2°; dolayısıyla pm′ ≈ 180° − 126.9° − 5.2° ≈ 48°'dir (istenen 40°'yi sağlar).</em></p>
+<h2 id="i-kinci-ogrenci-cozumu-a-2-b-3-set-f">İkinci öğrenci çözümü: a = 2, b = 3 (Set F)</h2>
+<p>Sistem G(s) = K / [s(s + 2)(s + 3)] (Set F: RL-LEAD, RL-PI, BODE-LEAD, BODE-LAG). Kv = K/(2·3) = 5 ⇒ <strong>K = 30</strong>. Çözüm Türkçe açıklamalı; Bode çizimi dersin web sayfasındaki yarı logaritmik kâğıda (SemiLogPaper) 15.11.2007 tarihinde basılmış.</p>
+<h3 id="1-rl-lead">1) RL-LEAD</h3>
+<ol><li>İstenen kutuplar −2 ± j2√3. Açı koşulu: θ = −(180° − 60°) − 90° − 73.9° = −283.9° ⇒ gereken açı φ = 103.9°.</li><li>Açıortay yapısıyla dengeleyicinin sıfırı −0.6, kutbu −26.6 bulunmuş: C(s) = (s + 0.6)/(s + 26.6).</li><li>Genlik koşulu |Kc·G(s)·C(s)| = 1 (s = −2 + j2√3'te) ⇒ <strong>Kc = 11</strong>.</li></ol>
+<h3 id="4-rl-pi">4) RL-PI</h3>
+<p>RL-LEAD ile bulunan dengelenmiş sisteme bir PI dengeleyici eklenmiş: Cpi(s) = Kp + Ki/s = Kp(s + Ki/Kp)/s. Açı katkısı küçük olsun diye sıfır orijine yakın seçilmiş (Ki/Kp = 0.1). Genlik koşulundan Kp = 4942.5/4862.095 ≈ 1.02 ⇒ <strong>Cpi(s) = 1.02(s + 0.1)/s</strong>.</p>
+<h3 id="5-bode-lead">5) BODE-LEAD</h3>
+<ol><li>G(jω) = 30/[jω(jω + 2)(jω + 3)] = 5/[jω(1 + jω/2)(1 + jω/3)], köşe frekansları 2 ve 3.</li><li>Dengelenmemiş Bode diyagramından pm = 13.5°, gm = 4 dB okunmuş.</li><li>Adım 1: φm = (40° − 13.5°) + 5° = 31.5°; sin φm = (1 − a)/(1 + a) = 0.52 ⇒ a = 0.32.</li><li>Adım 2: 10 log a = −5 dB olan frekans Bode diyagramından ωm = 3.8 rad/s.</li><li>Adım 3: 1/T = √a·ωm = 2.15, 1/(aT) = 6.72; C(s) = (s + 2.15)/(s + 6.72).</li><li>Adım 5: Kc = 1/a = 3.125 ⇒ Kc·C(s) = 3.125(s + 2.15)/(s + 6.72).</li><li>Adım 6: pm′ = 180° + ∠C(jωm)G(jωm) = 180° + 60.5° − 29.5° − 90° − 62.2° − 51.7° ⇒ <strong>pm′ = 7.1°</strong>.</li></ol>
+<figure class="yazi-gorsel"><img src="bode-lead-dengelenmemis.jpg" width="768" height="558" loading="lazy" decoding="async" alt="Set F için dengelenmemiş sistemin elle çizilmiş asimptotik Bode diyagramı: köşe frekansları 2 ve 3, gm = 4 dB, pm = 13.5°"><figcaption>BODE-LEAD, dengelenmemiş sistem (15.11.2007)</figcaption></figure>
+<p><em>Not: K = 30, bu sistemin kritik kazancına eşittir (s³ + 5s² + 6s + K için Routh: K = 5·6 = 30); tam hesapla dengelenmemiş sistemde pm = gm = 0 ve kesim frekansı √6 ≈ 2.45 rad/s'dir. pm = 13.5° ve gm = 4 dB asimptot diyagramından okunmuş. Bulunan pm′ = 7.1° istenen 40°'nin çok altında kalıyor; yani tek kademeli faz ilerleten dengeleyici bu özellikleri sağlamıyor.</em></p>
+<h3 id="6-bode-lag">6) BODE-LAG</h3>
+<ol><li>pm′ = 40° + 5° = 45°; Bode diyagramında fazın −135° olduğu frekans yeni kazanç kesim frekansı alınmış: ωg′ = 0.72 rad/s. Genlik diyagramından bu frekansta 16 dB okunmuş.</li><li>20 log b = 16 dB ⇒ b = 10^(16/20) = 6.3; 1/T = ωg′/10 = 0.073, 1/(bT) = 0.012.</li><li><strong>C(s) = (1/b)(s + 1/T)/(s + 1/(bT)) = 0.16(s + 0.073)/(s + 0.012)</strong>.</li></ol>
+<p><em>Not: Tam hesapla fazın −135° olduğu frekans ω² + 5ω − 6 = 0 denkleminden ω = 1 rad/s'dir ve orada |G| ≈ 12.6 dB'dir; 0.72 rad/s ve 16 dB asimptot diyagramından okunmuş değerlerdir (asimptotik genlik 0.72'de 16.8 dB).</em></p>
+<h2 id="matlab-ciktilari-a-1-2-b-2-set-b">MATLAB çıktıları: a = 1.2, b = 2 (Set B)</h2>
+<p>Üçüncü bir öğrencinin Word'e aktarılmış MATLAB çıktıları ödev no. 9'a (a = 1.2, b = 2, Set B: 1, 4, 5, 7) ait. Kv = K/(1.2·2) = 5 ⇒ K = 12:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num=[0,0,0,12];
+&gt;&gt; den=[1,3.2,2.4,0];
+&gt;&gt; G=tf(num,den)
+
+Transfer function:
+          12
+---------------------
+s^3 + 3.2 s^2 + 2.4 s
+
+&gt;&gt; rlocus(G)
+&gt;&gt; grid</code></pre>
+<p>Kök yer eğrisinde (1-RL-lead ve 4-RL-PI dosyalarında aynı çizim) gerçek eksendeki kutuplar −1.2, −2 ve 0 işaretlenmiş. Aynı sistem <code>bode(G)</code> ile çizildiğinde (5 ve 7 numaralı dosyalar, ikisi de "Bode-Lead – Uncompensated" başlıklı) MATLAB şu payları veriyor:</p>
+<pre class="kod"><code>Gain Margin (dB): -3.88   At frequency (rad/sec): 1.55   Closed Loop Stable? No
+Phase Margin (deg): -11.7   Delay Margin (sec): 3.17   At frequency (rad/sec): 1.92   Closed Loop Stable? No</code></pre>
+<p>Yani K = 12 ile dengelenmemiş kapalı döngü kararsız (kritik kazanç 3.2 × 2.4 = 7.68).</p>
+<h2 id="cozum-parcasi-bode-ile-faz-ilerleten-dengeleyici">Çözüm parçası: Bode ile faz ilerleten dengeleyici</h2>
+<p>"kontrol1" adlı taramada, hocanın el yazısıyla başka bir sistem için Bode-lead tasarımının bir bölümü var:</p>
+<ol><li>Tasarım özellikleri: pm = 45°, ess ≤ 0.4. ess = lim(s→0) sR(s)·1/(1 + G(s)) = 10/K = 0.4 ⇒ K = 25.</li><li>Çizimlerden gm = 5 dB, pm = 14°, ωp = 3, ωg = 2.2. Gereken ek faz 45° − 14° = 31°, 5° eklenerek 36°.</li><li>sin 36° = (1 − a)/(1 + a) = 0.6 ⇒ a = 0.25; 10 log a = −6 dB ⇒ ωm = 3.1 rad/s.</li><li>1/T = √a·ωm = 1.55, 1/(aT) = 6.2.</li><li>Faz ilerleten dengeleyici: Gc(s) = a(1 + Ts)/(1 + aTs) = 0.25(1 + 0.65s)/(1 + 0.16s) = (s + 1.55)/(s + 6.2).</li></ol>
+<p><em>Not: sin 36° = 0.588'dir; a = (1 − 0.588)/(1 + 0.588) ≈ 0.26 çıkar, çözümdeki 0.6 ve 0.25 yuvarlanmış değerlerdir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-odev-eem417-kompanzator-tasarimi.zip" download>eem322-odev-eem417-kompanzator-tasarimi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.4 MB · 15.11.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-odev-eem417-kompanzator-tasarimi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

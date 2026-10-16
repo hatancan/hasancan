@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Root-Locus (Kök Yer Eğrisi) Metodu – &quot;ders5&quot; Notu (2005, yazarı belirsiz) — hasancan.net</title>
+<meta name="description" content="Kök yer eğrisi yöntemine Türkçe giriş notu: kapalı çevrim kutuplarının kazançla değişimi, K/(s² + 3s + 2) örneği, MATLAB rlocus, asimptot açıları, kesişim noktası, ayrılma noktası ve sanal eksen kesişimi kuralları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-root-locus-metodu-ders5-notu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Root-Locus (Kök Yer Eğrisi) Metodu – &quot;ders5&quot; Notu (2005, yazarı belirsiz)">
+<meta property="og:description" content="Kök yer eğrisi yöntemine Türkçe giriş notu: kapalı çevrim kutuplarının kazançla değişimi, K/(s² + 3s + 2) örneği, MATLAB rlocus, asimptot açıları, kesişim noktası, ayrılma noktası ve sanal eksen kesişimi kuralları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-root-locus-metodu-ders5-notu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Root-Locus (Kök Yer Eğrisi) Metodu – \"ders5\" Notu (2005, yazarı belirsiz)", "description": "Kök yer eğrisi yöntemine Türkçe giriş notu: kapalı çevrim kutuplarının kazançla değişimi, K/(s² + 3s + 2) örneği, MATLAB rlocus, asimptot açıları, kesişim noktası, ayrılma noktası ve sanal eksen kesişimi kuralları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-root-locus-metodu-ders5-notu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Root_locus.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-root-locus-metodu-ders5-notu/Root_locus.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Root-Locus (Kök Yer Eğrisi) Metodu – &quot;ders5&quot; Notu (2005, yazarı belirsiz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>31.03.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#root-locus-metodu">Root-locus metodu</a></li><li><a href="#root-locus-ciziminin-temel-kurallari">Root locus çiziminin temel kuralları</a></li><li><a href="#kurallarin-ornege-uygulanmasi-g-s-k-s-3s-2">Kuralların örneğe uygulanması: G(s) = K/(s² + 3s + 2)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Root-Locus (Kök Yer Eğrisi) Metodu – &quot;ders5&quot; Notu (2005, yazarı belirsiz)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 31.03.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri klasöründe "Root_locus.pdf" adıyla saklanan 6 sayfalık <strong>üçüncü taraf</strong> bir ders notudur. Notun üzerinde yazar ya da kurum adı yok; PDF özelliklerine göre Word'de <strong>"ders5.doc"</strong> adıyla hazırlanmış ve <strong>31 Mart 2005</strong>'te PDF'e çevrilmiş (dosya sahibi olarak yalnızca "zeki" kullanıcı adı görünüyor). Kaynağı belirlenemeyen bu not, Türkçe karakterleri bozuk olduğu için imlası düzeltilerek yazıya aktarıldı; orijinal PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="root-locus-metodu">Root-locus metodu</h2>
+<p>Değişken kazançlı bir kontrol sistemi tasarlarken dikkat edilecek temel nokta, kullandığımız kazanç değerlerinin sistemi kararlı bölgede tutmasıdır. Root locus çizimi kararsız bölgeleri (karmaşık düzlemde köklerin düşey eksenin sağ tarafı), aşırı sönümlü sistemleri ve titreşimli sistemleri belirlemede oldukça kullanışlıdır. Yöntem biraz zaman alıcıdır, fakat elde edilen sonuçlar bir kontrol sistemini tasarlarken oldukça önemlidir.</p>
+<figure class="yazi-gorsel"><img src="blok-diyagram.jpg" width="780" height="230" loading="lazy" decoding="async" alt="Negative feedback loop: R(s), gain K and G₁(s) = 1/s in the forward path, H(s) = 1 in the feedback path, output Y(s)"><figcaption>Kazanç K ve G₁(s) = 1/s içeren geri beslemeli sistem</figcaption></figure>
+<p>G₁(s) = 1/s ve H(s) = 1 olan bu sistemin transfer fonksiyonu Mason formülü ile:</p>
+<blockquote><p>G_s(s) = G(s)/(1 + G(s)H(s)) = (K/s)/(1 + (K/s)·1) = K/(s + K)</p></blockquote>
+<p>Değişen K değerleri için transfer fonksiyonunun paydasının kökleri bulunur ve karmaşık düzlemde gösterilir (K kazancı normalde 0 ile +∞ arasında değer alır). D(s) = s + K, s + K = 0:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">K</th><th scope="col">Kök</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td></tr><tr><th scope="row">1</th><td>−1</td></tr><tr><th scope="row">2</th><td>−2</td></tr><tr><th scope="row">3</th><td>−3</td></tr></tbody></table></div>
+<p>K = 0'da kök orijindedir; K → ∞ iken kök reel eksen boyunca sola, −∞'a gider.</p>
+<p>Bir sistemin kararlılığını araştırmak için transfer fonksiyonunun paydasına bakmak yeterlidir. Negatif ve birim geri beslemeli bir kontrol sistemi için genel ifade G_s(s) = G(s)/(1 + G(s)H(s))'dir. Sistem cevabı paydanın bir fonksiyonudur ve paydanın kökleriyle belirlenir: <strong>1 + G(s)H(s) = 0</strong>. G(s)H(s) sıfırlar (zeros) ve kutuplar (poles) cinsinden şöyle de yazılabilir:</p>
+<blockquote><p>G(s)H(s) = K(s + z₀)(s + z₁)…(s + z_m) / [(s + p₀)(s + p₁)…(s + p_n)]</p></blockquote>
+<h3 id="ornek-g-s-k-s-3s-2-h-s-1">Örnek: G(s) = K/(s² + 3s + 2), H(s) = 1</h3>
+<p>Karakteristik denklem:</p>
+<blockquote><p>1 + K/(s² + 3s + 2) · 1 = 0 → s² + 3s + 2 + K = 0 s₁,₂ = [−3 ± √(9 − 4(2 + K))]/2 = −1.5 ± √(1 − 4K)/2</p></blockquote>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">K</th><th scope="col">Kökler</th></tr></thead><tbody><tr><th scope="row">0</th><td>−1, −2</td></tr><tr><th scope="row">1</th><td>−1.5000 ± 0.8660i</td></tr><tr><th scope="row">…</th><td>…</td></tr><tr><th scope="row">100</th><td>−1.5000 ± 9.9875i</td></tr></tbody></table></div>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>clc;clear;
+pay=[1];
+payda=[1,3,2];
+rlocus(pay,payda)</code></pre>
+<figure class="yazi-gorsel"><img src="kok-yer-egrisi.jpg" width="760" height="580" loading="lazy" decoding="async" alt="MATLAB root locus of K/(s²+3s+2): branches start at −1 and −2, meet at −1.5 and go vertically"><figcaption>K/(s² + 3s + 2) için kök yer eğrisi</figcaption></figure>
+<p>Şekilden anlaşıldığı gibi bu sistemde pozitif reel kısımlı kök olmadığı için sistem kararlıdır.</p>
+<h2 id="root-locus-ciziminin-temel-kurallari">Root locus çiziminin temel kuralları</h2>
+<ol><li>Kontrol sistemine ait karakteristik denklem yazılır: 1 + G(s)H(s) = 1 + K·(s + z₁)(s + z₂)…(s + z_m)/[(s + p₁)(s + p₂)…(s + p_n)] = 0.</li><li>Kutuplar ve sıfırlar sayılır. (n − m) farkı kadar sonsuza giden root locus çizgisi olacaktır.</li><li>Reel eksen üzerindeki kökler işaretlenir.</li><li>Sonsuza giden kollar için asimptot açıları β(k) = ±180°(2k + 1)/(n − m), k = 0, 1, …, (n − m − 1) ile bulunur; ardından asimptotların reel ekseni kestiği nokta σ hesaplanır ve asimptotlar çizilir.</li><li>Ayrılma (breakaway) ve birleşme (break-in) noktaları bulunur. Ayrılma noktaları reel eksende iki kutup arasında, birleşme noktaları sıfırlar arasında bulunur. A = (s + p₁)(s + p₂)…(s + p_n), B = (s + z₁)(s + z₂)…(s + z_m) için şu denklem çözülür: (dA/ds)·B − A·(dB/ds) = 0.</li><li>Kök eğrilerinin sanal ekseni kestiği yerler bulunur: s yerine iω konur ve 1 + K(iω + z₁)…(iω + z_m)/[(iω + p₁)…(iω + p_n)] = 0 ifadesi frekanslar için çözülür.</li></ol>
+<p>Notta asimptotların reel ekseni kestiği nokta σ = (p₁ + p₂ + … + p_n)(z₁ + z₂ + … + z_m)/(n − m) diye yazılmış.</p>
+<p><em>Not: Bu formül hatalı yazılmış. Kutup ve sıfırların toplamları çarpılmaz, birbirinden çıkarılır: σ = [Σ(kutuplar) − Σ(sıfırlar)]/(n − m). Buradaki gösterimle kutuplar −p_i, sıfırlar −z_i olduğundan σ = [(−p₁ − … − p_n) − (−z₁ − … − z_m)]/(n − m) olur.</em></p>
+<h2 id="kurallarin-ornege-uygulanmasi-g-s-k-s-3s-2">Kuralların örneğe uygulanması: G(s) = K/(s² + 3s + 2)</h2>
+<p><strong>Adım 1:</strong> D(s) = 1 + G(s)H(s) = 1 + K/(s² + 3s + 2) = 1 + K·1/[(s + 1)(s + 2)].</p>
+<p><strong>Adım 2:</strong> Sonsuza giden yer eğrisi sayısı: m = 0, n = 2, n − m = 2 eğri sonsuza gider.</p>
+<p><strong>Adım 3:</strong> Kökler (kutuplar, −1 ve −2) karmaşık düzlemde gösterilir.</p>
+<p><strong>Adım 4:</strong> Asimptot açıları ve reel ekseni kesim noktası:</p>
+<blockquote><p>β(k) = 180°(2k + 1)/2, k = 0, 1 → β(0) = 90°, β(1) = 270°</p></blockquote>
+<p>Notta kesim noktası σ = (−1 − 2)(0)/2 = 0 olarak hesaplanmış.</p>
+<p><em>Not: Doğru formülle σ = [(−1) + (−2) − 0]/2 = −1,5 bulunur. Asimptotlar orijinden değil −1,5'ten geçen düşey doğrulardır; bu, yukarıdaki MATLAB çizimindeki ve Adım 5'teki sonuçla da uyumludur (kollar −1,5'te reel eksenden ayrılıp düşey olarak gider).</em></p>
+<p><strong>Adım 5:</strong> Ayrılma noktası: A = 1, B = s² + 3s + 2; dA/ds = 0, dB/ds = 2s + 3.</p>
+<blockquote><p>A·(dB/ds) − B·(dA/ds) = 0 → 1·(2s + 3) − (s² + 3s + 2)·0 = 0 → 2s + 3 = 0 → s = −1.5</p></blockquote>
+<p><strong>Adım 6:</strong> Kök yer eğrileri sanal ekseni kesmediği için sistemin kararlı olduğu sonucuna varılabilir; uygulama amacıyla sanal eksen kesişimi hesabı:</p>
+<blockquote><p>s² + 3s + 2 + K = 0, s = iω → −ω² + 3iω + 2 + K = 0 → ω² − 3iω − 2 − K = 0 ω = [3i ± √((−3i)² − 4(−2 − K))]/2 = [3i ± √(−9 + 8 + 4K)]/2 = [3i ± √(4K − 1)]/2</p></blockquote>
+<p>Bu sonuç frekansın sanal bir değere sahip olduğunu gösterir; yani sanal ekseni kesen bir (gerçel) frekans yoktur.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Root_locus.pdf" download>Root_locus.pdf</a></p>
+              <p class="kucuk">PDF · 25 KB · 6 <span data-i18n="arch.pagesLower"></span> · 31.03.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Root_locus.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (25 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

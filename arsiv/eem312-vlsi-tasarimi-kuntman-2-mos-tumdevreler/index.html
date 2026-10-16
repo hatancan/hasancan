@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 2 – MOS Tümdevreler, CMOS Prosesi ve Serim Kuralları (Ayten Kuntman) — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Ayten Kuntman&#x27;ın VLSI tasarımı notlarının ikinci bölümü: E-NMOS, D-NMOS ve PMOS yapıları, çalışma bölgeleri ve akım ifadeleri, eşik gerilimi ve gövde etkisi, MOS kapasiteleri, parametre ölçümü, n-kuyulu CMOS prosesi, MOSIS lambda serim kuralları, NMOS ve CMOS eviricilerin lojik seviye, eşik, gecikme ve güç bağıntıları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 2 – MOS Tümdevreler, CMOS Prosesi ve Serim Kuralları (Ayten Kuntman)">
+<meta property="og:description" content="Prof. Dr. Ayten Kuntman&#x27;ın VLSI tasarımı notlarının ikinci bölümü: E-NMOS, D-NMOS ve PMOS yapıları, çalışma bölgeleri ve akım ifadeleri, eşik gerilimi ve gövde etkisi, MOS kapasiteleri, parametre ölçümü, n-kuyulu CMOS prosesi, MOSIS lambda serim kuralları, NMOS ve CMOS eviricilerin lojik seviye, eşik, gecikme ve güç bağıntıları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 2 – MOS Tümdevreler, CMOS Prosesi ve Serim Kuralları (Ayten Kuntman)", "description": "Prof. Dr. Ayten Kuntman'ın VLSI tasarımı notlarının ikinci bölümü: E-NMOS, D-NMOS ve PMOS yapıları, çalışma bölgeleri ve akım ifadeleri, eşik gerilimi ve gövde etkisi, MOS kapasiteleri, parametre ölçümü, n-kuyulu CMOS prosesi, MOSIS lambda serim kuralları, NMOS ve CMOS eviricilerin lojik seviye, eşik, gecikme ve güç bağıntıları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "VLSI_TASARIMI_A_KUNTMAN_2_MOS_Tumdevreler_s26-75.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/VLSI_TASARIMI_A_KUNTMAN_2_MOS_Tumdevreler_s26-75.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 2 – MOS Tümdevreler, CMOS Prosesi ve Serim Kuralları (Ayten Kuntman)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.04.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#5-mos-tumdevreler">5. MOS tümdevreler</a></li><li><a href="#5-1-temel-mos-yapilari">5.1. Temel MOS yapıları</a></li><li><a href="#5-2-mos-tumdevrelerin-temel-elektriksel-ozellikleri">5.2. MOS tümdevrelerin temel elektriksel özellikleri</a></li><li><a href="#5-3-mos-tranzistorlerde-model-parametreleri">5.3. MOS tranzistörlerde model parametreleri</a></li><li><a href="#5-4-mos-kapasiteler">5.4. MOS kapasiteler</a></li><li><a href="#5-5-parametrelerin-olculmesi">5.5. Parametrelerin ölçülmesi</a></li><li><a href="#5-6-cmos-teknolojisi-n-kuyulu-cmos-prosesi">5.6. CMOS teknolojisi: n-kuyulu CMOS prosesi</a></li><li><a href="#6-serim-tasarim-kurallari">6. Serim tasarım kuralları</a></li><li><a href="#6-1-full-custom-maske-serim-kurallari">6.1. "Full-custom" maske serim kuralları</a></li><li><a href="#6-2-cmos-evirici-serim-tasarimi">6.2. CMOS evirici serim tasarımı</a></li><li><a href="#6-3-mos-tumdevre-tasarimi">6.3. MOS tümdevre tasarımı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 2 – MOS Tümdevreler, CMOS Prosesi ve Serim Kuralları (Ayten Kuntman)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.04.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM312 Sayısal Elektronik dersinin klasöründe bulunan 158 sayfalık <strong>"VLSI Tasarımı"</strong> ders notunun ikinci bölümüdür (notun 26–75. sayfaları). Belgenin kapağında <em>"Bu notlar Prof. Dr. Ayten Kuntman tarafından 11.03.2009 tarihinde yayınlanan notların yeniden düzenlenmiş halidir"</em> yazıyor; PDF 28 Nisan 2009'da oluşturulmuş. Düzenlemeyi kimin yaptığı ve notun hangi kurumda okutulduğu belgede yazmıyor (Prof. Dr. Ayten Kuntman, İstanbul Teknik Üniversitesi öğretim üyesidir).</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p>Serinin diğer yazıları: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">1) tümdevre üretimi, silisyum ve proses adımları</a> (notun tamamı orada indirilebilir), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">3) bipolar tümdevreler</a>, <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">4) SPICE, serim örnekleri, sorular ve kaynaklar</a>. Bu bölümün metni, formülleri ve tabloları aşağıya aktarıldı (bozuk Türkçe karakterler ve PDF'te dağılmış formüller düzeltildi); şekiller kırpılarak eklendi. Bu bölümün sayfalarından oluşan PDF yazının sonunda indirilebilir.</p>
+<h2 id="5-mos-tumdevreler">5. MOS tümdevreler</h2>
+<p>MOS tümdevre üretiminde temel yapıtaşı MOSFET'lerdir; bu bölümde MOSFET üretim aşamaları ve bunların devre performans karakteristiklerine etkileri anlatılır. MOS (metal-oksit-yarıiletken) yapılar sayısal elektronik devre yapımında çok yaygın kullanılır; avantajları basitlik, ölçekleme kolaylığı, düşük güç harcaması ve yüksek hızdır. MOS'lar üç ana grupta toplanır:</p>
+<ul><li>N-kanallı MOS tranzistörler</li><li>P-kanallı MOS tranzistörler</li><li>CMOS'lar (kendi aralarında n-kuyulu ve p-kuyulu olmak üzere ikiye ayrılır)</li></ul>
+<h2 id="5-1-temel-mos-yapilari">5.1. Temel MOS yapıları</h2>
+<p>N-kanallı MOS tranzistörler <strong>kanal oluşturmalı (E-NMOS)</strong> ve <strong>kanal ayarlamalı (D-NMOS)</strong> olmak üzere ikiye ayrılır. E-NMOS'un eşik gerilimi sıfırdan büyük, D-NMOS'un eşik gerilimi sıfırdan küçüktür.</p>
+<h4 id="kanal-olusturmali-nmos-e-nmos">Kanal oluşturmalı NMOS (E-NMOS)</h4>
+<p>E-NMOS'ta p-tipi bir taban üzerine n-tipi difüzyonla kaynak ve savak bölgeleri oluşturulur. Geçit üzerinde SiO₂ ve polisilisyum geçit elektrodu vardır; kontak ve metal bağlantılarla tranzistör tamamlanır. Başlangıçta kanal yoktur. Geçide kaynağa göre daha pozitif bir gerilim uygulanırsa geçit-taban arasında oluşan elektrik alan nedeniyle elektronlar yukarı çekilir, delikler aşağı itilir ve savak-kaynak arasında bir <strong>n-kanal</strong> oluşur.</p>
+<p><em>Not: Belgede "kaynak (drain) ve savak (source)" yazılmış; doğrusu kaynak = source, savak = drain'dir.</em></p>
+<figure class="yazi-gorsel"><img src="sekil-5-1.jpg" width="688" height="428" loading="lazy" decoding="async" alt="Şekil 5-1: p-Si taban üzerinde n+ kaynak ve savak, oksit ve geçit; V_G &lt; V_T iken kanal yok, kaynak ve savak çevresinde fakirleşmiş bölge"><figcaption>Şekil 5-1: Kanal oluşturmalı N-MOS</figcaption></figure>
+<h4 id="kanal-ayarlamali-nmos-d-nmos">Kanal ayarlamalı NMOS (D-NMOS)</h4>
+<p>D-NMOS'ta eşik gerilimi sıfırdan küçüktür. E-NMOS'tan farklı olarak yapım sırasında geçit bölgesi katkılanmıştır: kaynak-savak arası iyon implantasyonuyla elektronca zenginleştirilir. Böylece geçide gerilim uygulanmadan önce (V_GS = 0'da da) yapıda bir kanal vardır; çalışma sırasında geçide gerilim uygulanarak akım kontrol edilir.</p>
+<figure class="yazi-gorsel"><img src="sekil-5-2.jpg" width="688" height="443" loading="lazy" decoding="async" alt="Şekil 5-2: geçit altında katkılanmış kanal bulunan n-kanallı MOS yapısının düşey kesiti"><figcaption>Şekil 5-2: Kanal ayarlamalı N-MOS</figcaption></figure>
+<h4 id="kanal-olusturmali-pmos-e-pmos">Kanal oluşturmalı PMOS (E-PMOS)</h4>
+<p>P-kanallı MOS'larda n-tipi taban üzerine p-tipi difüzyonla kaynak ve savak bölgeleri oluşturulur. Geçide uygun büyüklükte <strong>negatif</strong> bir gerilim uygulanınca delikler yukarı çekilerek kanal oluşur (Şekil 5-3).</p>
+<h4 id="5-1-2-e-nmos-tranzistorun-calisma-bolgeleri">5.1.2. E-NMOS tranzistörün çalışma bölgeleri</h4>
+<p>MOS tranzistörün doymasız bölge, doymalı bölge ve kısılma olmak üzere üç çalışma durumu vardır (Şekil 5-4):</p>
+<ul><li><strong>a) Kanal oluşumu:</strong> V_GS ≥ V_TO. Uygulanan V_GS eşik gerilimine ulaşınca kanal oluşur ve akım akmaya başlar.</li><li><strong>b) Doymasız bölge:</strong> V_DS ≤ V_GS − V_TO. V_DS artırılırsa savak akımı artar.</li><li><strong>c) Doymalı bölge:</strong> V_DS ≥ V_GS − V_TO. Akımın geçit gerilimiyle kontrol edildiği bölgedir; V_GS arttıkça savak akımı artar. Belli bir değerden sonra kanalın savak ucunda bir kısılma oluşur ve çalışma koşulları değişir.</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-5-4.jpg" width="1376" height="887" loading="lazy" decoding="async" alt="Şekil 5-4: E-NMOS düşey kesitinde a) V_D küçükken oluşan kanal, b) V_D = V_DSsat&#x27;ta kanalın savak ucunda kısılma, c) V_D &gt; V_DSsat&#x27;ta kısılma noktasının kaynağa doğru kayması"><figcaption>Şekil 5-4: Kanal oluşturmalı tranzistörün çalışma bölgeleri</figcaption></figure>
+<h4 id="5-1-3-n-kanalli-mos-tranzistor-uretim-sureci">5.1.3. N-kanallı MOS tranzistör üretim süreci</h4>
+<p>Polisilisyum geçitli n-kanallı MOS tranzistörün üretimi, p-tipi silisyum yüzeyinde 1. maske kullanılarak silisyum dioksit büyütmeyle başlar; buna <strong>alan oksiti</strong> denir. Alan oksiti üzerinde oksit maskesiyle tranzistör yapılacak alan belirlenir ve MOS tranzistörün geçidini oluşturacak yüksek kaliteli ince bir oksit büyütülür. İnce oksidin üzerine polisilisyum büyütülür ve 2. maskeyle polisilisyum geçit elektrodu oluşturulur. Geçit elektrodunun iki yanında katkılamayla n-bölgeleri (kaynak ve savak) oluşturulur. Ardından 3. maskeyle kontak pencereleri açılır; tüm yüzey metalle kaplanır ve 4. maskeyle metal yollar oluşturulur. Uygulanan maskeler:</p>
+<ol><li>Aktif bölge ve ince oksit maskesi (tranzistör alanı)</li><li>Polisilisyum maskesi</li><li>Kontak pencereleri maskesi</li><li>Metal maskesi</li></ol>
+<p>Her maskeleme adımı litografik işlemle gerçekleştirilir.</p>
+<figure class="yazi-gorsel"><img src="sekil-5-5.jpg" width="688" height="719" loading="lazy" decoding="async" alt="Şekil 5-5: soldan maskelerin üstten görünüşü (1.–4. maske), sağda her maske uygulamasından sonra tranzistörün düşey kesiti"><figcaption>Şekil 5-5: Temel MOS maskeleri ve her maske uygulaması sonucunda tranzistörün düşey kesiti</figcaption></figure>
+<h2 id="5-2-mos-tumdevrelerin-temel-elektriksel-ozellikleri">5.2. MOS tümdevrelerin temel elektriksel özellikleri</h2>
+<p>Kanal boyu ve kanal genişliği, tranzistörün kırmık üzerinde kapladığı alanı ve savak akımını belirleyen önemli büyüklüklerdir.</p>
+<ul><li><strong>Kanal boyu (L):</strong> Kanalın, kaynak-savak arasında akan savak akımı doğrultusundaki boyu.</li><li><strong>Kanal genişliği (W):</strong> Kanal boyuna dik uzunluk.</li><li>L × W tranzistörün <strong>etkin kanal alanıdır</strong>.</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-5-6.jpg" width="688" height="443" loading="lazy" decoding="async" alt="Şekil 5-6: p-tipi Si üzerinde n+ kaynak ve savak, silisyum dioksit ve geçit; kanal uzunluğu L ve kanal genişliği W"><figcaption>Şekil 5-6: n-kanallı MOSFET</figcaption></figure>
+<p>Akımın oluşması, geçide uygulanan gerilim sonucu kanala yük indüklenmesine bağlıdır. Kanal boyu, elektrik alan şiddeti ve elektronların geçiş süresi elemanın hızını ve akımını etkiler. Akım, birim zamanda kanalda indüklenen yük miktarıdır:</p>
+<p>I_DS = Q_C / τ   (kanala indüklenmiş yükler / elektronların geçiş süresi)   (5-1)</p>
+<p>τ = L / v   (5-2),   v = µ·E_DS   (5-3),   E_DS = V_DS / L   (5-4)</p>
+<p>τ = L² / (µ·V_DS)   (5-5)</p>
+<p>Burada v hız, L kanal boyu, E_DS elektrik alan şiddetidir.</p>
+<h4 id="5-2-1-n-kanalli-mos-tranzistorun-akim-ifadesinin-cikarilisi">5.2.1. N-kanallı MOS tranzistörün akım ifadesinin çıkarılışı</h4>
+<ul><li><strong>Kesim bölgesi:</strong> V_GS − V_TO &lt; 0; kaynak-savak arasında kanal yoktur, akım akmaz.</li><li><strong>Doymasız bölge:</strong> V_GS ≥ V_TO ve V_DS &lt; V_GS − V_TO; akım kaynak-savak gerilimiyle belirlenir.</li><li><strong>Doymalı bölge:</strong> V_DS ≥ V_GS − V_TO &gt; 0; akım geçit-kaynak gerilimiyle belirlenir. Doyma sınırı V_DS = V_GS − V_TO'dur.</li></ul>
+<p>Geçitte indüklenen yükler, E_g geçitteki elektrik alan, ε_r(SiO₂) SiO₂'nin bağıl dielektrik sabiti, ε₀ boşluğun dielektrik sabiti ve WL etkin tranzistör alanı olmak üzere:</p>
+<p>Q_C = E_g·ε_r(SiO₂)·ε₀·W·L   (5-6)</p>
+<p>Doymasız bölgede geçitteki ortalama elektrik alan:</p>
+<p>E_g = [(V_GS − V_TO) − V_DS/2] / t_ox   (5-7)</p>
+<p>Q_C = (W·L·ε_r(SiO₂)·ε₀ / t_ox)·[(V_GS − V_TO) − V_DS/2]   (5-8)</p>
+<p>I_DS = (ε_r(SiO₂)·ε₀·µ / t_ox)·(W/L)·[(V_GS − V_TO) − V_DS/2]·V_DS   (5-9)</p>
+<p><strong>I_DS = K·(W/L)·[(V_GS − V_TO)·V_DS − V_DS²/2]</strong>   (5-10) — doymasız bölge akım bağıntısı</p>
+<p>Burada K, SPICE proses parametresidir:</p>
+<p>K = ε_r(SiO₂)·ε₀·µ / t_ox   (5-11)</p>
+<p>Aynı ifade geçit bölgesi kapasitesi cinsinden de yazılabilir:</p>
+<p>C_g = ε_r(SiO₂)·ε₀·W·L / t_ox   (geçit bölgesi kapasitesi)   (5-12)</p>
+<p>I_DS = (C_g·µ / L²)·[(V_GS − V_TO)·V_DS − V_DS²/2]   (5-13)</p>
+<p>β = µ·C_ox·(W/L)   (5-14),   C_ox = ε_ox / t_ox = ε_r(SiO₂)·ε₀ / t_ox   (birim alan başına geçit kapasitesi)   (5-15)</p>
+<p><strong>I_DS = β·[V_GS − V_TO − V_DS/2]·V_DS</strong>   (5-16)</p>
+<p>Doymalı bölgede akım ifadeleri K, C_g ve β cinsinden:</p>
+<p>I_DS = K·(W/L)·(V_GS − V_TO)²/2   (5-17)</p>
+<p>I_DS = (C_g·µ / 2L²)·(V_GS − V_TO)²   (5-18)</p>
+<p><strong>I_DS = (β/2)·(V_GS − V_TO)²</strong>   (5-19)</p>
+<p>Kaynak-savak gerilimiyle savak akımının değişimi tranzistörün <strong>akım-gerilim karakteristiği</strong> (Şekil 5-7), geçit gerilimiyle savak akımının değişimi ise <strong>transfer karakteristiği</strong> (Şekil 5-8) olarak tanımlanır.</p>
+<figure class="yazi-gorsel"><img src="sekil-5-7-5-8.jpg" width="624" height="872" loading="lazy" decoding="async" alt="Şekil 5-7: farklı V_GS değerleri için savak akımı–savak gerilimi eğrileri, lineer bölge ve doyma bölgesi; Şekil 5-8: ölçüm devresi ve savak akımının geçit gerilimiyle değişimi"><figcaption>Şekil 5-7 ve 5-8: n-kanallı MOS tranzistörün akım-gerilim ve transfer karakteristikleri</figcaption></figure>
+<h4 id="p-kanalli-mos-tranzistorun-akim-ifadeleri">p-kanallı MOS tranzistörün akım ifadeleri</h4>
+<p>PMOS'un çalışma bölgeleri NMOS'unkilere benzer, ters işaretlidir (V_DS &lt; 0; V_TO &lt; 0):</p>
+<ol><li>Kesimde: V_GS − V_TO &gt; 0, I_D = 0.</li><li>Doymasız bölgede (V_DS &gt; V_GS − V_TO): I_DS = β·[V_GS − V_TO − V_DS/2]·V_DS   (5-20)</li><li>Doymalı bölgede (V_DS &lt; V_GS − V_TO &lt; 0): I_DS = (β/2)·(V_GS − V_TO)²   (5-21)</li></ol>
+<h2 id="5-3-mos-tranzistorlerde-model-parametreleri">5.3. MOS tranzistörlerde model parametreleri</h2>
+<p>MOS tranzistörde en temel model parametreleri: eşik gerilimi, gövde parametresi, kanal boyu modülasyon parametresi, etkin kanal boyu, geçiş iletkenliği, anahtarlama hızı, çıkış iletkenliği ve MOS kapasitelerdir.</p>
+<h4 id="5-3-1-esik-gerilimi-v-to">5.3.1. Eşik gerilimi (V_TO)</h4>
+<p>Eşik gerilimi, tranzistörden akım akması için geçide uygulanması gereken minimum gerilimdir. Dört fiziksel bileşeni vardır:</p>
+<ul><li>a) Geçit ile kanal arasındaki iş fonksiyonu farkı</li><li>b) Yüzey potansiyelinin etkisi</li><li>c) Boşaltılmış (fakirleşmiş) bölge yüklerinin etkisi</li><li>d) Geçit oksidi ve Si–SiO₂ arayüzey yükleri</li></ul>
+<p><strong>V_TO = Φ_GC − 2Φ_F − Q_BO/C_ox − Q_ox/C_ox</strong>   (5-22)</p>
+<p>Burada Φ_F tabanın Fermi potansiyeli (NMOS'ta negatif, PMOS'ta pozitif), Q_BO gövdenin birim alan başına fakirleşmiş bölge yükü (NMOS'ta negatif, PMOS'ta pozitif), Q_ox Si–SiO₂ arayüzey yükleri, C_ox birim alan başına oksit kapasitesidir. Analiz n-kanal için yapılır; küçük değişikliklerle p-kanal için de geçerlidir.</p>
+<p>İş fonksiyonu farkı geçit malzemesine bağlıdır:</p>
+<ul><li>Metal geçit için: Φ_GC = Φ_F(taban) − Φ_M</li><li>Polisilisyum geçit için: Φ_GC = Φ_F(taban) − Φ_F(geçit)</li></ul>
+<p>Yüzey potansiyeli −2Φ_F kadar değişir. Fermi potansiyeli:</p>
+<ul><li>p-tipi yarıiletken için: Φ_F = (kT/q)·ln(n_i/N_A)   (5-23)</li><li>n-tipi yarıiletken için: Φ_F = (kT/q)·ln(N_D/n_i)   (5-24)</li></ul>
+<p>Kaynak-taban gerilimi sıfırken boşaltılmış bölge yük yoğunluğu:</p>
+<p>Q_BO = −√(2q·N_A·ε_Si·|−2Φ_F|)   (5-25)</p>
+<p>Kaynak-taban gerilimi V_SB varken:</p>
+<p>Q_B = −√(2q·N_A·ε_Si·|−2Φ_F + V_SB|)   (5-26)</p>
+<p>Birim alan başına oksit kapasitesi: C_ox = ε_ox / t_ox   (5-27)</p>
+<p>V_SB etkisini içeren genelleştirilmiş eşik gerilimi:</p>
+<p>V_T = Φ_GC − 2Φ_F − Q_B/C_ox − Q_ox/C_ox   (5-28)</p>
+<p>Belgede arayüzey yükü için Q_ox = (1,5 – 8)×10⁻⁸ değer aralığı verilmiş (birim belgede "c²/m²" olarak yazılmış; yük yoğunluğu birimi C/cm² olmalıdır).</p>
+<p>V_T = V_TO − (Q_B − Q_BO)/C_ox   (5-29)</p>
+<p>−(Q_B − Q_BO)/C_ox = (√(2q·N_A·ε_Si) / C_ox)·(√|−2Φ_F + V_SB| − √|−2Φ_F|)   (5-30)</p>
+<p><strong>V_T = V_TO + γ·(√|−2Φ_F + V_SB| − √|2Φ_F|)</strong>   (5-31)</p>
+<p>γ = √(2q·N_A·ε_Si) / C_ox   (gövde etkisi katsayısı)   (5-32)</p>
+<p>Bu ifade hem n-kanallı hem p-kanallı tranzistörlerde kullanılabilir; yalnız terimlerin işaretlerine dikkat etmek gerekir. Φ_F NMOS'ta negatif, PMOS'ta pozitif; Q_BO ve Q_B NMOS'ta negatif, PMOS'ta pozitif; γ NMOS'ta pozitif, PMOS'ta negatif; V_SB NMOS'ta pozitif, PMOS'ta negatiftir.</p>
+<h4 id="5-3-2-govde-parametresi-taban-kutuplama-katsayisi">5.3.2. Gövde parametresi (taban kutuplama katsayısı)</h4>
+<p>γ = √(2q·N_A·ε_Si) / C_ox   (5-33)</p>
+<p>Burada q elektron yükü, N_A katkı yoğunluğu, ε_Si silisyumun dielektrik sabiti, C_ox birim alan başına oksit kapasitesidir.</p>
+<h4 id="5-3-3-mos-tranzistorun-etkin-kanal-boyu">5.3.3. MOS tranzistörün etkin kanal boyu</h4>
+<p>Tasarımda çizilen kanal boyu L'dir. Kaynak-savak difüzyonu sırasında istenmeyen yan difüzyonlar olacağından kanal boyu 2·L_yan dif. kadar kısalır; buna <strong>metalurjik kanal boyu</strong> denir ve lineer bölgedeki hesaplarda kullanılır:</p>
+<p>L_met = L_tasarlanan − 2·L_yan dif.</p>
+<p>Doymalı çalışmada kanalın savak ucunda X_D kadar fakirleşmiş bölge oluşur ve kanal X_D kadar daha kısalır. Bu durumdaki kanal boyu <strong>efektif (etkin) kanal boyudur</strong>:</p>
+<p>L_eff = L_tasarlanan − 2·L_yan dif. − X_D   (5-34)</p>
+<p>Tranzistörün kazancı efektif kanal boyuna göre değişir. Kanal kısalması:</p>
+<p>X_D = √(2ε·(V_DS − V_DSsat) / (q·N_A))   (5-35),   V_DSsat = √(2I_D/β)   (5-36)</p>
+<h4 id="5-3-4-gecis-iletkenligi-g-m">5.3.4. Geçiş iletkenliği (g_m)</h4>
+<p>Geçiş iletkenliği giriş gerilimiyle çıkış akımı arasındaki ilişkiyi verir:</p>
+<p>g_m = ∂I_DS/∂V_GS   (V_DS = sabit)   (5-37)</p>
+<p>Yükler cinsinden: τ = Q_C/I_DS, ∂I_DS = ∂Q_C/τ_SD, τ_SD = L²/(µ·V_DS) (5-40). Yüklerdeki değişim δQ_C = C_g·δV_GS olduğundan:</p>
+<p>∂I_DS = C_g·∂V_GS·µ·V_DS / L²   (5-42)</p>
+<p>g_m = ∂I_DS/∂V_GS = C_g·µ·V_DS / L²   (5-43)</p>
+<p>Doymalı çalışmada:</p>
+<p><strong>g_m = (µ·ε_r(SiO₂)·ε₀ / t_ox)·(W/L_eff)·(V_GS − V_TO)</strong>   (5-44)</p>
+<h4 id="5-3-5-anahtarlama-hizi-calisma-frekansi">5.3.5. Anahtarlama hızı (çalışma frekansı)</h4>
+<p>ω₀ = g_m / C_g = (µ/L²)·(V_GS − V_TO)   (5-45)</p>
+<h4 id="5-3-6-cikis-iletkenligi">5.3.6. Çıkış iletkenliği</h4>
+<p>Kaynak-savak gerilimindeki küçük değişimler için kanal kısalması sonucu akımdaki değişimi ifade eder; tersi çıkış direncidir:</p>
+<p>g_o = (I_D / L_eff)·(∂X_D/∂V_DS),   R_O = 1/g_o   (5-46)</p>
+<h2 id="5-4-mos-kapasiteler">5.4. MOS kapasiteler</h2>
+<p>MOSFET'in zaman alanı cevabı için kapasitelerin tipi ve büyüklüğü sayısal devrelerde önemlidir. Yapıda parazitik olarak genelde <strong>oksit kapasitesi</strong> ve <strong>jonksiyon kapasitesi</strong> olmak üzere iki tür kapasite oluşur.</p>
+<figure class="yazi-gorsel"><img src="sekil-5-9.jpg" width="719" height="422" loading="lazy" decoding="async" alt="Şekil 5-9: MOS yapısının kesitinde C_gs, C_gd, C_sb, C_db ile kaynak ve savak yan duvar kapasiteleri C_gsw, C_dsw"><figcaption>Şekil 5-9: Kapasitelerin fiziksel gösterimi</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-5-10.jpg" width="719" height="437" loading="lazy" decoding="async" alt="Şekil 5-10: geçit, savak, kaynak ve taban düğümleri arasında C_gd, C_gs, C_gb, C_db, C_sb kapasiteleri, g_m·V_gs ve g_mb·V_sb bağımlı akım kaynakları ve r_o çıkış direnci"><figcaption>Şekil 5-10: Küçük işaret eşdeğeri</figcaption></figure>
+<h4 id="5-4-1-oksit-kapasitesi">5.4.1. Oksit kapasitesi</h4>
+<p>Parazitik oksit kapasiteleri geçit-taban (C_gb), geçit-savak (C_gd) ve geçit-kaynak (C_gs) kapasiteleridir; <strong>bindirme kapasiteleri</strong> olarak da bilinirler ve paralel plakalı kapasite şeklinde oluşurlar. Geçit bölgesinin birim alan başına oksit kapasitesi:</p>
+<p>C_ox = ε_ox / t_ox = ε_r(SiO₂)·ε₀ / t_ox   (5-47)</p>
+<p>Çalışma bölgelerine göre değerleri (L_D: bindirme/yan difüzyon uzunluğu):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kapasite</th><th scope="col">Kesim</th><th scope="col">Lineer bölge</th><th scope="col">Doyma bölgesi</th></tr></thead><tbody><tr><th scope="row">C_gb (toplam)</th><td>C_ox·W·L</td><td>0</td><td>0</td></tr><tr><th scope="row">C_gd (toplam)</th><td>C_ox·W·L_D</td><td>½·C_ox·W·L + C_ox·W·L_D</td><td>C_ox·W·L_D</td></tr><tr><th scope="row">C_gs (toplam)</th><td>C_ox·W·L_D</td><td>½·C_ox·W·L + C_ox·W·L_D</td><td>⅔·C_ox·W·L + C_ox·W·L_D</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="sekil-5-11.jpg" width="688" height="541" loading="lazy" decoding="async" alt="Şekil 5-11: normalize kapasitelerin (C/C_ox) V_GS ile değişimi; kesimde C_gb = 1, doymada C_gs = 2/3, lineer bölgede C_gs ve C_gd = 1/2"><figcaption>Şekil 5-11: Oksit kapasitelerinin geçit-kaynak gerilimine göre değişimi</figcaption></figure>
+<h4 id="5-4-2-jonksiyon-kapasiteleri">5.4.2. Jonksiyon kapasiteleri</h4>
+<p>Uygulanan gerilime bağlı olarak kaynak-taban ve savak-taban jonksiyonlarında kapasite oluşur. Her pn jonksiyonu bir kapasite gibi davranabilir: fakirleşmiş bölge dielektrik gibi davranır. Ters öngerilimli keskin (sert) geçişli bir pn jonksiyonunda önce fakirleşmiş bölge kalınlığı bulunur:</p>
+<p>x_d = √((2ε_Si/q)·((N_A + N_D)/(N_A·N_D))·(Φ₀ − V))   (5-48)</p>
+<p>Belgede bu ifade (Φ₀ − V_R) ile yazılmış ve V_R "ters öngerilim" olarak tanımlanmış.</p>
+<p><em>Not: V_R ters öngerilimin büyüklüğü (pozitif sayı) ise ifade (Φ₀ + V_R) olmalıdır; (Φ₀ − V) yazımı, V'nin jonksiyona uygulanan işaretli gerilim (ters kutuplamada negatif) olduğu durumda doğrudur. Aşağıdaki (5-50)–(5-53) bu ikinci yazımı kullanır.</em></p>
+<p>Jonksiyonun yerleşik (gövde) potansiyeli:</p>
+<p>Φ₀ = (kT/q)·ln(N_A·N_D / n_i²)   (5-49)</p>
+<p>Boşaltılmış bölgede depolanan yük (A eklem alanı):</p>
+<p>Q_j = A·q·(N_A·N_D/(N_A + N_D))·x_d = A·√(2ε_Si·q·(N_A·N_D/(N_A + N_D))·(Φ₀ − V))   (5-50)</p>
+<p>Jonksiyon kapasitesi C_j = dQ_j/dV (5-51) ile hesaplanır:</p>
+<p>C_j(V) = A·√((ε_Si·q/2)·(N_A·N_D/(N_A + N_D))·1/(Φ₀ − V))   (5-52)</p>
+<p>Daha genel hâlde, m derecelendirme katsayısı (keskin eklem için 1/2, lineer eklem için 1/3) olmak üzere:</p>
+<p><strong>C_j(V) = A·C_j0 / (1 − V/Φ₀)^m</strong>   (5-53)</p>
+<p>C_j0 = √((ε_Si·q/2)·(N_A·N_D/(N_A + N_D))·1/Φ₀)   (birim alan başına öngerilimsiz jonksiyon kapasitesi)   (5-54)</p>
+<h2 id="5-5-parametrelerin-olculmesi">5.5. Parametrelerin ölçülmesi</h2>
+<p>Daha önce verilen akım bağıntılarından (5-16, 5-19, 5-20, 5-21) yararlanılarak eşik gerilimi V_TO, gövde etkisi katsayısı γ, kanal boyu modülasyon katsayısı λ ve geçiş iletkenliği parametreleri deneysel olarak çıkarılabilir:</p>
+<p>β_n = µ_n·C_ox·(W/L)   (5-55),   β_p = µ_p·C_ox·(W/L)   (5-56)</p>
+<p>n-kanallı MOSFET için β_n, V_TO ve γ'nın çıkarılması Şekil 5-13'te görülür. V_SB sabit tutularak V_GS'nin farklı değerleri için akım ölçülür; savak ve geçit aynı potansiyeldedir (V_DS = V_GS), dolayısıyla V_DS &gt; V_GS − V_T ve tranzistör doymada çalışır. Kanal boyu modülasyonu ihmal edilirse:</p>
+<p>I_D(sat) = (β_n/2)·(V_GS − V_T)²   (5-57)</p>
+<p>√I_D = √(β_n/2)·(V_GS − V_T)   (5-58)</p>
+<p>√I_D, V_GS'ye karşı çizilirse her V_SB için bir doğru elde edilir. V_SB = 0 doğrusunun gerilim eksenini kestiği nokta V_TO'yu, V_SB &gt; 0 doğrularının kestiği noktalar V_T'yi verir. Her doğrunun eğimi √(β_n/2)'ye eşittir; β_n bu eğimden kolayca bulunur. γ ise:</p>
+<p>γ = (V_T(V_SB) − V_TO) / (√(2|φ_F| + V_SB) − √(2|φ_F|))   (5-59)</p>
+<p><em>Not: Belgede ölçülen akım "geçit akımı" olarak geçiyor; MOSFET'te geçit akımı yoktur, ölçülen ve karekökü alınan <strong>savak akımıdır</strong> (I_D).</em></p>
+<figure class="yazi-gorsel"><img src="sekil-5-13.jpg" width="703" height="489" loading="lazy" decoding="async" alt="Şekil 5-13 (b): V_SB = 0 ve V_SB &gt; 0 için √I_D – V_GS doğruları; eksen kesişimleri V_T0 ve V_T1, eğim √(β/2)"><figcaption>Şekil 5-13: β_n, V_TO ve γ parametrelerinin ölçümü</figcaption></figure>
+<p>Kanal boyu modülasyon katsayısı λ farklı bir test devresiyle belirlenir (Şekil 5-14). V_GS = V_TO + 1'e ayarlanır, V_DS yeterince büyük seçilir (V_DS &gt; V_GS − V_TO) ve tranzistör doymada çalışır. V_DS1 ve V_DS2 gibi iki farklı değer için savak akımı ölçülür:</p>
+<p>I_D(doyma) = (β_n/2)·(V_GS − V_TO)²·(1 + λ·V_DS)   (5-60)</p>
+<p>I_D2 / I_D1 = (1 + λ·V_DS2) / (1 + λ·V_DS1)   (5-61)</p>
+<p>Doyma bölgesindeki I_D–V_DS eğrisinin eğimi λ·β_n/2'dir (V_GS − V_TO = 1 V için). Böylece eşik gerilimi, gövde parametresi, kanal boyu modülasyon parametresi ve geçiş iletkenliği parametresi tranzistör ölçümlerinden bulunabilir.</p>
+<figure class="yazi-gorsel"><img src="sekil-5-14.jpg" width="719" height="504" loading="lazy" decoding="async" alt="Şekil 5-14 (b): V_GS = V_T0 + 1 için doymada I_D – V_DS eğrisi; V_DS1 ve V_DS2&#x27;de ölçülen I_D1 ve I_D2"><figcaption>Şekil 5-14: Kanal boyu modülasyon katsayısı λ'nın ölçülmesi</figcaption></figure>
+<h2 id="5-6-cmos-teknolojisi-n-kuyulu-cmos-prosesi">5.6. CMOS teknolojisi: n-kuyulu CMOS prosesi</h2>
+<p>n-kuyulu CMOS için taban olarak katkı yoğunluğu 10¹⁵ atom/cm³ civarında p-tipi silisyum kullanılır. Difüzyona karşı maske görevi görecek oksit büyütülür, n-kuyuyu oluşturacak 1. maske uygulanır ve litografik işlemle n-kuyu açılır. Ardından nMOS ve pMOS tranzistörlerin aktif bölgeleri tanımlanır. CMOS evirici en az 7 maskeyle üretilir:</p>
+<ol><li>n-kuyu oluşturulması (p taban kullanıldığı varsayılıyor)</li><li>n-kanallı tranzistör alanının açılması ve geçitlerin oluşturulması</li><li>NMOS'un aktif bölgelerinin oluşturulması</li><li>PMOS'un aktif bölgelerinin oluşturulması</li><li>Kontak alanlarının belirlenmesi</li><li>Metal bağlantılar için Al yoğuşturma ve şekillendirme</li><li>Bağlantı pabuçlarının oluşturulması ve pasivasyon</li></ol>
+<p>Şekil 5-16'daki adımlar:</p>
+<ul><li><strong>(a.1)</strong> Alan oksiti büyütülür; 1. maskeyle n-kuyusu oluşturulur; geçit oksidi büyütülür. Geçit oksidinin kalınlığı ve kalitesi, MOS tranzistörlerin karakteristiğini ve ömrünü etkileyen iki önemli üretim parametresidir.</li><li><strong>(a.2)</strong> 2. maskeyle n-kanallı tranzistör alanı belirlenir.</li><li><strong>(b)</strong> Geçitler oluşturulur: polisilisyum tabakası kimyasal buhar depolamayla depolanır ve geçit maskesiyle plazma aşındırma yapılarak şekillendirilir. Bu polisilisyumlar nMOS ve pMOS tranzistörlerin geçitleridir.</li><li><strong>(c)</strong> p⁺ bölgeler oluşturulur; taban ve n-kuyusundaki omik bağlantılar da bu adımda yapılır.</li><li><strong>(d)</strong> n⁺ bölgeler oluşturulur.</li><li><strong>(e)</strong> Kontaklar açılır: önce CVD ile yalıtkan SiO₂ tabakası oluşturulur, sonra kontaklar tanımlanıp aşındırılarak silisyum ya da polisilisyum pencereleri açılır.</li><li><strong>(f)</strong> Devre bağlantıları için kırmık üzerine metal buharlaştırılır ve metal yollar maskesiyle şekillendirilir.</li><li><strong>(g)</strong> n-kuyusu içindeki pMOS ve dışındaki nMOS tranzistörler, polisilisyum ve metal bağlantılarla tamamlanmış serim ve düşey kesit. Son adım koruma amaçlı pasivasyondur.</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-5-16-a-c.jpg" width="1144" height="1622" loading="lazy" decoding="async" alt="Şekil 5-16 (a.1)–(c): her adımda üstte serim maskesi (vurgulu katman sarı), altta üç boyutlu kesit; n-kuyusu, alan oksiti, polisilisyum geçitler ve p+ bölgeler"><figcaption>Şekil 5-16 (a.1), (a.2), (b), (c): CMOS evirici üretim aşamaları</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-5-16-d-g.jpg" width="1144" height="1622" loading="lazy" decoding="async" alt="Şekil 5-16 (d)–(g): n+ bölgeler, kontak pencereleri, metal yollar ve tamamlanmış CMOS evirici (giriş, çıkış, GND, VDD; nMOS ve n-kuyusu içinde pMOS)"><figcaption>Şekil 5-16 (d), (e), (f), (g): CMOS evirici üretim aşamaları</figcaption></figure>
+<h2 id="6-serim-tasarim-kurallari">6. Serim tasarım kuralları</h2>
+<p>Herhangi bir devrenin fiziksel maske serimi, bazı geometrik kuralları veya sınırlamaları sağlayan özel işlemlerle yapılır; bunlara <strong>serim (layout) tasarım kuralları</strong> denir. Kurallar, kırmık üzerindeki metal veya polisilisyum bağlantıların izin verilen minimum genişlikte, elemanların minimum boyutlarda ve iki eleman arasındaki uzaklığın izin verilen minimum değerde olmasını sağlar. Örneğin dar bir metal yol uygun olmayan bir teknolojiyle yapılırsa üretim sırasında veya sonrasında kırılarak istenmeyen açık devreler oluşturabilir; iki metal yol birbirine çok yakınsa istenmeyen kısa devreler olabilir. Tasarım kurallarının amacı, en küçük silisyum alanını kullanırken yüksek güvenilirlikli ve kaliteli devreler yapmaktır. Kurallar doğru ve yanlış tasarım arasında kesin bir sınır vermez; ama üretim başarısını ve kaliteyi genellikle önemli ölçüde artırır.</p>
+<p>Boyutlandırmada iki kural kullanılır:</p>
+<ul><li><strong>Mikron kuralı:</strong> Minimum eleman boyutları ve elemanlar arasındaki uzaklıklar kesin mikron değerleriyle belirtilir.</li><li><strong>Lambda kuralı:</strong> Serim kuralları λ parametresinin katlarıyla belirlenir; böylece lineer orantılı ölçekleme yapılabilir.</li></ul>
+<p>Lambda tabanlı kurallar mikron tabanlı kuralları basitleştirmek ve ölçeklemeyi kolaylaştırmak için tasarlanmıştır; ancak bazı mikron altı CMOS uygulamalarında tasarım kuralları lineer ölçeklemeye uymaz, bu nedenle orada büyük dikkatle belirlenmelidir.</p>
+<p><strong>Tablo 6-1: MOSIS (MOS Implementation System) CMOS prosesi için lambda tabanlı serim tasarım kuralları</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kural</th><th scope="col">Tanımlama</th><th scope="col">λ kuralı</th></tr></thead><tbody><tr><th scope="row">R1</th><td>Minimum aktif alan genişliği</td><td>3λ</td></tr><tr><th scope="row">R2</th><td>Minimum aktif alan boşluğu</td><td>3λ</td></tr><tr><th scope="row">R3</th><td>Minimum poli genişliği</td><td>2λ</td></tr><tr><th scope="row">R4</th><td>Minimum poli boşluğu</td><td>2λ</td></tr><tr><th scope="row">R5</th><td>Aktif alandaki polinin minimum geçit açıklığı</td><td>2λ</td></tr><tr><th scope="row">R6</th><td>Minimum poli-aktif kenar boşluğu (poli aktif alanın dışında)</td><td>1λ</td></tr><tr><th scope="row">R7</th><td>Minimum poli-aktif kenar boşluğu (poli aktif alanın içinde)</td><td>3λ</td></tr><tr><th scope="row">R8</th><td>Minimum metal genişliği</td><td>3λ</td></tr><tr><th scope="row">R9</th><td>Minimum metal boşluğu</td><td>3λ</td></tr><tr><th scope="row">R10</th><td>Poli kontak büyüklüğü</td><td>2λ</td></tr><tr><th scope="row">R11</th><td>Minimum poli kontak boşluğu</td><td>2λ</td></tr><tr><th scope="row">R12</th><td>Minimum poli kontak–poli kenar boşluğu</td><td>1λ</td></tr><tr><th scope="row">R13</th><td>Minimum poli kontak–metal kenar boşluğu</td><td>1λ</td></tr><tr><th scope="row">R14</th><td>Minimum poli kontak–aktif kenar boşluğu</td><td>3λ</td></tr><tr><th scope="row">R15</th><td>Aktif kontak büyüklüğü</td><td>2λ</td></tr><tr><th scope="row">R16</th><td>Minimum aktif kontak boşluğu (aynı aktif bölgede)</td><td>2λ</td></tr><tr><th scope="row">R17</th><td>Minimum aktif kontak–aktif kenar boşluğu</td><td>1λ</td></tr><tr><th scope="row">R18</th><td>Minimum aktif kontak–metal kenar boşluğu</td><td>1λ</td></tr><tr><th scope="row">R19</th><td>Minimum aktif kontak–poli kenar boşluğu</td><td>3λ</td></tr><tr><th scope="row">R20</th><td>Minimum aktif kontak boşluğu (farklı aktif bölgelerde)</td><td>6λ</td></tr></tbody></table></div>
+<p>R1–R2 aktif alan, R3–R7 polisilisyum, R8–R9 metal, R10–R20 kontak kurallarıdır.</p>
+<p><em>Not: Belgede R20 "Minimum poli kontak boşluğu (farklı aktif bölgelerde)" diye yazılmış; tanım ve şekil aktif kontaklara işaret ettiği için tabloda "aktif kontak" olarak verildi.</em></p>
+<figure class="yazi-gorsel"><img src="sekil-6-1.jpg" width="719" height="719" loading="lazy" decoding="async" alt="Şekil 6-1: aktif bölge, polisilikon, kontak ve metal katmanlarıyla çizilmiş iki tranzistörlü serimde R2–R20 kurallarının gösterildiği ölçüler"><figcaption>Şekil 6-1: MOSIS tasarım kurallarının bir evirici için gösterimi</figcaption></figure>
+<h2 id="6-1-full-custom-maske-serim-kurallari">6.1. "Full-custom" maske serim kuralları</h2>
+<p>Fiziksel serim ve devre performansı birbirine sıkı sıkıya bağlıdır: fiziksel yapı doğrudan tranzistörlerin geçiş iletkenliğini, parazitik kapasite ve dirençleri ve kullanılan silisyum alanını belirler. Öte yandan lojik kapıların ayrıntılı maske serimi zaman alır. CMOS lojik kapıların fiziksel (maske serimi) tasarımı, devre topolojisi (istenen lojik fonksiyon için) ve tranzistörlerin başlangıç boyutları (istenen performans için) ile başlayan yinelemeli bir işlemdir. Bu noktada tasarımcı, çıkıştaki toplam parazitik yükü yalnızca çıkıştaki eleman sayısı ve tahmini bağlantı uzunluklarına göre kestirebilir. Lojik kapı 4–6 tranzistörden fazlasını içeriyorsa topolojik çizim ve <strong>Euler yolu yöntemi</strong>, tranzistörlerin en uygun sıralamasını bulmaya yardımcı olur; bu adımda basit bir <strong>stick diyagramı</strong> ve kontak yerleri çizilebilir.</p>
+<p>Gerçeklenebilir topoloji bulunduktan sonra maske katmanları serim editörüyle tasarım kurallarına göre çizilir; bu birkaç kez tekrarlanır ama temel topoloji pek değişmez. Biten serimde <strong>DRC</strong> (<em>Design Rule Check</em>) yapılır ve her düğümdeki parazitik kapasiteler belirlenir. <em>Extraction</em> adımının sonucu, otomatik üretilen ayrıntılı bir SPICE dosyasıdır; gerçek devre performansı SPICE ile belirlenir. Benzetim sonuçları istenen performansı sağlamazsa tüm işlemler tekrarlanır. Serim değişiklikleri, parazitik kaynak-savak kapasitelerini ve geçiş iletkenliğini belirlediği için W/L oranı üzerinden yapılır; tasarımcı parazitik etkileri azaltmak için devre topolojisini de değiştirebilir.</p>
+<h2 id="6-2-cmos-evirici-serim-tasarimi">6.2. CMOS evirici serim tasarımı</h2>
+<p>Örnek olarak n-kuyulu CMOS eviricinin maske serimi ele alınır. Önce n-kanallı MOS tranzistör için minimum boyut tasarım kuralları belirlenir (Şekil 6-2). Aktif alan üzerindeki polisilisyum genişliği (geçit) tipik olarak minimum poli genişliği alınır. Buna göre:</p>
+<ul><li><strong>Minimum aktif alan uzunluğu</strong> = (minimum polisilisyum genişliği) + 2 × (minimum poli–kontak boşluğu) + 2 × (minimum kontak genişliği) + 2 × (minimum aktif bölge kenarı–kontak boşluğu)</li><li><strong>Minimum aktif alan genişliği</strong> = (minimum kontak genişliği) + 2 × (minimum kontak–aktif kenar uzaklığı)</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-6-2.jpg" width="688" height="596" loading="lazy" decoding="async" alt="Şekil 6-2: iki kontaklı ve ortasında polisilisyum geçit bulunan aktif alan üzerinde 1–9 numaralı minimum ölçüler"><figcaption>Şekil 6-2: Tranzistör için minimum boyut tasarım kuralları</figcaption></figure>
+<p>Şekil 6-2'deki ölçüler: 1, 3 ve 6: minimum kontak–aktif kenar uzaklığı; 2: minimum kontak genişliği; 4: minimum polisilisyum kenar–kontak uzaklığı; 5: minimum kontak uzunluğu; 7: minimum polisilisyum uzunluğu; 8: minimum aktif alan genişliği; 9: minimum aktif alan uzunluğu.</p>
+<p>n-kuyulu CMOS'ta p-taban üzerinde n-kanallı MOS bulunur; PMOS tranzistör ise p-taban üzerine yapılan <strong>n-kuyu içinde</strong> oluşturulur. n-kuyunun minimum boyutu PMOS aktif alanı ve n-kuyu ile p⁺ bölge arasındaki minimum uzaklıkla belirlenir. NMOS ve PMOS arasındaki mesafe, n⁺ aktif alan ile n-kuyu arasındaki mesafeyle belirlenir (Şekil 6-3). NMOS ve PMOS'un polisilisyum geçitleri genelde birleşiktir; geçit bağlantısı tek bir polisilisyum yolla yapılır. Uzun polisilisyum yollardan, oluşturduğu büyük parazitik kapasite, direnç ve RC gecikmeleri nedeniyle kaçınılır; bağlantılar mümkün olduğunca metalle yapılır, gerektiğinde metal–polisilisyum kontaklarıyla katmanlar birleştirilir.</p>
+<p>Full-custom serim; eleman boyutlandırmada, yerleştirmede ve bağlantılarda istenen değişikliklerin yapılmasına olanak verir. Tasarımcı, silisyum alanının küçüklüğü, gecikmenin azaltılması, giriş/çıkış uçlarının yerleşimi gibi kriterlere göre alternatifler arasından bir maske serimi seçer; olası serim sayısı devrenin karmaşıklığıyla artar.</p>
+<figure class="yazi-gorsel"><img src="sekil-6-3.jpg" width="719" height="948" loading="lazy" decoding="async" alt="Şekil 6-3: n-kuyu içindeki pMOS ile altındaki nMOS arasında 1–4 numaralı minimum uzaklıklar"><figcaption>Şekil 6-3: nMOS ve pMOS arasındaki minimum uzaklık için tasarım kuralları</figcaption></figure>
+<p>Şekil 6-3'te 1 ve 2: n-kuyu ile p⁺ aktif alan arasındaki minimum uzaklık; 3: n⁺ aktif alan ile n-kuyu arasındaki minimum uzaklık; 4: nMOS ve pMOS tranzistör arasındaki minimum uzaklık.</p>
+<h2 id="6-3-mos-tumdevre-tasarimi">6.3. MOS tümdevre tasarımı</h2>
+<p>Sayısal tümdevrelerde tümleştirme MOS ve CMOS teknolojileriyle yapılır; tranzistörün tipi, kanal boyu ve kanal genişliği önemli parametrelerdir. NMOS teknolojisinde lojik kapılarda E-NMOS'lar <strong>sürücü</strong>, D-NMOS'lar <strong>yük</strong> tranzistörü olarak; CMOS teknolojisinde ise E-NMOS'lar sürücü, PMOS'lar yük tranzistörü olarak kullanılır. Teknoloji seçildikten sonra iki temel iş, fonksiyonu gerçekleştirecek devrenin seçimi ve tranzistörlerin boyutlandırılmasıdır; proses parametreleri teknolojiye göre belirlenir.</p>
+<h4 id="6-3-1-eviriciler">6.3.1. Eviriciler</h4>
+<p>Tranzistörlerle oluşturulan lojik kapılar NOT, OR, AND, NOR, NAND olarak sayılabilir; bunların en temeli Y = X̄ (NOT) işlemini yapan <strong>evirici</strong>dir.</p>
+<h4 id="6-3-2-nmos-evirici">6.3.2. NMOS evirici</h4>
+<p>NMOS teknolojisinde E-NMOS sürücü tranzistör (T_D), D-NMOS yük tranzistörüdür (T_L).</p>
+<figure class="yazi-gorsel"><img src="sekil-6-4.jpg" width="697" height="483" loading="lazy" decoding="async" alt="Şekil 6-4: V_DD&#x27;ye bağlı D-NMOS yük tranzistörü TL (geçidi çıkışa bağlı) ve altında giriş X&#x27;in sürdüğü E-NMOS sürücü TD; çıkış Y"><figcaption>Şekil 6-4: Standart NMOS evirici devresi</figcaption></figure>
+<p>Başlangıçta V_i, T_D'nin eşiğine gelene kadar T_D kesimdedir ve V_O = V_DD (lojik 1) olur. V_i arttıkça çıkış düşer ve en düşük çıkış gerilimi V_L (lojik 0) olur. 45° eğimli doğrunun özeğriyi kestiği nokta <strong>V_INV</strong> (evirtim noktası) olarak adlandırılır. V_DD ve V_L, lojik 1 ve lojik 0 durumlarına karşı düşen nominal gerilim seviyeleridir.</p>
+<figure class="yazi-gorsel"><img src="sekil-6-5.jpg" width="697" height="553" loading="lazy" decoding="async" alt="Şekil 6-5: V_H = V_DD = 5 V&#x27;tan V_L&#x27;ye inen geçiş özeğrisi; 45°&#x27;lik doğrunun özeğriyi kestiği V_inv noktası"><figcaption>Şekil 6-5: NMOS eviricinin transfer karakteristiği</figcaption></figure>
+<h5 id="eviricinin-elektriksel-ozellik-yapi-iliskisini-veren-buyuklukler">Eviricinin elektriksel özellik–yapı ilişkisini veren büyüklükler</h5>
+<p>Evirici performansını birinci planda belirleyen beş büyüklük: lojik 0 gerilimi, lojik eşik, aşağı gecikme, yukarı gecikme, güç harcaması.</p>
+<p><strong>1. Lojik 0 gerilimi (V_L):</strong> Girişe V_DD uygulandığında elde edilen çıkış gerilimidir. Bu durumda T_D doymasız, T_L doymalı bölgede çalışır; iki tranzistörün akımları eşitlenirse:</p>
+<p>V_L = [(−V_TL)² / (β_D/β_L)]·1/(V_DD − V_TD)   (6-1)</p>
+<p>V_L = [(−V_TL)² / ((W_D/L_D)/(W_L/L_L))]·1/(V_DD − V_TD)   (6-2)</p>
+<p>β = µ·C_ox·(W/L)   (tranzistöre ait parametre)   (6-3)</p>
+<p><em>Not: Akımlar eşitlenip V_L² terimi ihmal edilirse β_D·(V_DD − V_TD)·V_L = (β_L/2)·V_TL² ve V_L ≈ (−V_TL)²/(2·(β_D/β_L)·(V_DD − V_TD)) bulunur; belgedeki (6-1) ve (6-2)'de paydadaki 2 çarpanı eksik.</em></p>
+<p><strong>2. Lojik eşik (V_INV):</strong> Girişe uygulandığında çıkışı da aynı değere getiren gerilimdir; Şekil 6-5'te orijinden 45° eğimle çizilen doğrunun özeğriyi kestiği nokta. V_i &gt; V_inv için V_o &lt; V_inv, V_i &lt; V_inv için V_o &gt; V_inv olur. Bu yüzden lojik 0 ile lojik 1 arasında sınır kabul edilir; yaklaşık V_DD/2'dir.</p>
+<p>V_inv = V_TD + (−V_TL)/√(β_D/β_L) = V_TD + (−V_TL)/√((W_D/L_D)/(W_L/L_L))   (6-4)</p>
+<p><strong>3. Aşağı gecikme (τ_D):</strong> Çıkışın 1'den 0'a değişmesine kadar geçen süredir; devrenin hızını ve girişteki işaretin frekansını belirlemede gerekir. Aşağı gecikmesi büyük bir sistem hızlı darbelere cevap veremez.</p>
+<p>τ_D = Q_L / I_D   (6-5)</p>
+<p>τ_D = 2C_L·V_DD / (β_D·(V_DD − V_TD)²)   (6-6)</p>
+<p>τ_D = 2C_L·V_DD / (µ·C_ox·(W_D/L_D)·(V_DD − V_TD)²)   (6-7)</p>
+<p>τ_D = (C_L / (C_ox·W_D·L_D))·2L_D²·V_DD / (µ·(V_DD − V_TD)²)   (6-8)</p>
+<p><strong>4. Yukarı gecikme (τ_U):</strong> Çıkışın 0'dan 1'e değişmesine kadar geçen süredir.</p>
+<p>τ_U = Q_L / I_L = C_L·V_DD / ((β_L/2)·(−V_TL)²)   (6-9)</p>
+<p>τ_U = C_L·V_DD / (µ·C_ox·(W_L/2L_L)·(−V_TL)²)   (6-10)</p>
+<p>τ_U = (C_L / (C_ox·W_L·L_L))·2V_DD·L_L² / (µ·(−V_TL)²)   (6-11)</p>
+<p><em>Not: Belgede (6-11)'in paydasında (V_DD − V_TL)² yazılmış; (6-9) ve (6-10)'dan devam edildiğinde doğrusu (−V_TL)²'dir.</em></p>
+<p><strong>5. Güç harcaması:</strong> NMOS eviricide güç, çıkış lojik 0'dayken (her iki tranzistör iletimde) harcanır:</p>
+<p>P = (β_L/2)·(−V_TL)²·V_DD = ½·µ·C_ox·(W_L/L_L)·(−V_TL)²·V_DD</p>
+<p>Tüm bu parametreler birlikte optimize edilir.</p>
+<h4 id="6-3-3-cmos-eviriciler">6.3.3. CMOS eviriciler</h4>
+<p>CMOS teknolojisinde E-NMOS sürücü, PMOS yük tranzistörüdür. Şekil 6-6'daki devrede başlangıçta V_i = 0'da T_L iletimde, T_D kesimdedir ve V_O = V_DD (lojik 1) olur. V_i = V_DD + V_TL olduğunda T_L kesime girer, T_D iletimdedir ve V_O = 0 (lojik 0) olur. Geçiş özeğrisinden V_i = V_DD için V_o = 0, V_i = 0 için V_o = V_DD olduğu görülür.</p>
+<figure class="yazi-gorsel"><img src="sekil-6-6.jpg" width="688" height="440" loading="lazy" decoding="async" alt="Şekil 6-6: V_DD&#x27;ye bağlı pMOS ve toprağa bağlı nMOS; geçitleri birleşik giriş X, savakları birleşik çıkış Y"><figcaption>Şekil 6-6: CMOS evirici devresi</figcaption></figure>
+<p><strong>V_inv = (V_DD + V_TL + √(β_D/β_L)·V_TD) / (√(β_D/β_L) + 1)</strong>   (6-12)</p>
+<figure class="yazi-gorsel"><img src="sekil-6-7.jpg" width="688" height="602" loading="lazy" decoding="async" alt="Şekil 6-7: V_DD = 5 V için CMOS evirici geçiş özeğrisi; bölgeler: NMOS kesimde/PMOS lineer, NMOS doymada/PMOS lineer, ikisi de doymada (V_inv), NMOS lineer/PMOS doymada, NMOS lineer/PMOS kesimde"><figcaption>Şekil 6-7: CMOS eviricinin geçiş özeğrisi</figcaption></figure>
+<p>CMOS eviricide tranzistörlerden biri iletimdeyken diğeri kesimde kabul edilerek aşağı ve yukarı gecikmeler hesaplanır. Geçiş anı dışında akım akmadığı için CMOS'un güç harcaması azdır.</p>
+<p>τ_D = (C_L / (C_ox·W_D·L_D))·2L_D²·V_DD / (µ_n·(V_DD − V_TD)²)   (6-13)</p>
+<p>τ_U = τ_D·β_D·(V_DD − V_TD)² / (β_L·(V_DD + V_TL)²) = 2C_L·V_DD / (β_L·(V_DD + V_TL)²)   (6-14)</p>
+<p>Notun devamı (bipolar tümdevreler) serinin 3. yazısındadır: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">3) bipolar tümdevreler</a>.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="VLSI_TASARIMI_A_KUNTMAN_2_MOS_Tumdevreler_s26-75.pdf" download>VLSI_TASARIMI_A_KUNTMAN_2_MOS_Tumdevreler_s26-75.pdf</a></p>
+              <p class="kucuk">PDF · 2.3 MB · 50 <span data-i18n="arch.pagesLower"></span> · 28.04.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="VLSI_TASARIMI_A_KUNTMAN_2_MOS_Tumdevreler_s26-75.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

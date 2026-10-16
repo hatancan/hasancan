@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Bode Kararlılık Ölçütü, Kök Yer ve PI/PID Tasarımı (Robert Edwards, ChE 450, Penn State, 2001) — hasancan.net</title>
+<meta name="description" content="Robert Edwards&#x27;ın ChE 450 (Bahar 2001) proses kontrol dersinin 36–38. ders slaytları: açık çevrimden kapalı çevrim davranışı, kazanç ve faz payı, Bode çizim kuralları, ölü zamanlı ve ters yanıtlı süreçlerde PI, üçüncü dereceden süreçte PID tasarımı; kök yer ve Bode karşılaştırması.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-bode-kok-yer-pid-edwards-penn-state/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Bode Kararlılık Ölçütü, Kök Yer ve PI/PID Tasarımı (Robert Edwards, ChE 450, Penn State, 2001)">
+<meta property="og:description" content="Robert Edwards&#x27;ın ChE 450 (Bahar 2001) proses kontrol dersinin 36–38. ders slaytları: açık çevrimden kapalı çevrim davranışı, kazanç ve faz payı, Bode çizim kuralları, ölü zamanlı ve ters yanıtlı süreçlerde PI, üçüncü dereceden süreçte PID tasarımı; kök yer ve Bode karşılaştırması.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-bode-kok-yer-pid-edwards-penn-state/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Bode Kararlılık Ölçütü, Kök Yer ve PI/PID Tasarımı (Robert Edwards, ChE 450, Penn State, 2001)", "description": "Robert Edwards'ın ChE 450 (Bahar 2001) proses kontrol dersinin 36–38. ders slaytları: açık çevrimden kapalı çevrim davranışı, kazanç ve faz payı, Bode çizim kuralları, ölü zamanlı ve ters yanıtlı süreçlerde PI, üçüncü dereceden süreçte PID tasarımı; kök yer ve Bode karşılaştırması.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-bode-kok-yer-pid-edwards-penn-state/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Edwards-ChE450-lecture36-38.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-bode-kok-yer-pid-edwards-penn-state/Edwards-ChE450-lecture36-38.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Bode Kararlılık Ölçütü, Kök Yer ve PI/PID Tasarımı (Robert Edwards, ChE 450, Penn State, 2001)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.01.2001</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#lecture-36-bode-stability-criterion-and-sketching-rules">Lecture 36: Bode stability criterion and sketching rules</a></li><li><a href="#lecture-37-pi-control-examples-root-locus-and-bode">Lecture 37: PI control examples (root locus and Bode)</a></li><li><a href="#lecture-38-pid-control-of-a-third-order-plant">Lecture 38: PID control of a third order plant</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Bode Kararlılık Ölçütü, Kök Yer ve PI/PID Tasarımı (Robert Edwards, ChE 450, Penn State, 2001)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 08.01.2001 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri dersi için internetten indirilip "kontrol sistemleri farklı yerlerden indirilenler" klasörüne konmuş üç <strong>üçüncü taraf</strong> PowerPoint sunumunu bir araya getiriyor: <strong>Robert Edwards</strong>'ın <strong>ChE 450 (Spring 2001)</strong> proses kontrol dersinin <strong>36, 37 ve 38. ders</strong> slaytları. Klasördeki not dosyası kaynağı <strong>http://www.mne.psu.edu/edwards/CLASSES/CHE_SP01/lectures/lecture36.PPT</strong> olarak gösteriyor (Pennsylvania State University sunucusu). Dosyalar Ocak–Mayıs 2001 tarihli. Slaytlar İngilizce olduğundan metin özgün dilinde aktarıldı, denklemler düz metne çevrildi; üç sunum ve kaynak notu yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p>Notation in the slides: SP setpoint, E error, MV manipulated variable, CV controlled variable, CVm measured CV, D disturbance; G_c controller, G_v valve, G_p process, G_d disturbance, G_s sensor; G_OL = G_c·G_v·G_p·G_s is the open-loop transfer function.</p>
+<h2 id="lecture-36-bode-stability-criterion-and-sketching-rules">Lecture 36: Bode stability criterion and sketching rules</h2>
+<p>The <strong>Bode stability criterion</strong> uses the open-loop characteristic to predict the closed-loop behavior.</p>
+<h3 id="open-loop-landmarks">Open-loop landmarks</h3>
+<ul><li>ω₁ is the frequency at which |G_OL(jω)| = 1 (0 dB).</li><li>ω_π is the frequency at which ∠G_OL(jω) = −180°.</li><li><strong>Gain margin</strong> Gm = 1/|G_OL(jω_π)| in gain units, or −|G_OL(jω_π)| in dB.</li><li><strong>Phase margin</strong> Pm = 180° + ∠G_OL(jω₁).</li></ul>
+<figure class="yazi-gorsel"><img src="l36-acik-cevrim.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Open-loop landmarks: 0 dB crossing ω₁, −180° crossing ω_π, gain margin and phase margin on a Bode plot"><figcaption>Açık çevrim Bode diyagramında ω₁, ω_π, kazanç ve faz payı</figcaption></figure>
+<h3 id="frequency-domain-guidelines-for-a-good-open-loop">Frequency-domain guidelines for a "good" open loop</h3>
+<ul><li>A larger 0 dB crossing ω₁ means larger closed-loop bandwidth and shorter rise time.</li><li>Large |G_OL| at low frequency means small offset.</li><li>Gain margin &gt; 1 (&gt; 0 dB) is required for closed-loop stability; &gt; 2.5 (8 dB) is recommended for performance.</li><li>Phase margin &gt; 35° gives a small resonant peak in the closed loop, good damping and a good decay ratio.</li></ul>
+<p>The next question is how to <em>add components</em> to a feedback loop (PID, recycle, etc.) to get these desirable frequency response characteristics.</p>
+<h3 id="example-three-tank-mixing-process">Example: three-tank mixing process</h3>
+<p>With K_c = 1, T_I = ∞, T_D = 0, i.e. G_OL(jω) = 1.0·G_v G_p G_s = 0.039/(5s + 1)³ (<code>bode(0.039, conv([5 1],conv([5 1],[5 1])))</code>): there is no 0 dB crossing, which implies a slow response; low gain at low ω means poor offset; the large gain margin (~50 dB) means "really stable"; the infinite phase margin means "well damped".</p>
+<p>With PID, K_c = 21, T_I = 10, T_D = 2:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>margin(0.039*21*[20 10 1],conv([10 0],conv([5 1],conv([5 1],[5 1]))))</code></pre>
+<p>The 0 dB crossing is ω₁ = 0.08 rad/min; the infinite gain at low ω means good (zero) offset; the gain margin is infinite (no ω_π); the phase margin of about 67° (&gt; 35°) means a well damped response. The corresponding root locus (<code>rlocus(conv([Ti*Td Ti 1],num),conv([Ti 0],den))</code> with the exact three-tank model) has open-loop poles at s = 0, −1/5, −1/5, −1/5 and open-loop zeros at −0.14 and −0.36 for T_D = 2, T_I = 10. The slides then compare setpoint and disturbance responses with the "setpoint" and "disturbance" tunings.</p>
+<figure class="yazi-gorsel"><img src="l36-pid-bode.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Bode diagram of the three-tank process with PID (Kc = 21, TI = 10, TD = 2): phase margin about 67°"><figcaption>Üç tanklı süreç, PID ile Bode diyagramı</figcaption></figure>
+<p>With the Ziegler–Nichols ultimate-period settings (ultimate gain K_c = 120), K_c = 90, T_I = 9, T_D = 2.3:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>margin(0.039*90*[20.7 9 1],conv([9 0],conv([5 1],conv([5 1],[5 1]))))</code></pre>
+<p>the phase margin drops to about 36°. Time responses are compared for Pm = 31° (K_c = 120) and Pm = 36° (K_c = 90).</p>
+<p><em>Not: Bu slaytta açıklama kutusu bir önceki slayttan kopyalanmış ("phase margin of 67° &gt; 35°"); grafikteki faz payı ise yaklaşık 36°'dir.</em></p>
+<h3 id="bode-diagram-sketching-rules">Bode diagram sketching rules</h3>
+<p>First, put the open-loop transfer function into <strong>Bode form</strong>, with +1 at all the constant terms:</p>
+<blockquote><p>G_OL(s) = K_zp·Π(s − z_k)/Π(s − p_i) = K_B·Π(τ_k^N s + 1)/Π(τ_i^D s + 1), K_B = K_zp·Π(−z_k)/Π(−p_i), τ_k^N = −1/z_k, τ_i^D = −1/p_i</p></blockquote>
+<p>Then substitute s = jω. Each numerator or denominator component G_k(jω) = τ_k^N jω + 1 or G_i(jω) = τ_i^D jω + 1 is a complex number with a magnitude and a phase. Collecting the exponential terms and equating magnitude and phase on each side:</p>
+<blockquote><p>∠G(jω) = ∠K_B + Σ∠G_k(jω) − Σ∠G_i(jω) 20 log₁₀|G(jω)| = 20 log₁₀|K_B| + Σ 20 log₁₀|G_k(jω)| − Σ 20 log₁₀|G_i(jω)|</p></blockquote>
+<p>Logarithms turn magnitude multiplication into addition, so the plot can be constructed graphically: numerator components are <strong>added</strong>, denominator components <strong>subtracted</strong>. Since both have the same form, only one set of sketching rules is needed. There are only 4 possible numerator components: G(s) = K_B·s^ℓ·(τ²s² + 2ζτs + 1)·Π(τ_k^N s + 1)/Π(τ_i^D s + 1).</p>
+<ol><li><strong>Constant K_B:</strong> a real number, positive or negative. Magnitude |K_B|; phase 0° if K_B &gt; 0, −180° if K_B &lt; 0.</li><li><strong>Repeated zeros at the origin, s^ℓ:</strong> (jω)^ℓ = ω^ℓ e^(jℓπ/2); magnitude in dB = 20ℓ log₁₀ ω, a constant slope of +20ℓ dB/decade crossing 0 dB at ω = 1; phase constant at +90ℓ°. If ℓ &lt; 0 (in the denominator), slope and phase are negative.</li><li><strong>Numerator time constants τ_k &gt; 0:</strong> τ_k jω + 1. As ω → 0 the magnitude → 1 (0 dB) and phase → 0°; for large ω the magnitude → ωτ_k and the phase → +90°. The asymptotes intersect at the break frequency ω_b = 1/τ_k; the magnitude increases 20 dB/decade above the break. The phase is half-way between its asymptotic values (45°) at ω_b, and the slope of the phase plot extrapolates to 0° at ω_b/5 and to +90° at 5ω_b (<code>bode([0.1 1],1)</code>). For a denominator time constant (<code>bode(1,[1 1])</code>) everything is inverted: −20 dB/decade and −90°.</li><li><strong>Watch out for τ_k &lt; 0 (zero in the right half plane):</strong> the magnitude behaves the same (+20 dB/decade above the break; magnitude is just the distance from the origin), but the phase goes to <strong>−90°</strong> (<code>bode([-0.1 1],1)</code>).</li></ol>
+<p><strong>Repeated time constants:</strong> the high-frequency asymptotic slope, the high-frequency phase and the phase at the break are multiplied by the order of the root; the 0.2ω_b and 5ω_b corners still apply.</p>
+<p><strong>Quadratic terms (−1 &lt; ζ &lt; 1)</strong> are sketched as a time constant repeated twice: for ζ &gt; 0 the numerator slope is 40 dB/decade and the phase goes to +180°; for ζ &lt; 0 the slope is still 40 dB/decade but the phase goes to −180°. Denominator rules have opposite signs for slope and phase.</p>
+<figure class="yazi-gorsel"><img src="l36-zaman-sabiti.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Numerator time constant Bode diagram: asymptotes, break frequency 1/τ and phase corners at ω_b/5 and 5ω_b"><figcaption>Pay zaman sabitinin Bode diyagramı ve köşe kuralları</figcaption></figure>
+<h2 id="lecture-37-pi-control-examples-root-locus-and-bode">Lecture 37: PI control examples (root locus and Bode)</h2>
+<h3 id="example-1-pi-control-of-a-2-second-delay">Example 1: PI control of a 2-second delay</h3>
+<p>G_c(s) = K_c(T_I s + 1)/(T_I s), G_v = 1, G_s = 1, and the delay is approximated as G_p(s) ≈ (−s + 1)/(s + 1). Then</p>
+<blockquote><p>G_OL = K_c·[(T_I s + 1)/(T_I s)]·[(−s + 1)/(s + 1)] = (−K_c)·(s + 1/T_I)(s − 1)/[s(s + 1)]</p></blockquote>
+<p>so K_zp = −K_c, m = 2 zeros at s = 1 and −1/T_I, n = 2 poles at s = 0 and −1; n − m = 0, so there are no asymptotes. As |K_zp| increases from 0 to ∞, the locus leaves the poles at 0 and −1 and ends at the zeros, including the right-half-plane zero at +1.</p>
+<figure class="yazi-gorsel"><img src="l37-kok-yer.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Root locus of PI control of the delay approximation: branches go from the poles 0 and −1 to the zeros −1/TI and +1"><figcaption>Ölü zamanlı sürecin PI kontrolünde kök yer eğrisi</figcaption></figure>
+<p>For the Bode diagram, K_B = K_c/T_I; the numerator time constant (−s + 1) breaks at ω_b = |1/(−1)| = 1 and its phase goes to −90° (τ &lt; 0); the denominator pole 1/s and the time constant 1/(s + 1) break at ω_b = 1. The magnitudes of (−s + 1) and 1/(s + 1) add to zero, while their phases add to twice the slope (the numerator and denominator phase contributions are the same because τ &lt; 0 in the numerator). The PI portion (T_I s + 1)/(T_I s), e.g. T_I = 0.1, has a −20 dB/decade slope that becomes flat at ω_b = 1/T_I = 10; the phase plot has twice as many slope changes because there are two "corners" per break. Adding everything, a K_c &lt; 1 is needed for a decent phase margin: K_c = −30 dB = 0.032 gives about 30° phase margin.</p>
+<figure class="yazi-gorsel"><img src="l37-pi-gecikme.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Adding the PI controller and the delay approximation; Kc = −30 dB gives about 30° phase margin"><figcaption>PI ve gecikme yaklaşımının toplamı, Kc = 0,032</figcaption></figure>
+<h3 id="example-2-pi-control-with-3-asymptotes">Example 2: PI control with 3 asymptotes</h3>
+<p>G_p(s) = −1/[s(s + 1)²], so</p>
+<blockquote><p>G_OL = K_c·[(T_I s + 1)/(T_I s)]·[−1/(s(s + 1)²)] = (−K_c)·(s + 1/T_I)/[s²(s + 1)²]</p></blockquote>
+<p>K_zp = −K_c (note that the gain of the plant is negative), m = 1 zero at −1/T_I, n = 4 poles at s = 0, 0, −1, −1, n − m = 3 asymptotes. The locus (T_I = 2) becomes unstable for K_c too negative; a <strong>reverse response plant needs a reverse action controller</strong> (K_c &lt; 0). In the Bode analysis, to avoid a −180° phase contribution due to a negative Bode gain, K_c &lt; 0 is chosen with reverse action.</p>
+<p>The components 1/s and 1/(s + 1)² add to a slope of −20 − 40 = −60 dB/decade after ω = 1. With T_I = 10 (1/T_I = 0.1) the phase margin is maximised by choosing K_c = 0.1 (−20 dB). With K_c = 0.25, T_I = 10:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>margin(0.25*[10 1],conv([10 0],[1 2 1 0]))   % Gm = 16 dB, Pm = 40 deg</code></pre>
+<p>The Simulink test with reverse action selected in the controller confirms the response. With T_I = 5 the reset time is too short and the maximum phase margin is only 23°:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>margin(0.25*[5 1],conv([5 0],[1 2 1 0]))     % Pm = 23 deg</code></pre>
+<p><em>Not: Yanıt grafiklerinin başlığında süreç "1/[s(s² + 1)]" diye yazılmış; incelenen süreç 1/[s(s + 1)²]'dir (Simulink bloğunda da −1/(s³ + 2s² + s)).</em></p>
+<h2 id="lecture-38-pid-control-of-a-third-order-plant">Lecture 38: PID control of a third order plant</h2>
+<p>Lecture 38 begins by repeating Example 2 (as "Example 4") and then continues with PID control.</p>
+<h3 id="example-5-pid-control-with-a-3rd-order-plant">Example 5: PID control with a 3rd order plant</h3>
+<p>G_c(s) = K_c(T_I T_D s² + T_I s + 1)/(T_I s), G_p(s) = 1/[s(s + 1)²]:</p>
+<blockquote><p>G_OL = K_c·(T_I T_D/T_I)·[s² + s/T_D + 1/(T_I T_D)]/s · 1/[s(s + 1)²]</p></blockquote>
+<p>K_zp = K_c T_D; m = 2 zeros at s = [−T_I ± √(T_I² − 4T_I T_D)]/(2T_I); n = 4 poles at s = 0, 0, −1, −1; n − m = 2 asymptotes. With T_I = 4, T_D = 1 the asymptotes are at σ = −1/2 and the response is stable for all K_c; adding T_D requires a change in T_I.</p>
+<p><strong>Bode example 3:</strong> choose T_I and T_D to get a repeated numerator root: T_D = T_I/4 gives the repeated time constant T_I/2, G_OL = K_c(T_I s/2 + 1)²/(T_I s) · 1/[s(s + 1)²]. With T_I = 20 (T_D = 5): |1/20| = −26 dB; the PID components added together rise to 40 − 26 = 14 dB at high frequency, giving an ultimate phase improvement of +90°, but increasing the gain at large ω creates a noise response problem. Combined with the plant (−60 dB/decade), the phase margin is about 30° in the asymptotic sketch.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>margin([5*20 20 1],conv([20 0],[1 2 1 0]))   % Pm = 47 deg, Gm infinite, Kc = 1
+rlocus([5*20 20 1],conv([20 0],[1 2 1 0]))   % Kc = 0.28</code></pre>
+<p>Placing the PID zeros close to the origin forces a slow closed-loop response (compare K_c = 1 and K_c = 0.28).</p>
+<figure class="yazi-gorsel"><img src="l38-pid-bode.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Asymptotic Bode sketch of the plant 1/[s(s+1)²] with the PID controller TI = 20, TD = 5"><figcaption>Süreç ve PID (TI = 20, TD = 5) Bode çizimi</figcaption></figure>
+<p><strong>Why frequency response is generally more capable:</strong> with root locus, choosing K_c to get a desired damping factor on "one" set of roots does not account for the presence of additional poles and zeros; frequency response accounts for all the poles and zeros and their relative positions as well.</p>
+<h3 id="moving-the-zeros-away-from-the-origin-speeds-the-response">Moving the zeros away from the origin speeds the response</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Desired zeros</th><th scope="col">conv</th><th scope="col">Bode form</th><th scope="col">T_I, T_D</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">−1 and −0.1</th><td>s² + 1.1s + 0.1</td><td>10s² + 11s + 1</td><td>T_I = 11, T_D = 10/11 ≈ 0.9</td><td>rlocus: K_c = 0.27; with K_c = 2, PM = 35°</td></tr><tr><th scope="row">−1 and −0.5</th><td>s² + 1.5s + 0.5</td><td>2s² + 3s + 1</td><td>T_I = 3, T_D = 2/3 = 0.67</td><td>K_c = 2, PM = 45° (max); root locus shows poor damping, asymptotes at −0.25</td></tr><tr><th scope="row">−0.8 and −0.2</th><td>s² + s + 0.16</td><td>6.25s² + 6.25s + 1</td><td>T_I = 6.25, T_D = 1</td><td>K_c = 0.6, PM = 47°; rlocus K_c = 0.78</td></tr></tbody></table></div>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>rlocus([10 11 1],conv([11 0],[1 2 1 0]))
+margin(2*[10 11 1],conv([11 0],[1 2 1 0]))        % Kc = 2, PM = 35 deg
+rlocus([2 3 1],conv([3 0],[1 2 1 0]))
+margin(2*[3 2 1],conv([3 0],[1 2 1 0]))           % PM = 45 deg (slaytta yazıldığı gibi)
+margin(0.6*[6.25 6.25 1],conv([6.25 0],[1 2 1 0])) % PM = 47 deg
+rlocus([6.25 6.25 1],conv([6.25 0],[1 2 1 0]))</code></pre>
+<p>Moving the zeros to the left "pulls" the locus to faster pole locations. With T_I = 11, T_D = 0.9 the PID zero at −1 cancels a pole of the plant, and the high-frequency gain increase starts at a higher frequency, which makes the loop less susceptible to noise; the asymptotic sketch shows about 60° phase margin, and K_c was increased until the PM was reduced to 35°.</p>
+<p><em>Not: T_I = 3, T_D = 0,67 için PID payı T_I·T_D·s² + T_I·s + 1 = 2s² + 3s + 1, yani <code>[2 3 1]</code> olmalıdır; margin satırında <code>[3 2 1]</code> yazılmış (aynı slayt grubundaki rlocus satırında doğru biçim kullanılmış).</em></p>
+<p>The lecture ends by comparing the three PID tunings: K_c = 2, T_I = 11, T_D = 0.9; K_c = 0.6, T_I = 6.25, T_D = 1; and K_c = 1, T_I = 20, T_D = 5.</p>
+<figure class="yazi-gorsel"><img src="l38-uc-pid.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Closed-loop responses of the three PID tunings"><figcaption>Üç PID ayarının kapalı çevrim yanıtları</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="Edwards-ChE450-lecture36-38.zip" download>Edwards-ChE450-lecture36-38.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 322 KB · 08.01.2001</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Edwards-ChE450-lecture36-38.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (322 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

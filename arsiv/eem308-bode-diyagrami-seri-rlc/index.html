@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Seri RLC Devresinin Genlik ve Faz Bode Diyagramı Örneği (Kaynağı Belirsiz Slayt Çıktısı) — hasancan.net</title>
+<meta name="description" content="Reel sıfır ve kutuplu transfer fonksiyonu için Bode diyagramı örneği: 100 mH, 10 mF, 11 Ω seri RLC devresinde H(s) = 110s/((s+10)(s+100)), kırılma noktalarına göre asimptotik genlik (dB) ve faz eğrileri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-bode-diyagrami-seri-rlc/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Seri RLC Devresinin Genlik ve Faz Bode Diyagramı Örneği (Kaynağı Belirsiz Slayt Çıktısı)">
+<meta property="og:description" content="Reel sıfır ve kutuplu transfer fonksiyonu için Bode diyagramı örneği: 100 mH, 10 mF, 11 Ω seri RLC devresinde H(s) = 110s/((s+10)(s+100)), kırılma noktalarına göre asimptotik genlik (dB) ve faz eğrileri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-bode-diyagrami-seri-rlc/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Seri RLC Devresinin Genlik ve Faz Bode Diyagramı Örneği (Kaynağı Belirsiz Slayt Çıktısı)", "description": "Reel sıfır ve kutuplu transfer fonksiyonu için Bode diyagramı örneği: 100 mH, 10 mF, 11 Ω seri RLC devresinde H(s) = 110s/((s+10)(s+100)), kırılma noktalarına göre asimptotik genlik (dB) ve faz eğrileri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-bode-diyagrami-seri-rlc/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "bode-diyagrami-seri-rlc.pdf", "contentUrl": "https://hasancan.net/arsiv/eem308-bode-diyagrami-seri-rlc/bode-diyagrami-seri-rlc.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Seri RLC Devresinin Genlik ve Faz Bode Diyagramı Örneği (Kaynağı Belirsiz Slayt Çıktısı)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>22.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#reel-sifir-ve-kutuplu-transfer-fonksiyonunun-genlik-bode-diyagrami">Reel sıfır ve kutuplu transfer fonksiyonunun genlik Bode diyagramı</a></li><li><a href="#faz-bode-diyagrami-yaklasik">Faz Bode diyagramı (yaklaşık)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Seri RLC Devresinin Genlik ve Faz Bode Diyagramı Örneği (Kaynağı Belirsiz Slayt Çıktısı)</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 22.03.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM 308 Sinyaller ve Sistemler II klasöründe saklanan, Bode diyagramını bir <strong>seri RLC devresi</strong> örneği üzerinden anlatan <strong>iki sayfalık basılı slayt çıktısının</strong> taramasını aktarıyor. Türkçe slaytların yazarı belgede yazmıyor; dosya adı ("selda") ve aynı klasördeki diğer belgeler, çıktının dersin hocası Yrd. Doç. Dr. Selda Güney'in slaytlarından olabileceğini düşündürüyor. Devre ve grafikler, Nilsson &amp; Riedel'in <em>Electric Circuits</em> kitabındaki Bode diyagramı örneğinin şekilleriyle aynı. Sayfalarda kalemle yapılmış birkaç işaret var. Taranmış PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="reel-sifir-ve-kutuplu-transfer-fonksiyonunun-genlik-bode-diyagrami">Reel sıfır ve kutuplu transfer fonksiyonunun genlik Bode diyagramı</h2>
+<p>Devre: v_i kaynağına seri bağlı <strong>L = 100 mH</strong>, <strong>C = 10 mF</strong> ve <strong>R = 11 Ω</strong>; çıkış v_o direnç üzerindeki gerilim.</p>
+<p>H(s) = (R/L)s / (s² + (R/L)s + 1/LC)</p>
+<p>H(s) = 110s / (s² + 110s + 1000) = 110s / ((s + 10)(s + 100))</p>
+<p>H(jω) = 0,11 jω / ([1 + j(ω/10)] [1 + j(ω/100)])</p>
+<p>A_dB = 20 log₁₀ |H(jω)| = 20 log₁₀ 0,11 + 20 log₁₀ |jω| − 20 log₁₀ |1 + j(ω/10)| − 20 log₁₀ |1 + j(ω/100)|</p>
+<p>Kırılma frekansları ω = 10 rad/s ve ω = 100 rad/s. Asimptotik eğri bölge bölge şöyle toplanıyor:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Bölge</th><th scope="col">Etkin terimler</th><th scope="col">Asimptot</th></tr></thead><tbody><tr><th scope="row">1 ≤ ω &lt; 10 rad/s</th><td>20 log₁₀ 0,11 + 20 log₁₀ ω</td><td>+20 dB/dekad; ω = 1'de ≈ −19,2 dB</td></tr><tr><th scope="row">10 ≤ ω &lt; 100 rad/s</th><td>20 log₁₀ 0,11 + 20 log₁₀ ω − 20 log₁₀ (ω/10)</td><td>20 log₁₀ 1,1 ≈ 0,8 dB, yaklaşık 0 dB (yatay)</td></tr><tr><th scope="row">100 ≤ ω &lt; ∞</th><td>yukarıdakiler − 20 log₁₀ (ω/100)</td><td>−20 dB/dekad</td></tr></tbody></table></div>
+<p>Grafikteki işaretli gerçek değerler: ω = 50 rad/s'de <strong>−0,311 dB</strong>, ω = 500 rad/s'de <strong>−12,5 dB</strong>, ω = 1000 rad/s'de <strong>−19,22 dB</strong>.</p>
+<blockquote><p><strong>Kural:</strong> ω ekseni kırılma noktalarına göre bölgelere ayrılır, o bölgedeki terimler toplanır. İki uç nokta için toplama yeter.</p></blockquote>
+<figure class="yazi-gorsel"><img src="genlik-bode.jpg" width="1400" height="1014" loading="lazy" decoding="async" alt="Seri RLC devresi, H(s) ve asimptotik genlik Bode diyagramı"><figcaption>Sayfa 1: Genlik Bode diyagramı; kesikli çizgiler tek tek terimler, gri çizgi toplam 20 log₁₀|H(jω)|</figcaption></figure>
+<p><em>Not: Slaytın alt satırlarında 20 log₁₀ 0,11 için "= 19,22 dB" yazıyor; doğrusu 20 log₁₀ 0,11 ≈ <strong>−19,17 dB</strong>. Grafikteki −19,22 dB ise ω = 1000 rad/s'deki gerçek değer: |H(j1000)| = 110 / (√(1+100²)·√(1+10²)) ≈ 0,1094 → −19,22 dB. Ayrıca başlıktaki "FOKSİYONUNUN" kelimesi "fonksiyonunun" olmalı.</em></p>
+<h2 id="faz-bode-diyagrami-yaklasik">Faz Bode diyagramı (yaklaşık)</h2>
+<p>θ(ω) = ψ₁ − β₁ − β₂ = 90° − arctan(ω/10) − arctan(ω/100)</p>
+<p>Paydaki jω terimi sabit <strong>ψ₁ = 90°</strong> katkı verir; her kutup kendi köşe frekansının bir dekad altından (ω_k/10) bir dekad üstüne (10ω_k) kadar −45°/dekad eğimle toplam −90° ekler. Grafikteki gerçek değerler: ω = 50 rad/s'de <strong>−15,25°</strong>, ω = 500 rad/s'de <strong>−77,54°</strong>, ω = 1000 rad/s'de <strong>−83,72°</strong>.</p>
+<blockquote><p><strong>Kural:</strong> Kutup ve sıfırların 1/10'u (ve 10 katı) köşeler oluyor; ω'yı köşelere göre bölgelere ayırıp terimler toplanıyor.</p></blockquote>
+<figure class="yazi-gorsel"><img src="faz-bode.jpg" width="1400" height="1014" loading="lazy" decoding="async" alt="Seri RLC devresinin yaklaşık faz Bode diyagramı"><figcaption>Sayfa 2: Faz Bode diyagramı; ψ₁ = 90°, −β₁ = −tan⁻¹(ω/10), −β₂ = −tan⁻¹(ω/100)</figcaption></figure>
+<p><em>Not: Değerleri kontrol ettik: θ(50) = 90° − 78,69° − 26,57° = −15,26°, θ(500) = 90° − 88,85° − 78,69° = −77,54°, θ(1000) = 90° − 89,43° − 84,29° = −83,72°.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="bode-diyagrami-seri-rlc.pdf" download>bode-diyagrami-seri-rlc.pdf</a></p>
+              <p class="kucuk">PDF · 237 KB · 2 <span data-i18n="arch.pagesLower"></span> · 22.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="bode-diyagrami-seri-rlc.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (237 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

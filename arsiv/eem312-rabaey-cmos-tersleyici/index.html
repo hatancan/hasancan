@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: CMOS Tersleyici (UC Berkeley EE141, Jan Rabaey) — hasancan.net</title>
+<meta name="description" content="Jan Rabaey&#x27;in UC Berkeley EE141 slaytlarından derlenen, EEM312&#x27;de 2005&#x27;te dağıtılan &quot;The CMOS Inverter&quot; notları: VTC, anahtarlama eşiği, gürültü payları, yayılma gecikmesi, transistör boyutlandırma ve tersleyici zinciri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rabaey-cmos-tersleyici/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: CMOS Tersleyici (UC Berkeley EE141, Jan Rabaey)">
+<meta property="og:description" content="Jan Rabaey&#x27;in UC Berkeley EE141 slaytlarından derlenen, EEM312&#x27;de 2005&#x27;te dağıtılan &quot;The CMOS Inverter&quot; notları: VTC, anahtarlama eşiği, gürültü payları, yayılma gecikmesi, transistör boyutlandırma ve tersleyici zinciri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rabaey-cmos-tersleyici/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: CMOS Tersleyici (UC Berkeley EE141, Jan Rabaey)", "description": "Jan Rabaey'in UC Berkeley EE141 slaytlarından derlenen, EEM312'de 2005'te dağıtılan \"The CMOS Inverter\" notları: VTC, anahtarlama eşiği, gürültü payları, yayılma gecikmesi, transistör boyutlandırma ve tersleyici zinciri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rabaey-cmos-tersleyici/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "dosya_5_EEM312.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-rabaey-cmos-tersleyici/dosya_5_EEM312.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: CMOS Tersleyici (UC Berkeley EE141, Jan Rabaey)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.04.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#the-cmos-inverter-a-first-glance">The CMOS Inverter: a first glance</a></li><li><a href="#load-lines-and-the-vtc">Load lines and the VTC</a></li><li><a href="#switching-threshold">Switching threshold</a></li><li><a href="#noise-margins-and-gain">Noise margins and gain</a></li><li><a href="#capacitances-of-the-cascaded-inverter-pair">Capacitances of the cascaded inverter pair</a></li><li><a href="#propagation-delay">Propagation delay</a></li><li><a href="#nmos-pmos-ratio">NMOS/PMOS ratio</a></li><li><a href="#device-sizing-for-performance">Device sizing for performance</a></li><li><a href="#sizing-a-chain-of-inverters">Sizing a chain of inverters</a></li><li><a href="#input-signal-rise-fall-time">Input signal rise/fall time</a></li><li><a href="#delay-with-long-interconnects">Delay with long interconnects</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: CMOS Tersleyici (UC Berkeley EE141, Jan Rabaey)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 18.04.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> dersinde Prof. Dr. Emin Akata'nın Nisan 2005'te PDF olarak dağıttığı "The CMOS Inverter" ders notunun içeriğidir. Slaytlar <strong>Jan M. Rabaey</strong>'in <strong>UC Berkeley EE141 (Digital Integrated Circuits)</strong> dersi slaytlarından derlenmiştir; aralara kaynak kitaptan alınmış birkaç şekil ve tablo ile açıklama sayfaları eklenmiştir. Slayt metinleri İngilizce olarak konu başlıklarıyla aktarıldı, formüller düz metne çevrildi; yalnız metne dökülemeyen grafikler görsel olarak kondu. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="the-cmos-inverter-a-first-glance">The CMOS Inverter: a first glance</h2>
+<p>The CMOS inverter consists of a PMOS transistor (source at V_DD) and an NMOS transistor (source at GND) whose gates are tied together as the input V_in and whose drains are tied together as the output V_out, driving a load capacitance C_L.</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="CMOS tersleyici şeması ve yerleşim (layout) çizimi"><figcaption>CMOS tersleyici: devre şeması ve yerleşim (N kuyusu, PMOS, NMOS, polisilisyum, Metal 1, kontaklar)</figcaption></figure>
+<h3 id="steady-state-response">Steady-state response</h3>
+<ul><li>V_in = 0: the PMOS conducts (modelled as resistor R_p), the NMOS is off → V_out = 1.</li><li>V_in = V_DD: the NMOS conducts (R_n), the PMOS is off → V_out = 0.</li><li>V_OL = 0, V_OH = V_DD, V_M = f(R_n, R_p).</li></ul>
+<h3 id="transient-response">Transient response</h3>
+<p>(a) Low-to-high: C_L charges through R_p. (b) High-to-low: C_L discharges through R_n.</p>
+<p>t_pHL = f(R_on · C_L) = 0.69 R_on C_L</p>
+<h3 id="cmos-properties">CMOS properties</h3>
+<ul><li>Full rail-to-rail swing ⇒ high noise margins.</li></ul>
+<p>  - Logic levels not dependent upon the relative device sizes ⇒ transistors can be minimum size ⇒ <em>ratioless</em>.</p>
+<ul><li>Always a path to V_DD or GND in steady state ⇒ low output impedance (output resistance in kΩ range) ⇒ large fan-out (less sensitive to noise as well).</li><li>Extremely high input resistance (gate of MOS transistor is near perfect insulator) ⇒ nearly zero steady-state input current.</li><li>No direct path in steady state between power and ground ⇒ no static power dissipation.</li><li>Propagation delay is a function of load capacitance and resistance of transistors (limits fan-out).</li></ul>
+<h2 id="load-lines-and-the-vtc">Load lines and the VTC</h2>
+<h3 id="review-short-channel-i-v-plots">Review: short-channel I-V plots</h3>
+<ul><li>NMOS transistor, 0.25 µm, L_d = 0.25 µm, W/L = 1.5, V_DD = 2.5 V, V_T = 0.4 V: I_D curves for V_GS = 1.0, 1.5, 2.0, 2.5 V (I_D up to about 2.2 × 10⁻⁴ A); in saturation the current shows a <em>linear dependence</em> on V_GS (velocity saturation).</li><li>PMOS transistor, 0.25 µm, L_d = 0.25 µm, W/L = 1.5, V_DD = 2.5 V, V_T = −0.4 V: all polarities of all voltages and currents are reversed (V_GS = −1.0 … −2.5 V, I_D down to about −1 × 10⁻⁴ A).</li></ul>
+<h3 id="transforming-pmos-i-v-lines">Transforming PMOS I-V lines</h3>
+<p>We want a common coordinate set V_in, V_out and I_Dn (load-line plot):</p>
+<ul><li>I_DSp = −I_DSn</li><li>V_GSn = V_in; V_GSp = V_in − V_DD</li><li>V_DSn = V_out; V_DSp = V_out − V_DD</li></ul>
+<p>The PMOS curves are first mirrored around the x-axis (V_in = V_DD + V_GSp, I_Dn = −I_Dp) and then shifted horizontally over V_DD (V_out = V_DD + V_DSp).</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="CMOS tersleyici yük doğruları"><figcaption>CMOS inverter load lines: 0.25 µm, W/L_n = 1.5, W/L_p = 4.5, V_DD = 2.5 V, V_Tn = 0.4 V, V_Tp = −0.4 V</figcaption></figure>
+<h3 id="cmos-inverter-vtc">CMOS inverter VTC</h3>
+<p>The voltage transfer characteristic is obtained from the intersections of the load lines. Going from V_in = 0 to V_in = 2.5 V, the operating regions are: NMOS off / PMOS resistive → NMOS saturated / PMOS resistive → both saturated (around V_M, where the VTC crosses the line V_out = V_in) → NMOS resistive / PMOS saturated → NMOS resistive / PMOS off.</p>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="CMOS tersleyici VTC eğrisi ve çalışma bölgeleri"><figcaption>CMOS inverter VTC: her bölgede NMOS ve PMOS'un durumu</figcaption></figure>
+<p>The response of the inverter is dominated mainly by the output capacitance of the gate C_L, which is composed of:</p>
+<ul><li>drain diffusion capacitance of the PMOS and NMOS transistors,</li><li>capacitances of connecting wires,</li><li>input capacitance of the fan-out gates.</li></ul>
+<p>A fast gate is built either by keeping the output capacitance small or by decreasing the on-resistance of the transistor. The latter is achieved by increasing the W/L ratio.</p>
+<h3 id="relative-transistor-sizing">Relative transistor sizing</h3>
+<p>When designing static CMOS circuits, balance the driving strengths of the transistors by making the PMOS section wider than the NMOS section to</p>
+<ul><li>maximize the noise margins and</li><li>obtain symmetrical characteristics.</li></ul>
+<h2 id="switching-threshold">Switching threshold</h2>
+<h3 id="switching-threshold-as-a-function-of-transistor-ratio">Switching threshold as a function of transistor ratio</h3>
+<p>In the transition region both PMOS and NMOS transistors are always saturated, since V_DS = V_GS. By equating the currents through the transistors (assuming velocity saturation and ignoring channel length modulation): V_in = V_out = V_M, V_GS = V_M (NMOS), V_GS = V_M − V_DD (PMOS):</p>
+<p>k_n V_DSATn (V_M − V_Tn − V_DSATn/2) + k_p V_DSATp (V_M − V_DD − V_Tp − V_DSATp/2) = 0</p>
+<p>Solving for V_M yields:</p>
+<p>V_M = [(V_Tn + V_DSATn/2) + r (V_DD + V_Tp + V_DSATp/2)] / (1 + r), with r = k_p V_DSATp / (k_n V_DSATn) = υ_satp W_p / (υ_satn W_n)</p>
+<h3 id="switching-threshold-for-large-v-dd">Switching threshold for large V_DD</h3>
+<p>V_M is where V_in = V_out (both PMOS and NMOS in saturation since V_DS = V_GS). For large values of V_DD (with respect to threshold and saturation voltages):</p>
+<p>V_M ≈ r V_DD / (1 + r), where r = k_p V_DSATp / (k_n V_DSATn)</p>
+<ul><li>The switching threshold is set by the ratio r, which compares the <strong>relative driving strengths</strong> of the PMOS and NMOS transistors.</li><li>For V_M to be at V_DD/2, r ≈ 1, which is equivalent to sizing the PMOS device so that (W/L)_p = (W/L)_n × (V_DSATn k'_n) / (V_DSATp k'_p).</li><li>To move V_M upwards, a larger value of r is required, which means making the PMOS wider.</li></ul>
+<p>The required ratio of PMOS to NMOS transistor sizes such that the switching threshold is set to a desired value V_M:</p>
+<p>(W/L)_p / (W/L)_n = [k'_n V_DSATn (V_M − V_Tn − V_DSATn/2)] / [k'_p V_DSATp (V_DD − V_M + V_Tp + V_DSATp/2)]</p>
+<p>For long-channel devices or when the supply voltage is low (no velocity saturation):</p>
+<p>V_M = [V_Tn + r (V_DD + V_Tp)] / (1 + r), r = √(−k_p / k_n)</p>
+<h3 id="switching-threshold-example">Switching threshold example</h3>
+<p>In our generic 0.25 µm CMOS process, using the process parameters V_DD = 2.5 V and a minimum-size NMOS device ((W/L)_n of 1.5):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">V_T0 (V)</th><th scope="col">γ (V^0.5)</th><th scope="col">V_DSAT (V)</th><th scope="col">k' (A/V²)</th><th scope="col">λ (V⁻¹)</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>0.43</td><td>0.4</td><td>0.63</td><td>115 × 10⁻⁶</td><td>0.06</td></tr><tr><th scope="row">PMOS</th><td>−0.4</td><td>−0.4</td><td>−1</td><td>−30 × 10⁻⁶</td><td>−0.1</td></tr></tbody></table></div>
+<p>For V_M = 1.25 V (half of V_DD):</p>
+<p>(W/L)_p / (W/L)_n = (115 × 10⁻⁶ / −30 × 10⁻⁶) × (0.63 / −1.0) × (1.25 − 0.43 − 0.63/2) / (1.25 − 0.4 − 1.0/2) = 3.5</p>
+<p>(W/L)_p = 3.5 × 1.5 = 5.25 for a V_M of 1.25 V.</p>
+<h3 id="simulated-inverter-v-m">Simulated inverter V_M</h3>
+<ul><li>V_M is relatively insensitive to variations in device ratio: setting the ratio to 3, 2.5 and 2 gives V_M's of 1.22 V, 1.18 V and 1.13 V (the simulated ratio for V_M = 1.25 V is about 3.4; x-axis semilog).</li><li>Increasing the width of the PMOS moves V_M towards V_DD.</li><li>Increasing the width of the NMOS moves V_M toward GND.</li></ul>
+<p>A modified threshold can be useful: with a noisy input signal, an inverter with a shifted switching threshold can suppress the ringing that a standard inverter passes to its output.</p>
+<figure class="yazi-gorsel"><img src="s-18.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Standart ve eşiği değiştirilmiş tersleyicinin gürültülü girişe yanıtı"><figcaption>a) Response of standard inverter, b) Response of modified threshold</figcaption></figure>
+<h2 id="noise-margins-and-gain">Noise margins and gain</h2>
+<h3 id="noise-margins-determining-v-ih-and-v-il">Noise margins: determining V_IH and V_IL</h3>
+<p>Using a piece-wise linear approximation of the VTC:</p>
+<ul><li>By definition, V_IH and V_IL are where dV_out/dV_in = −1 (= gain).</li><li>V_IH − V_IL = −(V_OH − V_OL)/g = −V_DD/g</li><li>NM_H = V_DD − V_IH</li><li>NM_L = V_IL − GND</li><li>Approximating: V_IH = V_M − V_M/g, V_IL = V_M + (V_DD − V_M)/g</li></ul>
+<p>So high gain in the transition region is very desirable.</p>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Gürültü payları için VTC&#x27;nin parçalı doğrusal yaklaşımı"><figcaption>A piece-wise linear approximation of the VTC: V_IL, V_IH, V_M</figcaption></figure>
+<h3 id="gain-determinants">Gain determinants</h3>
+<p>Gain is a strong function of the slopes of the currents in the saturation region, for V_in = V_M (the plotted gain of the 0.25 µm inverter reaches about −17 at V_M):</p>
+<p>g = dV_out/dV_in = −(1/I_D(V_M)) × (k_n V_DSATn + k_p V_DSATp)/(λ_n − λ_p) ≈ (1 + r) / [(V_M − V_Tn − V_DSATn/2)(λ_n − λ_p)]</p>
+<p>The gain is determined by technology parameters, especially channel length modulation (λ). The only designer influence is through <strong>supply voltage</strong> and V_M (<strong>transistor sizing</strong>).</p>
+<h3 id="impact-of-process-variation-on-the-vtc-curve">Impact of process variation on the VTC curve</h3>
+<p>Process variations (mostly) cause a shift in the switching threshold: "good PMOS / bad NMOS" shifts the VTC to the right, "bad PMOS / good NMOS" to the left of the nominal curve.</p>
+<figure class="yazi-gorsel"><img src="s-21.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Süreç değişimlerinin VTC eğrisine etkisi"><figcaption>Impact of process variation on the VTC: nominal, good PMOS/bad NMOS, bad PMOS/good NMOS</figcaption></figure>
+<h3 id="gain-as-a-function-of-v-dd">Gain as a function of V_DD</h3>
+<p>The slide compares the VTCs for decreasing supply voltages, from 2.5 V down to the very low range (V_out axis up to 0.2 V); even there the VTC keeps a steep transition, and the curve with "Gain = −1" marks the lowest usable supply.</p>
+<p>Why don't we operate at low supply voltages?</p>
+<ul><li>Reducing the supply voltage improves gain and energy dissipation, but severely degrades the delay of the gate.</li><li>The dc characteristic becomes increasingly sensitive to variations in the device parameters.</li><li>While it helps to reduce the internal noise (such as crosstalk), it makes the device more sensitive to external noise sources that do not scale.</li></ul>
+<p>To achieve sufficient gain for use in a digital circuit, the supply must be at least 4φ_T, where φ_T = kT/q. (The only way to operate CMOS inverters below 100 mV is to reduce the ambient temperature, that is, to cool the circuit.)</p>
+<h2 id="capacitances-of-the-cascaded-inverter-pair">Capacitances of the cascaded inverter pair</h2>
+<p>The transient behavior of a cascaded inverter pair (M1/M2 driving M3/M4) is influenced by these parasitic capacitances: the gate-drain capacitance C_gd12, the diffusion capacitances C_db1 and C_db2, the wiring capacitance C_w and the gate capacitances of the fan-out C_g3 and C_g4.</p>
+<p><strong>Miller effect:</strong> a capacitor experiencing identical but opposite voltage swings at both its terminals can be replaced by a capacitor to ground whose value is two times the original value (C_gd → 2C_gd).</p>
+<p><strong>Diffusion capacitances C_db1 and C_db2:</strong> the nonlinear junction capacitance is linearized over the voltage swing:</p>
+<p>C_eq = K_eq C_j0</p>
+<p>K_eq = −Φ_0^m / [(V_high − V_low)(1 − m)] × [(Φ_0 − V_high)^(1−m) − (Φ_0 − V_low)^(1−m)]</p>
+<p>For the 2.5 V swing the junction capacitance is linearized over {2.5 V, 1.25 V} for the high-to-low and {0, 1.25 V} for the low-to-high transition. The book values quoted on the slide:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Device / transition</th><th scope="col">Bottom plate K_eq</th><th scope="col">Sidewall K_eqsw</th></tr></thead><tbody><tr><th scope="row">NMOS, high-to-low (V_high = −2.5 V, V_low = −1.25 V)</th><td>0.57 (m = 0.5, Φ_0 = 0.9)</td><td>0.61 (m = 0.44, Φ_0 = 0.9)</td></tr><tr><th scope="row">NMOS, low-to-high (V_high = −1.25 V, V_low = 0 V)</th><td>0.79</td><td>0.81</td></tr><tr><th scope="row">PMOS, high-to-low (V_low = 0, V_high = −1.25 V)</th><td>0.79 (m = 0.48)</td><td>0.86 (m = 0.32)</td></tr><tr><th scope="row">PMOS, low-to-high (V_low = −1.25 V, V_high = −2.5 V)</th><td>0.59</td><td>0.7</td></tr></tbody></table></div>
+<p><strong>Gate capacitances of fan-out C_g3 and C_g4:</strong></p>
+<p>C_fan-out = C_gate(NMOS) + C_gate(PMOS) = (C_GSOn + C_GDOn + W_n L_n C_ox) + (C_GSOp + C_GDOp + W_p L_p C_ox)</p>
+<p>Inverter transistor data: NMOS W/L = 0.375/0.25, AD = 0.3 µm² (19λ²), PD = 1.875 µm (15λ), AS = 0.3 µm², PS = 1.875 µm; PMOS W/L = 1.125/0.25, AD = 0.7 µm² (45λ²), PD = 2.375 µm (19λ), AS = 0.7 µm², PS = 2.375 µm. Overlap capacitance CGDO(NMOS) = 0.31 fF/µm, CGDO(PMOS) = 0.27 fF/µm; bottom junction capacitance CJ(NMOS) = 2 fF/µm², CJ(PMOS) = 1.9 fF/µm²; sidewall junction capacitance CJSW(NMOS) = 0.28 fF/µm, CJSW(PMOS) = 0.22 fF/µm; gate capacitance C_ox(NMOS) = C_ox(PMOS) = 6 fF/µm².</p>
+<p>The areas and perimeters follow from the layout of the inverter (0.25 µm = 2λ, PMOS 9λ/2λ, NMOS 3λ/2λ): the PMOS drain is a 5λ × 9λ region (45λ²); the NMOS drain consists of a 4λ × 4λ and a 3λ × 1λ region (19λ²), with a perimeter of 5 + 4 + 4 + 1 + 1 = 15λ.</p>
+<figure class="yazi-gorsel"><img src="s-28.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Tersleyici yerleşimi ve savak alanlarının ölçüleri"><figcaption>CMOS inverter layout: 5λx9λ PMOS drain, 4λx4λ and 3λx1λ NMOS drain regions, 15λ drain perimeter</figcaption></figure>
+<p>Components of C_L (for high-to-low and low-to-high transitions):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Capacitor</th><th scope="col">Expression</th><th scope="col">Value (fF) H→L</th><th scope="col">Value (fF) L→H</th></tr></thead><tbody><tr><th scope="row">C_gd1</th><td>2 CGDO_n W_n</td><td>0.23</td><td>0.23</td></tr><tr><th scope="row">C_gd2</th><td>2 CGDO_p W_p</td><td>0.61</td><td>0.61</td></tr><tr><th scope="row">C_db1</th><td>K_eqn AD_n CJ + K_eqswn PD_n CJSW</td><td>0.66</td><td>0.90</td></tr><tr><th scope="row">C_db2</th><td>K_eqp AD_p CJ + K_eqswp PD_p CJSW</td><td>1.5</td><td>1.15</td></tr><tr><th scope="row">C_g3</th><td>(CGDO_n + CGSO_n) W_n + C_ox W_n L_n</td><td>0.76</td><td>0.76</td></tr><tr><th scope="row">C_g4</th><td>(CGDO_p + CGSO_p) W_p + C_ox W_p L_p</td><td>2.28</td><td>2.28</td></tr><tr><th scope="row">C_w</th><td>from extraction</td><td>0.12</td><td>0.12</td></tr><tr><th scope="row">C_L</th><td>Σ</td><td>6.1</td><td>6.0</td></tr></tbody></table></div>
+<h2 id="propagation-delay">Propagation delay</h2>
+<p>I = C dV/dt → dt = (C/I) dV → t_p = ∫ from V1 to V2 of (C_L / i) dV</p>
+<p>Both C_L and i are nonlinear functions of V; an exact computation of this equation is very difficult. Instead, we use the simplified switch model: an RC circuit with v_out(t) = (1 − e^(−t/τ)) V, where τ = RC. The time to reach the 50% point is t = ln(2) τ = 0.69 τ.</p>
+<h3 id="inverter-propagation-delay">Inverter propagation delay</h3>
+<p>Propagation delay is proportional to the time constant of the network formed by the pull-down resistor and the load capacitance:</p>
+<ul><li>t_pHL = f(R_n, C_L)</li><li>t_pHL = ln(2) R_eqn C_L = 0.69 R_eqn C_L</li><li>t_pLH = ln(2) R_eqp C_L = 0.69 R_eqp C_L</li><li>t_p = (t_pHL + t_pLH)/2 = 0.69 C_L (R_eqn + R_eqp)/2</li></ul>
+<p>To equalize rise and fall times, make the on-resistance of the NMOS and PMOS approximately equal.</p>
+<h3 id="inverter-transient-response">Inverter transient response</h3>
+<p>For V_DD = 2.5 V, 0.25 µm, W/L_n = 1.5, W/L_p = 4.5, R_eqn = 13 kΩ (÷ 1.5), R_eqp = 31 kΩ (÷ 4.5):</p>
+<ul><li>t_pHL = 0.69 × 13/1.5 × 6.1 = 36 ps</li><li>t_pLH = 0.69 × 31/4.5 × 6 = 29 ps</li><li>so t_p = 32.5 ps</li></ul>
+<p>From simulation: t_pHL = 39.9 ps and t_pLH = 31.7 ps.</p>
+<figure class="yazi-gorsel"><img src="s-33.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Tersleyicinin geçici yanıt benzetimi"><figcaption>Inverter transient response: simulated V_in and V_out, t_pHL and t_pLH</figcaption></figure>
+<h3 id="delay-as-a-function-of-v-dd">Delay as a function of V_DD</h3>
+<p>Ignoring channel length modulation, if V_DD &gt;&gt; V_Tn + V_DSATn/2:</p>
+<p>t_pHL ≈ 0.52 C_L / [(W/L)_n k'_n V_DSATn]</p>
+<p>that is, the delay becomes independent of V_DD. (The slide's plot shows normalized t_p versus V_DD from 0.8 V to 2.4 V; dots indicate the calculated values, assuming velocity saturation; deviation appears at low supply voltages.)</p>
+<h3 id="design-for-performance">Design for performance</h3>
+<ul><li><strong>Keep capacitances small:</strong> good design practice requires keeping the drain diffusion areas as small as possible.</li><li><strong>Increase transistor sizes:</strong> watch out for self-loading! The intrinsic capacitance (i.e. diffusion capacitance) starts to dominate the extrinsic load (wiring and fan-out).</li><li><strong>Increase V_DD:</strong> trade-off with energy dissipation; oxide breakdown, hot carrier effects; minimal improvement above a certain level.</li></ul>
+<h2 id="nmos-pmos-ratio">NMOS/PMOS ratio</h2>
+<p>So far we have considered a widened PMOS so that its resistance matches that of the pull-down NMOS to yield a symmetrical VTC. However, this does not imply that this ratio also yields the minimum overall propagation delay. If symmetry and reduced noise margins are not of prime concern, it is possible to speed up the inverter by reducing the width of the PMOS device.</p>
+<p>Consider two identical cascaded CMOS inverters, with the approximate load capacitance of the first gate C_L:</p>
+<ul><li>C_L = (C_dp1 + C_dn1) + (C_gp2 + C_gn2) + C_w</li><li>β = (W/L)_p / (W/L)_n → C_dp1 = β C_dn1, C_gp2 = β C_gn2</li><li>C_L = (1 + β)(C_dn1 + C_gn2) + C_w, since t_p = 0.69 C_L (R_eqn + R_eqp)/2</li><li>t_p = (0.69/2) [(1 + β)(C_dn1 + C_gn2) + C_w] (R_eqn + R_eqp/β) = 0.345 [(1 + β)(C_dn1 + C_gn2) + C_w] R_eqn (1 + r/β), where r = R_eqp/R_eqn</li></ul>
+<p>To find the optimal value of β, setting ∂t_p/∂β = 0 we find:</p>
+<p>β_opt = √(r (1 + C_w / (C_dn1 + C_gn2))), or β_opt = √r when C_dn1 + C_gn2 &gt;&gt; C_w</p>
+<figure class="yazi-gorsel"><img src="s-38.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="t_pLH, t_pHL ve t_p&#x27;nin β oranına göre değişimi"><figcaption>NMOS/PMOS ratio: β = 2.4 symmetrical response, β = 1.9 optimal performance</figcaption></figure>
+<p>Assuming W/L = 1: β of 2.4 (= 31 kΩ / 13 kΩ) gives a symmetrical response; β of 1.9 gives optimal performance (1.6 calculated).</p>
+<p>Summary:</p>
+<ul><li>So far we have sized the PMOS and NMOS so that the R_eq's match (ratio of 3 to 3.5): symmetrical VTC, equal high-to-low and low-to-high propagation delays.</li><li>If speed is the only concern, reduce the width of the PMOS device! Widening the PMOS degrades t_pHL due to larger parasitic capacitance.</li><li>β = (W/L)_p / (W/L)_n; r = R_eqp/R_eqn (resistance ratio of identically sized PMOS and NMOS); β_opt = √r when wiring capacitance is negligible.</li></ul>
+<h2 id="device-sizing-for-performance">Device sizing for performance</h2>
+<p>The next question is how transistor sizing (sizing both NMOS and PMOS with the same ratio) impacts the performance of the gate. To answer this question we use a sizing factor S, which relates the transistor sizes of our inverter to a reference gate, typically a minimum-sized inverter.</p>
+<ul><li>Divide the capacitive load C_L into C_int (intrinsic: diffusion and Miller effect) and C_ext (extrinsic: wiring and fan-out):</li></ul>
+<p>  - t_p = 0.69 R_eq (C_int + C_ext) = 0.69 R_eq C_int (1 + C_ext/C_int) = t_p0 (1 + C_ext/C_int)   - where t_p0 = 0.69 R_eq C_int is the intrinsic (unloaded) delay of the gate (C_ext = 0).</p>
+<ul><li>Widening both PMOS and NMOS by a factor S reduces R_eq by an identical factor (R_eq = R_ref/S), but raises the intrinsic capacitance by the same factor (C_int = S C_iref):</li></ul>
+<p>  - t_p = 0.69 R_ref C_iref (1 + C_ext/(S C_iref)) = t_p0 (1 + C_ext/(S C_iref))   - t_p0 is independent of the sizing of the gate; with no load, the drive of the gate is totally offset by the increased capacitance.   - Any S sufficiently larger than (C_ext/C_int) yields the best performance gains with least silicon area impact.</p>
+<h3 id="sizing-impacts-on-delay">Sizing impacts on delay</h3>
+<p>For a fixed load, the majority of the improvement is already obtained for S = 5. Sizing factors larger than 10 barely yield any extra gain (and cost significantly more area): the self-loading effect (intrinsic capacitance) dominates.</p>
+<figure class="yazi-gorsel"><img src="s-42.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Boyutlandırma çarpanı S&#x27;nin gecikmeye etkisi"><figcaption>Sizing impacts on delay: t_p versus S for a fixed load</figcaption></figure>
+<h2 id="sizing-a-chain-of-inverters">Sizing a chain of inverters</h2>
+<p>While sizing up an inverter reduces its delay, it also increases its input capacitance. Gate sizing without taking into account its impact on the delay of the preceding gates is a purely academic enterprise. Therefore, a more relevant problem is determining the optimum sizing of a gate when embedded in a real environment.</p>
+<h3 id="impact-of-fan-out-on-delay">Impact of fan-out on delay</h3>
+<ul><li>Extrinsic capacitance C_ext is a function of the fan-out of the gate: the larger the fan-out, the larger the external load.</li><li>First determine the input loading effect of the inverter. Both the input gate capacitance C_g and the intrinsic output capacitance C_int are proportional to the gate sizing, so C_int = γ C_g is independent of gate sizing and</li></ul>
+<p>t_p = t_p0 (1 + C_ext/(γ C_g)) = t_p0 (1 + f/γ)</p>
+<p>i.e. the delay of an inverter is a function of the ratio between its external load capacitance and its input gate capacitance: the <strong>effective fan-out</strong> f = C_ext/C_g.</p>
+<h3 id="inverter-chain">Inverter chain</h3>
+<p>The real goal is to minimize the delay through an inverter chain (stages 1 … N, input capacitance C_g,1, load C_L). The delay of the j-th inverter stage is (C_W ignored):</p>
+<ul><li>t_p,j = t_p0 (1 + C_g,j+1/(γ C_g,j)) = t_p0 (1 + f_j/γ)</li><li>t_p = t_p1 + t_p2 + … + t_pN</li><li>t_p = Σ t_p,j = t_p0 Σ (1 + C_g,j+1/(γ C_g,j)), with C_g,N+1 = C_L</li></ul>
+<p>If C_L is given: how should the inverters be sized, and how many stages are needed to minimize the delay?</p>
+<p>This equation has N − 1 unknowns, C_g,2, C_g,3, … C_g,N. The minimum delay can be found by taking N − 1 partial derivatives and equating them to zero: ∂t_p/∂C_g,j = 0. The result is a set of constraints:</p>
+<p>C_g,j+1 / C_g,j = C_g,j / C_g,j−1, with j = 2, … N</p>
+<p>In other words, the optimum size of each inverter is the geometric mean of its neighbors' sizes: C_g,j = √(C_g,j−1 C_g,j+1).</p>
+<h3 id="sizing-the-inverters-in-the-chain">Sizing the inverters in the chain</h3>
+<ul><li>The optimum size of each inverter is the geometric mean of its neighbors, meaning that if each inverter is sized up by the same factor f with respect to the preceding gate, it will have the same effective fan-out and the same delay:</li></ul>
+<p>  - f = (C_L/C_g,1)^(1/N) = F^(1/N)   - where F represents the overall effective fan-out of the circuit (F = C_L/C_g,1 = f^N),   - and the minimum delay through the inverter chain is t_p = N t_p0 (1 + F^(1/N)/γ).</p>
+<ul><li>The relationship between t_p and F is linear for one inverter, square root for two, etc.</li></ul>
+<p><strong>Example:</strong> with C_L = 8 C_g,1 and N = 3 inverters, C_L/C_g,1 = 8 has to be evenly distributed over the three stages: f = ∛8 = 2, so the stages are sized 1, f = 2 and f² = 4.</p>
+<h3 id="determining-n-optimal-number-of-inverters">Determining N: optimal number of inverters</h3>
+<p>What is the optimal value for N given F (= f^N)?</p>
+<ul><li>If the number of stages is too large, the intrinsic delay of the stages becomes dominant.</li><li>If the number of stages is too small, the effective fan-out of each stage becomes dominant.</li></ul>
+<p>t_p = N t_p0 (1 + F^(1/N)/γ)</p>
+<p>The optimum N is found by differentiating the minimum delay expression and setting the result to 0, giving</p>
+<p>γ + F^(1/N) − F^(1/N) ln F / N = 0, or equivalently f = e^(1 + γ/f)</p>
+<ul><li>For γ = 0 (self-loading is ignored), N = ln(F) and the effective fan-out becomes f = e = 2.71828.</li><li>For γ = 1 (the typical case) the optimum effective fan-out (tapering factor) turns out to be close to 3.6.</li></ul>
+<figure class="yazi-gorsel"><img src="s-50.jpg" width="1400" height="989" loading="lazy" decoding="async" alt="Optimum etkin yelpaze çıkışı ve normalize gecikme grafikleri"><figcaption>Optimum effective fan-out: f_opt versus γ and normalized delay versus f for γ = 1</figcaption></figure>
+<p>Choosing f larger than the optimum has little effect on delay and reduces the number of stages (and area). Common practice is to use f = 4 (for γ = 1). But too many stages have a substantial negative impact on delay.</p>
+<h3 id="example-of-inverter-buffer-staging">Example of inverter (buffer) staging</h3>
+<p>For C_g,1 = 1 and C_L = 64 C_g,1 (t_p in units of t_p0, γ = 1):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">N</th><th scope="col">f</th><th scope="col">t_p</th></tr></thead><tbody><tr><th scope="row">1</th><td>64</td><td>65</td></tr><tr><th scope="row">2</th><td>8</td><td>18</td></tr><tr><th scope="row">3</th><td>4</td><td>15</td></tr><tr><th scope="row">4</th><td>2.8</td><td>15.3</td></tr></tbody></table></div>
+<h3 id="impact-of-buffer-staging-for-large-c-l">Impact of buffer staging for large C_L</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">F (γ = 1)</th><th scope="col">Unbuffered</th><th scope="col">Two-stage chain</th><th scope="col">Opt. inverter chain</th><th scope="col">N</th></tr></thead><tbody><tr><th scope="row">10</th><td>11</td><td>8.3</td><td>8.3</td><td>2</td></tr><tr><th scope="row">100</th><td>101</td><td>22</td><td>16.5</td><td>4</td></tr><tr><th scope="row">1,000</th><td>1001</td><td>65</td><td>24.8</td><td>5</td></tr><tr><th scope="row">10,000</th><td>10,001</td><td>202</td><td>33.1</td><td>7</td></tr></tbody></table></div>
+<p>Impressive speed-ups with an optimized cascaded inverter chain for very large capacitive loads.</p>
+<h2 id="input-signal-rise-fall-time">Input signal rise/fall time</h2>
+<ul><li>In reality, the input signal changes gradually (and both PMOS and NMOS conduct for a brief time). This affects the current available for charging/discharging C_L and impacts propagation delay.</li><li>t_p increases linearly with increasing input slope t_s, once t_s &gt; t_p (simulated for a minimum-size inverter with a fan-out of a single gate).</li><li>t_s is due to the limited driving capability of the preceding gate.</li></ul>
+<h3 id="design-challenge">Design challenge</h3>
+<ul><li>A gate is never designed in isolation: its performance is affected by both the fan-out and the driving strength of the gate(s) feeding its inputs:</li></ul>
+<p>  - t^i_p = t^i_step + η t^(i−1)_step (η ≈ 0.25)</p>
+<ul><li>Keep signal rise times smaller than or equal to the gate propagation delays: good for performance, good for power consumption.</li><li>Keeping rise and fall times of the signals small and of approximately equal values is one of the major challenges in high-performance designs: <em>slope engineering</em>.</li></ul>
+<h2 id="delay-with-long-interconnects">Delay with long interconnects</h2>
+<p>When gates are farther apart, wire capacitance and resistance can no longer be ignored. For a driver with intrinsic capacitance c_int driving a wire (r_w, c_w, L) and a fan-out load c_fan:</p>
+<p>t_p = 0.69 R_dr C_int + (0.69 R_dr + 0.38 R_w) C_w + 0.69 (R_dr + R_w) C_fan, where R_dr = (R_eqn + R_eqp)/2</p>
+<p>= 0.69 R_dr (C_int + C_fan) + 0.69 (R_dr c_w + r_w C_fan) L + 0.38 r_w c_w L²</p>
+<p>Wire delay rapidly becomes the dominant factor (due to the quadratic term) in the delay budget for longer wires.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dosya_5_EEM312.pdf" download>dosya_5_EEM312.pdf</a></p>
+              <p class="kucuk">PDF · 615 KB · 55 <span data-i18n="arch.pagesLower"></span> · 18.04.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dosya_5_EEM312.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (615 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

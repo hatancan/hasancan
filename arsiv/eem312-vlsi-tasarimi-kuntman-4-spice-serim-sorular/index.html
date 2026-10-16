@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 4 – SPICE, Serim Örnekleri, Sorular ve Kaynaklar (Ayten Kuntman) — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Ayten Kuntman&#x27;ın VLSI tasarımı notlarının ek bölümü: SPICE eleman, kaynak ve analiz komutları, diyot, BJT ve MOSFET model parametre tabloları, örnek SPICE dosyaları, CMOS NAND ve NOR kapılarının L-Edit serimi, bipolar proses akışı, uygulama planı, 40 tümdevre sorusu ve kaynakça.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 4 – SPICE, Serim Örnekleri, Sorular ve Kaynaklar (Ayten Kuntman)">
+<meta property="og:description" content="Prof. Dr. Ayten Kuntman&#x27;ın VLSI tasarımı notlarının ek bölümü: SPICE eleman, kaynak ve analiz komutları, diyot, BJT ve MOSFET model parametre tabloları, örnek SPICE dosyaları, CMOS NAND ve NOR kapılarının L-Edit serimi, bipolar proses akışı, uygulama planı, 40 tümdevre sorusu ve kaynakça.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 4 – SPICE, Serim Örnekleri, Sorular ve Kaynaklar (Ayten Kuntman)", "description": "Prof. Dr. Ayten Kuntman'ın VLSI tasarımı notlarının ek bölümü: SPICE eleman, kaynak ve analiz komutları, diyot, BJT ve MOSFET model parametre tabloları, örnek SPICE dosyaları, CMOS NAND ve NOR kapılarının L-Edit serimi, bipolar proses akışı, uygulama planı, 40 tümdevre sorusu ve kaynakça.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 4 – SPICE, Serim Örnekleri, Sorular ve Kaynaklar (Ayten Kuntman)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.04.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#8-spice-programi">8. SPICE programı</a></li><li><a href="#9-serim-layout-editoru-kavrami">9. Serim (layout) editörü kavramı</a></li><li><a href="#10-sorular">10. Sorular</a></li><li><a href="#11-kaynaklar">11. Kaynaklar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: VLSI Tasarımı Ders Notu 4 – SPICE, Serim Örnekleri, Sorular ve Kaynaklar (Ayten Kuntman)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.04.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM312 Sayısal Elektronik dersinin klasöründe bulunan 158 sayfalık <strong>"VLSI Tasarımı"</strong> ders notunun dördüncü ve son bölümüdür (notun 103–158. sayfaları: ekler). Belgenin kapağında <em>"Bu notlar Prof. Dr. Ayten Kuntman tarafından 11.03.2009 tarihinde yayınlanan notların yeniden düzenlenmiş halidir"</em> yazıyor; PDF 28 Nisan 2009'da oluşturulmuş. Düzenlemeyi kimin yaptığı ve notun hangi kurumda okutulduğu belgede yazmıyor (Prof. Dr. Ayten Kuntman, İstanbul Teknik Üniversitesi öğretim üyesidir). SPICE bölümünün bilgilerinin, belgede belirtildiği gibi, SPICE geliştiricilerinin web sitesinden alınıp örneklerle desteklendiğini de ekleyelim.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p>Serinin diğer yazıları: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">1) tümdevre üretimi, silisyum ve proses adımları</a> (notun tamamı orada indirilebilir), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">2) MOS tümdevreler, CMOS prosesi ve serim kuralları</a>, <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">3) bipolar tümdevreler</a>. Bu bölümün metni, SPICE dosyaları, tabloları ve soruları aşağıya aktarıldı; benzetim sonuçları ve serimler kırpılarak eklendi. Bu bölümün sayfalarından oluşan PDF yazının sonunda indirilebilir.</p>
+<h2 id="8-spice-programi">8. SPICE programı</h2>
+<h3 id="genel-yapi">Genel yapı</h3>
+<p>SPICE (<em>Simulation Program with Integrated Circuit Emphasis</em>), University of California at Berkeley'de EECS bölümünde geliştirilmiş genel amaçlı bir elektronik devre simülatörüdür; öğrenmesi kolay ve oldukça kullanışlıdır. Bir SPICE dosyası sırasıyla <strong>başlık</strong>, <strong>devrenin yazılması</strong>, <strong>yapılacak analizlerin yazılması</strong> ve <strong>.end</strong> bölümlerinden oluşur.</p>
+<ul><li>Program yazmaya başlarken ilk satıra mutlaka <code>*</code> işareti konup başlık yazılmalıdır; aksi hâlde ilk satır başlık olarak algılanır ve işleme konmaz.</li><li>Önünde <code>*</code> olan satırlar program tarafından okunmaz; açıklamalar bu şekilde yazılır.</li><li>Program her zaman <code>.end</code> komutuyla biter. Sonuçları görmek için <code>.end</code>'den önce genellikle <code>.probe</code> kullanılır; kullanılmazsa program çalışıp kapanır ve sonuçlar çıkış dosyalarından izlenmek zorunda kalınır.</li><li>Her aktif veya pasif eleman bir harfle simgelenir ve bağlı olduğu düğümlerle yazılır. Büyük-küçük harf ayrımı yapılmaz. Satır yetmezse alt satıra <code>+</code> konarak devam edilir.</li><li>Yarıiletken elemanlar <strong>model parametreleriyle</strong> tanımlanır; parametreler farklı prosesler için yeniden tanımlanabilir. Model parametrelerinin en gelişmiş sürümü olan BSIM çok sayıda parametre içerir.</li></ul>
+<h3 id="eleman-modelleri">Eleman modelleri</h3>
+<p>Elemanın bağlantıları yazıldıktan sonra <code>.model</code> komutuyla model parametreleri yazılır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.MODEL MNAME TYPE (PNAME1=PVAL1 PNAME2=PVAL2 ...)
+.MODEL MOD1 NPN (BF=50 IS=1E-13 VBF=50)</code></pre>
+<p>MNAME kullanıcının verdiği addır; TYPE ise elemanın tipini belirten sabit adlardan biridir:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Tip</th><th scope="col">Eleman</th></tr></thead><tbody><tr><th scope="row">R</th><td>Yarıiletken direnç</td></tr><tr><th scope="row">C</th><td>Yarıiletken kapasite</td></tr><tr><th scope="row">SW</th><td>Gerilim kontrollü anahtar</td></tr><tr><th scope="row">CSW</th><td>Akım kontrollü anahtar</td></tr><tr><th scope="row">URC</th><td>Tekdüze dağılmış RC modeli</td></tr><tr><th scope="row">LTRA</th><td>Kayıplı iletim hattı</td></tr><tr><th scope="row">D</th><td>Diyot</td></tr><tr><th scope="row">NPN / PNP</th><td>NPN / PNP BJT</td></tr><tr><th scope="row">NJF / PJF</th><td>N / P kanallı JFET</td></tr><tr><th scope="row">NMOS / PMOS</th><td>N / P kanallı MOSFET</td></tr><tr><th scope="row">NMF / PMF</th><td>N / P kanallı MESFET</td></tr></tbody></table></div>
+<h3 id="alt-devreler">Alt devreler</h3>
+<p>Aynı yapıdaki alt devreler <code>.subckt</code> ile bir kez tanımlanıp tekrar tekrar kullanılabilir; tanım <code>.ends</code> ile biter. Devrede alt devre <code>X</code> harfiyle çağrılır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.SUBCKT subname N1 N2 N3 ...
+...
+.ends subname
+
+.SUBCKT OPAMP 1 2 3 4
+...
+.ends OPAMP
+
+XYYYYYYY N1 N2 N3 ... SUBNAME
+X1 2 4 17 3 1 OPAMP</code></pre>
+<h3 id="pasif-elemanlar">Pasif elemanlar</h3>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Direnç: RXXXXXXX N1 N2 VALUE
+R1 1 2 100
+RC1 12 17 1K
+* Yarıiletken direnç: RXXXXXXX N1 N2 &lt;VALUE&gt; &lt;MNAME&gt; &lt;L=LENGTH&gt; &lt;W=WIDTH&gt; &lt;TEMP=T&gt;
+RLOAD 2 10 10K
+RMOD 3 7 RMODEL L=10u W=1u
+* Kondansatör: CXXXXXXX N+ N- VALUE &lt;IC=INCOND&gt;
+CBYP 13 0 1UF
+COSC 17 23 10U IC=3V
+* Yarıiletken kondansatör: CXXXXXXX N1 N2 &lt;VALUE&gt; &lt;MNAME&gt; &lt;L=LENGTH&gt; &lt;W=WIDTH&gt; &lt;IC=VAL&gt;
+CLOAD 2 10 10P
+CMOD 3 7 CMODEL L=10u W=1u
+* Bobin: LYYYYYYY N+ N- VALUE &lt;IC=INCOND&gt;
+LLINK 42 69 1UH
+LSHUNT 23 51 10U IC=15.7MA</code></pre>
+<p>Yarıiletken direnç veya kondansatörün değeri yazılmamışsa model adı ve uzunluğu mutlaka belirtilmelidir.</p>
+<p><strong>Tablo 8.2: Yarıiletken direnç model parametreleri</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Simge</th><th scope="col">Parametre</th><th scope="col">Birim</th><th scope="col">Varsayılan</th><th scope="col">Örnek</th></tr></thead><tbody><tr><th scope="row">TC1</th><td>Birinci derece sıcaklık katsayısı</td><td>Ω/°C</td><td>0,0</td><td>—</td></tr><tr><th scope="row">TC2</th><td>İkinci derece sıcaklık katsayısı</td><td>Ω/°C²</td><td>0,0</td><td>—</td></tr><tr><th scope="row">RSH</th><td>Tabaka direnci</td><td>Ω/□</td><td>—</td><td>50</td></tr><tr><th scope="row">DEFW</th><td>Varsayılan genişlik</td><td>m</td><td>1e-6</td><td>2e-6</td></tr><tr><th scope="row">NARROW</th><td>Yan aşındırmadan kaynaklanan daralma</td><td>m</td><td>0,0</td><td>1e-7</td></tr><tr><th scope="row">TNOM</th><td>Parametre ölçüm sıcaklığı</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Tablo 8.3: Yarıiletken kondansatör model parametreleri</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Simge</th><th scope="col">Parametre</th><th scope="col">Birim</th><th scope="col">Varsayılan</th><th scope="col">Örnek</th></tr></thead><tbody><tr><th scope="row">CJ</th><td>Jonksiyon taban kapasitesi</td><td>F/m²</td><td>—</td><td>5e-5</td></tr><tr><th scope="row">CJSW</th><td>Jonksiyon yan duvar kapasitesi</td><td>F/m</td><td>—</td><td>2e-11</td></tr><tr><th scope="row">DEFW</th><td>Varsayılan eleman genişliği</td><td>m</td><td>1e-6</td><td>2e-6</td></tr><tr><th scope="row">NARROW</th><td>Yan aşındırmadan kaynaklanan daralma</td><td>m</td><td>0,0</td><td>1e-7</td></tr></tbody></table></div>
+<h3 id="gerilim-ve-akim-kaynaklari">Gerilim ve akım kaynakları</h3>
+<p>Bağımsız gerilim kaynağı <code>V</code>, bağımsız akım kaynağı <code>I</code> ile gösterilir; önce pozitif, sonra negatif uç yazılır, ardından DC/AC türü ve değeri gelir:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>VXXXXXXX N+ N- &lt;DC/AC&gt; &lt;VALUE&gt;
+IYYYYYYY N+ N- &lt;DC/AC&gt; &lt;VALUE&gt;
+VCC 10 0 DC 6
+VIN 13 2 AC 5
+* Darbe kaynağı: PULSE(V1 V2 TD TR TF PW PER)
+VIN 3 0 PULSE(-1 1 2NS 2NS 2NS 50NS 100NS)
+* Sinüzoidal kaynak: SIN(VO VA FREQ TD THETA)
+VIN 3 0 SIN(0 1 100MEG 1NS 1E10)
+* Üstel kaynak: EXP(V1 V2 TD1 TAU1 TD2 TAU2)
+VIN 3 0 EXP(-4 -1 2NS 30NS 60NS 40NS)</code></pre>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kaynak</th><th scope="col">Parametre (varsayılan değer, birim)</th></tr></thead><tbody><tr><th scope="row">PULSE</th><td>V1 başlangıç değeri (V/A); V2 darbe değeri (V/A); TD gecikme (0,0 s); TR yükselme süresi (TSTEP); TF düşme süresi (TSTEP); PW darbe genişliği (TSTOP); PER periyot (TSTOP)</td></tr><tr><th scope="row">SIN</th><td>VO ofset (V/A); VA genlik (V/A); FREQ frekans (1/TSTOP Hz); TD gecikme (0,0 s); THETA sönüm katsayısı (0,0 1/s)</td></tr><tr><th scope="row">EXP</th><td>V1 başlangıç değeri (V/A); V2 darbe değeri (V/A); TD1 yükselme gecikmesi (0,0 s); TAU1 yükselme zaman sabiti (TSTEP); TD2 düşme gecikmesi (TD1 + TSTEP); TAU2 düşme zaman sabiti (TSTEP)</td></tr></tbody></table></div>
+<h3 id="yariiletken-devre-elemanlari">Yarıiletken devre elemanları</h3>
+<p>Diyot, BJT, JFET, MOSFET ve MESFET'ler model parametreleriyle tanıtılır: bağlantılar yazıldıktan sonra elemana bir model adı verilir ve <code>.model</code> satırında bu ad ile elemanın tipi (D, NPN/PNP, NMOS/PMOS) yazılır.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Diyot: DXXXXXXX N+ N- MNAME  (anot, katot)
+DBRIDGE 2 10 DIODE1
+.model DIODE1 D (...)
+DCLMP 3 7 DMOD 3.0 IC=0.2
+* BJT: QXXXXXXX NC NB NE MNAME &lt;AREA&gt; &lt;OFF&gt; &lt;IC=VBE,VCE&gt; &lt;TEMP=T&gt;
+Q23 10 24 13 QMOD IC=0.6, 5.0
+Q50A 11 26 4 MOD1
+.model MOD1 npn (...)
+* MOSFET: MXXXXXXX ND NG NS NB MNAME &lt;L=VAL&gt; &lt;W=VAL&gt; &lt;AD=VAL&gt; &lt;AS=VAL&gt;
+* + &lt;PD=VAL&gt; &lt;PS=VAL&gt; &lt;NRD=VAL&gt; &lt;NRS=VAL&gt; &lt;OFF&gt; &lt;IC=VDS,VGS,VBS&gt; &lt;TEMP=T&gt;
+M1 24 2 0 20 TYPE1
+.model TYPE1 NMOS (...)
+M31 2 17 6 10 MODM L=5U W=2U
+.model MODM PMOS (...)
+M1 2 9 3 0 MOD1 L=10U W=5U AD=100P AS=100P PD=40U PS=40U</code></pre>
+<p><strong>Tablo 8.7: Diyot model parametreleri</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Simge</th><th scope="col">Parametre</th><th scope="col">Birim</th><th scope="col">Varsayılan</th><th scope="col">Örnek</th></tr></thead><tbody><tr><th scope="row">IS</th><td>Doyma akımı</td><td>A</td><td>1,0e-14</td><td>1,0e-14</td></tr><tr><th scope="row">RS</th><td>Omik direnç</td><td>Ω</td><td>0</td><td>10</td></tr><tr><th scope="row">N</th><td>Emisyon katsayısı</td><td>—</td><td>1</td><td>1,0</td></tr><tr><th scope="row">TT</th><td>Geçiş süresi</td><td>s</td><td>0</td><td>0,1 ns</td></tr><tr><th scope="row">CJO</th><td>Sıfır kutuplamada jonksiyon kapasitesi</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJ</th><td>Jonksiyon potansiyeli</td><td>V</td><td>1</td><td>0,6</td></tr><tr><th scope="row">M</th><td>Derecelendirme katsayısı</td><td>—</td><td>0,5</td><td>0,5</td></tr><tr><th scope="row">EG</th><td>Aktivasyon enerjisi</td><td>eV</td><td>1,11</td><td>1,11 Si; 0,69 Sbd; 0,67 Ge</td></tr><tr><th scope="row">XTI</th><td>Doyma akımı sıcaklık üssü</td><td>—</td><td>3,0</td><td>3,0 jn; 2,0 Sbd</td></tr><tr><th scope="row">KF</th><td>Kırpışma (flicker) gürültüsü katsayısı</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">AF</th><td>Kırpışma gürültüsü üssü</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">FC</th><td>İleri kutuplama fakirleşme kapasitesi formülü katsayısı</td><td>—</td><td>0,5</td><td>—</td></tr><tr><th scope="row">BV</th><td>Ters belverme gerilimi</td><td>V</td><td>sonsuz</td><td>40,0</td></tr><tr><th scope="row">IBV</th><td>Belverme gerilimindeki akım</td><td>A</td><td>1,0e-3</td><td>—</td></tr><tr><th scope="row">TNOM</th><td>Parametre ölçüm sıcaklığı</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Tablo 8.8: BJT model parametreleri</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Simge</th><th scope="col">Parametre</th><th scope="col">Birim</th><th scope="col">Varsayılan</th><th scope="col">Örnek</th></tr></thead><tbody><tr><th scope="row">IS</th><td>Taşıma doyma akımı</td><td>A</td><td>1,0e-16</td><td>1,0e-15</td></tr><tr><th scope="row">BF</th><td>İdeal maksimum ileri beta</td><td>—</td><td>100</td><td>100</td></tr><tr><th scope="row">NF</th><td>İleri akım emisyon katsayısı</td><td>—</td><td>1,0</td><td>1</td></tr><tr><th scope="row">VAF</th><td>İleri Early gerilimi</td><td>V</td><td>sonsuz</td><td>200</td></tr><tr><th scope="row">IKF</th><td>İleri betanın yüksek akımda düşme köşesi</td><td>A</td><td>sonsuz</td><td>0,01</td></tr><tr><th scope="row">ISE</th><td>B-E kaçak doyma akımı</td><td>A</td><td>0</td><td>1,0e-13</td></tr><tr><th scope="row">NE</th><td>B-E kaçak emisyon katsayısı</td><td>—</td><td>1,5</td><td>2</td></tr><tr><th scope="row">BR</th><td>İdeal maksimum ters beta</td><td>—</td><td>1</td><td>0,1</td></tr><tr><th scope="row">NR</th><td>Ters akım emisyon katsayısı</td><td>—</td><td>1</td><td>1</td></tr><tr><th scope="row">VAR</th><td>Ters Early gerilimi</td><td>V</td><td>sonsuz</td><td>200</td></tr><tr><th scope="row">IKR</th><td>Ters betanın yüksek akımda düşme köşesi</td><td>A</td><td>sonsuz</td><td>0,01</td></tr><tr><th scope="row">ISC</th><td>B-C kaçak doyma akımı</td><td>A</td><td>0</td><td>—</td></tr><tr><th scope="row">NC</th><td>B-C kaçak emisyon katsayısı</td><td>—</td><td>2</td><td>1,5</td></tr><tr><th scope="row">RB</th><td>Sıfır kutuplamada baz direnci</td><td>Ω</td><td>0</td><td>100</td></tr><tr><th scope="row">IRB</th><td>Baz direncinin minimuma yarı yoldan düştüğü akım</td><td>A</td><td>sonsuz</td><td>0,1</td></tr><tr><th scope="row">RBM</th><td>Yüksek akımda minimum baz direnci</td><td>Ω</td><td>RB</td><td>10</td></tr><tr><th scope="row">RE</th><td>Emetör direnci</td><td>Ω</td><td>0</td><td>1</td></tr><tr><th scope="row">RC</th><td>Kollektör direnci</td><td>Ω</td><td>0</td><td>10</td></tr><tr><th scope="row">CJE</th><td>B-E sıfır kutuplama fakirleşme kapasitesi</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJE</th><td>B-E yerleşik potansiyeli</td><td>V</td><td>0,75</td><td>0,6</td></tr><tr><th scope="row">MJE</th><td>B-E jonksiyonu üstel çarpanı</td><td>—</td><td>0,33</td><td>0,33</td></tr><tr><th scope="row">TF</th><td>İdeal ileri geçiş süresi</td><td>s</td><td>0</td><td>0,1 ns</td></tr><tr><th scope="row">XTF</th><td>TF'nin kutuplama bağımlılığı katsayısı</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">VTF</th><td>TF'nin V_BC bağımlılığını tanımlayan gerilim</td><td>V</td><td>sonsuz</td><td>—</td></tr><tr><th scope="row">ITF</th><td>TF üzerindeki etki için yüksek akım parametresi</td><td>A</td><td>0</td><td>—</td></tr><tr><th scope="row">PTF</th><td>f = 1/(2π·TF) Hz'de fazla faz</td><td>derece</td><td>0</td><td>—</td></tr><tr><th scope="row">CJC</th><td>B-C sıfır kutuplama fakirleşme kapasitesi</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJC</th><td>B-C yerleşik potansiyeli</td><td>V</td><td>0,75</td><td>0,5</td></tr><tr><th scope="row">MJC</th><td>B-C jonksiyonu üstel çarpanı</td><td>—</td><td>0,33</td><td>0,5</td></tr><tr><th scope="row">XCJC</th><td>B-C kapasitesinin iç baz düğümüne bağlı kesri</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">TR</th><td>İdeal ters geçiş süresi</td><td>s</td><td>0</td><td>10 ns</td></tr><tr><th scope="row">CJS</th><td>Sıfır kutuplamada kollektör-taban kapasitesi</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJS</th><td>Taban jonksiyonu yerleşik potansiyeli</td><td>V</td><td>0,75</td><td>—</td></tr><tr><th scope="row">MJS</th><td>Taban jonksiyonu üstel çarpanı</td><td>—</td><td>0</td><td>0,5</td></tr><tr><th scope="row">XTB</th><td>İleri ve ters beta sıcaklık üssü</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">EG</th><td>IS sıcaklık etkisi için enerji aralığı</td><td>eV</td><td>1,11</td><td>—</td></tr><tr><th scope="row">XTI</th><td>IS sıcaklık etkisi üssü</td><td>—</td><td>3</td><td>—</td></tr><tr><th scope="row">KF</th><td>Kırpışma gürültüsü katsayısı</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">AF</th><td>Kırpışma gürültüsü üssü</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">FC</th><td>İleri kutuplama fakirleşme kapasitesi formülü katsayısı</td><td>—</td><td>0,5</td><td>—</td></tr><tr><th scope="row">TNOM</th><td>Parametre ölçüm sıcaklığı</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Tablo 8.9: MOSFET model parametreleri</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Simge</th><th scope="col">Parametre</th><th scope="col">Birim</th><th scope="col">Varsayılan</th><th scope="col">Örnek</th></tr></thead><tbody><tr><th scope="row">LEVEL</th><td>Model indeksi</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">VTO</th><td>Sıfır kutuplama eşik gerilimi (V_T0)</td><td>V</td><td>0,0</td><td>1,0</td></tr><tr><th scope="row">KP</th><td>Geçiş iletkenliği parametresi</td><td>A/V²</td><td>2,0e-5</td><td>3,1e-5</td></tr><tr><th scope="row">GAMMA</th><td>Gövde eşik parametresi (γ)</td><td>V^½</td><td>0,0</td><td>0,37</td></tr><tr><th scope="row">PHI</th><td>Yüzey potansiyeli (2Φ_F)</td><td>V</td><td>0,6</td><td>0,65</td></tr><tr><th scope="row">LAMBDA</th><td>Kanal boyu modülasyonu (yalnız MOS1, MOS2)</td><td>1/V</td><td>0,0</td><td>0,02</td></tr><tr><th scope="row">RD</th><td>Savak omik direnci</td><td>Ω</td><td>0,0</td><td>1,0</td></tr><tr><th scope="row">RS</th><td>Kaynak omik direnci</td><td>Ω</td><td>0,0</td><td>1,0</td></tr><tr><th scope="row">CBD</th><td>Sıfır kutuplamada B-D jonksiyon kapasitesi</td><td>F</td><td>0,0</td><td>20 fF</td></tr><tr><th scope="row">CBS</th><td>Sıfır kutuplamada B-S jonksiyon kapasitesi</td><td>F</td><td>0,0</td><td>20 fF</td></tr><tr><th scope="row">IS</th><td>Gövde jonksiyonu doyma akımı</td><td>A</td><td>1,0e-14</td><td>1,0e-15</td></tr><tr><th scope="row">PB</th><td>Gövde jonksiyonu potansiyeli</td><td>V</td><td>0,8</td><td>0,87</td></tr><tr><th scope="row">CGSO</th><td>Kanal genişliğinin metresi başına geçit-kaynak bindirme kapasitesi</td><td>F/m</td><td>0,0</td><td>4,0e-11</td></tr><tr><th scope="row">CGDO</th><td>Kanal genişliğinin metresi başına geçit-savak bindirme kapasitesi</td><td>F/m</td><td>0,0</td><td>4,0e-11</td></tr><tr><th scope="row">CGBO</th><td>Kanal boyunun metresi başına geçit-gövde bindirme kapasitesi</td><td>F/m</td><td>0,0</td><td>2,0e-10</td></tr><tr><th scope="row">RSH</th><td>Savak ve kaynak difüzyonu tabaka direnci</td><td>Ω/□</td><td>0,0</td><td>10,0</td></tr><tr><th scope="row">CJ</th><td>Jonksiyon alanının m²'si başına sıfır kutuplama taban kapasitesi</td><td>F/m²</td><td>0,0</td><td>2,0e-4</td></tr><tr><th scope="row">MJ</th><td>Gövde jonksiyonu taban derecelendirme katsayısı</td><td>—</td><td>0,5</td><td>0,5</td></tr><tr><th scope="row">CJSW</th><td>Jonksiyon çevresinin metresi başına sıfır kutuplama yan duvar kapasitesi</td><td>F/m</td><td>0,0</td><td>1,0e-9</td></tr><tr><th scope="row">MJSW</th><td>Gövde jonksiyonu yan duvar derecelendirme katsayısı</td><td>—</td><td>0,50 (level 1); 0,33 (level 2, 3)</td><td>—</td></tr><tr><th scope="row">JS</th><td>Jonksiyon alanının m²'si başına doyma akımı</td><td>A/m²</td><td>—</td><td>1,0e-8</td></tr><tr><th scope="row">TOX</th><td>Oksit kalınlığı</td><td>m</td><td>1,0e-7</td><td>1,0e-7</td></tr><tr><th scope="row">NSUB</th><td>Taban katkısı</td><td>1/cm³</td><td>0,0</td><td>4,0e15</td></tr><tr><th scope="row">NSS</th><td>Yüzey durum yoğunluğu</td><td>1/cm²</td><td>0,0</td><td>1,0e10</td></tr><tr><th scope="row">NFS</th><td>Hızlı yüzey durum yoğunluğu</td><td>1/cm²</td><td>0,0</td><td>1,0e10</td></tr><tr><th scope="row">TPG</th><td>Geçit malzemesi tipi: +1 tabana zıt, −1 tabanla aynı, 0 Al geçit</td><td>—</td><td>1,0</td><td>—</td></tr><tr><th scope="row">XJ</th><td>Metalurjik jonksiyon derinliği</td><td>m</td><td>0,0</td><td>1 µ</td></tr><tr><th scope="row">LD</th><td>Yanal difüzyon</td><td>m</td><td>0,0</td><td>0,8 µ</td></tr><tr><th scope="row">UO</th><td>Yüzey mobilitesi</td><td>cm²/V·s</td><td>600</td><td>700</td></tr><tr><th scope="row">UCRIT</th><td>Mobilite düşmesi için kritik alan (yalnız MOS2)</td><td>V/cm</td><td>1,0e4</td><td>1,0e4</td></tr><tr><th scope="row">UEXP</th><td>Mobilite düşmesinde kritik alan üssü (yalnız MOS2)</td><td>—</td><td>0,0</td><td>0,1</td></tr><tr><th scope="row">UTRA</th><td>Enine alan katsayısı (MOS2'de kaldırıldı)</td><td>—</td><td>0,0</td><td>0,3</td></tr><tr><th scope="row">VMAX</th><td>Taşıyıcıların maksimum sürüklenme hızı</td><td>m/s</td><td>0,0</td><td>5,0e4</td></tr><tr><th scope="row">NEFF</th><td>Toplam kanal yükü (sabit ve hareketli) katsayısı (yalnız MOS2)</td><td>—</td><td>1,0</td><td>5,0</td></tr><tr><th scope="row">KF</th><td>Kırpışma gürültüsü katsayısı</td><td>—</td><td>0,0</td><td>1,0e-26</td></tr><tr><th scope="row">AF</th><td>Kırpışma gürültüsü üssü</td><td>—</td><td>1,0</td><td>1,2</td></tr><tr><th scope="row">FC</th><td>İleri kutuplama fakirleşme kapasitesi formülü katsayısı</td><td>—</td><td>0,5</td><td>—</td></tr><tr><th scope="row">DELTA</th><td>Genişliğin eşik gerilimine etkisi (MOS2, MOS3)</td><td>—</td><td>0,0</td><td>1,0</td></tr><tr><th scope="row">THETA</th><td>Mobilite modülasyonu (yalnız MOS3)</td><td>1/V</td><td>0,0</td><td>0,1</td></tr><tr><th scope="row">ETA</th><td>Statik geri besleme (yalnız MOS3)</td><td>—</td><td>0,0</td><td>1,0</td></tr><tr><th scope="row">KAPPA</th><td>Doyma alanı çarpanı (yalnız MOS3)</td><td>—</td><td>0,2</td><td>0,5</td></tr><tr><th scope="row">TNOM</th><td>Parametre ölçüm sıcaklığı</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<h3 id="analizler">Analizler</h3>
+<h4 id="ac-analiz">AC analiz</h4>
+<p><code>.ac</code> komutundan sonra taramanın türü (dec/oct/lin), her on katlık/oktav başına (ya da toplam) nokta sayısı ve başlangıç ile bitiş frekansları yazılır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.AC DEC ND FSTART FSTOP
+.AC OCT NO FSTART FSTOP
+.AC LIN NP FSTART FSTOP
+.AC DEC 10 1 10K
+.AC DEC 10 1K 100MEG
+.AC LIN 100 1 100HZ</code></pre>
+<p>Örnek: R = 1 kΩ, C = 1 µF'lık RC alçak geçiren süzgeç. Satır başındaki <code>*</code> kaldırılarak zaman, DC, AC, distorsiyon ve gürültü analizlerinden istenen çalıştırılır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>**başlık
+*vs 1 0 sin(0 1 1k)    * zaman analizi için gerekli giriş
+vs 1 0 ac 5v
+r1 1 2 1k
+c1 2 0 1u
+*.tran 1n 2m                    *zaman analizi
+*.dc vs 0 5 0.1                 *dc analiz
+*.ac dec 101 10 10K             *ac analiz
+*.disto DEC 10 10 10k           *distorsiyon analizi
+*.NOISE V(2) Vs DEC 101 10 10K  *gürültü analizi
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="alcak-geciren.jpg" width="688" height="260" loading="lazy" decoding="async" alt="Alçak geçiren RC süzgeç devresi: V_in, seri R, çıkışta toprağa C"><figcaption>Alçak geçiren süzgeç</figcaption></figure>
+<figure class="yazi-gorsel"><img src="alcak-geciren-kazanc.jpg" width="673" height="459" loading="lazy" decoding="async" alt="V(2)/V(1) kazancının 10 Hz–10 kHz arasında frekansla değişimi: düşük frekansta 0 dB, yaklaşık 160 Hz kesim frekansından sonra düşüş"><figcaption>Alçak geçiren süzgeç devresinin kazanç-frekans eğrisi</figcaption></figure>
+<h4 id="dc-analiz">DC analiz</h4>
+<p><code>.dc</code> komutundan sonra taranacak kaynağın adı, başlangıç, bitiş değeri ve adımı yazılır; ikinci bir kaynak aynı satıra eklenebilir:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.DC SRCNAM VSTART VSTOP VINCR [SRC2 START2 STOP2 INCR2]
+.DC VIN 0.25 5.0 0.25
+.DC VDS 0 10 .5 VGS 0 5 1
+.DC VCE 0 10 .25 IB 0 10U 1U</code></pre>
+<p>MOS tranzistörün akım-gerilim karakteristiğinin çıkarılması (örnekte BSIM3 model parametreleri kullanılmış):</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*n-MOS özeğri
+VGS 2 0 dc 0
+VDS 3 0 dc 0
+M1 3 2 0 0 NMOD L=1U W=2U
+.MODEL NMOD NMOS (...)
+.dc Vds 0 3 0.1 vgs 0 3 1
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="nmos-ozegri.jpg" width="660" height="578" loading="lazy" decoding="async" alt="V_GS = 0–3 V için NMOS savak akımının V_DS ile değişimi (0–3 V)"><figcaption>MOS tranzistörün akım-gerilim karakteristiği</figcaption></figure>
+<h4 id="zaman-bolgesi-analizi">Zaman bölgesi analizi</h4>
+<p><code>.tran</code> komutundan sonra zaman adımı, bitiş süresi ve (isteğe bağlı) başlangıç süresi yazılır; TSTART belirtilmezse 0 alınır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.TRAN TSTEP TSTOP TSTART
+.TRAN 1NS 100NS
+.TRAN 1NS 1000NS 500NS
+*RLC analizi
+Vin 1 0 pulse(-220 220 0 1ns 1ns 100us 200us)
+R1 1 2 2
+L1 2 3 50uH
+C1 3 0 10uF
+.tran 1u 400u
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="rlc.jpg" width="688" height="1000" loading="lazy" decoding="async" alt="RLC devresine ±220 V&#x27;luk 200 µs periyotlu darbe uygulandığında direnç akımının ve kondansatör geriliminin 0–400 µs arasında salınımlı değişimi"><figcaption>RLC devresinde direnç akımının ve kondansatör geriliminin zamanla değişimi</figcaption></figure>
+<h4 id="distorsiyon-ve-gurultu-analizi">Distorsiyon ve gürültü analizi</h4>
+<p>Distorsiyon analizi devrelerin küçük işaret distorsiyonunu hesaplar; yazımı AC analize benzer. Gürültü analizinde <code>.noise</code> komutundan sonra çıkış gürültüsünün ölçüleceği nokta, giriş kaynağı ve AC analizdeki gibi frekans taraması yazılır:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.DISTO DEC ND FSTART FSTOP
+.DISTO DEC 10 1kHz 100Mhz
+.NOISE V(OUTPUT) V(INPUT) (DEC | LIN | OCT) PTS FSTART FSTOP
+.NOISE V(5) VIN DEC 10 1kHZ 100Mhz
+.NOISE V(5,3) V1 OCT 8 100 10kHz</code></pre>
+<p>Simetrik CMOS OTA'nın gürültü analizi (örnekte TÜBİTAK 3 µ model parametreleri kullanılmış):</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*Simetrik CMOS Ota
+Vdd 1 0 dc 2.5V
+Vss 3 0 dc -2.5V
+Vn 5 0 dc 2v
+Vp 9 0 dc 0v
+M1 4 5 6 6 NMOD L=1U W=2U
+M2 7 9 6 6 NMOD L=1U W=2U
+M7 2 2 3 3 NMOD L=1U W=2U
+M8 8 2 3 3 NMOD L=1U W=2U
+M3 4 4 1 1 PMOD L=1U W=5U
+M4 7 7 1 1 PMOD L=1U W=5U
+M5 2 4 1 1 PMOD L=1U W=4U
+M6 8 7 1 1 PMOD L=1U W=4U
+IB 6 3 DC 100uA
+*vx 8 0 dc 0V
+.MODEL NMOD NMOS (...)
+.MODEL PMOD PMOS (...)
+*.dc vn -2 2 0.1 ib 10u 100u 20u
+.NOISE V(8) VN OCT 8 100 1000000kHz
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="ota-gurultu.jpg" width="673" height="449" loading="lazy" decoding="async" alt="Çıkış gürültü yoğunluğunun 100 Hz–1 GHz arasında yaklaşık sabit kalıp yüksek frekansta düşmesi"><figcaption>CMOS OTA'nın gürültü analizi</figcaption></figure>
+<h2 id="9-serim-layout-editoru-kavrami">9. Serim (layout) editörü kavramı</h2>
+<p>Notta Vikipedi'ye dayandırılan tanıma göre tümdevre serimi (IC serimi, IC maske serimi veya maske tasarımı), tümdevrenin metal, oksit ve yarıiletken katmanlarının düzlemsel geometrik şekillerle ifade edilmesidir. Standart bir proseste tümdevrenin çalışması bu şekillerin konumuna ve bağlantılarına bağlıdır. Serim mühendisinin görevi, tüm tasarım koşullarını sağlayacak şekilde elemanları kırmığa yerleştirmek ve bağlamaktır; dikkat edilen başlıca özellikler performans, büyüklük ve üretilebilirliktir.</p>
+<p>Serim, doğrulama denen bir dizi testten geçirilir; en önemli iki adım <strong>DRC</strong> (<em>Design Rule Checking</em>, tasarım kuralları kontrolü) ve <strong>LVS</strong> (<em>Layout Versus Schematic</em>, serim–şema karşılaştırması) adımlarıdır. Doğrulamadan sonra veriler endüstride işlenmeye uygun hâle getirilir ve üretime geçilir. Bilgisayar destekli tasarımdan önce serim opak filmlerle elle yapılırdı; günümüzde EDA araçlarıyla (L-Edit, LASI, Electric…) yapılır.</p>
+<p>Notta ayrıca bipolar tümdevre prosesinin akış şeması verilmiş:</p>
+<ol><li>Isıl oksitleme</li><li>Altkollektör maskesi (<strong>maske 1</strong>) → antimon difüzyonu ve oksitleme</li><li>Epitaksi katmanı oluşturma</li><li>İzolasyon maskesi (<strong>maske 2</strong>) → bor difüzyonu ve oksitleme</li><li>Baz maskesi (<strong>maske 3</strong>) → baz difüzyonu ve oksitleme</li><li>Emetör maskesi (<strong>maske 4</strong>) → emetör difüzyonu (P veya As)</li><li>Kontak maskesi (<strong>maske 5</strong>) → metal depolama</li><li>Metal desen maskesi (<strong>maske 6</strong>) → metal aşındırma</li><li>SiO₂ pasivasyon katmanı → bağlantı yollarının (pabuçların) açılması (<strong>maske 7</strong>)</li></ol>
+<h3 id="spice-ve-serim-ornekleri-cmos-nand-kapisi">SPICE ve serim örnekleri: CMOS NAND kapısı</h3>
+<p>PMOS'lar (W/L = 16/3) paralel, NMOS'lar (W/L = 8/3) seri bağlıdır. Doğruluk tablosu (D, E girişler; C çıkış): D = 0 veya E = 0 iken C = 1; D = E = 1 iken C = 0.</p>
+<figure class="yazi-gorsel"><img src="nand-devre.jpg" width="688" height="275" loading="lazy" decoding="async" alt="CMOS NAND kapısı: VDD&#x27;ye paralel iki pMOS (16/3), toprağa seri iki nMOS (8/3), girişler D ve E, çıkış C"><figcaption>CMOS NAND kapısı</figcaption></figure>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nand
+vdd 1 0 dc 5V
+m1 2 4 1 1 pmod W=16u L=3u
+m2 2 5 1 1 pmod W=16u L=3u
+m3 2 4 3 0 nmod W=8u L=3u
+m4 3 5 0 0 nmod W=8u L=3u
+.MODEL NMOD NMOS (... LEVEL=3 model parametreleri ...)
+.MODEL PMOD PMOS (... LEVEL=3 model parametreleri ...)
+v1 4 0 pulse(0 5V 1n 0 0 10n 15n)
+v2 5 0 pulse(0 5V 5n 0 0 15n 20n)
+.tran 0.1n 25n
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="nand-cikis.jpg" width="688" height="373" loading="lazy" decoding="async" alt="NAND kapısının 0–25 ns arasındaki çıkış işareti: yalnız iki giriş birlikte 5 V iken çıkış 0&#x27;a iniyor"><figcaption>NAND kapısının çıkış işareti</figcaption></figure>
+<p>NAND kapısının maskeleri sırasıyla çizilmiş: 1) n-kuyu oluşturulması, 2) geçit bölgesinin oluşturulması, 3) N⁺ difüzyonu, 4) P⁺ difüzyonu, 5) kontaklar, 6) metalizasyon ve bağlantılar.</p>
+<figure class="yazi-gorsel"><img src="nand-serim.jpg" width="703" height="688" loading="lazy" decoding="async" alt="L-Edit&#x27;te CMOS NAND serimi: üstte yeşil n-kuyu içinde pMOS&#x27;lar, altta nMOS&#x27;lar, kırmızı polisilisyum geçitler (E, D), mavi metal VDD, GND ve çıkış"><figcaption>NAND kapısı: 6. metalizasyon ve bağlantılar</figcaption></figure>
+<h3 id="cmos-nor-kapisi">CMOS NOR kapısı</h3>
+<p>PMOS'lar (W/L = 10/2) seri, NMOS'lar (W/L = 5/2) paralel bağlıdır. Doğruluk tablosu (G, H girişler; F çıkış): yalnız G = H = 0 iken F = 1, diğer durumlarda F = 0.</p>
+<figure class="yazi-gorsel"><img src="nor-devre.jpg" width="673" height="428" loading="lazy" decoding="async" alt="CMOS NOR kapısı: VDD&#x27;den seri iki pMOS (10/2), toprağa paralel iki nMOS (5/2), girişler G ve H, çıkış F"><figcaption>CMOS NOR kapısı</figcaption></figure>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nor
+vdd 1 0 dc 5V
+m1 2 4 1 1 pmod W=10u L=2u
+m2 3 5 2 1 pmod W=10u L=2u
+m3 3 4 0 0 nmod W=5u L=2u
+m4 3 5 0 0 nmod W=5u L=2u
+.MODEL NMOD NMOS (LEVEL=3 model parametreleri)
+.MODEL PMOD PMOS (LEVEL=3 model parametreleri)
+v1 4 0 pulse(0 5V 2n 0 0 5n 10n)
+v2 5 0 pulse(0 5V 3n 0 0 4n 15n)
+.tran 0.1n 17n
+.probe
+.end</code></pre>
+<p>NOR kapısı için de aynı altı maske adımı (n-kuyu, geçit, N⁺, P⁺, kontaklar, metalizasyon) çizilmiş.</p>
+<figure class="yazi-gorsel"><img src="nor-serim.jpg" width="703" height="682" loading="lazy" decoding="async" alt="L-Edit&#x27;te CMOS NOR serimi: n-kuyu içinde seri pMOS&#x27;lar, altta paralel nMOS&#x27;lar, G ve H geçitleri, VDD, GND ve çıkış metal yolları"><figcaption>NOR kapısı: 6. metalizasyon ve bağlantılar</figcaption></figure>
+<h3 id="tumdevre-teknolojisi-dersi-uygulama-plani">Tümdevre teknolojisi dersi uygulama planı</h3>
+<ol><li>SPICE programının tanıtımı; temel yarıiletken elemanların (diyot, BJT, MOSFET) akım-gerilim eğrilerinin çıkarılması.</li><li>L-Edit programının tanıtılması.</li><li>SPICE ile temel analog işlem bloklarının (akım aynası, …) incelenmesi.</li><li>L-Edit ile bipolar tranzistör ve akım aynası seriminin hazırlanması.</li><li>SPICE ile temel analog işlem bloklarının (akım aynası, NMOS ve CMOS eviriciler, basit kuvvetlendirici yapıları) incelenmesi.</li><li>L-Edit ile MOS tranzistör ve CMOS evirici seriminin hazırlanması.</li><li>SPICE ve L-Edit'in birlikte kullanıldığı uygulama (NOR kapısı).</li></ol>
+<h2 id="10-sorular">10. Sorular</h2>
+<ol><li>Bir tümdevre direncin uçlarına 4 V'luk gerilim uygulandığında 2 mA'lik akım akmaktadır. Bu direncin üretim yöntemini belirleyerek L/W oranını bulunuz. Düşey kesitini çiziniz.</li><li>Bir p-n jonksiyonunda N_A = 5×10¹⁵ atom/cm³, N_D = 10¹⁶ atom/cm³, E_kritik = 3×10⁵ V/cm olduğuna göre: a) jonksiyonun belverme gerilimini bulunuz (ε = 1,04×10⁻¹² F/cm); b) p tipi bölge için fakirleşmiş bölge kalınlığını bulunuz.</li><li>N_A = 2×10¹⁵ atom/cm³ ve N_D = 5×10¹⁶ atom/cm³ olan sert geçişli bir p-n jonksiyonunun belverme gerilimi 30 V olduğuna göre, p tipi bölge için fakirleşmiş bölge kalınlığını hesaplayınız.</li><li>n tipi katkı yoğunluğu 10¹⁸ atom/cm³ olan 4 µm kalınlığındaki difüzyon bölgesinin tabaka direncini hesaplayınız.</li><li>a) Şekil 1'de serimi verilen yapının (p-taban, n-kuyu ve geçit maskeleri) A-A′ doğrultusundaki düşey kesitini çiziniz. b) Şekil 2'de düşey kesiti verilen yapının (p tipi taban, n⁺ gömük tabaka, n-epi, p ve n difüzyonları) maskelerini çizip serimini oluşturunuz.</li><li>a) MOSFET üretim aşamalarından hareketle serimi verilen elemanın (aktif, polisilisyum, metal katmanları) A-A′ doğrultusundaki düşey kesitini çiziniz. b) Entegre devre üretiminde metalizasyon prosesinin ana amacı nedir? c) Polisilisyum prosesinin ana amacı nedir?</li><li>a) MOSIS serim tasarım kurallarından yararlanarak bir CMOS eviricinin kırmık üzerindeki yerleşim alanını hesaplayınız; kullanılan minimum boyutları çizerek gösteriniz (λ = 0,5 µm). b) Kontak maskesini çizerek gösteriniz.</li><li>Bir p kanallı MOS tranzistörün kaynak ve savak bölgeleri 10¹⁹ 1/cm³ yoğunlukla katkılanıyor, difüzyon derinliği 3 µm'dir. a) Bu bölgenin tabaka direncini hesaplayınız. b) Bölgenin direncinin 50 Ω olması için L/W oranı ne olur? (µ_p = 70 cm²/V·s)</li><li>Bir p-kanallı MOS tranzistörde proses parametreleri N_D = 10¹⁶ 1/cm³, (kaynak-savak) 10²⁰ 1/cm³, N_ox = 4×10¹⁰, t_ox = 0,1 µm, q = 1,6×10⁻¹⁹ C, V_SB = 0, ε_r(SiO₂) = 4, ε_r(Si) = 11,7, ε₀ = 8,86×10⁻¹⁴ F/cm, Φ_GC = −0,2014 V, Q_BO = 4,81×10⁻⁸ C/cm², n_i = 1,5×10¹⁰ 1/cm³'tür. Bu tranzistörün eşik gerilimini hesaplayınız.</li><li>Bir MOS tranzistörde kaynak-savak difüzyonu katkı yoğunluğu N_A = 10²⁰ 1/cm³, jonksiyon derinliği 3 µm ve direnci 100 Ω olduğuna göre kaynak-savak bölgesinin W/L oranını bulunuz (µ = 500 cm²/V·s, q = 1,6×10⁻¹⁹ C).</li><li>Şekil 1 ve 2'de NMOS ve PMOS'un I_D–V_DS eğrileri görülmektedir. Bu tranzistörlerle 5 V'luk kaynakla beslenen ve 10 pF'lık kapasitif yükü süren bir CMOS evirici tasarlanmak isteniyor. Eviricinin a) lojik 0 gerilimini, b) evirtim noktasını, c) aşağı gecikmesini, d) yukarı gecikmesini hesaplayınız (µ_n·C_ox = 130 µA/V², µ_p·C_ox = 10 µA/V²).</li><li>Bir NMOS tranzistör için V_GS'nin √I_D ile değişimi şekilde görülmektedir (V_GS = 2 V'ta √I_D = 0,4 mA^½, V_GS = 3 V'ta 0,8 mA^½). µC_ox = 60 µA/V² ve V_BS = 0'dır. a) Eşik gerilimi nedir? b) Hangi çalışma bölgesinde çalışmaktadır? c) Tranzistörün β değerini ve W/L oranını hesaplayınız.</li><li>Şekildeki nMOS tranzistörün (V_GS = V_DS) farklı kutuplama şartlarında oda sıcaklığındaki I-V karakteristiği aşağıda verilmiştir. W/L = 1,0, t_ox = 150 Å, |2Φ_F| = 0,64 V. a) Eşik gerilimi V_TO'yu, b) elektron mobilitesi µ_n'yi, c) gövde etkisi katsayısı γ'yı bulunuz.</li><li>Gerilim uygulanmamış bir N-kanallı MOS tranzistörde oluşan kapasiteleri hesaplayınız ve şekil üzerinde gösteriniz. Çizilen kanal genişliği 90 µ, kanal boyu 6 µ; L(overlap) = 0,3 µ, t_ox = 100 Å, ε_r(Si) = 11,7, ε_r(SiO₂) = 4, ε₀ = 8,85×10⁻¹⁴ F/cm.</li><li>Bir CMOS eviricide K_p = µ_p·C_ox = 10 µA/V², K_n = µ_n·C_ox = 30 µA/V², V_TD = 1 V, V_TL = −2 V'tur; V_inv = V_DD/2 olması isteniyor. a) (W/L)_D ve (W/L)_L oranları ne olmalıdır? b) Gecikme sürelerinin eşit olması için (W/L)_D/(W/L)_L oranı ne olmalıdır? (C_L = 5 pF)</li><li>Bir akım aynasında besleme gerilimi 5 V, I_ref = 1 mA, V_T = 26 mV, I_S = 10⁻¹⁵ A ve β ≫ 1'dir (I_C1 = I_ref = I_S·e^(V_BE/V_T)). a) V_BE = ? b) R1 = ? c) R1 direnci proses sırasında hangi adımda gerçekleştirilebilir?</li><li>a) Bir npn tranzistörde 40 °C sıcaklıkta, sıfır kutuplamada 50 µm² alanda oluşacak maksimum kollektör-baz kapasitesini hesaplayınız (epi katkı yoğunluğu 5×10¹⁵ cm⁻³, baz katkı yoğunluğu 8×10¹⁹ cm⁻³, ε₀ = 8,86×10⁻¹⁴ F/cm, ε_r(Si) = 11,8, n_i = 1,5×10¹⁰ /cm³, q = 1,6×10⁻¹⁹ C, k = 1,38×10⁻²³ J/K). b) Aynı kapasite MOS kapasite olarak yapılırsa ne kadar kırmık alanı gerekir? (ε_r(SiO₂) = 4, t_ox = 1000 Å)</li><li>Bipolar npn tranzistörde çizilen baz bölgesi boyutları W = 40 µm, L = 30 µm, difüzyon derinliği 4 µm ve baz bölgesi direnci 50 Ω olduğuna göre bölgenin katkı yoğunluğunu hesaplayınız (µ = 120 cm²/V·s, q = 1,6×10⁻¹⁹ C).</li><li>Bir npn tranzistörün çizilmiş boyutları emetör 20 µm × 25 µm, gömük tabaka 41 µm × 65 µm, epi bölgesi 140 µm × 75 µm, kollektör kontağı 18 µm × 49 µm, baz 60 µm × 45 µm, izolasyon difüzyonu 10 µm × 15 µm olduğuna göre tranzistörün çip üzerinde kapladığı alanı hesaplayınız.</li><li>Bipolar npn tranzistörün V_BE = 550 mV, I_C = 10 µA, emetör alanı 4 mil × 4 mil olduğuna göre baz bölgesi katkı yoğunluğunu (φ_B) hesaplayınız. D_n = 13 cm²/s, V_T = 26 mV (300 K), 1 mil = 25,4 µm.</li><li>a) Bipolar tümdevre tasarımında seri baz direncinin 200 Ω olması isteniyor; sebebi nedir? b) Difüzyon kalınlığı 25 µm, katkı yoğunluğu 5×10¹⁵ atom/cm³ için baz bölgesinin L/W oranını bulunuz. c) Baz bölgesinin boyutlarını bulunuz.</li><li>Tipik bir npn tranzistörde sıfır kutuplamada birim alan başına düşebilecek maksimum kollektör-baz kapasitesini bulunuz (300 K). Ayrıca: konsantrasyonu 6×10²⁰ atom/cm³, kalınlığı 2 µm olan n tipi difüzyon katmanının tabaka direncini hesaplayınız.</li><li>45 °C'de npn tranzistörün maksimum kollektör-baz kapasitesini bulunuz: A = 20 µm², n_i = 1,5×10¹⁰ /cm³, ε = 1,04×10⁻¹² F/cm, k = 1,38×10⁻²³ J/K, q = 1,6×10⁻¹⁹ C, baz katkısı N_A = 8×10¹⁹ atom/cm³, epi katkısı N_D = 5×10¹⁵ 1/cm³.</li><li>Klasik bir npn tranzistörde katkı yoğunluğu 5×10²⁰ atom/cm³ olan fosfor atomlarıyla katkılama yapılıyor; oluşan tabakanın derinliği 2 µm'dir. Tabaka direncini hesaplayınız. Bu tabaka tranzistörün hangi bölgesini oluşturur? Neden?</li><li>V_BE = 620 mV olan tranzistörün emetör alanı 5 × 5 mm, 300 K'de bazın birim alanı başına katkı yoğunluğu 8×10¹² atom/cm² ise tranzistörün kollektör akımını hesaplayınız (D = 13 cm²/s).</li><li>Tipik bir npn tranzistörün baz bölgesinin 25 × 15 µm'lik bir alan için direncini hesaplayınız; kriterler nedir? (N_A = 10¹⁹ 1/cm³, N_D = 10¹⁵ 1/cm³, T = 3 µm, µ_p = 70 cm²/V·s)</li><li>Enine bir pnp tranzistör 0,5 Ω·cm özgül dirençli bir epi tabakasında oluşturuluyor. Akım kazancının düşmeye başladığı kollektör akımını bulunuz (D_p = 10 cm²/s, baz genişliği 8 µm, çevre 40 × 40 µm, µ_n = 0,14×10⁴ cm²/V·s, baz difüzyon derinliği ≅ 3 µm).</li><li>300 K'de V_BE = 560 mV, I_C = 11 µA, φ_B = 10¹² atom/cm², D_n = 13 cm²/s olan npn tranzistörün emetör alanını bulunuz.</li><li>Widlar akım kaynağı devresi verilmiştir. a) Tümleştirilmiş Widlar akım kaynağının düşey kesitini çiziniz. b) Üretimde kullanılan maske sayısını ve maskelerin adlarını yazınız. c) Emetör maskesini çiziniz. d) I_C2 = 10 µA olması için R2'nin değerini hesaplayınız (V_T·ln(I_C1/I_C2) = I_C2·R2). e) Bu direnç hangi proses adımında oluşturulabilir? W/L oranını belirleyiniz (V_CC = 15 V, V_BE = 0,7 V, R1 = 14,3 kΩ, T = 300 K).</li><li>a) Standart bipolar yapılarda npn tranzistörün baz direnci 5 kΩ olduğuna göre baz bölgesinin L/W oranını bulunuz (µ_n = 1000 cm²/V·s; katkı konsantrasyonlarıyla ilgili grafikten yararlanılabilir). b) npn tranzistörün seri kollektör direnci neden oluşur? Emetör boyutları W = 15 µm, L = 34 µm, T = 6 µm, kollektör bölgesinin özdirenci ρ = 5 Ω·cm, µ_n = 1000 cm²/V·s için r_c1 seri kollektör direncini hesaplayınız.</li><li>a) Kollektör-baz jonksiyonu kullanılarak 300 K'de 10 pF'lık kapasite elde edilmek isteniyor; gerekli çip alanını hesaplayınız (N_D = 10¹⁵, N_A = 10¹⁹ 1/cm³, V_T = 26 mV, n_i = 1,5×10¹⁰ 1/cm³, q = 1,6×10⁻¹⁹ C, ε = 1,04×10⁻¹² F/cm). b) p bölgesindeki fakirleşmiş bölge genişliğini hesaplayınız.</li><li>(15. sorunun tekrarı) CMOS evirici: K_p = 10 µA/V², K_n = 30 µA/V², V_TD = 1 V, V_TL = −2 V, V_inv = V_DD/2; a) (W/L)_D ve (W/L)_L oranları? b) Eşit gecikme için (W/L)_D/(W/L)_L? (C_L = 5 pF)</li><li>(18. sorunun tekrarı) W = 40 µm, L = 30 µm, derinlik 4 µm, baz direnci 50 Ω; katkı yoğunluğu? (µ = 120 cm²/V·s)</li><li>N_D = 10¹⁵ 1/cm³, N_A = 10¹⁶ 1/cm³ olan pn jonksiyonunun a) belverme gerilimini (E_krit = 3×10⁵ V/cm), b) p tarafındaki fakirleşmiş bölge kalınlığını hesaplayınız (V_T = 26 mV, n_i = 1,5×10¹⁰ 1/cm³, q = 1,6×10⁻¹⁹ C, ε = 1,04×10⁻¹² F/cm).</li><li>(16. sorunun tekrarı) Akım aynası: 5 V, I_ref = 1 mA, V_T = 26 mV, I_S = 10⁻¹⁵ A, β ≫ 1; a) V_BE, b) R1, c) R1 hangi proses adımında yapılır?</li><li>a) 19. sorudaki npn tranzistörün (gömük tabaka bu kez 41 µm × 85 µm) çip üzerinde kapladığı alanı hesaplayınız. b) Kaynak-savak difüzyonu katkı yoğunluğu N_A = 10¹⁹ 1/cm³, jonksiyon derinliği 3 µm ve direnci 900 Ω olan MOS tranzistörün kaynak-savak bölgesinin W/L oranını bulunuz (µ = 500 cm²/V·s).</li><li>n tipi katkı yoğunluğu 6×10²⁰ atom/cm³ olan 2 µm kalınlığındaki difüzyon bölgesinin tabaka direncini hesaplayınız. Bu difüzyon bir tümdevrede enine pnp tranzistörün hangi bölgesini oluşturur? Açıklayınız.</li><li>Doymalı bölgede çalışan bir MOS tranzistörün savak akımı V_GS = 1,5 V iken 100 µA, V_GS = 0,8 V iken 10 µA'dir. Eşik altı iletimi ihmal ederek ve mobilitenin değişmediğini kabul ederek tranzistörün eşik gerilimini ve µ_n·C_ox·(W/L) çarpımını belirleyiniz.</li><li>(10. sorunun tekrarı) N_A = 10²⁰ 1/cm³, jonksiyon derinliği 3 µm, direnç 100 Ω; kaynak-savak bölgesinin W/L oranı? (µ = 500 cm²/V·s)</li><li>(7. sorunun tekrarı) MOSIS kurallarıyla CMOS evirici yerleşim alanı (λ = 0,5 µm) ve kontak maskesi.</li></ol>
+<p>Soru 13'teki ölçümler:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_GS (V)</th><th scope="col">V_DS (V)</th><th scope="col">V_SB (V)</th><th scope="col">I_D (belgede "mA")</th></tr></thead><tbody><tr><th scope="row">4</th><td>4</td><td>0,0</td><td>256</td></tr><tr><th scope="row">5</th><td>5</td><td>0,0</td><td>441</td></tr><tr><th scope="row">4</th><td>4</td><td>2,6</td><td>144</td></tr><tr><th scope="row">5</th><td>5</td><td>2,6</td><td>256</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="soru-5.jpg" width="688" height="841" loading="lazy" decoding="async" alt="Soru 5: p-taban, n-kuyu ve geçit maskelerinden oluşan serim ve n-epi, p, n difüzyonları ve n+ gömük tabakalı düşey kesit"><figcaption>Soru 5: Şekil 1 ve Şekil 2</figcaption></figure>
+<figure class="yazi-gorsel"><img src="soru-6.jpg" width="688" height="566" loading="lazy" decoding="async" alt="Soru 6: aktif, polisilisyum ve metal katmanlarından oluşan, A-A′ ve B-B′ kesit çizgili eleman serimi"><figcaption>Soru 6: Serimi verilen eleman</figcaption></figure>
+<figure class="yazi-gorsel"><img src="soru-11.jpg" width="1376" height="382" loading="lazy" decoding="async" alt="Soru 11: NMOS ve PMOS için V_GS = 1, 2, 3 V&#x27;ta I_D–V_DS eğrileri (0–5 V)"><figcaption>Soru 11: NMOS ve PMOS'un I_D–V_DS eğrileri</figcaption></figure>
+<figure class="yazi-gorsel"><img src="soru-12.jpg" width="688" height="422" loading="lazy" decoding="async" alt="Soru 12: √I_D – V_GS doğrusu; V_GS = 2 V&#x27;ta 0,4 mA^½, 3 V&#x27;ta 0,8 mA^½"><figcaption>Soru 12: V_GS'nin √I_D ile değişimi</figcaption></figure>
+<p><em>Not: Sorular belgede 1–40 arası numaralı; bazıları birebir tekrarlanıyor (15 = 32, 16 = 35, 18 = 33, 10 = 39, 7 = 40), "36" numarası iki kez kullanılmış ve 22. sorunun içine "Soru 6" başlıklı ayrı bir tabaka direnci sorusu karışmış; burada sırayla numaralandırıldı. 8. soruda mobilite birimi "cm³/V·s" yazılmış (doğrusu cm²/V·s). 9. soruda katkı yoğunluklarının ikisi de "N_D" olarak yazılmış (ikincisi p⁺ kaynak-savak yoğunluğu olmalı) ve oksit yük yoğunluğu N_ox'un birimi 1/cm³ verilmiş (yüzey yoğunluğu olarak 1/cm² olmalı). 13. sorudaki akımlar W/L = 1 ve t_ox = 150 Å için mA mertebesinde olamaz, büyük olasılıkla µA'dir; üstelik V_SB = 0 verileri √I_D–V_GS eğimi olarak 5, V_SB = 2,6 V verileri 4 (µA^½/V) verdiğinden iki ölçüm takımı aynı β ile tutarlı değil.</em></p>
+<h2 id="11-kaynaklar">11. Kaynaklar</h2>
+<ol><li>SEGEM, TÜBİTAK Seminer Notları.</li><li>S. M. Kang, Y. Leblebici, <em>CMOS Digital Integrated Circuits</em>, McGraw-Hill, 1999.</li><li>W. Maly, <em>Atlas of IC Technologies</em>, Benjamin/Cummings, Menlo Park, CA, 1987.</li><li>R. L. Geiger, P. E. Allen, N. R. Strader, <em>VLSI Design Techniques for Analog and Digital Circuits</em>, McGraw-Hill, 1990.</li><li>P. R. Gray, R. G. Meyer, <em>Analysis and Design of Analog Integrated Circuits</em>, John Wiley &amp; Sons, 1997.</li><li>D. A. Pucknell, K. Eshraghian, <em>Basic VLSI Design: Systems and Circuits</em>, Prentice Hall, 1988.</li><li>P. Antognetti, G. Massobrio, <em>Semiconductor Device Modeling with SPICE</em>, McGraw-Hill.</li><li>A. B. Grebene, <em>Bipolar and MOS Analog Integrated Circuit Design</em>, John Wiley, 1984.</li></ol>
+<p><em>Not: Kaynakçada yazar adları belgede bozuk yazılmış ("Pischnell, Eshraghair", "Antapnetti, Gossobrio", "Geige") ve Geiger–Allen kitabı iki kez (1996 ve 1990 yıllarıyla) geçiyor; burada adlar düzeltilip tekrar birleştirildi.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf" download>VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf</a></p>
+              <p class="kucuk">PDF · 2.3 MB · 56 <span data-i18n="arch.pagesLower"></span> · 28.04.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Devre Teorisi II: Ödev 1–2, Fazör Dönüşümleri ve MATLAB ile Akım-Gerilim Grafikleri — hasancan.net</title>
+<meta name="description" content="EEM202 Devre Teorisi II ders ödevlerinden çözümler: zaman bölgesi ve fazör bölgesi dönüşümleri, paralel RC–RL devresinde akım hesabı ve 6.14, 7.7, 7.51 problemlerinin akım ve gerilim ifadelerinin MATLAB ile çizimi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-odev-1-2-fazorler-matlab/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Devre Teorisi II: Ödev 1–2, Fazör Dönüşümleri ve MATLAB ile Akım-Gerilim Grafikleri">
+<meta property="og:description" content="EEM202 Devre Teorisi II ders ödevlerinden çözümler: zaman bölgesi ve fazör bölgesi dönüşümleri, paralel RC–RL devresinde akım hesabı ve 6.14, 7.7, 7.51 problemlerinin akım ve gerilim ifadelerinin MATLAB ile çizimi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-odev-1-2-fazorler-matlab/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Devre Teorisi II: Ödev 1–2, Fazör Dönüşümleri ve MATLAB ile Akım-Gerilim Grafikleri", "description": "EEM202 Devre Teorisi II ders ödevlerinden çözümler: zaman bölgesi ve fazör bölgesi dönüşümleri, paralel RC–RL devresinde akım hesabı ve 6.14, 7.7, 7.51 problemlerinin akım ve gerilim ifadelerinin MATLAB ile çizimi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-odev-1-2-fazorler-matlab/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "eem202-odev-1-2-fazorler-matlab.zip", "contentUrl": "https://hasancan.net/arsiv/eem202-odev-1-2-fazorler-matlab/eem202-odev-1-2-fazorler-matlab.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM202 Devre Teorisi II: Ödev 1–2, Fazör Dönüşümleri ve MATLAB ile Akım-Gerilim Grafikleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.03.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#odev-1-fazorler">Ödev-1: Fazörler</a></li><li><a href="#matlab-odevleri">MATLAB ödevleri</a></li><li><a href="#i-ndirilebilir-dosyalar">İndirilebilir dosyalar</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM202 Devre Teorisi II: Ödev 1–2, Fazör Dönüşümleri ve MATLAB ile Akım-Gerilim Grafikleri</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 10.03.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi Elektrik-Elektronik Mühendisliği <strong>EEM202 Devre Teorisi II</strong> dersinin iki ödevinin arkadaşlar tarafından hazırlanmış çözümlerini bir araya getiriyor. <strong>Ödev-1</strong> (Mart 2014) fazör dönüşümleri üzerine el yazısı bir çözüm; fotoğraflanmış sayfalardan metne aktarıldı, fotoğraflar yayınlanmıyor. <strong>MATLAB ödevleri</strong> ise Word dosyalarıydı: akım ve gerilim ifadelerinin MATLAB komutlarıyla çizilmiş grafikleri. Kişisel bilgiler çıkarıldı. MATLAB çalışmaları sayfa görüntülerinden PDF'e çevrilerek yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="odev-1-fazorler">Ödev-1: Fazörler</h2>
+<p>Ödev kâğıdındaki sorular:</p>
+<ol><li>v₁(t) = 12 cos(377t − 425°) V ve v₂(t) = 18 sin(2513t + 4,2°) V gerilimlerini fazörlere çeviriniz.</li><li>Frekans 400 Hz olduğunda V₁ = 10∠20° ve V₂ = 12∠−60° fazörlerini zaman bölgesine çeviriniz.</li><li>i = 5 cos(ωt + 36,87°) + 10 cos(ωt − 53,13°) A ve V = (20 + j80 − 30∠15°) V ifadelerini tek terim hâlinde yazınız.</li><li>v = 120 sin(377t + 60°) V kaynağına 50 µF'lık kondansatör ile 20 Ω + 40 mH'lik seri kol paralel bağlanmıştır; kaynak akımını bulunuz.</li></ol>
+<h3 id="cozumler">Çözümler</h3>
+<p><strong>1)</strong> V₁ = 12∠−425° V. İkinci gerilim kosinüse çevrilerek: v₂(t) = 18 sin(2513t + 4,2°) = 18 cos(2513t + 94,2°) → V₂ = 18∠94,2° V.</p>
+<p><em>Not: −425° açısı −65° ile aynıdır (V₁ = 12∠−65° V). sin x = cos(x − 90°) olduğundan doğrusu v₂(t) = 18 cos(2513t − 85,8°), yani <strong>V₂ = 18∠−85,8° V</strong> olmalıdır; çözümde 90° eklenmiş.</em></p>
+<p><strong>2)</strong> ω = 2πf = 2(3,14)(400) = 2512 rad/s:</p>
+<ul><li>v₁(t) = 10 cos(2512t + 20°) V</li><li>v₂(t) = 12 cos(2512t − 60°) V</li></ul>
+<p><strong>3)</strong> Akım fazörü:</p>
+<ul><li>I = 5∠36,87° + 10∠−53,13° = 5(0,80 + j0,60) + 10(0,60 − j0,80) = 4 + j3 + 6 − j8 = 10 − j5</li><li>|I| = √(10² + 5²) = 11,18; θ = arctan(−5/10) = −26,57° → <strong>i(t) = 11,18 cos(ωt − 26,57°) A</strong></li></ul>
+<p>Gerilim fazörü:</p>
+<ul><li>V = 20 + j80 − 30(cos 15° + j sin 15°) = 20 + j80 − 29,1 − j7,8 = −9,1 + j72,2</li><li>|V| = √(9,1² + 72,2²) = 72,77; çözümde θ = arctan(72,2/−9,1) = −82,81° alınmış.</li></ul>
+<p><em>Not: Gerçel kısım negatif, sanal kısım pozitif olduğundan fazör ikinci bölgededir: θ = 180° − 82,8° ≈ <strong>97,2°</strong>, yani v(t) ≈ 72,8 cos(ωt + 97,2°) V olmalıdır.</em></p>
+<p><strong>4)</strong> v = 120 sin(377t + 60°) = 120 cos(377t − 30°) olarak yazılmalıdır; çözümde ise 120 cos(377t + 150°) alınmış. Empedanslar:</p>
+<ul><li>Z_R = 20 Ω, Z_L = jωL = j(377)(0,04) = j15,08 Ω, Z_C = −j/(ωC) = −j/(377 · 50·10⁻⁶) = −j53,05 Ω</li><li>Z_eş = (20 + j15,08) ∥ (−j53,05) = (800,45 − j1061,6)/(20 − j37,97) = 1329,55∠−53,0° / 43∠−62,24° = <strong>30,92∠9,18° Ω</strong></li><li>I = 120∠150° / 30,92∠9,18° = 3,88∠140,82° A → çözümün sonucu: i(t) = 3,88 cos(377t + 140,82°) A</li></ul>
+<p><em>Not: Hesap doğru (Z_eş ≈ 30,96∠9,2° Ω); ancak sinüsten kosinüse geçişte sin x = cos(x − 90°) kullanılmalı. Doğru fazör V = 120∠−30° V ile <strong>i(t) ≈ 3,88 cos(377t − 39,2°) A</strong> bulunur. Çözümün açısı 180° kaymış, yani akımın işareti ters çıkmış.</em></p>
+<h2 id="matlab-odevleri">MATLAB ödevleri</h2>
+<h3 id="odev-1-akim-ve-gerilim-dalga-sekilleri">Ödev 1: Akım ve gerilim dalga şekilleri</h3>
+<p>i(t) = 10t·e^(−5t) A akımı ve v(t) = (1 − 5t)·e^(−5t) V gerilimi 0–1 s aralığında çizdirilmiş (v, 0,1 H'lik bir bobin için v = L·di/dt ifadesine karşılık geliyor):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=0.01:0.01:1;
+i=10*t.*exp(-5*t);
+figure(1),plot(t,i);
+title('AKIMIN DALGA ŞEKLİ')
+xlabel('t(s)')
+ylabel('i(t)')
+
+V=(1-5*t).*exp(-5*t);
+figure(1),plot(t,V);
+title('VOLTAJIN DALGA ŞEKLİ')</code></pre>
+<p>Akım t = 0,2 s'de en büyük değerine ulaşıyor: i(0,2) = 10·0,2·e⁻¹ ≈ 0,736 A. Gerilim aynı anda sıfırdan geçip negatife dönüyor.</p>
+<figure class="yazi-gorsel"><img src="odev1-akim-dalga-sekli.jpg" width="809" height="674" loading="lazy" decoding="async" alt="MATLAB: i(t) = 10t·e^(−5t) akımının 0–1 s aralığındaki grafiği, tepe değeri yaklaşık 0,74 A"><figcaption>Ödev 1: akımın dalga şekli</figcaption></figure>
+<h3 id="odev-2-6-14-7-7-ve-7-51-problemleri">Ödev 2: 6.14, 7.7 ve 7.51 problemleri</h3>
+<p><strong>6.14:</strong> Parçalı akım ifadesi: 0 ≤ t ≤ 1 s için i = 60t² A, 1 ≤ t ≤ 2 s için i = −60(2 − t)² A.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=0:0.01:1;
+i=60*t.^2;
+t1=1:0.01:2;
+i1=-60*(2-t1).^2;
+figure(1);
+plot(t,i);
+hold on;
+plot(t1,i1);
+grid;
+title('AKIM-ZAMAN GRAFİĞİ (6.14)');
+xlabel('t(s)');
+ylabel('İ(t)(A)');</code></pre>
+<figure class="yazi-gorsel"><img src="odev2-6-14-akim-grafigi.jpg" width="797" height="682" loading="lazy" decoding="async" alt="MATLAB: 0–1 s arasında 60t² ile 60 A&#x27;e çıkan, 1 s&#x27;de −60 A&#x27;e atlayıp 2 s&#x27;de sıfıra dönen akım grafiği"><figcaption>Ödev 2, problem 6.14: akım-zaman grafiği</figcaption></figure>
+<p><strong>7.7:</strong> i = 2e^(−1000t) A ve i = 4e^(−125t) A akımları 0–2 s aralığında çizdirilmiş.</p>
+<p><strong>7.51:</strong> v = 15 − 105e^(−4000t) V ve v = 20 − 100e^(3333t) V gerilimleri 0–1 s aralığında çizdirilmiş.</p>
+<p><em>Not: 7.7 ve 7.51'deki ifadelerin zaman sabitleri milisaniye mertebesinde (1/1000 s, 1/125 s, 1/4000 s); 0,01 s adımla ve 0–2 s aralığında çizilince geçici kısım tek bir örneğe sıkışıyor, grafikler boş ya da düz çizgi gibi görünüyor. Örneğin t = 0:1e-5:5e-3 gibi bir aralık seçilmelidir. Ayrıca son ifadede üs pozitif yazılmış (e^(3333t)); bu yüzden grafik −10³⁰⁵ mertebesine ıraksıyor. Sönümlü bir tepki için üs negatif olmalıdır: v = 20 − 100e^(−3333t) V.</em></p>
+<h2 id="i-ndirilebilir-dosyalar">İndirilebilir dosyalar</h2>
+<p>ZIP'te iki MATLAB ödevinin (Ödev 1: 2 sayfa, Ödev 2: 5 sayfa) sayfa görüntülerinden oluşturulmuş PDF'leri var. Ödev-1'in el yazısı fotoğrafları yayınlanmıyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem202-odev-1-2-fazorler-matlab.zip" download>eem202-odev-1-2-fazorler-matlab.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 283 KB · 10.03.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem202-odev-1-2-fazorler-matlab.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (283 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

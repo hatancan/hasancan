@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Sayısal Sinyal İşleme: Spektral Görüntü Filtreleme Tasarım Projesi (MATLAB, FFT) — hasancan.net</title>
+<meta name="description" content="Hasan Can Öztürk&#x27;ün 2016 güz dönemi EEM401 Sayısal Sinyal İşleme tasarım projesi: gri tonlu bir görüntüdeki periyodik gürültünün 2B FFT genlik spektrumunda eşikleme ile maskelenip ters FFT ile temizlenmesi; proje öneri formu, rapor ve MATLAB kodu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-spektral-goruntu-filtreleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Sayısal Sinyal İşleme: Spektral Görüntü Filtreleme Tasarım Projesi (MATLAB, FFT)">
+<meta property="og:description" content="Hasan Can Öztürk&#x27;ün 2016 güz dönemi EEM401 Sayısal Sinyal İşleme tasarım projesi: gri tonlu bir görüntüdeki periyodik gürültünün 2B FFT genlik spektrumunda eşikleme ile maskelenip ters FFT ile temizlenmesi; proje öneri formu, rapor ve MATLAB kodu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-spektral-goruntu-filtreleme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Sayısal Sinyal İşleme: Spektral Görüntü Filtreleme Tasarım Projesi (MATLAB, FFT)", "description": "Hasan Can Öztürk'ün 2016 güz dönemi EEM401 Sayısal Sinyal İşleme tasarım projesi: gri tonlu bir görüntüdeki periyodik gürültünün 2B FFT genlik spektrumunda eşikleme ile maskelenip ters FFT ile temizlenmesi; proje öneri formu, rapor ve MATLAB kodu.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem401-spektral-goruntu-filtreleme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "spektral-goruntu-filtreleme-proje.pdf", "contentUrl": "https://hasancan.net/arsiv/eem401-spektral-goruntu-filtreleme/spektral-goruntu-filtreleme-proje.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM401 Sayısal Sinyal İşleme: Spektral Görüntü Filtreleme Tasarım Projesi (MATLAB, FFT)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.12.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#proje-oneri-formu">Proje öneri formu</a></li><li><a href="#rapor-spektral-goruntu-filtreleme">Rapor: Spektral Görüntü Filtreleme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM401 Sayısal Sinyal İşleme: Spektral Görüntü Filtreleme Tasarım Projesi (MATLAB, FFT)</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 09.12.2016 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 401 Sayısal Sinyal İşleme</strong> dersinin 2016 güz dönemindeki tasarım projesi için <strong>Hasan Can Öztürk</strong>'ün hazırladığı <strong>proje öneri formu</strong> ile iki sütunlu <strong>proje raporunu</strong> ("Spektral Görüntü Filtreleme") bir araya getiriyor. Öneri formu 11.11.2016'ya, rapor 09.12.2016'ya kadar teslim edilecek; projeler 13–14 Aralık'ta ders saatlerinde sunulacaktı. Proje tek kişilik. Rapordaki öğrenci numaralı e-posta adresi kapatıldı; öneri formu ve rapor yazının sonunda tek PDF olarak indirilebilir.</p>
+<h2 id="proje-oneri-formu">Proje öneri formu</h2>
+<p><strong>Proje başlığı:</strong> Spektral Görüntü Filtreleme <strong>Proje takımı:</strong> Hasan Can Öztürk</p>
+<p><strong>Konu.</strong> Gri tonlara sahip bir görüntüye belirli bir frekansı olan bir gürültü eklenir. Bu gürültü belirli aralıklarla kendini tekrar eden bir "örüntü" (pattern) olabilir. Gürültülü resmin FFT analizi yapılarak gürültüye ait alan belirlenir; bu belirleme kullanıcının FFT (genlik) görüntüsünde fareyle dikdörtgen bir alan seçmesiyle yapılacaktır. Seçilen gürültülü alan FFT genlik görüntüsünde temizlenir ve ters FFT ile gürültüden arındırılmış görüntü elde edilir; yani basit bir spektral filtreleme yapılır. Bu işlemleri yapan MATLAB programı yazılacaktır.</p>
+<p><strong>Amaç.</strong> Seçilen gürültülü alanın FFT genlik görüntüsünde temizlenip ters FFT ile gürültüsüz görüntünün elde edilmesi.</p>
+<p><strong>Başarı ölçütü.</strong> Seçilen gürültülü alan FFT (genlik) görüntüsünde tamamen temizlenerek görüntü gürültüden arındırılırsa proje başarılı sayılacak.</p>
+<p>Formun kurallar kısmına göre her grup tek proje önerebiliyor (iki grup aynı projeyi seçerse formu ilk ve eksiksiz getiren alıyor). Rapor iki sütunlu ve en az iki sayfa olmalı; sunum 15–20 slayt, 15 dakika konuşma + 5 dakika soru-cevap.</p>
+<h2 id="rapor-spektral-goruntu-filtreleme">Rapor: Spektral Görüntü Filtreleme</h2>
+<p><strong>Özet.</strong> Gri tonlu gürültülü bir görüntüyü FFT analiziyle gürültüden temizleyen MATLAB programının raporu.</p>
+<h3 id="giris">Giriş</h3>
+<p>Gri tonlu bir görüntüye belirli frekansta, kendini belirli aralıklarla tekrar eden bir örüntü biçiminde gürültü ekleniyor. Gürültülü resmin FFT analiziyle gürültüye ait alan belirleniyor, bu alan FFT genlik görüntüsünde temizleniyor ve ters FFT ile gürültüden arındırılmış görüntü elde ediliyor.</p>
+<h3 id="spektral-goruntu-filtreleme-yazilimi">Spektral görüntü filtreleme yazılımı</h3>
+<ol><li>Görüntü okunur, gri tonlamaya çevrilir, <code>mat2gray</code> ile normalize edilir ve FFT'den önce ikinin kuvveti olan kare bir boyuta, <strong>256 × 256</strong>'ya ölçeklenir.</li><li><code>fft2</code> ve <code>fftshift</code> ile merkezlenmiş 2B Fourier dönüşümü alınır; genlik spektrumu logaritmik ölçekte gösterilir: fLog = log(1 + |F|).</li><li>Spektrumda "yıldız" gibi görünen gürültü tepeleri kapatılır. En parlak "yıldız"ı, yani DC bileşenini ve düşük değerleri kaldırmak istenmediği için, spektrumun sıfırlanacağı bir <strong>değer aralığı</strong> tanımlanır. Bu eşik şöyle:</li></ol>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>filter = (fLog &gt; .7*max(fLog(:))) | (fLog &lt; .43*max(fLog(:)));</code></pre>
+<ol><li>Bu ikili <strong>çıktı maskesi</strong> (siyah = 0, beyaz = 1) Fourier görüntüsüyle çarpılır ve ters FFT alınır: B = |IFFT2(F · maske)|. Maske bazı gürültüleri kaldırırken bazı DC bileşenlerini koruyor; raporda bunlar yöntemin hata payı olarak yorumlanıyor.</li></ol>
+<figure class="yazi-gorsel"><img src="maske.jpg" width="380" height="340" loading="lazy" decoding="async" alt="Gürültü tepeleri kapatılmış Fourier genlik görüntüsü"><figcaption>Şekil 2: Temizlenecek gürültülerin kapatılmış hâli</figcaption></figure>
+<h3 id="matlab-kodu">MATLAB kodu</h3>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>% Görüntüyü Oku
+I = imread('clown.jpg');
+
+% Gri tonlamalı görüntüye çevir
+I = rgb2gray(I);
+
+% Görüntüyü Normalleştir
+I = double(mat2gray(I));
+
+% Görüntü boyutunu ayarla
+I = imresize(I, [256 256]);
+
+% Resmin boyutunu al
+[rows,cols] = size(I);
+
+% FFT'yi uygula
+f = fftshift(fft2(I));
+
+% Fourier görüntüyü çizdir
+fLog = log(1 + abs(f));
+
+% Fourier görüntüyü belirlenen aralıkta filtrele
+filter = (fLog &gt; .7*max(fLog(:)) ) | (fLog &lt; .43*max(fLog(:)) );
+
+B = abs(ifft2(f.*filter));
+
+% Ters Fourier uygulayarak görüntüyü elde et
+f1 = fftshift(fft2(B));
+fLog1 = log(1 + abs(f1));
+
+colormap(gray)
+subplot(3,2,1),imagesc(I); title('Orijinal Görüntü')
+subplot(3,2,2),imagesc(fLog); title('Fourier Görüntü')
+subplot(3,2,3),imagesc(fLog); title('Fourier Görüntü')
+subplot(3,2,4),imagesc(filter); title('Çıktı Maskesi')
+subplot(3,2,5),imagesc(fLog1); title('Temizlenme Sonrası Fourier Görüntü')
+subplot(3,2,6),imagesc(B); title('Temizlenmiş Görüntü')
+annotation('textbox', [0 0.9 1 0.1], ...
+    'String', 'FFT ile Görüntü Temizleme', ...
+    'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', ...
+    'FontSize', 15, ...
+    'FontWeight', 'bold')</code></pre>
+<h3 id="tartisma-ve-sonuclar">Tartışma ve sonuçlar</h3>
+<p>İşlemler sonrasında görüntü gürültülerden büyük ölçüde temizlendi; ancak bazı gürültüler kalkarken bazı DC bileşenlerinin de korunduğu görülüyor. Raporun vardığı sonuç: yazılım görüntü filtrelemek için en iyi yol olmasa da kullanım alanına göre kullanılabilir.</p>
+<figure class="yazi-gorsel"><img src="program-ciktisi.jpg" width="460" height="620" loading="lazy" decoding="async" alt="MATLAB çıktısı: orijinal görüntü, Fourier genlik görüntüsü, çıktı maskesi, temizlenme sonrası spektrum ve temizlenmiş görüntü"><figcaption>Şekil 4: Program çıktısı (FFT ile görüntü temizleme)</figcaption></figure>
+<p><em>Not: Öneri formunda gürültü alanının fareyle dikdörtgen seçilerek temizlenmesi planlanmıştı; rapordaki kod ise bunun yerine log-genlik spektrumuna sabit eşikler (%43 ve %70) uygulayarak maskeyi kendiliğinden oluşturuyor. Ayrıca kod <code>clown.jpg</code> dosyasını okuyor, ama Şekil 4'teki görüntü bir Amerikan futbolu topu; çıktı büyük olasılıkla farklı bir görüntüyle alınmış. Raporun Word dosyasındaki Şekil 1 (Fourier görüntüsü) dönüştürmede boş çıktı.</em></p>
+<h3 id="kaynakca-rapordan">Kaynakça (rapordan)</h3>
+<ol><li>Charles Van Loan, <em>Computational Frameworks for the Fast Fourier Transform</em>, SIAM, 1992.</li><li>M. T. Heideman, D. H. Johnson, C. S. Burrus, "Gauss and the history of the fast Fourier transform", <em>IEEE ASSP Magazine</em> 1(4), 14–21, 1984.</li><li>Gilbert Strang, "Wavelets", <em>American Scientist</em> 82(3), 253, 1994.</li><li>J. Dongarra, F. Sullivan, "Guest Editors Introduction to the top 10 algorithms", <em>Computing in Science &amp; Engineering</em> 2(1), 22–23, 2000.</li><li>M. T. Heideman, D. H. Johnson, C. S. Burrus, "Gauss and the history of the fast Fourier transform", <em>Archive for History of Exact Sciences</em> 34(3), 265–277, 1985.</li><li>Frank Yates, "The design and analysis of factorial experiments", Technical Communication no. 35, Commonwealth Bureau of Soils, 1937.</li></ol>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="spektral-goruntu-filtreleme-proje.pdf" download>spektral-goruntu-filtreleme-proje.pdf</a></p>
+              <p class="kucuk">PDF · 951 KB · 5 <span data-i18n="arch.pagesLower"></span> · 09.12.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="spektral-goruntu-filtreleme-proje.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (951 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

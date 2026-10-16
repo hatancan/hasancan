@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Sinyaller, Fourier ve Laplace Dönüşümü Notları (Texas A&amp;M, Parlos ve Parasuram) — hasancan.net</title>
+<meta name="description" content="Texas A&amp;M Üniversitesi Makine Mühendisliği&#x27;nin MEEN 651 (Alexander G. Parlos, 2003) ders notları ve MEEN 364 (Parasuram, 2001–2003) örnek föyleri: sinyal ve sistem tanımları, Fourier serisi ve dönüşümü, Laplace dönüşümü ve özellikleri, kütle-yay-sönümleyici transfer fonksiyonu, örnekleme ve örtüşme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-texas-am-sinyal-laplace-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Sinyaller, Fourier ve Laplace Dönüşümü Notları (Texas A&amp;M, Parlos ve Parasuram)">
+<meta property="og:description" content="Texas A&amp;M Üniversitesi Makine Mühendisliği&#x27;nin MEEN 651 (Alexander G. Parlos, 2003) ders notları ve MEEN 364 (Parasuram, 2001–2003) örnek föyleri: sinyal ve sistem tanımları, Fourier serisi ve dönüşümü, Laplace dönüşümü ve özellikleri, kütle-yay-sönümleyici transfer fonksiyonu, örnekleme ve örtüşme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-texas-am-sinyal-laplace-notlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Sinyaller, Fourier ve Laplace Dönüşümü Notları (Texas A&M, Parlos ve Parasuram)", "description": "Texas A&M Üniversitesi Makine Mühendisliği'nin MEEN 651 (Alexander G. Parlos, 2003) ders notları ve MEEN 364 (Parasuram, 2001–2003) örnek föyleri: sinyal ve sistem tanımları, Fourier serisi ve dönüşümü, Laplace dönüşümü ve özellikleri, kütle-yay-sönümleyici transfer fonksiyonu, örnekleme ve örtüşme.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-texas-am-sinyal-laplace-notlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-texas-am-notlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-texas-am-sinyal-laplace-notlari/eem301-texas-am-notlari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Sinyaller, Fourier ve Laplace Dönüşümü Notları (Texas A&amp;M, Parlos ve Parasuram)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.09.2003</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#meen-651-lecture-1a-introduction-to-signals-and-systems">MEEN 651 Lecture 1A: Introduction to Signals and Systems</a></li><li><a href="#meen-651-lecture-1b-fourier-analysis-and-fourier-transforms">MEEN 651 Lecture 1B: Fourier Analysis and Fourier Transforms</a></li><li><a href="#meen-651-lecture-2a-laplace-transforms">MEEN 651 Lecture 2A: Laplace Transforms</a></li><li><a href="#meen-364-ornek-foyleri-parasuram">MEEN 364 örnek föyleri (Parasuram)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Sinyaller, Fourier ve Laplace Dönüşümü Notları (Texas A&amp;M, Parlos ve Parasuram)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 15.09.2003 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM301 Sinyaller ve Sistemler I klasöründe 2017 tarihli olarak duran dokuz PDF'i tanıtıyor. Belgeler <strong>Texas A&amp;M University, Department of Mechanical Engineering</strong>'e ait: <strong>MEEN 651 Control System Design</strong> dersinin Dr. Alexander G. Parlos tarafından hazırlanan üç ders notu (Güz 2003) ve <strong>MEEN 364</strong> dersinin Parasuram imzalı örnek föyleri (2001–2003). Metinler İngilizce; aşağıda içerikleri özetlendi. Bütün PDF'ler yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="meen-651-lecture-1a-introduction-to-signals-and-systems">MEEN 651 Lecture 1A: Introduction to Signals and Systems</h2>
+<ul><li>Sinyaller bir ya da daha fazla bağımsız değişkenin (çoğunlukla zamanın) fonksiyonu olup bilgi taşır; sistemler giriş sinyallerine çıkış sinyalleri üreterek yanıt verir (ör. elektrik devresindeki gerilim ve akımlar sinyal, devrenin kendisi sistem).</li><li>Sürekli zamanlı ve ayrık zamanlı sinyaller ve sistemler.</li><li>Dönüşümlerin kullanımı:</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Kalıcı durum davranışı</th><th scope="col">Geçici durum davranışı</th></tr></thead><tbody><tr><th scope="row">Sürekli zaman</th><td>Sürekli Fourier dönüşümü</td><td>Laplace dönüşümü</td></tr><tr><th scope="row">Ayrık zaman</th><td>Ayrık Fourier dönüşümü</td><td>z dönüşümü</td></tr></tbody></table></div>
+<h2 id="meen-651-lecture-1b-fourier-analysis-and-fourier-transforms">MEEN 651 Lecture 1B: Fourier Analysis and Fourier Transforms</h2>
+<ul><li>Temel sürekli zamanlı sinyaller: karmaşık üstel x(t) = Ce^(at), periyodik e^(jω₀t), sinüzoit A cos(ω₀t + φ) = A·Re{e^(j(ω₀t+φ))}, T₀ = 2π/|ω₀|.</li><li>Birim basamak u(t) ve birim dürtü δ(t): u(t) = ∫₋∞^t δ(τ)dτ, δ(t) = du(t)/dt.</li><li>Fourier serisi x(t) = Σ a_k e^(jkω₀t); her iki taraf e^(−jnω₀t) ile çarpılıp bir periyot boyunca integral alınarak katsayılar a_k = (1/T₀)∫ x(t)e^(−jkω₀t) dt türetiliyor; periyot sonsuza götürülerek Fourier dönüşümüne geçiliyor.</li><li>Ayrık zamanda birim basamak ve dürtü dizileri, karmaşık üstel ve sinüzoit; sürekli ve ayrık zamanlı e^(jω₀t) ile e^(jω₀n) karşılaştırması (ayrık zamanda frekanslar 2π katlarında aynı sinyali verir, periyodiklik için ω₀/2π'nin rasyonel olması gerekir).</li></ul>
+<h2 id="meen-651-lecture-2a-laplace-transforms">MEEN 651 Lecture 2A: Laplace Transforms</h2>
+<ul><li>Tanım: F(s) = ∫₀^∞ f(t)e^(−st) dt, s = σ + jω; ters dönüşüm f(t) = (1/2πj)∫ F(s)e^(st) ds (pratikte kısmi kesirler kullanılır).</li><li>Tablo: δ(t) → 1, u(t) → 1/s, t → 1/s², t² → 2/s³, e^(−at) → 1/(s + a), te^(−at) → 1/(s + a)², sin ωt → ω/(s² + ω²), cos ωt → s/(s² + ω²).</li><li>Özellikler: doğrusallık, integral (F(s)/s), türev (sⁿF(s) − başlangıç terimleri), zamanda kayma e^(−as)F(s), karmaşık domende kayma F(s + a), ilk değer f(0⁺) = lim_{s→∞} sF(s) ve son değer lim_{t→∞} f(t) = lim_{s→0} sF(s) teoremleri.</li><li>Örnek: kütle-yay-sönümleyici sistemi. m dv/dt = F(t) − bv(t) − kx(t), dx/dt = v(t) denklemlerinden X(s)(ms² + bs + k) = F(s) + x(0⁻)(ms + b) + mv(0⁻); sıfır başlangıç koşullarıyla transfer fonksiyonu <strong>T(s) = X(s)/F(s) = 1/(ms² + bs + k)</strong>.</li></ul>
+<h2 id="meen-364-ornek-foyleri-parasuram">MEEN 364 örnek föyleri (Parasuram)</h2>
+<ul><li><strong>Handout E.1 – Examples on Signals and Systems:</strong> sinyal örnekleri, sistem gösterimi, analog/ayrık/sayısal giriş-çıkışlı sistemler, model türleri, doğrusal ve doğrusal olmayan sistemler, zaman ve frekans domeni modelleri.</li><li><strong>Handout E.2 – Examples on Fourier Transforms:</strong> f(x) = U(x)e^(−ax)'in sürekli Fourier dönüşümü, ayrık zamanlı bir sinyalin Fourier dönüşümünün geometrik seriyle hesabı.</li><li><strong>Handout E.3 – Examples on Laplace Transforms:</strong> Laplace dönüşümü örnekleri ve kısmi kesirlerle ters dönüşüm.</li><li><strong>Examples on Sampling and Aliasing Phenomena (E.4):</strong> x₁(t) = cos 2π(10)t ve x₂(t) = cos 2π(50)t, F_s = 40 Hz ile örneklenince x₁(n) = cos(πn/2) ve x₂(n) = cos(5πn/2) = cos(2πn + πn/2) = cos(πn/2) olur; iki sinyal ayırt edilemez, 50 Hz bu örnekleme hızında 10 Hz'in bir örtüşmesidir (alias). Diğer örneklerde x(t) = 3 cos 100πt için örtüşmeyi önleyen en küçük örnekleme hızı ve Nyquist hızı hesaplanıyor.</li><li><strong>Handout on Fourier Analysis of Dynamic Signals:</strong> sayısal sinyal işleme sisteminin öğeleri, sinyallerin sınıflandırılması, sürekli ve ayrık zamanlı periyodik sinyallerin Fourier serisi ve dönüşümü, hızlı Fourier dönüşümü (FFT) ve MATLAB'da <code>fft</code>/<code>ifft</code> kullanımı.</li><li><strong>Handout A.2 – Laplace Transforms:</strong> tanım, basit fonksiyonların dönüşümlerinin türetilmesi, MATLAB ile doğrulama (dönüşümler önce analitik yöntemle yapılmalı, MATLAB yalnız sağlama için kullanılmalı), özellikler, son değer teoremiyle kalıcı durum değeri, ters dönüşüm, diferansiyel denklem çözümü ve kısmi kesir açılımı teoremleri.</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-texas-am-notlari.zip" download>eem301-texas-am-notlari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.4 MB · 15.09.2003</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-texas-am-notlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

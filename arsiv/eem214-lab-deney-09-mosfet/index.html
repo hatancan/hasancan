@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Deney 9 – MOSFET Temelleri, CD4007 ile I_DS–V_DS Eğrileri, MOSFET Direnç ve Diyot Bağlantısı — hasancan.net</title>
+<meta name="description" content="EEM214 Elektronik I laboratuvarının MOSFET föyü (2006 Experiment 9, 2012&#x27;de Experiment 7): omik ve doyum bölgeleri, I_DS denklemleri, r_ohmic, diyot bağlantılı MOSFET; CD4007 ile ölçülen I_DS–V_DS tabloları, eşik gerilimi, r_ohmic ve V_MOSDIODE değerleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-deney-09-mosfet/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Deney 9 – MOSFET Temelleri, CD4007 ile I_DS–V_DS Eğrileri, MOSFET Direnç ve Diyot Bağlantısı">
+<meta property="og:description" content="EEM214 Elektronik I laboratuvarının MOSFET föyü (2006 Experiment 9, 2012&#x27;de Experiment 7): omik ve doyum bölgeleri, I_DS denklemleri, r_ohmic, diyot bağlantılı MOSFET; CD4007 ile ölçülen I_DS–V_DS tabloları, eşik gerilimi, r_ohmic ve V_MOSDIODE değerleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-deney-09-mosfet/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Deney 9 – MOSFET Temelleri, CD4007 ile I_DS–V_DS Eğrileri, MOSFET Direnç ve Diyot Bağlantısı", "description": "EEM214 Elektronik I laboratuvarının MOSFET föyü (2006 Experiment 9, 2012'de Experiment 7): omik ve doyum bölgeleri, I_DS denklemleri, r_ohmic, diyot bağlantılı MOSFET; CD4007 ile ölçülen I_DS–V_DS tabloları, eşik gerilimi, r_ohmic ve V_MOSDIODE değerleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem214-lab-deney-09-mosfet/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "EEM214_Deney9_MOSFET.zip", "contentUrl": "https://hasancan.net/arsiv/eem214-lab-deney-09-mosfet/EEM214_Deney9_MOSFET.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Deney 9 – MOSFET Temelleri, CD4007 ile I_DS–V_DS Eğrileri, MOSFET Direnç ve Diyot Bağlantısı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.05.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#foy-mosfet-transistor-basics">Föy: MOSFET Transistor Basics</a></li><li><a href="#ogrenci-raporlari">Öğrenci raporları</a></li><li><a href="#i-ndirme">İndirme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Deney 9 – MOSFET Temelleri, CD4007 ile I_DS–V_DS Eğrileri, MOSFET Direnç ve Diyot Bağlantısı</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 09.05.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 214 Electronics I</strong> laboratuvarının <strong>MOSFET Transistor Basics</strong> föyünü ve bu deney için hazırlanmış iki öğrenci raporunu içeriyor. Föy Mayıs 2006'da <strong>Experiment 9</strong> olarak hazırlanmış; 2012'de aynı metin <strong>Experiment 7</strong> başlığıyla kullanılmış (iki sürüm de ZIP'te). Raporlar arkadaşların çalışması; ad ve öğrenci numaraları kapatıldı. Föy İngilizce olduğu için metni İngilizce aktarıldı. Kuram için <a href="/arsiv/eem214-ders-06-fet/">Ders 6 – FET ve MOSFET Transistörler</a> yazısına bakılabilir.</p>
+<h2 id="foy-mosfet-transistor-basics">Föy: MOSFET Transistor Basics</h2>
+<p><strong>Aim:</strong> To familiarize the student with the basic regions of operation of a MOSFET transistor.</p>
+<h3 id="theory">Theory</h3>
+<p>The MOSFET is a four-terminal device (drain, gate, source, body), but the more common three-terminal symbol is used here; the devices in this lab have the body internally connected to the source. N-channel MOSFETs are studied. Two external sources provide V_DS and V_GS. A sufficiently high V_GS establishes an internal channel between drain and source; the higher V_GS, the easier the drain-source current I_DS flows. The only DC current in the MOSFET is I_DS, since the gate is insulated from the channel.</p>
+<p>The MOSFET operates in the <strong>ohmic (linear)</strong> and <strong>saturation (active)</strong> regions. In the I_DS–V_DS curves for constant V_GS, the ohmic region exists where V_DS is small and the curve is nearly linear; as V_DS increases the curve flattens, and at V_D(SAT) = V_GS − V_T the device enters saturation. For 0 ≤ V_DS ≤ V_D(SAT) it is ohmic, for V_DS ≥ V_D(SAT) it is saturated.</p>
+<ol><li>Ohmic region: I_DS = µ₀C_ox (W/L) [(V_GS − V_T) − V_DS/2] V_DS. Here the MOSFET acts as a voltage-controlled resistor.</li><li>Its resistance: 1/r_ohmic = ∂I_DS/∂V_DS = µ₀C_ox (W/L) [V_GS − V_T − V_DS].</li><li>Saturation region (λ = 0): I_DS = ½ µ₀C_ox (W/L) (V_GS − V_T)². Here the device acts as a voltage-controlled current source (used for amplification), shunted by a small-signal resistance r_ds.</li><li>Diode-connected MOSFET (gate tied to drain, V_GS = V_DS, saturation virtually guaranteed): V_MOSDIODE = V_T + √[ I_DS / (½ µ₀C_ox (W/L)) ].</li></ol>
+<h3 id="preliminary-work">Preliminary work</h3>
+<p>Review Section 4.10 of the textbook. The lab uses the <strong>CD4007</strong> MOSFET array; its NMOS has µ₀C_ox = 166.67 µA/V², W/L = 3, V_T = 1.45 V; assume V_A = 1/λ = 100 V. (The parameter values were obtained from measurements on the CD4007 and provided courtesy of Dr. David M. Binkley and colleagues at the University of North Carolina at Charlotte.)</p>
+<ol><li>For the MOSFET with V_GS and V_DS applied, find I_DS, the region of operation and, if necessary, r_ohmic for: a) V_GS = 3 V, V_DS = 0.5 V; b) V_GS = 5 V, V_DS = 0.5 V; c) V_GS = 2 V, V_DS = 3 V.</li><li>Plot the I_DS–V_DS curves in MATLAB for V_GS = 0–4 V in 0.5 V steps (V_DS = 0–5 V in 0.01 V steps), using: if V_GS &lt; V_T, cut-off (I_D = 0); otherwise if V_DS ≤ V_GS − V_T, I_D = µC_ox (W/L)(V_GS − V_T − V_DS/2)V_DS, else I_D = ½µC_ox (W/L)(V_GS − V_T)².</li><li>Find the V_GS needed for a MOSFET resistor of 100 kΩ at V_DS = 0 V.</li><li>For the diode-connected MOSFET fed through R (Fig. 7), find V_DS = V_MOSDIODE and R (write KCL at the drain and use Eqs. 3 and 4).</li><li>Read the experimental work.</li></ol>
+<h3 id="experimental-work">Experimental work</h3>
+<p>The CD4007 contains three NMOS and three PMOS transistors; NMOS substrates are connected to V_SS (pin 7) and PMOS substrates to V_DD (pin 14). Pin 7 must go to the most negative voltage and pin 14 to the most positive voltage, and the chip must not be connected with the power on. Characteristics vary considerably from chip to chip. MOSFETs are very susceptible to electrostatic discharge: ground yourself before handling the chip and do not touch the pins. Verify the resistors within 2%, set V_GS to +4 V and V_DS to 0 V before connecting.</p>
+<ol><li>Connect the circuit of Fig. 8 and record I_DS as V_DS varies from 0 to 5 V (0.4 V steps, then 0.2 V) for V_GS = 4, 3 and 2 V; plot the family of curves (Excel) and mark the ohmic and saturation regions.</li><li>With V_DS = 5 V, find the V_GS at which I_DS becomes negligible (5 µA); this is close to V_T.</li><li>Connect Fig. 9 with an ohmmeter across drain and source; record r_ohmic for V_GS = 1.5, 2, 3, 4, 5 V and compare with Eq. 2.</li><li>Using the R found in the preliminary work, set a 100 µA current into the diode-connected MOSFET (Fig. 10), adjusting the potentiometer; record R_POT and V_DS; repeat for 75 µA and 50 µA and compare with Eq. 4.</li><li>Why would it be necessary to create a resistor from a MOSFET? Name some advantages.</li><li>Why would a MOSFET be connected like a diode? Would the voltage set by it be helpful in circuit design?</li></ol>
+<p><strong>Components:</strong> CD4007 chip, 100 kΩ potentiometer.</p>
+<h2 id="ogrenci-raporlari">Öğrenci raporları</h2>
+<h3 id="i-ds-v-ds-olcumleri-ma">I_DS–V_DS ölçümleri (mA)</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_DS (V)</th><th scope="col">V_GS = 2 V (2006)</th><th scope="col">3 V (2006)</th><th scope="col">4 V (2006)</th><th scope="col">2 V (2008)</th><th scope="col">3 V (2008)</th><th scope="col">4 V (2008)</th></tr></thead><tbody><tr><th scope="row">0.4</th><td>0.250</td><td>0.738</td><td>1.393</td><td>0.20</td><td>0.752</td><td>0.941</td></tr><tr><th scope="row">0.8</th><td>0.262</td><td>1.170</td><td>2.129</td><td>0.20</td><td>1.171</td><td>1.712</td></tr><tr><th scope="row">1.2</th><td>0.265</td><td>1.270</td><td>2.680</td><td>0.21</td><td>1.280</td><td>2.496</td></tr><tr><th scope="row">1.6</th><td>0.267</td><td>1.294</td><td>2.969</td><td>0.21</td><td>1.342</td><td>2.852</td></tr><tr><th scope="row">2.0</th><td>0.268</td><td>1.304</td><td>3.049</td><td>0.21</td><td>1.354</td><td>2.931</td></tr><tr><th scope="row">3.0</th><td>0.271</td><td>1.321</td><td>3.108</td><td>0.21</td><td>1.372</td><td>2.991</td></tr><tr><th scope="row">4.0</th><td>0.273</td><td>1.332</td><td>3.136</td><td>0.22</td><td>1.384</td><td>3.017</td></tr><tr><th scope="row">5.0</th><td>0.276</td><td>1.342</td><td>3.154</td><td>0.22</td><td>1.140</td><td>3.040</td></tr></tbody></table></div>
+<p>Eğriler küçük V_DS'te doğrusal (omik), V_DS ≈ V_GS − V_T'den sonra yataylaşıyor (doyum). 2006 raporunda I_DS'nin 5 µA'e düştüğü gerilim <strong>V_GS = 1.2 V</strong> (eşik gerilimine yakın) bulunmuş.</p>
+<h3 id="mosfet-direnci-v-ds-0">MOSFET direnci (V_DS = 0)</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_GS</th><th scope="col">r_ohmic ölçülen (2006)</th><th scope="col">r_ohmic ölçülen (2008)</th><th scope="col">Eq. 2 ile hesap</th></tr></thead><tbody><tr><th scope="row">1.5 V</th><td>2.634 kΩ</td><td>2.9 kΩ</td><td>40 kΩ</td></tr><tr><th scope="row">2 V</th><td>960 Ω</td><td>1 kΩ</td><td>3.636 kΩ</td></tr><tr><th scope="row">3 V</th><td>447 Ω</td><td>986 Ω</td><td>1.290 kΩ</td></tr><tr><th scope="row">4 V</th><td>302 Ω</td><td>330 Ω</td><td>784 Ω</td></tr><tr><th scope="row">5 V</th><td>241 Ω</td><td>280 Ω</td><td>563 Ω</td></tr></tbody></table></div>
+<p>Raporda ölçülen ve hesaplanan değerlerin "hemen hemen aynı" olduğu yazılmış; tabloda görüldüğü gibi ölçülen dirençler hesaplananın yaklaşık yarısı ile üçte biri arasında. Bu, kullanılan çipin V_T ve µ₀C_ox değerlerinin föydeki değerlerden farklı olduğunu (föyde de belirtildiği gibi çipten çipe değişim) gösteriyor.</p>
+<p><em>Not: 2006 raporunda V_GS = 1.5 V için hesaplanan değer "4.000" yazılmış; µ₀C_ox(W/L) = 500 µA/V² ve V_T = 1.45 V ile r_ohmic = 1/(500 µA/V² × 0.05 V) = 40 kΩ'dur. Diğer hesaplanan değerler (kΩ cinsinden 3.636, 1.290, 0.784, 0.563) doğru.</em></p>
+<h3 id="diyot-baglantili-mosfet">Diyot bağlantılı MOSFET</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">I_DS</th><th scope="col">R_POT (2006)</th><th scope="col">V_DS (2006)</th><th scope="col">R_POT (2008)</th><th scope="col">V_DS (2008)</th><th scope="col">Eq. 4 ile hesap</th></tr></thead><tbody><tr><th scope="row">100 µA</th><td>29.18 kΩ</td><td>1.744 V</td><td>31 kΩ</td><td>1.74 V</td><td>2.08 V</td></tr><tr><th scope="row">75 µA</th><td>40.92 kΩ</td><td>1.658 V</td><td>46 kΩ</td><td>1.66 V</td><td>2.00 V</td></tr><tr><th scope="row">50 µA</th><td>70.5 kΩ</td><td>1.556 V</td><td>69 kΩ</td><td>1.58 V</td><td>1.90 V</td></tr></tbody></table></div>
+<p>2008 raporunda MOSFET direncinin drain-source akımını istenen değerde tutup FET'i aşırı akımdan koruduğu; diyot bağlantısının diyota benzediği, I_D'nin gate-source arasındaki elektrik alanla kontrol edildiği ve gate'ten akım geçmediği için girişte yük kaybı olmadığı yorumları yapılmış.</p>
+<h2 id="i-ndirme">İndirme</h2>
+<p>ZIP dosyasında 2006 (Experiment 9, parolası kaldırılmış) ve 2012 (Experiment 7 başlıklı) föyleri ile 2006 ve 2008 raporlarının kişisel bilgileri kapatılmış PDF kopyaları bulunuyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="EEM214_Deney9_MOSFET.zip" download>EEM214_Deney9_MOSFET.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.1 MB · 09.05.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM214_Deney9_MOSFET.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: 2006–2007 Laboratuvar Raporları ve Verilog Kodları (Deney 4–9, Yedi Parçalı Gösterge Sürücüsü) — hasancan.net</title>
+<meta name="description" content="EEM211 laboratuvarı için arkadaşların hazırladığı Deney 4–9 raporları ve Verilog kodları: davranışsal ve yapısal 4 bitlik toplayıcı, kapı gecikmeli tam toplayıcı ve carry-lookahead, hatalı kablonun bulunması, MUX ve kod çözücüyle tasarım, D flip-flop ve JK sayıcılar, dört haneli yedi parçalı gösterge sürücüsü (SSdriver) ile 0–9 ve 0–99 sayıcılar.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: 2006–2007 Laboratuvar Raporları ve Verilog Kodları (Deney 4–9, Yedi Parçalı Gösterge Sürücüsü)">
+<meta property="og:description" content="EEM211 laboratuvarı için arkadaşların hazırladığı Deney 4–9 raporları ve Verilog kodları: davranışsal ve yapısal 4 bitlik toplayıcı, kapı gecikmeli tam toplayıcı ve carry-lookahead, hatalı kablonun bulunması, MUX ve kod çözücüyle tasarım, D flip-flop ve JK sayıcılar, dört haneli yedi parçalı gösterge sürücüsü (SSdriver) ile 0–9 ve 0–99 sayıcılar.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: 2006–2007 Laboratuvar Raporları ve Verilog Kodları (Deney 4–9, Yedi Parçalı Gösterge Sürücüsü)", "description": "EEM211 laboratuvarı için arkadaşların hazırladığı Deney 4–9 raporları ve Verilog kodları: davranışsal ve yapısal 4 bitlik toplayıcı, kapı gecikmeli tam toplayıcı ve carry-lookahead, hatalı kablonun bulunması, MUX ve kod çözücüyle tasarım, D flip-flop ve JK sayıcılar, dört haneli yedi parçalı gösterge sürücüsü (SSdriver) ile 0–9 ve 0–99 sayıcılar.", "inLanguage": "tr", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/eem211-lab-raporlari-2007/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "EEM211_lab_raporlari_2006_2007_maskeli.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-lab-raporlari-2007/EEM211_lab_raporlari_2006_2007_maskeli.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: 2006–2007 Laboratuvar Raporları ve Verilog Kodları (Deney 4–9, Yedi Parçalı Gösterge Sürücüsü)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.12.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#deney-4-4-bitlik-toplayici-verilog">Deney 4: 4 bitlik toplayıcı (Verilog)</a></li><li><a href="#deney-6-kapi-gecikmeli-toplayicilar">Deney 6: Kapı gecikmeli toplayıcılar</a></li><li><a href="#deney-7-hatali-devre-mux-ve-kod-cozucu">Deney 7: Hatalı devre, MUX ve kod çözücü</a></li><li><a href="#deney-8-d-flip-flop-ve-jk-sayicilar">Deney 8: D flip-flop ve JK sayıcılar</a></li><li><a href="#deney-9-mandallar-flip-floplar-ve-yedi-parcali-gosterge-surucusu">Deney 9: Mandallar, flip-floplar ve yedi parçalı gösterge sürücüsü</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: 2006–2007 Laboratuvar Raporları ve Verilog Kodları (Deney 4–9, Yedi Parçalı Gösterge Sürücüsü)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 13.12.2007 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM211 Sayısal Mantık Tasarımı dersinin klasöründe "ferhat_notlari" adıyla toplanmış, <strong>2006 ve 2007 güz dönemlerinde</strong> laboratuvar deneyleri için arkadaşların hazırladığı raporları ve Verilog kaynak kodlarını bir araya getiriyor. Raporlardaki öğrenci adları ve numaraları kapatıldı, dosya adlarındaki numaralar çıkarıldı (raporlar A, B, C, D harfleriyle dört farklı kişiye ait olarak işaretlendi). Klasördeki Xilinx ara dosyaları (derleme çıktıları, benzetim veritabanları) alınmadı. Maskelenmiş raporlar ve Verilog dosyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="deney-4-4-bitlik-toplayici-verilog">Deney 4: 4 bitlik toplayıcı (Verilog)</h2>
+<p>Rapor A'da iki çözüm var. İkinci soruda tam toplayıcı davranışsal olarak, minterimlerle yazılmış:</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module fadder(s,co,c,a,b);
+output s,co;
+input c,a,b;
+assign co = (~c &amp; a &amp; b) | (c &amp; ~a &amp; b) | (c &amp; a &amp; ~b) | (a &amp; b &amp; c);
+assign s = (~c &amp; ~a &amp; b) | (~c &amp; a &amp; ~b) | (c &amp; ~a &amp; ~b) | (c &amp; a &amp; b);
+endmodule</code></pre>
+<p>Üçüncü soruda AND, OR ve tümleyici kapıları ayrı modüller (<code>andgate</code>, <code>orgate</code>, <code>invgate</code>) olarak tanımlanıp tam toplayıcı (<code>fadderStr</code>) bu kapılarla yapısal olarak yeniden kurulmuş; iki çözümde de dört tam toplayıcı zincirlenerek <code>fourbitadder1</code> ve <code>fourbitadder2</code> oluşturulmuş.</p>
+<h2 id="deney-6-kapi-gecikmeli-toplayicilar">Deney 6: Kapı gecikmeli toplayıcılar</h2>
+<p>Rapor B'de tam toplayıcı kapı gecikmeleriyle (XOR 17, AND 14, OR 15 birim) tanımlanıyor:</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module tamtoplayici(s,cout,a,b,cin);
+input a,b,cin;
+output s,cout;
+wire w1,w2,w3;
+xor #(17)
+  x1(w1,a,b),
+  x2(s,cin,w1);
+and #(14)
+  a1(w2,a,b),
+  a2(w3,w1,cin);
+or #(15) (cout,w3,w2);
+endmodule</code></pre>
+<p>Bununla 4 bitlik dalgacık eldeli toplayıcı ve <code>PGgen</code>, <code>carrygen</code> modülleriyle 4 bitlik <strong>carry-lookahead</strong> toplayıcı (<code>fourbitscarrylookahead</code>) kurulmuş.</p>
+<h2 id="deney-7-hatali-devre-mux-ve-kod-cozucu">Deney 7: Hatalı devre, MUX ve kod çözücü</h2>
+<p>İki rapor (B ve C) aynı soruları cevaplıyor:</p>
+<ol><li>Verilen devredeki yanlış F fonksiyonu Karnaugh haritasında sadeleştirildiğinde, doğru F'deki <strong>c'd</strong> teriminin eksik olduğu görülüyor; yani d'yi c'd terimini üreten AND kapısına götüren kablo hatalı (temas etmiyor).</li><li>F fonksiyonu kanonik biçimde yazılıp dört girişli, tek çıkışlı devre en fazla üç adet 2 girişli MUX ile tasarlanmış.</li><li>2x4 kod çözücü ve 4x1 MUX ile, iki bitlik ab ve cd sayıları eşitse 1 veren devre: F = a'b'c'd' + a'bc'd + ab'cd' + abcd. Kanonik formda yazılıp Karnaugh haritasına yerleştirilerek eşitlik kontrolü yapılıyor.</li></ol>
+<h2 id="deney-8-d-flip-flop-ve-jk-sayicilar">Deney 8: D flip-flop ve JK sayıcılar</h2>
+<p>Üç açıklama belgesinde aynı sorular cevaplanıyor:</p>
+<ol><li>FD bloğu yükselen kenarda tetiklenen bir D flip-flop; çıkışın önündeki tümleyici yüzünden çıkış girişin tersi olur ve her saat darbesinde değişir (frekans yarıya iner).</li><li>Dört JK flip-floplu devre, her flip-flopun çıkışı bir sonrakinin saat girişine bağlı asenkron bir <strong>geri sayıcıdır</strong>: 1111'den 0000'a azalır.</li><li>Bütün saat girişlerine tümleyici konunca flip-floplar düşen kenarda tetiklenir ve devre 0000'dan <strong>ileri sayar</strong>.</li><li>Şekil 3'teki sayıcının ilk flip-flopu girişin tersini çıkışa ilettiği için, Şekil 1'deki işlem bu devreyle de yapılabilir (en düşük anlamlı bit alınarak).</li></ol>
+<p><em>Not: Açıklamalardan birinde geri sayıcının ikinci durumu "0111, onluk karşılığı 14" diye yazılmış; bitler Q0'dan Q3'e doğru (ters sırada) okunmuş. Q3Q2Q1Q0 sırasıyla bu durum 1110 = 14'tür.</em></p>
+<h2 id="deney-9-mandallar-flip-floplar-ve-yedi-parcali-gosterge-surucusu">Deney 9: Mandallar, flip-floplar ve yedi parçalı gösterge sürücüsü</h2>
+<p>Bu deneyde dört haneli yedi parçalı gösterge sürücüsü (<code>SSdriver</code>) kullanılıyor. Rapor D'ye (19 Aralık 2006) göre modülün görevi, girişteki dört adet 4 bitlik bilgiyi (S1–S4) dört göstergeye sırayla aktarmak: önce S1'in karşılığı SS çıkışına verilip birinci göstergenin ortak anodu (AN) sürülür, sonra S2, S3 ve S4 için aynısı yapılır. Bu tarama saniyede yüzlerce kez tekrarlandığı için göz yanıp sönmeyi fark etmez ve göstergelerde sabit rakamlar görülür.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module clkdiv(clk,mclk);
+output clk;
+input mclk;
+reg [15:0] cnt;
+assign clk=cnt[15];
+initial cnt=0; // Don't forget!! Otherwise simulator does generate X only
+always @(posedge mclk)
+begin
+cnt = cnt+1;
+end
+endmodule
+
+module SSdriver(SS,AN,mclk,S1,S2,S3,S4);
+input mclk;
+input [3:0] S1,S2,S3,S4;
+output reg [7:0] SS;
+output reg [3:0] AN;
+wire [7:0] w1,w2,w3,w4;
+wire clk;
+wire [3:0] w5;
+reg [1:0] cnt;
+clkdiv cdiv(clk,mclk);
+decoder d1(w1,S1);
+decoder d2(w2,S2);
+decoder d3(w3,S3);
+decoder d4(w4,S4);
+anode_decoder d5(w5,cnt);
+initial cnt=0;
+always @(posedge clk)
+begin
+cnt=cnt+1;
+end
+always @(cnt)
+begin
+AN&lt;=w5;
+case (cnt)
+2'b00 : SS&lt;=w1;
+2'b01 : SS&lt;=w2;
+2'b10 : SS&lt;=w3;
+2'b11 : SS&lt;=w4;
+endcase
+end
+endmodule</code></pre>
+<p><code>decoder</code> modülü 0–9 rakamlarını 8 bitlik segment koduna (ör. 0 → 10000001, 1 → 10011111; etkin düşük) çeviriyor, <code>anode_decoder</code> ise 2 bitlik sayaca göre dört anottan birini 0 yapıyor (1110, 1101, 1011, 0111). <code>clkdiv</code>, kartın saatini 2¹⁶'ya bölerek tarama saatini üretiyor.</p>
+<p>Raporlarda bu sürücüyle kurulan sayıcılar anlatılıyor:</p>
+<ul><li><strong>0–9 sayıcı:</strong> 8 bitlik ikili sayıcının çıkışına bağlanan AND kapısı, çıkış 1010 (10) olduğunda clr girişini 1 yapıp sayıcıyı sıfırlıyor; böylece sayıcı yalnızca 9'a kadar sayıyor ve çıkış göstergeye aktarılıyor.</li><li>clr girişi sürekli 1'e bağlanırsa çıkışlar sıfırlanır ve göstergede hep 0 görülür.</li><li><strong>0–99 sayıcı:</strong> her basamak ayrı bir sayıcıyla saydırılıyor; birinci sayıcıyı 10'da sıfırlayan AND kapısının çıkışı ikinci sayıcının saat girişine bağlanıyor. Böylece birler basamağı her 9'dan 0'a döndüğünde onlar basamağı bir artıyor ve devre 99'a kadar sayıyor.</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="EEM211_lab_raporlari_2006_2007_maskeli.zip" download>EEM211_lab_raporlari_2006_2007_maskeli.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.8 MB · 13.12.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM211_lab_raporlari_2006_2007_maskeli.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

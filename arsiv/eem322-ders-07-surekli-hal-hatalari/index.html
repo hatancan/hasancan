@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders 7 – Sürekli Hal Hataları, Statik Hata Katsayıları, Bozucu Etkiler ve Duyarlılık — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri ders notu 7 (Hamit Erdem, 2013): basamak, rampa ve parabol girişleri için sürekli hal hatası, son değer teoremi, oransal ve integral denetim, Kp, Kv, Ka statik hata katsayıları ve sistem tipi, bozucu etkiden doğan hata, birim geri beslemeli olmayan sistemler ve duyarlılık örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-07-surekli-hal-hatalari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders 7 – Sürekli Hal Hataları, Statik Hata Katsayıları, Bozucu Etkiler ve Duyarlılık">
+<meta property="og:description" content="EEM322 Denetim Sistemleri ders notu 7 (Hamit Erdem, 2013): basamak, rampa ve parabol girişleri için sürekli hal hatası, son değer teoremi, oransal ve integral denetim, Kp, Kv, Ka statik hata katsayıları ve sistem tipi, bozucu etkiden doğan hata, birim geri beslemeli olmayan sistemler ve duyarlılık örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-07-surekli-hal-hatalari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders 7 – Sürekli Hal Hataları, Statik Hata Katsayıları, Bozucu Etkiler ve Duyarlılık", "description": "EEM322 Denetim Sistemleri ders notu 7 (Hamit Erdem, 2013): basamak, rampa ve parabol girişleri için sürekli hal hatası, son değer teoremi, oransal ve integral denetim, Kp, Kv, Ka statik hata katsayıları ve sistem tipi, bozucu etkiden doğan hata, birim geri beslemeli olmayan sistemler ve duyarlılık örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-07-surekli-hal-hatalari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322L7.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-07-surekli-hal-hatalari/eem322L7.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders 7 – Sürekli Hal Hataları, Statik Hata Katsayıları, Bozucu Etkiler ve Duyarlılık">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#uc-tasarim-olcutu-ve-test-girisleri">Üç tasarım ölçütü ve test girişleri</a></li><li><a href="#yalniz-k-kazanci-ile-denetim">Yalnız K kazancı ile denetim</a></li><li><a href="#birim-geri-beslemeli-sistemde-surekli-hal-hatasi">Birim geri beslemeli sistemde sürekli hal hatası</a></li><li><a href="#statik-hata-katsayilari-ve-sistem-tipi">Statik hata katsayıları ve sistem tipi</a></li><li><a href="#bozucu-etkiler-icin-surekli-hal-hatalari">Bozucu etkiler için sürekli hal hataları</a></li><li><a href="#birim-geri-beslemeli-olmayan-sistemler">Birim geri beslemeli olmayan sistemler</a></li><li><a href="#duyarlilik-sensitivity">Duyarlılık (sensitivity)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders 7 – Sürekli Hal Hataları, Statik Hata Katsayıları, Bozucu Etkiler ve Duyarlılık</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 18.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin <strong>7. ders notudur</strong> ("EEM322: Lecture 7"). Notlar dersi veren <strong>Hamit Erdem</strong>'e ait; sayfa başlarında 18.07.2013 tarihi var. Ders notu Türkçe ve İngilizce karışık, sayfa başına iki slayt yerleştirilmiş 18 sayfalık bir PDF; Ders 1–6'nın devamıdır. Aşağıda içerik Türkçe olarak aktarıldı, formüller ve çözümlü örnekler yazıya döküldü. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Konular: sürekli hal (kararlı hal) hataları; bozucu etkiler için sürekli hal hataları; duyarlılık (sensitivity).</p>
+<h2 id="uc-tasarim-olcutu-ve-test-girisleri">Üç tasarım ölçütü ve test girişleri</h2>
+<p>Denetim sistemlerinin analiz ve tasarımında üç ölçüte odaklanılır:</p>
+<ol><li>Geçici rejim cevabı</li><li>Kararlılık</li><li>Sürekli hal (kararlı hal) hataları</li></ol>
+<p><strong>Sürekli hal hatası</strong>, önceden belirlenmiş bir giriş (referans) sinyali için t → ∞ giderken giriş ile çıkış sinyali arasındaki farktır. Sürekli hal hatasını belirlemekte kullanılan giriş işaretleri:</p>
+<ul><li><strong>Birim basamak (step):</strong> sabit konumu temsil eder; sistemin sabit bir hedefe göre yerini bulma yeteneğini belirler.</li><li><strong>Rampa:</strong> sabit hızı temsil eder; doğrusal olarak artan girişi izleyebilme yeteneğini test etmek için kullanılır.</li><li><strong>Parabol:</strong> sabit ivmeyi temsil eder; hızlanan hedefler için kullanılır (örneğin güdümlü füzeler).</li></ul>
+<p>Sürekli hal hataları <strong>kararlı sistemler</strong> için tanımlıdır; bu yüzden tasarımcı kararlı hal hatasını hesaplamadan önce mutlaka kapalı döngü sistemin kararlılığını incelemelidir. Kontrol sistemlerinde sürekli hal hataları çoğunlukla doğrusal olmayan kaynaklardan doğar (dişlilerdeki boşluk, motora uygulanan gerilim belli bir eşiği geçmeden motorun dönmemesi gibi). Hata ayrıca sistemin bağlantı şeklinden ya da uygulanan giriş tipinden de kaynaklanabilir; derste bunlar üzerinde durulur.</p>
+<h2 id="yalniz-k-kazanci-ile-denetim">Yalnız K kazancı ile denetim</h2>
+<p>Birim geri beslemeli, ileri yolunda yalnız K kazancı olan sistemde:</p>
+<ul><li>E(s) = R(s) − C(s), C(s) = K·E(s)</li><li>R(s) = E(s) + K·E(s) ⇒ <strong>E(s) = R(s) / (1 + K)</strong></li></ul>
+<p>c(t) sonlu ve sıfırdan farklıdır ama e(t) hiçbir zaman sıfır olamaz. Birim basamak giriş için <strong>K ne kadar artarsa hata o kadar azalır, fakat sıfırlanamaz</strong>.</p>
+<h3 id="birinci-dereceden-sistemde-oransal-denetim">Birinci dereceden sistemde oransal denetim</h3>
+<p>G(s) = Y(s)/R(s) = G_c G_v G_p / (1 + G_c G_v G_p), burada süreç G_p = K/(Ts + 1), oransal denetleyici G_c = K_p ve denetim elemanı G_v = 1 alınıyor. Kapalı çevrim transfer fonksiyonu:</p>
+<ul><li>Y(s)/R(s) = K K_p / (Ts + 1 + K K_p) = [K K_p/(1 + K K_p)] / ([T/(1 + K K_p)] s + 1)</li></ul>
+<p>Denetleyici kazancı arttıkça sistemin toplam kazancı 1'e yaklaşır ve <strong>zaman sabiti T/(1 + K K_p) küçülür</strong>; yani sistem yanıtı hızlanır. Oransal denetim karakteristik denklemi de değiştirir.</p>
+<p><strong>Son değer teoremi</strong> ile R(s) = 1/s için:</p>
+<ul><li>lim(t→∞) e(t) = lim(s→0) s·E(s), E(s) = R(s) / (1 + G_c G_p)</li><li>lim(t→∞) e(t) = lim(s→0) s · 1/(1 + K_p K/(Ts + 1)) · 1/s = <strong>1 / (1 + K K_p)</strong></li></ul>
+<p>Örnek olarak G_p = 5/(10s + 1) için K_p = 0,1, 1 ve 10 değerlerindeki basamak yanıtları gösteriliyor. Bu denklem, K_p sonsuz olmadıkça her zaman bir hata kalacağını söyler; hatanın büyüklüğü oransal kazançla ters orantılıdır.</p>
+<h3 id="i-leri-yola-integrator-eklemek">İleri yola integratör eklemek</h3>
+<p>İleri yola K/s eklenirse c(t) büyüdükçe e(t) azalır ve bu e(t) sıfır olana kadar sürer. Hata sıfırlansa da integratör çıkışı olan c(t) bir değere sahiptir, çünkü integratör sıfır girişe sabit bir çıkış verir. Örneğin bir motor: gerilim uygulandıkça döner, gerilim kesilince o anki konumunda durur; girişi olmamasına rağmen başlangıç ile duruş konumu arasında bir açısal konum değişimi oluşmuştur. Bu yüzden motor basitçe bir integratör olarak düşünülebilir; ileri yola bir motor bağlanırsa birim basamak girişte sürekli hal hatası her zaman sıfır olur.</p>
+<p><strong>İntegral denetim (basamak giriş):</strong> u(t) = K_i ∫ e(t) dt, G_c = U(s)/E(s) = K_i/s. Süreç K/(Ts + 1) ile:</p>
+<ul><li>Y(s)/R(s) = K K_i / (Ts² + s + K K_i)</li><li>E(s) = R(s)[1 − K K_i/(Ts² + s + K K_i)] = R(s)(Ts² + s)/(Ts² + s + K K_i)</li><li>lim(t→∞) e(t) = lim(s→0) s · (1/s) · (Ts² + s)/(Ts² + s + K K_i) = <strong>0</strong></li></ul>
+<h2 id="birim-geri-beslemeli-sistemde-surekli-hal-hatasi">Birim geri beslemeli sistemde sürekli hal hatası</h2>
+<p>E(s) = R(s) − C(s), C(s) = E(s)G(s) ⇒ E(s) = R(s)/(1 + G(s)). Son değer teoremi f(∞) = lim(s→0) sF(s) ile:</p>
+<ul><li><strong>e(∞) = lim(s→0) s R(s) / (1 + G(s))</strong></li></ul>
+<p>Görüldüğü gibi giriş (referans) işareti R(s), sürekli hal hatası üzerinde doğrudan etkilidir.</p>
+<h3 id="1-birim-basamak-girisi">1. Birim basamak girişi</h3>
+<p>R(s) = 1/s için e(∞) = lim(s→0) 1/(1 + G(s)). lim(s→0) G(s), ileri yol transfer fonksiyonunun <strong>dc kazancıdır</strong>. Hatanın sıfır olması için lim(s→0) G(s) = ∞ olmalıdır; bunun için G(s) şu biçimde olmalıdır:</p>
+<ul><li>G(s) = (s + z₁)(s + z₂)… / [sⁿ (s + p₁)(s + p₂)…], n ≥ 1</li></ul>
+<p>Yani paydadaki polinomun en az bir kökü orijinde olmalıdır; teknik ifadeyle <strong>ileri yolda en az bir saf integratör</strong> bulunmalıdır. Orijinde hiç kutup yoksa lim(s→0) G(s) = z₁z₂…/(p₁p₂…) olur ve bu sonlu bir sürekli hal hatasına karşılık gelir.</p>
+<h3 id="2-rampa-girisi">2. Rampa girişi</h3>
+<p>R(s) = 1/s² için e(∞) = lim(s→0) 1/(s + sG(s)) = 1 / lim(s→0) sG(s). Hatanın sıfır olması için lim sG(s) = ∞ olmalıdır; bunun için <strong>en az iki kutup orijinde</strong> olmalı, yani ileri yolda iki saf integratör bulunmalıdır. Tek integratör varsa lim sG(s) = z₁z₂…/(p₁p₂…) olur ve sabit bir hata kalır; hiç integratör yoksa lim sG(s) = 0 olur ve çıkış rampa girişinden zamanla uzaklaşarak hata sonsuza gider.</p>
+<h3 id="3-parabolik-giris">3. Parabolik giriş</h3>
+<p>R(s) = 1/s³ için e(∞) = 1 / lim(s→0) s²G(s). Sıfır hata için <strong>en az üç kutup orijinde</strong> olmalıdır. İki saf integratör varsa sabit bir hata kalır; bir integratör varsa ya da hiç yoksa lim s²G(s) = 0 olur ve hata sonsuza gider.</p>
+<h3 id="cozumlu-ornekler">Çözümlü örnekler</h3>
+<p><strong>Örnek 1:</strong> G(s) = 100(s + 2)(s + 6) / [s(s + 3)(s + 4)]; 5u(t), 5tu(t) ve 5t²u(t) girişleri için:</p>
+<ul><li>5u(t) → 5/s: lim G(s) = ∞ ⇒ e(∞) = 5/∞ = <strong>0</strong></li><li>5tu(t) → 5/s²: lim sG(s) = 100·2·6/(3·4) = 100 ⇒ e(∞) = 5/100 = <strong>1/20</strong></li><li>5t²u(t) → 10/s³: lim s²G(s) = 0 ⇒ e(∞) = <strong>∞</strong></li></ul>
+<p><strong>Örnek 2:</strong> G(s) = 120(s + 2) / [(s + 3)(s + 4)]:</p>
+<ul><li>Basamak: lim G(s) = 120·2/(3·4) = 20 ⇒ e(∞) = 5/(1 + 20) = <strong>5/21</strong></li><li>Rampa: lim sG(s) = 0 ⇒ e(∞) = <strong>∞</strong>; parabol: lim s²G(s) = 0 ⇒ e(∞) = <strong>∞</strong></li></ul>
+<h2 id="statik-hata-katsayilari-ve-sistem-tipi">Statik hata katsayıları ve sistem tipi</h2>
+<p>Hata ifadelerinin paydasındaki limit terimlerine <strong>statik hata katsayıları</strong> denir:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Katsayı</th><th scope="col">Tanım</th><th scope="col">Giriş</th><th scope="col">Sürekli hal hatası</th></tr></thead><tbody><tr><th scope="row">Konum sabiti K_p</th><td>lim(s→0) G(s)</td><td>birim basamak u(t)</td><td>e(∞) = 1/(1 + K_p)</td></tr><tr><th scope="row">Hız sabiti K_v</th><td>lim(s→0) sG(s)</td><td>rampa tu(t)</td><td>e(∞) = 1/K_v</td></tr><tr><th scope="row">İvmelenme sabiti K_a</th><td>lim(s→0) s²G(s)</td><td>parabol (1/2)t²u(t)</td><td>e(∞) = 1/K_a</td></tr></tbody></table></div>
+<p><strong>Sistem tipi:</strong> İleri yoldaki saf integratör sayısı (G(s) paydasındaki sⁿ teriminin n'si) sistemin tipidir. n = 0 ise Tip 0, n = 1 ise Tip 1, n = 2 ise Tip 2.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Giriş</th><th scope="col">Tip 0</th><th scope="col">Tip 1</th><th scope="col">Tip 2</th></tr></thead><tbody><tr><th scope="row">Basamak</th><td>K_p sabit, hata 1/(1 + K_p)</td><td>K_p = ∞, hata 0</td><td>K_p = ∞, hata 0</td></tr><tr><th scope="row">Rampa</th><td>K_v = 0, hata ∞</td><td>K_v sabit, hata 1/K_v</td><td>K_v = ∞, hata 0</td></tr><tr><th scope="row">Parabol</th><td>K_a = 0, hata ∞</td><td>K_a = 0, hata ∞</td><td>K_a sabit, hata 1/K_a</td></tr></tbody></table></div>
+<p><strong>Örnek 3:</strong> G(s) = 500(s + 2)(s + 5) / [(s + 8)(s + 10)(s + 12)] (Tip 0):</p>
+<ul><li>K_p = 500·2·5/(8·10·12) = 5,208; K_v = 0; K_a = 0</li><li>Konum girişi: e(∞) = 1/(1 + K_p) = <strong>0,161</strong>; hız girişi: <strong>∞</strong>; ivme girişi: <strong>∞</strong></li></ul>
+<p><strong>Örnek 4:</strong> G(s) = 500(s + 2)(s + 5)(s + 6) / [s(s + 8)(s + 10)(s + 12)] (Tip 1):</p>
+<ul><li>K_p = ∞; K_v = 500·2·5·6/(8·10·12) = 31,25; K_a = 0</li><li>Konum: e(∞) = <strong>0</strong>; hız: e(∞) = 1/31,25 = <strong>0,032</strong>; ivme: <strong>∞</strong></li></ul>
+<p><strong>Örnek 5:</strong> G(s) = 500(s + 2)(s + 4)(s + 5)(s + 6)(s + 7) / [s²(s + 8)(s + 10)(s + 12)] (Tip 2):</p>
+<ul><li>K_p = ∞, K_v = ∞; K_a = 500·2·4·5·6·7/(8·10·12) = 875</li><li>Konum: <strong>0</strong>; hız: <strong>0</strong>; ivme: e(∞) = 1/875 = <strong>1,14 × 10⁻³</strong></li></ul>
+<p><strong>Örnek 6:</strong> Bir sistemin hız sabiti K_v = 1000 ise bu sistem hakkında ne söylenebilir?</p>
+<ol><li>Sistem kararlıdır (sürekli hal hatası tanımlı).</li><li>Sistem Tip 1'dir (Tip 0 sistemlerde K_v = 0, Tip 2 sistemlerde K_v sonsuzdur).</li><li>Test işareti rampadır; rampa girişte sürekli hal hatası hız sabitiyle ters orantılıdır.</li><li>Giriş rampası ile çıkış rampası arasındaki sürekli hal hatası 1/K_v'dir.</li></ol>
+<p>Benzer şekilde konum sabiti K_p = 1000 ise sistem kararlıdır, Tip 0'dır (K_p sonsuz değil), test işareti birim basamaktır ve e(∞) = 1/(1 + 1000) = 1/1001.</p>
+<p><strong>Örnek 7:</strong> G(s) = K(s + 5) / [s(s + 6)(s + 7)(s + 8)] sisteminde sürekli hal hatasının %10 olması için K'yı bulun. Sistem Tip 1 olduğundan hata rampa girişi için tanımlıdır: e(∞) = 1/K_v = 0,1 ⇒ K_v = 10. K_v = lim sG(s) = 5K/(6·7·8) = 10 ⇒ <strong>K = 672</strong>.</p>
+<h2 id="bozucu-etkiler-icin-surekli-hal-hatalari">Bozucu etkiler için sürekli hal hataları</h2>
+<p>Geri beslemeli denetim kullanmanın nedeni, bozucu etkilere rağmen sistemin giriş referansını sıfır ya da çok az hatayla izleyebilmesidir. Denetleyici G₁(s) ile süreç G₂(s) arasına bir bozucu D(s) girdiğinde:</p>
+<figure class="yazi-gorsel"><img src="bozucu-etki.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Denetleyici G1(s), süreç G2(s) ve aralarına toplanan bozucu etki D(s) ile blok diyagramı ve E(s) türetmesi"><figcaption>Bozucu etkili sistem</figcaption></figure>
+<ul><li>C(s) = E(s)G₁(s)G₂(s) + D(s)G₂(s), C(s) = R(s) − E(s)</li><li><strong>E(s) = R(s)/(1 + G₁G₂) − G₂ D(s)/(1 + G₁G₂)</strong></li></ul>
+<p>Son değer teoremiyle e(∞) = e_R(∞) + e_D(∞): e_R(∞), girişten (R(s)) doğan hata; e_D(∞), bozucudan (D(s)) doğan hatadır. Birim basamak bozucu D(s) = 1/s için:</p>
+<ul><li>e_D(∞) = −lim(s→0) s G₂/(1 + G₁G₂) · (1/s) = −1 / [lim(s→0) 1/G₂(s) + lim(s→0) G₁(s)]</li></ul>
+<p>Birim basamak bozucuda <strong>G₁(s)'in dc kazancını artırmak ya da G₂(s)'in dc kazancını azaltmak</strong>, bozucudan doğan sürekli hal hatasını azaltır.</p>
+<h2 id="birim-geri-beslemeli-olmayan-sistemler">Birim geri beslemeli olmayan sistemler</h2>
+<p>Başarım ölçütlerini iyileştiren dengeleyici ve denetleyicilerin kullanılması ya da sistemin fiziksel yapısı nedeniyle çoğu denetim sistemi birim geri beslemeli değildir. H(s) geri beslemeli sistem, geri besleme yoluna H(s) ile paralel −1 eklenip blok indirgemesiyle eşdeğer birim geri beslemeli sisteme çevrilir:</p>
+<ul><li>G_e(s) = G(s) / [1 + G(s)H(s) − G(s)]</li></ul>
+<figure class="yazi-gorsel"><img src="birim-olmayan-geribesleme.jpg" width="724" height="548" loading="lazy" decoding="async" alt="H(s) geri beslemeli sistemin, H(s) − 1 yoluyla eşdeğer birim geri beslemeli sisteme dönüştürülmesi"><figcaption>Birim geri beslemeli olmayan sistemin dönüştürülmesi</figcaption></figure>
+<p><strong>Örnek:</strong> G(s) = 100/[s(s + 10)], H(s) = 1/(s + 5). Sistemin tipi, uygun hata sabiti ve birim basamak için sürekli hal hatası:</p>
+<ul><li>G_e(s) = 100(s + 5) / (s³ + 15s² − 50s − 400)</li><li>Saf integratör olmadığından sistem <strong>Tip 0</strong>'dır; uygun hata sabiti konum sabitidir.</li><li>K_p = lim G_e(s) = 100·5/(−400) = −5/4 ⇒ e(∞) = 1/(1 + K_p) = 1/(1 − 5/4) = <strong>−4</strong></li></ul>
+<p>İşaretin negatif olması çıkış değerinin giriş değerinden büyük olduğunu gösterir.</p>
+<p><strong>Hem birim geri beslemesi olmayan hem de bozucu girişi olan sistem</strong> (G₁, G₂, H ve D(s)) için:</p>
+<ul><li>e(∞) = lim(s→0) s{[1 − G₁G₂/(1 + G₁G₂H)] R(s) − [G₂/(1 + G₁G₂H)] D(s)}</li></ul>
+<p>R(s) = 1/s ve D(s) = 1/s için sıfır hata olabilmesi:</p>
+<ul><li>lim s[G₁G₂] / lim s[1 + G₁G₂H] = 1 ve lim sG₂ / lim s[1 + G₁G₂H] = 0</li></ul>
+<p>Sistem kararlıysa, G₁(s) Tip 1, G₂(s) Tip 0 ve H(s) dc kazancı 1 olan Tip 0 bir sistemse bu koşullar her zaman sağlanır ve sürekli hal hatası sıfır olur.</p>
+<h2 id="duyarlilik-sensitivity">Duyarlılık (sensitivity)</h2>
+<p>Tasarım sürecinde mühendis, sistem parametrelerinin sistem davranışını ne derece etkilediğini bilmek ister; örneğin ideal olarak sıcaklık gibi parametreler başarımı etkilememelidir. <strong>Sistem parametrelerinin transfer fonksiyonunu, dolayısıyla başarımı etkileme derecesine duyarlılık</strong> denir.</p>
+<p><strong>Örnek:</strong> F = K/(K + a) fonksiyonunun a'ya göre duyarlılığı. K = 10, a = 100 için F = 0,091. a üç katına (300) çıkarılırsa F = 0,032 olur. a'daki kesirli değişim (300 − 100)/100 = 2, F'deki ise (0,032 − 0,091)/0,091 = −0,65 (−%65). F'nin a'daki değişime azalan bir duyarlılığı vardır.</p>
+<p>Sistemde G(s) → G(s) + ΔG(s) değişirse çıkış Y(s) + ΔY(s) = [G(s) + ΔG(s)]R(s), yani ΔY(s) = ΔG(s)·R(s) olur. Geri beslemenin bir diğer avantajı, sistemin parametrelere göre duyarlılığını azaltma eğiliminde olmasıdır. Duyarlılık tanımı:</p>
+<ul><li>S_F:P = lim(ΔP→0) (F'deki kesirli değişim)/(P'deki kesirli değişim) = lim (ΔF/F)/(ΔP/P) = (P/F)(∂F/∂P)</li></ul>
+<p><strong>Örnek:</strong> G(s) = K/[s(s + a)] birim geri beslemeli sistemde T(s) = K/(s² + as + K). a parametresine duyarlılık:</p>
+<ul><li>S_T:a = (a/T)(∂T/∂a) = <strong>−as / (s² + as + K)</strong></li></ul>
+<p>s'nin herhangi bir değeri için K'nın artırılması, kapalı döngü transfer fonksiyonunun a'daki değişime duyarlılığını azaltır.</p>
+<p><strong>Örnek:</strong> Aynı sisteme rampa girişi uygulandığında sürekli hal hatasının a ve K'ya duyarlılığı: K_v = lim sG(s) = K/a, e(∞) = 1/K_v = a/K.</p>
+<ul><li>S_e:a = (a/e)(∂e/∂a) = (a/(a/K))·(1/K) = <strong>1</strong></li><li>S_e:K = (K/e)(∂e/∂K) = (K/(a/K))·(−a/K²) = <strong>−1</strong></li></ul>
+<p>a ve K'daki değişiklikler doğrudan e(∞)'da görülür; duyarlılıkta azalma ya da artma olmaz.</p>
+<p><strong>Örnek:</strong> G(s) = K/[(s + a)(s + b)] sistemine birim basamak uygulandığında: sistem Tip 0, K_p = K/(ab), e(∞) = 1/(1 + K/(ab)) = ab/(ab + K).</p>
+<ul><li>S_e:a = (a/e)(∂e/∂a) = [a / (ab/(ab + K))]·[((ab + K)b − ab²)/(ab + K)²] = <strong>K / (ab + K)</strong></li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem322L7.pdf" download>eem322L7.pdf</a></p>
+              <p class="kucuk">PDF · 1.1 MB · 18 <span data-i18n="arch.pagesLower"></span> · 18.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322L7.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

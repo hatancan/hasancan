@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Bölüm 2 ve 4 Çözümlü Örnekleri – Modelleme, Blok Diyagramı ve Zaman Yanıtı (Uraz) — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Alper Uraz&#x27;ın EEM322 el yazısı çözümlü örnekleri: sarkaç, dişli takımı, etkileşimli ve etkileşimsiz tank sistemleri, endüvi kontrollü DC motorlu konum servosu, Mason kazanç formülü ve blok diyagramı indirgeme; durum uzayından basamak yanıtı, ikinci dereceden sistem özellikleri, kutup bölgesi ve sürekli hal hataları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-odev-uraz-ornekleri-bolum-2-4/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Bölüm 2 ve 4 Çözümlü Örnekleri – Modelleme, Blok Diyagramı ve Zaman Yanıtı (Uraz)">
+<meta property="og:description" content="Prof. Dr. Alper Uraz&#x27;ın EEM322 el yazısı çözümlü örnekleri: sarkaç, dişli takımı, etkileşimli ve etkileşimsiz tank sistemleri, endüvi kontrollü DC motorlu konum servosu, Mason kazanç formülü ve blok diyagramı indirgeme; durum uzayından basamak yanıtı, ikinci dereceden sistem özellikleri, kutup bölgesi ve sürekli hal hataları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-odev-uraz-ornekleri-bolum-2-4/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Bölüm 2 ve 4 Çözümlü Örnekleri – Modelleme, Blok Diyagramı ve Zaman Yanıtı (Uraz)", "description": "Prof. Dr. Alper Uraz'ın EEM322 el yazısı çözümlü örnekleri: sarkaç, dişli takımı, etkileşimli ve etkileşimsiz tank sistemleri, endüvi kontrollü DC motorlu konum servosu, Mason kazanç formülü ve blok diyagramı indirgeme; durum uzayından basamak yanıtı, ikinci dereceden sistem özellikleri, kutup bölgesi ve sürekli hal hataları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-odev-uraz-ornekleri-bolum-2-4/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-odev-uraz-ornekleri-bolum-2-4.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-odev-uraz-ornekleri-bolum-2-4/eem322-odev-uraz-ornekleri-bolum-2-4.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Bölüm 2 ve 4 Çözümlü Örnekleri – Modelleme, Blok Diyagramı ve Zaman Yanıtı (Uraz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.04.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#bolum-2-matematiksel-modelleme">Bölüm 2: Matematiksel modelleme</a></li><li><a href="#bolum-4-zaman-yaniti">Bölüm 4: Zaman yanıtı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Bölüm 2 ve 4 Çözümlü Örnekleri – Modelleme, Blok Diyagramı ve Zaman Yanıtı (Uraz)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 09.04.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri klasörünün "Kontrol" alt klasöründe bulunan, dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong>'ın el yazısıyla hazırladığı <strong>"Examples on Chapter 2 (EEM322)"</strong> ve <strong>"CH-4"</strong> çözümlü örneklerini metne aktarıyor. Bölüm 2 örnekleri matematiksel modelleme ve blok diyagramlarıyla, Bölüm 4 örnekleri zaman yanıtı ve sürekli hal hatalarıyla ilgili. Sayfa numaralarındaki "b" eki (1b, 2b, …) örneklerin ikinci takımı olduğunu gösteriyor. Belgelerde tarih yok. Taranmış 12 sayfa yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="bolum-2-matematiksel-modelleme">Bölüm 2: Matematiksel modelleme</h2>
+<h3 id="ornek-1-b-sarkac">Örnek 1(b): Sarkaç</h3>
+<p>Kütlesiz bir çubuğun ucunda toplanmış M kütleli, b uzunluklu bir sarkaca T torku uygulanıyor.</p>
+<ol><li>Dönme noktasına göre eylemsizlik momenti J = Mb².</li><li>Dönme hareketi için Newton'un ikinci yasası (N = Jθ̈; N: dış momentlerin toplamı, J: kütle eylemsizlik momenti, θ̈: açısal ivme): T − Mgb sin θ = Jθ̈, yani θ̈ + (g/b) sin θ = T/(Mb²); g ≅ 9.81 m/s².</li><li>Denklem sin θ yüzünden doğrusal değildir. Taylor serisi sin θ = θ − θ³/3! + θ⁵/5! − … olduğundan küçük açılar (radyan) için sin θ ≅ θ alınır: θ̈ + (g/b)θ = T/(Mb²).</li><li>Tork uygulanmazsa bu denklem ωn = √(g/b) doğal frekanslı bir harmonik osilatörü tanımlar.</li><li>Transfer fonksiyonu: <strong>θ(s)/T(s) = (1/(Mb²)) / (s² + g/b)</strong>.</li></ol>
+<h3 id="ornek-2-b-disli-takimi">Örnek 2(b): Dişli takımı</h3>
+<p>Motordan yük miline tork ileten bir dişli takımı: birinci milde J₁, B₁, N₁ dişli; ikinci milde J₂, B₂, N₂ dişli ve TL yük torku; n = N₁/N₂ ve T₁/T₂ = θ₂/θ₁ = n.</p>
+<ol><li>Birinci mil: J₁ d²θ₁/dt² + B₁ dθ₁/dt + T₁ = Tm (T₁: dişli takımının geri kalanının 1. dişliye yük torku, Tm: motordan gelen giriş torku).</li><li>İkinci mil: J₂ d²θ₂/dt² + B₂ dθ₂/dt + TL = T₂ (T₂: 2. dişliye iletilen tork).</li><li>T₁ = nT₂ = n(J₂ θ̈₂ + B₂ θ̇₂ + TL) = n²J₂ θ̈₁ + n²B₂ θ̇₁ + nTL.</li><li>Birinci mil denklemine konunca: <strong>J₁eq d²θ₁/dt² + B₁eq dθ₁/dt + nTL = Tm</strong>; burada J₁eq = J₁ + n²J₂, B₁eq = B₁ + n²B₂ birinci mile indirgenmiş eşdeğer eylemsizlik ve sürtünmedir.</li></ol>
+<h3 id="ornek-3-b-etkilesimli-iki-tankli-seviye-denetim-sistemi">Örnek 3(b): Etkileşimli iki tanklı seviye denetim sistemi</h3>
+<p>Ders kitabındaki Ex. 2.8'in sistemi. Laplace dönüşümlü denklemler:</p>
+<ul><li>[Q(s) − Q₁(s)]/(C₁s) = P₁(s)</li><li>[P₁(s) − P₂(s)]/R₁ = Q₁(s)</li><li>P₂(s)/R₂ = Q₂(s)</li><li>[Q₁(s) − Q₂(s)]/(C₂s) = P₂(s)</li></ul>
+<p>Her denklem bir blokla gösterilip birleştirilir; geri besleme noktaları kaydırılarak diyagram adım adım sadeleştirilir: önce iki iç döngü 1/(R₁C₁s + 1) ve 1/(R₂C₂s + 1) bloklarına indirgenir, aradaki etkileşim R₂C₁s geri besleme bloğu olarak kalır. Sonuç:</p>
+<blockquote><p><strong>Q₂(s)/Q(s) = 1 / [R₁C₁R₂C₂s² + (R₁C₁ + R₂C₂ + R₂C₁)s + 1]</strong></p></blockquote>
+<figure class="yazi-gorsel"><img src="ornek3-tank-blok.jpg" width="1100" height="811" loading="lazy" decoding="async" alt="Örnek 3(b): iki tanklı sistemin birleşik blok diyagramı, adım adım sadeleştirilmesi, işaret akış grafiği ve sonuç transfer fonksiyonu"><figcaption>Örnek 3(b): etkileşimli tanklar için blok diyagramı indirgeme</figcaption></figure>
+<h3 id="ornek-4-b-etkilesimsiz-tanklar">Örnek 4(b): Etkileşimsiz tanklar</h3>
+<p>Birinci tank (kesit alanı A₁, seviye H₁, çıkış direnci R₁) ikinci tankı (A₂, H₂, R₂) besliyor. Pᵢ = ρHᵢ, Cᵢ = Aᵢ/ρ, ρ = 1 (su yoğunluğu).</p>
+<ol><li>Dinamik denklemler: Q − Q₁ = C₁ dP₁/dt, P₁/R₁ = Q₁, Q₁ − Q₂ = C₂ dP₂/dt, P₂/R₂ = Q₂.</li><li>Transfer fonksiyonu: <strong>Q₂(s)/Q(s) = 1 / [(1 + R₁C₁s)(1 + R₂C₂s)]</strong>.</li><li>Elektriksel benzeşim: her tank, bir akım kaynağıyla beslenen paralel C ve R devresine karşılık gelir (i → C₁ ∥ R₁, i₁ → C₂ ∥ R₂).</li><li>Blok diyagramı: Q → [1/(1 + R₁C₁s)] → Q₁ → [1/(1 + R₂C₂s)] → Q₂ (tanklar birbirini yüklemediği için bloklar doğrudan çarpılır).</li></ol>
+<h3 id="ornek-5-b-enduvi-kontrollu-dc-motorlu-konum-servosu">Örnek 5(b): Endüvi kontrollü DC motorlu konum servosu</h3>
+<p>(Ders kitabındaki Ex. 2.4'e benzer.) Çıkış milinin açısal konumu c, giriş açısı r ile iki döner potansiyometre yardımıyla karşılaştırılıyor. Hata gerilimi Kp kazançlı bir kuvvetlendiriciden geçip endüvi devresini (Ra, La) sürüyor; alan akımı sabit; motor n = N₁/N₂ oranlı dişli takımıyla JL, BL yükünü döndürüyor.</p>
+<p>Kuvvetlendiricinin giriş empedansı çok yüksek olmalıdır, çünkü potansiyometreler yüksek empedanslı devrelerdir ve akım çekilmesine dayanamaz; aynı zamanda motorun endüvi devresini beslediği için çıkış empedansı düşük olmalıdır.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Zaman bölgesi</th><th scope="col">s bölgesi (sıfır başlangıç koşulları)</th></tr></thead><tbody><tr><th scope="row">e = K₁(r − c)</th><td>E(s) = K₁[R(s) − C(s)]</td></tr><tr><th scope="row">ea = Kp·e</th><td>Ea(s) = Kp·E(s)</td></tr><tr><th scope="row">La·dia/dt + Ra·ia + eb = ea</th><td>(La·s + Ra)Ia(s) + Eb(s) = Ea(s)</td></tr><tr><th scope="row">eb = Kb·dθ/dt = Kb·ω</th><td>Eb(s) = Kb·s·θ(s) = Kb·Ω(s)</td></tr><tr><th scope="row">T = K₂·ia</th><td>T(s) = K₂·Ia(s)</td></tr><tr><th scope="row">Jeq·d²θ/dt² + Beq·dθ/dt = T</th><td>(Jeq·s² + Beq·s)θ(s) = T(s)</td></tr><tr><th scope="row">c = nθ</th><td>C(s) = n·θ(s)</td></tr></tbody></table></div>
+<p>Jeq = n²JL ve Beq = n²BL, motor miline indirgenmiş eşdeğer değerlerdir.</p>
+<ol><li>Endüvi kontrollü DC motorun transfer fonksiyonu: θ(s)/Ea(s) = K₂ / [s(La·s + Ra)(Jeq·s + Beq) + K₂Kb·s] ≅ K₂ / [Ra·s(Jeq·s + Beq) + K₂Kb·s] (küçük La ile).</li><li>Toplam transfer fonksiyonu: C(s)/R(s) = K₁KpK₂n / [s(La·s + Ra)(Jeq·s + Beq) + K₂Kb·s + K₁KpK₂n] ≅ K₁KpK₂n / [RaJeq·s² + (RaBeq + K₂Kb)s + K₁KpK₂n].</li><li>Pay ve payda n²Ra'ya bölünürse: <strong>C(s)/R(s) = K / (Js² + Bs + K)</strong>; burada K = K₁K₂Kp/(nRa), J = Jeq/n², B = Beq/n² + K₂Kb/(n²Ra) (çıkış miline indirgenmiş değerler).</li><li>Sadeleştirilmiş blok diyagramı: birim geri beslemeli K/[s(Js + B)].</li><li><strong>Hız geri beslemesi:</strong> çıkış işaretinin türevi sistem başarımını iyileştirmek için kullanılabilir; hız işareti bir takometreyle elde edilir. Diyagramda iç döngüde K/(Js + B) bloğunun çıkışı Kt kazancıyla geri beslenir (hız geri beslemesi), dışta 1/s'den sonra konum geri beslemesi vardır.</li></ol>
+<h3 id="ornek-6-b-i-saret-akis-grafigi-ve-mason-kazanc-formulu">Örnek 6(b): İşaret akış grafiği ve Mason kazanç formülü</h3>
+<p>Verilen blok diyagramının işaret akış grafiğini çizin; Mason kazanç formülüyle çıkışı R ve D (bozucu) girişlerine göre bulun.</p>
+<figure class="yazi-gorsel"><img src="ornek6b-blok.jpg" width="1100" height="483" loading="lazy" decoding="async" alt="Örnek 6(b): G₁, G₂, G₃, H₁, H₂, H₃ bloklu ve D(s) bozucu girişli blok diyagramı ile işaret akış grafiği"><figcaption>Örnek 6(b): blok diyagramı ve işaret akış grafiği</figcaption></figure>
+<p><strong>D(s) = 0 için:</strong></p>
+<ul><li>İleri yollar: P₁ = G₁G₂, P₂ = G₃.</li><li>Döngü kazançları: L₁ = −G₁H₁, L₂ = −G₂H₂, L₃ = −G₁G₂H₃, L₄ = −G₃H₃, L₅ = G₃H₂H₁.</li><li>Birbirine değmeyen döngü yok. Determinant Δ = 1 − (L₁ + L₂ + L₃ + L₄ + L₅); kofaktörler Δ₁ = 1, Δ₂ = 1.</li><li><strong>PR = (P₁Δ₁ + P₂Δ₂)/Δ = (G₁G₂ + G₃) / (1 + G₁H₁ + G₂H₂ + G₁G₂H₃ + G₃H₃ − G₃H₂H₁)</strong></li></ul>
+<p><strong>R(s) = 0 için:</strong> determinant aynı kalır. İleri yol P₁ = G₂, kofaktör Δ₁ = 1 − L₁ = 1 + G₁H₁.</p>
+<ul><li><strong>PD = P₁Δ₁/Δ = G₂(1 + G₁H₁)/Δ</strong></li></ul>
+<p>Toplam çıkış: C(s) = PR·R(s) + PD·D(s). Ödev olarak: D(s) = 0 için toplam transfer fonksiyonunu blok diyagramı cebriyle bulun.</p>
+<h3 id="ornek-7-b-blok-diyagrami-cebri">Örnek 7(b): Blok diyagramı cebri</h3>
+<p>G₁, G₂, G₃, G₄ ileri blokları ve H₁, H₂ geri besleme bloklarından oluşan diyagram adım adım indirgeniyor:</p>
+<ol><li>G₄'ün dallanma noktası G₂'nin sonrasına taşınır; paralel kol G₄/G₂ + G₃ olur.</li><li>G₂ ile birleştirilince ileri blok G₂G₃ + G₄ olur; H₁ geri beslemesinin alındığı nokta da kaydırıldığı için H₁ bloğu H₁G₂/(G₂G₃ + G₄) olur.</li><li>H₂ pozitif geri besleme döngüsü indirgenir: (G₂G₃ + G₄)/(1 − G₂G₃H₂ − G₄H₂).</li><li>Son olarak dış döngü kapatılır:</li></ol>
+<blockquote><p><strong>Y/R = (G₁G₂G₃ + G₁G₄) / (1 − G₂G₃H₂ − G₄H₂ + G₁G₂H₁)</strong></p></blockquote>
+<h2 id="bolum-4-zaman-yaniti">Bölüm 4: Zaman yanıtı</h2>
+<h3 id="ornek-1b-durum-uzayi-modelinden-birim-basamak-yaniti">Örnek 1b: Durum uzayı modelinden birim basamak yanıtı</h3>
+<blockquote><p>ẋ = [−1 0.5; −1 0]x + [0; 1]u, y = [1 0]x</p></blockquote>
+<ol><li>Laplace bölgesinde Y(s) = [C(sI − A)⁻¹B]U(s) = G(s)U(s); U(s) = 1/s, başlangıç koşulları sıfır.</li><li>sI − A = [s + 1 −0.5; 1 s], (sI − A)⁻¹ = (1/(s² + s + 0.5))·[s 0.5; −1 s + 1].</li><li>G(s) = [1 0]·(1/(s² + s + 0.5))·[0.5; s + 1] = <strong>0.5/(s² + s + 0.5)</strong>.</li><li>ωn = √0.5, 2ζωn = 1 ⇒ ζ = 1/(2√0.5) = 0.707.</li><li>Y(s) = 0.5/[(s² + s + 0.5)s]; ters Laplace dönüşümü: <strong>y(t) = 1 − (e^(−0.5t)/0.707)·sin(0.5t + π/4)</strong>, t ≥ 0.</li><li>Genel biçim: y(t) = 1 − [e^(−ζωn t)/√(1 − ζ²)]·sin[ωn√(1 − ζ²)·t + tan⁻¹(√(1 − ζ²)/ζ)].</li></ol>
+<h3 id="ornek-2b-yerlesme-suresi-kosulundan-kazanc">Örnek 2b: Yerleşme süresi koşulundan kazanç</h3>
+<p>Birim geri beslemeli sistem: G(s) = K/[s(s + √(2K))], istenen Ts ≤ 1 s.</p>
+<ol><li>T(s) = G/(1 + G) = K/(s² + √(2K)s + K) ⇒ ωn = √K, ζ = √2/2 = 0.707.</li><li>Aşım: PO = 100·e^(−πζ/√(1 − ζ²)) = 100·e^(−π) = %4.3.</li><li>Yerleşme süresi (%2): Ts = 4/(ζωn) = 8/√(2K). Ts ≤ 1 s için 8/√(2K) = 1 ⇒ <strong>K = 32</strong>.</li><li>K = 32 için: tepe değeri Mp = 1 + e^(−πζ/√(1 − ζ²)) = 1.043; tepe zamanı Tp = π/ωd = π/(ωn√(1 − ζ²)) = π/4 = 0.785 s; yükselme süresi Tr = (π − θ)/ωd = (π − π/4)/4 = 3π/16 = 0.589 s, burada θ = cos⁻¹ζ = cos⁻¹0.707 = π/4.</li></ol>
+<h3 id="ornek-3b-i-stenen-kutup-bolgesi">Örnek 3b: İstenen kutup bölgesi</h3>
+<p>İkinci dereceden kapalı döngü T(s) = ωn²/(s² + 2ζωn s + ωn²) için özellikler: PO ≤ %5, Ts ≤ 4 s, Tp ≤ 1 s.</p>
+<ol><li>PO = 100·e^(−πζ/√(1 − ζ²)) = 5 ⇒ e^(πζ/√(1 − ζ²)) = 20 ⇒ πζ/√(1 − ζ²) = ln 20 = 3 ⇒ π²ζ² = 9 − 9ζ² ⇒ ζ² = 9/(π² + 9) = 0.477 ⇒ <strong>ζ = 0.69</strong> (yaklaşık 46°'lik sınır doğrusu).</li><li>Ts = 4/(ζωn) ≤ 4 ⇒ ζωn ≥ 1 (kutuplar σ = −1 doğrusunun solunda).</li><li>Tp = π/(ωn√(1 − ζ²)) ≤ 1 ⇒ ωd ≥ π.</li><li>Kutuplar için istenen bölge, bu üç sınırın kesiştiği (s-düzleminde taranmış) bölgedir.</li></ol>
+<figure class="yazi-gorsel"><img src="ornek3b-bolge.jpg" width="900" height="774" loading="lazy" decoding="async" alt="Örnek 3b: s-düzleminde ζ = 0.69 doğruları, σ = −1 ve ωd = π sınırlarıyla taranmış istenen kutup bölgesi"><figcaption>Örnek 3b: istenen kutup bölgesi</figcaption></figure>
+<h3 id="ornek-4b-birim-olmayan-geri-besleme-ve-surekli-hal-hatalari">Örnek 4b: Birim olmayan geri besleme ve sürekli hal hataları</h3>
+<p>Sistem G(s) = 20/[s²(s + 2)], geri besleme H(s) = h.</p>
+<ol><li>Birim olmayan geri besleme eşdeğer birim geri beslemeye dönüştürülür: G/(1 + GH) = GE/(1 + GE) ⇒ GE = G/[1 + G(H − 1)].</li><li>Böylece GE(s) = 20/[s²(s + 2) + 20(h − 1)]: h = 1 için sistem tip 2, h ≠ 1 için tip 0.</li><li>Hata sabitleri: Kp = GE(0) = ∞ (h = 1) ya da 1/(h − 1) (h ≠ 1); Kv = ∞ ya da 0; Ka = lim s²GE(s) = 10 (h = 1) ya da 0.</li><li>Basamak girişi (R = 1/s): ess = 1/(1 + Kp) = 0 (h = 1), (h − 1)/h (h ≠ 1).</li><li>Rampa girişi (R = 1/s²): ess = 1/Kv = 0 (h = 1), ∞ (h ≠ 1).</li><li>Parabol girişi r(t) = t² (R = 2/s³): ess = 2/Ka = 2/10 (h = 1), ∞ (h ≠ 1).</li></ol>
+<p><em>Not: Bu sonuçlar ancak kapalı döngü kararlıysa geçerlidir. Kapalı döngü karakteristik denklemi s³ + 2s² + 20h = 0'da s'li terim yoktur; h'nin hiçbir değeri için Routh koşulu sağlanmaz, yani bu sistem her h için kararsızdır. Örnek, hata sabitlerinin hesap yöntemini göstermek için verilmiş.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-odev-uraz-ornekleri-bolum-2-4.zip" download>eem322-odev-uraz-ornekleri-bolum-2-4.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 5.9 MB · 09.04.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-odev-uraz-ornekleri-bolum-2-4.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (5.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

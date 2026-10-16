@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Final Çalışma Notları (2014) – Diyot Modelleri, Doğrultucu, Kırpıcı, BJT/FET Analizi, Direnç ve Kondansatör Çeşitleri — hasancan.net</title>
+<meta name="description" content="EEM214 Elektronik I finaline hazırlık için tutulmuş el yazısı özet notlar: diyot modelleri ve DC/AC analiz adımları, yarım ve tam dalga doğrultucu, seri ve paralel kırpıcı, kenetleyici devreler, transistör sınıflandırması, BJT ve FET&#x27;lerde DC ve AC analiz; ödev için diyot, direnç ve kondansatör çeşitleri ile direnç renk kodu tablosu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-final-calisma-notlari-2014/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Final Çalışma Notları (2014) – Diyot Modelleri, Doğrultucu, Kırpıcı, BJT/FET Analizi, Direnç ve Kondansatör Çeşitleri">
+<meta property="og:description" content="EEM214 Elektronik I finaline hazırlık için tutulmuş el yazısı özet notlar: diyot modelleri ve DC/AC analiz adımları, yarım ve tam dalga doğrultucu, seri ve paralel kırpıcı, kenetleyici devreler, transistör sınıflandırması, BJT ve FET&#x27;lerde DC ve AC analiz; ödev için diyot, direnç ve kondansatör çeşitleri ile direnç renk kodu tablosu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-final-calisma-notlari-2014/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Final Çalışma Notları (2014) – Diyot Modelleri, Doğrultucu, Kırpıcı, BJT/FET Analizi, Direnç ve Kondansatör Çeşitleri", "description": "EEM214 Elektronik I finaline hazırlık için tutulmuş el yazısı özet notlar: diyot modelleri ve DC/AC analiz adımları, yarım ve tam dalga doğrultucu, seri ve paralel kırpıcı, kenetleyici devreler, transistör sınıflandırması, BJT ve FET'lerde DC ve AC analiz; ödev için diyot, direnç ve kondansatör çeşitleri ile direnç renk kodu tablosu.", "inLanguage": "tr", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/eem214-final-calisma-notlari-2014/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Final Çalışma Notları (2014) – Diyot Modelleri, Doğrultucu, Kırpıcı, BJT/FET Analizi, Direnç ve Kondansatör Çeşitleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.05.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#final-notlari">Final notları</a></li><li><a href="#odev-notlari-diyot-direnc-ve-kondansator-cesitleri">Ödev notları: Diyot, direnç ve kondansatör çeşitleri</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Final Çalışma Notları (2014) – Diyot Modelleri, Doğrultucu, Kırpıcı, BJT/FET Analizi, Direnç ve Kondansatör Çeşitleri</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 28.05.2014 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM214 Elektronik I dersinin <strong>2014 bahar</strong> dönemi final sınavına (29 Mayıs 2014) hazırlanırken tutulmuş el yazısı özet notları ve aynı dönemin finalde sorulacağı belirtilen ödevi (diyot, direnç ve kondansatör çeşitleri) için hazırlanmış notları aktarıyor. Metin, kâğıtların telefonla çekilmiş fotoğraflarından metne aktarıldı; fotoğraflar yayınlanmadı. Şekiller sözle tarif edildi. Ödevin bilgisayarda hazırlanmış cevapları için <a href="/arsiv/eem214-odev-cevaplari-2012-2014/">Ödev Cevapları (2012–2014)</a>, final sınavının cevap anahtarı için <a href="/arsiv/eem214-quiz-2-final-2014/">2014 Quiz 2 ve final</a> yazısına bakılabilir.</p>
+<h2 id="final-notlari">Final notları</h2>
+<h3 id="yariiletken-ve-diyot">Yarıiletken ve diyot</h3>
+<ul><li><strong>n türü madde:</strong> boşta fazla elektron.</li><li><strong>p türü madde:</strong> boşta fazla bağ.</li><li><strong>Diyotlar:</strong> doğru polarma altında kendi yönünde akımı ileten elemanlardır.</li></ul>
+<p><em>Not: p türü maddede fazlalık "bağ" değil, eksik elektron yani <strong>delik</strong>tir.</em></p>
+<h3 id="diyot-modelleri">Diyot modelleri</h3>
+<ul><li><strong>1) İdeal diyot:</strong> iletimde kısa devre gibi davranır. Ters yönde akım iletmez; çalışması için V_i &gt; 0 olması yeterli.</li><li><strong>2) Sabit gerilim düşümü modeli (Constant Voltage Drop, CVD):</strong> iletimde V_B'lik bir gerilim kaynağı. Ters yönde akım iletmez; çalışması için V_i &gt; V_B olmalı.</li><li><strong>3) Parçalı doğrusal model (Piece-Wise Linear, PWL):</strong> iletimde V_B gerilim kaynağı ile seri r_d direnci. Ters yönde akım iletmez; çalışması için V_i &gt; V_B olmalı.</li></ul>
+<h3 id="diyotlarda-dc-ve-ac-analiz">Diyotlarda DC ve AC analiz</h3>
+<p><strong>DC analiz:</strong></p>
+<ol><li>Akım yönü ile diyot aynı yönde mi?</li><li>V_giriş &gt; V_bariyer ise</li><li>modeli istenene göre çiz,</li><li>devre analizini yap.</li></ol>
+<p><strong>AC analiz:</strong> Girişe hem AC hem DC verilir. Ayrı ayrı AC ve DC model çizilip istenen bulunur, iki değer toplanarak sonuç bulunur. AC modelde diyot r_ac direnciyle gösterilir.</p>
+<h3 id="dogrultucu-diyot-devreleri">Doğrultucu diyot devreleri</h3>
+<ul><li><strong>Yarım dalga doğrultucu:</strong> kaynak, seri diyot ve R yükü. Giriş sinüsünün yalnız pozitif alternansları çıkışa geçer; negatif alternanslarda çıkış sıfırdır.</li><li><strong>Tam dalga doğrultucu (köprü):</strong> transformatör sekonderine bağlı dört diyotlu köprü ve R yükü. Çıkışta her iki alternans da pozitif yönde görülür.</li><li><strong>Tam dalga doğrultucu (orta uçlu):</strong> orta uçlu transformatör ve iki diyot, R yükü; çıkış köprülü doğrultucununkiyle aynı biçimde.</li></ul>
+<h3 id="kirpici-diyot-devreleri">Kırpıcı diyot devreleri</h3>
+<p><strong>a) Seri kırpıcı:</strong> diyot ve 3 V'luk pil kaynakla seri, çıkış R üzerinden alınıyor. Pil diyota ters yönde bağlıyken giriş 3 V'u aşmadıkça diyot iletmez; çıkışta yalnız girişin 3 V'un üstündeki kısmı görülür.</p>
+<p><em>Not (defterdeki):</em> 3 V ile V_g = 3 V olana kadar 3 V daha güçlü olduğu için 3 V'a kadar kırpar. Diyot yönü pozitif yönde mi, negatif yönde mi, onu ayarlar.</p>
+<p>İkinci seri kırpıcıda pil diyotla aynı yönde bağlı; çıkış dalga biçimi girişe göre yukarı kaymış olarak çizilmiş.</p>
+<p><em>Not (defterdeki):</em> Diyotla batarya aynı yönde olduğu için 3 V → +3 V gider.</p>
+<p><strong>b) Paralel kırpıcı:</strong> kaynak seri R üzerinden, çıkışa paralel diyot + 3 V'luk pil. Çıkış, girişin 3 V'un üstüne çıkan kısmı kesilmiş biçimde 3 V'ta sınırlanıyor; negatif alternans aynen geçiyor.</p>
+<h3 id="kenetleyici-devreler">Kenetleyici devreler</h3>
+<ol><li>Analize diyodun çalıştığı alternansla başlanır.</li><li>Devre çalışırken kondansatör ilk gördüğü gerilimle şarj olur.</li><li>Karşı alternansta kondansatörün boşalmadığı kabul edilir.</li><li>Tekrar çalıştığında kondansatör, gerilim kaynağına destek olur.</li></ol>
+<p>Örnek: seri kondansatör, çıkışa paralel diyot ve R. Giriş +10 V / −10 V kare dalga iken çıkış 0 ile −20 V arasında değişen kare dalga olur.</p>
+<h3 id="transistorlerin-siniflandirilmasi">Transistörlerin sınıflandırılması</h3>
+<ul><li><strong>BJT'ler:</strong> NPN (düz), PNP (ters).</li><li><strong>FET'ler → JFET'ler:</strong> n kanal, p kanal.</li><li><strong>FET'ler → MOSFET'ler → Depletion (azaltan tip) MOS:</strong> n kanal, p kanal.</li><li><strong>FET'ler → MOSFET'ler → Enhancement (çoğaltan tip) MOS:</strong> n kanal, p kanal.</li><li><strong>MESFET</strong> de MOSFET'lerin yanında anılmış.</li></ul>
+<h3 id="bjt-ler">BJT'ler</h3>
+<p>npn ve pnp sembolleri (B, C, E uçları) çizilmiş. Eğer bazdan akım girerse C'den E'ye akım geçer; giren akım (baz) ile C–E akımı doğru orantılı olarak değişir.</p>
+<ul><li>I_E = I_B + I_C</li><li>I_C = β·I_B</li><li>I_E = (β + 1)·I_B</li><li>β ≫ 1 ise I_C ≅ I_E alınabilir.</li></ul>
+<p><strong>BJT'lerde DC analiz:</strong> devreyi çizerken kondansatörler açık devre yapılır.</p>
+<p><strong>BJT'lerde AC analiz:</strong> kondansatörler kısa devre, (DC) kaynaklar öldürülür.</p>
+<ul><li><strong>r_e modeli:</strong> B–E arasında β·r_e direnci, C–E arasında I_b·β bağımlı akım kaynağı.</li><li><strong>r_π modeli:</strong> B–E arasında r_π direnci, C–E arasında g_m·V_BE (ya da I_b·β) bağımlı akım kaynağı.</li></ul>
+<h3 id="fet-lerde-dc-analiz">FET'lerde DC analiz</h3>
+<ul><li>V_T &gt; V_GS ise kesim (cutoff).</li><li>V_G &gt; V_T ise aktif:</li><li>a) Triyot (doğrusal) bölge, V_DS &lt; V_GS − V_T ise: I_D = k_n′(W/L)·[(V_GS − V_T)·V_DS − ½·V_DS²]</li><li>b) Doyum (saturation), V_DS &gt; V_GS − V_T ise: I_D = ½·k_n′(W/L)·(V_GS − V_T)²</li></ul>
+<p><em>Not: Aktif olma koşulu defterde "V_G &gt; V_T" yazılmış; doğrusu V_GS &gt; V_T.</em></p>
+<h3 id="fet-lerde-ac-analiz">FET'lerde AC analiz</h3>
+<p>G–S arası açık devre (giriş gerilimi v_gs), D–S arasında g_m·v_gs bağımlı akım kaynağı.</p>
+<p><strong>AC analiz yaparken:</strong></p>
+<ol><li>Kondansatörler kısa devre,</li><li>DC kaynaklar ölür,</li><li>modeli çiz,</li><li>A_v, A_i bul.</li></ol>
+<h2 id="odev-notlari-diyot-direnc-ve-kondansator-cesitleri">Ödev notları: Diyot, direnç ve kondansatör çeşitleri</h2>
+<h3 id="diyot-secenekleri">Diyot seçenekleri</h3>
+<ul><li><strong>a) Tünel diyot:</strong> Saf silisyum, germanyuma fazla katkı maddesi katılarak imal edilir. Belli bir gerilim değerine kadar akım seviyesi artar, belli gerilimden sonra akım azalır; düşüş olduğu bölgede çalışır. Yüksek frekanslı devrelerde, osilatörlerde kullanılır.</li><li><strong>b) Varikap diyot:</strong> Uçlarına verilen gerilim ile ayarlanabilir kondansatör gibi çalışan diyottur; ters polarma altında çalışır. Voltaj artarsa yalıtkan bölge artar (ya da tam tersi).</li><li><strong>c) Schottky diyot:</strong> Normal diyotlar yüksek frekans altında uygulanan gerilimin yön değiştirmesine hızlı cevap veremezler; hızlı cevap vermek için platinle kaplanmıştır.</li><li><strong>d) Foto diyot:</strong> Ters polarma altında ışık sensörü gibi, ışığın yoğunluğuna göre; normal polarmada düz diyot.</li><li><strong>e) LED diyot:</strong> Doğru polarmada ışık yayan diyottur; galyum arsenit; RGBY.</li></ul>
+<p><em>Not: Schottky diyot "platinle kaplanmış" bir P-N diyot değil, metal–yarıiletken eklemli bir diyottur; hızını azınlık taşıyıcı depolanmamasına borçludur.</em></p>
+<h3 id="direnc-cesitleri">Direnç çeşitleri</h3>
+<ul><li><strong>a) Karbon direnç:</strong> Renk kodlarıyla kodlanır. ¼, ½, 1, 2, 3 W değerlerle imal edilir; 1 Ω'dan 22 MΩ'a. Eskidikçe direnç değerleri değişir.</li><li><strong>b) Telli direnç (taş direnç):</strong> 10 Ω ile 100 kΩ arasında, 30 W'a kadar. Büyükleri, büyük güç harcayanları ısınır.</li><li><strong>Entegre direnç:</strong> birden çok direncin tek paket olarak kullanılması.</li><li><strong>SMD direnç:</strong> PCB devre kartında kolay kullanım.</li></ul>
+<p><strong>Ayarlı dirençler:</strong></p>
+<ul><li><strong>1) Trimpot:</strong> Güçleri küçük, elektronik devrelerde kullanılır. Tornavida ile ayarlanır; direnci ayarlandıktan sonra sabit bırakılan dirençlerdir.</li><li><strong>2) Potansiyometre:</strong> Genellikle gerilim bölme, çıkış gerilimini ayarlamada kullanılır; devre içinde sık sık değiştirilir; genellikle ses ayarlamada kullanılır. Çeşitleri: lineer, logaritmik ve çok turlu potansiyometre.</li><li><strong>3) Reosta:</strong> Yüksek gerilimde kullanışlı, yüksek akım geçer; elle kontrol edilir.</li></ul>
+<p><strong>Değişken dirençler:</strong></p>
+<ul><li><strong>Termistör (NTC–PTC):</strong> Isı değeri ile direnç değeri değişen dirençtir.</li><li><strong>Varistör:</strong> Uçlarına uygulanan gerilime göre ters orantılı olarak direnç değeri değişir. Genellikle frekans kaymasını engellemek için ya da fazla gerilimden korunmak adına gerilim sabitlemesi yapan devrelerde kullanılır.</li><li><strong>Foto direnç (LDR):</strong> Üzerine düşen ışığa göre az ya da çok direnç gösteren dirençlerdir: karanlıkta yüksek, ışıkta az direnç gösterir.</li></ul>
+<p><strong>Direnç okuma:</strong> İlk iki renk direnç değerini, üçüncüsü kaç sıfır olduğunu, dördüncüsü toleransı verir. Siyah 0, kahverengi 1, kırmızı 2 … mor 7, gri 8, beyaz 9.</p>
+<h3 id="direnc-renk-kodu-tablosu">Direnç renk kodu tablosu</h3>
+<p>Notlarla birlikte bir web sayfasından alınmış (kaynağı belirtilmemiş, büyük olasılıkla Türkçe Vikipedi) ekran görüntüsündeki tablo:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Renk</th><th scope="col">1. bant</th><th scope="col">2. bant</th><th scope="col">3. bant (çarpan)</th><th scope="col">4. bant (tolerans)</th><th scope="col">Sıcaklık katsayısı</th></tr></thead><tbody><tr><th scope="row">Siyah</th><td>0</td><td>0</td><td>×10⁰</td><td></td><td></td></tr><tr><th scope="row">Kahverengi</th><td>1</td><td>1</td><td>×10¹</td><td>±%1 (F)</td><td>100 ppm</td></tr><tr><th scope="row">Kırmızı</th><td>2</td><td>2</td><td>×10²</td><td>±%2 (G)</td><td>50 ppm</td></tr><tr><th scope="row">Turuncu</th><td>3</td><td>3</td><td>×10³</td><td></td><td>15 ppm</td></tr><tr><th scope="row">Sarı</th><td>4</td><td>4</td><td>×10⁴</td><td></td><td>25 ppm</td></tr><tr><th scope="row">Yeşil</th><td>5</td><td>5</td><td>×10⁵</td><td>±%0.5 (D)</td><td></td></tr><tr><th scope="row">Mavi</th><td>6</td><td>6</td><td>×10⁶</td><td>±%0.25 (C)</td><td></td></tr><tr><th scope="row">Mor</th><td>7</td><td>7</td><td>×10⁷</td><td>±%0.1 (B)</td><td></td></tr><tr><th scope="row">Gri</th><td>8</td><td>8</td><td>×10⁸</td><td>±%0.05 (A)</td><td></td></tr><tr><th scope="row">Beyaz</th><td>9</td><td>9</td><td>×10⁹</td><td></td><td></td></tr><tr><th scope="row">Altın</th><td></td><td></td><td>×10⁻¹</td><td>±%5 (J)</td><td></td></tr><tr><th scope="row">Gümüş</th><td></td><td></td><td>×10⁻²</td><td>±%10 (K)</td><td></td></tr><tr><th scope="row">Yok</th><td></td><td></td><td></td><td>±%20 (M)</td><td></td></tr></tbody></table></div>
+<p><em>Not: Ekran görüntüsündeki tabloda son sütunun başlığı "Geçici Katsayı" yazıyor; içerik direncin sıcaklık katsayısıdır.</em></p>
+<h3 id="kondansator-cesitleri">Kondansatör çeşitleri</h3>
+<p>Sınıflandırma: yalıtkan cinsine göre; kapasite değerine göre (sabit ve ayarlanabilir kondansatörler); kutup durumuna göre (kutuplu ve kutupsuz).</p>
+<ul><li><strong>Yalıtkan cinsine göre:</strong> vakumlu, havalı, plastik film, mikalı, kâğıtlı, camlı, seramik, alüminyum elektrolitik, tantalum, OS-CON, süper ve "gimmick" kondansatör.</li><li><strong>Kapasite değerine göre:</strong> sabit kondansatör ve ayarlanabilir kondansatör (varyabl, trimer, varaktör).</li><li><strong>Varyabl:</strong> yüksek gerilim, yüksek frekans.</li><li><strong>Trimer:</strong> küçük güç; telekomünikasyonda kullanılır.</li><li><strong>Varaktör:</strong> yüksek frekans; telekomünikasyon, frekans kontrolünde de kullanılır.</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

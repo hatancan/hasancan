@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Boole İşlevlerinin Sadeleştirilmesinde Karnaugh Haritası Tekniği (Orhan Tuncoz) — hasancan.net</title>
+<meta name="description" content="Orhan Tuncoz&#x27;un Karnaugh haritası ders notu: devre maliyeti, Hamming uzaklığı, komşu hücreler ve alt küpler, bir-dört değişkenli haritalar, içeren, asal içeren, öz asal içeren ve seçkin miniterim, en küçük çarpımların toplamının bulunması, dikkate alınmayan (d) durumlar ve asansör kapısı örneği.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-karnaugh-haritasi-tuncoz/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Boole İşlevlerinin Sadeleştirilmesinde Karnaugh Haritası Tekniği (Orhan Tuncoz)">
+<meta property="og:description" content="Orhan Tuncoz&#x27;un Karnaugh haritası ders notu: devre maliyeti, Hamming uzaklığı, komşu hücreler ve alt küpler, bir-dört değişkenli haritalar, içeren, asal içeren, öz asal içeren ve seçkin miniterim, en küçük çarpımların toplamının bulunması, dikkate alınmayan (d) durumlar ve asansör kapısı örneği.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-karnaugh-haritasi-tuncoz/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Boole İşlevlerinin Sadeleştirilmesinde Karnaugh Haritası Tekniği (Orhan Tuncoz)", "description": "Orhan Tuncoz'un Karnaugh haritası ders notu: devre maliyeti, Hamming uzaklığı, komşu hücreler ve alt küpler, bir-dört değişkenli haritalar, içeren, asal içeren, öz asal içeren ve seçkin miniterim, en küçük çarpımların toplamının bulunması, dikkate alınmayan (d) durumlar ve asansör kapısı örneği.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-karnaugh-haritasi-tuncoz/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "k map.doc", "contentUrl": "https://hasancan.net/arsiv/eem211-karnaugh-haritasi-tuncoz/k map.doc"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Boole İşlevlerinin Sadeleştirilmesinde Karnaugh Haritası Tekniği (Orhan Tuncoz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.10.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>Word (.doc)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#neden-sadelestirme">Neden sadeleştirme?</a></li><li><a href="#karnaugh-haritasi">Karnaugh haritası</a></li><li><a href="#asal-icerenler">Asal içerenler</a></li><li><a href="#dikkate-alinmayanlar-don-t-care">Dikkate alınmayanlar (don't care)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Boole İşlevlerinin Sadeleştirilmesinde Karnaugh Haritası Tekniği (Orhan Tuncoz)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 07.10.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM211 Sayısal Mantık Tasarımı dersinin klasöründe bulunan 12 sayfalık Türkçe bir ders notudur: <strong>"Boole İşlevlerinin Sadeleştirmesinde Karnaugh Haritası Tekniği"</strong>. Word belgesinin yazar bilgisinde <strong>Orhan Tuncoz</strong> adı geçiyor; hangi kurum için ve ne zaman hazırlandığı belgede yazmıyor. Notun metni aşağıda aktarıldı; haritaların çizimleri için gereken sayfalar görsel olarak eklendi. Orijinal Word dosyası yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="neden-sadelestirme">Neden sadeleştirme?</h2>
+<p>Mantık devrelerinin tasarımında bir devrenin iyi niteliklerinin değerlendirilmesi sırasında birçok etken göz önüne alınmalıdır. Bunlardan en önemlisi <strong>maliyettir</strong>: öğelerin, tasarımın, kurulumun ve bakımın maliyeti. Ayrıca devrenin <strong>güvenilirliği</strong> (çok güvenilir öğelerle ya da yedeklilik teknikleriyle sağlanır) ve girişlerdeki değişimlere <strong>yanıt süresi</strong> de önemlidir. Bu üç etken birbirinden bağımsız değildir ve hepsini birden başaran tek bir basit tasarım yöntemi yoktur.</p>
+<p>Yanıt süresini en azda tutmak için bir sinyalin geçmesi gereken mantık seviyesi sayısı azaltılmalıdır. Her birleşik devre kanonik bir formülle betimlenebildiğinden, değişkenlerin kendisinin ve tümleyeninin girişte hazır olduğu (çift hatlı mantık) varsayımıyla her mantık devresi en fazla <strong>iki seviyede</strong> kurulabilir. Bu yüzden ilgi normal formüllerle (çarpımların toplamı, toplamların çarpımı) sınırlandırılır.</p>
+<p>Bir normal formülün <strong>öğe maliyeti</strong> iki şekilde ölçülebilir:</p>
+<ul><li><strong>Kapı sayısı:</strong> ifadedeki birden fazla harf-değişkenli terimlerin sayısının bir fazlası (tek terim varsa 1).</li><li><strong>Kapı girişi sayısı:</strong> harf-değişken sayısı + birden fazla harf-değişken içeren terimlerin sayısı (tek terim varsa yalnızca harf-değişken sayısı).</li></ul>
+<p>Cebirsel sadeleştirmenin sorunları şunlardır: izlenecek belirli bir yöntem yoktur; büyük ölçüde deneyime dayanır; sonucun en sade ifade olduğundan emin olunamaz; dört-beş değişkenden fazlasında cebirsel işlemler çok zorlaşır ve hata yapılabilir. Bunun yerine kullanılan sistematik yöntemler <strong>Karnaugh haritası</strong>, <strong>yinelemeli uzlaşma</strong> ve <strong>Quine-McCluskey listeleme yöntemidir</strong>. Notta dört değişkene kadar Karnaugh haritası işleniyor.</p>
+<h2 id="karnaugh-haritasi">Karnaugh haritası</h2>
+<p>Harita yöntemi, bir doğruluk tablosunun şemasal gösterimi olarak düşünülebilir. İlk kez <strong>E. W. Veitch</strong> tarafından önerilmiş, sonra <strong>M. Karnaugh</strong> tarafından biraz değiştirilmiştir; bu yüzden "Veitch şeması" ya da "Karnaugh haritası" adını alır. Harita karelerden (hücrelerden) oluşur; her hücre bir miniterimi (ya da maksiterimi) gösterir. n değişkenli bir haritada 2ⁿ hücre vardır.</p>
+<h3 id="tanimlar">Tanımlar</h3>
+<ul><li><strong>Mod-2 toplama (⊕):</strong> 0 ⊕ 0 = 0, 0 ⊕ 1 = 1, 1 ⊕ 0 = 1, 1 ⊕ 1 = 0.</li><li><strong>Hamming uzaklığı:</strong> A = a₁a₂…a_k ve B = b₁b₂…b_k ikili sayıları için H = Σ (aᵢ ⊕ bᵢ), yani farklı olan bit sayısıdır (sonuç onlu bir sayıdır). Notun örneğinde 10101 ile 10011 arasındaki uzaklık 1 + 0 + 0 + 1 + 1 = 3, 101010 ile 101110 arasındaki uzaklık 1'dir.</li><li><strong>Bitişik (komşu) hücreler:</strong> aralarındaki Hamming uzaklığı 1 olan, yani yalnızca bir biti farklı hücreler. n değişkenli bir haritada her hücrenin n komşusu vardır.</li><li><strong>Alt küp:</strong> her biri m hücreye komşu olan 2ᵐ hücreden oluşan küme. n değişkenli haritada m. dereceden bir alt küp, n − m harf-değişkenli bir çarpım terimiyle ifade edilir.</li></ul>
+<h3 id="bir-iki-uc-ve-dort-degiskenli-haritalar">Bir, iki, üç ve dört değişkenli haritalar</h3>
+<ul><li><strong>Bir değişkenli harita:</strong> iki miniterim (x' ve x). n değişkenle 2^(2ⁿ) farklı Boole işlevi üretilebildiğinden, bir değişkenle dört işlev vardır: f = 0, f = 1, f = x, f = x'.</li><li><strong>İki değişkenli harita:</strong> dört miniterim, on altı farklı işlev. x satırlarda, y sütunlarda; 0 satırında/sütununda değişken tümleyen, 1'de normal görünür.</li><li><strong>Üç değişkenli harita:</strong> sekiz miniterim. Sütunlar 00, 01, 11, 10 sırasındadır (Gray sırası): komşu sütunlar arasında yalnızca bir bit değişir. Örneğin m6 hücresi satır 1, sütun 10'dadır (110 = 6). Komşu hücrelerdeki iki miniterim tek bir terime sadeleşir: m5 + m7 = xy'z + xyz = xz(y + y') = xz. m3'ün komşuları m1, m2 ve m7'dir.</li><li><strong>Dört değişkenli harita:</strong> on altı miniterim. m15'in komşuları m7, m11, m13 ve m14'tür. Haritanın üst-alt ve sağ-sol kenarları birbirine değiyormuş gibi düşünülür: m4 ile m6, m1 ile m9 komşudur. Bir hücre dört harf-değişkenli, iki komşu hücre üç, dört komşu hücre iki, sekiz komşu hücre bir harf-değişkenli terim verir; on altı hücre f = 1 demektir.</li></ul>
+<p>Notun örnekleri: f(x, y, z) = Σm(2, 3, 6, 7) (dört hücrelik alt küp, f = y); f(w, x, y, z) = Σm(3, 4, 7, 11, 12, 15) = xy'z' + yz; f(w, x, y, z) = Σm(0, 4, 5, 7, 8, 9, 13, 15) ve iki farklı en sade çözümü olan f(x, y, z) = Σm(0, 2, 3, 4, 5, 7).</p>
+<p>Bir işlevi sadeleştirmek için 1 içeren bütün hücreler, her biri 2ᵐ hücreli ve olabildiğince büyük, olabildiğince az sayıda alt küple kapsanmalıdır. Harita ile sadeleştirmede en sade ifade tek olmayabilir.</p>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Dört değişkenli harita ve Σm(3, 4, 7, 11, 12, 15) ile Σm(0, 4, 5, 7, 8, 9, 13, 15) örneklerinin alt küpleri"><figcaption>Dört değişkenli harita ve sadeleştirme örnekleri</figcaption></figure>
+<h2 id="asal-icerenler">Asal içerenler</h2>
+<ul><li><strong>İçeren (implicant):</strong> çarpımların toplamı biçimindeki bir f işlevinde, bir g çarpım terimi, g = 1 olan her girişte f = 1 oluyorsa f'nin bir içerenidir. Çarpımların toplamındaki her terim işlevin bir içerenidir.</li><li><strong>Asal içeren (prime implicant):</strong> daha büyük bir alt küp tarafından kapsanmayan içeren; ondan bir harf-değişken atılırsa f tarafından kapsanmayan bir terim elde edilir. Örneğin f = Σm(5, 7, 13, 15) için w'xz ve xyz asal içeren değildir (ikisini de xz kapsar); xz asal içerendir.</li><li><strong>Öz asal içeren (essential prime implicant):</strong> başka hiçbir asal içerenin kapsamadığı en az bir 1-hücresini kapsayan asal içeren; en küçük ifadede bulunmak zorundadır. f = Σm(1, 5, 6, 7, 9, 13, 14, 15) örneğinde g1, g2, g3 asal içerendir; g1 ve g3 öz asal içerendir, g2 değildir.</li><li><strong>Seçkin miniterim:</strong> yalıtılmış bir miniterim ya da başka hiçbir asal içerenin kapsamadığı, bir öz asal içerene ait miniterim; haritada (*) ile gösterilir.</li></ul>
+<p>Örnek: f(w, x, y, z) = Σm(1, 3, 4, 5, 10, 12, 13).</p>
+<ul><li>İçerenler: wx'yz', w'x'z, w'y'z, w'xy', wxy', xy'z', xy'z ve bütün miniterimler.</li><li>Asal içerenler: wx'yz', w'x'z, w'y'z, xy'.</li><li>Öz asal içerenler: wx'yz', w'x'z, xy'.</li><li>En küçük çarpımların toplamı: f = wx'yz' + w'x'z + xy'.</li></ul>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Asal içeren, öz asal içeren ve seçkin miniterim örneklerinin haritaları"><figcaption>Asal içeren örnekleri</figcaption></figure>
+<p>Bir işlevin asal içerenler kümesi tektir; ama en küçük ifade için hepsi gerekmeyebilir. Örneğin f(x, y, z) = Σm(2, 3, 5, 7) için x'y, yz ve xz asal içerendir; x'y ile xz özdür, yz gereksizdir. Bu, uzlaşma teoremiyle de görülür: x'y + yz + xz ifadesinde yz uzlaşma terimidir, dolayısıyla f = x'y + xz. Benzer şekilde f(w, x, y, z) = Σm(1, 5, 6, 7, 11, 12, 13, 15) için asal içerenler w'y'z, wxy', w'xy, wyz ve xz'dir; xz gereksizdir ve f = w'y'z + wxy' + w'xy + wyz olur.</p>
+<h3 id="en-kucuk-carpimlarin-toplamini-bulma-yontemi">En küçük çarpımların toplamını bulma yöntemi</h3>
+<ol><li>İşlevin bütün asal içerenlerini ve öz asal içerenlerini bulup listeleyin.</li><li>En küçük çarpımların toplamına bütün öz asal içerenleri ekleyin.</li><li>1-hücreleri öz asal içerenlerce kapsanan asal içerenleri listeden çıkarın.</li><li>İşlevin bütün 1-hücreleri kapsanıyorsa bulunan ifade tektir.</li><li>Aksi hâlde işlevi tümüyle kapsayacak şekilde ek asal içerenler seçin.</li><li>İşlevin en küçük çarpımlar toplamının her zaman tek olmayabileceğini unutmayın.</li></ol>
+<h2 id="dikkate-alinmayanlar-don-t-care">Dikkate alınmayanlar (don't care)</h2>
+<p>Bazı giriş birleşimleri hiçbir zaman oluşmaz; örneğin dört bitlik BCD kodunda 10–15 arasındaki altı birleşim kullanılmaz. Bu birleşimlerde çıkışın ne olacağı önemsizdir ve sadeleştirmede kullanılabilir. Haritada bunlar 1 ya da 0 ile değil "d" ile işaretlenir. Alt küpler seçilirken d'ler işe yarıyorsa 1, yaramıyorsa 0 sayılır; bir alt küpü büyütmeye katkı yapmayan d hiç kullanılmayabilir.</p>
+<h3 id="ornek-asansor-kapisi-denetimi">Örnek: asansör kapısı denetimi</h3>
+<p>Üç katlı bir binada asansör kapısını denetleyecek bir devre tasarlanacak. Girişler: asansör motoru M (1: hareket ediyor, 0: duruyor) ve kat algılayıcıları KA1, KA2, KA3 (normalde 0, asansör o katın hizasına gelince 1). Çıkış K kapıyı açar (normalde 0, asansör istenen kata gelince 1).</p>
+<ul><li>Asansör aynı anda birden fazla katın hizasında olamayacağı için birden fazla algılayıcının 1 olduğu durumlar olanaksızdır ve "d" ile işaretlenir (sekiz satır).</li><li>M = 1 iken asansör hareket ettiğinden K = 0 olmalıdır; aksi can güvenliği açısından tehlikelidir.</li><li>M = 0 ve algılayıcılardan biri 1 ise K = 1'dir. M = 0 ve bütün algılayıcılar 0 ise asansör durmuş ama bir katın hizasında değildir; yine K = 0 olmalıdır.</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">M</th><th scope="col">KA1</th><th scope="col">KA2</th><th scope="col">KA3</th><th scope="col">K</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">0</th><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">0</th><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">0</th><td>0</td><td>1</td><td>1</td><td>d</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>1</td><td>d</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>0</td><td>d</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>1</td><td>d</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>1</td><td>1</td><td>d</td></tr><tr><th scope="row">1</th><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>0</td><td>1</td><td>d</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>0</td><td>d</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>d</td></tr></tbody></table></div>
+<p>K(M, KA1, KA2, KA3) = Σm(1, 2, 4) + d(3, 5, 6, 7, 11, 13, 14, 15)</p>
+<p>Haritada d ile gösterilen miniterimler hiçbir zaman seçkin miniterim olarak işaretlenmez. En küçük çarpımların toplamı:</p>
+<p>K = M'·KA1 + M'·KA2 + M'·KA3 = M'·(KA1 + KA2 + KA3)</p>
+<p>Yani kapının açılması için motorun durmuş ve asansörün katlardan birine gelmiş olması gerekir. İlk ifadeyi gerçekleştirmek için üç VE, bir VEYA ve bir DEĞİL kapısı gerekirken, ikinci biçim için bir VEYA, bir VE ve bir DEĞİL kapısı yeter.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Asansör kapısı örneğinin doğruluk tablosu ve d&#x27;li Karnaugh haritası"><figcaption>Asansör kapısı örneği: Karnaugh haritası</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon doc" aria-hidden="true">DOC</span>
+            <div>
+              <p class="indir-ad"><a href="k map.doc" download>k map.doc</a></p>
+              <p class="kucuk">Word (.doc) · 440 KB · 12 <span data-i18n="arch.slidesLower"></span> · 07.10.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="k map.doc" download>⬇ <span data-i18n="arch.downloadFile"></span> (440 KB)</a>
+            <a class="buton" href="k map.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (1.3 MB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

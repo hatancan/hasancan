@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Elektronik II: İşlemsel Yükselteçler (Op-Amp), Uygulamaları ve Aktif Filtreler — hasancan.net</title>
+<meta name="description" content="EEM311 Elektronik II el yazısı ders notları: op-amp temelleri, farksal ve ortak mod, CMRR, zahiri toprak, çevirici ve çevirmeyen yükselteç, offset ve polarma akımları, slew rate, toplayıcı, fark, enstrümantasyon yükselteci, karşılaştırıcı ve Schmitt tetikleyici, kontrollü kaynaklar, Butterworth alçak/yüksek geçiren, band geçiren ve notch filtre tasarımı; çözümlü örneklerle.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-op-amp/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Elektronik II: İşlemsel Yükselteçler (Op-Amp), Uygulamaları ve Aktif Filtreler">
+<meta property="og:description" content="EEM311 Elektronik II el yazısı ders notları: op-amp temelleri, farksal ve ortak mod, CMRR, zahiri toprak, çevirici ve çevirmeyen yükselteç, offset ve polarma akımları, slew rate, toplayıcı, fark, enstrümantasyon yükselteci, karşılaştırıcı ve Schmitt tetikleyici, kontrollü kaynaklar, Butterworth alçak/yüksek geçiren, band geçiren ve notch filtre tasarımı; çözümlü örneklerle.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-op-amp/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Elektronik II: İşlemsel Yükselteçler (Op-Amp), Uygulamaları ve Aktif Filtreler", "description": "EEM311 Elektronik II el yazısı ders notları: op-amp temelleri, farksal ve ortak mod, CMRR, zahiri toprak, çevirici ve çevirmeyen yükselteç, offset ve polarma akımları, slew rate, toplayıcı, fark, enstrümantasyon yükselteci, karşılaştırıcı ve Schmitt tetikleyici, kontrollü kaynaklar, Butterworth alçak/yüksek geçiren, band geçiren ve notch filtre tasarımı; çözümlü örneklerle.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-op-amp/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-islemsel-yukseltecler-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-op-amp/eem311-islemsel-yukseltecler-notlari.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM311 Elektronik II: İşlemsel Yükselteçler (Op-Amp), Uygulamaları ve Aktif Filtreler">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-slemsel-yukselteclere-giris">İşlemsel yükselteçlere giriş</a></li><li><a href="#op-amp-temelleri">Op-amp temelleri</a></li><li><a href="#op-amp-parametreleri">Op-amp parametreleri</a></li><li><a href="#op-amp-uygulamalari">Op-amp uygulamaları</a></li><li><a href="#kontrollu-kaynaklar">Kontrollü kaynaklar</a></li><li><a href="#enstrumantasyon-yukselteci">Enstrümantasyon yükselteci</a></li><li><a href="#karsilastirici-komparator">Karşılaştırıcı (komparatör)</a></li><li><a href="#dogrultucu-kirpici-ve-dedektorler">Doğrultucu, kırpıcı ve dedektörler</a></li><li><a href="#op-amp-li-guc-amplifikatorleri">Op-amp'lı güç amplifikatörleri</a></li><li><a href="#aktif-filtreler">Aktif filtreler</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM311 Elektronik II: İşlemsel Yükselteçler (Op-Amp), Uygulamaları ve Aktif Filtreler</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM311 Elektronik II</strong> dersinin <strong>işlemsel yükselteçler (operational amplifiers, op-amp)</strong> ve <strong>aktif filtreler</strong> konularını anlatan 36 sayfalık el yazısı ders notlarının taranmış sayfalarından hazırlandı. Notlarda yazar adı ve tarih yok. Tanımlar, formüller, tasarım adımları ve çözümlü örnekler metne aktarıldı; devre şemaları ve grafikler için ilgili sayfa görselleri eklendi. Taranmış sayfaların tamamı PDF olarak yazının sonunda indirilebilir.</p>
+<h2 id="i-slemsel-yukselteclere-giris">İşlemsel yükselteçlere giriş</h2>
+<p>Giriş devresi bir farksal yükselteç, çıkış devresinde de yüksek kazançlı bir yükseltecin bulunduğu devrelere <strong>op-amp</strong> denir. Çevirici ve çevirici olmayan şeklinde adlandırılan iki girişi vardır ve sırasıyla (−) ve (+) işaretleri ile gösterilirler: <strong>çevirmeyen giriş (non-inverting, +)</strong> ve <strong>çevirici giriş (inverting, −)</strong>. Tek bir girişe ya da her iki girişe sinyal uygulanabilir; farksal (differential) ve ortak mod (common mode) olmak üzere iki tip çalışma yapar.</p>
+<h3 id="farksal-ve-ortak-mod-calismasi">Farksal ve ortak mod çalışması</h3>
+<ul><li>Farksal giriş sinyali: <strong>V_d = V_i1 − V_i2</strong>, farksal çıkış V_od = A_d · V_d (A_d: farksal kazanç)</li><li>Ortak mod giriş sinyali: <strong>V_c = ½ (V_i1 + V_i2)</strong>, ortak mod çıkışı V_oc = A_c · V_c (A_c: ortak mod kazancı)</li><li>Toplam çıkış: <strong>V_o = V_od + V_oc = A_d V_d + A_c V_c</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1191" height="1671" loading="lazy" decoding="async" alt="El yazısı not sayfası: op-amp giriş katı (fark yükselteci), op-amp sembolü, farksal ve ortak mod çalışmasının sembolik gösterimi"><figcaption>Op-amp, farksal ve ortak mod çalışma</figcaption></figure>
+<ul><li>Ters polariteli girişler için (V_i1 = V_s, V_i2 = −V_s): V_d = 2V_s, V_c = 0 → <strong>V_o = 2A_d V_s</strong></li><li>Aynı polariteli girişler için (V_i1 = V_i2 = V_s): V_d = 0, V_c = V_s → <strong>V_o = A_c V_s</strong></li></ul>
+<h3 id="ortak-mod-atma-orani-cmrr">Ortak mod atma oranı (CMRR)</h3>
+<ul><li><strong>CMRR = A_d / A_c</strong>, <strong>CMRR (log) = 20 log₁₀ (A_d/A_c)</strong></li><li>V_o = A_d V_d (1 + A_c V_c / (A_d V_d)) = <strong>A_d V_d (1 + (1/CMRR) · (V_c/V_d))</strong></li></ul>
+<p>İdeal bir op-amp'ın ortak modda sinyalleri hiç yükseltmediği, yalnızca farksal sinyalleri yükselttiği kabul edilir. Gerçekte ise op-amp ortak modlu sinyalleri de yükseltir. Ancak ortak mod kazancı (farksal kazanca göre) ne kadar düşükse op-amp o kadar iyidir; yani CMRR'si ne kadar yüksekse op-amp ideale o kadar yakındır.</p>
+<p><strong>Örnek:</strong> V_i1 = 150 µV, V_i2 = 140 µV ise CMRR'nin 100 ve 10⁵ olduğu değerler için çıkış voltajını bulunuz (A_d = 4000).</p>
+<ul><li>V_d = V_i1 − V_i2 = 10 µV, V_c = ½ (V_i1 + V_i2) = 145 µV</li><li>CMRR = 100 → V_o = A_d V_d (1 + (1/CMRR)(V_c/V_d)) = <strong>45,8 mV</strong></li><li>CMRR = 10⁵ → V_o = <strong>40,006 mV</strong></li><li>CMRR büyüdükçe çıkış voltajı A_d V_d'ye yaklaşır.</li></ul>
+<h2 id="op-amp-temelleri">Op-amp temelleri</h2>
+<p>İdeal op-amp eşdeğeri: girişler arasındaki gerilime bağlı A_v(V₁ − V₂) bağımlı gerilim kaynağı. Gerçek op-amp ac eşdeğerinde giriş direnci R_i, çıkış direnci R_o ve A_d V_d kaynağı bulunur; ideal op-amp'ta <strong>R_i = ∞, R_o = 0, A_d → ∞</strong>'dur.</p>
+<p>Op-amp'lar <strong>açık göz (open-loop)</strong> ve <strong>kapalı göz (closed-loop)</strong> olmak üzere iki şekilde çalıştırılırlar. Açık göz kazancında op-amp çıkışından girişlere doğru herhangi bir geri besleme yoktur, yani kapalı bir göz oluşturulmamıştır. Bu çalışmada op-amp'ın voltaj kazancı sonsuzdur; bu türde op-amp yalnızca komparatör (karşılaştırıcı) olarak çalıştırılır. Çıkıştan girişlere doğru geri besleme yapılmışsa, yani kapalı bir göz oluşturulmuşsa devrenin kazancı istenilen bir değerde ayarlanabilir. Bu tür çalışma devreleri çok çeşitli şekillerde yapılabilirler: çevirici, integral alıcı, toplayıcı, çıkarıcı vb.</p>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: ideal op-amp eşdeğeri, gerçek ve ideal ac eşdeğer devreler, çevirici kapalı-göz bağlantısı"><figcaption>Op-amp eşdeğer devreleri</figcaption></figure>
+<h3 id="cevirici-yukseltecin-kazanci-superpozisyon-ile">Çevirici yükseltecin kazancı (süperpozisyon ile)</h3>
+<ul><li>V_i' = R₂/(R₁ + R₂) · V₁, V_i'' = R₁/(R₁ + R₂) · (A_v · V_i), V_i = V_+ − V_−, V_+ = 0 V</li><li>R₂V₁ = V_i (A_v R₁ − (R₁ + R₂)) → V_i = R₂V₁ / (R₁(A_v − 1) − R₂)</li><li>A_v ≫ 1, (A_v − 1) ≅ A_v, A_v R₁ ≫ R₂ ise <strong>V_i = R₂V₁ / (A_v R₁)</strong></li><li>V_o = −A_v V_i → <strong>V_o = −R₂V₁/R₁</strong></li><li><strong>Çevirici amplifikatör kazancı: V_o/V₁ ≅ V_o/V_i = −R₂/R₁ = A_v</strong></li></ul>
+<h3 id="zahiri-toprak">Zahiri toprak</h3>
+<p>V_+ = V_− ⇒ V_i = V_+ − V_− = 0 ⇒ I_i = 0. I_i = 0 olduğuna göre I₁ = I₂:</p>
+<ul><li>I₁ = (V₁ − V_i)/R₁ = V₁/R₁, I₂ = (V_i − V_o)/R₂ = −V_o/R₂</li><li><strong>V_o/V₁ = −R₂/R₁</strong></li></ul>
+<p>Ya da V_+ = V_− olduğuna göre: V_+ = 0 V, V_− = V₁R₂/(R₁ + R₂) + V_oR₁/(R₁ + R₂) = 0 ⇒ V₁R₂ = −V_oR₁ ⇒ V_o/V₁ = −R₂/R₁.</p>
+<p>Bu prensibe göre, op-amp'ın kazancı A çok büyük (idealde sonsuz) olduğundan, devre çalışırken çıkışta sonlu bir çıkış voltajı elde ediliyorsa op-amp giriş terminalleri arasındaki voltaj ihmal edilecek kadar küçüktür: <strong>V_+ − V_− = V_o/A ≅ 0</strong>.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: zahiri toprak prensibi ve çevirici yükselteç kazancının türetilmesi"><figcaption>Zahiri toprak</figcaption></figure>
+<h3 id="diger-cevirici-baglanti-uygulamalari">Diğer çevirici bağlantı uygulamaları</h3>
+<p>Devrenin kapalı göz kazancı ya da kapalı göz transfer fonksiyonu: <strong>V_o/V_i = −Z₂/Z₁</strong></p>
+<p><strong>İntegral alıcı devre:</strong> Z₁ = R, Z₂ = 1/(sC) → V_o/V_i = −1/(sCR); fiziksel frekans s = jω ise <strong>V_o/V_i = −1/(jωCR)</strong>.</p>
+<ul><li>i₁ = V₁(t)/R, i_C = C dV_C/dt, V_C = −V_o → V₁(t)/R = −C dV_o/dt</li><li><strong>V_o = −(1/RC) ∫₀ᵗ V₁(t) dt</strong></li><li>Eğer t = 0'da kapasitör uçlarında gösterilen V_C voltajının yönüne ters yönde bir V_Ci voltajı varsa: V_o(t) = V_Ci − (1/C) ∫₀ᵗ i₁(t) dt = <strong>V_Ci − (1/RC) ∫₀ᵗ V₁(t) dt</strong> olur.</li></ul>
+<p><strong>Türev alıcı devre:</strong> Z₁ = 1/(sC), Z₂ = R → <strong>V_o/V_i = −sCR = −jωCR</strong>; i_C = i_R, C dV₁(t)/dt = −V_o(t)/R → <strong>V_o(t) = −RC dV₁(t)/dt</strong></p>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: genel Z₁/Z₂ çevirici bağlantı, integral alıcı ve türev alıcı devreler"><figcaption>İntegral ve türev alıcı devreler</figcaption></figure>
+<h3 id="cevirmeyen-non-inverting-yukseltec-ve-tampon">Çevirmeyen (non-inverting) yükselteç ve tampon</h3>
+<p>Zahiri toprak prensibine göre V_+ = V_−: V_+ = V₁, V_− = V_oR₁/(R₁ + R₂) ⇒</p>
+<ul><li><strong>V_o/V₁ = (R₁ + R₂)/R₁ = 1 + R₂/R₁</strong></li></ul>
+<p><strong>Tampon yükselteç (birlik izleyici):</strong> çıkış doğrudan (−) girişe bağlanır; <strong>V_o = V_i</strong>.</p>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: çevirmeyen yükselteç, tampon yükselteç ve offset voltajı tanımı"><figcaption>Çevirmeyen yükselteç ve tampon</figcaption></figure>
+<h2 id="op-amp-parametreleri">Op-amp parametreleri</h2>
+<h3 id="offset-voltaji">Offset voltajı</h3>
+<p>Eğer bir op-amp'ın her iki giriş terminali de sıfır yapılırsa (toprağa bağlanırsa), eleman karakteristiklerinin birbirinden farklı olması sebebiyle çıkışta dc bir gerilim meydana gelir (idealde bu durumda çıkışın sıfır olması gerekir). Bu gerilime <strong>çıkış offset voltajı</strong> denir. Bu dc voltajı kapalı-göz bağlantıların analizlerinde hesaba katmak için girişe yansıtmalıyız. Çıkış offset voltajını kazanca (A_o) bölersek giriş offset voltajını elde ederiz: <strong>V_off = V_o/A_o</strong>.</p>
+<p>Giriş offset voltajı sebebiyle kapalı-göz bağlantıda çıkışta oluşan offset gerilimi: V_− = V_+ ⇒ V_out · R₁/(R₁ + R₂) = V_off ⇒ <strong>V_out = V_off (1 + R₂/R₁)</strong></p>
+<p>Eğer kapalı-göz kazancı büyükse çıkış dc offset voltajının büyük olmasına sebep olacaktır; bu da olası maksimum çıkış sinyal salınımını azaltacaktır. Bu problemi önlemenin bir yolu <strong>kapasitif kuplajdır</strong> (girişe seri C). Kondansatör dc kazancın sıfır olmasına sebep olur. Fakat ω₀ = 1/(CR₁) olduğu frekansta −3 dB'lik yüksek frekans etkisi gösterir ve kazanç ω ≫ ω₀ için −R₂/R₁ olur. Bu bağlantının avantajı, V_off çıkışta V_off(1 + R₂/R₁) şeklinde değil V_off şeklinde görülür, yani yükseltilmez.</p>
+<h3 id="giris-polarma-akimlari">Giriş polarma akımları</h3>
+<p>Op-amp'ın çalışması için her iki giriş terminaline de dc akımlar uygulanmalıdır ki bunlara <strong>giriş polarma akımları</strong> denir. Burada polarma akımları op-amp'ın giriş direncinden bağımsızdırlar.</p>
+<ul><li>Giriş polarma akımı iki akımın ortalamasıdır: <strong>I_B = (I_B1 + I_B2)/2</strong></li><li>İki akımın farkı ise giriş offset akımıdır: <strong>I_off = |I_B1 − I_B2|</strong></li><li>Buna göre: <strong>I_B1 = I_B + I_off/2</strong>, <strong>I_B2 = I_B − I_off/2</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: offset voltajının çıkışa etkisi, kapasitif kuplaj ve giriş polarma akımları"><figcaption>Offset voltajı ve polarma akımları</figcaption></figure>
+<p>Girişler topraklı çevirici yapıda R₁'den akım akmaz ve V_o = I_B1 · R₂ ≅ I_B · R₂ olur. Offset voltajı ve giriş polarma akımları sebebiyle çıkışta oluşan toplam offset voltajı:</p>
+<ul><li><strong>V_o,offset = V_off (1 + R₂/R₁) + I_B R₂</strong></li></ul>
+<p>Giriş polarma akımlarının yarattığı offset geriliminin değeri (I_B R₂) R₂ direnci ile doğru orantılıdır. Bunu azaltmak için op-amp'ın (+) giriş terminaline seri bir R₃ direnci bağlanır:</p>
+<ul><li>V_+ = V_− = −I_B2 R₃; V_o = −I_B2 R₃ + R₂(I_B1 − I_B2 R₃/R₁)</li><li>I_B1 = I_B2 = I_B kabul edilirse V_o = I_B [R₂ − R₃(1 + R₂/R₁)] → sıfır olması için <strong>R₃ = R₂/(1 + R₂/R₁) = R₁R₂/(R₁ + R₂) = R₁ // R₂</strong></li><li>I_B1 = I_B + I_off/2, I_B2 = I_B − I_off/2 ile <strong>V_o = I_off · R₂</strong></li></ul>
+<p>Op-amp aşağıdaki gibi bağlanarak offset ayarı yapılır, yani çıkışın sıfır olması için girişine ters yönde gerilim uygulanır. Çıkıştaki offset gerilimini sıfır yapacak giriş gerilimine giriş offset gerilimi denir. Op-amp geri beslemeli şekilde çalışıyorsa offset ayarı da bu durumda yapılmalıdır. Sıcaklık değişince offset ayarı bozulur (transistörlerin giriş akımları değişir); örneğin LM741 için sıcaklığa göre offset kayması yaklaşık 15 µV/°C'dir. (Şekilde LM741'in offset uçlarına bağlı 10 kΩ'luk potansiyometre ile offset ayarı gösteriliyor.)</p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: polarma akımlarının etkisi, R₃ ile kompanzasyon ve LM741 offset ayarı"><figcaption>Polarma akımı kompanzasyonu ve offset ayarı</figcaption></figure>
+<h3 id="ortak-isaret-bastirma-orani-cmrr">Ortak işaret bastırma oranı (CMRR)</h3>
+<p>Op-amp'ın offset ayarı yapıldıktan sonra bile girişler birleştirilip ortak işaretli bir sinyal uygulandığında (V₁ = V₂) çıkışından sıfır alınmaz (idealde bu durumda V_o = 0 olmalıdır). Bu, op-amp'ın ortak işaret kazancının sıfır olmadığını gösterir. CMRR denilen oran, kuvvetlendirici çıkışında ölçülen gerilimin girişine uygulanan ortak işaret gerilimine bölümüdür. dB olarak bu oranın işareti negatif çıkacağından genellikle gerilimler oranı ters çevrilir. Ancak geri besleme yapılmış kuvvetlendiricilerde (op-amp), farksal kazancın ortak işaret kazancına oranı olarak hesaplanır: <strong>CMRR = A_d/A_c</strong>, <strong>CMRR (log) = 20 log CMRR</strong>. CMRR ne kadar büyükse op-amp o kadar iyidir.</p>
+<h3 id="kazanc-band-genisligi">Kazanç-band genişliği</h3>
+<p>Açık-göz kazancı f_c'den sonra −20 dB/decade ile düşer ve f_t'de 0 dB olur. f_t kazanç-band genişliği çarpımıdır (birim kazanç frekansı):</p>
+<ul><li><strong>f_t = A · f_c</strong> (A: açık-göz kazancı)</li><li>Herhangi bir frekanstaki kazanç: <strong>|A(jω)| ≅ ω_t/ω = f_t/f</strong></li></ul>
+<h3 id="buyuk-isaret-degisim-hizi-slew-rate-sr">Büyük işaret değişim hızı (slew rate, SR)</h3>
+<p>Op-amp'ın girişine büyük genlikli bir sinyal uygulandığında çıkış gerilimi +V_max ve −V_max değerlerinden sonraki değerleri için kırpılır. Sinyalin −V_max ile +V_max arasındaki değişiminin idealde t = 0 anında (bir anda) olması gerekirken gerçekte T_SR kadar bir süre geçer. Bu geçişin eğimi olarak tanımlanan slew rate, birim zaman başına çıkış değişme miktarıdır:</p>
+<ul><li><strong>SR = 2V_max / T_SR</strong> (V/µs)</li></ul>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: CMRR, kazanç-band genişliği grafiği ve slew rate tanımı"><figcaption>CMRR, kazanç-band genişliği ve slew rate</figcaption></figure>
+<h2 id="op-amp-uygulamalari">Op-amp uygulamaları</h2>
+<h3 id="voltaj-toplayici">Voltaj toplayıcı</h3>
+<ul><li>V_o = −i · R_f, i = i₁ + i₂ + i₃ = V₁/R₁ + V₂/R₂ + V₃/R₃</li><li><strong>V_o = −R_f (V₁/R₁ + V₂/R₂ + V₃/R₃)</strong></li></ul>
+<p>Op-amp'ların girişlerindeki ac ve dc bileşenleri birlikte yükseltmeleri, kuvvetlendirilecek işaretin dc bileşeninin büyük olması durumunda sorun yaratır; op-amp bu dc bileşen sebebiyle doyuma gider. Bunu önlemek için toplama özelliğinden yararlanılır: girişe, esas işaretteki dc bileşene zıt yönde bir dc gerilim uygulanır. Bu yöntem geliştirilerek offset ayarı için de kullanılabilir. (Örnek devrede V_i 10 kΩ üzerinden, +15 V/−15 V arasına bağlı 5 kΩ potansiyometrenin orta ucu V_b ise 20 kΩ üzerinden toplama noktasına bağlı; geri besleme direnci 100 kΩ.)</p>
+<h3 id="voltaj-cikarici">Voltaj çıkarıcı</h3>
+<p>İki çevirici kattan oluşur (V₁ birinci katta R₁/R_f1 ile çevrilir, ikinci katta R₂ ve R₃ üzerinden V₂ ile toplanır):</p>
+<ul><li>V_o = −[(R_f2/R₂)(−R_f1 V₁/R₁) + (R_f2/R₃) V₂]</li><li><strong>V_o = −((R_f2/R₃) V₂ − (R_f2/R₂)(R_f1/R₁) V₁)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: voltaj toplayıcı, dc bileşen kompanzasyonu ve iki katlı voltaj çıkarıcı"><figcaption>Toplayıcı ve çıkarıcı</figcaption></figure>
+<h3 id="farksal-yukseltec-voltaj-cikarici">Farksal yükselteç (voltaj çıkarıcı)</h3>
+<ul><li>V_− = V_+, V_− = R₃V₁/(R₁ + R₃) + R₁V_o/(R₁ + R₃), V_+ = R₄V₂/(R₂ + R₄)</li><li>V_o = (R₄/(R₂ + R₄)) · ((R₁ + R₃)/R₁) V₂ − (R₃/R₁) V₁</li><li>R₁ = R₂ = R_a ve R₃ = R₄ = R_b olursa <strong>V_o = (R_b/R_a)(V₂ − V₁)</strong></li></ul>
+<p><em>Not: Notta genel ifadenin son terimi "(R₃/R₁)V₂" olarak yazılmış; doğrusu (R₃/R₁)V₁'dir.</em></p>
+<p><strong>Toplayıcı-çıkarıcı:</strong> V₁ (R₁) ve V₂ (R₃) çevirici girişe, V₃ (R₁) ve V₄ (R₃) çevirmeyen girişe bağlı; geri besleme ve (+) girişten toprağa R₂:</p>
+<ul><li><strong>V_o = (R₂/R₁)[V₃ − V₁] + (R₂/R₃)[V₄ − V₂]</strong></li></ul>
+<p><strong>Farksal integratör:</strong> iki girişe de R, geri beslemede ve (+) girişten toprağa C:</p>
+<ul><li><strong>V_o = (1/RC) ∫ (V₂ − V₁) dt</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: farksal yükselteç, toplayıcı-çıkarıcı ve farksal integratör"><figcaption>Farksal yükselteç ve farksal integratör</figcaption></figure>
+<h3 id="giris-direnci">Giriş direnci</h3>
+<ul><li>Kapalı-göz çevirici yükseltecin giriş direnci R₁'e eşittir: R_in ≡ V₁/i₁ = V₁/(V₁/R₁) = <strong>R₁</strong></li><li>Voltaj izleyici yükseltecin giriş empedansı ise op-amp'ın pozitif giriş ucundan içeriye akım akmadığı kabul edildiğinden idealde sonsuz, gerçekte çok yüksektir. Çevirici olmayan bu tampon yükselteç, yüksek empedanslı bir devre çıkışını düşük empedanslı bir yüke aktarmak için (empedans uygunlaştırıcı olarak) kullanılır.</li><li>Farksal yükselteçte (R₁, R₂ ile) V_o = (R₂/R₁)(V_+ − V_−) = (R₂/R₁)(V₂ − V₁). Giriş direnci R_in = (V₂ − V₁)/i olarak tanımlanırsa V₂ − V₁ = R₁·i + 0 + R₁·i ⇒ <strong>R_in = 2R₁</strong></li></ul>
+<p>Farksal yükseltecin ve çevirici yükseltecin giriş dirençleri istenildiği kadar büyük seçilebilir, ancak bu durumda kazançlarının düşeceği dikkate alınmalıdır. Bu devrelerin kullanıldığı yerlerde girişlere voltaj izleyici konarak yüksek giriş empedansı sağlanabilir.</p>
+<figure class="yazi-gorsel"><img src="s-13.jpg" width="1018" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: çevirici yükselteç, voltaj izleyici ve farksal yükseltecin giriş direnci"><figcaption>Giriş direnci</figcaption></figure>
+<h2 id="kontrollu-kaynaklar">Kontrollü kaynaklar</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kaynak</th><th scope="col">Tanım</th><th scope="col">Op-amp ile gerçekleme</th></tr></thead><tbody><tr><th scope="row">Voltaj kontrollü voltaj kaynağı</th><td>V_o = kV₁</td><td>Çevirici: V_o = −(R_f/R₁)V₁ = kV₁; çevirmeyen: V_o = (1 + R_f/R₁)V₁ = kV₁</td></tr><tr><th scope="row">Voltaj kontrollü akım kaynağı</th><td>I_o = kV₁</td><td>Yük R_L geri besleme yolunda: I_o = V₁/R₁ = kV₁</td></tr><tr><th scope="row">Akım kontrollü voltaj kaynağı</th><td>V_o = kI₁</td><td>I₁ doğrudan çevirici girişe, R_L geri beslemede: V_o = −I₁R_L = kI₁</td></tr><tr><th scope="row">Akım kontrollü akım kaynağı</th><td>I_o = kI₁</td><td>I_o = I₁ + I₂ = I₁ + I₁R₁/R₂ = (1 + R₁/R₂)I₁ = kI₁</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: voltaj ve akım kontrollü voltaj ve akım kaynakları"><figcaption>Kontrollü kaynaklar</figcaption></figure>
+<p><strong>Akımdan voltaja çevirici:</strong> I_i = I_f, <strong>V_o = −I_f R_f</strong>; birden çok akım girişi için V_o = −(I₁ + I₂ + I₃)R.</p>
+<p><strong>Akım farkını voltaja çevirici:</strong> I₁ çevirici girişe (geri besleme R), I₂ çevirmeyen girişe (toprağa R): <strong>V_o = (I₂ − I₁)R</strong></p>
+<p><strong>Voltajdan akıma çevirici:</strong> Yük R_L geri besleme yolunda; çevirici bağlantıda (V_i, R₁ üzerinden) ve çevirmeyen bağlantıda (V_i (+) girişe, (−) girişten toprağa R₁) <strong>I_L = V_i/R₁</strong>.</p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: akım kontrollü akım kaynağı, akımdan voltaja, akım farkını voltaja ve voltajdan akıma çeviriciler"><figcaption>Akım-voltaj çeviricileri</figcaption></figure>
+<h2 id="enstrumantasyon-yukselteci">Enstrümantasyon yükselteci</h2>
+<p>Girişlerine izleyici yerleştirilmiş fark yükseltecine <strong>enstrümantasyon yükselteci</strong> denir. Giriş dirençlerinin ve CMRR oranının yüksek olması yanında diğer bir üstünlüğü de tek bir dirençle (R₁) fark kazancının ayarlanabilir olmasıdır. Bu özellikleri dolayısıyla biyopotansiyel işaretlerin ölçülmesinde kullanılır.</p>
+<ul><li>I = (V₃ − V₄)/(2R₂ + R₁) = (V₁ − V₂)/R₁</li><li>V₃ − V₄ = ((2R₂ + R₁)/R₁)(V₁ − V₂)</li><li><strong>V_o = (R₄/R₃)(2R₂/R₁ + 1)(V₁ − V₂)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-16.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: üç op-amp&#x27;lı enstrümantasyon yükselteci ve kazanç türetmesi"><figcaption>Enstrümantasyon yükselteci</figcaption></figure>
+<h2 id="karsilastirici-komparator">Karşılaştırıcı (komparatör)</h2>
+<p>Karşılaştırıcı, giriş gerilimini bir referans gerilimi ile karşılaştırıp buna göre çıkışı +V_sat ve −V_sat doyma gerilimlerine getiren bir devredir. Giriş ve referans gerilimlerinin hangi uçlara uygulandığı önemlidir. Dijital devrelerde doyma gerilimi üstten +5 V, alttan 0 V ile sınırlandırılmıştır.</p>
+<ul><li><strong>Giriş (V_i) + uçta, referans (V_ref) − uçta:</strong> V_i &gt; V_ref ⇒ V_o = +V_sat; V_i &lt; V_ref ⇒ V_o = −V_sat</li><li><strong>Giriş (V_i) − uçta, referans (V_ref) + uçta:</strong> V_i &gt; V_ref ⇒ V_o = −V_sat; V_i &lt; V_ref ⇒ V_o = +V_sat</li></ul>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: girişin + ve − uca uygulandığı karşılaştırıcıların transfer karakteristikleri ve dalga şekilleri"><figcaption>Karşılaştırıcı</figcaption></figure>
+<h3 id="histerisizli-karsilastirici-schmitt-tetikleyici">Histerisizli karşılaştırıcı (Schmitt tetikleyici)</h3>
+<p>V_i ve V_ref eşit R₁ dirençleri üzerinden çevirici girişe bağlı, çıkıştan (+) girişe R₂–R₃ gerilim bölücüsü ile pozitif geri besleme var:</p>
+<ul><li>V_− = (V_i + V_r)/2, V_+ = R₃V_o/(R₂ + R₃) → V_o = ((R₂ + R₃)/(2R₃))(V_i + V_r)</li><li>R₂ ≫ R₃ ise veya R₃ = 0 alınırsa (limitte) çıkış: a) V_i + V_r &gt; 0 (V_i &gt; −V_r) ⇒ V_o = −V_sat; b) V_i + V_r &lt; 0 (V_i &lt; −V_r) ⇒ V_o = +V_sat</li></ul>
+<p>Bu şekli ile devre <strong>Schmitt trigger (tetikleme)</strong> devresi olarak çalışır. R₃ ≠ 0 yapılarak −V_r civarında bir histerisiz oluşturulmuştur ve böylece giriş işaretinin −V_r civarındaki çok küçük değişimlerinin çıkışta kararsız değişimlere yol açması önlenmiştir. V_i işareti üzerindeki gürültü seviyesine göre R₂ ve R₃ dirençleri ile oynanarak histerisiz aralığı genişletilebilir. Referans gerilimi etrafındaki histerisiz aralığı:</p>
+<ul><li><strong>2ΔV = 4 · V_sat · R₃/(R₂ + R₃)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-18.jpg" width="1224" height="1683" loading="lazy" decoding="async" alt="El yazısı not sayfası: Schmitt tetikleyici devresi ve ±10 V doymalı histerisiz eğrisi"><figcaption>Schmitt tetikleyici ve histerisiz</figcaption></figure>
+<h2 id="dogrultucu-kirpici-ve-dedektorler">Doğrultucu, kırpıcı ve dedektörler</h2>
+<h3 id="dogrultucu">Doğrultucu</h3>
+<p>Diyot-direnç tipi doğrultucular yaklaşık 0,7 V'tan küçük genlikli sinyalleri doğrultamaz. Bu nedenle diyotları op-amp'larla birlikte kullanarak küçük genlikli sinyalleri de doğrultmak mümkündür. Aşağıdaki devre giriş sinyalinin negatif kısımlarını geçirirken pozitif kısımlarını geçirmez:</p>
+<ul><li>V_i &lt; 0 için D₁ kesimde, D₂ iletimdedir. Devre çevirici yükselteç durumuna gelir ve V_o = −V_i olur (eğim −R_f/R_i).</li><li>V_i &gt; 0 için D₁ iletimde, D₂ kesimdedir; V_o = 0 olur.</li></ul>
+<h3 id="kirpici">Kırpıcı</h3>
+<ul><li>V_i &lt; V_r ise D iletimdedir ve yükselteç izleyici durumundadır: V_o = V_r olur.</li><li>V_i &gt; V_r ise D kesimdedir, R'den akım geçmez; çıkış girişi takip eder: V_o = V_i olur.</li></ul>
+<p>Kırpıcı, giriş sinyalinin belli bir V_r referans seviyesinin altında kalan kısmını geçirmez, yani girişi alttan kırpar. Diyotun yönü değiştirilirse giriş V_r seviyesinde üstten kırpılır.</p>
+<figure class="yazi-gorsel"><img src="s-19.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: hassas doğrultucu ve kırpıcı devreleri ile dalga şekilleri"><figcaption>Op-amp'lı doğrultucu ve kırpıcı</figcaption></figure>
+<h3 id="aktif-tepe-dedektoru">Aktif tepe dedektörü</h3>
+<ul><li>V_i &gt; V_o için D iletimdedir ve yükselteç izleyici durumundadır; çıkış girişi izler.</li><li>V_i &lt; V_o için D kesimdedir ve çıkış kondansatör üzerindeki gerilime eşit olur; çıkıştan akım çekilmezse diyotun kesime girdiği andaki değerini muhafaza eder.</li></ul>
+<p>Böylece giriş sinyalinin aldığı en büyük değer çıkışta elde edilmiş olur.</p>
+<h3 id="esik-dedektoru">Eşik dedektörü</h3>
+<p>Pozitif geri beslemeli (R₁, R₂) ve ±V_B arasına bağlı R_p potansiyometresi (α R_p, (1 − α) R_p) ile eşiği ayarlanan karşılaştırıcı:</p>
+<ul><li>(V_R − V_o)/R₂ + (V_R − V₁)/R₁ = 0 ①</li><li>(V₁ − V_R)/R₁ + (V₁ + V_B)/(α R_p) + (V₁ − V_B)/((1 − α) R_p) = 0 ②</li><li>V_R = [R₁V_o/(R₁ + R₂) − R₁R₂V_B(1 − 2α) / ([α(1 − α)R_p + R₁](R₁ + R₂))] / [1 − R₂R_p α(1 − α) / ([α(1 − α)R_p + R₁](R₁ + R₂))]</li></ul>
+<p>Bu eşitlikle V_o yerine +V_sat konularak V_R1, −V_sat konularak V_R2 değerleri bulunur. Eşik voltajı ise bu iki değerin ortalamasıdır: <strong>V_th = (V_R1 + V_R2)/2</strong></p>
+<figure class="yazi-gorsel"><img src="s-20.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: aktif tepe dedektörü ve eşik dedektörü devreleri, histerisiz eğrisi"><figcaption>Tepe ve eşik dedektörü</figcaption></figure>
+<h2 id="op-amp-li-guc-amplifikatorleri">Op-amp'lı güç amplifikatörleri</h2>
+<p><strong>Geçiş (crossover) distorsiyonu kompanze edilmiş push-pull güç amplifikatörü:</strong> Geçiş distorsiyonu op-amp kullanılarak yok edilmiş bir push-pull amplifikatör. Bu devre örneğin bir EKG monitörünün çıkış ünitesinde, bir kâğıt yazıcı motorunu sürmede veya displayi aktif hâle getirmek için kullanılabilir.</p>
+<ul><li>V_in/R_i + (V_in − V_L)/R_f = 0 → <strong>V_L = V_in (1 + R_f/R_i)</strong>, <strong>A_v = 1 + R_f/R_i</strong></li></ul>
+<p><strong>Offset kontrollü güç amplifikatörü:</strong> Yukarıdaki güç amplifikatörüne offset kontrol ünitesi eklenmiştir. Böyle bir devre örneğin bir EKG kart kaydedicisini sürmek için çok kullanışlıdır. Kazanç R_o ile ayarlanır.</p>
+<ul><li>α₁V₁/R_i + (α₁V₁ − (−V_BB))/(α₂R₂ + R₁) + (α₁V₁ − V_BB)/(R₁ + (1 − α₂)R₂) + (α₁V₁ − V_out)/R_f = 0</li><li>V_out = (R_f/R_i)(α₁V₁) + R_f (α₁V₁ + V_BB)/(α₂R₂ + R₁) + R_f (α₁V₁ − V_BB)/((1 − α₂)R₂ + R₁) + α₁V₁</li></ul>
+<figure class="yazi-gorsel"><img src="s-21.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: geçiş distorsiyonu kompanze edilmiş ve offset kontrollü push-pull güç amplifikatörleri"><figcaption>Op-amp'lı push-pull güç amplifikatörleri</figcaption></figure>
+<h2 id="aktif-filtreler">Aktif filtreler</h2>
+<p>Bir filtre, belirli bir banddaki (aralıktaki) sinyalleri geçirmek için dizayn edilmiş, bu bandın dışındaki bütün sinyalleri zayıflatan bir devredir. Filtreler aktif veya pasif olabilirler. Pasif filtre devreleri yalnızca direnç, kondansatör ve bobin kullanılarak dizayn edilirken, aktif filtrelerde bunlara ek olarak transistör veya op-amp'lar kullanılır. Bobinler büyük, pahalı ve çok büyük dahili rezistif elemanlara sahip olabilecekleri için genellikle aktif filtre devrelerinde kullanılmazlar.</p>
+<p>Dört tip filtre vardır: <strong>alçak geçiren (low-pass)</strong>, <strong>yüksek geçiren (high-pass)</strong>, <strong>band geçiren (band-pass)</strong> ve <strong>band durduran (band-reject veya notch)</strong>.</p>
+<p>Alçak geçiren bir filtre dc'den f_c kesim frekansına kadar sabit bir çıkış voltajına sahiptir. Frekans f_c'nin üzerinde arttırılırsa çıkış voltajı zayıflatılır. İletilen frekans alanına <strong>geçen band</strong>, zayıflatılan frekans alanına <strong>duran band</strong> denir. Kesim frekansı f_c'ye 0,707 frekansı, −3 dB frekansı, köşe frekansı veya rezonans frekansı da denir.</p>
+<figure class="yazi-gorsel"><img src="s-22.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: alçak geçiren, yüksek geçiren, band geçiren ve band durduran filtrelerin ideal ve gerçek frekans cevapları"><figcaption>Filtre tipleri</figcaption></figure>
+<h3 id="temel-alcak-geciren-filtre">Temel alçak geçiren filtre</h3>
+<p>Filtreleme işlemi RC elemanları ile yapılır ve birim kazançlı (birlik izleyici) op-amp kullanılmıştır. R_f direnci R'ye eşittir ve dc offset için devreye bağlanmıştır (dc'de kondansatörün reaktansı sonsuzdur ve her iki giriş ucu için toprağa olan yolun dc rezistansı birbirine eşit olmalıdır). Op-amp'ın + ve − giriş terminalleri arasındaki gerilim 0 V olduğuna göre C üzerindeki gerilim V_o'a eşittir, çünkü op-amp voltaj izleyicidir.</p>
+<ul><li>V_o = (1/(jωC)) / (R + 1/(jωC)) · V₁ (ω = 2πf, j = √−1)</li><li>Kapalı-göz kazancı: <strong>A_CL = V_o/V₁ = 1/(1 + jωRC)</strong></li></ul>
+<p>Kazanç frekansa bağlıdır: ω → 0 çok düşük frekanslarda |A_CL| = 1, ω → ∞ çok yüksek frekanslarda |A_CL| = 0 olur. Yani frekans f_c'den büyük olunca |A_CL| 20 dB/decade'lik bir oranla azalır. Bu nedenle bu devre tek bir RC'den oluştuğu için <strong>birinci derece (first order)</strong> ya da <strong>tek kutuplu</strong> olarak adlandırılır.</p>
+<figure class="yazi-gorsel"><img src="s-23.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: temel alçak geçiren filtre devresi ve −20 dB/decade frekans cevabı"><figcaption>Temel alçak geçiren filtre</figcaption></figure>
+<p><strong>Filtrenin dizaynı:</strong></p>
+<ul><li>Kesim frekansı: ω_c = 1/(RC) = 2πf_c; bu eşitlik R için düzenlenirse <strong>R = 1/(ω_c C) = 1/(2πf_c C)</strong></li><li>Kesim frekansı belirlenir (ω_c, f_c); C kapasitansı seçilir (genellikle 0,001 ile 0,1 µF arasında); eşitlikten R bulunur.</li></ul>
+<p><strong>Filtrenin cevabı:</strong> ω_c'de A_CL'nin değeri ωRC = 1 yapılarak bulunur: A_CL = 1/(1 + j1) = 1/(√2 ∠45°) = 0,707 ∠−45°. |A_CL| = 1/√2 = 0,707, |A_CL|_dB = 20 log |A_CL| = −3 dB; faz açısı −45°'dir.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ω</th><th scope="col">Kazanç büyüklüğü A_CL</th><th scope="col">Faz açısı</th></tr></thead><tbody><tr><th scope="row">0,1 ω_c</th><td>1,0</td><td>−6°</td></tr><tr><th scope="row">0,25 ω_c</th><td>0,97</td><td>−14°</td></tr><tr><th scope="row">0,5 ω_c</th><td>0,89</td><td>−27°</td></tr><tr><th scope="row">ω_c</th><td>0,707</td><td>−45°</td></tr><tr><th scope="row">2 ω_c</th><td>0,445</td><td>−63°</td></tr><tr><th scope="row">4 ω_c</th><td>0,25</td><td>−76°</td></tr><tr><th scope="row">10 ω_c</th><td>0,1</td><td>−84°</td></tr></tbody></table></div>
+<h3 id="butterworth-filtreler">Butterworth filtreler</h3>
+<p>Birçok alçak-geçiren filtre uygulamasında kapalı-göz kazancının geçen bandda 1'e yakın olması gerekir. Butterworth filtre bu tip uygulamaları en iyi şekilde yerine getirir; bu nedenle bu filtrelere <strong>maximally flat</strong> veya düz filtre denir. Yukarıdaki filtre de bu tiptedir.</p>
+<p>Butterworth filtreler kesim frekansında sabit bir faz açısı olacak şekilde dizayn edilmezler. Temel alçak geçiren filtre ω_c'de −45°'lik faz açısına sahiptir (−20 dB/decade); −40 dB/decade'lik Butterworth filtre ω_c'de −90°'lik, −60 dB/decade'lik bir Butterworth filtre ise ω_c'de −135°'lik faz açısına sahiptir. Yani −20 dB/decade'lik her bir artışta ω_c'de faz açısı −45° artış gösterir.</p>
+<h3 id="40-db-decade-lik-ikinci-derece-cift-kutuplu-alcak-geciren-butterworth-filtre">−40 dB/decade'lik (ikinci derece, çift kutuplu) alçak geçiren Butterworth filtre</h3>
+<p>R₁ = R₂ = R, R_f = 2R; C₁ (+) girişten toprağa, C₂ çıkıştan R₁–R₂ birleşimine. C₁ uçlarındaki gerilim çıkış gerilimidir.</p>
+<p><strong>Dizayn:</strong> kesim frekansı belirlenir (ω_c, f_c); C₁ belirlenir (100 pF ~ 0,1 µF); <strong>C₂ = 2C₁</strong> seçilir; <strong>R = 0,707/(ω_c C)</strong> (R₁ = R₂ = R); <strong>R_f = 2R</strong> seçilir.</p>
+<ul><li><strong>f_c = 1/(2π√(R₁R₂C₁C₂))</strong></li><li>Filtrenin cevabı: kesim frekansından sonra kazanç frekansın her 10 kat artışında −40 dB düşer.</li></ul>
+<figure class="yazi-gorsel"><img src="s-24.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: filtre tasarımı, birinci derece faz ve büyüklük tablosu ve Butterworth tanımı"><figcaption>Filtre dizaynı ve Butterworth filtre</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-25.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: −40 dB/decade ikinci derece alçak geçiren Butterworth filtre devresi, tasarım adımları ve cevap tablosu"><figcaption>İkinci derece alçak geçiren Butterworth filtre</figcaption></figure>
+<h3 id="60-db-decade-lik-ucuncu-derece-uc-kutuplu-alcak-geciren-butterworth-filtre">−60 dB/decade'lik (üçüncü derece, üç kutuplu) alçak geçiren Butterworth filtre</h3>
+<p>Bir −40 dB/decade'lik kat (R₁ = R₂ = R, R_f1 = 2R, C₁, C₂) ile bir −20 dB/decade'lik katın (R₃ = R, C₃, R_f2 = R) kaskat bağlanmasıyla elde edilir.</p>
+<ul><li>A_CL = V_o/V₁ = (V_o1/V₁) · (V_o/V_o1); ω_c'de A_CL 0,707'ye eşit olmalıdır.</li><li><strong>f_c = 1/(2π ∛(R₁R₂R₃C₁C₂C₃))</strong></li></ul>
+<p><strong>Dizayn:</strong> kesim frekansı belirlenir (ω_c, f_c); C₃ belirlenir (0,001 ~ 0,1 µF); <strong>C₁ = ½ C₃</strong>, <strong>C₂ = 2C₃</strong>; <strong>R = 1/(ω_c C₃)</strong> hesaplanır; R = R₁ = R₂ = R₃; <strong>R_f1 = 2R</strong>, <strong>R_f2 = R</strong>. En iyi sonuç için R 10 ile 100 kΩ arasında olmalıdır. Eğer R bu alanın dışında seçilirse tekrar başa dönülüp yeni bir C₃ değeri seçilir.</p>
+<p><strong>Filtrenin cevabı:</strong> kazanç kesim frekansında −3 dB azalırken frekansın her 10 kat artışında −60 dB düşer.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ω</th><th scope="col">Kazanç büyüklüğü A_CL</th><th scope="col">Faz açısı</th></tr></thead><tbody><tr><th scope="row">0,1 ω_c</th><td>1,0</td><td>−12°</td></tr><tr><th scope="row">0,25 ω_c</th><td>0,999</td><td>−29°</td></tr><tr><th scope="row">0,5 ω_c</th><td>0,992</td><td>−60°</td></tr><tr><th scope="row">ω_c</th><td>0,707</td><td>−135°</td></tr><tr><th scope="row">2 ω_c</th><td>0,124</td><td>−210°</td></tr><tr><th scope="row">4 ω_c</th><td>0,022</td><td>−226°</td></tr><tr><th scope="row">10 ω_c</th><td>0,001</td><td>−256°</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="s-26.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: −60 dB/decade üçüncü derece alçak geçiren Butterworth filtre ve tasarım adımları"><figcaption>Üçüncü derece alçak geçiren Butterworth filtre</figcaption></figure>
+<h3 id="yuksek-geciren-butterworth-filtreler">Yüksek geçiren Butterworth filtreler</h3>
+<p>Bir yüksek geçiren filtre belirli bir kesim frekansının (ω_c, f_c) altındaki bütün sinyalleri zayıflatırken bu frekanstan büyük frekanstaki sinyalleri geçirir. Bu tip filtre devreleri alçak geçiren filtrelerin ters fonksiyonuna sahiptir ve yalnızca devrede kondansatör ile direncin yeri değişmiştir. Faz açısı −20 dB/decade için ω_c'de +45°'dir ve her −20 dB/decade'lik zayıflama için +45° artar.</p>
+<p><strong>−20 dB/decade'lik (birinci derece, tek kutuplu) yüksek geçiren Butterworth filtre:</strong> girişte seri C, (+) girişten toprağa R, R_f = R.</p>
+<ul><li><strong>V_o = V₁ / (1 − j(1/(ωRC)))</strong>; ω → 0 rad/s ⇒ V_o → 0 V; ω → ∞ ⇒ V_o = V₁</li><li>ωRC = 1 iken kapalı-göz kazancının büyüklüğü 0,707 olur. Bu nedenle kesim frekansı <strong>ω_c = 1/(RC) = 2πf_c</strong>, <strong>R = 1/(ω_c C) = 1/(2πf_c C)</strong></li><li><strong>Dizayn:</strong> kesim frekansı belirlenir; C seçilir (0,001 ~ 0,1 µF); R hesaplanır; R_f = R yapılır (R_f dc offseti minimize eder).</li></ul>
+<figure class="yazi-gorsel"><img src="s-27.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: üçüncü derece alçak geçiren filtre cevap tablosu ve birinci derece yüksek geçiren Butterworth filtre"><figcaption>Birinci derece yüksek geçiren filtre</figcaption></figure>
+<p><strong>−40 dB/decade'lik (ikinci derece, çift kutuplu) yüksek geçiren filtre:</strong> Kesim frekansından itibaren kazanç frekansın her 10 kat azalışında −40 dB azalır. Kesim frekansında kazanç 0,707, geçen bandda ise 0 dB'dir.</p>
+<ul><li><strong>Dizayn:</strong> kesim frekansı belirlenir (ω_c, f_c); <strong>C₁ = C₂ = C</strong> seçilir; <strong>R₁ = 1,414/(ω_c C)</strong> hesaplanır; <strong>R₂ = ½ R₁</strong> seçilir; <strong>R_f = R₁</strong> yapılır.</li><li><strong>f_c = 1/(2π√(R₁R₂C₁C₂))</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-28.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: ikinci derece yüksek geçiren Butterworth filtre devresi ve tasarım adımları"><figcaption>İkinci derece yüksek geçiren filtre</figcaption></figure>
+<p><strong>−60 dB/decade'lik (üçüncü derece, üç kutuplu) yüksek geçiren Butterworth filtre:</strong> −40 dB/decade'lik kat (C₁ = C₂ = C, R₁, R₂, R_f1 = R₁) ile −20 dB/decade'lik katın (C₃, R₃, R_f2 = R₃) kaskat bağlanmasıyla elde edilir.</p>
+<ul><li><strong>f_c = 1/(2π ∛(R₁R₂R₃C₁C₂C₃))</strong></li><li><strong>Dizayn:</strong> kesim frekansı belirlenir (ω_c, f_c); C₁ = C₂ = C₃ = C seçilir (100 pF ~ 0,1 µF); <strong>R₃ = 1/(ω_c C)</strong> hesaplanır; <strong>R₁ = 2R₃</strong>; <strong>R₂ = ½ R₃</strong>; <strong>R_f1 = R₁</strong>, <strong>R_f2 = R₃</strong> seçilir.</li></ul>
+<p>Yüksek geçiren filtrelerin kazanç büyüklükleri ve faz açılarının karşılaştırılması (notta okunduğu kadarıyla):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ω</th><th scope="col">Büyüklük −20 dB/dec</th><th scope="col">Büyüklük −40 dB/dec</th><th scope="col">Büyüklük −60 dB/dec</th><th scope="col">Faz −20 dB/dec</th><th scope="col">Faz −40 dB/dec</th><th scope="col">Faz −60 dB/dec</th></tr></thead><tbody><tr><th scope="row">0,1 ω_c</th><td>0,1</td><td>0,001</td><td>0,001</td><td>84°</td><td>172°</td><td>256°</td></tr><tr><th scope="row">0,25 ω_c</th><td>0,25</td><td>0,053</td><td>0,022</td><td>76°</td><td>143°</td><td>226°</td></tr><tr><th scope="row">0,5 ω_c</th><td>0,445</td><td>0,24</td><td>0,124</td><td>63°</td><td>137°</td><td>210°</td></tr><tr><th scope="row">ω_c</th><td>0,707</td><td>0,707</td><td>0,707</td><td>45°</td><td>90°</td><td>135°</td></tr><tr><th scope="row">2 ω_c</th><td>0,89</td><td>0,97</td><td>0,992</td><td>27°</td><td>45°</td><td>69°</td></tr><tr><th scope="row">4 ω_c</th><td>0,97</td><td>0,998</td><td>0,999</td><td>14°</td><td>21°</td><td>29°</td></tr><tr><th scope="row">10 ω_c</th><td>1,0</td><td>1,0</td><td>1,0</td><td>6°</td><td>8°</td><td>12°</td></tr></tbody></table></div>
+<p><em>Not: İkinci derece Butterworth için kuramsal değerler 0,1 ω_c'de |A| ≈ 0,01; 0,25 ω_c'de ≈ 0,062 ve faz 0,25–4 ω_c aralığında sırasıyla yaklaşık 152°, 127°, 90°, 53°, 28°'dir. Tablodaki bazı değerler notta bunlardan farklı yazılmış ya da güç okunuyor; alçak geçiren filtrenin ikinci derece tablosu (s-25) da benzer şekilde kısmen okunaksız.</em></p>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: üçüncü derece yüksek geçiren Butterworth filtre ve filtrelerin kazanç-faz karşılaştırma tablosu"><figcaption>Üçüncü derece yüksek geçiren filtre ve karşılaştırma tablosu</figcaption></figure>
+<h3 id="band-geciren-filtreler">Band geçiren filtreler</h3>
+<p>Bir band geçiren filtre bir frekans seçicidir; yalnızca belli bir frekans bandını seçer ya da geçirir. Bu tip bir filtre rezonans frekansında (f_r) maksimum kazanca sahiptir. Kazancın 0,707 (ya da 3 dB) düştüğü iki frekans noktasından biri alt kesim frekansı, diğeri ise üst kesim frekansıdır (f_L, f_H).</p>
+<ul><li>Band genişliği: <strong>BW = f_H − f_L</strong></li><li>Eğer f_L ve f_H biliniyorsa rezonans frekansı (merkez frekansı) bulunabilir: <strong>f_r = √(f_L · f_H)</strong></li><li>f_r ve BW biliniyorsa: <strong>f_L = √(BW²/4 + f_r²) − BW/2</strong>, <strong>f_H = f_L + BW</strong></li></ul>
+<p><strong>Örnek:</strong> f_L = 300 Hz, f_H = 3000 Hz ise BW ve f_r = ?</p>
+<ul><li>BW = f_H − f_L = 2700 Hz; f_r = √(f_H · f_L) = √(300 · 3000) = <strong>948,7 Hz</strong></li><li>Dikkat edilirse f_r daima merkez frekansın altında bir değerdedir: (300 + 3000)/2 = 1650 Hz.</li></ul>
+<figure class="yazi-gorsel"><img src="s-30.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: band geçiren filtre cevabı, band genişliği ve rezonans frekansı bağıntıları"><figcaption>Band geçiren filtre</figcaption></figure>
+<p><strong>Örnek:</strong> Rezonans frekansı 950 Hz, band genişliği 2700 Hz olan filtrenin alt ve üst kesim frekanslarını bulunuz.</p>
+<ul><li>f_L = √(2700²/4 + 950²) − 2700/2 = 1650 − 1350 = <strong>300 Hz</strong>; f_H = 300 + 2700 = <strong>3000 Hz</strong></li></ul>
+<p><strong>Kalite faktörü Q:</strong> Kalite faktörü rezonans frekansının band genişliğine oranıdır; band geçiren filtrenin seçiciliğinin bir ölçüsüdür: <strong>Q = f_r / BW</strong>. Yüksek Q değeri filtrenin çok küçük bir bandı seçtiğini (geçirdiğini) gösterir.</p>
+<p><strong>Darband ve genişband filtreler:</strong> Geniş bandlı bir filtre rezonans frekansının iki ya da daha çok katı büyüklüğünde bir band genişliğine sahiptir; Q ≤ 0,5 ise genişbandlıdır. Genellikle genişbandlı filtreler bir alçak ve bir yüksek geçiren filtrenin kaskat bağlanması ile oluşturulurlar. Darbandlı filtreler (Q &gt; 0,5) genellikle tek bir kat şeklinde yapılırlar.</p>
+<p><strong>Örnek:</strong> BW = 2700 Hz, f_r = 950 Hz olan filtrenin kalite faktörünü bulunuz. Q = f_r/BW = 950/2700 = 0,35 &lt; 0,5 → genişbandlı bir filtredir.</p>
+<h3 id="genisbandli-filtreler">Genişbandlı filtreler</h3>
+<p>Bir alçak geçiren filtre ile bir yüksek geçiren filtrenin seri olarak bağlanması (kaskat, ardarda) ile oluşturulurlar; hangisinin önce yer alacağı önemli değildir. Örnek devre: 3000 Hz alçak geçiren filtre (7,5 kΩ, 7,5 kΩ, 10 nF, 5 nF) ve 300 Hz yüksek geçiren filtre (50 nF, 50 nF, 7,5 kΩ, 15 kΩ); band genişliği 2700 Hz, f_r = 948 Hz, her iki yanda −40 dB/decade.</p>
+<p>Alçak ve yüksek geçiren filtrelerin kesim frekansları çakışmamalıdır ve her ikisi de geçirdikleri bandda aynı kazanca sahip olmalıdırlar. Alçak geçiren filtrenin kesim frekansı yüksek geçireninkinden 10 kat veya daha fazla büyük olmalıdır. Kaskat bağlı alçak ve yüksek geçiren filtrelerle yapılan geniş bandlı band geçiren filtre şu karakteristiklere sahiptir:</p>
+<ol><li>Alt kesim frekansı f_L yalnızca yüksek geçiren filtre tarafından belirlenir.</li><li>Üst kesim frekansı f_H yalnızca alçak geçiren filtre tarafından belirlenir.</li><li>Kazanç rezonans frekansında (f_r) maksimumdur ve her bir filtrenin geçen band kazancına eşittir.</li></ol>
+<figure class="yazi-gorsel"><img src="s-32.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: 3000 Hz alçak geçiren ve 300 Hz yüksek geçiren filtrelerin kaskadıyla genişbandlı band geçiren filtre"><figcaption>Genişbandlı band geçiren filtre</figcaption></figure>
+<h3 id="darbandli-band-geciren-filtreler">Darbandlı band geçiren filtreler</h3>
+<p>Darbandlı bir filtre devresi yalnız tek bir op-amp içerir. Filtrenin giriş direnci R direncine eşittir. Geri besleme direnci (2R) giriş direncinin iki katı yapılırsa filtrenin maksimum kazancı rezonans frekansında 1 ya da 0 dB olacaktır. R_r'nin ayarlanması ile rezonans frekansı değiştirilebilir (band genişliği ve kazanç değişmez).</p>
+<p><strong>Performans:</strong> Birim kazançlı darbandlı filtrenin performansı birkaç basit eşitlikle hesaplanabilir:</p>
+<ul><li><strong>BW = 0,1591/(RC)</strong>, BW = f_r/Q</li><li><strong>R_r = R/(2Q² − 1)</strong></li><li><strong>f_r = (0,1125/(RC)) √(1 + R/R_r)</strong></li></ul>
+<p><strong>Örnek:</strong> R = 21,21 kΩ, 2R = 42,42 kΩ, C = 15 nF, R_r = 3,03 kΩ olan band geçiren filtrenin rezonans frekansı ve band genişliği nedir?</p>
+<ul><li>f_r = 0,1125/(21,21·10³ · 15·10⁻⁹) · √(1 + 21,21k/3,03k) = 353,6 Hz · √(1 + 7) ≅ <strong>1000 Hz</strong></li><li>BW = 0,1591/(21,21·10³ · 15·10⁻⁹) = <strong>500 Hz</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-33.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: darbandlı band geçiren filtre devresi, performans bağıntıları ve örnek"><figcaption>Darbandlı band geçiren filtre</figcaption></figure>
+<p><strong>Örnek (equalizer):</strong> Rezonans frekansları 32, 64, 128, 250, 500, 1000, 2000, 4000, 8000 ve 16 000 Hz olan bir equalizerin birim kazançlı 6. darband filtresini Q = 2 için dizayn ediniz.</p>
+<p><em>Açıklama:</em> Bir stereo equalizer her bir kanalında 10 tane band geçiren filtreye sahiptir. Bu devre odyo (ses) spektrumunu (30 Hz – 16 kHz) 10 farklı frekans bölgesine ayırır.</p>
+<ul><li>6. filtrenin rezonans frekansı f_r = 1000 Hz; BW = f_r/Q = 1000/2 = 500 Hz</li><li>f_L = √(500²/4 + 1000²) − 500/2 = <strong>780 Hz</strong>; f_H = f_L + BW = <strong>1280 Hz</strong></li><li>C = 0,015 µF = 15 nF seçersek R = 0,1591/(BW · C) = 0,1591/(500 · 15·10⁻⁹) = <strong>21,21 kΩ</strong></li><li>Geri besleme direnci 2R = <strong>42,42 kΩ</strong>; R_r = R/(2Q² − 1) = 21,21k/(2·2² − 1) = <strong>3,03 kΩ</strong></li></ul>
+<h3 id="band-durduran-notch-filtreler">Band durduran (notch) filtreler</h3>
+<p>İstenmeyen frekanslar duran bandda zayıflatılır, istenilen (seçilen) frekanslar geçen bandda iletilir. Notch filtreler geçen bandda birim kazanca sahiptir. Q, BW, f_L, f_H ve f_r ifadeleri band geçiren filtre ile aynıdır.</p>
+<figure class="yazi-gorsel"><img src="s-34.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: equalizer filtresi tasarımı ve band durduran (notch) filtre cevabı"><figcaption>Equalizer örneği ve notch filtre</figcaption></figure>
+<p><strong>Notch filtre teorisi:</strong> Bir notch filtre, bir band geçiren filtre çıkışının orijinal sinyalden çıkarılması ile yapılır. Notch filtrenin geçen bandındaki frekanslar için band geçiren filtrenin çıkışı sıfıra yaklaşır. Giriş sinyali V₁ toplayıcı giriş direnci R₂ yolu ile V_o'a −V₁ olarak aktarılır. Bu nedenle her iki alt ve üst geçen bandda V_o = −V₁ olur.</p>
+<p>Farz edelim ki V₁ giriş sinyalinin frekansı notch filtrenin rezonans frekansına ayarlanmış olsun (band geçiren filtrenin f_r'si notch filtrenin f_r'sidir). V₁ band geçiren filtrenin çıkışından −V₁ olarak çıkar ve R₁ ve R üzerinden tekrar çevrilerek çıkışta +V₁ olur. V₁ bu anda R₂ üzerinden de çıkışa −V₁ olarak geleceğinden f_r'de V_o = 0 V (V_o = V₁ − V₁ = 0 V) olur.</p>
+<figure class="yazi-gorsel"><img src="s-35.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: darbandlı band geçiren filtre ve çevirici toplayıcıdan oluşan notch filtre blok şeması"><figcaption>Notch filtre teorisi</figcaption></figure>
+<h3 id="ornek-uygulama-120-hz-notch-filtre">Örnek uygulama: 120 Hz notch filtre</h3>
+<p>Uygulamalarda sinyaller yükseltilirken istenmeyen sinyaller (gürültüler) sinyale bulaşır. Örneğin 60 Hz'lik ac bir sinyali tam dalga doğrultucu ile doğrulttuğumuzda sinyalin üzerinde 120 Hz'lik ripple sinyali oluşur. Ya da güç hatlarına bağlı olan doğrultucularda, regüleli anahtarlamalı tip güç kaynaklarından alınan sinyallerde (anahtarlama frekansı karışığı) ya da saat osilatör sinyallerindeki istenmeyen frekans bileşenleri notch kullanılarak atılır.</p>
+<p>Yukarıda bahsedilen problemi önlemek için 120 Hz'lik frekansa sahip olan sinyalleri atmanız (zayıflatmanız) gerekir. O hâlde f_r = 120 Hz'dir; BW = 12 Hz belirlersek:</p>
+<ul><li>Q = f_r/BW = 120/12 = 10 → darbandlı filtre</li><li>Yapılacak filtrenin geçen banddaki kazancı birdir. BW = 12 Hz olduğuna göre f_L = 120 − BW/2 = 114 Hz, f_H = 120 + BW/2 = 126 Hz olacaktır.</li></ul>
+<p><strong>Notch filtresi yapım basamakları:</strong></p>
+<ol><li>Belirlenen f_r, Q ve BW değerlerinde bir band geçiren filtre yapılır.</li><li>Çevirici toplayıcı op-amp'a band geçiren filtre çıkışı ve orijinal sinyal eşit R değerleri üzerinden uygulanır.</li></ol>
+<ul><li>C = 0,33 µF seçelim: R = 0,1591/(BW · C) = 0,1591/(12 · 0,33·10⁻⁶) = <strong>40,2 kΩ</strong></li><li>Geri besleme direnci 2R = <strong>80,4 kΩ</strong></li><li>R_r = R/(2Q² − 1) = 40,2k/(2·10² − 1) = <strong>201 Ω</strong> (toplayıcıda R₁ = R₂ = 10 kΩ, geri besleme 10 kΩ)</li></ul>
+<figure class="yazi-gorsel"><img src="s-36.jpg" width="1182" height="1672" loading="lazy" decoding="async" alt="El yazısı not sayfası: 120 Hz notch filtre hesabı ve band geçiren filtre ile toplayıcıdan oluşan devre"><figcaption>120 Hz notch filtre</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem311-islemsel-yukseltecler-notlari.pdf" download>eem311-islemsel-yukseltecler-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 4.2 MB · 36 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem311-islemsel-yukseltecler-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

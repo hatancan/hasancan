@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders Defteri (Mart 2013) – Durum Uzayı, Durum Geçiş Matrisi, Eş ve Kipsel Biçim, Denetlenebilirlik ve Gözlenebilirlik — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri 2013 ders defterinden durum uzayı haftaları: çözücü matris (sI−A)⁻¹ ve e^(At), RLC devresinin durum denklemleri, eş (companion) biçime ve Vandermonde ile kipsel (modal) biçime dönüşüm, doğrudan, kaskad ve paralel ayrıştırma, su tankı örnekleriyle denetlenebilirlik ve gözlenebilirlik.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders Defteri (Mart 2013) – Durum Uzayı, Durum Geçiş Matrisi, Eş ve Kipsel Biçim, Denetlenebilirlik ve Gözlenebilirlik">
+<meta property="og:description" content="EEM322 Denetim Sistemleri 2013 ders defterinden durum uzayı haftaları: çözücü matris (sI−A)⁻¹ ve e^(At), RLC devresinin durum denklemleri, eş (companion) biçime ve Vandermonde ile kipsel (modal) biçime dönüşüm, doğrudan, kaskad ve paralel ayrıştırma, su tankı örnekleriyle denetlenebilirlik ve gözlenebilirlik.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders Defteri (Mart 2013) – Durum Uzayı, Durum Geçiş Matrisi, Eş ve Kipsel Biçim, Denetlenebilirlik ve Gözlenebilirlik", "description": "EEM322 Denetim Sistemleri 2013 ders defterinden durum uzayı haftaları: çözücü matris (sI−A)⁻¹ ve e^(At), RLC devresinin durum denklemleri, eş (companion) biçime ve Vandermonde ile kipsel (modal) biçime dönüşüm, doğrudan, kaskad ve paralel ayrıştırma, su tankı örnekleriyle denetlenebilirlik ve gözlenebilirlik.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-defter-durum-uzayi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders Defteri (Mart 2013) – Durum Uzayı, Durum Geçiş Matrisi, Eş ve Kipsel Biçim, Denetlenebilirlik ve Gözlenebilirlik">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.03.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#mason-kuraliyla-saglama">Mason kuralıyla sağlama</a></li><li><a href="#ornek-1-durum-denkleminin-cozumu">Örnek 1: Durum denkleminin çözümü</a></li><li><a href="#ornek-2-rlc-devresinin-durum-denklemleri">Örnek 2: RLC devresinin durum denklemleri</a></li><li><a href="#ornek-3-es-companion-bicime-donusum">Örnek 3: Eş (companion) biçime dönüşüm</a></li><li><a href="#ornek-4-kipsel-modal-matris">Örnek 4: Kipsel (modal) matris</a></li><li><a href="#ornek-5-aktarim-islevi-ayristirmalari">Örnek 5: Aktarım işlevi ayrıştırmaları</a></li><li><a href="#denetlenebilirlik-ve-gozlenebilirlik-su-tanklari-ornek-6-1">Denetlenebilirlik ve gözlenebilirlik: su tankları (Örnek 6, ρ = 1)</a></li><li><a href="#ornek-7-benzerlik-donusumunde-degismezlik">Örnek 7: Benzerlik dönüşümünde değişmezlik</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders Defteri (Mart 2013) – Durum Uzayı, Durum Geçiş Matrisi, Eş ve Kipsel Biçim, Denetlenebilirlik ve Gözlenebilirlik</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 16.03.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin 2013 bahar dönemine ait bir arkadaşın <strong>ders defterinden</strong> durum uzayı konusunu içeriyor (7, 14 ve 16 Mart 2013'te çekilmiş sayfalar). İçerik <strong>fotoğraflanmış sayfalardan metne aktarıldı</strong>; fotoğraflar yayınlanmadı. Örnekler derste İngilizce yazılmış, Türkçe kenar notları da aktarıldı. Hesaplar kontrol edildi; defterdeki küçük yazım hataları notlarla belirtildi. Bulanık çekilmiş bir sayfa okunamadığı için atlandı.</p>
+<p>Konu anlatımı için <a href="/arsiv/eem322-ders-03-durum-uzayi/">Ders 3</a> yazısına bakılabilir. Defterin önceki ve sonraki bölümleri: <a href="/arsiv/eem322-defter-modelleme-blok-diyagram/">modelleme ve blok diyagramları</a>, <a href="/arsiv/eem322-defter-kalici-hata-routh-kok-yer/">kalıcı durum hatası, Routh ve kök yer eğrisi</a>.</p>
+<h2 id="mason-kuraliyla-saglama">Mason kuralıyla sağlama</h2>
+<p>Sayfanın başında bir blok diyagramı indirgemesinin sonucu (G₁ + G₂)/(1 + G₁H) işaret akış grafiğiyle doğrulanıyor: ileri yollar P₁ = G₁, P₂ = G₂, döngü L₁ = −G₁H, Δ = 1 + G₁H, Δ₁ = Δ₂ = 1 ⇒ (P₁Δ₁ + P₂Δ₂)/Δ = (G₁ + G₂)/(1 + G₁H).</p>
+<h2 id="ornek-1-durum-denkleminin-cozumu">Örnek 1: Durum denkleminin çözümü</h2>
+<p>Durum uzayı modelinin blok diyagramı: u → B → toplama → ẋ → ∫ → x → C → (D ile toplanarak) y, A ile geri besleme.</p>
+<ul><li>ẋ = [[−1, −3], [1, −5]] x + [1, 0]ᵀ u, y = [1, −1] x, D = 0</li><li>u(t) = 1 (t ≥ 0), x(0) = [1, 0]ᵀ</li></ul>
+<p><strong>(a) Sıfır giriş (homojen) çözümü:</strong> X(s) = (sI − A)⁻¹x(0) ya da x(t) = e^(At)x(0). Çözücü (resolvent) matris:</p>
+<ul><li>sI − A = [[s + 1, 3], [−1, s + 5]], det(sI − A) = s² + 6s + 8 = (s + 2)(s + 4)</li><li>(sI − A)⁻¹ = (1/Δ(s))·[[s + 5, −3], [1, s + 1]]</li><li>Kısmi kesirler: [[3/2/(s+2) − 1/2/(s+4), −3/2/(s+2) + 3/2/(s+4)], [1/2/(s+2) − 1/2/(s+4), −1/2/(s+2) + 3/2/(s+4)]]</li></ul>
+<p>Ters Laplace ile durum geçiş matrisi:</p>
+<ul><li>Φ(t) = e^(At) = [[(3/2)e^(−2t) − (1/2)e^(−4t), −(3/2)e^(−2t) + (3/2)e^(−4t)], [(1/2)e^(−2t) − (1/2)e^(−4t), −(1/2)e^(−2t) + (3/2)e^(−4t)]]</li><li>Sıfır giriş durum yanıtı: x(t) = e^(At)[1, 0]ᵀ = [(3/2)e^(−2t) − (1/2)e^(−4t), (1/2)e^(−2t) − (1/2)e^(−4t)]ᵀ</li></ul>
+<p><strong>(b) u(t) = 1 ve x(0) = [1, 0]ᵀ için çıkış:</strong></p>
+<ul><li>Y(s) = C(sI − A)⁻¹x(0) + C(sI − A)⁻¹B U(s)</li><li>= (1/Δ(s))·{[1, −1][s + 5, 1]ᵀ + [1, −1][(s + 5)/s, 1/s]ᵀ} = (s² + 5s + 4)/[sΔ(s)] = (s + 1)/[s(s + 2)]</li><li>y(t) = 1/2 + (1/2)e^(−2t)</li></ul>
+<p>Kaynaktaki not: Bütün sadeleştirmeler ve matris işlemleri Laplace bölgesinde yapılmalı, ters Laplace en sonda uygulanmalı.</p>
+<h2 id="ornek-2-rlc-devresinin-durum-denklemleri">Örnek 2: RLC devresinin durum denklemleri</h2>
+<p>vi kaynağı, R₁ = 4 kΩ, C₁ = 0.25 mF, L = 2 mH, C₂ = 0.5 mF, R₂ = 1 kΩ ve is akım kaynağından oluşan devre. Düğüm denklemleri:</p>
+<ul><li>C₁ dv₁/dt + iL − (vi − v₁)/R₁ = 0 ⇒ 0.00025 dv₁/dt + iL − (vi − v₁)/4000 = 0</li><li>C₂ dv₂/dt − iL + v₂/R₂ − is = 0 ⇒ 0.0005 dv₂/dt − iL + v₂/1000 − is = 0</li><li>L diL/dt + v₂ − v₁ = 0 ⇒ 0.002 diL/dt + v₂ − v₁ = 0</li></ul>
+<p>Durum değişkenleri x₁ = v₁, x₂ = v₂, x₃ = iL; girişler u₁ = vi, u₂ = is; çıkış y = v₂:</p>
+<ul><li>ẋ₁ = −x₁ − 4000x₃ + u₁</li><li>ẋ₂ = −2x₂ + 2000x₃ + 2000u₂</li><li>ẋ₃ = 500x₁ − 500x₂</li><li>A = [[−1, 0, −4000], [0, −2, 2000], [500, −500, 0]], B = [[1, 0], [0, 2000], [0, 0]], C = [0, 1, 0]</li></ul>
+<p><em>Not: Defterde ilk denklem "dv₁/dt = v₁ − 4000iL + vi" diye yazılmış; doğrusu −v₁ (durum değişkenli yazımda doğru: −x₁).</em></p>
+<h2 id="ornek-3-es-companion-bicime-donusum">Örnek 3: Eş (companion) biçime dönüşüm</h2>
+<p>Örnek 1'deki sistem için karakteristik denklem Δ(s) = |sI − A| = s² + 6s + 8 = 0.</p>
+<ul><li>Denetlenebilirlik matrisi U = [B, AB] = [[1, −1], [0, 1]], |U| ≠ 0 ⇒ eş biçim mümkün</li><li>U⁻¹ = [[1, 1], [0, 1]], q = [0, 1]U⁻¹ = [0, 1] (U⁻¹'in son satırı)</li><li>Q = [q; qA] = [[0, 1], [1, −5]], Q⁻¹ = [[5, 1], [1, 0]]</li><li>w = Qx dönüşümüyle ẇ = QAQ⁻¹w + QBu = [[0, 1], [−8, −6]]w + [0, 1]ᵀu</li><li>y = CQ⁻¹w + Du = [4, 1]w</li></ul>
+<h2 id="ornek-4-kipsel-modal-matris">Örnek 4: Kipsel (modal) matris</h2>
+<p>Eş biçimdeki sistem: ẇ = [[0, 1], [−8, −6]]w + [0, 1]ᵀu, y = [4, 1]w, w(0) = Qx(0) = [0, 1]ᵀ.</p>
+<ul><li>Δ(s) = |sI − Ac| = s² + 6s + 8 ⇒ λ₁ = −2, λ₂ = −4</li><li>Vandermonde yaklaşımıyla özvektörler doğrudan: m₁ = [1, λ₁]ᵀ = [1, −2]ᵀ, m₂ = [1, λ₂]ᵀ = [1, −4]ᵀ</li><li>M = [[1, 1], [−2, −4]], M⁻¹ = [[2, 0.5], [−1, −0.5]]</li><li>Λ = M⁻¹AcM = diag(−2, −4), Γ = M⁻¹Bc = [0.5, −0.5]ᵀ, F = CcM = [2, 0]</li><li>ż = Λz + Γu, y = Fz</li></ul>
+<p>Üç gösterimin aktarım işlevi:</p>
+<ul><li>G(s) = C(sI − A)⁻¹B = (s + 4)/[(s + 2)(s + 4)] = 1/(s + 2)</li><li>Gc(s) = Cc(sI − Ac)⁻¹Bc = [4, 1]·(1/Δ)[[s + 6, 1], [−8, s]]·[0, 1]ᵀ = 1/(s + 2)</li><li>Gm(s) = F(sI − Λ)⁻¹Γ = 1/(s + 2)</li></ul>
+<p>G(s) = Gc(s) = Gm(s) ve Δ(s) = |sI − A| = |sI − Ac| = |sI − Λ|, beklendiği gibi.</p>
+<p><strong>4(b) Kipsel ayrışım (serbest yanıt):</strong> ẇ = [[0, 1], [−8, −6]]w için yeni başlangıç vektörü z(0) = M⁻¹w(0) = [0.5, −0.5]ᵀ.</p>
+<ul><li>w = Mz = M e^(Λt) z(0) = [m₁, m₂]·diag(e^(−2t), e^(−4t))·z(0)</li><li>w(t) = 0.5e^(−2t)[1, −2]ᵀ − 0.5e^(−4t)[1, −4]ᵀ</li></ul>
+<p><em>Not: Defterde Örnek 4'ün başında eş biçim matrisi işaretsiz ([[0, 1], [8, 6]]) yazılmış, doğrusu [[0, 1], [−8, −6]]. M⁻¹'in ikinci satırı da [−1, 0.5] diye yazılmış, doğrusu [−1, −0.5] (Γ bu doğru değerle hesaplanmış). Serbest yanıtta ikinci terimin katsayısı −0.5 olmalı; böylece w(0) = [0, 1]ᵀ sağlanıyor.</em></p>
+<h2 id="ornek-5-aktarim-islevi-ayristirmalari">Örnek 5: Aktarım işlevi ayrıştırmaları</h2>
+<p>G(s) = (3s² + 9s + 6)/(s³ + 7s² + 12s) = 3(s + 1)(s + 2)/[s(s + 3)(s + 4)]</p>
+<p><strong>(i) Doğrudan ayrıştırma:</strong></p>
+<ul><li>Y/U = (3s⁻¹ + 9s⁻² + 6s⁻³)/(1 + 7s⁻¹ + 12s⁻²)</li><li>X(s) = U(s) − 7s⁻¹X(s) − 12s⁻²X(s), Y(s) = 3s⁻¹X(s) + 9s⁻²X(s) + 6s⁻³X(s)</li><li>İntegratör çıkışları durum değişkeni seçilerek zaman bölgesine geçiliyor: ẋ = [[0, 1, 0], [0, 0, 1], [0, −12, −7]]x + [0, 0, 1]ᵀu, y = [6, 9, 3]x</li></ul>
+<p><strong>(ii) Kaskad (seri) ayrıştırma:</strong> Y/U = (3/s)·[(s + 1)/(s + 3)]·[(s + 2)/(s + 4)]</p>
+<ul><li>(s + z)/(s + p) = (1 + z s⁻¹)/(1 + p s⁻¹) ⇒ X = U − p s⁻¹X, Y = X + z s⁻¹X</li><li>a/s ⇒ X = U, Y = a s⁻¹X</li><li>Bloklar 1/s·3 → (s + 1)/(s + 3) → (s + 2)/(s + 4) sırasıyla dizilip integratörler açılınca üçgen biçimli (triangle form) A matrisi çıkıyor: ẋ = [[−4, −2, 3], [0, −3, 3], [0, 0, 0]]x + [0, 0, 1]ᵀu, y = [2 − 4, 1 − 3, 3]x = [−2, −2, 3]x</li></ul>
+<p><em>Not: Defterdeki matrisin (2,3) elemanı −3 gibi okunuyor; (s + 1)/(s + 3) bloğunun girişi 3x₃ olduğundan ẋ₂ = −3x₂ + 3x₃, yani eleman +3 olmalı.</em></p>
+<p><strong>(iii) Paralel ayrıştırma:</strong> İlk adım kısmi kesir açılımı:</p>
+<ul><li>G(s) = (1/2)/s − 2/(s + 3) + (9/2)/(s + 4)</li><li>a/(s + p) = a s⁻¹/(1 + p s⁻¹) ⇒ X = U − p s⁻¹X, Y = a s⁻¹X</li><li>ẋ = [[0, 0, 0], [0, −3, 0], [0, 0, −4]]x + [1, 1, 1]ᵀu, y = [1/2, −2, 9/2]x</li></ul>
+<h2 id="denetlenebilirlik-ve-gozlenebilirlik-su-tanklari-ornek-6-1">Denetlenebilirlik ve gözlenebilirlik: su tankları (Örnek 6, ρ = 1)</h2>
+<p><strong>(a)</strong> Üstteki tank (A₁, R₁) alttaki tanka (A₂, R₂) boşalıyor, giriş u alt tanka, çıkış y = x₂/R₂:</p>
+<ul><li>A₁ẋ₁ = −x₁/R₁, A₂ẋ₂ = x₁/R₁ − x₂/R₂ + u</li><li>A₁ = A₂ = 1, R₁ = R₂ = 1 için ẋ = [[−1, 0], [1, −1]]x + [0, 1]ᵀu, y = [0, 1]x</li><li>U = [B, AB] = [[0, 0], [1, −1]] ⇒ rank 1 (determinant 0) ⇒ denetlenemez</li><li>V = [C; CA] = [[0, 1], [1, −1]] ⇒ rank 2 ⇒ gözlenebilir</li></ul>
+<p><em>Not: Defterde genel matrisin ikinci satırı [1/(R₁R₂), −1/(R₁A₂)] diye yazılmış; denklemlere göre doğrusu [1/(R₁A₂), −1/(R₂A₂)], B = [0, 1/A₂]ᵀ.</em></p>
+<p><strong>(b)</strong> Giriş üst tanka, çıkış üst tankın debisi (y = [1, 0]x): ẋ = [[−1, 0], [1, 0]]x + [1, 0]ᵀu ⇒ denetlenebilir, gözlenemez.</p>
+<p><strong>(c)</strong> Giriş ve çıkış birinci tankta, ikinci tank bağlantısız: ẋ = [[−1, 0], [0, 0]]x + [1, 0]ᵀu, y = [1, 0]x ⇒ denetlenemez, gözlenemez.</p>
+<p><strong>(d)</strong> Yan yana, R₁ ile bağlı iki tank; giriş birinci tanka, çıkış ikinci tankın R₂ üzerinden debisi:</p>
+<ul><li>A₁ẋ₁ = (x₂ − x₁)/R₁ + u, A₂ẋ₂ = −(x₂ − x₁)/R₁ − x₂/R₂, y = x₂/R₂</li><li>Birim değerlerle ẋ = [[−1, 1], [1, −2]]x + [1, 0]ᵀu, y = [0, 1]x ⇒ denetlenebilir ve gözlenebilir</li></ul>
+<h2 id="ornek-7-benzerlik-donusumunde-degismezlik">Örnek 7: Benzerlik dönüşümünde değişmezlik</h2>
+<p>Örnek 4'teki köşegen biçim: ż = diag(−2, −4)z + [0.5, −0.5]ᵀu, y = [2, 0]z. Λ'nın elemanları negatif olduğundan sistem kararlı; çıkış matrisindeki 0 yüzünden λ₂ = −4 kipi gözlenemiyor.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gösterim</th><th scope="col">U = [B, AB]</th><th scope="col">det U</th><th scope="col">V = [C; CA]</th><th scope="col">det V</th><th scope="col">Sonuç</th></tr></thead><tbody><tr><th scope="row">Genel (A, B, C)</th><td>[[1, −1], [0, 1]]</td><td>1</td><td>[[1, −1], [−2, 2]]</td><td>0</td><td>Denetlenebilir, gözlenemez</td></tr><tr><th scope="row">Eş biçim (Ac, Bc, Cc)</th><td>[[0, 1], [1, −6]]</td><td>−1</td><td>[[4, 1], [−8, −2]]</td><td>0</td><td>Denetlenebilir, gözlenemez</td></tr><tr><th scope="row">Köşegen (Λ, Γ, F)</th><td>[[0.5, −1], [−0.5, 2]]</td><td>0.5</td><td>[[2, 0], [−4, 0]]</td><td>0</td><td>Denetlenebilir, gözlenemez</td></tr></tbody></table></div>
+<p>Denetlenebilirlik ve gözlenebilirlik özellikleri benzerlik dönüşümü altında <strong>değişmez</strong>. Gözlenemeyen λ₂ = −4 kipi, Örnek 4'teki aktarım işlevinde sadeleşen (s + 4) çarpanı olarak görülüyor: G(s) = Gc(s) = Gm(s) = (s + 4)/[(s + 2)(s + 4)] = 1/(s + 2).</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

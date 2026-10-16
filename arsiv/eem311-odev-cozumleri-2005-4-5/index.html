@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Elektronik II: 2005 Ödev Çözümleri IV–V, Çok Katlı Yükselteç, Fark Yükselteci, CMRR, Akım Aynaları ve Bode Diyagramı — hasancan.net</title>
+<meta name="description" content="EEM311 Elektronik II dersinin 2005 güz dönemi 4. ve 5. ödev çözümleri (Jaeger &amp; Blalock 15.22–16.8): BJT–PMOS iki katlı yükselteç, uyumsuz fark yükseltecinde A_dd, A_cd ve CMRR, yarım devre analizi, MOSFET akım kaynaklarının çıkış direnci, akım aynası ve bir transfer fonksiyonunun Bode diyagramı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-odev-cozumleri-2005-4-5/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Elektronik II: 2005 Ödev Çözümleri IV–V, Çok Katlı Yükselteç, Fark Yükselteci, CMRR, Akım Aynaları ve Bode Diyagramı">
+<meta property="og:description" content="EEM311 Elektronik II dersinin 2005 güz dönemi 4. ve 5. ödev çözümleri (Jaeger &amp; Blalock 15.22–16.8): BJT–PMOS iki katlı yükselteç, uyumsuz fark yükseltecinde A_dd, A_cd ve CMRR, yarım devre analizi, MOSFET akım kaynaklarının çıkış direnci, akım aynası ve bir transfer fonksiyonunun Bode diyagramı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-odev-cozumleri-2005-4-5/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Elektronik II: 2005 Ödev Çözümleri IV–V, Çok Katlı Yükselteç, Fark Yükselteci, CMRR, Akım Aynaları ve Bode Diyagramı", "description": "EEM311 Elektronik II dersinin 2005 güz dönemi 4. ve 5. ödev çözümleri (Jaeger & Blalock 15.22–16.8): BJT–PMOS iki katlı yükselteç, uyumsuz fark yükseltecinde A_dd, A_cd ve CMRR, yarım devre analizi, MOSFET akım kaynaklarının çıkış direnci, akım aynası ve bir transfer fonksiyonunun Bode diyagramı.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-odev-cozumleri-2005-4-5/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-odev-cozumleri-2005-4-5.zip", "contentUrl": "https://hasancan.net/arsiv/eem311-odev-cozumleri-2005-4-5/eem311-odev-cozumleri-2005-4-5.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM311 Elektronik II: 2005 Ödev Çözümleri IV–V, Çok Katlı Yükselteç, Fark Yükselteci, CMRR, Akım Aynaları ve Bode Diyagramı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.11.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#odev-iv">Ödev IV</a></li><li><a href="#odev-v">Ödev V</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM311 Elektronik II: 2005 Ödev Çözümleri IV–V, Çok Katlı Yükselteç, Fark Yükselteci, CMRR, Akım Aynaları ve Bode Diyagramı</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 10.11.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM311 Elektronik II</strong> dersinin 2005 güz dönemindeki 4. ve 5. ödevlerinin çözümlerini içeriyor (Ödev IV: 10 Kasım 2005, Ödev V: 11 Aralık 2005). Problemler ders kitabı Jaeger &amp; Blalock, <em>Microelectronic Circuit Design</em>'dan; çözümler dersin asistanı tarafından Word'de devre şemalarıyla hazırlanmış. Parolası kaldırılmış orijinal PDF'ler yazının sonunda ZIP olarak indirilebilir. İlk üç ödev ayrı bir yazıda: <em>EEM311 2005 Ödev Çözümleri I–III</em>.</p>
+<h2 id="odev-iv">Ödev IV</h2>
+<h3 id="15-22-bjt-ortak-emetor-pmos-kaynak-izleyici-iki-katli-yukseltec">15.22: BJT ortak emetör + PMOS kaynak izleyici (iki katlı yükselteç)</h3>
+<p>Devre: 15 V tek besleme. Birinci kat pnp Q₁: baz bölücüsü 120 kΩ (15 V'a) ve 240 kΩ (toprağa), emetörde 18 kΩ (C₂ ile köprülü), kolektörde 36 kΩ (toprağa); kaynak direnci 1 kΩ. İkinci kat fakirleştirmeli PMOS M₂: geçidi Q₁'in kolektörüne bağlı, kaynağı 5,1 kΩ ile 15 V'a, savağı toprakta; çıkış kaynaktan C₃ ile 1 kΩ yüke alınıyor. β_F = 75, K_p = 4 mA/V², V_P = 4 V.</p>
+<figure class="yazi-gorsel"><img src="p15-22.jpg" width="1400" height="774" loading="lazy" decoding="async" alt="15.22: İki katlı yükselteç, DC ve AC eşdeğer devreleri"><figcaption>15.22: BJT–PMOS iki katlı yükseltecin çözümü</figcaption></figure>
+<p><strong>DC analiz:</strong></p>
+<ul><li>V_EQ = 15 V·240 kΩ/(240 kΩ + 120 kΩ) = <strong>10,0 V</strong>, R_EQ = 240 kΩ ∥ 120 kΩ = <strong>80,0 kΩ</strong></li><li>I_B1 = (15 − 10 − 0,7 V)/(80 + 76·18 kΩ) = <strong>2,97 µA</strong>, I_C1 = 75·I_B1 = <strong>223 µA</strong></li><li>V_E1 = 15 − 18 000·I_E1 = 10,9 V, V_C1 = 36 000·I_C1 = <strong>8,03 V</strong>, V_EC1 = <strong>2,87 V</strong> → ileri aktif.</li><li>M₂: I_D2 = (15 + V_GS2 − 8,03)/5,1 kΩ ve I_D2 = (0,004/2)(V_GS2 − 4)² → <strong>V_GS2 = 3,01 V, I_D2 = 1,96 mA</strong></li><li>V_DS2 = −[15 − 5,1 kΩ·(1,96 mA)] = <strong>−5,00 V</strong>; V_GS − V_P = −0,99 V → |V_DS2| &gt; |V_GS − V_P|, doyma kabulü doğru.</li></ul>
+<p><strong>(a) AC analiz:</strong></p>
+<ul><li>g_m1 = 40(223 µA) = <strong>8,92 mS</strong>, r_π1 = 75/8,92 mS = <strong>8,41 kΩ</strong></li><li>g_m2 = √(2·(4·10⁻³)·(1,96·10⁻³)) = <strong>3,96 mS</strong></li><li>R_in = 240 kΩ ∥ 120 kΩ ∥ r_π1 = <strong>7,61 kΩ</strong>, R_L = 5,1 kΩ ∥ 1 kΩ = <strong>836 Ω</strong></li><li>A_v1 = −g_m1·(36 kΩ)·R_in/(R_I + R_in) = −8,92 mS·36 kΩ·7,61/(1 + 7,61) = <strong>−284</strong></li><li>A_v2 = g_m2·R_L/(1 + g_m2·R_L) = (3,96 mS)(0,836 kΩ)/(1 + 3,31) = <strong>0,768</strong></li><li><strong>A_v = 0,768·(−284) = −218</strong></li><li>R_out = 5100 ∥ (1/g_m2) = <strong>241 Ω</strong></li></ul>
+<p><strong>(b) 18 kΩ'un köprüleme kondansatörü çıkarılırsa:</strong></p>
+<ul><li>R_in = 80 kΩ ∥ [r_π1 + (β_o1 + 1)·18 kΩ] = <strong>75,6 kΩ</strong></li><li>A_v1 = (R_in/(1 kΩ + R_in))·(−β_o1·36 kΩ/(r_π1 + (β_o1 + 1)·18 kΩ)) = (75,6/76,6)·(−75·36 kΩ/138 kΩ) = <strong>−1,93</strong></li><li><strong>A_v = 0,768·(−1,93) = −1,48</strong></li></ul>
+<p><em>Not: Kaynakta paydaki ifade "138 kΩ" yazılmış; r_π1 + 76·18 kΩ = 8,41 kΩ + 1368 kΩ ≈ <strong>1376 kΩ (1,38 MΩ)</strong> olmalı (sonuç −1,93 bu değerle doğru: tam hesapla −1,94). Ayrıca A_v1 formülündeki β_o1·R_I, kolektör direnci 36 kΩ'u kastediyor.</em></p>
+<h3 id="15-53-tek-cikisli-fark-yukselteci-akim-kaynagi-ideal">15.53: Tek çıkışlı fark yükselteci (akım kaynağı ideal)</h3>
+<p>Devre: Q₁ ve Q₂ emetörleri I_EE = 20 µA'lik ideal akım kaynağına bağlı; Q₁'in kolektörü doğrudan +V_CC'ye, Q₂'nin kolektörü R_C = 910 kΩ ile +V_CC = 10 V'a; çıkış Q₂'nin kolektöründen; v_s Q₁'in bazına, Q₂'nin bazı toprakta. β_F = 100.</p>
+<ul><li>I_C1 = I_C2 = α_F·I_EE/2 = (100/101)·(20 µA/2) = <strong>9,90 µA</strong></li><li>V_C2 = 10 − 9,1·10⁵·I_C = <strong>0,991 V</strong></li><li>g_m = 40·I_C = <strong>0,396 mS</strong>, r_π = β_o/g_m = 100/0,396 mS = <strong>252,5 kΩ</strong></li><li>(a) v_s = 0 için: V_O = V_C2 = <strong>0,991 V</strong></li><li>v_s = 2 mV için: diferansiyel giriş v_id = 2 mV, ortak mod giriş v_ic = 1 mV.</li><li>Fark modunda emetörler sanal toprak: tek uçlu kazanç <strong>A_dd = g_m·R_C/2 = 180</strong></li><li>Ortak modda R_EE = ∞ olduğundan akım yok: <strong>A_cc = 0</strong></li><li>v_o = 180·(0,002 V) + 0·(0,001 V) = 0,36 V → <strong>V_O = 0,36 + 0,991 = 1,35 V</strong></li></ul>
+<h3 id="15-64-uyumsuz-g-m-farkli-fark-yukseltecinde-cmrr">15.64: Uyumsuz (g_m farklı) fark yükseltecinde CMRR</h3>
+<p>Devre: Q₁ ve Q₂ kolektörlerinde eşit R yükleri, emetörler ortak R_EE ile −V_EE'ye; çıkış iki kolektör arasından (v_OD). Transistörlerin geçiş iletkenlikleri farklı: g_m1 = g_m + Δg_m/2, g_m2 = g_m − Δg_m/2. Devre uyumsuz olduğundan emetör düğümü sanal toprak değildir.</p>
+<p><strong>Fark modu:</strong> v_be1 = v_id/2 − v_e, v_be2 = −v_id/2 − v_e.</p>
+<ul><li>v_od = −g_m·R·(v_id + (Δg_m/g_m)·v_e)</li><li>Emetör düğümünde KCL'den v_e = (1/2)(Δg_m/g_m)·β_o·R_EE/(r_π + (β_o + 1)2R_EE)·v_id ≅ (1/4)(Δg_m/g_m)·v_id</li><li>v_od ≅ −g_m·R·v_id·(1 + (1/4)(Δg_m/g_m)²); (Δg_m/g_m)² terimi ihmal edilecek kadar küçük → <strong>A_dd ≅ −g_m·R = −300</strong></li></ul>
+<p><strong>Ortak mod:</strong> v_be = v_ic − v_e (iki transistörde de).</p>
+<ul><li>v_od = −Δg_m·R·(v_ic − v_e) = −(Δg_m/g_m)·g_m·R·(v_ic − v_e)</li><li>v_ic − v_e = r_π/(r_π + (β_o + 1)2R_EE)·v_ic</li><li>A_cd = −(Δg_m/g_m)·β_o·R/(r_π + (β_o + 1)2R_EE) ≅ −(Δg_m/g_m)·g_m·R/(1 + 2g_m·R_EE) = <strong>−0,00499</strong></li><li><strong>CMRR = A_dd/A_cd = (1 + 2g_m·R_EE)·(Δg_m/g_m)⁻¹ = 60 000, yani 95,6 dB</strong></li></ul>
+<h3 id="15-83-emetorler-ve-kolektorler-arasinda-direnc-bulunan-fark-yukselteci">15.83: Emetörler ve kolektörler arasında direnç bulunan fark yükselteci</h3>
+<p>Devre: Kolektör dirençleri 100 kΩ (V_CC = 20 V'a), iki kolektör arasında 1 MΩ, iki emetör arasında 5 kΩ; her emetörde ayrı I_EE = 100 µA akım kaynağı (çıkış direnci R_EE = 600 kΩ). β_o = 100.</p>
+<figure class="yazi-gorsel"><img src="p15-83.jpg" width="1400" height="564" loading="lazy" decoding="async" alt="15.83: Devre ile ortak mod ve fark modu yarım devreleri"><figcaption>15.83: Fark yükseltecinin yarım devreleri</figcaption></figure>
+<p><strong>(a) Yarım devreler:</strong> Ortak modda simetri ekseninden akım geçmez, 1 MΩ ve 5 kΩ'luk dirençler devreden çıkar (Q₁, 100 kΩ kolektör, R_EE = 600 kΩ). Fark modunda dirençlerin orta noktası sanal toprak olur: kolektörde 1 MΩ/2 = 500 kΩ, emetörde 5 kΩ/2 = 2,5 kΩ toprağa bağlanır.</p>
+<p><strong>(b) DC yarım devre:</strong></p>
+<ul><li>I_C = α_F·I_EE = (100/101)(100 µA) = <strong>99,0 µA</strong></li><li>V_CE = 20 − 10⁵·I_C − (−0,7) = <strong>10,8 V</strong>, V_BC = −10,1 V → ileri aktif. <strong>Q noktası: (99,0 µA; 10,8 V)</strong></li><li>r_π = 100(0,025 V)/99,0 µA = <strong>25,3 kΩ</strong>, g_m = 40·I_C = <strong>3,96 mS</strong></li></ul>
+<p><strong>Fark modu:</strong></p>
+<ul><li>A_dd = −β_o·(100 kΩ ∥ 500 kΩ)/(r_π + (β_o + 1)(600 kΩ ∥ 2,5 kΩ)) = −100(83,3 kΩ)/(25,3 kΩ + 101·2,49 kΩ) = <strong>−30,1</strong></li><li>R_id = 2[r_π + (β_o + 1)(2,49 kΩ)] = 2[25,3 kΩ + 101·2,49 kΩ] = <strong>554 kΩ</strong></li></ul>
+<p><strong>Ortak mod:</strong></p>
+<ul><li>A_cc = −β_o·(100 kΩ)/(r_π + (β_o + 1)(600 kΩ)) = −100(100 kΩ)/(25,3 kΩ + 101·600 kΩ) = <strong>−0,165</strong></li><li>Tek uçlu çıkış için <strong>CMRR = 0,5·A_dd/A_cc = 15,05/0,165 = 91,2</strong></li></ul>
+<h2 id="odev-v">Ödev V</h2>
+<h3 id="15-130-npn-pnp-transistor-yigini">15.130: npn–pnp transistör yığını</h3>
+<p>Devre: npn Q₁ (kolektörü +10 V'ta) ile pnp Q₂ (kolektörü −10 V'ta) emetörlerinden birbirine bağlı; 1,3 V'luk kaynak Q₁'in bazı ile Q₂'nin bazı (toprak) arasında. I_S1 = 5·10⁻¹⁵ A, I_S2 = 10⁻¹⁵ A.</p>
+<ul><li>I_E1 = I_E2 olduğundan I_C1 = (α_F1/α_F2)·I_C2 ≅ I_C2 = I_C</li><li>1,3 = V_BE1 + V_EB2 = V_T·ln(I_C1/I_S1) + V_T·ln(I_C2/I_S2) = V_T·ln(I_C²/(I_S1·I_S2))</li><li><strong>I_C = √((5·10⁻¹⁵)(10⁻¹⁵)·exp(1,3/0,025)) = 438 µA</strong></li></ul>
+<h3 id="15-163-pmos-akim-kaynaklarinin-cikis-direnci">15.163: PMOS akım kaynaklarının çıkış direnci</h3>
+<p>Devre: V_DD = 12 V; iki PMOS geçitleri ortak, R₃ = R₄ = 2 MΩ bölücüsünden besleniyor; M₁'in kaynağında R₁ = 100 kΩ, M₂'nin kaynağında R₂ = 470 kΩ; I_O1 ve I_O2 savaklardan toprağa akıyor. K_p = 250 µA/V², V_TP = −1 V, λ = 0,02 V⁻¹.</p>
+<figure class="yazi-gorsel"><img src="p15-163.jpg" width="1400" height="789" loading="lazy" decoding="async" alt="15.163: Kaynak dejenerasyonlu iki PMOS akım kaynağı ve çıkış direnci devresi"><figcaption>15.163: Akım kaynaklarının DC ve küçük sinyal analizi</figcaption></figure>
+<ul><li>V_EQ = 12 V·2 MΩ/(2 MΩ + 2 MΩ) = <strong>6,00 V</strong>, R_EQ = <strong>1,00 MΩ</strong> (geçit akımı sıfır)</li><li>M₁: 12 − 10⁵·I_D1 + V_GS1 = 6, V_GS1 = −1 − √(2I_D1/2,5·10⁻⁴) → <strong>I_O1 = 44,1 µA</strong>, V_GS1 = −1,59 V, V_DS1 = −(6 − V_GS1) = <strong>−7,59 V</strong></li><li>M₂: 12 − 4,7·10⁵·I_D2 + V_GS2 = 6 → <strong>I_O2 = 10,0 µA</strong>, V_GS2 = −1,28 V, V_DS2 = <strong>−7,28 V</strong></li><li>Küçük sinyalde v_x = i_x(r_o1(1 + g_m1·R₁) + R₁) → <strong>R_out1 = r_o1·(1 + g_m1·R₁)</strong></li><li>R_out1 = (50 V + 7,59 V)/44,1 µA · (1 + 100 kΩ·√(2·250 µA·44,1 µA·[1 + 0,02·7,59])) = <strong>22,2 MΩ</strong></li><li>R_out2 = (50 V + 7,28 V)/10,0 µA · (1 + 470 kΩ·√(2·250 µA·10,0 µA·[1 + 0,02·7,28])) = <strong>210 MΩ</strong></li></ul>
+<h3 id="16-8-nmos-akim-aynasi-cok-cikisli">16.8: NMOS akım aynası, çok çıkışlı</h3>
+<p>Devre: I_REF, diyot bağlı M₁'e (W/L = 4/1) giriyor; M₂ (10/1), M₃ (20/1), M₄ (40/1) aynı V_GS ile sürülüyor ve savakları sırasıyla +10 V, +8 V, +12 V'a bağlı. K_n' = 25 µA/V², V_TN = 0,75 V, λ = 0,015 V⁻¹.</p>
+<figure class="yazi-gorsel"><img src="p16-8.jpg" width="1400" height="945" loading="lazy" decoding="async" alt="16.8: Çok çıkışlı NMOS akım aynası ve çıkış direnci"><figcaption>16.8: Akım aynası çıkış akımları ve çıkış dirençleri</figcaption></figure>
+<p>Genel ifadeler: I_OX = ((W/L)_X/(W/L)₁)·I_REF·(1 + λV_DSX)/(1 + λV_DS1), R_outX = r_oX = (1/λ + V_DSX)/I_OX.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Durum</th><th scope="col">V_DS1 = V_GS1</th><th scope="col">I_O2 / R_out2</th><th scope="col">I_O3 / R_out3</th><th scope="col">I_O4 / R_out4</th></tr></thead><tbody><tr><th scope="row">(a) I_REF = 30 µA, λ = 0,015</th><td>1,52 V</td><td>84,3 µA / 909 kΩ</td><td>164 µA / 455 kΩ</td><td>346 µA / 227 kΩ</td></tr><tr><th scope="row">(b) I_REF = 50 µA, λ = 0,015</th><td>1,75 V</td><td>140 µA / 548 kΩ</td><td>273 µA / 274 kΩ</td><td>575 µA / 137 kΩ</td></tr><tr><th scope="row">(c) I_REF = 30 µA, λ = 0</th><td>—</td><td>75 µA / ∞</td><td>150 µA / ∞</td><td>300 µA / ∞</td></tr></tbody></table></div>
+<p>Örnek: V_GS1 = V_TN + √(2I_D1/K_n) = 0,75 + √(2·30·10⁻⁶/(4·25·10⁻⁶)) = 1,52 V; I_O2 = (10/4)(30 µA)·(1 + 0,015·10)/(1 + 0,015·1,52) = 84,3 µA.</p>
+<h3 id="soru-4-bode-diyagrami">Soru 4: Bode diyagramı</h3>
+<p>Transfer fonksiyonu:</p>
+<p>A_v(s) = −150·s·(s + 15)/((s + 12)(s + 20)) = −9,375·s·(s/15 + 1)/((s/12 + 1)(s/20 + 1))</p>
+<p>(150·15/(20·12) = 9,375; 20·log₁₀ 9,375 = 19,44 dB). s = jω yazılarak:</p>
+<p>A_v(jω) = −9,375·jω·(1 + jω/15)/((1 + jω/12)(1 + jω/20))</p>
+<p>Kaynakta genlik</p>
+<p>A_dB = −20 log 9,375 − 20 log|jω| − 20 log|1 + jω/15| + 20 log|1 + jω/12| + 20 log|1 + jω/20|</p>
+<p>olarak yazılmış ve asimptotlar bu ifadeye göre çizilmiş (ω = 1'de −19,44 dB, 20 dB/dekad düşüş, yüksek frekansta yaklaşık −43,5 dB); faz da −90° − tan⁻¹(ω/15) + tan⁻¹(ω/12) + tan⁻¹(ω/20) olarak çizilmiş.</p>
+<figure class="yazi-gorsel"><img src="bode-genlik.jpg" width="1400" height="1019" loading="lazy" decoding="async" alt="Soru 4: Kaynaktaki genlik asimptot çizimi (işaretleri ters)"><figcaption>Soru 4: Kaynaktaki genlik diyagramı; terimlerin işaretleri ters alınmış</figcaption></figure>
+<p><em>Not: Kaynaktaki genlik ve faz ifadelerinde terimlerin işaretleri ters alınmış; çizim doğru eğrinin ayna görüntüsü. Doğrusu: A_dB = +20 log 9,375 + 20 log ω + 20 log|1 + jω/15| − 20 log|1 + jω/12| − 20 log|1 + jω/20|. Yani ω = 1 rad/s'de yaklaşık +19,4 dB, ω ≈ 12'ye kadar +20 dB/dekad yükselir, yüksek frekansta |A_v| → 150, yani <strong>+43,5 dB</strong>'de düzleşir. Faz: φ = −90° + tan⁻¹(ω/15) − tan⁻¹(ω/12) − tan⁻¹(ω/20); alçak frekansta −90°, yüksek frekansta −180° (ω = 10'da yaklaşık −123°).</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem311-odev-cozumleri-2005-4-5.zip" download>eem311-odev-cozumleri-2005-4-5.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 538 KB · 10.11.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem311-odev-cozumleri-2005-4-5.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (538 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

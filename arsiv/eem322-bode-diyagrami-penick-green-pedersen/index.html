@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Bode Diyagramı Notları (Tom Penick 1999, Walter Green, Bo Rohde Pedersen – AUE 2007) — hasancan.net</title>
+<meta name="description" content="İnternetten derlenmiş üç Bode diyagramı kaynağı: Tom Penick&#x27;in transfer fonksiyonundan adım adım asimptotik Bode çizimi ve MATLAB kodu, Walter Green&#x27;in kutup-sıfır ve Bode örnekleri (filtre tasarımı, ters Bode problemi), Bo Rohde Pedersen&#x27;in (AUE 2007) faz yaklaşımı ve ikinci dereceden sistem slaytları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-bode-diyagrami-penick-green-pedersen/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Bode Diyagramı Notları (Tom Penick 1999, Walter Green, Bo Rohde Pedersen – AUE 2007)">
+<meta property="og:description" content="İnternetten derlenmiş üç Bode diyagramı kaynağı: Tom Penick&#x27;in transfer fonksiyonundan adım adım asimptotik Bode çizimi ve MATLAB kodu, Walter Green&#x27;in kutup-sıfır ve Bode örnekleri (filtre tasarımı, ters Bode problemi), Bo Rohde Pedersen&#x27;in (AUE 2007) faz yaklaşımı ve ikinci dereceden sistem slaytları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-bode-diyagrami-penick-green-pedersen/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Bode Diyagramı Notları (Tom Penick 1999, Walter Green, Bo Rohde Pedersen – AUE 2007)", "description": "İnternetten derlenmiş üç Bode diyagramı kaynağı: Tom Penick'in transfer fonksiyonundan adım adım asimptotik Bode çizimi ve MATLAB kodu, Walter Green'in kutup-sıfır ve Bode örnekleri (filtre tasarımı, ters Bode problemi), Bo Rohde Pedersen'in (AUE 2007) faz yaklaşımı ve ikinci dereceden sistem slaytları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-bode-diyagrami-penick-green-pedersen/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Bode-Plots-Penick-Green-Pedersen.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-bode-diyagrami-penick-green-pedersen/Bode-Plots-Penick-Green-Pedersen.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Bode Diyagramı Notları (Tom Penick 1999, Walter Green, Bo Rohde Pedersen – AUE 2007)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>20.11.1999</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#tom-penick-creating-bode-plots-from-a-transfer-function">Tom Penick: Creating Bode Plots from a Transfer Function</a></li><li><a href="#walter-green-poles-zeros-and-bode-plots">Walter Green: Poles, Zeros and Bode Plots</a></li><li><a href="#bo-rohde-pedersen-2-order-circuit-and-bode-plots-aue-2007">Bo Rohde Pedersen: 2. Order Circuit and Bode Plots (AUE 2007)</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Bode Diyagramı Notları (Tom Penick 1999, Walter Green, Bo Rohde Pedersen – AUE 2007)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 20.11.1999 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri dersi çalışılırken "kontrol sistemleri farklı yerlerden indirilenler" klasörüne toplanmış, <strong>Bode diyagramı</strong> konusundaki üç <strong>üçüncü taraf</strong> kaynağı bir araya getiriyor:</p>
+<ol><li><strong>Tom Penick</strong>, <em>Creating Bode Plots from a Transfer Function</em>, 20.11.1999; 7 sayfalık PDF (sayfa altlarında: tomzap@eden.com, www.teicontrols.com/notes).</li><li><strong>Walter Green</strong>, <em>Poles and Zeros and Transfer Functions / Bode Plots</em>; 32 slaytlık PowerPoint (slaytlarda "wlg" imzası, dosya 2002–2003 tarihli). Kurum adı belgede yazmıyor.</li><li><strong>Bo Rohde Pedersen</strong>, <em>2. Order Circuit and Bode Plots</em>, Circuit Theory, <strong>AUE 2007</strong>; 15 slaytlık, kısmen Danca PowerPoint.</li></ol>
+<p>İçerik İngilizce olduğundan metinler özgün dilinde aktarıldı, denklemler düz metne çevrildi. Üç orijinal dosya yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="tom-penick-creating-bode-plots-from-a-transfer-function">Tom Penick: Creating Bode Plots from a Transfer Function</h2>
+<p>Given the transfer function (s = jω, G is the gain of the system in V/V):</p>
+<blockquote><p>G(s) = 10s² (1 + s/10²)(1 + s/10⁶)² / [(1 + s/10)² (1 + s/10³)(1 + s/10⁵)⁴]</p></blockquote>
+<h3 id="zeros-and-poles">Zeros and poles</h3>
+<p>We find the zeros and poles by observing the numerator and denominator respectively, and determining the value of s that will make each term zero. The absolute value of that term is the zero or pole; the power to which the expression is raised is the order of the pole or zero.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Zeros (numerator)</th><th scope="col">Poles (denominator)</th></tr></thead><tbody><tr><th scope="row">s = 0 → 2nd order zero at ω = 0</th><td>s = −10 → 2nd order pole at ω = 10</td></tr><tr><th scope="row">s = −10² → 1st order zero at ω = 10²</th><td>s = −10³ → 1st order pole at ω = 10³</td></tr><tr><th scope="row">s = −10⁶ → 2nd order zero at ω = 10⁶</th><td>s = −10⁵ → 4th order pole at ω = 10⁵</td></tr></tbody></table></div>
+<p>Mark the zeros (O) and poles (X) at the top of the Bode plot, from 10⁻² to 10⁸ rad/s. The first zero is off the graph to the left, since ω = 0 is not available on a logarithmic scale. The marks show the <em>frequency corners</em>, where the slope changes.</p>
+<h3 id="slope-of-the-amplitude-plot">Slope of the amplitude plot</h3>
+<p>The order of each zero or pole gives the change in slope in multiples of 20 dB/decade (order 2 → 40 dB/decade). The slope is increased at zeros and reduced at poles. Mark each decade with up or down arrows, each arrow standing for 20 dB/decade. Here the 2nd order zero at ω = 0 means the first decade starts with two up arrows.</p>
+<h3 id="slope-of-the-phase-plot">Slope of the phase plot</h3>
+<p>On the phase plot each arrow represents 45°/decade per order of zero or pole; zeros slope upward, poles downward. Each pole or zero influences one decade on either side of its frequency: a 2nd order pole causes a 90°/decade downward slope from one decade below to one decade above the pole. Arrows in the same decade are summed and may cancel. The 2nd order zero at ω = 0 makes the plot begin at +180°; the phase values at the decades from 10⁻² to 10⁸ are 180°, 180°, 180°, 90°, 45°, 45°, 0°, −180°, −270°, −180°, −180°.</p>
+<h3 id="starting-point-and-amplitudes">Starting point and amplitudes</h3>
+<p>The plot begins at ω = 10⁻², so we need |G(j10⁻²)|. Only one term is not approximately 1:</p>
+<blockquote><p>G(10⁻²) ≈ 10·(10⁻²)² = 10⁻³ V/V → G_dB = 20 log(10⁻³) = −60 dB</p></blockquote>
+<p>Label −60 dB at ω = 10⁻²; for the two up arrows in the first decade add 40 dB (−20 dB at 10⁻¹), and continue across the plot adding 20 dB per up arrow and subtracting 20 dB per down arrow. The decade values are −60, −20, 20, 60, 60, 80, 80, 80, 0, −40, −80 dB.</p>
+<figure class="yazi-gorsel"><img src="penick-asimptotik.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="Penick: asymptotic Bode amplitude and phase plots of the example, with zero/pole marks and slope arrows"><figcaption>Penick'in örneği: asimptotik genlik ve faz diyagramı</figcaption></figure>
+<p>The resulting plots are approximations; the actual plots feature curved transitions at the frequency corners instead of abrupt changes in slope. The note also shows the same function plotted in MATLAB, where the abrupt vertical jump in the phase plot is only due to the function passing the −180° mark.</p>
+<figure class="yazi-gorsel"><img src="penick-matlab.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="Penick: the same transfer function plotted in MATLAB"><figcaption>Aynı fonksiyonun MATLAB çizimi</figcaption></figure>
+<h3 id="the-matlab-code">The MATLAB code</h3>
+<p>Penick's script evaluates G(jω) on a geometric frequency grid and draws both plots (the note lists five sample problems to paste in):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>% Problem 1: y = 10*s^2 * (1+s/10^2) * (1+s/10^6)^2 / ((1+s/10)^2 * (1+s/10^3) * (1+s/10^5)^4);
+% Problem 2: y = 10^10 * (1+s/10^2) * (s+10^5) / (s*(s+10^3) * (s+10^4)^2);
+% Problem 3: y = 10^26*s*(s+1)*(s+10^3)*(s+10^5)^2 / ((s+10)^2*(s+10^2)*(s+10^4)*(s+10^6)^5);
+% Problem 4: y = (s+.1) * (s+1)^3 * (s+10^4)^2 / (10^5*s^2 * (1+s/10)^3 * (1+s/10^3)^2);
+% Problem 5: y = 10^10*s * (s+.1)^2 * (s+10^2)^3 / ((s+1) * (s+10)^4 * (1+s/10^4)^2 * (s+10^5)^2);
+PlotWindowSize = [1400,600];
+figure('Position',[10 10 PlotWindowSize(1) PlotWindowSize(2)])
+N=[]; X=[]; Y=[]; x=10^-2;
+while x &lt; 10^8,
+  s = i*x;                                  % get the j-omega
+  y = 10*s^2 * (1+s/10^2) * (1+s/10^6)^2 / ((1+s/10)^2 * (1+s/10^3) * (1+s/10^5)^4);
+  X = [X,x]; N = [N,y];
+  x = x*1.05;                               % controls the resolution
+end
+Y = 20*log10(abs(N));                       % amplitude in dB
+semilogx(X,Y); grid on
+title('Bode Amplitude Plot')
+xlabel('Frequency [rad/sec]'); ylabel('Amplitude [dB]')
+figure('Position',[10 60 PlotWindowSize(1) PlotWindowSize(2)])
+Y = angle(N)*180/pi;                        % phase in degrees
+semilogx(X,Y); grid on
+title('Bode Phase Plot')
+xlabel('Frequency [rad/sec]'); ylabel('Phase Angle [degrees]')</code></pre>
+<p><em>Not: Kod burada eksen ayarı satırları kısaltılarak verildi. Orijinalde denklem satırı "y = y = 10*s^2 ..." diye yazılmış; çift "y =" MATLAB'da hata verir, yukarıda tek "y =" ile düzeltildi.</em></p>
+<h2 id="walter-green-poles-zeros-and-bode-plots">Walter Green: Poles, Zeros and Bode Plots</h2>
+<p><strong>Transfer function:</strong> the ratio of the Laplace transform of the output to the input with all initial conditions equal to zero; defined only for linear time invariant systems. It can usually be expressed as the ratio of two polynomials in s and factored as</p>
+<blockquote><p>G(s) = K(s + z₁)(s + z₂)…(s + z_m) / [(s + p₁)(s + p₂)…(s + p_n)]</p></blockquote>
+<p>The roots of the numerator polynomial are called <strong>zeros</strong>; the roots of the denominator polynomial are called <strong>poles</strong>.</p>
+<p><strong>Example:</strong> show the poles and zeros of G(s) = (s + 8)(s + 14)/[s(s + 4)(s + 10)] in the s-plane: zeros (o) at −8 and −14, poles (x) at 0, −4 and −10.</p>
+<figure class="yazi-gorsel"><img src="green-s-duzlemi.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green: poles (x) at 0, −4, −10 and zeros (o) at −8, −14 in the s-plane"><figcaption>s düzleminde kutuplar ve sıfırlar</figcaption></figure>
+<h3 id="the-four-terms-of-a-bode-plot">The four terms of a Bode plot</h3>
+<p>A transfer function in the form G(jω) = K_B(jω/z + 1)/[(jω)(jω/p + 1)] contains four types of terms: K_B, 1/s, 1/(s/p + 1) and (s/z + 1). In dB:</p>
+<blockquote><p>20 log|G(jω)| = 20 log K_B + 20 log|jω/z + 1| − 20 log|jω| − 20 log|jω/p + 1|</p></blockquote>
+<ul><li><strong>20 log K_B</strong> is a constant number of dB: a straight line independent of ω.</li><li><strong>−20 log|jω| = −20 log ω</strong> is a straight line sloping at −20 dB/decade, 0 dB at ω = 1.</li><li><strong>−20 log|jω/p + 1|</strong>: for ω &lt; p approximated as 0 dB (flat); for ω &gt; p as −20 log(ω/p), sloping −20 dB/dec from ω = p. The approximation has an error of −3 dB at ω = p and −1 dB at ω = p/2 and ω = 2p.</li><li><strong>20 log|jω/z + 1|</strong>: 0 dB/dec for ω &lt; z, then +20 dB/dec for ω &gt; z.</li></ul>
+<p>Bode plots are usually prepared on 5-cycle semi-log paper.</p>
+<h3 id="example-1">Example 1</h3>
+<p>Given G(jω) = 50,000(jω + 10)/[(jω + 1)(jω + 500)].</p>
+<p><em>First:</em> always get the poles and zeros in a form where the constants are associated with the jω terms, here by factoring out the 10 in the numerator and the 500 in the denominator: G(jω) = 100(jω/10 + 1)/[(jω + 1)(jω/500 + 1)].</p>
+<p><em>Second:</em> with neither poles nor zeros at 0, start the Bode at 20 log K = 20 log 100 = 40 dB.</p>
+<p><em>Third:</em> observe the order in which the poles and zeros occur – "the secret of being able to quickly sketch the Bode". A pole at 1 makes the plot break and slope −20 dB/dec; a zero at 10 adds +20 dB/dec and the line becomes flat; a pole at 500 makes it slope down at −20 dB/dec again. The range of active poles and zeros determines the ω scale.</p>
+<p><em>Not: Slayttaki 50.000 katsayısıyla K = 50.000·10/500 = 1000 (60 dB) olurdu. Slaytların devamındaki 100 kazancı, 40 dB başlangıç ve MATLAB satırı (num = [5000 50000], yani 5000(s + 10)) katsayının 5000 olması gerektiğini gösteriyor.</em></p>
+<figure class="yazi-gorsel"><img src="green-ornek1.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green, Example 1: asymptotic Bode magnitude of 100(1 + jω/10)/((1 + jω)(1 + jω/500))"><figcaption>Örnek 1'in asimptotik genlik diyagramı</figcaption></figure>
+<p><strong>Using MATLAB:</strong> in the form 5000(s + 10)/[(s + 1)(s + 500)] = (5000s + 50000)/(s² + 501s + 500):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [5000 50000];
+den = [1 501 500];
+bode(num,den)</code></pre>
+<p>The exact magnitude and phase (light blue) and the asymptotic magnitude (heavy red) are compared; the 3 dB errors at the corner frequencies are visible.</p>
+<figure class="yazi-gorsel"><img src="green-matlab.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green: exact (MATLAB) and asymptotic Bode plot for Example 1"><figcaption>Örnek 1: MATLAB ile tam çizim ve asimptotlar</figcaption></figure>
+<p><strong>Phase:</strong> the phase is generally not as easy to approximate as the magnitude, so it is computed analytically, taking the angle of each pole and zero as tan⁻¹(imaginary part/real part):</p>
+<blockquote><p>∠G(jω) = tan⁻¹(ω/10) − tan⁻¹(ω/1) − tan⁻¹(ω/500)</p></blockquote>
+<p>About 10 to 15 calculations are usually enough to see what the phase does.</p>
+<h3 id="examples-2-6">Examples 2–6</h3>
+<ul><li><strong>Example 2:</strong> G(s) = 100(1 + s/10)/[s(1 + s/100)²]. Start with the two terms 100/jω, i.e. 20 log 100 − 20 log ω, a tentative −20 dB/dec line until the first pole or zero not at the origin; the plot flattens at the zero at 10 and falls at −40 dB/dec after the double pole at 100.</li><li><strong>Example 3:</strong> G(s) = 80(1 + jω)³/[(jω)³(1 + jω/20)²]; 20 log 80 = 38 dB; −60 dB/dec at low frequency, flat between 1 and 20, then −40 dB/dec.</li><li><strong>Example 4:</strong> G(jω) = 10(1 − jω/2)/[(1 + j0.025ω)(1 + jω/500)²]; +20 dB/dec after 2, flat after 40, −40 dB/dec after 500 ("sort of a low pass filter").</li><li><strong>Example 5:</strong> G(jω) = (1 + jω/30)²(1 + jω/100)²/[(1 + jω/2)²(1 + jω/1700)²]; 0 dB, −40 dB/dec from 2 to 30, flat to 100, +40 dB/dec to 1700, then 0 dB again.</li><li><strong>Example 6</strong> (problem 11.15 of the course text): H(jω) = 640(jω + 1)(0.01jω + 1)/[(jω)²(jω + 10)] = 64(jω + 1)(0.01jω + 1)/[(jω)²(0.1jω + 1)]; slopes −40, −20, −40, −20 dB/dec with corners at 1, 10 and 100.</li></ul>
+<figure class="yazi-gorsel"><img src="green-ornek2.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green, Example 2: completed asymptotic Bode magnitude of 100(1 + s/10)/(s(1 + s/100)²)"><figcaption>Örnek 2'nin tamamlanmış genlik diyagramı</figcaption></figure>
+<h3 id="example-7-design-a-g-s-from-a-bode-plot">Example 7: design a G(s) from a Bode plot</h3>
+<p>Design a G(s) whose Bode magnitude is 0 dB at low frequency, rises at +40 dB/dec to 30 dB (reached at 30 rad/s), stays at 30 dB until 900 rad/s and falls at −40 dB/dec back to 0 dB. The two unknown break frequencies follow from #dec = log₁₀(ω₂/ω₁):</p>
+<blockquote><p>(#dec)(40 dB/dec) = 30 dB → log₁₀(30/ω₁) = 0.75 → ω₁ = 5.33 rad/s log₁₀(ω₂/900)·(−40 dB/dec) = −30 dB → ω₂ = 5060 rad/s</p></blockquote>
+<figure class="yazi-gorsel"><img src="green-tasarim.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green, Example 7: required Bode magnitude with unknown corners"><figcaption>Örnek 7: istenen genlik diyagramı</figcaption></figure>
+<p>So</p>
+<blockquote><p>G(s) = (1 + s/5.3)²(1 + s/5060)² / [(1 + s/30)²(1 + s/900)²]</p></blockquote>
+<p>and after clearing, (s + 5.3)²(s + 5060)²/[(s + 30)²(s + 900)²], with the polynomials formed in MATLAB by <code>N = conv(N1,N2)</code>, N1 = [1 10.6 28.1], N2 = [1 10120 2.56e+7]:</p>
+<blockquote><p>G(s) = (s⁴ + 10130.6s³ + 2.571·10⁷s² + 2.716·10⁸s + 7.194·10⁸) / (s⁴ + 1860s³ + 9.189·10⁵s² + 5.022·10⁷s + 7.29·10⁸)</p></blockquote>
+<p><strong>Testing:</strong> at ω = 5.3 rad/s the filter has a gain of 6 dB (about 2); at ω = 164 rad/s, 30 dB (about 31.6). This was checked in MATLAB Simulink with a sine wave source, the transfer function block and scopes; the slides show the filter output at 5.3 rad/s and 70 rad/s.</p>
+<p><em>Not: Slayttaki son G(s) ifadesinde payın s² katsayısı 2,571e8 yazılmış; çarpım (s² + 10,6s + 28,1)(s² + 10120s + 2,56·10⁷) bu katsayıyı 2,56·10⁷ + 10,6·10120 + 28,1 ≈ 2,571·10⁷ verir (Simulink bloğunda da 2,571e+7 var), yukarıda öyle yazıldı. Simulink bloğundaki pay s³ katsayısı ise 10103,6 diye girilmiş; doğrusu 10130,6'dır (10120 + 10,6).</em></p>
+<h3 id="examples-8-9-reverse-bode-plots">Examples 8–9: reverse Bode plots</h3>
+<p>From a partial Bode diagram, determine the transfer function (assume a minimum phase system):</p>
+<ul><li><strong>Example 8:</strong> a +20 dB/dec rise up to 30 dB at ω = 1, flat at 30 dB, another +20 dB/dec rise up to 68 dB at ω = 110, flat until ω = 850, then −20 dB/dec (not to scale).</li><li><strong>Example 9:</strong> 100 dB at ω = 0.5 with −40 dB/dec, then −20 dB/dec down to 50 dB, flat at 10 dB between ω = 40 and 300, then −20 dB/dec and −40 dB/dec (not to scale).</li></ul>
+<figure class="yazi-gorsel"><img src="green-ters-bode.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Green, Example 9: partial Bode diagram for the reverse Bode problem"><figcaption>Örnek 9: ters Bode problemi</figcaption></figure>
+<h2 id="bo-rohde-pedersen-2-order-circuit-and-bode-plots-aue-2007">Bo Rohde Pedersen: 2. Order Circuit and Bode Plots (AUE 2007)</h2>
+<p>Pedersen's Circuit Theory slides (partly in Danish) start from the general transfer function</p>
+<blockquote><p>H(s) = K (s − z₁)(s − z₂)…(s − z_m) / [(s − p₁)(s − p₂)…(s − p_n)]</p></blockquote>
+<p>where z_k are the zeros ("nulpunkter") and p_k the poles, seen as a collection of first-order circuits. The <strong>DC gain</strong> ("DC forstærkning") is the gain for a constant (zero-frequency) input: H(0) = K·b₀/a₀; note that K itself is <em>not</em> the DC gain.</p>
+<p><strong>Phase of each factor:</strong></p>
+<ul><li>s + a: θ = arctan(ω/a), from 0° to +90°;</li><li>1/(s + a): θ = −arctan(ω/a), from 0° to −90°;</li><li>s − a (right half plane zero): θ = 180° − arctan(ω/a), from 180° to 90°;</li><li>s and 1/s: constant +90° and −90°.</li></ul>
+<p>arctan(ω/a) is approximated by straight lines: 0° below 0.1a, 45° at a, 90° above 10a. The slide summarising the four cases (left/right half-plane zeros and poles):</p>
+<figure class="yazi-gorsel"><img src="pedersen-faz.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Pedersen: straight-line phase approximations for zeros and poles in the left and right half plane"><figcaption>Sol ve sağ yarı düzlemdeki sıfır ve kutupların faz yaklaşımı</figcaption></figure>
+<p><strong>Bode plot:</strong> magnitude → modulus |z| = √(x² + y²); phase → argument θ = arctan(y/x). <strong>Drawing Bode plots by hand:</strong> write the transfer function poles (s − α) and zeros (s − β), draw the low and high frequency lines, and remember the 3 dB difference at a pole or zero.</p>
+<p>The remaining slides cover adding two filters, series and parallel RLC circuits (resonant frequency 1/√(LC), bandwidth R/L for series and 1/(RC) for parallel, quality factor (1/R)√(L/C) for series and R√(C/L) for parallel), the parallel resonant circuit (f_r = 1/(2π√(LC)) for Q ≥ 10), second-order systems in the frequency domain, G(s) = ω_n²/(s² + 2ζω_n s + ω_n²), and the time domain of a complex second-order system, x = c₁e^(r₁t) + c₂e^(r₂t), with its step response.</p>
+<p><em>Not: Slaytta rezonans frekansı ω_R = ω_n√(1 − ζ²) olarak yazılmış; bu ifade sönümlü doğal frekanstır (ω_d). İkinci dereceden sistemin genlik yanıtının tepe yaptığı rezonans frekansı ω_R = ω_n√(1 − 2ζ²)'dir; tepe değeri 1/(2ζ√(1 − ζ²)) ise slayttaki gibidir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="Bode-Plots-Penick-Green-Pedersen.zip" download>Bode-Plots-Penick-Green-Pedersen.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 601 KB · 20.11.1999</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Bode-Plots-Penick-Green-Pedersen.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (601 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

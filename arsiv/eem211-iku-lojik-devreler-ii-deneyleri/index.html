@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Ardışıl Devre Analizi ve 010 Dizi Detektörü Deneyleri (İKÜ Logic Circuits II Lab, 2009) — hasancan.net</title>
+<meta name="description" content="İstanbul Kültür Üniversitesi Logic Circuits II laboratuvarının 2009 tarihli iki İngilizce deney föyü: SSI entegre sayısını azaltan eşdeğer ardışıl devrenin analizi, zararlı ve zararsız hatalı çıkışlar; 010 dizisini algılayan Mealy ve Moore makinelerinin karşılaştırılması.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-iku-lojik-devreler-ii-deneyleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Ardışıl Devre Analizi ve 010 Dizi Detektörü Deneyleri (İKÜ Logic Circuits II Lab, 2009)">
+<meta property="og:description" content="İstanbul Kültür Üniversitesi Logic Circuits II laboratuvarının 2009 tarihli iki İngilizce deney föyü: SSI entegre sayısını azaltan eşdeğer ardışıl devrenin analizi, zararlı ve zararsız hatalı çıkışlar; 010 dizisini algılayan Mealy ve Moore makinelerinin karşılaştırılması.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-iku-lojik-devreler-ii-deneyleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Ardışıl Devre Analizi ve 010 Dizi Detektörü Deneyleri (İKÜ Logic Circuits II Lab, 2009)", "description": "İstanbul Kültür Üniversitesi Logic Circuits II laboratuvarının 2009 tarihli iki İngilizce deney föyü: SSI entegre sayısını azaltan eşdeğer ardışıl devrenin analizi, zararlı ve zararsız hatalı çıkışlar; 010 dizisini algılayan Mealy ve Moore makinelerinin karşılaştırılması.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-iku-lojik-devreler-ii-deneyleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "IKU_Logic_Circuits_II_LAB_deney3_4.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-iku-lojik-devreler-ii-deneyleri/IKU_Logic_Circuits_II_LAB_deney3_4.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Ardışıl Devre Analizi ve 010 Dizi Detektörü Deneyleri (İKÜ Logic Circuits II Lab, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.11.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#experiment-3-sequential-circuit-analysis">Experiment 3: Sequential circuit analysis</a></li><li><a href="#experiment-4-sequence-detector-analysis">Experiment 4: Sequence detector analysis</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Ardışıl Devre Analizi ve 010 Dizi Detektörü Deneyleri (İKÜ Logic Circuits II Lab, 2009)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 01.11.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM211 Sayısal Mantık Tasarımı dersinin laboratuvar klasöründe bulunan iki İngilizce deney föyünü aktarıyor: <strong>İstanbul Kültür Üniversitesi (İKÜ) Elektronik Mühendisliği Bölümü, Logic Circuits II LAB</strong> dersinin <strong>Experiment 3: Sequential Circuit Analysis</strong> (Kasım 2009 güncellemesi) ve <strong>Experiment 4: Sequence Detector Analysis</strong> (Ekim 2009 güncellemesi) föyleri. Deneyler TTL entegrelerle (7476, 7400, 7402) breadboard üzerinde kuruluyor, ön çalışmada Proteus ile benziyor. Föyler İngilizce olduğundan içerik İngilizce bırakıldı. Orijinal Word dosyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="experiment-3-sequential-circuit-analysis">Experiment 3: Sequential circuit analysis</h2>
+<p><strong>Objectives:</strong> Understanding synchronous sequential circuit analysis, Moore and Mealy machines, time diagrams, hazardous and non-hazardous faulty outputs, IC optimization.</p>
+<p><strong>Introduction:</strong> The aim of logic design is to minimize the number of memory elements and minimal-input-span gates. At realization level we have to use commercially available SSI elements. Normally, there exist two memory elements or four two-input gates within each commercially available SSI. Therefore SSIC minimizations are required as well as memory and gate minimization. The logic circuits given in Figure 1 and Figure 2 are equivalent. The first one requires a total of six SSI components: one for the D FF, one for the JK FF, one for EXOR, one for AND and one for OR gates. The second one requires only three SSI components: one for the JK FFs and two for NAND gates. This means three SSI components will be adequate instead of six.</p>
+<figure class="yazi-gorsel"><img src="sekil1.jpg" width="745" height="258" loading="lazy" decoding="async" alt="Figure 1: X girişli devre; 7404, 7408, 7432 ve 7486 kapıları, bir 7474 D flip-flop ve bir 7476 JK flip-flop"><figcaption>Experiment 3, Figure 1: six-SSI realization</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil2.jpg" width="745" height="330" loading="lazy" decoding="async" alt="Figure 2: aynı devrenin iki 7400 NAND entegresi (U1–U8) ve bir 7476 çift JK flip-flop ile gerçekleştirilmesi; PRESET, CLEAR ve CLK girişleri"><figcaption>Experiment 3, Figure 2: three-SSI realization</figcaption></figure>
+<p><strong>Preliminary work:</strong> Find the state diagram for the logic circuit given in Figure 2. Simulate this circuit on Proteus for the inputs given on the report page and also for the verification of the state diagram you found.</p>
+<p><strong>Procedure:</strong></p>
+<ol><li>Realize the circuit given in Figure 2 on the breadboard.</li><li>7476 and 7408 data sheets are available on the course web page.</li><li>Do not forget power and ground connections.</li><li>Use standard switches (TTL SWT) for R, S control inputs as required.</li><li>Use a negative pulsar switch for the clock input.</li><li>Use LEDs for states and z output observation.</li><li>Complete the time diagrams of Q1Q2 states and z output for the initial states 00 and 11.</li></ol>
+<p>Required components: one 7476 JK FF IC and two 7400 NAND ICs.</p>
+<p><strong>Report questions:</strong></p>
+<ol><li>Explain why the circuits given in Figures 1 and 2 are equivalent.</li><li>How many different output sequences can we observe for the same given input sequence? Why?</li><li>Why do we observe faulty outputs in this circuit?</li><li>In which time interval could we observe faulty outputs? Why?</li><li>In order to see non-hazardous faulty outputs only, what would you do? Why? (Hint: additional FF)</li><li>Find an initial state and input sequence which gives a hazardous faulty (0) output. Repeat this for hazardous faulty (1).</li></ol>
+<h2 id="experiment-4-sequence-detector-analysis">Experiment 4: Sequence detector analysis</h2>
+<p><strong>Objectives:</strong> Understanding Mealy and Moore machine analysis of a sequence detector and comparing the results.</p>
+<p><strong>Introduction:</strong> A three-input-length (010) sequence detector (as a Moore and also as a Mealy machine) will be examined.</p>
+<p><strong>Preliminary work:</strong> We wish to design a circuit which detects separate (010) sequences in a string of bits coming through an input line (i.e., the input is a serial bit stream). Once the (010) sequence is detected, the output becomes 1, otherwise it stays 0. The first bit coming to the input is the one on the left:</p>
+<pre class="kod"><code>Example input stream:  00100101010010
+Example output stream: 00010010001001</code></pre>
+<p>Before coming to the lab, find the state diagrams of this sequence detector a) as a Mealy machine, b) as a Moore machine, and simulate both realizations on Proteus for the example input stream. (Föyde iki gerçekleştirmenin devre şeması bir resim olarak verilmiş; Word dosyası dönüştürülürken bu resim görünmüyor.)</p>
+<p><em>Not: "Separate" ifadesine uygun olarak örnekte iç içe geçen diziler sayılmıyor: 5–7. bitlerdeki 010 algılandıktan sonra, 7. biti paylaşan 7–9. bitlerdeki 010 sayılmıyor; bir sonraki algılama 9–11. bitlerde. Örnek çıkış bu kurala göre kontrol edildi ve doğru.</em></p>
+<p><strong>Procedure:</strong></p>
+<ol><li>Set up the given Mealy machine on your board.</li><li>Do not forget power and ground connections.</li><li>Use standard switches (TTL SWT) for preset and clear control inputs as required.</li><li>Use a standard switch (TTL SWT) for the x input.</li><li>Use a negative pulsar switch for the clock input.</li><li>Use LEDs for states and z output observation.</li><li>Verify your Mealy machine realization on the breadboard with the state diagram you found in the prelab work.</li><li>Apply the sample input bit stream and observe the output stream. Compare your results with the Proteus graphical result.</li><li>Draw time diagrams for the x input, the y1, y2 state variables and the z output.</li></ol>
+<p>Attention: for each input there should be a clock pulse; the initial state 00 should be arranged with the preset and clear inputs, and the example input stream applied right after the initial state. Required components: 7476 JK FF, 7402 NOR gates IC.</p>
+<p><em>Not: Föyde "bu durumda 13 saat darbesi gerekir" yazıyor; örnek giriş dizisi 14 bit olduğundan 14 darbe gerekir.</em></p>
+<p><strong>Report questions:</strong></p>
+<ol><li>Could there be any unexpected faulty output at the output bit stream of the Mealy machine you realized? a) If yes, give an input sequence which gives an unexpected (hazardous) faulty output (zararlı hatalı çıkış). b) If no, is it worth choosing the Moore realization instead of Mealy?</li><li>If you change the chosen state assignment with another one, will you still have a valid design? Why?</li><li>How would a state assignment change affect a sequential design? Does it affect the number of FFs? Why?</li><li>Could we choose any state as the initial state? Why?</li><li>Can we say a Moore machine is always preferable since there won't be any false outputs?</li></ol>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="IKU_Logic_Circuits_II_LAB_deney3_4.zip" download>IKU_Logic_Circuits_II_LAB_deney3_4.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 170 KB · 01.11.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="IKU_Logic_Circuits_II_LAB_deney3_4.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (170 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

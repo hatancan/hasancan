@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Laplace Dönüşümü Sunumu (MAK312 Sistem Dinamiği ve Kontrol, 2007–2008 Güz) — hasancan.net</title>
+<meta name="description" content="MAK312 Sistem Dinamiği ve Kontrol dersinin Laplace dönüşümü sunumu: tanım, temel fonksiyonların dönüşümleri, öteleme, türev ve integral kuralları, son ve ilk değer teoremleri, konvolüsyon, periyodik fonksiyonlar, kısmi kesirlere ayırma, MATLAB residue ve diferansiyel denklem çözümü.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Laplace Dönüşümü Sunumu (MAK312 Sistem Dinamiği ve Kontrol, 2007–2008 Güz)">
+<meta property="og:description" content="MAK312 Sistem Dinamiği ve Kontrol dersinin Laplace dönüşümü sunumu: tanım, temel fonksiyonların dönüşümleri, öteleme, türev ve integral kuralları, son ve ilk değer teoremleri, konvolüsyon, periyodik fonksiyonlar, kısmi kesirlere ayırma, MATLAB residue ve diferansiyel denklem çözümü.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Laplace Dönüşümü Sunumu (MAK312 Sistem Dinamiği ve Kontrol, 2007–2008 Güz)", "description": "MAK312 Sistem Dinamiği ve Kontrol dersinin Laplace dönüşümü sunumu: tanım, temel fonksiyonların dönüşümleri, öteleme, türev ve integral kuralları, son ve ilk değer teoremleri, konvolüsyon, periyodik fonksiyonlar, kısmi kesirlere ayırma, MATLAB residue ve diferansiyel denklem çözümü.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "MAK312_04_LaplaceTransform.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/MAK312_04_LaplaceTransform.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Laplace Dönüşümü Sunumu (MAK312 Sistem Dinamiği ve Kontrol, 2007–2008 Güz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.03.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#laplace-donusumu">Laplace dönüşümü</a></li><li><a href="#temel-fonksiyonlarin-donusumleri">Temel fonksiyonların dönüşümleri</a></li><li><a href="#donusum-kurallari">Dönüşüm kuralları</a></li><li><a href="#son-deger-ve-ilk-deger-teoremleri">Son değer ve ilk değer teoremleri</a></li><li><a href="#ornek-cift-darbe-ve-a-0-limiti">Örnek: çift darbe ve a → 0 limiti</a></li><li><a href="#periyodik-fonksiyonlar">Periyodik fonksiyonlar</a></li><li><a href="#ters-laplace-donusumu-ve-kismi-kesirler">Ters Laplace dönüşümü ve kısmi kesirler</a></li><li><a href="#dogrusal-zamanla-degismeyen-diferansiyel-denklemlerin-cozumu">Doğrusal, zamanla değişmeyen diferansiyel denklemlerin çözümü</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Laplace Dönüşümü Sunumu (MAK312 Sistem Dinamiği ve Kontrol, 2007–2008 Güz)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 05.03.2008 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri klasöründe "eem322_kontrol_alper_siteden" alt klasöründe saklanan <strong>üçüncü taraf</strong> bir sunumdur: <strong>MAK312 Sistem Dinamiği ve Kontrol</strong> dersinin <strong>2007–2008 Güz dönemi</strong> "Laplace Dönüşümü (Laplace Transform)" slaytları. Klasör adına göre bir web sitesinden indirilmiş; sunumda hoca ya da üniversite adı yazmıyor. PDF, sayfa başına iki slayt olacak şekilde 31 sayfa (62 slayt) ve <strong>5 Mart 2008</strong> tarihli. Slayt metinleri ve formüller aşağıya yazı olarak aktarıldı; orijinal PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="laplace-donusumu">Laplace dönüşümü</h2>
+<p>Doğrusal sistemlerin modellenmesi ve analizi için kullanılan en önemli araçlardan biri Laplace dönüşümüdür. Gücü, <strong>doğrusal diferansiyel denklemleri cebirsel denklemlere dönüştürmesinde</strong> yatar; sistem dinamiği dersinde çok kullanıldığı için en başta çalışılması gereken konudur.</p>
+<figure class="yazi-gorsel"><img src="zaman-frekans.jpg" width="1000" height="760" loading="lazy" decoding="async" alt="Time domain and frequency domain: x(t) → h(t) → y(t) = h(t)∗x(t); Laplace transform gives X(s) → H(s) → Y(s) = H(s)X(s)"><figcaption>Zaman bölgesinde konvolüsyon, frekans bölgesinde çarpım</figcaption></figure>
+<p>Bir f(t) fonksiyonunun Laplace dönüşümü, f(t)'yi e^(−st) ile çarpıp t = 0'dan ∞'a integral alarak bulunur. Sonuç, karmaşık Laplace değişkeni s'nin bir fonksiyonudur:</p>
+<blockquote><p>F(s) = L[f(t)] = ∫₀^∞ f(t)·e^(−st) dt</p></blockquote>
+<p><strong>Doğrusallık:</strong> L[a·f(t) + b·g(t)] = a·F(s) + b·G(s).</p>
+<h2 id="temel-fonksiyonlarin-donusumleri">Temel fonksiyonların dönüşümleri</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Fonksiyon</th><th scope="col">f(t) (t ≥ 0)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Üstel</th><td>A·e^(−αt)</td><td>A/(s + α)  (s &gt; −α)</td></tr><tr><th scope="row">Birim basamak</th><td>h(t) = 1(t)</td><td>1/s</td></tr><tr><th scope="row">Ötelenmiş birim basamak</th><td>1(t − t₀)</td><td>e^(−st₀)/s</td></tr><tr><th scope="row">Rampa</th><td>a·t</td><td>a/s²</td></tr><tr><th scope="row">Sinüs</th><td>A·sin(ωt)</td><td>Aω/(s² + ω²)</td></tr><tr><th scope="row">Kosinüs</th><td>A·cos(ωt)</td><td>As/(s² + ω²)</td></tr><tr><th scope="row">Vurum (puls), yükseklik A/t₀, süre t₀</th><td>(A/t₀)[1(t) − 1(t − t₀)]</td><td>(A/(s·t₀))(1 − e^(−st₀))</td></tr><tr><th scope="row">Anivurum (impuls)</th><td>A·δ(t)</td><td>A</td></tr></tbody></table></div>
+<ul><li><strong>Rampa:</strong> integral kısmi integrasyonla (∫u dv = uv − ∫v du, u = t, dv = e^(−st)dt, v = −e^(−st)/s) çözülür: L[a·t] = a·∫₀^∞ e^(−st)dt/s = a/s².</li><li><strong>Sinüs:</strong> sin(ωt) = (e^(iωt) − e^(−iωt))/(2i) yazılarak L = (A/2i)[1/(s − iω) − 1/(s + iω)] = Aω/(s² + ω²); kosinüs benzer şekilde bulunur.</li><li><strong>İmpuls:</strong> vurum fonksiyonunda t₀ → 0 limiti alınır; 0/0 belirsizliği L'Hôpital ile çözülür: lim A(1 − e^(−st₀))/(st₀) = As/s = A. Altındaki alan 1 ise birim impuls (Dirac delta) adını alır. t = t₀ anındaki birim impuls δ(t − t₀): t ≠ t₀ için 0, t = t₀'da ∞ ve ∫δ(t − t₀)dt = 1. Birim impuls, birim basamağın türevidir; birim basamak da birim impulsun integralidir.</li></ul>
+<p>Bu örneklerdeki gibi integral almak her zaman pratik değildir; bunun yerine hazırlanmış Laplace dönüşüm tabloları kullanılır.</p>
+<h2 id="donusum-kurallari">Dönüşüm kuralları</h2>
+<ul><li><strong>Zaman ekseninde öteleme:</strong> a &gt; 0 için L[f(t − a)] = e^(−as)·F(s). (İspat: τ = t − a değişken değiştirmesi; zamana bağlı fonksiyonlar t &lt; 0'da sıfır kabul edilir.)</li><li><strong>e^(−αt) ile çarpım:</strong> L[e^(−αt)·f(t)] = F(s + α). Örnek: L[sin ωt] = ω/(s² + ω²) ⇒ L[e^(−αt) sin ωt] = ω/((s + α)² + ω²).</li><li><strong>Türevler:</strong> L[df/dt] = sF(s) − f(0); L[d²f/dt²] = s²F(s) − s·f(0) − ḟ(0); genel olarak L[f⁽ⁿ⁾(t)] = sⁿF(s) − s^(n−1)f(0) − s^(n−2)ḟ(0) − … − f⁽ⁿ⁻¹⁾(0).</li><li><strong>Örnek:</strong> g(t) = sin ωt için L[ġ(t)]: I. yol, ġ = ω cos ωt ⇒ sω/(s² + ω²); II. yol, s·ω/(s² + ω²) − g(0) = sω/(s² + ω²).</li><li><strong>İntegral:</strong> L[∫f(t)dt] = F(s)/s + f⁻¹(0)/s, f⁻¹(0) = (∫f(t)dt) t = 0'da; belirli integral için L[∫₀ᵗ f(t)dt] = F(s)/s.</li><li><strong>Karmaşık türevleme teoremi:</strong> L[t·f(t)] = −dF(s)/ds, L[t²f(t)] = d²F(s)/ds², L[tⁿf(t)] = (−1)ⁿ dⁿF(s)/dsⁿ.</li><li><strong>Konvolüsyon:</strong> f₁(t)∗f₂(t) = ∫₀ᵗ f₁(t − τ)f₂(τ)dτ = f₂(t)∗f₁(t) ve L[f₁∗f₂] = F₁(s)·F₂(s).</li><li><strong>İki fonksiyonun çarpımı:</strong> L[f(t)·g(t)] = (1/2πj)∫_(c−j∞)^(c+j∞) F(ρ)G(s − ρ)dρ.</li></ul>
+<p><em>Not: Slaytta karmaşık türevleme teoreminde türevler d/dt ile yazılmış; F(s) s'nin fonksiyonu olduğundan türev s'ye göredir (d/ds).</em></p>
+<h2 id="son-deger-ve-ilk-deger-teoremleri">Son değer ve ilk değer teoremleri</h2>
+<p>Son değer teoremi bir fonksiyonun durağan durum (steady-state) davranışını verir ve yalnızca lim(t→∞) f(t) varsa geçerlidir. sF(s)'nin bütün kutupları s düzleminin sol yarısındaysa f(t) sınırlı bir değere yerleşir. Kutuplar sanal eksendeyse ya da sağ yarı düzlemdeyse f(t) salınır veya üstel olarak büyür ve limit yoktur; örneğin f(t) = sin ωt için F(s) = ω/(s² + ω²), kutuplar s = ∓jω'dır, son değer teoremi uygulanamaz.</p>
+<blockquote><p><strong>Teorem:</strong> f(t) ve df/dt'nin Laplace dönüşümleri ve lim(t→∞) f(t) varsa, lim(t→∞) f(t) = lim(s→0) sF(s).</p></blockquote>
+<p>İspat: türev kuralında s → 0 limiti alınırsa lim ∫₀^∞ (df/dt)e^(−st)dt = lim[sF(s) − f(0)]; e^(−st) → 1 olduğundan sol taraf ∫₀^∞ (df/dt)dt = lim f(t) − f(0) olur ve iki eşitlikten sonuç çıkar.</p>
+<p><strong>Örnek:</strong> F(s) = 1/(s(s + 1)). sF(s) = 1/(s + 1); kutup s = −1 sol yarı düzlemde, limit vardır: lim f(t) = lim(s→0) 1/(s + 1) = 1.</p>
+<p><strong>İlk değer teoremi:</strong> f(0+) = lim(s→∞) sF(s) (ispatı ödev olarak bırakılmış).</p>
+<h2 id="ornek-cift-darbe-ve-a-0-limiti">Örnek: çift darbe ve a → 0 limiti</h2>
+<figure class="yazi-gorsel"><img src="cift-darbe.jpg" width="1000" height="330" loading="lazy" decoding="async" alt="Doublet pulse: 1/a² on 0 ≤ t &lt; a, −1/a² on a ≤ t &lt; 2a, zero elsewhere"><figcaption>Çift darbe fonksiyonu</figcaption></figure>
+<p>f(t), basamakların toplamı olarak yazılır: f(t) = (1/a²)1(t) − (2/a²)1(t − a) + (1/a²)1(t − 2a). Böylece</p>
+<blockquote><p>F(s) = (1/(a²s))·(1 − 2e^(−as) + e^(−2as))</p></blockquote>
+<p>Aynı sonuç integralle de (2. yol) bulunur. a → 0 limiti 0/0 belirsizliğidir; L'Hôpital iki kez uygulanırsa lim F(s) = −s + 2s = s elde edilir (birim impulsun türevinin, yani birim çift darbenin dönüşümü).</p>
+<h2 id="periyodik-fonksiyonlar">Periyodik fonksiyonlar</h2>
+<p>T periyotlu bir f(t) için</p>
+<blockquote><p>L[f(t)] = (1/(1 − e^(−Ts)))·∫₀ᵀ f(t)e^(−st)dt</p></blockquote>
+<p>İspat: integral periyotlara bölünür, τ = t − nT ile Σ e^(−nTs)·∫₀ᵀ f(τ)e^(−sτ)dτ elde edilir ve Σ e^(−nTs) = 1/(1 − e^(−Ts)) geometrik serisi kullanılır.</p>
+<p><strong>Örnek:</strong> 0–T/2 aralığında +1, T/2–T aralığında −1 olan kare dalga için</p>
+<blockquote><p>L[f(t)] = (1/(1 − e^(−Ts)))·(1/s)·(1 − e^(−sT/2))² = (1/s)·(1 − e^(−sT/2))/(1 + e^(−sT/2))</p></blockquote>
+<h2 id="ters-laplace-donusumu-ve-kismi-kesirler">Ters Laplace dönüşümü ve kısmi kesirler</h2>
+<blockquote><p>L⁻¹[F(s)] = f(t) = (1/2πj)∫_(c−j∞)^(c+j∞) F(s)e^(st) ds</p></blockquote>
+<p>Buradaki c sabiti F(s)'nin bütün kutuplarından büyük seçilir. Bu integral çok nadiren kullanılır; F(s), dönüşümleri bilinen fonksiyonların bileşenlerine ayrılır ve her biri ayrı ayrı ters dönüştürülür: F(s) = F₁(s) + … + Fₙ(s) ⇒ f(t) = f₁(t) + … + fₙ(t).</p>
+<p><em>Not: Slayttaki ters dönüşüm integralinde üstel terim e^(−sτ) diye yazılmış; doğrusu e^(st)'dir.</em></p>
+<p><strong>Kısmi kesirlere ayırma:</strong> F(s) = B(s)/A(s) basit kesir olmalıdır, yani deg A(s) &gt; deg B(s). Değilse önce bölme yapılır: (s + 1)/s = 1 + 1/s.</p>
+<h3 id="i-farkli-kutuplar">(i) Farklı kutuplar</h3>
+<blockquote><p>F(s) = K(s + z₁)…(s + z_m)/[(s + p₁)…(s + p_n)] = a₁/(s + p₁) + a₂/(s + p₂) + … + aₙ/(s + pₙ), m &lt; n</p></blockquote>
+<p>a_k sabitlerine kalıntı (residue) denir. Eşitliğin iki tarafı (s + p_k) ile çarpılıp s = −p_k konursa a_k = [(s + p_k)F(s)] (s = −p_k) bulunur. L⁻¹[a_k/(s + p_k)] = a_k·e^(−p_k t) kullanılarak f(t) = a₁e^(−p₁t) + a₂e^(−p₂t) + … + aₙe^(−pₙt) elde edilir.</p>
+<p>Alıştırmalar: F(s) = 4(s + 1)(s + 2)/[s(s + 1)(s + 2)]; F(s) = (s⁴ + 3s² + 5s + 1)/[s(s + 1)(s + 2)]; F(s) = (s + 4)/(s² + s + 1).</p>
+<h3 id="ii-tekrarlanan-kutuplar">(ii) Tekrarlanan kutuplar</h3>
+<p>F(s) = (s² + 2s + 3)/(s + 1)³ = b₁/(s + 1) + b₂/(s + 1)² + b₃/(s + 1)³. İki taraf (s + 1)³ ile çarpılırsa (s + 1)³F(s) = (s + 1)²b₁ + (s + 1)b₂ + b₃:</p>
+<ul><li>s = −1'de: b₃ = (s² + 2s + 3) = 2</li><li>birinci türevde s = −1: b₂ = (2s + 2) = 0</li><li>ikinci türevde s = −1: 2b₁ = 2 ⇒ b₁ = 1</li></ul>
+<blockquote><p>F(s) = 1/(s + 1) + 2/(s + 1)³,  L⁻¹[1/(s + a)ⁿ] = tⁿ⁻¹e^(−at)/(n − 1)! f(t) = e^(−t) + 2·t²e^(−t)/2! = e^(−t)(1 + t²)</p></blockquote>
+<h3 id="matlab-ile-kismi-kesirler">MATLAB ile kısmi kesirler</h3>
+<p>F(s) = B(s)/A(s) = (b(1)s^m + … + b(m))/(a(1)s^n + … + a(n)) için <code>num</code> ve <code>den</code> katsayı vektörleriyle <code>[r,p,k] = residue(num,den)</code> kalıntıları (r), kutupları (p) ve tam kısmı (k) verir. Örnek:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>pay = [1 -8 17 -6 -2];
+payda = [1 -10 31 -30];
+[r,p,k] = residue(pay,payda)
+% r = 3, 1, 2   p = 5, 3, 2   k = 1 2
+[pay,payda] = residue([3 1 2],[5 3 2],[1 2])   % ters yönde: kesirlerden polinomlara</code></pre>
+<blockquote><p>F(s) = (s⁴ − 8s³ + 17s² − 6s − 2)/(s³ − 10s² + 31s − 30) = s + 2 + 3/(s − 5) + 1/(s − 3) + 2/(s − 2)</p></blockquote>
+<p><em>Not: Slaytta sonuç "3/(s + 5) + 1/(s + 3) + 2/(s + 2)" diye yazılmış; MATLAB ekran görüntüsündeki kutuplar p = 5, 3, 2'dir ve payda (s − 2)(s − 3)(s − 5)'e ayrılır, yani paydalar s − 5, s − 3, s − 2 olmalıdır.</em></p>
+<h2 id="dogrusal-zamanla-degismeyen-diferansiyel-denklemlerin-cozumu">Doğrusal, zamanla değişmeyen diferansiyel denklemlerin çözümü</h2>
+<p>İki adım izlenir: (1) diferansiyel denklemin her teriminin Laplace dönüşümü alınır, s'ye bağlı cebirsel bir denklem elde edilir ve bağımlı değişken X(s) yalnız bırakılır; (2) X(s)'e ters Laplace dönüşümü uygulanarak zaman fonksiyonu bulunur. Türevlerin dönüşümleri:</p>
+<blockquote><p>L[x(t)] = X(s), L[ẋ(t)] = sX(s) − x(0), L[ẍ(t)] = s²X(s) − s·x(0) − ẋ(0) L[x⁽ⁿ⁾(t)] = sⁿX(s) − Σ(k=1…n) s^(n−k)·x⁽ᵏ⁻¹⁾(0)</p></blockquote>
+<p>Alıştırmalar:</p>
+<ul><li>Örnek 4: y⃛ + 6ÿ + 11ẏ + 6y = 2t, y(0) = ẏ(0) = ÿ(0) = 0</li><li>Örnek 5: ẍ + 2ẋ + 5x = 1, x(0) = 0, ẋ(0) = 2</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="MAK312_04_LaplaceTransform.pdf" download>MAK312_04_LaplaceTransform.pdf</a></p>
+              <p class="kucuk">PDF · 633 KB · 31 <span data-i18n="arch.pagesLower"></span> · 05.03.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="MAK312_04_LaplaceTransform.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (633 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

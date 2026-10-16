@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Elektronik II: Güç Yükselteçleri (A, B, AB, C ve D Sınıfı) — hasancan.net</title>
+<meta name="description" content="EEM311 Elektronik II el yazısı ders notları: A, B, AB, C ve D sınıfı güç amplifikatörleri, verim hesapları (%25, %50, %78,5), push-pull devreleri ve geçiş distorsiyonu, C sınıfı tank devresi, harmonik distorsiyon ve THD, güç transistörlerinde ısı etkisi; çözümlü örneklerle.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Elektronik II: Güç Yükselteçleri (A, B, AB, C ve D Sınıfı)">
+<meta property="og:description" content="EEM311 Elektronik II el yazısı ders notları: A, B, AB, C ve D sınıfı güç amplifikatörleri, verim hesapları (%25, %50, %78,5), push-pull devreleri ve geçiş distorsiyonu, C sınıfı tank devresi, harmonik distorsiyon ve THD, güç transistörlerinde ısı etkisi; çözümlü örneklerle.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Elektronik II: Güç Yükselteçleri (A, B, AB, C ve D Sınıfı)", "description": "EEM311 Elektronik II el yazısı ders notları: A, B, AB, C ve D sınıfı güç amplifikatörleri, verim hesapları (%25, %50, %78,5), push-pull devreleri ve geçiş distorsiyonu, C sınıfı tank devresi, harmonik distorsiyon ve THD, güç transistörlerinde ısı etkisi; çözümlü örneklerle.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-guc-yukseltecleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-guc-yukselteci-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-guc-yukseltecleri/eem311-guc-yukselteci-notlari.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM311 Elektronik II: Güç Yükselteçleri (A, B, AB, C ve D Sınıfı)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#guc-amplifikatorlerinin-siniflari">Güç amplifikatörlerinin sınıfları</a></li><li><a href="#a-sinifi-guc-amplifikatorleri">A sınıfı güç amplifikatörleri</a></li><li><a href="#b-sinifi-guc-amplifikatorleri">B sınıfı güç amplifikatörleri</a></li><li><a href="#c-sinifi-guc-amplifikatorleri">C sınıfı güç amplifikatörleri</a></li><li><a href="#d-sinifi-guc-amplifikatorleri">D sınıfı güç amplifikatörleri</a></li><li><a href="#amplifikator-distorsiyonu">Amplifikatör distorsiyonu</a></li><li><a href="#guc-transistoru-isi-etkisi">Güç transistörü ısı etkisi</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM311 Elektronik II: Güç Yükselteçleri (A, B, AB, C ve D Sınıfı)</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM311 Elektronik II</strong> dersinin <strong>güç amplifikatörleri (güç yükselteçleri)</strong> konusunu anlatan el yazısı ders notlarının taranmış sayfalarından hazırlandı. Notlarda yazar adı ve tarih yok; sayfalar dersin slayt/not klasöründe birlikte duruyordu. Başlıklar, tanımlar, formüller ve çözümlü örnekler metne aktarıldı; devre şemaları ve grafikler için ilgili sayfa görselleri eklendi. Taranmış sayfaların tamamı PDF olarak yazının sonunda indirilebilir.</p>
+<h2 id="guc-amplifikatorlerinin-siniflari">Güç amplifikatörlerinin sınıfları</h2>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1152" height="1643" loading="lazy" decoding="async" alt="El yazısı not sayfası: A, B, AB ve C sınıfı amplifikatörlerin çıkış dalga şekilleri ve dc polarma seviyeleri"><figcaption>A, B, AB ve C sınıfı çalışmada çıkış sinyalleri</figcaption></figure>
+<ul><li><strong>A sınıfı:</strong> Giriş sinyalinin tamamı boyunca (360°) çıkış sinyali vardır. DC polarma ile Q noktası dc yük doğrusunun ortasında olacak şekilde devre polarmalandırılır.</li><li><strong>B sınıfı:</strong> Giriş sinyalinin yalnızca bir periyodu için (180°) çıkış sinyali vardır. Devre, Q noktası kesim noktasında olacak şekilde polarmalandırılır.</li><li><strong>AB sınıfı:</strong> Giriş sinyalinin 180° ile 360° arasındaki bir kısmı için çıkış vardır. Q noktası dc yük doğrusu üzerinde kesime yakındır.</li><li><strong>C sınıfı:</strong> Giriş sinyalinin 180°'den de küçük bir kısmı için çıkış sinyali vardır. Q noktası kesimin altında olacak şekilde polarmalandırılır.</li><li><strong>D sınıfı:</strong> D sınıfı amplifikatör yalnızca bir pals sinyali uygulandığında çalışır ve çıkış verir.</li></ul>
+<h3 id="amplifikator-verimi">Amplifikatör verimi</h3>
+<p>Güç amplifikatörlerinin verimi A'dan D'ye doğru artar. Yani transistör ne kadar uzun süre çalışırsa harcayacağı güç de artacağından, devrenin verimi (verim = çıkış gücü / giriş gücü) o kadar azalır.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">A</th><th scope="col">AB</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr><th scope="row">Çalışma saykılı</th><td>360°</td><td>180°–360°</td><td>180°</td><td>180°'den az</td><td>Pals</td></tr><tr><th scope="row">Verim</th><td>%25–%50</td><td>%25 (%50) – %78,5</td><td>%78,5</td><td>&gt; %78,5 (*)</td><td>&gt; %90</td></tr></tbody></table></div>
+<p>(*) C sınıfı güç amplifikatörleri genellikle çok yüksek güçler için çalıştırılmazlar.</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="981" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: verim tablosu ve A sınıfında ac yük doğrusu üzerinde Q noktası ile kırpılma"><figcaption>Verim tablosu ve A sınıfında yük doğrusu</figcaption></figure>
+<h2 id="a-sinifi-guc-amplifikatorleri">A sınıfı güç amplifikatörleri</h2>
+<p>A sınıfı amplifikatör, giriş sinyalinin 360°'si için lineer bölgede çalışacak şekilde polarmalandırılmıştır. Maksimum çıkış için Q noktası yük doğrusunun tam ortasında olmalıdır. Eğer giriş sinyali çok yüksek olursa çıkış sinyalinde kırpılma oluşur. (Sayfadaki iki grafik, ortadaki Q noktası için I_C ve V_CE salınımını ve Q noktası kayınca oluşan kırpılmayı gösteriyor.)</p>
+<ul><li><strong>Sükûnet gücü:</strong> Herhangi bir ac sinyal uygulanmadığında transistörde harcanan güçtür. Transistörün minimum güç seviyesi en az bu kadar olmalıdır: <strong>P_DQ = V_CEQ · I_CQ</strong></li><li><strong>Giriş gücü:</strong> DC voltaj kaynağının devreye verdiği güçtür: <strong>P_i(dc) = V_CC · I_CC = V_CC · I_CQ</strong></li><li><strong>Çıkış gücü:</strong> Devrenin yüke aktardığı ac güçtür:</li></ul>
+<p>  - P_o(ac) = V_CE(rms) · I_C(rms) → Q noktası ortada ise   - P_o(ac) = I_C(rms)² · R_C → Q noktası kesime yakın ise   - P_o(ac) = V_CE(rms)² / R_C → Q noktası doyuma yakın ise</p>
+<ul><li><strong>Verim:</strong> Amplifikatörden alınan çıkış gücünün uygulanan giriş gücüne oranıdır: <strong>%η = (P_o(ac) / P_i(dc)) · 100%</strong></li></ul>
+<h3 id="maksimum-verim">Maksimum verim</h3>
+<p>Maksimum verim için Q noktası yük doğrusunun tam ortasındadır:</p>
+<ul><li>max V_CE(p-p) = V_CC, max I_C(p-p) = V_CC / R_C</li><li>max P_o(ac) = V_CC · (V_CC/R_C) / 8 = <strong>V_CC² / (8R_C)</strong></li><li>max P_i(dc) = V_CC · max I_C = V_CC · (V_CC/R_C)/2 = <strong>V_CC² / (2R_C)</strong></li><li>max %η = (max P_o(ac) / max P_i(ac)) × 100 → <strong>max %η = %25</strong></li></ul>
+<p><em>Not: Son satırdaki paydada notta "P_i(ac)" yazıyor; doğrusu dc giriş gücü P_i(dc)'dir. Sonuç (%25) değişmez.</em></p>
+<h3 id="ornek-a-sinifi-amplifikatorun-gucu-ve-verimi">Örnek: A sınıfı amplifikatörün gücü ve verimi</h3>
+<p>Aşağıdaki A sınıfı güç amplifikatörünün a) minimum transistör gücünü, b) ac çıkış gücünü, c) verimini bulunuz. Devre: V_CC = +24 V, R1 = 5 kΩ, R2 = 1 kΩ, R_C = 300 Ω, R_E = 100 Ω (C_E ile köprülü), R_L = 300 Ω, C1 = 10 µF, C2 = 1 µF, C_E = 10 µF.</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="995" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: A sınıfı güç amplifikatörü örneği, devre şeması ve ac yük doğrusu"><figcaption>A sınıfı amplifikatör örneği</figcaption></figure>
+<p><strong>Çözüm (dc analiz, yaklaşık analiz):</strong></p>
+<ul><li>V_B = 24 V · 1k / (5k + 1k) = 4 V</li><li>V_E = 4 V − 0,7 V = 3,3 V</li><li>I_E = V_E / R_E = 33 mA ≅ I_CQ</li><li>V_C = 24 V − 33 mA · 300 Ω = 14,1 V</li><li>V_CE = V_C − V_E = 10,8 V</li></ul>
+<p>a) Transistörde harcanan minimum güç: P_DQ = V_CEQ · I_CQ = 10,8 V · 33 mA = <strong>0,356 W</strong></p>
+<p>b) ac çıkış gücünü bulmak için ac yük doğrusu çizilir (Q noktasının tespiti için):</p>
+<ul><li>r_C = R_C // R_L = 150 Ω</li><li>I_C(sat) = I_CQ + V_CEQ / r_C = 33 mA + 10,8 V / 150 Ω = 105 mA</li><li>V_CE(cut-off) = V_CEQ + I_CQ · r_C = 15,75 V</li></ul>
+<p>Yük doğrusunun ortası 52,5 mA / 7,88 V'tur; gerçek Q noktası (33 mA, 10,8 V) ortada değildir, kesime yakındır:</p>
+<ul><li>P_o(ac) = 0,5 · I_CQ² · r_C = 0,5 · (33 mA)² · 150 Ω = <strong>81,68 mW</strong></li></ul>
+<p>c) Verim: %η = P_o(ac) / P_dc · 100 = 81,68 mW / (24 V · 33 mA) · 100 = <strong>%10,3</strong></p>
+<h3 id="transformator-kuplajli-a-sinifi">Transformatör kuplajlı A sınıfı</h3>
+<p>A sınıfı güç amplifikatörünün çıkışı yük üzerine transformatör üzerinden aktarılırsa verim %50'ye kadar çıkabilir.</p>
+<ul><li>V₂/V₁ = I₁/I₂ = N₂/N₁, V₂ = V_o</li><li>Primere yansıyan yük: <strong>R_L' = a² · R_L = (N₂/N₁)² · R_L</strong></li></ul>
+<p><em>Not: a = N₁/N₂ (primer/sekonder) tanımıyla yansıyan yük R_L' = (N₁/N₂)² · R_L olur; notta oran ters yazılmış.</em></p>
+<h2 id="b-sinifi-guc-amplifikatorleri">B sınıfı güç amplifikatörleri</h2>
+<p>Giriş sinyalinin 180°'lik bir bölümü için çıkış verir. Çıkıştan tam bir sinüs elde edilebilmesi için iki transistörün yer aldığı <strong>push-pull</strong> devreler kullanılır. Bunlardan biri pozitif, diğeri de negatif alternans için çıkış verir ve çıkışlar bir yük üzerinde birleştirilir. Her iki transistör de Q noktaları kesim noktasında olacak şekilde polarmalandırılır ve farklı tiptedirler. Push-pull amplifikatörler tek veya çift voltaj kaynağı ile yapılabilir.</p>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="981" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: transformatör kuplajlı A sınıfı devre, push-pull blok şemaları, tek ve çift kaynaklı yapılar"><figcaption>Transformatör kuplajı ve push-pull blok şemaları</figcaption></figure>
+<h3 id="push-pull-amplifikatorlerin-polarmalandirilmasi-ve-gecis-distorsiyonu">Push-pull amplifikatörlerin polarmalandırılması ve geçiş distorsiyonu</h3>
+<p>B sınıfı push-pull amplifikatör devresinde transistörler kesimde olacak şekilde polarmalandırılırsa, iletime geçmek için ac giriş sinyalinin transistörlerin V_BE gerilimlerini aşması gerekir. Bu da çıkış sinyali üzerinde, bu aralıklarda çıkış olmaması sebebiyle <strong>distorsiyon (bozulma)</strong> olarak görülür (<strong>geçiş distorsiyonu</strong>). Bunu önlemek için transistörlerin kesimin biraz üzerinde polarmalandırılması gereklidir. Bunun için iki devre kullanılır: <strong>voltaj bölücü polarma</strong> ve <strong>diyot polarmalı devre</strong>.</p>
+<figure class="yazi-gorsel"><img src="s-06.jpg" width="1023" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: tamamlayıcı push-pull devresi, geçiş distorsiyonu, transfer karakteristiği, voltaj bölücü ve diyot polarmalı devreler"><figcaption>Geçiş distorsiyonu ve polarma devreleri</figcaption></figure>
+<p>Daha sıklıkla kullanıldığı için diyot polarmalı devreyi incelersek, diyotların üzerindeki gerilimlerle V_BE gerilimlerinin eşit olduğu kabul edilirse <strong>V_CEQ1 = V_CEQ2 = V_CC/2</strong> olur. Transistörlerin kesime yakın polarmalandırıldıkları düşünülürse I_CQ ≅ 0'dır.</p>
+<p><strong>dc analiz:</strong> R1 = R2 seçilir; V_A = V_CC/2 olur. Transistörler kesimde iseler (iletime geçmek üzereler):</p>
+<ul><li>I = (V_CC − 2V_d) / (R1 + R2)</li><li>V_CEQ1 = V_CEQ2 = V_CC/2</li></ul>
+<p><strong>ac işlem:</strong> Her transistör bir yarım saykıl iletir; yük üzerinde tepe akımı I_C(sat) = V_CEQ / R_L olur.</p>
+<p><strong>Maksimum çıkış gücü:</strong></p>
+<ul><li>P_out = V_out(rms) · I_out(rms), V_out(rms) = 0,707 V_CEQ, I_out(rms) = 0,707 I_C(sat)</li><li><strong>P_out = 0,5 · V_CEQ · I_C(sat)</strong></li><li>V_CEQ = V_CC/2 iken <strong>P_out = 0,25 · V_CC · I_C(sat)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-07.jpg" width="1152" height="1644" loading="lazy" decoding="async" alt="El yazısı not sayfası: diyot polarmalı push-pull devrenin dc eşdeğeri ve ac yük doğrusu"><figcaption>Diyot polarmalı push-pull: dc ve ac analiz</figcaption></figure>
+<p><strong>dc giriş gücü:</strong></p>
+<ul><li>P_dc = V_CC · I_CC, I_CC = I_C(sat) / π (ortalama değer)</li><li><strong>P_dc = V_CC · I_C(sat) / π</strong></li></ul>
+<p><strong>Verim:</strong> %η = (P_out / P_dc) · 100</p>
+<p><strong>Maksimum verim:</strong> %η_max = (0,25 V_CC · I_C(sat)) / (V_CC · I_C(sat)/π) · 100 = 0,25π · 100 = <strong>%78,5</strong></p>
+<h3 id="transformator-kuplajli-push-pull-devresi">Transformatör kuplajlı push-pull devresi</h3>
+<p>Polarma noktası uygun seçilirse AB sınıfı çalışma da yapabilir. Empedansı uygunlaştırmak için çıkışa transformatör bağlanmıştır. Her iki transistör de npn tipi olduğundan giriş sinyalinin fazının farklı olması gerekir; bunu da giriş transformatörü sağlar. Ancak transformatörün kullanımı yüksek maliyet, fazla yer işgali ve kötü bir frekans cevabına sebep olur. Bunun yerine Darlington çifti ve geri beslemeli çift kullanan push-pull devreler ya da çift kaynaklı (V_CC1 = V_CC2, R1 = R2, R_E1 = R_E2) hoparlör sürücü devreleri kullanılabilir.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="987" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: B sınıfı verim türetmesi, transformatör kuplajlı push-pull, Darlington ve geri beslemeli çift devreleri"><figcaption>Transformatör kuplajlı push-pull ve Darlington çifti</figcaption></figure>
+<h2 id="c-sinifi-guc-amplifikatorleri">C sınıfı güç amplifikatörleri</h2>
+<p>C sınıfı amplifikatör 180°'den daha küçük bir aralık için çalıştırılır; Q noktası kesimin altındadır. Örnek devre −V_BB kaynağı ile kesimin altında polarmalandırılmıştır. Transistörün iletime geçmesi için ac giriş sinyalinin V_BB + V_BE değerini aşması gerekir. Yani yalnızca giriş sinyalinin tepe değerleri için çıkış vardır. Dolayısıyla transistör güç kaybı çok düşüktür.</p>
+<ul><li>Transistörün iletimdeyken harcadığı güç: <strong>P_D(on) = V_CE(sat) · I_C(sat)</strong></li><li>Sinyal periyodu süresince harcadığı (ortalama) güç: <strong>P_D(ort) = P_D(on) · t_on / T = (t_on / T) · V_CE(sat) · I_C(sat)</strong></li><li>t_on: transistörün iletimde kaldığı süre; T: giriş sinyalinin periyodu.</li></ul>
+<p><strong>Örnek:</strong> Bir C sınıfı amplifikatör 200 kHz ile sürülmektedir. Transistör 1 µs'lik bir an için iletimde kalıyorsa, I_C(sat) = 100 mA, V_CE(sat) = 0,2 V ise transistörün harcadığı ortalama güç ne olur?</p>
+<p><em>Not: Notta bu örneğin çözümü yok. T = 1/200 kHz = 5 µs, P_D(on) = 0,2 V · 100 mA = 20 mW, P_D(ort) = 20 mW · (1 µs / 5 µs) = 4 mW bulunur.</em></p>
+<figure class="yazi-gorsel"><img src="s-09.jpg" width="995" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: C sınıfı amplifikatör devresi, kollektör akımı darbeleri ve ortalama güç bağıntıları"><figcaption>C sınıfı amplifikatör ve güç kaybı</figcaption></figure>
+<h3 id="kenetleyici-polarma">Kenetleyici polarma</h3>
+<p>Transistörü kesimin altında polarmalandırmak için beyze ikinci bir kaynak bağlamak yerine, beyz–emiter diyotu ile C1 kondansatörünün oluşturduğu kenetleyici (clamper) beyz polarması kullanılır.</p>
+<ul><li>C1, giriş sinyali pozitif tepeye doğru artarken V_p − 0,7 V'a şarj olur.</li><li>Giriş sinyalinin geri kalan kısmı için kondansatörün çok deşarj olmadığı kabul edilir. Yani R1C1 zaman sabiti çok büyük seçilmelidir ki kondansatör üzerindeki voltaj çok fazla değişmesin. Beyz gerilimi yaklaşık −(V_p − 0,7 V) etrafında salınır.</li><li>Sinyalin ikinci pozitif alternansı geldiğinde transistörü iletime geçirmek için giriş sinyalinin kondansatör voltajını aşması gerekir. Böylece transistör yalnızca giriş sinyalinin pozitif tepeleri için çalışmış olur.</li></ul>
+<h3 id="tank-devresi">Tank devresi</h3>
+<p>Çıkış sinyalinin tam bir sinüs olabilmesi için C sınıfı amplifikatörler bir <strong>paralel rezonans devresi (tank devresi)</strong> ile birlikte kullanılır. Tank devresi osilasyonlarının sürekli devam etmesi için tank devresi rezonans frekansıyla devrenin ac giriş sinyal frekansının birbirine eşit olması gerekir. Devreden maksimum çıkış bu durumda alınır. Tank devresinin rezonans frekansı:</p>
+<p><strong>f_r = 1 / (2π√(LC))</strong></p>
+<figure class="yazi-gorsel"><img src="s-10.jpg" width="987" height="1400" loading="lazy" decoding="async" alt="El yazısı not sayfası: kenetleyici polarma, beyz geriliminin dalga şekli ve tank devresi açıklaması"><figcaption>Kenetleyici polarma ve tank devresi</figcaption></figure>
+<p>Transistör iletime geçtiğinde kollektör akım palsı tank devresinin osilasyonunu başlatır ve besler. Böylece çıkışta tam bir sinüsoidal sinyal alınır; çıkış yaklaşık +V_CC ile −V_CC arasında salınır.</p>
+<p><strong>Maksimum çıkış gücü:</strong> Tank devresinin üzerindeki gerilim yaklaşık olarak tepeden tepeye 2V_CC'dir.</p>
+<ul><li>V_out(p-p) = 2V_CC, V_out(p) = V_CC, V_out(rms) = 0,707 V_CC</li><li><strong>P_out = V_out(rms)² / R_c = 0,5 V_CC² / R_c</strong> (R_c: tank devresi direnci)</li><li>Toplam güç: P_T = P_out + P_D(ort) = 0,5 V_CC² / R_c + (t_on/T) · V_CE(sat) · I_C(sat)</li><li>Verim: %η = (P_out / P_T) · 100. P_out ≫ P_D(ort) ise %η yaklaşık %100'dür.</li></ul>
+<p><strong>Örnek:</strong> P_D(ort) = 2 mW olan C sınıfı amplifikatörün V_CC = 24 V ve R_c = 100 Ω değerleri için verimi nedir?</p>
+<ul><li>P_out = 0,5 V_CC² / R_c = 0,5 · 24² / 100 Ω = 2,88 W</li><li>%η = 2,88 W / (2,88 W + 2 mW) · 100 = <strong>%99,93</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-11.jpg" width="1152" height="1598" loading="lazy" decoding="async" alt="El yazısı not sayfası: tank devresinde kollektör akım darbeleri ve sinüsoidal çıkış, maksimum güç ve verim örneği"><figcaption>Tank devresi çıkışı ve verim örneği</figcaption></figure>
+<h2 id="d-sinifi-guc-amplifikatorleri">D sınıfı güç amplifikatörleri</h2>
+<p>D sınıfı amplifikatörler dijital veya pals tipi sinyallerle çalışacak şekilde dizayn edilirler. Verimleri %90'ın üzerindedir. D sınıfı amplifikatörde önce ac sinüsoidal sinyalin pals tipi dalga formuna çevrilmesi, amplifikatör çıkışının ise yüke aktarılmadan önce tekrar orijinal hâline dönüştürülmesi gereklidir.</p>
+<p>Giriş sinyali bir testere dişi sinyalle karşılaştırılır; sonuç, 0 ile +5 V arasında değişen, genişliği giriş sinyaline göre değişen palslerden oluşan dijital dalga formudur. D tipi bir amplifikatörün blok diyagramı: <strong>testere dişi sinyal üreteci</strong> ve <strong>V_i</strong> → <strong>karşılaştırıcı</strong> → <strong>amplifikatör</strong> → <strong>alçak geçiren filtre</strong> (dijitalden sinüsoidale dönüşüm) → <strong>V_o</strong>; çıkıştan girişe bir <strong>geri besleme</strong> yolu vardır.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1137" height="1460" loading="lazy" decoding="async" alt="El yazısı not sayfası: D sınıfında testere dişi ile karşılaştırma, pals dizisi ve blok diyagram"><figcaption>D sınıfı amplifikatör ve blok diyagramı</figcaption></figure>
+<h2 id="amplifikator-distorsiyonu">Amplifikatör distorsiyonu</h2>
+<p>Herhangi bir sinyal 360°'den daha az bir aralık için değişiyorsa distorsiyona sahiptir. 360° için pozitif ve negatif olarak değişen bir sinüsoidal sinyal tek bir frekansa sahipken, distorsiyonlu sinyal her biri farklı genlik değerlerine sahip birden fazla frekans bileşenine sahiptir. Bunlara <strong>harmonik elemanlar</strong> ya da <strong>harmonikler</strong> denir. Örneğin orijinal olarak 1000 Hz olan bir sinyal distorsiyondan sonra 1000 Hz'lik bir frekans komponentine ve 2 kHz, 3 kHz, 4 kHz, … gibi harmonik komponentlerine sahiptir. Orijinal sinyal frekansına (1 kHz) <strong>temel frekans</strong>, bunun tam sayı katlarına <strong>harmonikler</strong> denir: 2 kHz'lik komponent ikinci harmonik, 3 kHz'lik komponent üçüncü harmoniktir.</p>
+<p><strong>Harmonik distorsiyon:</strong> %n. harmonik distorsiyon = <strong>%D_n = (|A_n| / |A₁|) × 100%</strong> (A₁: temel frekansın genliği, A_n: n. frekans komponentinin genliği)</p>
+<p><strong>Toplam harmonik distorsiyon:</strong> <strong>%THD = √(D₂² + D₃² + D₄² + …) × 100%</strong></p>
+<p><strong>Örnek:</strong> Temel genliği 2,5 V, ikinci harmonik genliği 0,25 V, üçüncü harmonik genliği 0,1 V, dördüncü harmonik genliği 0,05 V olan sinyalin % harmonik distorsiyonlarını ve THD'sini hesaplayınız.</p>
+<ul><li>%D₂ = (0,25 V / 2,5 V) × 100 = %10; D₃ = %4; D₄ = %2</li><li>%THD = √(0,10² + 0,04² + 0,02²) × 100 = <strong>%10,95</strong></li></ul>
+<h3 id="distorsiyonlu-sinyalin-gucu">Distorsiyonlu sinyalin gücü</h3>
+<ul><li>Yük direnci (R_C) üzerinde temel frekans tarafından oluşturulan güç: P₁ = I₁² R_C / 2</li><li>Bütün harmoniklerce oluşturulan toplam güç: P = (I₁² + I₂² + I₃² + …) R_C / 2</li><li><strong>P = (1 + D₂² + D₃² + …) I₁² R_C / 2 = (1 + THD²) P₁</strong></li></ul>
+<p>Harmonik komponentlere sahip distorsiyonlu sinyal; temel sinüsoidal komponent V₁ sin ωt, ikinci harmonik −V₂ cos 2ωt ve üçüncü harmonik V₃ sin 3ωt'nin birleşimi olarak gösterilebilir.</p>
+<figure class="yazi-gorsel"><img src="s-14.jpg" width="1152" height="1368" loading="lazy" decoding="async" alt="El yazısı not sayfası: distorsiyonlu sinyalin temel, ikinci ve üçüncü harmonik bileşenlerine ayrılışı"><figcaption>Distorsiyonlu sinyalin harmonik bileşenleri</figcaption></figure>
+<h2 id="guc-transistoru-isi-etkisi">Güç transistörü ısı etkisi</h2>
+<p>Transistörün ısısı arttıkça üzerinde harcayacağı güç miktarı düşer. Tipik olarak maksimum birleşim sıcaklığı silisyum için 150–200 °C, germanyum için 100–110 °C'dir. Ortalama güç harcaması <strong>P_D = V_CE · I_C</strong>'dir. Bu güç değeri transistörün oda sıcaklığındaki (25 °C) çalışma ısısında harcayacağı güçtür; sıcaklık arttıkça güç miktarı düşecektir:</p>
+<p><strong>P_D(sıcaklık₁) = P_D(sıcaklık₀) − (sıcaklık₁ − sıcaklık₀) · (azalma faktörü)</strong></p>
+<p><strong>Örnek:</strong> 25 °C'de maksimum gücü 80 W olarak verilen bir transistörün 25 °C'nin üzerindeki sıcaklıklarda azalma faktörü 0,5 W/°C ise 125 °C'deki gücünü bulunuz.</p>
+<ul><li>P_D(125 °C) = P_D(25 °C) − (125 °C − 25 °C) · (0,5 W/°C) = 80 W − 50 W = <strong>30 W</strong></li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem311-guc-yukselteci-notlari.pdf" download>eem311-guc-yukselteci-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 3.2 MB · 15 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem311-guc-yukselteci-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

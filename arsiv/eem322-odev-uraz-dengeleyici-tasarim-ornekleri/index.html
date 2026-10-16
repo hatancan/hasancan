@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Dengeleyici Tasarımı Çözümlü Örnekleri – Faz İlerleten/Geciktiren, PD ve PI (Uraz, EEM471) — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Alper Uraz&#x27;ın el yazısı çözümlü tasarım örnekleri: kök yer eğrisiyle faz ilerleten (RL-lead) ve faz geciktiren (RL-lag), Bode ile faz ilerleten ve geciktiren dengeleyici; kök yer eğrisiyle PD ve PI, Bode ile PI ve pratik PD denetleç tasarımı adım adım.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Dengeleyici Tasarımı Çözümlü Örnekleri – Faz İlerleten/Geciktiren, PD ve PI (Uraz, EEM471)">
+<meta property="og:description" content="Prof. Dr. Alper Uraz&#x27;ın el yazısı çözümlü tasarım örnekleri: kök yer eğrisiyle faz ilerleten (RL-lead) ve faz geciktiren (RL-lag), Bode ile faz ilerleten ve geciktiren dengeleyici; kök yer eğrisiyle PD ve PI, Bode ile PI ve pratik PD denetleç tasarımı adım adım.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Dengeleyici Tasarımı Çözümlü Örnekleri – Faz İlerleten/Geciktiren, PD ve PI (Uraz, EEM471)", "description": "Prof. Dr. Alper Uraz'ın el yazısı çözümlü tasarım örnekleri: kök yer eğrisiyle faz ilerleten (RL-lead) ve faz geciktiren (RL-lag), Bode ile faz ilerleten ve geciktiren dengeleyici; kök yer eğrisiyle PD ve PI, Bode ile PI ve pratik PD denetleç tasarımı adım adım.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Dengeleyici Tasarımı Çözümlü Örnekleri – Faz İlerleten/Geciktiren, PD ve PI (Uraz, EEM471)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.04.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ornek-7-kok-yer-egrisiyle-faz-ilerleten-tasarim-rl-lead">Örnek 7: Kök yer eğrisiyle faz ilerleten tasarım (RL-LEAD)</a></li><li><a href="#ornek-8-kok-yer-egrisiyle-faz-geciktiren-tasarim-rl-lag">Örnek 8: Kök yer eğrisiyle faz geciktiren tasarım (RL-LAG)</a></li><li><a href="#ornek-9-bode-ile-faz-ilerleten-tasarim-bode-lead">Örnek 9: Bode ile faz ilerleten tasarım (BODE-LEAD)</a></li><li><a href="#ornek-10-bode-ile-faz-geciktiren-tasarim-bode-lag">Örnek 10: Bode ile faz geciktiren tasarım (BODE-LAG)</a></li><li><a href="#pd-denetlec-tasarimi-kok-yer-egrisi">PD denetleç tasarımı (kök yer eğrisi)</a></li><li><a href="#pi-denetlec-tasarimi-kok-yer-egrisi-faz-geciktiren-mantigiyla">PI denetleç tasarımı (kök yer eğrisi, faz geciktiren mantığıyla)</a></li><li><a href="#pi-denetlec-tasarimi-bode-faz-geciktiren-mantigiyla">PI denetleç tasarımı (Bode, faz geciktiren mantığıyla)</a></li><li><a href="#bode-ile-pd-denetlec">Bode ile PD denetleç</a></li><li><a href="#ek-bir-ogrencinin-rl-lag-cozumu">Ek: Bir öğrencinin RL-LAG çözümü</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Dengeleyici Tasarımı Çözümlü Örnekleri – Faz İlerleten/Geciktiren, PD ve PI (Uraz, EEM471)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 09.04.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri klasörünün "Control" alt klasöründe bulunan, dersin öğretim üyesi <strong>Prof. Dr. Alper Uraz</strong>'ın el yazısıyla hazırladığı <strong>dengeleyici (kompanzatör) ve PD/PI denetleç tasarımı çözümlü örneklerini</strong> bir araya getiriyor. Örnek 7–10'un bulunduğu klasörün adı "EEM471Ex7-8-9-10"; yani bu sayfalar dosya adına göre EEM471 kodlu bir derse ait, ama EEM322 klasöründe saklandıkları için burada yer alıyorlar. PD ve PI tasarımı sayfalarında köşede "(p. 174)" notu var. Tarihleri belgede yazmıyor. Taranmış orijinal sayfalar yazının sonunda ZIP olarak indirilebilir.</p>
+<p>Bütün örneklerde birim geri beslemeli bir sistem ve açık döngü transfer fonksiyonu (OLTF) G(s) ele alınıyor. Kullanılan genel formüller:</p>
+<ul><li>İstenen kapalı döngü kutupları: s = −ζωn ± jωn√(1 − ζ²); yerleşme süresi (%2) Ts = 4/(ζωn); aşım PO = 100·e^(−ζπ/√(1 − ζ²)).</li><li>Faz ilerleten dengeleyici: Gc(s) = (s + 1/T)/(s + 1/(aT)) ya da Bode biçiminde Gc(s) = a(1 + Ts)/(1 + aTs), sin φm = (1 − a)/(1 + a), 1/T = √a·ωm.</li><li>Faz geciktiren dengeleyici: Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)).</li></ul>
+<h2 id="ornek-7-kok-yer-egrisiyle-faz-ilerleten-tasarim-rl-lead">Örnek 7: Kök yer eğrisiyle faz ilerleten tasarım (RL-LEAD)</h2>
+<p>OLTF: G(s) = 5 / [s(s + 2)(s + 10)]. Tasarım özellikleri: Ts ≤ 2 s ve PO ≤ %16.3.</p>
+<ol><li>Ts = 4/(ζωn) = 2 ⇒ ζωn = 2; PO = 100·e^(−ζπ/√(1 − ζ²)) = 16.3 ⇒ ζ = 0.5 ⇒ ωn = 4.</li><li>İstenen kapalı döngü kutupları: −2 ± j2√3 = −2 ± j3.46.</li><li>Açı koşulu: ∠5/[s(s + 2)(s + 10)] (s = −2 + j3.46'da) = −120° − 90° − 23.4° = −233.4°.</li><li>Açı eksiği φ = 233.4° − 180° = 53.4° ≈ 54°; dolayısıyla faz ilerleten dengeleyici gerekir.</li><li>Açıortay yöntemi: ζ = 0.5 doğrusu (cos 60° = ζ) ile yatay arasındaki açının açıortayından 27°'şer sağa ve sola ayrılarak sıfır ve kutup bulunur. tan 3° = y/(2√3) ⇒ y = 0.18; tan 57° = x/(2√3) ⇒ x = 5.33. Böylece sıfır −2.18'de, kutup −7.33'te: <strong>Gc(s) = (s + 2.18)/(s + 7.33)</strong>.</li><li>Kuvvetlendirici kazancı genlik koşulundan: |Kc·Gc(s)·G(s)| = 1 (s = −2 + j3.46'da) ⇒ |Kc × 3.46 × 5 / (6.35 × 4 × 3.46 × 8.71)| = 1 ⇒ <strong>Kc = 44.25</strong>.</li></ol>
+<h2 id="ornek-8-kok-yer-egrisiyle-faz-geciktiren-tasarim-rl-lag">Örnek 8: Kök yer eğrisiyle faz geciktiren tasarım (RL-LAG)</h2>
+<p>OLTF: G(s) = 1.06 / [s(s + 1)(s + 2)]. Tasarım özellikleri: ζ = 0.491, ωn = 0.673 (istenen kutup sd = −0.331 + j0.586) ve ess ≤ 0.5.</p>
+<ol><li>Açı koşulu: −119.5° − 41.2° − 19.3° = −180°; istenen kutuplar kök yer eğrisinin kolları üzerindedir.</li><li>Genlik koşulu: K₁ = |s(s + 1)(s + 2)/1.06| = 0.673 × 0.889 × 1.769 / 1.06 = 1.</li><li>Gc(0) = 1 varsayımıyla ess = 0.5 = 1/Kv ⇒ Kv = 2; Kv = lim(s→0) sK·Gc(s)·G(s) = K/2 = 2 ⇒ K₂ = 4. Dolayısıyla b = K₂/K₁ = 4.</li><li>T = 10 seçilir (1/T = 0.1), 1/(bT) = 0.025.</li><li><strong>Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)) = (1/4)(s + 0.1)/(s + 0.025) = (1 + 10s)/(1 + 40s)</strong>; Kc = 1/b = 0.25 ve K = K₂ = 4.</li></ol>
+<h2 id="ornek-9-bode-ile-faz-ilerleten-tasarim-bode-lead">Örnek 9: Bode ile faz ilerleten tasarım (BODE-LEAD)</h2>
+<p>OLTF: G(s) = K / [s(s + 1)(s + 5)]. Tasarım özellikleri: ess ≤ 0.5 ve pm ≥ 40°.</p>
+<ol><li>ess = 0.5 = 1/Kv ⇒ Kv = 2; Kv = lim(s→0) sG(s) = K/5 = 2 ⇒ K₁ = 10.</li><li>Çizimlerden gm = 8 dB, pm = 18°.</li><li>Gereken ek faz 40° − 18° = 22°; 5° güvenlik payıyla φm = 27°.</li><li>sin 27° = (1 − a)/(1 + a) = 0.45 ⇒ a = 0.38; 10 log a = −4.2 dB ⇒ ωm = 1.8 rad/s (genliğin −4.2 dB olduğu frekans).</li><li>1/T = √a·ωm = 1.1 ve 1/(aT) = 2.9.</li><li><strong>Gc(s) = a(1 + Ts)/(1 + aTs) = 0.38(1 + 0.9s)/(1 + 0.34s) = (s + 1.1)/(s + 2.9)</strong>.</li><li>Yeni faz payı ωm = 1.8'de: pm′ = 180° − 90° − tan⁻¹ωm − tan⁻¹(ωm/2.9) + tan⁻¹(ωm/1.1) − tan⁻¹(ωm/5) = 36.1°.</li><li>Kuvvetlendirici kazancı Kc = 1/a = 1/0.38 = 2.63.</li></ol>
+<figure class="yazi-gorsel"><img src="ornek9-bode.jpg" width="1400" height="992" loading="lazy" decoding="async" alt="Örnek 9: G(s) = 10/s(s+1)(s+5) için dengelenmemiş ve faz ilerleten dengeleyiciyle dengelenmiş sistemin elle çizilmiş Bode diyagramları"><figcaption>Örnek 9: Bode ile faz ilerleten tasarım çizimi</figcaption></figure>
+<p><em>Not: Hesaplanan pm′ = 36.1° istenen pm ≥ 40° koşulunu tam karşılamıyor; tasarımın bir kez daha (daha büyük güvenlik payıyla) tekrarlanması gerekir. Çözümde bu konuda yorum yok.</em></p>
+<h2 id="ornek-10-bode-ile-faz-geciktiren-tasarim-bode-lag">Örnek 10: Bode ile faz geciktiren tasarım (BODE-LAG)</h2>
+<p>OLTF: G(s) = K / [s(s + 2)(s + 8)]. Tasarım özellikleri: ess ≤ 0.2 ve pm ≥ 45°.</p>
+<ol><li>ess = 0.2 = 1/Kv ⇒ Kv = 5; Kv = K/16 = 5 ⇒ K₁ = 80.</li><li>Çizimlerden 45° + 5° = 50° faz payı, yeni kazanç kesim frekansı ωg′ = 1.1 rad/s'ye karşılık gelir. ωg′ = 1.1'de 13 dB zayıflatma gerekir.</li><li>b = 10^(13/20) = 10^0.65 = 4.47.</li><li>Bir köşe frekansı ωg′'nün bir dekad altına seçilir: 1/T = 1.1/10 = 0.11 ⇒ 1/(bT) = 0.0246.</li><li><strong>Gc(s) = (1/4.47)(s + 0.11)/(s + 0.0246) = (1 + 9.1s)/(1 + 40.6s)</strong>.</li><li>Yeni faz payı: pm′ = 180° + tan⁻¹(ωg′/0.11) − tan⁻¹(ωg′/0.0246) − 90° − tan⁻¹(ωg′/2) − tan⁻¹(ωg′/8) = 49°.</li></ol>
+<figure class="yazi-gorsel"><img src="ornek10-bode.jpg" width="1400" height="992" loading="lazy" decoding="async" alt="Örnek 10: G(s) = 80/s(s+2)(s+8) için faz geciktiren dengeleyiciyle Bode diyagramı; ωg′ = 1.1 rad/s&#x27;de 13 dB zayıflatma"><figcaption>Örnek 10: Bode ile faz geciktiren tasarım çizimi</figcaption></figure>
+<h2 id="pd-denetlec-tasarimi-kok-yer-egrisi">PD denetleç tasarımı (kök yer eğrisi)</h2>
+<p>PD denetleç: Gc(s) = Kp + Kd·s = Kd(s + Kp/Kd); sıfırı −Kp/Kd'dedir.</p>
+<p>OLTF: K·G(s)·H(s) = K / [s(s + 2)]; istenen kapalı döngü kutupları −2 ± j2.</p>
+<ol><li>Açı koşulu: ∠K/[s(s + 2)] (s = −2 + j2'de) = −∠(−2 + j2) − ∠(−2 + j2 + 2) = −135° − 90° = −225°.</li><li>Toplam açının 180° olması için ilerletme katkısı 45° olmalı; PD denetlecin sıfırı s = −4'e konur, yani Kp/Kd = 4.</li><li>Genlik koşulu: Kd(s + 4)/[s(s + 2)] = −1 (s = −2 + j2'de) ⇒ Kd = 2.</li><li>Böylece Kp = 8 ve <strong>Gc(s) = 8 + 2s</strong>. Dengelenmiş kök yer eğrisi −2 ile 0 arasından ayrılıp −4'teki sıfır çevresinde bir yay çizerek gerçek eksene döner.</li></ol>
+<h2 id="pi-denetlec-tasarimi-kok-yer-egrisi-faz-geciktiren-mantigiyla">PI denetleç tasarımı (kök yer eğrisi, faz geciktiren mantığıyla)</h2>
+<p>OLTF: G(s) = 1 / [s(s + 5)(s + 10)]; istenen kapalı döngü kutupları −1.85 ± j1.88 ve rampa girişi için ess = 0.</p>
+<ol><li>PI denetleç: Gc(s) = Kp + Ki/s = Kp(s + Ki/Kp)/s. Sıfır orijine yakın seçilir: Ki/Kp = 0.1.</li><li>Açı koşulu: ∠Kp(s + 0.1)/[s²(s + 5)(s + 10)] (s = −1.85 ± j1.88'de) = 132.9° − 2 × 134.5° − 30.8° − 12.9° = −180°.</li><li>Genlik koşulu: |Kp(s + 0.1)/[s²(s + 5)(s + 10)]| = 1 ⇒ Kp = 83.3 ⇒ Ki = 8.33.</li><li><strong>Gc(s) = 83.3 + 8.33/s</strong>. PI denetleçle sistem tip 2 olur, rampa girişi için ess = 0.</li></ol>
+<p><em>Not: Taramada açı toplamının sonucu "−120°" gibi okunuyor; terimler toplandığında 132.9° − 269° − 30.8° − 12.9° ≈ −180° çıkar, yani istenen kutuplar dengelenmiş kök yer eğrisi üzerindedir.</em></p>
+<h2 id="pi-denetlec-tasarimi-bode-faz-geciktiren-mantigiyla">PI denetleç tasarımı (Bode, faz geciktiren mantığıyla)</h2>
+<p>OLTF: G(s) = 4 / [s(s + 1)(s + 2)]; istenen faz payı φpm = 50°.</p>
+<ol><li>Adım 1: Açık döngü kazancı ess koşuluna göre ayarlanır; burada K₁ = 1.</li><li>Adım 2: 50° + 5° = 55° ⇒ yeni kazanç kesim frekansı ωg′ = 0.4 rad/s.</li><li>Adım 3: Kp, |G(jωg′)| = −20 log Kp = 13.16 dB koşulundan bulunur: Kp = 10^(−13.16/20) = 0.22.</li><li>Adım 4: Ki/Kp köşe frekansı ωg′'nün bir dekad altına konur: Ki/Kp = ωg′/10 ⇒ Ki = 0.04 × 0.22 = 0.0088.</li><li>Adım 5: <strong>Gc(s) = K₁(Kp + Ki/s) = 0.22 + 0.0088/s</strong>.</li></ol>
+<p>Faz geciktiren dengeleyiciyle karşılaştırma: geciktiren dengeleyici Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)) ve b = 10^(|Gp(jωg′)|/20) olduğundan Kp = 1/b'dir; PI tasarımı, kutbu orijine taşınmış bir faz geciktiren tasarımdır.</p>
+<h2 id="bode-ile-pd-denetlec">Bode ile PD denetleç</h2>
+<p>Pratik PD denetleç türev etkisini bir filtreyle sınırlar:</p>
+<blockquote><p>Gc(s) = Kp + Kd·s/(1 + (Kd/N)s) = Kp·[1 + ((Kp + N)Kd/(N·Kp))s] / [1 + (Kd/N)s]</p></blockquote>
+<p>Bu ifade bir faz ilerleten transfer fonksiyonudur, Gc(s) = a(1 + Ts)/(1 + aTs); tasarım adımları faz ilerleten dengeleyicininkilerle aynıdır.</p>
+<h2 id="ek-bir-ogrencinin-rl-lag-cozumu">Ek: Bir öğrencinin RL-LAG çözümü</h2>
+<p>Klasördeki bir sayfada (fotoğraflanmış sayfadan metne aktarıldı) bir öğrenci aynı yöntemi Gp(s) = K/[s(s + 2)] sistemine uygulamış: ζ = 0.707 ve ess ≤ 0.2.</p>
+<ol><li>İstenen kapalı döngü kutupları s = −1 + j. Açı koşulu: ∠1/[s(s + 2)] = −135° − 45° = −180°; kutuplar kök yer eğrisi üzerinde.</li><li>Genlik koşulu: K₁ = 1.4142 × 1.4142 ≈ 2.</li><li>Gc(0) = 1 varsayımıyla ess = 0.2 = 1/Kv ⇒ Kv = 5; Kv = lim(s→0) sK·Gc(s)·Gp(s) = K/2 ⇒ K₂ = 10; b = K₂/K₁ = 5.</li><li>1/T = 0.1, 1/(bT) = 0.02 ⇒ Gc(s) = (1/5)(s + 0.1)/(s + 0.02); kazanç K = K₂ = 10'a ayarlanır.</li></ol>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip" download>eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.8 MB · 09.04.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

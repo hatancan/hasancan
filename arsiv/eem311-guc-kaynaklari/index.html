@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Elektronik II: Güç Kaynakları, Ripple, Filtreler ve Voltaj Regülatörleri — hasancan.net</title>
+<meta name="description" content="EEM311 Elektronik II el yazısı ders notları: güç kaynağı blok diyagramı, yarım ve tam dalga doğrultucuda ripple faktörü, kapasitör ve RC filtreleri, diyot iletim periyodu, 7805 sabit ve LM317 ayarlanabilir IC voltaj regülatörleri; çözümlü örneklerle.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-guc-kaynaklari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Elektronik II: Güç Kaynakları, Ripple, Filtreler ve Voltaj Regülatörleri">
+<meta property="og:description" content="EEM311 Elektronik II el yazısı ders notları: güç kaynağı blok diyagramı, yarım ve tam dalga doğrultucuda ripple faktörü, kapasitör ve RC filtreleri, diyot iletim periyodu, 7805 sabit ve LM317 ayarlanabilir IC voltaj regülatörleri; çözümlü örneklerle.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-guc-kaynaklari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Elektronik II: Güç Kaynakları, Ripple, Filtreler ve Voltaj Regülatörleri", "description": "EEM311 Elektronik II el yazısı ders notları: güç kaynağı blok diyagramı, yarım ve tam dalga doğrultucuda ripple faktörü, kapasitör ve RC filtreleri, diyot iletim periyodu, 7805 sabit ve LM317 ayarlanabilir IC voltaj regülatörleri; çözümlü örneklerle.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-guc-kaynaklari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-guc-kaynaklari-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-guc-kaynaklari/eem311-guc-kaynaklari-notlari.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM311 Elektronik II: Güç Kaynakları, Ripple, Filtreler ve Voltaj Regülatörleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#guc-kaynagi-blok-diyagrami">Güç kaynağı blok diyagramı</a></li><li><a href="#dogrultulmus-sinyalin-ripple-faktoru">Doğrultulmuş sinyalin ripple faktörü</a></li><li><a href="#kapasitor-filtresi">Kapasitör filtresi</a></li><li><a href="#rc-filtre">RC filtre</a></li><li><a href="#ic-voltaj-regulatorleri">IC voltaj regülatörleri</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM311 Elektronik II: Güç Kaynakları, Ripple, Filtreler ve Voltaj Regülatörleri</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM311 Elektronik II</strong> dersinin <strong>güç kaynakları (voltaj regülatörleri)</strong> konusunu anlatan dört sayfalık el yazısı ders notunun taranmış sayfalarından hazırlandı. Notlarda yazar adı ve tarih yok. Formüller ve örnekler metne aktarıldı; şemalar için sayfa görselleri eklendi. Taranmış sayfalar PDF olarak yazının sonunda indirilebilir.</p>
+<h2 id="guc-kaynagi-blok-diyagrami">Güç kaynağı blok diyagramı</h2>
+<p>220 V (rms) şebeke gerilimi sırasıyla <strong>transformatör → doğrultucu → filtre → regülatör → yük</strong> bloklarından geçer: transformatör gerilimi düşürür, doğrultucu tek yönlü (darbeli) gerilim üretir, filtre bunu dalgalı bir dc'ye çevirir, regülatör ise sabit dc çıkış verir.</p>
+<p><strong>Ripple (dalgalılık):</strong> Filtre çıkışındaki gerilim V_dc ortalama değeri etrafında V_r(p-p) tepeden tepeye dalgalanır.</p>
+<ul><li>r = ripple voltajı (rms) / dc voltaj</li><li><strong>%r = (V_r(rms) / V_dc) × 100%</strong></li></ul>
+<h2 id="dogrultulmus-sinyalin-ripple-faktoru">Doğrultulmuş sinyalin ripple faktörü</h2>
+<p><strong>Yarım dalga doğrultucu çıkışı için</strong> (V_m: tepe değer):</p>
+<ul><li>dc çıkış voltajı: V_dc = 0,318 V_m</li><li>Çıkıştaki ac bileşenin rms değeri: V_r(rms) = 0,385 V_m</li><li>Ripple faktörü: %r = (0,385 V_m / 0,318 V_m) × 100 = <strong>%121</strong></li></ul>
+<p><strong>Tam dalga doğrultucu çıkışı için:</strong></p>
+<ul><li>dc çıkış voltajı: V_dc = 0,636 V_m</li><li>Çıkıştaki ac bileşenin rms değeri: V_r(rms) = 0,308 V_m</li><li>Ripple faktörü: %r = V_r(rms)/V_dc × 100 = <strong>%48</strong></li></ul>
+<p><em>Not: Notta tam dalga için kesir "0,636 V_m / 0,308 V_m" olarak ters yazılmış; doğrusu 0,308 V_m / 0,636 V_m ≈ 0,48'dir. Sonuç (%48) doğru.</em></p>
+<figure class="yazi-gorsel"><img src="s-01.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="El yazısı not sayfası: güç kaynağı blok diyagramı, ripple tanımı, yarım ve tam dalga doğrultucu ripple faktörleri"><figcaption>Güç kaynağı blok diyagramı ve ripple faktörü</figcaption></figure>
+<h2 id="kapasitor-filtresi">Kapasitör filtresi</h2>
+<p>Doğrultucu çıkışı ile yük (R_L) arasına paralel bir kapasitör bağlanır. Orta uçlu transformatörlü tam dalga doğrultucuda kapasitörsüz çıkış V_m tepeli darbelerden oluşur; kapasitör takılınca çıkış V_m'ye yakın, testere dişi biçiminde dalgalanan (V_r(p-p)) bir gerilime dönüşür.</p>
+<ul><li><strong>V_r(rms) = I_dc / (4√3 f C) = 2,4 I_dc / C = 2,4 V_dc / (R_L C)</strong> (I_dc mA, R_L kΩ, C µF)</li><li><strong>V_dc = V_m − I_dc / (4fC) = V_m − 4,17 I_dc / C</strong></li><li>Kapasitör filtresi ripple faktörü: <strong>%r = V_r(rms)/V_dc × 100 = 2,4 I_dc / (C V_dc) × 100 = 2,4 / (R_L C) × 100</strong></li></ul>
+<p><em>Not: 2,4 ve 4,17 katsayıları 60 Hz şebeke (120 Hz tam dalga ripple) için hesaplanmış ders kitabı sabitleridir. Notun sonunda belirtildiği gibi 50 Hz şebekede (100 Hz tam dalga ripple) aynı formüller V_r(rms) ≈ 1,44 I_dc / C ve V_dc ≈ V_m − 2,5 I_dc / C verir.</em></p>
+<h3 id="diyot-iletim-periyodu-ve-tepe-diyot-akimi">Diyot iletim periyodu ve tepe diyot akımı</h3>
+<p>Diyot yalnızca kapasitörün yeniden şarj olduğu kısa T₁ süresinde iletir; bu sürede yüksek bir tepe akımı (I_peak) akar.</p>
+<ul><li>I_dc = (T₁/T) · I_peak → <strong>I_peak = (T/T₁) · I_dc</strong></li><li>T₁: diyot iletim periyodu; T = 1/f (f, tam dalga için 2 × 50 = 100 Hz)</li></ul>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="El yazısı not sayfası: kapasitör filtresi, ripple dalga şekli, diyot iletim periyodu ve tepe diyot akımı"><figcaption>Kapasitör filtresi ve diyot akımı</figcaption></figure>
+<h2 id="rc-filtre">RC filtre</h2>
+<p>C filtresinin ardına bir R–C2 bölümü eklenerek (C1 – R – C2 – R_L) ripple daha da azaltılır. a noktasında V_dc ve V_r, b noktasında V'_dc ve daha küçük V'_r bulunur.</p>
+<ul><li>b noktasındaki dc voltaj (dc'de kondansatörler açık devre): <strong>V'_dc = R_L / (R + R_L) · V_dc</strong></li><li>b noktasındaki ripple voltajı: <strong>V'_r(rms) ≅ (X_C / R) · V_r(rms)</strong></li></ul>
+<p><strong>Örnek:</strong> 220 V, 50 Hz ac girişli tam dalga doğrultucunun çıkışında V_dc = 150 V, V_r(rms) = 15 V'tur. Ardından C1 = 15 µF, R = 500 Ω, C2 = 10 µF ve R_L = 5 kΩ'luk RC filtre vardır.</p>
+<ul><li>V'_dc = 5k / (500 Ω + 5k) · 150 V = <strong>136,4 V</strong></li><li>X_C = 1/(2πfC) = 159,2 Ω (f = 100 Hz, C = 10 µF)</li><li>V'_r(rms) = (159,2 / 500) · 15 V = <strong>4,77 V</strong></li><li>%r = V'_r(rms) / V'_dc × 100 = 4,77 V / 136,4 V × 100 = <strong>%3,5</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="El yazısı not sayfası: RC filtre devresi, a ve b noktalarındaki gerilimler ve sayısal örnek"><figcaption>RC filtre ve örnek</figcaption></figure>
+<h2 id="ic-voltaj-regulatorleri">IC voltaj regülatörleri</h2>
+<p>Örnek devrede V_m = 15 V'luk transformatör sekonderi köprü doğrultucuya, ardından 250 µF filtre kapasitörüne ve <strong>7805</strong> sabit regülatörüne (1: IN, 2: OUT, 3: GND) bağlanır; çıkışta 0,01 µF kapasitörle <strong>V_o = +5 V</strong> elde edilir.</p>
+<ul><li>V_r(peak) = √3 · V_r(rms)</li><li>V_dc = V_m − V_r(peak)</li><li>V_i(low) = V_dc − V_r(peak) (regülatör girişinin en düşük değeri)</li></ul>
+<h3 id="ayarlanabilir-voltaj-regulatoru">Ayarlanabilir voltaj regülatörü</h3>
+<p><strong>LM317</strong> ayarlanabilir regülatöründe V_OUT ile ADJ ucu arasına R1, ADJ ucu ile toprak arasına ayarlı R2 bağlanır:</p>
+<ul><li><strong>V_o = V_ref (1 + R2/R1) + I_adj · R2</strong></li><li>Tipik değerler: V_ref = 1,25 V, I_adj = 100 µA</li></ul>
+<p><strong>Örnek:</strong> Yukarıdaki devrede R1 = 240 Ω, R2 = 2,4 kΩ ise regüle edilen çıkışı bulunuz.</p>
+<ul><li>V_o = 1,25 V (1 + 2,4k/240 Ω) + 100 µA · 2,4k = 13,75 V + 0,24 V = <strong>13,99 V</strong></li></ul>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="El yazısı not sayfası: 7805 ile sabit 5 V güç kaynağı ve LM317 ayarlanabilir regülatör örneği"><figcaption>IC voltaj regülatörleri: 7805 ve LM317</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem311-guc-kaynaklari-notlari.pdf" download>eem311-guc-kaynaklari-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 301 KB · 4 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem311-guc-kaynaklari-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (301 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

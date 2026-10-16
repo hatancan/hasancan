@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: MOS Transistör – Akım Bağıntıları, Hız Doyumu, Sığalar (UC Berkeley EE141 slaytları, Jan Rabaey) — hasancan.net</title>
+<meta name="description" content="EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey&#x27;in UC Berkeley EE141 ders slaytlarına dayanan MOS transistör sunumu: doğrusal ve doyum bölgesi akımı, kanal boyu modülasyonu, hız doyumu ve VDSAT, eşik altı iletim, birleşik el analizi modeli, eşdeğer direnç Req, gate, difüzyon ve parazitik sığalar, hot-carrier etkisi, eşik değişimleri ve latch-up.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: MOS Transistör – Akım Bağıntıları, Hız Doyumu, Sığalar (UC Berkeley EE141 slaytları, Jan Rabaey)">
+<meta property="og:description" content="EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey&#x27;in UC Berkeley EE141 ders slaytlarına dayanan MOS transistör sunumu: doğrusal ve doyum bölgesi akımı, kanal boyu modülasyonu, hız doyumu ve VDSAT, eşik altı iletim, birleşik el analizi modeli, eşdeğer direnç Req, gate, difüzyon ve parazitik sığalar, hot-carrier etkisi, eşik değişimleri ve latch-up.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: MOS Transistör – Akım Bağıntıları, Hız Doyumu, Sığalar (UC Berkeley EE141 slaytları, Jan Rabaey)", "description": "EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey'in UC Berkeley EE141 ders slaytlarına dayanan MOS transistör sunumu: doğrusal ve doyum bölgesi akımı, kanal boyu modülasyonu, hız doyumu ve VDSAT, eşik altı iletim, birleşik el analizi modeli, eşdeğer direnç Req, gate, difüzyon ve parazitik sığalar, hot-carrier etkisi, eşik değişimleri ve latch-up.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "dosya_4_EEM312.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/dosya_4_EEM312.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: MOS Transistör – Akım Bağıntıları, Hız Doyumu, Sığalar (UC Berkeley EE141 slaytları, Jan Rabaey)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>24.02.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#uzun-kanalli-transistorde-akim-gerilim-bagintisi">Uzun kanallı transistörde akım–gerilim bağıntısı</a></li><li><a href="#hiz-doyumu-velocity-saturation">Hız doyumu (velocity saturation)</a></li><li><a href="#esik-alti-iletim-subthreshold-conductance">Eşik altı iletim (subthreshold conductance)</a></li><li><a href="#ozet-akim-bagintilari">Özet: akım bağıntıları</a></li><li><a href="#kanal-direnci-ve-anahtar-modeli">Kanal direnci ve anahtar modeli</a></li><li><a href="#mos-sigalari">MOS sığaları</a></li><li><a href="#hot-carrier-etkileri-esik-degisimleri-ve-latch-up">Hot-carrier etkileri, eşik değişimleri ve latch-up</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: MOS Transistör – Akım Bağıntıları, Hız Doyumu, Sığalar (UC Berkeley EE141 slaytları, Jan Rabaey)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 24.02.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> dersinde Prof. Dr. Emin Akata'nın 2006 bahar döneminde dağıttığı 41 sayfalık MOS transistör sunumunu aktarıyor. Sunum büyük ölçüde <strong>Jan M. Rabaey'in UC Berkeley EE141 (Digital Integrated Circuits)</strong> ders slaytlarına dayanıyor; hocanın türetmeleri ve açıklamaları eklenmiş. Slaytlar İngilizce; içerik aşağıda Türkçe açıklamalarla ve formülleriyle yazıya döküldü. Orijinal PDF yazının sonunda indirilebilir. Serinin önceki bölümü: <a href="/arsiv/eem312-rabaey-diyot/">Diyot ve MOS Transistöre Giriş</a>.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="uzun-kanalli-transistorde-akim-gerilim-bagintisi">Uzun kanallı transistörde akım–gerilim bağıntısı</h2>
+<p><strong>Doğrusal (rezistif) bölge</strong> (L &gt; 0,25 µm, V_DS ≤ V_GS − V_T):</p>
+<ul><li>I_D = k′_n (W/L)[(V_GS − V_T)V_DS − V_DS²/2]</li><li>k′_n = µ_n C_ox = µ_n ε_ox/t_ox: süreç geçiş iletkenliği parametresi (µ_n taşıyıcı hareketliliği, m²/Vs); k_n = k′_n W/L: aygıtın kazanç çarpanı</li><li>Küçük V_DS'de I_D ile V_DS arasında doğrusal ilişki vardır; bölgenin adı buradan gelir.</li></ul>
+<p><strong>Doyum bölgesi</strong> (V_DS ≥ V_GS − V_T): yukarıdaki ifadede V_DS yerine V_GS − V_T konur:</p>
+<ul><li>I_D′ = (k′_n/2)(W/L)(V_GS − V_T)²</li><li>Kısılma (pinch-off) noktası ile source arasındaki gerilim V_GS − V_T'de sabit kaldığından I_D artık V_DS'ye bağlı değildir. Ancak iletken kanalın etkin uzunluğu V_DS ile değiştiğinden: <strong>I_D = I_D′(1 + λV_DS)</strong>; λ kanal boyu modülasyonu katsayısıdır ve kanal boyuyla ters orantılıdır.</li></ul>
+<p>Doyumdaki transistör ideal bir akım kaynağı gibi davranır; ama V_DS arttıkça etkin kanal kısalır ve akım artar (L paydadadır). Kısa transistörlerde drain ekleminin boşaltılmış bölgesi kanalın daha büyük bir kısmını kapladığından kanal boyu modülasyonu daha belirgindir; yüksek empedanslı bir akım kaynağı gerekiyorsa uzun kanallı transistör seçmek önerilir.</p>
+<p><strong>Akımı belirleyenler</strong> (sabit V_DS ve V_GS &gt; V_T için): source-drain uzaklığı L, kanal genişliği W, eşik gerilimi V_T, SiO₂ kalınlığı t_ox, gate yalıtkanının dielektrik sabiti ε_ox ve taşıyıcı hareketliliği (nFET için µ_n = 500 cm²/Vs, pFET için µ_p = 180 cm²/Vs).</p>
+<h2 id="hiz-doyumu-velocity-saturation">Hız doyumu (velocity saturation)</h2>
+<p>Çok kısa kanallı transistörler rezistif ve doyum modellerinden belirgin biçimde sapar. Taşıyıcı hızı v_n = µ_n ξ(x) iken hareketlilik sabittir; ama yatay alan kritik bir ξ_c değerine ulaşınca çarpışmalar nedeniyle hız doyar. Bu koşul kısa kanallı aygıtlarda kolayca sağlanır.</p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Taşıyıcı hızının alanla değişimi: ξc = 1,5 V/µm&#x27;ye kadar sabit hareketlilik, sonra υsat = 10⁵ m/s&#x27;de sabit hız"><figcaption>Kısa kanal etkileri: hız doyumu</figcaption></figure>
+<p>L = 0,25 µm'lik bir NMOS'ta hız doyumuna ulaşmak için D ile S arasında yalnızca birkaç voltluk fark yeterlidir; PMOS'ta hız doyumu daha az belirgindir.</p>
+<p><strong>Yaklaşık hız eğrisi:</strong> v = µ_n ξ/(1 + ξ/ξ_c) (ξ ≤ ξ_c), v = v_sat (ξ ≥ ξ_c). Eğrinin v_sat'ta sürekli olması ξ_c = 2v_sat/µ_n gerektirir. Akım ifadesi bu hız ifadesiyle yeniden hesaplanınca:</p>
+<ul><li>Doğrusal (V_DS ≤ V_GS − V_T): I_D = κ(V_DS) k′_n (W/L)[(V_GS − V_T)V_DS − V_DS²/2]</li><li>κ(V) = 1/(1 + V/(ξ_c L)): hız doyumunun derecesinin ölçüsü</li><li>Doyum (V_DS = V_DSAT): I_DSAT = κ(V_DSAT) k′_n (W/L)[(V_GS − V_T)V_DSAT − V_DSAT²/2]</li><li>Uzun kanalda ya da küçük V_DS'de κ → 1; kısa kanalda κ &lt; 1 ve beklenenden az akım verilir.</li></ul>
+<p>Rezistif bölgedeki dq(x) = −C_ox W dx[V_GS − V(x) − V_T] ifadesinden I(x) = C_ox W v_n(x)[V_GS − V(x) − V_T], doyumda I_DSAT = C_ox W v_sat [V_GS − V_DSAT − V_T]; bu iki ifade eşitlenince <strong>V_DSAT = κ(V_GT)V_GT</strong>, V_GT = V_GS − V_T.</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Uzun ve kısa kanallı aygıtların ID–VDS eğrileri: kısa kanallı aygıt VGS − VT&#x27;den önce, VDSAT&#x27;ta doyuma girer"><figcaption>Hız doyumu etkileri</figcaption></figure>
+<p>Kısa kanallı aygıtta ve yeterince büyük V_GT'de κ(V_GT) 1'den belirgin biçimde küçüktür ve V_DSAT &lt; V_GT olur: aygıt V_DS, V_GS − V_T'ye ulaşmadan doyuma girer ve daha çok doyumda çalışır. I_DSAT, V_GS'ye <strong>doğrusal</strong> bağlıdır (uzun kanaldaki karesel bağımlılığın aksine); belli bir kontrol gerilimi için daha az akım verilir. V_GS = V_DS = 2,5 V'ta kısa transistörün akımı uzun olanınkinin yalnızca %40'ı kadardır (220 µA'e karşı 540 µA).</p>
+<p>PMOS'ta tüm gerilim ve akım işaretleri terstir (örnek: 0,25 µm PMOS, W/L = 1,5, V_DD = 2,5 V, V_T = −0,4 V; V_GS = −2,5 V'ta I_D ≈ −1 × 10⁻⁴ A).</p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="ID–VGS: uzun kanalda karesel, kısa kanalda doğrusal bağımlılık (VDS = 2,5 V, W/L = 1,5)"><figcaption>MOS ID–VGS karakteristikleri</figcaption></figure>
+<h3 id="basitlestirilmis-model">Basitleştirilmiş model</h3>
+<p>Bulunan ifadeler el analizi için karmaşık olduğundan iki varsayım yapılır:</p>
+<ol><li>Hız ξ_c'de birden doyar: v = µ_n ξ (ξ ≤ ξ_c), v = v_sat = µ_n ξ_c (ξ ≥ ξ_c).</li><li>Kritik alanın oluştuğu V_DSAT sabittir (büyük V_GT için makul): V_DSAT ≈ Lξ_c = Lv_sat/µ_n.</li></ol>
+<p>V_DSAT = κ(V_GT)V_GT = [ξ_c L/(ξ_c L + V_GT)]V_GT ve büyük V_GT'de ≈ ξ_c L. Bu varsayımlarla rezistif bölge denklemleri uzun kanal modeliyle aynı kalır; V_DSAT'a ulaşılınca akım birden doyar:</p>
+<ul><li>I_DSAT = µ_n C_ox (W/L)[(V_GS − V_T)V_DSAT − V_DSAT²/2], µ_n/L = v_sat/V_DSAT konunca</li><li><strong>I_DSAT = v_sat C_ox W (V_GS − V_T − V_DSAT/2)</strong></li></ul>
+<p>Bu model gerçekten birinci derece ve deneyseldir; doğrusal ve hız doyumlu bölgeler arasındaki geçişte sapmalara yol açar.</p>
+<h2 id="esik-alti-iletim-subthreshold-conductance">Eşik altı iletim (subthreshold conductance)</h2>
+<p>V_GS &lt; V_T iken iletimden kesime geçiş ani değil, kademelidir; akım hemen sıfıra düşmez, bipolar transistördeki gibi üstel olarak azalır. İletken kanal yokken source, bulk ve drain parazitik bir npn bipolar transistör oluşturur:</p>
+<ul><li>I_D = I_S e^(qV_GS/(nkT)) (1 − e^(−qV_DS/(kT)))(1 + λV_DS); I_S ve n deneysel parametreler, n tipik olarak 1,5 civarı (≥ 1)</li><li>Eğim çarpanı S = n(kT/q) ln(10): tipik 60 (n = 1) ile 100 mV/dekad</li><li>Akımın azalma hızı sıcaklık artışından da etkilenir; eşik altı iletim dinamik devrelerde ve güç tüketiminde sorun yaratır.</li></ul>
+<h2 id="ozet-akim-bagintilari">Özet: akım bağıntıları</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Bölge</th><th scope="col">Koşul</th><th scope="col">I_D</th></tr></thead><tbody><tr><th scope="row">Kesim</th><td>V_GS ≤ V_T</td><td>0</td></tr><tr><th scope="row">Triyot</th><td>V_GS &gt; V_T, V_DS &lt; V_GS − V_T</td><td>k_n[(V_GS − V_T)V_DS − V_DS²/2]</td></tr><tr><th scope="row">Doyum</th><td>V_GS &gt; V_T, V_DS ≥ V_GS − V_T</td><td>(k_n/2)(V_GS − V_T)²(1 + λV_DS)</td></tr><tr><th scope="row">Hız doyumu</th><td>V_GS &gt; V_T, V_DS ≥ V_DSAT, V_DSAT &lt; V_GS − V_T</td><td>k_n[(V_GS − V_T)V_DSAT − V_DSAT²/2] ≈ v_sat C_ox W(V_GS − V_T − V_DSAT/2)</td></tr></tbody></table></div>
+<p>k_n = k′_n W/L, k′_n = µ_n C_ox = µ_n ε_ox/t_ox, V_GT = V_GS − V_T.</p>
+<h3 id="birlesik-unified-el-analizi-modeli">Birleşik (unified) el analizi modeli</h3>
+<ul><li>I_D = 0 (V_GT ≤ 0)</li><li>I_D = k′(W/L)[V_GT V_min − V_min²/2](1 + λV_DS) (V_GT ≥ 0), V_min = min(V_GT, V_DS, V_DSAT)</li><li>V_T = V_T0 + γ(√|−2φ_F + V_SB| − √|−2φ_F|)</li></ul>
+<p>Model dört uçtaki gerilimlerle ve beş aygıt parametresiyle (V_T0, γ, V_DSAT, k′, λ) belirlenir. PMOS'ta bu parametrelerin hepsi negatiftir ve "min" yerine "max" kullanılır. Sayısal devrelerde aygıt çoğunlukla yüksek akım bölgesinde (V_GS = V_DS = V_DD) çalıştığından modelin bu bölgede iyi uyması önemlidir. 0,25 µm CMOS için:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">V_T0 (V)</th><th scope="col">γ (V^0,5)</th><th scope="col">V_DSAT (V)</th><th scope="col">k′ (A/V²)</th><th scope="col">λ (V⁻¹)</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>0,43</td><td>0,4</td><td>0,63</td><td>115 × 10⁻⁶</td><td>0,06</td></tr><tr><th scope="row">PMOS</th><td>−0,4</td><td>−0,4</td><td>−1</td><td>−30 × 10⁻⁶</td><td>−0,1</td></tr></tbody></table></div>
+<p>Sunumda basit modelin SPICE ile karşılaştırması da var: doğrusal, hız doyumlu ve doymuş bölgelerde iki eğri yakın; V_DS = V_DSAT ve V_DSAT = V_GT sınırları işaretli.</p>
+<h2 id="kanal-direnci-ve-anahtar-modeli">Kanal direnci ve anahtar modeli</h2>
+<p><strong>Doğrusal bölgede drain-source direnci</strong> (kanal boyu modülasyonu ve hız doyumu ihmal):</p>
+<ul><li>R_DS = (∂I_D/∂V_DS)⁻¹ = 1/[k_n(V_GS − V_T − V_DS)]; V_DS → V_GS − V_T iken R_DS → ∞</li></ul>
+<p><strong>Doyumda</strong> (kanal boyu modülasyonu dahil, hız doyumu ihmal): R_DS = [λ(k_n/2)(V_GS − V_T)²]⁻¹ ≅ (λI_D)⁻¹ (sabit V_GS için).</p>
+<p><strong>Anahtar modeli:</strong> transistör, sonsuz kesim direnci ve sonlu R_on iletim direnci olan bir anahtar gibi modellenir. Direnç W/L ile ters orantılıdır (W'yi iki katına çıkarmak R_on'u yarıya indirir); V_DD ≫ V_T + V_DSAT/2 için R_on V_DD'den bağımsızdır; V_DD, V_T'ye yaklaştıkça R_on hızla artar. W/L = 1 için (V_GS = V_DD, V_DS: V_DD → V_DD/2):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_DD (V)</th><th scope="col">1</th><th scope="col">1,5</th><th scope="col">2</th><th scope="col">2,5</th></tr></thead><tbody><tr><th scope="row">NMOS R_eq (kΩ)</th><td>35</td><td>19</td><td>15</td><td>13</td></tr><tr><th scope="row">PMOS R_eq (kΩ)</th><td>115</td><td>55</td><td>38</td><td>31</td></tr></tbody></table></div>
+<p>Daha büyük aygıtlar için R_eq, W/L'ye bölünür.</p>
+<p>R_on zamanla değişen, doğrusal olmayan ve çalışma noktasına bağlı bir büyüklüktür; geçişin uç noktalarındaki ortalama direnç R_eq iyi bir sabit yaklaşımdır:</p>
+<ul><li>R_eq = 1/(t₂ − t₁) ∫ R_on(t) dt = 1/(t₂ − t₁) ∫ V_DS(t)/I_D(t) dt ≈ ½[R_on(t₁) + R_on(t₂)]</li></ul>
+<p>Yayılım gecikmesi tanımı gereği, bir sığanın V_DD'den V_DD/2'ye hız doyumundaki bir NMOS üzerinden boşalması alınırsa:</p>
+<ul><li><strong>R_eq = (3/4)(V_DD/I_DSAT)(1 − (7/9)λV_DD)</strong>, I_DSAT = k′(W/L)[(V_DD − V_T)V_DSAT − V_DSAT²/2]</li><li>Uç noktalardaki dirençlerin ortalaması alınıp Taylor açılımıyla sadeleştirilirse benzer sonuç: R_eq ≈ (3/4)(V_DD/I_DSAT)(1 − (5/6)λV_DD)</li></ul>
+<h2 id="mos-sigalari">MOS sığaları</h2>
+<p><strong>Örtüşme (overlap) sığası:</strong> yanal difüzyon x_d nedeniyle gate, source ve drain'in üzerine taşar (L_d = L − 2x_d): C_GSO = C_GDO = C_ox x_d W = C_o W.</p>
+<p><strong>Gate-kanal sığası</strong> bölgeye göre:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Bölge</th><th scope="col">C_GCB</th><th scope="col">C_GCS</th><th scope="col">C_GCD</th><th scope="col">C_GC</th><th scope="col">C_G</th></tr></thead><tbody><tr><th scope="row">Kesim</th><td>C_ox WL</td><td>0</td><td>0</td><td>C_ox WL</td><td>C_ox WL + 2C_o W</td></tr><tr><th scope="row">Rezistif</th><td>0</td><td>C_ox WL/2</td><td>C_ox WL/2</td><td>C_ox WL</td><td>C_ox WL + 2C_o W</td></tr><tr><th scope="row">Doyum</th><td>0</td><td>(2/3)C_ox WL</td><td>0</td><td>(2/3)C_ox WL</td><td>(2/3)C_ox WL + 2C_o W</td></tr></tbody></table></div>
+<p>Sayısal tasarımda en önemli bölgeler doyum ve kesimdir.</p>
+<figure class="yazi-gorsel"><img src="s-34.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Gate sığasının VGS&#x27;ye (VDS = 0) ve doyma derecesine VDS/(VGS − VT) göre değişimi"><figcaption>Gate sığası</figcaption></figure>
+<p><strong>Difüzyon sığası:</strong> source/drain bölgesinin taban (bottom) ve yan duvar (side wall) eklemlerinden oluşur:</p>
+<ul><li>C_j = C_j0/(1 − V_D/φ₀)^m, C_sw = C′_sw x_j (W + 2L_s), C_jsw = C′_sw x_j</li><li>C_diff = C_bottom + C_sw = C_j × alan + C_jsw × çevre = C_j L_s W + C_jsw(2L_s + W)</li></ul>
+<p><strong>MOSFET sığa modeli:</strong> C_GS = C_GCS + C_GSO, C_GD = C_GCD + C_GDO, C_GB = C_GCB, C_SB = C_Sdiff, C_DB = C_Ddiff.</p>
+<p>0,25 µm CMOS sürecindeki sığa parametreleri:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">C_ox (fF/µm²)</th><th scope="col">C_O (fF/µm)</th><th scope="col">C_j (fF/µm²)</th><th scope="col">m_j</th><th scope="col">φ_b (V)</th><th scope="col">C_jsw (fF/µm)</th><th scope="col">m_jsw</th><th scope="col">φ_bsw (V)</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>6</td><td>0,31</td><td>2</td><td>0,5</td><td>0,9</td><td>0,28</td><td>0,44</td><td>0,9</td></tr><tr><th scope="row">PMOS</th><td>6</td><td>0,27</td><td>1,9</td><td>0,48</td><td>0,9</td><td>0,22</td><td>0,32</td><td>0,9</td></tr></tbody></table></div>
+<p><strong>Parazitik dirençler:</strong> source ve drain bölgelerinin seri dirençleri R_S ve R_D; şekilde etkin gate gerilimi V_GS,eff ile drain kontağı–gate arasındaki L_D uzaklığı ve W gösteriliyor.</p>
+<h2 id="hot-carrier-etkileri-esik-degisimleri-ve-latch-up">Hot-carrier etkileri, eşik değişimleri ve latch-up</h2>
+<p><strong>Hot-carrier etkileri:</strong> kısa kanallı aygıtlarda zamanla kayma eğilimi. Aygıt boyutları sürekli küçülürken besleme ve çalışma gerilimleri aynı oranda küçülmemiştir; elektrik alan ve elektron hızı artar. Yüksek enerjili elektronlar gate oksidine girip orada tutulur; bu da eşik geriliminin artmasına (PMOS'ta azalmasına) yol açar ve uzun vadeli bir güvenilirlik sorunudur. Çözüm: elektrik alan tepelerini sınırlayan özel tasarlanmış drain ve source bölgeleri ve düşürülmüş besleme gerilimleri.</p>
+<p><strong>Eşik değişimleri:</strong> düşük V_DS'de eşik gerilimi kanal boyu kısaldıkça düşer (uzun kanal eşiğinden aşağı); kısa L'de V_DS arttıkça eşik düşer (<strong>drain-induced barrier lowering</strong>, DIBL). Veriye bağlı gürültü: eşik altı sızıntı akımı bit hattındaki veri örüntülerine bağlı hâle gelir.</p>
+<p><strong>Latch-up:</strong> son slaytta latch-up'ın kaynağı gösteriliyor: CMOS yapısında n-well ve p-alttaş içinde oluşan parazitik pnp ve npn transistörler (R_nwell ve R_psubs dirençleriyle) ve bunların eşdeğer devresi.</p>
+<figure class="yazi-gorsel"><img src="s-41.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Latch-up&#x27;ın kaynağı: n-well ve p-alttaş içindeki parazitik bipolar transistörler ve eşdeğer devre"><figcaption>Latch-up</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dosya_4_EEM312.pdf" download>dosya_4_EEM312.pdf</a></p>
+              <p class="kucuk">PDF · 574 KB · 41 <span data-i18n="arch.pagesLower"></span> · 24.02.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dosya_4_EEM312.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (574 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

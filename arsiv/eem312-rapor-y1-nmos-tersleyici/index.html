@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: Y1 Raporları, Direnç Yüklü NMOS Tersleyicinin SPICE Benzetimi (5 V ve 3 V) — hasancan.net</title>
+<meta name="description" content="EEM312 Sayısal Elektronik yazılım laboratuvarı Y1 deneyi için öğrenci ön çalışmaları ve raporları: Spice3 komutları, direnç yüklü NMOS tersleyicinin VTC eğrisinden VOL, VOH, VIL, VIH, VM, gürültü payları ve 5 V ile 3 V beslemede tr, tf, tpHL, tpLH gecikmeleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rapor-y1-nmos-tersleyici/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: Y1 Raporları, Direnç Yüklü NMOS Tersleyicinin SPICE Benzetimi (5 V ve 3 V)">
+<meta property="og:description" content="EEM312 Sayısal Elektronik yazılım laboratuvarı Y1 deneyi için öğrenci ön çalışmaları ve raporları: Spice3 komutları, direnç yüklü NMOS tersleyicinin VTC eğrisinden VOL, VOH, VIL, VIH, VM, gürültü payları ve 5 V ile 3 V beslemede tr, tf, tpHL, tpLH gecikmeleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rapor-y1-nmos-tersleyici/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: Y1 Raporları, Direnç Yüklü NMOS Tersleyicinin SPICE Benzetimi (5 V ve 3 V)", "description": "EEM312 Sayısal Elektronik yazılım laboratuvarı Y1 deneyi için öğrenci ön çalışmaları ve raporları: Spice3 komutları, direnç yüklü NMOS tersleyicinin VTC eğrisinden VOL, VOH, VIL, VIH, VM, gürültü payları ve 5 V ile 3 V beslemede tr, tf, tpHL, tpLH gecikmeleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rapor-y1-nmos-tersleyici/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "EEM312_Y1_NMOS_tersleyici_raporlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem312-rapor-y1-nmos-tersleyici/EEM312_Y1_NMOS_tersleyici_raporlari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: Y1 Raporları, Direnç Yüklü NMOS Tersleyicinin SPICE Benzetimi (5 V ve 3 V)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>29.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#on-calisma-spice3-komutlari">Ön çalışma: Spice3 komutları</a></li><li><a href="#benzetilen-devre">Benzetilen devre</a></li><li><a href="#sonuclar-5-v-ve-3-v-besleme">Sonuçlar: 5 V ve 3 V besleme</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: Y1 Raporları, Direnç Yüklü NMOS Tersleyicinin SPICE Benzetimi (5 V ve 3 V)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 29.03.2011 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> yazılım laboratuvarının ilk deneyi <strong>Y1: Direnç yüklü NMOS ile tersleyici</strong> için yazılmış ön çalışma ve raporları bir araya getiriyor: 2011 bahar döneminden bir ön çalışma ve rapor (A), yine 2011'den bir ön çalışma (B) ve 2014'ten bir ön çalışma ve rapor (C). Hepsi arkadaşların çalışmaları; <strong>kişisel bilgiler çıkarıldı</strong>. Föyün kendisi <a href="/arsiv/eem312-yazilim-deneyleri-y1-y3/">EEM312 yazılım laboratuvarı föyleri Y1–Y3</a> yazısında. Kişisel bilgileri kapatılmış PDF'ler, SPICE ağ listeleri ve 2014 tarihli WinSPICE ekran görüntüleri yazının sonundaki ZIP'te.</p>
+<h2 id="on-calisma-spice3-komutlari">Ön çalışma: Spice3 komutları</h2>
+<p>Üç ön çalışma da föyde istenen komutları açıklıyor:</p>
+<ul><li><strong>DC analiz:</strong> <code>.DC SRCNAM VSTART VSTOP VINCR [SRC2 START2 STOP2 INCR2]</code>. Örneğin <code>.DC VCC 0 5 0.5</code>, kaynağı 0 V'tan 5 V'a 0.5 V adımlarla tarar; <code>.DC VDS 0 10 .5 VGS 0 5 1</code> iç içe iki kaynak tarar.</li><li><strong>Gerilim kaynağı:</strong> <code>VNAME N+ N- DC değer</code> (ör. <code>VCC 1 0 DC 5</code>); darbe kaynağı <code>PULSE(V1 V2 TD TR TF PW PER)</code> (başlangıç ve darbe seviyeleri, gecikme, yükselme ve düşme süreleri, darbe genişliği, periyot).</li><li><strong>Geçici durum analizi:</strong> <code>.TRAN TSTEP TSTOP &lt;TSTART &lt;TMAX&gt;&gt;</code>.</li><li><strong>MOSFET:</strong> <code>MNAME DRAIN GATE SOURCE BULK MODELNAME L=… W=…</code>; model <code>.MODEL</code> komutuyla tanımlanır.</li><li><strong>Grafik:</strong> <code>.PLOT DC V(2) VS V(1)</code>, <code>.PLOT TRAN V(2) V(1)</code>; WinSPICE'ta <code>.control … plot … .endc</code> bloğu.</li><li>Tanımlar: V_OH/V_OL çıkış yüksek/düşük seviyeleri, V_IH/V_IL eğimin −1 olduğu giriş gerilimleri, V_M = V_in = V_out noktası, NM_H = V_OH − V_IH, NM_L = V_IL − V_OL; t_r, t_f %10–%90 süreleri, t_pHL, t_pLH %50 gecikmeleri, t_d = (t_pHL + t_pLH)/2.</li></ul>
+<h2 id="benzetilen-devre">Benzetilen devre</h2>
+<p>İki raporda da devre aynı: 50 kΩ yük direnci, 1 pF yük sığası, L = 5 µm, W = 10 µm NMOS ve 0–5 V, 1 µs periyotlu darbe girişi (A raporunun ağ listesi):</p>
+<pre class="kod"><code>VDC 3 0 DC 5
+VIN 1 0 PULSE(0 5 0 2NS 2NS 504NS 1US)
+C1 2 0 1PF
+R1 3 2 50K
+M1 2 1 0 0 M1 L=5U W=10U
+.MODEL M1 NMOS (VTO=1 KP=20U GAMMA=0.37 PHI=0.6 CBD=3.1E-15 CBS=3.1E-15)
+.DC VIN 0 5 0.01
+.TRAN 0.1NS 1US
+.PLOT DC V(2) VS V(1)
+.PLOT TRAN V(2) V(1)
+.END</code></pre>
+<figure class="yazi-gorsel"><img src="y1-vtc-winspice.jpg" width="1400" height="788" loading="lazy" decoding="async" alt="WinSPICE&#x27;ta direnç yüklü NMOS tersleyicinin V_out–V_in eğrisi: 5 V&#x27;tan başlayıp 2–3 V arasında hızla düşen ve 0.5 V civarına inen eğri"><figcaption>Direnç yüklü NMOS tersleyicinin VTC eğrisi (WinSPICE ekran görüntüsü, 2014)</figcaption></figure>
+<h2 id="sonuclar-5-v-ve-3-v-besleme">Sonuçlar: 5 V ve 3 V besleme</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Büyüklük</th><th scope="col">A, 5 V</th><th scope="col">A, 3 V</th><th scope="col">C, 5 V</th><th scope="col">C, 3 V</th></tr></thead><tbody><tr><th scope="row">V_OL</th><td>0.7 V</td><td>0.5 V</td><td>0.59 V</td><td>0.697 V</td></tr><tr><th scope="row">V_OH</th><td>5 V</td><td>3 V</td><td>5 V</td><td>3 V</td></tr><tr><th scope="row">V_IL</th><td>1.5 V</td><td>1.5 V</td><td>2.0 V</td><td>2 V</td></tr><tr><th scope="row">V_IH</th><td>2.8 V</td><td>2.3 V</td><td>3.02 V</td><td>2.565 V</td></tr><tr><th scope="row">V_M</th><td>2.6 V</td><td>2 V</td><td>2.564 V</td><td>2 V</td></tr><tr><th scope="row">NM_H</th><td>2.2 V</td><td>0.7 V</td><td>1.98 V</td><td>0.435 V</td></tr><tr><th scope="row">NM_L</th><td>0.8 V</td><td>1 V</td><td>1.41 V</td><td>1.303 V</td></tr><tr><th scope="row">t_r</th><td>200 ns</td><td>190 ns</td><td>132.7 ns</td><td>163 ns</td></tr><tr><th scope="row">t_f</th><td>30 ns</td><td>25 ns</td><td>18.5 ns</td><td>21 ns</td></tr><tr><th scope="row">t_pHL</th><td>20 ns</td><td>15 ns</td><td>9 ns</td><td>6 ns</td></tr><tr><th scope="row">t_pLH</th><td>40 ns</td><td>40 ns</td><td>45.5 ns</td><td>54 ns</td></tr><tr><th scope="row">t_d</th><td>30 ns</td><td>22.5 ns</td><td>27.27 ns</td><td>30 ns</td></tr></tbody></table></div>
+<p>Gözlemler:</p>
+<ul><li>Çıkış, 50 kΩ direnç üzerinden beslemeye bağlı olduğu için <strong>V_OH = V_DD</strong>; besleme 5 V'tan 3 V'a inince V_OH ve onunla birlikte NM_H belirgin şekilde düşüyor.</li><li><strong>t_r, t_f'den çok daha uzun:</strong> çıkış yükselirken 1 pF'lık yük 50 kΩ üzerinden doluyor (RC = 50 ns, %10–%90 süresi ≈ 2.2·RC ≈ 110 ns), düşerken ise iletimdeki NMOS'un küçük direnci üzerinden boşalıyor. Aynı nedenle t_pLH &gt; t_pHL.</li><li>A raporu besleme değişiminin zamanlama değerlerini çok az etkilediğini, V_OL ve V_OH'nin ise V_DD'ye bağlı olduğunu yazıyor.</li><li><strong>İdeal tersleyici</strong> (soru 3): giriş empedansı sonsuz, çıkış empedansı sıfır; VTC geçiş bölgesinde dikey (sonsuz kazanç), V_M = V_DD/2, NM_H = NM_L = V_DD/2, tanımsız bölge ve t_r, t_f yok. Benzetilen devre ideal olmadığı için çıkış dalgası köşeleri yuvarlanmış biçimde ortaya çıkıyor.</li></ul>
+<p><em>Not: A raporunda gürültü payları "NM_H = V_OH − V_OL" ve "NM_L = V_OL − V_IL" diye etiketlenmiş; sayısal değerler ise doğru tanımla (NM_H = V_OH − V_IH, NM_L = V_IL − V_OL) hesaplanmış.</em></p>
+<p><em>Not: C raporunun 3 V sonuçlarında V_IL ile V_M aynı (2 V) yazılmış; V_IL, V_M'den küçük olmalı, değerlerden biri grafikten yanlış okunmuş görünüyor.</em></p>
+<p>Klasörde 2014 tarihli başka bir öğrenci raporu da vardı; ölçüm değerleri ve metni A raporunun birebir kopyası olduğundan ayrıca alınmadı. ZIP'teki <code>y1_2017_nmos_100k.cir</code>, aynı deneyin 2017 sürümüne ait ağ listesidir (100 kΩ yük, 1 fF, W/L = 1.8/1.2 µm, Level 2 model, 3.1 V besleme).</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="EEM312_Y1_NMOS_tersleyici_raporlari.zip" download>EEM312_Y1_NMOS_tersleyici_raporlari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.0 MB · 29.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM312_Y1_NMOS_tersleyici_raporlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

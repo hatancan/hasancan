@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: DC Motor Transfer Fonksiyonları (ME 360 ders notu, Kamman, 2001) — hasancan.net</title>
+<meta name="description" content="Alan akımı ve endüvi (armatür) akımı kontrollü DC motorun transfer fonksiyonlarının türetilmesi: tork, akım, hız ve konum transfer fonksiyonları, ters EMK&#x27;lı kapalı çevrim blok diyagramı. ME 360 dersi için hazırlanmış İngilizce üçüncü taraf ders notu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-dc-motor-transfer-fonksiyonu-kamman/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: DC Motor Transfer Fonksiyonları (ME 360 ders notu, Kamman, 2001)">
+<meta property="og:description" content="Alan akımı ve endüvi (armatür) akımı kontrollü DC motorun transfer fonksiyonlarının türetilmesi: tork, akım, hız ve konum transfer fonksiyonları, ters EMK&#x27;lı kapalı çevrim blok diyagramı. ME 360 dersi için hazırlanmış İngilizce üçüncü taraf ders notu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-dc-motor-transfer-fonksiyonu-kamman/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: DC Motor Transfer Fonksiyonları (ME 360 ders notu, Kamman, 2001)", "description": "Alan akımı ve endüvi (armatür) akımı kontrollü DC motorun transfer fonksiyonlarının türetilmesi: tork, akım, hız ve konum transfer fonksiyonları, ters EMK'lı kapalı çevrim blok diyagramı. ME 360 dersi için hazırlanmış İngilizce üçüncü taraf ders notu.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-dc-motor-transfer-fonksiyonu-kamman/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "DCmotor_model_lecture2.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-dc-motor-transfer-fonksiyonu-kamman/DCmotor_model_lecture2.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: DC Motor Transfer Fonksiyonları (ME 360 ders notu, Kamman, 2001)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.09.2001</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#dc-motor-transfer-functions">DC Motor Transfer Functions</a></li><li><a href="#field-current-controlled-motor">Field-current controlled motor</a></li><li><a href="#armature-current-controlled-motor">Armature-current controlled motor</a></li><li><a href="#kisa-ozet">Kısa özet</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: DC Motor Transfer Fonksiyonları (ME 360 ders notu, Kamman, 2001)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 10.09.2001 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri dersinin klasöründe "DCmotor_model_lecture2.pdf" adıyla duran, <strong>üçüncü taraf</strong> bir ders notudur. Belgenin kendisinde yazar ya da kurum adı yok; PDF özelliklerine göre başlığı <strong>"Me360DCMotorTransferFunctions01"</strong>, yazarı <strong>kamman</strong>'dır ve <strong>10 Eylül 2001</strong>'de Word'den üretilmiştir; yani bir <strong>ME 360</strong> dersi için hazırlanmış 4 sayfalık bir nottur. Notun kendi kaynağı olarak Dorf ve Bishop'un <em>Modern Control Systems</em> (9. baskı, Prentice-Hall, 2001) kitabı gösterilmiş. Dosya Dropbox'ta parolalıydı; parolası kaldırılmış kopyası yazının sonunda indirilebilir. İçerik İngilizce olduğundan özgün dille aktarıldı, formüller düz metne çevrildi.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="dc-motor-transfer-functions">DC Motor Transfer Functions</h2>
+<p><em>(Reference: Dorf and Bishop, Modern Control Systems, 9th Ed., Prentice-Hall, Inc. 2001)</em></p>
+<p>The figure represents a DC motor attached to an inertial load. The voltages applied to the field and armature sides of the motor are represented by V_f and V_a. The resistances and inductances of the field and armature sides of the motor are represented by R_f, L_f, R_a and L_a. The torque generated by the motor is proportional to i_f and i_a, the currents in the field and armature sides of the motor:</p>
+<blockquote><p>T_m = K · i_f · i_a  (1.1)</p></blockquote>
+<figure class="yazi-gorsel"><img src="dc-motor.jpg" width="330" height="470" loading="lazy" decoding="async" alt="DC motor: armature side (V_a, R_a, L_a), field side (V_f, R_f, L_f) and the inertial load on the shaft"><figcaption>DC motor ve eylemsizlik yükü (notun el çizimi şekli)</figcaption></figure>
+<h2 id="field-current-controlled-motor">Field-current controlled motor</h2>
+<p>In a field-current controlled motor, the armature current i_a is held constant, and the field current is controlled through the field voltage V_f. In this case, the motor torque increases linearly with the field current:</p>
+<blockquote><p>T_m = K_mf · i_f</p></blockquote>
+<p>Taking Laplace transforms of both sides gives the transfer function from the input current to the resulting torque:</p>
+<blockquote><p>T_m(s) / I_f(s) = K_mf  (1.2)</p></blockquote>
+<p>For the field side of the motor the voltage/current relationship is</p>
+<blockquote><p>V_f = V_R + V_L = R_f · i_f + L_f · (di_f/dt)</p></blockquote>
+<p>The transfer function from the input voltage to the resulting current is found by taking Laplace transforms of both sides of this equation:</p>
+<blockquote><p>I_f(s) / V_f(s) = (1/L_f) / (s + R_f/L_f)  (1st order system)  (1.3)</p></blockquote>
+<p>Combining equations (1.2) and (1.3) gives the transfer function from the input voltage to the resulting motor torque:</p>
+<blockquote><p>T_m(s)/V_f(s) = [T_m(s)/I_f(s)] · [I_f(s)/V_f(s)] = (K_mf/L_f) / (s + R_f/L_f)  (1st order system)  (1.4)</p></blockquote>
+<p>So, a step input in field voltage results in an exponential rise in the motor torque.</p>
+<h3 id="rotational-motion-of-the-inertial-load">Rotational motion of the inertial load</h3>
+<p>An equation that describes the rotational motion of the inertial load is found by summing moments (counterclockwise positive):</p>
+<blockquote><p>ΣM = T_m − c·ω = J·ω̇, or J·ω̇ + c·ω = T_m</p></blockquote>
+<figure class="yazi-gorsel"><img src="serbest-cisim.jpg" width="385" height="295" loading="lazy" decoding="async" alt="Free body diagram of the inertial load: motor torque T_m and damping torque cθ̇ = cω"><figcaption>Eylemsizlik yükünün serbest cisim diyagramı</figcaption></figure>
+<p>Thus, the transfer function from the input motor torque to rotational speed changes is</p>
+<blockquote><p>ω(s) / T_m(s) = (1/J) / (s + c/J)  (1st order system)  (1.5)</p></blockquote>
+<p>Combining equations (1.4) and (1.5) gives the transfer function from the input field voltage to the resulting speed change:</p>
+<blockquote><p>ω(s)/V_f(s) = [ω(s)/T_m(s)] · [T_m(s)/V_f(s)] = (K_mf/(L_f·J)) / [(s + c/J)(s + R_f/L_f)]  (2nd order system)  (1.6)</p></blockquote>
+<p>Finally, since ω = dθ/dt, the transfer function from input field voltage to the resulting rotational position change is</p>
+<blockquote><p>θ(s)/V_f(s) = [θ(s)/ω(s)] · [ω(s)/V_f(s)] = (K_mf/(L_f·J)) / [s(s + c/J)(s + R_f/L_f)]  (3rd order system)  (1.7)</p></blockquote>
+<h2 id="armature-current-controlled-motor">Armature-current controlled motor</h2>
+<p>In an armature-current controlled motor, the field current i_f is held constant, and the armature current is controlled through the armature voltage V_a. In this case, the motor torque increases linearly with the armature current:</p>
+<blockquote><p>T_m = K_ma · i_a</p></blockquote>
+<p>The transfer function from the input armature current to the resulting motor torque is</p>
+<blockquote><p>T_m(s) / I_a(s) = K_ma  (1.8)</p></blockquote>
+<p>The voltage/current relationship for the armature side of the motor is</p>
+<blockquote><p>V_a = V_R + V_L + V_b  (1.9)</p></blockquote>
+<p>where V_b represents the "back EMF" induced by the rotation of the armature windings in a magnetic field. The back EMF is proportional to the speed ω, i.e. V_b(s) = K_b·ω(s). Taking Laplace transforms of equation (1.9) gives</p>
+<blockquote><p>V_a(s) − V_b(s) = (R_a + L_a·s)·I_a(s)  (1.10)</p></blockquote>
+<p>or</p>
+<blockquote><p>V_a(s) − K_b·ω(s) = (R_a + L_a·s)·I_a(s)  (1.11)</p></blockquote>
+<p>As before, the transfer function from the input motor torque to rotational speed changes is</p>
+<blockquote><p>ω(s) / T_m(s) = (1/J) / (s + c/J)  (1st order system)  (1.12)</p></blockquote>
+<p>Equations (1.8), (1.11) and (1.12) together can be represented by the closed loop block diagram below: V_a(s) enters a summing junction, passes through (1/L_a)/(s + R_a/L_a) to give I_a(s), through K_ma to give T_m(s), and through (1/J)/(s + c/J) to give ω(s); the back-EMF path K_b feeds ω(s) back negatively.</p>
+<figure class="yazi-gorsel"><img src="blok-diyagram.jpg" width="860" height="200" loading="lazy" decoding="async" alt="Closed-loop block diagram of the armature-controlled DC motor with back-EMF feedback K_b"><figcaption>Endüvi kontrollü DC motorun ters EMK geri beslemeli blok diyagramı</figcaption></figure>
+<p>Block diagram reduction gives the transfer function from the input armature voltage to the resulting speed change:</p>
+<blockquote><p>ω(s)/V_a(s) = (K_ma/(L_a·J)) / [(s + R_a/L_a)(s + c/J) + K_b·K_ma/(L_a·J)]  (2nd order system)  (1.13)</p></blockquote>
+<p>The transfer function from the input armature voltage to the resulting angular position change is found by multiplying equation (1.13) by 1/s.</p>
+<h2 id="kisa-ozet">Kısa özet</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Denetim biçimi</th><th scope="col">Giriş → çıkış</th><th scope="col">Transfer fonksiyonu</th><th scope="col">Mertebe</th></tr></thead><tbody><tr><th scope="row">Alan akımı kontrollü</th><td>V_f → T_m</td><td>(K_mf/L_f)/(s + R_f/L_f)</td><td>1</td></tr><tr><th scope="row">Alan akımı kontrollü</th><td>V_f → ω</td><td>(K_mf/(L_f J))/[(s + c/J)(s + R_f/L_f)]</td><td>2</td></tr><tr><th scope="row">Alan akımı kontrollü</th><td>V_f → θ</td><td>(K_mf/(L_f J))/[s(s + c/J)(s + R_f/L_f)]</td><td>3</td></tr><tr><th scope="row">Endüvi akımı kontrollü</th><td>V_a → ω</td><td>(K_ma/(L_a J))/[(s + R_a/L_a)(s + c/J) + K_b K_ma/(L_a J)]</td><td>2</td></tr><tr><th scope="row">Endüvi akımı kontrollü</th><td>V_a → θ</td><td>(1.13) × 1/s</td><td>3</td></tr></tbody></table></div>
+<p>Alan kontrollü motorda geri besleme yoktur ve transfer fonksiyonu alt sistemlerin çarpımıdır; endüvi kontrollü motorda ise ters EMK doğal bir negatif geri besleme döngüsü oluşturur. (1.13) ifadesi, ileri yol G = (1/L_a)/(s + R_a/L_a) · K_ma · (1/J)/(s + c/J) ve geri besleme H = K_b ile G/(1 + GH) bağıntısından doğrudan elde edilir.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="DCmotor_model_lecture2.pdf" download>DCmotor_model_lecture2.pdf</a></p>
+              <p class="kucuk">PDF · 87 KB · 4 <span data-i18n="arch.pagesLower"></span> · 10.09.2001</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="DCmotor_model_lecture2.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (87 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

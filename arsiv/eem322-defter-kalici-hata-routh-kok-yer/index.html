@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ders Defteri (Mart–Nisan 2013) – Kalıcı Durum Hatası, Sinüzoidal Yanıt, Routh Tablosu, Eksen Kaydırma ve Kök Yer Eğrisi — hasancan.net</title>
+<meta name="description" content="EEM322 Denetim Sistemleri 2013 ders defterinden çözümlü örnekler: polinom ve sinüzoidal girişte kalıcı durum yanıtı, birim olmayan geri beslemenin eşdeğer birim geri beslemeye çevrilmesi, Routh tablosunda sıfır eleman ve sıfır satır, K&#x27;nın kararlılık aralığı, eksen kaydırma, kök yer eğrisinde sanal eksen kesişimi, ayrılma noktası, kalkış açısı, ζ = 0.7 için K ve Horner/Newton ile kök bulma.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-defter-kalici-hata-routh-kok-yer/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ders Defteri (Mart–Nisan 2013) – Kalıcı Durum Hatası, Sinüzoidal Yanıt, Routh Tablosu, Eksen Kaydırma ve Kök Yer Eğrisi">
+<meta property="og:description" content="EEM322 Denetim Sistemleri 2013 ders defterinden çözümlü örnekler: polinom ve sinüzoidal girişte kalıcı durum yanıtı, birim olmayan geri beslemenin eşdeğer birim geri beslemeye çevrilmesi, Routh tablosunda sıfır eleman ve sıfır satır, K&#x27;nın kararlılık aralığı, eksen kaydırma, kök yer eğrisinde sanal eksen kesişimi, ayrılma noktası, kalkış açısı, ζ = 0.7 için K ve Horner/Newton ile kök bulma.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-defter-kalici-hata-routh-kok-yer/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ders Defteri (Mart–Nisan 2013) – Kalıcı Durum Hatası, Sinüzoidal Yanıt, Routh Tablosu, Eksen Kaydırma ve Kök Yer Eğrisi", "description": "EEM322 Denetim Sistemleri 2013 ders defterinden çözümlü örnekler: polinom ve sinüzoidal girişte kalıcı durum yanıtı, birim olmayan geri beslemenin eşdeğer birim geri beslemeye çevrilmesi, Routh tablosunda sıfır eleman ve sıfır satır, K'nın kararlılık aralığı, eksen kaydırma, kök yer eğrisinde sanal eksen kesişimi, ayrılma noktası, kalkış açısı, ζ = 0.7 için K ve Horner/Newton ile kök bulma.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-defter-kalici-hata-routh-kok-yer/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ders Defteri (Mart–Nisan 2013) – Kalıcı Durum Hatası, Sinüzoidal Yanıt, Routh Tablosu, Eksen Kaydırma ve Kök Yer Eğrisi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>19.04.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kalici-durum-hatasi">Kalıcı durum hatası</a></li><li><a href="#bolum-5-kararlilik-routh-tablosu">Bölüm 5: Kararlılık (Routh tablosu)</a></li><li><a href="#kok-yer-egrisi">Kök yer eğrisi</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ders Defteri (Mart–Nisan 2013) – Kalıcı Durum Hatası, Sinüzoidal Yanıt, Routh Tablosu, Eksen Kaydırma ve Kök Yer Eğrisi</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 19.04.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM322 Denetim Sistemleri</strong> dersinin 2013 bahar dönemine ait bir arkadaşın <strong>ders defterinden</strong> kalıcı durum hatası, kararlılık ve kök yer eğrisi örneklerini içeriyor (29 Mart, 14–15 ve 19 Nisan 2013'te çekilmiş sayfalar). İçerik <strong>fotoğraflanmış sayfalardan metne aktarıldı</strong>; fotoğraflar yayınlanmadı. Örnekler derste İngilizce yazılmış; Türkçe kenar notları da aktarıldı. Hesaplar kontrol edildi. Derste izlenen kitabın Routh ve kök yer eğrisi sayfalarının fotoğrafları kitap sayfası olduğu için aktarılmadı.</p>
+<p>Konu anlatımı için <a href="/arsiv/eem322-ders-06-kararlilik/">Ders 6</a>, <a href="/arsiv/eem322-ders-07-surekli-hal-hatalari/">Ders 7</a> ve <a href="/arsiv/eem322-ders-08-kok-yer-egrisi/">Ders 8</a> yazılarına bakılabilir. Defterin önceki bölümleri: <a href="/arsiv/eem322-defter-modelleme-blok-diyagram/">modelleme ve blok diyagramları</a>, <a href="/arsiv/eem322-defter-durum-uzayi/">durum uzayı</a>.</p>
+<h2 id="kalici-durum-hatasi">Kalıcı durum hatası</h2>
+<h3 id="ornek-2-b-birim-olmayan-geri-besleme-b-1">Örnek 2(b): Birim olmayan geri besleme (b ≠ 1)</h3>
+<p>Önceki sayfada başlayan örneğin (a) şıkkında çıkışın rampa girişi sonlu ess ile izlediği ve sistemin 1. tip olduğu bulunmuş. (b) şıkkında geri besleme b ≠ 1:</p>
+<ul><li>W(s) = [s² + 3s + 10(b − 1)]/(s² + 3s + 10b)</li><li>C₀ = W(0) = (b − 1)/b, C₁ = dW(s)/ds (s = 0) = 3/(10b²)</li><li>R(s) = 1/s için ess = lim(s→0) sR(s)W(s) = W(0) = (b − 1)/b (basamak girişi için sonlu sonuç)</li><li>R(s) = 1/s² için ess = lim(s→0) (1/s)W(s) = ∞</li><li>Çıkış basamak girişi sonlu ess ile izliyor, sistem 0. tip.</li></ul>
+<h3 id="ornek-3-a-polinom-giris">Örnek 3(a): Polinom giriş</h3>
+<p>Burada G(s) değil, doğrudan kapalı çevrim aktarım işlevi verilmiş (defterdeki uyarı: "Burada G(s) verilmemiş, ona dikkat et!"):</p>
+<ul><li>T(s) = (3s + 2)/(s² + 3s + 2) = (b₁s + b₀)/(s² + a₁s + a₀)</li><li>Hem basamak hem rampa için kalıcı durum hatası, b₀ = a₀ ve b₁ = a₁ ise sıfır; yalnız a₀ = b₀ ise basamak için hata sıfır.</li></ul>
+<p>(i) Basamak girişi r(t) = 4 için:</p>
+<ul><li>css(t) = lim(t→∞) c(t) = T(0)·a = (b₀/a₀)·a = (2/2)·4 = 4</li></ul>
+<p>(ii) r(t) = 2 + t (basamak ve rampa birlikte) için:</p>
+<ul><li>r₁(t) = 2 ⇒ css₁(t) = 2</li><li>r₂(t) = t ⇒ css₂(t) = T(0)·t + T′(0)·1 = (b₀/a₀)t + [(a₀b₁ − b₀a₁)/a₀²]·1 = t</li><li>Süperpozisyonla css(t) = 2 + t</li></ul>
+<p>Hata ifadeleri:</p>
+<ul><li>Konum hatası: ep(t) = |(a₀ − b₀)/a₀| = |1 − T(0)| = 0</li><li>Hız hatası: ev(t) = |(1 − T(0))t − T′(0)| = |[(a₀ − b₀)/a₀]t − (a₀b₁ − b₀a₁)/a₀²| = 0</li></ul>
+<p>Dolayısıyla (i) ve (ii) için asimptotik izleme sağlanıyor: css(t) = lim c(t) = r(t).</p>
+<h3 id="ornek-4-a-sinuzoidal-giris">Örnek 4(a): Sinüzoidal giriş</h3>
+<ul><li>T(s) = 3/(s + 0.4), r(t) = 5 sin 2t, ω = 2</li><li>T(j2) = 3/(0.4 + j2) = 3/(2.04 e^(j1.37)) = 1.47 e^(−j1.37)</li><li>css(t) = X·|T(jω)|·sin(ωt + φ) = 5 × 1.47 sin(2t − 1.37) = 7.35 sin(2t − 1.37), X = 5, φ = ∠T(jω) = −1.37 rad</li></ul>
+<h3 id="ornek-5-a-birim-olmayan-geri-besleme">Örnek 5(a): Birim olmayan geri besleme</h3>
+<p>G(s) = 2/(s² + 3s), H(s) = 5s + 2. Önce eşdeğer birim geri beslemeli yapı:</p>
+<ul><li>G/(1 + GH) = Ge/(1 + Ge) ⇒ Ge = G/[1 + G(H − 1)]</li><li>Ge(s) = [2/(s² + 3s)]/{1 + [2/(s² + 3s)](5s + 2 − 1)} = 2/(s² + 13s + 2)</li><li>Orijinde kutup yok ⇒ 0. tip</li><li>Kp = Ge(0) = 1, Kv = lim sGe(s) = 0, Ka = lim s²Ge(s) = 0</li></ul>
+<p>r(t) = 1, t, t² için kalıcı durum hatası (W(s) hata ile giriş arasındaki aktarım işlevi, W = 1/(1 + Ge) = (s² + 13s + 2)/(s² + 13s + 4)):</p>
+<ul><li>Birim basamak: ess = lim s·(1/s)·W(s) = 1/2 = 1/(1 + Kp)</li><li>Birim rampa: ess = ∞</li><li>Parabolik (R = 2/s³): ess = ∞</li></ul>
+<p>Beklendiği gibi, eşdeğer sistem 0. tip olduğundan yalnız r(t) = 1 için ess sonlu.</p>
+<p>Bir sonraki sayfanın başında duyarlılık bağıntısı da not edilmiş: |ΔT(s)/T(s)| = |S_K^T(s)|·|ΔK/K|, s = jω.</p>
+<h2 id="bolum-5-kararlilik-routh-tablosu">Bölüm 5: Kararlılık (Routh tablosu)</h2>
+<h3 id="ornek-3a-birinci-sutunda-sifir">Örnek 3a: Birinci sütunda sıfır</h3>
+<ul><li>Δ(s) = s⁵ + 2s⁴ + 2s³ + 4s² + 11s + 10 = 0</li><li>Routh: s⁵: 1, 2, 11; s⁴: 2, 4, 10; s³: ε, 6, 0; s²: c₁, 10; s¹: d₁; s⁰: 10</li><li>c₁ = (4ε − 12)/ε ≅ −12/ε (ε → 0₊ iken 4ε sıfıra gidiyor), d₁ = (6c₁ − 10ε)/c₁ ≅ 6</li><li>Birinci sütunda iki işaret değişimi ⇒ sağ yarı düzlemde (RHP) iki kök</li></ul>
+<h3 id="ornek-3b-tamamen-sifir-satir">Örnek 3b: Tamamen sıfır satır</h3>
+<ul><li>Δ(s) = s⁵ + 2s⁴ + 24s³ + 48s² − 25s − 50 = 0</li><li>s⁵: 1, 24, −25; s⁴: 2, 48, −50; s³: 0, 0 (tamamen sıfır satır)</li><li>Bir üst satırdan yardımcı denklem: A(s) = 2s⁴ + 48s² − 50, dA(s)/ds = 8s³ + 96s ⇒ s³ satırı 8, 96</li><li>Devamı: s²: 24, −50; s¹: 112.7, 0; s⁰: −50</li><li>Bir işaret değişimi ⇒ RHP'de bir kök. Çarpanlara ayrılmış hali: Δ(s) = (s + 1)(s − 1)(s + j5)(s − j5)(s + 2)</li></ul>
+<p>Kenar notu: Kararlı polinomlara Hurwitz polinomu denir; tamamen sıfır satır çıkınca yardımcı denklem yazılıp türeviyle tablo yeniden oluşturulur.</p>
+<h3 id="ornek-4-kararlilik-icin-k-araligi">Örnek 4: Kararlılık için K aralığı</h3>
+<p>Birim geri beslemeli sistem, G(s) = K/[s(s + 2)(s² + s + 1)]:</p>
+<ul><li>CLTF: C(s)/R(s) = K/[s(s + 2)(s² + s + 1) + K]</li><li>CLCE: Δ(s) = s⁴ + 3s³ + 3s² + 2s + K = 0</li><li>Routh: s⁴: 1, 3, K; s³: 3, 2; s²: 7/3, K; s¹: 2 − 9K/7; s⁰: K</li><li>Kapalı çevrim kararlılığı için 0 &lt; K &lt; 14/9; kritik kazanç Kc = 14/9</li><li>Yardımcı denklem (7/3)s² + 14/9 = 0 ⇒ s² + 2/3 = 0 ⇒ s₁,₂ = ±j√(2/3) = ±j0.82 ⇒ ωp = 0.82 rad/s</li></ul>
+<h3 id="ornek-5-eksen-kaydirma">Örnek 5: Eksen kaydırma</h3>
+<ul><li>Δ(s) = s⁴ + 6s³ + 12s² + 11s + 6 = (s + 2)(s + 3)(s² + s + 1)</li><li>Routh: s⁴: 1, 12, 6; s³: 6, 11; s²: 61/6, 6; s¹: 455/61; s⁰: 6 ⇒ bütün kökler sol yarı düzlemde (LHP)</li><li>Kenar notu: İkinci dereceden polinomlarda katsayıların aynı işaretli olması kararlılık için gerek ve yeter koşuldur.</li></ul>
+<p>s = −1 doğrusunun sağında kök olup olmadığını bulmak için s yerine (p − 1) konuyor (jω ekseni −1'e kaydırılıp yeni eksene jν deniyor):</p>
+<ul><li>Δ(p) = (p − 1)⁴ + 6(p − 1)³ + 12(p − 1)² + 11(p − 1) + 6 = p⁴ + 2p³ + p + 2</li><li>Routh: p⁴: 1, 0, 2; p³: 2, 1; p²: −1/2, 2; p¹: 9; p⁰: 2</li><li>İki işaret değişimi ⇒ s = −1 doğrusunun sağında iki kök var (−1/2 ± j√3/2). Kaydırmadan önce −3 ve −2'de olan kökler kaydırmadan sonra −2 ve −1'de.</li></ul>
+<h2 id="kok-yer-egrisi">Kök yer eğrisi</h2>
+<h3 id="ornek-6-a">Örnek 6(a)</h3>
+<ul><li>CLCE: Δ(s) = s³ + 7s² + 16s + K + 10 = 0 ⇒ 1 + K/(s³ + 7s² + 16s + 10) = 0</li><li>Eşdeğer OLTF: K/[(s + 1)(s² + 6s + 10)] = K/[(s + 1)(s + 3 ± j)]</li><li>Açık çevrim kutupları: −1, −3 ± j (n = 3), sıfır yok (m = 0)</li><li>Asimptotlar: θk = (2k + 1)π/(n − m) = 60°, 180°, 300°; σa = (−1 − 3 − 3)/3 = −2.33</li><li>jω ekseni kesişimi, Routh: s³: 1, 16; s²: 7, K + 10; s¹: [112 − (K + 10)]/7; s⁰: K + 10 ⇒ Km = 102. Yardımcı denklem 7s² + 112 = 0 ⇒ s² + 16 = 0 ⇒ s₁,₂ = ±j4</li><li>Ayrılma noktası: K = −s³ − 7s² − 16s − 10 ⇒ dK/ds = −(3s² + 14s + 16) = 0 ⇒ s₁,₂ = −2, −2.67</li><li>Kalkış açısı (−3 + j kutbundan): θd = 180° − Σθpj + Σθzi = 180° − 90° − 153° = −63°</li></ul>
+<p>Çizimde karmaşık kutuplardan çıkan iki kol −63° ile ayrılıp −2.67'de gerçek eksene iniyor (K ≈ 1.85); biri −∞'a gidiyor, diğeri sağa ilerleyip −1'den gelen kolla −2'de buluşuyor (K = 2). Bu iki kol −2'den yeniden ayrılıp K = 102'de ±j4'ten sanal ekseni kesiyor.</p>
+<h3 id="ornek-6-b-0-7-icin-k">Örnek 6(b): ζ = 0.7 için K</h3>
+<p>ζ = 0.7 ⇒ ζ = cos θ, θ = 45°. Kapalı çevrim kutupları {−b, −a ± ja} biçiminde:</p>
+<ul><li>Δ(s) = (s + b)(s² + 2as + 2a²) = s³ + (2a + b)s² + (2a² + 2ab)s + 2a²b = s³ + 7s² + 16s + (K + 10)</li><li>2a + b = 7, 2a² + 2ab = 16, 2a²b = K + 10 ⇒ b = 7 − 2a, a² − 7a + 8 = 0 ⇒ a = 1.4384 (ya da 5.5616)</li><li>b = 4.1232, K = 7.06; kapalı çevrim kutupları −4.12 ve −1.44 ± j1.44</li></ul>
+<p>Kutuplar verildiğinde K genlik koşuluyla da bulunabilir: 1 + KGH(s) = 0 ⇒ |GH(s)| = 1/|K|, yani</p>
+<ul><li>K = |(s + 1)(s + 3 + j)(s + 3 − j)| (s = −1.44 + j1.44) = |(−0.44 + j1.44)(1.56 + j2.44)(1.56 + j0.44)| = 1.506 × 2.896 × 1.621 = 7.07</li></ul>
+<h3 id="ornek-7-parametreye-gore-degisen-kok-yer-egrileri">Örnek 7: Parametreye göre değişen kök yer eğrileri</h3>
+<ul><li>(i) KG(s) = K/[(s − a)(s² − 2bs + b² + c²)] = K/[(s − a)(s − b + jc)(s − b − jc)]: a = b + √3c iken üç kol tek noktada buluşuyor (örneğin b = −4, c = 1 için a = −0.54); a &lt; b + √3c, a &gt; b + √3c ve a = 0 durumları için eğrinin biçimi çizilmiş.</li><li>(ii) KG(s) = K(s + 1)/[s²(s + a)] için a = 3, 7, 9 ve 11 durumlarının kök yer eğrileri karşılaştırılmış; a = 9 ve a = 11 çizimlerinde kollar −1'deki sıfırın çevresinde çember çiziyor.</li><li>(iii) KG(s) = K(s + a)/[s(s + 1)(s² + 4s + 8)] için a = 1.296 civarında kolların birleştiği özel durum çizilmiş.</li></ul>
+<h3 id="ornek-8-horner-dizisi-ve-newton-yontemiyle-kok-bulma">Örnek 8: Horner dizisi ve Newton yöntemiyle kök bulma</h3>
+<p>p(s) = s³ + 7s² + 15s + 10 için ilk tahmin s₁ = −1:</p>
+<ul><li>Horner (−1): 1, 6, 9, r₁ = 1; ikinci kez: 1, 5, r₂ = 4</li><li>s₂ = s₁ − r₁/r₂ = −1 − 1/4 = −1.25</li><li>Horner (−1.25): 1, 5.75, 7.813, r₃ = 0.234; ikinci kez: 1, 4.5, r₄ = 2.188</li><li>s₃ = s₂ − r₃/r₄ = −1.25 − 0.234/2.188 = −1.357</li><li>p(s)'nin gerçek kökleri: −1.382, −2, −3.618</li></ul>
+<h3 id="ornek-9-tamsayi-koklerin-bulunmasi">Örnek 9: Tamsayı köklerin bulunması</h3>
+<p>Örnek 3b'deki Δ(s) = s⁵ + 2s⁴ + 24s³ + 48s² − 25s − 50 = 0 için tamsayı gerçek kökler 50'nin bölenleri arasında olmalı. Horner dizisiyle:</p>
+<ul><li>s = 1: 1, 3, 27, 75, 50, kalan 0</li><li>s = −1: 1, 2, 25, 50, kalan 0 ⇒ geriye s³ + 2s² + 25s + 50 kalıyor</li><li>Yardımcı denklemden (s² + 25)'in de çarpan olduğu biliniyor: (s³ + 2s² + 25s + 50)/(s² + 25) = s + 2 (ya da −2 ile Horner: 1, 0, 25, kalan 0)</li><li>Δ(s) = (s + 1)(s − 1)(s² + 25)(s + 2) = 0</li></ul>
+<p><em>Not: Defterde Örnek 9 "From Exa. 4" diye başlıyor; polinom Örnek 3b'ninki.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

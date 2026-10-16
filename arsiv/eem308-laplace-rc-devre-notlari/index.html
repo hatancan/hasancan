@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Laplace Dönüşümüyle RC Devresi Çözümleri ve s-Domeni Devre Modelleri (El Yazısı Notlar) — hasancan.net</title>
+<meta name="description" content="EEM308 dersinin Haziran 2014 tarihli el yazısı çalışma notları: RC devresinde transfer fonksiyonu ve dürtü yanıtı, tek taraflı Laplace dönüşümüyle başlangıç koşullu RC devresi, direnç, kondansatör ve endüktansın tek taraflı s-domeni modelleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-laplace-rc-devre-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Laplace Dönüşümüyle RC Devresi Çözümleri ve s-Domeni Devre Modelleri (El Yazısı Notlar)">
+<meta property="og:description" content="EEM308 dersinin Haziran 2014 tarihli el yazısı çalışma notları: RC devresinde transfer fonksiyonu ve dürtü yanıtı, tek taraflı Laplace dönüşümüyle başlangıç koşullu RC devresi, direnç, kondansatör ve endüktansın tek taraflı s-domeni modelleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-laplace-rc-devre-notlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Laplace Dönüşümüyle RC Devresi Çözümleri ve s-Domeni Devre Modelleri (El Yazısı Notlar)", "description": "EEM308 dersinin Haziran 2014 tarihli el yazısı çalışma notları: RC devresinde transfer fonksiyonu ve dürtü yanıtı, tek taraflı Laplace dönüşümüyle başlangıç koşullu RC devresi, direnç, kondansatör ve endüktansın tek taraflı s-domeni modelleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-laplace-rc-devre-notlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Laplace Dönüşümüyle RC Devresi Çözümleri ve s-Domeni Devre Modelleri (El Yazısı Notlar)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.06.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ornek-1-seri-rc-devresinde-transfer-fonksiyonu-ve-durtu-yaniti">Örnek 1: Seri RC devresinde transfer fonksiyonu ve dürtü yanıtı</a></li><li><a href="#ornek-2-tek-tarafli-laplace-donusumu-baslangic-kosullu-rc-devresi">Örnek 2: Tek taraflı Laplace dönüşümü, başlangıç koşullu RC devresi</a></li><li><a href="#devre-elemanlarinin-tek-tarafli-s-domeni-modelleri">Devre elemanlarının tek taraflı s-domeni modelleri</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Laplace Dönüşümüyle RC Devresi Çözümleri ve s-Domeni Devre Modelleri (El Yazısı Notlar)</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 15.06.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 308 Sinyaller ve Sistemler II</strong> dersinin final dönemine (15 Haziran 2014) ait üç sayfalık <strong>el yazısı çalışma notunu</strong> aktarıyor: bir RC devresinin iki farklı çıkış için transfer fonksiyonu ve dürtü yanıtı, başlangıç koşulu olan RC devresinin tek taraflı Laplace dönüşümüyle çözümü ve devre elemanlarının s-domeni modelleri. Sayfalarda ad veya numara yok. Notlar fotoğraflanmış sayfalardan metne aktarıldı; fotoğrafların kendisi arşivde saklanıyor, yayınlanmıyor.</p>
+<h2 id="ornek-1-seri-rc-devresinde-transfer-fonksiyonu-ve-durtu-yaniti">Örnek 1: Seri RC devresinde transfer fonksiyonu ve dürtü yanıtı</h2>
+<p>Bir v_s(t) gerilim kaynağı, R direnci ve C kondansatörü seri bağlı. İki durum isteniyor:</p>
+<ul><li><strong>a)</strong> x(t) = v_s(t), y(t) = v_c(t) (kondansatör gerilimi) için h(t) = ?</li><li><strong>b)</strong> x(t) = v_s(t), y(t) = i(t) (devre akımı) için h(t) = ?</li></ul>
+<h3 id="a-cikis-kondansator-gerilimi">a) Çıkış kondansatör gerilimi</h3>
+<p>Devrenin diferansiyel denklemi:</p>
+<p>dy(t)/dt + (1/RC) y(t) = (1/RC) x(t)</p>
+<p>Laplace dönüşümü alınırsa sY(s) + (1/RC) Y(s) = (1/RC) X(s), dolayısıyla</p>
+<p>H(s) = Y(s)/X(s) = (1/RC) / (s + 1/RC)</p>
+<p><strong>h(t) = ℒ⁻¹{H(s)} = (1/RC) e^(−t/RC) u(t)</strong></p>
+<h3 id="b-cikis-devre-akimi">b) Çıkış devre akımı</h3>
+<p>i(t) = C dv_c(t)/dt ve Kirchhoff gerilim yasasından</p>
+<p>−v_s(t) + R i(t) + (1/C) ∫₋∞ᵗ i(τ) dτ = 0</p>
+<p>Burada x(t) = v_s(t), y(t) = i(t):</p>
+<p>y(t) + (1/RC) ∫₋∞ᵗ y(τ) dτ = (1/R) x(t)</p>
+<p>Türev alınırsa dy(t)/dt + (1/RC) y(t) = (1/R) dx(t)/dt, Laplace dönüşümüyle sY(s) + (1/RC) Y(s) = (1/R) s X(s):</p>
+<p>H(s) = (s/R) / (s + 1/RC) = (1/R) · s / (s + 1/RC) = 1/R − (1/(R²C)) · 1/(s + 1/RC)</p>
+<p><strong>h(t) = (1/R) δ(t) − (1/(R²C)) e^(−t/RC) u(t)</strong></p>
+<h2 id="ornek-2-tek-tarafli-laplace-donusumu-baslangic-kosullu-rc-devresi">Örnek 2: Tek taraflı Laplace dönüşümü, başlangıç koşullu RC devresi</h2>
+<p>Anahtarın t = 0'da kapandığı seri RC devresinde v_c(0) = V₀ ve v_s(t) = V·u(t). İstenenler: <strong>a)</strong> i(t) = ? <strong>b)</strong> v_c(t) = ?</p>
+<h3 id="a-akim">a) Akım</h3>
+<p>R i(t) + (1/C) ∫₋∞ᵗ i(τ) dτ = v_s(t)</p>
+<p>Tek taraflı Laplace dönüşümünde integralin 0⁻ öncesi kısmı başlangıç koşulunu verir: ∫₋∞⁰ i(τ) dτ = C v_c(0) = C V₀. Böylece</p>
+<p>R I(s) + (1/C) [ (1/s) I(s) + (1/s) C V₀ ] = V/s R I(s) + (1/(sC)) I(s) + V₀/s = V/s (R + 1/(sC)) I(s) = (V − V₀)/s</p>
+<p>I(s) = ((V − V₀)/s) · 1/(R + 1/(sC)) = ((V − V₀)/R) · 1/(s + 1/RC)</p>
+<p><strong>i(t) = ((V − V₀)/R) e^(−t/RC) u(t)</strong></p>
+<h3 id="b-kondansator-gerilimi">b) Kondansatör gerilimi</h3>
+<p>C dv_c(t)/dt + v_c(t)/R = v_s(t)/R, yani dv_c(t)/dt + (1/RC) v_c(t) = (1/RC) v_s(t). Tek taraflı Laplace dönüşümüyle</p>
+<p>s V_c(s) − v_c(0) + (1/RC) V_c(s) = (1/RC)(V/s) V_c(s) (s + 1/RC) = (1/RC)(V/s) + V₀</p>
+<p><em>Not: Not sayfası bu satırda bitiyor. Çözümün devamı: V_c(s) = V/(s(RCs + 1)) + V₀/(s + 1/RC) = V/s − V/(s + 1/RC) + V₀/(s + 1/RC), dolayısıyla v_c(t) = [V + (V₀ − V) e^(−t/RC)] u(t). Kontrol: v_c(0) = V₀, v_c(∞) = V ve C dv_c/dt = ((V − V₀)/R) e^(−t/RC), a şıkkındaki akımla aynı.</em></p>
+<h2 id="devre-elemanlarinin-tek-tarafli-s-domeni-modelleri">Devre elemanlarının tek taraflı s-domeni modelleri</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Eleman</th><th scope="col">t bölgesi</th><th scope="col">s bölgesi</th></tr></thead><tbody><tr><th scope="row">Gerilim kaynağı</th><td>v(t)</td><td>V(s)</td></tr><tr><th scope="row">Akım kaynağı</th><td>i(t)</td><td>I(s)</td></tr><tr><th scope="row">Direnç</th><td>v(t) = R i(t)</td><td>V(s) = R I(s)</td></tr><tr><th scope="row">Kondansatör</th><td>i(t) = C dv(t)/dt</td><td>I(s) = sC V(s) − C v(0)</td></tr><tr><th scope="row"></th><td></td><td>V(s) = (1/sC) I(s) + (1/s) v(0)</td></tr><tr><th scope="row">Endüktans</th><td>v(t) = L di(t)/dt</td><td>V(s) = sL I(s) − L i(0)</td></tr><tr><th scope="row"></th><td></td><td>I(s) = (1/sL) V(s) + (1/s) i(0)</td></tr></tbody></table></div>
+<p>Bu bağıntılar iki eşdeğer devreye karşılık gelir:</p>
+<ul><li><strong>Kondansatör:</strong> 1/sC empedansına <strong>paralel</strong> C·v(0) akım kaynağı (Norton biçimi) ya da 1/sC empedansıyla <strong>seri</strong> v(0)/s gerilim kaynağı (Thevenin biçimi).</li><li><strong>Endüktans:</strong> sL empedansıyla <strong>seri</strong> L·i(0) gerilim kaynağı ya da sL empedansına <strong>paralel</strong> i(0)/s akım kaynağı.</li></ul>
+<p>Notun son satırında bir sonraki konunun başlığı var: <em>Frekans tepkisinin kutup-sıfır diyagramından elde edilmesi.</em></p>
+<p><em>Not: Notta endüktansın paralel modelindeki akım kaynağı v(0)/s gibi okunuyor; doğrusu, ikinci satırdaki I(s) = (1/sL)V(s) + (1/s)i(0) bağıntısının gösterdiği gibi i(0)/s'dir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: MATLAB ile Kontrol Laboratuvarı, Bölüm 1–4 (University of Houston ECE 4115, Nisarg Mehta, 2005) — hasancan.net</title>
+<meta name="description" content="University of Houston ECE 4115 Control Systems Lab (Bahar 2005) MATLAB sunumları: tf, zpk, ss ve frd modelleri; impulse, step, lsim, conv, deconv, residue; rlocus, rlocfind, bode, nyquist, margin; DC motor hız kontrolü vaka çalışması (PID, kök yer, frekans tasarımı).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ece4115-matlab-lab-houston-mehta/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: MATLAB ile Kontrol Laboratuvarı, Bölüm 1–4 (University of Houston ECE 4115, Nisarg Mehta, 2005)">
+<meta property="og:description" content="University of Houston ECE 4115 Control Systems Lab (Bahar 2005) MATLAB sunumları: tf, zpk, ss ve frd modelleri; impulse, step, lsim, conv, deconv, residue; rlocus, rlocfind, bode, nyquist, margin; DC motor hız kontrolü vaka çalışması (PID, kök yer, frekans tasarımı).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ece4115-matlab-lab-houston-mehta/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: MATLAB ile Kontrol Laboratuvarı, Bölüm 1–4 (University of Houston ECE 4115, Nisarg Mehta, 2005)", "description": "University of Houston ECE 4115 Control Systems Lab (Bahar 2005) MATLAB sunumları: tf, zpk, ss ve frd modelleri; impulse, step, lsim, conv, deconv, residue; rlocus, rlocfind, bode, nyquist, margin; DC motor hız kontrolü vaka çalışması (PID, kök yer, frekans tasarımı).", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ece4115-matlab-lab-houston-mehta/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "ECE4115-Control-Systems-Lab-Chapter1-4.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ece4115-matlab-lab-houston-mehta/ECE4115-Control-Systems-Lab-Chapter1-4.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: MATLAB ile Kontrol Laboratuvarı, Bölüm 1–4 (University of Houston ECE 4115, Nisarg Mehta, 2005)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.02.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#chapter-1-system-models">Chapter 1: System Models</a></li><li><a href="#chapter-2-time-response-of-systems">Chapter 2: Time Response of Systems</a></li><li><a href="#chapter-3-frequency-domain-analysis-and-design">Chapter 3: Frequency Domain Analysis and Design</a></li><li><a href="#chapter-4-case-study-motor-speed-control">Chapter 4: Case Study – Motor Speed Control</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: MATLAB ile Kontrol Laboratuvarı, Bölüm 1–4 (University of Houston ECE 4115, Nisarg Mehta, 2005)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 03.02.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM322 Denetim Sistemleri dersi klasöründe "kontrol sistemleri farklı yerlerden indirilenler" başlığıyla saklanmış <strong>üçüncü taraf</strong> dört sunumu bir araya getiriyor: <strong>University of Houston</strong>, <strong>ECE 4115 Control Systems Lab 1</strong> dersinin <strong>Bahar 2005</strong> dönemi MATLAB laboratuvar sunumları (Chapter 1–4). Sunumları <strong>Nisarg Mehta</strong> hazırlamış ("Prepared by: Nisarg Mehta"); dosyalar Şubat–Nisan 2005 tarihli. Klasördeki not dosyası kaynağı <strong>http://www.egr.uh.edu/courses/ECE/ECE4115/</strong> olarak gösteriyor. Sunumlar İngilizce olduğundan içerik özgün dilinde aktarıldı; denklemler düz metne çevrildi. Dört PowerPoint dosyası ve kaynak notu yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p>Laboratuvarda MATLAB, ağ sürücüsünden açılıyordu: <em>Start → Run → \\laser\apps</em>, ardından MatlabR14 klasöründe MATLAB 7.0.1. Her bölümün sonunda bir ödev vardı; dönem, model indirgeme ve kontrol sistemi tasarımı üzerine bir projeyle bitiyordu.</p>
+<h2 id="chapter-1-system-models">Chapter 1: System Models</h2>
+<p>The Control System Toolbox has <strong>4 basic types of LTI models</strong>: Transfer Function (TF), Zero-pole-gain model (ZPK), State-Space models (SS) and Frequency response data model (FRD). The chapter also covers conversion between models and model dynamics.</p>
+<h3 id="transfer-function-models">Transfer function models</h3>
+<p>Consider a linear time invariant (LTI) single-input/single-output system:</p>
+<blockquote><p>y'' + 6y' + 5y = 4u' + 3u</p></blockquote>
+<p>Applying the Laplace transform to both sides with zero initial conditions:</p>
+<blockquote><p>G(s) = Y(s)/U(s) = (4s + 3)/(s² + 6s + 5)</p></blockquote>
+<p><strong>tf</strong> – creation of transfer functions. <code>sys=tf(num,den)</code> creates a continuous-time transfer function sys with numerator(s) num and denominator(s) den. For SISO models, num and den are row vectors listing the numerator and denominator coefficients in descending powers of s.</p>
+<p><strong>tfdata</strong> – quick access to transfer function data. <code>[num,den]=tfdata(sys,'v')</code> returns the numerator and denominator as row vectors (if sys is not a transfer function, it is first converted).</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num = [4 3];
+&gt;&gt; den = [1 6 5];
+&gt;&gt; sys = tf(num,den)
+Transfer function:
+    4 s + 3
+-------------
+s^2 + 6 s + 5
+&gt;&gt; [num,den] = tfdata(sys,'v')
+num =
+     0     4     3
+den =
+     1     6     5</code></pre>
+<p>"My first program", Chp1_1.m:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Program to write a Transfer function
+%Author: Firstname Lastname
+clear all
+close all
+clc
+num = [4 3];
+den = [1 6 5];
+sys = tf(num,den) %transfer function model
+[num1,den1] = tfdata(sys,'v')</code></pre>
+<h3 id="zero-pole-gain-models">Zero-pole-gain models</h3>
+<p>The same system in zero-pole-gain form: G(s) = (4s + 3)/(s² + 6s + 5) = 4(s + 0.75)/((s + 1)(s + 5)).</p>
+<p><strong>zpk</strong> – <code>sys=zpk(z,p,k)</code> creates a continuous-time zero-pole-gain model with zeros z, poles p and gain k (set z=[ ] if there are no zeros). <strong>zpkdata</strong> – <code>[z,p,k]=zpkdata(sys,'v')</code> returns the zeros and poles as column vectors and the gain k.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Program to write a Zero-Pole-Gain Model  (Chp1_2.m)
+z = -0.75;
+p = [-1 -5];
+g = 4;
+sys1 = zpk(z,p,g)
+disp('The zeros, poles and gain corresponding to the system are')
+[ze,po,k]=zpkdata(sys1,'v')</code></pre>
+<pre class="kod"><code>Zero/pole/gain:
+ 4 (s+0.75)
+-----------
+(s+1) (s+5)
+ze = -0.7500
+po = -1
+     -5
+k  = 4</code></pre>
+<h3 id="state-space-models">State-space models</h3>
+<p>A state-space model for the same system is</p>
+<blockquote><p>[x1'; x2'] = [0 1; −5 −6]·[x1; x2] + [0; 1]·u,  y = [3 4]·[x1; x2],  x1(0) = x2(0) = 0</p></blockquote>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Program to write a State-space Model  (Chp1_3.m)
+A = [0 1; -5 -6];
+B = [0; 1];
+C = [3 4];
+D = 0;
+sys = ss(A,B,C,D)
+[A,B,C,D] = ssdata(sys)</code></pre>
+<h3 id="frequency-response-data-models">Frequency response data models</h3>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>freq = [1000; 2000; 3000];
+resp = [1;2;3];
+H = frd(resp,freq)</code></pre>
+<h3 id="conversion-between-models-and-model-dynamics">Conversion between models and model dynamics</h3>
+<ul><li><code>sys_tf = tf(sys)</code>, <code>sys_zpk = zpk(sys)</code>, <code>sys_ss = ss(sys)</code> convert an arbitrary LTI model to transfer function, zero-pole-gain and state-space representation respectively.</li><li><strong>pzmap</strong> – pole-zero map of LTI models; poles are plotted as x's and zeros as o's. <code>[p,z]=pzmap(sys)</code> returns them without a plot.</li><li><strong>pole</strong>, <strong>eig</strong> – compute the poles of LTI models.</li><li><strong>zero</strong> – transmission zeros; <code>[z,gain]=zero(sys)</code> also returns the gain.</li><li><strong>dcgain</strong> – steady-state (DC or low-frequency, i.e. G(0)) gain.</li></ul>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Program to write a State-space Model and understand model dynamics
+num = [4 3];
+den = [1 6 5];
+sys = tf(num,den)   %sys in transfer function model
+sys_ss = ss(sys)    %sys_ss in state space model
+pzmap(sys)          %plot pole-zero map
+p = pole(sys)       %determine poles
+po = eig(sys)       %determine poles
+z = zero(sys)       %determine zeros
+k = dcgain(sys)     %determine DC gain</code></pre>
+<p>HW #1: one submission per team (HW1_1.m, HW1_2.m, HW1_3.m).</p>
+<h2 id="chapter-2-time-response-of-systems">Chapter 2: Time Response of Systems</h2>
+<p>Once a model of a system has been defined, we might be interested in knowing the time response of the system to a certain input. Objectives: impulse response (<code>impulse</code>), step response (<code>step</code>), general time response (<code>lsim</code>), polynomial multiplication (<code>conv</code>), polynomial division (<code>deconv</code>) and partial fraction expansion (<code>residue</code>).</p>
+<ul><li>The <strong>impulse response</strong> of a system is its output when the input is a unit impulse. <code>impulse(sys)</code> plots it; <code>impulse(sys,tfinal)</code> simulates from t = 0 to tfinal; <code>impulse(sys,t)</code> uses a user-supplied time vector; <code>[y,t]=impulse(sys)</code> returns the response without plotting (for state-space models <code>[y,t,x]</code> also returns the state trajectory).</li><li>The <strong>step response</strong> is the output for a unit step input; <code>step</code> has the same calling forms.</li><li>The general response to any input is computed with <strong>lsim</strong>: <code>lsim(sys,u,t)</code> plots the response to the input samples u at times t; <code>lsim(sys,u,t,x0)</code> specifies the initial state (state-space models only).</li></ul>
+<p><strong>Problem 1:</strong> Given the LTI system G(s) = (3s + 2)/(2s³ + 4s² + 5s + 1), plot (a) the impulse response, (b) the step response, (c) the response to the input u(t) = sin(0.5t), using both <code>lsim</code> and <code>residue</code>.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp2_1.m
+A=[3 2];
+B=[2 4 5 1];
+sys=tf(A,B);
+t=0:0.01:10;
+%Impulse response
+impulse(sys,t);
+%Step response
+figure
+step(sys,t);
+%Response to a sinusoidal input
+u=sin(0.5*t);
+figure
+lsim(sys,u,t);</code></pre>
+<h3 id="conv-deconv-and-residue">conv, deconv and residue</h3>
+<ul><li><code>C=conv(A,B)</code> multiplies two polynomials: (s² + 3s − 1)(2s² − 4s + 3) = 2s⁴ + 2s³ − 11s² + 13s − 3, i.e. <code>C=conv([1 3 -1],[2 -4 3])</code> gives <code>2 2 -11 13 -3</code>.</li><li><code>[Q,R]=deconv(B,A)</code> divides polynomials so that B = conv(A,Q) + R: (s³ + 6s² + 11s + 6)/(s + 2) → <code>[Q,R]=deconv([1 6 11 6],[1 2])</code> gives Q = <code>1 4 3</code>, R = <code>0 0 0 0</code>.</li><li><code>[r,p,k]=residue(B,A)</code> finds the residues, poles and direct term of the partial fraction expansion of B(s)/A(s). If P(j) = … = P(j+m−1) is a pole of multiplicity m, the expansion includes the terms R(j)/(s − P(j)) + R(j+1)/(s − P(j))² + … + R(j+m−1)/(s − P(j))^m. <code>[b,a]=residue(r,p,k)</code> converts back to polynomials.</li></ul>
+<p><strong>Problem 2:</strong> Given G(s) = (3s + 2)/(s³ + 5s² + 8s + 4), find the step response using the residue command. With U(s) = 1/s, Y(s) = G(s)U(s) = (3s + 2)/(s³ + 5s² + 8s + 4) · 1/s and y(t) = L⁻¹{Y(s)}: a partial fraction expansion is performed first, then each fraction is inverted and the individual inverse transforms are added up.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp2_2.m
+A=[3 2];
+B=[1 5 8 4];
+Bu=conv(B,[1 0]);
+[r,p,k]=residue(A,Bu)</code></pre>
+<pre class="kod"><code>r = -1.5000   -2.0000    1.0000    0.5000
+p = -2.0000   -2.0000   -1.0000         0
+k = []</code></pre>
+<p>Y(s) has four poles, one of them repeated, so</p>
+<blockquote><p>y(t) = r(1)·e^(p(1)t) + r(2)·t·e^(p(1)t) + r(3)·e^(p(2)t) + r(4)·e^(p(3)t)</p></blockquote>
+<p><em>Not: Slayttaki ifadede üstel terimlerin indisleri p vektörünün sırasına göre kaymış; Chp2_3.m'deki kodda doğru biçimi var: y(t) = r(1)e^(p(1)t) + r(2)·t·e^(p(2)t) + r(3)e^(p(3)t) + r(4)e^(p(4)t). Sayısal olarak y(t) = 0,5 + e^(−t) − 1,5e^(−2t) − 2t·e^(−2t) olur (sağlaması: t = 0'da y = 0, son değer G(0) = 2/4 = 0,5).</em></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp2_3.m
+A=[3 2];
+B=[1 5 8 4];
+sys=tf(A,B);
+t=0:0.01:10;
+%Step response
+[ystep,t]=step(sys,t);
+%Step response via the Inverse Laplace Transform
+Bu = conv(B,[1,0]);
+[r,p] = residue(A,Bu);
+ystep_res=r(1)*exp(p(1)*t)+r(2)*t.*exp(p(2)*t)...
+    +r(3)*exp(p(3)*t)+r(4)*exp(p(4)*t);
+%Figures
+subplot(2,1,1),plot(t,ystep_res,'k')
+xlabel('t')
+ylabel('y')
+subplot(2,1,2),plot(t,ystep,'k:')
+xlabel('t')
+ylabel('y')</code></pre>
+<figure class="yazi-gorsel"><img src="ch2-sekil.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Step response computed by inverse Laplace transform (a) and by the step command (b); both settle at 0.5"><figcaption>Ters Laplace dönüşümü (a) ve step komutu (b) ile basamak yanıtı</figcaption></figure>
+<h2 id="chapter-3-frequency-domain-analysis-and-design">Chapter 3: Frequency Domain Analysis and Design</h2>
+<p>Topics: root locus analysis; frequency response plots (Bode, Nyquist); gain margin and phase margin.</p>
+<h3 id="root-locus">Root locus</h3>
+<p>The root locus is a plot in the s-plane of all possible locations of the poles of a closed-loop system, as one parameter, usually the gain, is varied from 0 to ∞. By examining that plot the designer can choose values of the controller's parameters and infer the performance of the closed-loop system.</p>
+<ul><li><code>rlocus(sys)</code> computes and plots the root locus of the SISO model for the negative feedback loop as the feedback gain K varies from 0 to Inf; <code>rlocus(sys,k)</code> uses user-specified gains; <code>[r,k]=rlocus(sys)</code> returns the root locations.</li><li><code>[k,poles]=rlocfind(sys)</code> puts up a crosshair cursor on an existing root locus; the gain at the selected point and all closed-loop poles for that gain are returned. <code>[k,poles]=rlocfind(sys,p)</code> computes a gain for each desired root location in p.</li></ul>
+<p><strong>Problem 1:</strong> Plot the root locus of G(s) = K(s + 8)/(s(s + 2)(s² + 8s + 32)).</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp3_1.m
+num=[1 8];
+den=conv(conv([1 0],[1 2]),[1 8 32]);
+Gsys=tf(num,den)
+rlocus(Gsys)
+[k,pol]=rlocfind(Gsys)</code></pre>
+<pre class="kod"><code>Transfer function:
+           s + 8
+----------------------------
+s^4 + 10 s^3 + 48 s^2 + 64 s
+Select a point in the graphics window
+selected_point =
+  -8.2929 - 2.7551i
+k =
+  775.1330
+pol =
+   3.2999 + 8.3727i
+   3.2999 - 8.3727i
+  -8.2999 + 2.7705i
+  -8.2999 - 2.7705i</code></pre>
+<figure class="yazi-gorsel"><img src="ch3-kok-yer.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Root locus of K(s+8)/(s(s+2)(s²+8s+32)): two branches cross into the right half plane"><figcaption>Chp3_1.m kök yer eğrisi</figcaption></figure>
+<h3 id="bode-and-nyquist-plots">Bode and Nyquist plots</h3>
+<p>The MATLAB Control System Toolbox provides functions for the two most common frequency response plots: <code>bode</code> and <code>nyquist</code>. <code>logspace(d1,d2,N)</code> generates N logarithmically equally spaced points between 10^d1 and 10^d2 (e.g. <code>logspace(-1,2,100)</code>: 100 points from 0.1 to 100). <code>bode(sys)</code>, <code>bode(sys,{wmin,wmax})</code>, <code>bode(sys,w)</code>; <code>[mag,phase]=bode(sys,w)</code> returns magnitudes and phases (degrees) without plotting. <code>nyquist</code> has the same calling forms; <code>[re,im]=nyquist(sys,w)</code> returns the real and imaginary parts.</p>
+<p><strong>Problem 2:</strong> Given G(s) = 1/(s(s + 1)), draw the Bode diagram for 100 frequencies in the interval [10⁻¹, 10].</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp3_2.m
+A=[1];
+B=[1 1 0];
+w=logspace(-1,1,100);
+sys=tf(A,B);
+bode(sys,w);
+[mag, phase] = bode(sys,w);
+for i=1:length(w)
+    magnitude(i)=mag(1,1,i);
+    phase_wolag(i)=phase(1,1,i);
+end
+magdB=20*log10(magnitude);
+phase_wlag=-57.3*0.2.*w;
+phase_total=phase_wolag+phase_wlag;
+figure;
+subplot(2,1,1),semilogx(w,magdB)
+subplot(2,1,2),semilogx(w,phase_wlag)</code></pre>
+<p><em>Not: Kodun ikinci kısmı, problemde sözü edilmeyen 0,2 s'lik bir ölü zamanın (e^(−0,2s)) faz katkısını, −57,3·0,2·ω derece, ekliyor. Son satırda büyük olasılıkla <code>phase_total</code> çizdirilmek istenmiş; yazılan <code>phase_wlag</code> yalnız gecikmenin fazını çizer.</em></p>
+<h3 id="gain-margin-and-phase-margin">Gain margin and phase margin</h3>
+<p>For the loop gain transfer function L(s):</p>
+<ul><li>The <strong>gain margin</strong> is the multiplicative amount that the magnitude of L(s) can be increased before the closed-loop system goes unstable.</li><li>The <strong>phase margin</strong> is the amount of additional phase lag that can be associated with L(s) before the closed-loop system goes unstable.</li></ul>
+<p><code>[Gm,Pm,Wcg,Wcp]=margin(sys)</code> computes the gain margin Gm, the phase margin Pm (degrees) and the associated crossover frequencies for the SISO open-loop model. Gm is defined as 1/G, where G is the gain at the −180° phase crossing; in dB, Gm_dB = 20·log10(Gm). Gm_dB &lt; 0 means stability is most sensitive to loop gain reduction. With several crossover points, margin returns the smallest margins.</p>
+<p><strong>Problem 3:</strong> Given G(s) = (1280s + 640)/(s⁴ + 24.2s³ + 1604.81s² + 320.24s + 16), draw the Bode and Nyquist plots for 100 frequencies in [10⁻⁴, 10³] and find the gain and phase margins.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%Chp3_3.m
+A=[1280 640];
+B=[1 24.2 1604.81 320.24 16];
+w=logspace(-4,3,100);
+sys=tf(A,B);
+%Bode plot
+bode(sys,w)
+gtext('(a)')
+gtext('(b)')
+[Gm,Pm,Wcg,Wcp]=margin(sys)
+%Nyquist plot
+figure
+nyquist(sys,w)
+axis([-10 50 -30 30])</code></pre>
+<pre class="kod"><code>Gm  = 29.8637
+Pm  = 72.8960
+Wcg = 39.9099
+Wcp = 0.9036</code></pre>
+<p>So the gain margin is about 29.9 (≈ 29.5 dB) at 39.9 rad/s and the phase margin about 72.9° at 0.90 rad/s.</p>
+<figure class="yazi-gorsel"><img src="ch3-bode.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Bode diagram of Problem 3: magnitude (a) and phase (b) from 10⁻⁴ to 10³ rad/s"><figcaption>Chp3_3.m Bode diyagramı</figcaption></figure>
+<figure class="yazi-gorsel"><img src="ch3-nyquist.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Nyquist diagram of Problem 3"><figcaption>Chp3_3.m Nyquist diyagramı</figcaption></figure>
+<p>HW3 was due on April 20th, 2005.</p>
+<h2 id="chapter-4-case-study-motor-speed-control">Chapter 4: Case Study – Motor Speed Control</h2>
+<p>The course summary: introduction to MATLAB; Chapter 1 system models; Chapter 2 time response; Chapter 3 frequency domain analysis and design; and a case study of motor speed control covering modeling, time response, PID controller design, root locus controller design and frequency based controller design. The programs used: Open_loop_response, P_response, PI_response, PID_response, Open_loop_rootlocus, PID_rootlocus, Open_loop_bode, PID_bode.</p>
+<h3 id="modeling">Modeling</h3>
+<p>A DC motor has second order speed dynamics: mechanical properties such as inertia (J) and damping (b), electrical properties such as inductance (L) and resistance (R). The controller's objective is to maintain the speed of rotation of the motor shaft with a particular step response.</p>
+<figure class="yazi-gorsel"><img src="ch4-model.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Armature circuit (V, R, L, back EMF e = Kθ̇) and the free body diagram of the rotor (T, J, bθ̇)"><figcaption>Endüvi devresi ve rotorun serbest cisim diyagramı</figcaption></figure>
+<p>Parameters:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parameter</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Moment of inertia of the rotor (J)</th><td>0.01 kg·m²/s²</td></tr><tr><th scope="row">Damping ratio of the mechanical system (b)</th><td>0.1 Nms</td></tr><tr><th scope="row">Electromotive force constant (K = Ke = Kt)</th><td>0.01 Nm/A</td></tr><tr><th scope="row">Electric resistance (R)</th><td>1 Ω</td></tr><tr><th scope="row">Electric inductance (L)</th><td>0.5 H</td></tr><tr><th scope="row">Input (V)</th><td>source voltage</td></tr><tr><th scope="row">Output (θ)</th><td>position of shaft</td></tr></tbody></table></div>
+<p>The rotor and shaft are assumed to be rigid. The motor torque is related to the armature current by T = Kt·i; the back EMF is related to the rotational velocity by e = Ke·θ̇. Based on Newton's law combined with Kirchhoff's law:</p>
+<blockquote><p>J·θ̈ + b·θ̇ = K·i L·(di/dt) + R·i = V − K·θ̇</p></blockquote>
+<p>Using Laplace transforms:</p>
+<blockquote><p>(Ls + R)·I(s) = V − Ks·Θ(s) s(Js + b)·Θ(s) = K·I(s) θ̇/V = K / ((Js + b)(Ls + R) + K²) θ/V = K / (s((Js + b)(Ls + R) + K²))</p></blockquote>
+<p><em>Not: Slaytta ilk oran da "θ/V" diye yazılmış; K/((Js + b)(Ls + R) + K²) aslında hızın (θ̇) gerilime oranıdır, yukarıda öyle düzeltildi.</em></p>
+<h3 id="open-loop-response-and-pid-design">Open loop response and PID design</h3>
+<p>When 1 volt is applied to the system, the motor position changes by 70 radians in 2 seconds; the motor doesn't reach a steady state. With a 1 rad/sec step input, the design criteria are: settling time less than 0.04 seconds, overshoot less than 16%, no steady-state error.</p>
+<p>PID controller: Kp + Ki/s + Kd·s = (Kd·s² + Kp·s + Ki)/s. Tuning steps on the slide:</p>
+<ol><li>Proportional controller with gain Kp = 100</li><li>PID controller with gains Kp = 100, Ki = 1 and Kd = 1</li><li>Tune the gain Ki = 200</li><li>Increase Kd to reduce overshoot, Kd = 10</li></ol>
+<p>The plots that follow show the step response with a proportional gain Kp = 1.7, PI control with Kp = 1.7, Ki = 20, and PID control (plot title Kp = 17, Ki = 200, Kd = 0.15).</p>
+<figure class="yazi-gorsel"><img src="ch4-pid.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Step response with PID control: fast rise and small overshoot within 0.1 s"><figcaption>PID denetleyicili basamak yanıtı</figcaption></figure>
+<p><em>Not: Ayar adımlarındaki kazançlar (Kp = 100, Ki = 200, Kd = 10) ile grafik başlıklarındaki değerler (Kp = 1,7 / 17, Ki = 20 / 200, Kd = 0,15) birbirini tutmuyor; grafikler farklı bir örnekten alınmış görünüyor. Sunum, University of Michigan'ın "Control Tutorials for MATLAB" DC motor örneklerine çok benziyor.</em></p>
+<h3 id="root-locus-and-frequency-design">Root locus and frequency design</h3>
+<p>The remaining slides show the open-loop root locus (P control), finding the gain on the root locus with the same design criteria (settling time &lt; 0.04 s, overshoot &lt; 16%, no steady-state error), the step response with PID and K = 0.13, the original Bode plot and the step response obtained with the frequency design method.</p>
+<p>The course ended with a final project, "Model Reduction and Control Systems Design", with the sections Abstract, Introduction, Theoretical Development, Illustrative Examples, Model Reduction, Control System Design, Conclusion and Discussion, References (Homework #3 and the final project were due on April 20th).</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="ECE4115-Control-Systems-Lab-Chapter1-4.zip" download>ECE4115-Control-Systems-Lab-Chapter1-4.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 285 KB · 03.02.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="ECE4115-Control-Systems-Lab-Chapter1-4.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (285 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

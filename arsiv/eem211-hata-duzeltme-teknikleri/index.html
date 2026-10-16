@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Hata Düzeltme Teknikleri – Eşlik, CRC, ARQ ve Hamming Kodu (Trakya Üniversitesi Proje Ödevi, 2009) — hasancan.net</title>
+<meta name="description" content="Trakya Üniversitesi BİLM 637 dersi için 2009&#x27;da hazırlanmış &quot;Hata Düzeltme Teknikleri&quot; proje ödevi ve sunusu: eşlik denetimi, iki boyutlu eşlik, VRC/LRC, CRC-16, dur-bekle ve kayan pencere protokolleri, ARQ, (11,7) ve (7,4) Hamming kodu, G ve H matrisleriyle hata düzeltme, Reed-Solomon ve Raptor kodları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Hata Düzeltme Teknikleri – Eşlik, CRC, ARQ ve Hamming Kodu (Trakya Üniversitesi Proje Ödevi, 2009)">
+<meta property="og:description" content="Trakya Üniversitesi BİLM 637 dersi için 2009&#x27;da hazırlanmış &quot;Hata Düzeltme Teknikleri&quot; proje ödevi ve sunusu: eşlik denetimi, iki boyutlu eşlik, VRC/LRC, CRC-16, dur-bekle ve kayan pencere protokolleri, ARQ, (11,7) ve (7,4) Hamming kodu, G ve H matrisleriyle hata düzeltme, Reed-Solomon ve Raptor kodları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Hata Düzeltme Teknikleri – Eşlik, CRC, ARQ ve Hamming Kodu (Trakya Üniversitesi Proje Ödevi, 2009)", "description": "Trakya Üniversitesi BİLM 637 dersi için 2009'da hazırlanmış \"Hata Düzeltme Teknikleri\" proje ödevi ve sunusu: eşlik denetimi, iki boyutlu eşlik, VRC/LRC, CRC-16, dur-bekle ve kayan pencere protokolleri, ARQ, (11,7) ve (7,4) Hamming kodu, G ve H matrisleriyle hata düzeltme, Reed-Solomon ve Raptor kodları.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "hata_duzeltme_teknikleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/hata_duzeltme_teknikleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Hata Düzeltme Teknikleri – Eşlik, CRC, ARQ ve Hamming Kodu (Trakya Üniversitesi Proje Ödevi, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>31.12.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#giris">Giriş</a></li><li><a href="#bolum-i-sayisal-iletisimin-temelleri-ozet">Bölüm I: Sayısal iletişimin temelleri (özet)</a></li><li><a href="#bolum-ii-hata-sezme-ve-duzeltme-teknikleri">Bölüm II: Hata sezme ve düzeltme teknikleri</a></li><li><a href="#hata-bulma-teknikleri">Hata bulma teknikleri</a></li><li><a href="#hamming-kodlama-sistemi">Hamming kodlama sistemi</a></li><li><a href="#reed-solomon-ve-raptor-kodlari-ozet">Reed-Solomon ve Raptor kodları (özet)</a></li><li><a href="#sonuc">Sonuç</a></li><li><a href="#sunu">Sunu</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Hata Düzeltme Teknikleri – Eşlik, CRC, ARQ ve Hamming Kodu (Trakya Üniversitesi Proje Ödevi, 2009)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 31.12.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM211 Sayısal Mantık Tasarımı dersinin klasöründe Hamming kodu konusuna yardımcı kaynak olarak bulunan bir <strong>proje ödevi</strong> ve sunusudur. Ödev, <strong>Trakya Üniversitesi Fen Bilimleri Enstitüsü Bilgisayar Mühendisliği Bölümü</strong>'nde <strong>BİLM 637 Mobil ve Kablosuz Bilişim</strong> dersi (Doç. Dr. Hasan Hüseyin Balık) için bir yüksek lisans öğrencisi tarafından hazırlanmış (Edirne, Aralık 2009). Kapaktaki öğrenci adı ve numarası çıkarıldı. 36 sayfalık rapor iki bölümden oluşuyor: sayısal iletişimin temelleri ve hata sezme/düzeltme teknikleri. Aşağıda raporun özellikle sayısal mantık dersini ilgilendiren kısımları (eşlik, CRC, Hamming kodu) ayrıntılı, diğer kısımları özet olarak aktarıldı. Maskelenmiş raporun PDF'i ve 37 slaytlık sunu yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="giris">Giriş</h2>
+<p>Ağda ilerleyen paketler bazı hata risklerine sahiptir; özellikle ağın koşulları iyi değilse paketler kaybolabilir ya da bozulabilir. Ancak bu tip hataların düzeltilmesi mümkündür. Bu çalışmada hata düzeltme teknikleri üzerinde durulmuş, en yaygın kullanılan Hamming kodlama algoritması ve ARQ teknikleri üzerine ağırlık verilmiş, Reed-Solomon ve Raptor göndermede hata düzeltim kodlarına da kısaca değinilmiştir.</p>
+<h2 id="bolum-i-sayisal-iletisimin-temelleri-ozet">Bölüm I: Sayısal iletişimin temelleri (özet)</h2>
+<p>Raporun ilk bölümü konunun alt yapısını hatırlatıyor:</p>
+<ul><li><strong>Sayısal iletişim:</strong> ikili (0/1) kodlanmış verinin sistemler arasında aktarılması. İletim hızı bit/sn ile verilir; örneğin 8 bitlik kodlar kullanan 2400 bit/sn'lik bir hat saniyede 2400 / 8 = 300 karakter taşır.</li><li><strong>Veri iletimi karakteristikleri:</strong> salınım yapan işaretin genlik, frekans ve fazı değiştirilerek bilgi taşınır; <strong>baud</strong>, hat üzerindeki işaretin değişme hızıdır. Her işaret değişiminde iki bit gönderilirse bit hızı baud'un iki katı olur.</li><li><strong>Band genişliği ve Shannon kanunu:</strong> bir kanalın taşıyabileceği en yüksek bilgi hızı C = W·log₂(1 + S/N) ile verilir (W band genişliği, S/N işaret-gürültü oranı). Raporda 1000'e 1 S/N oranlı bir ses kanalı için en yüksek sığa 25 900 bit/sn olarak veriliyor.</li><li><strong>Periyot ve dalga boyu:</strong> T = 1/F; örneğin 2400 Hz'lik bir işaretin periyodu 1/2400 ≈ 0,000416 s. Dalga boyu WL = S / F (S: işaretin yayılma hızı).</li><li><strong>Kodlama:</strong> n bitle 2ⁿ sembol kodlanabilir; ASCII 7 bitlik (128 karakter), EBCDIC 8 bitlik bir koddur. ASCII'ye hata sezmek için 8. bit (eşlik) eklenebilir.</li><li><strong>Paralel ve seri iletim:</strong> paralel iletimde her bit ayrı yoldan gider (veri hazır / istek sinyalleriyle); seri iletim asenkron (her karakterde başla ve dur bitleri), senkron (saat veriyle birlikte, blok başında ve sonunda özel kodlar) ve isokron (periyodik, garantili kapasite; ses-görüntü) olarak üçe ayrılır.</li><li><strong>Hat tipleri:</strong> simpleks (tek yönlü, TV yayını), yarı dupleks (sırayla iki yönlü, telsiz), tam dupleks (aynı anda iki yönlü, telefon).</li></ul>
+<h2 id="bolum-ii-hata-sezme-ve-duzeltme-teknikleri">Bölüm II: Hata sezme ve düzeltme teknikleri</h2>
+<p>Veri iletimi sırasında bazı bitlerin bozulması ihtimali az da olsa ihmal edilemez; bir bit bile bozulsa verinin tamamı anlamsız hâle gelebilir. Bozulma olup olmadığını anlamak için <strong>hata sezme</strong>, bozulmuşsa düzeltmek için <strong>hata düzeltme</strong> teknikleri kullanılır; hata giderilemezse veri paketi yeniden gönderilir. Bu işlevler OSI modelinde <strong>veri bağı katmanına</strong> aittir: katman veriyi çerçevelere (frame) böler ve her çerçevenin sonuna bir <strong>çerçeve denetim dizisi (FCS, Frame Check Sequence)</strong> ekler; alıcı aynı hesabı yapıp FCS ile karşılaştırır.</p>
+<h3 id="protokoller-ozet">Protokoller (özet)</h3>
+<ul><li><strong>Dur ve bekle (Idle RQ):</strong> her çerçeveden sonra ACK beklenir. Çerçeve ya da ACK bozulursa zaman aşımıyla yeniden gönderilir; alıcı hatalı çerçeve için NAK gönderirse zaman aşımı beklenmeden tekrar gönderim yapılır.</li><li><strong>Sürekli tekrar istemi (Continuous RQ):</strong> gönderici ACK beklemeden çerçeveleri art arda yollar, kopyalarını tekrar iletim listesinde tutar.</li><li><strong>Seçmeli tekrar (selective repeat):</strong> yalnızca hatalı çerçeve yeniden gönderilir.</li><li><strong>N çerçeve gerile (go-back-N):</strong> sıra dışı bir çerçeve alınınca, son doğrulanan çerçeveden sonraki bütün çerçeveler yeniden istenir.</li><li><strong>Kayan pencere:</strong> doğrulama beklemeden gönderilebilecek çerçeve sayısı K ile sınırlanır (K = 1 ise dur ve bekle gibi çalışır).</li></ul>
+<p>Veri iletiminde iki tip hata görülür: <strong>patlama (burst)</strong> hatasında alıcıya bir süre anlamsız bilgi gelir ve o süredeki bütün bitler bozulabilir; <strong>rastgele (random)</strong> hatada ortamdaki gürültü yüzünden tek tek bitler bozulur. Hatanın iki nedeni vardır: <strong>bit hataları</strong> (elektromanyetik etkiler vb.) ve <strong>paket kayıpları</strong> (ağ tıkanıklığı, aşırı gecikme).</p>
+<h3 id="hata-duzeltme-yontemleri">Hata düzeltme yöntemleri</h3>
+<ol><li><strong>Sembol yerine koyma:</strong> alıcıda veriyi bir insan değerlendiriyorsa, yanlış alınan karakterin yerine kullanılmayan bir sembol konur; operatör anlayamazsa tekrar iletim istenir.</li><li><strong>Tekrar iletme (ARQ, Automatic Repeat Request):</strong> hatalı alınan mesaj otomatik olarak yeniden istenir. En güvenilir ama her zaman en verimli olmayan yöntemdir; istatistiksel olarak ideal mesaj bloğunun 256–512 karakter olduğu belirtiliyor.</li><li><strong>İleriye dönük hata düzeltme (FEC):</strong> mesaja iletimden önce fazladan bitler eklenir ve hata, tekrar iletim olmadan alıcıda bulunup düzeltilir. En yaygın örneği R. W. Hamming'in Bell Laboratuvarları'nda geliştirdiği <strong>Hamming kodudur</strong>.</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">FEC için kullanılan algoritmalar</th><th scope="col">ARQ için kullanılan algoritmalar</th></tr></thead><tbody><tr><th scope="row">Katlamalı (konvolüsyonel) kodlar</th><td>CRC kodları</td></tr><tr><th scope="row">BCH kodları</th><td>Seri eşlik</td></tr><tr><th scope="row">Hamming kodları</th><td>Blok eşlik</td></tr><tr><th scope="row">Reed-Solomon kodları</th><td>Modül toplamı</td></tr><tr><th scope="row">Raptor kodları</th><td></td></tr></tbody></table></div>
+<h2 id="hata-bulma-teknikleri">Hata bulma teknikleri</h2>
+<p>Hata bulma teknikleri hangi bitin hatalı olduğunu söylemez, yalnızca hata olduğunu belirler.</p>
+<ul><li><strong>Artıklık:</strong> her karakter iki kez gönderilir; iki kopya aynı değilse hata vardır.</li><li><strong>Tam sayım kodlaması:</strong> bütün karakterlerde 1'lerin sayısı aynıdır (ör. her karakterde üç tane 1); 1'ler sayılarak hata bulunur.</li><li><strong>Yankılama (echoplex):</strong> terminalde yapılan işlem merkeze bildirilir, merkez bunu geri yansıtır; kullanıcı ekranda doğruluğu kontrol eder.</li></ul>
+<h3 id="eslik-denetimi-parity-check">Eşlik denetimi (parity check)</h3>
+<p>En sık kullanılan hata sezme yöntemidir. <strong>Çift eşlikte</strong> eşlik biti ile birlikte 1'lerin sayısı çift, <strong>tek eşlikte</strong> tek olur. Çift eşlik biti, veri bitlerinin XOR'lanmasıyla; tek eşlik biti XNOR ile bulunur. Örneğin 0110 verisi için çift eşlik biti 0, tek eşlik biti 1'dir.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Veri</th><th scope="col">1'lerin sayısı</th><th scope="col">Çift eşlik (even)</th><th scope="col">Tek eşlik (odd)</th></tr></thead><tbody><tr><th scope="row">1101</th><td>3 (tek)</td><td>1 → 11011</td><td>0 → 11010</td></tr><tr><th scope="row">1100</th><td>2 (çift)</td><td>0 → 11000</td><td>1 → 11001</td></tr></tbody></table></div>
+<p><em>Not: Raporda tek eşlik örneğinde 1100 için eklenecek bitin "0" olduğu yazıyor; doğrusu 1'dir (sonuç olarak verilen 11001 doğru).</em></p>
+<h3 id="i-ki-boyutlu-eslik-vrc-ve-lrc">İki boyutlu eşlik, VRC ve LRC</h3>
+<p>İki boyutlu eşlikte her karakterin kendi eşlik bitinin yanında, bit sıralarına (sütunlara) göre de eşlik bitleri oluşturulur; böylece tek bitlik hatada hatalı bitin yeri de bulunabilir.</p>
+<ul><li><strong>VRC (düşey artıklık denetimi, karakter eşliği):</strong> her karaktere iletimden önce bir eşlik biti eklenir.</li><li><strong>LRC (boyuna artıklık denetimi, mesaj eşliği):</strong> her bit konumu için mesajdaki bütün karakterlerin eşliği hesaplanır ve mesajın sonuna son karakter gibi eklenir; LRC'de yalnızca çift eşlik kullanılır.</li></ul>
+<p>Örnek: ASCII "THE CAT" mesajı için VRC'de tek eşlik, LRC'de çift eşlik:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Karakter</th><th scope="col">T</th><th scope="col">H</th><th scope="col">E</th><th scope="col">boşluk</th><th scope="col">C</th><th scope="col">A</th><th scope="col">T</th><th scope="col">LRC</th></tr></thead><tbody><tr><th scope="row">Onaltılı</th><td>54</td><td>48</td><td>45</td><td>20</td><td>43</td><td>41</td><td>54</td><td>2F</td></tr><tr><th scope="row">b0 (LSB)</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">b1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b2</th><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">b3</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b4</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">b5</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b6 (MSB)</th><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">b7 (VRC)</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>LRC bütün iletim hatalarının %95–98'ini bulur; ama aynı bit konumunda çift sayıda karakter bozulursa hatayı göremez. VRC ve LRC birlikte kullanıldığında tek bitlik hatanın yeri bulunabilir. Mesajdaki baytların mod 256 toplamının kullanıldığı <strong>toplama denetimi (checksum)</strong> de bu ailedendir.</p>
+<h3 id="crc-cevrimli-fazlalik-sinamasi">CRC (çevrimli fazlalık sınaması)</h3>
+<p>CRC, en güvenli ve en yaygın hata bulma tekniğidir; iletim hatalarının yaklaşık %99,95'ini bulur. Veri bitleri bir polinomun katsayıları gibi ele alınır. Veri polinomu P(x), xᵖ ile çarpılır (verinin sağına p tane 0 eklenir) ve p. dereceden <strong>üreteç polinomu G(x)</strong>'e mod 2 (XOR ile) bölünür:</p>
+<p>xᵖ·P(x) = Q(x)·G(x) + R(x)</p>
+<p>Bölüm atılır, <strong>kalan R(x)</strong> verinin sonuna eklenip gönderilir. Alıcı aldığı diziyi aynı G(x)'e böler; kalan sıfırsa veri hatasız gelmiştir. ABD'de en yaygın kod <strong>CRC-16</strong>'dır; üreteç polinomu:</p>
+<p>G(x) = x¹⁶ + x¹² + x⁵ + 1</p>
+<p>CRC kodundaki bit sayısı üreteç polinomunun en yüksek kuvvetine eşittir (burada 16).</p>
+<h3 id="arq-yontemleri">ARQ yöntemleri</h3>
+<p>ARQ'da üç yöntem kullanılır: <strong>olumlu doğrulama</strong> (alıcı hatasız aldığı her çerçeve için onay gönderir), <strong>zaman aşımı sonrasında yeniden gönderim</strong> ve <strong>olumsuz doğrulama ile yeniden gönderim</strong> (alıcı hatalı çerçeve için NAK gönderir). İki tür ARQ vardır: beklemeli tekrar istemi (dur ve bekle) ve sürekli tekrar istemi (N çerçeve gerile, seçmeli tekrar).</p>
+<h2 id="hamming-kodlama-sistemi">Hamming kodlama sistemi</h2>
+<p>Hamming kodu, telekomünikasyonda kullanılan doğrusal bir hata kontrol ve düzeltme yöntemidir: <strong>tek bitlik hataları bulup düzeltir</strong>, iki bitlik hataları bulabilir ama düzeltemez. Richard Hamming 1940'larda Bell Laboratuvarları'nda delikli kartlarla çalışan Bell Model V röleli bilgisayarında çalışırken, hafta sonları operatör yokken hatalar yüzünden işlerinin yarıda kalmasından bıkmış, yıllarca süren çalışmalar sonunda 1950'de adını taşıyan yöntemi yayımlamıştır.</p>
+<p>Hamming, kodları (n, k) gösterimiyle tanımladı: n toplam bit, k veri biti. Örneğin 7 bitlik ASCII'ye bir eşlik biti eklemek (8,7), üç kez tekrar (3,1) kodudur; <strong>bilgi oranı</strong> k/n'dir (tekrar için 1/3). İki kod sözcüğünü birbirinden ayıran bit sayısına <strong>Hamming uzaklığı</strong> (distance) dendi: eşlik yönteminin uzaklığı 2, (3,1) tekrar kodunun uzaklığı 3'tür. Amaç uzaklığı artırırken bilgi oranını yüksek tutmaktır.</p>
+<p>Algoritma:</p>
+<ol><li>2'nin kuvveti olan bütün bit konumları (1, 2, 4, 8, 16, …) eşlik bitleri içindir.</li><li>Diğer konumlar (3, 5, 6, 7, 9, 10, 11, …) veri bitleri içindir.</li><li>n. konumdaki eşlik biti, n−1 bit atlayıp n bit kontrol eder, n bit atlar, n bit kontrol eder… Yani 1. eşlik biti 1, 3, 5, 7, 9, 11…; 2. eşlik biti 2, 3, 6, 7, 10, 11…; 4. eşlik biti 4–7, 12–15…; 8. eşlik biti 8–15, 24–31… konumlarını denetler.</li></ol>
+<h3 id="11-7-hamming-kodu-ornegi">(11,7) Hamming kodu örneği</h3>
+<p>7 bitlik veri "0110001" olsun. Veri bitleri d1…d7, 3, 5, 6, 7, 9, 10, 11. konumlara yerleştirilir ve eşlik bitleri (çift eşlik) hesaplanır:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Konum</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">11</th></tr></thead><tbody><tr><th scope="row">Bit</th><td>p1</td><td>p2</td><td>d1</td><td>p3</td><td>d2</td><td>d3</td><td>d4</td><td>p4</td><td>d5</td><td>d6</td><td>d7</td></tr><tr><th scope="row">Eşliksiz veri</th><td></td><td></td><td>0</td><td></td><td>1</td><td>1</td><td>0</td><td></td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">Eşlikli veri</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>Gönderilen kod sözcüğü <strong>00001101001</strong> olur. İletimde baştan 3. bitin bozulduğunu, alıcının <strong>00101101001</strong> aldığını varsayalım. Alıcı her eşlik bitini yeniden denetler; doğruysa 0, yanlışsa 1 yazar:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Eşlik biti</th><th scope="col">Denetlediği konumlar</th><th scope="col">Sonuç</th><th scope="col">Eşlik kontrol biti</th></tr></thead><tbody><tr><th scope="row">p1</th><td>1, 3, 5, 7, 9, 11</td><td>Yanlış</td><td>1</td></tr><tr><th scope="row">p2</th><td>2, 3, 6, 7, 10, 11</td><td>Yanlış</td><td>1</td></tr><tr><th scope="row">p3</th><td>4, 5, 6, 7</td><td>Doğru</td><td>0</td></tr><tr><th scope="row">p4</th><td>8, 9, 10, 11</td><td>Doğru</td><td>0</td></tr></tbody></table></div>
+<p>Bu bitler p4 p3 p2 p1 sırasıyla yazılınca <strong>0011</strong> = 2 + 1 = <strong>3</strong> elde edilir: hatalı bit 3. konumdadır. 3. bit çevrilerek veri ilk hâli olan 00001101001'e döndürülür.</p>
+<p><em>Not: Kod sözcüğü ve sendrom kontrol edildi; 0110001 verisinin (11,7) Hamming kodu gerçekten 00001101001'dir.</em></p>
+<h3 id="7-4-hamming-kodu-ve-hamming-matrisleri">(7,4) Hamming kodu ve Hamming matrisleri</h3>
+<p>Bugün Hamming kodu denince ilk akla gelen, 1950'de açıklanan <strong>(7,4)</strong> kodudur: her 4 veri bitine 3 kontrol biti eklenir; her tek bitlik hatayı düzeltebilir ya da bütün tek ve iki bitlik hataları bulabilir. Bu kod iki matrisle çalışır: <strong>kod üretici matris G</strong> (7×4) ve <strong>eşlik kontrol matrisi H</strong> (3×7). Bu örnekte veri bitleri ilk 4, eşlik bitleri son 3 konumdadır.</p>
+<pre class="kod"><code>G =  1 0 0 0        H =  0 1 1 1 1 0 0
+     0 1 0 0             1 0 1 1 0 1 0
+     0 0 1 0             1 1 0 1 0 0 1
+     0 0 0 1
+     0 1 1 1
+     1 0 1 1
+     1 1 0 1</code></pre>
+<p>G'nin ilk 4 satırı 4×4 birim matristir (veriyi olduğu gibi aktarır), son 3 satırı eşlik bitlerinin hangi veri bitlerinden hesaplandığını gösterir. H'nin son 3 sütunu 3×3 birim matris, ilk 4 sütunu aynı eşlik ilişkileridir.</p>
+<p><strong>Kanal kodlama:</strong> gönderilecek veri "1001" olsun, p = (1, 0, 0, 1)ᵀ. Kodlanmış veri mod 2 çarpımla x = G·p = (1, 0, 0, 1, 1, 0, 0)ᵀ olur.</p>
+<p><strong>Eşlik kontrolü:</strong> hata yoksa alınan r = x olur ve z = H·r = (0, 0, 0)ᵀ çıkar.</p>
+<p><strong>Hatanın düzeltilmesi:</strong> tek bitlik hata varsa r = x + eᵢ (eᵢ, i. konumu 1 olan sıfır vektörü) ve</p>
+<p>H·r = H·(x + eᵢ) = H·x + H·eᵢ = 0 + H·eᵢ = H·eᵢ</p>
+<p>olur; yani z, H'nin i. sütununa eşittir ve hatalı bitin yerini gösterir. Örneğin 3. bit bozulursa r = (1, 0, 1, 1, 1, 0, 0)ᵀ ve z = H·r = (1, 1, 0)ᵀ çıkar; bu H'nin 3. sütunudur. 3. bit çevrilince asıl veriye ulaşılır.</p>
+<h2 id="reed-solomon-ve-raptor-kodlari-ozet">Reed-Solomon ve Raptor kodları (özet)</h2>
+<ul><li><strong>Reed-Solomon</strong> kodları güçlü doğrusal hata düzeltme kodlarıdır; Galois alanları üzerinde çalışır (her sembol 8 bit), R-S(n, k) kodu (n−k)/2 sembol hatasını düzeltebilir. Çözücü karmaşıktır ve paket düzeyindeki kayıplarda bazı kısıtları vardır; gereken işlem gücü blok uzunluğuyla hızla artar.</li><li><strong>Raptor</strong> kodlarında alıcı k' &gt; k sembol alarak k kaynak sembolünü yeniden oluşturur; alıcı ek yükü R = (k' − k)/k, %1'in altındadır. Veri büyüklüğüne sınır koymaz ve gereken işlem gücü doğrusal artar.</li></ul>
+<h2 id="sonuc">Sonuç</h2>
+<p>Farklı hata düzeltme tekniklerini karşılaştırırken paket kayıp oranı, gereken ağ kaynağı (bant genişliği), gönderici ve alıcıdaki işlemci yükü ve algoritmanın karmaşıklığı göz önüne alınmalıdır.</p>
+<h2 id="sunu">Sunu</h2>
+<p>Ödevle birlikte hazırlanan 37 slaytlık sunu aynı konuları özetliyor: sayısal iletişim ve veri iletimi, paralel/asenkron/senkron seri iletim, iletim hattı tipleri, gerçek zamanlı ve gerçek zamanlı olmayan iletişim, veri bağı katmanı ve FCS, dur ve bekle, sürekli tekrar istemi, seçmeli tekrar, çerçeve gerile ve kayan pencere protokolleri, hata türleri, hata bulma teknikleri (artıklık, tam sayım, yankılama, iki boyutlu eşlik, LRC, CRC), üç hata düzeltme yöntemi, FEC ve ARQ algoritmaları, Hamming kodu algoritması, (11,7) örneği, (7,4) kodu ve matrisleri, Reed-Solomon ve Raptor kodları.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="hata_duzeltme_teknikleri.zip" download>hata_duzeltme_teknikleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 7.7 MB · 31.12.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="hata_duzeltme_teknikleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

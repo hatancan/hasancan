@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Fourier Özeti ve Faydalı Bağıntılar (Alper Uraz) — hasancan.net</title>
+<meta name="description" content="EEM301 Sinyaller ve Sistemler I dersinin iki sayfalık formül özeti: sürekli ve ayrık zamanlı konvolüsyon, Fourier serisi ve Fourier dönüşümü sentez/analiz denklemleri, faydalı integraller, sonlu ve sonsuz geometrik toplamlar, dikdörtgen–kutupsal dönüşüm ve j&#x27;nin kuvvetleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-fourier-ozeti/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Fourier Özeti ve Faydalı Bağıntılar (Alper Uraz)">
+<meta property="og:description" content="EEM301 Sinyaller ve Sistemler I dersinin iki sayfalık formül özeti: sürekli ve ayrık zamanlı konvolüsyon, Fourier serisi ve Fourier dönüşümü sentez/analiz denklemleri, faydalı integraller, sonlu ve sonsuz geometrik toplamlar, dikdörtgen–kutupsal dönüşüm ve j&#x27;nin kuvvetleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-fourier-ozeti/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Fourier Özeti ve Faydalı Bağıntılar (Alper Uraz)", "description": "EEM301 Sinyaller ve Sistemler I dersinin iki sayfalık formül özeti: sürekli ve ayrık zamanlı konvolüsyon, Fourier serisi ve Fourier dönüşümü sentez/analiz denklemleri, faydalı integraller, sonlu ve sonsuz geometrik toplamlar, dikdörtgen–kutupsal dönüşüm ve j'nin kuvvetleri.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-fourier-ozeti/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-fourier-ozeti.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-fourier-ozeti/eem301-fourier-ozeti.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Fourier Özeti ve Faydalı Bağıntılar (Alper Uraz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.01.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#konvolusyon">Konvolüsyon</a></li><li><a href="#fourier-serileri">Fourier serileri</a></li><li><a href="#fourier-donusumleri">Fourier dönüşümleri</a></li><li><a href="#faydali-integraller">Faydalı integraller</a></li><li><a href="#faydali-bagintilar">Faydalı bağıntılar</a></li><li><a href="#dikdortgen-kutupsal">Dikdörtgen ↔ kutupsal</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Fourier Özeti ve Faydalı Bağıntılar (Alper Uraz)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 03.01.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM301 Sinyaller ve Sistemler I</strong> dersinde Prof. Dr. Alper Uraz'ın dağıttığı iki sayfalık <strong>"Fourier Summary"</strong> (EEM301-UsefulSummary) formül kâğıdını içeriyor. Belgenin iki sürümü var: Ocak 2007 tarihli ilk sürüm ve 2010'da düzeltilip konvolüsyon özelliği eklenmiş sürüm. Aşağıdaki metin yeni sürümden aktarıldı. Her iki Word dosyası yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="konvolusyon">Konvolüsyon</h2>
+<p>Konvolüsyon özelliği (2010 sürümünde eklenmiş):</p>
+<ul><li>y(t) = h(t) ∗ x(t) ⟷ Y(ω) = H(ω) X(ω)</li><li>y(n) = h(n) ∗ x(n) ⟷ Y(e^(jω)) = H(e^(jω)) X(e^(jω))</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Sürekli zaman (CT)</th><th scope="col">Ayrık zaman (DT)</th></tr></thead><tbody><tr><th scope="row">Nedensel olmayan x(·), h(·)</th><td>y(t) = ∫₋∞^∞ x(τ) h(t − τ) dτ</td><td>y(n) = Σ_{k=−∞}^{∞} x(k) h(n − k)</td></tr><tr><th scope="row">Nedensel x(·), h(·)</th><td>y(t) = ∫₀ᵗ x(τ) h(t − τ) dτ</td><td>y(n) = Σ_{k=0}^{n} x(k) h(n − k)</td></tr></tbody></table></div>
+<h2 id="fourier-serileri">Fourier serileri</h2>
+<p>x(t) ⟷ aₖ ve x(n) ⟷ aₖ (FS):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">CT</th><th scope="col">DT</th></tr></thead><tbody><tr><th scope="row">Sentez denklemi</th><td>x(t) = Σ_{k=−∞}^{∞} aₖ e^(jkω₀t)</td><td>x(n) = Σ_{k=⟨N⟩} aₖ e^(jkω₀n)</td></tr><tr><th scope="row">Analiz denklemi</th><td>aₖ = (1/T) ∫_T x(t) e^(−jkω₀t) dt</td><td>aₖ = (1/N) Σ_{n=⟨N⟩} x(n) e^(−jkω₀n)</td></tr></tbody></table></div>
+<h2 id="fourier-donusumleri">Fourier dönüşümleri</h2>
+<p>x(t) ⟷ X(ω), yani F[x(t)] = X(ω), x(t) = F⁻¹[X(ω)]; ayrık zamanda x(n) ⟷ X(e^(jω)).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">CT</th><th scope="col">DT</th></tr></thead><tbody><tr><th scope="row">Sentez denklemi</th><td>x(t) = (1/2π) ∫₋∞^∞ X(ω) e^(jωt) dω</td><td>x(n) = (1/2π) ∫_{2π} X(e^(jω)) e^(jωn) dω</td></tr><tr><th scope="row">Analiz denklemi</th><td>X(ω) = ∫₋∞^∞ x(t) e^(−jωt) dt</td><td>X(e^(jω)) = Σ_{n=−∞}^{∞} x(n) e^(−jωn)</td></tr></tbody></table></div>
+<h2 id="faydali-integraller">Faydalı integraller</h2>
+<ul><li>∫ e^(ax) sin nx dx = e^(ax)/(a² + n²) · [a sin nx − n cos nx]</li><li>∫ e^(ax) cos nx dx = e^(ax)/(a² + n²) · [a cos nx + n sin nx]</li><li>∫ x sin nx dx = sin nx / n² − x cos nx / n</li><li>∫ x cos nx dx = cos nx / n² + x sin nx / n</li><li>∫ x e^(ax) dx = e^(ax) [x/a − 1/a²]</li><li>∫ p·q dx = p [∫q dx] − ∫ [∫q dx] (dp/dx) dx (kısmi integrasyon)</li></ul>
+<h2 id="faydali-bagintilar">Faydalı bağıntılar</h2>
+<p><strong>Sonlu toplam formülü</strong> (her karmaşık a için):</p>
+<ul><li>Σ_{n=0}^{N−1} aⁿ = (1 − a^N)/(1 − a), a ≠ 1; a = 1 için N</li></ul>
+<p><strong>Sonsuz toplam formülü:</strong></p>
+<ul><li>Σ_{n=0}^{∞} aⁿ = 1/(1 − a), |a| &lt; 1</li></ul>
+<p><strong>Türevler:</strong></p>
+<ul><li>Σ_{n=0}^{N−1} n aⁿ = a(1 − a^N)/(1 − a)² − N a^N/(1 − a)</li><li>Σ_{n=0}^{∞} n aⁿ = a/(1 − a)², |a| &lt; 1</li></ul>
+<p><strong>Farklı sınırlarla</strong> (a ≠ 1, pozitif/negatif M, N ve M ≤ N):</p>
+<ul><li>Σ_{n=M}^{N−1} aⁿ = (a^M − a^N)/(1 − a); a = 1 için N − M</li><li>Σ_{n=M}^{∞} aⁿ = a^M/(1 − a), |a| &lt; 1</li><li>Σ_{n=1}^{N} n = N(N + 1)/2, Σ_{n=1}^{N} n² = N(N + 1)(2N + 1)/6</li></ul>
+<p><em>Not: 2007 tarihli ilk sürümde Σ n aⁿ (n = 0…∞) toplamı a/(1 − a) olarak yazılmıştı; doğrusu a/(1 − a)²'dir ve 2010 sürümünde düzeltilmiş.</em></p>
+<h2 id="dikdortgen-kutupsal">Dikdörtgen ↔ kutupsal</h2>
+<p>Pozitif gerçel a, b ve tam sayı n için:</p>
+<ul><li>a − jb = r e^(jθ₁) ⇒ r = √(a² + b²), θ₁ = tan⁻¹(−b/a) = −tan⁻¹(b/a)</li><li>−a + jb = r e^(jθ₂) ⇒ r = √(a² + b²), θ₂ = π − tan⁻¹(b/a) = π + θ₁</li><li>e^(±jnπ) = cos(nπ) = (−1)ⁿ, sin(nπ) = 0, e^(±j2πn) = 1, e^(j(2n+1)π/2) = j(−1)ⁿ</li></ul>
+<p><strong>j'nin kuvvetleri:</strong></p>
+<ul><li>(−j)² = −1, (−j)³ = +j, (−j)⁴ = 1, (−j)⁵ = (−j)⁴(−j)¹ = −j, …</li><li>(+j)² = −1, (+j)³ = −j, (+j)⁴ = 1, (+j)⁵ = (+j)⁴(+j)¹ = +j, …</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-fourier-ozeti.zip" download>eem301-fourier-ozeti.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 59 KB · 03.01.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-fourier-ozeti.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (59 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

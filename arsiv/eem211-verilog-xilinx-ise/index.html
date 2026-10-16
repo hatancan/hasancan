@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Verilog&#x27;a Giriş ve Xilinx ISE ile Proje Hazırlama (Laboratuvar Notları, 2011) — hasancan.net</title>
+<meta name="description" content="EEM211 Sayısal Mantık Tasarımı laboratuvarının 2011 notları: donanım tanımlama dilleri, Verilog ile VHDL farkları, yapısal ve davranışsal tasarım örneği; Xilinx ISE&#x27;de proje, şematik, Verilog ve test dosyası oluşturma, ISE Simulator ile benzetim, Nexys2 pin tanımlamaları ve Digilent Adept ile karta yükleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-verilog-xilinx-ise/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Verilog&#x27;a Giriş ve Xilinx ISE ile Proje Hazırlama (Laboratuvar Notları, 2011)">
+<meta property="og:description" content="EEM211 Sayısal Mantık Tasarımı laboratuvarının 2011 notları: donanım tanımlama dilleri, Verilog ile VHDL farkları, yapısal ve davranışsal tasarım örneği; Xilinx ISE&#x27;de proje, şematik, Verilog ve test dosyası oluşturma, ISE Simulator ile benzetim, Nexys2 pin tanımlamaları ve Digilent Adept ile karta yükleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-verilog-xilinx-ise/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Verilog'a Giriş ve Xilinx ISE ile Proje Hazırlama (Laboratuvar Notları, 2011)", "description": "EEM211 Sayısal Mantık Tasarımı laboratuvarının 2011 notları: donanım tanımlama dilleri, Verilog ile VHDL farkları, yapısal ve davranışsal tasarım örneği; Xilinx ISE'de proje, şematik, Verilog ve test dosyası oluşturma, ISE Simulator ile benzetim, Nexys2 pin tanımlamaları ve Digilent Adept ile karta yükleme.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-verilog-xilinx-ise/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "EEM211_Verilog_Xilinx_2011.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-verilog-xilinx-ise/EEM211_Verilog_Xilinx_2011.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Verilog&#x27;a Giriş ve Xilinx ISE ile Proje Hazırlama (Laboratuvar Notları, 2011)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>19.10.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#verilog">Verilog</a></li><li><a href="#xilinx-programi-ile-proje-hazirlanmasi">Xilinx programı ile proje hazırlanması</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Verilog&#x27;a Giriş ve Xilinx ISE ile Proje Hazırlama (Laboratuvar Notları, 2011)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 19.10.2011 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM211 Sayısal Mantık Tasarımı</strong> laboratuvarında 2011 güz döneminde kullanılan iki yardımcı belgeyi aktarıyor: <strong>Doç. Dr. Hamit Erdem</strong> ve <strong>Araş. Gör. Gencer Tulay</strong>'ın hazırladığı "Verilog" sunusu (Ekim 2011) ve <strong>Araş. Gör. Evren Emekdaş</strong> ile <strong>Araş. Gör. Gencer Tulay</strong>'ın hazırladığı "Xilinx Programı ile Proje Hazırlanması" kılavuzu (Ekim 2011). Kılavuz adım adım ekran görüntülerinden oluşuyor; adımlar aşağıda metin olarak verildi. İki PDF yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="verilog">Verilog</h2>
+<h3 id="hdl-nedir">HDL nedir?</h3>
+<p><strong>HDL</strong> (Hardware Description Language), Türkçesiyle <strong>DTD</strong> (Donanım Tanımlama Dili), sayısal devrelerin tanımlanması amacıyla kullanılan bilgisayar dillerinin sınıfına verilen addır. DTD, devrenin yürüttüğü işlemin tasarımını ve benzetim yoluyla doğrulanmasını sağlar. En çok bilinen DTD'ler <strong>Verilog</strong> ve <strong>VHDL</strong>'dir; diğerleri arasında ABEL, AHDL, Hardware Join Java, Lola, MyHDL ve Ruby sayılıyor.</p>
+<p>Bir sayısal sistem üç farklı seviyede tanımlanabilir:</p>
+<ol><li><strong>Anahtar seviyesi (switch level):</strong> kablo, direnç, transistör vb. elemanlar.</li><li><strong>Kapı seviyesi (gate level):</strong> mantıksal kapılar, flip-floplar.</li><li><strong>Yazmaç aktarım seviyesi (register transfer level, RTL):</strong> yazmaçlar ve yazmaçlar arasındaki sinyal akışı.</li></ol>
+<h3 id="verilog-ve-vhdl">Verilog ve VHDL</h3>
+<p>Verilog, donanım tanımlamak için kullanılan bir dildir; 1985'te Gateway Design Corporation tarafından çıkarılmış, bugün Cadence Design Systems'in ürünüdür. Ders kapsamında Xilinx program geliştirme ortamında kullanılıyor.</p>
+<ul><li>Verilog C'ye, VHDL Ada'ya yakındır.</li><li>Avrupa'da VHDL, Amerika ve Uzak Doğu'da Verilog yaygındır.</li><li>Anahtar ve kapı seviyesindeki tasarımlarda Verilog daha kullanışlıdır.</li><li>Verilog büyük/küçük harfe duyarlıdır, VHDL değildir.</li></ul>
+<h3 id="nicin-kullanilir">Niçin kullanılır?</h3>
+<p>Tasarım oluşturmak ve benzetim (simulation) yoluyla test etmek için. Bir elektronik tasarım modellenip çeşitli testlerle denetlenmezse, çalışma sırasında öngörülemeyen hatalarla karşılaşılabilir; bu da maliyet olarak zarar demektir ve seri üretim hacmi yüksekse büyük maddi kayba yol açar.</p>
+<h3 id="tasarim-yontemleri">Tasarım yöntemleri</h3>
+<p>Yapısal (structural), davranışsal (behavioral) ve fiziksel (physical) tasarım. Aynı devrenin (X = AB + C', Y = C') yapısal ve davranışsal tanımı:</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>// Yapısal tasarım
+module cct(X,Y,A,B,C);
+output X,Y;
+input A,B,C;
+wire e;
+and a1(e,A,B);
+not i1(Y,C);
+or o1(X,e,Y);
+endmodule</code></pre>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>// Davranışsal tasarım
+module cct(X,Y,A,B,C);
+output X,Y;
+input A,B,C;
+assign Y=~C;
+assign X=(A&amp;B)|Y;
+endmodule</code></pre>
+<p><em>Not: Sunuda <code>module cct(X,Y,A,B,C)</code> satırlarının sonunda noktalı virgül yok; Verilog'da modül başlığı <code>;</code> ile bitmelidir, yukarıda eklendi.</em></p>
+<p>Kaynaklar: www.fpgarelated.com, www.asic-world.com, www.verilog.com, www.verilog.net.</p>
+<h2 id="xilinx-programi-ile-proje-hazirlanmasi">Xilinx programı ile proje hazırlanması</h2>
+<h3 id="proje-olusturma">Proje oluşturma</h3>
+<p>Xilinx ISE açıldığında en son çalışılan proje üzerinden devam eder. Bu yüzden yeni bir çalışmaya başlarken önce <strong>File → Close Project</strong> ile açık projeyi kapatıp <strong>File → New Project</strong> ile yeni proje oluşturun; dosyaların kaydedileceği yeri seçip projeye isim verin. <em>New Project Wizard – Device Properties</em> penceresinde şu ayarları yapın:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Ayar</th><th scope="col">Değer</th></tr></thead><tbody><tr><th scope="row">Family</th><td>Spartan3E</td></tr><tr><th scope="row">Device</th><td>XC3S500E</td></tr><tr><th scope="row">Package</th><td>FG320</td></tr><tr><th scope="row">Speed</th><td>-4</td></tr><tr><th scope="row">Simulator</th><td>ISE Simulator (VHDL/Verilog)</td></tr></tbody></table></div>
+<p>Sonraki <em>Create New Source</em> ve <em>Add Existing Sources</em> pencerelerinde Next'e basın, <em>Project Summary</em> penceresinde ayarları denetleyip Finish'e basın.</p>
+<h3 id="sematik-dosyasi-olusturma">Şematik dosyası oluşturma</h3>
+<p>Soldaki <em>Sources</em> penceresinde çip modelinin üstüne sağ tıklayıp <strong>New Source</strong>'u seçin. <em>Select Source Type</em> penceresinde <strong>Schematic</strong>'i işaretleyip dosya adını yazın, Next ve Finish'e basın. Açılan sayfada çalışmanızı şema olarak hazırlayıp kaydedin.</p>
+<h3 id="verilog-dosyasi-olusturma">Verilog dosyası oluşturma</h3>
+<p>Yine çip modeline sağ tıklayıp <strong>New Source</strong> → <strong>Verilog Module</strong> seçin, dosya adını verin. Giriş-çıkış tanımı ekranından sonra Finish'e basınca Verilog kodunu yazacağınız düzenleyici açılır; kodunuzu yazıp kaydedin.</p>
+<h3 id="test-dosyasi-olusturma">Test dosyası oluşturma</h3>
+<p>Kaynak dosyası üzerine sağ tıklayıp <strong>New Source</strong> → <strong>Test Bench Waveform</strong> seçin ve dosya adını verin. Finish'ten sonra açılan <em>Initial Timing and Clock Wizard – Initialize Timing</em> penceresinde, <em>Clock Information</em> bölümünde <strong>Combinatorial (or internal clock)</strong> seçeneğini işaretleyin. Açılan <code>.tbw</code> uzantılı test dosyasına benzetim için uygun giriş değerlerini girip kaydedin.</p>
+<h3 id="xilinx-ise-simulator-ile-benzetim">Xilinx ISE Simulator ile benzetim</h3>
+<p><em>Sources for</em> seçeneğini <strong>Behavioral Simulation</strong> yapın, test dosyanızı açın ve <em>Processes</em> bölümünde <strong>Simulate Behavioral Model</strong>'e çift tıklayın. Benzetim sonuçlarını tasarımınızdan beklediğiniz sonuçlarla karşılaştırın; fark varsa tasarım aşamasına geri dönün.</p>
+<figure class="yazi-gorsel"><img src="ise-benzetim-sonucu.jpg" width="700" height="330" loading="lazy" decoding="async" alt="Xilinx ISE Simulator&#x27;da A, B, C girişleri ve F çıkışının 1000 ns&#x27;lik benzetim dalga biçimleri"><figcaption>ISE Simulator benzetim sonucu</figcaption></figure>
+<h3 id="pin-baglantilarinin-tanimlanmasi">Pin bağlantılarının tanımlanması</h3>
+<p><em>Processes</em> bölümünde <strong>User Constraints → Floorplan Area/IO/Logic – Post-Synthesis</strong> seçeneğine çift tıklayın ve çıkan pencerede Yes'e basın. Açılan <strong>Xilinx PACE</strong> penceresinde <code>.ucf</code> uzantılı kısıt dosyası oluşur; burada <strong>Nexys2</strong> kartında kullanacağınız pin bağlantılarını, kart üzerinde yazılı değerlere göre tanımlayın (örneğin SW0 için G18, LD0 için J14). Dosyayı kaydedin.</p>
+<p>Ardından <strong>Generate Programming File</strong> seçeneğine sağ tıklayıp <em>Properties</em>'i açın; <em>Startup Options</em> kategorisinde <strong>FPGA Start-Up Clock</strong>'u <strong>JTAG Clock</strong> yapın. Sonra Generate Programming File'a sağ tıklayıp <strong>Run</strong> deyin. İşlem bitince Nexys2 kartına yüklenecek <code>.bit</code> uzantılı dosya üretilir.</p>
+<h3 id="karta-program-yukleme">Karta program yükleme</h3>
+<p>Programlar menüsünden <strong>Digilent → Adept → Adept</strong>'i çalıştırın. Bilgisayar Nexys2 kartını USB üzerinden gördüğünde açılan pencerede, <strong>FPGA XC3S500E</strong> satırında Browse ile <code>.bit</code> dosyasını seçip <strong>Program</strong>'a basın. Yükleme doğru yapıldıysa <em>Programming Successful</em> mesajı çıkar. Kart üzerindeki buton ve LED'lerle tasarımınızın donanımda doğru çalışıp çalışmadığını görün.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="EEM211_Verilog_Xilinx_2011.zip" download>EEM211_Verilog_Xilinx_2011.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.2 MB · 19.10.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="EEM211_Verilog_Xilinx_2011.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

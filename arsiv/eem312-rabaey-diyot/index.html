@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: Diyot ve MOS Transistöre Giriş (UC Berkeley EE141 slaytları, Jan Rabaey) — hasancan.net</title>
+<meta name="description" content="EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey&#x27;in UC Berkeley EE141 ders slaytlarına dayanan sunum: p-n eklemi, ileri ve ters kutuplama, diyot akımı, boşaltılmış bölge yükü ve genişliği, en büyük elektrik alan, eklem ve difüzyon sığası, eşdeğer doğrusal sığa, MOS transistörde eşik gerilimi, body effect ve doğrusal bölge akım ifadesinin türetilmesi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rabaey-diyot/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: Diyot ve MOS Transistöre Giriş (UC Berkeley EE141 slaytları, Jan Rabaey)">
+<meta property="og:description" content="EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey&#x27;in UC Berkeley EE141 ders slaytlarına dayanan sunum: p-n eklemi, ileri ve ters kutuplama, diyot akımı, boşaltılmış bölge yükü ve genişliği, en büyük elektrik alan, eklem ve difüzyon sığası, eşdeğer doğrusal sığa, MOS transistörde eşik gerilimi, body effect ve doğrusal bölge akım ifadesinin türetilmesi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rabaey-diyot/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: Diyot ve MOS Transistöre Giriş (UC Berkeley EE141 slaytları, Jan Rabaey)", "description": "EEM312 Sayısal Elektronik dersinde dağıtılan, Jan Rabaey'in UC Berkeley EE141 ders slaytlarına dayanan sunum: p-n eklemi, ileri ve ters kutuplama, diyot akımı, boşaltılmış bölge yükü ve genişliği, en büyük elektrik alan, eklem ve difüzyon sığası, eşdeğer doğrusal sığa, MOS transistörde eşik gerilimi, body effect ve doğrusal bölge akım ifadesinin türetilmesi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rabaey-diyot/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "dosya_3_EEM312.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-rabaey-diyot/dosya_3_EEM312.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: Diyot ve MOS Transistöre Giriş (UC Berkeley EE141 slaytları, Jan Rabaey)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.03.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#diyot">Diyot</a></li><li><a href="#bosaltilmis-bolge-depletion-region">Boşaltılmış bölge (depletion region)</a></li><li><a href="#eklem-sigasi">Eklem sığası</a></li><li><a href="#mos-transistore-giris">MOS transistöre giriş</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: Diyot ve MOS Transistöre Giriş (UC Berkeley EE141 slaytları, Jan Rabaey)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 06.03.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> dersinde Prof. Dr. Emin Akata'nın 2006 bahar döneminde dağıttığı "The Diode" başlıklı 37 sayfalık sunumu aktarıyor. Sunum büyük ölçüde <strong>Jan M. Rabaey'in UC Berkeley EE141 (Digital Integrated Circuits)</strong> ders slaytlarına dayanıyor; hocanın el yazısı ve formül türetmeleri ile başka ders kitaplarından alınmış birkaç şekil eklenmiş. Slaytlar İngilizce; içerik aşağıda Türkçe açıklamalarla ve formülleriyle yazıya döküldü. Orijinal PDF yazının sonunda indirilebilir. Aynı serinin devamı: <a href="/arsiv/eem312-rabaey-mos-transistor/">MOS Transistör</a>.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="diyot">Diyot</h2>
+<p>Bir IC sürecinde p-n eklemi, n alttaş içinde p bölgesi ve üzerinde alüminyum kontaklarla oluşur (A: anot, B: katot). Sayısal tümdevrelerde diyot çoğunlukla <strong>parazitik bir eleman</strong> olarak bulunur (ör. MOS transistörlerin source/drain–alttaş eklemleri).</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="p-n ekleminde hole ve elektron difüzyonu ile sürüklenmesi, yük yoğunluğu, elektrik alan ve elektrostatik potansiyel dağılımı"><figcaption>p-n eklemi: akım, yük yoğunluğu, alan ve potansiyel</figcaption></figure>
+<h3 id="i-leri-ve-ters-kutuplama">İleri ve ters kutuplama</h3>
+<ul><li><strong>İleri kutuplama:</strong> azınlık taşıyıcıları eklemin iki yanına enjekte edilir; fazla azınlık taşıyıcıları difüzyon uzunluğu (L_p) boyunca azalarak denge değerine (n_p0, p_n0) döner. Sayısal IC'lerde <strong>genellikle kaçınılan</strong> çalışma biçimidir.</li><li><strong>Ters kutuplama:</strong> azınlık taşıyıcı yoğunlukları eklem kenarında denge değerinin altına düşer; sayısal IC'lerde <strong>baskın çalışma biçimidir</strong>.</li></ul>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="İleri kutuplamada azınlık taşıyıcı yoğunluğu: −W1 ile W2 arası boşaltılmış bölge, iki yanda fazla azınlık taşıyıcıları ve difüzyon"><figcaption>İleri kutuplama</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Ters kutuplamada azınlık taşıyıcı yoğunluğunun eklem kenarlarında düşmesi"><figcaption>Ters kutuplama</figcaption></figure>
+<h3 id="diyot-akimi">Diyot akımı</h3>
+<ul><li>I_D = I_S (e^(V_D/Φ_T) − 1)</li><li>Yerleşik (built-in) potansiyel: Φ₀ = Φ_T ln(N_A N_D / n_i²)</li><li>Isıl gerilim: Φ_T = kT/q = 26 mV (300 K)</li><li>N_A alıcı, N_D verici yoğunluğu; n_i ≅ 1,5 × 10¹⁰ cm⁻³ (silisyum, 300 K); k = 1,38 × 10⁻²³ J/K; T = 273 + °C; q = 1,6 × 10⁻¹⁹ C</li></ul>
+<p>Notlar:</p>
+<ul><li>I_S doyma akımıdır ve diyotun kesit alanıyla doğru orantılıdır.</li><li>I_S sıcaklığa çok bağlıdır; yaklaşık her 5 °C artışta iki katına çıkar.</li><li>Gerçek aygıtlarda ters akım I_S'den yaklaşık 3 kat büyüktür; bunun nedeni boşaltılmış bölgede ısıl olarak üretilen ve elektrik alanla süpürülen elektron-hole çiftleridir. Ters akım her 10 °C'de iki katına çıkar.</li><li>Tipik silisyum eklemlerde I_S, 10⁻¹⁷ A/µm² mertebesindedir.</li><li>Φ₀'a eşik (cut-in) gerilimi de denir (0,6–0,8 V).</li></ul>
+<p>Diyot akımı doğrusal ölçekte V_D ≈ 0,7 V'tan sonra hızla artar; logaritmik ölçekte ileri yönde akım 2,3Φ_T V/dekad eğimle artar.</p>
+<p><strong>El analizi modelleri:</strong> (a) ideal diyot modeli I_D = I_S(e^(V_D/Φ_T) − 1); (b) birinci derece model: diyot, iletimdeyken V_Don değerinde bir gerilim kaynağı. Sunumda bir ders kitabından alınmış örnekte V_S = 3 V, R_S = 10 kΩ ve I_S = 0,5 × 10⁻¹⁶ A olan basit diyot devresinde V_S − R_S I_D = V_D denkleminin sayısal çözümü I_D = 0,224 mA, V_D = 0,757 V; V_Don = 0,7 V'luk basit model ise V_D = 0,7 V, I_D = 0,23 mA veriyor. Bu yüzden ilk yaklaşım çözümünde basit model kullanmak mantıklıdır.</p>
+<h2 id="bosaltilmis-bolge-depletion-region">Boşaltılmış bölge (depletion region)</h2>
+<p><strong>Yük:</strong> Boşaltılmış bölgenin iki yanındaki uzay yükü eşittir:</p>
+<ul><li>−qW₁N_A A_D = qW₂N_D A_D ⇒ W₁ = −W₂ N_D/N_A … (1)</li><li>Bölge genişliği W_j = W₂ − W₁ ⇒ W₂ = W_j + W₁ … (2)</li><li>(1) ve (2)'den W₂ = W_j / (1 + N_D/N_A) … (3) (W₁ negatiftir)</li><li>Q_j = Q_N = qW₂N_D A_D … (4) ⇒ Q_j = q [N_A N_D/(N_A + N_D)] A_D W_j … (5)</li><li>Aygıt fiziğinden W_j = √[(2ε_si/q)((N_A + N_D)/(N_A N_D))(Φ₀ − V_D)] … (6)</li><li>(6), (5)'e konunca: <strong>Q_j = A_D √[2ε_si q (N_A N_D/(N_A + N_D)) (Φ₀ − V_D)]</strong></li></ul>
+<p>Ters kutuplamada V_D negatiftir.</p>
+<p><strong>En büyük elektrik alan:</strong> Gauss yasasından E = q/(ε₀A); buradan</p>
+<ul><li><strong>E_j = √[(2q/ε_si)(N_A N_D/(N_A + N_D))(Φ₀ − V_D)]</strong></li></ul>
+<h2 id="eklem-sigasi">Eklem sığası</h2>
+<p>Uzay yükü bölgesinde serbest taşıyıcı çok az olduğundan bölge ε_si dielektrik sabitli bir yalıtkan gibi, n ve p bölgeleri de kondansatör levhaları gibi davranır. C_j = dQ_j/dV_D türevi alınıp düzenlenirse:</p>
+<ul><li>C_j = A_D √[(ε_si q/2)(N_A N_D/(N_A + N_D))(Φ₀ − V_D)⁻¹]</li><li>Sıfır kutuplamada (V_D = 0): <strong>C_j0 = A_D √[(ε_si q/2)(N_A N_D/(N_A + N_D)) Φ₀⁻¹]</strong></li><li><strong>C_j = C_j0 / √(1 − V_D/Φ₀)</strong>, genel olarak C_j = C_j0/(1 − V_D/Φ₀)^m; m = 0,5 ani (abrupt), m = 0,33 doğrusal eklem</li></ul>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Cj&#x27;nin VD ile değişimi: ani ve doğrusal eklem eğrileri ve sıfır kutuplama değeri Cj0"><figcaption>Eklem sığası</figcaption></figure>
+<h3 id="difuzyon-sigasi">Difüzyon sığası</h3>
+<p>Diyotun dinamik davranışı, uzay yükü ve fazla azınlık taşıyıcılarının yük depolama etkilerini birleştiren doğrusal olmayan C_D sığasıyla modellenir:</p>
+<ul><li>Depolanan fazla azınlık taşıyıcı yükü Q = τ_T I_D = τ_T I_S(e^(V_D/nΦ_T) − 1) ≅ τ_T I_S e^(V_D/nΦ_T) (I_D ≫ I_S için); n çoğu diyotta 1 olan yayınım katsayısı, τ_T ortalama geçiş süresidir.</li><li>C_d = dQ/dV_D; <strong>C_D = C_j + C_d = C_j0/(1 − V_D/Φ₀)^m + (τ_T I_S/Φ_T) e^(V_D/nΦ_T)</strong></li><li>C_d yalnız ileri kutuplamada önemlidir; sayısal tümdevrelerde bu durum söz konusu değildir.</li></ul>
+<h3 id="buyuk-isaret-esdeger-sigasi">Büyük işaret eşdeğer sığası</h3>
+<p>Eklem sığası gerilime bağlıdır; sayısal devrelerde gerilim V_high–V_low aralığında hızla değiştiği için doğrusal olmayan C_j yerine eşdeğer doğrusal bir C_eq kullanmak daha uygundur:</p>
+<ul><li>C_eq = ΔQ_j/ΔV_D = [Q_j(high) − Q_j(low)] / (V_high − V_low) = K_eq C_j0</li><li>K_eq = [−Φ₀^m / ((V_high − V_low)(1 − m))] [(Φ₀ − V_high)^(1−m) − (Φ₀ − V_low)^(1−m)]</li></ul>
+<p><strong>Diyot modeli:</strong> seri direnç R_S, akım kaynağı I_D ve paralel C_D. <strong>İkincil etkiler:</strong> yaklaşık −20 V'ta çığ kırılması (avalanche breakdown).</p>
+<h2 id="mos-transistore-giris">MOS transistöre giriş</h2>
+<p>Transistör bir anahtardır: V_GS ≥ V_T iken source ile drain arasında R_on dirençli bir anahtar gibi davranır. MOS transistör; polisilisyum gate, ince gate oksidi, n+ source/drain bölgeleri, alan oksidi (field oxide) ve p tipi alttaştan oluşur.</p>
+<figure class="yazi-gorsel"><img src="s-25.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Elle çizilmiş NMOS ve PMOS enhancement ile NMOS depletion transistör simgeleri ve akım yönleri"><figcaption>MOS transistör simgeleri (hocanın çizimi)</figcaption></figure>
+<h3 id="esik-gerilimi">Eşik gerilimi</h3>
+<p>Güçlü evirtimin (strong inversion) oluştuğu V_GS değerine <strong>eşik gerilimi V_T</strong> denir.</p>
+<ul><li>Boşaltılmış bölge genişliği W_d = √(2ε_si φ/(qN_A)), yükü Q_d = √(2qN_A ε_si φ); φ, oksit-silisyum sınırındaki potansiyel, N_A alttaş katkısıdır.</li><li>Evirtim katmanı varken boşaltılmış bölge yükü sabittir: Q_B0 = √(2qN_A ε_si |2φ_F|).</li><li>Alttaş kutuplaması V_SB uygulanırsa güçlü evirtim için gereken yüzey potansiyeli artar: Q_B = √(2qN_A ε_si (|−2φ_F| + V_SB)).</li></ul>
+<p><strong>V_T = V_T0 + γ(√|−2φ_F + V_SB| − √|−2φ_F|)</strong></p>
+<ul><li>V_T0: V_SB = 0'daki eşik gerilimi; çoğunlukla üretim sürecine bağlıdır (gate ile alttaş arasındaki iş fonksiyonu farkı, oksit kalınlığı, Fermi gerilimi, yüzeyde tutulan yabancı yükler, iyon ekme dozu vb.).</li><li>V_SB: source-bulk gerilimi.</li><li>φ_F = −φ_T ln(N_A/n_i): Fermi potansiyeli (~ −0,3 V).</li><li>γ = √(2qε_si N_A)/C_ox: body-effect katsayısı; ε_si = 1,053 × 10⁻¹⁰ F/m, C_ox = ε_ox/t_ox, ε_ox = 3,5 × 10⁻¹¹ F/m.</li></ul>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="VBS 0&#x27;dan −2,5 V&#x27;a giderken VT&#x27;nin 0,45 V&#x27;tan 0,85 V&#x27;a yükseldiği body effect eğrisi"><figcaption>Body effect</figcaption></figure>
+<p>V_SB, gövdesi toprağa bağlı n kanallı aygıtlarda normalde pozitiftir; negatif V_BS, V_T'yi 0,45 V'tan 0,85 V'a yükseltir.</p>
+<h3 id="dogrusal-ve-doyum-bolgeleri">Doğrusal ve doyum bölgeleri</h3>
+<ul><li><strong>Doğrusal bölge</strong> (V_GS &gt; V_T, V_DS &lt; V_GS − V_T): akım hem V_GS hem V_DS'nin doğrusal fonksiyonudur (küçük V_DS'de).</li><li><strong>Doyum bölgesi</strong> (V_DS &gt; V_GS − V_T): kanal drain ucunda kısılır (pinch-off) ve akım sabit kalır (doyar).</li></ul>
+<figure class="yazi-gorsel"><img src="s-32.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Doyum bölgesinde, drain ucunda kanalın kısıldığı (pinch-off) NMOS kesiti"><figcaption>Doyum bölgesi</figcaption></figure>
+<h3 id="dogrusal-bolge-akiminin-turetilmesi">Doğrusal bölge akımının türetilmesi</h3>
+<ol><li>Kanalın dx'lik parçasındaki yük: dq(x) = −C_ox W dx [V_GS − v(x) − V_T]; birim alan başına yük Q_i(x) = −C_ox[V_GS − v(x) − V_T], C_ox = ε_ox/t_ox.</li><li>x noktasındaki alan E(x) = −dv(x)/dx elektronları µ_n dv(x)/dx hızıyla drain'e sürükler; i = (dx/dt)(dq/dx) = µ_n (dv(x)/dx)(dq(x)/dx).</li><li>Yerine koyunca I_D = −i = µ_n C_ox W [V_GS − v(x) − V_T] dv(x)/dx; iki taraf 0'dan L'ye ve 0'dan V_DS'ye integre edilir.</li><li><strong>I_D = (µ_n C_ox)(W/L)[(V_GS − V_T)V_DS − V_DS²/2]</strong></li></ol>
+<p>Burada µ_n C_ox = k′_n süreç geçiş iletkenliği parametresi, k_n = k′_n W/L kazanç çarpanı, W/L en-boy oranıdır.</p>
+<p><em>Not: Sunumda bazı sayfalar (ör. diyot devresi örneği, MOSFET'in üç boyutlu yapısı ve kesiti, i_D–v_DS eğrileri) basılı ders kitaplarından taranmış şekillerdir; bunlar yazıya görsel olarak alınmadı, yalnız içerikleri özetlendi.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dosya_3_EEM312.pdf" download>dosya_3_EEM312.pdf</a></p>
+              <p class="kucuk">PDF · 983 KB · 37 <span data-i18n="arch.pagesLower"></span> · 06.03.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dosya_3_EEM312.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (983 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

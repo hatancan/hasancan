@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Devre Teorisi II: Örnekleme, Örtüşme (Aliasing) ve Nyquist Frekansı (Texas A&amp;M, Alexander G. Parlos) — hasancan.net</title>
+<meta name="description" content="Texas A&amp;M Üniversitesi MEEN 651 Control System Design dersinin 2003 güz dönemi &quot;Lecture 2B&quot; notu: sürekli zamanlı işaretlerin örneklenmesi, darbe katarıyla örnekleme, örnekleme teoremi ωs &gt; 2ωM ve yetersiz örneklemenin yol açtığı örtüşme (aliasing).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-texas-am-ornekleme-ve-ortusme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Devre Teorisi II: Örnekleme, Örtüşme (Aliasing) ve Nyquist Frekansı (Texas A&amp;M, Alexander G. Parlos)">
+<meta property="og:description" content="Texas A&amp;M Üniversitesi MEEN 651 Control System Design dersinin 2003 güz dönemi &quot;Lecture 2B&quot; notu: sürekli zamanlı işaretlerin örneklenmesi, darbe katarıyla örnekleme, örnekleme teoremi ωs &gt; 2ωM ve yetersiz örneklemenin yol açtığı örtüşme (aliasing).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-texas-am-ornekleme-ve-ortusme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Devre Teorisi II: Örnekleme, Örtüşme (Aliasing) ve Nyquist Frekansı (Texas A&M, Alexander G. Parlos)", "description": "Texas A&M Üniversitesi MEEN 651 Control System Design dersinin 2003 güz dönemi \"Lecture 2B\" notu: sürekli zamanlı işaretlerin örneklenmesi, darbe katarıyla örnekleme, örnekleme teoremi ωs > 2ωM ve yetersiz örneklemenin yol açtığı örtüşme (aliasing).", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-texas-am-ornekleme-ve-ortusme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "Lecture2B.pdf", "contentUrl": "https://hasancan.net/arsiv/eem202-texas-am-ornekleme-ve-ortusme/Lecture2B.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM202 Devre Teorisi II: Örnekleme, Örtüşme (Aliasing) ve Nyquist Frekansı (Texas A&amp;M, Alexander G. Parlos)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.09.2003</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#amac-ve-tanim">Amaç ve tanım</a></li><li><a href="#sampling-of-continuous-time-signals">Sampling of continuous-time signals</a></li><li><a href="#the-effect-of-undersampling-aliasing">The effect of undersampling: aliasing</a></li><li><a href="#i-ndirilebilir-dosya">İndirilebilir dosya</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM202 Devre Teorisi II: Örnekleme, Örtüşme (Aliasing) ve Nyquist Frekansı (Texas A&amp;M, Alexander G. Parlos)</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 15.09.2003 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, <strong>Texas A&amp;M University, Department of Mechanical Engineering</strong> bünyesindeki <strong>MEEN 651 Control System Design</strong> dersinde <strong>Dr. Alexander G. Parlos</strong>'un 2003 güz döneminde dağıttığı <strong>"Lecture 2B: Sampling and Aliasing Phenomena, Sampling Rate Selection and Nyquist Frequency"</strong> başlıklı 5 sayfalık İngilizce ders notunu içeriyor. Not, EEM202 ders klasöründe ek okuma olarak saklanmış. İçerik özgün dilinde aktarıldı, açıklamalar Türkçe; şekiller görsel olarak eklendi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="amac-ve-tanim">Amaç ve tanım</h2>
+<p>The objective of this lecture is to introduce and explain some of the most basic concepts that are involved in the measurement of continuous-time signals. The basic rules regarding sampling are discussed and the consequences of incorrect sampling rate selection are mentioned.</p>
+<blockquote><p><strong>Definition:</strong> The instantaneous values of a signal at equally or unequally spaced values of time are called samples.</p></blockquote>
+<p>Sampling, if done correctly, can help us represent a continuous-time signal very accurately. The correct way of sampling a continuous-time signal is described by the so-called sampling theorem.</p>
+<h2 id="sampling-of-continuous-time-signals">Sampling of continuous-time signals</h2>
+<p>In general, if we were to sample a signal we would not expect to be able to guess the precise continuous-time signal that generated the samples. In fact, there are an infinite number of signals that pass through a finite number of points (Figure 1: three continuous-time signals with identical values at integer multiples of T).</p>
+<p>Strangely enough, for most signals, if we take the samples sufficiently close to each other we can uniquely identify (or reconstruct) the continuous-time signal that generated the samples. This forms the basis for the accurate measurement of dynamic signals, such as vibration level.</p>
+<h3 id="impulse-train-sampling">Impulse-train sampling</h3>
+<p>A simple way to sample a continuous-time signal is to measure it for a finite period of time using pulses (Figure 2: pulse amplitude modulation; as Δ → 0, p(t) approaches an impulse). As the duration of the pulses approaches zero, we obtain an impulse train (Figure 3) whose impulses have values corresponding to instantaneous samples of the signal at time instants spaced T seconds apart.</p>
+<p>If the impulses are spaced arbitrarily, we cannot uniquely know the signal that generated the samples. If we sample with a predetermined sampling rate, we can uniquely determine the signal. The required sampling rate follows from the <strong>sampling theorem</strong>:</p>
+<ul><li><strong>ω_s &gt; 2ω_M</strong> (1)</li></ul>
+<p>where ω_M is the maximum frequency contained in the signal and ω_s is the sampling rate. A continuous-time signal must be sampled at least twice the maximum frequency present in it. The note calls the sampling frequency ω_s the <em>Nyquist frequency</em> and the frequency 2ω_M which must be exceeded the <em>Nyquist rate</em>.</p>
+<p><em>Not: Yaygın kullanımda "Nyquist frekansı" örnekleme frekansının yarısına (ω_s/2) denir; "Nyquist oranı (rate)" ise işaretteki en yüksek frekansın iki katıdır (2ω_M). Nottaki ilk tanım bu kullanımdan farklıdır.</em></p>
+<h2 id="the-effect-of-undersampling-aliasing">The effect of undersampling: aliasing</h2>
+<p>If the sampling rate is not high enough (undersampling), we end up with an effect called <strong>aliasing</strong>, which yields very inaccurate and false information about the sampled signal. In Figures 4 and 5 a sinusoid of increasing frequency is sampled with impulse trains of constant spacing:</p>
+<ol><li>(a) The sampling rate is six times the frequency of the sinusoid (six samples per cycle); the signal can be reconstructed.</li><li>(b) The signal frequency is doubled; the sampling rate is three times the signal frequency (three samples per cycle, including the zero-crossing samples) and the signal can still be uniquely reconstructed.</li><li>(c) The signal frequency is four times that of (a); the sampling rate is now 1.5 times the signal frequency (three samples every two cycles), less than the required 2, so the sinusoid cannot be uniquely reconstructed.</li><li>(d) Any further increase in frequency without increasing the sampling rate results in similar aliasing (six samples every five cycles).</li></ol>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Figure 4: sabit aralıklı darbe katarıyla örneklenen, frekansı giderek artan sinüs işaretleri; (a) ve (b)&#x27;de yeterli, (c)&#x27;de yetersiz örnekleme"><figcaption>Figure 4: Effects of aliasing on a sinusoidal signal</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-05.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Figure 5: örtüşme etkisinin devamı; örnek noktalarından düşük frekanslı sahte bir sinüs elde edilmesi"><figcaption>Figure 5: Effects of aliasing on a sinusoidal signal (continued)</figcaption></figure>
+<p>Not, okuma ödevi olarak dersin web sayfasındaki "Handout E.4" örneklerine yönlendirerek bitiyor.</p>
+<h2 id="i-ndirilebilir-dosya">İndirilebilir dosya</h2>
+<p>5 sayfalık orijinal PDF aşağıdan indirilebilir.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Lecture2B.pdf" download>Lecture2B.pdf</a></p>
+              <p class="kucuk">PDF · 2.9 MB · 5 <span data-i18n="arch.pagesLower"></span> · 15.09.2003</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Lecture2B.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

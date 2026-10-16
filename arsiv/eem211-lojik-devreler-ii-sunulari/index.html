@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Lojik Devreler II Sunuları – Ardışıl Devreler, Bellek Elemanları, Analiz ve Sentez (Ertuğrul Eriş, 2009) — hasancan.net</title>
+<meta name="description" content="Ertuğrul Eriş&#x27;in Lojik Devreler II (EE540) ders sunuları: ardışıl devre modeli, durum tablosu ve diyagramı, SR, D, JK, T latch ve flip-floplar, ana-bağımlı ve kenar tetiklemeli flip-flop, Mealy ve Moore makinelerinin analizi, ters tanım bağıntıları, seri toplayıcı, modulo 8 sayıcı, 0,2,4,7 sayıcısı ve 0101 dizi detektörü sentezi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Lojik Devreler II Sunuları – Ardışıl Devreler, Bellek Elemanları, Analiz ve Sentez (Ertuğrul Eriş, 2009)">
+<meta property="og:description" content="Ertuğrul Eriş&#x27;in Lojik Devreler II (EE540) ders sunuları: ardışıl devre modeli, durum tablosu ve diyagramı, SR, D, JK, T latch ve flip-floplar, ana-bağımlı ve kenar tetiklemeli flip-flop, Mealy ve Moore makinelerinin analizi, ters tanım bağıntıları, seri toplayıcı, modulo 8 sayıcı, 0,2,4,7 sayıcısı ve 0101 dizi detektörü sentezi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Lojik Devreler II Sunuları – Ardışıl Devreler, Bellek Elemanları, Analiz ve Sentez (Ertuğrul Eriş, 2009)", "description": "Ertuğrul Eriş'in Lojik Devreler II (EE540) ders sunuları: ardışıl devre modeli, durum tablosu ve diyagramı, SR, D, JK, T latch ve flip-floplar, ana-bağımlı ve kenar tetiklemeli flip-flop, Mealy ve Moore makinelerinin analizi, ters tanım bağıntıları, seri toplayıcı, modulo 8 sayıcı, 0,2,4,7 sayıcısı ve 0101 dizi detektörü sentezi.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "lojik_devreler_II_eris.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/lojik_devreler_II_eris.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Lojik Devreler II Sunuları – Ardışıl Devreler, Bellek Elemanları, Analiz ve Sentez (Ertuğrul Eriş, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.10.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#beni-oku-belgesi">"Beni Oku" belgesi</a></li><li><a href="#sunu-1-ardisil-devre-modellemesi-ve-bellek-elemanlari">Sunu 1: Ardışıl devre modellemesi ve bellek elemanları</a></li><li><a href="#sunu-2-ardisil-devre-analizi">Sunu 2: Ardışıl devre analizi</a></li><li><a href="#sunu-3-ardisil-devre-sentezi">Sunu 3: Ardışıl devre sentezi</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Lojik Devreler II Sunuları – Ardışıl Devreler, Bellek Elemanları, Analiz ve Sentez (Ertuğrul Eriş, 2009)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 08.10.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM211 Sayısal Mantık Tasarımı dersinin klasöründe yardımcı kaynak olarak bulunan, <strong>Ertuğrul Eriş</strong>'e ait <strong>Lojik Devreler II</strong> (ders kodu EE540) ders materyalini tanıtıyor: üç sunu (<em>Ardışıl Devre Modellemesi ve Bellek Elemanları</em>, <em>Ardışıl Devre Analizi</em>, <em>Ardışıl Devre Sentezi</em>; ilk sununun güncelleme tarihi 8 Ekim 2009) ve dersin web sayfası için yazılmış "Beni Oku" belgesi (Eylül 2010 güncellemesi). Belgelerde hangi üniversitede verildiği yazmıyor. Sunularda Mano'nun <em>Digital Design</em> kitabından alınmış şekiller de kullanılmış. Sunuların ana içeriği aşağıda metin olarak özetlendi; dört orijinal dosya yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="beni-oku-belgesi">"Beni Oku" belgesi</h2>
+<p>Belge, dersin web sayfasındaki belgelerin beş başlık altında toplandığını anlatıyor:</p>
+<ol><li><strong>Genel:</strong> Lojik Devreler I–II derslerini kapsayan ders notları, Lojik Devreler II öğrenim çıktıları (dersi başarıyla bitiren öğrencinin neyi öğreneceği ve hangi becerileri kazanacağı) ve öğrenci anket soruları. Anket soruları üç grupta: derste öğrenilenler, kazandırılan yetkinlikler ve öğretim üyesinin değerlendirilmesi.</li><li><strong>Sunular:</strong> derste kullanılan PowerPoint sunuları. Sunuların amacı tahtaya ve deftere yazmayı en aza indirip dersin soru-cevap biçiminde geçmesini sağlamak. Öğrencilere sunuların yanında dersin kitabını kullanmaları, çözülmüş problemlerle çalışmak yerine bir problemi öğrendikleri bilgilerle kendileri çözmeye çalışmaları öneriliyor.</li><li><strong>Laboratuvar:</strong> deney föyleri ve laboratuvarda kullanılan <strong>Proteus</strong> benzetim yazılımıyla ilgili hatırlatmalar. Bir sorunun cevabının doğruluğu devre Proteus'ta simüle edilerek denetlenebilir.</li><li><strong>Sınavlar:</strong> daha önce sorulmuş sorular ve cevapları (bazılarının Proteus simülasyonlarıyla), sınavlarda sık yapılan hatalar ve ara sınav sonuçları.</li><li><strong>Yüksek öğretim:</strong> hocanın yüksek öğretim üzerine yazdığı makaleler (blog adresi belgede verilmiş).</li></ol>
+<h2 id="sunu-1-ardisil-devre-modellemesi-ve-bellek-elemanlari">Sunu 1: Ardışıl devre modellemesi ve bellek elemanları</h2>
+<h3 id="kombinezonsal-ve-ardisil-devreler">Kombinezonsal ve ardışıl devreler</h3>
+<p>Sunu, <strong>seri toplayıcı</strong> örneğiyle başlıyor: x1 = 12 (01100) ve x2 = 14 (01110) sayıları en anlamlı olmayan bitten başlayarak bit bit girilir, her adımda önceki adımın eldesi hatırlanmak zorundadır; çıkış z = 26 (11010) olur. Eldeyi hatırlama gereği, devreyi kombinezonsal değil <strong>ardışıl</strong> yapar.</p>
+<p>Ardışıl devreler üç yolla modellenir: <strong>matematiksel model</strong>, <strong>durum tablosu</strong> ve <strong>durum diyagramı</strong>.</p>
+<figure class="yazi-gorsel"><img src="ardisil-devre-genel-yapisi.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Ardışıl devrenin genel yapısı: x1…xn girişleri ve y1…yr durum değişkenleri kombinezonsal devreye girer, z1…zm çıkışları ve Y1…Yr bellek girişleri üretilir"><figcaption>Ardışıl devrelerin genel yapısı: kombinezonsal devre ve saatli bellek elemanları</figcaption></figure>
+<h3 id="matematiksel-model">Matematiksel model</h3>
+<ul><li>Bağımsız değişkenler: girişler (x1, …, xn) ve durum değişkenleri (y1, …, yr). N durum sayısı, n durum değişkeni sayısı ise N = 2ⁿ, n = log₂N.</li><li>Bağımlı değişkenler: bir sonraki durum fonksiyonları (Y1, …, Yr) ve çıkış fonksiyonları (z1, …, zm).</li><li>Seri toplayıcı için (y elde biti): Y = y'x1x2 + y·x1'x2 + y·x1x2' + y·x1x2 (yani Y = x1x2 + y·x1 + y·x2) ve z = x1 ⊕ x2 ⊕ y.</li></ul>
+<h3 id="bellek-elemanlari">Bellek elemanları</h3>
+<ul><li><strong>SR bellek elemanı:</strong> Y = S + R'y (S = R = 1 kullanılmaz). İki NOR (TÜVEYA) kapısıyla yapılan devrenin analizinde, iki girişin aynı anda değişmesi hâlinde kapı gecikmelerine bağlı olarak iki farklı sonuç (01 ya da 10) oluşabileceği, yani belirsizlik olduğu gösteriliyor. NAND kapılı sürüm S*R* latch olarak adlandırılıyor.</li><li><strong>Sorunlar ve çözümleri:</strong> iki giriş aynı anda değişirse (01'den 10'a gibi) istenmeyen 00 ya da 11 girişleri ara durum olarak uygulanmış olabilir. Çözüm: arada durum değiştirmeyen girişi uygulamak ya da seviye biçiminde saat (enable) girişi kullanmak.</li><li><strong>D (gecikme) latch:</strong> Y = D.</li><li><strong>JK latch:</strong> Y = Jy' + K'y.</li><li><strong>T latch:</strong> Y = Ty' + T'y.</li><li><strong>Sürekli değişme (toggling) sorunu:</strong> T elemanına 1, JK elemanına 11 girişi uygulandığında saat seviyesi sürdükçe çıkış sürekli değişir; seviye biçiminde saat bunu çözmez. Çözüm <strong>kenar tetiklemeli bellek elemanlarıdır</strong>. Senkron devrelerde seviye biçiminde saat kullanılırsa, saat darbesi bellek ve kombinezonsal devre gecikmelerinin toplamından uzun olduğunda (ts &gt; tb + tc) bir saat darbesinde iki durum değişimi olabilir.</li><li><strong>Latch ve flip-flop farkı:</strong> latch'larda ya saat yoktur ya da saat seviye olarak (enable) vardır; flip-floplarda yalnızca kenar tetiklemeli saat girişleri vardır.</li><li>Sununun devamında karakteristik tablolar, <strong>ana-bağımlı (master-slave)</strong> D ve SR elemanları, <strong>pozitif kenar tetiklemeli D flip-flop</strong>un CLK ve D'nin dört durumu için analizi, <strong>oturma (setup) ve tutma (hold) zamanları</strong> (girişin değişmemesi gereken zaman aralığı), asenkron resetli D flip-flop ve preset/clear girişli uygulamadaki JK tümdevresi yer alıyor.</li><li><strong>Ardışıl devrelerin sınıflandırılması:</strong> senkron ve asenkron makineler; asenkron makineler temel modda ya da darbe modunda çalışır.</li></ul>
+<p>Sununun sonundaki slaytlar (öğrenim programının oluşturulması, Bloom taksonomisi, Türkiye Yükseköğretim Ulusal Yeterlilikler Çerçevesi ve ders değerlendirme matrisi) üç sunuda da ortak.</p>
+<h2 id="sunu-2-ardisil-devre-analizi">Sunu 2: Ardışıl devre analizi</h2>
+<p>İlk slaytlar Türkçe-İngilizce terim karşılıklarını veriyor: ardışıl devre (sequential circuit, finite state machine), bellek elemanı (memory/storage element), seviye saatli eleman (latch), kenar tetiklemeli flip-flop (edge triggered flip-flop), tanım bağıntısı (characteristic table), bir sonraki durum fonksiyonu (characteristic equation), durum tablosu (state table), durum diyagramı (state diagram), ters tanım bağıntısı (excitation table). N durumu kodlamak için gereken durum değişkeni sayısı n, n ≥ log₂N koşulunu sağlayan en küçük tamsayıdır.</p>
+<p>Analiz örnekleri:</p>
+<ul><li>JK flip-floplu, iki durum değişkenli, dört durumlu senkron <strong>Moore</strong> devresi: durum tablosu, durum diyagramı, Proteus uygulaması ve zaman diyagramları.</li><li>T flip-floplu Moore devresi ve D flip-floplu bir başka Moore örneği.</li><li>D flip-floplu, iki durum değişkenli <strong>Mealy</strong> devresi: durum tablosu (iki biçimde), durum diyagramı, zaman diyagramları ve Proteus simülasyonu.</li><li>D ve JK flip-floplu bir Mealy makinesinin durum tablosu ve diyagramı, ardından <strong>hatalı çıkışlar</strong>: Mealy makinesinde çıkış girişe doğrudan bağlı olduğundan, giriş saat kenarları arasında değişince çıkışta kısa süreli yanlış değerler görülür. Zaman diyagramında bu darbeler "zararlı" ve "zararsız" olarak işaretlenmiş; hatalı çıkışı olan devrenin Proteus uygulaması da verilmiş.</li></ul>
+<h2 id="sunu-3-ardisil-devre-sentezi">Sunu 3: Ardışıl devre sentezi</h2>
+<h3 id="sentezin-adimlari">Sentezin adımları</h3>
+<ol><li>Sözle tanımdan (word description) durum diyagramına geçiş.</li><li>Durum indirgemesi (sonuç devreye etkisi nedir?).</li><li>Durum kodlaması (rastgele seçilse ne olur?).</li><li>Çıkış fonksiyonlarının saptanması ve indirgenmesi.</li><li>Bellek elemanı seçimi.</li><li>Bellek elemanlarının <strong>ters tanım bağıntılarıyla</strong> (excitation table) giriş fonksiyonlarının saptanması ve indirgenmesi.</li><li>Devrenin çizimi.</li></ol>
+<h3 id="ters-tanim-bagintilari">Ters tanım bağıntıları</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">y → Y</th><th scope="col">D</th><th scope="col">T</th><th scope="col">SR</th><th scope="col">JK</th></tr></thead><tbody><tr><th scope="row">0 → 0</th><td>0</td><td>0</td><td>0K</td><td>0K</td></tr><tr><th scope="row">0 → 1</th><td>1</td><td>1</td><td>10</td><td>1K</td></tr><tr><th scope="row">1 → 0</th><td>0</td><td>1</td><td>01</td><td>K1</td></tr><tr><th scope="row">1 → 1</th><td>1</td><td>0</td><td>K0</td><td>K0</td></tr></tbody></table></div>
+<p>(K: keyfi, yani "don't care".)</p>
+<h3 id="seri-toplama-devresi">Seri toplama devresi</h3>
+<p>İki seri giriş (toplanacak X ve Y sayıları, en az anlamlı bit önce, her bit için bir saat darbesi), bir seri çıkış (toplam). İki durum vardır: elde 0 ve elde 1; bu yüzden tek durum değişkeni yeter. SR bellek elemanıyla sentez:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">X1</th><th scope="col">X2</th><th scope="col">y</th><th scope="col">Y</th><th scope="col">S</th><th scope="col">R</th><th scope="col">Z</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>K</td><td>0</td></tr><tr><th scope="row">0</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>0</td><td>0</td><td>K</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>1</td><td>K</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>K</td><td>1</td></tr><tr><th scope="row">1</th><td>0</td><td>1</td><td>1</td><td>K</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>K</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>Sonuç: S = x1x2, R = x1'x2', z = y ⊕ x1 ⊕ x2.</p>
+<figure class="yazi-gorsel"><img src="seri-toplayici-durum-diyagrami.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Seri toplama devresinin elde 0 ve elde 1 durumlu durum diyagramı ve SR bellek elemanlı durum tablosu"><figcaption>Seri toplayıcının durum diyagramı ve SR girişleri</figcaption></figure>
+<h3 id="modulo-8-sayici">Modulo 8 sayıcı</h3>
+<p>X girişi 1 iken her saat darbesinde bir sonraki duruma geçen (S0 → S1 → … → S7 → S0), X = 0 iken bekleyen üç bitlik sayıcı. T bellek elemanlarıyla giriş fonksiyonları:</p>
+<p>T1 = x·y2·y3, T2 = x·y3, T3 = x</p>
+<p>Saat darbelerini doğrudan saymak için (x = 1): T1 = y2y3, T2 = y3, T3 = 1.</p>
+<h3 id="0-2-4-7-biciminde-sayan-sayici">0, 2, 4, 7 biçiminde sayan sayıcı</h3>
+<p>Üç JK bellek elemanıyla 000 → 010 → 100 → 111 → 000 sırasında sayan sayıcı (çıkışlar doğrudan durumlar, Moore makinesi). Kullanılmayan dört durum keyfi (K) alınarak:</p>
+<p>J1 = y2, K1 = y2; J2 = 1, K2 = 1; J3 = y1, K3 = 1</p>
+<p>Sunu, aynı sayıcının iki JK elemanıyla (dört durum A = 00, B = 01, C = 10, D = 11 ve çıkış kod çözücüsüyle) nasıl yapılabileceğini de tartışıyor: durum sayısı minimum mu, Moore mu Mealy mi, hangi sentez daha iyi?</p>
+<p><em>Not: Verilen J/K fonksiyonları kontrol edildi; 000 → 010 → 100 → 111 → 000 sırasını doğru üretiyor.</em></p>
+<h3 id="dizi-detektoru">Dizi detektörü</h3>
+<p>0101 dizisini algılayan devre için üç farklı tanım ve aynı giriş için çıkışlar:</p>
+<pre class="kod"><code>Giriş:                       100101010111001000101
+İç içe dizileri de algılasın: 000001010100000000001
+İç içe olanları algılamasın:  000001000100000000001
+Dörtlü paketlere göre:        000000010000000000000</code></pre>
+<p>İç içe geçmiş 0101 dizilerini algılayan Mealy makinesi: A başlangıç, B "0 gelmiş", C "01 gelmiş", D "010 gelmiş" durumu; durum kodlaması A = 00, B = 01, C = 11, D = 10. Geçişler: A –0/0→ B, A –1/0→ A; B –0/0→ B, B –1/0→ C; C –0/0→ D, C –1/0→ A; D –1/1→ C, D –0/0→ B. İç içe olmayan sürümde D'den 1 gelince çıkış 1 olur ve başlangıç durumuna (A) dönülür.</p>
+<figure class="yazi-gorsel"><img src="dizi-detektoru-0101.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="İç içe geçmiş 0101 dizisini algılayan A, B, C, D durumlu Mealy durum diyagramı"><figcaption>0101 dizi detektörünün durum diyagramı</figcaption></figure>
+<p>Son olarak 111 dizisini algılayan, dört durumlu (S0 = 00 … S3 = 11) bir detektörün durum diyagramı ve lojik devresi veriliyor; slaytta "Bu dizi için üç durum yeterli olur muydu? Mealy mi Moore mu?" soruları soruluyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="lojik_devreler_II_eris.zip" download>lojik_devreler_II_eris.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 10.8 MB · 08.10.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="lojik_devreler_II_eris.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (10.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>

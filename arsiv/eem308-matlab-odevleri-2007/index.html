@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: EEM302 MATLAB Ödevi (2007) ve Öğrenci Çözümleri, Kutup-Sıfır Diyagramları — hasancan.net</title>
+<meta name="description" content="EEM302 (bugünkü EEM308) Sinyaller ve Sistemler II dersinin 2007 MATLAB ödevi: Buck&#x27;ın Computer Explorations kitabından kutup-sıfır diyagramı, ikinci dereceden sistemin frekans yanıtı, |H(s)| yüzeyi ve kutup vektörleri problemleri; arkadaşların .m çözümleri, notlarla.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: EEM302 MATLAB Ödevi (2007) ve Öğrenci Çözümleri, Kutup-Sıfır Diyagramları">
+<meta property="og:description" content="EEM302 (bugünkü EEM308) Sinyaller ve Sistemler II dersinin 2007 MATLAB ödevi: Buck&#x27;ın Computer Explorations kitabından kutup-sıfır diyagramı, ikinci dereceden sistemin frekans yanıtı, |H(s)| yüzeyi ve kutup vektörleri problemleri; arkadaşların .m çözümleri, notlarla.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170014">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: EEM302 MATLAB Ödevi (2007) ve Öğrenci Çözümleri, Kutup-Sıfır Diyagramları", "description": "EEM302 (bugünkü EEM308) Sinyaller ve Sistemler II dersinin 2007 MATLAB ödevi: Buck'ın Computer Explorations kitabından kutup-sıfır diyagramı, ikinci dereceden sistemin frekans yanıtı, |H(s)| yüzeyi ve kutup vektörleri problemleri; arkadaşların .m çözümleri, notlarla.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem302-matlab-odevleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/eem302-matlab-odevleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: EEM302 MATLAB Ödevi (2007) ve Öğrenci Çözümleri, Kutup-Sıfır Diyagramları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>25.03.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#odevin-kurallari-ve-problem-dagilimi">Ödevin kuralları ve problem dağılımı</a></li><li><a href="#sayfa-166-a-ve-178-i-kutup-sifir-diyagramlari">Sayfa 166 (a) ve 178 (i): Kutup-sıfır diyagramları</a></li><li><a href="#sayfa-163-b-i-kinci-dereceden-sistemde-sonum-orani">Sayfa 163 (b): İkinci dereceden sistemde sönüm oranı</a></li><li><a href="#sayfa-177-kutup-vektorlerinin-uzunluklari">Sayfa 177: Kutup vektörlerinin uzunlukları</a></li><li><a href="#sayfa-169-a-2011">Sayfa 169 (a) (2011)</a></li><li><a href="#ev-calismasi-bant-sinirli-90-faz-kaydiricinin-durtu-yaniti">Ev çalışması: Bant sınırlı 90° faz kaydırıcının dürtü yanıtı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: EEM302 MATLAB Ödevi (2007) ve Öğrenci Çözümleri, Kutup-Sıfır Diyagramları</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 25.03.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM 302 Sinyaller ve Sistemler II</strong> dersinde (ders daha sonra EEM 308 koduyla verildi) <strong>Yrd. Doç. Dr. Mustafa Doğan</strong>'ın 2007 bahar döneminde verdiği <strong>MATLAB ödevini</strong> ve bu ödeve arkadaşların hazırladığı MATLAB çözümlerini bir araya getiriyor. Ödev, <em>Computer Explorations in Signals and Systems Using MATLAB</em> (Buck, Daniel, Singer; 2. baskı) kitabının Laplace ve z-dönüşümü bölümlerinden seçilmiş problemlerden oluşuyor. 2011'de aynı ödev sisteminde hazırlanmış iki kısa çözüm de eklendi.</p>
+<p>Çözümler arkadaşların çalışmalarıdır; dosya adlarındaki ve kodlardaki ad ve öğrenci numaraları çıkarıldı, dosyalar problem numarasına göre yeniden adlandırıldı. Ödev dağıtım listesi (öğrenci adları ve numaraları içerdiği için) ve kitap sayfalarının fotoğrafları yayınlanmadı; problem dağılımı aşağıda adsız olarak verildi. Temizlenmiş <code>.m</code> dosyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="odevin-kurallari-ve-problem-dagilimi">Ödevin kuralları ve problem dağılımı</h2>
+<p>Ödev listesinin başlığı: <em>EEM 302 MATLAB HW — "Computer Explorations in Signals and Systems 2nd ed. – BUCK" — Yrd. Doç. Dr. Mustafa Doğan</em>. Ödevler <strong>25 Mart (Pazar) saat 24:00'e kadar</strong> bölümün web sunucusundaki yükleme adresine gönderilecekti. Sınıf sekiz gruba ayrılmış, her gruba kitaptan iki problem verilmişti:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Grup</th><th scope="col">Laplace bölümünden</th><th scope="col">z-dönüşümü bölümünden</th></tr></thead><tbody><tr><th scope="row">1</th><td>Sayfa 163 (a)</td><td>Sayfa 178 (k)</td></tr><tr><th scope="row">2</th><td>Sayfa 163 (b)</td><td>Sayfa 178 (j)</td></tr><tr><th scope="row">3</th><td>Sayfa 166 (a)</td><td>Sayfa 178 (i)</td></tr><tr><th scope="row">4</th><td>Sayfa 166 (b)</td><td>Sayfa 177 (e)</td></tr><tr><th scope="row">5</th><td>Sayfa 166 (c)</td><td>Sayfa 177 (d)</td></tr><tr><th scope="row">6</th><td>Sayfa 166 (d)</td><td>Sayfa 177 (c)</td></tr><tr><th scope="row">7</th><td>Sayfa 169 (a)</td><td>Sayfa 177 (b)</td></tr><tr><th scope="row">8</th><td>Sayfa 169 (b)</td><td>Sayfa 177 (a)</td></tr></tbody></table></div>
+<p>Ödevlerde dikkat edilmesi gerekenler:</p>
+<ol><li>Gönderilecek tek dosya, örnekteki gibi <code>öğrenciNo.m</code> biçiminde adlandırılmalı. Ödevde yapılması gereken her şey (tüm şıklar) bu m-dosyasının içinde olmalı ve dosya çalışır olmalı.</li><li>Değerlendirmede açıklamaların ve soruların cevaplarının katkısı çok daha fazla olacak. Değerlendirilmesi istenen açıklamalar <code>display('sözel cevaplar ve açıklamalar...');</code> örneğindeki gibi <code>display</code> ile Command Window'a yazdırılmalı.</li><li>Değerlendirilmesi istenmeyen çıktılar Command Window'da görünmemeli (<code>;</code> kullanılmadığında çıktı Command Window'da görünür).</li></ol>
+<h2 id="sayfa-166-a-ve-178-i-kutup-sifir-diyagramlari">Sayfa 166 (a) ve 178 (i): Kutup-sıfır diyagramları</h2>
+<p><strong>166 (a).</strong> H₁(s) = 4 / (s² + 2s + 17), Re(s) &gt; −1 sistem fonksiyonunun pay ve payda katsayılarını <code>b1</code> ve <code>a1</code> vektörleri olarak tanımlayıp <code>roots</code> ile kutupları bulmak ve çizmek.</p>
+<p><strong>178 (i).</strong> H₃(z) = (0,25 − (√3/2)z⁻¹ + z⁻²) / (1 − (√3/2)z⁻¹ + 0,25z⁻²), |z| &gt; 0,5 sisteminin kutuplarını ve sıfırlarını bulup çizmek; kutup ve sıfır konumlarının nasıl ilişkili olduğunu açıklamak.</p>
+<p>Bu gruba ait iki çözüm var. İkisi de aynı yolu izliyor; ikincisinin bir sürümü kitaptaki <code>plotpz</code> mantığıyla eksenleri, ROC sınırını ve birim çemberi de çiziyor:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>b1=[4];
+a1=[1 2 17];
+zeros=roots(b1);
+poles=roots(a1);
+
+disp('Soru : 166 (a) için');
+disp('Kutuplar:');
+disp(poles);
+
+figure (1);
+plot(real(zeros),imag(zeros),'o');
+hold on
+plot(real(poles),imag(poles),'x');
+grid
+title('Soru : 166 (a)');
+xlabel('Re');
+ylabel('Im');
+axis([-5 5 -5 5]);
+
+b=[0.25 -(sqrt(3)/2) 1];
+a=[1 -(sqrt(3)/2) 0.25];
+zs=roots(b);
+ps=roots(a);
+disp('Soru : 178 (i) için');
+disp('Sıfırlar:'); disp(zs);
+disp('Kutuplar:'); disp(ps);</code></pre>
+<p>Sonuçlar: 166 (a)'da kutuplar <strong>s = −1 ± j4</strong> (pay sabit olduğundan sonlu sıfır yok). 178 (i)'de kutuplar <strong>z = 0,5·e^(±jπ/6)</strong> (= 0,433 ± j0,25), sıfırlar <strong>z = 2·e^(±jπ/6)</strong> (= 1,732 ± j1).</p>
+<p><em>Not: Çözümler yalnızca "2 kutup ve 2 sıfır bulunmuştur" diyor; sorunun asıl istediği ilişki şu: sıfırlar, kutupların birim çembere göre yansımaları (1/p</em>) ve pay katsayıları paydanınkilerin ters sırası. Bu yüzden sistem tüm geçiren (all-pass) bir süzgeç, |H₃(e^jω)| = 1 sabit (z = 1'de pay ve payda ikisi de 0,384). Ayrıca kodlardaki <code>rsmak('circle')</code> satırı MATLAB'ın Spline Toolbox'ına bağlı; bu araç kutusu yoksa hata verir.*</p>
+<h3 id="h-s-yuzeyi">|H₁(s)| yüzeyi</h3>
+<p>Aynı problem için hazırlanmış bir başka dosya, |H₁(s)|'i s-düzleminde bir yüzey olarak çiziyor: σ, −1'in hemen sağından 3'e kadar 32 örnek (σ = −1 + k/8, k = 1…32), ω ∈ [−10, 10] aralığı 0,5 adımla; <code>meshgrid</code> ile s = σ + jω ızgarası kuruluyor, H₁ = <code>polyval(b1,s)./polyval(a1,s)</code> hesaplanıp <code>mesh</code> ile çiziliyor ve jω ekseni boyunca yüzeyin kesiti mavi çizgiyle (<code>plot3</code>) işaretleniyor. Açıklamadaki sonuç: yüzey kutuplara yaklaştıkça hızla büyüyor; kutupların frekans yanıtını nasıl etkilediği 3 boyutlu çizimde görülüyor.</p>
+<h2 id="sayfa-163-b-i-kinci-dereceden-sistemde-sonum-orani">Sayfa 163 (b): İkinci dereceden sistemde sönüm oranı</h2>
+<p>Problem, ikinci dereceden sistem H(s) = ωₙ² / (s² + 2ζωₙs + ωₙ²) için ωₙ = 1 alıp sönüm oranı ζ'nin farklı değerlerinde kutupları ve frekans yanıtını incelemeyi istiyor. İki çözüm de <code>ord2</code>, <code>printsys</code> ve <code>freqs</code> komutlarıyla ζ = 0, 1/4, 1 ve 2 için |H(jω)|'yı ω ∈ [−5, 5] aralığında çiziyor:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>wn=1
+omega=[-5:0.1:5]
+damping_ratio=1/4
+[num0,den]=ord2(wn,damping_ratio);
+num=wn^2*num0
+printsys(num,den)
+freqs(num,den,omega)
+display('0&lt;damping_ratio&lt;1 olduğunda polinomun kutupları kompleks sayı olur dolayısıyla step response ve impulse responsları salınıma sahip olur...');</code></pre>
+<p>Çözümlerdeki açıklamaların özeti:</p>
+<ul><li><strong>ζ = 0:</strong> Kutuplar sanal eksende (s = ±jωₙ).</li><li><strong>0 &lt; ζ &lt; 1:</strong> Kutuplar karmaşık eşlenik; basamak ve dürtü yanıtı salınımlı. ζ küçüldükçe kutuplar jω eksenine yaklaşıyor ve |H(jω)| (çözümlere göre) ω = ωₙ√(1 − ζ²) frekansında tepe yapıyor; sistem ideal olmayan bir bant geçiren süzgeç gibi davranıyor.</li><li><strong>ζ = 1:</strong> Kutuplar reel eksende (çift kutup); ω arttıkça |H(jω)| monoton azalıyor.</li><li><strong>ζ &gt; 1:</strong> Düşük ω değerlerinde |H(jω)| ω'daki değişime daha duyarlı hâle geliyor.</li><li>ω = 0'da dört sistemin de |H(j0)| = 1 olduğu, çünkü fonksiyonun bu noktada sabite indirgendiği belirtiliyor.</li></ul>
+<p><em>Not: Çözümlerde birkaç düzeltme gerekiyor. ζ = 0'da tepe "oluşmuyor" değil, tersine ω = ωₙ = 1'de |H| sonsuza gidiyor (ω ızgarası 1'i tam içerdiğinden <code>freqs</code> bu noktada Inf üretir ve çizimde görünmez). Rezonans tepesinin konumu ωₙ√(1 − ζ²) değil ωₙ√(1 − 2ζ²)'dir ve yalnız ζ &lt; 1/√2 için oluşur; √(1 − ζ²) sönümlü salınım frekansıdır. Kutuplar ζ ≥ 1 için (yalnız ζ = 1'de değil) reeldir; ζ &gt; 1'de iki ayrı reel kutup oluşur, biri orijine yaklaşırken öteki sola uzaklaşır.</em></p>
+<h2 id="sayfa-177-kutup-vektorlerinin-uzunluklari">Sayfa 177: Kutup vektörlerinin uzunlukları</h2>
+<p>Problem, H₁(z) = 1 / (1 − 0,9z⁻¹ + 0,81z⁻²) sistemi için birim çember üzerindeki 512 noktadan (ω = k·π/256) kutuplara çizilen vektörlerin uzunluklarını ve açılarını hesaplamayı, frekans yanıtıyla ilişkisini göstermeyi istiyor. Çözümlerin çekirdeği:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>omega=[0:511]*pi/256;
+unitcirc=exp(j*omega);
+num=[1 0 0];
+den=[1 -0.9 0.81];
+ps1=roots(den)
+polevectors1=ones(2,1)*unitcirc-ps1*ones(1,512);
+polelength1=abs(polevectors1);
+poleangle1=atan2(imag(polevectors1),real(polevectors1));
+zerovectors1=ones(2,1)*unitcirc;      % z = 0'daki iki sıfır
+zerolength1=abs(zerovectors1);
+plot(omega,polelength1,'r',omega,zerolength1,'g')</code></pre>
+<p>Kutuplar <strong>z = 0,9·e^(±jπ/3)</strong> (= 0,45 ± j0,779); H₁(z) = z²/(z² − 0,9z + 0,81) yazıldığında z = 0'da iki sıfır olduğundan sıfır vektörlerinin uzunluğu her frekansta 1'dir.</p>
+<p><em>Not: Bir çözümdeki sonuç cümlesi ("|H₁| kutup uzunluklarının maksimum ve minimum olduğu yerlerde minimum, 1 olduğu yerlerde maksimum") yanlış. Sıfır uzunlukları 1 olduğundan |H₁(e^jω)| = 1 / (|e^jω − p₁|·|e^jω − p₂|) olur: kutup vektörlerinin kısaldığı ω ≈ ±π/3 civarında |H₁| en büyük, uzadığı ω = π civarında en küçüktür.</em></p>
+<h2 id="sayfa-169-a-2011">Sayfa 169 (a) (2011)</h2>
+<p>2011'de aynı problem setinden hazırlanmış kısa bir çözüm, nedensel sistemi H(s) = 1/(s + 2) olarak <code>tf([1],[1 2])</code> ile tanımlıyor ve nedensel olmayan karşılığı için zaman ters çevrilmiş denklemden (−dy(−t)/dt − 2y(−t) = −x(−t)) yola çıkıp ikinci bir transfer fonksiyonu kuruyor. 2011 tarihli 177 (b) çözümü yukarıdaki kutup vektörü hesabının aynısı; dosyadaki nota göre ayrıntılı açıklamalar ve Laplace sorusu elle yazılıp ayrıca teslim edilmiş.</p>
+<h2 id="ev-calismasi-bant-sinirli-90-faz-kaydiricinin-durtu-yaniti">Ev çalışması: Bant sınırlı 90° faz kaydırıcının dürtü yanıtı</h2>
+<p>Aynı klasörde, 27 Mart 2007 tarihli, bir arkadaşın el yazısı "Ev Çalışması" sayfasının fotoğrafı da vardı (fotoğraflanmış sayfadan metne aktarıldı; fotoğraf yayınlanmadı). Frekans yanıtı |ω| &lt; ω_c bandında</p>
+<p>H(jω) = e^(jπ/2), 0 &lt; ω &lt; ω_c; H(jω) = e^(−jπ/2), −ω_c &lt; ω &lt; 0</p>
+<p>olan sistemin dürtü yanıtı ters Fourier dönüşümüyle bulunuyor:</p>
+<p>h(t) = (1/2π) ∫₀^ω_c e^(jπ/2) e^(jωt) dω + (1/2π) ∫₋ω_c⁰ e^(−jπ/2) e^(jωt) dω = (1/2πt) (e^(jω_c t) − 1) − (1/2πt) (1 − e^(−jω_c t)) = (cos ω_c t − 1) / (πt)</p>
+<p>ve cos ω_c t = 1 − 2 sin²(ω_c t/2) kullanılarak</p>
+<p><strong>h(t) = −2 sin²(ω_c t / 2) / (πt)</strong></p>
+<p>sonucuna ulaşılıyor. (Sonucu kontrol ettik; doğru.)</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem302-matlab-odevleri.zip" download>eem302-matlab-odevleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 7 KB · 25.03.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem302-matlab-odevleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170014"></script>
+<script src="/assets/lang/en.js?v=202610170014"></script>
+<script src="/assets/lang/de.js?v=202610170014"></script>
+<script src="/assets/js/site.js?v=202610170014"></script>
+</body>
+</html>
