@@ -15,7 +15,8 @@ satır içinde **kalın** ve *eğik*.
 Gerekenler: LibreOffice (soffice), poppler-utils (pdftoppm, pdftotext). Fontlar: Arial Narrow için Liberation Sans
 Narrow, Tahoma için Wine Tahoma ~/.local/share/fonts altında olmalı; yoksa bazı slaytlarda yazılar sıkışık çıkar.
 """
-import argparse, html, json, re, shutil, subprocess, sys, tempfile, zipfile
+import argparse, fcntl, html, json, re, shutil, subprocess, sys, tempfile, zipfile
+from contextlib import contextmanager
 from datetime import date
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -62,62 +63,80 @@ def kayitlari_yaz(kayitlar):
     (ARSIV / 'arsiv.json').write_text(json.dumps(kayitlar, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
+@contextmanager
+def kilit():
+    """Aynı anda birden çok sunum.py çalışabilir (paralel arşivleme): arsiv.json/index/sitemap yazımı sırayla."""
+    ARSIV.mkdir(exist_ok=True)
+    with open(ARSIV / '.kilit', 'w') as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
+
+
+def kayit_ekle(kayit):
+    with kilit():
+        eski = {k['slug']: k for k in kayitlari_oku()}
+        if kayit['slug'] in eski and eski[kayit['slug']].get('eklenme'):
+            kayit['eklenme'] = eski[kayit['slug']]['eklenme']   # yeniden dönüştürmek eklenme tarihini değiştirmesin
+        kayitlari_yaz([k for k in eski.values() if k['slug'] != kayit['slug']] + [kayit])
+
+
+SUNUM = ('.ppt', '.pptx', '.pps', '.ppsx', '.odp')
+BELGE = ('.doc', '.docx', '.odt', '.rtf', '.xls', '.xlsx', '.ods')
+
+
 def donustur(a):
     hedef = ARSIV / a.slug
     hedef.mkdir(parents=True, exist_ok=True)
     kaynak = a.kaynak.resolve()
     uzanti = kaynak.suffix.lower()
-    if uzanti not in ('.pdf', '.ppt', '.pptx'):
+    temel = {'slug': a.slug, 'ders': a.ders, 'sinif': a.sinif, 'tarih': a.tarih, 'eklenme': date.today().isoformat(),
+             'dosya': kaynak.name, 'boyut': kaynak.stat().st_size}
+    if uzanti != '.pdf' and uzanti not in SUNUM + BELGE:
         shutil.copyfile(kaynak, hedef / kaynak.name)
-        kayitlar = [k for k in kayitlari_oku() if k['slug'] != a.slug]
-        kayitlar.append({
-            'slug': a.slug, 'ders': a.ders, 'sinif': a.sinif, 'tarih': a.tarih, 'eklenme': date.today().isoformat(),
-            'tur': 'dosya', 'dosya': kaynak.name, 'boyut': kaynak.stat().st_size, 'pdf': None, 'pdf_boyut': None,
-            'bicim': {'.zip': 'ZIP arşivi', '.7z': '7z arşivi'}.get(uzanti, uzanti.lstrip('.').upper()), 'sayfa': None,
-        })
-        kayitlari_yaz(kayitlar)
+        kayit_ekle({**temel, 'tur': 'dosya', 'pdf': None, 'pdf_boyut': None, 'sayfa': None,
+                    'bicim': {'.zip': 'ZIP arşivi', '.7z': '7z arşivi', '.rar': 'RAR arşivi'}.get(uzanti, uzanti.lstrip('.').upper())})
         print(f'{kaynak.name} → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
         return
-    pdf_kaynak = uzanti == '.pdf'
+    tur = 'pdf' if uzanti == '.pdf' else 'sunum' if uzanti in SUNUM else 'belge'
     with tempfile.TemporaryDirectory() as g:
         g = Path(g)
-        if pdf_kaynak:
+        if tur == 'pdf':
             pdf = kaynak
         else:
             profil = f'-env:UserInstallation=file://{g}/lo-profil'
-            for bicim in ('pdf', 'pptx'):
+            for bicim in (('pdf', 'pptx') if tur == 'sunum' else ('pdf',)):
                 calistir('soffice', '--headless', '--norestore', profil, '--convert-to', bicim, '--outdir', str(g), str(kaynak))
             pdf, pptx = g / (kaynak.stem + '.pdf'), g / (kaynak.stem + '.pptx')
+            if not pdf.exists():
+                sys.exit(f'LibreOffice {kaynak.name} dosyasını PDF\'e çeviremedi')
         for eski in hedef.glob('s-*.jpg'):
             eski.unlink()
         calistir('pdftoppm', '-r', '144', '-jpeg', '-jpegopt', 'quality=78,optimize=y', str(pdf), str(hedef / 's'))
-        if pdf_kaynak:  # PDF'te metnin bir kısmı görsel olabilir: s-NN.jpg'lere de bak
+        if tur == 'sunum':
+            metinler = slayt_metinleri(pptx, pdf)
+        else:  # metnin bir kısmı görsel olabilir (taranmış sayfa): s-NN.jpg'lere de bak
             metinler = []
             for i in range(1, len(list(hedef.glob('s-*.jpg'))) + 1):
                 cikti = subprocess.run(['pdftotext', '-layout', '-f', str(i), '-l', str(i), '-enc', 'UTF-8', str(pdf), '-'],
                                        capture_output=True, text=True).stdout
                 metinler.append([l.rstrip() for l in cikti.splitlines() if l.strip()])
-        else:
-            metinler = slayt_metinleri(pptx, pdf)
         shutil.copyfile(kaynak, hedef / kaynak.name)
-        if not pdf_kaynak:
+        if tur != 'pdf':
             shutil.copyfile(pdf, hedef / pdf.name)
     for f in hedef.glob('s-*.jpg'):  # pdftoppm 1/01/001 diye adlandırabilir; iki haneye sabitle
         f.rename(hedef / f's-{int(f.stem[2:]):02d}.jpg')
+    birim = 'Slayt' if tur == 'sunum' else 'Sayfa'
     (hedef / 'slaytlar.txt').write_text(
-        '\n\n'.join(f'## {"Sayfa" if pdf_kaynak else "Slayt"} {i}\n' + '\n'.join(s) for i, s in enumerate(metinler, 1)) + '\n', encoding='utf-8')
-
-    kayitlar = [k for k in kayitlari_oku() if k['slug'] != a.slug]
-    kayitlar.append({
-        'slug': a.slug, 'ders': a.ders, 'sinif': a.sinif, 'tarih': a.tarih, 'eklenme': date.today().isoformat(),
-        'tur': 'pdf' if pdf_kaynak else 'sunum', 'dosya': kaynak.name, 'boyut': kaynak.stat().st_size,
-        'pdf': None if pdf_kaynak else pdf.name,
-        'pdf_boyut': None if pdf_kaynak else (hedef / pdf.name).stat().st_size,
-        'bicim': 'PDF' if pdf_kaynak else 'PowerPoint (.' + kaynak.suffix.lstrip('.') + ')',
-        'sayfa': len(metinler),
-    })
-    kayitlari_yaz(kayitlar)
-    print(f'{len(metinler)} {"sayfa" if pdf_kaynak else "slayt"} → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
+        '\n\n'.join(f'## {birim} {i}\n' + '\n'.join(s) for i, s in enumerate(metinler, 1)) + '\n', encoding='utf-8')
+    bicim = {'pdf': 'PDF', 'sunum': 'PowerPoint', 'belge': 'Excel' if uzanti in ('.xls', '.xlsx', '.ods') else 'Word'}[tur]
+    kayit_ekle({**temel, 'tur': tur, 'sayfa': len(metinler),
+                'pdf': None if tur == 'pdf' else pdf.name,
+                'pdf_boyut': None if tur == 'pdf' else (hedef / pdf.name).stat().st_size,
+                'bicim': bicim if tur == 'pdf' else f'{bicim} (.{uzanti.lstrip(".")})'})
+    print(f'{len(metinler)} {birim.lower()} → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
 
 
 # ---------------------------------------------------------------- yazı (küçük markdown)
@@ -277,6 +296,13 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 '''
 
 
+def ikon_sinifi(k):
+    tur = k.get('tur', 'sunum')
+    if tur == 'belge':
+        return 'xls' if k['dosya'].lower().endswith(('.xls', '.xlsx', '.ods')) else 'doc'
+    return {'pdf': 'pdf', 'sunum': 'ppt'}.get(tur, 'zip')
+
+
 def boyut_yaz(n):
     return f'{n / 1048576:.1f} MB' if n >= 1048576 else f'{n / 1024:.0f} KB'
 
@@ -298,8 +324,8 @@ def yazi_sayfasi(k, on, govde, icindekiler):
         'associatedMedia': {'@type': 'MediaObject', 'name': k['dosya'], 'contentUrl': f'{SITE}{url}{k["dosya"]}'},
     }, ensure_ascii=False)
     tur = k.get('tur', 'sunum')
-    pdf_kaynak = tur != 'sunum'   # tek indirme düğmesi
-    ikon = {'pdf': 'pdf', 'sunum': 'ppt'}.get(tur, 'zip')
+    pdf_kaynak = not k.get('pdf')   # PDF kopyası yoksa tek indirme düğmesi
+    ikon = ikon_sinifi(k)
     birim = 'arch.pagesLower' if tur == 'pdf' else 'arch.slidesLower'
     sayfa_bilgi = f" · {k['sayfa']} <span data-i18n=\"{birim}\"></span>" if k.get('sayfa') else ''
     toc = ''.join(f'<li><a href="#{a}">{satir_ici(t)}</a></li>' for a, t in icindekiler)
@@ -314,7 +340,7 @@ def yazi_sayfasi(k, on, govde, icindekiler):
             </div>
           </div>
           <p class="indir-satir">
-            <a class="buton turuncu" href="{e(k['dosya'])}" download>⬇ <span data-i18n="{'arch.downloadFile' if pdf_kaynak else 'arch.downloadPpt'}"></span> ({boyut_yaz(k['boyut'])})</a>
+            <a class="buton turuncu" href="{e(k['dosya'])}" download>⬇ <span data-i18n="{'arch.downloadPpt' if tur == 'sunum' else 'arch.downloadFile'}"></span> ({boyut_yaz(k['boyut'])})</a>
             {'' if pdf_kaynak else f'<a class="buton" href="{e(k["pdf"])}" download>⬇ <span data-i18n="arch.downloadPdf"></span> ({boyut_yaz(k["pdf_boyut"])})</a>'}
           </p>
           <p class="telif" data-i18n="arch.copyright"></p>
@@ -365,7 +391,7 @@ def arsiv_dizini(kayitlar):
     for sinif in sorted({k['sinif'] for k in hazir}):
         satirlar.append(f'<tr class="sinif-satir" id="sinif-{sinif}"><td colspan="4">{sinif}. <span data-i18n="arch.yearSuffix"></span></td></tr>')
         for k in sorted((k for k in hazir if k['sinif'] == sinif), key=lambda k: (k['ders'], k['slug'])):
-            satirlar.append(f'''<tr><td><span class="mini-ikon {({'pdf': 'pdf', 'sunum': 'ppt'}).get(k.get('tur', 'sunum'), 'zip')}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
+            satirlar.append(f'''<tr><td><span class="mini-ikon {ikon_sinifi(k)}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
               <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut'])}</td></tr>''')
     son = max(hazir, key=lambda k: k['eklenme'])['baslik'] if hazir else '–'
     govde = f'''  <div class="kolonlar iki" id="ust">
@@ -424,6 +450,13 @@ def sayfa(a):
     eksik = [g for g in gorseller if not (hedef / g).exists()]
     if eksik:
         sys.exit(f'yazi.md şu görselleri istiyor ama yoklar: {eksik}')
+    with kilit():
+        _sayfa_yaz(a, hedef, on, govde, icindekiler, gorseller)
+
+
+def _sayfa_yaz(a, hedef, on, govde, icindekiler, gorseller):
+    kayitlar = kayitlari_oku()
+    k = next(k for k in kayitlar if k['slug'] == a.slug)
     k['baslik'] = on['baslik']
     (hedef / 'index.html').write_text(yazi_sayfasi(k, on, govde, icindekiler), encoding='utf-8')
     for f in hedef.glob('s-*.jpg'):  # yazıda kullanılmayan slayt görselleri yayına gitmesin
