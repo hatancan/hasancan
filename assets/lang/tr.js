@@ -33,7 +33,7 @@ window.I18N.tr = {
   'info.city': 'Şehir',
   'info.cityVal': '[İÇERİK: şehir]',
   'info.job': 'Meslek',
-  'info.jobVal': '[İÇERİK: unvan / şirket]',
+  'info.jobVal': "MEZTECH LLC – Kurucu Ortak, Vizyon ve Ürün Direktörü",
   'info.since': 'İnternette',
   'info.sinceVal': "2000'lerin başından beri",
   'info.langs': 'Diller',
@@ -58,9 +58,6 @@ window.I18N.tr = {
   'skills.level': '[seviye]',
 
   'projects.title': 'Projeler',
-  'projects.name': '[Proje adı]',
-  'projects.desc': '[İÇERİK: tek cümle açıklama]',
-  'projects.visit': 'İncele »',
 
   'blog.title': 'Günlük',
   'blog.month10': 'Eki',
@@ -95,7 +92,6 @@ window.I18N.tr = {
   'poll.vote': 'Oy ver (yakında)',
 
   'links.title': 'Bağlantılar',
-  'links.more': '[İÇERİK: diğer bağlantılar]',
 
   'footer.best': 'Bu site en iyi 1024×768 çözünürlükte görüntülenir.',
   'footer.rights': 'Tüm hakları saklıdır.',
@@ -128,5 +124,23 @@ window.I18N.tr = {
   "arch.pagesLower": "sayfa",
   "arch.downloadFile": "Dosyayı indir",
   "arch.source": "Kaynak",
-  "arch.photoSource": "Bu yazı fotoğraflanmış sayfalardan metne aktarıldı. Fotoğrafların kendisi arşivde saklanıyor, yayınlanmıyor."
+  "arch.photoSource": "Bu yazı fotoğraflanmış sayfalardan metne aktarıldı. Fotoğrafların kendisi arşivde saklanıyor, yayınlanmıyor.",
+  "arch.postsLower": "yazı",
+  "arch.coursesLower": "ders",
+  "arch.courses": "Ders sayısı",
+  "arch.expandAll": "▼ Tümünü aç",
+  "arch.collapseAll": "► Tümünü kapat",
+  "projects.note": "Hepsi <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a> çatısı altında; kurucu ortak ve ürün direktörü olarak yürütüyorum.",
+  "projects.tontik.badge": "Mobil uygulama",
+  "projects.tontik.desc": "Akıllı saat verilerini analiz ederek çiftlerin duygusal ve fiziksel bağını anlamalarına yardım eden mobil uygulama: nabız, hareket ve ritim uyumundan kişisel içgörüler.",
+  "projects.eplisp.badge": "SaaS platformu",
+  "projects.eplisp.desc": "Elektrik tesisat projeleri için profesyonel AutoCAD/GstarCAD araçları: yük tabloları, malzeme listesi, kablo güzergâhı ve daha fazlası otomatik; saatlerce elle çizim zahmetine son.",
+  "projects.freshsignal.badge": "B2B platformu",
+  "projects.freshsignal.desc": "Satış ekipleri için şirket istihbaratı: şirketleri ve gelişmelerini takip et, işletmeleri ve karar vericileri keşfet; toplu e-posta, takip dizileri ve teklifler tek yerde.",
+  "projects.kipi.badge": "Çocuk video markası",
+  "projects.kipi.desc": "4–10 yaş için hareketli macera videoları: çocuklar hikâyeyle birlikte zıplar, eğilir, kaçar, donar ve koşar. Evde ve sınıfta, ekran başında hareket. Türkçe, İngilizce, İspanyolca ve Almanca.",
+  "projects.mezirme.badge": "Topluluk arşivi",
+  "projects.mezirme.desc": "Malatya Hekimhan'a bağlı Mezirme (Ballıkaya) köyünün ticari olmayan dijital arşivi: tarih, kültür ve fotoğraflar, kaynaklarıyla. MEZTECH adını Mezirme'den alır.",
+  "projects.arsiv.badge": "Kişisel arşiv",
+  "projects.arsiv.desc": "Başkent Üniversitesi Elektrik-Elektronik Mühendisliği yıllarımdan ders notları, föyler ve sınavlar; okunabilir yazılar olarak."
 };

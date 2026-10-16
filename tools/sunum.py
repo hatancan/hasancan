@@ -145,6 +145,9 @@ def donustur(a):
 def satir_ici(t):
     t = e(t, quote=False)
     t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
+    # [metin](adres): yalnız site içi (/...) ve http(s) bağlantıları
+    t = re.sub(r'\[([^\]]+)\]\(((?:/|https?://)[^)\s]+)\)',
+               lambda m: f'<a href="{m.group(2)}"' + ('' if m.group(2).startswith('/') else ' rel="noopener" target="_blank"') + f'>{m.group(1)}</a>', t)
     t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
     t = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     return t
@@ -215,7 +218,8 @@ def yazi_coz(metin, klasor=None):
         elif s.startswith('|'):
             blok = []
             while i < len(satirlar) and satirlar[i].startswith('|'):
-                blok.append([h.strip() for h in satirlar[i].strip().strip('|').split('|')])
+                hucreler = re.split(r'(?<!\\)\|', satirlar[i].strip().strip('|'))   # \| hücre içinde düz çizgi
+                blok.append([h.strip().replace('\\|', '|') for h in hucreler])
                 i += 1
             bas, govde = blok[0], [r for r in blok[2:]]
             th = ''.join(f'<th scope="col">{satir_ici(h)}</th>' for h in bas)
@@ -385,7 +389,7 @@ def yazi_sayfasi(k, on, govde, icindekiler):
     </main>
   </div>'''
     yol = [('<span data-i18n="nav.home"></span>', '/'), ('<span data-i18n="nav.archive"></span>', '/arsiv/'),
-           (f'{k["sinif"]}. <span data-i18n="arch.yearSuffix"></span>', f'/arsiv/#sinif-{k["sinif"]}'), (e(kod), '')]
+           (f'{k["sinif"]}. <span data-i18n="arch.yearSuffix"></span>', f'/arsiv/#sinif-{k["sinif"]}'), (e(kod), f'/arsiv/#{ders_kimligi(k["ders"])}')]
     return kabuk(baslik, ozet, url, yol, govde_html,
                  f'<script type="application/ld+json">{ld}</script>\n')
 
@@ -402,15 +406,33 @@ def _yazi_sayfasi_metin(k, on, govde, icindekiler):
     return html_
 
 
+def ders_kimligi(ders):
+    return 'ders-' + kimlik(ders.split(' ')[0])
+
+
 def arsiv_dizini(kayitlar):
-    satirlar = []
+    """Sınıf → ders akordeonu (<details>); ders başlığında yazı sayısı."""
     hazir = [k for k in kayitlar if k.get('baslik')]
+    bolumler = []
     for sinif in sorted({k['sinif'] for k in hazir}):
-        satirlar.append(f'<tr class="sinif-satir" id="sinif-{sinif}"><td colspan="4">{sinif}. <span data-i18n="arch.yearSuffix"></span></td></tr>')
-        for k in sorted((k for k in hazir if k['sinif'] == sinif), key=lambda k: (k['ders'], k['slug'])):
-            satirlar.append(f'''<tr><td><span class="mini-ikon {ikon_sinifi(k)}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
-              <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut']) if k.get('dosya') else '–'}</td></tr>''')
-    son = max(hazir, key=lambda k: k['eklenme'])['baslik'] if hazir else '–'
+        dersler = {}
+        for k in hazir:
+            if k['sinif'] == sinif:
+                dersler.setdefault(k['ders'].split(' ')[0], []).append(k)
+        ders_html = []
+        for kod in sorted(dersler):
+            liste = sorted(dersler[kod], key=lambda k: (k['tarih'], k['slug']))
+            ad = liste[0]['ders'].split('–', 1)[-1].strip() if '–' in liste[0]['ders'] else liste[0]['ders']
+            satirlar = ''.join(f'''<tr><td><span class="mini-ikon {ikon_sinifi(k)}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'].split(': ', 1)[-1])}</a></td>
+                <td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut']) if k.get('dosya') else '–'}</td></tr>''' for k in liste)
+            ders_html.append(f'''<details class="ders-akordiyon" id="{ders_kimligi(liste[0]['ders'])}">
+            <summary><span class="ders-kod">{e(kod)}</span> <span class="ders-ad">{e(ad)}</span> <span class="ders-adet">{len(liste)} <span data-i18n="arch.postsLower"></span></span></summary>
+            <table class="dosya-tablo"><thead><tr><th data-i18n="arch.file"></th><th class="gizle-mobil" data-i18n="arch.date"></th><th class="gizle-mobil" data-i18n="arch.size"></th></tr></thead>
+            <tbody>{satirlar}</tbody></table>
+          </details>''')
+        bolumler.append(f'''<h3 class="sinif-baslik" id="sinif-{sinif}">{sinif}. <span data-i18n="arch.yearSuffix"></span> <small>({sum(len(v) for v in dersler.values())} <span data-i18n="arch.postsLower"></span>, {len(dersler)} <span data-i18n="arch.coursesLower"></span>)</small></h3>
+          {''.join(ders_html)}''')
+    son = max(hazir, key=lambda k: (k['eklenme'], k['slug']))['baslik'] if hazir else '–'
     govde = f'''  <div class="kolonlar iki" id="ust">
     <aside class="sol">
       <section class="kutu">
@@ -421,6 +443,7 @@ def arsiv_dizini(kayitlar):
         <h2 class="yesil" data-i18n="arch.stats"></h2>
         <dl class="bilgiler">
           <dt data-i18n="arch.files"></dt><dd>{len(hazir)}</dd>
+          <dt data-i18n="arch.courses"></dt><dd>{len({k['ders'].split(' ')[0] for k in hazir})}</dd>
           <dt data-i18n="arch.lastAdded"></dt><dd>{e(son)}</dd>
         </dl>
       </section>
@@ -430,12 +453,9 @@ def arsiv_dizini(kayitlar):
         <h1 class="kutu-h1 mavi" data-i18n="arch.title"></h1>
         <div class="kutu-ic">
           <p data-i18n="arch.intro"></p>
-          <table class="dosya-tablo">
-            <thead><tr><th data-i18n="arch.file"></th><th data-i18n="arch.course"></th><th class="gizle-mobil" data-i18n="arch.date"></th><th class="gizle-mobil" data-i18n="arch.size"></th></tr></thead>
-            <tbody>
-            {chr(10).join(satirlar)}
-            </tbody>
-          </table>
+          <p class="akordiyon-dugmeler"><button type="button" class="buton kucuk-buton" data-akordiyon="ac" data-i18n="arch.expandAll"></button>
+            <button type="button" class="buton kucuk-buton" data-akordiyon="kapat" data-i18n="arch.collapseAll"></button></p>
+          {''.join(bolumler)}
         </div>
       </section>
     </main>
@@ -502,6 +522,18 @@ def metin(a):
     print(f'{a.slug}: indirmesiz "yalnız metin" yazı (şimdi: sunum.py sayfa {a.slug})')
 
 
+def sil(a):
+    """Yazıyı arşivden kaldır: kaydı, klasörü; dizin ve site haritasını yeniden üret."""
+    with kilit():
+        kayitlar = [k for k in kayitlari_oku() if k['slug'] != a.slug]
+        kayitlari_yaz(kayitlar)
+        if (ARSIV / a.slug).is_dir():
+            shutil.rmtree(ARSIV / a.slug)
+        (ARSIV / 'index.html').write_text(arsiv_dizini(kayitlar), encoding='utf-8')
+        site_haritasi(kayitlar)
+    print(f'{a.slug} silindi')
+
+
 def main():
     ap = argparse.ArgumentParser()
     alt = ap.add_subparsers(dest='komut', required=True)
@@ -515,8 +547,10 @@ def main():
     s.add_argument('slug')
     m = alt.add_parser('metin', help='yalnız fotoğraf kaynaklı yazıyı indirmesiz yap')
     m.add_argument('slug')
+    x = alt.add_parser('sil', help='yazıyı arşivden kaldır')
+    x.add_argument('slug')
     a = ap.parse_args()
-    {'donustur': donustur, 'sayfa': sayfa, 'metin': metin}[a.komut](a)
+    {'donustur': donustur, 'sayfa': sayfa, 'metin': metin, 'sil': sil}[a.komut](a)
 
 
 if __name__ == '__main__':

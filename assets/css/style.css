@@ -390,6 +390,11 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
 }
 .mavi-disket { background: linear-gradient(135deg, #2f5ea8, #1b3a6e); }
 .yesil-disket { background: linear-gradient(135deg, #4b8a2a, #2b5716); }
+.pembe-disket { background: linear-gradient(135deg, #c8457b, #7d1f48); }
+.turuncu-disket { background: linear-gradient(135deg, #d9772b, #8a3f0c); }
+.gri-disket { background: linear-gradient(135deg, #7a8496, #3f4757); }
+.disket-etiket span { font: 9px Tahoma, sans-serif; color: #777; text-align: right; }
+.projeler-not { margin: 0; padding: 0 12px 12px; }
 .disket-etiket {
   display: flex;
   justify-content: space-between;
@@ -722,4 +727,44 @@ h1.mavi { background: linear-gradient(#7d97cf 0%, #5675b5 50%, #3b5998 51%, #345
   .kolonlar.iki .orta { order: -1; }   /* mobilde içerik önce, yan kutular sonra */
   .yol { margin: 8px 8px 0; }
   .dosya-tablo .gizle-mobil { display: none; }
+}
+
+/* ---------- Arşiv dizini: ders akordeonu ---------- */
+
+.akordiyon-dugmeler { display: flex; gap: 6px; margin: 0 0 10px; }
+.sinif-baslik {
+  margin: 16px 0 6px;
+  padding: 4px 8px;
+  font: bold 12px var(--baslik-font);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+  background: linear-gradient(#93c35c 0%, #6fa53a 50%, #5a8f29 51%, #4d7d22 100%);
+  border: 1px solid #3f6b1a;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+.sinif-baslik small { font-weight: normal; opacity: .9; }
+.akordiyon-dugmeler + .sinif-baslik { margin-top: 0; }
+.ders-akordiyon { margin: 0 0 4px; border: 1px solid var(--cerceve); background: #fff; }
+.ders-akordiyon > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  background: linear-gradient(#fff 0%, #f1f4f9 50%, #e3e9f3 51%, #d9e1ee 100%);
+}
+.ders-akordiyon > summary::-webkit-details-marker { display: none; }
+.ders-akordiyon > summary::before { content: "►"; font-size: 9px; color: var(--fb); width: 10px; flex: none; }
+.ders-akordiyon[open] > summary::before { content: "▼"; }
+.ders-akordiyon > summary:hover { background: linear-gradient(#fff, #fff7e6 50%, #ffe7b8 51%, #ffdc94); }
+.ders-kod { flex: none; min-width: 58px; font-weight: bold; color: var(--fb); }
+.ders-ad { flex: 1; color: #333; }
+.ders-adet { flex: none; font-size: 11px; color: var(--soluk); white-space: nowrap; }
+.ders-akordiyon .dosya-tablo { border-top: 1px solid var(--cerceve); }
+.ders-akordiyon:target { box-shadow: 0 0 0 2px var(--yonja); }
+@media (max-width: 640px) {
+  .ders-akordiyon > summary { flex-wrap: wrap; font-size: 13px; padding: 8px; }
+  .ders-ad { flex-basis: 60%; }
 }

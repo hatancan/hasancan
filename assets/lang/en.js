@@ -32,7 +32,7 @@ window.I18N.en = {
   'info.city': 'City',
   'info.cityVal': '[CONTENT: city]',
   'info.job': 'Occupation',
-  'info.jobVal': '[CONTENT: title / company]',
+  'info.jobVal': "MEZTECH LLC – Co-Founder, Vision Lead & Product Director",
   'info.since': 'Online',
   'info.sinceVal': 'since the early 2000s',
   'info.langs': 'Languages',
@@ -57,9 +57,6 @@ window.I18N.en = {
   'skills.level': '[level]',
 
   'projects.title': 'Projects',
-  'projects.name': '[Project name]',
-  'projects.desc': '[CONTENT: one-line description]',
-  'projects.visit': 'View »',
 
   'blog.title': 'Blog',
   'blog.month10': 'Oct',
@@ -94,7 +91,6 @@ window.I18N.en = {
   'poll.vote': 'Vote (soon)',
 
   'links.title': 'Links',
-  'links.more': '[CONTENT: more links]',
 
   'footer.best': 'This site is best viewed at 1024×768.',
   'footer.rights': 'All rights reserved.',
@@ -127,5 +123,23 @@ window.I18N.en = {
   "arch.pagesLower": "pages",
   "arch.downloadFile": "Download file",
   "arch.source": "Source",
-  "arch.photoSource": "This post was transcribed from photographed pages. The photos themselves are kept in the archive and are not published."
+  "arch.photoSource": "This post was transcribed from photographed pages. The photos themselves are kept in the archive and are not published.",
+  "arch.postsLower": "posts",
+  "arch.coursesLower": "courses",
+  "arch.courses": "Courses",
+  "arch.expandAll": "▼ Expand all",
+  "arch.collapseAll": "► Collapse all",
+  "projects.note": "All under <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a>, where I am co-founder and product director.",
+  "projects.tontik.badge": "Mobile app",
+  "projects.tontik.desc": "A mobile app that helps couples understand their emotional and physical connection through smartwatch data analysis: personal insights from heart rate, movement and rhythm synchronization.",
+  "projects.eplisp.badge": "SaaS platform",
+  "projects.eplisp.desc": "Professional AutoCAD/GstarCAD tools for electrical installation projects. Automates load schedules, bill of materials, cable routing and more, saving hours of manual drafting.",
+  "projects.freshsignal.badge": "B2B platform",
+  "projects.freshsignal.desc": "Company intelligence for sales teams: follow companies and their developments, discover businesses and decision-makers, and run bulk email, follow-up sequences and quotes in one place.",
+  "projects.kipi.badge": "Kids video brand",
+  "projects.kipi.desc": "Move-along adventure videos for kids aged 4–10. Children jump, duck, dodge, freeze and run along with the story: screen time that gets them moving. In Turkish, English, Spanish and German.",
+  "projects.mezirme.badge": "Community archive",
+  "projects.mezirme.desc": "A non-commercial digital archive for Mezirme (Ballıkaya), a village in Hekimhan, Malatya: history, culture and photographs with clear sources. MEZTECH takes its name from Mezirme.",
+  "projects.arsiv.badge": "Personal archive",
+  "projects.arsiv.desc": "Lecture notes, lab sheets and exams from my Electrical & Electronics Engineering years at Başkent University, as readable posts."
 };

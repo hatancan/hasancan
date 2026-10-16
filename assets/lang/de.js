@@ -32,7 +32,7 @@ window.I18N.de = {
   'info.city': 'Stadt',
   'info.cityVal': '[INHALT: Stadt]',
   'info.job': 'Beruf',
-  'info.jobVal': '[INHALT: Titel / Firma]',
+  'info.jobVal': "MEZTECH LLC – Mitgründer, Vision & Produktdirektor",
   'info.since': 'Im Netz',
   'info.sinceVal': 'seit Anfang der 2000er',
   'info.langs': 'Sprachen',
@@ -57,9 +57,6 @@ window.I18N.de = {
   'skills.level': '[Stufe]',
 
   'projects.title': 'Projekte',
-  'projects.name': '[Projektname]',
-  'projects.desc': '[INHALT: Beschreibung in einem Satz]',
-  'projects.visit': 'Ansehen »',
 
   'blog.title': 'Tagebuch',
   'blog.month10': 'Okt',
@@ -94,7 +91,6 @@ window.I18N.de = {
   'poll.vote': 'Abstimmen (bald)',
 
   'links.title': 'Links',
-  'links.more': '[INHALT: weitere Links]',
 
   'footer.best': 'Diese Seite wird am besten bei 1024×768 dargestellt.',
   'footer.rights': 'Alle Rechte vorbehalten.',
@@ -127,5 +123,23 @@ window.I18N.de = {
   "arch.pagesLower": "Seiten",
   "arch.downloadFile": "Datei herunterladen",
   "arch.source": "Quelle",
-  "arch.photoSource": "Dieser Beitrag wurde aus fotografierten Seiten abgeschrieben. Die Fotos selbst werden im Archiv aufbewahrt und nicht veröffentlicht."
+  "arch.photoSource": "Dieser Beitrag wurde aus fotografierten Seiten abgeschrieben. Die Fotos selbst werden im Archiv aufbewahrt und nicht veröffentlicht.",
+  "arch.postsLower": "Beiträge",
+  "arch.coursesLower": "Kurse",
+  "arch.courses": "Kurse",
+  "arch.expandAll": "▼ Alle öffnen",
+  "arch.collapseAll": "► Alle schließen",
+  "projects.note": "Alle unter dem Dach von <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a>, wo ich Mitgründer und Produktdirektor bin.",
+  "projects.tontik.badge": "Mobile App",
+  "projects.tontik.desc": "Eine App, die Paaren hilft, ihre emotionale und körperliche Verbindung über Smartwatch-Daten zu verstehen: persönliche Einblicke aus Herzfrequenz, Bewegung und Rhythmus-Synchronisation.",
+  "projects.eplisp.badge": "SaaS-Plattform",
+  "projects.eplisp.desc": "Professionelle AutoCAD/GstarCAD-Werkzeuge für Elektroinstallationsprojekte: Lastpläne, Stücklisten, Kabelführung und mehr automatisiert, statt stundenlang von Hand zu zeichnen.",
+  "projects.freshsignal.badge": "B2B-Plattform",
+  "projects.freshsignal.desc": "Unternehmensinformationen für Vertriebsteams: Firmen und ihre Entwicklungen verfolgen, Unternehmen und Entscheider finden, Serienmails, Follow-ups und Angebote an einem Ort.",
+  "projects.kipi.badge": "Kinder-Videomarke",
+  "projects.kipi.desc": "Mitmach-Abenteuervideos für Kinder von 4–10 Jahren: Springen, ducken, ausweichen, einfrieren und rennen mit der Geschichte. Bildschirmzeit in Bewegung, auf Türkisch, Englisch, Spanisch und Deutsch.",
+  "projects.mezirme.badge": "Gemeinschaftsarchiv",
+  "projects.mezirme.desc": "Ein nichtkommerzielles digitales Archiv für Mezirme (Ballıkaya), ein Dorf in Hekimhan, Malatya: Geschichte, Kultur und Fotos mit klaren Quellen. MEZTECH ist nach Mezirme benannt.",
+  "projects.arsiv.badge": "Persönliches Archiv",
+  "projects.arsiv.desc": "Vorlesungsnotizen, Laborblätter und Prüfungen aus meinem Elektrotechnik-Studium an der Başkent-Universität, als lesbare Beiträge."
 };

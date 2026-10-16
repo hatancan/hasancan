@@ -99,6 +99,22 @@
   }
   window.addEventListener('hashchange', aktifSekme);
 
+  // Arşiv dizini: adresteki #ders-... açık gelsin; tümünü aç/kapat
+  function dersAc() {
+    var h = location.hash && document.getElementById(location.hash.slice(1));
+    if (h && h.tagName === 'DETAILS') { h.open = true; h.scrollIntoView(); }
+  }
+  if (document.querySelector('.ders-akordiyon')) {
+    window.addEventListener('hashchange', dersAc);
+    dersAc();
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-akordiyon]');
+      if (!b) return;
+      var ac = b.getAttribute('data-akordiyon') === 'ac';
+      document.querySelectorAll('.ders-akordiyon').forEach(function (d) { d.open = ac; });
+    });
+  }
+
   var yil = document.getElementById('yil');
   if (yil) yil.textContent = new Date().getFullYear();
 
