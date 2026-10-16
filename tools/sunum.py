@@ -25,6 +25,8 @@ from xml.etree import ElementTree as ET
 KOK = Path(__file__).resolve().parent.parent
 ARSIV = KOK / 'arsiv'
 SITE = 'https://hasancan.net'
+from datetime import datetime as _dt
+SURUM = _dt.now().strftime('%Y%m%d%H%M')   # stil/betik önbellek kırıcı
 A_NS = '{http://schemas.openxmlformats.org/drawingml/2006/main}'
 e = html.escape
 
@@ -281,7 +283,7 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 <meta property="og:locale" content="tr_TR">
 <meta name="theme-color" content="#3b5998">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v={SURUM}">
 {ek_bas}</head>
 <body data-sekme="arsiv" data-baslik="{e(baslik)}">
 <!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
@@ -292,10 +294,10 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 {govde}
   {alt}
 </div>
-<script src="/assets/lang/tr.js"></script>
-<script src="/assets/lang/en.js"></script>
-<script src="/assets/lang/de.js"></script>
-<script src="/assets/js/site.js"></script>
+<script src="/assets/lang/tr.js?v={SURUM}"></script>
+<script src="/assets/lang/en.js?v={SURUM}"></script>
+<script src="/assets/lang/de.js?v={SURUM}"></script>
+<script src="/assets/js/site.js?v={SURUM}"></script>
 </body>
 </html>
 '''
