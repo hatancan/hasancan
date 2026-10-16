@@ -5,6 +5,7 @@
   1) python3 -I tools/sunum.py donustur KAYNAK.ppt SLUG --ders "EEM101 – ..." --sinif 1 --tarih 2009-10-30
      → arsiv/SLUG/ içine orijinal dosya, PDF, tüm slayt görselleri (s-NN.jpg) ve slaytlar.txt (metin dökümü).
   2) arsiv/SLUG/yazi.md dosyasını yaz (slaytlar.txt'den, blog yazısı gibi; biçim aşağıda).
+  (yalnız fotoğraf kaynaklıysa: python3 -I tools/sunum.py metin SLUG — fotoğraflar yayınlanmaz, indirme olmaz)
   3) python3 -I tools/sunum.py sayfa SLUG
      → arsiv/SLUG/index.html, arsiv/index.html, sitemap.xml. Yazıda kullanılmayan s-NN.jpg ve slaytlar.txt silinir.
 
@@ -485,6 +486,22 @@ def _sayfa_yaz(a, hedef, on, govde, icindekiler, gorseller):
     print(f'arsiv/{a.slug}/index.html · {len(icindekiler)} bölüm · {len(gorseller)} görsel')
 
 
+def metin(a):
+    """Kaynağı yalnız fotoğraf olan yazı: indirme dosyasını kaldır, kaydı 'yalnız metin' yap (fotoğraflar yayınlanmaz)."""
+    with kilit():
+        kayitlar = kayitlari_oku()
+        k = next((k for k in kayitlar if k['slug'] == a.slug), None)
+        if not k:
+            sys.exit(f'arsiv.json içinde {a.slug} yok; önce "donustur" çalıştır.')
+        hedef = ARSIV / a.slug
+        for ad in (k.get('dosya'), k.get('pdf')):
+            if ad and (hedef / ad).exists():
+                (hedef / ad).unlink()
+        k.update(dosya=None, boyut=0, pdf=None, pdf_boyut=None, sayfa=None, tur='metin', bicim='Fotoğraflardan metin')
+        kayitlari_yaz(kayitlar)
+    print(f'{a.slug}: indirmesiz "yalnız metin" yazı (şimdi: sunum.py sayfa {a.slug})')
+
+
 def main():
     ap = argparse.ArgumentParser()
     alt = ap.add_subparsers(dest='komut', required=True)
@@ -496,8 +513,10 @@ def main():
     d.add_argument('--tarih', required=True, help='YYYY-AA-GG')
     s = alt.add_parser('sayfa')
     s.add_argument('slug')
+    m = alt.add_parser('metin', help='yalnız fotoğraf kaynaklı yazıyı indirmesiz yap')
+    m.add_argument('slug')
     a = ap.parse_args()
-    donustur(a) if a.komut == 'donustur' else sayfa(a)
+    {'donustur': donustur, 'sayfa': sayfa, 'metin': metin}[a.komut](a)
 
 
 if __name__ == '__main__':
