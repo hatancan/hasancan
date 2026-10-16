@@ -19,7 +19,6 @@ window.I18N.en = {
   'ticker.text': 'hasancan.net is live! · Under construction, content is coming bit by bit. · Don\'t forget to sign the guestbook :)',
 
   'profile.title': 'Profile',
-  'profile.photo': '[PHOTO: profile picture]',
   'profile.name': 'Hasan Can Öztürk',
   'profile.online': 'Online',
   'profile.statusLabel': 'Status:',

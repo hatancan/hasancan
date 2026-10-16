@@ -20,7 +20,6 @@ window.I18N.tr = {
   'ticker.text': 'hasancan.net yayında! · Site yapım aşamasında, içerikler yavaş yavaş doluyor. · Ziyaretçi defterine uğramayı unutmayın :)',
 
   'profile.title': 'Profil',
-  'profile.photo': '[FOTO: profil fotoğrafı]',
   'profile.name': 'Hasan Can Öztürk',
   'profile.online': 'Çevrimiçi',
   'profile.statusLabel': 'Durum:',

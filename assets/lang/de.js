@@ -19,7 +19,6 @@ window.I18N.de = {
   'ticker.text': 'hasancan.net ist online! · Die Seite ist im Aufbau, Inhalte folgen nach und nach. · Vergiss nicht, dich ins Gästebuch einzutragen :)',
 
   'profile.title': 'Profil',
-  'profile.photo': '[FOTO: Profilbild]',
   'profile.name': 'Hasan Can Öztürk',
   'profile.online': 'Online',
   'profile.statusLabel': 'Status:',
