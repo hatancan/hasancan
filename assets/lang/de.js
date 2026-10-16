@@ -137,7 +137,7 @@ window.I18N.de = {
   "poll.thanks": "Deine Stimme ist gezählt, danke!",
   "poll.pick": "Wähle zuerst eine Option.",
   "intro.title": "Willkommen",
-  "intro.text": "Auf dieser Seite teile ich, was sich über die Jahre angesammelt hat: die <a href=\"#projeler\">Projekte</a>, die ich betreue, und meine weiteren Arbeiten, <a href=\"/arsiv/\">Vorlesungsnotizen</a>, eigene Fotos, Archive, die ich pflege, und Texte anderer, die mir unterwegs begegnet sind und die ich für aufbewahrenswert halte. Manches ist von heute, manches stammt aus den frühen 2000ern; alles kommt nach und nach hierher und wird im <a href=\"#gunluk\">Tagebuch</a> angekündigt. Wenn du Kontakt aufnehmen möchtest, schreib über den Bereich <a href=\"#iletisim\">Kontakt</a> oder hinterlass einen Eintrag im <a href=\"#defter\">Gästebuch</a>. Fühl dich wie zu Hause!",
+  "intro.text": "Auf dieser Seite teile ich, was sich über die Jahre angesammelt hat: die <a href=\"#projeler\">Projekte</a>, die ich betreue, und meine weiteren Arbeiten, eigene Fotos, Archive, die ich pflege, und Texte anderer, die mir unterwegs begegnet sind und die ich für aufbewahrenswert halte. Manches ist von heute, manches stammt aus den frühen 2000ern; alles kommt nach und nach hierher und wird im <a href=\"#gunluk\">Tagebuch</a> angekündigt. Wenn du Kontakt aufnehmen möchtest, schreib über den Bereich <a href=\"#iletisim\">Kontakt</a> oder hinterlass einen Eintrag im <a href=\"#defter\">Gästebuch</a>. Fühl dich wie zu Hause!",
   "nav.archive": "Vorlesungsnotizen",
   "arch.title": "Vorlesungsnotizen: Başkent-Universität",
   "blog.p2.title": "Meine Vorlesungsnotizen sind online",
