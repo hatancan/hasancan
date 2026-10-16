@@ -1,11 +1,11 @@
 ---
-baslik: EEM224 Elektromanyetik I: Klasör eki: EEM214 Elektronik I, 2007 ara sınavı
-ozet: Arşivdeki soru ve çözüm sayfalarının kişisel bilgiler çıkarılarak hazırlanmış metin dökümü.
+baslik: EEM214 Elektronik I: 2006–2007 Bahar Ara Sınavı, Fotoğraf Kopyası ve El Yazılı Ek Sınav
+ozet: EEM214 Elektronik I 2006–2007 bahar ara sınavının fotoğraflanmış kopyasından ve bir arkadaşın el yazılı ek sınav sayfasından hazırlanmış metin dökümü: yarı iletkende akım, diyot delinmesi, kırpıcılar, Zener düzenleyici, FET çalışma noktası.
 ---
 
 Fotoğraflanmış sayfalardan metne aktarılan bu arşiv kaydı, soru metinleri ile okunabilen çözüm adımlarını içeriyor. Fotoğraflar özel arşivde saklanıyor; indirilebilir dosya bulunmuyor.
 
-**Ders kodu açıklaması:** Bu dosyalar EEM224 klasöründe bulunsa da üzerlerinde EEM214 Elektronik I yazıyor. Elektromanyetik sınavı değildir. Kaynak klasörünün bütünlüğü için bu ayrım açıkça belirtilerek ek kayıt olarak arşivlendi. Basılı 2006–2007 bahar föyünde Prof. Dr. Turhan Çiftçibaşı ve Yrd. Doç. Dr. Mustafa Doğan adları var. El yazılı ek sınav sayfası bir arkadaşın notudur; kişisel bilgiler çıkarıldı.
+Bu fotoğraflar arşivde yanlışlıkla Elektromanyetik I (EEM224) klasörüne konmuştu; üzerlerinde EEM214 Elektronik I yazıyor. Basılı 2006–2007 bahar föyünde Prof. Dr. Turhan Çiftçibaşı ve Yrd. Doç. Dr. Mustafa Doğan adları var. Aynı sınavın taranmış asılları ve cevap anahtarları için [2006–2007 Bahar Ara Sınav ve Final Soruları](/arsiv/eem214-ara-sinav-final-2007/) yazısına bakabilirsiniz. El yazılı ek sınav sayfası bir arkadaşın notudur; kişisel bilgiler çıkarıldı.
 
 ## Yarı iletkende akım
 n-tipi silisyum: ND=5×10¹⁷ cm⁻³, μn=700 cm²/(V·s), T=300 K, q=1,602×10⁻¹⁹ C. Kesit 10 μm×10 μm, uzunluk 0,1 cm, uygulanan gerilim 10 V. Çözüm σ≈56,07 (Ω·cm)⁻¹, R≈1783 Ω, I≈5,6 mA buluyor.
