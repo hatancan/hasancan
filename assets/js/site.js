@@ -34,9 +34,15 @@
   function uygula(dil) {
     mevcut = dil;
     document.documentElement.lang = dil;
-    document.title = metin(dil, 'meta.title');
-    var md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute('content', metin(dil, 'meta.desc'));
+    // Alt sayfalar (arşiv) kendi başlığını taşır: body[data-baslik]
+    var altBaslik = document.body.getAttribute('data-baslik');
+    if (altBaslik) {
+      document.title = altBaslik + ' — hasancan.net';
+    } else {
+      document.title = metin(dil, 'meta.title');
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', metin(dil, 'meta.desc'));
+    }
 
     // Sözlükler kendi statik dosyalarımız, kullanıcı girdisi yok: küçük HTML (<b>, <a>) serbest.
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
@@ -81,11 +87,15 @@
     goz.classList.add('goz-kirpildi');
   });
 
-  // Sekmelerde etkin olanı kaydırmaya göre işaretle
+  // Etkin sekme: alt sayfada body[data-sekme], ana sayfada adresteki #bölüm
   var sekmeler = document.querySelectorAll('.sekmeler a');
+  var sabitSekme = document.body.getAttribute('data-sekme');
   function aktifSekme() {
-    var h = location.hash || '#ana';
-    sekmeler.forEach(function (a) { a.classList.toggle('aktif', a.getAttribute('href') === h); });
+    sekmeler.forEach(function (a) {
+      var aktif = sabitSekme ? a.getAttribute('data-sekme') === sabitSekme
+                             : a.getAttribute('href') === (location.hash || '#ana');
+      a.classList.toggle('aktif', aktif);
+    });
   }
   window.addEventListener('hashchange', aktifSekme);
 
