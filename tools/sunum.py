@@ -66,38 +66,53 @@ def donustur(a):
     hedef = ARSIV / a.slug
     hedef.mkdir(parents=True, exist_ok=True)
     kaynak = a.kaynak.resolve()
+    pdf_kaynak = kaynak.suffix.lower() == '.pdf'
     with tempfile.TemporaryDirectory() as g:
         g = Path(g)
-        profil = f'-env:UserInstallation=file://{g}/lo-profil'
-        for bicim in ('pdf', 'pptx'):
-            calistir('soffice', '--headless', '--norestore', profil, '--convert-to', bicim, '--outdir', str(g), str(kaynak))
-        pdf, pptx = g / (kaynak.stem + '.pdf'), g / (kaynak.stem + '.pptx')
+        if pdf_kaynak:
+            pdf = kaynak
+        else:
+            profil = f'-env:UserInstallation=file://{g}/lo-profil'
+            for bicim in ('pdf', 'pptx'):
+                calistir('soffice', '--headless', '--norestore', profil, '--convert-to', bicim, '--outdir', str(g), str(kaynak))
+            pdf, pptx = g / (kaynak.stem + '.pdf'), g / (kaynak.stem + '.pptx')
         for eski in hedef.glob('s-*.jpg'):
             eski.unlink()
         calistir('pdftoppm', '-r', '144', '-jpeg', '-jpegopt', 'quality=78,optimize=y', str(pdf), str(hedef / 's'))
-        metinler = slayt_metinleri(pptx, pdf)
+        if pdf_kaynak:  # PDF'te metnin bir kısmı görsel olabilir: s-NN.jpg'lere de bak
+            metinler = []
+            for i in range(1, len(list(hedef.glob('s-*.jpg'))) + 1):
+                cikti = subprocess.run(['pdftotext', '-layout', '-f', str(i), '-l', str(i), '-enc', 'UTF-8', str(pdf), '-'],
+                                       capture_output=True, text=True).stdout
+                metinler.append([l.rstrip() for l in cikti.splitlines() if l.strip()])
+        else:
+            metinler = slayt_metinleri(pptx, pdf)
         shutil.copyfile(kaynak, hedef / kaynak.name)
-        shutil.copyfile(pdf, hedef / pdf.name)
+        if not pdf_kaynak:
+            shutil.copyfile(pdf, hedef / pdf.name)
     for f in hedef.glob('s-*.jpg'):  # pdftoppm 1/01/001 diye adlandırabilir; iki haneye sabitle
         f.rename(hedef / f's-{int(f.stem[2:]):02d}.jpg')
     (hedef / 'slaytlar.txt').write_text(
-        '\n\n'.join(f'## Slayt {i}\n' + '\n'.join(s) for i, s in enumerate(metinler, 1)) + '\n', encoding='utf-8')
+        '\n\n'.join(f'## {"Sayfa" if pdf_kaynak else "Slayt"} {i}\n' + '\n'.join(s) for i, s in enumerate(metinler, 1)) + '\n', encoding='utf-8')
 
     kayitlar = [k for k in kayitlari_oku() if k['slug'] != a.slug]
     kayitlar.append({
         'slug': a.slug, 'ders': a.ders, 'sinif': a.sinif, 'tarih': a.tarih, 'eklenme': date.today().isoformat(),
-        'dosya': kaynak.name, 'boyut': kaynak.stat().st_size, 'pdf': pdf.name,
-        'pdf_boyut': (hedef / pdf.name).stat().st_size, 'bicim': 'PowerPoint (.' + kaynak.suffix.lstrip('.') + ')',
-        'slayt': len(metinler),
+        'tur': 'pdf' if pdf_kaynak else 'sunum', 'dosya': kaynak.name, 'boyut': kaynak.stat().st_size,
+        'pdf': None if pdf_kaynak else pdf.name,
+        'pdf_boyut': None if pdf_kaynak else (hedef / pdf.name).stat().st_size,
+        'bicim': 'PDF' if pdf_kaynak else 'PowerPoint (.' + kaynak.suffix.lstrip('.') + ')',
+        'sayfa': len(metinler),
     })
     kayitlari_yaz(kayitlar)
-    print(f'{len(metinler)} slayt → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
+    print(f'{len(metinler)} {"sayfa" if pdf_kaynak else "slayt"} → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
 
 
 # ---------------------------------------------------------------- yazı (küçük markdown)
 
 def satir_ici(t):
     t = e(t, quote=False)
+    t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
     t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
     t = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     return t
@@ -118,6 +133,14 @@ def yazi_coz(metin):
         s = satirlar[i]
         if not s.strip():
             i += 1
+        elif s.startswith('```'):
+            i += 1
+            kod = []
+            while i < len(satirlar) and not satirlar[i].startswith('```'):
+                kod.append(satirlar[i])
+                i += 1
+            i += 1
+            cikti.append('<pre class="kod"><code>' + e('\n'.join(kod), quote=False) + '</code></pre>')
         elif s.startswith('#'):
             seviye = len(s) - len(s.lstrip('#'))
             yazi = s[seviye:].strip()
@@ -160,7 +183,7 @@ def yazi_coz(metin):
             cikti.append(f'<blockquote><p>{satir_ici(" ".join(parca))}</p></blockquote>')
         else:
             parca = []
-            while i < len(satirlar) and satirlar[i].strip() and not re.match(r'(#|!\[|\||- |1\. |> )', satirlar[i]):
+            while i < len(satirlar) and satirlar[i].strip() and not re.match(r'(#|!\[|\||- |1\. |> |```)', satirlar[i]):
                 parca.append(satirlar[i])
                 i += 1
             cikti.append(f'<p>{satir_ici(" ".join(parca))}</p>')
@@ -238,20 +261,23 @@ def yazi_sayfasi(k, on, govde, icindekiler):
         'about': k['ders'],
         'associatedMedia': {'@type': 'MediaObject', 'name': k['dosya'], 'contentUrl': f'{SITE}{url}{k["dosya"]}'},
     }, ensure_ascii=False)
+    pdf_kaynak = k.get('tur') == 'pdf'
+    ikon = 'pdf' if pdf_kaynak else 'ppt'
+    birim = 'arch.pagesLower' if pdf_kaynak else 'arch.slidesLower'
     toc = ''.join(f'<li><a href="#{a}">{satir_ici(t)}</a></li>' for a, t in icindekiler)
     indir = f'''<section class="kutu indir-kutu" id="indir">
         <h2 class="turuncu" data-i18n="arch.download"></h2>
         <div class="kutu-ic">
           <div class="dosya-ust">
-            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <span class="dosya-ikon {ikon}" aria-hidden="true">{ikon.upper()}</span>
             <div>
               <p class="indir-ad"><a href="{e(k['dosya'])}" download>{e(k['dosya'])}</a></p>
-              <p class="kucuk">{e(k['bicim'])} · {boyut_yaz(k['boyut'])} · {k['slayt']} <span data-i18n="arch.slidesLower"></span> · {tarih_yaz(k['tarih'])}</p>
+              <p class="kucuk">{e(k['bicim'])} · {boyut_yaz(k['boyut'])} · {k['sayfa']} <span data-i18n="{birim}"></span> · {tarih_yaz(k['tarih'])}</p>
             </div>
           </div>
           <p class="indir-satir">
-            <a class="buton turuncu" href="{e(k['dosya'])}" download>⬇ <span data-i18n="arch.downloadPpt"></span> ({boyut_yaz(k['boyut'])})</a>
-            <a class="buton" href="{e(k['pdf'])}" download>⬇ <span data-i18n="arch.downloadPdf"></span> ({boyut_yaz(k['pdf_boyut'])})</a>
+            <a class="buton turuncu" href="{e(k['dosya'])}" download>⬇ <span data-i18n="{'arch.downloadFile' if pdf_kaynak else 'arch.downloadPpt'}"></span> ({boyut_yaz(k['boyut'])})</a>
+            {'' if pdf_kaynak else f'<a class="buton" href="{e(k["pdf"])}" download>⬇ <span data-i18n="arch.downloadPdf"></span> ({boyut_yaz(k["pdf_boyut"])})</a>'}
           </p>
           <p class="telif" data-i18n="arch.copyright"></p>
         </div>
@@ -301,7 +327,7 @@ def arsiv_dizini(kayitlar):
     for sinif in sorted({k['sinif'] for k in hazir}):
         satirlar.append(f'<tr class="sinif-satir" id="sinif-{sinif}"><td colspan="4">{sinif}. <span data-i18n="arch.yearSuffix"></span></td></tr>')
         for k in sorted((k for k in hazir if k['sinif'] == sinif), key=lambda k: (k['ders'], k['slug'])):
-            satirlar.append(f'''<tr><td><span class="mini-ikon ppt" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
+            satirlar.append(f'''<tr><td><span class="mini-ikon {'pdf' if k.get('tur') == 'pdf' else 'ppt'}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
               <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut'])}</td></tr>''')
     son = max(hazir, key=lambda k: k['eklenme'])['baslik'] if hazir else '–'
     govde = f'''  <div class="kolonlar iki" id="ust">

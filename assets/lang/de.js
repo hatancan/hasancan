@@ -118,10 +118,12 @@ window.I18N.de = {
   "arch.slidesLower": "Folien",
   "arch.download": "Herunterladen",
   "arch.fileInfo": "Dateiinfo",
-  "arch.copyright": "Dieser Beitrag wurde aus Lehrmaterial zusammengestellt; die Originalpräsentation wird zu Archivzwecken geteilt. Die Urheberrechte liegen bei den jeweiligen Rechteinhabern. Der Beitrag ist auf Türkisch.",
+  "arch.copyright": "Dieser Beitrag wurde aus Lehrmaterial zusammengestellt; die Originaldatei wird zu Archivzwecken geteilt. Die Urheberrechte liegen bei den jeweiligen Rechteinhabern. Der Beitrag ist auf Türkisch.",
   "arch.toc": "Inhalt",
   "arch.post": "Kursnotizen",
   "arch.addedOn": "hinzugefügt am",
   "arch.downloadPpt": "Präsentation herunterladen",
-  "arch.downloadPdf": "Als PDF herunterladen"
+  "arch.downloadPdf": "Als PDF herunterladen",
+  "arch.pagesLower": "Seiten",
+  "arch.downloadFile": "Datei herunterladen"
 };

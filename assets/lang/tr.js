@@ -119,10 +119,12 @@ window.I18N.tr = {
   "arch.slidesLower": "slayt",
   "arch.download": "İndir",
   "arch.fileInfo": "Dosya Bilgisi",
-  "arch.copyright": "Bu yazı ders materyalinden derlenmiştir; sunum arşiv amacıyla orijinal hâliyle paylaşılmıştır. İçeriğin telif hakları sahiplerine aittir.",
+  "arch.copyright": "Bu yazı ders materyalinden derlenmiştir; orijinal dosya arşiv amacıyla paylaşılmıştır. İçeriğin telif hakları sahiplerine aittir.",
   "arch.toc": "İçindekiler",
   "arch.post": "Ders Notu",
   "arch.addedOn": "eklenme:",
   "arch.downloadPpt": "Sunumu indir",
-  "arch.downloadPdf": "PDF olarak indir"
+  "arch.downloadPdf": "PDF olarak indir",
+  "arch.pagesLower": "sayfa",
+  "arch.downloadFile": "Dosyayı indir"
 };

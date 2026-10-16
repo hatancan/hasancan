@@ -118,10 +118,12 @@ window.I18N.en = {
   "arch.slidesLower": "slides",
   "arch.download": "Download",
   "arch.fileInfo": "File info",
-  "arch.copyright": "This post is compiled from course material; the original presentation is shared for archival purposes. Copyright belongs to its respective owners. The post is in Turkish.",
+  "arch.copyright": "This post is compiled from course material; the original file is shared for archival purposes. Copyright belongs to its respective owners. The post is in Turkish.",
   "arch.toc": "Contents",
   "arch.post": "Course notes",
   "arch.addedOn": "added",
   "arch.downloadPpt": "Download slides",
-  "arch.downloadPdf": "Download as PDF"
+  "arch.downloadPdf": "Download as PDF",
+  "arch.pagesLower": "pages",
+  "arch.downloadFile": "Download file"
 };
