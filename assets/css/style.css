@@ -608,6 +608,7 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
 }
 .dosya-ikon.ppt { background: linear-gradient(#f0884f, #c4421a); }
 .dosya-ikon.pdf { background: linear-gradient(#e2584a, #a8160c); }
+.dosya-ikon.zip { background: linear-gradient(#f2c94c, #b8860b); color: #3a2a00; }
 .dosya-baslik { margin: 0 0 4px; font: bold 17px/1.3 var(--baslik-font); color: var(--fb); }
 .indir-satir { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
 .telif { margin: 10px 0 0; padding: 6px 8px; font-size: 11px; color: #6b5a00; background: #fffbe0; border: 1px solid #f0de80; }
@@ -620,6 +621,7 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
 .dosya-tablo .mini-ikon { display: inline-block; width: 16px; height: 18px; margin-right: 6px; vertical-align: -4px; border-radius: 1px 5px 1px 1px; }
 .mini-ikon.ppt { background: linear-gradient(#f0884f, #c4421a); }
 .mini-ikon.pdf { background: linear-gradient(#e2584a, #a8160c); }
+.mini-ikon.zip { background: linear-gradient(#f2c94c, #b8860b); }
 .dosya-tablo .sinif-satir td { background: linear-gradient(#93c35c, #5a8f29) !important; color: #fff; font-weight: bold; font-size: 11px; }
 
 /* Blog yazısı */
@@ -662,7 +664,27 @@ h1.mavi { background: linear-gradient(#7d97cf 0%, #5675b5 50%, #3b5998 51%, #345
   color: #fff;
   background: linear-gradient(90deg, #0a246a, #a6caf0);
 }
-.yazi-govde-metin pre.kod code { font: inherit; padding: 0; background: none; }
+.yazi-govde-metin pre.kod code, .yazi-govde-metin pre.kaynak code { font: inherit; padding: 0; background: none; }
+.yazi-govde-metin pre.kaynak {   /* kaynak kod: Not Defteri penceresi */
+  margin: 0 0 14px;
+  padding: 0 12px 10px;
+  overflow-x: auto;
+  font: 13px/1.5 "Courier New", monospace;
+  color: #000;
+  background: #fff;
+  border: 2px solid #0a246a;
+  border-radius: 3px 3px 0 0;
+}
+.yazi-govde-metin pre.kaynak::before {
+  content: attr(data-dosya);
+  display: block;
+  margin: 0 -12px 8px;
+  padding: 1px 6px;
+  font: bold 10px Tahoma, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #0a246a, #a6caf0);
+  border-bottom: 1px solid #808080;
+}
 .yazi-govde-metin h3 { margin: 16px 0 8px; font: bold 14px var(--baslik-font); color: #a24400; }
 .yazi-govde-metin blockquote {
   margin: 0 0 12px;
@@ -690,7 +712,7 @@ h1.mavi { background: linear-gradient(#7d97cf 0%, #5675b5 50%, #3b5998 51%, #345
 @media (max-width: 640px) {
   .yazi-bas h1 { font-size: 19px; }
   .yazi-govde-metin { font-size: 15px; }
-  .yazi-govde-metin pre.kod { font-size: 11px; }
+  .yazi-govde-metin pre.kod, .yazi-govde-metin pre.kaynak { font-size: 11px; }
   .kolonlar.iki { grid-template-columns: minmax(0, 1fr); }
   .kolonlar.iki .orta { order: -1; }   /* mobilde içerik önce, yan kutular sonra */
   .yol { margin: 8px 8px 0; }

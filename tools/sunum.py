@@ -66,7 +66,19 @@ def donustur(a):
     hedef = ARSIV / a.slug
     hedef.mkdir(parents=True, exist_ok=True)
     kaynak = a.kaynak.resolve()
-    pdf_kaynak = kaynak.suffix.lower() == '.pdf'
+    uzanti = kaynak.suffix.lower()
+    if uzanti not in ('.pdf', '.ppt', '.pptx'):
+        shutil.copyfile(kaynak, hedef / kaynak.name)
+        kayitlar = [k for k in kayitlari_oku() if k['slug'] != a.slug]
+        kayitlar.append({
+            'slug': a.slug, 'ders': a.ders, 'sinif': a.sinif, 'tarih': a.tarih, 'eklenme': date.today().isoformat(),
+            'tur': 'dosya', 'dosya': kaynak.name, 'boyut': kaynak.stat().st_size, 'pdf': None, 'pdf_boyut': None,
+            'bicim': {'.zip': 'ZIP arşivi', '.7z': '7z arşivi'}.get(uzanti, uzanti.lstrip('.').upper()), 'sayfa': None,
+        })
+        kayitlari_yaz(kayitlar)
+        print(f'{kaynak.name} → arsiv/{a.slug}/  (şimdi yazi.md yaz, sonra: sunum.py sayfa {a.slug})')
+        return
+    pdf_kaynak = uzanti == '.pdf'
     with tempfile.TemporaryDirectory() as g:
         g = Path(g)
         if pdf_kaynak:
@@ -123,7 +135,24 @@ def kimlik(baslik):
     return re.sub(r'[^a-z0-9]+', '-', t).strip('-')
 
 
-def yazi_coz(metin):
+def gorsel_boyut(yol):
+    """PNG/JPEG genişlik-yükseklik (düzen kaymasını önlemek için width/height yazılır)."""
+    b = yol.read_bytes()
+    if b[:8] == b'\x89PNG\r\n\x1a\n':
+        return int.from_bytes(b[16:20], 'big'), int.from_bytes(b[20:24], 'big')
+    i = 2
+    while i < len(b) - 9:
+        if b[i] != 0xFF:
+            i += 1
+            continue
+        isaret, uzunluk = b[i + 1], int.from_bytes(b[i + 2:i + 4], 'big')
+        if isaret in (0xC0, 0xC1, 0xC2):
+            return int.from_bytes(b[i + 7:i + 9], 'big'), int.from_bytes(b[i + 5:i + 7], 'big')
+        i += 2 + uzunluk
+    return 1440, 1080
+
+
+def yazi_coz(metin, klasor=None):
     """Ön bilgi + gövde HTML + içindekiler + kullanılan görseller."""
     m = re.match(r'---\n(.*?)\n---\n', metin, re.S)
     on = dict(re.findall(r'^(\w+):\s*(.+)$', m.group(1), re.M)) if m else {}
@@ -134,13 +163,19 @@ def yazi_coz(metin):
         if not s.strip():
             i += 1
         elif s.startswith('```'):
+            dil = s[3:].strip()   # ```java / ```c / ```cpp → kaynak kod penceresi; yalın ``` → konsol çıktısı
             i += 1
             kod = []
             while i < len(satirlar) and not satirlar[i].startswith('```'):
                 kod.append(satirlar[i])
                 i += 1
             i += 1
-            cikti.append('<pre class="kod"><code>' + e('\n'.join(kod), quote=False) + '</code></pre>')
+            if dil:
+                m = re.search(r'\bclass\s+(\w+)', '\n'.join(kod))
+                ad = f'{m.group(1)}.java' if dil == 'java' and m else {'c': 'program.c', 'cpp': 'program.cpp'}.get(dil, dil)
+                cikti.append(f'<pre class="kaynak" data-dosya="{e(ad)} - Not Defteri"><code>' + e('\n'.join(kod), quote=False) + '</code></pre>')
+            else:
+                cikti.append('<pre class="kod"><code>' + e('\n'.join(kod), quote=False) + '</code></pre>')
         elif s.startswith('#'):
             seviye = len(s) - len(s.lstrip('#'))
             yazi = s[seviye:].strip()
@@ -153,7 +188,8 @@ def yazi_coz(metin):
             g = re.match(r'!\[(.*?)\]\((\S+?)(?:\s+"(.*?)")?\)', s)
             gorseller.append(g.group(2))
             alt_yazi = f'<figcaption>{satir_ici(g.group(3))}</figcaption>' if g.group(3) else ''
-            cikti.append(f'<figure class="yazi-gorsel"><img src="{e(g.group(2))}" width="1440" height="1080" '
+            gen, yuk = gorsel_boyut(klasor / g.group(2)) if klasor and (klasor / g.group(2)).exists() else (1440, 1080)
+            cikti.append(f'<figure class="yazi-gorsel"><img src="{e(g.group(2))}" width="{gen}" height="{yuk}" '
                          f'loading="lazy" decoding="async" alt="{e(g.group(1))}">{alt_yazi}</figure>')
             i += 1
         elif s.startswith('|'):
@@ -261,18 +297,20 @@ def yazi_sayfasi(k, on, govde, icindekiler):
         'about': k['ders'],
         'associatedMedia': {'@type': 'MediaObject', 'name': k['dosya'], 'contentUrl': f'{SITE}{url}{k["dosya"]}'},
     }, ensure_ascii=False)
-    pdf_kaynak = k.get('tur') == 'pdf'
-    ikon = 'pdf' if pdf_kaynak else 'ppt'
-    birim = 'arch.pagesLower' if pdf_kaynak else 'arch.slidesLower'
+    tur = k.get('tur', 'sunum')
+    pdf_kaynak = tur != 'sunum'   # tek indirme düğmesi
+    ikon = {'pdf': 'pdf', 'sunum': 'ppt'}.get(tur, 'zip')
+    birim = 'arch.pagesLower' if tur == 'pdf' else 'arch.slidesLower'
+    sayfa_bilgi = f" · {k['sayfa']} <span data-i18n=\"{birim}\"></span>" if k.get('sayfa') else ''
     toc = ''.join(f'<li><a href="#{a}">{satir_ici(t)}</a></li>' for a, t in icindekiler)
     indir = f'''<section class="kutu indir-kutu" id="indir">
         <h2 class="turuncu" data-i18n="arch.download"></h2>
         <div class="kutu-ic">
           <div class="dosya-ust">
-            <span class="dosya-ikon {ikon}" aria-hidden="true">{ikon.upper()}</span>
+            <span class="dosya-ikon {ikon}" aria-hidden="true">{Path(k['dosya']).suffix.lstrip('.').upper()[:4]}</span>
             <div>
               <p class="indir-ad"><a href="{e(k['dosya'])}" download>{e(k['dosya'])}</a></p>
-              <p class="kucuk">{e(k['bicim'])} · {boyut_yaz(k['boyut'])} · {k['sayfa']} <span data-i18n="{birim}"></span> · {tarih_yaz(k['tarih'])}</p>
+              <p class="kucuk">{e(k['bicim'])} · {boyut_yaz(k['boyut'])}{sayfa_bilgi} · {tarih_yaz(k['tarih'])}</p>
             </div>
           </div>
           <p class="indir-satir">
@@ -327,7 +365,7 @@ def arsiv_dizini(kayitlar):
     for sinif in sorted({k['sinif'] for k in hazir}):
         satirlar.append(f'<tr class="sinif-satir" id="sinif-{sinif}"><td colspan="4">{sinif}. <span data-i18n="arch.yearSuffix"></span></td></tr>')
         for k in sorted((k for k in hazir if k['sinif'] == sinif), key=lambda k: (k['ders'], k['slug'])):
-            satirlar.append(f'''<tr><td><span class="mini-ikon {'pdf' if k.get('tur') == 'pdf' else 'ppt'}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
+            satirlar.append(f'''<tr><td><span class="mini-ikon {({'pdf': 'pdf', 'sunum': 'ppt'}).get(k.get('tur', 'sunum'), 'zip')}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/">{e(k['baslik'])}</a></td>
               <td>{e(k['ders'])}</td><td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut'])}</td></tr>''')
     son = max(hazir, key=lambda k: k['eklenme'])['baslik'] if hazir else '–'
     govde = f'''  <div class="kolonlar iki" id="ust">
@@ -379,7 +417,7 @@ def sayfa(a):
     k = next((k for k in kayitlar if k['slug'] == a.slug), None)
     if not k:
         sys.exit(f'arsiv.json içinde {a.slug} yok; önce "donustur" çalıştır.')
-    on, govde, icindekiler, gorseller = yazi_coz((hedef / 'yazi.md').read_text(encoding='utf-8'))
+    on, govde, icindekiler, gorseller = yazi_coz((hedef / 'yazi.md').read_text(encoding='utf-8'), hedef)
     for gerekli in ('baslik', 'ozet'):
         if gerekli not in on:
             sys.exit(f'yazi.md ön bilgisinde "{gerekli}:" yok')

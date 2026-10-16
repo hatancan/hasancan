@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Veri Yapıları: Java ile Bağlı Liste (Node Zinciri) — hasancan.net</title>
+<meta name="description" content="EEM227 Veri Yapıları dersinin bağlı liste (linked list) örneği: Node sınıfı, elle kurulan düğüm zinciri, addToLast, addToFront ve removeFirst metotlarıyla MyLinkedList; düğümleri dışarıdan gizleyen ikinci sürüm.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-bagli-liste/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Veri Yapıları: Java ile Bağlı Liste (Node Zinciri)">
+<meta property="og:description" content="EEM227 Veri Yapıları dersinin bağlı liste (linked list) örneği: Node sınıfı, elle kurulan düğüm zinciri, addToLast, addToFront ve removeFirst metotlarıyla MyLinkedList; düğümleri dışarıdan gizleyen ikinci sürüm.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-bagli-liste/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Veri Yapıları: Java ile Bağlı Liste (Node Zinciri)", "description": "EEM227 Veri Yapıları dersinin bağlı liste (linked list) örneği: Node sınıfı, elle kurulan düğüm zinciri, addToLast, addToFront ve removeFirst metotlarıyla MyLinkedList; düğümleri dışarıdan gizleyen ikinci sürüm.", "inLanguage": "tr", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-bagli-liste/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "LinkedListNodeChain.7z", "contentUrl": "https://hasancan.net/arsiv/eem227-bagli-liste/LinkedListNodeChain.7z"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM227 Veri Yapıları: Java ile Bağlı Liste (Node Zinciri)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#hakkimda" data-i18n="nav.about"></a></li>
+      <li><a href="/#yetenekler" data-i18n="nav.skills"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <span aria-current="page">EEM227</span></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.11.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>7z arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#dugum-node">Düğüm: Node</a></li><li><a href="#elle-kurulan-zincir">Elle kurulan zincir</a></li><li><a href="#liste-sinifi-mylinkedlist">Liste sınıfı: MyLinkedList</a></li><li><a href="#dugumleri-gizleyen-surum-mylinkedlisthidenodeint">Düğümleri gizleyen sürüm: MyLinkedListHideNodeInt</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM227 Veri Yapıları: Java ile Bağlı Liste (Node Zinciri)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 10.11.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM227 Veri Yapıları</strong> dersinde (Kasım 2013) işlenen bağlı liste (linked list) örneğinin Java kodlarını içeriyor. Konu, izlencenin 3. haftasındaki "Linked Lists – Java programlama dilinde kullanımı". Örnek adım adım ilerliyor: önce tek bir düğüm, sonra elle bağlanan bir zincir, sonra bu zinciri yöneten bir liste sınıfı. Orijinal BlueJ projesi yazının sonunda 7z arşivi olarak indirilebilir.</p>
+<h2 id="dugum-node">Düğüm: Node</h2>
+<p>Her düğüm bir değer ve bir sonraki düğümü gösteren bir referans taşır.</p>
+<pre class="kaynak" data-dosya="Node.java - Not Defteri"><code>public class Node
+{
+    private int value;
+    private Node next;
+
+    public int getValue()
+    {
+        return value;
+    }
+    public void setValue(int pValue)
+    {
+        value = pValue;
+    }
+
+    public Node getNext()
+    {
+        return next;
+    }
+
+    public void setNext(Node pNode)
+    {
+        next = pNode;
+    }
+}</code></pre>
+<h2 id="elle-kurulan-zincir">Elle kurulan zincir</h2>
+<p>Üç düğüm oluşturulup birbirine bağlanıyor: 3 → 5 → 7.</p>
+<pre class="kaynak" data-dosya="NodeChainTest1.java - Not Defteri"><code>public class NodeChainTest1
+{
+    public static void main()
+    {
+        Node n1 = new Node();
+        n1.setValue(3);
+
+        Node n2 = new Node();
+        n2.setValue(5);
+
+        Node n3 = new Node();
+        n3.setValue(7);
+
+        n1.setNext(n2);
+        n2.setNext(n3);
+    }
+}</code></pre>
+<h2 id="liste-sinifi-mylinkedlist">Liste sınıfı: MyLinkedList</h2>
+<p>Zincirin başını ve sonunu tutan, eleman sayısını sayan bir sınıf. Sona eklemede son düğümün <code>next</code>'i yeni düğüme bağlanıyor; başa eklemede yeni düğümün <code>next</code>'i eski ilk düğüme bağlanıyor.</p>
+<pre class="kaynak" data-dosya="MyLinkedList.java - Not Defteri"><code>public class MyLinkedList
+{
+    private Node firstNode;
+    private Node lastNode;
+    private int nodeCount = 0;
+
+    public void addToLast(Node node)
+    {
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+          Node temp = lastNode;
+          temp.setNext(node);
+          lastNode = node;
+          nodeCount++;
+        }
+    }
+
+    public Node getFirstNode()
+    {
+        return firstNode;
+    }
+    public Node getLastNode()
+    {
+        return lastNode;
+    }
+    public int size()
+    {
+        return nodeCount;
+    }
+
+    public void addToFront(Node node)
+    {
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+            Node temp = firstNode;
+            node.setNext(firstNode);
+            firstNode = node;
+            nodeCount++;
+        }
+    }
+}</code></pre>
+<h2 id="dugumleri-gizleyen-surum-mylinkedlisthidenodeint">Düğümleri gizleyen sürüm: MyLinkedListHideNodeInt</h2>
+<p>İkinci sürümde liste dışarıya <code>Node</code> değil, doğrudan <code>int</code> alıyor; düğüm oluşturma işi sınıfın içine saklanıyor. Kullanıcı artık bağlı listenin iç yapısını bilmek zorunda değil. Bu sürümde ilk elemanı silen <code>removeFirst</code> de var.</p>
+<pre class="kaynak" data-dosya="MyLinkedListHideNodeInt.java - Not Defteri"><code>public class MyLinkedListHideNodeInt
+{
+    private Node firstNode;
+    private Node lastNode;
+    private int nodeCount = 0;
+
+    public void addToLast(int sayi)
+    {
+        Node node = new Node();
+        node.setValue(sayi);
+
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+          Node temp = lastNode;
+          temp.setNext(node);
+          lastNode = node;
+          nodeCount++;
+        }
+    }
+
+    public int size()
+    {
+        return nodeCount;
+    }
+
+    public void addToFront(int sayi)
+    {
+        Node node = new Node();
+        node.setValue(sayi);
+
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+            Node temp = firstNode;
+            node.setNext(firstNode);
+            firstNode = node;
+            nodeCount++;
+        }
+    }
+
+    public void removeFirst()
+    {
+        if (nodeCount == 0)
+        {
+            return;
+        }
+        else if (nodeCount == 1)
+        {
+            nodeCount--;
+            firstNode = null;
+            lastNode = null;
+        }
+        else
+        {
+            Node  newFirstNode = firstNode.getNext();
+            firstNode = newFirstNode;
+            nodeCount--;
+        }
+    }
+}</code></pre>
+<p><code>removeFirst</code> ilk düğümü silmek için yalnızca <code>firstNode</code>'u bir sonrakine kaydırıyor; eski ilk düğüme artık hiçbir referans kalmadığı için çöp toplayıcı onu temizliyor. Bağlı listenin diziden farkı tam olarak bu: başa ekleme ve baştan silme, eleman sayısından bağımsız olarak sabit sürede yapılabiliyor.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">7Z</span>
+            <div>
+              <p class="indir-ad"><a href="LinkedListNodeChain.7z" download>LinkedListNodeChain.7z</a></p>
+              <p class="kucuk">7z arşivi · 3 KB · 10.11.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="LinkedListNodeChain.7z" download>⬇ <span data-i18n="arch.downloadFile"></span> (3 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js"></script>
+<script src="/assets/lang/en.js"></script>
+<script src="/assets/lang/de.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
