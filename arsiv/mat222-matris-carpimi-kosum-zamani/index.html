@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAT222 Diferansiyel Denklemler: MATLAB ile Matris Çarpımının Koşum Zamanını Ölçmek — hasancan.net</title>
+<meta name="description" content="İki arkadaşımla hazırladığımız 2016 tarihli matris çarpımı projesi: MATLAB&#x27;da birim matrisler, tic/toc ile süre ölçümü, matris boyutu, adım aralığı ve çarpım sayısının grafiklerle karşılaştırılması.">
+<link rel="canonical" href="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAT222 Diferansiyel Denklemler: MATLAB ile Matris Çarpımının Koşum Zamanını Ölçmek">
+<meta property="og:description" content="İki arkadaşımla hazırladığımız 2016 tarihli matris çarpımı projesi: MATLAB&#x27;da birim matrisler, tic/toc ile süre ölçümü, matris boyutu, adım aralığı ve çarpım sayısının grafiklerle karşılaştırılması.">
+<meta property="og:url" content="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170059">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MAT222 Diferansiyel Denklemler: MATLAB ile Matris Çarpımının Koşum Zamanını Ölçmek", "description": "İki arkadaşımla hazırladığımız 2016 tarihli matris çarpımı projesi: MATLAB'da birim matrisler, tic/toc ile süre ölçümü, matris boyutu, adım aralığı ve çarpım sayısının grafiklerle karşılaştırılması.", "inLanguage": "tr", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "MAT222 – Diferansiyel Denklemler", "associatedMedia": {"@type": "MediaObject", "name": "matris-carpimi-kosum-zamani-maskeli.pdf", "contentUrl": "https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/matris-carpimi-kosum-zamani-maskeli.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="MAT222 Diferansiyel Denklemler: MATLAB ile Matris Çarpımının Koşum Zamanını Ölçmek">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-mat222">MAT222</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>MAT222 – Diferansiyel Denklemler</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.05.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kavram-ve-isletim">Kavram ve işletim</a></li><li><a href="#i-s-kirilimi-ve-uygulama-takvimi">İş kırılımı ve uygulama takvimi</a></li><li><a href="#birim-matris-ve-matris-carpimi">Birim matris ve matris çarpımı</a></li><li><a href="#deneyler-ve-grafikler">Deneyler ve grafikler</a></li><li><a href="#arastirma-sonuclari">Araştırma sonuçları</a></li><li><a href="#matlab-kaynak-kodu">MATLAB kaynak kodu</a></li><li><a href="#rapordaki-kaynakca">Rapordaki kaynakça</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · MAT222</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>MAT222 Diferansiyel Denklemler: MATLAB ile Matris Çarpımının Koşum Zamanını Ölçmek</h1>
+            <p class="kucuk">MAT222 – Diferansiyel Denklemler · 06.05.2016 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi'nde <strong>iki arkadaşımla birlikte hazırladığımız “Matris Çarpımının Koşum Zaman Ölçülmesi”</strong> başlıklı 2016 tarihli proje raporudur. MAT222 klasörümde sakladığım çalışmada MATLAB ile farklı boyutlardaki birim matrislerin çarpım sürelerini inceledik. Kişisel bilgiler çıkarıldı; yazının sonunda yalnız <strong>maskelenmiş PDF</strong> indirilebilir.</p>
+<p><em>Not: Raporda ders kodu ve teslim tarihi yazmıyor. MAT222 sınıflandırması arşiv klasörüne dayanıyor; 6 Mayıs 2016 tarihi özgün Word dosyasının oluşturulma bilgisinden alındı. Aynı dosyanın son değiştirilme tarihi 11 Mayıs 2016'dır.</em></p>
+<h2 id="kavram-ve-isletim">Kavram ve işletim</h2>
+<p>Program kullanıcıdan üç değer alıyor:</p>
+<ul><li>Matris boyutunun üst sınırı: <strong>MAXN</strong></li><li>Boyutun kaçar kaçar artacağı: <strong>deltaN</strong></li><li>Her boyutta matrisin kendisiyle kaç kez çarpılacağı: <strong>KERE</strong></li></ul>
+<p>Karşılaştırmalarda daima birim matris kullanılıyor. Her boyut için matris oluşturuluyor; çarpma işlemlerinin süresi bilgisayarın donanımına ve yüklü yazılımlarına bağlı olarak ölçülüyor. Toplanan verilerle matris boyutu ve geçen zaman arasındaki ilişki çizdiriliyor. Hazırlıkta birim matris ve matris çarpımı kavramlarını araştırıp algoritmayı ve grafikleri bu bilgilerle değerlendirdik.</p>
+<h2 id="i-s-kirilimi-ve-uygulama-takvimi">İş kırılımı ve uygulama takvimi</h2>
+<p>Hazırlık aşaması; kavramların araştırılması, MATLAB algoritmasının tasarlanması ve araştırma sonuçlarıyla algoritmanın ilişkilendirilmesinden oluşuyor. Uygulamada değişkenlerin ve grafiklerin oluşturulması, kodun yazılması, testler ve araştırma sonuçlarının hazırlanması var.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gün</th><th scope="col">İş</th></tr></thead><tbody><tr><th scope="row">1</th><td>Hazırlık aşamasının tamamlanması</td></tr><tr><th scope="row">2</th><td>MATLAB kodlarının oluşturulması</td></tr><tr><th scope="row">3</th><td>Kodların test edilmesi, hataların giderilmesi ve gözlemler</td></tr><tr><th scope="row">4</th><td>Raporun yazılması ve projenin teslimi</td></tr></tbody></table></div>
+<h2 id="birim-matris-ve-matris-carpimi">Birim matris ve matris çarpımı</h2>
+<p>Raporda birim matris n × n boyutlu kare matris olarak tanıtılıyor; I_n veya boyutu bağlamdan biliniyorsa I ile gösteriliyor. Şekil 1'de I₁ = [1], I₂ = [1, 0; 0, 1] ve I₃ = [1, 0, 0; 0, 1, 0; 0, 0, 1] örnekleri var.</p>
+<p><em>Not: Kaynağın birim matris tanımı dil açısından bozuk ve köşegendeki değerleri açık söylemiyor. Şekilde görüldüğü gibi ana köşegen 1, diğer elemanlar 0'dır.</em></p>
+<p>Matris çarpımı iki matristen yeni bir matris üreten işlem olarak anlatılıyor. Satır ve sütun sayılarının ve elemanların nasıl birleştirildiğinin önemi vurgulanıyor; doğrusal denklemler, doğrusal dönüşümler, fizik ve mühendislik uygulamalarından söz ediliyor.</p>
+<p><em>Not: Raporda her elemanın aynı skalerle çarpılması “nokta çarpım” olarak adlandırılmış. Bu işlem skalerle çarpmadır; matris çarpımı veya vektörlerin iç çarpımıyla aynı işlem değildir.</em></p>
+<h2 id="deneyler-ve-grafikler">Deneyler ve grafikler</h2>
+<p>İlk deneylerde adım aralığı 3, en büyük matris boyutu 200 olarak sabit tutulup çarpım sayısı değiştiriliyor. Ardından çarpım sayısı 20'de sabitlenerek adım aralığı ve üst boyut sınırı inceleniyor.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Şekil</th><th scope="col">Adım aralığı</th><th scope="col">En büyük boyut</th><th scope="col">Çarpım sayısı</th></tr></thead><tbody><tr><th scope="row">2</th><td>3</td><td>200</td><td>1</td></tr><tr><th scope="row">3</th><td>3</td><td>200</td><td>5</td></tr><tr><th scope="row">4</th><td>3</td><td>200</td><td>10</td></tr><tr><th scope="row">5</th><td>3</td><td>200</td><td>20</td></tr><tr><th scope="row">6</th><td>10</td><td>200</td><td>20</td></tr><tr><th scope="row">7</th><td>3</td><td>100</td><td>20</td></tr></tbody></table></div>
+<p>Örnek program girdisi:</p>
+<pre class="kod"><code>Adim araligini giriniz:3
+Maksimum matris degeriniz giriniz:200
+Kac carpim yapilacagini giriniz:20</code></pre>
+<p>Rapor, tekrar sayısı arttığında işlem süresinin arttığını; adım aralığı büyüdüğünde daha az örnek alındığını; en büyük matris boyutu küçültüldüğünde grafikte incelenen aralığın daraldığını belirtiyor.</p>
+<figure class="yazi-gorsel"><img src="s-02.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Birim matris örnekleri ve adım 3, üst boyut 200 için bir ve beş çarpımın süre grafikleri"><figcaption>Raporun ikinci sayfası: Şekil 1–3 ve ilk deney girdileri</figcaption></figure>
+<figure class="yazi-gorsel"><img src="s-03.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="On ve yirmi çarpımın karşılaştırması, adım aralığı 10 ve en büyük boyut 100 deneylerinin süre grafikleri"><figcaption>Raporun üçüncü sayfası: Şekil 4–7</figcaption></figure>
+<p><em>Not: Dönüştürülmüş PDF'de birim matris görselinin sağ kısmı, grafiklerin üst kısımları ve bazı eksen ölçekleri kırpılmış; Şekil 6'nın altyazısında da kırpılma var. Özgün Word içindeki görsellerle karşılaştırıldığında bu ayrıntıların PDF'ye tam geçmediği görülüyor. Bu nedenle grafiklerden kesin sayısal süreler çıkarılmadı. Yukarıdaki görseller maskelenmiş PDF'den alındı.</em></p>
+<h2 id="arastirma-sonuclari">Araştırma sonuçları</h2>
+<p>Raporda üç değişkenin etkisini ayırmak için her deneyde bir değişkeni değiştirip diğerlerini sabit tuttuğumuz anlatılıyor. Matris değerlerinin sonucu etkilememesi için birim matris kullanıldı. Sürelerin bilgisayarın donanım ve yazılımına bağlı olduğu, aşırı büyük boyut veya tekrar sayısının programın yanıt vermemesine yol açabildiği belirtiliyor.</p>
+<p>Kaynağın değerlendirmesinde işlem süresinin matris boyutuyla “doğru orantılı” arttığı söyleniyor.</p>
+<p><em>Not: Grafiklerdeki artış tek başına doğrusal orantı kanıtı değildir. Ayrıca kod yalnız seçilen indislerde t(i) değeri atayıp plot(t) çizdirdiği için aradaki ölçülmemiş indisler sıfır kalabilir; grafiklerin testere dişi görünümü tümüyle gerçek ölçüm dalgalanması olarak yorumlanmamalıdır.</em></p>
+<h2 id="matlab-kaynak-kodu">MATLAB kaynak kodu</h2>
+<p>Aşağıdaki kod rapordan aktarıldı; kişisel bilgi içeren yorumlar çıkarıldı, sayfa yerleşimi nedeniyle bölünen giriş metinleri tek satırda birleştirildi. Rapordaki sorunlu <code>g t = zeros(0,MAXN);</code> satırı korunuyor.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%% Meta Bilgileri %%
+%Version : sürüm 1
+
+%Not: Grafikleri bilgisayarınızda tam ekran yaparak incelemeniz tavsiye edilir.
+
+%% Parametreler 1%%
+deltaN = input ('Adim araligini giriniz:');
+MAXN = input ('Maksimum matris degeriniz giriniz:');
+KERE = input ('Kac carpim yapilacagini giriniz:');
+
+%% Parametreler 2%%
+g t = zeros(0,MAXN);
+
+%% İşlemleri uygula 2%%
+for i = deltaN:deltaN:MAXN
+    A = eye(i,i);
+    tic;
+    for j = 1:KERE
+        A = A*A;
+    end
+    t(i) = toc;
+end
+
+%% Grafiği Çiz %%
+plot(t)
+title('Geçen Zaman - Matris Boyut')
+xlabel('Matris Boyut')
+ylabel('Gecen Zaman')</code></pre>
+<p><em>Not: “g t = …” geçerli bir t ataması değildir; ayrıca zeros(0,MAXN) bir ölçüm satırı yerine sıfır satırlı boş dizi oluşturur. Bu kod çalıştırılmadı; belge örneği olarak korundu. A = A*A işlemi her döngüde mevcut matrisi karesine yükseltir. Birim matris için sonuç yine I olduğundan deneyin bu kısmında değerler değişmez.</em></p>
+<p><em>Not: deltaN = 3 ve MAXN = 200 için son denenen boyut 198'dir; MAXN = 100 için 99'dur. Bunlar döngünün adımına göre ulaşılan değerlerdir; üst sınır her zaman örneklenmez.</em></p>
+<h2 id="rapordaki-kaynakca">Rapordaki kaynakça</h2>
+<p>Raporda Wikipedia, Matlab Akademi, Tureng, Encyclopaedia Britannica ve MathWorks adları ile erişim tarihleri yer alıyor. Son kaynak César Pérez López'in <strong>MATLAB Matrix Algebra</strong> (Apress, 2013) kitabı olarak verilmiş. Bu yazı öğrencilik dönemindeki proje raporunu içeriyor; kitap içeriği eklenmedi.</p>
+<p><em>Not: Kaynakçada Wikipedia adı altında farklı bir alan adı yazılması ve “worst since” ifadeleri gibi bibliyografik tutarsızlıklar var; bu kayıtlar doğrulanmış kaynak künyeleri olarak alınmamalıdır.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="matris-carpimi-kosum-zamani-maskeli.pdf" download>matris-carpimi-kosum-zamani-maskeli.pdf</a></p>
+              <p class="kucuk">PDF · 782 KB · 4 <span data-i18n="arch.pagesLower"></span> · 06.05.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="matris-carpimi-kosum-zamani-maskeli.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (782 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170059"></script>
+<script src="/assets/lang/en.js?v=202610170059"></script>
+<script src="/assets/lang/de.js?v=202610170059"></script>
+<script src="/assets/js/site.js?v=202610170059"></script>
+</body>
+</html>

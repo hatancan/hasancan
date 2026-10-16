@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM224 Elektromanyetik I: Tanyer: MATLAB temel fonksiyonları ve dalga gösterimi — hasancan.net</title>
+<meta name="description" content="MATLAB kaynak kodunun açıklamalı arşiv kaydı; kod ve indirilebilir dosya.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem224-matlab-temel-fonksiyonlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM224 Elektromanyetik I: Tanyer: MATLAB temel fonksiyonları ve dalga gösterimi">
+<meta property="og:description" content="MATLAB kaynak kodunun açıklamalı arşiv kaydı; kod ve indirilebilir dosya.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem224-matlab-temel-fonksiyonlar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610170056">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM224 Elektromanyetik I: Tanyer: MATLAB temel fonksiyonları ve dalga gösterimi", "description": "MATLAB kaynak kodunun açıklamalı arşiv kaydı; kod ve indirilebilir dosya.", "inLanguage": "tr", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/eem224-matlab-temel-fonksiyonlar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM224 – Elektromanyetik I", "associatedMedia": {"@type": "MediaObject", "name": "temel06.m", "contentUrl": "https://hasancan.net/arsiv/eem224-matlab-temel-fonksiyonlar/temel06.m"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM224 Elektromanyetik I: Tanyer: MATLAB temel fonksiyonları ve dalga gösterimi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem224">EEM224</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM224 – Elektromanyetik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>14.02.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>M</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kaynak-kod">Kaynak kod</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM224</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM224 Elektromanyetik I: Tanyer: MATLAB temel fonksiyonları ve dalga gösterimi</h1>
+            <p class="kucuk">EEM224 – Elektromanyetik I · 14.02.2013 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>S. Gökhan Tanyer’in Başkent Üniversitesi EEM224 dersi için hazırladığı temel06.m dosyası; başlığında temel05SS.m sürümü yazıyor. Vektör oluşturma, sinüs ailesi, eksen ve çizgi ayarları, contour/mesh/surfl, dalga animasyonu ve ödevler içeriyor. Kaynak kod aşağıda, dosya yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="kaynak-kod">Kaynak kod</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%%   temel05SS.m
+%
+%   EEM224 Dersi icin hazırlanmıştır. 
+%
+%   Temel MATLAB fonksiyonlarının gozden gecirilmesi.
+%   Bu dosya, Baskent Univ., Muh. Fak. ogrencileri tarafından ödev ve proje 
+%   çalismalarinda kullanılmak uzere hazırlanmıştır. Bu dosyayi ihtiyacınız 
+%   dogrultusunda asama asama degistirerek kendi yazilimlarinizi 
+%   gelistirebilirsiniz. Basarılar.
+
+%   Dr. S. Gokhun Tanyer
+%   14.02.13
+
+%% YAZILIMIN TARİHÇESİ
+% Bu kisimda her urettiginiz yazılım surumunun kodunu bir artırarak
+% tarihçesini burada kayıt altına alabilirsiniz. Bu sayede, hata
+% yaptiginizda eski kayıtlara dönebilir, ayrica eski calismalarinizi gozden
+% gecirebilirsiniz.
+%       dosya ismi / yıl.ay.gun / calisma durumu / detaylı bilgi.
+%       Dosya ismi: Kisa, anlaşılır olmalı. Çift rakamlı surum 
+%                   sayisi ile takip edebilir.
+%       Tarih: 14 Şubat 2013 için 130204
+%       Calisma durumu:   -- henüz üstünde çalışıyorum.
+%                         OK  Calisan surumdur.
+%                         SS  Calisan ve bir daha dokunmayacağım, koruma
+%                             altına almak istedigim Son Sürüm yazılımdır.
+%                             Bu durumda temel01SS.m dosyasına da ayrica
+%                             saklamanızda fayda var.
+%
+%
+%
+%
+%temel05SS  130214  OK  Koruma altina alıyorum. 
+%temel05            OK  Aksam ders sonrası tamamlandı.
+%                   --  Dalga hareketi olacak.
+%temel04            OK  Örnek 4: Dalga gösterimi tamam.
+%temel03            OK  Örnek 3 tamamlandı. Örnek 4'te dalga hazirlayacagim.
+%                   OK  Örnek 3'e geciyorum.
+%temel02 130214     --  Örnek 1 ve 2'deki pause etkisizleştirildi. 3'e geçiyorum.
+%                   OK  Örnekler 1(A-B), 2(A-G) tamamlandı.
+%temel01 130214     --  İlk calisma.
+%%  GIRIS - Ekran
+%   Bu kisımda kullanacaginiz sekiller, diger yazilimlardan alıntı satırlar,
+%   yazılıma giris asamasinda ihtiyac duyacağınız satirlar bulunabilir.
+
+    clear;          %Hafizayı sil.
+    figure(1), clf, hold off;
+    figure(2), clf, hold off;
+    figure(3), clf, hold off;
+    figure(4), clf, hold off;      
+    %figure(5), clf, hold off;      
+    %figure(6), clf, hold off;      
+    %figure(7), clf, hold off;      
+    %figure(8), clf, hold off;      
+    %Not: kullanmadığınız satiri silmek yerine sonra kullanmak üzere " % "
+    %işareti ile etkisiz hale getirir, saklayabilirsiniz.
+    %Not: Kısım sonlarında iki-üç satir boş bırakmanız görünürlük
+    %sağlayacaktır.
+    
+    
+    
+%%  GIRIS - Veri hazirlama
+%   Ihtiyac duyacaginiz sabit degerler, kullanacağınız matrislerin onceden
+%   tanımlanması burada yapılabilir.
+%   Not: Kullanacağınız matris boyutu onceden belirli olmasi halinde, 
+%   tanımlanması halinde Matlab cok daha hizli calismaktadır. Dongu
+%   içerisinde surekli olarak boyutları degisen matris kullanımını 
+%   engellemenizde fayda var.
+
+
+
+%%   ÖRNEK VERI HAZIRLAMA VE CİZDİRME:
+%   Hadi tek boyutlu bir vektor hazırlayalım ve görelim.
+    x = [0:1:360];  %Ya da sadece [0:360] kullanbilirsiniz. 1 adim varsayilan değerdir.
+                    %eger ";" işaretini kullanmazsanız x degeri ekrana
+                    %bastirilacaktır. Gerektiginde veri incelemede
+                    %kullanabilirsiniz.
+
+%%   ÖRNEK 1: TEK BOYUTLU VERİLER
+%   Hadi basit tek boyutlu bir cizge cizdirelim
+    figure(1)   %acik degilse acar. Eger zaten aciksa, ekranin ustune getirir.
+    %pause komutu ile burada beklemeye alabilirsiniz. Tıklayınca devam edecektir.
+    disp('Örnek 1A - Çizdirilecek');
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+    
+    plot(x)     %Bu kadar basit!
+    
+    y = 2 * x;
+    
+    figure(1), hold on;
+    disp('Örnek 1B - y ilave edilecek');%pause
+    pause;          %tam durduruyorum.
+    
+    plot(y)     %bu da basit degil mi!
+    
+%%   ÖRNEK 2:
+%   x aci olsun. Onu radyana cevirip sinus çizdirelim.
+    xrad = pi .* x ./ 180;  %dikkat: vektör çarpımı ".*", vektör bolumu "./"
+    z = sin(xrad);
+
+    disp('Örnek 2A - Sinus cizilecek');%pause
+    pause;          %tam durduruyorum.
+    %pause(2);      %ekrana bakabilmek için 2 saniye yeterli olacaktır. 
+
+    figure(2)
+    plot(xrad, z), hold on; %sinüsü ekranda gördünüz. Hadi diğerlerini de çizdirelim.
+    
+    disp('Örnek 2B - Digerleri cizdirilecek');%pause
+    pause;          %tam durduruyorum.
+    
+    plot(xrad,  cos(xrad), '--')
+    plot(xrad, -sin(xrad), '-.')
+    plot(xrad, -cos(xrad), ':')
+                            %Dikkat: x ekseni radyan degerleri vermektedir.
+    %Güzel ve anlaşilir gorunmesi icin soyle de yapabilirdik.
+    disp('Örnek 2C - Renkli grafikler cizdirilecek');%pause
+    pause;          %tam durduruyorum.
+    %pause(2);      %ekrana bakabilmek için 2 saniye yeterli olacaktır. 
+
+    figure(2), hold off, clf;   %Sekli serbest bırakip temizleyelim.
+
+    plot(xrad,  sin(xrad), 'r-',  'LineWidth', 4), hold on;
+    plot(xrad,  cos(xrad), 'g--', 'LineWidth', 4)
+    plot(xrad, -0.8 .* sin(xrad), 'b-.', 'LineWidth', 4)
+    plot(xrad, -cos(xrad), 'm:',  'LineWidth', 4)
+ 
+    %Eksen degerlerine de mudahale etmek mumkun.
+    disp('Örnek 2D - Eksen degerleri ayarlanacak');%pause
+    pause;          %tam durduruyorum.
+    axis([-0.1, 2.1*pi, -1.1, 1.1]);
+    
+    %Eksen tik degerlerine de mudahale etmek mumkun.
+    disp('Örnek 2E - Eksen tik degerleri');%pause
+    pause;          %tam durduruyorum.
+    %pause(2);      %ekrana bakabilmek için 2 saniye yeterli olacaktır. 
+    set(gca, 'xtick',  [0 pi 2*pi]);
+    set(gca, 'ytick',  [-1 -0.8 0 0.8 1]);
+    
+    %Dahası da var.
+    disp('Örnek 2F - Grid çizgileri');%pause
+    pause;          %tam durduruyorum.
+    %pause(2);      %ekrana bakabilmek için 2 saniye yeterli olacaktır. 
+    grid on;
+    
+    %Dahası yine var.
+    disp('Örnek 2G - Basliklar');%pause
+    pause;          %tam durduruyorum.
+    %pause(2);      %ekrana bakabilmek için 2 saniye yeterli olacaktır. 
+    title('SİNÜS AİLESİ BİR ARADA');
+    xlabel('x (Radyan)');
+    ylabel('Olculen Gerilim (Volt)');
+    
+    disp(' ');
+    disp('&gt;&gt;  legend komutunu ogrenin');
+    disp('&gt;&gt;  Ayrica fprintf komutunu ogrenin ornek yaratın. ');
+    disp(' ');
+    %ODEV: legend komutunu ogreniniz.
+    %       Aşağıdaki komutu anlayınız.
+    %       x = plot(1:10,5*rand(10,1),'marker','square','markersize',12,...
+    %           'markeredgecolor','y','markerfacecolor',[.6 0 .6],...
+    %           'linestyle','-','color','r','linewidth',2); hold off
+
+    
+    
+    %% ÖRNEK 3: İKİ BOYUTLU VERİLER
+    disp('Örnek 3 - 2B Çizgeler - Baklava - Contour');%pause
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+
+    clear;
+    Rrad    = 1 .* pi .*  [0:360] ./ 180;       %sinüsün fazı
+    lenR    = length(Rrad);
+    
+    x       = ones(lenR,1) * cos(Rrad);  %Dikkat: matris çarpımıdır.
+    y       = ones(lenR,1) * sin(Rrad);  %Dikkat: matris çarpımıdır.
+    y       = y';
+    
+    Baklava = zeros (size(x));      %matrisi acalim
+    Baklava = sqrt ( x.^2 + y.^2);
+    
+    %Hadi bakalim, 2B çizgeleri birlikte inceleyelim.
+    figure(3), hold off;    %pencereniz yüksekliğin iki katı genişlikte olsun.
+    subplot(121), contour(Baklava, 'LineWidth', 3);
+    subplot(121), axis('square');
+    
+    disp('Örnek 3 - 2B Çizgeler - Baklava - 3B gösterim');%pause
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+
+    subplot(122), mesh(Baklava);
+    colormap('copper');
+    %subplot(122), axis('square');
+    
+    %ODEV:  subplot(121) ve 
+    %       subplot(122)yerine 
+    %       subplot(211) ve 
+    %       subplot(212)deneyin bakalım ne oluyor?
+    %       Neden subplot(33x)'i denemiyorsunuz. x yerine koyacağınız
+    %       rakamlar kaca kadar gidecek? Her sayınin yeri nereye denk
+    %       geliyor? İnceleyim bakalım.
+    
+    %ODEV:  mesh yerine, surf, surfl kullanın, farkini inceleyin.
+    
+    %Asagidaki komutlari degistirerek farkli cozumleri deneyebilirsiniz.
+    disp('Örnek 3 - Baklava cizimi - Farkli renk / bakış açısı tercihi');%pause
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+    
+    subplot(122), surfl(Baklava);
+    shading('interp'); colormap('winter');
+    AZ = 85; EL = 60; view(AZ,EL);
+    
+        
+    
+    %% ÖRNEK 4: DALGA GÖSTERİMİ
+    disp('Örnek 4 - Dalga gosterimi');%pause
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+        
+    clear %hafizayı sil, yeniden başlıyoruz.
+        
+    t       = 0;                    %anlik fotoğrafi hesapliyoruz.
+    f       = 1e9;                  %1 GHz
+    c       = 3e8;                  %ışık hızı = 300,000 km
+    db      = c /f;                 %dalga boyu = 30 cm.
+    
+    %100X100lük bir matris oluşturacağız.
+    X       = 10 .* [0: 0.3/99 : 0.3];
+    Y       = 10 .* [0: 0.3/99 : 0.3];     
+    len     = length(X);
+    
+    %Simdi dongu yapmayi inceleyelim.
+    for ix = 1:len
+        
+        for iy = 1:len
+            
+            XX  = (X(ix) - 1.5) .* (X(ix) - 1.5);
+            YY  = (Y(iy) - 1.5) .* (Y(iy) - 1.5);
+            R   (ix,iy)    = 1e-10 + sqrt(XX + YY); %Dikkat: R=0 sorun yaratıyor.
+            Att (ix,iy)    = 1 ./ R(ix,iy); %Dalgamizin 1/R ile zayıfladığını kabul 
+                                     %edelim. Biliyorum 1/R^2 olmalı ama 1/R
+                                     %daha güzel görünüyor.
+            faz (ix,iy) = 2 .* pi .* f .* t ...
+                        - 2 .* pi ./ db .* R(ix,iy);
+        end
+    end
+        
+    Dalga   = sin(faz) .* Att;
+    
+    figure(4), hold off;    
+    surfl(Dalga);
+    shading('interp'); colormap('winter');
+    AZ = 45;EL = 50; view(AZ,EL);  %Mudahale etmeyebilirsiniz de.
+    
+       
+    
+    %% ÖRNEK 5: DALGA HAREKETİNİN GÖSTERİMİ
+    disp('Örnek 5 - Dalga hareketinin gosterimi');%pause
+    figure(4), hold off;  
+    pause;       %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+    
+    clear %hafizayı sil, yeniden başlıyoruz.
+        
+    f       = 1e9;                  %1 GHz
+    c       = 3e8;                  %ışık hızı = 300,000 km
+    db      = c /f;                 %dalga boyu = 30 cm.
+    T       = 1/f;                  %Dalganın periyodu.
+    t       = [0 : T/10 : T];       %süre sadece 1 milisaniye
+    lenT    = length(t);
+    
+    
+    for it = 1 : lenT
+        %100X100lük bir matris oluşturacağız.
+        
+        X       = 10 .* [0: db/99 : db];
+        Y       = 10 .* [0: db/99 : db];     
+        len     = length(X);
+    
+        %Simdi dongu yapmayi inceleyelim.
+        for ix = 1:len
+        
+            for iy = 1:len
+            
+                XX  = (X(ix) - 1.5) .* (X(ix) - 10*db/2);
+                YY  = (Y(iy) - 1.5) .* (Y(iy) - 10*db/2);
+                R   (ix,iy)    = 1e-10 + sqrt(XX + YY); %Dikkat: R=0 sorun yaratıyor.
+                Att (ix,iy)    = 1 ./ R(ix,iy); %Dalgamizin 1/R ile zayıfladığını kabul 
+                                     %edelim. Biliyorum 1/R^2 olmalı ama 1/R
+                                     %daha güzel görünüyor.
+                faz (ix,iy) = 2 .* pi .* f .* t(it) ...
+                            - 2 .* pi ./ db .* R(ix,iy);
+            end %iy
+        end %ix
+        Dalga   = sin(faz) .* Att;
+        surfl(Dalga);
+        shading('interp'); colormap('copper');
+        AZ = 45;EL = 50; view(AZ,EL);  %Mudahale etmeyebilirsiniz de.
+        axis([0 100 0 100 -5 5])
+        M(it) = getframe;
+    end %it
+        
+    disp('Örnek 5 gosterime hazır! ');
+    pause;          %tam durduruyorum.
+    %pause(2);   %ekrana bakabilmek için 2 saniye yeterli olacaktır.
+    
+    movie(M,10,2);
+        
+    
+    %%  ODEV 1: 
+    %   A.  İstediğinizde bu yazılımı aynen kullanarak, 
+    %           for it = 1 : lenT
+    %       için, tel ustunde sinus dalgası yaratınız. 
+    %       Dikkat ediniz, grafik tek boyutlu olacak. 
+    %
+    %   B.  Aynı şekilde gelen dalgayı da gösteriniz.
+    %
+    %   C.  Her iki dalganın toplamını farklı zamanlarda gösteriniz.
+    %
+    %   D.  C şıkkındaki sonuçları film halinde gösteriniz.
+    %%
+    
+    
+    
+    %real(E) ile Guc miktarıni ilerleme yonundeki mesafeye göre çizdiriniz.
+    figure(5), hold off
+    clear
+    
+    dum = 0:0.01:20;
+    E = sin(dum);
+    E2 = E .* E;
+    
+    plot(dum, E, 'r-',   'LineWidth', 4), hold on;
+    plot(dum, E2, 'b--', 'LineWidth', 4)
+    title ( 'ALAN GENLIGI VE GUC DEGERI');
+    xlabel('Radyan')
+    ylabel( 'ALAN (Volt) ,  GUC (Watt)');
+    
+    
+    
+    
+    
+
+    %% Devami olacak, pek yakında !!
+    
+    
+    
+    
+%%  SON SON SON SON SON SON SON SON SON SON SON SON SON SON SON SON SON SON</code></pre>
+<p><em>Not: Tarihçe açıklamasındaki 14 Şubat için “130204” yazımı 130214 olmalıdır. f=1 GHz için T=1 ns; “1 milisaniye” yorumu bu değerle uyuşmuyor. 1/R alan genliği ile 1/R² güç yoğunluğu birbirinden ayrılmalıdır; örnek kodun güç grafiği normalize E² gösterimidir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">M</span>
+            <div>
+              <p class="indir-ad"><a href="temel06.m" download>temel06.m</a></p>
+              <p class="kucuk">M · 13 KB · 14.02.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="temel06.m" download>⬇ <span data-i18n="arch.downloadFile"></span> (13 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610170056"></script>
+<script src="/assets/lang/en.js?v=202610170056"></script>
+<script src="/assets/lang/de.js?v=202610170056"></script>
+<script src="/assets/js/site.js?v=202610170056"></script>
+</body>
+</html>
