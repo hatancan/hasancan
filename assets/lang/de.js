@@ -8,7 +8,6 @@ window.I18N.de = {
 
   'nav.label': 'Hauptmenü',
   'nav.home': 'Startseite',
-  'nav.about': 'Über mich',
   'nav.projects': 'Projekte',
   'nav.blog': 'Tagebuch',
   'nav.guestbook': 'Gästebuch',
@@ -37,7 +36,6 @@ window.I18N.de = {
   'char.hp': 'HP',
   'char.xp': 'EP',
 
-  'about.title': 'Über mich',
 
 
   'projects.title': 'Projekte',
@@ -69,9 +67,7 @@ window.I18N.de = {
   'footer.best': 'Diese Seite wird am besten bei 1024×768 dargestellt.',
   'footer.rights': 'Alle Rechte vorbehalten.',
   'footer.gen': 'Seite in {s} Sekunden erstellt.',
-  "nav.archive": "Archiv",
   "arch.crumbs": "Du bist hier",
-  "arch.title": "Archiv der Başkent-Universität",
   "arch.intro": "Vorlesungsnotizen, Folien und Laborblätter aus meinem Studium der Elektrotechnik und Elektronik. Ohne Eile, Datei für Datei hinzugefügt.",
   "arch.about": "Über dieses Archiv",
   "arch.aboutText": "Notizen und Präsentationen werden zu lesbaren Beiträgen; die Originaldateien stehen unter jedem Beitrag zum Download bereit.",
@@ -120,13 +116,8 @@ window.I18N.de = {
   "info.companyVal": "(Delaware, 2025)",
   "char.classVal": "Klasse: Ingenieur / Gründer",
   "char.note": "Lv. = Alter. Die EP-Leiste zeigt den Weg zur nächsten Stufe; sie füllt sich mit dem Archiv.",
-  "blog.p2.title": "Das Başkent-Archiv ist online",
   "blog.p2.body": "Vorlesungsnotizen, Laborblätter, Hausaufgaben und Prüfungen aus meiner Studienzeit sind jetzt lesbare Beiträge im Archiv. Es füllt sich Kurs für Kurs; die Originaldateien stehen unter jedem Beitrag.",
-  "blog.p2.more": "Zum Archiv »",
   "gb.sampleName": "Hasan Can",
-  "about.p1": "Ich bin Hasan Can Öztürk, Ingenieur für Elektrotechnik und Elektronik, Mitgründer und Produktdirektor von <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a>. Die Arbeiten, die ich verantworte, stehen unten unter <a href=\"#projeler\">Projekte</a>.",
-  "about.p2": "Seit Anfang der 2000er bin ich dabei: <code>ping localhost</code>, erste eigene Seiten, Foren, Gästebücher, IRC. Ich habe Elektrotechnik und Elektronik an der Başkent-Universität studiert; die Notizen aus dieser Zeit teile ich im <a href=\"/arsiv/\">Archiv</a>.",
-  "about.p3": "Diese Seite ist im Geist des Internets von 2005–2010 gemacht, das mich am meisten geprägt hat: frühes Facebook, Yonja, Hattrick, Knight Online.",
   "counter.note": "Eindeutige Besucher pro Tag seit 16.10.2026",
   "music.title": "Winamp",
   "music.prev": "Zurückspulen",
@@ -144,5 +135,11 @@ window.I18N.de = {
   "gb.sampleMsg": "Willkommen! Schreib den ersten Eintrag.",
   "poll.vote": "Abstimmen",
   "poll.thanks": "Deine Stimme ist gezählt, danke!",
-  "poll.pick": "Wähle zuerst eine Option."
+  "poll.pick": "Wähle zuerst eine Option.",
+  "intro.title": "Willkommen",
+  "intro.text": "Auf dieser Seite teile ich meine Arbeit und was sich über die Jahre angesammelt hat: die <a href=\"#projeler\">Projekte</a>, die ich betreue, meine <a href=\"/arsiv/\">Vorlesungsnotizen</a> aus dem Studium und <a href=\"#gunluk\">Tagebuch</a>-Beiträge. Wenn du Kontakt aufnehmen möchtest, schreib über den Bereich <a href=\"#iletisim\">Kontakt</a> oder hinterlass einen Eintrag im <a href=\"#defter\">Gästebuch</a>. Fühl dich wie zu Hause!",
+  "nav.archive": "Vorlesungsnotizen",
+  "arch.title": "Vorlesungsnotizen: Başkent-Universität",
+  "blog.p2.title": "Meine Vorlesungsnotizen sind online",
+  "blog.p2.more": "Zu den Vorlesungsnotizen »"
 };

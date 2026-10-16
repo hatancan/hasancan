@@ -9,7 +9,6 @@ window.I18N.tr = {
 
   'nav.label': 'Ana menü',
   'nav.home': 'Ana Sayfa',
-  'nav.about': 'Hakkımda',
   'nav.projects': 'Projeler',
   'nav.blog': 'Günlük',
   'nav.guestbook': 'Ziyaretçi Defteri',
@@ -38,7 +37,6 @@ window.I18N.tr = {
   'char.hp': 'HP',
   'char.xp': 'XP',
 
-  'about.title': 'Hakkımda',
 
 
   'projects.title': 'Projeler',
@@ -70,9 +68,7 @@ window.I18N.tr = {
   'footer.best': 'Bu site en iyi 1024×768 çözünürlükte görüntülenir.',
   'footer.rights': 'Tüm hakları saklıdır.',
   'footer.gen': 'Bu sayfa {s} saniyede oluşturuldu.',
-  "nav.archive": "Arşiv",
   "arch.crumbs": "Konum",
-  "arch.title": "Başkent Üniversitesi Arşivi",
   "arch.intro": "Elektrik-Elektronik Mühendisliği yıllarımdan kalan ders notları, sunumlar ve föyler. Acele etmeden, dosya dosya ekleniyor.",
   "arch.about": "Bu Arşiv Hakkında",
   "arch.aboutText": "Notlar ve sunumlar okunabilir yazılar hâline getirilir; orijinal dosyalar her yazının altından indirilebilir.",
@@ -121,13 +117,8 @@ window.I18N.tr = {
   "info.companyVal": "(Delaware, 2025)",
   "char.classVal": "Sınıf: Mühendis / Kurucu",
   "char.note": "Lv. = yaş. XP çubuğu bir sonraki seviyeye giden yolu gösterir; arşiv doldukça dolar.",
-  "blog.p2.title": "Başkent Arşivi açıldı",
   "blog.p2.body": "Üniversite yıllarından kalan ders notları, föyler, ödevler ve sınavlar artık okunabilir yazılar olarak arşivde. Ders ders, sınıf sınıf doluyor; orijinal dosyalar her yazının altında.",
-  "blog.p2.more": "Arşive git »",
   "gb.sampleName": "Hasan Can",
-  "about.p1": "Ben Hasan Can Öztürk. Elektrik-elektronik mühendisiyim; <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a>'nin kurucu ortağı ve ürün direktörüyüm. Yürüttüğüm işler aşağıdaki <a href=\"#projeler\">Projeler</a> bölümünde.",
-  "about.p2": "2000'lerin başından beri bu işlerin meraklısıyım: <code>ping localhost</code>, ilk kişisel sayfalar, forumlar, ziyaretçi defterleri, IRC. Başkent Üniversitesi Elektrik-Elektronik Mühendisliği'nde okudum; o yıllardan kalan notları <a href=\"/arsiv/\">Arşiv</a>'de paylaşıyorum.",
-  "about.p3": "Bu site, bende en çok iz bırakan 2005–2010 internetinin ruhuyla yapıldı: Facebook'un ilk günleri, Yonja, Hattrick, Knight Online.",
   "counter.note": "16.10.2026'dan beri, günlük tekil ziyaretçi",
   "music.title": "Winamp",
   "music.prev": "Başa sar",
@@ -145,5 +136,11 @@ window.I18N.tr = {
   "gb.sampleMsg": "Hoş geldiniz! İlk mesajı siz yazın.",
   "poll.vote": "Oy ver",
   "poll.thanks": "Oyun kaydedildi, teşekkürler!",
-  "poll.pick": "Önce bir seçenek işaretle."
+  "poll.pick": "Önce bir seçenek işaretle.",
+  "intro.title": "Hoş Geldiniz",
+  "intro.text": "Bu sayfada yaptığım işleri ve yıllar içinde biriktirdiklerimi paylaşıyorum: yürüttüğüm <a href=\"#projeler\">projeler</a>, üniversiteden kalan <a href=\"/arsiv/\">ders notlarım</a> ve <a href=\"#gunluk\">günlük</a> yazıları. Benimle iletişime geçmek isterseniz <a href=\"#iletisim\">İletişim</a> bölümünden yazabilir ya da <a href=\"#defter\">ziyaretçi defterine</a> bir not bırakabilirsiniz. Buyrun!",
+  "nav.archive": "Ders Notlarım",
+  "arch.title": "Ders Notlarım: Başkent Üniversitesi",
+  "blog.p2.title": "Ders notlarım yayında",
+  "blog.p2.more": "Ders Notlarım »"
 };

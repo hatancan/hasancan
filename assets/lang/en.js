@@ -8,7 +8,6 @@ window.I18N.en = {
 
   'nav.label': 'Main menu',
   'nav.home': 'Home',
-  'nav.about': 'About me',
   'nav.projects': 'Projects',
   'nav.blog': 'Blog',
   'nav.guestbook': 'Guestbook',
@@ -37,7 +36,6 @@ window.I18N.en = {
   'char.hp': 'HP',
   'char.xp': 'XP',
 
-  'about.title': 'About me',
 
 
   'projects.title': 'Projects',
@@ -69,9 +67,7 @@ window.I18N.en = {
   'footer.best': 'This site is best viewed at 1024×768.',
   'footer.rights': 'All rights reserved.',
   'footer.gen': 'Page generated in {s} seconds.',
-  "nav.archive": "Archive",
   "arch.crumbs": "You are here",
-  "arch.title": "Başkent University Archive",
   "arch.intro": "Lecture notes, slides and lab sheets left over from my Electrical & Electronics Engineering years. Added without rush, file by file.",
   "arch.about": "About this archive",
   "arch.aboutText": "Notes and presentations are turned into readable posts; the original files can be downloaded below each post.",
@@ -120,13 +116,8 @@ window.I18N.en = {
   "info.companyVal": "(Delaware, 2025)",
   "char.classVal": "Class: Engineer / Founder",
   "char.note": "Lv. = age. The XP bar shows the road to the next level; it fills as the archive grows.",
-  "blog.p2.title": "The Başkent Archive is open",
   "blog.p2.body": "Lecture notes, lab sheets, homework and exams from my university years are now readable posts in the archive. Filling up course by course, year by year; original files below each post.",
-  "blog.p2.more": "Go to the archive »",
   "gb.sampleName": "Hasan Can",
-  "about.p1": "I'm Hasan Can Öztürk, an electrical & electronics engineer and co-founder and product director of <a href=\"https://meztech.llc\" rel=\"noopener\" target=\"_blank\">MEZTECH LLC</a>. The work I run is listed under <a href=\"#projeler\">Projects</a> below.",
-  "about.p2": "I've been hooked on this since the early 2000s: <code>ping localhost</code>, first personal pages, forums, guestbooks, IRC. I studied Electrical & Electronics Engineering at Başkent University; I share the notes from those years in the <a href=\"/arsiv/\">Archive</a>.",
-  "about.p3": "This site is built in the spirit of the 2005–2010 internet that left the biggest mark on me: early Facebook, Yonja, Hattrick, Knight Online.",
   "counter.note": "Unique daily visitors since 16.10.2026",
   "music.title": "Winamp",
   "music.prev": "Rewind",
@@ -144,5 +135,11 @@ window.I18N.en = {
   "gb.sampleMsg": "Welcome! Be the first to sign the guestbook.",
   "poll.vote": "Vote",
   "poll.thanks": "Your vote is in, thanks!",
-  "poll.pick": "Pick an option first."
+  "poll.pick": "Pick an option first.",
+  "intro.title": "Welcome",
+  "intro.text": "On this page I share my work and what I have collected over the years: the <a href=\"#projeler\">projects</a> I run, my <a href=\"/arsiv/\">course notes</a> from university and <a href=\"#gunluk\">blog</a> posts. If you would like to get in touch, write via the <a href=\"#iletisim\">Contact</a> section or leave a note in the <a href=\"#defter\">guestbook</a>. Make yourself at home!",
+  "nav.archive": "Course Notes",
+  "arch.title": "Course Notes: Başkent University",
+  "blog.p2.title": "My course notes are online",
+  "blog.p2.more": "Course Notes »"
 };
