@@ -138,7 +138,7 @@ window.I18N.tr = {
   "poll.thanks": "Oyun kaydedildi, teşekkürler!",
   "poll.pick": "Önce bir seçenek işaretle.",
   "intro.title": "Hoş Geldiniz",
-  "intro.text": "Bu sayfada yaptığım işleri ve yıllar içinde biriktirdiklerimi paylaşıyorum: yürüttüğüm <a href=\"#projeler\">projeler</a>, üniversiteden kalan <a href=\"/arsiv/\">ders notlarım</a> ve <a href=\"#gunluk\">günlük</a> yazıları. Benimle iletişime geçmek isterseniz <a href=\"#iletisim\">İletişim</a> bölümünden yazabilir ya da <a href=\"#defter\">ziyaretçi defterine</a> bir not bırakabilirsiniz. Buyrun!",
+  "intro.text": "Bu sayfada yıllar içinde biriktirdiklerimi paylaşıyorum: yürüttüğüm <a href=\"#projeler\">projeler</a> ve çalışmalarım, <a href=\"/arsiv/\">ders notları</a>, çektiğim fotoğraflar, tuttuğum arşivler, bir de yolum boyunca karşıma çıkan, başkalarının yazdığı ama saklamaya değer bulduğum metinler. Bir kısmı bugünün işleri, bir kısmı 2000'lerin başından kalma; hepsi zamanla buraya eklenecek, <a href=\"#gunluk\">günlükte</a> de duyuracağım. Benimle iletişime geçmek isterseniz <a href=\"#iletisim\">İletişim</a> bölümünden yazabilir ya da <a href=\"#defter\">ziyaretçi defterine</a> bir not bırakabilirsiniz. Buyrun!",
   "nav.archive": "Ders Notlarım",
   "arch.title": "Ders Notlarım: Başkent Üniversitesi",
   "blog.p2.title": "Ders notlarım yayında",

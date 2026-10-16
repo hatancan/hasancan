@@ -137,7 +137,7 @@ window.I18N.en = {
   "poll.thanks": "Your vote is in, thanks!",
   "poll.pick": "Pick an option first.",
   "intro.title": "Welcome",
-  "intro.text": "On this page I share my work and what I have collected over the years: the <a href=\"#projeler\">projects</a> I run, my <a href=\"/arsiv/\">course notes</a> from university and <a href=\"#gunluk\">blog</a> posts. If you would like to get in touch, write via the <a href=\"#iletisim\">Contact</a> section or leave a note in the <a href=\"#defter\">guestbook</a>. Make yourself at home!",
+  "intro.text": "On this page I share what I have collected over the years: the <a href=\"#projeler\">projects</a> I run and my other work, <a href=\"/arsiv/\">course notes</a>, photographs I have taken, archives I keep, and texts written by others that I came across along the way and found worth keeping. Some of it is today's work, some dates back to the early 2000s; all of it will be added here over time and announced in the <a href=\"#gunluk\">blog</a>. If you would like to get in touch, write via the <a href=\"#iletisim\">Contact</a> section or leave a note in the <a href=\"#defter\">guestbook</a>. Make yourself at home!",
   "nav.archive": "Course Notes",
   "arch.title": "Course Notes: Başkent University",
   "blog.p2.title": "My course notes are online",
