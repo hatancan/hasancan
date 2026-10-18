@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM491 Bitirme Projesi I: Akıllı Kilit Sistemi — Bluetooth ve Wi-Fi ile Kapı Kilidi (Arduino, ESP8266, Android) — hasancan.net</title>
+<meta name="description" content="Başkent Üniversitesi EEM491/EEM492 bitirme projesi (2016–2017): telefonla Bluetooth&#x27;tan yakın mesafede, Wi-Fi&#x27;dan ağ üzerinden açılıp kilitlenen kapı kilidi. Blok diyagram, bağlantı şemaları, Arduino + ESP8266 + HC-06 firmware&#x27;i, App Inventor ve Java Android uygulamaları, akış diyagramları, iş takvimi, maliyet ve risk analizi; rapor, poster ve tüm kaynak kodlar indirilebilir.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM491 Bitirme Projesi I: Akıllı Kilit Sistemi — Bluetooth ve Wi-Fi ile Kapı Kilidi (Arduino, ESP8266, Android)">
+<meta property="og:description" content="Başkent Üniversitesi EEM491/EEM492 bitirme projesi (2016–2017): telefonla Bluetooth&#x27;tan yakın mesafede, Wi-Fi&#x27;dan ağ üzerinden açılıp kilitlenen kapı kilidi. Blok diyagram, bağlantı şemaları, Arduino + ESP8266 + HC-06 firmware&#x27;i, App Inventor ve Java Android uygulamaları, akış diyagramları, iş takvimi, maliyet ve risk analizi; rapor, poster ve tüm kaynak kodlar indirilebilir.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181458">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM491 Bitirme Projesi I: Akıllı Kilit Sistemi — Bluetooth ve Wi-Fi ile Kapı Kilidi (Arduino, ESP8266, Android)", "description": "Başkent Üniversitesi EEM491/EEM492 bitirme projesi (2016–2017): telefonla Bluetooth'tan yakın mesafede, Wi-Fi'dan ağ üzerinden açılıp kilitlenen kapı kilidi. Blok diyagram, bağlantı şemaları, Arduino + ESP8266 + HC-06 firmware'i, App Inventor ve Java Android uygulamaları, akış diyagramları, iş takvimi, maliyet ve risk analizi; rapor, poster ve tüm kaynak kodlar indirilebilir.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM491 – Bitirme Projesi I", "associatedMedia": {"@type": "MediaObject", "name": "akilli-kilit-sistemi.zip", "contentUrl": "https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/akilli-kilit-sistemi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM491 Bitirme Projesi I: Akıllı Kilit Sistemi — Bluetooth ve Wi-Fi ile Kapı Kilidi (Arduino, ESP8266, Android)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem491">EEM491</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM491 – Bitirme Projesi I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.05.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#projenin-amaci">Projenin amacı</a></li><li><a href="#sistem-mimarisi">Sistem mimarisi</a></li><li><a href="#donanim-ve-baglantilar">Donanım ve bağlantılar</a></li><li><a href="#firmware">Firmware</a></li><li><a href="#android-uygulamasi">Android uygulaması</a></li><li><a href="#akis-diyagramlari">Akış diyagramları</a></li><li><a href="#birinci-donemin-sonu">Birinci dönemin sonu</a></li><li><a href="#proje-yonetimi">Proje yönetimi</a></li><li><a href="#kaynaklar">Kaynaklar</a></li><li><a href="#i-ndirme-paketinin-icerigi">İndirme paketinin içeriği</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM491</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM491 Bitirme Projesi I: Akıllı Kilit Sistemi — Bluetooth ve Wi-Fi ile Kapı Kilidi (Arduino, ESP8266, Android)</h1>
+            <p class="kucuk">EEM491 – Bitirme Projesi I · 26.05.2017 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Hasan Can Öztürk'ün Başkent Üniversitesi Elektrik-Elektronik Mühendisliği bölümünde <strong>EEM491 Bitirme Projesi I</strong> (2016 güz) ve <strong>EEM492 Bitirme Projesi II</strong> (2017 bahar) dersleri boyunca bir proje arkadaşıyla birlikte geliştirdiği <strong>Akıllı Kilit Sistemi</strong>ni anlatıyor. Hasan Can Öztürk projede grup lideriydi. Danışman <strong>Yrd. Doç. Dr. Alparslan Çağrı Yapıcı</strong>, jüri üyeleri <strong>Prof. Dr. Murat Emin Akata</strong> ve <strong>Doç. Dr. Sedat Nazlıbilek</strong>'ti.</p>
+<p>Yazı; bitirme raporu, iki dönem sunumu, proje posteri, üç firmware sürümü, iki Android uygulaması (MIT App Inventor ve Java) ile tasarım klasöründeki diyagramlardan derlendi. Raporun (öğrenci numaraları, proje arkadaşının adı ve özgeçmiş sayfaları kapatılarak), posterin, tüm kodların ve diyagramların bulunduğu paket yazının sonunda indirilebilir.</p>
+<figure class="yazi-gorsel"><img src="poster.jpg" width="1000" height="1429" loading="lazy" decoding="async" alt="Akıllı Kilit proje posteri: başlık, Başkent Üniversitesi Elektrik ve Elektronik Mühendisliği Bölümü, danışman adı; Anahtarsız erişim, Blok diyagram, Sadece bir pil ile çalıştırmanız yeterli ve Basit ve kullanışlı bölümleri; elde tutulan telefonda SmartLock uygulaması, kapı kilit mekanizmasının içine yerleştirilmiş devre kartı ve kapı kolu üzerindeki kilit kapağı görselleri"><figcaption>Proje posteri (2017). Proje arkadaşının adı ve e-postası posterden çıkarıldı.</figcaption></figure>
+<h2 id="projenin-amaci">Projenin amacı</h2>
+<p>Posterdeki tanımıyla amaç, <em>"ev ve işyerlerinin kapı kilitlerine geleneksel yöntemlere ek olarak akıllı teknolojiler ile kapıyı açıp kilitleyebileceğimiz cihaz yapmak"</em>. Mekanizma Wi-Fi ve Bluetooth teknolojileriyle kuruldu. Rapordaki Kavram Tanımlama ve İşletim Dokümanı (KTİD) sistemden beklenenleri şöyle sıralıyor:</p>
+<ol><li>Kapının yaklaşık <strong>3 metre</strong> yakınına gelindiğinde kilit cep telefonuyla <strong>otomatik</strong> açılacak.</li><li>Kilit şifresi değiştirilinceye kadar doğru şifrenin bir kez girilmiş olması yeterli olacak; şifreyi bilen her akıllı telefon kullanıcısı girebilecek.</li><li>Kilit <strong>1 saniyeden kısa</strong> sürede açılacak.</li><li>3 metreden uzak mesafelerde kilit <strong>internet bağlantısı</strong> ve cep telefonuyla açılacak. Bu işlem kullanıcı adı ve parolayla, kullanıcıya atanan bir hesap üzerinden yapılacak.</li><li>Yakın mesafede otomatik açma için kullanılan şifre bu hesap üzerinden değiştirilebilecek.</li></ol>
+<p>Proje İsterleri Belirtimi Dokümanı (PİBD) bunu donanım ve yazılım işlerine böler: temassız iletişim teknolojileriyle bir kapı kilit kontrol devresi kurulması, devrenin Bluetooth ve Wi-Fi'ı desteklemesi, devrede koşacak yazılımın, telefon arayüzünün ve internetten kontrol için sunucu yazılımının geliştirilmesi, en sonda da alt birimler bütünleştirilerek seri üretime uygun ilk prototipin hazırlanması.</p>
+<h3 id="ev-otomasyonundan-akilli-kilide">Ev otomasyonundan akıllı kilide</h3>
+<p>Projenin ilk önerisi daha geniş bir başlık taşıyordu: <strong>"Yakın ve Uzak Alan İletişimi ile Ev Otomasyon Sisteminin Geliştirilmesi"</strong>. Öneri sunumunda yakından iletişim kurulduğunda şifreyi bilen her telefon kullanıcısının kilidi açabileceği, sistem yöneticisinin ise uzaktan açıp şifre atayabileceği bir yapı tarif ediliyor. Uzak bağlantı için sunucuda <strong>MySQL</strong> veritabanı, sunucuyla iletişimde <strong>PHP</strong>, tarayıcı arayüzü için <strong>HTML</strong>, Android için <strong>Java</strong>, iOS için <strong>Swift</strong> kullanılması planlanmıştı. Bağlantı sorunlarında şifreyi atamak için bir <strong>LCD ve tuş takımı</strong>, tüm enerjinin kesildiği durumlar için de <strong>mekanik anahtar</strong> "acil durum çözümü" olarak düşünülmüştü.</p>
+<p>Proje ilerledikçe kapsam, ev otomasyonunun bir parçası olan <strong>kapı kilidine</strong> odaklandı: birinci dönem Bluetooth ile yakın mesafe kontrolü, ikinci dönem Wi-Fi ile ağ üzerinden kontrol ve gerçek kilit mekanizmasının motorla sürülmesi.</p>
+<h2 id="sistem-mimarisi">Sistem mimarisi</h2>
+<figure class="yazi-gorsel"><img src="blok-diyagram.png" width="1200" height="427" loading="lazy" decoding="async" alt="Blok diyagram: Cep telefonu, WiFi modülü ve Bluetooth modülü üzerinden Arduino&#x27;ya bağlanıyor; Arduino motor sürücüyü, motor sürücü de kilidi kontrol ediyor"><figcaption>Blok diyagram (raporda Şekil 1 ve Şekil 4)</figcaption></figure>
+<p>Raporun "Gerçekleştirme" bölümüne göre sistem dört ana alt birimden oluşuyor:</p>
+<ol><li><strong>Bluetooth ile kapı kontrol birimi</strong> — telefon kilide yaklaştığında yakın mesafeden bağlantı.</li><li><strong>Wi-Fi ile kapı kontrol birimi</strong> — aynı ağdaki telefondan HTTP isteğiyle kontrol.</li><li><strong>Motor kontrol birimi</strong> — Arduino'nun komutuyla motoru iki yöne süren sürücü.</li><li><strong>Fiziksel kilit birimi</strong> — gömme kapı kilidinin içine yerleştirilen motorlu mekanizma.</li></ol>
+<p>Çalışma sırası raporda şöyle özetleniyor: önce geliştirme kartı, Bluetooth modülü ve akıllı cihaz işletim sistemi araştırılıp seçildi; Bluetooth modülü için Arduino yazılımı tamamlanıp modül test edildi; ardından Bluetooth modülüne veri gönderecek telefon uygulaması yazıldı; son olarak motor sürücü kartıyla kapı kilidini kontrol etmek için motor sürüldü.</p>
+<h3 id="kullanilan-bilesenler">Kullanılan bileşenler</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Bileşen</th><th scope="col">Görevi</th><th scope="col">Not</th></tr></thead><tbody><tr><th scope="row">Arduino Due (1. dönem), Arduino Uno (2. dönem)</th><td>Kontrol merkezi; Bluetooth ve Wi-Fi'dan gelen komutları işleyip motoru sürer</td><td>Posterde işlemci ATmega328P (Uno) olarak geçiyor</td></tr><tr><th scope="row">HC-06 Bluetooth modülü</th><td>Telefonla yakın mesafe seri haberleşme (SPP), slave modda</td><td>Bluetooth 2.0 + EDR, 2,4 GHz; AT komutlarıyla ayarlanır. Bağlantı şemalarında HC-05 yazıyor</td></tr><tr><th scope="row">ESP8266 Wi-Fi modülü</th><td>Ağa bağlanıp 80 numaralı portta küçük bir web sunucusu açar</td><td>AT komut setiyle Arduino'nun seri portundan yönetilir</td></tr><tr><th scope="row">Motor sürücü + redüktörlü DC motor</th><td>Kilidin dilini iki yönde hareket ettirir</td><td>Arduino'nun 6 ve 7 numaralı pinleriyle sürülür</td></tr><tr><th scope="row">Kilit mekanizması</th><td>Fiziksel kapı kilidi</td><td>Bütçenin en büyük kalemi</td></tr><tr><th scope="row">LED</th><td>Birinci dönemde kilidin yerine, kapının açık/kapalı durumunu göstermek için</td><td>İkinci dönemde de durum göstergesi olarak kaldı</td></tr><tr><th scope="row">LCD ve numerik tuş takımı</th><td>Birinci dönemde şifre oluşturma ve acil durumda elle giriş</td><td>Final sunumunda "acil durum için kullanılan tuş takımı"</td></tr><tr><th scope="row">Batarya</th><td>Besleme</td><td>Posterde: "Sadece bir pil ile çalıştırmanız yeterli"</td></tr></tbody></table></div>
+<p>Posterdeki enerji bölümüne göre cihazda güç tüketen parçalar ATmega328P işlemci, Wi-Fi modülü, Bluetooth modülü ve DC motordur. Her iki modül ve işlemcinin <strong>uyku modunda</strong> toplam tüketimi 4 mA'in altındadır. Motordaki redüktör sayesinde devre girişine 9 V uygulandığında <strong>0,8 A</strong> akım çekilir ve bu, cihazın bir pille ortalama <strong>6 ayı aşkın</strong> çalışabilmesini sağlar. Posterde bunu destekleyen "Maksimum Çıkış Akımı ve Giriş Voltajı Karşılaştırması" grafiği (9 V ve 12 V eğrileri) de yer alıyor.</p>
+<p><em>Not: Arşivdeki firmware sürümlerinde uyku moduna geçiren bir kod yok; posterdeki tüketim ve pil ömrü değerleri bir tasarım hedefi olarak okunmalı.</em></p>
+<h2 id="donanim-ve-baglantilar">Donanım ve bağlantılar</h2>
+<p>Proje boyunca iki bağlantı düzeni kullanıldı. Birinci dönemde <strong>Arduino Due</strong>'nun birden fazla donanım seri portu sayesinde Bluetooth ve Wi-Fi modülleri ayrı portlara bağlandı:</p>
+<figure class="yazi-gorsel"><img src="baglanti-semasi-due.jpg" width="1200" height="281" loading="lazy" decoding="async" alt="Arduino Due bağlantı şeması: HC05 Bluetooth modülünün td ve tr uçları Due&#x27;nun tr1 ve td1 uçlarına; ESP8266 WiFi modülünün td ve tr uçları Due&#x27;nun tr2 ve td2 uçlarına; 3.3V/5V ve GRD bağlantıları"><figcaption>Arduino Due ile bağlantı şeması: Bluetooth modülü Serial1, Wi-Fi modülü Serial2 tarafında</figcaption></figure>
+<p>İkinci dönemde kart <strong>Arduino Uno</strong>'ya değişti. Uno'da tek donanım seri portu olduğu için Wi-Fi modülü donanım seri portuna (0–1), Bluetooth modülü ise <code>SoftwareSerial</code> ile <strong>10 ve 11 numaralı pinlere</strong> bağlandı:</p>
+<figure class="yazi-gorsel"><img src="baglanti-semasi-uno.jpg" width="1200" height="281" loading="lazy" decoding="async" alt="Arduino Uno bağlantı şeması: HC05 Bluetooth modülü Uno&#x27;nun 10 ve 11 numaralı pinlerine, ESP8266 WiFi modülü Uno&#x27;nun tr ve td uçlarına; 3.3V, 5V ve GRD bağlantıları"><figcaption>Arduino Uno ile bağlantı şeması (son sürüm)</figcaption></figure>
+<p>Tasarım klasöründe ayrıca motoru korumak için düşünülmüş bir <strong>akım kesme devresi</strong> var. Şemada Arduino Mega, 12 V araç aküsü, 12 V DC motor, tek kanallı röle modülü, akım sensörü ve bir anlık basmalı buton görülüyor. Motor kilit dilini sonuna kadar götürdüğünde akım yükselir; devre <strong>3–5 A</strong>'de motorun akımını kesecek şekilde düşünülmüş ("Max 3A – 5A to cut off").</p>
+<figure class="yazi-gorsel"><img src="motor-akim-kesme-devresi.jpg" width="900" height="619" loading="lazy" decoding="async" alt="Motor akım kesme devresi çizimi: Arduino Mega 2560, 12V DC araç aküsü, 12V DC motor, 1 kanallı röle modülü, akım sensörü ve basmalı buton arasındaki kablo bağlantıları; Max 3A–5A to cut off notu"><figcaption>Motor için akım kesme devresi tasarımı (Mayıs 2017)</figcaption></figure>
+<p><em>Not: Son firmware'de motor, akım ölçülerek değil süreyle (2,5 saniye) durduruluyor; akım kesme devresi koda yansımamış bir tasarım olarak kalmış.</em></p>
+<h2 id="firmware">Firmware</h2>
+<p>Arşivde Arduino kodunun üç sürümü var. Hepsi aynı iskeleti paylaşıyor: ESP8266'yı AT komutlarıyla ağa bağlayıp web sunucusu açmak, Bluetooth'tan gelen karakterlere göre kilidi yönetmek ve telefona düzenli "canlılık" sinyali göndermek.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Sürüm</th><th scope="col">Tarih</th><th scope="col">Kart</th><th scope="col">Kilit</th><th scope="col">Farkı</th></tr></thead><tbody><tr><th scope="row"><code>SmartKey_ArduinoDue.ino</code></th><td>Nisan 2017</td><td>Arduino Due</td><td>LED</td><td>Bluetooth <code>Serial2</code> (9600 baud), ESP8266 <code>Serial1</code> (115200), hata ayıklama çıktısı <code>Serial3</code>. Web sayfasında ON/OFF düğmeleri</td></tr><tr><th scope="row"><code>SmartKey_ESP8266_v1_LED.ino</code></th><td>Nisan 2017</td><td>Arduino Uno</td><td>LED</td><td>Bluetooth <code>SoftwareSerial</code> (10, 11; 38400 baud). Telefona her 500 ms'de bir sinyal (<code>ping</code>) eklendi</td></tr><tr><th scope="row"><code>SmartKey_ESP8266_v2_Motor.ino</code></th><td>Mayıs 2017</td><td>Arduino Uno</td><td>Motor sürücü (pin 6–7)</td><td>LED yerine motor: kilit açma/kilitleme hareketleri, açılışta mekanizma testi</td></tr></tbody></table></div>
+<h3 id="son-surumun-calisma-mantigi">Son sürümün çalışma mantığı</h3>
+<p><strong>Açılış (<code>setup</code>)</strong></p>
+<ol><li>Wi-Fi modülü için seri port <strong>115200</strong>, Bluetooth için yazılımsal seri port <strong>38400</strong> baud ile açılır.</li><li>ESP8266'ya <code>AT</code> gönderilir; modül <code>OK</code> dönerse <code>AT+CWMODE=1</code> ile <strong>istasyon (STA)</strong> moduna alınır ve <code>AT+CWJAP_CUR</code> ile kablosuz ağa bağlanılır. Bağlantı sürerken LED yanar, <code>OK</code> gelince söner.</li><li><code>AT+CWDHCP_CUR=1,0</code> ile DHCP kapatılıp <code>AT+CIPSTA_CUR</code> ile <strong>sabit IP (192.168.1.20)</strong> atanır. Böylece telefon uygulaması kilidi her zaman aynı adreste bulur.</li><li><code>AT+CIPMUX=1</code> ile çoklu bağlantı açılıp <code>AT+CIPSERVER=1,80</code> ile <strong>80 numaralı portta sunucu</strong> başlatılır.</li><li>Motor kısa bir açma–kapama hareketi yapar (3 s açma yönünde, 200 ms kapama yönünde); mekanizmanın çalıştığı açılışta görülür.</li></ol>
+<p><strong>Ana döngü (<code>loop</code>)</strong></p>
+<ul><li><strong>Wi-Fi:</strong> ESP8266'dan <code>+IPD,</code> (gelen HTTP isteği) okunursa tarayıcıya kısa bir yanıt (<code>&lt;head&gt; Hello World &lt;/head&gt;</code>) gönderilir, isteğin geri kalanı <code>led_yakma()</code> fonksiyonunda okunur: içinde <code>pin=on</code> varsa kilit <strong>açılır</strong>, <code>pin=off</code> varsa <strong>kilitlenir</strong>. Bağlantı <code>AT+CIPCLOSE=0</code> ile kapatılır.</li><li><strong>Bluetooth:</strong> yazılımsal seri portta veri varsa <code>kilit_kontrol_bt()</code> gelen her karaktere bakar:</li></ul>
+<p>  - <code>t</code> → LED yanar ve <strong>30 saniyelik</strong> bir sayaç başlar (telefon yaklaşıp otomatik bağlandığında gönderilir).   - <code>n</code> → kilit <strong>açılır</strong>.   - <code>f</code> → kilit <strong>kilitlenir</strong>, sayaç durur.</p>
+<ul><li><strong>Sayaç:</strong> sayaç açıkken geçen saniye Bluetooth'tan telefona yazılır; 30 saniye dolunca LED söner.</li><li><strong>Canlılık sinyali:</strong> her 500 ms'de bir telefona <code>500</code> yazılır. Telefon uygulaması bu veriyi alamadığında bağlantının koptuğunu, yani kullanıcının kapıdan uzaklaştığını anlar.</li></ul>
+<p><strong>Motor hareketi:</strong> Açmak için <code>in2</code> HIGH / <code>in1</code> LOW yapılıp motor <strong>2,5 saniye</strong> döndürülür, ardından yön 300 ms ters çevrilip motor durdurulur. Kilitlemek için <code>in1</code> HIGH yapılıp motor 2,5 saniye ters yönde döndürülür.</p>
+<h3 id="kod-smartkey-esp8266-v2-motor-ino">Kod: <code>SmartKey_ESP8266_v2_Motor.ino</code></h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;SoftwareSerial.h&gt;
+SoftwareSerial mySerial(10, 11); // RX, TX
+
+#define ag_ismi "wireless"
+#define ag_sifresi "********"
+#define LED 8
+#define LED1 13
+#define bekleme_suresi 30000
+#define ping_zamani 500
+
+const int in1 = 7;
+const int in2 = 6;
+unsigned long simdikizaman = 0, oncekizaman = 0, ping = 0;
+char sayac_acik = 0;
+int fark = 0;
+
+void setup()
+{
+  // mySerial.begin(115200);   //bluethoot icin
+  Serial.begin(115200); //Seriport'u açıyoruz. Güncellediğimiz Wifi
+  mySerial.begin(38400); //Seriport'u açıyoruz. Güncellediğimiz BT
+
+
+  //ESP modülünün baudRate değeri 115200 olduğu için bizde Seriport'u 115200 şeklinde seçiyoruz
+  Serial.println("AT"); //ESP modülümüz ile bağlantı kurulup kurulmadığını kontrol ediyoruz.
+  pinMode(LED1, OUTPUT);
+  pinMode(LED, OUTPUT);
+  pinMode (in1, OUTPUT);
+  pinMode (in2, OUTPUT);
+  delay(3000); //ESP ile iletişim için 3 saniye bekliyoruz.
+
+  if (Serial.find("OK")) {       //esp modülü ile bağlantıyı kurabilmişsek modül "AT" komutuna "OK" komutu ile geri dönüş yapıyor.
+    Serial.println("AT+CWMODE=1"); //esp modülümüzün WiFi modunu STA şekline getiriyoruz. Bu mod ile modülümüz başka ağlara bağlanabilecek.
+    digitalWrite(LED, HIGH);
+    delay(2000);
+    String baglantiKomutu = String("AT+CWJAP_CUR=\"") + ag_ismi + "\",\"" + ag_sifresi + "\"";
+    Serial.println(baglantiKomutu);
+    delay(5000);
+    if (Serial.find("OK"))
+      digitalWrite(LED, LOW);
+  }
+
+  Serial.println("AT+CWDHCP_CUR=1,0");    //DHCP yi kapat
+  delay(500);
+  Serial.println("AT+CIPSTA_CUR=\"192.168.1.20\",\"192.168.1.1\",\"255.255.255.0\"");   //static IP ata
+  delay(500);
+
+  Serial.println("AT+CIPMUX=1");
+  delay(1000);
+  Serial.println("AT+CIPSERVER=1,80");
+  delay(1000);
+  Serial.println("AT+CIPCLOSE=0");
+
+
+  ping = millis();
+
+  //-----------------------------------------------
+    //Serial.begin(9600);  
+    digitalWrite(in1, LOW); //açar
+    digitalWrite(in2, HIGH);
+    delay(3000);
+    digitalWrite(in2, LOW); //kapar
+    digitalWrite(in1, HIGH);
+    delay(200);
+    digitalWrite(in2, LOW);
+    digitalWrite(in1, LOW);
+    delay(1);
+    //--------------------------------------------------
+}
+
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    if (Serial.find("+IPD,")) {
+      String metin = "&lt;head&gt; Hello World &lt;/head&gt;";
+      // metin += "&lt;br&gt;&lt;a href=\" ?pin=on\"&gt;&lt;button type='button'&gt;ON&lt;/button&gt;&lt;/a&gt;";
+      // metin += "&lt;br&gt;&lt;a href=\" ?pin=off\"&gt;&lt;button type='button'&gt;OFF&lt;/button&gt;&lt;/a&gt;";
+      String cipsend = "AT+CIPSEND=";
+      cipsend += "0";
+      cipsend += ",";
+      cipsend += metin.length();
+      cipsend += "\r\n";
+      Serial.print(cipsend);
+      delay(500);
+      Serial.println(metin);
+      led_yakma();
+      Serial.println("AT+CIPCLOSE=0");
+
+    }
+  }
+
+  if (mySerial.available() &gt; 0) {
+    kilit_kontrol_bt();
+  }
+
+  if (sayac_acik &amp;&amp; millis() - oncekizaman &gt; bekleme_suresi) {
+    sayac_acik = 0;
+    digitalWrite(LED, LOW);
+  }
+
+  if (sayac_acik &amp;&amp; millis() - oncekizaman &lt;= bekleme_suresi) {
+    fark = (millis () - oncekizaman) / 1000;
+    mySerial.print(fark);
+    mySerial.print("\r");
+  }
+
+  if (millis() - ping &gt;= ping_zamani)
+  {
+    ping = millis();
+    mySerial.print(ping_zamani);
+  }
+}
+
+
+
+void led_yakma() {
+  String gelen = "";
+  char serialdenokunan;
+  int ii = 0;
+
+  while (Serial.available() &gt; 0) {
+    serialdenokunan = Serial.read();
+    gelen += serialdenokunan;
+    ii++;
+  }
+
+  if ((gelen.indexOf("pin=on") &gt; 1)) { //on butonuna basıldığında server adresinde /?pin=on var ise
+    digitalWrite(LED, HIGH);                 //ledi yakar
+     //-----------------------------------------------
+      digitalWrite(in2, HIGH); //kilidi açar
+      digitalWrite(in1, LOW);
+      delay(2500);
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(300);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //----------------------------------------
+
+  }
+  if ((gelen.indexOf("pin=off") &gt; 1)) { // off butonuna basıldığında server adresinde /?pin=off var ise
+    digitalWrite(LED, LOW);                   //ledi söndürür
+    //-----------------------------------------------
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(2500);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //-----------------------------------------------
+
+  }
+}
+
+void kilit_kontrol_bt() {
+  String gelenbt = "";
+  char serialdenokunanbt;
+
+  while (mySerial.available() &gt; 0) {
+    serialdenokunanbt = mySerial.read();
+    gelenbt += serialdenokunanbt;
+
+    if (serialdenokunanbt == 't') { //on butonuna basıldığında server adresinde blu=on var ise
+      digitalWrite(LED, HIGH);                 //ledi yakar
+      oncekizaman = millis();
+      sayac_acik = 1;
+    }
+
+    if (serialdenokunanbt == 'n') { //on butonuna basıldığında server adresinde blu=on var ise
+      digitalWrite(LED, HIGH);                 //ledi yakar
+       //-----------------------------------------------
+      digitalWrite(in2, HIGH); //kilidi açar
+      digitalWrite(in1, LOW);
+      delay(2500);
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(300);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //----------------------------------------
+
+    }
+
+    if (serialdenokunanbt == 'f') { // off butonuna basıldığında server adresinde blu=off var ise
+      digitalWrite(LED, LOW);                   //ledi söndürür
+      //-----------------------------------------------
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(2500);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //-----------------------------------------------
+
+      sayac_acik = 0;
+    }
+  }
+
+}</code></pre>
+<p><em>Not: Koddaki Wi-Fi şifresi yayınlanan kopyada <code><strong></em></strong><em>*</em></code> ile değiştirildi. Komutlar karakter karakter işlendiği için Bluetooth'tan gelen mesajda geçen herhangi bir <code>n</code> kilidi açar. Uygulamanın gönderdiği <code>1234 blu=on 5678</code> bunu kullanıyor (<code>on</code> içindeki <code>n</code>), <code>1234 blu=off 5678</code> ise <code>f</code> sayesinde kilitliyor. Mesajın başındaki ve sonundaki <code>1234</code> / <code>5678</code> firmware'de doğrulanmıyor. Wi-Fi tarafında da istek kimlik doğrulamasız düz HTTP. Raporun güvenlik bölümü Bluetooth'un yalnız eşleşmiş cihazlar arasında veri aktarmasına ve frekans atlamasına dayanıyor; ağ tarafındaki hesap ve parola ile şifreli komut, KTİD'de hedeflenen ama arşivdeki kodda yer almayan adımlar olarak kaldı.*</p>
+<h2 id="android-uygulamasi">Android uygulaması</h2>
+<p>Projede iki ayrı Android uygulaması var.</p>
+<h3 id="birinci-donem-java-ile-bluetooth-uygulamasi">Birinci dönem: Java ile Bluetooth uygulaması</h3>
+<p>İlk sürüm Android Studio'da Java ile yazıldı (proje adı <code>deneme39</code>, Ocak 2017). Uygulama açılışta telefonun Bluetooth'unu kontrol eder (kapalıysa açılmasını ister), eşleşmiş cihazları listeler ve çevredeki cihazları tarar. Listede "(Eslesti)" etiketiyle görünen cihaza dokunulduğunda <code>ConnectThread</code> ile <strong>RFCOMM soketi</strong> açılır (seri port profili UUID'si <code>00001101-0000-1000-8000-00805F9B34FB</code>), bağlantı kurulunca <code>ConnectedThread</code> gelen veriyi okuyup ekranda gösterir. "Lambayı Aç" ve "Lambayı Kapat" düğmeleri modüle sırasıyla <code>1</code> ve <code>2</code> karakterlerini gönderir. Bu dönemde kilidin yerinde bir LED vardı.</p>
+<pre class="kaynak" data-dosya="ConnectThread.java - Not Defteri"><code>private class ConnectThread extends Thread {
+    private final BluetoothSocket mmSocket;
+    private final BluetoothDevice mmDevice;
+
+    public ConnectThread(BluetoothDevice device) {
+        BluetoothSocket tmp = null;
+        mmDevice = device;
+        try {
+            tmp = device.createRfcommSocketToServiceRecord(mmuuid);
+        } catch (IOException e) {
+        }
+        mmSocket = tmp;
+    }
+
+    public void run() {
+        blt.cancelDiscovery();
+        try {
+            mmSocket.connect();
+        } catch (IOException connectException) {
+            try {
+                mmSocket.close();
+            } catch (IOException closeException) { }
+            return;
+        }
+        mHandler.obtainMessage(baglanti, mmSocket).sendToTarget();
+    }
+}
+
+public void ledon() throws IOException {
+    outstream.write("1".getBytes());
+}
+
+public void ledoff() throws IOException {
+    outstream.write("2".getBytes());
+}</code></pre>
+<p><em>Not: <code>1</code> / <code>2</code> komutları birinci dönemin LED devresine aittir; arşivdeki firmware sürümleri <code>t</code>, <code>n</code>, <code>f</code> karakterlerini işliyor. Birinci dönemin Arduino kodu arşivde bulunmuyor. Raporun eklerinde bu uygulamanın kodu, arayüz düzeni (<code>activity_main.xml</code>) ve manifest başlığı altında da yine arayüz düzeni yer alıyor.</em></p>
+<h3 id="i-kinci-donem-app-inventor-ile-smartlock">İkinci dönem: App Inventor ile SmartLock</h3>
+<p>İkinci dönemde uygulama <strong>MIT App Inventor</strong>'da yeniden yapıldı (uygulama adı <strong>SMARTLOCK</strong>). Arşivde iki sürümü var (17 ve 18 Nisan 2017):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Sürüm</th><th scope="col">Özellikler</th></tr></thead><tbody><tr><th scope="row">v1</th><td>"BT Modül Seç" listesinden modül elle seçilip bağlanılır; Network AÇ/KAPAT düğmeleri</td></tr><tr><th scope="row">v2</th><td>Seçilen modülün adresi telefona kaydedilir (<code>TinyDB</code>); uygulama her açılışta kayıtlı modüle <strong>otomatik bağlanmayı</strong> dener. Bluetooth ve Network için ayrı AÇ/KAPAT düğmeleri, bağlantı durum düğmesi, kilit açık/kilitli görselleri</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="uygulama-ekrani.png" width="450" height="713" loading="lazy" decoding="async" alt="SmartLock uygulamasının ekranı: Akıllı Kilit başlığı, BT Modül Seç düğmesi, Network başlığı altında AÇ ve KAPAT düğmeleri, Başkent Üniversitesi logosu ve EEM492 dersi telefon uygulaması yazısı"><figcaption>Uygulamanın ekranı (Mayıs 2017)</figcaption></figure>
+<p>v2'nin blok mantığı (App Inventor bloklarından metne aktarıldı):</p>
+<ol><li><strong>Açılış:</strong> Durum düğmesi turuncu ve "Bağlantı yok" yazar, kilitli görseli gösterilir. Telefonda kayıtlı bir modül adresi varsa ekranda "Kaydedilen BT adresi" olarak yazılır, düğme "Bağlanıyor" olur ve 1 saniyelik <strong>bağlanma zamanlayıcısı</strong> (Clock1) başlar.</li><li><strong>Bağlanma zamanlayıcısı:</strong> Bluetooth açıksa ve bağlantı yoksa kayıtlı adrese bağlanmayı dener. Başarılı olursa düğme yeşil "Bağlandı" olur, modüle <strong><code>1234 zxtr 5678</code></strong> gönderilir (içindeki <code>t</code> firmware'de LED'i yakıp 30 saniyelik sayacı başlatır), kilit açık görseli gösterilir ve <strong>bağlantı izleme zamanlayıcısı</strong> (Clock2) başlar. Başaramazsa düğme kırmızı "Bağlanamadı" olur ve bir sonraki saniye yeniden dener. Bluetooth kapalıysa "BT kapalı! Otomatik bağlantı durduruldu" uyarısı verir.</li><li><strong>Bağlantı izleme zamanlayıcısı:</strong> Her saniye modülden veri gelip gelmediğine bakar. Firmware her 500 ms'de bir veri yolladığı için veri gelmiyorsa telefon menzil dışına çıkmıştır: bağlantı kapatılır ve bağlanma zamanlayıcısı yeniden başlar. Kullanıcı kapıya yaklaştığında uygulama böylece kendiliğinden yeniden bağlanır.</li><li><strong>Durum düğmesi:</strong> Bağlantı yoksa eşleşmiş cihazları listeler ("Eşleşmiş cihaz yok, eşleme için cihaz ayarlarını kullanın" uyarısıyla), seçilen modüle bağlanıp adresini kaydeder. Bağlantı varsa "BT bağlantısını sonlandır" sorusunu sorar.</li><li><strong>Bluetooth AÇ / KAPAT:</strong> modüle <code>1234 blu=on 5678</code> / <code>1234 blu=off 5678</code> gönderir ve kilit görselini değiştirir.</li><li><strong>Network AÇ / KAPAT:</strong> <code>http://192.168.1.20/pin=on</code> / <code>pin=off</code> adresine HTTP PUT isteği gönderir; firmware istekte <code>pin=on</code> / <code>pin=off</code> ifadesini arar.</li></ol>
+<h2 id="akis-diyagramlari">Akış diyagramları</h2>
+<p>Tasarım aşamasında (Nisan 2017) sistemin dört akışı çizildi.</p>
+<p><strong>Bluetooth ile kilit kontrolü.</strong> Uygulama kayıtlı cihazları arar; kayıtlı cihaz bulunduğunda kilidi açar, 10 saniye sonra kilitler ve beklemeye geçer. Bluetooth bağlantısı devam ettiği sürece kullanıcının kilidi açmak isteyip istemediğine bakılır; bağlantı koptuğunda akış biter.</p>
+<figure class="yazi-gorsel"><img src="akis-bluetooth-kilit.png" width="696" height="652" loading="lazy" decoding="async" alt="Bluetooth kilit kontrol akış diyagramı: Başla, akıllı kilide kayıtlı cihazları ara, kayıtlı cihaz bulundu mu, kilidi aç, 10 saniye süre geçti mi, kilitle; beklemeye geç, BT bağlantısı devam ediyor mu, kilidi açmak istiyorum, kilitle, son"><figcaption>Bluetooth ile kilit kontrol akışı</figcaption></figure>
+<p><strong>Wi-Fi ile kilit kontrolü.</strong> Uygulama sunucuya bağlanır; akıllı kilit sunucuya bağlı ve beklemede iken kullanıcı "1 – Kilidi aç" ya da "2 – Kilitle" seçer. İstek sunucuya kaydedilip akıllı kilide gönderilir ve kapı kilidi açılır ya da kilitlenir.</p>
+<figure class="yazi-gorsel"><img src="akis-wifi-kilit.png" width="1200" height="779" loading="lazy" decoding="async" alt="Wi-Fi kilit kontrol akış diyagramı: akıllı kilit uygulamasını aç, sunucuya bağlan, akıllı kilit sunucuya bağlı beklemede, 1 kilidi aç 2 kilitle; kilit açma isteği gönder, sunucuya kaydet, akıllı kilide gönder, kapı kilidini aç; kilitleme isteği için aynı adımlar ve kapıyı kilitle"><figcaption>Wi-Fi ile kilit kontrol akışı</figcaption></figure>
+<p><strong>Bluetooth ve Wi-Fi ile ilk bağlantı.</strong> Bluetooth'ta akıllı kilit ve telefon açılır, uygulama Bluetooth cihazlarını arar, kullanıcı şifreyi girer; şifre doğruysa kilit telefona kaydedilir. Wi-Fi'da akıllı kilit, modem ve telefon açılır; kullanıcı adı ve şifre girilir, uygulama Wi-Fi ağlarını arar, ev ağı ve ağ şifresiyle akıllı kilit ağa kaydedilir.</p>
+<figure class="yazi-gorsel"><img src="akis-baglanti.png" width="1200" height="894" loading="lazy" decoding="async" alt="Bluetooth ve Wi-Fi bağlantı akış diyagramları: solda akıllı kilit ve telefonu aç, Bluetooth uygulamasını aç, Bluetooth cihazlarını ara, BT cihazı bulundu mu, verilen şifreyi gir, şifre doğru mu, akıllı kilidi telefona kaydet; sağda akıllı kilit, modem ve telefonu aç, kullanıcı adı ve şifre gir, WiFi ağlarını ara, ev ağı bulundu mu, ağ şifresini gir, ağı akıllı kilide kaydet"><figcaption>Bluetooth (solda) ve Wi-Fi (sağda) ile ilk bağlantı akışları</figcaption></figure>
+<p><strong>Şifre değiştirme.</strong> Mevcut şifre, yeni şifre ve yeni şifrenin tekrarı girilir; mevcut şifre doğru ve iki yeni şifre aynıysa şifre değiştirilir.</p>
+<figure class="yazi-gorsel"><img src="akis-sifre-degistirme.png" width="672" height="890" loading="lazy" decoding="async" alt="Şifre değiştirme akış diyagramı: akıllı telefon uygulamasını aç, şifre işlemlerini aç, mevcut şifreyi gir, yeni şifreyi gir, yeni şifreyi tekrar gir, mevcut şifre doğru mu, yeni şifreler aynı mı, şifreyi değiştir, bitir"><figcaption>Şifre değiştirme akışı</figcaption></figure>
+<p>Kullanım senaryoları diyagramında sistem dört işe ayrılıyor: <strong>ilk kurulum</strong>, <strong>şifre değiştirme</strong>, <strong>kayıtlı kullanıcı</strong> ve <strong>beklenmedik misafir</strong>.</p>
+<figure class="yazi-gorsel"><img src="kullanim-senaryolari.png" width="1000" height="454" loading="lazy" decoding="async" alt="Kullanım senaryoları diyagramı: Akıllı Kilit Sistemi kutusundan ilk kurulum, şifre değiştirme, kayıtlı kullanıcı ve beklenmedik misafir kutularına oklar"><figcaption>Kullanım senaryoları</figcaption></figure>
+<h2 id="birinci-donemin-sonu">Birinci dönemin sonu</h2>
+<p>EEM491 final sunumunda (Ocak 2017) birinci dönemin durumu şöyle özetleniyor: kartta <strong>Arduino Due</strong>, haberleşmede <strong>HC-06 Bluetooth</strong>, şifre için <strong>numerik tuş takımı ve LCD</strong> kullanıldı; arayüzün çalıştığını denetlemek için kilit yerine bir <strong>LED</strong> konuldu. Mimari çizimde kapı üzerinde acil durum için tuş takımı ve manuel giriş, içeride Due ve HC-06'dan oluşan "kilidin iç yapısı" yer alıyor; ev sakini ve misafir telefonla bağlanıyor. Sunumdaki "Bu Yarıyıl İçin Hazırlanan Arayüz ve Devre" slaytında Java uygulamasının ekranı ve breadboard üzerinde kurulan Arduino–HC-06–LED devresinin fotoğrafı var.</p>
+<p>Gelecek yarıyıl için konan hedefler:</p>
+<ol><li>Sistemde LED yerine kilit sistemi kullanılacak.</li><li>Birinci dönemdeki yakın mesafe kontrolüne ek olarak sisteme uzak mesafeden erişim sağlanacak.</li><li>Uzak mesafeden iletişimle şifre değiştirilebilecek.</li><li>Uzak mesafe iletişimi Wi-Fi kitiyle yapılacak.</li></ol>
+<p>Raporun "Sonuçlar" bölümünde birinci dönemin sonucu şöyle yazıyor: <em>"Akıllı kilit sisteminin ilk iki bölümünü tamamladık. Cihaza yaklaşan akıllı cihaz ve sistem uygulamasına sahip kişi, Bluetooth'un kapsama alanına girdiği zaman LED'i açıp kapatabilmektedir ve LCD ile tuş takımı ile şifre oluşturulabilmektedir."</em> İkinci dönemde bunun üzerine ESP8266 ile Wi-Fi kontrolü, motor sürücüyle gerçek kilit hareketi ve otomatik bağlanan App Inventor uygulaması eklendi.</p>
+<h2 id="proje-yonetimi">Proje yönetimi</h2>
+<h3 id="proje-uygulama-takvimi">Proje uygulama takvimi</h3>
+<p>Birinci dönemin takvimi (raporun Çizelge 2'si):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">İş</th><th scope="col">Hafta</th></tr></thead><tbody><tr><th scope="row">Proje konularının belirlenmesi</th><td>1–4</td></tr><tr><th scope="row">Danışmanla görüşülerek iş tanımının belirlenmesi</th><td>5</td></tr><tr><th scope="row">Akıllı evler için yakın alan iletişiminin araştırılması</th><td>5–6</td></tr><tr><th scope="row">Bluetooth ile veri aktarımının araştırılması</th><td>7–8</td></tr><tr><th scope="row">Mikrodenetleyicilerin araştırılması</th><td>8–9</td></tr><tr><th scope="row">Ara sınav sunum haftası</th><td>10</td></tr><tr><th scope="row">Güvenli kapı kilit sisteminin araştırılması</th><td>11–12</td></tr><tr><th scope="row">Sistemin yazılımı için araştırmaların yapılması</th><td>12–14</td></tr><tr><th scope="row">Arduino ve Bluetooth deneylerinin yapılması</th><td>14–15</td></tr><tr><th scope="row">Yarıyıl sonu sunum haftası</th><td>16</td></tr></tbody></table></div>
+<p>İkinci dönemin takvimi (Nisan 2017):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">İş</th><th scope="col">Hafta</th></tr></thead><tbody><tr><th scope="row">Bluetooth bağlantı sorunlarının giderilmesi</th><td>1–3</td></tr><tr><th scope="row">Wi-Fi modülünün yazılması</th><td>3–5</td></tr><tr><th scope="row">Akıllı telefon uygulamasının yazılması</th><td>4–7</td></tr><tr><th scope="row">Vize haftası</th><td>8</td></tr><tr><th scope="row">Sunum haftası</th><td>9</td></tr><tr><th scope="row">Mekanik düzeneğin tasarlanması</th><td>10–11</td></tr><tr><th scope="row">Sunucu yazılımının hazırlanması</th><td>11–12</td></tr><tr><th scope="row">Telefon uygulamasının geliştirilmesi</th><td>12–14</td></tr><tr><th scope="row">Sistemin birbirine entegre edilmesi</th><td>14</td></tr><tr><th scope="row">Final haftası</th><td>15</td></tr><tr><th scope="row">Sunum haftası</th><td>16</td></tr></tbody></table></div>
+<h3 id="maliyet-analizi">Maliyet analizi</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Malzeme / ürün</th><th scope="col">Tahmini maliyet</th><th scope="col">Gerçek maliyet</th></tr></thead><tbody><tr><th scope="row">Arduino Uno</th><td>30 TL</td><td>35 TL</td></tr><tr><th scope="row">Bluetooth kit</th><td>30 TL</td><td>27 TL</td></tr><tr><th scope="row">Wi-Fi modülü</th><td>40 TL</td><td>15 TL</td></tr><tr><th scope="row">Motor sürücü</th><td>50 TL</td><td>20 TL</td></tr><tr><th scope="row">Batarya</th><td>20 TL</td><td>10 TL</td></tr><tr><th scope="row">Kilit mekanizması</th><td>150 TL</td><td>200 TL</td></tr><tr><th scope="row"><strong>Toplam</strong></th><td><strong>320 TL</strong></td><td><strong>307 TL</strong></td></tr></tbody></table></div>
+<p><em>Not: Toplam satırı rapordaki çizelgeye eklendi; çizelgede yalnız kalemler var.</em></p>
+<h3 id="risk-analizi">Risk analizi</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Risk</th><th scope="col">Olasılık</th><th scope="col">Etkisi</th><th scope="col">Önlem</th><th scope="col">Gerçekleşme durumu</th></tr></thead><tbody><tr><th scope="row">Yurt dışından temin edilen donanımların ulaşımında aksaklık</th><td>Yüksek</td><td>Yüksek</td><td>Donanımlar daha maliyetli olarak Türkiye'den temin edildi</td><td>Gerçekleşme ihtimali çok düşük</td></tr><tr><th scope="row">Donanımların arızalı çıkması</th><td>Düşük</td><td>Yüksek</td><td>Malzemelerden ikişer tane satın alındı</td><td>Gerçekleşme ihtimali yüksek</td></tr></tbody></table></div>
+<h3 id="standartlar-kisitlar-ve-disiplinler">Standartlar, kısıtlar ve disiplinler</h3>
+<ul><li><strong>Standartlar:</strong> IEEE 802.15 (Bluetooth), Bluetooth 4.0, SWAP, IEEE 802.11 (Wi-Fi).</li><li><strong>Kullanılan ders bilgileri:</strong> Mikroişlemciler, Devre Teorisi I–II, Bilgisayar Ağları.</li><li><strong>Güvenlik:</strong> Bluetooth'ta veri aktarımı yalnız eşleşmiş cihazlar arasında yapılır; frekans bandındaki 79 kanalda saniyede 1600 kez frekans atlanarak iletişim kurulur.</li><li><strong>Disiplinler arası çalışma:</strong> Bilgisayar Mühendisliği, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği.</li></ul>
+<h2 id="kaynaklar">Kaynaklar</h2>
+<p>Raporun kaynakçası:</p>
+<ol><li>802.1X-2004 — Port Based Network Access Control.</li><li>NFC Forum (erişim 22.10.2016).</li><li>"Bluetooth Low Energy", Bluetooth.com (erişim 23.11.2016).</li><li>"AT Komutlarının Kullanılması", Maker.robotistan.com (erişim 01.11.2016).</li><li>HC-06 Bluetooth Kit Datasheet.</li><li>K. Y. Lee, J. W. Choi, "Remote-Controlled Home Automation System via Bluetooth Home Network", vol. 3, 2003, s. 2824–2829.</li><li>T. Tamura, A. Kawarada, M. Nambu, A. Tsukada, K. Sasaki, K. Yamakoshi, "E-Healthcare at an Experimental Welfare Techno House in Japan", <em>The Open Medical Informatics Journal</em>, vol. 1, 2007, s. 1–7.</li><li>D. J. Cook, M. Youngblood, E. O. Heierman, "MavHome: An Agent Based Smart Home", Arlington, VA: National Science Foundation.</li><li>H. Kanma, N. Wakabayashi, R. Kanazawa, H. Ito, "Home Appliance Control System over Bluetooth with a Cellular Phone", <em>IEEE Transactions on Consumer Electronics</em>, vol. 49, 2003, s. 1049–1053.</li></ol>
+<p>Proje klasöründe başvuru için tutulan belgeler (indirme paketine konmadı): ITead Studio <em>HC-05 Bluetooth to Serial Port Module</em> veri sayfası ve Karadeniz Teknik Üniversitesi Bilgisayar Mühendisliği Bölümü'nün <em>Arduino-RFID ile Kartlı Kapı Geçiş Sistemi</em> tasarım projesi raporu (2016).</p>
+<h2 id="i-ndirme-paketinin-icerigi">İndirme paketinin içeriği</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Klasör</th><th scope="col">İçerik</th></tr></thead><tbody><tr><th scope="row"><code>rapor/</code></th><td>Bitirme raporu, 34 sayfa (öğrenci numaraları, proje arkadaşının adı ve özgeçmiş bilgileri kapatıldı)</td></tr><tr><th scope="row"><code>poster/</code></th><td>Proje posteri</td></tr><tr><th scope="row"><code>firmware/</code></th><td>Üç Arduino sürümü: Due, Uno + ESP8266 (LED), Uno + ESP8266 + motor</td></tr><tr><th scope="row"><code>android/app-inventor/</code></th><td>SmartLock v1 ve v2 (<code>.aia</code>, App Inventor'da <em>Import project</em> ile açılır)</td></tr><tr><th scope="row"><code>android/android-studio/</code></th><td>Birinci dönemin Java Bluetooth uygulamasının kaynakları</td></tr><tr><th scope="row"><code>diyagramlar/</code></th><td>Blok diyagram, iki bağlantı şeması, motor akım kesme devresi, akış diyagramları, kullanım senaryoları</td></tr></tbody></table></div>
+<p><em>Not: Projenin tanıtım videoları ve kurulabilir uygulama dosyaları (APK) pakete konmadı; final sunumundaki devre fotoğrafı da yayımlanmadı.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="akilli-kilit-sistemi.zip" download>akilli-kilit-sistemi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 5.9 MB · 26.05.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="akilli-kilit-sistemi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (5.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181458"></script>
+<script src="/assets/lang/en.js?v=202610181458"></script>
+<script src="/assets/lang/de.js?v=202610181458"></script>
+<script src="/assets/js/site.js?v=202610181458"></script>
+</body>
+</html>
