@@ -571,9 +571,17 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
   .logo-yazi { font-size: 32px; }
   .beta { width: 42px; height: 42px; right: -40px; font-size: 10px; }
   .dil-secimi { position: static; margin-top: 12px; }
-  .sekmeler { padding: 8px 8px 0; }
-  .sekmeler ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-  .sekmeler li { flex: none; }
+  /* Telefonda sekmeler yana kaymaz: 3 sütunlu parlak düğme ızgarası, hepsi aynı anda görünür */
+  .sekmeler { padding: 8px; }
+  .sekmeler ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .sekmeler a {
+    display: flex; align-items: center; justify-content: center; height: 100%; box-sizing: border-box;
+    min-height: 38px; margin-bottom: 0; padding: 5px 4px;
+    text-align: center; line-height: 1.2; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word;
+    border-bottom: 1px solid var(--cerceve); border-radius: 5px;
+    box-shadow: inset 0 1px 0 #fff;
+  }
+  .sekmeler a.aktif { border-color: #2f4b88; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
   .serit { margin: 8px 8px 0; }
   .kolonlar { grid-template-columns: minmax(0, 1fr); padding: 8px; gap: 8px; }
   .sol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
