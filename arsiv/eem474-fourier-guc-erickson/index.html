@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM474 Güç Elektroniği: Fourier serilerinde güç ve RMS (R. W. Erickson) — hasancan.net</title>
+<meta name="description" content="ECEN 2260 ek ders notlarından harmoniklerle güç aktarımı, RMS, bozulma ve yer değiştirme güç faktörleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem474-fourier-guc-erickson/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM474 Güç Elektroniği: Fourier serilerinde güç ve RMS (R. W. Erickson)">
+<meta property="og:description" content="ECEN 2260 ek ders notlarından harmoniklerle güç aktarımı, RMS, bozulma ve yer değiştirme güç faktörleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem474-fourier-guc-erickson/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM474 Güç Elektroniği: Fourier serilerinde güç ve RMS (R. W. Erickson)", "description": "ECEN 2260 ek ders notlarından harmoniklerle güç aktarımı, RMS, bozulma ve yer değiştirme güç faktörleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem474-fourier-guc-erickson/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM474 – Güç Elektroniği", "associatedMedia": {"@type": "MediaObject", "name": "fourier-guc-rms-erickson.pdf", "contentUrl": "https://hasancan.net/arsiv/eem474-fourier-guc-erickson/fourier-guc-rms-erickson.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM474 Güç Elektroniği: Fourier serilerinde güç ve RMS (R. W. Erickson)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem474">EEM474</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM474 – Güç Elektroniği</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#average-power-and-energy">Average power and energy</a></li><li><a href="#rms-values">RMS values</a></li><li><a href="#power-factor">Power factor</a></li><li><a href="#total-harmonic-distortion">Total harmonic distortion</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM474</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM474 Güç Elektroniği: Fourier serilerinde güç ve RMS (R. W. Erickson)</h1>
+            <p class="kucuk">EEM474 – Güç Elektroniği · 17.03.2015 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>R. W. Erickson'ın “Power and RMS Values of Fourier Series” başlıklı ECEN 2260 ek ders notu, EEM474 arşivindeki kopyadan aktarılmıştır. Tarihsiz dokuz sayfalık belgenin PDF'i yazının sonundan indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="average-power-and-energy">Average power and energy</h2>
+<p>For periodic voltage and current, p(t) = v(t)i(t), Wcycle = ∫₀ᵀ p(t) dt and Pav = Wcycle/T. Instantaneous power can be negative during part of the cycle even when average power is positive.</p>
+<p>Write the Fourier series with peak amplitudes Vn and In:</p>
+<p>v(t) = V₀ + Σ Vn cos(nωt − φn)</p>
+<p>i(t) = I₀ + Σ In cos(nωt − θn)</p>
+<p>Orthogonality makes products of different harmonics integrate to zero over a complete period. Consequently Pav = V₀I₀ + ½Σ VnIn cos(φn − θn). Only matching frequency components contribute to average power. A fundamental voltage and a pure third-harmonic current therefore transfer zero net energy; matching third harmonics can transfer power.</p>
+<h2 id="rms-values">RMS values</h2>
+<p>Vrms² = V₀² + ½Σ Vn², with an equivalent expression for current. The RMS value can be found either by integrating the squared waveform or by adding squared harmonic RMS values. Individual harmonic amplitudes are not added directly.</p>
+<p>For a resistor, Pav = Irms²R. This relation explains the additional heating caused by harmonic current even when that current does not contribute to useful power supplied by a sinusoidal voltage source.</p>
+<h2 id="power-factor">Power factor</h2>
+<p>PF = Pav/(Vrms Irms). When the voltage contains only a sinusoidal fundamental, PF = (I₁,rms/Irms) cos(φ₁ − θ₁). The first factor describes waveform distortion; the second describes displacement between the fundamental components.</p>
+<p>A current waveform can have zero fundamental phase displacement and still have power factor below one. Conversely, a phase correction alone does not remove distortion current. The notes use waveforms and Fourier components to distinguish these cases.</p>
+<h2 id="total-harmonic-distortion">Total harmonic distortion</h2>
+<p>THD = √(Irms² − I₁,rms²)/I₁,rms for a current with no DC component. In that case I₁,rms/Irms = 1/√(1 + THD²). The document relates harmonic content, RMS loading, and power factor without assuming that every waveform is sinusoidal.</p>
+<p><em>Not: Fourier katsayıları bu yazıda tepe değerleridir; RMS katsayılarla yazılan eşitliklerde ½ çarpanı ayrıca kullanılmaz.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="fourier-guc-rms-erickson.pdf" download>fourier-guc-rms-erickson.pdf</a></p>
+              <p class="kucuk">PDF · 157 KB · 9 <span data-i18n="arch.pagesLower"></span> · 17.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="fourier-guc-rms-erickson.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (157 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

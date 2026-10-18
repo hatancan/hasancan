@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: BJT ve FET Laboratuvarı El Yazısı Ön Çalışmaları — hasancan.net</title>
+<meta name="description" content="BJT çalışma bölgeleri, kutuplama, emetör izleyici, MOSFET hesapları ve JFET ön çalışma sorularının kişisel bilgiler çıkarılarak metne aktarımı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-bjt-fet-el-yazisi-oncalismalar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: BJT ve FET Laboratuvarı El Yazısı Ön Çalışmaları">
+<meta property="og:description" content="BJT çalışma bölgeleri, kutuplama, emetör izleyici, MOSFET hesapları ve JFET ön çalışma sorularının kişisel bilgiler çıkarılarak metne aktarımı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-bjt-fet-el-yazisi-oncalismalar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: BJT ve FET Laboratuvarı El Yazısı Ön Çalışmaları", "description": "BJT çalışma bölgeleri, kutuplama, emetör izleyici, MOSFET hesapları ve JFET ön çalışma sorularının kişisel bilgiler çıkarılarak metne aktarımı.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-lab-bjt-fet-el-yazisi-oncalismalar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: BJT ve FET Laboratuvarı El Yazısı Ön Çalışmaları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.05.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#bjt-baz-akimi-ve-calisma-bolgeleri">BJT: baz akımı ve çalışma bölgeleri</a></li><li><a href="#dort-bjt-kutuplama-devresi">Dört BJT kutuplama devresi</a></li><li><a href="#ortak-kollektor-emetor-izleyici">Ortak kollektör: emetör izleyici</a></li><li><a href="#mosfet-ohmik-bolge-ve-doyum">MOSFET: ohmik bölge ve doyum</a></li><li><a href="#fet-on-calisma-kutuplama-ve-cikis-direnci">FET ön çalışma: kutuplama ve çıkış direnci</a></li><li><a href="#cozulmemis-baskent-laboratuvar-sorulari">Çözülmemiş Başkent laboratuvar soruları</a></li><li><a href="#2n5460-p-kanal-jfet-inceleme-notu">2N5460 P-kanal JFET inceleme notu</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: BJT ve FET Laboratuvarı El Yazısı Ön Çalışmaları</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 13.05.2013 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM214 laboratuvarı için farklı öğrencilerin hazırladığı, bir kısmı 2013 tarihli ön çalışmalar fotoğraflanmış ve taranmış sayfalardan metne aktarıldı. Kişisel bilgiler çıkarıldı; fotoğraf ve indirme dosyası paylaşılmıyor. Aynı hesabın farklı kopyaları birlikte ele alındı; kaynakta görülen hatalar ilgili bölümün altında belirtiliyor.</p>
+<h2 id="bjt-baz-akimi-ve-calisma-bolgeleri">BJT: baz akımı ve çalışma bölgeleri</h2>
+<p>İlk ön çalışmada R_B = 100 kΩ, V_BE = 0,6 V ve β = 260 alınır. Kullanılan bağıntılar:</p>
+<ul><li>I_B = (V_BB − V_BE)/R_B.</li><li>I_C = βI_B.</li><li>V_CE = V_CC − I_C R_C.</li></ul>
+<p>V_BB = 0,6 V için I_B = 0; 1 V için 4 µA yazılmıştır. Üçüncü durumun başlığında 10 V yazmasına rağmen hesapta 12 V kullanılmış; farklı kopyalarda 114 µA ve 144 µA sonuçları yer almıştır.</p>
+<p><em>Not: 10 V için sonuç 94 µA, 12 V için 114 µA'dir. 144 µA sonucu verilen sayılarla uyuşmaz. I_C = βI_B bağıntısı ileri aktif bölge içindir.</em></p>
+<p>R_C = 1 kΩ için kaynakta kullanılan I_B = 0, 20, 40 ve 60 µA değerleri sırasıyla I_C = 0, 5,2, 10,4 ve 15,6 mA verir. İleri aktif bölge bağıntısının doğrudan uygulanmasıyla yazılan tablo:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_CC</th><th scope="col">I_B</th><th scope="col">I_C</th><th scope="col">V_CE</th></tr></thead><tbody><tr><th scope="row">15 V</th><td>0</td><td>0</td><td>15 V</td></tr><tr><th scope="row">15 V</th><td>20 µA</td><td>5,2 mA</td><td>9,8 V</td></tr><tr><th scope="row">15 V</th><td>40 µA</td><td>10,4 mA</td><td>4,6 V</td></tr><tr><th scope="row">15 V</th><td>60 µA</td><td>15,6 mA</td><td>−0,6 V</td></tr><tr><th scope="row">10 V</th><td>0</td><td>0</td><td>10 V</td></tr><tr><th scope="row">10 V</th><td>20 µA</td><td>5,2 mA</td><td>4,8 V</td></tr><tr><th scope="row">10 V</th><td>40 µA</td><td>10,4 mA</td><td>−0,4 V</td></tr><tr><th scope="row">5 V</th><td>0</td><td>0</td><td>5 V</td></tr><tr><th scope="row">5 V</th><td>20 µA</td><td>5,2 mA</td><td>−0,2 V</td></tr><tr><th scope="row">1 V</th><td>0</td><td>0</td><td>1 V</td></tr></tbody></table></div>
+<p>1 V ve 20 µA satırının gerilim sonucu kaynakta tamamlanmamış. Çizilen yük doğruları V_CE eksenini 1, 5, 10 ve 15 V'ta keser.</p>
+<p><em>Not: Negatif V_CE sonuçları, devrenin bu akımla ileri aktif bölgede çalışamayacağını gösterir; gerçek çözüm doyum modeliyle yeniden bulunmalıdır. Bir kopyanın ilk satırındaki belirsiz gerilim yazısı diğer kopyadaki 15 V ile karşılaştırılmıştır.</em></p>
+<p>R_C = 2,2 kΩ ve I_B = 20 µA için bir kopyada 15 V beslemede 2,56 V, 10 V beslemede 1,44 V, 5 V beslemede −6,44 V, 1 V beslemede −10,44 V yazılır. Diğer kopyada ilk sonuç 3,532 V görünmektedir.</p>
+<p><em>Not: I_C = 5,2 mA kabulüyle ilk iki cebirsel sonuç 3,56 V ve −1,44 V'tur. 3,532 V, akımın daha fazla basamakla hesaplanmasına bağlı olabilir; kaynak bunu açıklamıyor. Negatif sonuçlar yine doyum kontrolü gerektirir.</em></p>
+<p>V_CE,sat = 0,2 V alınan doyum hesabında:</p>
+<ul><li>V_CC = 15 V, R_C = 1 kΩ: I_C = 14,8 mA. Bir kopyada I_B = 0,56 mA, diğerinde yaklaşık 0,057 mA yazılmıştır.</li><li>V_CC = 10 V, R_C = 2,2 kΩ: diğer kopyada I_C ≈ 4,45 mA, I_B ≈ 0,017 mA bulunur. İlk kopyada başlık 10 V olduğu hâlde denklemde 15 V kullanılmış, 6,72 mA ve 0,025 mA yazılmıştır.</li></ul>
+<p><em>Not: 14,8 mA/260 ≈ 56,9 µA'dir. 10 V ve 2,2 kΩ için sınır akımı 4,455 mA, β = 260 ile hesaplanan baz akımı 17,13 µA'dir; doyumda zorlanmış β ayrıca değerlendirilir.</em></p>
+<p>Sayfalarda ileri aktif, kesim ve doyum bölgeleri sıralanır. İleri aktif için I_B &gt; 0 ve V_CE &gt; 0 ifadeleri, doyum için küçük V_CE ve pozitif I_B gösterilmiştir.</p>
+<p><em>Not: İleri aktif bölgeyi yalnız V_CE &gt; 0 koşulu tanımlamaz; baz-emetör jonksiyonu ileri, baz-kollektör jonksiyonu ters kutuplu olmalıdır.</em></p>
+<h2 id="dort-bjt-kutuplama-devresi">Dört BJT kutuplama devresi</h2>
+<p>İki sayfalık başka bir çalışmada V_CC = 30 V, β = 100, R_C = 4,7 kΩ, R_B = 470 kΩ, gerektiğinde R_E = 1,2 kΩ kullanılmıştır.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Devre</th><th scope="col">Kaynaktaki baz akımı</th><th scope="col">Kaynaktaki V_CE</th></tr></thead><tbody><tr><th scope="row">Sabit baz kutuplama</th><td>62,34 µA</td><td>0,7002 V</td></tr><tr><th scope="row">Emetör dirençli kutuplama</th><td>49,56 µA</td><td>0,7068 V</td></tr><tr><th scope="row">Kollektörden baza geri besleme</th><td>31,17 µA</td><td>15,3501 V</td></tr><tr><th scope="row">Gerilim bölücülü kutuplama</th><td>−2,735 µA</td><td>31,61689 V</td></tr></tbody></table></div>
+<p>Kullanılan denklemler:</p>
+<ul><li>Sabit kutuplama: I_B = (V_CC − V_BE)/R_B.</li><li>Emetör dirençli: I_B = (V_CC − V_BE)/[R_B + (β + 1)R_E].</li><li>Geri beslemeli yaklaşım: I_B = (V_CC − V_BE)/(R_B + βR_C).</li><li>Bölücülü: V_Th = V_CC R_B2/(R_B1 + R_B2), R_Th = R_B1 || R_B2; I_B = (V_Th − V_BE)/[R_Th + (β + 1)R_E].</li></ul>
+<p>Bölücüde 470 kΩ ve 5,6 kΩ kullanılarak V_Th = 0,3532 V, R_Th = 5,59 kΩ yazılmıştır.</p>
+<p><em>Not: 470 kΩ || 5,6 kΩ ≈ 5,534 kΩ'dur. V_Th &lt; 0,7 V olduğundan negatif baz akımı ileri aktif modelin geçersizliğini gösterir; basitleştirilmiş modelde transistör kesimdedir. 31,61689 V fiziksel çalışma noktası değildir. Emetör dirençli devrede verilen I_B ile V_CE yaklaşık 0,70 V'tur; küçük farklar yuvarlama kaynaklıdır. Kollektörden beslenen baz akımı da R_C'den geçtiği için tam denklemde β yerine β + 1 bulunur.</em></p>
+<p>Kararlılık hesabı sayfasında şu sonuçlar yer alır:</p>
+<ul><li>Sabit kutuplama: S(I_CO) = 101 ve S(V_BE) = −101/(470 kΩ).</li><li>Emetör dirençli: S(V_BE) = −100/[470 kΩ + 101 × 1,2 kΩ] ≈ −0,1691 × 10⁻³ A/V; S(I_CO) ≈ 79,86.</li><li>Geri beslemeli: S(V_BE) = −100/[470 kΩ + 101 × 4,7 kΩ]; sonuç −0,1058 yazılmıştır. S(I_CO) ≈ 50,75.</li><li>Bölücülü son satırda direnç yerine 0,180 kullanılmış ve −0,82385 ile 0,011369 sonuçları yazılmıştır.</li></ul>
+<p><em>Not: Kararlılık katsayısının hangi akıma göre tanımlandığı önemlidir. I_C'nin V_BE'ye türevi için sabit kutuplamada pay −β'dir. Geri beslemeli satırın boyutu yaklaşık −0,1059 mA/V'tur. Son satırdaki 0,180 değeri önceki R_Th hesabıyla uyuşmaz; bu satır doğrulanmış bir tasarım sonucu değildir.</em></p>
+<h2 id="ortak-kollektor-emetor-izleyici">Ortak kollektör: emetör izleyici</h2>
+<p>26 Nisan 2013 tarihli ve başka bir kopyası bulunan çalışmada V_CC = 15 V, R_1 = 47 kΩ, R_2 = 10 kΩ, R_E = 1 kΩ ve β = 100 kullanılır. Kaynaktaki işlem sırası:</p>
+<ol><li>V_Th = [10/(10 + 47)] × 15 = 2,625 V.</li><li>R_Th = 10 kΩ || 47 kΩ = 8,25; birim Ω yazılmıştır.</li><li>I_B = (V_Th − V_BE)/[R_Th + (β + 1)R_E] denkleminde paya 15 − 0,7 konularak 0,131 mA bulunmuştur.</li><li>I_E = 13,231 mA ve r_e = 25 mV/I_E = 1,89 Ω hesaplanmıştır.</li><li>R_in,base ≈ β(r_e + R_E); sonuç 101,2 kΩ yazılmıştır. Diğer kopyada toplam R_in ≈ 7,63 kΩ görünür.</li><li>R_out = r_e || R_E ifadesinin sonucu 0,530 kΩ yazılmıştır.</li><li>A_V ≈ R_E/(r_e + R_E) = 0,998; gerilimde faz farkı yoktur.</li><li>A_I ≈ −β(R_1 || R_2)/[(R_1 || R_2) + R_in,base]. Çıkış akımı oku emetör akımına ters seçilmiştir.</li></ol>
+<p><em>Not: V_Th ≈ 2,632 V ve R_Th ≈ 8,246 kΩ'dur. Doğru V_Th ile I_B ≈ 17,68 µA, I_E ≈ 1,786 mA ve r_e ≈ 14 Ω bulunur. Kaynaktaki 1,89 Ω || 1 kΩ işlemi bile 0,530 kΩ değil yaklaşık 1,886 Ω verir. Gerçek çıkış direnci giriş kaynağının direncine de bağlıdır. Negatif akım kazancı burada seçilen ok yönünden kaynaklanır; emetör izleyicinin gerilim kazancı pozitiftir.</em></p>
+<h2 id="mosfet-ohmik-bolge-ve-doyum">MOSFET: ohmik bölge ve doyum</h2>
+<p>2 Mayıs 2013 tarihli çalışma ile iki taranmış sayfa aynı parametreleri kullanır: μ₀C_ox = 166,67 µA/V², W/L = 3, V_T = 1,45 V; taranmış çözümde V_A = 1/λ = 100 V da verilmiştir.</p>
+<ul><li>Ohmik bölge: I_D = μ₀C_ox(W/L)[(V_GS − V_T)V_DS − V_DS²/2].</li><li>Doyum sınırı: V_DS,sat = V_GS − V_T.</li><li>Doyum, kanal boyu modülasyonu ihmal: I_D = ½μ₀C_ox(W/L)(V_GS − V_T)².</li><li>Ohmik bölgedeki diferansiyel direnç: r = 1/[μ₀C_ox(W/L)(V_GS − V_T − V_DS)].</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_GS</th><th scope="col">V_DS</th><th scope="col">Taranmış çözümde bölge</th><th scope="col">I_D</th><th scope="col">Direnç</th></tr></thead><tbody><tr><th scope="row">3 V</th><td>0,5 V</td><td>Ohmik</td><td>325 µA</td><td>1904,7 Ω</td></tr><tr><th scope="row">5 V</th><td>0,5 V</td><td>Ohmik</td><td>825 µA</td><td>655,7 Ω</td></tr><tr><th scope="row">2 V</th><td>3 V</td><td>Doyum</td><td>75,63 µA</td><td>Ohmik bağıntı uygulanmaz</td></tr></tbody></table></div>
+<p>Diğer kopyada ilk iki direnç 1,9047 × 10⁻³ Ω ve 6,557 × 10⁻⁴ Ω yazılmış; üçüncü duruma da ohmik bağıntı uygulanarak negatif direnç ve −1425,0285 µA bulunmuştur.</p>
+<p><em>Not: İlk iki dirençte µ katsayısı nedeniyle milyon katlık birim hatası vardır. Üçüncü durum doyumdadır; negatif sonuçlar yanlış bölge denkleminin kullanılmasındandır. V_A = 100 V bilgisi kullanılacaksa doyum akımına 1 + λV_DS çarpanı gelir ve yaklaşık 77,9 µA elde edilir; taranmış çözüm bu etkiyi ihmal etmiştir.</em></p>
+<p>100 kΩ küçük sinyal direnci için V_DS ≈ 0 alınmış; bir kopyada V_GS = 1,45 V, taranmış çözümde 1,47 V bulunmuştur.</p>
+<p><em>Not: 100 kΩ koşulu V_GS − V_T ≈ 0,020 V verir; 1,47 V sonucu tutarlıdır.</em></p>
+<p>Diyot bağlı MOSFET örneğinde V_DD = 5 V, I_D = 100 µA:</p>
+<p>V_GS = V_T + √[I_D/(½μ₀C_ox W/L)] ≈ 2,082 V.</p>
+<p>R = (5 − 2,082)/(100 µA) ≈ 29,18 kΩ. Kaynakta aynı hesabın yuvarlanmış 29,2 kΩ sonucu da vardır.</p>
+<h2 id="fet-on-calisma-kutuplama-ve-cikis-direnci">FET ön çalışma: kutuplama ve çıkış direnci</h2>
+<p>10 Mayıs 2013 tarihli sayfa ile ikinci kopyada kapısı dirençle toprağa bağlı, R_D = 4,7 kΩ, R_S = 1 kΩ ve V_DD = 15 V olan devre çizilir. I_G ≈ 0 yazılır. Çevre denklemi −15 + 4,7k I_D + V_DS + 1k = 0 biçimindedir.</p>
+<p><em>Not: Son terimde akım eksiktir; doğru boyutlu terim I_D × 1 kΩ olmalıdır.</em></p>
+<p>Bir sonraki satırda V_DS ≥ V_GS − V_T koşulu ve 3 V ≥ 2 V karşılaştırmasıyla doyum kararı verilir. V_A = 100 V için r_o ≈ V_A/I_D tablosu:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">I_D</th><th scope="col">r_o</th></tr></thead><tbody><tr><th scope="row">1 mA</th><td>100 kΩ</td></tr><tr><th scope="row">2,5 mA</th><td>40 kΩ</td></tr><tr><th scope="row">10 mA</th><td>10 kΩ</td></tr></tbody></table></div>
+<p>Bölücülü FET tasarımında V_DD = 15 V, V_G = 5 V, I_D = 4 mA, V_D = 11 V, I_DSS = 9 mA ve V_P = 3 V yazılmıştır. Bölücü akımı 0,05 mA alınarak R_G1 = (15 − 5)/0,05 mA = 200 kΩ ve R_G2 = 5/0,05 mA = 100 kΩ bulunur.</p>
+<p><em>Not: V_P işareti kanal tipine bağlıdır; kaynak bu satırda kanal tipini ve işaret kabulünü açıklamıyor.</em></p>
+<h2 id="cozulmemis-baskent-laboratuvar-sorulari">Çözülmemiş Başkent laboratuvar soruları</h2>
+<p><strong>Deney 4 ön çalışması:</strong> İlk devre ortak emetörlüdür: üst baz direnci 100 kΩ, alt baz direnci 10 kΩ, giriş kaynak direnci 10 kΩ, kollektör direnci 5 kΩ; emetör topraklıdır. A_I, A_V, Z_o ve Z_i istenir. V_CC sayısal olarak belirtilmemiştir.</p>
+<p>İkinci devre ortak bazlıdır. Baz topraklı, kollektör +8 V'a 3,6 kΩ üzerinden, emetör −5 V'a 3,9 kΩ üzerinden bağlıdır. Giriş emetöre, çıkış kollektöre kapasitif kuplajlıdır. β = 75 ve r_o = ∞ için A_V ve A_I istenir. Kaynakta çözüm yoktur.</p>
+<p><strong>Deney 5 ön çalışması:</strong> Ortak kaynaklı, öz kutuplamalı JFET devresinde R_D = 12 kΩ, R_G = 1 MΩ, R_S = 470 Ω, V_DD = 30 V, I_DSS = 3 mA, V_P = −2,4 V ve r_d ≫ R_D verilmiştir. Kaynak direnci kondansatörle AC açısından by-pass edilmiştir. V_GS, I_D, V_DS ve küçük sinyal gerilim kazancı sorulur; çözüm yazılmamıştır.</p>
+<h2 id="2n5460-p-kanal-jfet-inceleme-notu">2N5460 P-kanal JFET inceleme notu</h2>
+<p>İki sayfalık öğrenci raporu G, S ve D uçlarını; N ve P kanal ayrımını ve P-kanal 2N5460 elemanını anlatır. Kapı, kaynak ve savak uçları işlev bakımından BJT'nin baz, emetör ve kollektör uçlarına benzetilir. Transfer karakteristiği sabit V_DS'de I_D'nin V_GS ile değişimidir. V_GS = 0 iken doyum bölgesinde I_D = I_DSS; kapama geriliminde akım yaklaşık sıfırdır.</p>
+<p>Raporda aktarılan değerler:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parametre</th><th scope="col">Kaynaktaki değer</th></tr></thead><tbody><tr><th scope="row">I_DSS</th><td>−1 mA ile −5 mA</td></tr><tr><th scope="row">V_GS(off)</th><td>0,75–6,0 V</td></tr><tr><th scope="row">İleri iletim admitansı, y_fs büyüklüğü</th><td>1000–4000 µmho</td></tr><tr><th scope="row">Çıkış admitansı, y_os büyüklüğü</th><td>En çok 75 µmho</td></tr></tbody></table></div>
+<p>g_m kapı gerilimindeki değişime karşı savak akımının değişimini ifade eder. Çıkış admitansı küçük sinyal çıkış direncini bulmakta kullanılır. Rapor, farklı kapama gerilimlerinde akım eğrilerini ve sıcaklıkla değişimi yorumlar; akımın sıcaklık yükselince azaldığını, iletimin akımla artıp eğiminin küçüldüğünü belirtir.</p>
+<p><em>Not: Bunlar kaynak raporun grafik yorumlarıdır; g_m sabit bir malzeme sayısı değildir ve çalışma noktasına bağlıdır. Çıkış admitansının tersinden direnç elde edilir. Negatif akımlar P-kanal işaret kabulünü yansıtır; mutlak büyüklük aralığı 1–5 mA'dir. Grafiklerin sıcaklık davranışı tüm çalışma noktalarına genellenemez.</em></p>
+<p>Anahtar örneği +10 V besleme ve 2 kΩ savak direnci kullanır. V_GS &lt; −4 V olduğunda kesim ve V_out = +10 V; V_GS = 0 olduğunda ohmik çalışma ve yaklaşık V_out = 0,3 V yazılmıştır. Yük doğrusu I_D = (10 V − V_DS)/2 kΩ'dur ve eksenleri 5 mA ile 10 V'ta keser.</p>
+<p><em>Not: Bu son örneğin V_P = −4 V işaretleri N-kanal JFET'e aittir; önceki P-kanal 2N5460 bölümünün doğrudan devamı olarak uygulanmamalıdır. Fotoğraflardaki üretici grafiklerinin ve datasheet'in kendisi paylaşılmadı.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Simulink ile Diferansiyel Denklem ve Kontrol Modelleri (M. Subramanian) — hasancan.net</title>
+<meta name="description" content="2001 tarihli 19 metin tabanlı Simulink modeli ve 14 blok şeması: ODE, PID, tank dinamiği, doğrusal olmayan denklemler ve faz dengesi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-simulink-subramanian-modelleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Simulink ile Diferansiyel Denklem ve Kontrol Modelleri (M. Subramanian)">
+<meta property="og:description" content="2001 tarihli 19 metin tabanlı Simulink modeli ve 14 blok şeması: ODE, PID, tank dinamiği, doğrusal olmayan denklemler ve faz dengesi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-simulink-subramanian-modelleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Simulink ile Diferansiyel Denklem ve Kontrol Modelleri (M. Subramanian)", "description": "2001 tarihli 19 metin tabanlı Simulink modeli ve 14 blok şeması: ODE, PID, tank dinamiği, doğrusal olmayan denklemler ve faz dengesi.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-simulink-subramanian-modelleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-simulink-subramanian-modelleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-simulink-subramanian-modelleri/eem301-simulink-subramanian-modelleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Simulink ile Diferansiyel Denklem ve Kontrol Modelleri (M. Subramanian)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.03.2001</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#birinci-dereceden-diferansiyel-denklem">Birinci dereceden diferansiyel denklem</a></li><li><a href="#i-kinci-dereceden-denklem-ve-transfer-fonksiyonu">İkinci dereceden denklem ve transfer fonksiyonu</a></li><li><a href="#bagli-birinci-dereceden-denklemler">Bağlı birinci dereceden denklemler</a></li><li><a href="#sivi-seviyesi-dinamigi">Sıvı seviyesi dinamiği</a></li><li><a href="#geri-besleme-ve-pid">Geri besleme ve PID</a></li><li><a href="#dogrusal-olmayan-cebirsel-denklemler">Doğrusal olmayan cebirsel denklemler</a></li><li><a href="#buhar-basinci-ve-doyma-sicakligi">Buhar basıncı ve doyma sıcaklığı</a></li><li><a href="#kabarcik-ve-ciy-basinci">Kabarcık ve çiy basıncı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Simulink ile Diferansiyel Denklem ve Kontrol Modelleri (M. Subramanian)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 03.03.2001 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM301 arşivindeki <strong>PISim</strong> klasörü, M. Subramanian’ın 2001 tarihli Simulink örneklerini içeriyor; model açıklamalarında <strong>svce.ac.in</strong> kurum adresi yer alıyor. 19 MDL model dosyası ve 14 GIF blok şeması yazının sonunda ZIP olarak indirilebilir. Dosyalar Simulink 3 dönemi biçiminde; aşağıdaki inceleme model metinlerine ve şemalara dayanıyor, modeller çalıştırılmadı.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="birinci-dereceden-diferansiyel-denklem">Birinci dereceden diferansiyel denklem</h2>
+<p><strong>FirstOrderODE.mdl</strong>, x′(t)=−2x(t)+u(t) denklemini bir integratör, −2 kazancı, toplama düğümü ve rampa girişiyle kurar. Başlangıç koşulu x(0)=0’dır. İntegratör çıkışı x, toplama düğümünün çıkışı x′ olur.</p>
+<p>Modeldeki kazanç bloğundan kaynak parçası:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>Block {
+  BlockType Gain
+  Name "Gain"
+  Gain "-2"
+}</code></pre>
+<p><em>Not: Bu blok MATLAB komut dosyası değil, MDL dosyasının metin gösterimidir. ZIP’te bağlantılar ve diğer bloklarla birlikte tam model bulunur.</em></p>
+<figure class="yazi-gorsel"><img src="model-434.jpg" width="360" height="206" loading="lazy" decoding="async" alt="Birinci dereceden denklemin integratörlü blok şeması"><figcaption>x′=−2x+u</figcaption></figure>
+<h2 id="i-kinci-dereceden-denklem-ve-transfer-fonksiyonu">İkinci dereceden denklem ve transfer fonksiyonu</h2>
+<p><strong>SolutionToSecondOrderODE_1.mdl</strong> ve <strong>SolutionToSecondOrderODE_2.mdl</strong>, x″+5x′+6x=1 denklemini iki farklı çizimle temsil eder. İlk model x′=y ve y′=1−6x−5y ayrımını açıkça gösterir. İki integratörün başlangıç değeri sıfırdır. Çıkış kaydı için secondorder.mat ve 2ndOrder.mat adları kullanılmıştır.</p>
+<figure class="yazi-gorsel"><img src="model-450.jpg" width="531" height="248" loading="lazy" decoding="async" alt="İkinci dereceden denklemin iki birinci dereceden denkleme ayrılması"><figcaption>x′=y; y′=1−6x−5y</figcaption></figure>
+<p><strong>SecondOdrTransferFunction.mdl</strong>, 10/(s²+1,6s+4) transfer fonksiyonunu 4 büyüklüğündeki basamakla uyarır. Kaynak katsayıları:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>BlockType TransferFcn
+Numerator "[10]"
+Denominator "[1 1.6 4]"</code></pre>
+<h2 id="bagli-birinci-dereceden-denklemler">Bağlı birinci dereceden denklemler</h2>
+<p><strong>TwoFirstOrderODE_1.mdl</strong>:</p>
+<ul><li>dCₐ/dt=−4Cₐ+Cᵦ.</li><li>dCᵦ/dt=4(Cₐ−Cᵦ).</li><li>Cₐ(0)=100, Cᵦ(0)=0.</li></ul>
+<p>İki integratör birbirinin çıkışını kullanır. Sonuçlar CA.mat ve CB.mat dosya adlarıyla kaydedilecek şekilde yapılandırılmıştır.</p>
+<p><strong>TwoFirstOrderODE_2.mdl</strong>:</p>
+<ul><li>2dCₐ₁/dt+Cₐ₁=Cₐ₀.</li><li>4dCₐ₂/dt+Cₐ₂=Cₐ₁.</li><li>Cₐ₀=1; iki başlangıç koşulu sıfır.</li></ul>
+<p>Burada birinci sistemin çıkışı ikinci sistemi besler; 1/2 ve 1/4 kazançları zaman sabitlerini belirler.</p>
+<h2 id="sivi-seviyesi-dinamigi">Sıvı seviyesi dinamiği</h2>
+<p><strong>LiquidLevelDynamics.mdl</strong> silindirik tank için dh/dt=(Fᵢ−kₒ√h)/A denklemini kullanır. Fᵢ=1, 1/A=0,01, kₒ=0,01 ve h(0)=0’dır. Karekök bloğu çıkış debisinin seviyeye doğrusal olmayan bağımlılığını temsil eder.</p>
+<p><strong>TimeDomain_ControlofTankLevel.mdl</strong>:</p>
+<p>A dh′/dt+K꜀h′+(K꜀/Tᵢ)∫h′dt=F′ᵢ.</p>
+<p>Model A=2, K꜀=1 ve 1/Tᵢ=0,2 kullanır. Açıklama, George Stephanopoulos’un Chemical Process Control kitabındaki Örnek 11.4’e atıf yapar; dosya bu örnek için hazırlanmış Simulink uygulamasıdır.</p>
+<p><strong>TwoTanksInSeriesImpulseInput.mdl</strong> iki etkileşimsiz tankı bağlar:</p>
+<ul><li>A₁dh₁/dt+h₁/R₁=F₀.</li><li>A₂dh₂/dt+h₂/R₂=h₁/R₁.</li><li>A₁=A₂=10, R₁=0,1, R₂=0,35, F₀=20.</li></ul>
+<p>Birinci tankın durağan seviyesi 2, ikinci tankınki 7 olarak verilmiştir. Birinci tanktaki dürtü, başlangıç seviyesine 1 eklenerek h₁(0)=3 şeklinde temsil edilir; h₂(0)=7’dir.</p>
+<h2 id="geri-besleme-ve-pid">Geri besleme ve PID</h2>
+<p><strong>FeedbackControl.mdl</strong>, 1,6 kazancı ile 5/(s+1) ve 1/(2s+1) bloklarını seri bağlayıp birim negatif geri besleme kullanır. Referans basamağı 0,1’dir.</p>
+<p><strong>PID_Controller.mdl</strong>, oransal, integral ve türev yollarını birleştirir. Denetleyici G꜀(s)=K[1+1/(Tᵢs)+T𝒹s] biçimindedir. K, Tᵢ ve T𝒹 parametreleri modelde sembolik değerler olarak yer alır.</p>
+<ul><li><strong>PID_StepChangeInSetPoint.mdl</strong>: referans değişimine tepki; proses 2/(s²+2s+1), maske değerleri 1, 1, 2.</li><li><strong>PID_StepChangeInLoad_1.mdl</strong> ve <strong>PID_StepChangeInLoad_2.mdl</strong>: yük değişimine tepkiyi farklı yük bağlantılarıyla gösteren iki model; maske değerleri 1, 1, 1.</li></ul>
+<h2 id="dogrusal-olmayan-cebirsel-denklemler">Doğrusal olmayan cebirsel denklemler</h2>
+<p><strong>NonLinearEquations.mdl</strong>, dört Algebraic Constraint bloğuyla şu denklemleri kurar:</p>
+<p>F₁=−Cₐ+Cₐ₀+[−k₁Cₐ−k₂Cₐ^(3/2)+k₃C꜀²]t=0,</p>
+<p>F₂=−Cᵦ+[2k₁Cₐ−k₄Cᵦ²]t=0,</p>
+<p>F₃=−C꜀+[k₂Cₐ^(3/2)−k₃C꜀²+k₄Cᵦ²]t=0,</p>
+<p>F₄=−C𝒹+[k₄Cᵦ²]t=0.</p>
+<p>Kaynak parametreleri k₁=1, k₂=0,2, k₃=0,05, k₄=0,4, Cₐ₀=1 ve t=2’dir. Açıklamada Cₐ=0,3189, Cᵦ=0,7839, C꜀=0,5350 ve C𝒹=0,4916 çözümü verilmiştir.</p>
+<figure class="yazi-gorsel"><img src="model-438.jpg" width="723" height="789" loading="lazy" decoding="async" alt="Dört doğrusal olmayan cebirsel denklemin bloklarla kurulması"><figcaption>NonLinearEquations</figcaption></figure>
+<p><em>Not: Model parametreleri yüklemek için simult.mat dosyasına başvuruyor; bu dosya kaynak klasörde yok. Gerekli parametre değerleri modelin açıklamasında mevcut. Diğer modellerin ürettiği MAT dosyalarıyla bu eksik giriş dosyası karıştırılmamalıdır.</em></p>
+<h2 id="buhar-basinci-ve-doyma-sicakligi">Buhar basıncı ve doyma sıcaklığı</h2>
+<p><strong>VapPress.mdl</strong> Antoine bağıntısını kullanır: P=exp[A−B/(C+T)]. Verilen sabitler A=14,5463, B=2940,46 ve C=237,22; giriş sıcaklığı 80’dir. Modeldeki ifade:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>Expr "exp(u[1] - u[2]/(u[3] + u[4]))"</code></pre>
+<p><strong>Sat_Temp.mdl</strong>, ters bağıntı T=B/(A−lnP)−C ile P=150 için doyma sıcaklığını hesaplayan blok düzenidir:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>Expr "(u[2]/(u[1] - log(u[4])))-u[3]"</code></pre>
+<h2 id="kabarcik-ve-ciy-basinci">Kabarcık ve çiy basıncı</h2>
+<p><strong>BUBL_PY.MDL</strong>, sıvı bileşimi X ve saf bileşen buhar basınçlarından kabarcık basıncı P ile buhar bileşimi Y üretir. <strong>DEW_PX.MDL</strong> ters yönde, buhar bileşimi Y’den çiy basıncı P ve sıvı bileşimi X üretir.</p>
+<p>İdeal karışım bağıntıları P=ΣxᵢPᵢˢᵃᵗ, yᵢ=xᵢPᵢˢᵃᵗ/P; çiy hesabında 1/P=Σyᵢ/Pᵢˢᵃᵗ ve xᵢ=yᵢP/Pᵢˢᵃᵗ biçimindedir. İki modelde T=110 ve bileşim vektörü [0,3; 0,45; 0,25] kullanılır.</p>
+<p>Üç bileşenin Antoine sabitleri sırasıyla [14,5463;2940,46;237,22], [14,2724;2945,47;224] ve [14,2043;2972,64;209]’dur. Kaynak model, sayıların fiziksel birimlerini açıklamadığından burada birim varsayılmadı.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-simulink-subramanian-modelleri.zip" download>eem301-simulink-subramanian-modelleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 134 KB · 03.03.2001</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-simulink-subramanian-modelleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (134 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

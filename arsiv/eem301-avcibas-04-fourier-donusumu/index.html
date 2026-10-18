@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Chapter 4 — Sürekli Zamanlı Fourier Dönüşümü (İsmail Avcıbaş) — hasancan.net</title>
+<meta name="description" content="Fourier serisinden dönüşüme geçiş, dönüşüm çiftleri, simetri, konvolüsyon, modülasyon ve diferansiyel denklem örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-avcibas-04-fourier-donusumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Chapter 4 — Sürekli Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)">
+<meta property="og:description" content="Fourier serisinden dönüşüme geçiş, dönüşüm çiftleri, simetri, konvolüsyon, modülasyon ve diferansiyel denklem örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-avcibas-04-fourier-donusumu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Chapter 4 — Sürekli Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)", "description": "Fourier serisinden dönüşüme geçiş, dönüşüm çiftleri, simetri, konvolüsyon, modülasyon ve diferansiyel denklem örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-avcibas-04-fourier-donusumu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-avcibas-04-fourier-donusumu.pdf", "contentUrl": "https://hasancan.net/arsiv/eem301-avcibas-04-fourier-donusumu/eem301-avcibas-04-fourier-donusumu.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Chapter 4 — Sürekli Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.08.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#from-fourier-series-to-fourier-transform">From Fourier series to Fourier transform</a></li><li><a href="#basic-transform-pairs">Basic transform pairs</a></li><li><a href="#periodic-signals">Periodic signals</a></li><li><a href="#transform-properties">Transform properties</a></li><li><a href="#convolution-and-frequency-response">Convolution and frequency response</a></li><li><a href="#multiplication-and-modulation">Multiplication and modulation</a></li><li><a href="#constant-coefficient-differential-equations">Constant-coefficient differential equations</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Chapter 4 — Sürekli Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 16.08.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi EEM301 dersi için İsmail Avcıbaş’ın hazırladığı <strong>Chapter IV: Continuous Time Fourier Transform</strong> sunumu (71 sayfa). Kaynak PowerPoint’in oluşturulma tarihi 16 Ağustos 2006, son kaydı 6 Ekim 2009. Metni görsel olarak saklanan slaytların konu anlatımı, temel formülleri ve örnekleri aşağıya aktarıldı. Sunumun PDF kopyası yazının sonunda indirilebilir.</p>
+<h2 id="from-fourier-series-to-fourier-transform">From Fourier series to Fourier transform</h2>
+<p>A finite-duration signal can be repeated with period T. Its series coefficients sample an envelope: aₖ=X(jkω₀)/T, where ω₀=2π/T. Letting T increase makes the samples denser, and the synthesis sum becomes an integral:</p>
+<ul><li>X(jω)=∫₋∞^∞ x(t)e^(−jωt)dt.</li><li>x(t)=(1/2π)∫₋∞^∞ X(jω)e^(jωt)dω.</li></ul>
+<p>The slides discuss finite-energy convergence and sufficient Dirichlet conditions: absolute integrability, finitely many extrema and finitely many finite discontinuities on finite intervals.</p>
+<figure class="yazi-gorsel"><img src="s-04.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Artan periyotta Fourier katsayılarının sürekli bir zarfı örneklemesi"><figcaption>T büyürken ω₀=2π/T küçülür</figcaption></figure>
+<h2 id="basic-transform-pairs">Basic transform pairs</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Time signal</th><th scope="col">Fourier transform</th></tr></thead><tbody><tr><th scope="row">e^(−at)u(t), a&gt;0</th><td>1/(a+jω)</td></tr><tr><th scope="row">e^(−a</th><td>t</td><td>), a&gt;0</td><td>2a/(a²+ω²)</td></tr><tr><th scope="row">δ(t)</th><td>1</td></tr><tr><th scope="row">Unit rectangle on −T₁&lt;t&lt;T₁</th><td>2sin(ωT₁)/ω</td></tr><tr><th scope="row">sin(Wt)/(πt)</th><td>Unit rectangle on −W&lt;ω&lt;W</td></tr><tr><th scope="row">e^(jω₀t)</th><td>2πδ(ω−ω₀)</td></tr><tr><th scope="row">cosω₀t</th><td>π[δ(ω−ω₀)+δ(ω+ω₀)]</td></tr><tr><th scope="row">sinω₀t</th><td>(π/j)[δ(ω−ω₀)−δ(ω+ω₀)]</td></tr></tbody></table></div>
+<p>The normalized sinc is sinc(θ)=sin(πθ)/(πθ). Narrower pulses have broader spectra. For e^(−at)u(t), the magnitude is 1/√(a²+ω²) and the phase is −tan⁻¹(ω/a).</p>
+<h2 id="periodic-signals">Periodic signals</h2>
+<p>If x(t)=Σaₖe^(jkω₀t), its transform is X(jω)=2πΣaₖδ(ω−kω₀). The periodic impulse train Σδ(t−kT) transforms to (2π/T)Σδ(ω−2πk/T).</p>
+<h2 id="transform-properties">Transform properties</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Operation</th><th scope="col">Transform</th></tr></thead><tbody><tr><th scope="row">ax(t)+by(t)</th><td>aX(jω)+bY(jω)</td></tr><tr><th scope="row">x(t−t₀)</th><td>e^(−jωt₀)X(jω)</td></tr><tr><th scope="row">e^(jω₀t)x(t)</th><td>X(j(ω−ω₀))</td></tr><tr><th scope="row">x*(t)</th><td>X*(−jω)</td></tr><tr><th scope="row">x(at), a≠0</th><td>X(jω/a)/</td><td>a</td><td></td></tr><tr><th scope="row">dx/dt</th><td>jωX(jω)</td></tr><tr><th scope="row">t x(t)</th><td>j dX(jω)/dω</td></tr></tbody></table></div>
+<p>For real x(t), X(−jω)=X*(jω); its magnitude is even and its phase is odd where defined. The even part transforms to Re X and the odd part to j Im X.</p>
+<p>Integration from −∞ to t transforms to X(jω)/(jω)+πX(0)δ(ω). In particular u(t) transforms to 1/(jω)+πδ(ω), interpreted in the generalized sense.</p>
+<p>Duality exchanges time and frequency with a reversal and a 2π factor. Parseval’s relation is ∫|x(t)|²dt=(1/2π)∫|X(jω)|²dω.</p>
+<p>The examples form a stepped pulse as the sum of two shifted rectangles, and obtain the transform of a finite ramp by differentiating it into a rectangle plus endpoint impulses.</p>
+<h2 id="convolution-and-frequency-response">Convolution and frequency response</h2>
+<p>y=x∗h corresponds to Y=XH. A cascade has frequency response H₁H₂ and a parallel combination has H₁+H₂. A pure delay has H(jω)=e^(−jωt₀); differentiation has H(jω)=jω.</p>
+<p>An ideal lowpass filter with unit gain on |ω|&lt;ω꜀ has h(t)=sin(ω꜀t)/(πt). The slides compare this with the causal exponential response e^(−t)u(t), whose response is 1/(1+jω).</p>
+<p>For h(t)=e^(−at)u(t) and x(t)=e^(−bt)u(t), a,b&gt;0:</p>
+<ul><li>If a≠b, y(t)=[e^(−at)−e^(−bt)]u(t)/(b−a).</li><li>If a=b, y(t)=t e^(−at)u(t).</li></ul>
+<p>Cascading two ideal lowpass responses retains the smaller cutoff.</p>
+<h2 id="multiplication-and-modulation">Multiplication and modulation</h2>
+<p>Multiplication in time corresponds to convolution in frequency with the factor 1/(2π). For r(t)=s(t)cosω₀t:</p>
+<p>R(jω) = [S(j(ω−ω₀))+S(j(ω+ω₀))]/2.</p>
+<p>Multiplying again by cosω₀t produces a baseband term s(t)/2 and shifted copies around ±2ω₀. A lowpass filter can isolate the baseband component. Another example multiplies two sinc functions, obtaining a trapezoidal spectrum from convolution of their rectangular spectra.</p>
+<figure class="yazi-gorsel"><img src="s-61.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="İki sinc işaretinin çarpımı ve dikdörtgen spektrumların konvolüsyonu"><figcaption>Çarpım özelliği: spektrumda trapez</figcaption></figure>
+<h2 id="constant-coefficient-differential-equations">Constant-coefficient differential equations</h2>
+<p>For Σaₖ dᵏy/dtᵏ=Σbₖ dᵏx/dtᵏ, the LTI frequency response is</p>
+<p>H(jω) = [Σbₖ(jω)ᵏ]/[Σaₖ(jω)ᵏ].</p>
+<p>Example: y″+4y′+3y=x′+2x gives</p>
+<p>H(jω)=(jω+2)/[(jω+1)(jω+3)] = (1/2)/(jω+1)+(1/2)/(jω+3),</p>
+<p>so h(t)=[e^(−t)+e^(−3t)]u(t)/2. With x(t)=e^(−t)u(t), the output becomes</p>
+<p>y(t)=[(1/4)e^(−t)+(1/2)t e^(−t)−(1/4)e^(−3t)]u(t).</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-avcibas-04-fourier-donusumu.pdf" download>eem301-avcibas-04-fourier-donusumu.pdf</a></p>
+              <p class="kucuk">PDF · 2.6 MB · 71 <span data-i18n="arch.pagesLower"></span> · 16.08.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-avcibas-04-fourier-donusumu.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

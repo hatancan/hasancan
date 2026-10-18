@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Bode Plots: Genlik, Faz ve Çözümlü Alıştırmalar (Hugh Jack) — hasancan.net</title>
+<meta name="description" content="Hugh Jack’ın Bode notları: fazör dönüşümü, düz çizgi yaklaşımı, kutup ve sıfır katkıları, rezonans, sinyal spektrumu ve çözümlü alıştırmalar.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-bode-plots-hugh-jack/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Bode Plots: Genlik, Faz ve Çözümlü Alıştırmalar (Hugh Jack)">
+<meta property="og:description" content="Hugh Jack’ın Bode notları: fazör dönüşümü, düz çizgi yaklaşımı, kutup ve sıfır katkıları, rezonans, sinyal spektrumu ve çözümlü alıştırmalar.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-bode-plots-hugh-jack/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Bode Plots: Genlik, Faz ve Çözümlü Alıştırmalar (Hugh Jack)", "description": "Hugh Jack’ın Bode notları: fazör dönüşümü, düz çizgi yaklaşımı, kutup ve sıfır katkıları, rezonans, sinyal spektrumu ve çözümlü alıştırmalar.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem322-bode-plots-hugh-jack/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Hugh-Jack-Bode-Plots.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-bode-plots-hugh-jack/Hugh-Jack-Bode-Plots.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Bode Plots: Genlik, Faz ve Çözümlü Alıştırmalar (Hugh Jack)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.10.1994</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#introduction-gain-and-phase">Introduction: gain and phase</a></li><li><a href="#bode-plots-on-semilog-paper">Bode plots on semilog paper</a></li><li><a href="#straight-line-magnitude-approximation">Straight-line magnitude approximation</a></li><li><a href="#straight-line-phase-approximation">Straight-line phase approximation</a></li><li><a href="#second-order-systems-and-resonance">Second-order systems and resonance</a></li><li><a href="#signal-spectrums">Signal spectrums</a></li><li><a href="#scilab-example">Scilab example</a></li><li><a href="#practice-problems">Practice problems</a></li><li><a href="#selected-solution-results">Selected solution results</a></li><li><a href="#assignment-problems-and-drawing-paper">Assignment problems and drawing paper</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Bode Plots: Genlik, Faz ve Çözümlü Alıştırmalar (Hugh Jack)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 08.10.1994 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Hugh Jack’ın <strong>“10. Bode Plots”</strong> başlıklı İngilizce notu, EEM322 ders arşivinde bulunan 38 sayfalık <code>bode.pdf</code> dosyasından aktarıldı. Kaynak PDF’nin yazar alanı <code>jackh</code>; oluşturulma tarihi 8 Ekim 1994, son değişiklik tarihi 20 Aralık 2004. Konu anlatımı, alıştırmalar, çözümler ve logaritmik çizim kâğıtlarını içeren PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="introduction-gain-and-phase">Introduction: gain and phase</h2>
+<p>A phasor transform expresses the transfer function as a complex quantity that depends on frequency. Its magnitude is the gain and its angle is the phase shift. A Bode diagram plots these two quantities against frequency, providing an overall picture of the system response.</p>
+<p>The note uses a graphic equalizer as an analogy: moving the sliders changes the frequency response, emphasizing or suppressing selected bands. In a linear system, each sinusoidal component can be considered separately.</p>
+<p>For the mass–spring–damper example:</p>
+<p>G(jω) = X(jω)/F(jω) = 1 / [(2000 − 1000ω²) + j3000ω]</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">G(jω)</th><th scope="col">= 1 / √[(2000 − 1000ω²)² + (3000ω)²]</th></tr></thead><tbody></tbody></table></div>
+<p>The phase is obtained from the real and imaginary parts, with the appropriate quadrant correction. Frequencies listed in Hz must first be converted using <strong>ω = 2πf</strong>. Magnitude is converted to decibels using <strong>G_dB = 20 log₁₀|G|</strong>.</p>
+<p><em>Not: Kaynağın 10.3 numaralı sayfasında fazın bölge değişimi ω = 2 ile ayrılmıştır. Yazılan transfer fonksiyonunda gerçek kısmın işareti 2000 − 1000ω² = 0, yani ω = √2 rad/s noktasında değişir. Faz için atan2 yaklaşımı bu bölge belirsizliğini önler.</em></p>
+<p>The frequency table covers f = 0, 0.001, 0.01, 0.1, 1, 10, 100 and 1000 Hz. The gain tells how much the input amplitude changes; the phase tells how far the output sinusoid leads or lags.</p>
+<p>For the input F(t) = 1000 + 20 sin(20t) + 10 sin(0.5t), the constant component gives x = 1000/2000 = 0.5. The remaining terms use the magnitude and phase evaluated at 20 and 0.5 rad/s respectively. The source leaves these numerical entries as an exercise.</p>
+<h2 id="bode-plots-on-semilog-paper">Bode plots on semilog paper</h2>
+<p>The frequency axis is logarithmic; successive decades might be 0.1, 1, 10, 100 and 1000. Zero frequency cannot appear on this axis. Gain in dB and phase in degrees use linear vertical scales.</p>
+<p>There are two approaches:</p>
+<ol><li>Calculate magnitude and phase at a selection of frequencies, then plot the points.</li><li>Factor the transfer function and build straight-line approximations from its poles and zeros.</li></ol>
+<p>The source provides four-cycle graph paper and asks for the mass–spring–damper points to be plotted both by hand and by computer.</p>
+<h2 id="straight-line-magnitude-approximation">Straight-line magnitude approximation</h2>
+<ol><li>Write the transfer function in factored form and identify the corner frequencies.</li><li>Determine the low-frequency level when a finite nonzero DC gain exists.</li><li>Add the slope contribution of each factor: a first-order numerator factor contributes +20 dB/decade; a denominator factor contributes −20 dB/decade after its corner.</li><li>Add all contributions to obtain the overall approximation.</li><li>Smooth the corners. An isolated first-order corner differs from the asymptote by approximately 3 dB.</li></ol>
+<p>For G(s) = 1/(ωc + s), the low-frequency magnitude is 1/ωc. At ω = ωc, its magnitude is 1/(√2 ωc), so the relative change is 20 log₁₀(1/√2) = <strong>−3.01 dB</strong> and the phase is <strong>−45°</strong>. At high frequencies G(jω) ≈ 1/(jω), producing −20 dB/decade. A repeated pole produces −40 dB/decade.</p>
+<p>The worked example is presented in factored form as:</p>
+<p>G(s) = 10⁴(s + 1)/[(s + 10)(s + 100)]</p>
+<p>Its initial gain is 10, or 20 dB. The zero at 1 rad/s raises the slope to +20 dB/decade; the pole at 10 rad/s returns it to zero; the pole at 100 rad/s changes it to −20 dB/decade.</p>
+<p><em>Not: Kaynak aynı örneğin açılmış paydasını 0.01s² + 0.11s + 10 olarak yazıyor. Verilen çarpanlı biçimle uyumlu payda 0.01s² + 1.1s + 10 olur. Buradaki eğri anlatımı kaynağın çarpanlı biçimine aittir.</em></p>
+<figure class="yazi-gorsel"><img src="s-15.jpg" width="1081" height="1400" loading="lazy" decoding="async" alt="Tek tek kutup ve sıfır katkılarından yaklaşık genlik eğrisinin oluşturulması"><figcaption>Düz çizgi yaklaşımı ve köşelerin yumuşatılması</figcaption></figure>
+<h2 id="straight-line-phase-approximation">Straight-line phase approximation</h2>
+<p>The phase contributions are added in the same way. In the example, the zero at 1 rad/s contributes +90°, while the poles at 10 and 100 rad/s each contribute −90°. A first-order transition is approximated over two decades: from one tenth of the corner frequency to ten times that frequency.</p>
+<p>An isolated factor s in the numerator contributes +90° from the start; one in the denominator contributes −90°. The plotted example begins near 0° and approaches −90° at high frequency.</p>
+<figure class="yazi-gorsel"><img src="s-18.jpg" width="1081" height="1400" loading="lazy" decoding="async" alt="Kutup ve sıfır faz katkılarının toplanması ve düzgün faz eğrisi"><figcaption>Yaklaşık ve düzgün faz eğrileri</figcaption></figure>
+<h2 id="second-order-systems-and-resonance">Second-order systems and resonance</h2>
+<p>The note considers the second-order denominator s² + 2ζωn s + ωn². Complex poles can create a resonant peak, and the peak becomes stronger as damping decreases.</p>
+<p><em>Not: Kaynak rezonans tepesini sönümlü doğal frekans ωd = ωn√(1 − ζ²) ile aynı yerde gösteriyor ve bir yerde ζ &lt; 1 koşulunu yeterli sayıyor. Standart sabit paylı ikinci dereceden alçak geçiren sistemde genlik rezonansı için ζ &lt; 1/√2 gerekir; tepe frekansı ωr = ωn√(1 − 2ζ²)’dir. ωd geçici yanıtın salınım frekansıdır.</em></p>
+<h2 id="signal-spectrums">Signal spectrums</h2>
+<p>A spectrum shows component amplitudes versus frequency. The example is:</p>
+<p>x(t) = A sin(2πt/0.01) + 0.3A sin(2πt/0.005) + 0.01A sin(2πt/0.0005)</p>
+<p>Its three components are:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Frequency</th><th scope="col">Amplitude</th></tr></thead><tbody><tr><th scope="row">100 Hz</th><td>A</td></tr><tr><th scope="row">200 Hz</th><td>0.3A</td></tr><tr><th scope="row">2000 Hz</th><td>0.01A</td></tr></tbody></table></div>
+<p>The time trace combines these components; the frequency plot displays three separate peaks.</p>
+<h2 id="scilab-example">Scilab example</h2>
+<p>The source uses the transfer function (s + 5)/(s² + 100s + 10000). The direct plotting portion is:</p>
+<pre class="kaynak" data-dosya="scilab - Not Defteri"><code>D = poly(0, 'D');
+h = syslin('c', (D + 5) / (D^2 + 100*D + 10000));
+bode(h, 0.1, 1000, 'Sample Transfer Function');</code></pre>
+<p>A separate loop samples six points per decade over six decades, starting at 0.1 Hz. It converts frequency to rad/s, calculates polar magnitude and phase, converts to dB and degrees, and writes the results to <code>data.txt</code>.</p>
+<p><em>Not: Kaynağın veri yazma örneğinde <code>w = f * 2 * %pi);</code> satırında fazla kapanış parantezi var. Kod burada çalıştırılmadı; örnek döneminin Scilab sözdizimini kullanıyor.</em></p>
+<h2 id="practice-problems">Practice problems</h2>
+<ol><li>Draw the gain and phase Bode plots of (s + 1)(s + 1000)/(s + 100)² and 5/s² using the phasor transform.</li><li>For G(s) = (s + 10)(s + 5)/(s + 5)², draw the straight-line plots and determine the steady-state output for x(t) = 20 sin(9t + 0.3).</li><li>Draw the straight-line Bode approximation of G(s) = (s + 1000)/(s² + 5s + 100).</li><li>For Vo/Vi = 1000/(s + 1000), find the response to Vi = 5 sin(100000t) and draw the approximate plot.</li><li>For G(s) = s(s + 2π)/(s² + 300πs + 62500π²), draw the approximate Bode plot, verify selected points, and find the response to 5 sin(624t) + sin(6.2t).</li><li>A 10 kg mass is suspended by two springs in series, K₁ = 500 N/m and K₂ = 1000 N/m. With applied force F as input and displacement x as output, neglect gravity and obtain the transfer function. Find the sinusoidal response for F(t) = 10 cos(t + 1), invert the input/output choice, draw Bode plots and find the 10 N step response. Finally include gravity in the step-response calculation.</li><li>For ÿ + ẏ + 7y = F, y(0) = 1, ẏ(0) = 0 and F(t) = 10 for t &gt; 0, write the state equations; solve numerically and analytically; find and sketch the frequency response.</li><li>For ẋ + 5x = F and F(t) = 10 sin(100t), find the transfer function, magnitude and phase, Bode plot, sinusoidal response and state equation. Calculate values from t = 0 to 0.010 s in 0.002 s steps, and determine the unit-step response from rest.</li></ol>
+<h2 id="selected-solution-results">Selected solution results</h2>
+<p>The source includes graphical solutions for the practice problems. The principal algebraic results are:</p>
+<ul><li>Problem 2: G(j9) = 1.236 − 0.425j; magnitude approximately 1.307, phase approximately −0.3312 rad. Thus y(t) ≈ <strong>26.1 sin(9t − 0.031)</strong>.</li><li>Problem 3: ωn = 10 rad/s and ζ = 0.25. DC gain is 10, or 20 dB. The zero is at 1000 rad/s and the denominator contributes the second-order resonant response.</li><li>Problem 4: the response amplitude is approximately <strong>0.0500</strong> and the phase is approximately <strong>−1.561 rad</strong>.</li><li>Problem 6: the series spring stiffness is K₁K₂/(K₁ + K₂) = 1000/3 N/m, giving X/F = 1/(10s² + 1000/3). The source gives the 10 N step response as approximately 0.03[1 − cos(5.77t)] before gravity is included.</li><li>Problem 7: with x₁ = y and x₂ = ẏ, ẋ = [0 1; −7 −1]x + [0; 1]F and y = [1 0]x. The frequency response is 1/(7 − ω² + jω).</li><li>Problem 8: G(s) = 1/(s + 5), |G(jω)| = 1/√(25 + ω²), phase = −atan(ω/5). At 100 rad/s the response is approximately <strong>0.0999 sin(100t − 1.521)</strong>. For a unit step from rest, x(t) = (1 − e^(−5t))/5.</li></ul>
+<p><em>Not: Problem 2 çözümünde −0.3312 rad için −9.49° yazılmış; dönüşüm yaklaşık −18.98° verir. Ayrıca çözümün ara satırında giriş sinüs yerine kosinüs yazılmış, son sonuç yeniden sorudaki sinüs girdisini kullanıyor.</em></p>
+<h2 id="assignment-problems-and-drawing-paper">Assignment problems and drawing paper</h2>
+<p>The final assignment section asks for computer-generated Bode plots, plots of simple first- and second-order factors, and gain/phase approximations for a factored transfer function. It also asks how a specified two-frequency sinusoidal signal can be passed through the system, how a Bode plot can be reconstructed from poles and zeros, and how to infer an approximate transfer function from a supplied magnitude plot.</p>
+<p>The PDF ends with two- and four-cycle log-scale paper for these exercises.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Hugh-Jack-Bode-Plots.pdf" download>Hugh-Jack-Bode-Plots.pdf</a></p>
+              <p class="kucuk">PDF · 2.2 MB · 38 <span data-i18n="arch.pagesLower"></span> · 08.10.1994</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Hugh-Jack-Bode-Plots.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

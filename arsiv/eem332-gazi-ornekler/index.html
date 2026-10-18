@@ -1,0 +1,2076 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: 8086 Komut Kümesi ve Örnekler (Gazi Üniversitesi, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="8086 komut kümesi, operandlar ve örnek assembly işlemleri; 2007 tarihli ders notu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-ornekler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: 8086 Komut Kümesi ve Örnekler (Gazi Üniversitesi, M. Ali Akcayol)">
+<meta property="og:description" content="8086 komut kümesi, operandlar ve örnek assembly işlemleri; 2007 tarihli ders notu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-ornekler/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: 8086 Komut Kümesi ve Örnekler (Gazi Üniversitesi, M. Ali Akcayol)", "description": "8086 komut kümesi, operandlar ve örnek assembly işlemleri; 2007 tarihli ders notu.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-ornekler/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-ornekler.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-ornekler/eem332-gazi-ornekler.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: 8086 Komut Kümesi ve Örnekler (Gazi Üniversitesi, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.01.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#8086komutlarornekler">_8086KomutlarOrnekler</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: 8086 Komut Kümesi ve Örnekler (Gazi Üniversitesi, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 01.01.2007 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2007–2007). 8086 komut kümesi, operandlar ve örnek assembly işlemleri; 2007 tarihli ders notu. Kaynak: Gazi Üniversitesi, M. Ali Akcayol, 2007. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="8086komutlarornekler">_8086KomutlarOrnekler</h2>
+<h3 id="8086-komut-kumesi-ve-ornekler">8086 KOMUT KÜMESİ VE ÖRNEKLER</h3>
+<p>Doç.Dr. M.Ali Akcayol</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>(2007)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: Bu doküman başta emu8086 programının yardım dosyası olmak üzere aşağıdaki</code></pre>
+<h3 id="kaynaklar-kullanilarak-hazirlanmistir">kaynaklar kullanılarak hazırlanmıştır</h3>
+<p>Barry B. Brey, The Intel Microprocessors 8086/8088, 80186/80188, 80286, 80386, 80486, Pentium, Pentium Pro Processor, Pentium II, Pentium Ill, Pentium 4 Architecture, Programming, and Interfacing (7th edition), Prentice Hall, ISBN: 0131974076, 2006.</p>
+<p>Walter A. Triebel, Avtar Singh, Avtar Singh, The 8088 and 8086 Microprocessors: Programming, Interfacing, Software, Hardware, and Applications (4th edition), Prentice Hall, 0130930814, 2002.</p>
+<p>Muhammad Ali Mazidi, Janice Gillispie-Mazidi, Muhammad A. Mazidi, Janice Catherine Gillispie-Mazidi, 80X86 IBM PC and Compatible Computers: Assembly Language, Design, and Interfacing (4th edition), Prentice Hall, 2002.</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<h3 id="genel-bi-lgi-ler">GENEL BİLGİLER</h3>
+<h3 id="genel-amacli-regi-ster-lar">GENEL AMAÇLI REGİSTER'LAR</h3>
+<h3 id="ax-bx-cx-dx-si-di-bp-sp">AX, BX, CX, DX, SI, DI, BP, SP</h3>
+<h3 id="ozel-amacli-register-lar">OZEL AMACLI REGISTER’LAR</h3>
+<h3 id="ip-flag-register-lari">IP, FLAG REGISTER’LARI</h3>
+<h3 id="segment-register-lari">SEGMENT REGISTER’LARI</h3>
+<h3 id="cs-ds-es-ss">CS, DS, ES, SS</h3>
+<h3 id="operand-turleri">OPERAND TÜRLERİ</h3>
+<h3 id="reg-ax-bx-cx-dx-ah-al-bl-bh-ch-cl-dh-dl-di-si-bp-sp">REG : AX, BX, CX, DX, AH, AL, BL, BH, CH, CL, DH, DL, DI, SI, BP, SP.</h3>
+<p>SREG : DS, ES, SS, CS(sadece ikinci operand).</p>
+<p>memory _ : [BX], [BX+SI+7], degisken, vb.</p>
+<p>immediate : 5, -24, 3Fh, 10001101b, vb.</p>
+<h3 id="bayrak-durumlari">BAYRAK DURUMLARI</h3>
+<p>1 - komut bu bayrak bitini 1 yapar.</p>
+<p>0 - komut bu bayrak bitini O yapar.</p>
+<p>r - bayrak değeri komutun sonucuna bağlıdır.</p>
+<p>? - bayrak değeri tanımsızdır (1 veya 0 olabilir).</p>
+<h3 id="degi-skenler">DEĞİŞKENLER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>isim DB değer</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>isim DW değer</code></pre>
+<p>isim DD değer</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, varl
+MOV BX, var2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET i program durur
+VARI DB 7</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>var2 DW 1234h</code></pre>
+<h3 id="di-zi-ler">DİZİLER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>a DB 48h, 65h, 6Ch, 6Ch, 6Fh, 00h
+b DB 'Hello', 0</code></pre>
+<p>... a[6] al1) a[2] a[3] a[4] a[5] b(6J b[1] b[2]</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, a[3]</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV SI, 3</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, a[SI]</code></pre>
+<p>DUP operatörü</p>
+<p>adet DUP ( degerler )</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>c DB 5 DUP (9)
+c DB 9, 9, 9, 9, 9</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>d DB 5 DUP(1, 2)</code></pre>
+<p>sh 2 0</p>
+<h3 id="degiskenler">DEGISKENLER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>isim EQU &lt;ifade&gt;</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>k EQU 5
+MOV AX, k</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 5</code></pre>
+<h3 id="bayrak-bi-tleri">BAYRAK BİTLERİ</h3>
+<p>C - Carry Flag</p>
+<p>Z - Zero Flag</p>
+<p>S - Sign Flag</p>
+<p>O - Overflow Flag P - Parity Flag</p>
+<p>A - Auxiliary Flag | - Interrupt Flag D - Direction Flag</p>
+<h3 id="veri-transfer-komutlari">VERİ TRANSFER KOMUTLARI</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH, POP, LEA, LDS, LODS, LODSB, LODSW, STOS, STOSB, STOSW, MOVS, MOVSB, MOVSW, INS, INSB,</code></pre>
+<h3 id="insw-outs-outsb-outsw-xchg-lahf-sahf-xlat-in-out">INSW, OUTS, OUTSB, OUTSW, XCHG, LAHF, SAHF, XLAT, IN, OUT</h3>
+<h3 id="ari-tmeti-k-ve-mantik-komutlari">ARİTMETİK VE MANTIK KOMUTLARI</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD, INC, ADC, SUB, DEC, SBB, CMP, MUL, IMULI DIV, IDIV, CBW, CWD, DAA, DAS, AAA, AAD, AAM, AAS,
+AND, OR, XOR, TEST, NOT, NEG, SHL, SHR, SAL, SAR, ROL, RCL, RCR, ROR, SCAS, CMPS</code></pre>
+<h3 id="program-kontrol-komutlari">PROGRAM KONTROL KOMUTLARI</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP, JA, JAE, JB, JBE, JC, JE, JZ, JG, JGE, JL, JLE, INC, JNE, JNZ, JNC, JNE, JNZ, JNO, JNS, JNP, JPO,
+JO, JP, JPE, JS, JCXZ, LOOP, CALL, RET, INT, IRET, HLT, NOP</code></pre>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<h3 id="genel-bi-lgi-ler">GENEL BİLGİLER</h3>
+<h3 id="komut-o-operandlar-tanim-ve-ornek">KOMUT O OPERANDLAR TANIM VE ÖRNEK</h3>
+<p>5 Toplama sonrasında ASCII düzenlemesi yapar. BCD kodlarıyla çalışırken toplama sonrasında AH ve AL değerlerini</p>
+<p>düzenler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if low nibble of AL &gt; 9 or AF = 1 then</p>
+<h3 id="al-al-6">AL = AL + 6</h3>
+<h3 id="ah-ah-1">AH = AH +1</h3>
+<p>AF =1 CF=1 else</p>
+<h3 id="af-0">AF = 0</h3>
+<h3 id="cf-0">CF = 0</h3>
+<p>İki durumdada AL’nin soldaki dörtlüsü sıfırlanır.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 15 ; AH = 00, AL = OFh
+AAA ; AH = 01, AL = 05
+RET</code></pre>
+<p>2 Bölme sonrasında ASCII düzenlemesi yapar. İki BCD değerini bölme için hazırlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="al-ah-10-al">AL = (AH * 10) + AL</h3>
+<h3 id="ah-0">AH = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 0105h ; AH = 01, AL = 05</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AAD ; AH = 00, AL = OFh (15)
+RET</code></pre>
+<p>c|zJsJojfJrPJA ?l)rjr|2)Jr)J2</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>arpma sonrasında ASCII düzenlemesi yapar. İki BCD değerinin çarpma sonucunu düzenler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="ah-al-10">AH = AL / 10</h3>
+<p>AL = remainder</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 15 ; AL = OFh</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AAM ; AH = 01, AL = 05
+RET</code></pre>
+<p>lol</p>
+<h3 id="n">N</h3>
+<p>oO} &gt;</p>
+<p>Çıkarma sonrasında ASCII düzenlemesi yapar. BCD kodlarıyla çalışırken çıkarma sonrasında AH ve AL değerlerini düzenler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if low nibble of AL &gt; 9 or AF - 1 then</p>
+<h3 id="al-al-6">AL = AL - 6</h3>
+<h3 id="ah-ah-1">AH = AH - 1</h3>
+<p>AF =1 CE s1 else a (8)</p>
+<h3 id="ce-0">CE = 0</h3>
+<p>iki durumdada AL’nin soldaki dörtlüsü sıfırlanır.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, O2FFh ; AH = 02, AL = OFFh</code></pre>
+<h3 id="aas-ah-01-al-09">AAS ; AH = 01, AL = 09</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>SPAS ee rj(2J2(2)J2)r</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>Toplama yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operandi = operandi + operand2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5; AL = 5
+ADD AL, -3 ; AL = 2
+RET</code></pre>
+<h3 id="geze">GEZE</h3>
+<p>rİrjrlrjrjr</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>iki operand arasında karşılıklı tüm bitlere mantıksal VE işlemi yapar ve sonucu soldaki operanda kaydeder.</p>
+<h3 id="dogruluk-tablosu">Doğruluk tablosu</h3>
+<p>1 AND 1=1</p>
+<p>1 AND 0 o</p>
+<h3 id="0-and-1-0">0 AND 1 = 0</h3>
+<h3 id="0-and-0-0">0 AND 0 = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 'a' ; AL = 01100001b
+AND AL, 11011111b ; AL = 01000001b ('A')</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>ae O|P olr|/r/ojr</p>
+<p>procedure name etiket 4-byte adres</p>
+<p>Bir prosedürü çağırır ve dönüş adresini (IP) stack'a push eder. 4 byte adres kullanılarak çağırma yapılabilir. 1234h:5678h adresinde ilk değer segment ikinci değer offset adresini belirtir. Bu far çağırmadır ve IP ile birlikte CS stack'a push edilir.</p>
+<h3 id="ornek">Örnek</h3>
+<h1 id="make-com">make, COM$</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h Oo; for COM file.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL pl</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AX, 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET ; return to DOS.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>pl PROC i procedure declaration.
+MOV AX, 1234h
+RET 7; return to caller.</code></pre>
+<p>pl ENDP</p>
+<p>C[z{s[o[PlA degismez</p>
+<p>Byte degeri word’e cevirir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if high bit of AL = 1 then AH = 255 (OFFh)</p>
+<p>else</p>
+<h3 id="ah-0">AH = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AX, 0 ; AH = 0, AL = 0
+MOV AL, -5 ; AX = 000FBh (251)</code></pre>
+<p>CBW } AX = OFFFBh (-5)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>C[z{s[o[PlA degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>. Taşma bayrağı (Carry flag) sıfırlanır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="ce-0">CE = 0</h3>
+<p>Cc</p>
+<ul><li>Direction bayrağı (Direction flag) sıfırlanır. SI ve DI register'ları CMPSB,</li></ul>
+<h3 id="cmpsw-lodsb-lodsw">CMPSW, LODSB, LODSW,</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVSB, MOVSW, STOSB, STOSW komutlarıyla ardarda yapılan</code></pre>
+<p>işlemlerde artırılır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="df-0">DF = 0</h3>
+<h3 id="d">D</h3>
+<p>s Interrup etkinleştirme bayrağı (Interrupt enable flag) sıfırlanır. Bu donanım interrupt'larını etkisiz yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="if-0">IF -0</h3>
+<h3 id="i">I</h3>
+<p>i Taşma bayrağı (Carry flag) terslenir(complement).</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF - 1 then CF - 0 if CF = 0 then CF - 1</p>
+<p>Cc</p>
+<h3 id="r">R</h3>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>Karşılaştırma yapar. Soldaki operand’1 sağdakinden çıkartır ancak operandlar değişmez sadece bayrak bitleri değişir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>öperandi - operand2</p>
+<p>OF, SF, ZF, AF,PF, CF bayrakları sonuca göre yeniden düzenlenir.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV BL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, BL ; AL=5, ZF=1 Çeşit)
+RET</code></pre>
+<h3 id="gse">GSE</h3>
+<p>rİrjrlrjrjr</p>
+<p>ES: [DI] ile DS:JSIJ arasında bir byte karşılatırır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="ds-1sij-es-di">DS:1SIJ — ES: [DI]</h3>
+<p>OF, SF, ZF, AF, PF, CF bayrakları sonuca göre yeniden düzenlenir. if DF = 0 then</p>
+<p>SI =sI+1</p>
+<p>DI =DI+1</p>
+<p>SI=st-1 DI =DI-1</p>
+<p>Z(s|o r[re[r[r[r[r</p>
+<p>ES:[DI] ile DS:[SI] arasında bir word karşılatırır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="ds-si-es-di">DS: [SI] - ES: [DI]</h3>
+<p>OF, SF, ZF, AF, PF, CF bayrakları sonuca göre yeniden düzenlenir. if DF = 0 then</p>
+<h3 id="si-si-2">SI = SI + 2</h3>
+<h3 id="di-di-2">DI = DI +2</h3>
+<h3 id="si-si-2">SI = SI - 2</h3>
+<h3 id="di-di-2">DI = DI - 2</h3>
+<p>Z{[s[o rİrjrirjrjr</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>. İşaretli sayılarda word boyutunu doubleword boyutuna genişletir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if high bit of AX = 1 then DX = 65535 (OFFFFh)</p>
+<p>else</p>
+<h3 id="dx-0">DX = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV DX, 0 ; DX = 0
+MOV AX, 0 ; AX = 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, —5 ; DX AX = 00000h:0FFFBh</code></pre>
+<p>CWD ; DX AX = OFFFFh:0FFFBh</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="cizistojpta">CIZISTOJPTA</h3>
+<p>değişmez</p>
+<p>2 Toplamadan sonra ondalık düzenlemesi yapar. İki BCD değerinin toplam sonucunu düzenler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if low nibble of AL &gt; 9 or AF - 1 then</p>
+<h3 id="al-al-6">AL = AL + 6</h3>
+<p>AF =1</p>
+<p>if AL &gt; 9Fh or CF = 1 then AL = AL + 60h</p>
+<p>CF =1</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AL, OFh } AL = OFh (15)
+DAA AE Gia
+RET</code></pre>
+<p>a O|P</p>
+<p>3 Çıkarmadan sonra ondalık düzenlemesi yapar. İki BCD değerinin çıkarma sonucunu düzenler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if low nibble of AL &gt; 9 or AF - 1 then</p>
+<h3 id="al-al-6">AL = AL - 6</h3>
+<p>AF =1</p>
+<p>if AL &gt; 9Fh or CF = 1 then AL = AL — 60h</p>
+<p>Cr Si</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AL, OFFh ; OFFh (&lt;1)
+DAS 7 99h, CF -1
+RET</code></pre>
+<p>c|zJsJoJPJA rİrjrirjrjr</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>REG Azaltma işlemi yapar. memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operand = operand - 1</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 255 ; AL = OFFh (255 or -1)
+DEC AL ; AL = OFEh (254 or -2)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c|zJsJofJPJA rİrjirirjrjr</p>
+<p>CF değişmez! REG İşaretsiz bölme yapar. memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="operand-byte-ise">operand byte ise</h3>
+<p>AL - AX / operand AH - remainder (kalan)</p>
+<h3 id="operand-word-ise">operand word ise</h3>
+<p>AX = (DX AX) / operand DX = remainder (kalan)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<p>‘MOV AX, 203 ; AX = 00CBh</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV BL, 4</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV BL 7 AL = 50 (32h), AH = 3
+RET</code></pre>
+<p>cj|zjsJofJPJA</p>
+<h3 id="i-nenenenene">İNENENENENE</h3>
+<ul><li>Program kapatılır.</li></ul>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 5
+HLT</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG İşaretli bölme yapar. memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="operand-byte-ise">operand byte ise</h3>
+<p>AL = AX / operand</p>
+<p>AH = remainder (kalan)</p>
+<h3 id="operand-word-ise">operand word ise</h3>
+<p>AX = (DX AX) / operand</p>
+<p>DX = remainder (kalan)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, -203 ; AX = OFF35h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV BL, 4</code></pre>
+<p>IDIV BL ; AL = -50 (0CEh), AH = -3 (OFDh)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c/zJsJojJrPJA</p>
+<p>Tl?l?l?7 lel?</p>
+<p>REG isaretli çarpma yapar. memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="operand-byte-ise">operand byte ise</h3>
+<p>AX = AL * operand</p>
+<h3 id="operand-word-ise">operand word ise</h3>
+<p>(DX AX) = AX * operand</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AL, -2
+MOV BL, -4</code></pre>
+<h3 id="imul-bl-ax-8">IMUL BL ; AX = 8</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cj(zJsJojJrPJA r|2(/2(r|J2)(2</p>
+<p>Sonuç operandan taşmazsa CF=OF=0 sıfır olur.</p>
+<p>AL, im.byte AL veya AX'e porttan giriş alır. AL, DX ikinci operand port numarasidir. AX, im.byte AX, DX Second operand is a port number. Eğer 255 üstündeki portlara erişim gerekiyorsa DX register’1 kullanılır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+IN AX, 4 ; get status of traffic lights.
+IN AL, 7 ; get status of stepper-motor.</code></pre>
+<p>cj|zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG Artırma işlemi yapar. memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operand = operand + 1</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 4
+INC AL ; AL
+RET</code></pre>
+<p>" a</p>
+<h3 id="sjojpja">SJOJPJA</h3>
+<p>r[r[r[r[r</p>
+<p>CF degismez!</p>
+<p>immediate byte Operandla verilen interrupt’) çalıştırır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="stack-a-push-et">Stack’a push et</h3>
+<p>bayrak register'ları cs</p>
+<h3 id="ip">IP</h3>
+<p>IF=0 Program akışını interrupt prosedürüne atlatır</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AH, OBh ; teletype.
+MOV AL, 'A'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INT 10h ; BIOS interrupt.
+RET</code></pre>
+<p>Ci[z[s[o[P[A degismez 0</p>
+<p>2 Overflow bayrağı 1 ise interrupt 4'ü çalıştır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if OF = 1 then INT 4</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<p>} -5 - 127 = -132 (not in -128..127)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; the result of SUB is wrong (124),
+ji so OF = 1 is set:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, -5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AL, 127 ; AL = 7Ch (124)</code></pre>
+<p>INTO ; process error.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>Interrupt dönüşü.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="stack-tan-pop-et">Stack'tan pop et</h3>
+<h3 id="ip">IP</h3>
+<p>cs flags register</p>
+<p>c(zJsJoJPJA</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>pop edilir</code></pre>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden büyükse kısa atlama (short jump yapar). İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if (CF = 0) and (ZF = 0) then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include ‘emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 250</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 5
+JA etiketi</code></pre>
+<p>PRINT 'AL 5'ten büyük degil'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<p>PRINT 'AL 5’ten büyük"</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>CIZ[S[oO[P[A degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer birinci operand ikinciden büyük veya eşitse kısa atlama (short</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump yapar). İşaretsiz karşılaştırma yapar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc"</code></pre>
+<h1 id="make-com-org-100h">make_COM# ‘ORG 100h</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5
+CMP AL, 5
+JAE etiketli</code></pre>
+<p>PRINT 'AL is not above or equal to 5'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiketi; PRINT 'AL is above or egual to 5'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket Eğer birinci operand ikinciden küçükse kısa atlama (short jump yapar). İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, 1
+CMP AL, 5
+JB etiketl</code></pre>
+<p>PRINT 'AL is not below 5!</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<p>PRINT 'AL is below 5'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="celle">CELLE</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden küçük veya eşitse kısa atlama (short</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump yapar). İşaretsiz karşılaştırma yapar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 1 or ZF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<p>‘ORG 100h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<h3 id="cmp-al-5">‘CMP AL, 5</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JBE etiketli</code></pre>
+<p>PRINT 'AL is not below or equal to 5' IMP exit</p>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'AL is below or egual to 5'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket</p>
+<p>Taşma bayrak biti 1 ise kısa atlama yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<p>‘ORG 100h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 255
+ADD AL, 1
+JC etiketi</code></pre>
+<p>PRINT 'taşma yok"</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+siiketli:</code></pre>
+<p>PRINT “taşma var'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cizJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket CX register’! 1 ise kısa atlama yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CX = 0 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include "emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV CX, 0
+JCXZ etiket1</code></pre>
+<p>PRINT 'CX sıfır de§ildir.' IMP exit</p>
+<h3 id="etiketl">etiketl</h3>
+<p>PRINT 'CX sıfırdır.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>CIZ[s[O[P[A degismez</p>
+<p>etiket Eger birinci operand ikinci operanda esitse kisa atlama (short jump yapar). İşaretli veya işaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if 2F = 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, 5
+CMP AL, 5
+JE etiketl</code></pre>
+<p>PRINT 'AL 5’e eşit değil." UMP exit</p>
+<h3 id="etiketli">etiketli</h3>
+<p>PRINT 'AL 5’e eşit.' exits</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="ci-z-s-o-p-a">CI[Z[S[O][P[A</h3>
+<p>degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden büyük veya eşitse kısa atlama (short</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump yapar). İşaretli karşılaştırma yapar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if (ZF = 0) and (SF = OF) then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com-org-100h">make_COM# ‘ORG 100h</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5
+CMP AL, -5
+JG etiketli</code></pre>
+<p>PRINT 'AL -5'ten büyük değildir.'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiketi; PRINT ' AL -5'ten büyüktür."</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden büyük veya eşitse kısa atlama (short</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump yapar). İşaretli karşılaştırma yapar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF - OF then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, -5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JGE etiketli</code></pre>
+<h3 id="print-al-5">PRINT 'AL &lt; -5'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<h3 id="print-al-5">PRINT 'AL &gt;= -5'</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="celle">CELLE</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden küçükse kısa atlama (short jump yapar). İşaretli karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF &lt;&gt; OF then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, -2
+CMP AL, 5
+JL etiketli</code></pre>
+<h3 id="print-al-5">PRINT 'AL &gt;= 5."</h3>
+<p>UMP exit etiketi;</p>
+<h3 id="print-al-5">PRINT 'AL &lt; 5.'</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden küçük veya eşitse kısa atlama (short</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump yapar). İşaretli karşılaştırma yapar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF &lt;&gt; OF or ZF - 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, -2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JLE etiketli</code></pre>
+<h3 id="print-al-5">PRINT 'AL &gt; 5.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<h3 id="print-al-5">PRINT 'AL &lt;= 5.'</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="celle">CELLE</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket 4-byte adres</p>
+<p>Şartsız atlama yapar. . 4-byte adres 1234h:5678h seklinde girilebilir. ilk deger segment ikinci offset adrestir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>always jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<p>UMP etiket1 ; jump over 2 lines! PRINT ‘Not Jumped!"</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 0</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'Got Here!</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden büyük değilse kısa atlama (short jump) yapar. İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 1 or ZF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JNA etiketli</code></pre>
+<p>PRINT 'AL is above 5."</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiket lc</p>
+<p>PRINT 'AL is not above 5."</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="cizistojpta">CIZISTOJPTA</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden büyük değilse ve eşit değilse kısa atlama (short jump) yapar. İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2
+CMP AL, 5
+JNAE etiketi</code></pre>
+<h3 id="print-al-5">PRINT 'AL &gt;= 5."</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiketi;</p>
+<h3 id="print-al-5">PRINT 'AL &lt; 5.'</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket</p>
+<p>Eğer birinci operand ikinciden küçük değilse kısa atlama (short jump) yapar. İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 7</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JNB etiket1</code></pre>
+<h3 id="print-al-5">PRINT 'AL &lt; 5.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<h3 id="print-al-5">PRINT 'AL &gt;= 5."</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="celle">CELLE</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer birinci operand ikinciden küçük değilse ve eşit değilse kısa atlama (short jump) yapar. İşaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if (CF = 0) and (ZF = 0) then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc"</code></pre>
+<h1 id="make-com-org-100h">make_COM# ‘ORG 100h</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 7
+CMP AL, 5
+JNBE etiketi</code></pre>
+<h3 id="print-al-5">PRINT 'AL &lt;= 5."</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiketi;</p>
+<h3 id="print-al-5">PRINT 'AL &gt; 5.'</h3>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket Taşma bayrak biti (carry flag) O ise kısa atlama (short jump) yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if CF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc'</code></pre>
+<h1 id="make-com-org-100h">make_COM# ‘ORG 100h</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2
+ADD AL, 3
+JNC etiketli</code></pre>
+<p>PRINT ‘has carry.' UMP exit etiketi; PRINT 'no carry.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cizJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer birinci operand ikinciye eşit değilse kısa atlama (short jump) yapar. İşaretli veya işaretsiz karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if ZF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, 2
+CMP AL, 3</code></pre>
+<p>INE etiketi</p>
+<h3 id="print-al-3">PRINT 'AL = 3."</h3>
+<p>IMP exit etiketlik PRINT 'Al &lt;&gt; 3.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="ciz-s-o-p-a">CIZ[S[O[P[A</h3>
+<p>degismez</p>
+<p>etiket Eger birinci operand ikinciden büyük değilse kısa atlama (short jump) yapar. İşaretli karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if (ZF = 1) and (SF &lt;&gt; OF) then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 3</code></pre>
+<p>ING etiket1</p>
+<h3 id="print-al-3">PRINT 'AL &gt; 3.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<p>PRINT 'Al &lt;= 3."</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>CIZJISToJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer birinci operand ikinciden büyük değilse ve eşit değilse kısa atlama (short jump) yapar. İşaretli karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF &lt;&gt; OF then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com-org-100h">make_COM# ‘ORG 100h</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2
+CMP AL, 3
+JNGE etiketli</code></pre>
+<h3 id="print-al-3">PRINT 'AL &gt;= 3.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<p>etiketi; PRINT 'Al &lt; 3.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket Eğer birinci operand ikinciden küçük değilse kısa atlama (short jump) yapar. İşaretli karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF - OF then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, -3</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JNL etiketli</code></pre>
+<h3 id="print-al-3">PRINT 'AL &lt; -3.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'Al &gt;= -3.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="celle">CELLE</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer birinci operand ikinciden küçük değilse ve eşit değilse kısa atlama (short jump) yapar. İşaretli karşılaştırma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if (SF - OF) and (ZF - 0) then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<p>‘ORG 100h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, -3</code></pre>
+<p>İNLE etiketi</p>
+<h3 id="print-al-3">PRINT 'AL &lt;= -3.'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit
+etiketi:</code></pre>
+<p>PRINT 'Al &gt; -3.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket Overflow bayrak biti 0 ise kısa atlama (short jump) yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if OF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<p>-5 - 2 = -7 (inside -128..127) the result of SUB is correct,</p>
+<h3 id="so-of-0">so OF = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, -5
+SUB AL, 2 ; AL = 0F9h (-7)
+JNO etiketli</code></pre>
+<p>PRINT 'overflow!' IMP exit etiketlik PRINT 'no overflow."</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket Parity (eşlik) bayrak biti 0 ise (odd-tek) kısa atlama (short jump) yapar. Sadece en düşük öneme sahip 8 bit kontrol edilir. CMP, SUB, ADD,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST, AND, OR, XOR komutları set eder.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if PF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000111b ; AL = 7
+OR AL, 0 ; just set flags.</code></pre>
+<p>INP etiket1</p>
+<p>PRINT 'parity even.'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'parity odd.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>etiket İşaret bayrak (signed) biti 1 değilse (pozitif) kısa atlama (short jump) yapar. CMP, SUB, ADD, TEST, AND, OR, XOR komutları set eder.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, 00000111b ; AL = 7
+OR AL, 0 ; just set flags.</code></pre>
+<p>ONS etiket1 PRINT 'signed.' UMP exit</p>
+<h3 id="etiketl">etiketl</h3>
+<p>PRINT 'not signed.’</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>C[z{s[o[PlA degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Sıfır bayrak (ZF) biti O ise (pozitif) kısa atlama (short jump) yapar.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP, SUB, ADD, TEST, AND, OR, XOR komutları set eder.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if ZF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000111b ; AL=7
+OR AL, 0 ; just set flags.
+JNZ etiket1</code></pre>
+<p>PRINT 'zero.'</p>
+<p>UMP exit</p>
+<p>etiketi;</p>
+<p>PRINT 'not zero.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>etiket Overflow bayrak (OF) biti 1 ise kısa atlama (short jump) yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if OF - 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<p>e iye 132 (ice in 128127)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; the result of SUB is wrong (124),</code></pre>
+<h3 id="i-so-of-1-is-set">i so OF = 1 is set</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>org 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, -5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AL, 127 ; AL = 7Ch (124)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JO etiketi</code></pre>
+<p>PRINT 'no overflow.'</p>
+<p>IMP exit</p>
+<h3 id="etiketii">etiketii</h3>
+<p>PRINT 'overflow!'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="c-z-s-o-p-a">C[Z[S[O[P[A</h3>
+<p>degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket</p>
+<p>Parity (eşlik) bayrak biti 1 ise (even-çift) kısa atlama (short jump) yapar. Sadece en düşük öneme sahip 8 bit kontrol edilir. CMP, SUB,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD, TEST, AND, OR, XOR komutları set eder.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if PF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000101b ; AL = 5
+OR AL, 0 ; just set flags.
+JP etiketl</code></pre>
+<p>PRINT 'parity odd.'</p>
+<p>UMP exit</p>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'parity even."</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>etiket</p>
+<p>Parity çift ise (even) kısa atlama (short jump) yapar. Sadece en düşük öneme sahip 8 bit kontrol edilir. CMP, SUB, ADD, TEST, AND, OR, XOR komutları set eder.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if PF = 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000101b ; AL = 5
+OR AL, 0 ; just set flags.
+JPE etiket1</code></pre>
+<p>PRINT 'parity odd.'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP exit</code></pre>
+<h3 id="etiketli">etiketli</h3>
+<p>PRINT 'parity even.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Parity tek ise (odd) kısa atlama (short jump) yapar. Sadece en düşük öneme sahip 8 bit kontrol edilir. CMP, SUB, ADD, TEST, AND, OR, XOR komutları set eder.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if PF = 0 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000111b ; AL = 7
+OR AL, 0 ; just set flags.
+JPO etiketli</code></pre>
+<p>PRINT 'parity even.'</p>
+<p>UMP exit</p>
+<h3 id="etiketi">etiketi</h3>
+<p>PRINT 'parity odd.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>etiket Sign bayrak biti 1 ise (negatif) kısa atlama (short jump) yapar. CMP,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB, ADD, TEST, AND, OR, XOR komutları set eder.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if SF = 1 then jump</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+MOV AL, 10000000b ; AL = -128
+OR AL, 0 ; just set flags.
+JS etiketi</code></pre>
+<p>PRINT 'not signed.' UMP exit</p>
+<h3 id="etiketl">etiketl</h3>
+<p>PRINT 'signed.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>C[z{s[o[PlA degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket Eğer sıfır ise (ZF-1) kısa atlama (short jump) yapar. CMP, SUB, ADD,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST, AND, OR, XOR komutları set eder.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>if ZF = 1 then jump</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JZ etiketi</code></pre>
+<p>PRINT 'AL is not equal to 5.' UMP exit</p>
+<p>etiketi;</p>
+<p>PRINT 'AL is equal to 5.'</p>
+<h3 id="exit">exit</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>2 AH register’ina bayrak register’inin (flags register) en düşük öneme sahip 8 bit’ini yükler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>AH = flags register AH: 7 6 5 4 3 2 1 te)</p>
+<h3 id="sf-zf-0-af-0-pf-1-cf">(SF) [ZF] [0] [AF] [0] [PF] [1] [CF]</h3>
+<p>1, 3, 5 bitleri ayrılmıştır.</p>
+<p>CIZ[S[oO[P[A degismez</p>
+<p>REG, memory Hafizadan alınan doubleword datayı hedef operand register’a ve DS’ye yükler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>REG = first word DS = second word</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<p>LDS AX, m</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>m DW 1234h</code></pre>
+<p>DW 5678h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>AX is set to 1234h, DS is set to 5678h.</p>
+<p>cJzJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG, memory Efektif adres yükler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>REG = adres of memory (offset)</p>
+<h3 id="ornek">Örnek</h3>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+LEA AX, m
+RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>m DW 1234h
+END</code></pre>
+<p>AX’e 0104h degeri atanir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA komutu 3 byte, RET komutu 1 byte’tir. 0100h adresinden</code></pre>
+<p>başlandığı icin m’nin adresi 0104h olur.</p>
+<h3 id="cizjsjojpja">CIZJSJOJPJA</h3>
+<p>değişmez</p>
+<p>REG, memory Hafızadan alınan doubleword datayı hedef operand register'a ve ES'ye yükler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>REG = first word ES = second word</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make COM$#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<p>LES AX, m</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>m DW 1234h</code></pre>
+<p>DW 5678h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>AX register’inin değeri 1234h olur ve ES register’inin değeri 5678h olur.</p>
+<p>CIZJSJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>. AL register’ina DS:[SI] adresinden bir byte yükler. SI değeri güncellenir (1 artırılır (D=0), 1 azaltılır (D=1))</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="al-ds-1si-j">AL = DS:1SI)J</h3>
+<p>if DF = 0 then Sr = Si + 1 else</p>
+<p>Seki sl</p>
+<h3 id="ornek">Örnek</h3>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h
+LEA SI, al
+MOV CX, 5
+MOV AH, OEh
+m: LODSB
+INT 10h
+LOOP m</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>al DB 'H', 'e', Cl, '1!, to!</code></pre>
+<p>CiZ[s[o[P[A degismez</p>
+<p>i AX register'ına DS:[SI] adresinden bir word yükler. SI değeri güncellenir (2 artırılır (D=0), 2 azaltılır (D=1))</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="ax-ds-sij">AX = DS:(SIJ</h3>
+<p>if DF = 0 then Su = si 2 else</p>
+<p>Sh ei = 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA SI, al</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REP LODSW ; finally there will be 555h in AX.
+RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>al dw 1lih, 222h, 333h, 444h, 555h</code></pre>
+<p>CIZJSJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>etiket CX bir azaltılır ve CX sıfır değilse etikete atlanır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>ex sGX-1</p>
+<p>if CX &lt;&gt; 0 then</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump</code></pre>
+<p>else</p>
+<p>no jump, continue</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc"</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<p>etiker ik</p>
+<p>PRININ 'loop!'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOP etiket1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="ci-z-s-o-p-a">CI[Z[S[O][P[A</h3>
+<p>degismez</p>
+<p>etiket CX bir azaltilir ve CX sifir degilse ve esitlik varsa (verilen iki operand arasinda) (ZF=1) etikete atlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>xx =</p>
+<p>if (CX &lt;&gt; 0) and (ZF = 1) then</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump</code></pre>
+<p>else</p>
+<p>no jump, continue</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; Loop until result fits into AL alone,
+; or 5 times. The result will be over 255
+; on third loop (100+100+100),</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; so loop will exit.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc’</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, O</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<h3 id="putc">PUTC '*'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AX, 100</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AH, 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOPE etiket1l</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>C[Z[S[O[Pl/A degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket CX bir azaltılır ve CX sıfır değilse ve eşitlik yoksa (verilen iki operand arasında) (ZF=0)</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>EK =x</p>
+<p>if (CX &lt;&gt; 0) and (ZF = 0) then</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump</code></pre>
+<p>else</p>
+<p>no jump, continue</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; Loop until '7' is found,
+; or 5 times.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV SI, 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<h3 id="putc-4">PUTC '4!</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, v1[SI]</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC SI ; next byte (SI=SI+1).
+CMP AL, 7</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOPNE etiketl</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>vl db 9, 8, 7, 6, 5</code></pre>
+<p>cizJsJoJPJA değişmez</p>
+<p>etiket CX bir azaltılır ve CX sıfır değilse ve ZF=0 ise etikete atlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="cx-cx-1">CX = CX -— 1</h3>
+<p>if (CX &lt;&gt; 0) and (ZF = 0) then</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump</code></pre>
+<p>else</p>
+<p>no jump, continue</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; Loop until '7' is found,</code></pre>
+<p>7 or 5 times.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc!</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV SI, 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<h3 id="etiketl">etiketl</h3>
+<p>rege) Tet</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, v1[SI]</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC SI ; next byte (SI=SI+1).</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 7
+LOOPNZ etiketli
+RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>vl db 9, 8, 7, 6, 5</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>etiket CX bir azaltılır ve CX sıfır değilse ve ZF=1 ise etikete atlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>cece</p>
+<p>if (CX &lt;&gt; 0) and (ZF = 1) then</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump</code></pre>
+<p>else</p>
+<p>no jump, continue</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; Loop until result fits into AL alone,
+; or 5 times. The result will be over 255
+; on third loop (100+100+100),</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; so loop will exit.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include 'emu8086.inc'</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<h3 id="etiketi">etiketi</h3>
+<p>Eyre 1 #</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AX, 100</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AH, 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOPZ etiketl</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="ciz-s-o-p-a">CIZ[S[O[P[A</h3>
+<p>degismez</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV REG, memory İkinci operand birinci operanda kopyalanır.</code></pre>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">memory, REG</th></tr></thead><tbody></tbody></table></div>
+<h3 id="reg-reg-mov-komutuyla">REG, REG MOV komutuyla</h3>
+<p>memory, * CS ve IP register'larına değer atanamaz. immediate * İki segment register'i arasında değer aktarılamaz (önce genel REG, immediate amaçlı register'a aktarılmalıdır). SREG, memory</p>
+<h3 id="memory-sreg-algoritma">memory, SREG Algoritma</h3>
+<p>REG, SREG operandl = operand2</p>
+<h3 id="sreg-reg">SREG, REG</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, OB800h ; set AX = B800h (VGA memory).
+MOV DS, AX ; copy value of AX to DS.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL, 'A' ; CL = 41h (ASCII code).</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CH, 01011111b ; CL = color attribute.
+MOV BX, 15Eh ; BX = position on screen.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV [BX], CX ; w.[0B800h:015Eh] = CX.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET ; returns to operating system.</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>. DS:(SIJ adresinden ES:(DIJ adresine bir byte kopyalar. SI ve DI register'ları güncellenir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-dij-ds-si">ES:(DIJ = DS:[SI]</h3>
+<p>if DF = 0 then SE = Si 4 1 DI =DI+1</p>
+<p>SI=st-1</p>
+<h3 id="di-di-1">DI = DI-1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA SI, al</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA DI, a2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REP MOVSB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>ai Bel, 2, 3,475</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>a2 DB 5 DUP (0)</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>. DS:(SIJ adresinden ES: [DI] adresine bir word kopyalar. SI ve DI register'ları güncellenir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-di-ds-sij">ES:(DI] = DS:(SIJ</h3>
+<p>if DF = 0 then</p>
+<h3 id="si-si-2">SI = SI + 2</h3>
+<h3 id="di-di-2">DI = DI + 2</h3>
+<h3 id="si-si-2">SI = SI -2</h3>
+<h3 id="di-di-2">DI = DI - 2</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA SI, al</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA DI, a2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REP MOVSW</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>al DW 1,2,3,4,5
+a2 DW 5 DUP(0)</code></pre>
+<p>CIZ[s[O[P[A degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<h3 id="reg">REG</h3>
+<p>memory</p>
+<p>İşaretsiz çarpma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="operand-byte-ise">operand byte ise</h3>
+<p>AX - AL * operand.</p>
+<h3 id="operand-word-ise">operand word ise</h3>
+<p>(DX AX) = AX * operand.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 200 ; AL = 0C8h
+MOV BL, 4</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL BL ; AX = 0320h (800)
+RET</code></pre>
+<p>C{[Z{[s[O[PlA cl? [?[r[?[?</p>
+<p>CF=OF=0 when high section of the result is zero.</p>
+<h3 id="reg">REG</h3>
+<p>memory</p>
+<p>Bir sayının işaretini tersler (ikinin tümleyeni).</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Invert all bits of the operand</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Add 1 to inverted operand</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5 ; AL = 05h</code></pre>
+<p>NEG AL ; AL = OFBh (-5) NEG AL ; AL = 05h (5)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>c|zJsJo rİrjrirjrjr</p>
+<p>İşlem yapmaz.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Do nothing</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; do nothing, 3 times:
+NOP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cizJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG Operandaki her bit terslenir (birin tümleyeni). memory</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>if bit is 1 turn it to 0. if bit is 0 turn it to 1.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00011011b</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT AL ; AL = 11100100b
+RET</code></pre>
+<p>CIZ[sS[O[P[A</p>
+<p>degismez REG, memory İki operandaki karşılıklı her bit için mantıksal veya işlemi yapar. memory, REG</p>
+<h3 id="reg-reg-dogruluk-tablosu">REG, REG Doğruluk tablosu</h3>
+<p>memory, 1OR1=1</p>
+<p>immediate 1 oR 0 REG, immediate OORI</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 'A' ; AL = 01000001b</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL, 00100000b ; AL = 01100001b ('a')
+RET</code></pre>
+<p>c|zJsJojfJrPJA olr|r/ojJrfJ2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT im.byte, AL AL veya AX register’1 verilen porta gönderilir.</code></pre>
+<p>im.byte, AX İlk operand port numarasıdır. Eğer 255'in üstündeki portlara erişim DX, AL gerekirse DX register’) kullanılır.</p>
+<h3 id="dx-ax">DX, AX</h3>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, OFFEh ; Turn on all</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT 4, AX ; traffic lights.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 100b ; Turn on the third</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT 7, AL ; magnet of the stepper-motor.</code></pre>
+<p>cj|zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<h3 id="reg">REG</h3>
+<h3 id="sreg">SREG</h3>
+<p>memory</p>
+<p>Stack’tan 16 bit değer alır ve operanda aktarır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operand = SS:[SP] (stack'ın en üstü)</p>
+<h3 id="sp-sp-42">SP - SP 42</h3>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 1234h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH AX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP DX ; DX = 1234h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>Bütün genel amaçlı register'ları (DI, SI, BP, SP, BX, DX, CX, AX) stack’tan pop eder. SP değeri gözardı edilir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not: Bu komut sadece 80186 ve üstü lişlemcilerde kullanılır.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP DI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP SI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP BP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP xx (SP gözardı edilir)
+POP BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP DX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP CX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP AX</code></pre>
+<p>cj|zJsJoJPJA değişmez</p>
+<p>Flag register’ina stack’tan değer pop edilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>flags = SS:(SPJ (top of the stack)</p>
+<h3 id="sp-sp-2">SP = SP + 2</h3>
+<p>C[Z[s[oO[PlA</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Pop edilir</code></pre>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<h3 id="reg">REG</h3>
+<h3 id="sreg">SREG</h3>
+<p>memory immediate</p>
+<p>16 bit değer stack'a saklanır. Store 16 bit value in the stack.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not: PUSH immediate sadece 80186 ve üstü işlemcilerde kullanılır.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<p>e</p>
+<p>SS:[SP] (top of the stack) = operand</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 1234h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH AX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP DX ; DX = 1234h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<h3 id="cizjsjojpja">CIZJSJOJPJA</h3>
+<p>değişmez</p>
+<p>Tüm genel amaçlı register'ları (AX, CX, DX, BX, SP, BP, SI, DI) stack’a push eder. SP register’in1 PUSHA komutundan önceki değeri kullanılır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not: Bu komut sadece 80186 ve üstü işlemcilerde kullanılır.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH AX
+PUSH CX
+PUSH DX
+PUSH BX
+PUSH SP
+PUSH BP
+PUSH SI
+PUSH DI</code></pre>
+<p>c(zJsJoJPJA değişmez</p>
+<p>Flag register’ stack'a saklar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="sp-sp-2">SP = SP - 2</h3>
+<p>SS:[SP] (top of the stack) = flags</p>
+<p>cj|zJsJoJPJAa değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>memory, immediate</p>
+<p>REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandi taşma bayrağı (carry flag) üzerinden sola döndürür. Bit olarak dönme sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>shift all bits left, the bit that goes off is set to CF and</p>
+<p>previous value of CF is inserted to the right-most position.</p>
+<h3 id="ornek">Örnek</h3>
+<p>STC ; set carry (CF=1).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 1Ch ; AL = 00011100b</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL AL, 1 ; AL = 00111001b, CF=0.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+clo
+rjr</code></pre>
+<p>OF-0 olur eğer birinci operand işaretini korursa.</p>
+<p>memory, immediate</p>
+<p>REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandi taşma bayrağı (carry flag) üzerinden sağa döndürür. Bit olarak dönme sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>shift all bits right, the bit that goes off is set to</p>
+<h3 id="ce">CE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and previous value of CF is inserted to the left-most
+position.</code></pre>
+<h3 id="ornek">Örnek</h3>
+<p>STC ; set carry (CF=1).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 1Ch ; AL = 00011100b</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR AL, 1 ; AL = 10001110b, CF=0.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+clo
+rir</code></pre>
+<p>OF=0 olur eger birinci operand isaretini korursa.</p>
+<p>tekrarlanacak komut</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVSB, MOVSW, LODSB, LODSW, STOSB, STOSW komutlarim CX defa
+tekrarlar.</code></pre>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="check-cx">check_cx</h3>
+<p>if CX &lt;&gt; 0 then</p>
+<p>do following chain instruction cX = CX - 1</p>
+<p>go back to check_cx</p>
+<p>else</p>
+<p>exit from REP cycle</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>tekrarlanacak komut</p>
+<p>CMPSB, CMPSW, SCASB, SCASW komutlarını ZF-1 olduğu sürece (sonuç eşit olur) ve en fazla CX değeri kadar tekrarlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="check-cx">check, cx</h3>
+<p>if CX &lt;&gt; 0 then</p>
+<p>do following chain instruction</p>
+<h3 id="cx-cx-1">CX = CX -— 1</h3>
+<p>if ZF = 1 then</p>
+<p>m go back to check_cx else</p>
+<p>m exit from REPE cycle else</p>
+<p>exit from REPE cycle</p>
+<p>tekrarlanacak komut</p>
+<p>CMPSB, CMPSW, SCASB, SCASW komutlarını ZF=0 olduğu sürece (sonuç eşit değil) ve en fazla CX değeri kadar tekrarlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="check-cx">check cx</h3>
+<p>if CX &lt;&gt; 0 then</p>
+<p>do following chain instruction CX = cx -1</p>
+<p>if ZF = 0 then</p>
+<p>go back to check_cx else</p>
+<p>m exit from REPNE cycle else</p>
+<p>exit from REPNE cycle</p>
+<p>tekrarlanacak komut</p>
+<p>CMPSB, CMPSW, SCASB, SCASW komutlarını ZF=0 olduğu sürece (sonuç sıfır değil) ve en fazla CX değeri kadar tekrarlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="check-cx">check cx</h3>
+<p>if CX &lt;&gt; 0 then</p>
+<p>do following chain instruction cX = CX -1</p>
+<p>if ZF = 0 then</p>
+<p>m go back to check_cx else</p>
+<p>m exit from REPNZ cycle else</p>
+<p>exit from REPNZ cycle</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>tekrarlanacak CMPSB, CMPSW, SCASB, SCASW komutlarını ZF-1 olduğu sürece (sonuç komut sıfır ) ve en fazla CX değeri kadar tekrarlar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>check, c if CX &lt;&gt; 0 then</p>
+<p>do following chain instruction</p>
+<h3 id="cx-cx-1">CX = CX -— 1</h3>
+<p>if ZF = 1 then</p>
+<p>go back to check_cx</p>
+<p>else</p>
+<p>exit from REPZ cycle</p>
+<p>else</p>
+<p>exit from REPZ cycle</p>
+<p>z Near prosedürden dönüş yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Pop from stack:</code></pre>
+<h3 id="ip">IP</h3>
+<p>if immediate operand is present: SP = SP + operand</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h ; for COM file.
+CALL pl</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AX, 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET ; return to OS.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>pl PROC ; procedure declaration.
+MOV AX, 1234h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET ; return to caller,</code></pre>
+<p>pl ENDP</p>
+<h3 id="cizjsjojpja">CIZJSJOJPJA</h3>
+<p>değişmez</p>
+<p>5 Far prosedürden dönüş yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Pop from stack:</code></pre>
+<h3 id="ip">IP</h3>
+<p>cs</p>
+<p>if immediate operand is present: SP = SP + operand</p>
+<p>c(zJsJoJPJA değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>memory, immediate</p>
+<p>REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandi sola döndürür. Bit olarak dönme sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>shift all bits left, the bit that goes off is set to CF and</p>
+<p>the same bit is inserted to the right-most position.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AL, 1Ch ; AL = 00011100b
+ROL AL, 1 ; AL = 00111000b, CF=0.
+RET
+o
+rir</code></pre>
+<p>OF-0 olur eğer birinci operandi işaretini korursa.</p>
+<p>memory, immediate REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandı sağa döndürür. Bit olarak dönme sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>shift all bits right, the bit that goes off is set to</p>
+<h3 id="ce">CE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and the same bit is inserted to the left-most
+position.</code></pre>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 1Ch ; AL = 00011100b
+ROR AL, 1 ; AL = 00001110b, CF=0.
+RET
+o
+tier</code></pre>
+<p>OF=0 olur eğer birinci operandi işaretini korursa.</p>
+<p>AH register'ına flag register'inın en az öneme sahip 8 bit'inin değerini yükler.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>flags register = AH</p>
+<p>AH bit:7 6 5 4 2 Cs 1 o</p>
+<h3 id="sf-zf-0-af-0-pf-1-cf">(SF] [ZF] [0] [AF] [0] [PF] [1] [CF]</h3>
+<p>1, 3, 5 bitler ayrilmistir.</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>memory, immediate</p>
+<p>REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandi sola aritmetik kaydırır. Kaydırma sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Shift all bits left, the bit that goes off is set to Cr.</p>
+<p>Zero bit is inserted to the right-most position.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, OEOh ; AL = 11100000b
+SAL AL, 1 ; AL = 11000000b, CF=1.
+RET</code></pre>
+<p>o rjr</p>
+<p>OF=0 eğer birinci operand işaretini korursa.</p>
+<p>memory, immediate REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandı sağa aritmetik kaydırır. Kaydırma sayısı ikinci operandla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Shift all bits right, the bit that goes off is set to</p>
+<h3 id="ce">CE.</h3>
+<p>The sign bit that is inserted to the left-most position</p>
+<p>has the same value as before shift.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, OEOh ; AL = 11100000b
+SAR AL, 1 ; AL = 11110000b, CF=0.
+MOV BL, 4Ch ; BL = 01001100b</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR BL, 1 ; BL = 00100110b, CF=0.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+clo
+rir</code></pre>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>Ödünç bitiyle çıkarma işlemi yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operandi = operandi - operand2 - CF</p>
+<h3 id="ornek">Örnek</h3>
+<p>sTC</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<h3 id="sbb-al-3-al-5-3-1-1">SBB AL, 3;AL-5-3-1-1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>AL ile ES:(DIJ adresindeki değeri karşılaştırır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-di-al">ES:(DI] - AL</h3>
+<h3 id="set-flags-according-to-result">set flags according to result</h3>
+<h3 id="of-sf-zf-af-pf-cf">OF, SF, ZF, AF, PF, CF</h3>
+<p>if DF = 0 then</p>
+<h3 id="di-di-1">DI = DI +1</h3>
+<p>else</p>
+<p>DI=DI-1</p>
+<p>c|zJsJo rİririririr</p>
+<p>AX ile ES:[DI] adresindeki değeri karşılaştırır.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-dij-ax">ES:(DIJ - AX</h3>
+<h3 id="set-flags-according-to-result">set flags according to result</h3>
+<h3 id="of-sh-ze-ar-pe-ce">OF, SH, ZE, AR, PE, CE</h3>
+<p>if DF = 0 then</p>
+<h3 id="di-di-2">DI = DI + 2</h3>
+<p>else</p>
+<h3 id="di-di-2">DI = DI - 2</h3>
+<p>Gebimak rİririririr</p>
+<p>memory, immediate REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandı sola kaydırır. Kaydırma sayısı ikinci operanla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Shift all bits left, the bit that goes off is set to</p>
+<h3 id="ee">EE.</h3>
+<p>Zero bit is inserted to the right-most position.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 11100000b
+SHL AL, 1 ; AL = 11000000b, CF=1.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+clo
+rir</code></pre>
+<p>OF=0 eğer birinci operand işaretini korursa.</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>memory, immediate</p>
+<p>REG, immediate memory, CL</p>
+<h3 id="reg-cl">REG, CL</h3>
+<p>Birinci operandi sağa kaydırır. Kaydırma sayısı ikinci operanla belirtilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>Shift all bits right, the bit that goes off is set to</p>
+<h3 id="ce">CE.</h3>
+<p>Zero bit is inserted to the left-most position.</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000111b
+SHR AL, 1 ; AL = 00000011b, CF=1.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+clo
+rir</code></pre>
+<p>OF=0 eğer birinci operand işaretini korursa.</p>
+<p>Taşma bayrağı (carry flag) set edilir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>GE s1</p>
+<p>Yön bayrağı (direction flag) set edilir. CMPSB, CMPSW, LODSB, LODSW,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVSB, MOVSW, STOSB, STOSW komutları tarafından SI ve DI azaltılır</code></pre>
+<p>(D=1) veya artırılır (D-0).</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="de-1">DE = 1</h3>
+<p>Kesme bayrağı (interrupt flag) set edilir. Bu donanım interrupt’ larini etkin yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="te-i">TE -İ</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in</code></pre>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>AL register’inin değerini ES:[DI] adresine kopyalar. DI güncellenir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-di">ES: [DI]</h3>
+<p>if DF =</p>
+<h3 id="di-di">DI = DI</h3>
+<p>else</p>
+<h3 id="di-di">DI = DI</h3>
+<h3 id="al">AL</h3>
+<p>then</p>
+<p>+ ol</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA DI, al
+MOV AL, 12h
+MOV CX, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REP STOSB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>al DB 5 dup(0)</code></pre>
+<h3 id="ci-z-s-o-p-a">CI[Z[S[O][P[A</h3>
+<p>degismez</p>
+<p>AX register’inin değerini ES:[DI] adresine kopyalar. DI güncellenir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<h3 id="es-di-ax">ES:(DI] = AX</h3>
+<p>if DF = 0 then</p>
+<h3 id="di-di-2">DI = DI + 2</h3>
+<p>else</p>
+<h3 id="di-di-2">DI = DI - 2</h3>
+<h3 id="ornek">Örnek</h3>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA DI, al
+MOV AX, 1234h
+MOV CX, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REP STOSW</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>al DW 5 dup(0)</code></pre>
+<h3 id="cizistojpta">CIZISTOJPTA</h3>
+<p>değişmez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>Cikarma yapar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operandi = operand1 — operand2</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AL, 1; AL &lt; 4
+RET</code></pre>
+<p>c|zJsJo rİrjirirjrjr</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>İk operand arsında karşılıklı bitlerin hepsine e işlemi uygular. Operandların değeri değişmez ZF, SF ve PF bayrak bitleri değişir.</p>
+<h3 id="dogruluk-tablosu">Doğruluk tablosu</h3>
+<p>1 AND 1 =1</p>
+<h3 id="1-and">1 AND</h3>
+<h3 id="0-and">0 AND</h3>
+<h3 id="0-and">0 AND</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ore
+coo</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:
+MOV AL, 00000101b
+TEST AL, 1 ; ZF = 0.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST AL, 10b ; ZF 1.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET
+İİ</code></pre>
+<p>olr|/rJojr</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>İki operandın değerlerini yer değiştirir.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>operandl &lt; — &gt; operand2</p>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AH, 2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XCHG AL, AH ; AL = 2, AH =
+XCHG AL, AH ; AL = 5, AH = 2
+RET</code></pre>
+<p>" a</p>
+<p>C[z{s[o[PlA degismez</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<p>Tablo kullanarak bir byte çevirir. DS:(BX*işaretsiz AL] adresinden bir byte bilgiyi AL register'ına kopyalar.</p>
+<h3 id="algoritma">Algoritma</h3>
+<p>AL = DS:(BX + unsigned AL]</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Ornek:</code></pre>
+<h1 id="make-com">make_COM#</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 100h</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA BX, dat</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 2</code></pre>
+<p>XLATB ; AL = 33h</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>dat DB 11h, 22h, 33h, 44h, 55h</code></pre>
+<p>CIZ[S[oO[P[A degismez</p>
+<p>REG, memory memory, REG</p>
+<h3 id="reg-reg">REG, REG</h3>
+<p>memory, immediate REG, immediate</p>
+<p>İki operandın karşılıklı bitlerine XOR işlemi yapılır. Sonuç birinci operanda saklanır.</p>
+<h3 id="dogruluk-tablosu">Doğruluk tablosu</h3>
+<h3 id="1-xor-1-0">1 XOR 1 = 0</h3>
+<h3 id="1x0ro-1">1X0RO-1</h3>
+<p>0 XOR1=1</p>
+<h3 id="0-xor-0-0">0 XOR 0 = 0</h3>
+<h3 id="ornek">Örnek</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 00000111b
+XOR AL, 00000010b ; AL = 00000101b
+RET</code></pre>
+<p>CIZJSJoJPJA olr|r/ojJrfJ2</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bol</p>
+<h3 id="ornekler">ÖRNEKLER</h3>
+<p>hafizada yeralan ve herbirisi 20 rakamdan olusan 16'lik tabandaki iki sayinin toplamini yapar. ilk sayi 0100h-0109h</p>
+<p>ikinci sayi 010Ah-0113h</p>
+<p>sonuc 0114h-011Dh</p>
+<p>m.ali akcayol</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>org 0100h
+mov (0100h),8A76h
+mov [0102h],6557h
+mov [0104h],1A98h
+mov [0106h],713Eh
+mov [0108h],8797h
+mov [010Ah],2587h
+mov [010Ch],8B96h
+mov [010Eh],2588h
+mov [0110h],46D1h
+mov [0112h],9854h
+mov si, 0108h ; 1.sayinin en sagdaki 4 rakam (1 word) aliniyor
+mov bx, [si]
+add bx, [si+000Ah] ; 2.sayinin en sagdaki 4 rakami ile toplaniyor
+mov [sit+0014h],bx ; sonuc hafizaya yaziliyor
+jne atlal ; carry=0 ise atla</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov dx,1 ; sub isleminden once carry dx'e saklaniyor
+atlal:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>sub si,2 ; sola dogru 4 rakam (1 word) gidiliyor
+dongu:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov bx, [si]</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>add bx, [si+000Ah]
+add bx, dx</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>xor dx,dx</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov [sit+0014h],bx</code></pre>
+<p>1.sayinin onceki 4 rakami (1 word) aliniyor 2.sayinin onceki 4 rakami ile toplaniyor varsa carry ekleniyor</p>
+<p>saklanan carry degeri sifirlaniyor</p>
+<p>sonuc hafizaya yaziliyor</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>inc atla2 ; carry=0 ise atla
+mov di,1
+atla2:
+sub si,2 sola dogru 4 rakam (1 word) gidiliyor</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>cmp si, 0100h
+jae dongu</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>call mesajyaz</code></pre>
+<p>hit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mesajyaz proc
+mov dx, offset mesajvar</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, 9
+int 21h
+ret</code></pre>
+<p>en sola gelindimi? gelinmediyse basa doner</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mesajvar db "toplama islemi tamamlandi... $"</code></pre>
+<p>mesajyaz endp</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<h3 id="nnnnnnnnnn">NNNNNNNNNN</h3>
+<p>hafizada yeralan toplam 100 karakterden ADET ile belirtilen kadarini kendi</p>
+<p>=</p>
+<p>BRA RRR Be BS</p>
+<h3 id="bebe">BEBE</h3>
+<p>yerinde siralayan algoritma - bubblesort</p>
+<p>m.ali akcayol</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>org 0100h
+diziO0 db 'v','a',
+dizil db 'v','a',
+dizi2 db 'v','a',
+dizi3 db 'v','a',
+dizi4 db 'v','a',
+dizi5 db 'v','a',
+dizi6 db 'v','a',
+dizi7 db 'v','a',
+dizi8 db 'v','a',
+dizi9 db 'v','a',
+ADET dw 9</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov dx, ADET
+call ekranayazdir</code></pre>
+<h3 id="dongu">dongu</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov cx,0
+icdongu:
+mov si,cx
+mov al, [dizid+si]
+mov bl, [dizid+sit1]
+cmp al,bl
+jbe devam
+call degistir
+devam:
+inc cx
+cmp cx,dx
+jnb icdongusonu
+jmp icdongu
+icdongusonu:
+dec dx
+cmp dx, 0
+je bitir
+jmp dongu
+bitir:
+call ekranayazdir
+hit</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>degistir proc
+mov [dizid+si],bl
+mov [dizi0+si+1],al
+ret</code></pre>
+<p>degistir endp</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ekranayazdir proc
+push dx
+mov cx, 0
+mov ah, 2
+tekrar:</code></pre>
+<p>ilk 10</p>
+<p>eleman</p>
+<p>karakter siralanir</p>
+<p>sayisi-1</p>
+<p>toplam eleman sayisi kadar tekrar siralanmamis eleman sayisi kalan eleman sayisi kadar tekrar</p>
+<p>soldaki sagdaki</p>
+<p>soldaki soldaki</p>
+<p>eleman eleman</p>
+<p>kucukse degistrme yapma buyukse degistir</p>
+<p>siralanmamis elemanlarda bir artir siralanmamis elemanlarin sonuna geldimi siralanmamis elemanlarin sonu siralanmamis eleman devam ediyor</p>
+<p>ic dongude siralanmamis eleman kalmadi</p>
+<p>sirasiz sirasiz sirasiz sirasiz</p>
+<p>kalan eleman sayisini bir azalt eleman sayisi 0 mi?</p>
+<p>eleman sayisi 0 ise bitir eleman varsa basa git</p>
+<p>sirali yazdir program bitisi</p>
+<p>yanyana</p>
+<p>iki karakter yer degistirir</p>
+<p>dl ye deger atanacak karakter sayaci</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>int 21,</code></pre>
+<p>ah=2, ekrana karakter yazdir</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov
+mov
+int
+inc
+cmp</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ja cikis</code></pre>
+<p>siyvex</p>
+<p>dl, 21h cx cx,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jmp tekrar
+cikis:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov
+int
+mov
+int
+pop
+ret</code></pre>
+<p>dl, 21h dı, 21h dx</p>
+<p>ODh</p>
+<p>OAh</p>
+<p>[dizidtsi]</p>
+<h3 id="adet">ADET</h3>
+<p>ekranayazdir endp</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>int 21, ah=2, ekrana karakter yazdir</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return</code></pre>
+<p>yeni satir</p>
+<p>dl nin eski degeri alindi</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; binary search ---</code></pre>
+<p>sirali bir dizide en cok log(2)sayiadedi kadar kontrolle aranan sayinin olup olmadigini bulur m.ali akcayol</p>
+<p>bolen aranan sayi</p>
+<p>en kucuk adres en buyuk adres</p>
+<p>eleman sayisi hesaplaniyor</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ortadaki sayi bulunuyor</code></pre>
+<p>kalan atiliyor</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ortadaki sayinin adresi</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; ortadaki sayi arananla karsilastiriliyor
+; kucukse saga gidilir</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; buyukse sola gidilir</code></pre>
+<p>esitse bulunmustur</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; eleman sayisi hesaplaniyor</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; ortadaki sayi bulunuyor</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; kalan atiliyor</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>org 0100h
+mov (0100h), 1
+mov (0101h), 2
+mov [0102h], 3
+mov [0103h], 4
+mov [0104h], 6
+mov [0105h], 8
+mov [0106h], 9
+mov [0107h], 10
+mov [0108h], 11
+mov [0109h], 13
+mov [010Ah], 14
+mov [010Bh], 15
+mov [010Ch], 16
+mov [010Dh], 17
+mov [010Eh], 19
+mov [010Fh], 20
+mov [0110h], 22
+mov [0111h], 23
+mov [0112h], 25
+mov [0113h], 27
+mov [0114h], 28
+mov [0115h], 30
+mov dl,2 ;
+mov dh, 28 ;
+mov bx,0100h ;
+mov cx,0115h ;
+mov si,0100h
+mov ax,cx ;
+dec bx
+sub ax,bx
+div dl ;
+xor ah,ah i
+add si,ax i
+dongu:
+cmp [si],dh
+jb sagtaraf
+ja soltaraf
+je bulundu
+sagtaraf:
+mov bx,si
+mov ax,cx
+sub ax,bx
+div dl
+cmp al,0
+jz kalanall
+xor ah,ah
+add si,ax</code></pre>
+<p>} ortadaki sayinin adresi</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jmp</code></pre>
+<p>dongu</p>
+<h3 id="kalanall">kalanall</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>xchg al,ah
+add si,ax</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>cmp [si],dh
+je bulundu
+jne sayiyok</code></pre>
+<h3 id="soltaraf">soltaraf</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov
+mov
+sub
+div
+cmp</code></pre>
+<p>cx, si ax,cx ax, bx dl al,0</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jz kalanal2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>xor
+sub
+jmp</code></pre>
+<p>ah,ah si,ax dongu</p>
+<h3 id="kalanal2">kalanal2</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>xchg al,ah
+sub si,ax
+cmp [si],dh
+je bulundu
+jne sayiyok</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; yazdirma islemleri</code></pre>
+<h3 id="bulundu">bulundu</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov dx,
+mov ah,
+int 21h
+ret</code></pre>
+<p>basa don son kalan eleman kontrol ediliyor</p>
+<p>eleman sayisi hesaplaniyor</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ortadaki sayi bulunuyor</code></pre>
+<p>kalan atiliyor</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ortadaki sayinin adresi</code></pre>
+<p>basa don</p>
+<p>son kalan eleman kontrol ediliyor</p>
+<p>offset mesajvar</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mesajvar db "sayi bulundu $"
+jmp cikis</code></pre>
+<h3 id="sayiyok">sayiyok</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov dx,
+mov ah,
+int 21h
+ret</code></pre>
+<p>offset mesajyok</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mesajyok db "sayi yok $"</code></pre>
+<h3 id="cikis">cikis</h3>
+<p>hit</p>
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<figure class="yazi-gorsel"><img src="sekil-679-05.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="_8086KomutlarOrnekler: sayfa 5, devre, tablo ve şekiller"><figcaption>_8086KomutlarOrnekler, sayfa 5.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-679-12.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="_8086KomutlarOrnekler: sayfa 12, devre, tablo ve şekiller"><figcaption>_8086KomutlarOrnekler, sayfa 12.</figcaption></figure>
+<p><em>Not: PDF’in metin katmanı bozuk olduğundan metin görsellerden OCR ile aktarılmıştır; komut ve sembollerin kesin yazımı için PDF esas alınmalıdır.</em></p>
+<p><em>Not: Kapakta yalnız 2007 yılı bulunduğundan arşiv sıralaması için 1 Ocak 2007 kullanılmıştır; bu tarih kesin hazırlanma günü değildir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-gazi-ornekler.zip" download>eem332-gazi-ornekler.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 275 KB · 01.01.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-gazi-ornekler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (275 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

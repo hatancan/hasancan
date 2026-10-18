@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: Butonlarla Ayarlanabilen PIC Zamanlayıcısı — hasancan.net</title>
+<meta name="description" content="Üç butonla süreyi başlatma, değiştirme ve geri sayım; akış şeması ve assembly kodları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-zamanlayici-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: Butonlarla Ayarlanabilen PIC Zamanlayıcısı">
+<meta property="og:description" content="Üç butonla süreyi başlatma, değiştirme ve geri sayım; akış şeması ve assembly kodları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-zamanlayici-projesi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: Butonlarla Ayarlanabilen PIC Zamanlayıcısı", "description": "Üç butonla süreyi başlatma, değiştirme ve geri sayım; akış şeması ve assembly kodları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-zamanlayici-projesi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-zamanlayici-projesi.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-zamanlayici-projesi/eem332-zamanlayici-projesi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: Butonlarla Ayarlanabilen PIC Zamanlayıcısı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>19.05.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ss">SS</a></li><li><a href="#proje-rapor-1">proje rapor 1</a></li><li><a href="#proje-yeni-1">proje yeni 1</a></li><li><a href="#proje-yeni">proje yeni</a></li><li><a href="#proje">proje</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: Butonlarla Ayarlanabilen PIC Zamanlayıcısı</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 19.05.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2008–2008). Üç butonla süreyi başlatma, değiştirme ve geri sayım; akış şeması ve assembly kodları. Bir arkadaşın hazırladığı çalışmalar ve ders belgeleri birlikte aktarılmış; öğrenci adları, numaraları ve grup bilgileri çıkarılmıştır. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="ss">SS</h2>
+<h3 id="basla">BAŞLA</h3>
+<h3 id="1-buton-kontrolu">1. BUTON KONTROLU</h3>
+<h3 id="no-ye">NO                                 YE</h3>
+<h3 id="s">S</h3>
+<h3 id="sayaci-arttir">SAYAÇI ARTTIR</h3>
+<h3 id="sureyi-azalt">SÜREYİ AZALT</h3>
+<h3 id="sure-0">SÜRE = = 0</h3>
+<h3 id="no">NO</h3>
+<h3 id="ye">YE</h3>
+<h3 id="s">S</h3>
+<h3 id="3-buton-kontrolu">3. BUTON KONTROLU</h3>
+<h3 id="ye">YE</h3>
+<h3 id="no-s">NO                                                    S</h3>
+<h3 id="1-ve-2-buton">1.VE 2. BUTON</h3>
+<h3 id="kontrolu">KONTROLU</h3>
+<h3 id="ye-ye">YE                                                    YE</h3>
+<h3 id="s-s">S                                                     S</h3>
+<h3 id="1-buton-2-buton">1. BUTON                         2. BUTON</h3>
+<h3 id="sureyi">SÜREYİ</h3>
+<h3 id="sureyi-azalt">SÜREYİ                           AZALT</h3>
+<h3 id="arttir">ARTTIR</h3>
+<h3 id="3-buton-kontrolu">3. BUTON KONTROLU</h3>
+<h3 id="ye-no">YE                                                          NO</h3>
+<h3 id="s">S</h3>
+<figure class="yazi-gorsel"><img src="sekil-949-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="SS: sayfa 1, devre, tablo ve şekiller"><figcaption>SS, sayfa 1.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-949-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="SS: sayfa 2, devre, tablo ve şekiller"><figcaption>SS, sayfa 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-949-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="SS: sayfa 3, devre, tablo ve şekiller"><figcaption>SS, sayfa 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-949-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="SS: sayfa 4, devre, tablo ve şekiller"><figcaption>SS, sayfa 4.</figcaption></figure>
+<h2 id="proje-rapor-1">proje rapor 1</h2>
+<h3 id="proje">PROJE</h3>
+<p>Bu projede 3 adet butonum bulunmaktadır. 1 nolu butona basıldığında default olarak belirlediğimiz 4 saniye değeri azalmaya başlamakta ve sayaç ise 1 nolu butona basılma sayısını tutmaktadır. 4 saniye değerimiz bittiği zaman basılma sayısı seven segment de görülmektedir. 4 saniye default süreyi kendi isteğimizle değistirebilmekteyiz. 3 nolu butona bastığımızda seven segment de ayar çizgisi çıkmakta ve devremiz süre ayarına hazır hale gelmektedir. 1 ve 2 nolu butonlardan ise süre ayarını azaltıp, arttırabilmekteyiz. Bu işlemlerden sonra tekrar 3 nolu butona bastığımızda devre tekrar en başa dönmektedir.</p>
+<h3 id="kod">KOD</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST    p=16F84;
+INCLUDE"P16F84.INC"
+SAYAC1         EQU        H'0C'   ;Değişkenleri tanımladık
+SAYAC2         EQU        H'0D'
+HAFIZA         EQU        H'0E'
+SANIYE         EQU        H'0F'   ;EQU deyimi bir hex adresi belirlenen
+SURE           EQU        H'10'   ;etikete atar(s1,s2,s3…)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG H'00'
+GOTO ILKDEGER                     ;Program ILKDEGER den başlıyor
+ORG H'04'
+GOTO INTP                         ;Interrupt geldiğinde INTP ye gider</code></pre>
+<h3 id="ilkdeger">ILKDEGER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF    PORTB
+BSF     STATUS,5                    ;PORTB output PORTA input yapıldı
+CLRF    TRISB                       ;TRISB 0 oldu ve output oldu
+MOVLW   H'FF'
+MOVWF   TRISA                       ;TRISA 1 oldu ve giriş oldu
+BCF     STATUS,5
+CLRF    HAFIZA                      ;HAFIZA yı sıfırladık</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'04'                       ;SANİYE 4 olarak atandı
+MOVWF   SANIYE                      ;Default saniye değeri
+MOVLW   H'3D'
+MOVWF   SURE                        ;SURE değeri 3D(61) olarak atandı</code></pre>
+<h3 id="basla">BASLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1                     ;PORTA nın 1.butonuna basılırsa
+GOTO    BASLA                       ;devam et basılmassa BASLA ya git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF     STATUS,5          ;Pigde ayar yapmak için status 5 oldu(bank 1)
+MOVLW   B'10010111'       ;256 ile carpmak için 111 oldu
+MOVWF   OPTION_REG        ;Timer için ayar(256 cycle da timer 1 artar)
+MOVLW   B'10100000'       ;İNTERRUPT ile ilgili</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF   INTCON
+BCF     STATUS,5
+MOVLW   H'00'      ;TMR0 sıfırlandı (Timer)
+MOVWF   TMR0        ;Timer 00 dan FF e sayacak
+MOVFW   SANIYE      ;belirlediğimiz saniyeyi yazdırdık(default 4)
+CALL     YAZDIR
+MOVLW    h'00'     ;Ekran sıfırlandı
+CALL     YAZDIR</code></pre>
+<h3 id="kayit">KAYIT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1
+GOTO    KAYIT              ;butona basıldıysa devam et</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCF    HAFIZA             ;basıldıkça hafıza değeri arttı
+MOVFW   HAFIZA             ;değer hafızaya atıldı
+CALL     YAZDIR            ;değer yazdırıldı
+GOTO     KAYIT             ;tekrar başa dönüldü
+DONGU
+BTFSC   PORTA,4            ;3. butona basılmayı kontrol ediyor
+GOTO    DONGU              ;basılırsa devam ediyor ve çizgi
+UYARI
+MOVLW   H'40'              ;saniye ayarına geçti uyarısıdır
+MOVWF   PORTB              ;ortada çizgi cıkıyor
+CALL    GECIKME
+BAK1
+BTFSC   PORTA,1    ;1. butona basılıp basılmadığının kontrolü
+GOTO    BAK2       ;1. butona basmaz isek BAK2 ye git
+INCF    SANIYE     ;1. butona basarsak saniyeyi arttır
+MOVFW   SANIYE
+ANDLW   H'07'      ;Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK2
+BTFSC   PORTA,2    ; 2. butona basılıp basılmadığının kontrolü
+GOTO    BAK3       ; 2. butona basmaz isek BAK2 ye git
+DECF    SANIYE     ; 2. butona basarsak saniyeyi azalt
+MOVFW   SANIYE
+ANDLW   H'07'      ; Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK3
+BTFSC   PORTA,4    ; 3. butona basılıp basılmadığının kontrolü
+GOTO    BAK1       ; 3. butona basmaz isek BAK1 e git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'00'            ;W yi sıfırlarız
+SUBWF   SANIYE,W         ;Saniyeden W yi cıkartırız
+BTFSS   STATUS,2         ;İşlem sonucu sıfır ise statusun 2.biti
+GOTO    SIFIR            ;0 oluyor işlem sıfır ise sıfır a git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO    DONGU              ;işlem sıfır degilse donguye git
+SIFIR
+CLRF    HAFIZA
+GOTO    BASLA        ; süre ayarı için olan döngüden çıkar
+; ve tekrar başa döner
+GECIKME
+MOVLW   H'FF'        ;Gecikmeyi arttırmak için FF yaptık (256)
+MOVWF   SAYAC1</code></pre>
+<p>DONGU1                        ;Buton arklarını engellemek için</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW    H'FF'
+MOVWF    SAYAC2
+DONGU2
+DECFSZ SAYAC2,1
+GOTO     DONGU2
+DECFSZ SAYAC1,1
+GOTO     DONGU1
+RETURN
+SEVENSEGMENT
+ADDWF PCL,1             ;PCL&lt;---W(H'05')        ;Seven Segment de gösterim
+RETLW h'3f'              ; 0
+RETLW h'06'              ; 1
+RETLW h'5b'              ; 2
+RETLW h'4f'              ; 3
+RETLW h'66'              ; 4
+RETLW h'6d'              ; 5
+RETLW h'7d'              ; 6
+RETLW h'07'              ; 7
+RETLW h'7f'              ; 8
+RETLW h'6f'              ; 9
+INTP
+BCF      INTCON,T0IF
+DECFSZ SURE
+RETFIE                   ;İnterrupt sağlanır
+CALL     SURE_INDIR      ;Timer FF den 00 a gelmiş ise buraya gelinir
+RETFIE                   ;Böylece Timerin sıfırlandığı anlaşılır
+SURE_INDIR
+MOVLW    H'3D'
+MOVWF    SURE            ;Süre ‘3D’ hex değeri kadar dönüyor
+DECFSZ SANIYE,1          ;0 değilse 1 azalt
+RETURN
+GOTO     DONGU
+YAZDIR
+ANDLW B'00001111'       ; Mod 16 yaptık çünkü seven segment 15 e
+CALL    SEVENSEGMENT    ; kadar gösteriyor
+MOVWF PORTB
+CALL   GECIKME
+RETURN</code></pre>
+<figure class="yazi-gorsel"><img src="sekil-953-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="proje rapor 1: sayfa 4, devre, tablo ve şekiller"><figcaption>proje rapor 1, sayfa 4.</figcaption></figure>
+<h2 id="proje-yeni-1">proje yeni 1</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST    p=16F84;
+INCLUDE"P16F84.INC"
+SAYAC1         EQU        H'0C'   ;Değişkenleri tanımladık
+SAYAC2         EQU        H'0D'
+HAFIZA         EQU        H'0E'
+SANIYE         EQU        H'0F'   ;EQU deyimi bir hex adresi belirlenen
+SURE           EQU        H'10'   ;etikete atar(s1,s2,s3…)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG H'00'
+GOTO ILKDEGER                      ;Program ILKDEGER den başlıyor
+ORG H'04'
+GOTO INTP                          ;Interrupt geldiğinde INTP ye gider</code></pre>
+<h3 id="ilkdeger">ILKDEGER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF    PORTB
+BSF     STATUS,5                     ;PORTB output PORTA input yapıldı
+CLRF    TRISB                        ;TRISB 0 oldu ve output oldu
+MOVLW   H'FF'
+MOVWF   TRISA                        ;TRISA 1 oldu ve giriş oldu
+BCF     STATUS,5
+CLRF    HAFIZA                       ;HAFIZA yı sıfırladık</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'04'                        ;SANİYE 4 olarak atandı
+MOVWF   SANIYE                       ;Default saniye değeri
+MOVLW   H'3D'
+MOVWF   SURE                         ;SURE değeri 3D(61) olarak atandı</code></pre>
+<h3 id="basla">BASLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1                      ;PORTA nın 1.butonuna basılırsa
+GOTO    BASLA                        ;devam et basılmassa BASLA ya git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF     STATUS,5          ;Pigde ayar yapmak için status 5 oldu(bank 1)
+MOVLW   B'10010111'       ;256 ile carpmak için 111 oldu
+MOVWF   OPTION_REG        ;Timer için ayar(256 cycle da timer 1 artar)
+MOVLW   B'10100000'       ;İNTERRUPT ile ilgili
+MOVWF   INTCON
+BCF     STATUS,5
+MOVLW   H'00'             ;TMR0 sıfırlandı (Timer)
+MOVWF   TMR0               ;Timer 00 dan FF e sayacak
+MOVFW   SANIYE             ;belirlediğimiz saniyeyi yazdırdık(default 4)
+CALL     YAZDIR
+MOVLW    h'00'            ;Ekran sıfırlandı
+CALL     YAZDIR</code></pre>
+<h3 id="kayit">KAYIT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1
+GOTO    KAYIT                     ;butona basıldıysa devam et</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCF    HAFIZA            ;basıldıkça hafıza değeri arttı
+MOVFW   HAFIZA            ;değer hafızaya atıldı
+CALL     YAZDIR           ;değer yazdırıldı
+GOTO     KAYIT            ;tekrar başa dönüldü</code></pre>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,4           ;3. butona basılmayı kontrol ediyor
+GOTO    DONGU             ;basılırsa devam ediyor ve çizgi
+;4 saniye bitiminde buraya geliyor
+UYARI
+MOVLW   H'40'             ;saniye ayarına geçti uyarısıdır
+MOVWF   PORTB             ;ortada çizgi cıkıyor
+CALL    GECIKME</code></pre>
+<h3 id="bak1">BAK1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1    ;1. butona basılıp basılmadığının kontrolü
+GOTO    BAK2       ;1. butona basmaz isek BAK2 ye git
+INCF    SANIYE     ;1. butona basarsak saniyeyi arttır
+MOVFW   SANIYE
+ANDLW   H'07'      ;Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK2
+BTFSC   PORTA,2    ; 2. butona basılıp basılmadığının kontrolü
+GOTO    BAK3       ; 2. butona basmaz isek BAK2 ye git
+DECF    SANIYE     ; 2. butona basarsak saniyeyi azalt
+MOVFW   SANIYE
+ANDLW   H'07'      ; Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK3
+BTFSC   PORTA,4    ; 3. butona basılıp basılmadığının kontrolü
+GOTO    BAK1       ; 3. butona basmaz isek BAK1 e git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'00'           ;W yi sıfırlarız
+SUBWF   SANIYE,W        ;Saniyeden W yi çıkartırız
+BTFSS   STATUS,2        ;İşlem sonucu sıfır ise statusun 2.biti
+GOTO    SIFIR           ;0 oluyor işlem sıfır ise sıfır a git
+GOTO    DONGU           ;işlem sıfır değilse döngüye git</code></pre>
+<h3 id="sifir">SIFIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF    HAFIZA
+GOTO    BASLA      ; süre ayarı için olan döngüden çıkar
+; ve tekrar başa döner</code></pre>
+<h3 id="gecikme">GECIKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW    H'FF'            ;Gecikmeyi arttırmak için FF yaptık (256)
+MOVWF    SAYAC1</code></pre>
+<p>DONGU1                            ;Buton arklarını engellemek için</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      H'FF'
+MOVWF      SAYAC2
+DONGU2
+DECFSZ     SAYAC2,1
+GOTO       DONGU2
+DECFSZ     SAYAC1,1
+GOTO       DONGU1
+RETURN
+SEVENSEGMENT</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF    PCL,1              ;PCL&lt;---W(H'05')       ;Seven Segment de gösterim
+RETLW    h'3f'               ; 0
+RETLW    h'06'               ; 1
+RETLW    h'5b'               ; 2
+RETLW    h'4f'               ; 3
+RETLW    h'66'               ; 4
+RETLW    h'6d'               ; 5
+RETLW    h'7d'               ; 6
+RETLW    h'07'               ; 7
+RETLW    h'7f'               ; 8
+RETLW    h'6f'               ; 9</code></pre>
+<h3 id="intp">INTP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF    INTCON,T0IF
+DECFSZ SURE
+RETFIE                    ;İnterrupt sağlanır
+CALL   SURE_INDIR         ;Timer FF den 00 a gelmiş ise buraya gelinir
+RETFIE                    ;Böylece Timerin sıfırlandığı anlaşılır</code></pre>
+<h3 id="sure-indir">SURE_INDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      H'3D'
+MOVWF      SURE             ;Süre ‘3D’ hex değeri kadar dönüyor
+DECFSZ     SANIYE,1         ;0 değilse 1 azalt
+RETURN
+GOTO       DONGU</code></pre>
+<h3 id="yazdir">YAZDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW    B'00001111'      ; Mod 16 yaptık çünkü seven segment 15 e
+CALL     SEVENSEGMENT     ; kadar gösteriyor
+MOVWF   PORTB
+CALL    GECIKME
+RETURN</code></pre>
+<h2 id="proje-yeni">proje yeni</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCF    HAFIZA            ;basıldıkça hafıza değeri arttı
+MOVFW   HAFIZA            ;değer hafızaya atıldı
+CALL     YAZDIR           ;değer yazdırıldı
+GOTO     KAYIT            ;tekrar başa dönüldü</code></pre>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,4            ;3. butona basılmayı kontrol ediyor
+GOTO    DONGU              ;basılırsa devam ediyor ve çizgi
+;4 saniye bitiminde buraya geliyor
+UYARI
+MOVLW   H'40'             ;saniye ayarına geçti uyarısıdır
+MOVWF   PORTB             ;ortada çizgi cıkıyor
+CALL    GECIKME</code></pre>
+<h3 id="bak1">BAK1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,1    ;1. butona basılıp basılmadığının kontrolü
+GOTO    BAK2       ;1. butona basmaz isek BAK2 ye git
+INCF    SANIYE     ;1. butona basarsak saniyeyi arttır
+MOVFW   SANIYE
+ANDLW   H'07'      ;Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK2
+BTFSC   PORTA,2    ; 2. butona basılıp basılmadığının kontrolü
+GOTO    BAK3       ; 2. butona basmaz isek BAK2 ye git
+DECF    SANIYE     ; 2. butona basarsak saniyeyi azalt
+MOVFW   SANIYE
+ANDLW   H'07'      ; Saniye 7 yi gemcesin diye and yaptık
+MOVWF   SANIYE
+CALL    YAZDIR
+BAK3
+BTFSC   PORTA,3    ; 3. butona basılıp basılmadığının kontrolü
+GOTO    BAK1       ; 3. butona basmaz isek BAK1 e git</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO    BASLA      ; süre ayarı için olan döngüden çıkar
+; ve tekrar başa döner
+GECIKME
+MOVLW     H'FF'      ;Gecikmeyi arttırmak için FF yaptık (256)
+MOVWF     SAYAC1</code></pre>
+<p>DONGU1                     ;Buton arklarını engellemek için</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW     H'FF'
+MOVWF     SAYAC2
+DONGU2
+DECFSZ    SAYAC2,1
+GOTO      DONGU2
+DECFSZ    SAYAC1,1
+GOTO      DONGU1
+RETURN</code></pre>
+<h3 id="sevensegment">SEVENSEGMENT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF    PCL,1             ;PCL&lt;---W(H'05')       ;Seven Segment de gösterim
+RETLW    h'3f'              ; 0
+RETLW    h'06'              ; 1
+RETLW    h'5b'              ; 2
+RETLW    h'4f'              ; 3
+RETLW    h'66'              ; 4
+RETLW    h'6d'              ; 5
+RETLW    h'7d'              ; 6
+RETLW    h'07'              ; 7
+RETLW    h'7f'              ; 8
+RETLW    h'6f'              ; 9</code></pre>
+<h3 id="intp">INTP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF    INTCON,T0IF
+DECFSZ SURE
+RETFIE                    ;İnterrupt sağlanır
+CALL   SURE_INDIR         ;Timer FF den 00 a gelmiş ise buraya gelinir
+RETFIE                    ;Böylece Timerin sıfırlandığı anlaşılır</code></pre>
+<h3 id="sure-indir">SURE_INDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      H'3D'
+MOVWF      SURE            ;Süre ‘3D’ hex değeri kadar dönüyor
+DECFSZ     SANIYE,1        ;0 değilse 1 azalt
+RETURN
+GOTO       DONGU</code></pre>
+<h3 id="yazdir">YAZDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW    B'00001111'     ; Mod 16 yaptık çünkü seven segment 15 e
+CALL     SEVENSEGMENT    ; kadar gösteriyor
+MOVWF   PORTB
+CALL    GECIKME
+RETURN</code></pre>
+<h2 id="proje">proje</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST    p=16F84;
+INCLUDE"P16F84.INC"
+SAYAC1         EQU          H'0C'   ;DEĞİŞKENLER BELİRTİLEN
+SAYAC2         EQU          H'0D'   ;ADRESLERDE TANIMLANIYOR
+HAFIZA         EQU          H'0E'
+SANIYE         EQU          H'0F'
+SURE           EQU          H'10'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG H'00'
+GOTO ILKDEGER                        ;PROGRAM ILKDEGERDEN BASLAR
+ORG H'04'                            ;INTERRUPT GELDIGINDE INTP
+GOTO INTP                            ;BOLUMUNE DALLANIR</code></pre>
+<h3 id="ilkdeger">ILKDEGER</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF      PORTB
+BSF       STATUS,5          ;PORTB OUTPUT PORTA INPUT YAPILDI
+CLRF      TRISB
+MOVLW     H'FF'
+MOVWF     TRISA             ;KLASİK İŞLEMLER HER PROGRAMDA
+YAPILIR
+BCF       STATUS,5
+CLRF      HAFIZA</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'05'             ;SANIYE DEĞİŞKENİNİN DEGERİ 05
+MOVWF   SANIYE            ;DEFAULT SANİYE DEGERİ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'0B'
+MOVWF   SURE              ;SURE DEĞİŞKENİNİN DEĞERİ   0B</code></pre>
+<h3 id="basla">BASLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,4           ;PORTANIN 4.BUTONUNA BASILIRSA
+TIME
+GOTO    BASLA             ;BOLUMUNE GEÇER YOKSA SUREKLİ
+KONTROL
+EDER</code></pre>
+<h3 id="time">TIME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF     STATUS,5
+MOVLW   B'10010110'
+MOVWF   OPTION_REG        ;INTERREUPT İÇİN KLASİK İŞLEMLER
+MOVLW   B'10100000'
+MOVWF   INTCON
+BCF     STATUS,5
+MOVLW   H'00'             ;TMR0 SIFIRLANDI
+MOVWF   TMR0
+MOVFW   SANIYE            ;belirlediğimiz saniye yazdırıldı
+CALL     YAZDIR
+movlw    h'00'             ;EKRAN SIFIRLANDI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL    YAZDIR
+KAYIT
+BTFSC   PORTA,1
+GOTO    KAYIT        ;butona kaçkez basıldıgını bulmak
+için
+INCF    HAFIZA       ;basıldıkça hafıza değeri artar
+MOVFW   HAFIZA
+CALL     YAZDIR      ;ve yazdırılır
+GOTO     KAYIT</code></pre>
+<h3 id="dongu-movlw-h-20-sani-ye-bi-tti-uyari-si-veri-r">DONGU    MOVLW   H'20'       ;SANİYE BİTTİ UYARİSİ VERİR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF   PORTB
+BTFSC   PORTA,4
+GOTO    DONGU
+UYAR
+MOVLW   H'80'       ;SANİYE AYARİNA GECTİ UYARİ CİZGİSİ
+MOVWF   PORTB
+CALL    GECIKME</code></pre>
+<h3 id="bak1">BAK1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC    PORTA,1
+GOTO     BAK2         ;BAK1 1.BUTONA BASILIRSA SANİYE
+DEGERİNİ
+ARTTIRIR
+INCF     SANIYE
+MOVFW    SANIYE
+ANDLW    H'07'
+MOVWF    SANIYE
+CALL     YAZDIR</code></pre>
+<h3 id="bak2">BAK2</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC    PORTA,2
+GOTO     BAK3
+DECF     SANIYE
+MOVFW    SANIYE      ;BAK2 2.BUTONA BASILIRSA SANİYE
+DEĞERİNİ
+AZALTIR
+ANDLW    H'07'
+MOVWF    SANIYE
+CALL     YAZDIR</code></pre>
+<h3 id="bak3">BAK3</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC   PORTA,4
+GOTO    BAK1
+MOVLW   H'00'      ;4.BUTONA BASILDI MI DİYE BAKAR.TEKRAR
+BASA
+DÖNER
+SUBWF   SANIYE,W   ;AYNI İŞLEMLERİ YAPMAK İÇİN</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS   STATUS,2
+GOTO    SIFIR
+GOTO    DONGU</code></pre>
+<h3 id="sifir">SIFIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF    HAFIZA
+GOTO    BASLA</code></pre>
+<h3 id="gecikme">GECIKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW   H'AA'
+MOVWF   SAYAC1             ;BUTON ARCLARINI ÖNLEMEK VE LEDLERİN
+YANIP</code></pre>
+<h3 id="dongu1-sonmesi-ni-gormek-i-ci-n-boyle-bi-r">DONGU1                             ;SÖNMESİNİ GÖRMEK İÇİN BÖYLE BİR</h3>
+<h3 id="geci-kme">GECİKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW     H'AA'              ;DÖNGÜSÜ TASARLADIK..AA VERİNCE YETERLİ
+MOVWF     SAYAC2             ;GECIKME SAĞLANDI
+DONGU2
+DECFSZ    SAYAC2,1
+GOTO      DONGU2
+DECFSZ    SAYAC1,1
+GOTO      DONGU1
+RETURN</code></pre>
+<h3 id="sevensegment">SEVENSEGMENT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF PCL,1             ;PCL&lt;---W(H'05')
+RETLW h'3f'
+RETLW h'06'
+RETLW h'5b'
+RETLW h'4f'
+RETLW h'66'
+RETLW h'6d'                        ;SEVENSEGMENNTE YAZDIRMAK İÇİN GEREKLİ
+STANDART
+RETLW h'7d'                        ;SATIRLAR..RETLWW İÇERİSİNE DEĞER</code></pre>
+<h3 id="atarak-geri-donderi-r">ATARAK GERİ DÖNDERİR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW h'07'
+RETLW h'7f'
+RETLW h'6f'
+RETLW h'77'
+RETLW h'7c'
+RETLW h'39'
+RETLW h'5e'
+RETLW h'79'
+RETLW h'71'
+RETLW h'80'</code></pre>
+<h3 id="intp">INTP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF     INTCON,T0IF</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ SURE
+RETFIE                  ;İNTERUPT SAĞLANIR
+CALL   SURE_INDIR
+RETFIE</code></pre>
+<h3 id="sure-indir">SURE_INDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW     H'0B'
+MOVWF     SURE
+DECFSZ    SANIYE,1
+RETURN
+GOTO      DONGU</code></pre>
+<h3 id="yazdir">YAZDIR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW    B'00001111'
+CALL     SEVENSEGMENT      ;SEVENSEGMENTTE GÖSTERMEK İÇİN
+MOVWF    PORTB
+CALL     GECIKME
+RETURN</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-zamanlayici-projesi.zip" download>eem332-zamanlayici-projesi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 131 KB · 19.05.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-zamanlayici-projesi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (131 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

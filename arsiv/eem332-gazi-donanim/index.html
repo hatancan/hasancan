@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: Bellek ve I/O Arabirimi (Gazi Üniversitesi, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="8086/8088 donanımı, adres çözümleme, hafıza birimleri ve temel giriş-çıkış arayüzü.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-donanim/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: Bellek ve I/O Arabirimi (Gazi Üniversitesi, M. Ali Akcayol)">
+<meta property="og:description" content="8086/8088 donanımı, adres çözümleme, hafıza birimleri ve temel giriş-çıkış arayüzü.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-donanim/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: Bellek ve I/O Arabirimi (Gazi Üniversitesi, M. Ali Akcayol)", "description": "8086/8088 donanımı, adres çözümleme, hafıza birimleri ve temel giriş-çıkış arayüzü.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-donanim/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-donanim.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-donanim/eem332-gazi-donanim.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: Bellek ve I/O Arabirimi (Gazi Üniversitesi, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.12.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpul9hardware">CPUL9Hardware</a></li><li><a href="#cpul10memory">CPUL10Memory</a></li><li><a href="#cpul11i-o">CPUL11I_O</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: Bellek ve I/O Arabirimi (Gazi Üniversitesi, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 17.12.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2008–2008). 8086/8088 donanımı, adres çözümleme, hafıza birimleri ve temel giriş-çıkış arayüzü. Kaynak: Gazi Üniversitesi, M. Ali Akcayol; BİL362 ders notları. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="cpul9hardware">CPUL9Hardware</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular 8086/8088 Donanım Özellikleri</p>
+<ul><li>8086/8088 Pinleri ve İşlevleri</li></ul>
+<ul><li>Clock Üreteci (8284A)</li></ul>
+<ul><li>Bus Buffering ve Demultiplexing</li></ul>
+<ul><li>Bus Timing</li></ul>
+<ul><li>Minimum ve Maksimum Mod</li></ul>
+<ul><li>Bus Denetleyici (8288)</li></ul>
+<ul><li>8088 Bağlantıları ve Bus’lar</li></ul>
+<p>8086/8088 Pinleri ve İşlevleri</p>
+<ul><li>8086 ve 8088 40 pin ve dual-in-line (DIP) paketi şeklindedir.</li></ul>
+<p>8086/8088 Pinleri ve İşlevleri</p>
+<ul><li>8086 16-bit mikroişlemcidir ve 16-bit data bus’a sahiptir, 8088’de 16-bit</li></ul>
+<p>mikroişlemcidir ancak 8-bit data bus’a sahiptir.</p>
+<ul><li>8086’da AD0-AD15 data bus için kullanılır, 8088’de AD0-AD7 data bus için</li></ul>
+<p>kullanılır. 8086 daha etkin data transferi yapar.</p>
+<ul><li>8086 ve 8088 işlemciler +5.0V ile çalışır. 8086 360mA ve 8088 340mA</li></ul>
+<p>maksimum kaynak akımı kullanır.</p>
+<ul><li>Mikroişlemcilere yapılan bağlantılarda giriş pini için gereken akıma ve çıkış</li></ul>
+<p>pini için gereken çıkış akımına dikkat edilmelidir.</p>
+<ul><li>Aşağıda giriş ve çıkış pinleri için gerilim ve akım değerleri verilmiştir.</li></ul>
+<p>Giriş</p>
+<p>Çıkış</p>
+<p>8086/8088 Pinleri ve İşlevleri Pin Bağlantıları</p>
+<ul><li>AD7-AD0, adres ve data bus için kullanılır ve en sağdaki 8 biti içerirler.</li></ul>
+<ul><li>A15-A8, 8088’de 9-16 arasındaki adres bitleri için kullanılır.</li></ul>
+<ul><li>AD15-AD8, 8086’da 9-16 bitler arasındaki adres ve data için kullanılır.</li></ul>
+<ul><li>A19/S6-A16/S3 pinleri adres ve status bitleri için (multiplex yapılarak)</li></ul>
+<p>kullanılır.</p>
+<ul><li>S6 her zaman 0’dır, S5 IF bayrak bitinin durumunu gösterir, S4-S3 ise şu</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>andaki bus cycle’da hangi segmente ulaşıldığını gösterir.</code></pre>
+<ul><li>RD pini 0 ise data bus memory veya I/O cihazlarından data alır.</li></ul>
+<ul><li>READY pini işlemciyi hazır bekleme durumuna almak için kullanılır, 0 ise</li></ul>
+<p>işlemci hazır duruma geçer,1 ise işlemcinin şu andaki durumunu etkilemez. S3 ve S4 durum bitleri</p>
+<p>8086/8088 Pinleri ve İşlevleri Pin Bağlantıları - devam</p>
+<ul><li>INTR, bir donanım interrupt isteği için kullanılır. IF=1 iken INTR=1 olursa</li></ul>
+<p>çalışmakta olan komut döngüsünden sonra interrupt döngüsüne girilir.</p>
+<ul><li>NMI, (non-maskable interrupt) INTR gibi çalışır ancak IF bayrak biti kontrol</li></ul>
+<p>edilmeden interrupt döngüsüne girilir.</p>
+<ul><li>RESET, işlemciyi yeniden başlatmak için kullanılır. En az 4 clock cycle</li></ul>
+<p>boyunca 1 olursa işlemci reset edilir.</p>
+<ul><li>CLK, işlemcinin zamanlama sinyalini girmek için kullanılır. Clock sinyalde</li></ul>
+<p>en az %33 oranında duty cycle olmalıdır.</p>
+<ul><li>Vcc, işlemcinin güç kaynağı girişidir ve +5.0V (%±10) olmalıdır.</li></ul>
+<ul><li>MN/MX, minimum ve maksimum mod arasında seçim yapmak için kullanılır.</li></ul>
+<p>Minimum mod için doğrudan +5.0V‘ a bağlanmalıdır.</p>
+<ul><li>BHE/S7, (bus high enable) D15-D8 data bus bitlerini okuma ve yazma</li></ul>
+<p>işlemlerinde aktif yapmak için kullanılır.</p>
+<p>8086/8088 Pinleri ve İşlevleri Pin Bağlantıları – devam – minimum mod pinleri</p>
+<ul><li>IO/M veya M/IO, 8088 ve 8086 işlemcilerde memory veya I/O seçimi yapar.</li></ul>
+<ul><li>WR, 8086/8088 işlemcinin memory veya I/O cihazına data gönderdiğini</li></ul>
+<p>gösterir. 0 ise data bus, memory veya I/O için geçerli dataya sahiptir.</p>
+<ul><li>INTA, INTR giriş pininden gelen interrupt’ın algılandığını gösterir.</li></ul>
+<ul><li>ALE, (adres latch enable) 8086/8088 işlemcilerde adres/data bus seçimini</li></ul>
+<p>yapar. 1 ise adres/data bus üzerinde adres bilgisi olduğunu gösterir.</p>
+<ul><li>DT/R, (data transmit/receive) data bus’ta veri gönderildiğini(1) veya</li></ul>
+<p>alındığını(0) gösterir.</p>
+<ul><li>SS0, IO/M ve DT/R ile birlikte</li></ul>
+<p>şimdiki bus cycle’nın fonksiyonunu çözümlemek için kullanılır (8088).</p>
+<p>8086/8088 Pinleri ve İşlevleri Pin Bağlantıları – devam – maksimum mod pinleri</p>
+<ul><li>S2,S1,S0, şimdiki bus cycle’ın fonksiyonunu gösterir. Bir bus denetleyici</li></ul>
+<p>(8288) tarafından çözülür.</p>
+<ul><li>RQ/GT1 ve RQ/GT0, maksimum modda çalışırken DMA (direct memory</li></ul>
+<p>access) isteği için kullanılırlar. İki yönlüdürler(request ve grant yapılır.)</p>
+<ul><li>QS1 ve QS0, (queue status) komut kuyruğunun durumunu gösterir.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<ul><li>8284A clock üreteci 8086/8088 mikroişlemciler için yardımcı elemandır.</li></ul>
+<ul><li>Temel olarak clock üretme, RESET senkronizasyonu, READY</li></ul>
+<p>senkronizasyonu ve TTL (Transistor–Transistor Logic ) seviyesinde çevre birim clock sinyali üretme fonksiyonlarını gerçekleştirir.</p>
+<ul><li>Toplam 18 pine sahiptir ve özellikle 8086/8088 işlemcilerle birlikte</li></ul>
+<p>kullanılmak için tasarlanmıştır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<p>Pin fonksiyonları</p>
+<ul><li>AEN1 ve AEN2, (address enable) bus hazır sinyallerini (RDY1 ve RDY2)</li></ul>
+<p>sağlamak için kullanılırlar.</p>
+<ul><li>RDY1 ve RDY2, (bus ready) AEN1 ve AEN2 ile birlikte 8086/8088 işlemciyi</li></ul>
+<p>bekleme durumuna almak için kullanılırlar.</p>
+<ul><li>READY, çıkış pinidir ve 8086/8088 READY girişine bağlıdır.</li></ul>
+<ul><li>X1 ve X2, kristal osilatör bağlantısı için kullanılır.</li></ul>
+<ul><li>EFI, (External Frequency Input) 1 ise clock sinyalin external bir giriş</li></ul>
+<p>tarafından üretileceğini belirler.</p>
+<ul><li>F/C, (Frequency/Clock) 0 ise clock sinyalin 8284A tarafından üretileceği, 1</li></ul>
+<p>ise clock sinyalin EFI tarafından üretileceği seçilmiş olur.</p>
+<ul><li>CLK, clock sinyal çıkışıdır ve 8086/8088 clock girişine bağlanır.</li></ul>
+<ul><li>RES, (reset input) 0 olduğunda reset işlemi başlatır.</li></ul>
+<ul><li>RESET, (reset output) 8086/8088 RESET girişine bağlıdır.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<p>8284A ile 8086/8088 bağlantısı</p>
+<ul><li>15MHz kristal mikroişlemciye 5MHz clock sağlamaktadır.</li></ul>
+<p>Bus Buffering ve Demultiplexing</p>
+<ul><li>Adres/Data Bus pinleri daha az pin kullanılması için multiplex yapılır.</li></ul>
+<ul><li>Tüm bilgisayar sistemleri data bus, adres bus ve kontrol bus olmak üzere 3</li></ul>
+<p>tür bus’a sahiptir.</p>
+<ul><li>8086/8088 işlemciler, memory ve I/O ara yüzleriyle birlikte kullanılmadan</li></ul>
+<p>önce demultiplex yapılmak zorundadır.</p>
+<ul><li>Demultiplex için genellikle 74LS373 benzeri entegre devreler kullanılır.</li></ul>
+<p>Bus Buffering ve Demultiplexing</p>
+<ul><li>LE, (latch enable) 1 ise D flip-flop’unu aktif yapar, OE (output enable) 1</li></ul>
+<p>ise çıkışı yüksek direnç yapar.</p>
+<ul><li>Doğruluk tablosu aşağıdaki gibidir.</li></ul>
+<p>8088 demultiplexing</p>
+<p>8086 demultiplexing</p>
+<p>8088 buffer</p>
+<p>uni-directional</p>
+<p>bi-directional</p>
+<p>uni-directional</p>
+<p>bi-directional</p>
+<p>8086 buffer</p>
+<p>Bus Timing</p>
+<ul><li>Veri yazma ve okuma işlemlerinde data, adres ve kontrol bus’lar kullanılır.</li></ul>
+<ul><li>Eğer hafızaya veri yazılacaksa, yazılacak veri data bus’la, yazılacak yer</li></ul>
+<p>adres bus’la ve kontrol işaretleride kontrol bus’la gönderilmelidir.</p>
+<ul><li>Kontrol işareti olarak WR (0) ile IO/M (0) (8088 için) veya M/IO (1) (8086</li></ul>
+<p>için) kullanılmalıdır.</p>
+<p>Data Write</p>
+<p>Bus Timing</p>
+<ul><li>Eğer okuma yapılacaksa okunacak yer adres bus’la gönderilir.</li></ul>
+<ul><li>RD kontrol işaretiyle okunacak veri data bus’la alınır.</li></ul>
+<p>Data Read</p>
+<p>Minimum ve Maksimum Mod</p>
+<ul><li>8086/8088 minimum ve maksimum olarak iki modda</li></ul>
+<p>çalışabilmektedir.</p>
+<ul><li>MN/MX seçme pini +5.0V ‘a bağlanırsa minimum mod seçilmiş olur,</li></ul>
+<p>toprağa bağlandığında ise maksimum mod seçilmiş olur.</p>
+<ul><li>Maksimum mod, yardımcı işlemci kullanılan sistemler için</li></ul>
+<p>tasarlanmıştır.</p>
+<ul><li>80286 ve üstü işlemcilerde maksimum mod yoktur.</li></ul>
+<ul><li>Minimum modda tüm kontrol işaretleri mikroişlemci tarafından</li></ul>
+<p>üretilir ve maliyet açısından ucuzdur.</p>
+<ul><li>Maksimum modda bazı kontrol işaretleri external olarak üretilir ve</li></ul>
+<p>maliyeti daha fazladır.</p>
+<ul><li>Maksimum modda external bus denetleyici kullanılır ve bus kontrol</li></ul>
+<p>işaretlerini üretir.</p>
+<p>8088 minimum mod</p>
+<p>8088 maksimum mod</p>
+<p>Bus Denetleyici (8288)</p>
+<ul><li>Maksimum mod çalışmada kontrol işaretleri 8086/8088 yerine 8288</li></ul>
+<p>tarafından üretilir.</p>
+<ul><li>Durum girişleri olarak S0,S1 ve S2 çıkışlarını alır ve tüm kontrol</li></ul>
+<p>işaretlerini üretir.</p>
+<p>Bus Denetleyici (8288)</p>
+<ul><li>8288 denetleyici girişleri ve üretilen kontrol işaretleri aşağıdaki</li></ul>
+<p>gibidir.</p>
+<ul><li>S0, S1 ve S2 girişlerinin tümüde 1 olursa pasif duruma geçilmekte ve</li></ul>
+<p>komut üretilmemektedir.</p>
+<p>Bus Denetleyici (8288) Pin fonksiyonları</p>
+<ul><li>S0,S1 ve S2, durum girişleri. 8086/8088 durum çıkışlarına bağlıdır.</li></ul>
+<ul><li>CLK, clock girişi. 8284A clock üretecinin CLK çıkış pinine bağlıdır.</li></ul>
+<ul><li>ALE, (address latch enable) adres/data bus arasında demultiplex</li></ul>
+<p>için kullanılır.</p>
+<ul><li>DEN, (data bus enable) bi-directional data bus buffer’ı kontrol eder.</li></ul>
+<ul><li>DT/R, (data transmit/receive) data bus üzerinden yazma/okuma</li></ul>
+<p>seçimi için kullanılır.</p>
+<ul><li>AEN, (address enable) girişiyle 8288 memory kontrol sinyallerini</li></ul>
+<p>etkin yapar.</p>
+<ul><li>CEN, (control enable) girişiyle 8288 kontrol çıkış pinleri aktif yapılır.</li></ul>
+<p>Bus Denetleyici (8288) Pin fonksiyonları</p>
+<ul><li>IOWC, (I/O write command) I/O cihazı için write komutu üretir.</li></ul>
+<ul><li>IORC, (I/O read command) I/O cihazı için read komutu üretir.</li></ul>
+<ul><li>MWTC, (memory write command) memory için write komutu üretir.</li></ul>
+<ul><li>MRDC, (memory read command) memory için read komutu üretir.</li></ul>
+<ul><li>INTA, (interrupt acknowledge) INTR pininden gelen interrupt’a</li></ul>
+<p>cevap bilgisidir.</p>
+<ul><li>IOB, (I/O bus mode) I/O bus mod ile system bus mod arasında seçim</li></ul>
+<p>yapar.</p>
+<p>8088 Bağlantıları ve Bus’lar</p>
+<ul><li>8259 interrupt denetleyicisidir.</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-655-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL9Hardware: sayfa 3, devre, tablo ve şekiller"><figcaption>CPUL9Hardware, sayfa 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-655-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL9Hardware: sayfa 6, devre, tablo ve şekiller"><figcaption>CPUL9Hardware, sayfa 6.</figcaption></figure>
+<h2 id="cpul10memory">CPUL10Memory</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular Hafıza Arayüzü</p>
+<ul><li>Hafıza Birimleri</li></ul>
+<ul><li>Adres Çözümleme</li></ul>
+<ul><li>8088 ve 80188 Hafıza Arayüzü (8-bit)</li></ul>
+<ul><li>8086, 80186, 80286 ve 80386SX Hafıza Arayüzü (16-bit)</li></ul>
+<ul><li>80386DX ve 80486 Hafıza Arayüzü (32-bit)</li></ul>
+<ul><li>Pentium–Pentium 4 Hafıza Arayüzü (64-bit)</li></ul>
+<p>Hafıza Birimleri</p>
+<ul><li>Hafıza elemanları ROM (read-only memory), flash memory (EEPROM), SRAM</li></ul>
+<p>(Static Random Access Memory) ve DRAM (Dynamic Random Access Memory) olarak sınıflandırılır.</p>
+<ul><li>Bir hafıza elemanın adres bağlantıları, data bağlantıları, seçme bağlantıları</li></ul>
+<p>ve kontrol bağlantıları bulunur.</p>
+<ul><li>Adres pin sayısı hafıza satır sayısını, data pin sayısı bir alana yazılacak bit</li></ul>
+<p>sayısını belirler. Seçme bağlantıları (CS, CE, S, vb) chip‘i yazma/okuma için aktif yapar. Kontrol pinleri bir tane (R/W), iki veya daha fazla (WE, OE) olabilir.</p>
+<p>Hafıza Birimleri ROM (read-only memory)</p>
+<ul><li>Programları sürekli olarak saklar, enerji kesildiğinde kaybolmaz</li></ul>
+<p>(nonvolatile memory).</p>
+<ul><li>PROM (programmable read-only memory) bir kez programlanabilir</li></ul>
+<p>ve silinemez.</p>
+<ul><li>EPROM (erasable programmable read-only memory) bir tür ROM</li></ul>
+<p>hafızadır ve yaklaşık 20 dakika ultraviyole ışını uygulanarak silinebilmektedir.</p>
+<ul><li>Yeni tip RMM (read mostly memory) flash memory olarak</li></ul>
+<p>adlandırılır. Günümüzde flash memory adı sıklıkla EEPROM (electrically erasable programmable ROM) için kullanılır.</p>
+<ul><li>Flash memory birçok bilgisayar sisteminde BIOS memory ve video</li></ul>
+<p>kartı setup bilgilerini saklamak için kullanılır.</p>
+<p>Hafıza Birimleri ROM (read-only memory) - devam</p>
+<ul><li>Aşağıda 2716 EPROM görülmektedir. 11 giriş ve 8 çıkış vardır.</li></ul>
+<ul><li>2716, 2Kx8 read-only hafıza elemanıdır.</li></ul>
+<p>Hafıza Birimleri ROM (read-only memory) - devam</p>
+<ul><li>2716 EPROM için zamanlama (timing diagram) aşağıdaki gibidir.</li></ul>
+<ul><li>Öncelikle adres bilgisi adres pinlerine gönderilir.</li></ul>
+<ul><li>Ardından CS girişiyle (Lojik 0) chip etkin hale getirilir.</li></ul>
+<ul><li>Belirli bir gecikmeden sonra (en fazla 120 ns) çıkış pinlerinden ilgili</li></ul>
+<p>adresteki veri okunur.</p>
+<ul><li>En önemli ölçüt adres bilgisinin girilmesinden sonra verinin okunması için</li></ul>
+<p>geçen süredir. 2716 için en fazla 450 ns gecikme vardır.</p>
+<p>Hafıza Birimleri SRAM (static RAM)</p>
+<ul><li>Statik RAM’lerde bilgi, enerji sağlandığı sürece korunur. DC gerilim</li></ul>
+<p>kesildiğinde bilgi kaybolur. Bu hafıza birimleri volatile olarak adlandırılır.</p>
+<ul><li>ROM‘ lar bilgisayarda kullanılmadaan önce programlanırlar, RAM’ler</li></ul>
+<p>bilgisayara bağlıykende bilgi yazılıp okunabilir.</p>
+<ul><li>Aşağıda 2K x 8 kapasiteye sahip 4016 SRAM görülmektedir. W pini WE, S</li></ul>
+<p>pini CS ve G pini OE pini yerine kullanılmaktadır.</p>
+<p>Hafıza Birimleri DRAM (dynamic RAM)</p>
+<ul><li>Dinamik RAM’ler SRAM’lere göre daha büyük boyuttadırlar. Veri</li></ul>
+<p>kapasitörlerde saklanır ve tüm hafızanın her 2-4 ms aralıklarla yenilenmesi (refresh) gerekir.</p>
+<ul><li>Yenileme işlemi bilgi okunurken veya yazılırken yapılabilir.</li></ul>
+<ul><li>Daha fazla adres pinine ihtiyaç duyulur.</li></ul>
+<ul><li>Aşağıda Texas Instruments firmasının TMS4464 (64K x 4) DRAM entegresi</li></ul>
+<p>görülmektedir. Toplam 64K x 4 = 256 K bit veri saklar.</p>
+<ul><li>64 K alan için 16 adres pini gerekmesine karşın toplam 8 pin kullanılır.</li></ul>
+<p>Hafıza Birimleri DRAM (dynamic RAM) - devam</p>
+<ul><li>DRAM’lerde adresleme satır ve sütun</li></ul>
+<p>olarak iki aşamalı yapılır.</p>
+<ul><li>RAS (row address strobe) satır adresi</li></ul>
+<p>seçimi ve CAS (column address strobe) sütun adresi seçimi için kullanılır.</p>
+<ul><li>Yandaki 74157 ile iki aşamalı</li></ul>
+<p>adres seçimi yapılır.</p>
+<ul><li>RAS hem satır adresini göstermekte</li></ul>
+<p>hem de adres girişlerinin hangi kısmının seçileceğini belirlemektedir. RAS=1 için B’ler, RAS=0 için A’lar seçilir.</p>
+<p>Hafıza Birimleri DRAM (dynamic RAM) - devam</p>
+<ul><li>Aşağıda 41256 DRAM (256K x 1) görülmektedir. Toplam 256K bit</li></ul>
+<p>saklamaktadır ve veriye erişim için 70ns gerektirir.</p>
+<ul><li>Daha yüksek boyutlarda (1M x 1, 4M x 1, 16M x 1 ve 64M x 1) DRAM’ler</li></ul>
+<p>üretilmektedir.</p>
+<ul><li>DRAM hafıza elemanları küçük devreler üzerine yerleştirilirler ve</li></ul>
+<p>SIMMs(Single in-line Memory Modules) olarak adlandırılırlar.</p>
+<ul><li>30-pin SIMM modüller 1M x 8, 1M x 9, 4M x 8, 4M x 9 olarak organize</li></ul>
+<p>edilirler. 72-pin SIMM modüller 1M x 32, 1M x 36, 2M x 32, 4M x 32, 8M x 32, 16M x 32 olarak organize edilirler.</p>
+<p>Hafıza Birimleri DRAM (dynamic RAM) - devam</p>
+<ul><li>Aşağıda 30-pin SIMM modül (4M x 9) görülmektedir.</li></ul>
+<p>Hafıza Birimleri DRAM (dynamic RAM) - devam</p>
+<ul><li>Aşağıda 72-pin SIMM modül (4M x 36) görülmektedir.</li></ul>
+<p>Hafıza Birimleri DRAM (dynamic RAM) - devam</p>
+<ul><li>Pentium işlemcilerde 64-bit genişliğinde DIMMs (Dual in-line Memory</li></ul>
+<p>Modules) kullanılmaktadır.</p>
+<ul><li>Genel olarak 16MByte (2M x 64), 32 MByte (4M x 64), 64MByte (8M x 64) ve</li></ul>
+<p>128 MByte (16M x 64) olarak organize edilirler.</p>
+<ul><li>Aşağıda 168-pin DIMM modül görülmektedir.</li></ul>
+<p>Adres Çözümleme</p>
+<ul><li>Adres çözümleme (decoding) işlemcinin ürettiği adres ile hafızada istenen</li></ul>
+<p>bir alanın seçilmesini sağlar.</p>
+<ul><li>8088 mikroişlemci 20-bit adres üretir. Eğer 2716 EPROM kullanılırsa 11-bit</li></ul>
+<p>adresleme yapmak gerekir. Decoding işlemi işlemciyle hafıza birimi arasındaki uyumsuzlukları da gidermek amacıyla kullanılır.</p>
+<ul><li>2K x 8 EPROM kullanılırsa, 8088 işlemcisinin A10-A0 adres pinleri EPROM’un</li></ul>
+<p>A10-A0 pinlerine bağlanır. Kalan adres pinleri (A19-A11) bir NAND kapısına bağlanır.</p>
+<p>Adres Çözümleme</p>
+<ul><li>A19-A11 girişlerinin tümünün 1 olması ve IO/M girişinin 0 olması (M aktif)</li></ul>
+<p>halinde CE girişi 0 olur (etkin).</p>
+<ul><li>İşlemcinin RD bağlantısı OE girişine bağlanır ve okuma işlemi başlatılabilir.</li></ul>
+<ul><li>Adres aralığı ise, (1111 1111 1XXX XXXX XXXX olacağından)</li></ul>
+<p>1111 1111 1000 0000 0000-1111 1111 1111 1111 1111 olur(FF800H-FFFFFH).</p>
+<p>Adres Çözümleme 3-to-8 adres çözücü</p>
+<ul><li>74LS138 ve benzeri entegreler 3 girişi 8 çıkışa dönüştürür.</li></ul>
+<ul><li>G2A (0), G2B (0) ve G1 (1) girişlerinin aktif olması gereklidir.</li></ul>
+<ul><li>Doğruluk tablosu yanda görülmektedir.</li></ul>
+<p>Adres Çözümleme Örnek adres çözücü</p>
+<ul><li>Aşağıda 8 adet 2764 (8K x 8) EPROM’a bağlı bir çözücü görülmektedir.</li></ul>
+<ul><li>A19-A16 aktif ise (1) F0000H-FFFFFH (64KB) arasında adresleme yapar.</li></ul>
+<p>8088 ve 80188 Hafıza Arayüzü (8-bit)</p>
+<ul><li>8088/80188 işlemciler 8-bit data bus’a sahiptir ve 8-bit hafıza kullanılır.</li></ul>
+<ul><li>Mikroişlemcinin RD, WR ve IO/M işaretlerinin de kullanılması gerekir.</li></ul>
+<ul><li>27256 EPROM (32K x 8) ile 8088 bağlantısı aşağıda görülmektedir.</li></ul>
+<ul><li>Adres aralığı E8000H-FFFFFH ve toplam hafıza 96KByte’tır.</li></ul>
+<p>8086, 80186, 80286 ve 80386SX Hafıza Arayüzü (16-bit)</p>
+<ul><li>8086/80186 işlemcilerde adres 20-bit, 80286/80386SX işlemcilerde 24-bit</li></ul>
+<p>genişliğindedir.</p>
+<ul><li>80286 ve 80386SX işlemcilerde RD ve WR yerine MWRC ve MRDC kontrol</li></ul>
+<p>işaretleri vardır.</p>
+<ul><li>Aşağıda 2 bank halinde hafıza organizasyonu görülmektedir.</li></ul>
+<p>16-bit data bus ve 24-bit adres</p>
+<p>Ao</p>
+<p>80386SX işlemci Kullanılıyor</p>
+<h3 id="adres-araligi">Adres aralığı</h3>
+<h3 id="000000h-0fffffh">000000H – 0FFFFFH</h3>
+<p>512K x 16 1024K x</p>
+<p>Ao</p>
+<p>80386DX ve 80186 Hafıza Arayüzü (32-bit)</p>
+<ul><li>80386DX ve 80486 işlemciler 32-bit data bus’a sahiptir. Hafıza 4 bank</li></ul>
+<p>kullanılarak oluşturulur.</p>
+<ul><li>80386DX ve 80486 işlemciler 32-bit adres genişliğine sahiptir.</li></ul>
+<ul><li>Aşağıda 4 bank halinde hafıza organizasyonu görülmektedir.</li></ul>
+<p>64K x 8</p>
+<p>32-bit data bus 32-bit adres 512KByte SRAM</p>
+<p>Pentium–Pentium 4 Hafıza Arayüzü (64-bit)</p>
+<ul><li>Pentium işlemciler 64-bit data bus’a sahiptir. 8 bank kullanılır.</li></ul>
+<p>64K x 8</p>
+<p>64-bit data bus 32-bit adres 512KByte EPROM</p>
+<figure class="yazi-gorsel"><img src="sekil-653-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL10Memory: sayfa 4, devre, tablo ve şekiller"><figcaption>CPUL10Memory, sayfa 4.</figcaption></figure>
+<h2 id="cpul11i-o">CPUL11I_O</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular Temel I/O Arayüzü</p>
+<ul><li>I/O Arayüzüne Giriş</li></ul>
+<ul><li>I/O Port Adres Çözümleme</li></ul>
+<ul><li>Programlanabilir Çevrebirim Arayüzü</li></ul>
+<ul><li>Analog-Dijital ve Dijital-Analog Çeviriciler</li></ul>
+<p>I/O Arayüzüne Giriş</p>
+<ul><li>Mikroişlemciler I/O cihazına veri aktarmak için (OUT) ve I/O</li></ul>
+<p>cihazından veri almak için komutlara (IN) sahiptir.</p>
+<ul><li>80186 ve üstü işlemcilerde OUTS ve INS komutlarıyla memory</li></ul>
+<p>ve I/O cihazı arasında string veri transferi yapılmaktadır.</p>
+<ul><li>IN ve OUT komutları I/O cihazıyla mikroişlemci akümülatör’ü</li></ul>
+<p>(AL, AX, EAX) arasında veri transferi yapar.</p>
+<ul><li>I/O adresi DX register’ında 16-bit olarak saklanır. Veya 8-bit</li></ul>
+<p>immediate olarak opcode’dan hemen sonra verilir.</p>
+<p>I/O Arayüzüne Giriş</p>
+<ul><li>IN ve OUT komutlarıyla veri transferi yapılacağı zaman I/O</li></ul>
+<p>adresi (port numarası) adres bus’a gönderilir.</p>
+<ul><li>I/O arayüzü port numarasını çözümler (hafıza arayüzünün</li></ul>
+<p>hafıza adresini çözümlediği gibi).</p>
+<ul><li>İlk 256 port adresine (00H-FFH) immediate ve DX ile ve 0100H-</li></ul>
+<p>FFFFH arasındaki port adreslerine DX register’ıyla erişilir.</p>
+<ul><li>ISA (industry standart architecture) bus için 0000H-03FFH</li></ul>
+<p>arasındaki I/O adresleri kullanılır.</p>
+<h3 id="dx">DX</h3>
+<h3 id="dx">DX</h3>
+<h3 id="dx">DX</h3>
+<p>I/O Arayüzüne Giriş Isolated and memory-mapped I/O</p>
+<ul><li>Isolated I/O yaklaşımında IN, INS, OUT ve OUTS komutları</li></ul>
+<p>mikroişlemci akümülatörü ve hafıza ile I/O cihazı arasında veri transferi yapar.</p>
+<ul><li>Memory-mapped I/O yaklaşımında IN, INS, OUT ve OUTS</li></ul>
+<p>komutları kullanılmaz bunların yerine hafıza ile mikroişlemci arasında veri transferi yapan herhangi bir komut kullanılabilir.</p>
+<ul><li>Isolated I/O cihazlarının adresleri (port) hafızanın dışındadır</li></ul>
+<p>ve I/O ile mikroişlemci arasında veri aktarımı IN, INS, OUT ve OUTS komutlarıyla yapılır.</p>
+<ul><li>Memory-mapped I/O cihazlarına erişim için IN, INS, OUT ve</li></ul>
+<p>OUTS komutları kullanılmaz. Hafıza ile mikroişlemci arasında veri aktarımı yapan komutlar kullanılır.</p>
+<ul><li>Memory içerisinde bir alan I/O cihazlarına ayrılır.</li></ul>
+<p>I/O Arayüzüne Giriş</p>
+<p>Isolated I/O           Memory-mapped I/O</p>
+<p>I/O Arayüzüne Giriş PC’lerde I/O map</p>
+<p>I/O Arayüzüne Giriş Temel Giriş/Çıkış Arayüzleri</p>
+<ul><li>Giriş için three-state buffer kullanılır.</li></ul>
+<p>I/O Arayüzüne Giriş Temel Giriş/Çıkış Arayüzleri</p>
+<ul><li>Çıkış için bağlantı arayüzü aşağıdaki gibidir.</li></ul>
+<p>I/O Arayüzüne Giriş Giriş Cihazları</p>
+<p>Çıkış Cihazları</p>
+<p>I/O Port Adres Çözümleme</p>
+<ul><li>I/O port adres çözümleme özellikle memory-mapped I/O için</li></ul>
+<p>memory adres çözümlemeyle aynıdır.</p>
+<ul><li>Isolated I/O adresi çözümlemede kullanılan adres pin sayısı</li></ul>
+<p>farklıdır.</p>
+<ul><li>Memory için 32, 24 veya 20 adres biti çözümlenir. Isolated I/O</li></ul>
+<p>için 16-bit adres çözümlenir.</p>
+<p>I/O Port Adres Çözümleme 8-bit I/O adres çözümleme</p>
+<ul><li>Immediate operandla adresleme yapan I/O komutları 8-bit</li></ul>
+<p>adresleme yapar (0000H-00FFH arasındaki adresler).</p>
+<ul><li>Eğer sistem 256’dan fazla cihaz kullanmayacaksa sadece A7-</li></ul>
+<p>A0 adres bağlantıları kullanılır.</p>
+<ul><li>Aşağıdaki şekilde F0H-F7H arasında adresleme yapan decoder</li></ul>
+<p>görülmektedir.</p>
+<p>I/O Port Adres Çözümleme 16-bit I/O adres çözümleme</p>
+<ul><li>16-bit adres çözümlemede A15-A0 arasındaki bitlerin tümü</li></ul>
+<p>kullanılır.</p>
+<p>I/O Port Adres Çözümleme 32-bit</p>
+<h3 id="i-o">I/O</h3>
+<p>Programlanabilir Çevrebirim Arayüzü</p>
+<ul><li>82C55 programlanabilir çevrebirim</li></ul>
+<p>arayüzü en yaygın kullanılan elemandır.</p>
+<ul><li>Toplam 24 tane I/O pinine sahiptir ve</li></ul>
+<p>gruplar halinde programlanabilir.</p>
+<ul><li>82C55 klavye ve paralel port arayüzünde</li></ul>
+<p>kulanılmaktadır.</p>
+<ul><li>A,B ve C olarak 3 porta sahiptir.</li></ul>
+<ul><li>A1 ve A0 pinleri port seçimi için</li></ul>
+<p>kullanılır.</p>
+<p>Programlanabilir Çevrebirim Arayüzü</p>
+<ul><li>8-bit I/O port adresleme için 82C55 ile 80386SX bağlantısı</li></ul>
+<p>yandadır.</p>
+<ul><li>C0H(port A)</li></ul>
+<ul><li>C2H(port B)</li></ul>
+<ul><li>C4H(port C)</li></ul>
+<ul><li>C6H</li></ul>
+<p>(komut reg)</p>
+<p>Analog-Dijital ve Dijital-Analog Çeviriciler</p>
+<ul><li>ADC ve DAC elemanları mikroişlemcinin analog değerleri</li></ul>
+<p>değerlendirebilmesi amacıyla kullanılır.</p>
+<ul><li>Aşağıda DAC0830 dijital-analog çevirici görülmektedir.</li></ul>
+<ul><li>DAC0830 8-bit çeviricidir. VREF girişindeki referans gerilimi</li></ul>
+<p>256 farklı seviyede 255 aralıkla ifade eder.</p>
+<ul><li>10-bit DAC elemanlar 1024 farklı seviyede çıkış üretirler.</li></ul>
+<ul><li>1001 0010 girişi için</li></ul>
+<p>+2.862V çıkış üretir.</p>
+<p>Analog-Dijital ve Dijital-Analog Çeviriciler</p>
+<ul><li>Aşağıda ADC0804 8-bit çevirici görülmektedir.</li></ul>
+<ul><li>INTR çıkışı çevirme işleminin bittiğini göstermek için kullanılır.</li></ul>
+<ul><li>Analog giriş VI+ ve VI- pinlerinden yapılır.</li></ul>
+<figure class="yazi-gorsel"><img src="sekil-654-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL11I_O: sayfa 4, devre, tablo ve şekiller"><figcaption>CPUL11I_O, sayfa 4.</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-gazi-donanim.zip" download>eem332-gazi-donanim.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 4.9 MB · 17.12.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-gazi-donanim.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

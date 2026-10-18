@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: 8086 Mimarisi, Yazmaçlar ve Sayı Sistemleri — hasancan.net</title>
+<meta name="description" content="8086/8088 tarihi, yazmaçlar, segmentler, bayraklar ve ikili-onaltılı sayı gösterimi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-8086-mimari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: 8086 Mimarisi, Yazmaçlar ve Sayı Sistemleri">
+<meta property="og:description" content="8086/8088 tarihi, yazmaçlar, segmentler, bayraklar ve ikili-onaltılı sayı gösterimi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-8086-mimari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: 8086 Mimarisi, Yazmaçlar ve Sayı Sistemleri", "description": "8086/8088 tarihi, yazmaçlar, segmentler, bayraklar ve ikili-onaltılı sayı gösterimi.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-8086-mimari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-8086-mimari.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-8086-mimari/eem332-8086-mimari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: 8086 Mimarisi, Yazmaçlar ve Sayı Sistemleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>24.02.2003</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu02-2013">CPU02_2013</a></li><li><a href="#cpu02-08">cpu02_08</a></li><li><a href="#cpu03-06">cpu03-06</a></li><li><a href="#cpu02">cpu02</a></li><li><a href="#cpu02-06">cpu02-06</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: 8086 Mimarisi, Yazmaçlar ve Sayı Sistemleri</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 24.02.2003 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2003–2015). 8086/8088 tarihi, yazmaçlar, segmentler, bayraklar ve ikili-onaltılı sayı gösterimi. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cpu02-2013">CPU02_2013</h2>
+<p>EEM332 Lecture2. History of Microprocessor Introduction to Intel 8086/8088 Registers of 8086 Simple instructions</p>
+<p>8086 Microprocessor History</p>
+<p>1959: first IC's 1971: µP 4004 4Bit     Intel (~2000 Tr.) 1972: µP 8008 8Bit     Intel (~5000 Tr.) 1974: µP 8080 8Bit     Intel (~6000 Tr.) 1974: µP 6800 8Bit     Motorola 1975: µP Z80 8Bit      Zilog 1976: µP 9900 16Bit    Texas Instruments 1978: µP 8086 16Bit    Intel (50.000 Tr) 1982: µP 8286 16Bit    Intel (100.000 Tr.) 1985: µP 80386 16Bit   Intel (300.000 Tr.) 1989: µP 80486 16Bit   Intel (10 Tr.) 1993: µP 80586 16Bit   Intel (5·106 Tr.) ...</p>
+<p>BRIEF HISTORY OF THE x86 FAMILY evolution from 8080/8085 to 8086</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In 1978, Intel Corporation introduced the 16-bit 8086 microprocessor, a major</code></pre>
+<p>improvement over the previous generation 8080/8085 series. The 8086 capacity of 1 megabyte of memory exceeded the 8080/8085 maximum of 64K bytes of memory. 8080/8085 was an 8-bit system, which could work on only 8 bits of data at a time. Data larger than 8 bits had to be broken into 8-bit pieces to be processed by the</p>
+<h3 id="cpu">CPU.</h3>
+<p>8086 was a pipelined processor, as opposed to the nonpipelined 8080/8085</p>
+<p>BRIEF HISTORY OF THE x86 FAMILY evolution from 8080/8085 to 8086</p>
+<p>The microprocessor is typically a single VLSI (Very Large-Scale Integration) chip</p>
+<h3 id="maximum-minimum">MAXIMUM       MINIMUM</h3>
+<h3 id="maximum-minimum">MAXIMUM    MINIMUM</h3>
+<h3 id="mode-mode">MODE          MODE</h3>
+<h3 id="mode-mode">MODE       MODE</h3>
+<p>GND    1           40   Vcc GND      1           40   Vcc</p>
+<h3 id="ad14-ad15">AD14                    AD15</h3>
+<h3 id="a14-a15">A14                      A15</h3>
+<h3 id="ad13-a16-s3">AD13                    A16,S3</h3>
+<h3 id="a13-a16-s3">A13                      A16,S3</h3>
+<h3 id="ad12-a17-s4">AD12                    A17,S4</h3>
+<p>AD11                    A18,S5      Dta Bus A11  A12                      A17,S4</p>
+<h3 id="a18-s5">A18,S5</h3>
+<h3 id="ad10-a19-s6">AD10                    A19,S6</h3>
+<h3 id="ad9-bhe-s7">AD9                     /BHE,S7</h3>
+<p>16 bit 8 bit A10                       A19,S6 A9                      high       /SS0</p>
+<h3 id="ad8-mn-mx">AD8                     MN,/MX</h3>
+<h3 id="a8-mn-mx">A8                      MN,/MX</h3>
+<h3 id="ad7-rd">AD7                     /RD</h3>
+<h3 id="ad7-rd">AD7                      /RD</h3>
+<h3 id="ad6-rq-gt0-hold">AD6                     /RQ,/GT0      HOLD</h3>
+<h3 id="8086-ad6-rq-gt0-hold">8086                                 AD6                      /RQ,/GT0   HOLD</h3>
+<h3 id="ad5-rq-gt1-hlda">AD5                     /RQ,/GT1      HLDA</h3>
+<h3 id="ad5">AD5</h3>
+<h3 id="8088-rq-gt1-hlda">8088        /RQ,/GT1   HLDA</h3>
+<h3 id="ad4-lock-wr">AD4                     /LOCK         /WR</h3>
+<h3 id="ad4-lock-wr">AD4                      /LOCK      /WR</h3>
+<h3 id="ad3-s2-io-m">AD3                     /S2           IO/M</h3>
+<h3 id="ad3-s2-io-m">AD3                      /S2        IO/M</h3>
+<h3 id="ad2-s1-dt-r">AD2                     /S1           DT/R</h3>
+<h3 id="ad2-s1-dt-r">AD2                      /S1        DT/R</h3>
+<h3 id="ad1-s0-den">AD1                     /S0           /DEN</h3>
+<h3 id="ad1-s0-den">AD1                      /S0        /DEN</h3>
+<h3 id="ad0-qs0-ale">AD0                     QS0           ALE</h3>
+<h3 id="ad0-qs0-ale">AD0                      QS0        ALE</h3>
+<h3 id="nmi-qs1-inta">NMI                    QS1           /INTA</h3>
+<h3 id="nmi-qs1-inta">NMI                      QS1        /INTA</h3>
+<h3 id="intr-test">INTR                    /TEST</h3>
+<h3 id="intr-test">INTR                      /TEST</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK                     READY
+CLK                      READY</code></pre>
+<h3 id="gnd-20-21-reset">GND    20          21   RESET</h3>
+<h3 id="gnd-20-21-reset">GND      20          21   RESET</h3>
+<p>Internal structure is same</p>
+<p>Bus Interface Unit</p>
+<p>Execution Unit (EU).</p>
+<p>The BIU accesses memory and peripherals, while the EU executes instructions previously fetched.</p>
+<p>The 8086 has two parts, the Bus Interface Unit (BIU) and the Execution Unit (EU).</p>
+<p>The BIU fetches instructions, reads and writes data, and computes the 20-bit address.</p>
+<p>The EU decodes and executes the instructions using the 16-bit</p>
+<h3 id="alu">ALU.</h3>
+<ul><li>The BIU contains the following registers:</li></ul>
+<p>IP - the Instruction Pointer CS – the Code Segment Register DS - the Data Segment Register SS - the Stack Segment Register ES - the Extra Segment Register</p>
+<p>Software Model of the 8088/8086 Microprocessor</p>
+<p>The status register, SR, with nine of its bits implement for status and control flags. The memory address space is 1 Mbytes and the I/O</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address space is 64 Kbytes in length.</code></pre>
+<p>BIU registers                  8086 Programmer’s Model (20 bit adder) ES                         Extra Segment CS                         Code Segment SS                         Stack Segment DS                         Data Segment IP                         Instruction Pointer</p>
+<p>AX       AH                AL                Accumulator BX       BH                BL                Base Register CX       CH                CL                Count Register DX       DH                DL                Data Register SP                          Stack Pointer BP                          Base Pointer SI                          Source Index Register DI                          Destination Index Register</p>
+<h3 id="flags">FLAGS</h3>
+<ul><li>The first letter of each register indicates its use.</li></ul>
+<ul><li>AX is used for the accumulator.</li></ul>
+<ul><li>BX is a base addressing register.</li></ul>
+<ul><li>CX is a counter in loop operations.</li></ul>
+<ul><li>DX points to data in I/O operations</li></ul>
+<p>8086/88 internal registers 16 bits (2 bytes each)</p>
+<p>AX, BX, CX and DX are two bytes wide and each byte can be accessed separately</p>
+<p>These registers are used as memory pointers.</p>
+<p>Flags will be discussed later</p>
+<p>Segment registers are used as base address for a segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in the 1 M byte of memory</code></pre>
+<p>Data Registers</p>
+<p>The 8086/8088 Microprocessors: Registers</p>
+<ul><li>Registers</li></ul>
+<ul><li>Registers are in the CPU and are referred to by specific names</li></ul>
+<ul><li>Data registers</li></ul>
+<ul><li>Hold data for an operation to be performed</li></ul>
+<ul><li>There are 4 data registers (AX, BX, CX, DX)</li></ul>
+<ul><li>Low and High bytes of the data registers (AX, BX, CX, DX) can be accessed</li></ul>
+<p>separately</p>
+<ul><li>AH, BH, CH, DH are the high bytes</li></ul>
+<ul><li>AL, BL, CL, and DL are the low bytes</li></ul>
+<ul><li>Address registers</li></ul>
+<ul><li>Hold the address of an instruction or data element</li></ul>
+<ul><li>Segment registers (CS, DS, ES, SS)</li></ul>
+<ul><li>Pointer registers (SP, BP, IP)</li></ul>
+<ul><li>Index registers (SI, DI)</li></ul>
+<ul><li>Status register</li></ul>
+<ul><li>Keeps the current status of the processor</li></ul>
+<ul><li>On an IBM PC the status register is called the FLAGS register</li></ul>
+<ul><li>In total there are fourteen 16-bit registers in an 8086/8088</li></ul>
+<p>Pointer and Index Registers</p>
+<ul><li>Contain the offset addresses of memory locations</li></ul>
+<ul><li>Can also be used in arithmetic and other operations</li></ul>
+<ul><li>SP: Stack pointer</li></ul>
+<ul><li>Used with SS to access the stack segment</li></ul>
+<ul><li>BP: Base Pointer</li></ul>
+<ul><li>Primarily used to access data on the stack</li></ul>
+<ul><li>Can be used to access data in other segments</li></ul>
+<ul><li>SI: Source Index register</li></ul>
+<ul><li>is required for some string operations</li></ul>
+<ul><li>When string operations are performed, the SI register points to</li></ul>
+<p>memory locations in the data segment which is addressed by the DS register. Thus, SI is associated with the DS in string operations.</p>
+<p>Segment Registers - CS, DS, SS and ES</p>
+<ul><li>Are Address registers</li></ul>
+<ul><li>Store the memory addresses of instructions and data</li></ul>
+<ul><li>Memory Organization</li></ul>
+<ul><li>Each byte in memory has a 20 bit address starting with 0 to 220-1 or 1</li></ul>
+<p>meg of addressable memory</p>
+<ul><li>Addresses are expressed as 5 hex digits from 00000 - FFFFF</li></ul>
+<ul><li>Problem: But 20 bit addresses are TOO BIG to fit in 16 bit registers!</li></ul>
+<ul><li>Solution: Memory Segment</li></ul>
+<ul><li>Block of 64K (65,536) consecutive memory bytes</li></ul>
+<ul><li>A segment number is a 16 bit number</li></ul>
+<ul><li>Segment numbers range from 0000 to FFFF</li></ul>
+<ul><li>Within a segment, a particular memory location is specified with an offset</li></ul>
+<ul><li>An offset also ranges from 0000 to FFFF</li></ul>
+<p>Generating a Memory Address</p>
+<ul><li>The BIU has a dedicated</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>adder for determining</code></pre>
+<p>physical memory addresses</p>
+<p>Segments</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address</code></pre>
+<p>Segment Starting address is segment                           0H register value shifted 4 places to the left.</p>
+<h3 id="code">CODE</h3>
+<p>64K Data</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STACK                                Segment</code></pre>
+<h3 id="data">DATA</h3>
+<h3 id="extra-cs-0">EXTRA                                               CS:0</h3>
+<p>64K Code Segment Segment Registers</p>
+<p>Segments are &lt; or = 64K, can overlap, start at an address that ends in 0H.                                            0FFFFFH</p>
+<h3 id="memory">MEMORY</h3>
+<p>The Code Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="4000h">4000H</h3>
+<h3 id="cs-0400h">CS:       0400H</h3>
+<h3 id="ip-0056h-4056h">IP    0056H             4056H</h3>
+<h3 id="cs-ip-400-56">CS:IP = 400:56</h3>
+<p>Logical Address</p>
+<p>Memory 0400 0 Segment Register</p>
+<p>Offset                    +      0056 Physical or                   04056H</p>
+<h3 id="0fffffh">0FFFFFH</h3>
+<p>Absolute Address</p>
+<p>The offset is the distance in bytes from the start of the segment. The offset is given by the IP for the Code Segment. Instructions are always fetched with using the CS register.</p>
+<p>The physical address is also called the absolute address.</p>
+<p>The Data Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="05c00h">05C00H</h3>
+<h3 id="ds-05c0">DS:        05C0</h3>
+<h3 id="05c50h">05C50H</h3>
+<h3 id="ea-0050-ds-ea">EA    0050                                       DS:EA</h3>
+<p>Memory</p>
+<h3 id="05c0-0">05C0     0</h3>
+<p>Segment Register</p>
+<p>Offset                    +     0050</p>
+<p>Physical Address                                                 0FFFFFH</p>
+<h3 id="05c50h">05C50H</h3>
+<p>Data is usually fetched with respect to the DS register. The effective address (EA) is the offset. The EA depends on the addressing mode.</p>
+<p>The Stack Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="0a00-0a000h">0A00                              0A000H</h3>
+<h3 id="ss">SS</h3>
+<h3 id="0a100h">0A100H</h3>
+<h3 id="sp-0100-ss-sp">SP        0100                                             SS:SP</h3>
+<p>Memory</p>
+<h3 id="0a00-0">0A00 0</h3>
+<p>Segment Register</p>
+<p>Offset                        +    0100</p>
+<h3 id="0fffffh">0FFFFFH</h3>
+<p>Physical Address                  0A100H The offset is given by the SP register. The stack is always referenced with respect to the stack segment register. The stack grows toward decreasing memory locations. The SP points to the last or top item on the stack.</p>
+<ul><li>Logical Address is specified as segment:offset</li></ul>
+<ul><li>Physical address is obtained by shifting the segment address 4 bits to the left and adding the</li></ul>
+<p>offset address</p>
+<ul><li>Thus the physical address of the logical address A4FB:4872 is      A4FB0+ 4872 = A9822</li></ul>
+<h3 id="introduction-to-program-segments">INTRODUCTION TO PROGRAM SEGMENTS</h3>
+<p>A typical Assembly language program consists of</p>
+<h3 id="at-least-three-segments">at least three segments</h3>
+<p>A code segment - which contains the Assembly language instructions that perform the tasks that the program was designed to accomplish. A data segment - used to store information (data) to be processed by the instructions in the code segment. A stack segment - used by the CPU to store information temporarily. The stack is a section of RAM,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>A segment is an area of memory that includes up to 64K bytes, and begins on an
+address evenly divisible by 16 (such an address ends in 0H)</code></pre>
+<p>8085 addressed a maximum of 64K of physical memory, since it had only 16 pins for address lines. (216 = 64K) Limitation was carried into 8088/86 design for compatibility.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In 8085 there was 64K bytes of memory for all code, data, and stack information.
+In 8088/86 there can be up to 64K bytes in each category.</code></pre>
+<p>The code segment, data segment, and stack segment.</p>
+<p>The Stack</p>
+<ul><li>The stack is implemented for temporary storage of information such as</li></ul>
+<p>data or addresses.</p>
+<ul><li>The stack is 64KBytes long and is organized from a software point of</li></ul>
+<p>view as 32K words.</p>
+<ul><li>The contents of the SP and BP registers are used as offsets into the stack</li></ul>
+<p>segment memory while the</p>
+<ul><li>segment base value is in the SS register. Push instructions (PUSH) and</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>pop instructions (POP)</code></pre>
+<ul><li>Top of the stack (TOS) and bottom of the stack (BOS)</li></ul>
+<ul><li>The 8088 can push word-wide data and address information onto the</li></ul>
+<p>stack from registers or memory.</p>
+<ul><li>Many stacks can exist but only one is active at a time.</li></ul>
+<ul><li>As data is pushed onto the stack it is decremented.</li></ul>
+<ul><li>As data is popped off the stack into the CPU, it is incremented.</li></ul>
+<p>Examples of ass. Language fo 8086</p>
+<h3 id="introduction-to-assembly-programming">INTRODUCTION TO ASSEMBLY PROGRAMMING</h3>
+<h3 id="example-for-mov-instruction">Example for MOV instruction</h3>
+<p>This program first loads CL with value 55H, then moves this value around to various registers inside the CPU.</p>
+<h3 id="the-use-of-16-bit-registers-is-shown-here">The use of 16-bit registers is shown here</h3>
+<p>Values cannot be loaded directly into any segment register (CS, DS, ES, or SS). To load a value into a segment register, load it to a non-segment register, then move it to the segment register</p>
+<p>Flag register Many Assembly language instructions alter flag register bits &amp; some instructions function differently based on the information in the flag register. The flag register is a 16-bit register sometimes referred to as the status register. Although 16 bits wide, only some of the bits are used. The rest are either undefined or reserved by Intel.</p>
+<p>Carry flag Overflow Direction                                       Parity flag</p>
+<p>Interrupt enable                             Auxiliary flag 6 are status flags 3 are control flag            Trap                    Zero</p>
+<p>Sign Status flags (called conditional flags ): They are set according to some results of arithmetic operation. You do not need to alter the value yourself. Control flags: Used to control some operations of the MPU. These flags are to be set by you in order to achieve some specific purposes.</p>
+<p>CF, the Carry Flag: This flag is set whenever there is a carry out, either from d7 after an 8-bit operation, or from d15 after a 16-bit data operation. PF, the Parity Flag: After certain operations, the parity of the result’s low-order byte is checked. If the byte has an even number of 1s, the parity flag is set to 1; otherwise, it is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>cleared.</code></pre>
+<p>AF, the Auxiliary Carry Flag: If there is a carry from d3 to d4 of an operation this bit is set to 1, otherwise cleared (set to 0). ZF, the Zero Flag: The ZF is set to 1 if the result of the arithmetic or logical operation is zero, otherwise, it is cleared (set to 0). SF, the Sign Flag: MSB is used as the sign bit of the binary representation of the signed numbers.After arithmetic or logical operations the MSB is copied into SF to indicate the sign of the result. TF, the Trap Flag: When this flag is set it allows the program to single step, meaning to execute one instruction at a time. Used for debugging purposes. IF, Interrupt Enable Flag: This bit is set or cleared to enable or disable only the external interrupt requests. DF, the Direction Flag: This bit is used to control the direction of the string operations. OF, the Overflow Flag: This flag is set whenever the result of a signed number operation is too large, causing the high-order bit to overflow into the sign bit.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not: the zero is used flag to implement program loops.</code></pre>
+<p>The status register, also called the flags register, indicate conditions that are produced as the result of executing an instruction. Only nine bits of the register are implemented. Six of these bits represent status flags and the other three bits represent control flags The 8088 provides instructions within its instruction set that are able to use these flags to alter the sequence in which the program is executed.</p>
+<ul><li>As an example, to add 5 bytes of data, a counter can be used to keep track of</li></ul>
+<p>how many times the loop needs to be repeated.</p>
+<p>Each time the addition is performed the counter is decremented and the zero flag is checked. When the counter becomes zero, the zero flag is set (ZF = 1) and the loop is stopped.</p>
+<figure class="yazi-gorsel"><img src="sekil-754-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU02_2013: sayfa 5, devre, tablo ve şekiller"><figcaption>CPU02_2013, sayfa 5.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-754-09.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU02_2013: sayfa 9, devre, tablo ve şekiller"><figcaption>CPU02_2013, sayfa 9.</figcaption></figure>
+<h2 id="cpu02-08">cpu02_08</h2>
+<p>8086 Microprocessor History</p>
+<p>1959: first IC's 1971: µP 4004 4Bit      Intel (~2000 Tr.) 1972: µP 8008 8Bit      Intel (~5000 Tr.) 1974: µP 8080 8Bit      Intel (~6000 Tr.) 1974: µP 6800 8Bit      Motorola 1975: µP Z80 8Bit       Zilog 1976: µP 9900 16Bit     Texas Instruments 1978: µP 8086 16Bit     Intel (50.000 Tr) 1982: µP 8286 16Bit     Intel (100.000 Tr.) 1985: µP 80386 16Bit    Intel (300.000 Tr.) 1989: µP 80486 16Bit    Intel (10 Tr.) 1993: µP 80586 16Bit    Intel (5·10 Tr.) ...</p>
+<p>History of Intel’s Microprocessors</p>
+<ul><li>Intel 4004</li></ul>
+<ul><li>1971, 4-bit</li></ul>
+<ul><li>Intel 8008</li></ul>
+<ul><li>1972, 8-bit</li></ul>
+<ul><li>Originally designed for Datapoint Corp. as a CRT display controller</li></ul>
+<ul><li>Intel 8080</li></ul>
+<ul><li>1974, April - Altair 8800, 1975, MITS( 256 bytes of Mem, $395)</li></ul>
+<ul><li>Apple II -- Steve Jobs and Steve Wozniak 1976, Apple 사 설립</li></ul>
+<ul><li>Bill Gates and a fellow student : BASIC, 1975 --&gt; Microsoft</li></ul>
+<ul><li>Intel 8086/8088</li></ul>
+<ul><li>1978, 16 bit: 8088, 1979, 8-bit external bus</li></ul>
+<ul><li>IBM PC ; 1981</li></ul>
+<ul><li>29,000 Trs</li></ul>
+<ul><li>Intel 80286</li></ul>
+<ul><li>1982, 16-bit architecture</li></ul>
+<ul><li>24-bit addressing, memory protection and virtual memory</li></ul>
+<ul><li>16 MB of physical MEM and 1 GB of virtual mem</li></ul>
+<ul><li>130,000 Trs onto a single chip</li></ul>
+<ul><li>IBM PC/AT in 1984, IBM PS/2 Model 50 and 60</li></ul>
+<ul><li>Intel 80386</li></ul>
+<ul><li>1985, 32 bits</li></ul>
+<ul><li>3~5 MIPS (7 MIPS on the 25 MHz chip)</li></ul>
+<ul><li>memory paging and enhanced I/O permission features</li></ul>
+<ul><li>4GB programming model</li></ul>
+<ul><li>Intel 80486</li></ul>
+<ul><li>1989 Spring COMDEX show -&gt; 1990 June : actual release</li></ul>
+<ul><li>1,200,000 Trs</li></ul>
+<ul><li>386+387+8K data and instruction cache, paging and MMU</li></ul>
+<ul><li>Pentium</li></ul>
+<ul><li>1993</li></ul>
+<ul><li>110 MIPS on 66 Mhz Chip</li></ul>
+<ul><li>16 KB on-chip cache and 64 bit data bus</li></ul>
+<ul><li>superscalar technology (two instructions/clock)</li></ul>
+<ul><li>3.1 million transistors</li></ul>
+<ul><li>Pentium Pro</li></ul>
+<ul><li>1995, Superscalar(three-way issue)</li></ul>
+<ul><li>5.5 million Trs in the CPU core + 15.5 million Trs in the secondary cache</li></ul>
+<p>8K data, 8K instr cache</p>
+<ul><li>256 KB SRAM secondary cache</li></ul>
+<ul><li>200 SPECint92 at 133 MHz</li></ul>
+<ul><li>2.9 V, 0.6 micron BICMOS</li></ul>
+<ul><li>Pentium II</li></ul>
+<ul><li>Pentium Pro + MMX, 1997</li></ul>
+<ul><li>233, 266, upto 450 MHz</li></ul>
+<ul><li>7.5 million Trs in CPU</li></ul>
+<ul><li>512KB in secondary cache</li></ul>
+<ul><li>Pentium III</li></ul>
+<ul><li>1999</li></ul>
+<ul><li>Pentium Pro + MMX + Internet Streaming SIMD Instructions</li></ul>
+<ul><li>0.25 micron, 9.5 million Trs</li></ul>
+<ul><li>600 MHz, 550 MHz,...</li></ul>
+<ul><li>32 K(16K/16K) non-blocking level 1 cache</li></ul>
+<h3 id="maximum-minimum">MAXIMUM    MINIMUM</h3>
+<h3 id="maximum-minimum">MAXIMUM    MINIMUM</h3>
+<h3 id="mode-mode">MODE       MODE</h3>
+<h3 id="mode-mode">MODE       MODE</h3>
+<p>GND    1           40   Vcc GND    1           40   Vcc</p>
+<h3 id="a14-a15">A14                     A15</h3>
+<h3 id="ad14-ad15">AD14                    AD15</h3>
+<h3 id="a13-a16-s3">A13                     A16,S3</h3>
+<h3 id="ad13-a16-s3">AD13                    A16,S3</h3>
+<h3 id="a12-a17-s4">A12                     A17,S4</h3>
+<h3 id="ad12-a17-s4">AD12                    A17,S4</h3>
+<h3 id="a11-a18-s5">A11                     A18,S5</h3>
+<h3 id="ad11-a18-s5">AD11                    A18,S5</h3>
+<h3 id="a10-a19-s6">A10                     A19,S6</h3>
+<h3 id="ad10-a19-s6">AD10                    A19,S6</h3>
+<p>A9                     high       /SS0</p>
+<h3 id="ad9-bhe-s7">AD9                     /BHE,S7</h3>
+<h3 id="a8-mn-mx">A8                     MN,/MX</h3>
+<h3 id="ad8-mn-mx">AD8                     MN,/MX</h3>
+<h3 id="ad7-rd">AD7                     /RD</h3>
+<h3 id="ad7-rd">AD7                     /RD</h3>
+<h3 id="ad6-rq-gt0-hold">AD6                     /RQ,/GT0   HOLD</h3>
+<h3 id="ad6">AD6</h3>
+<p>8086</p>
+<h3 id="rq-gt0-hold">/RQ,/GT0   HOLD</h3>
+<h3 id="ad5">AD5</h3>
+<h3 id="8088-rq-gt1-hlda">8088        /RQ,/GT1   HLDA</h3>
+<h3 id="ad5-rq-gt1-hlda">AD5                     /RQ,/GT1   HLDA</h3>
+<h3 id="ad4-lock-wr">AD4                     /LOCK      /WR</h3>
+<h3 id="ad4-lock-wr">AD4                     /LOCK      /WR</h3>
+<h3 id="ad3-s2-io-m">AD3                     /S2        IO/M</h3>
+<h3 id="ad3-s2-io-m">AD3                     /S2        IO/M</h3>
+<h3 id="ad2-s1-dt-r">AD2                     /S1        DT/R</h3>
+<h3 id="ad2-s1-dt-r">AD2                     /S1        DT/R</h3>
+<h3 id="ad1-s0-den">AD1                     /S0        /DEN</h3>
+<h3 id="ad1-s0-den">AD1                     /S0        /DEN</h3>
+<h3 id="ad0-qs0-ale">AD0                     QS0        ALE</h3>
+<h3 id="ad0-qs0-ale">AD0                     QS0        ALE</h3>
+<h3 id="nmi-qs1-inta">NMI                     QS1        /INTA</h3>
+<h3 id="nmi-qs1-inta">NMI                    QS1        /INTA</h3>
+<h3 id="intr-test">INTR                    /TEST</h3>
+<h3 id="intr-test">INTR                    /TEST</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK                     READY
+CLK                     READY</code></pre>
+<h3 id="gnd-20-21-reset">GND    20          21   RESET</h3>
+<h3 id="gnd-20-21-reset">GND    20          21   RESET</h3>
+<p>Software Model of the 8088/8086 Microprocessor</p>
+<p>The status register, SR, with nine of its bits implement for status and control flags. The memory address space is 1 Mbytes and the I/O</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address space is 64 Kbytes in length.</code></pre>
+<ul><li>The 8086 has two parts, the Bus Interface Unit (BIU) and the</li></ul>
+<p>Execution Unit (EU).</p>
+<ul><li>The BIU fetches instructions, reads and writes data, and computes the</li></ul>
+<p>20-bit address.</p>
+<ul><li>The EU decodes and executes the instructions using the 16-bit ALU.</li></ul>
+<ul><li>The BIU contains the following registers:</li></ul>
+<p>IP - the Instruction Pointer CS – the Code Segment Register DS - the Data Segment Register SS - the Stack Segment Register ES - the Extra Segment Register</p>
+<p>Bus Interface Unit</p>
+<p>Execution Unit (EU).</p>
+<p>8086 Programmer’s Model</p>
+<p>ES                      Extra Segment BIU registers (20 bit adder)                    CS                      Code Segment SS                      Stack Segment DS                      Data Segment IP                      Instruction Pointer</p>
+<p>AX        AH                AL            Accumulator BX        BH                BL            Base Register CX        CH                CL            Count Register DX        DH                DL            Data Register SP                      Stack Pointer BP                       Base Pointer SI                       Source Index Register DI                      Destination Index Register</p>
+<h3 id="flags">FLAGS</h3>
+<p>8086/88 internal registers 16 bits (2 bytes each)</p>
+<p>AX, BX, CX and DX are two bytes wide and each byte can be accessed separately</p>
+<p>These registers are used as memory pointers.</p>
+<p>Flags will be discussed later</p>
+<p>Segment registers are used as base address for a segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in the 1 M byte of memory</code></pre>
+<p>Data Registers</p>
+<p>The 8086/8088 Microprocessors: Registers</p>
+<ul><li>Registers</li></ul>
+<ul><li>Registers are in the CPU and are referred to by specific names</li></ul>
+<ul><li>Data registers</li></ul>
+<ul><li>Hold data for an operation to be performed</li></ul>
+<ul><li>There are 4 data registers (AX, BX, CX, DX)</li></ul>
+<ul><li>Address registers</li></ul>
+<ul><li>Hold the address of an instruction or data element</li></ul>
+<ul><li>Segment registers (CS, DS, ES, SS)</li></ul>
+<ul><li>Pointer registers (SP, BP, IP)</li></ul>
+<ul><li>Index registers (SI, DI)</li></ul>
+<ul><li>Status register</li></ul>
+<ul><li>Keeps the current status of the processor</li></ul>
+<ul><li>On an IBM PC the status register is called the FLAGS register</li></ul>
+<ul><li>In total there are fourteen 16-bit registers in an 8086/8088</li></ul>
+<p>Data Registers: AX, BX, CX, DX</p>
+<ul><li>Instructions execute faster if the data is in a register</li></ul>
+<ul><li>AX, BX, CX, DX are the data registers</li></ul>
+<ul><li>Low and High bytes of the data registers can be accessed</li></ul>
+<p>separately</p>
+<ul><li>AH, BH, CH, DH are the high bytes</li></ul>
+<ul><li>AL, BL, CL, and DL are the low bytes</li></ul>
+<ul><li>Data Registers are general purpose registers but they also</li></ul>
+<p>perform special functions</p>
+<ul><li>AX</li></ul>
+<ul><li>Accumulator Register</li></ul>
+<ul><li>Preferred register to use in arithmetic, logic and data transfer instructions</li></ul>
+<p>because it generates the shortest Machine Language Code</p>
+<ul><li>Must be used in multiplication and division operations</li></ul>
+<ul><li>Must also be used in I/O operations</li></ul>
+<ul><li>BX .Base Register</li></ul>
+<ul><li>Also serves as an address register</li></ul>
+<ul><li>Used in array operations</li></ul>
+<ul><li>Used in Table Lookup operations (XLAT)</li></ul>
+<ul><li>CX : Count register</li></ul>
+<ul><li>Used as a loop counter</li></ul>
+<ul><li>Used in shift and rotate operations</li></ul>
+<ul><li>DX : Data register</li></ul>
+<ul><li>Used in multiplication and division</li></ul>
+<ul><li>Also used in I/O operations</li></ul>
+<p>DI: Destination Index register is also required for some string operations. When string operations are performed, the DI register points to memory locations in the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>data segment which is addressed by the ES register. Thus, DI is</code></pre>
+<p>associated with the ES in string operations. The SI and the DI registers may also be used to access data stored in arrays</p>
+<p>Pointer and Index Registers</p>
+<ul><li>Contain the offset addresses of memory locations</li></ul>
+<ul><li>Can also be used in arithmetic and other operations</li></ul>
+<ul><li>SP: Stack pointer</li></ul>
+<ul><li>Used with SS to access the stack segment</li></ul>
+<ul><li>BP: Base Pointer</li></ul>
+<ul><li>Primarily used to access data on the stack</li></ul>
+<ul><li>Can be used to access data in other segments</li></ul>
+<ul><li>SI: Source Index register</li></ul>
+<ul><li>is required for some string operations</li></ul>
+<ul><li>When string operations are performed, the SI register points to</li></ul>
+<p>memory locations in the data segment which is addressed by the DS register. Thus, SI is associated with the DS in string operations.</p>
+<p>Segment Registers - CS, DS, SS and ES</p>
+<ul><li>Are Address registers</li></ul>
+<ul><li>Store the memory addresses of instructions and data</li></ul>
+<ul><li>Memory Organization</li></ul>
+<ul><li>Each byte in memory has a 20 bit address starting with 0 to 220-1 or 1</li></ul>
+<p>meg of addressable memory</p>
+<ul><li>Addresses are expressed as 5 hex digits from 00000 - FFFFF</li></ul>
+<ul><li>Problem: But 20 bit addresses are TOO BIG to fit in 16 bit registers!</li></ul>
+<ul><li>Solution: Memory Segment</li></ul>
+<ul><li>Block of 64K (65,536) consecutive memory bytes</li></ul>
+<ul><li>A segment number is a 16 bit number</li></ul>
+<ul><li>Segment numbers range from 0000 to FFFF</li></ul>
+<ul><li>Within a segment, a particular memory location is specified with an offset</li></ul>
+<ul><li>An offset also ranges from 0000 to FFFF</li></ul>
+<p>Generating a Memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address</code></pre>
+<ul><li>The BIU has a dedicated</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>adder for determining</code></pre>
+<p>physical memory addresses</p>
+<p>Segments</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address</code></pre>
+<p>Segment Starting address is segment                           0H register value shifted 4 places to the left.</p>
+<h3 id="code">CODE</h3>
+<p>64K Data</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STACK                                Segment</code></pre>
+<h3 id="data">DATA</h3>
+<h3 id="extra-cs-0">EXTRA                                               CS:0</h3>
+<p>64K Code Segment Segment Registers</p>
+<p>Segments are &lt; or = 64K, can overlap, start at an address that ends in 0H.                                            0FFFFFH</p>
+<h3 id="memory">MEMORY</h3>
+<p>The Code Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="4000h">4000H</h3>
+<h3 id="cs-0400h">CS:       0400H</h3>
+<h3 id="ip-0056h-4056h">IP    0056H             4056H</h3>
+<h3 id="cs-ip-400-56">CS:IP = 400:56</h3>
+<p>Logical Address</p>
+<p>Memory 0400 0 Segment Register</p>
+<p>Offset                    +      0056</p>
+<p>Physical or                   04056H</p>
+<h3 id="0fffffh">0FFFFFH</h3>
+<p>Absolute Address</p>
+<p>The offset is the distance in bytes from the start of the segment. The offset is given by the IP for the Code Segment. Instructions are always fetched with using the CS register.</p>
+<p>The physical address is also called the absolute address.</p>
+<p>The Data Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="05c00h">05C00H</h3>
+<h3 id="ds-05c0">DS:        05C0</h3>
+<h3 id="05c50h">05C50H</h3>
+<h3 id="ea-0050-ds-ea">EA    0050                                       DS:EA</h3>
+<p>Memory</p>
+<h3 id="05c0-0">05C0     0</h3>
+<p>Segment Register</p>
+<p>Offset                    +     0050</p>
+<p>Physical Address                                                 0FFFFFH</p>
+<h3 id="05c50h">05C50H</h3>
+<p>Data is usually fetched with respect to the DS register. The effective address (EA) is the offset. The EA depends on the addressing mode.</p>
+<p>The Stack Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="0a00-0a000h">0A00                             0A000H</h3>
+<h3 id="ss">SS</h3>
+<h3 id="0a100h">0A100H</h3>
+<h3 id="sp-0100-ss-sp">SP       0100                                             SS:SP</h3>
+<p>Memory</p>
+<h3 id="0a00-0">0A00 0</h3>
+<p>Segment Register</p>
+<p>Offset                       +     0100</p>
+<h3 id="0fffffh">0FFFFFH</h3>
+<p>Physical Address                 0A100H The offset is given by the SP register. The stack is always referenced with respect to the stack segment register. The stack grows toward decreasing memory locations. The SP points to the last or top item on the stack.</p>
+<ul><li>Logical Address is specified as segment:offset</li></ul>
+<ul><li>Physical address is obtained by shifting the segment address 4 bits to the left and adding the</li></ul>
+<p>offset address</p>
+<ul><li>Thus the physical address of the logical address A4FB:4872 is       A4FB0+ 4872 = A9822</li></ul>
+<p>The Stack</p>
+<ul><li>The stack is implemented for temporary storage of information such as</li></ul>
+<p>data or addresses.</p>
+<ul><li>The stack is 64KBytes long and is organized from a software point of</li></ul>
+<p>view as 32K words.</p>
+<ul><li>The contents of the SP and BP registers are used as offsets into the stack</li></ul>
+<p>segment memory while the</p>
+<ul><li>segment base value is in the SS register. Push instructions (PUSH) and</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>pop instructions (POP)</code></pre>
+<ul><li>Top of the stack (TOS) and bottom of the stack (BOS)</li></ul>
+<ul><li>The 8088 can push word-wide data and address information onto the</li></ul>
+<p>stack from registers or memory.</p>
+<ul><li>Many stacks can exist but only one is active at a time.</li></ul>
+<p>Assembly</p>
+<p>Flags in flag register</p>
+<p>Carry flag Overflow Direction                                          Parity flag</p>
+<p>Interrupt enable                                 Auxiliary flag 6 are status flags 3 are control flag            Trap                       Zero</p>
+<p>Sign</p>
+<h3 id="status-flags">Status flags</h3>
+<p>They are set according to some results of arithmetic operation. You do not need to alter the value yourself.</p>
+<h3 id="control-flags">Control flags</h3>
+<p>Used to control some operations of the MPU. These flags are to be set by you in order to achieve some specific purposes.</p>
+<p>CF, the Carry Flag: This flag is set whenever there is a carry out, either from d7 after an 8-bit operation, or from d15 after a 16-bit data operation. PF, the Parity Flag: After certain operations, the parity of the result’s low-order byte is checked. If the byte has an even number of 1s, the parity flag is set to 1; otherwise, it is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>cleared.</code></pre>
+<p>AF, the Auxiliary Carry Flag: If there is a carry from d3 to d4 of an operation this bit is set to 1, otherwise cleared (set to 0). ZF, the Zero Flag: The ZF is set to 1 if the result of the arithmetic or logical operation is zero, otherwise, it is cleared (set to 0). SF, the Sign Flag: MSB is used as the sign bit of the binary representation of the signed numbers.After arithmetic or logical operations the MSB is copied into SF to indicate the sign of the result. TF, the Trap Flag: When this flag is set it allows the program to single step, meaning to execute one instruction at a time. Used for debugging purposes. IF, Interrupt Enable Flag: This bit is set or cleared to enable or disable only the external interrupt requests. DF, the Direction Flag: This bit is used to control the direction of the string operations. OF, the Overflow Flag: This flag is set whenever the result of a signed number operation is too large, causing the high-order bit to overflow into the sign bit.</p>
+<p>The status register, also called the flags register, indicate conditions that are produced as the result of executing an instruction. Only nine bits of the register are implemented. Six of these bits represent status flags and the other three bits represent control flags The 8088 provides instructions within its instruction set that are able to use these flags to alter the sequence in which the program is executed.</p>
+<p>Data Types</p>
+<p>The most significant bit of a signed integer is a sign bit. A zero in this bit position identifies a positive number.</p>
+<p>The 8088 can also process data that is coded as binary-coded decimal (BCD) numbers.</p>
+<h2 id="cpu03-06">cpu03-06</h2>
+<p>8086 Microprocessor History</p>
+<p>1959:   first IC's 1971:   µP 4004 4Bit     Intel (~2000 Tr.) 1972:   µP 8008 8Bit     Intel (~5000 Tr.) 1974:   µP 8080 8Bit     Intel (~6000 Tr.) 1974:   µP 6800 8Bit     Motorola 1975:   µP Z80 8Bit      Zilog 1976:   µP 9900 16Bit    Texas Instruments 1978:   µP 8086 16Bit    Intel (50.000 Tr) 1982:   µP 8286 16Bit    Intel (100.000 Tr.) 1985:   µP 80386 16Bit   Intel (300.000 Tr.) 1989:   µP 80486 16Bit   Intel (106 Tr.) 1993:   µP 80586 16Bit   Intel (5·106 Tr.) ...</p>
+<p>History of Intel’s Microprocessors</p>
+<ul><li>Intel 4004</li></ul>
+<ul><li>1971, 4-bit</li></ul>
+<ul><li>Intel 8008</li></ul>
+<ul><li>1972, 8-bit</li></ul>
+<ul><li>Originally designed for Datapoint Corp. as a CRT display controller</li></ul>
+<ul><li>Intel 8080</li></ul>
+<ul><li>1974, April - Altair 8800, 1975, MITS( 256 bytes of Mem, $395)</li></ul>
+<ul><li>Apple II -- Steve Jobs and Steve Wozniak 1976, Apple 사 설립</li></ul>
+<ul><li>Bill Gates and a fellow student : BASIC, 1975 --&gt; Microsoft</li></ul>
+<ul><li>Intel 8086/8088</li></ul>
+<ul><li>1978, 16 bit: 8088, 1979, 8-bit external bus</li></ul>
+<ul><li>IBM PC ; 1981</li></ul>
+<ul><li>29,000 Trs</li></ul>
+<ul><li>Intel 80286</li></ul>
+<ul><li>1982, 16-bit architecture</li></ul>
+<ul><li>24-bit addressing, memory protection and virtual memory</li></ul>
+<ul><li>16 MB of physical MEM and 1 GB of virtual mem</li></ul>
+<ul><li>130,000 Trs onto a single chip</li></ul>
+<ul><li>IBM PC/AT in 1984, IBM PS/2 Model 50 and 60</li></ul>
+<ul><li>Intel 80386</li></ul>
+<ul><li>1985, 32 bits</li></ul>
+<ul><li>3~5 MIPS (7 MIPS on the 25 MHz chip)</li></ul>
+<ul><li>memory paging and enhanced I/O permission features</li></ul>
+<ul><li>4GB programming model</li></ul>
+<ul><li>Intel 80486</li></ul>
+<ul><li>1989 Spring COMDEX show -&gt; 1990 June : actual release</li></ul>
+<ul><li>1,200,000 Trs</li></ul>
+<ul><li>386+387+8K data and instruction cache, paging and MMU</li></ul>
+<ul><li>Pentium</li></ul>
+<ul><li>1993</li></ul>
+<ul><li>110 MIPS on 66 Mhz Chip</li></ul>
+<ul><li>16 KB on-chip cache and 64 bit data bus</li></ul>
+<ul><li>superscalar technology (two instructions/clock)</li></ul>
+<ul><li>3.1 million transistors</li></ul>
+<ul><li>Pentium Pro</li></ul>
+<ul><li>1995, Superscalar(three-way issue)</li></ul>
+<ul><li>5.5 million Trs in the CPU core + 15.5 million Trs in the secondary cache</li></ul>
+<p>8K data, 8K instr cache</p>
+<ul><li>256 KB SRAM secondary cache</li></ul>
+<ul><li>200 SPECint92 at 133 MHz</li></ul>
+<ul><li>2.9 V, 0.6 micron BICMOS</li></ul>
+<ul><li>Pentium II</li></ul>
+<ul><li>Pentium Pro + MMX, 1997</li></ul>
+<ul><li>233, 266, upto 450 MHz</li></ul>
+<ul><li>7.5 million Trs in CPU</li></ul>
+<ul><li>512KB in secondary cache</li></ul>
+<ul><li>Pentium III</li></ul>
+<ul><li>1999</li></ul>
+<ul><li>Pentium Pro + MMX + Internet Streaming SIMD Instructions</li></ul>
+<ul><li>0.25 micron, 9.5 million Trs</li></ul>
+<ul><li>600 MHz, 550 MHz,...</li></ul>
+<ul><li>32 K(16K/16K) non-blocking level 1 cache</li></ul>
+<p>8086 Microprocessor</p>
+<p>16-bit Arithmetic Logic Unit</p>
+<ul><li>16-bit data bus</li></ul>
+<p>(8088 has 8-bit data bus)</p>
+<ul><li>20-bit address bus -</li></ul>
+<p>220 = 1,048,576 = 1 meg</p>
+<p>8086 Architecture</p>
+<ul><li>The 8086 has two parts, the Bus Interface Unit (BIU) and the</li></ul>
+<p>Execution Unit (EU).</p>
+<ul><li>The BIU fetches instructions, reads and writes data, and computes the</li></ul>
+<p>20-bit address.</p>
+<ul><li>The EU decodes and executes the instructions using the 16-bit ALU.</li></ul>
+<ul><li>The BIU contains the following registers:</li></ul>
+<p>IP - the Instruction Pointer CS - the Code Segment Register DS - the Data Segment Register SS - the Stack Segment Register ES - the Extra Segment Register</p>
+<p>The BIU fetches instructions using the CS and IP, written CS:IP, to contruct the 20-bit address. Data is fetched using a segment register (usually the DS)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and an effective address (EA) computed by the EU depending on the
+addressing mode.</code></pre>
+<p>80386/80486/Pentium Registers</p>
+<p>The ax, bx, cx, dx, si, di, bp, sp, flags, and ip 32 bits registers of the 8068 were all extended to 32 bits. The 80386 calls these new 32 bit versions EAX,</p>
+<h3 id="ebx-ecx-edx-esi-edi-ebp-esp">EBX, ECX, EDX, ESI, EDI, EBP, ESP,</h3>
+<p>EFLAGS, and EIP Memory segments can be as large as 4GB</p>
+<p>8086 Programmer’s Model</p>
+<p>ES                      Extra Segment BIU registers                CS                      Code Segment (20 bit adder)               SS                      Stack Segment DS                      Data Segment IP                     Instruction Pointer</p>
+<p>AX   AH                AL           Accumulator BX   BH                BL           Base Register CX   CH                CL           Count Register DX   DH                DL           Data Register SP                     Stack Pointer BP                     Base Pointer SI                     Source Index Register DI                     Destination Index Register</p>
+<h3 id="flags">FLAGS</h3>
+<p>8086/88 8086/88internal internalregisters registers16 16bits bits(2 (2bytes byteseach) each)</p>
+<p>AX, BX, CX and DX are two bytes wide and each byte can be accessed separately</p>
+<p>These registers are used as memory pointers.</p>
+<p>Flags will be discussed later</p>
+<p>Segment registers are used as base address for a segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in the 1 M byte of memory</code></pre>
+<p>The 8086/8088 Microprocessors: Registers</p>
+<ul><li>Registers</li></ul>
+<ul><li>Registers are in the CPU and are referred to by specific names</li></ul>
+<ul><li>Data registers</li></ul>
+<ul><li>Hold data for an operation to be performed</li></ul>
+<ul><li>There are 4 data registers (AX, BX, CX, DX)</li></ul>
+<ul><li>Address registers</li></ul>
+<ul><li>Hold the address of an instruction or data element</li></ul>
+<ul><li>Segment registers (CS, DS, ES, SS)</li></ul>
+<ul><li>Pointer registers (SP, BP, IP)</li></ul>
+<ul><li>Index registers (SI, DI)</li></ul>
+<ul><li>Status register</li></ul>
+<ul><li>Keeps the current status of the processor</li></ul>
+<ul><li>On an IBM PC the status register is called the FLAGS register</li></ul>
+<ul><li>In total there are fourteen 16-bit registers in an 8086/8088</li></ul>
+<p>Data Registers: AX, BX, CX, DX</p>
+<ul><li>Instructions execute faster if the data is in a register</li></ul>
+<ul><li>AX, BX, CX, DX are the data registers</li></ul>
+<ul><li>Low and High bytes of the data registers can be accessed</li></ul>
+<p>separately</p>
+<ul><li>AH, BH, CH, DH are the high bytes</li></ul>
+<ul><li>AL, BL, CL, and DL are the low bytes</li></ul>
+<ul><li>Data Registers are general purpose registers but they also</li></ul>
+<p>perform special functions</p>
+<ul><li>AX</li></ul>
+<ul><li>Accumulator Register</li></ul>
+<ul><li>Preferred register to use in arithmetic, logic and data transfer instructions</li></ul>
+<p>because it generates the shortest Machine Language Code</p>
+<ul><li>Must be used in multiplication and division operations</li></ul>
+<ul><li>Must also be used in I/O operations</li></ul>
+<ul><li>BX</li></ul>
+<ul><li>Base Register</li></ul>
+<ul><li>Also serves as an address register</li></ul>
+<ul><li>Used in array operations</li></ul>
+<ul><li>Used in Table Lookup operations (XLAT)</li></ul>
+<ul><li>CX</li></ul>
+<ul><li>Count register</li></ul>
+<ul><li>Used as a loop counter</li></ul>
+<ul><li>Used in shift and rotate operations</li></ul>
+<ul><li>DX</li></ul>
+<ul><li>Data register</li></ul>
+<ul><li>Used in multiplication and division</li></ul>
+<ul><li>Also used in I/O operations</li></ul>
+<p>Pointer and Index Registers</p>
+<ul><li>Contain the offset addresses of memory locations</li></ul>
+<ul><li>Can also be used in arithmetic and other operations</li></ul>
+<ul><li>SP: Stack pointer</li></ul>
+<ul><li>Used with SS to access the stack segment</li></ul>
+<ul><li>BP: Base Pointer</li></ul>
+<ul><li>Primarily used to access data on the stack</li></ul>
+<ul><li>Can be used to access data in other segments</li></ul>
+<ul><li>SI: Source Index register</li></ul>
+<ul><li>is required for some string operations</li></ul>
+<ul><li>When string operations are performed, the SI register points to</li></ul>
+<p>memory locations in the data segment which is addressed by the DS register. Thus, SI is associated with the DS in string operations.</p>
+<ul><li>DI: Destination Index register</li></ul>
+<ul><li>is also required for some string operations.</li></ul>
+<ul><li>When string operations are performed, the DI register points to</li></ul>
+<p>memory locations in the data segment which is addressed by the ES register. Thus, DI is associated with the ES in string operations.</p>
+<ul><li>The SI and the DI registers may also be used to access data</li></ul>
+<p>stored in arrays</p>
+<p>Segment Registers - CS, DS, SS and ES</p>
+<ul><li>Are Address registers</li></ul>
+<ul><li>Store the memory addresses of instructions and data</li></ul>
+<ul><li>Memory Organization</li></ul>
+<ul><li>Each byte in memory has a 20 bit address starting with 0 to 2 20-1 or 1</li></ul>
+<p>meg of addressable memory</p>
+<ul><li>Addresses are expressed as 5 hex digits from 00000 - FFFFF</li></ul>
+<ul><li>Problem: But 20 bit addresses are TOO BIG to fit in 16 bit registers!</li></ul>
+<ul><li>Solution: Memory Segment</li></ul>
+<ul><li>Block of 64K (65,536) consecutive memory bytes</li></ul>
+<ul><li>A segment number is a 16 bit number</li></ul>
+<ul><li>Segment numbers range from 0000 to FFFF</li></ul>
+<ul><li>Within a segment, a particular memory location is specified with an offset</li></ul>
+<ul><li>An offset also ranges from 0000 to FFFF</li></ul>
+<p>Intel                Memory Address Generation</p>
+<ul><li>The BIU has a dedicated adder for determining physical</li></ul>
+<p>memory addresses</p>
+<ul><li>If the data segment starts at location 1000h and a data reference</li></ul>
+<ul><li>contains the address 29h where is the actual data?</li></ul>
+<p>Offset Value (16 bits)</p>
+<p>Segment Register (16 bits)     0000</p>
+<p>2          9</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Adder</code></pre>
+<p>Offset:          0000000000101001</p>
+<p>Segment 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 00 0 0 0 :                                                             Physical Address (20 Bits)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address: 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 01 0 0 1</code></pre>
+<p>Segments</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address
+0H</code></pre>
+<p>Segment Starting address is segment</p>
+<p>register value shifted 4 places to the left.</p>
+<h3 id="code">CODE</h3>
+<p>64K Data</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STACK                                  Segment</code></pre>
+<h3 id="data">DATA</h3>
+<h3 id="extra-cs-0">EXTRA                                                CS:0</h3>
+<p>64K Code Segment Segment Registers</p>
+<p>Segments are &lt; or = 64K, can overlap, start at an address that ends in 0H.                                            0FFFFFH</p>
+<h3 id="memory">MEMORY</h3>
+<p>The Code Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="4000h">4000H</h3>
+<h3 id="cs-0400h">CS:       0400H</h3>
+<h3 id="ip-0056h-4056h">IP       0056H          4056H</h3>
+<h3 id="cs-ip-400-56">CS:IP = 400:56</h3>
+<p>Logical Address</p>
+<p>Memory 0400 0 Segment Register</p>
+<p>Offset                       +      0056 Physical or                      04056H                                 0FFFFFH Absolute Address</p>
+<p>The offset is the distance in bytes from the start of the segment. The offset is given by the IP for the Code Segment. Instructions are always fetched with using the CS register.</p>
+<p>The physical address is also called the absolute address.</p>
+<p>The Data Segment</p>
+<h3 id="0h">0H</h3>
+<h3 id="05c00h">05C00H</h3>
+<h3 id="ds-05c0">DS:        05C0</h3>
+<h3 id="05c50h">05C50H</h3>
+<h3 id="ea-0050-ds-ea">EA      0050                               DS:EA</h3>
+<p>Memory</p>
+<h3 id="05c0-0">05C0     0</h3>
+<p>Segment Register</p>
+<p>Offset                      +     0050</p>
+<p>Physical Address                05C50H                         0FFFFFH</p>
+<p>Data is usually fetched with respect to the DS register. The effective address (EA) is the offset. The EA depends on the addressing mode.</p>
+<p>The Stack Segment</p>
+<h3 id="0a00-0a000h-0h">0A00                              0A000H                          0H</h3>
+<h3 id="ss">SS</h3>
+<h3 id="0a100h">0A100H</h3>
+<h3 id="sp-0100-ss-sp">SP        0100                                                 SS:SP</h3>
+<p>Memory</p>
+<h3 id="0a00-0">0A00 0</h3>
+<p>Segment Register</p>
+<p>Offset                        +     0100</p>
+<p>Physical Address                  0A100H                                       0FFFFFH</p>
+<p>The offset is given by the SP register. The stack is always referenced with respect to the stack segment register. The stack grows toward decreasing memory locations. The SP points to the last or top item on the stack.</p>
+<ul><li>Logical Address is specified as segment:offset</li></ul>
+<ul><li>Physical address is obtained by shifting the segment address 4 bits to the left and adding the</li></ul>
+<p>offset address</p>
+<ul><li>Thus the physical address of the logical address A4FB:4872 is       A4FB0+ 4872 = A9822</li></ul>
+<h3 id="logical-address-physical-address">LOGICAL ADDRESS       PHYSICAL ADDRESS</h3>
+<p>Segment   Beginning Last        Beginning Last Number    Address   Address     Address   Address</p>
+<h3 id="0000-0000-0000-0000-ffff-00000-0ffff">0000      0000:0000 0000:FFFF   00000     0FFFF</h3>
+<h3 id="0001-0001-0000-0001-ffff-00010-1000f">0001      0001:0000 0001:FFFF   00010     1000F</h3>
+<h3 id="0002-0002-0000-0002-ffff-00020-1001f">0002      0002:0000 0002:FFFF   00020     1001F</h3>
+<h3 id="0003-0003-0000-0003-ffff-00030-1002f">0003      0003:0000 0003:FFFF   00030     1002F</h3>
+<p>.         .         .           .         . .         .         .           .         . .         .         .           .         .</p>
+<h3 id="ffff-ffff-0000-ffff-ffff-ffff0-0ffef">FFFF      FFFF:0000 FFFF:FFFF   FFFF0     0FFEF</h3>
+<p>Flags Flags in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in flag</code></pre>
+<p>flag register register</p>
+<p>Carry flag Overflow Direction                              Parity flag Interrupt enable                    Auxiliary flag Trap          Zero</p>
+<p>6 are status flags                 Sign 3 are control flag</p>
+<p>Flag Register</p>
+<ul><li>Conditional flags:</li></ul>
+<ul><li>They are set according to some results of arithmetic operation. You do</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>not need to alter the value yourself.</code></pre>
+<ul><li>Control flags:</li></ul>
+<ul><li>Used to control some operations of the MPU. These flags are to be set</li></ul>
+<p>by you in order to achieve some specific purposes. Flag                         O    D   I   T   S   Z       A       P       C</p>
+<p>Bit no.   15   14   13   12   11       9   8   7   6   5   4   3   2   1   0</p>
+<ul><li>CF (carry) Contains carry from leftmost bit following</li></ul>
+<p>arithmetic, also contains last bit from a shift or rotate operation.</p>
+<p>Flag Register</p>
+<ul><li>OF (overflow) Indicates overflow of the</li></ul>
+<p>leftmost bit during arithmetic.</p>
+<ul><li>DF (direction) Indicates left or right for</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>moving or comparing string data.</code></pre>
+<ul><li>IF (interrupt) Indicates whether external</li></ul>
+<p>interrupts are being processed or ignored.</p>
+<ul><li>TF (trap) Permits operation of the processor</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in single step mode.</code></pre>
+<ul><li>SF (sign) Contains the resulting sign of an</li></ul>
+<p>arithmetic operation (1=negative)</p>
+<ul><li>ZF (zero) Indicates when the result of</li></ul>
+<p>arithmetic or a comparison is zero. (1=yes)</p>
+<ul><li>AF (auxiliary carry) Contains carry out of</li></ul>
+<p>bit 3 into bit 4 for specialized arithmetic.</p>
+<ul><li>PF (parity) Indicates the number of 1 bits</li></ul>
+<p>that result from an operation.</p>
+<h2 id="cpu02">cpu02</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representation of Numbers and
+Characters</code></pre>
+<p>Number Systems</p>
+<ul><li>A. Decimal</li></ul>
+<ul><li>B. Binary</li></ul>
+<ul><li>C. Hexadecimal</li></ul>
+<ul><li>Is a short-hand notation for binary</li></ul>
+<ul><li>Consists of 16 digits: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C,</li></ul>
+<h3 id="d-e-f">D, E, F</h3>
+<ul><li>Note: Yu's book use:</li></ul>
+<ul><li>101d to represent decimal</li></ul>
+<ul><li>101b to represent binary</li></ul>
+<ul><li>101h to represent hexadecimal</li></ul>
+<p>Conversion between number systems</p>
+<ul><li>A. Binary to Decimal</li></ul>
+<ul><li>B. Decimal to Binary</li></ul>
+<ul><li>C. Hexadecimal to Decimal</li></ul>
+<ul><li>D. Decimal to Hexadecimal</li></ul>
+<ul><li>E. Binary to Hex</li></ul>
+<ul><li>F. Hex to Binary</li></ul>
+<ul><li>Note: we will learn addition and subtraction in</li></ul>
+<p>hexadecimal only</p>
+<p>Terminology</p>
+<ul><li>MSB - most significant bit is bit 15 in a word or bit 7 in a</li></ul>
+<p>byte</p>
+<ul><li>LSB - least significant bit is bit 0 in both a word and a byte</li></ul>
+<p>(If the LSB of an integer is 0, the integer is even. If its LSB is a 1, the integer is odd)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representing Integers</code></pre>
+<ul><li>Unsigned Integers</li></ul>
+<ul><li>Integers that are never negative</li></ul>
+<ul><li>Memory addresses, counters, and ASCII character codes are stored</li></ul>
+<p>as unsigned numbers</p>
+<ul><li>No bit is needed to represent the sign bit</li></ul>
+<ul><li>Largest unsigned integer in a byte is 11111111b or 255 or 28 -1;</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in a word it is 1111111111111111b or 65,535 or 216 - 1</code></pre>
+<ul><li>Signed Integers</li></ul>
+<ul><li>In a signed number the MSB is the sign. The number is positive if</li></ul>
+<p>the MSB is a 0 and the number is negative if the MSB is a One's complement in binary</p>
+<ul><li>flip all the bits from 0 to 1 or from 1 to 0</li></ul>
+<ul><li>Two's complement in binary -</li></ul>
+<ul><li>get one's complement and then add 1 (that is, flip all the</li></ul>
+<p>bits and then add 1)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representing Positive and Negative Numbers in Hex</code></pre>
+<ul><li>Positive numbers - straight conversion to hex</li></ul>
+<ul><li>Negative numbers are stored in two's complement form</li></ul>
+<ul><li>To get the two's complement form of a number in hex:</li></ul>
+<ul><li>First:        Represent the number as if it were positive</li></ul>
+<ul><li>Second:       Subtract it from FF(byte) or FFFF(word)</li></ul>
+<ul><li>Third:        Add 1</li></ul>
+<ul><li>Examples:</li></ul>
+<p>-97 as a word is FFFF -0061</p>
+<h3 id="ff9e">FF9E</h3>
+<p>+ 1</p>
+<h3 id="ff9f-97">FF9F = -97</h3>
+<p>-97 as a byte is FF -61</p>
+<h3 id="9e">9E</h3>
+<p>+1</p>
+<h3 id="9f-97">9F = - 97</h3>
+<p>Advantage of Storing Numbers in 2’s Complement Form</p>
+<ul><li>Advantage of storing numbers in 2's complement form is</li></ul>
+<p>that subtraction can be accomplished by bit complementation and addition</p>
+<ul><li>Circuits for complementation and addition are easy to</li></ul>
+<p>design</p>
+<ul><li>Also the same addition circuit can be used for subtraction</li></ul>
+<p>as well. Hence, no separate circuit is needed for subtration</p>
+<p>Interpreting Signed and Unsigned Bytes and Words in Memory as Decimal Numbers</p>
+<ul><li>Unsigned</li></ul>
+<ul><li>Straight translation from binary or hex to decimal</li></ul>
+<ul><li>Signed numbers</li></ul>
+<ul><li>First determine the sign of the number by looking at its MSB. If</li></ul>
+<p>its 0, its positive and you can do a straight translation from binary</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or hex to decimal</code></pre>
+<ul><li>If its MSB is a 1, its negative and you must Re-complement it!</li></ul>
+<ul><li>Since everything you see in memory will be expressed in</li></ul>
+<p>hexadecimal, you won't "see" the MSB. Instead, you will see a hex digit. Therefore, if the first hex digit of a signed word or a byte is 0 to 7, the number is positive. If the first hex digit of a signed word or a byte is 8 to F, the number is negative. Why?</p>
+<p>Identifying Positive Integers in Hex First Hex Digit          Expressed in Binary 0            0000 1            0001 2            0010 3            0011 4            0100 5            0101 6            0110 7            0111</p>
+<ul><li>In all of the above cases, the MSB is 0!</li></ul>
+<ul><li>Therefore, if the first hex digit of a signed word or a byte is</li></ul>
+<p>0 to 7, the number is positive.</p>
+<p>Identifying Negative Integers in Hex First Hex Digit Expressed in Binary 8            1000 9            1001</p>
+<h3 id="a-1010">A            1010</h3>
+<h3 id="b-1011">B            1011</h3>
+<h3 id="c-1100">C            1100</h3>
+<h3 id="d-1101">D            1101</h3>
+<h3 id="e-1110">E            1110</h3>
+<h3 id="f-1111">F            1111</h3>
+<ul><li>In all of the above cases, the MSB is 1 !</li></ul>
+<ul><li>Therefore, if the first hex digit of a signed word or a byte is</li></ul>
+<p>8 to F, the number is positive</p>
+<p>How to Interpret a Negative Integer Given in Hex</p>
+<ul><li>Re-complement the number in hex. To do that,</li></ul>
+<ul><li>First:     Subtract the byte or word from FF or FFFF respectively</li></ul>
+<ul><li>Second:    Add 1</li></ul>
+<ul><li>Interpret your hex answer as a decimal answer and place a</li></ul>
+<p>minus sign in front of your answer!</p>
+<ul><li>Example: What signed number does the byte AAh</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?
+FF</code></pre>
+<p>-AA Subtract from all F's + 1 Add 1 56h Interpret your HEX answer as a decimal number So the answer is: -86</p>
+<p>How to Interpret a Negative Integer Given in Binary</p>
+<ul><li>Re-complement the number in binary. To do that,</li></ul>
+<ul><li>First:    Flip all the bits</li></ul>
+<ul><li>Second:   Add 1</li></ul>
+<ul><li>Interpret your binary answer as a decimal answer and place a</li></ul>
+<p>minus sign in front of your answer!</p>
+<ul><li>Example: What signed number does the byte 11111000b</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?</code></pre>
+<p>Flip all bits      00000111b</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Add 1          00001000b</code></pre>
+<p>So the answer is: -8</p>
+<p>Range of Integers</p>
+<ul><li>The range of signed values that can be stored in a byte is</li></ul>
+<p>from -128 to 127</p>
+<ul><li>The range of signed values that can be stored in a word is</li></ul>
+<p>from -32,768 to 32,767</p>
+<p>Character Representation</p>
+<ul><li>Code chosen for IBM PC is the ASCII code</li></ul>
+<ul><li>7 bit code</li></ul>
+<ul><li>27 or 128 possible values</li></ul>
+<ul><li>stored in a byte</li></ul>
+<ul><li>95 ASCII codes are printable (32 to 126)</li></ul>
+<ul><li>0 to 31 and 127 are used for control purposes</li></ul>
+<ul><li>IBM PC uses an extended character set using an 8 bit code</li></ul>
+<p>thus in can represent 28 or 256 possible values</p>
+<ul><li>ASCII keyboard</li></ul>
+<ul><li>Each key pressed is stored in ASCII code</li></ul>
+<ul><li>Today on IBM PC, each key is assigned a unique number called a</li></ul>
+<p>scan code to handle the many control and function keys in addition to the ASCII character keys</p>
+<p>ASCII Codes for Capital Letters</p>
+<ul><li>Capital Letters of the Alphabet (41 - 5A)</li></ul>
+<h3 id="a-41-j-4a-q-51-z-5a">A - 41         J - 4A        Q - 51    Z - 5A</h3>
+<h3 id="b-42-k-4b-r-52">B - 42         K - 4B        R - 52</h3>
+<h3 id="c-43-l-4c-s-53">C - 43         L - 4C        S - 53</h3>
+<h3 id="d-44-m-4d-t-54">D - 44         M - 4D        T - 54</h3>
+<h3 id="e-45-n-4e-u-55">E - 45         N - 4E        U - 55</h3>
+<h3 id="f-46-0-4f-v-56">F - 46         0 - 4F        V - 56</h3>
+<h3 id="g-47-p-50-w-57">G - 47         P - 50        W - 57</h3>
+<h3 id="h-48-x-58">H - 48                       X - 58</h3>
+<h3 id="i-49-y-59">I - 49                       Y - 59</h3>
+<p>ASCII Codes for Lower Case Letters</p>
+<ul><li>Lower case letters of the alphabet (61-7A)</li></ul>
+<p>a - 61        j - 6A         q - 71     z - 7A b - 62        k - 6B         r - 72 c - 63        l - 6C         s - 73 d - 64        m - 6D         t - 74 e - 65        n - 6E         u - 75 f - 66        o - 6F         v - 76 g - 67        p - 70         w - 77 h - 68                       x - 78 i - 69                       y - 79</p>
+<p>ASCII Codes for Digits and Special Characters</p>
+<ul><li>Digits (30-39)</li></ul>
+<p>0 - 30   3 - 33   6 - 36    9 - 39 1 - 31   4 - 34   7 - 37 2 - 32   5 - 35    8 - 38</p>
+<ul><li>Special Characters</li></ul>
+<p>space - 20 ! - 21</p>
+<h3 id="2b">+ - 2B</h3>
+<h3 id="2d">- - 2D</h3>
+<ul><li>See pages 442-443 in Yu's book for the complete ASCII</li></ul>
+<p>CODE chart</p>
+<p>Practice Problems on ASCII Code</p>
+<ul><li>Interpret this: 31 32 33 20 4F 41 4B 20 53 54 52 45 45 54</li></ul>
+<ul><li>Interpret this: 49 53 4E 27 54 20 54 48 49 53 20 46 55 4E 21</li></ul>
+<p>Homework - Number System Review</p>
+<h3 id="conversion">Conversion</h3>
+<h3 id="1-convert-from-decimal-to-binary">1. Convert from decimal to binary</h3>
+<p>a. 43                         b. 167</p>
+<h3 id="2-convert-from-binary-to-decimal">2. Convert from binary to decimal</h3>
+<p>a. 1101100b                   b. 1100011b</p>
+<h3 id="3-convert-from-decimal-to-hexadecimal">3. Convert from decimal to hexadecimal</h3>
+<p>a. 6242                       b. 12321</p>
+<h3 id="4-convert-from-hexadecimal-to-decimal">4. Convert from hexadecimal to decimal</h3>
+<p>a. 4BFh                       b. A2F7h</p>
+<h3 id="5-convert-from-binary-to-hexadecimal">5. Convert from binary to hexadecimal</h3>
+<p>a. 110010011110b              b. 100001011b</p>
+<h3 id="6-convert-from-hexadecimal-to-binary">6. Convert from hexadecimal to binary</h3>
+<p>a. FADh                       b. 265Ch        c. BE98h</p>
+<p>Homework: Data Representations Set 1 Problems Note: Express all answers to problems 1-9 in HEXADECIMAL</p>
+<h3 id="1-how-do-you-represent-231-as-an-unsigned-byte">1. How do you represent 231 as an unsigned byte? ___________</h3>
+<h3 id="2-how-do-you-represent-110-as-a-signed-byte">2. How do you represent 110 as a signed byte? ___________</h3>
+<h3 id="3-how-do-you-represent-103-as-a-signed-byte">3. How do you represent -103 as a signed byte? ___________</h3>
+<h3 id="4-how-do-you-represent-64785-as-an-unsigned-word">4. How do you represent 64785 as an unsigned word? _______</h3>
+<h3 id="5-how-do-you-represent-1600-as-a-signed-word">5. How do you represent 1600 as a signed word? ___________</h3>
+<h3 id="6-how-do-you-represent-160-as-a-signed-word">6. How do you represent -160 as a signed word? _________</h3>
+<h3 id="7-how-do-you-represent-7623-as-a-character-string">7. How do you represent +7623 as a character string?_________</h3>
+<h3 id="8-how-do-you-represent-632-as-a-character-string">8. How do you represent -632 as a character string? _______</h3>
+<h3 id="9-how-do-you-represent-wow-as-a-character-string">9. How do you represent WOW! as a character string? _______</h3>
+<p>Homework: Hex to Decimal or Character - Set 1 You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your answers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:</code></pre>
+<h3 id="10-you-know-8e-is-an-unsigned-byte-what-number-does-it-represent">10. You know 8E is an unsigned byte. What number does it represent? ______</h3>
+<h3 id="11-you-know-8e-is-a-signed-byte-what-number-does-it-represent">11. You know 8E is a signed byte. What number does it represent? _________</h3>
+<h3 id="12-you-know-7e-is-a-signed-byte-what-number-does-it-represent">12. You know 7E is a signed byte. What number does it represent? _________</h3>
+<h3 id="13-you-know-34a2-is-an-unsigned-word-pv-what-number-does">13. You know 34A2 is an unsigned word (PV). What number does</h3>
+<p>it represent? _________</p>
+<h3 id="14-you-know-34a2-is-a-signed-word-pv-what-number-does-it">14. You know 34A2 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<h3 id="15-you-know-3452-is-a-signed-word-pv-what-number-does-it">15. You know 3452 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<h3 id="16-you-know-5745-is-a-character-string-what-value-does-it">16. You know 5745 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<p>Homework: Hex to Decimal or Character - Set 1 (cont’d) You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your anwers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:
+Answers</code></pre>
+<h3 id="10-you-know-8e-is-an-unsigned-byte-what-number-does-it-represent-142">10. You know 8E is an unsigned byte. What number does it represent? 142</h3>
+<h3 id="11-you-know-8e-is-a-signed-byte-what-number-does-it-represent-114">11. You know 8E is a signed byte. What number does it represent? -114</h3>
+<h3 id="12-you-know-7e-is-a-signed-byte-what-number-does-it-represent-126">12. You know 7E is a signed byte. What number does it represent?       126</h3>
+<h3 id="13-you-know-34a2-is-an-unsigned-word-pv-what-number-does">13. You know 34A2 is an unsigned word (PV). What number does</h3>
+<p>it represent? 41524</p>
+<h3 id="14-you-know-34a2-is-a-signed-word-pv-what-number-does-it">14. You know 34A2 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       -24012</code></pre>
+<h3 id="15-you-know-3452-is-a-signed-word-pv-what-number-does-it">15. You know 3452 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       21044</code></pre>
+<h3 id="16-you-know-5745-is-a-character-string-what-value-does-it">16. You know 5745 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       WE</code></pre>
+<p>HOMEWORK: Data Representations - Set 2 LV: Logical View                PV: Physical View Express all answers to problems 1-9 in HEXADECIMAL</p>
+<h3 id="1-how-do-you-represent-195-as-an-unsigned-byte">1. How do you represent 195 as an unsigned byte? ___________</h3>
+<h3 id="2-how-do-you-represent-101-as-a-signed-byte">2. How do you represent 101 as a signed byte? ___________</h3>
+<h3 id="3-how-do-you-represent-119-as-a-signed-byte">3. How do you represent -119 as a signed byte? ___________</h3>
+<h3 id="4-how-do-you-represent-42623-as-an-unsigned-word-lv">4. How do you represent 42623 as an unsigned word? (LV)______</h3>
+<h3 id="5-how-do-you-represent-32001-as-a-signed-word-lv">5. How do you represent 32001 as a signed word? (LV)__________</h3>
+<h3 id="6-how-do-you-represent-1675-as-a-signed-word-lv">6. How do you represent -1675 as a signed word? (LV) _________</h3>
+<h3 id="7-how-do-you-represent-25-as-a-character-string">7. How do you represent +25 as a character string?_______</h3>
+<h3 id="8-how-do-you-represent-413-as-a-character-string">8. How do you represent -413 as a character string? _______</h3>
+<h3 id="9-how-do-you-represent-test-as-a-character-string">9. How do you represent (TEST) as a character string? ______</h3>
+<p>Hex to Decimal or Character: Set 2 You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your answers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:</code></pre>
+<h3 id="10-you-know-95-is-an-unsigned-byte-what-number-does-it-represent">10. You know 95 is an unsigned byte. What number does it represent? ____</h3>
+<h3 id="11-you-know-95-is-a-signed-byte-what-number-does-it-represent">11. You know 95 is a signed byte. What number does it represent? _____</h3>
+<h3 id="12-you-know-7f-is-a-signed-byte-what-number-does-it-represent">12. You know 7F is a signed byte. What number does it represent? _____</h3>
+<h3 id="13-you-know-1db1-is-an-unsigned-word-pv-what-number-does">13. You know 1DB1 is an unsigned word (PV). What number does</h3>
+<p>it represent? ______</p>
+<h3 id="14-you-know-1db1-is-a-signed-word-pv-what-number-does-it">14. You know 1DB1 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+<h3 id="15-you-know-6c73-is-a-signed-word-pv-what-number-does-it">15. You know 6C73 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+<h3 id="16-you-know-4d41-is-a-character-string-what-value-does-it">16. You know 4D41 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+<h2 id="cpu02-06">cpu02-06</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representation of Numbers and
+Characters</code></pre>
+<p>Number Systems</p>
+<ul><li>A. Decimal</li></ul>
+<ul><li>B. Binary</li></ul>
+<ul><li>C. Hexadecimal</li></ul>
+<ul><li>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F</li></ul>
+<ul><li>Note:                                        • MSB - most significant bit</li></ul>
+<ul><li>101d to represent decimal                                 is bit 15 in a word or bit 7</li></ul>
+<ul><li>101b to represent binary                                  in a byte</li></ul>
+<ul><li>101h to represent hexadecimal</li></ul>
+<ul><li>Conversion between number systems</li></ul>
+<ul><li>LSB - least significant bit</li></ul>
+<ul><li>A.     Binary to Decimal                                     is bit 0 in both a word and</li></ul>
+<ul><li>B.     Decimal to Binary</li></ul>
+<p>a byte (If the LSB of an</p>
+<ul><li>C.     Hexadecimal to Decimal</li></ul>
+<ul><li>D.     Decimal to Hexadecimal</li></ul>
+<p>integer is 0, the integer is</p>
+<ul><li>E.     Binary to Hex                                         even. If its LSB is a 1, the</li></ul>
+<ul><li>F.     Hex to Binary                                         integer is odd)</li></ul>
+<ul><li>Note: we will learn addition and subtraction in hexadecimal only</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representing Integers</code></pre>
+<ul><li>Unsigned Integers</li></ul>
+<ul><li>Integers that are never negative</li></ul>
+<ul><li>Memory addresses, counters, and ASCII character codes are stored</li></ul>
+<p>as unsigned numbers</p>
+<ul><li>No bit is needed to represent the sign bit</li></ul>
+<ul><li>Largest unsigned integer in a byte is 11111111b or 255 or 28 -1;</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in a word it is 1111111111111111b or 65,535 or 216 - 1</code></pre>
+<ul><li>Signed Integers</li></ul>
+<ul><li>In a signed number the MSB is the sign. The number is positive if</li></ul>
+<p>the MSB is a 0 and the number is negative if the MSB is a One's complement in binary</p>
+<ul><li>flip all the bits from 0 to 1 or from 1 to 0</li></ul>
+<ul><li>Two's complement in binary -</li></ul>
+<ul><li>get one's complement and then add 1 (that is, flip all the</li></ul>
+<p>bits and then add 1)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Representing Positive and Negative Numbers in Hex</code></pre>
+<ul><li>Positive numbers - straight conversion to hex</li></ul>
+<ul><li>Negative numbers are stored in two's complement form</li></ul>
+<ul><li>To get the two's complement form of a number in hex:</li></ul>
+<ul><li>First:        Represent the number as if it were positive</li></ul>
+<ul><li>Second:       Subtract it from FF(byte) or FFFF(word)</li></ul>
+<ul><li>Third:        Add 1</li></ul>
+<ul><li>Examples:</li></ul>
+<p>-97 as a word is FFFF -0061</p>
+<h3 id="ff9e">FF9E</h3>
+<p>+ 1</p>
+<h3 id="ff9f-97">FF9F = -97</h3>
+<p>-97 as a byte is FF -61</p>
+<h3 id="9e">9E</h3>
+<p>+1</p>
+<h3 id="9f-97">9F = - 97</h3>
+<p>Advantage of Storing Numbers in 2’s Complement Form</p>
+<ul><li>Advantage of storing numbers in 2's complement form is</li></ul>
+<p>that subtraction can be accomplished by bit complementation and addition</p>
+<ul><li>Circuits for complementation and addition are easy to</li></ul>
+<p>design</p>
+<ul><li>Also the same addition circuit can be used for subtraction</li></ul>
+<p>as well. Hence, no separate circuit is needed for subtration</p>
+<p>Interpreting Signed and Unsigned Bytes and Words in Memory as Decimal Numbers</p>
+<ul><li>Unsigned</li></ul>
+<ul><li>Straight translation from binary or hex to decimal</li></ul>
+<ul><li>Signed numbers</li></ul>
+<ul><li>First determine the sign of the number by looking at its MSB. If</li></ul>
+<p>its 0, its positive and you can do a straight translation from binary</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or hex to decimal</code></pre>
+<ul><li>If its MSB is a 1, its negative and you must Re-complement it!</li></ul>
+<ul><li>Since everything you see in memory will be expressed in</li></ul>
+<p>hexadecimal, you won't "see" the MSB. Instead, you will see a hex digit. Therefore, if the first hex digit of a signed word or a byte is 0 to 7, the number is positive. If the first hex digit of a signed word or a byte is 8 to F, the number is negative. Why?</p>
+<p>Identifying Positive Integers in Hex First Hex Digit          Expressed in Binary 0            0000 1            0001 2            0010 3            0011 4            0100 5            0101 6            0110 7            0111</p>
+<ul><li>In all of the above cases, the MSB is 0!</li></ul>
+<ul><li>Therefore, if the first hex digit of a signed word or a byte is</li></ul>
+<p>0 to 7, the number is positive.</p>
+<p>Identifying Negative Integers in Hex First Hex Digit Expressed in Binary 8            1000 9            1001</p>
+<h3 id="a-1010">A            1010</h3>
+<h3 id="b-1011">B            1011</h3>
+<h3 id="c-1100">C            1100</h3>
+<h3 id="d-1101">D            1101</h3>
+<h3 id="e-1110">E            1110</h3>
+<h3 id="f-1111">F            1111</h3>
+<ul><li>In all of the above cases, the MSB is 1 !</li></ul>
+<ul><li>Therefore, if the first hex digit of a signed word or a byte is</li></ul>
+<p>8 to F, the number is positive</p>
+<p>How to Interpret a Negative Integer Given in Hex</p>
+<ul><li>Re-complement the number in hex. To do that,</li></ul>
+<ul><li>First:         Subtract the byte or word from FF or FFFF respectively</li></ul>
+<ul><li>Second:        Add 1</li></ul>
+<ul><li>Interpret your hex answer as a decimal answer and place a</li></ul>
+<p>minus sign in front of your answer!</p>
+<ul><li>Example: What signed number does the byte AAh</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?
+FF</code></pre>
+<p>-AA Subtract from all F's + 1 Add 1 56h Interpret your HEX answer as a decimal number So the answer is: -86</p>
+<p>How to Interpret a Negative Integer Given in Binary</p>
+<ul><li>Re-complement the number in binary. To do that,</li></ul>
+<ul><li>First:      Flip all the bits</li></ul>
+<ul><li>Second:     Add 1</li></ul>
+<ul><li>Interpret your binary answer as a decimal answer and place a</li></ul>
+<p>minus sign in front of your answer!</p>
+<ul><li>Example: What signed number does the byte 11111000b</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?</code></pre>
+<p>Flip all bits      00000111b</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Add 1          00001000b</code></pre>
+<p>So the answer is: -8</p>
+<ul><li>Range of Integers</li></ul>
+<ul><li>The range of signed values that can be stored in a byte is</li></ul>
+<p>from -128 to 127</p>
+<ul><li>The range of signed values that can be stored in a word is</li></ul>
+<p>from -32,768 to 32,767</p>
+<p>Character Representation</p>
+<ul><li>Code chosen for IBM PC is the ASCII code</li></ul>
+<ul><li>7 bit code</li></ul>
+<ul><li>27 or 128 possible values</li></ul>
+<ul><li>stored in a byte</li></ul>
+<ul><li>95 ASCII codes are printable (32 to 126)</li></ul>
+<ul><li>0 to 31 and 127 are used for control purposes</li></ul>
+<ul><li>IBM PC uses an extended character set using an 8 bit code</li></ul>
+<p>thus in can represent 28 or 256 possible values</p>
+<ul><li>ASCII keyboard</li></ul>
+<ul><li>Each key pressed is stored in ASCII code</li></ul>
+<ul><li>Today on IBM PC, each key is assigned a unique number called a</li></ul>
+<p>scan code to handle the many control and function keys in addition to the ASCII character keys</p>
+<p>ASCII Codes for Capital Letters</p>
+<ul><li>Capital Letters of the Alphabet (41 - 5A)</li></ul>
+<h3 id="a-41-j-4a-q-51-z-5a">A - 41           J - 4A            Q - 51            Z - 5A</h3>
+<h3 id="b-42-k-4b-r-52">B - 42           K - 4B            R - 52</h3>
+<h3 id="c-43-l-4c-s-53">C - 43           L - 4C            S - 53</h3>
+<h3 id="d-44-m-4d-t-54">D - 44           M - 4D            T - 54</h3>
+<h3 id="e-45-n-4e-u-55">E - 45           N - 4E            U - 55</h3>
+<h3 id="f-46-0-4f-v-56">F - 46           0 - 4F            V - 56</h3>
+<h3 id="g-47-p-50-w-57">G - 47           P - 50            W - 57</h3>
+<h3 id="h-48-x-58">H - 48                             X - 58</h3>
+<h3 id="i-49-y-59">I - 49                             Y - 59</h3>
+<p>ASCII Codes for Lower Case Letters</p>
+<ul><li>Lower case letters of the alphabet (61-7A)</li></ul>
+<p>a - 61            j - 6A             q - 71   z - 7A b - 62            k - 6B             r - 72 c - 63            l - 6C             s - 73 d - 64            m - 6D             t - 74 e - 65            n - 6E             u - 75 f - 66            o - 6F             v - 76 g - 67            p - 70             w - 77 h - 68                               x - 78 i - 69                               y - 79</p>
+<p>ASCII Codes for Digits and Special Characters</p>
+<ul><li>Digits (30-39)</li></ul>
+<p>0 - 30   3 - 33   6 - 36    9 - 39 1 - 31   4 - 34   7 - 37 2 - 32   5 - 35    8 - 38</p>
+<ul><li>Special Characters</li></ul>
+<p>space - 20 ! - 21</p>
+<h3 id="2b">+ - 2B</h3>
+<h3 id="2d">- - 2D</h3>
+<ul><li>See pages 442-443 in Yu's book for the complete ASCII</li></ul>
+<p>CODE chart</p>
+<p>Homework - Number System Review</p>
+<h3 id="conversion">Conversion</h3>
+<h3 id="1-convert-from-decimal-to-binary">1. Convert from decimal to binary</h3>
+<p>a. 43                         b. 167</p>
+<h3 id="2-convert-from-binary-to-decimal">2. Convert from binary to decimal</h3>
+<p>a. 1101100b                   b. 1100011b</p>
+<h3 id="3-convert-from-decimal-to-hexadecimal">3. Convert from decimal to hexadecimal</h3>
+<p>a. 6242                       b. 12321</p>
+<h3 id="4-convert-from-hexadecimal-to-decimal">4. Convert from hexadecimal to decimal</h3>
+<p>a. 4BFh                       b. A2F7h</p>
+<h3 id="5-convert-from-binary-to-hexadecimal">5. Convert from binary to hexadecimal</h3>
+<p>a. 110010011110b              b. 100001011b</p>
+<h3 id="6-convert-from-hexadecimal-to-binary">6. Convert from hexadecimal to binary</h3>
+<p>a. FADh                       b. 265Ch                c. BE98h</p>
+<p>Homework: Data Representations Set 1 Problems Note: Express all answers to problems 1-9 in HEXADECIMAL</p>
+<h3 id="1-how-do-you-represent-231-as-an-unsigned-byte">1. How do you represent 231 as an unsigned byte? ___________</h3>
+<h3 id="2-how-do-you-represent-110-as-a-signed-byte">2. How do you represent 110 as a signed byte? ___________</h3>
+<h3 id="3-how-do-you-represent-103-as-a-signed-byte">3. How do you represent -103 as a signed byte? ___________</h3>
+<h3 id="4-how-do-you-represent-64785-as-an-unsigned-word">4. How do you represent 64785 as an unsigned word? _______</h3>
+<h3 id="5-how-do-you-represent-1600-as-a-signed-word">5. How do you represent 1600 as a signed word? ___________</h3>
+<h3 id="6-how-do-you-represent-160-as-a-signed-word">6. How do you represent -160 as a signed word? _________</h3>
+<h3 id="7-how-do-you-represent-7623-as-a-character-string">7. How do you represent +7623 as a character string?_________</h3>
+<h3 id="8-how-do-you-represent-632-as-a-character-string">8. How do you represent -632 as a character string? _______</h3>
+<h3 id="9-how-do-you-represent-wow-as-a-character-string">9. How do you represent WOW! as a character string? _______</h3>
+<p>Practice Problems on ASCII Code</p>
+<ul><li>Interpret this: 31 32 33 20 4F 41 4B 20 53 54 52 45 45 54</li></ul>
+<ul><li>Interpret this: 49 53 4E 27 54 20 54 48 49 53 20 46 55 4E 21</li></ul>
+<p>Homework: Hex to Decimal or Character - Set 1 You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your answers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:</code></pre>
+<h3 id="10-you-know-8e-is-an-unsigned-byte-what-number-does-it-represent">10. You know 8E is an unsigned byte. What number does it represent? ______</h3>
+<h3 id="11-you-know-8e-is-a-signed-byte-what-number-does-it-represent">11. You know 8E is a signed byte. What number does it represent? _________</h3>
+<h3 id="12-you-know-7e-is-a-signed-byte-what-number-does-it-represent">12. You know 7E is a signed byte. What number does it represent? _________</h3>
+<h3 id="13-you-know-34a2-is-an-unsigned-word-pv-what-number-does">13. You know 34A2 is an unsigned word (PV). What number does</h3>
+<p>it represent? _________</p>
+<h3 id="14-you-know-34a2-is-a-signed-word-pv-what-number-does-it">14. You know 34A2 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<h3 id="15-you-know-3452-is-a-signed-word-pv-what-number-does-it">15. You know 3452 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<h3 id="16-you-know-5745-is-a-character-string-what-value-does-it">16. You know 5745 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? _________</code></pre>
+<p>Homework: Hex to Decimal or Character - Set 1 (cont’d) You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your anwers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:
+Answers</code></pre>
+<h3 id="10-you-know-8e-is-an-unsigned-byte-what-number-does-it-represent-142">10. You know 8E is an unsigned byte. What number does it represent? 142</h3>
+<h3 id="11-you-know-8e-is-a-signed-byte-what-number-does-it-represent-114">11. You know 8E is a signed byte. What number does it represent? -114</h3>
+<h3 id="12-you-know-7e-is-a-signed-byte-what-number-does-it-represent-126">12. You know 7E is a signed byte. What number does it represent?       126</h3>
+<h3 id="13-you-know-34a2-is-an-unsigned-word-pv-what-number-does">13. You know 34A2 is an unsigned word (PV). What number does</h3>
+<p>it represent? 41524</p>
+<h3 id="14-you-know-34a2-is-a-signed-word-pv-what-number-does-it">14. You know 34A2 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       -24012</code></pre>
+<h3 id="15-you-know-3452-is-a-signed-word-pv-what-number-does-it">15. You know 3452 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       21044</code></pre>
+<h3 id="16-you-know-5745-is-a-character-string-what-value-does-it">16. You know 5745 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent?       WE</code></pre>
+<p>HOMEWORK: Data Representations - Set 2 LV: Logical View                 PV: Physical View Express all answers to problems 1-9 in HEXADECIMAL</p>
+<h3 id="1-how-do-you-represent-195-as-an-unsigned-byte">1. How do you represent 195 as an unsigned byte? ___________</h3>
+<h3 id="2-how-do-you-represent-101-as-a-signed-byte">2. How do you represent 101 as a signed byte? ___________</h3>
+<h3 id="3-how-do-you-represent-119-as-a-signed-byte">3. How do you represent -119 as a signed byte? ___________</h3>
+<h3 id="4-how-do-you-represent-42623-as-an-unsigned-word-lv">4. How do you represent 42623 as an unsigned word? (LV)______</h3>
+<h3 id="5-how-do-you-represent-32001-as-a-signed-word-lv">5. How do you represent 32001 as a signed word? (LV)__________</h3>
+<h3 id="6-how-do-you-represent-1675-as-a-signed-word-lv">6. How do you represent -1675 as a signed word? (LV) _________</h3>
+<h3 id="7-how-do-you-represent-25-as-a-character-string">7. How do you represent +25 as a character string?_______</h3>
+<h3 id="8-how-do-you-represent-413-as-a-character-string">8. How do you represent -413 as a character string? _______</h3>
+<h3 id="9-how-do-you-represent-test-as-a-character-string">9. How do you represent (TEST) as a character string? ______</h3>
+<p>Hex to Decimal or Character: Set 2 You are looking at a dump. Therefore, the values in problems 10-16 are expressed in HEXADECIMAL. Express your answers to problems 10-16 in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decimal or character form:</code></pre>
+<h3 id="10-you-know-95-is-an-unsigned-byte-what-number-does-it-represent">10. You know 95 is an unsigned byte. What number does it represent? ____</h3>
+<h3 id="11-you-know-95-is-a-signed-byte-what-number-does-it-represent">11. You know 95 is a signed byte. What number does it represent? _____</h3>
+<h3 id="12-you-know-7f-is-a-signed-byte-what-number-does-it-represent">12. You know 7F is a signed byte. What number does it represent? _____</h3>
+<h3 id="13-you-know-1db1-is-an-unsigned-word-pv-what-number-does">13. You know 1DB1 is an unsigned word (PV). What number does</h3>
+<p>it represent? ______</p>
+<h3 id="14-you-know-1db1-is-a-signed-word-pv-what-number-does-it">14. You know 1DB1 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+<h3 id="15-you-know-6c73-is-a-signed-word-pv-what-number-does-it">15. You know 6C73 is a signed word (PV). What number does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+<h3 id="16-you-know-4d41-is-a-character-string-what-value-does-it">16. You know 4D41 is a character string. What value does it</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represent? ______</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-8086-mimari.zip" download>eem332-8086-mimari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3.6 MB · 24.02.2003</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-8086-mimari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: 8253/8254 Zamanlayıcıları ve Seri İletişim — hasancan.net</title>
+<meta name="description" content="Programlanabilir sayıcıların kipleri, zaman gecikmesi ve seri veri aktarımı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-zamanlayici-seri-iletisim/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: 8253/8254 Zamanlayıcıları ve Seri İletişim">
+<meta property="og:description" content="Programlanabilir sayıcıların kipleri, zaman gecikmesi ve seri veri aktarımı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-zamanlayici-seri-iletisim/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: 8253/8254 Zamanlayıcıları ve Seri İletişim", "description": "Programlanabilir sayıcıların kipleri, zaman gecikmesi ve seri veri aktarımı.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-zamanlayici-seri-iletisim/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-zamanlayici-seri-iletisim.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-zamanlayici-seri-iletisim/eem332-zamanlayici-seri-iletisim.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: 8253/8254 Zamanlayıcıları ve Seri İletişim">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.05.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu12">cpu12</a></li><li><a href="#cpu12-06t">cpu12_06T</a></li><li><a href="#cpu12-06d">cpu12_06d</a></li><li><a href="#cpu13-07">cpu13_07</a></li><li><a href="#cpu13-06">cpu13_06</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: 8253/8254 Zamanlayıcıları ve Seri İletişim</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 03.05.2005 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2005–2015). Programlanabilir sayıcıların kipleri, zaman gecikmesi ve seri veri aktarımı. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cpu12">cpu12</h2>
+<p>Asynchronous Counter</p>
+<h3 id="q-q-q">Q                   Q                        Q</h3>
+<h3 id="d-d-d">D                     D                        D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK</code></pre>
+<p>Synchronous Counter</p>
+<h3 id="q-q-q">Q              Q                     Q</h3>
+<h3 id="d-d-d">D             D                  D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+BUFGP</code></pre>
+<p>8253/54 Timer programmable Interval Timer</p>
+<p>Creating time delays in 8088/8086 based system for a delay loop</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,N
+Again: LOOP again</code></pre>
+<p>Evrey loop takes total of 17 clk pulse to be executed so the time delay is Nx17 example : system frequency is 4.7 MHZ (t=210 ns). For 100ms delay its needed N) 28000 another way for delay generation is using of external hardware timers</p>
+<p>Programmable Interval Timer - 8254</p>
+<p>Programmable Timer   Internal architecure of the 82C54</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+CLK is the input clock frequency, which can range between 0 and 2 MHz for</code></pre>
+<p>the 8253. for input frequencies higher than 2 MHz, the 8254 must be used; the 8254 can go as high as 8 MHz, and the 8254-2 can go as high as 10 MHz.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT</code></pre>
+<p>Although the input frequency is a square wave of 33% duty cycle, the shape of the output frequency coming from the OUT pin after being divided can be programmed. Among the options are square-wave, one-shot, and other square- shape waves of various duty cycles but no sine-wave or saw-tooth shapes.</p>
+<h3 id="gate">GATE</h3>
+<p>This pin is use to enable or disable the counter. Putting HIGH (5 V) on GATE enables the counter, whereas LOW (0 V) disables it ýn some modes a 0-to-1 pulse must be applied to GATE to enable the counter.</p>
+<h3 id="d0-d7">D0 – D7</h3>
+<p>The D0 –D7 data bus of the 8253/54 is a bidirectional bus connected to D0 –D7 of the system data bus. The data bus allows the CPU to access various registers inside the 8253/54 for both read and write operations. RD and WR (both active low) are connected to IOR and LOW control of the system bus.</p>
+<p>Pin Description of 8253/54 CS   A1   A0   Port</p>
+<p>0    0    0    Counter 0</p>
+<p>0    0    1    Counter 1 A0, A1, and CS                         0    1    0    Counter 2</p>
+<p>0    1    1    Control register</p>
+<ul><li>Inside the 8253/54 timer, there</li></ul>
+<p>1    x    x    8253/54 is not selected are 3 counters.</p>
+<ul><li>Each timer works independently</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and programmed separately.</code></pre>
+<ul><li>Each counter is assigned an</li></ul>
+<p>individual port address.</p>
+<ul><li>The control register common to</li></ul>
+<p>all 3 counters and has its own port.</p>
+<p>Control word format of the 82C54</p>
+<p>Operation Modes</p>
+<p>Mode 0 Interrupt on terminal count Mode 1 Programmable one-shot Mode 2 Rate Generator Mode 3 Square wave rate generator Mode 4 Software triggered strobe Mode 5 Hardware trigger strobe</p>
+<p>Accessing the register of the 82c54    Interface</p>
+<p>Base adress is 40H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV   AL, 30H ; set up counter 0</code></pre>
+<p>Bsed on last figure load : OUT   43H, AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV   AL, 55H ; set up counter 1</code></pre>
+<p>counter0=1234H,            OUT   43H, AL Binary counter in mode 0   MOV   AL, B8H; set up counter 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT   43H, AL</code></pre>
+<p>Counter1 =0100h,           MOV   AL,34H; load counter 0 with 1234H BCD counter in mode 2      OUT   40H, AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV   AL,12H</code></pre>
+<p>counter 2=1FFFh            OUT   40H, AL Binary counter in mode3    MOV   AL,00H; load counter 1 with 100H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT   41H, AL
+MOV   AL,01H
+OUT   41H, AL
+MOV   AL,FFH; load counter 2 with 1FFFH
+OUT   42H, AL
+MOV   AL,1FH
+OUT   42H, AL</code></pre>
+<p>Content of each register could be read at any time.</p>
+<h3 id="methods-of-reading-the-state-of-a-counter-while-counting">Methods of reading the state of a counter while counting</h3>
+<p>1-Employ a read from the input port associated with the counter. The counter must be temporarily paused. 2-Using the 8254’s counter latch command. This command is selected by clearing bits 5</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and 4 in the control word for a particular counter. This causes the 8254 to transfer a</code></pre>
+<p>copy of the selected count register into an output latch 3-The third technique uses a read-back command to read the state of 3counter with a single command. The read-back command is issued by setting bits 7 and 6 . Example: Write an instruction sequence to read the contebt of counter 2. The content is to be loaded into the AX register. The base adress of timer is 40H . (latch command)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Mov AL, 1000xxxxB
+OUT 43 H, AL
+IN AL, 42H
+MOV BL,AL; READ THE LOW BYTE
+IN     AL,42H, READ THE HÝGH BYTE
+MOV AH,AL
+MOV AL,BL, AX =COUNTER2 VALUE</code></pre>
+<p>Mode 0: interrupt on terminal count The output in this mode is initially low, and will remain low for the duration of the count if GATR = 1. The width of the low output is as follows. Width of low pulse = N × T Where N is the clock count loaded into counter, and T is the clock period of the CLK input. When the terminal count is reached, the output will go high and remain high until a new control word or new count number is loaded. Mode 1: programmable one-shot This mode is also called hardware triggerable one-shot. The triggering must be done through the GATE input by sending a 0-to-1 pulse to it. In 8253/54 modes that are programmable (triggerable) such as mode1, the following two steps must be performed for the counter to work.</p>
+<h3 id="1-load-the-count-register">1. Load the count register.</h3>
+<h3 id="2-a-0-to-1-pulse-must-be-sent-to-the-gate-input-to-trigger-the-counter">2. A 0-to-1 pulse must be sent to the GATE input to trigger the counter.</h3>
+<p>Mode 2: rate generator Mode 2 is also called divide-by-N counter. In this mode, if GATE = 1, OUT will be high for the N x T clock period, goes low only for one clock pulse, then the count is reloaded automatically, and the process continues indefinitely. This mode in effect produces a divide-by-N counter. In this mode, the period of OUT is equal to (N + 1) x T where for N x T, OUT is high and 1 clock pulse, OUT is low.</p>
+<p>Mode 3: square wave rate generator</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this mode if GATE = 1, OUT is a square wave the high pulse is equal to the low pulse if N is</code></pre>
+<p>an even number. In that case, the high part and low part of the pulse have the same duration and are equal to (N/2) x T where N is the clock count and T is the CLK period. In this mode, the count is reloaded automatically when the terminal count is reached, thereby producing a continuous square wave with frequency of 1/N of the CLK frequenc y. Mode 3 is similar to mode 2, except that OUT in mode 3 is a square wave of 50% duty cycle . If an odd number is loaded into counter, the time for high position is (N+1)/2 and the time for low position is (N-1)/2 Mode 4: software triggered strobe</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this mode if GATE = 1, the output will go high upon loading the count. It will stay high for the</code></pre>
+<p>duration of N x T, where N is the count and T is the clock period. After the count reaches zero (terminal count), it becomes low for one clock pulse, then goes high again and stays high until a new command word or new count is loaded. To repeat the strobe, the count must be reloaded again. In other words, this mode does not automatically reload the count upon reaching the terminal count. Mode 4 is similar to mode 2, except the counter is not reloaded automatically. In this mode, if the GATE input becomes low, the count will stop and the output will be high. The count resumes only when the gate becomes high again. Mode 5: hardware triggered storbe This mode is similar to mode 4 except the triggering must be done with the GATE input. In this mode, the count begins only when a 0-to-1 pulse is sent to the GATE input. This is unlike mode 4 where the counter started upon loading the count, as GATE = 1.</p>
+<p>Operating modes of 82C54</p>
+<p>Mode 0     Mode 2 The gate is fixed to high for square wave Software   generation (software)</p>
+<p>Mode 1     Mode 3The gate is fixed to high for square wave generation Hardware   Software</p>
+<p>Mode 4 (is similar to mode 2, except the counter is not reloaded automatically)</p>
+<p>Mode 2</p>
+<p>Adress of Counter0=94H, Counter 1 =95H, Counter2=96H, Control register=97H</p>
+<p>Adress of Counter0=94H, Counter 1 =95H, Counter2=96H, Control register=97H</p>
+<p>8253/54 Timer Connections and Programming</p>
+<p>Mode 2</p>
+<p>Mode 3</p>
+<figure class="yazi-gorsel"><img src="sekil-833-03.jpg" width="911" height="1287" loading="lazy" decoding="async" alt="cpu12: sayfa 3, devre, tablo ve şekiller"><figcaption>cpu12, sayfa 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-833-06.jpg" width="911" height="1287" loading="lazy" decoding="async" alt="cpu12: sayfa 6, devre, tablo ve şekiller"><figcaption>cpu12, sayfa 6.</figcaption></figure>
+<h2 id="cpu12-06t">cpu12_06T</h2>
+<p>Counter and Timers: programmable Interval Timer 8253/54 Timer</p>
+<p>Asynchronous Counter</p>
+<h3 id="q-q-q">Q               Q                         Q</h3>
+<h3 id="d-d-d">D                  D                        D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK           Synchronous Counter</code></pre>
+<h3 id="q-q-q">Q          Q                      Q</h3>
+<h3 id="d-d-d">D         D                   D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+BUFGP</code></pre>
+<p>Creating time delays in 8088/8086 based system for a delay loop</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,N
+Again: LOOP again</code></pre>
+<p>Evrey loop takes total of 17 clock pulse to be executed so the time delay is Nx17 example : system frequency is 4.7 MHZ (t=210 ns). For 100ms delay its needed N) 28000 another way for delay generation is using of external hardware timers</p>
+<p>Programmable Interval Timer - 8254</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+CLK is the input clock frequency, which can range between 0 and 2 MHz for</code></pre>
+<p>the 8253. for input frequencies higher than 2 MHz, the 8254 must be used; the 8254 can go as high as 8 MHz, and the 8254-2 can go as high as 10 MHz.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT</code></pre>
+<p>Although the input frequency is a square wave of 33% duty cycle, the shape of the output frequency coming from the OUT pin after being divided can be programmed. Among the options are square-wave, one-shot, and other square- shape waves of various duty cycles but no sine-wave or saw-tooth shapes.</p>
+<h3 id="gate">GATE</h3>
+<p>This pin is use to enable or disable the counter. Putting HIGH (5 V) on GATE enables the counter, whereas LOW (0 V) disables it ın some modes a 0-to-1 pulse must be applied to GATE to enable the counter.</p>
+<h3 id="d0-d7">D0 – D7</h3>
+<p>The D0 –D7 data bus of the 8253/54 is a bidirectional bus connected to D0 –D7 of the system data bus. The data bus allows the CPU to access various registers inside the 8253/54 for both read and write operations. RD and WR (both active low) are connected to IOR and LOW control of the system bus.</p>
+<p>Pin Description of 8253/54 CS   A1   A0   Port</p>
+<p>0    0    0    Counter 0</p>
+<p>0    0    1    Counter 1 A0, A1, and CS                         0    1    0    Counter 2</p>
+<ul><li>Inside the 8253/54 timer, there      0    1    1    Control register</li></ul>
+<p>are 3 counters.                        1    x    x    8253/54 is not selected</p>
+<ul><li>Each timer works independently</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and programmed separately.</code></pre>
+<ul><li>Each counter is assigned an</li></ul>
+<p>individual port address.</p>
+<ul><li>The control register common to</li></ul>
+<p>all 3 counters and has its own port.</p>
+<p>Control word format of the 82C54</p>
+<p>Operation Modes (Six operation modes)</p>
+<p>Mode 0 Interrupt on terminal count Mode 1 Programmable one-shot Mode 2 Rate Generator Mode 3 Square wave rate generator Mode 4 Software triggered strobe Mode 5 Hardware trigger strobe</p>
+<p>Accessing the register of the 82C54    Interface</p>
+<p>Base adress is 40H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV    AL, 30H ; set up counter 0
+Example:                  OUT    43H, AL
+MOV    AL, 55H ; set up counter 1</code></pre>
+<p>Bsed on last figure load : OUT   43H, AL counter0=1234H,           MOV    AL, B8H; set up counter 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT    43H, AL</code></pre>
+<p>Binary counter in mode 0 MOV     AL,34H; load counter 0 with 1234H Counter1 =0100h,          OUT    40H, AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV    AL,12H</code></pre>
+<p>BCD counter in mode 2     OUT    40H, AL counter 2=1FFFh           MOV    AL,00H; load counter 1 with 100H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT    41H, AL</code></pre>
+<p>Binary counter in mode3   MOV    AL,01H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT    41H, AL
+MOV    AL,FFH; load counter 2 with 1FFFH
+OUT    42H, AL
+MOV    AL,1FH
+OUT    42H, AL</code></pre>
+<p>Content of each register could be read at any time.</p>
+<h3 id="methods-of-reading-the-state-of-a-counter-while-counting">Methods of reading the state of a counter while counting</h3>
+<p>1-Employ a read from the input port associated with the counter. The counter must be temporarily paused. 2-Using the 8254’s counter latch command. This command is selected by clearing bits 5</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and 4 in the control word for a particular counter. This causes the 8254 to transfer a</code></pre>
+<p>copy of the selected count register into an output latch 3-The third technique uses a read-back command to read the state of 3counter with a single command. The read-back command is issued by setting bits 7 and 6 . Example: Write an instruction sequence to read the contebt of counter 2. The content is to be loaded into the AX register. The base adress of timer is 40H . (latch command)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Mov AL, 1000xxxxB
+OUT 43 H, AL
+IN AL, 42H
+MOV BL,AL; READ THE LOW BYTE
+IN     AL,42H, READ THE HİGH BYTE
+MOV AH,AL
+MOV AL,BL, AX =COUNTER2 VALUE</code></pre>
+<p>8253/54 Timer Connections and Programming (adress decoding)</p>
+<p>Mode 4</p>
+<p>Mode 5</p>
+<h2 id="cpu12-06d">cpu12_06d</h2>
+<p>Counter and Timers: programmable Interval Timer 8253/54 Timer</p>
+<p>Asynchronous Counter</p>
+<h3 id="q-q-q">Q                                Q                               Q</h3>
+<h3 id="d-d-d">D                                D                               D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK                        Synchronous Counter</code></pre>
+<h3 id="q-q-q">Q                      Q                          Q</h3>
+<h3 id="d-d-d">D                     D                          D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+BUFGP</code></pre>
+<p>Creating time delays in 8088/8086 based system for a delay loop</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,N
+Again: LOOP again</code></pre>
+<p>Evrey loop takes total of 17 clock pulse to be executed so the time delay is Nx17 example : system frequency is 4.7 MHZ (t=210 ns). For 100ms delay its needed N) 28000 another way for delay generation is using of external hardware timers</p>
+<p>Programmable Interval Timer - 8254</p>
+<p>Programmable Timer             Internal architecure of the 82C54</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+CLK is the input clock frequency, which can range between 0 and 2 MHz for</code></pre>
+<p>the 8253. for input frequencies higher than 2 MHz, the 8254 must be used; the 8254 can go as high as 8 MHz, and the 8254-2 can go as high as 10 MHz.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT</code></pre>
+<p>Although the input frequency is a square wave of 33% duty cycle, the shape of the output frequency coming from the OUT pin after being divided can be programmed. Among the options are square-wave, one-shot, and other square- shape waves of various duty cycles but no sine-wave or saw-tooth shapes.</p>
+<h3 id="gate">GATE</h3>
+<p>This pin is use to enable or disable the counter. Putting HIGH (5 V) on GATE enables the counter, whereas LOW (0 V) disables it ın some modes a 0-to-1 pulse must be applied to GATE to enable the counter.</p>
+<h3 id="d0-d7">D0 – D7</h3>
+<p>The D0 –D7 data bus of the 8253/54 is a bidirectional bus connected to D0 –D7 of the system data bus. The data bus allows the CPU to access various registers inside the 8253/54 for both read and write operations. RD and WR (both active low) are connected to IOR and LOW control of the system bus.</p>
+<p>Pin Description of 8253/54 CS   A1   A0   Port</p>
+<p>0    0    0    Counter 0</p>
+<p>0    0    1    Counter 1 A0, A1, and CS                         0    1    0    Counter 2</p>
+<ul><li>Inside the 8253/54 timer, there      0    1    1    Control register</li></ul>
+<p>are 3 counters.                        1    x    x    8253/54 is not selected</p>
+<ul><li>Each timer works independently</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and programmed separately.</code></pre>
+<ul><li>Each counter is assigned an</li></ul>
+<p>individual port address.</p>
+<ul><li>The control register common to</li></ul>
+<p>all 3 counters and has its own port.</p>
+<p>Control word format of the 82C54</p>
+<p>Operation Modes (Six operation modes)</p>
+<p>Mode 0 Interrupt on terminal count Mode 1 Programmable one-shot Mode 2 Rate Generator Mode 3 Square wave rate generator Mode 4 Software triggered strobe Mode 5 Hardware trigger strobe</p>
+<p>Accessing the register of the 82C54                    Interface</p>
+<p>Base adress is 40H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV         AL, 30H ; set up counter 0
+Example:                  OUT         43H, AL
+MOV         AL, 55H ; set up counter 1</code></pre>
+<p>Bsed on last figure load : OUT        43H, AL counter0=1234H,           MOV         AL, B8H; set up counter 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT         43H, AL</code></pre>
+<p>Binary counter in mode 0 MOV          AL,34H; load counter 0 with 1234H Counter1 =0100h,          OUT         40H, AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV         AL,12H</code></pre>
+<p>BCD counter in mode 2     OUT         40H, AL counter 2=1FFFh           MOV         AL,00H; load counter 1 with 100H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT         41H, AL</code></pre>
+<p>Binary counter in mode3   MOV         AL,01H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT         41H, AL
+MOV         AL,FFH; load counter 2 with 1FFFH
+OUT         42H, AL
+MOV         AL,1FH
+OUT         42H, AL</code></pre>
+<p>Content of each register could be read at any time.</p>
+<h3 id="methods-of-reading-the-state-of-a-counter-while-counting">Methods of reading the state of a counter while counting</h3>
+<p>1-Employ a read from the input port associated with the counter. The counter must be temporarily paused. 2-Using the 8254’s counter latch command. This command is selected by clearing bits 5</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and 4 in the control word for a particular counter. This causes the 8254 to transfer a</code></pre>
+<p>copy of the selected count register into an output latch 3-The third technique uses a read-back command to read the state of 3counter with a single command. The read-back command is issued by setting bits 7 and 6 . Example: Write an instruction sequence to read the contebt of counter 2. The content is to be loaded into the AX register. The base adress of timer is 40H . (latch command)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Mov AL, 1000xxxxB
+OUT 43 H, AL
+IN AL, 42H
+MOV BL,AL; READ THE LOW BYTE
+IN     AL,42H, READ THE HİGH BYTE
+MOV AH,AL
+MOV AL,BL, AX =COUNTER2 VALUE</code></pre>
+<p>Mode 0: interrupt on terminal count The output in this mode is initially low, and will remain low for the duration of the count if GATR = 1. The width of the low output is as follows. Width of low pulse = N × T Where N is the clock count loaded into counter, and T is the clock period of the CLK input. When the terminal count is reached, the output will go high and remain high until a new control word or new count number is loaded. Mode 1: programmable one-shot This mode is also called hardware triggerable one-shot. The triggering must be done through the GATE input by sending a 0-to-1 pulse to it. In 8253/54 modes that are programmable (triggerable) such as mode1, the following two steps must be performed for the counter to work.</p>
+<h3 id="1-load-the-count-register">1. Load the count register.</h3>
+<h3 id="2-a-0-to-1-pulse-must-be-sent-to-the-gate-input-to-trigger-the-counter">2. A 0-to-1 pulse must be sent to the GATE input to trigger the counter.</h3>
+<p>Mode 2: rate generator Mode 2 is also called divide-by-N counter. In this mode, if GATE = 1, OUT will be high for the N x T clock period, goes low only for one clock pulse, then the count is reloaded automatically, and the process continues indefinitely. This mode in effect produces a divide-by-N counter. In this mode, the period of OUT is equal to (N + 1) x T where for N x T, OUT is high and 1 clock pulse, OUT is low.</p>
+<p>Mode 3: square wave rate generator</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this mode if GATE = 1, OUT is a square wave the high pulse is equal to the low pulse if N is</code></pre>
+<p>an even number. In that case, the high part and low part of the pulse have the same duration and are equal to (N/2) x T where N is the clock count and T is the CLK period. In this mode, the count is reloaded automatically when the terminal count is reached, thereby producing a continuous square wave with frequency of 1/N of the CLK frequency. Mode 3 is similar to mode 2, except that OUT in mode 3 is a square wave of 50% duty cycle. If an odd number is loaded into counter, the time for high position is (N+1)/2 and the time for low position is (N-1)/2 Mode 4: software triggered strobe</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this mode if GATE = 1, the output will go high upon loading the count. It will stay high for the</code></pre>
+<p>duration of N x T, where N is the count and T is the clock period. After the count reaches zero (terminal count), it becomes low for one clock pulse, then goes high again and stays high until a new command word or new count is loaded. To repeat the strobe, the count must be reloaded again. In other words, this mode does not automatically reload the count upon reaching the terminal count. Mode 4 is similar to mode 2, except the counter is not reloaded automatically. In this mode, if the GATE input becomes low, the count will stop and the output will be high. The count resumes only when the gate becomes high again. Mode 5: hardware triggered storbe This mode is similar to mode 4 except the triggering must be done with the GATE input. In this mode, the count begins only when a 0-to-1 pulse is sent to the GATE input. This is unlike mode 4 where the counter started upon loading the count, as GATE = 1.</p>
+<p>Operating modes of 82C54</p>
+<p>Mode 0                                                Mode 2 The gate is fixed to high for square wave Software                                              generation (software)</p>
+<p>Mode 1                                                Mode 3The gate is fixed to high for square wave generation Hardware                                              Software</p>
+<p>Mode 4 (is similar to mode 2, except the counter is not reloaded automatically)</p>
+<p>Mode 2</p>
+<p>Adress of Counter0=94H, Counter 1 =95H, Counter2=96H, Control register=97H</p>
+<p>Adress of Counter0=94H, Counter 1 =95H, Counter2=96H, Control register=97H</p>
+<p>8253/54 Timer Connections and Programming (adress decoding)</p>
+<p>Mode 2</p>
+<p>Mode 3</p>
+<p>Mode 4</p>
+<p>Mode 5</p>
+<h2 id="cpu13-07">cpu13_07</h2>
+<p>Serial Communication Interface</p>
+<p>CPU based systems transfer data in two ways:          parallel and serial.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In parallel data transfers, often 8 or more lines (write conductors) are used to transfer</code></pre>
+<p>data to a device that is only a few feet a way. Examples of parallel transfer are printers</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and hard disks using cables with many wire strips. Although in such cases a lot of data</code></pre>
+<p>can be transferred in a short amount of time by using many wires in parallel, the distance cannot be great. To transfer to a device located many meters away, the serial method is used. In serial communication, the data is sent one bit at a time, in contrast to parallel communication in which the data is sent a byte or more at a time.</p>
+<p>Half-and full-duplex transmission</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In data transmission if the data can be transmitted and received, it is a duplex transmission. This is
+in contrast to simplex transmissions such as printers, in which the computer only sends data.</code></pre>
+<p>Duplex transmissions can be half or full duplex, depending on whether or not the data transfer can be simultaneous. If data is transmitted one way at a time, it is referred to as half duplex. If the data can go both ways at the same time, it is full duplex. Of course, full duplex requires two wire conductors for the data lines (in addition to ground), one for transmission and one for reception, in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>order to transfer and receive data simultaneously. See Figure</code></pre>
+<p>The data coming in at the receiving end of the data line in a serial data transfer is all 0s</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and 1s; it is difficult to make sense of the data unless the sender and receiving agree on</code></pre>
+<p>a set of rules, a protocol, on how the data is packed, how many bits constitute a character, and when the data beings and ends.</p>
+<p>For serial data communication to work, the byte of data must be grabbed from the 8-bit data bus of the microprocessor and converted to serial bits using a parallel-in-serial-out shift register; then it can be transmitted over a single data line. This also means that at the receiving end there must be a serial-in-parallel-out shift register to receive the serial data and pack them into a byte and present it to the system at the receiving end. Serial data communication uses two method, Asynchronous : This method transfers a single byte at time Synchronous : This method transfers a block of data (characters) at a time ( common clock pulse)</p>
+<p>It is possible to write software to use either of these methods, but the programs can be tedious and long. For this reason, there are special IC chips made by many manufactures for serial data communications. These chips are commonly referred to as UART (universal asynchronous receiver-transmitter) and USART (universal synchronous receiver-transmitter).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In sychronous communication, the receiver and transmitter sections must run</code></pre>
+<p>synchronously. As shown in fig ,the interface must includes a clock line. The format used for synchronous communication of data is shown in figure. 1- The transmitter first sends out synchronization characters to receiver 2- The receiver reads the synchronization bit pattern and compare it to a known sync pattern 3- The receiver begins to read charracter data of the data line</p>
+<h3 id="example">Example</h3>
+<h3 id="i2c">I2C</h3>
+<h3 id="spi">SPI</h3>
+<p>Asynchronous serial ;Start and stop bits Asynchronous serial data communication is widely used for character-oriented transmissions, and block-oriented data transfers use the sychnochrounous method. In the asynchronous method, each character is put in between start and stop bits. This is called framing. In data framing for asynchronous communications, the data, such as ASCII characters, are packed in between a start bit and a stop bit. The start bit is always one bit but the stop bit can be one or two bits. The start bit is always a 0 (low) and the stop bit(s) is 1 (high). For example, look at Figure where the ASCII character ‘’A’’, binary 0100 0001, is farmed in between the start bit and 2 stop bits. Notice that the LSB is out first. When there is no transfer the signal is 1 (high), which is referred to as mark. The 0 (low) is referred to as space. Notice that the transmission beings with a start bit followed by D0, the LSB, then the rest of the bits until the MSB (D7), and finally, the 2 stop bits indicating the end of the character ‘’A’’.</p>
+<p>The format of a typical asynchronous character is the following ; Start bit (1 bit) : a logical 0 (also called a space) that is used to indicate the beginning of a character Data bits (7- 8 bits) : they contain the information that is being transmitted. The data wordlength can be either 7 or 8 bits Parity bit (1- 0 bits) : optional, used for error checking. If odd parity is used, the parity bit is set to 1 or 0 such that the total number of 1- bits, including the data bits and the parity bit, is odd. Stop bit (1- 2 bits) : a logical 1 (also called a mark) that is used to indicate the end of the transmission</p>
+<h3 id="example-1">Example 1</h3>
+<p>Calculate the total number of bits used in transferring 5 pages, each with 80x25</p>
+<h3 id="characters-assume-8-bits-per-character-and-1-stop-bit-solution">characters. Assume 8 bits per character and 1 stop bit. Solution</h3>
+<p>For each character, a total of 10 bits is used, 8 bits for each character, 1 stop bit, and 1 start bit. There for, the total number of bits is 80 x 25 x 10 = 20,000 bits per. For 5 pages, 100,000 bits will be transferred. Data transfer rate The rate of data transfer in serial data communication is stated in bps (bits per second). Another widely used terminology for bps is baud rate. However, the baud and bps rates are not necessarily equal. This is due to the fact that baud rate is the modem terminology and is defined as number of signal changes per second. In modems, there are occasions when a single change of signal transfers several bits of data. As far as the conductor wire is concerned, the baud rate and bps are the same, Bits per second (bps) Measures the rate at which information flows across a data link. Bit rate reveals the actual number of data bits transferred in a given period of time</p>
+<h3 id="example-2">Example 2</h3>
+<h3 id="calculate-the-time-it-takes-to-transfer-the-entire-5-pages-of-data-in-last-example">Calculate the time it takes to transfer the entire 5 pages of data in last example</h3>
+<h3 id="for-2400-bps">for 2400 bps</h3>
+<p>100,000/2400 = 41.67 seconds</p>
+<p>Programming the 8251 (Programmable communication interface controller )</p>
+<h3 id="control-register-of-8251">Control register of 8251</h3>
+<p>7      6      5        4           3     2      1        0 Number of    Parity    Parity       Character    Baud rate Stop bits              Enable       Length</p>
+<p>00-invalid   0-0dd     0-disable    00-5 bits    00-syn mode 01-1 bit     1-even    1-enable     01-6 bits    01-x 1 clock 10-invalid                          10-7 bits    10-x 16 clock 11-2 bits                           11-8 bits    11- x 64 clock</p>
+<p>Setting the serial port parameters, When setting up a serial port, several</p>
+<h3 id="parameters-must-be-specified-the-most-common-are">parameters must be specified. The most common are</h3>
+<p>1- Bit rate selection 2- Character length:The number of data bits/ character, usually five to eight. 3-Parity selection and generation (odd, even, or no parity) 4- Number of stop bits ( usually one).</p>
+<p>A simple connection for interface of microcontroller and PC MAX 232 is used for voltage level converter: ( RS232 t0 TTL logic converter)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In RS 232 data communication: Logic 1 level is –3 to –25 and Logic 0 voltage</code></pre>
+<p>level is +3 to +25</p>
+<h3 id="1-cd-carrier-detect-2-rxd">1. CD (Carrier Detect)2. RXD</h3>
+<p>(Receive Data)3. TXD (Transmit Data)4. DTR (Data terminal Ready)5. GND (Ground)6. DSR (Data Set Ready)7. RTS (Request To Send)8. CTS (Clear To Bit rate = The number of bits of data transferred per second,   Send)9. RI (Ring Indicator)</p>
+<p>9600 bit rate Example: The total time is observed for data transfer in a. Communication is 0.833 ms what is the baud rate? Solution = 1/0.833 = 1200 bps</p>
+<h2 id="cpu13-06">cpu13_06</h2>
+<p>Serial Communication Interface</p>
+<p>CPU based systems transfer data in two ways:          parallel and serial.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In parallel data transfers, often 8 or more lines (write conductors) are used to transfer</code></pre>
+<p>data to a device that is only a few feet a way. Examples of parallel transfer are printers</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and hard disks using cables with many wire strips. Although in such cases a lot of data</code></pre>
+<p>can be transferred in a short amount of time by using many wires in parallel, the distance cannot be great. To transfer to a device located many meters away, the serial method is used. In serial communication, the data is sent one bit at a time, in contrast to parallel communication in which the data is sent a byte or more at a time.</p>
+<p>For serial data communication to work, the byte of data must be grabbed from the 8-bit data bus of the microprocessor and converted to serial bits using a parallel-in-serial-out shift register; then it can be transmitted over a single data line. This also means that at the receiving end there must be a serial-in-parallel-out shift register to receive the serial data and pack them into a byte and present it to the system at the receiving end. Serial data communication uses two method, Asynchronous : This method transfers a single byte at time Synchronous : This method transfers a block of data (characters) at a time</p>
+<p>It is possible to write software to use either of these methods, but the programs can be tedious and long. For this reason, there are special IC chips made by many manufactures for serial data communications. These chips are commonly referred to as UART (universal asynchronous receiver-transmitter) and USART (universal synchronous receiver-transmitter).</p>
+<p>Half-and full-duplex transmission</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In data transmission if the data can be transmitted and received, it is a duplex transmission. This is
+in contrast to simplex transmissions such as printers, in which the computer only sends data.</code></pre>
+<p>Duplex transmissions can be half or full duplex, depending on whether or not the data transfer can be simultaneous. If data is transmitted one way at a time, it is referred to as half duplex. If the data can go both ways at the same time, it is full duplex. Of course, full duplex requires two wire conductors for the data lines (in addition to ground), one for transmission and one for reception, in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>order to transfer and receive data simultaneously. See Figure</code></pre>
+<p>The data coming in at the receiving end of the data line in a serial data transfer is all 0s</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and 1s; it is difficult to make sense of the data unless the sender and receiving agree on</code></pre>
+<p>a set of rules, a protocol, on how the data is packed, how many bits constitute a character, and when the data beings and ends.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In sychronous communication, the receiver and transmitter sections must run</code></pre>
+<p>synchronously. As shown in fig ,the interface must includes a clock line. The format used for synchronous communication of data is shown in figure. 1- The transmitter first sends out synchronization characters to receiver 2- The receiver reads the synchronization bit pattern and compare it to a known sync pattern 3- The receiver begins to read charracter data of the data line</p>
+<p>Asynchronous serial ;Start and stop bits Asynchronous serial data communication is widely used for character-oriented transmissions, and block-oriented data transfers use the sychnochrounous method. In the asynchronous method, each character is put in between start and stop bits. This is called framing. In data framing for asynchronous communications, the data, such as ASCII characters, are packed in between a start bit and a stop bit. The start bit is always one bit but the stop bit can be one or two bits. The start bit is always a 0 (low) and the stop bit(s) is 1 (high). For example, look at Figure where the ASCII character A, binary 0100 0001, is farmed in between the start bit and 2 stop bits. Notice that the LSB is out first. When there is no transfer the signal is 1 (high), which is referred to as mark. The 0 (low) is referred to as space. Notice that the transmission beings with a start bit followed by D0, the LSB, then the rest of the bits until the MSB (D7), and finally, the 2 stop bits indicating the end of the character A.</p>
+<p>The format of a typical asynchronous character is the following ; Start bit (1 bit) : a logical 0 (also called a space) that is used to indicate the beginning of a character Data bits (7- 8 bits) : they contain the information that is being transmitted. The data wordlength can be either 7 or 8 bits Parity bit (1- 0 bits) : optional, used for error checking. If odd parity is used, the parity bit is set to 1 or 0 such that the total number of 1- bits, including the data bits and the parity bit, is odd. Stop bit (1- 2 bits) : a logical 1 (also called a mark) that is used to indicate the end of the transmission</p>
+<h3 id="example-1">Example 1</h3>
+<p>Calculate the total number of bits used in transferring 5 pages, each with 80x25</p>
+<h3 id="characters-assume-8-bits-per-character-and-1-stop-bit-solution">characters. Assume 8 bits per character and 1 stop bit. Solution</h3>
+<p>For each character, a total of 10 bits is used, 8 bits for each character, 1 stop bit, and 1 start bit. There for, the total number of bits is 80 x 25 x 10 = 20,000 bits per. For 5 pages, 100,000 bits will be transferred. Data transfer rate The rate of data transfer in serial data communication is stated in bps (bits per second). Another widely used terminology for bps is baud rate. However, the baud and bps rates are not necessarily equal. This is due to the fact that baud rate is the modem terminology and is defined as number of signal changes per second. In modems, there are occasions when a single change of signal transfers several bits of data. As far as the conductor wire is concerned, the baud rate and bps are the same, Bits per second (bps) Measures the rate at which information flows across a data link. Bit rate reveals the actual number of data bits transferred in a given period of time</p>
+<h3 id="example-2">Example 2</h3>
+<h3 id="calculate-the-time-it-takes-to-transfer-the-entire-5-pages-of-data-in-last-example">Calculate the time it takes to transfer the entire 5 pages of data in last example</h3>
+<h3 id="for-2400-bps">for 2400 bps</h3>
+<p>100,000/2400 = 41.67 seconds</p>
+<p>Programming the 8251 (Programmable communication interface controlles )</p>
+<h3 id="control-register-of-8251">Control register of 8251</h3>
+<p>7      6      5        4           3     2      1        0 Number of     Parity   Parity      Character     Baud rate Stop bits              Enable      Length</p>
+<p>00-invalid    0-0dd    0-disable   00-5 bits     00-syn mode 01-1 bit      1-even   1-enable    01-6 bits     01-x 1 clock 10-1.5 bits                        10-7 bits     10-x 16 clock 11-2 bits                          11-8 bits     11- x 64 clock</p>
+<p>Setting the serial port parameters, When setting up a serial port, several</p>
+<h3 id="parameters-must-be-specified-the-most-common-are">parameters must be specified. The most common are</h3>
+<p>1- Bit rate selection 2- Character length:The number of data bits/ character, usually five to eight. 3-Parity selection and generation (odd, even, or no parity) 4- Number of stop bits ( usually one).</p>
+<p>A simple connection for interface of microcontroller and pc MAX 232 is used for voltage level converter: ( RS232 t0 TTL logic converter)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In RS 232 data communication: Logic 1 level is –3 to –25 and Logic 0 voltage</code></pre>
+<p>level is +3 to +25</p>
+<h3 id="1-cd-carrier-detect-2-rxd">1. CD (Carrier Detect)2. RXD</h3>
+<p>(Receive Data)3. TXD (Transmit Data)4. DTR (Data terminal Ready)5. GND (Ground)6. DSR (Data Set Ready)7. RTS (Request To Send)8. CTS (Clear To Bit rate = The number of bits of data transferred per second,   Send)9. RI (Ring Indicator)</p>
+<p>9600 bit rate Example: The total time is observed for data transfer in a. Communication is 0.833 ms what is the baud rate? Solution = 1/0.833 = 1200 bps</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-zamanlayici-seri-iletisim.zip" download>eem332-zamanlayici-seri-iletisim.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.2 MB · 03.05.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-zamanlayici-seri-iletisim.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Chapter 2 — LTI Sistemler ve Konvolüsyon (İsmail Avcıbaş) — hasancan.net</title>
+<meta name="description" content="Dürtü yanıtından konvolüsyonun türetilmesi, nedensellik ve kararlılık, fark ve diferansiyel denklemler; grafiksel çözümlü örnekler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-avcibas-02-lti-konvolusyon/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Chapter 2 — LTI Sistemler ve Konvolüsyon (İsmail Avcıbaş)">
+<meta property="og:description" content="Dürtü yanıtından konvolüsyonun türetilmesi, nedensellik ve kararlılık, fark ve diferansiyel denklemler; grafiksel çözümlü örnekler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-avcibas-02-lti-konvolusyon/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Chapter 2 — LTI Sistemler ve Konvolüsyon (İsmail Avcıbaş)", "description": "Dürtü yanıtından konvolüsyonun türetilmesi, nedensellik ve kararlılık, fark ve diferansiyel denklemler; grafiksel çözümlü örnekler.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-avcibas-02-lti-konvolusyon/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-avcibas-02-lti-konvolusyon.pdf", "contentUrl": "https://hasancan.net/arsiv/eem301-avcibas-02-lti-konvolusyon/eem301-avcibas-02-lti-konvolusyon.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Chapter 2 — LTI Sistemler ve Konvolüsyon (İsmail Avcıbaş)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.08.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#impulse-representation-and-convolution">Impulse representation and convolution</a></li><li><a href="#discrete-time-examples">Discrete-time examples</a></li><li><a href="#continuous-time-examples">Continuous-time examples</a></li><li><a href="#properties-of-lti-systems">Properties of LTI systems</a></li><li><a href="#differential-and-difference-equations">Differential and difference equations</a></li><li><a href="#singularity-functions">Singularity functions</a></li><li><a href="#additional-graphical-convolution-examples">Additional graphical convolution examples</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Chapter 2 — LTI Sistemler ve Konvolüsyon (İsmail Avcıbaş)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 16.08.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi EEM301 dersi için İsmail Avcıbaş’ın hazırladığı <strong>Chapter II: Linear Time Invariant Systems</strong> sunumu (117 sayfa). Kaynak PowerPoint’in oluşturulma tarihi 16 Ağustos 2006, son kaydı 9 Ekim 2009. Metni görsel olarak saklanan slaytların konu anlatımı, temel formülleri ve örnekleri aşağıya aktarıldı. Sunumun PDF kopyası yazının sonunda indirilebilir.</p>
+<h2 id="impulse-representation-and-convolution">Impulse representation and convolution</h2>
+<p>The sampling property gives x[n]=Σₖ x[k]δ[n−k]. A linear system responds with y[n]=Σₖ x[k]hₖ[n], where hₖ is its response to δ[n−k]. Time invariance makes hₖ[n]=h[n−k], yielding the convolution sum:</p>
+<p>y[n] = Σₖ₌₋∞^∞ x[k]h[n−k] = x[n]∗h[n].</p>
+<p>In continuous time, x(t)=∫₋∞^∞ x(τ)δ(t−τ)dτ and the corresponding LTI output is</p>
+<p>y(t) = ∫₋∞^∞ x(τ)h(t−τ)dτ = x(t)∗h(t).</p>
+<p>Graphical convolution consists of reversing one signal, shifting it by the output time, multiplying the overlapping values and summing or integrating.</p>
+<h2 id="discrete-time-examples">Discrete-time examples</h2>
+<p>For x[n]=aⁿu[n], 0&lt;a&lt;1, and h[n]=u[n], the overlapping indices are 0≤k≤n. Thus y[n]=[(1−a^(n+1))/(1−a)]u[n]. With a=7/8, y[0]=1, y[1]=15/8 and the limiting value is 8.</p>
+<p>For x[n]=2ⁿu[−n] and h[n]=u[n], the sum extends to min(n,0). The result is 2^(n+1) for n&lt;0 and 2 for n≥0.</p>
+<p>Another example uses x[n]=1 for 0≤n≤4 and h[n]=aⁿ for 0≤n≤6, both zero elsewhere. The support of their convolution is 0≤n≤10; the overlap changes at n=4 and n=6.</p>
+<figure class="yazi-gorsel"><img src="s-17.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Sonlu dizilerin örtüşme aralıkları ve parçalı konvolüsyon sonucu"><figcaption>0≤n≤4 ve 0≤n≤6 destekli diziler</figcaption></figure>
+<h2 id="continuous-time-examples">Continuous-time examples</h2>
+<p>For x(t)=e^(−at)u(t), a&gt;0, and h(t)=u(t):</p>
+<p>y(t) = [(1−e^(−at))/a]u(t).</p>
+<p>For x(t)=e^(2t)u(−t) and h(t)=u(t−3), the output is (1/2)e^(2(t−3)) for t≤3, and 1/2 for t≥3. The integration boundary follows the intersection τ≤0 and τ≤t−3.</p>
+<h2 id="properties-of-lti-systems">Properties of LTI systems</h2>
+<p>Convolution is commutative, distributive and associative. Consequently, cascade LTI systems have combined response h₁∗h₂; parallel systems have h₁+h₂.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">System property</th><th scope="col">Impulse-response condition</th></tr></thead><tbody><tr><th scope="row">Memoryless</th><td>h[n]=Kδ[n] or h(t)=Kδ(t)</td></tr><tr><th scope="row">Invertible</th><td>An inverse response hᵢ exists with h∗hᵢ=δ</td></tr><tr><th scope="row">Causal</th><td>h[n]=0 for n&lt;0, or h(t)=0 for t&lt;0</td></tr><tr><th scope="row">BIBO stable</th><td>Σ</td><td>h[n]</td><td>&lt;∞, or ∫</td><td>h(t)</td><td>dt&lt;∞</td></tr></tbody></table></div>
+<p>A pure delay is stable and has an inverse advance. An accumulator has h[n]=u[n] and is not BIBO stable. Its inverse is the first-difference system with response δ[n]−δ[n−1].</p>
+<p>The step response is s=h∗u. Therefore h[n]=s[n]−s[n−1] and h(t)=ds(t)/dt.</p>
+<h2 id="differential-and-difference-equations">Differential and difference equations</h2>
+<p>A constant-coefficient CT model has Σₖ₌₀ᴺ aₖ dᵏy/dtᵏ = Σₖ₌₀ᴹ bₖ dᵏx/dtᵏ. A DT model has Σₖ₌₀ᴺ aₖ y[n−k] = Σₖ₌₀ᴹ bₖ x[n−k]. Initial conditions are needed to determine a unique response.</p>
+<p>The recursive equation y[n]−(1/2)y[n−1]=x[n], with initial rest, has h[n]=(1/2)ⁿu[n], an infinite impulse response. A nonrecursive finite sum y[n]=Σₖ₌₀ᴹ(bₖ/a₀)x[n−k] has a finite impulse response.</p>
+<p>Block diagrams use adders, gains, unit delays, integrators and differentiators. The presentation gives alternative realizations for y″+3y′+2y=x and y[n]+(1/4)y[n−1]−(1/8)y[n−2]=x[n].</p>
+<figure class="yazi-gorsel"><img src="s-57.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="İkinci dereceden diferansiyel denklemin alternatif blok gösterimleri"><figcaption>y″+3y′+2y=x</figcaption></figure>
+<h2 id="singularity-functions">Singularity functions</h2>
+<p>The identity x∗δ=x defines the impulse through convolution. Differentiation corresponds to convolution with δ′, while integration corresponds to convolution with u. Repeated integration gives t^(k−1)u(t)/(k−1)! for k≥1. Repeated differentiation gives successive derivatives of the impulse.</p>
+<h2 id="additional-graphical-convolution-examples">Additional graphical convolution examples</h2>
+<p>The latter part of the presentation develops four CT examples and several DT examples in detail.</p>
+<ol><li>f(t)=eᵗu(−t), h(t)=−δ(t)+2e^(−t)u(t): splitting the delta term from the ordinary convolution gives y(t)=e^(−t)u(t).</li><li>f(t)=sin(t)[u(t)−u(t−2π)] and g(t)=u(t)−u(t−2π): the result is 0 for t≤0, 1−cos t for 0&lt;t≤2π, cos t−1 for 2π&lt;t≤4π and 0 afterward.</li><li>f(t)=A[u(t−4)−u(t−6)] and g(t)=B[u(t+5)−u(t+4)]: the result is zero outside −1≤t≤2, AB(t+1) for −1≤t&lt;0, AB for 0≤t&lt;1 and AB(2−t) for 1≤t≤2.</li><li>f₁(t)=e^(−t)u(t), f₂(t)=u(t+3)−u(t): the result is zero for t&lt;−3, 1−e^(−(t+3)) for −3≤t&lt;0 and (1−e^(−3))e^(−t) for t≥0.</li></ol>
+<figure class="yazi-gorsel"><img src="s-92.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Üstel sinyal ile üç birim genişlikli darbenin konvolüsyon sonucu"><figcaption>Üç zaman aralığı ayrı değerlendirilir</figcaption></figure>
+<p>For the DT graphical example with five consecutive samples of height 3 and h[0]=2, h[1]=2, h[2]=1, the output values at n=0,…,6 are 6, 12, 15, 15, 15, 9, 3; all other samples are zero.</p>
+<p>For x[n]=(1/2)ⁿu[n] and h[n]=u[n]−u[n−4], the result is zero for n&lt;0; 2[1−(1/2)^(n+1)] for 0≤n≤3; and 2[(1/2)^(n−3)−(1/2)^(n+1)] for n≥4. Replacing the input by cos(πn/2)u[n] gives y[0]=1, y[1]=1 and y[n]=0 for n≥2.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-avcibas-02-lti-konvolusyon.pdf" download>eem301-avcibas-02-lti-konvolusyon.pdf</a></p>
+              <p class="kucuk">PDF · 4.2 MB · 117 <span data-i18n="arch.pagesLower"></span> · 16.08.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-avcibas-02-lti-konvolusyon.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Otomatik Kontrol Özeti ve Sabit Hız Tasarımı (Gürsel Şefkat, MAK4030) — hasancan.net</title>
+<meta name="description" content="Gürsel Şefkat’ın 2008 sunumu: transfer fonksiyonları, P/PI/PID denetim, araç hız modeli, kök yer ve Bode ile tasarım.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-otomatik-kontrol-ozeti-gursel-sefkat/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Otomatik Kontrol Özeti ve Sabit Hız Tasarımı (Gürsel Şefkat, MAK4030)">
+<meta property="og:description" content="Gürsel Şefkat’ın 2008 sunumu: transfer fonksiyonları, P/PI/PID denetim, araç hız modeli, kök yer ve Bode ile tasarım.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-otomatik-kontrol-ozeti-gursel-sefkat/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Otomatik Kontrol Özeti ve Sabit Hız Tasarımı (Gürsel Şefkat, MAK4030)", "description": "Gürsel Şefkat’ın 2008 sunumu: transfer fonksiyonları, P/PI/PID denetim, araç hız modeli, kök yer ve Bode ile tasarım.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem322-otomatik-kontrol-ozeti-gursel-sefkat/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "MAK4030-Otomatik-Kontrol-Ozeti.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-otomatik-kontrol-ozeti-gursel-sefkat/MAK4030-Otomatik-Kontrol-Ozeti.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Otomatik Kontrol Özeti ve Sabit Hız Tasarımı (Gürsel Şefkat, MAK4030)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.02.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#transfer-fonksiyonu-ve-sistem-turleri">Transfer fonksiyonu ve sistem türleri</a></li><li><a href="#kalici-durum-hatasi-kararlilik-ve-denetim-etkileri">Kalıcı durum hatası, kararlılık ve denetim etkileri</a></li><li><a href="#sabit-hiz-kontrolunun-modeli">Sabit hız kontrolünün modeli</a></li><li><a href="#p-denetimi">P denetimi</a></li><li><a href="#pi-ve-pid-denetimi">PI ve PID denetimi</a></li><li><a href="#kok-yer-ve-faz-geciktiren-dengeleyici">Kök yer ve faz geciktiren dengeleyici</a></li><li><a href="#bode-ile-tasarim">Bode ile tasarım</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Otomatik Kontrol Özeti ve Sabit Hız Tasarımı (Gürsel Şefkat, MAK4030)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 28.02.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p><strong>Öğr. Gör. Dr. Gürsel Şefkat</strong> tarafından hazırlanan, <strong>MAK4030 Endüstriyel Kontrol Sistemleri ve Ölçme</strong> dersinin “Otomatik Kontrol Sistemleri Hakkında Özet” sunumu, EEM322 arşivindeki üçüncü taraf materyaller arasındadır. Sunum 2007–2008 bahar dönemine ait; PDF tarihi 28 Şubat 2008. On üç PDF sayfasına dörder slayt yerleştirilmiş. Belge, İbrahim Yüksel’in <em>Otomatik Kontrol</em> kitabını (5. baskı, 2006) kaynak gösteriyor. PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="transfer-fonksiyonu-ve-sistem-turleri">Transfer fonksiyonu ve sistem türleri</h2>
+<p>Sıfır başlangıç koşullarında transfer fonksiyonu çıkışın girişe oranıdır: <strong>G(s) = Y(s)/U(s)</strong>. Diferansiyel denklemin Laplace dönüşümünden elde edilir. Payın kökleri sıfırlar, paydanın kökleri kutuplardır. Farklı fiziksel yapılar aynı transfer fonksiyonunu verebilir.</p>
+<p>Sunum kazanç, birinci dereceden gecikme ve ikinci dereceden titreşim tiplerini karşılaştırır. Birinci dereceden sistemin zaman sabiti; ikinci dereceden sistemin doğal frekansı, sönüm oranı ve basamak yanıtı üzerinde durulur. Geçici yanıt ölçütleri yükselme, tepe, yerleşme süresi ve aşmadır.</p>
+<h2 id="kalici-durum-hatasi-kararlilik-ve-denetim-etkileri">Kalıcı durum hatası, kararlılık ve denetim etkileri</h2>
+<p>Sistem tipi ile basamak, rampa ve parabolik girişlerdeki kalıcı durum hatası ilişkilendirilir. Kararlılık başlığı altında kutupların konumu, Routh–Hurwitz ölçütü ve bağıl kararlılık sıralanır.</p>
+<p>Denetim etkileri iki konumlu denetim ve sürekli denetim olarak ayrılır. Sürekli denetimde:</p>
+<ul><li>P: orantı etkisi, Gc(s) = Kp.</li><li>PI: Gc(s) = Kp + Ki/s.</li><li>PD: Gc(s) = Kp + Kd s.</li><li>PID: Gc(s) = Kp + Ki/s + Kd s.</li></ul>
+<p>Denetleyici ayarı deneysel veya analitik yapılabilir. Deneysel başlıklar salınım yöntemi ve sistem cevap yöntemidir. Frekans cevabı kısmında Bode ve kutupsal eğriler tanıtılır.</p>
+<h2 id="sabit-hiz-kontrolunun-modeli">Sabit hız kontrolünün modeli</h2>
+<p>Araç, tekerlek ataleti ihmal edilmiş bir kütle–sönümleyici olarak modellenir. Motor kuvveti u, hız v, kütle m ve sürtünme katsayısı b ile:</p>
+<p><strong>m v̇ + bv = u, y = v</strong></p>
+<p>m = 1000 kg, b = 50 N·s/m ve u = 500 N alınır. Açık döngü transfer fonksiyonu:</p>
+<p><strong>G(s) = 1/(1000s + 50)</strong></p>
+<p>Durum uzayı gösterimi: A = [−b/m], B = [1/m], C = [1], D = 0. Sabit 500 N kuvvet için son hız 10 m/s olur. Tasarım istekleri: yükselme zamanı &lt; 5 s, aşma &lt; %10 ve kalıcı durum hatası &lt; %2.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>m=1000;
+b=50;
+u=500;
+num=[1];
+den=[m b];
+step(u*num,den)</code></pre>
+<p>Kaynağın açık döngü grafiği son değere çok yavaş yaklaşıldığını gösterir; hızın tam yerleşmesi 100 saniyeyi aşar.</p>
+<h2 id="p-denetimi">P denetimi</h2>
+<p>Birim geri beslemede kapalı döngü transfer fonksiyonu:</p>
+<p><strong>T(s) = Kp/[ms + b + Kp]</strong></p>
+<p>Kp = 100 ile yanıt hızlansa da son değer hatası büyüktür: 10 m/s referans için son hız 10×100/150 ≈ 6.67 m/s. Kp = 10000 seçildiğinde hata çok küçülür ve yanıt çok hızlı olur; sunum bunun gerçek aracın kuvvet/ivmelenme kısıtları açısından gerçekçi olmayabileceğini belirtir.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>kp=100; m=1000;
+b=50; u=10;
+num=[kp];
+den=[m b+kp];
+t=0:0.1:20;
+step(u*num,den,t)
+axis([0 20 0 10])</code></pre>
+<h2 id="pi-ve-pid-denetimi">PI ve PID denetimi</h2>
+<p>PI denetim için:</p>
+<p><strong>T(s) = (Kp s + Ki)/[ms² + (b + Kp)s + Ki]</strong></p>
+<p>Sunum önce Kp = 600, Ki = 1 değerlerini, sonra <strong>Kp = 800, Ki = 40</strong> seçimini inceler. İkinci seçim için çizilen yanıt tasarım ölçütlerini sağlar.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>kp=800; ki=40;
+m=1000; b=50; u=10;
+num=[kp ki];
+den=[m b+kp ki];
+t=0:0.1:20;
+step(u*num,den,t)
+axis([0 20 0 10])</code></pre>
+<p><em>Not: Bu seçimde payda (s + 0.8)(1000s + 50), pay 800(s + 0.05) biçimindedir; sadeleşme sonrası T(s) = 0.8/(s + 0.8). Böylece son değer hatası ve aşma sıfır, %10–%90 yükselme süresi ln(9)/0.8 ≈ 2.75 s olur. Bu, sunumun sayısal sonucunu doğrular.</em></p>
+<p>PID eklenirse T(s) = (Kd s² + Kp s + Ki)/[(m + Kd)s² + (b + Kp)s + Ki]. Sunum, bu özel örnekte türev etkisine gerek olmadığını belirtir; PID katsayılarının ayrıntılı ayarı verilmez.</p>
+<h2 id="kok-yer-ve-faz-geciktiren-dengeleyici">Kök yer ve faz geciktiren dengeleyici</h2>
+<p>Kök yer eğrisi Kp’nin değişmesiyle kapalı döngü kutuplarının hareketini gösterir. Sunum <code>sgrid(0.6,0.36)</code> ile hedef bölgeyi işaretler ve <code>rlocfind</code> ile seçim yaptırır. Yalnız P denetiminde yaklaşık −0.4 kutbu seçilse de kalıcı hata yeterince küçülmez.</p>
+<p>Faz geciktiren dengeleyici <strong>G₁(s) = (s + Z₀)/(s + P₀)</strong> ile eklenir. Kodda Z₀ = 0.3, P₀ = 0.03 kullanılır. Bu, sıfırın −0.3’te, kutbun −0.03’te olduğu anlamına gelir. Açık döngü:</p>
+<p>G₁(s)G(s) = (s + Z₀)/[ms² + (b + mP₀)s + bP₀]</p>
+<p>Kapalı döngü:</p>
+<p>T(s) = Kp(s + Z₀)/[ms² + (b + mP₀ + Kp)s + bP₀ + KpZ₀]</p>
+<figure class="yazi-gorsel"><img src="s-12.jpg" width="1360" height="1022" loading="lazy" decoding="async" alt="Faz geciktiren dengeleyiciyle kök yer, basamak yanıtı ve frekans yaklaşımı"><figcaption>MAK4030 sunumunda kök yer ile sabit hız tasarımı</figcaption></figure>
+<p><em>Not: Metinde Z₀ ve P₀ için negatif değerler yazılırken kodda pozitif katsayılar kullanılmıştır. G₁(s) = (s + Z₀)/(s + P₀) tanımında kutup ve sıfır yerleri katsayıların negatifidir.</em></p>
+<h2 id="bode-ile-tasarim">Bode ile tasarım</h2>
+<p>Oransal kazanç artırıldığında Bode genlik eğrisi yukarı kayar; faz değişmez. Kaynak düşük frekans kazancı ile kalıcı hata, bant genişliği ile yükselme süresi arasında yaklaşık ilişkiler kurar.</p>
+<p>Bu örnekte birim basamak bağıl hatası <strong>1/(1 + Kp/b)</strong>’dir. Kp = 1 için yaklaşık %98.04; Kp = 100 için %33.33 elde edilir.</p>
+<p><em>Not: Son slaytta Kp = 100 koduyla “20 dB, %9 hata” sonucu birlikte yazılmıştır. b = 50 için Kp = 100, 6.02 dB ve %33.33 hata verir; 20 dB ve yaklaşık %9.09 için Kp = 500 gerekir. Ayrıca Kp = 1 durumunda açık döngü genliği hiçbir frekansta 0 dB’ye ulaşmadığından sunumdaki 155° faz payı yorumu bu modelle tutarlı değildir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="MAK4030-Otomatik-Kontrol-Ozeti.pdf" download>MAK4030-Otomatik-Kontrol-Ozeti.pdf</a></p>
+              <p class="kucuk">PDF · 605 KB · 13 <span data-i18n="arch.pagesLower"></span> · 28.02.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="MAK4030-Otomatik-Kontrol-Ozeti.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (605 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: MATLAB’a Giriş Ders Notu (A. Hakan Argeşo) — hasancan.net</title>
+<meta name="description" content="2004 tarihli MATLAB 6 ders notu: komut penceresi, aritmetik, çalışma alanı, dosyalar, yardım, save/load ve diary örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-matlab-argeso-ders-notu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: MATLAB’a Giriş Ders Notu (A. Hakan Argeşo)">
+<meta property="og:description" content="2004 tarihli MATLAB 6 ders notu: komut penceresi, aritmetik, çalışma alanı, dosyalar, yardım, save/load ve diary örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-matlab-argeso-ders-notu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: MATLAB’a Giriş Ders Notu (A. Hakan Argeşo)", "description": "2004 tarihli MATLAB 6 ders notu: komut penceresi, aritmetik, çalışma alanı, dosyalar, yardım, save/load ve diary örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-matlab-argeso-ders-notu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-matlab-argeso-ders-notu.pdf", "contentUrl": "https://hasancan.net/arsiv/eem301-matlab-argeso-ders-notu/eem301-matlab-argeso-ders-notu.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: MATLAB’a Giriş Ders Notu (A. Hakan Argeşo)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.03.2004</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#introduction">Introduction</a></li><li><a href="#desktop-tools">Desktop tools</a></li><li><a href="#arithmetic-and-assignment">Arithmetic and assignment</a></li><li><a href="#example-area-of-a-trapezoid">Example: area of a trapezoid</a></li><li><a href="#managing-a-session">Managing a session</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#menus">Menus</a></li><li><a href="#saving-and-loading-variables">Saving and loading variables</a></li><li><a href="#recording-a-session-with-diary">Recording a session with diary</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: MATLAB’a Giriş Ders Notu (A. Hakan Argeşo)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 08.03.2004 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM301 arşivinde bulunan <strong>A. Hakan Argeşo, MATLAB: Lecture Notes</strong> başlıklı 19 sayfalık ders notu, PDF oluşturulma tarihine göre 8 Mart 2004’e ait. MATLAB 6’nın çalışma ortamını ve temel kullanımını anlatıyor. İngilizce notun açıklamaları ve örnekleri aşağıda; PDF yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>MATLAB, short for Matrix Laboratory, is an interactive language for technical and scientific computing. The notes introduce mathematical computation, graphics, algorithm development, modeling, simulation and data analysis. Arrays are its basic data elements, and the examples use double-precision numeric values.</p>
+<p>The document describes MATLAB version 6 for Windows, released in 2000. Its menus and interface descriptions belong to that historical version.</p>
+<h2 id="desktop-tools">Desktop tools</h2>
+<p>The desktop includes Command Window, Command History, Current Directory Browser, Workspace Browser, Launch Pad, Help Browser, Array Editor and Editor/Debugger. Windows can be docked within the desktop or undocked. The View menu controls visibility and predefined desktop layouts.</p>
+<p>The Command Window accepts expressions after the <code>&gt;&gt;</code> prompt. Command History retains entered lines, which can be copied or executed again. The Workspace Browser shows variables, their sizes and their classes.</p>
+<h2 id="arithmetic-and-assignment">Arithmetic and assignment</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>2*6
+3+ans
+x=5+2*7
+x=38/x</code></pre>
+<p>The successive numeric results are 12, 15, 19 and 2. Variable names are case sensitive: <code>xsum</code> and <code>Xsum</code> are different names.</p>
+<p><em>Not: Kaynak, x’e yapılan iki atamanın çıktısını da “ans” başlığıyla gösteriyor. Atama sonucu MATLAB’da x adıyla görüntülenir; adsız hesapların sonucu ans değişkenindedir.</em></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Operation</th><th scope="col">MATLAB notation</th></tr></thead><tbody><tr><th scope="row">Exponentiation</th><td>a^b</td></tr><tr><th scope="row">Multiplication</th><td>a*b</td></tr><tr><th scope="row">Right division</th><td>a/b</td></tr><tr><th scope="row">Left division</th><td>a\b</td></tr><tr><th scope="row">Addition</th><td>a+b</td></tr><tr><th scope="row">Subtraction</th><td>a-b</td></tr></tbody></table></div>
+<p>Parentheses control grouping; exponentiation precedes multiplication and division, which precede addition and subtraction. The worked examples are:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>5*6/2 + 17
+8^2*7 - (3*11 + 7)/(6 - 1)
+27^(1/3)*2 - 81^0.5 + 3*(17+18+19)
+0.5*((2^3+1)^2 + 15)^2/8</code></pre>
+<p>The results are 32, 440, 159 and 576.</p>
+<p>The assignment operator places the value of the right-hand expression into the variable on the left. <code>12=x</code> and <code>x+12=x</code> are invalid assignments. <code>x=x+12</code> is valid when x has already been assigned.</p>
+<h2 id="example-area-of-a-trapezoid">Example: area of a trapezoid</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>a=3;
+b=2;
+h=5;
+A=h*(a+b)/2</code></pre>
+<p>The result is A=12.5. Semicolons suppress display; commas separate statements while allowing their values to be displayed. The same calculation can be written on one line.</p>
+<p><em>Not: Kaynak h’yi “base length” diye adlandırıyor; A=h(a+b)/2 formülünde h yükseklik, a ve b paralel kenar uzunluklarıdır.</em></p>
+<h2 id="managing-a-session">Managing a session</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Command</th><th scope="col">Purpose</th></tr></thead><tbody><tr><th scope="row">who</th><td>List current variables</td></tr><tr><th scope="row">whos</th><td>List variables with sizes and classes</td></tr><tr><th scope="row">clear</th><td>Remove workspace variables</td></tr><tr><th scope="row">clear a</th><td>Remove only a</td></tr><tr><th scope="row">clc</th><td>Clear the Command Window display</td></tr><tr><th scope="row">pwd</th><td>Display current directory</td></tr><tr><th scope="row">dir</th><td>List directory entries</td></tr><tr><th scope="row">cd dirname</th><td>Change current directory</td></tr></tbody></table></div>
+<p>For the trapezoid example, <code>who</code> lists A, a, b and h. <code>whos</code> reports four 1×1 double arrays. After <code>clear a</code>, the remaining names are A, b and h.</p>
+<p>MATLAB searches the current directory and its search path for files. The Current Directory Browser allows navigation and file operations.</p>
+<h2 id="getting-help">Getting help</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>help cos
+lookfor tangent</code></pre>
+<p><code>help</code> gives concise command documentation. <code>lookfor</code> searches descriptions using a keyword; the example lists inverse tangent, tangent and related functions. The Help Browser provides Contents, Index, Search and Favorites tabs.</p>
+<p>The note also shows <code>doc cosine</code> and then explains why <code>help cosine</code> reports that cosine.m cannot be found.</p>
+<p><em>Not: Belgede aynı yardım örneği içinde cos ve cosine adları karışmış. Fonksiyon adı cos olduğundan doğrudan fonksiyon belgesi için doc cos kullanılır.</em></p>
+<h2 id="menus">Menus</h2>
+<p>File contains commands for new files, opening files, importing data, saving workspaces, configuring the path and printing. Edit contains undo, redo, clipboard actions and commands for clearing windows or variables. View manages desktop tools and layouts. Web opens MathWorks resources; Window selects open windows; Help opens documentation.</p>
+<h2 id="saving-and-loading-variables">Saving and loading variables</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>save Mywork
+load Mywork</code></pre>
+<p><code>save</code> without a filename uses matlab.mat; an explicit name creates the corresponding MAT file. <code>load</code> restores saved variables into the workspace. The document also describes Save Workspace As and opening MAT files from the directory browser.</p>
+<h2 id="recording-a-session-with-diary">Recording a session with diary</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>diary on
+a=1
+b=2
+c=a+b
+diary off
+get(0,'diary')
+get(0,'diaryfile')</code></pre>
+<p>The example computes c=3. <code>diary on</code> starts recording commands and textual output, <code>diary off</code> stops it, and <code>diary filename</code> chooses another file. Graphs are not included. The ASCII diary can be opened in the Editor/Debugger for viewing and editing.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-matlab-argeso-ders-notu.pdf" download>eem301-matlab-argeso-ders-notu.pdf</a></p>
+              <p class="kucuk">PDF · 327 KB · 19 <span data-i18n="arch.pagesLower"></span> · 08.03.2004</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-matlab-argeso-ders-notu.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (327 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

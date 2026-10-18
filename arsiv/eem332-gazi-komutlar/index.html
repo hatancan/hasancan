@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: Veri, Aritmetik ve Kontrol Komutları (Gazi Üniversitesi, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="Veri aktarımı, aritmetik ve mantık, dallanma, makrolar, BIOS ve DOS yordamları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-komutlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: Veri, Aritmetik ve Kontrol Komutları (Gazi Üniversitesi, M. Ali Akcayol)">
+<meta property="og:description" content="Veri aktarımı, aritmetik ve mantık, dallanma, makrolar, BIOS ve DOS yordamları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-komutlar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: Veri, Aritmetik ve Kontrol Komutları (Gazi Üniversitesi, M. Ali Akcayol)", "description": "Veri aktarımı, aritmetik ve mantık, dallanma, makrolar, BIOS ve DOS yordamları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-komutlar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-komutlar.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-komutlar/eem332-gazi-komutlar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: Veri, Aritmetik ve Kontrol Komutları (Gazi Üniversitesi, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.11.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpul5datamovement">CPUL5DataMovement</a></li><li><a href="#cpul6arithmeticlogic">CPUL6ArithmeticLogic</a></li><li><a href="#cpul7control">CPUL7Control</a></li><li><a href="#cpul8programming">CPUL8Programming</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: Veri, Aritmetik ve Kontrol Komutları (Gazi Üniversitesi, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 10.11.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2008–2015). Veri aktarımı, aritmetik ve mantık, dallanma, makrolar, BIOS ve DOS yordamları. Kaynak: Gazi Üniversitesi, M. Ali Akcayol; BİL362 ders notları. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="cpul5datamovement">CPUL5DataMovement</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular Veri Aktarım (Data Movement) Komutları</p>
+<ul><li>MOV Komutu</li></ul>
+<ul><li>PUSH / POP Komutları</li></ul>
+<ul><li>LOAD Komutları</li></ul>
+<ul><li>String Data Transfer Komutları</li></ul>
+<ul><li>Diğer Data Transfer Komutları</li></ul>
+<ul><li>Segment Override Prefix</li></ul>
+<ul><li>Assembler Komutları</li></ul>
+<ul><li>Hafıza Organizasyonu</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV</code></pre>
+<ul><li>MOV komutu register-register veya register-memory arasında</li></ul>
+<p>8086-80286 işlemciler için byte veya word 80386 ve üstü işlemciler için byte, word veya doubleword data transfer eder.</p>
+<ul><li>MOV CX,DX komutu word (16-bit) boyutundaki DX içeriğini</li></ul>
+<p>CX register’ına aktarır.</p>
+<ul><li>80386 ve üstü işlemcilerde doubleword (32-bit) boyutundaki</li></ul>
+<p>veri aktarılabilir.</p>
+<ul><li>MOV ECX,EDX komutu doubleword EDX içeriğini ECX</li></ul>
+<p>register’ına aktarır.</p>
+<ul><li>MOV AL,22H       komutu byte boyutundaki 22H değerini AL</li></ul>
+<p>register’ına aktarır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV</code></pre>
+<ul><li>80386 ve üstü işlemcilerde doubleword (32-bit) boyutundaki</li></ul>
+<p>data aktarılabilir.</p>
+<ul><li>MOV EBX,12345678H komutu doubleword 12345678H</li></ul>
+<p>değerini EBX register’ına kopyalar.</p>
+<ul><li>MOV CX,LIST     komutu hafızada LIST adresindeki word</li></ul>
+<p>boyutundaki içeriği CX register’ına aktarır.</p>
+<ul><li>MOV AX,[BX]     komutu data segment içerisinde BX offset</li></ul>
+<p>adresindeki bir word datayı AX register’ına aktarır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH / POP</code></pre>
+<ul><li>PUSH ve POP komutları LIFO yapısındaki stack memory’den bilgi</li></ul>
+<p>almak veya bilgi depolamak için kullanılırlar.</p>
+<ul><li>Mikroişlemci 6 farklı PUSH ve POP yapısına sahiptir: register,</li></ul>
+<p>memory, immediate, segment register, flags ve all registers.</p>
+<ul><li>Register adresleme herhangi bir register içeriğinin stack’a</li></ul>
+<p>saklanması veya stack’tan alınmasını sağlar.</p>
+<ul><li>Memory adresleme bir memory alanının stack’a saklanması veya</li></ul>
+<p>stack’tan alınmasını sağlar.</p>
+<ul><li>Immediate adresleme sabit bir verinin stack’a saklanmasını sağlar.</li></ul>
+<ul><li>Segment register adresleme bir segment register’ın stack’a</li></ul>
+<p>saklanması veya stack’tan alınmasını sağlar. CS PUSH edilebilir ancak CS’ye POP edilemez.</p>
+<ul><li>Flags adreslemede flag’lar stack’a saklanabilir veya stack’tan</li></ul>
+<p>alınabilir.</p>
+<ul><li>All register adreslemede tüm register içerikleri PUSH veya POP</li></ul>
+<p>edilebilir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>8086-80286 mikroişlemcilerde PUSH komutu 16-bit data’yı</li></ul>
+<p>stack’a saklar veya stack’tan alır. 80386 ve üstü işlemcilerde 2 veya 4 byte data stack’a saklanır.</p>
+<ul><li>PUSHA komutu segment register’ları hariç diğer tüm</li></ul>
+<p>register’ları stack’a saklar.</p>
+<ul><li>PUSHA (push all) komutu register’ları AX,CX,DX,BX,SP,BP,SI</li></ul>
+<p>ve DI sırasında stack’a saklar.</p>
+<ul><li>PUSHF (push flags) komutu flag register’ların içeriğini</li></ul>
+<p>stack’a saklar.</p>
+<ul><li>PUSHAD ve POPAD komutları 32-bit register’ların tümünü</li></ul>
+<p>stack’a push veya stack’tan pop eder.</p>
+<ul><li>16-bit push işlemi yapıldığında soldaki 8-bit SP-1 ve sağdaki</li></ul>
+<p>8-bit SP-2 adresine yazılır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>PUSH AX komutunun çalışmasından sonraki durum aşağıda</li></ul>
+<p>görülmektedir.</p>
+<ul><li>AH SP-1 ve AL SP-2 adresine saklanır.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>PUSHA komutu 16-bit tüm register’ları stack’a saklar.</li></ul>
+<ul><li>Sıralama AX,CX,DX,BX,SP,BP,SI ve DI şeklindedir.</li></ul>
+<ul><li>PUSHAD komutu 32-bit tüm register’ları stack’a saklar.</li></ul>
+<ul><li>PUSH ‘A’ komutu 0041H</li></ul>
+<p>değerini stack’a saklar.</p>
+<h3 id="0041h-ascii-a">0041H = ASCII(A)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>Aşağıda PUSH komutları görülmektedir.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>POP komutu stack’tan veri alır ve 16-bit register’a, segment</li></ul>
+<p>register’a veya 16-bit hafıza alanına saklar.</p>
+<ul><li>80386 ve üstü işlemcilerde 32-bit data aktarımı yapılabilir.</li></ul>
+<ul><li>POPF komutu stack’tan 16-bit alır ve flag’a aktarır.</li></ul>
+<ul><li>POPFD komutu stack’tan 32-bit alır ve extended flag’a</li></ul>
+<p>aktarır.</p>
+<ul><li>POPA komutu 16 byte datayı stack’tan alır sırasıyla</li></ul>
+<p>DI,SI,BP,SP,BX,DX,CX ve AX register’larına aktarır.</p>
+<ul><li>POPAD komutu 80386 ve üstü işlemcilerde 32-bit</li></ul>
+<p>register’lara stack’tan değer alır.</p>
+<ul><li>POP BX komutu stack’tan SP adresini BL’ye ve SP+1 adresini</li></ul>
+<p>BH’ye aktarır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>Aşağıdaki şekilde POP BX komutu çalıştıktan sonraki durum</li></ul>
+<p>görülmektedir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>Aşağıda POP komutları görülmektedir.</li></ul>
+<h3 id="load">LOAD</h3>
+<ul><li>Herhangi bir hafıza alanını veya bir operand’ın offset adresini bir</li></ul>
+<p>register’a yüklemek için kullanılır.</p>
+<ul><li>LEA komutu 16-bit register’a operand’ın offset adresini yükler.</li></ul>
+<ul><li>LDS, LES 16-bit DS ve ES register’larına bir hafıza alanını yükler.</li></ul>
+<ul><li>80386 ve üstü işlemcilerde LFS, LGS ve LSS komutları 32-bit offset</li></ul>
+<p>adresinden FS, GS ve SS register’larına yükler.</p>
+<ul><li>Aşağıda LOAD komutları görülmektedir.</li></ul>
+<h3 id="load">LOAD</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA</code></pre>
+<ul><li>LEA komutu 16 veya 32-bit register’lara operand’la belirtilen</li></ul>
+<p>datanın offset adresini yükler.</p>
+<ul><li>LEA AX, NUMB komutu NUMB operand’ının adresini AX’e</li></ul>
+<p>yükler.</p>
+<ul><li>LEA BX,[DI] komutu [DI] operand’ının offset adresini BX’e</li></ul>
+<p>yükler (DI içeriği). MOV BX,[DI] komutu [DI] operand’ının gösterdiği adresteki datayı BX’e yükler.</p>
+<h3 id="load">LOAD</h3>
+<ul><li>Aşağıdaki örnekte önce SI register’ına DATA1 operand’ının offset</li></ul>
+<p>adresi yüklenir.</p>
+<ul><li>Ardından DI register’ına DATA2 operand’ının offset adresi yüklenir.</li></ul>
+<ul><li>Program çalıştıktan sonra DATA1 ve DATA2 hafıza alanlarının içeriği</li></ul>
+<p>yer değiştirilir.</p>
+<h3 id="load">LOAD</h3>
+<h3 id="lds-les-lfs-lgs-lss">LDS, LES, LFS, LGS, LSS</h3>
+<ul><li>LDS, LES, LFS, LGS, LSS komutları 16 veya 32-bit register’lardan</li></ul>
+<p>birisine offset adresini yükler, DS, ES, FS, GS, SS segment register’larından birisine segment adresini yükler.</p>
+<ul><li>Bu komutlar segment ve offset adresini içeren 32-bit (16-bit</li></ul>
+<p>segment+16-bit offset) veya 48-bit (32-bit offset+16-bit segment) hafıza alanına erişim yapar.</p>
+<ul><li>LFS, LGS ve LSS komutları 80386 ve üstü işlemcilerde vardır.</li></ul>
+<h3 id="load">LOAD</h3>
+<ul><li>Aşağıdaki örnekte LDS BX, [DI] komutunun çalışması görülmektedir.</li></ul>
+<ul><li>Data segment’te DI ile adreslenen 32-bit alan BX ve DS’ye yüklenir.</li></ul>
+<ul><li>Önce offset adres, ardından segment adres alınır.</li></ul>
+<h3 id="bx-127ah">BX = 127AH</h3>
+<h3 id="ds-3000h">DS = 3000H</h3>
+<p>olur.</p>
+<h3 id="load">LOAD</h3>
+<ul><li>En sık kullanılan LSS komutudur. 80386 ve üstü işlemcilerde vardır ve .386</li></ul>
+<p>deyimi .MODEL deyiminden hemen sonra kullanılmalıdır.</p>
+<p>String Data Transfer</p>
+<ul><li>LODS, STOS, MOVS, INS ve OUTS komutları kullanılır. String</li></ul>
+<p>komutları byte,word veya doubleword data transfer eder. Direction Flag</p>
+<ul><li>Flag register’daki D biti string işlemleri için DI ve SI register’larının</li></ul>
+<p>otomatik artırılması (D=0) veya otomatik azaltılması (D=1) için kullanılır.</p>
+<ul><li>Direction biti sadece string işlemlerinde kullanılır.</li></ul>
+<ul><li>CLD komutu D=0 (clear) yapar, STD komutu D=1 (set) yapar.</li></ul>
+<ul><li>String komutu bir byte transfer ederse SI/DI 1 değişir, bir word için</li></ul>
+<p>SI/DI 2 değişir, doubleword için SI/DI 4 değişir.</p>
+<ul><li>Her komut DI/SI çiftinden birisini kullanır. STOSB komutu DI</li></ul>
+<p>register’ını artırır veya azaltır (SI değişmez), LODSB SI register’ını artırır veya azaltır (DI değişmez).</p>
+<ul><li>Tüm string komutları DI offset adresiyle extra segment’e, SI offset</li></ul>
+<p>adresiyle data segment’e erişir.</p>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LODS</code></pre>
+<ul><li>LODS komutu AL, AX veya EAX (80386 ve üstü) register’larına data</li></ul>
+<p>segment’te SI register’ıyla belirlenen offset adresinin içeriğini yükler.</p>
+<ul><li>AL, AX veya EAX yüklendiğinde D=0 için SI artırılır D=1 için SI azaltılır.</li></ul>
+<ul><li>Byte boyutunda transfer için 1, word için 2 ve doubleword için 4 artırılır</li></ul>
+<p>veya azaltılır.</p>
+<ul><li>LODSB (loads a byte) komutu AL register’ına bir byte, LODSW (loads a</li></ul>
+<p>word) AX register’ına bir word ve LODSD (loads a doubleword) EAX register’ına bir doubleword yükler.</p>
+<p>String Data Transfer</p>
+<ul><li>Aşağıdaki şekilde LODSW komutunun</li></ul>
+<p>D=0, SI=1000H ve DS=1000H için çalışması görülmektedir.</p>
+<ul><li>11000H ve 11001H AX’e yüklenir.</li></ul>
+<ul><li>D=0 olduğundan ve 16-bit transfer</li></ul>
+<p>edildiğinden SI 2 artırılır.</p>
+<ul><li>SI=1002 olacaktır.</li></ul>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS</code></pre>
+<ul><li>STOS komutu AL, AX veya EAX (80386 ve üstü) register’larını extra</li></ul>
+<p>segment’te DI register’ıyla belirlenen offset adresine kopyalar.</p>
+<ul><li>AL, AX veya EAX aktarıldığında D=0 için DI artırılır D=1 için DI azaltılır.</li></ul>
+<ul><li>Byte boyutunda transfer için 1, word için 2 ve doubleword için 4 artırılır</li></ul>
+<p>veya azaltılır.</p>
+<ul><li>STOSB (stores a byte) komutu AL register’ını, STOSW (stores a word) AX</li></ul>
+<p>register’ını ve STOSD (stores a doubleword) EAX register’ını extra segment’te DI ile belirtilen offset adresine kopyalar.</p>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS ve REP</code></pre>
+<ul><li>REP (repeat prefix) deyimi LODS hariç diğer string data</li></ul>
+<p>transfer komutlarına eklenir.</p>
+<ul><li>REP deyimi her string komutu çalıştığında CX sayacını 1</li></ul>
+<p>azaltır. CX = 0 olduğunda döngü biter ve sonraki komut çalışır.</p>
+<ul><li>CX=100 iken REP STOSB komutu, DI register’ı her döngüde 1</li></ul>
+<p>azalacağı veya artacağı için AL register’ının içeriğini 100 adreslik bir hafıza bloğuna aktarır.</p>
+<ul><li>STOSB (stores a byte) komutu AL register’ını, STOSW (stores a</li></ul>
+<p>word) AX register’ını ve STOSD (stores a doubleword) EAX register’ını DI ile belirtilen extra segment alanına aktarır.</p>
+<ul><li>STOSW komutu DI register’ını 2 değiştirir, STOSD komutu 4</li></ul>
+<p>değiştirir.</p>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS ve REP</code></pre>
+<ul><li>Aşağıdaki örnek Buffer adlı hafıza bloğunu Count değeri kadar temizler.</li></ul>
+<ul><li>Program C++ ortamında inline assembler ile yazılmış ve ClearBuffer</li></ul>
+<p>fonksiyonu çağırılarak çalıştırılmaktadır.</p>
+<ul><li>REP STOSW komutu Buffer adlı hafıza bloğunu AX=0 yazarak temizler.</li></ul>
+<p>her tekrarda ECX 1 azalır, EDI 2 (D=0)artar.</p>
+<p>String Data Transfer Operand operatörleri</p>
+<ul><li>Herhangi bir operand operatörlerle birlikte kullanılabilir.</li></ul>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVS</code></pre>
+<ul><li>MOVS komutu iki hafıza alanı arasında string data aktarır.</li></ul>
+<ul><li>8086-Pentium 4 mikroişlemcilerde memory-to-memory işlemine izin veren</li></ul>
+<p>tek komuttur.</p>
+<ul><li>MOVS komutu data segment’te SI ile adreslenen byte, word veya</li></ul>
+<p>doubleword data’yı DI ile adreslenen extra segment’e kopyalar.</p>
+<ul><li>SI ve DI için artma/azalma direction bayrağıyla belirlenir.</li></ul>
+<p>String Data Transfer Blok Transfer</p>
+<ul><li>REP MOVSD komutu BlockA’yı BlockB’ye kopyalar.</li></ul>
+<p>String Data Transfer</p>
+<h3 id="ins">INS</h3>
+<ul><li>INS komutu bir I/O cihazından byte, word veya doubleword data’yı extra</li></ul>
+<p>segment içerisinde DI ile adreslenen alana aktarır. (8086/8088’de yoktur.)</p>
+<ul><li>I/O adresi DX register’ından alınır.</li></ul>
+<ul><li>Bir harici I/O cihazından hafızaya blok data aktarımında etkindir.</li></ul>
+<ul><li>INSB byte, INSW word ve INSD doubleword data transfer eder.</li></ul>
+<p>String Data Transfer INS - örnek</p>
+<ul><li>Aşağıdaki örnekte 03ACH adresine sahip I/O cihazından 50 byte data’yı</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>extra segment’te LISTS dizisine aktarılır.</code></pre>
+<p>String Data Transfer</p>
+<h3 id="outs">OUTS</h3>
+<ul><li>OUTS komutu data segment içerisinden SI ile adreslenen alandan byte,</li></ul>
+<p>word veya doubleword data’yı bir I/O cihazına aktarır. (8086/8088’de yoktur.)</p>
+<ul><li>I/O adres DX register’ındadır.</li></ul>
+<ul><li>Bir blok datanın harici I/O cihazına aktarımında etkindir.</li></ul>
+<ul><li>OUTSB byte, OUTW word ve OUTSD doubleword data transfer eder.</li></ul>
+<p>String Data Transfer OUTS - örnek</p>
+<ul><li>Aşağıdaki örnekte data segment’te ARRAY adresindeki 100 byte data 03ACH</li></ul>
+<p>adresine sahip I/O cihazına aktarılır.</p>
+<p>Diğer Data Transfer Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XCHG</code></pre>
+<ul><li>XCHG komutu iki register veya bir register ile bir hafıza alanı arasında</li></ul>
+<p>data’yı karşılıklı değiştirir.</p>
+<ul><li>XCHG komutu segment register’larını değiştiremez veya memory-to-</li></ul>
+<p>memory değiştiremez.</p>
+<ul><li>XCHG AL,[DI] ile XCHG [DI],AL aynı işlemi yapar.</li></ul>
+<p>Diğer Data Transfer Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN ve OUT</code></pre>
+<ul><li>IN komutu harici I/O cihazından AL,AX ve EAX register’larına data aktarır.</li></ul>
+<ul><li>OUT komutu AL,AX ve EAX’ten harici I/O cihazına data aktarır.</li></ul>
+<ul><li>16-bit I/O port adres Address Bus ile ilgili cihaza iletilir.</li></ul>
+<ul><li>Fixed port adreslemede port adresi opcode’dan hemen sonra gelir.</li></ul>
+<p>Variable port adreslemede DX register’ı port adresini saklar.</p>
+<p>Diğer Data Transfer Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN ve OUT - örnek</code></pre>
+<ul><li>Aşağıdaki örnekte OUT 19H,AX komutunun çalışması görülmektedir.</li></ul>
+<ul><li>AX içeriği I/O port 19H adresine aktarılır. Adres bus 0019H (16-bit)</li></ul>
+<p>değerine, data bus AX içeriğine ve control bus IOCW (I/O write control) kontrol işaretine (lojik 0 ilgili I/O cihazını etkin yapar (enable)) sahiptir.</p>
+<p>Segment Override Prefix</p>
+<ul><li>Komutlar için default (varsayılan) register değiştirilerek farklı</li></ul>
+<p>segment’teki data’ya erişmeyi sağlar.</p>
+<ul><li>MOV AX,[DI] komutu default olarak data segment’e erişir. MOV</li></ul>
+<p>AX,ES:[DI] komutu extra segment’e erişmeyi sağlar.</p>
+<ul><li>Aşağıda bazı komutlar görülmektedir.</li></ul>
+<p>Assembler Komutları</p>
+<ul><li>Assembler komutları (directives), operand veya programın bir kısmında</li></ul>
+<p>assembler tarafından nasıl işlem yapılacağını belirler.</p>
+<p>Assembler Komutları</p>
+<p>Assembler Komutları</p>
+<ul><li>DB (define byte), DW (define word) ve DD (define</li></ul>
+<p>doubleword) hafıza tanımlama ve data aktarmak için kullanılır.</p>
+<ul><li>SEGMENT deyimiyle istenildiği kadar yeni sembolik isme sahip</li></ul>
+<p>segment tanımlanabilir.</p>
+<ul><li>DB, DW ve DD komutlarıyla tanımlanan alanlar ? ile sonraki</li></ul>
+<p>kullanımlar için reserve edilebilir.</p>
+<ul><li>DUP (duplicates) komutu bir dizi oluşturur. 10 DUP (?) komutu</li></ul>
+<p>herhangi bir değer atamadan 10 hafıza alanı ayırır.</p>
+<ul><li>DATA1 DB 10 DUP (2) komutu 10 byte hafıza alanını ayırır ve</li></ul>
+<p>her birisinin içerisine 02H atar.</p>
+<p>Assembler Komutları Örnek</p>
+<p>Assembler Komutları ASSUME, EQU ve ORG</p>
+<ul><li>ASSUME deyimi code, data, extra ve stack segment için seçilen isimleri</li></ul>
+<p>belirtmek için kullanılır. EQU (equate) deyimi bir sayıyı, ASCII karakteri veya etiketi başka bir etikete eşitler.</p>
+<ul><li>ORG (origin) deyimi data segment içindeki offset adresini değiştirmek için</li></ul>
+<p>kullanılır. THIS deyimi THIS BYTE, THIS WORD veya THIS DWORD şeklinde kullanılır ve ilgili etikete belirtilen data aktarılabilir.</p>
+<p>Assembler Komutları PROC ve ENDP</p>
+<ul><li>PROC ve ENDP deyimleri bir prosedürün başlangıcını ve bitişini gösterir.</li></ul>
+<ul><li>PROC ve ENDP deyimleri başlangıç ve bitişi için etikete gerek duyarlar.</li></ul>
+<ul><li>PROC deyimi NEAR veya FAR şeklinde iki ifade kullanır.</li></ul>
+<ul><li>NEAR (lokal) procedürün aynı code segment’e yerleştirilmesi, FAR (global)</li></ul>
+<p>hafızada herhangi bir yere yerleştirilmesini sağlar.</p>
+<ul><li>Aşağıdaki örnekte BX, CX, DX toplanarak sonuç AX register’ına</li></ul>
+<p>aktarılmaktadır.</p>
+<p>Hafıza Organizasyonu</p>
+<ul><li>Assembler iki farklı hafıza organizasyonu kullanır. Birisi model kullanımı diğeri tüm</li></ul>
+<p>segment tanımlarının (full-segment definitions) yapılmasıdır.</p>
+<ul><li>Model kullanımı kolaydır ve basit programlarda kullanılmalıdır.</li></ul>
+<ul><li>Full-segment definitions assembly dilinnde daha iyi kontrol sağlar ve kompleks</li></ul>
+<p>programlarda kullanılmalıdır. Model</p>
+<ul><li>MASM assembler tiny, small, medium, compact, large, huge, flat modelleri</li></ul>
+<p>kullanır.</p>
+<ul><li>Tiny model tüm programın 64 KB tek segment’e sığdırılmasını sağlar.</li></ul>
+<ul><li>Small model bir data segment ve bir code segment kullanılmasını sağlar ve toplam</li></ul>
+<p>boyut 128KB olur.</p>
+<ul><li>Medium model birden çok code segment ve bir data segment kullanılmasını sağlar.</li></ul>
+<ul><li>Compact model, bir code segment ve birden çok data segment kullanılmasını</li></ul>
+<p>sağlar.</p>
+<ul><li>Large model, birden çok code segment ve birden çok data segment kullanılmasını</li></ul>
+<p>sağlar. 64K dan büyük dizi kullanılamaz.</p>
+<ul><li>Huge model, birden çok code segment ve birden çok data segment kullanılmasını</li></ul>
+<p>sağlar. 64K dan büyük dizi kullanılabilir.</p>
+<ul><li>Flat model, 4GB’a kadar bir segment kullanılmasını sağlar. Tüm data ve code 32-bit</li></ul>
+<p>bir segmentte bulunabilir.</p>
+<p>Hafıza Organizasyonu Model</p>
+<ul><li>Aşağıdaki örnekte 100-byte LISTA isimli hafıza bloğunu LISTB alanına</li></ul>
+<p>kopyalar.</p>
+<p>Hafıza Organizasyonu Full-Segment Tanımı</p>
+<ul><li>Model yaklaşımına göre daha yapısaldır. Örnek sonraki sayfadadır.</li></ul>
+<ul><li>STACK_SEG için ayrılan alan SEGMENT ve ENDS arasıdır.</li></ul>
+<ul><li>DW 100H DUP(?) komutu stack segment için 100H adet word alan oluşturur.</li></ul>
+<ul><li>STACK kelimesi SS ve SP register’larını otomatik olarak yükler.</li></ul>
+<ul><li>DATA_SEG için LISTA ve LISTB her elemanı byte olan 100 elemanlı iki dizi</li></ul>
+<p>tanımlanmıştır.</p>
+<ul><li>CODE_SEG ile ENDS arası code segment’i göstermektedir.</li></ul>
+<ul><li>‘DATA’ ve ‘CODE’ kelimeleri MS CodeView ile debug işlemi için kullanılır.</li></ul>
+<ul><li>ASSUME deyimi SS için STACK_SEG, DS için DATA_SEG ve CS için CODE_SEG</li></ul>
+<p>isminin kullanıldığını gösterir.</p>
+<p>Hafıza Organizasyonu</p>
+<p>Ödev</p>
+<ul><li>Her birisi byte olan 10 elemanlı DIZI1 adlı dizinin elemanlarını</li></ul>
+<p>hepsi byte olan 100 elemanlı DIZI2 adlı diziye 10 kez ardarda kopyalayan bir program yazınız. Programda gerekli gördüğünüz yerlere açıklama yazınız. Program courier new font ile ve 12 boyutunda yazılacaktır. Programda sadece etiket, komut ve açıklama kısımlarının yazılması yeterlidir.</p>
+<figure class="yazi-gorsel"><img src="sekil-649-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL5DataMovement: sayfa 5, devre, tablo ve şekiller"><figcaption>CPUL5DataMovement, sayfa 5.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-649-09.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL5DataMovement: sayfa 9, devre, tablo ve şekiller"><figcaption>CPUL5DataMovement, sayfa 9.</figcaption></figure>
+<h2 id="cpul6arithmeticlogic">CPUL6ArithmeticLogic</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Sh Konular</p>
+<p>Aritmetik ve Mantık (Arithmetic and Logic) Komutları = Toplama, Çıkarma ve Karşılaştırma Komutları » Çarpma ve Bölme Komutları = Temel Mantık Komutları = Kaydırma ve Döndürme (Shift and Rotate) Komutları = String Karşılaştırma Komutları</p>
+<p>Toplama</p>
+<p>= ADD (Addition) mikroişlemcide birçok şekilde kullanılabilir.</p>
+<p>= Register, immediate, memory-to-register, array, increment,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addition-with-carry toplama işlemleri yapılabilir.</code></pre>
+<p>= Memory-to-memory ve segment register toplama işlemleri yapılamaz.</p>
+<p>= Segment register'ları sadece MOV, PUSH veya POP yapılabilir.</p>
+<p>=. Toplama</p>
+<p>Register ‘Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD ALL AL=AL+BL</code></pre>
+<p>toplama Awcxo Ox= 0X +01</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD EBP,EAX EBP = EBP + EAX
+ADD CLAAH CL=CL+44H
+ADD BX,245FH BX = BX + 245FH
+ADD EDX,12345H EDX = EDX + 12345H
+ADD [BX] AL AL adds to the byte contents of the data segment memory location
+addressed by BX with the sum stored in the same memory location
+ADD CLP] The byte contents ofthe stack segment memory location addressed</code></pre>
+<p>by BP add to CL with the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AL, [EBX] The byte contents of the</code></pre>
+<p>by EBX add to AL with the sun</p>
+<p>um stored in CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ta segment memory location addressed</code></pre>
+<p>tored in AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BX,[SI+2] The word contents of the data segment memory location addressed</code></pre>
+<p>by Sİ + 2 add to BX with the sum stored in BX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD CL, TEMP. The byte contents of data segment memory location TEMP add to</code></pre>
+<p>CL with the sum stored in Ci</p>
+<p>‘ADD BX,TEMPJDİ) ‘The word contents of the data segment memory location addressed by TEMP + DI add to BX with the sum stored in BX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD [BX+DI],DL DL adds to the byte contents of the data segment memory location
+addressed by BX + Dİ with the sum stored in the same memory
+location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BYTE PTR[DI],3 O A3 adds to the byte contents of the data segment memory location
+addressed by DI with the sum stored in the same location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BX,[EAX+2*ECX] © The word contents of the data segment memory location addressed</code></pre>
+<p>by EAX plus 2 times ECX add to BX with the sum stored in BX</p>
+<p>Sh Toplama</p>
+<p>Örnek</p>
+<p>Örnekte AX, BX, CX ve DX register'ları toplanır ve 16-bti AX register'ına sonuç saklanır.</p>
+<p>Bir toplama işlemi yapıldığında FLAG register değeri değişir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD komutu sign, zero, carry, auxiliary carry, parity ve</code></pre>
+<p>overflow bitleri değişir.</p>
+<p>Toplama</p>
+<p>Immediate toplama</p>
+<p>Sabit bir değer toplanır.</p>
+<h3 id="0000-b2">0000 B2</h3>
+<p>00 80</p>
+<p>Once DL’ye 12H yüklenir. Daha sonra 33H ile DL içeriği toplanır. Toplama işlemi sonucu 45H DL register'ına saklanır.</p>
+<p>Bu işlem sonucunda FLAG değişimleri yandaki gibidir.</p>
+<p>Z = 0 (result not zero) C= 0 (no carry)</p>
+<p>A= 0 (no half-carry) S = 0 (result positive) P = 0 (odd parity)</p>
+<p>O= 0 (no overflow)</p>
+<p>Toplama</p>
+<p>Memory-to-register toplama « İstenen hafıza alanı bir register'la toplanır.</p>
+<h3 id="0000-bf-0000-r-mov-di-offset-numb">0000 BF 0000 R MOV DI,OFFSET NUMB</h3>
+<h3 id="0003-bo-00-mov-al-0">0003 BO 00 MOV AL,0</h3>
+<p>0005 02 05 0007 02 45 01</p>
+<p>iclear sum</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AL, [DI] ;add NUMB
+ADD AL, [DI+1] jadd NUMB+1</code></pre>
+<p>= Önce DI’ya NUMB offset adresi aktarılır.</p>
+<p>= Daha sonra AL’ye 0 değeri aktarılır.</p>
+<p>= Data segment'te DI offset adresinin içeriği AL register’ina eklenir.</p>
+<p>= Son olarak AL register'ına data segmentte DI*1 offset adresinin içeriği eklenir.</p>
+<p>Toplama</p>
+<p>Array toplama = Hafızada bir alanda bulunan dizi değerleri toplanır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;clear sum</code></pre>
+<h3 id="ere">ERE</h3>
+<p>Le oD</p>
+<p>= Önce AL’ye aktarılır.</p>
+<p>= Daha sonra SI register'ına 3 değeri aktarılır.</p>
+<p>= ARRAYISIJ operand’1 SI=3 olduğu için dizideki 3.elemanı gösterir.</p>
+<p>= Dizinin 3.elemanı, 5.elemani ve 7.elemanı toplanarak sonuç AL register'ına aktarılır.</p>
+<p>Toplama</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Increment toplama</code></pre>
+<p>= INC komutu bir register'a (segment register'ları hariç) veya hafıza alanına 1 ekler.</p>
+<p>= Indirect memory artırımında BYTE PTR, WORD PTR veya DWORD PTR ile data boyutu belirtilmelidir.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC BL BL=BL+1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC SP SP=SP+1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC EAX EAX = EAX+1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC BYTE PTR[BX] Adds 1 to the byte contents of the data segment memory location
+addressed by BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC WORD PTRISIJ ‘Adds 1 to the word contents of the data segment memory location
+addressed by SI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC DWORD PTRIECX] Adds 1 to the doubleword contents of the data segment memory</code></pre>
+<p>location addressed by ECX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC DATA1 Adds 1 to the contents of data segment memory location DATA1</code></pre>
+<p>Toplama</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Increment toplama - örnek</code></pre>
+<p>0000 BF 0000 R MOV DI,OFFSET NUMB jaddress NUMB</p>
+<p>0003 BO 00 / AL,O ;clear sum</p>
+<p>0005 02 05 ADD AL, [DI] ;add NUMB</p>
+<p>0007 47 INC DI ;increment DI</p>
+<p>0008 02 05 ADD AL, [DI] ;add NUMB+1</p>
+<p>« Once data segment’te NUMB offset adresinin içeriği AL’ye eklenir.</p>
+<p>= Ardından DI adres değeri 1 artırılarak DI*1 offset adresin içeriği AL’ye eklenir.</p>
+<p>= Word boyutundaki data için DI değerini 2 artırmak, doubleword data için 4 artırmak gerekir.</p>
+<p>=. Toplama</p>
+<p>Carry ile toplama</p>
+<p>= ADC (addition-with-carry) komutu operand’a carry bitinin degerini ekler.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Assembly Language Operation</th></tr></thead><tbody></tbody></table></div>
+<p>ADC AL,AH AL = AL + AH + carry</p>
+<p>ADC CX,BX CX = CX + BX + carry</p>
+<p>ADC EBX,EDX EBX = EBX + EDX + carry</p>
+<p>ADC DH BX] The byte contents of the data segment memory location addressed by BX add to DH with the sum stored in DH</p>
+<p>ADC BX,[BP+2] The word contents of the stack segment memory location addressed by BP plus 2 add to BX with the sum stored in BX</p>
+<p>ADC ECX,[EBX] The doubleword contents of the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by EBX add to ECX with the sum stored in ECX</code></pre>
+<p>=. Toplama Carry ile toplama nek</p>
+<p>= AX ve BX te bulunan 32-bit data CX ve DX te bulunan 32-bit</p>
+<p>datayla toplansin. Sr (ADO) (çi (ADD)</p>
+<h3 id="bx-l-ax">[ BX | | L AX |</h3>
+<p>+ L DX | | [ cx |</p>
+<h3 id="bx-j-ax">[ BX | J AX |</h3>
+<p>000 03 Cl ADD</p>
+<h3 id="2-13-da-adc">2 13 DA ADC</h3>
+<p>a Cikarma . (subtraction) komutu bir operand’! diğerinden çıkarmak</p>
+<p>için kullanılır. « Özel formu DEC (decrement) komutudur ve 1 cıkarır.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB CLEL CL=CL-BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AX,SP AX = AX - SP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ECX,EBP ECX = ECX - EBP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB DH,6FH DH = DH ~ 6FH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AX,0CCCCH AX = AX — 0CCCCH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ESI,2000300H ESI = ES! — 2000300H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB [DI],CH Subtracts CH from the byte contents of the data se
+addressed by DI and stores the difference in the
+location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB CH,[BP] Subtracts the byte contents of the stack segment memory location
+addressed by BP from CH and stores the difference in CH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AH,TEMP Subtracts the byte contents of memory location TEMP from AH and</code></pre>
+<p>stores the difference in AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB Dİ,TEMPJESİ) Subtracts the word contents of the data segment memory location
+addressed by TEMP plus ESI from DI and stores the difference in Dİ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ECX,DATAT Subtracts the doubleword contents of memory location DATA1 from</code></pre>
+<p>ECX and stores the difference in ECX</p>
+<p>ent memory e memory</p>
+<p>Cikarma</p>
+<p>Register çıkarma = Bir register’in değeri diğerinden çıkarılır.</p>
+<h3 id="0000-2b-d9-sub-bx-cx">0000 2B D9 SUB BX,CX</h3>
+<h3 id="0002-2b-da-sub-bx-dx">0002 2B DA SUB BX,DX</h3>
+<p>« Örnekte 16-bit CX ve DX register'ları BX’ten çıkarılır ve sonuç BX'te saklanır.</p>
+<p>= Her çıkarmadan sonra FLAG bitleri değiştirilir.</p>
+<p>= Cikarma Immediate çıkarma = Bir sabit değer bir register'dan çıkarılır. Sabit değer</p>
+<p>instruction'la birlikte verilir.</p>
+<p>)000 BS z MOV H</p>
+<p>= Örnekte 8-bit 22H değeri CH register’ina aktarılır.</p>
+<p>= Ardından 22H değerinden 44H değeri çıkartılır. Sonuç (ODEH) CH register'ında saklanmaktadır. FLAG durumları aşağıdadır. Z = O (result not zero)</p>
+<p>C = 1 (borrow) 1 (half-borrow)</p>
+<p>= | (result negative)</p>
+<p>i</p>
+<p>1 (even parity)</p>
+<h3 id="ound">OUND</h3>
+<p>if</p>
+<p>= 0 (no overflow)</p>
+<p>Cikarma</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decrement cikarma</code></pre>
+<p>= Bir hafıza alanından veya register’dan 1 çıkarılır.</p>
+<p>a DEC komutu hafıza adreslediğinde BYTE PTR, WORD PTR veya DWORD PTR kullanilmalidir.</p>
+<p>= DEC [SI] yerine DEC BYTE PTR [SI], DEC WORD PTR [SI] veya</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC DWORD PTR [S!] kullanılmalıdır.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC BYTE PTRIDI|</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC WORD PTRIBP]</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC DWORD PTRIEBX!</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC NUMB</code></pre>
+<p>Assemb Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC BH BH =BH~1
+DEC CX CX=CX-1
+DEC EDX EDX = EDX -1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Subtracts 1 from the byte contents of the data segment memory</code></pre>
+<p>location addr by DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Sub n the word contents of the stack segment</code></pre>
+<p>memory | addressed by BP</p>
+<p>Su</p>
+<p>the doubleword contents of the data segment tion addressed by EBX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Subtracts 1 from the contents of data segment memory</code></pre>
+<p>location NUMB</p>
+<p>memory |</p>
+<p>Cikarma</p>
+<p>Ödünç alma ile (subtraction-with-borrow) çıkarma</p>
+<p>= SBB (subtraction-with-borrow) hedef operand’dan diğer operand ile carry biti çıkarılır.</p>
+<p>= SBB komutu hafıza adreslediğinde BYTE PTR, WORD PTR veya DWORD PTR kullanılmalıdır.SBB [SI] yerine SBB BYTE PTR [SI], SBB WORD PTR [SI] veya SBB DWORD PTR [SI] kullanılmalıdır.</p>
+<p>Assembly Language Operation</p>
+<p>SBB AH,AL AH = AH— AL ~carry</p>
+<p>SBB AX,BX AX = AX - BX - carry</p>
+<p>SBB EAX,ECX EAX = EAX — ECX — carry</p>
+<p>SBB CL,2 CL-CL-2- carry</p>
+<p>SBB BYTE PTRIDI|3 Both 3 and carry subtract from the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by Dİ</code></pre>
+<p>SBB (DI) AL Both AL and carry subtract from the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by Dİ</code></pre>
+<p>SBB DI,[BP+2] Both carry and the word contents of the stack segment memory location addressed by BP plus 2 subtract from DI</p>
+<p>SBB AL,[EBX+ECX] Both carry and the byte contents of the data segment memory</p>
+<p>location addressed by EBX plus ECX subtract from AL</p>
+<p>karma</p>
+<p>Ödünç alma ile çıkarma - örnek = BX ve AX register'larında bulunan 32-bit sayı SI ve DI’da bulunan 32-bit</p>
+<p>sayidan cikarilmaktadir. CF (SBB) i (SUB)</p>
+<h3 id="bx-ax">BX AX</h3>
+<p>— sı DI BX i AX</p>
+<h3 id="0000-2b">0000 2B</h3>
+<p>Zi Karşılaştırma (Comparison) . (compare) komutu çıkarma işlemi yapar, hedef operand değişmez.</p>
+<p>= Genellikle bir JUMP komutu izler ve FLAG ları kontrol eder. = Memory-to-memory ve segment register karşılaştırılamaz.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP CL,BL cL-BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AX,SP AX-SP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP EBPESİ EBP —ESİ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AX,2000H AX—2000H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP [DI],CH CH subtracts from the byte contents of the data segment memory</code></pre>
+<p>location addressed by DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP CLIP] The byte contents of the stack segment memory location addressed</code></pre>
+<p>by BP subtracts from CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AH,TEMP The byte contents of data segment memory location TEMP subtracts</code></pre>
+<p>from AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP DI,TEMP[BX] The word contents of the data segment memory location addressed</code></pre>
+<p>by TEMP plus BX subtracts from DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL{EDIESI] The byte contents of the data segment memory location addressed</code></pre>
+<p>by EDİ plus ES! subtracts from AL</p>
+<p>Karsilastirma (Comparison)</p>
+<p>= Aşağıdaki örnekte AL register’! 10H ile karşılaştırılır.</p>
+<p>= Şartlı dallanma (conditional jump) komutları JA (jump above) ve JB (jump below) karşılaştırmanın sonucuna göre atlamayı gerçekleştirir.</p>
+<p>= JA komutu eğer AL register'ı 10H’dan büyüksek atlamayı gerçekleştirir, JB komutu küçükse atlamayı gerçekleştirir.</p>
+<p>ainst 10H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or above</code></pre>
+<p>0000 3c 10 CMP AL,10H compare 0002 73 1c JAE SUBER jif AL</p>
+<p>= Örnekte JAE (jump above or equal) komutu AL register'ı 10H</p>
+<p>ise veya 10H’dan büyükse programı SUBER etiketinin olduğu satıra atlatır.</p>
+<p>= JBE (jump below or equal) komutu AL register’1 10H ise veya</p>
+<p>10H’dan küçükse ilgili satıra atlatır.</p>
+<p>Çarpma ve Bölme Çarpma (Multiplication) = Çarpma işlemi byte,word veya doubleword datayla yapılabilir. « İşaretli (signed) integer (IMUL) veya isaretsiz (unsigned) integer (MUL) komutları kullanılabilir.</p>
+<p>= Çarpım sonucu her zaman iki kat genişliğindedir. 8-bit iki sayının çarpım sonucu 16-bit, 16-bit iki sayının çarpımı 32-bit ve 32-bit iki sayının çarpımı 64-bit olur.</p>
+<p>= Ove C fag bitleri etkilenir. Eğer 8-bit iki sayının sonucunda soldaki 8-bit 0 ise 0-0 ve C-0 olur. C=1 olması sonucun 16-bit olduğunu gösterir.</p>
+<p>« İki 16-bit sayının çarpım sonucunda C-0 ve 0-0 olursa soldaki 16-bit 0 değerindedir.</p>
+<p>Sİ Çarpma ve Bölme</p>
+<p>8-bit çarpma</p>
+<p>= 8-bit çarpmada çarpılan her zaman AL (işaretli/işaretsiz) olur.</p>
+<p>= Çarpan 8-bit bir register veya bir hafıza alanı olur.</p>
+<p>= Çarpma komutunda 1 operand vardır ve default çarpılan AL register’idir.</p>
+<p>= MUL BL komutu AL ile BL’yi isaretsiz çarpar. Çarpma sonucu 16-bit AX register'ına kaydedilir.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL CL AL is multiplied by CL; the unsigned product is in AX</code></pre>
+<p>IMUL DH AL is multiplied by DH; the signed product is in AX</p>
+<p>IMUL BYTE PTRIBXJ AL is multiplied by the byte contents of the data segment memory location addressed by BX; the signed product is in AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL TEMP AL is multiplied by the byte contents of data segment memory</code></pre>
+<p>location TEMP; the unsigned product is in AX</p>
+<p>il</p>
+<p>Çarpma ve Bölme</p>
+<p>8-bit çarpma - örnek</p>
+<p>= BI ve CL register'larındaki 8-bit unsigned sayılar çarpılmaktadır.</p>
+<p>= 16-bit sonuç DX register’ina kaydedilmektedir.</p>
+<p>= Bu işlem AL register’: kullanılarak yapılacağından bir register’! AL’ye aktarmak gerekir.</p>
+<p>= Signed sayılar için IMUL komutu kullanılır.</p>
+<p>= Negatif sayılar için ikinin tümleyeni, pozitif sayılar için binary form kullanılır.</p>
+<p>(6)</p>
+<p>AL, CL ;position data</p>
+<h3 id="0008-8b-do-mov-dx-ax">0008 8B DO MOV DX,AX</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;position product</code></pre>
+<p>= Carpma ve Bolme 16-bit carpma</p>
+<p>= 16-bit çarpmada çarpılan her zaman AX olur. = Carpan 8-bit bir register veya bir hafiza alam olur.</p>
+<p>= Carpim sonucu DX-AX icerisine saklanir. DX most-significant 16-bit, AX least-significant 16-bit sayıyı saklar.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL Cx AX is multiplied by CX; the unsigned product is in DX-AX</code></pre>
+<p>IMUL DI AX is multiplied by DI; the signed product is in DX-AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL WORD PTRISIJ AX is multiplied by the word contents of the data segment memory</code></pre>
+<p>location addressed by SI; the unsigned product is in DX-AX</p>
+<p>= Carpma ve Bolme 32-bit carpma</p>
+<p>80386 ve üstü işlemcilerde 32-bit çarpma yapılabilir. 32-bit çarpma işaretli (IMUL) veya isaretsiz (MUL) olabilir. EAX register’1 komut tarafından belirlenen operand'la çarpılır.</p>
+<p>Sonuç EDX-EAX içerisine saklanır. EDX most-significant 32-bit ve EAX least significant 32-bit kısmı saklar.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL ECX EAX is multiplied by ECX; the unsigned product is in EDX-EA\</code></pre>
+<p>IMUL EDI EAX is multiplied by EDİ; the signed product is in EDX-EAX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL DWORD PTRIES!] EAX is multiplied by the doubleword contents of the data</code></pre>
+<p>segment memory location address by ESI; the unsigned product is in EDX-EAX</p>
+<p>Carpma ve Bolme</p>
+<p>Bölme (Division)</p>
+<p>8086-80286 islemcilerde bolme 8-bit veya 16-bit sayilarda, 80386-Pentium 4 işlemcilerde 32-bit sayılarda yapılır.</p>
+<p>IDIV işaretli sayılarda, DIV işaretsiz sayılarda bölme yapar. Bölünen her zaman iki kat genişliğindedir.</p>
+<pre class="kod"><code>AX=3000 ise ve 2 ile bölünürse sonuç 1500 olur ve AL</code></pre>
+<p>registerina sığmaz. (1500 - 10111011100)</p>
+<p>Bu durumda overflow oluşur ve divide-error-interrupt gerçekleşir.</p>
+<p>=k Carpma ve Bolme 8-bit bolme</p>
+<p>= 8-bit bölmede bölünen AX register'ında bulunur ve 8-bit register veya hafızadaki bir değere bölünür.</p>
+<p>= AL register’ina bölüm sonucu, AH register’ina kalan saklanır.</p>
+<p>« İşaretli sayılar için bölüm negatif veya pozitif olabilir, kalan bölünenin işaretini saklar ve integer sayıdır.</p>
+<p>= AX=0010H(+16), BL=FDH(-3) ve IDIV BL komutu çalışırsa</p>
+<pre class="kod"><code>AX=01FBH olur. AL=-5 bölüm sonucu ve AH=1 kalan değerdir.</code></pre>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV CL AX is divided by CL; the unsigned quotient is in AL and the unsigned</code></pre>
+<p>remainder is in AH</p>
+<p>IDIV BL AX is divided by BL; the signed quotient is in AL and the signed remainder is in AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV BYTE PTRIBP| AX is divided by the byte contents of the stack segment memory</code></pre>
+<p>location addressed by BP; the unsigned quotient is in AL and the unsigned remainder is in AH</p>
+<p>Sh Carpma ve Bolme 8-bit bolme - devam</p>
+<p>= 8-bit bölmede sayılar genellikle 8-bit olur. Bölünen sayının AX register'i için word boyutuna dönüştürülmesi gerekir.</p>
+<p>« İşaretsiz sayılarda soldaki 8-bit (AH) O yapılır (zero-extended). İşaretli sayılarda AH register’ina AL'nin işaret biti aktarılır (sign-extended).</p>
+<p>= CBW (convert byte to word) komutu işaretli sayı olan AL register’inin içeriğini AX boyutuna dönüştürür.</p>
+<p>=k Carpma ve Bolme 8-bit bolme nek</p>
+<p>= Unsigned byte sayı NUMB, unsigned sayı NUMB1’e bölünür. = Bölüm sonucu ANSQ ve kalan ANSR hafıza alanlarına aktarılır.</p>
+<h3 id="0000-ao-0000-r">0000 AO 0000 R</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,NUMB</code></pre>
+<p>iget NUMB</p>
+<p>0003 EF MOV AH,O ;zero-extend 0005 DIV B ;divide by NU 0009 A2 MOV ;save guotie</p>
+<p>000C 88 2 MOV ANSR,AH ave remainder</p>
+<p>= Aşağıda signed bölme yapılıyor ve sign extent için CBW kullanilmaktadir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, NUMB
+cBW</code></pre>
+<h3 id="idiv-numb1">IDIV NUMB1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV ANSQ, AL
+MOV ANSR, AH</code></pre>
+<p>=. Carpma ve Bolme 16-bit bolme</p>
+<p>= 16-bit bölmede bölünen 32-bit sayı DX-AX register'ında bulunur ve 16-bit register veya hafizadaki bir değere bölünür.</p>
+<p>= AX register’ina bölüm sonucu, DX register’ina kalan saklanır.</p>
+<p>= 16-bit unsigned bölünen sayı için DX=0 yapılır (zero-extended) ve signed sayı için DX=sign(AX) yapılır (sign-extended).</p>
+<p>= CWD(convert word to doubleword) 16-bit sign extend yapar.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV cx DX-AX is divided by CX; the unsigned quotient is in AX and the</code></pre>
+<p>unsigned remainder is in DX</p>
+<p>ID SI DX-AX is divided by SI; the signed quotient is in AX and the signed remainder is in DX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV NUMB DX-AX is divided by the word contents of data segment memory</code></pre>
+<p>NUMB; the unsigned quotient is in AX and the unsigned remainder is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in DX</code></pre>
+<p>Çarpma ve Bölme 16-bit bölme - örnek</p>
+<p>= Aşağıda iki 16-bit signed sayının bölümü görülmektedir.</p>
+<p>= AX =-100, CX = +9 ve CWD komutu AX--100(16-bit) değerini DX-AX = -100(32-bit) yapar.</p>
+<p>= Bölme sonucunda AX=-11(bdliim) ve DX=-1(kalan) değerine sahiptir.</p>
+<p>0000 0003 0006 0007</p>
+<p>= Carpma ve Bolme 32-bit bolme</p>
+<p>= 80386-Pentium 4 islemcilerde isaretli veya isaretsiz sayilarda 32-bit bölme yapılır.</p>
+<p>= 64-bit bölünen EDX-EAX değeri operand’la belirlenen değere bölünür. EAX 32-bit bölüm sonucunu ve EDX kalanı tutar.</p>
+<p>= CDQ (convert doubleword to quadword) 32-bit EAX’i 64-bit EDX-EAX’e dönüştürür.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Div ECx EDX-EAX is divided by ECX; the unsigned quotient is in EAX and</code></pre>
+<p>the unsigned remainder is in EDX</p>
+<p>IDIV DATA4 EDX-EAX is divided by the doubleword contents in data segment</p>
+<p>memory location DATA4; the signed quotient is in EAX and the signed remainder is in EDX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV DWORD PTRIEDI) EDX-EAX is divided by the doubleword contents of the data</code></pre>
+<p>segment memory location addressed by EDİ; the unsigned quotient is in EAX and the unsigned remainder is in EDX</p>
+<p>= Carpma ve Bolme 32-bit bolme - ornek</p>
+<p>= Örnekte AX değeri BL’ye bölünür ve sonuç yuvarlanır (round).</p>
+<p>= ADDAH,AH ile kalan ikiyle çarpılır ve BL’den büyükse AL (bölüm sonucu) 1 artırılır.</p>
+<p>= 0.5 ten büyük değerler bir üst tamsayıya yuvarlanmış olur.</p>
+<p>oh Temel Mantık Komutları</p>
+<p>. , OR, XOR ve NOT temel mantık komutlarıdır.</p>
+<p>= TEST ve NEG komutları AND ile NOT komutlarının özel şeklidir.</p>
+<p>= Mantık komutlar bitlere set,clear ve complement işlemi yapar.</p>
+<p>= Mantık komutlar carry ve overflow bitlerini 0 yapar. Diğer FLAG bitleri işlem sonucuna göre değer alır.</p>
+<p>= Mantık komutları yazılımlarda bit seviyesinde kontrol gerçekleştirir.</p>
+<p>Temel Mantık Komutları br,</p>
+<p>= AND islemi mantıksal çarpma yapar. Memory-to-memory ve segment register adresleme yapilamaz. Asagidaki dogruluk tablosuna sahiptir.</p>
+<h3 id="a-bt">A BT</h3>
+<p>ololo altel : ji — i ole 8</p>
+<p>= AND islemi binary sayıda bir bit degerini U yapmak için kullanılır. (masking) XXXXx XXxXx Unknown number</p>
+<p>* 00001111 Mask</p>
+<p>Result</p>
+<h3 id="0000-bb-3135-mov-bx-31">0000 BB 3135 MOV BX,31</h3>
+<h3 id="0003-81-e3-nd-bx-0f">0003 81 E3 ND BX, 0F'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;load ASCII
+;mask BX</code></pre>
+<h3 id="of">OF</h3>
+<p>=. Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND - devam</code></pre>
+<p>= AND işlemleri aşağıdaki tabloda görülmektedir. Memory-to- register veya register-to-register veya immediate adresleme</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL,BL AL = AL and BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND CX,DX CX = CX and DX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ECX,EDI ECX = ECX and EDİ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND CL,33H CL - CL and 33H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND DI,4FFFH DI = DI and 4FFFH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ESİ,34H ESI = ESI and 34H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AX,[DI] The word contents of the data segment memory location addressed</code></pre>
+<p>by Dİ are ANDed with AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ARRAY[SI],AL The byte contents of the data segment memory location addressed</code></pre>
+<p>by ARRAY plus SI are ANDed with AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND [EAX],CL CL is ANDed with the byte contents of the data segment memory</code></pre>
+<p>location addressed by ECX</p>
+<p>Si Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR</code></pre>
+<p>= OR islemi mantıksal toplama yapar. Memory-to-memory ve segment</p>
+<p>register adresleme yapilamaz. Asagidaki dogruluk tablosuna sahiptir.</p>
+<h3 id="a-bt">A BT</h3>
+<h3 id="t-t">T T</h3>
+<p>ololo</p>
+<p>ola</p>
+<p>= OR islemi binary sayıda bir bit değerini 0 yapmak için kullanılır. (masking) XXXX XXXX Unknown number</p>
+<p>*00001111 Mask</p>
+<p>XXX Result</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR oOAX,3030H to ASCIT</code></pre>
+<p>= Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR - devam</code></pre>
+<p>= OR islemleri aşağıdaki tabloda görülmektedir. Memory-to-register veya register-to-register veya immediate adresleme yapılabilir.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL.BL AL = AL or BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR SI,DX SI = Sl or DX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR EAX,EBX EAX = EAX or EBX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DH,OA3H DH = DH or OA3H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR SP,990DH SP = SP or 990DH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR EBP10 EBP = EBP or 10</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DX,[BX] DX is ORed with the word contents of data segment memory location
+addressed by BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DATES[D1+2],AL The byte contents of the data segment memory location addressed</code></pre>
+<p>by DI plus 2 are ORed with AL</p>
+<p>= Temel Mantık Komutları Exclusive-OR (XOR)</p>
+<p>0000 81 0004 83 0007 81</p>
+<p>Exclusive-OR işleminde OR işleminden farklı olarak 1,1 girişleri için sonuç 1 değil 0 olur. Memory-to-memory ve segment register adresleme yapılamaz. Aşağıdaki doğruluk tablosuna sahiptir.</p>
+<h3 id="a-bt">A BT</h3>
+<p>olala</p>
+<p>e |</p>
+<p>lale</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR işlemi binary sayıda bir bit değerini O yapmak için kullanılır. (masking)</code></pre>
+<p>XXXX XXXxX Unknown number</p>
+<p>800001111 Mask</p>
+<h3 id="9-0600-or-ck">9 0600 OR CK</h3>
+<h3 id="1-fc-and-cx">1 FC AND CX</h3>
+<h3 id="1-1000-xor-cx">1 1000 XOR CX</h3>
+<p>= Temel Mantık Komutları XO levam</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR işlemleri aşağıdaki tabloda görülmektedir. Memory-to-register veya</code></pre>
+<p>register-to-register veya immediate adresleme yapılabilir.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR CH,DL CH = CH xor DL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR SI,BX SI = SI xor BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR EBX,ED! EBX = EBX xor EDİ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR AH,OEEH AH = AH xor OEEH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DI,OODDH DI = DI xor OODDH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR ESI, 100 ESI = ESI xor 100</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DX,(SI] DX is Exclusive-ORed with the word contents of the data segment</code></pre>
+<p>memory location addressed by SI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DEAL(BP+2],AH ‘AH is Exclusive-ORed with the byte contents of the stack segment</code></pre>
+<p>memory location addressed by BP plus 2</p>
+<p>Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test ve Bit Test Komutları</code></pre>
+<p>= Test komutu AND işlemi yapar. TEST komutu hedef operandi değiştirmez, AND değiştirir.</p>
+<p>= TEST işlemi FLAG bitlerini değiştirir ve CMP komutuna benzer şekilde çalışır. CMP bir byte veya word üzerinde işlem yapar TEXT bit üzerinde işlem yapar.</p>
+<p>= Eger test edilen bit 0 ise Z = 1 ve 1 ise Z = 0 olur. (Z -&gt; Zero</p>
+<p>Flag) Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST DL,DH DL is ANDed with DH
+TEST CX,BX CX is ANDed with BX
+TEST EDX,ECX EDX is ANDed with ECX
+TEST AH,4 AH is ANDed with 4
+TEST EAX,256 EAX is ANDed with 256</code></pre>
+<p>Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test ve Bit Test Komutları - devam</code></pre>
+<p>= Test komutundan hemen sonra genellikle JZ (Jump Zero) veya JNZ (Jump Not Zero) komutları kullanılır.</p>
+<p>= Hedef operand bir immediate değerle test edilebilir.</p>
+<p>Immediate değer 1 ise en sağdaki bit, 2 ise sağdan ikinci bit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>test edilir.</code></pre>
+<p>= Aşağıdaki örnekte önce AL nin en sağdaki biti ardından en soldaki biti test edilir. Sonuca göre RIGHT veya LEFT etiketlerinin olduğu kısma atlama yapılır.</p>
+<p>Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test ve Bit Test Komutları - devam</code></pre>
+<p>80386 ve üstü işlemciler bir bit testi için kullanılan komutlara sahiptir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test işleminin sunucu Carry Flag bitine aktarılır. BT AX,4</code></pre>
+<p>komutu AX register’inin 4.bitini test eder. 1 ise C=1, O ise C=0 yapılır.</p>
+<p>Diğer üç komut test işleminden hemen sonra değer değiştirir.</p>
+<p>Assembly Language Operation</p>
+<p>BT Tests a bit in the destination operand specified by the source operand</p>
+<p>BTC Tests and complements a bit in the destination operand specified by the source operand</p>
+<p>BTR Tests and resets a bit in the destination operand specified by the source operand</p>
+<p>BTS Tests and sets a bit in the destination operand specified by the source operand</p>
+<p>Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test ve Bit Test Komutları - devam</code></pre>
+<p>80386 ve üstü işlemciler bir bit testi için kullanılan komutlara sahiptir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Test işleminin sunucu Carry Flag bitine aktarılır. BT AX,4</code></pre>
+<p>komutu AX register’inin 4.bitini test eder. 1 ise C=1, 0 ise C-0 yapılır.</p>
+<p>Diğer üç komut test işleminden hemen sonra değer değiştirir.</p>
+<p>= Temel Mantık Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT ve NEG komutları</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT mantıksal tersleme veya 1 tümleyen (one's</code></pre>
+<p>complement), NEG aritmetik işaret tersleme veya 2 tümleyen (two’s complement) işlemi yapar.</p>
+<p>= NOT tümbitleri tersler, NEG işareti tersler. Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT CH CH is one’s complemented</code></pre>
+<p>NEG CH CH is two's complemented NEG AX AX is two's complemented</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT EBX EBX is one’s complemented</code></pre>
+<p>NEG ECX ECX is two's complemented</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT TEMP: The contents of data segment memory location TEMP are one’s
+complemented
+NOT BYTE PTRJBXJ The byte contents of the data segment memory location addressed</code></pre>
+<p>by BX are one’s complemented</p>
+<h3 id="s">S</h3>
+<p>SHIFT ve ROTATE Komutları a</p>
+<p>SHIFT komutu bir register veya hafıza içeriğini sağa veya sola kaydırma işlemi yapar. 2 nin katları şeklinde çarpma (sola kaydırma) veya bölme (sağa kaydırma) yapar.</p>
+<p>Mantıksal kaydırmada taşan biti atılır. İşaretsiz sayılarda kullanılır.</p>
+<p>Aritmetik kaydırmada değerin işaret biti sabit tutulur. İşaretli sayılarda kullanılır.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL AX,1 AX is logically shifted left 1 place
+SHR BX,12 BX is logically shifted right 12 places
+SHR ECX,10 ECX is logically shifted right 10 places
+SAL DATA1,CL The contents of data segment memory location DATA are</code></pre>
+<p>arithmetically shifted left the number of spaces specified by CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR S2 SI is arithmeticaliy shifted right 2 places
+SAR EDX,14 EDX is arithmetically shifted right 14 places</code></pre>
+<p>« SHLve SHR mantıksal | swf</p>
+<p>kaydırma yapar. = SAL ve SAL aritmetik 8,</p>
+<p>kaydırma yapar. sa []}—{_-=———_</p>
+<p>= SHIFT ve ROTATE Komutları SHI örnek</p>
+<p>«İlk işlemcilerde kaydırma ile yapılan çarpma MUL komutundan daha hızlı çalışır.</p>
+<p>SHIFT ve ROTATE Komutları ğe</p>
+<p>= ROTATE komutları register veya hafizadaki bir alanın carry flag kullanılarak kaydırılması için kullanılır.</p>
+<p>= Büyük boyuttaki sayıların kaydırılması için kullanılır.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL SI,14 SI rotates left 14 places</code></pre>
+<p>RCLBL,6 BL rotates left through carry 6 places</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL ECX,18 ECX rotates left 18 places
+RCR AH,CL ‘AH rotates right through carry the number of places specified by CL
+ROR WORD PTRIBP],2 O The word contents of the stack segment memory location addressed</code></pre>
+<p>by BP rotate right 2 places</p>
+<p>= Aşağıdaki örnekte 48-bit DX,BX,AX sayısı sola kaydırılmıştır.</p>
+<h3 id="0000-di-eo-sal-ax-1">0000 DI EO SAL AX,1</h3>
+<h3 id="0002-di-d3-rcl">0002 DI D3 RCL</h3>
+<h3 id="0004-di-d2-rcl">0004 DI D2 RCL</h3>
+<p>=. SHIFT ve ROTATE Komutları RO Target register or memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL Ak Pra</code></pre>
+<h3 id=""></h3>
+<p>= Of</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR</code></pre>
+<h3 id="c">C</h3>
+<p>+ String Karşılaştırma Komutları</p>
+<p>. ok data işlemleri MOVS, LODS, STOS, INS ve OUTS komutlarıyla yapılmaktadır.</p>
+<p>= Hafizadaki bir bloğun sabit bir değerle veya başka bir hafıza bloğuyla karşılaştırılması için SCAS (Scan String) ve CMPS (Compare String) komutları kullanılır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SCAS</code></pre>
+<p>= SCAS komutu AL register’ini hafizadaki bir byte blokla, AX register'ını bir word blokla veya EAX registerini bir doubleword blokla karşılaştırır.</p>
+<p>= SCAS komutu hafızadaki bloğu AL, AX veya EAX register’ larindan çıkartır.</p>
+<p>= Byte karşılaştırması için SCASB, word için SCASW ve doubleword için SCASD komutu kullanılır.</p>
+<p>= Hafizada karşılaştırılan DI offset adresine sahip blok extra segment içerisindedir.</p>
+<p>a String Karşılaştırma Komutları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SCAS - devam</code></pre>
+<p>= BLOCK isimli 100 byte’lk bir hafıza bloğu olsun. Bu blok içerisinde 00H olup olmadığı aşağıdaki örnekte test edilmektedir.</p>
+<p>= REPNE (Repeat While Not Equal) ve REPE (Repeat While Equal) deyimleri CX=0 oluncaya kadar veya karsilastirma sonucu esit oluncaya (REPNE)/esit olmayincaya (REPE) kadar döngüyü tekrarlar.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLD pauto</code></pre>
+<p>to-inerement lo. cou ace</p>
+<p>Sh String Karşılaştırma Komutları</p>
+<h3 id="cmps">CMPS</h3>
+<p>CMPS komutu hafizaki iki bloğu byte (CMPSB), word (CMPSW) veya doubleword (CMPSD) olarak karşılaştırır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Data segment içerisinde SI ile belirtilen alan extra segment</code></pre>
+<p>içerisinde DI ile belirtilen alanla karşılaştırılır.</p>
+<p>CMPS, DI ve SI register’larim otomatik artırır veya azaltır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REPE, REPNE, REPZ (Repeat While Zero), REPNZ (Repeat</code></pre>
+<p>While Not Zero) ön belirteçlerle(prefix) kullanılır.</p>
+<p>Aşağıdaki örnekte 10 byte’lik bir blok karşılatırılır. CX&gt;0 olduğu sürece veya eşitlik olduğu sürece döngü devam eder.</p>
+<p>MO SI,OFFSE dr</p>
+<p>= Ödev</p>
+<p>100 elemanlı bir dizinin her bir elemanının yerine kendisi ve kendisinden önceki sayıların toplamını hesaplayıp kaydeden bir program yazınız.</p>
+<p>Sayıların içinde en büyük sayı BX register'ına ve en küçük sayı DX register'ına kaydedilecektir.</p>
+<p>Program sayıların aritmetik ortalamasını hesaplayıp AX register'ına saklayacaktır.</p>
+<figure class="yazi-gorsel"><img src="sekil-650-05.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="CPUL6ArithmeticLogic: sayfa 5, devre, tablo ve şekiller"><figcaption>CPUL6ArithmeticLogic, sayfa 5.</figcaption></figure>
+<h2 id="cpul7control">CPUL7Control</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular Program Kontrol Komutları</p>
+<ul><li>Şartsız Atlama</li></ul>
+<ul><li>Şartlı Atlama</li></ul>
+<ul><li>Döngüler (Loop)</li></ul>
+<ul><li>Assembly Programı Akış Denetimi</li></ul>
+<ul><li>While Döngüleri</li></ul>
+<ul><li>Repeat-Until Döngüleri</li></ul>
+<ul><li>Prosedürler</li></ul>
+<ul><li>Kesmelere (Interrupts) Giriş</li></ul>
+<ul><li>Diğer Komutlar</li></ul>
+<p>Şartsız Atlama</p>
+<ul><li>Kontrol komutları programın bir kısmına atlamayı sağlar.</li></ul>
+<ul><li>Kontrol komutları bayrak bitlerinin durumuna göre şartlı</li></ul>
+<p>atlamayı gerçekleştir.</p>
+<ul><li>Short jump, near jump ve far jump olmak üzere 3 tür şartsız</li></ul>
+<p>atlama komutu kullanılabilir.</p>
+<p>Şartsız Atlama</p>
+<ul><li>Short jump komutu 2 byte uzunluğundadır ve bulunulan yere göre</li></ul>
+<p>+127 ve -128 adres aralığına atlama yapar.</p>
+<ul><li>Near jump 3 byte uzunluğundadır ve bulunulan segment içerisinde</li></ul>
+<p>±32K aralığına atlama yapar.</p>
+<ul><li>Far jump 5 byte uzunluğundadır ve hafızada herhangi bir alana</li></ul>
+<p>atlamayı gerçekleştirir.</p>
+<ul><li>Short ve near jump intrasegment, far jump intersegment atlama</li></ul>
+<p>yapar.</p>
+<p>Şartsız Atlama Short jump</p>
+<ul><li>Bulunulan segment içerisinde göreceli atlama yapar.</li></ul>
+<ul><li>Opcode içinde atlanacak adres yerine bulunulan yere uzaklık verilir.</li></ul>
+<ul><li>JMP SHORT NEXT şeklinde kullanılır. NEXT atlanacak yerdir.</li></ul>
+<h3 id="0009h-0017h-0020h">0009H + 0017H = 0020H</h3>
+<p>Şartsız Atlama Near jump</p>
+<ul><li>Near jump, short jump gibi aynı segment içerisinde atlama yapar</li></ul>
+<p>ancak short jump’a göre daha uzun aralığa atlar.</p>
+<ul><li>Bulunulan segment içerisinde ±32K aralığına atlama yapar. 80386 ve</li></ul>
+<p>üstü işlemcilerde protected mode’da ±2G aralığına atlama yapar.</p>
+<p>Şartsız Atlama Far jump</p>
+<ul><li>Far jump yeni bir segment ve offset adres alır ve doğrudan istenen</li></ul>
+<p>adrese atlar.</p>
+<ul><li>Far jump FAR PTR komutuyla veya far label etiketiyle belirtilir.</li></ul>
+<p>Şartlı Atlama</p>
+<ul><li>Şartlı atlama komutları 8086-80286 işlemcilerde short jump yapar.</li></ul>
+<p>Şartlı Atlama</p>
+<ul><li>+127 ile -128 arasında atlama yapar. MASM v.6X assembler uzaklığı</li></ul>
+<p>otomatik ayarlar.</p>
+<ul><li>Şartlı atlama komutları S, Z, C, P ve O bayrak bitlerini kontrol eder.</li></ul>
+<ul><li>Test edilen şart doğru (true, 1) ise etiketle belirtilen yere atlanır,</li></ul>
+<p>yanlış (false, 0) ise sonraki adım çalıştırılır.</p>
+<ul><li>Karşılaştırma işlemi signed (işaretli) ve unsigned (işaretsiz) sayılarda</li></ul>
+<p>farklı sonuçlar oluşturur.</p>
+<ul><li>İşaretsiz sayılarda FFH (255)</li></ul>
+<p>sayısı 00H (0) sayısından büyüktür.</p>
+<ul><li>İşaretli sayılarda FFH (-1)</li></ul>
+<p>sayısı 00H (0) sayısından küçüktür.</p>
+<p>Şartlı Atlama</p>
+<ul><li>İşaretli sayılarda karşılaştırma için JG, JL, JGE, JLE, JE ve JNE</li></ul>
+<p>komutları kullanılır.</p>
+<ul><li>İşaretsiz sayılarda karşılaştırma için JA, JB, JAE, JBE, JE ve JNE</li></ul>
+<p>komutları kullanılır.</p>
+<ul><li>Diğer şartlı atlama komutları bayrak bitlerini test eder.</li></ul>
+<ul><li>JCXZ ve JECXZ komutları CX ve ECX register’larını test eder ve 0 ise</li></ul>
+<p>istenen yere atlama yapar.</p>
+<ul><li>Aşağıdaki örnekte 100 byte alan içinde 0AH değerini arar.</li></ul>
+<p>Döngüler (Loop)</p>
+<ul><li>LOOP komutu CX azaltma ve JNZ şartlı atlama komutlarının</li></ul>
+<p>birleşimidir.</p>
+<ul><li>Her adımda CX register’ı 1 azaltılır ve CX değeri test edilir.</li></ul>
+<ul><li>8086-80286 işlemcilerde CX azaltılır ve CX&lt;&gt;0 olduğu sürece</li></ul>
+<p>belirtilen etikete atlanır. CX=0 ise sonraki adıma geçilir.</p>
+<ul><li>80386 ve üstü işlemcilerde CX veya ECX kullanılır. LOOPW</li></ul>
+<p>komutu CX, LOOPD komutu ECX register’ını kullanır. Şartlı LOOP</p>
+<ul><li>LOOPE (Loop while equal) ve LOOPNE (Loop while not equal)</li></ul>
+<p>komutları CX&lt;&gt;0 ve verilen şart geçerli olduğu sürece döngüyü tekrarlar.</p>
+<ul><li>80386 ve üstü işlemcilerde CX veya ECX kullanılabilir.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOPEW/LOOPNEW ve LOOPED/LOOPNED komutları CX ve ECX</code></pre>
+<p>register’larını kullanır.</p>
+<p>Döngüler (Loop)</p>
+<ul><li>Örnekte BLOCK1 de word boyutundaki data BLOCK2 ye eklenir.</li></ul>
+<p>Assembly Programı Akış Denetimi</p>
+<ul><li>MASM 6.X assembler .IF,</li></ul>
+<h3 id="else-elseif-endif">.ELSE, .ELSEIF, .ENDIF,</h3>
+<h3 id="repeat-until-while">.REPEAT, .UNTIL, .WHILE</h3>
+<p>ve .ENDW gibi komutları sağlar.</p>
+<ul><li>Yandaki örnekte .IF ve</li></ul>
+<p>.ENDIF ile yapılan işlemin assembly komutlarıyla gerçekleştirilmesi görülmektedir.</p>
+<p>Assembly Programı Akış Denetimi</p>
+<ul><li>Aşağıda .IF komutuyla kullanılabilecek ilişkisel operatörler</li></ul>
+<p>görülmektedir.</p>
+<p>Örnek</p>
+<p>Assembler üretir</p>
+<p>While Döngüleri</p>
+<ul><li>Yüksek seviyeli dillerde olduğu gibi MASM 6.X WHILE döngü</li></ul>
+<p>yapısı içermektedir.</p>
+<ul><li>.WHILE deyimi şart kısmını, .ENDW ise döngü bitişini gösterir.</li></ul>
+<ul><li>.WHILE deyimindeki şart kısmı doğru olduğu sürece döngü</li></ul>
+<p>tekrarlanır. Her döngüde şart tekrar kontrol edilir.</p>
+<ul><li>Şart doğru olmadığında .ENDW deyiminden sonraki adıma</li></ul>
+<p>geçilir.</p>
+<ul><li>Sonraki sayfadaki örnekte klavyeden 0DH (Enter) girilene</li></ul>
+<p>kadar tüm girişler ekstra segment içerisinde BUF adlı diziye kaydedilir.</p>
+<ul><li>While döngülerinde .BREAK ve .CONTINUE deyimleri kullanılır.</li></ul>
+<ul><li>.BREAK .IF AL == 0DH komutu AL==0 ise döngüden çıkış yapar.</li></ul>
+<ul><li>.CONTINUE .IF AL==15 komutu AL==15 ise döngü sonuna</li></ul>
+<p>kadarki kısmı atlar ve sonraki döngüye devam eder.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Repeat-Until Döngüleri</code></pre>
+<ul><li>Yüksek seviyeli dillerde olduğu gibi MASM 6.X REPEAT-UNTIL</li></ul>
+<p>döngü yapısı içermektedir.</p>
+<ul><li>.UNTIL deyimi şart kısmını, .REPEAT ise döngü başlangıcını</li></ul>
+<p>gösterir.</p>
+<ul><li>Döngü içindeki deyimler şart kısmı doğru olduğu sürece</li></ul>
+<p>tekrarlanır. Her döngüde şart tekrar kontrol edilir.</p>
+<ul><li>Şart doğru olmadığında .UNTIL deyiminden sonraki adıma</li></ul>
+<p>geçilir.</p>
+<ul><li>Sonraki sayfadaki örnekte klavyeden 0DH (Enter) girilene</li></ul>
+<p>kadar tüm girişler ekstra segment içerisinde BUF adlı diziye kaydedilir.</p>
+<ul><li>Repeat döngülerinde .UNTILCXZ deyimi kullanılır ve her</li></ul>
+<p>döngüde CX register’ını bir azaltarak kontrol eder.</p>
+<h3 id="ds">DS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Repeat-Until Döngüleri</code></pre>
+<ul><li>Aşağıdaki örnekte CX register’ı her döngüde bir azaltılarak</li></ul>
+<p>kontrol edilir.</p>
+<ul><li>CX &lt;&gt; 0 olduğu sürece döngü tekrarlanır.</li></ul>
+<p>Prosedürler</p>
+<ul><li>Prosedürler programların yeniden kullanılabilir olan ve</li></ul>
+<p>genellikle sadece bir fonksiyonu gerçekleştiren kısımlarıdır.</p>
+<ul><li>CALL komutu bir prosedüre geçiş için, RET komutu ise geri</li></ul>
+<p>dönüş için kullanılır.</p>
+<ul><li>Bir prosedür çağrıldığında stack geri dönüş adresini saklar.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL komutu stack’a bir sonraki adresi (return) push eder.</code></pre>
+<ul><li>RET komutu stack’tan bir adresi geri dönüş adresi olarak alır.</li></ul>
+<ul><li>Bir prosedür PROC deyimiyle başlar ve ENDP ile biter. Her</li></ul>
+<p>ikisinden önce prosedürün adı belirtilir.</p>
+<ul><li>PROC deyiminden sonra NEAR (intrasegment) ve FAR</li></ul>
+<p>(intersegment) olarak tür belirtilir.</p>
+<ul><li>NEAR ve FAR deyimlerinden sonra USE deyimiyle hangi</li></ul>
+<p>register’ların kullanılacağı belirtilebilir. Belirtilen register’lar stack’a otomatik olarak push ve pop edilir.</p>
+<p>Prosedürler Örnek</p>
+<p>Prosedürler</p>
+<ul><li>Near return komutu stack’tan 16-bit değer alır ve IP’ye dönüş</li></ul>
+<p>adresi olarak atar.</p>
+<ul><li>Far return komutu stack’tan 32-bit değer alır ve IP ile CS’ye</li></ul>
+<p>dönüş adresi olarak atar.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL</code></pre>
+<ul><li>CALL komutu adı verilen prosedürü çağırır ve dönüş adresini</li></ul>
+<p>stack’a saklar.</p>
+<ul><li>Near CALL komutu 3 byte boyutundadır. İlk byte opcode,</li></ul>
+<p>ikinci ve üçüncü byte dönüş adresidir (±32K).</p>
+<ul><li>80386 ve üstü işlemcilerde protected mode’da dönüş adresi 4</li></ul>
+<p>byte (±2G) olur.</p>
+<ul><li>Far CALL komutu 5 byte boyutundadır. İlk byte opcode, 2-3 IP</li></ul>
+<p>ve 4-5 CS’ nin yeni değeridir.</p>
+<ul><li>CALL komutu IP ve CS değerlerini stack’a push eder.</li></ul>
+<p>Prosedürler</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL - örnek</code></pre>
+<p>Prosedürler</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL – register ile çağırma</code></pre>
+<ul><li>CALL komutları register operand kullanabilir (CALL BX).</li></ul>
+<ul><li>IP stack’a push edilir ve aynı segmentte BX offset adresine geçilir.</li></ul>
+<ul><li>Aşağıdaki örnekte CALL BX ile DISP prosedürü çağırılmaktadır.</li></ul>
+<ul><li>Aynı işlem CALL DISP şeklinde yapılabilir.</li></ul>
+<p>Prosedürler</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL – dolaylı hafıza adresiyle çağırma</code></pre>
+<ul><li>CALL komutları indirect adres kullanabilir (CALL [BX]).</li></ul>
+<ul><li>Genellikle bir lookup tablodan seçilen farklı prosedürlerin kullanımında</li></ul>
+<p>faydalıdır.</p>
+<ul><li>Aşağıdaki örnekte EBX değerine göre ZERO, ONE veya TWO prosedürlerine</li></ul>
+<p>geçiş yapılır.</p>
+<ul><li>CALL FAR PTR [4*EBX] komutu far çağırma yapar veya eğer tablo</li></ul>
+<p>doubleword tanımlı ise (DD) CALL TABLE[4*EBX] komutu far çağırma yapar.</p>
+<p>Prosedürler</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<ul><li>RET komutu near return için 16-bit sayıyı stack’tan alır ve IP’ye atar. Far</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return için 32-bit sayıyı stack’tan alır ve IP ve CS’ye atar.</code></pre>
+<ul><li>Aşağıdaki örnekte SS=A000 ve CS=1000 değerine sahiptir. CALL işleminden</li></ul>
+<p>önce SP=FFFF ve IP=0003 değerindedir.</p>
+<ul><li>CALL’dan sonra SP=FFFD, IP=0FFF.</li></ul>
+<ul><li>RET işleminden sonra SP=FFFF,</li></ul>
+<p>IP=0003 ve Efektif adres=11003 olur.</p>
+<p>Prosedürler</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<ul><li>RET komutu dönüş adresini stack’tan sildikten sonra SP değerine belirli bir</li></ul>
+<p>değer ekleyebilir. Böylece, prosedür çağrıldığında stack’a push edilen parametreler kadar değer eklenerek bu parametrelerin atılması sağlanır.</p>
+<ul><li>Örnekte AX ve BX (4 byte) prosedür çağrılmadan önce stack’a push</li></ul>
+<p>ediliyor. RET 4 ile dönüş adresinden sonra SP’e 4 ekleyerek AX,BX’i atar.</p>
+<p>Ödev</p>
+<ul><li>Hafızada bir alanda bulunan ve herbirisi word boyutunda olan 100 adet</li></ul>
+<p>sayıyı küçükten büyüğe doğru sıralanmış olarak hafızadaki ikinci bir diziye aktaran program yazınız.</p>
+<ul><li>İstenen sıralama algoritması kullanılabilir.</li></ul>
+<ul><li>Program emu8086 ile yazılacaktır.</li></ul>
+<ul><li>Ödevin hem çıktısı teslim edilecek hemde kaynak kodu</li></ul>
+<p>akcayol@gazi.edu.tr adresine e-posta ile gönderilecektir.</p>
+<figure class="yazi-gorsel"><img src="sekil-651-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL7Control: sayfa 6, devre, tablo ve şekiller"><figcaption>CPUL7Control, sayfa 6.</figcaption></figure>
+<h2 id="cpul8programming">CPUL8Programming</h2>
+<p>BIL 362 Mikroişlemciler</p>
+<p>M.Ali Akcayol Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+<p>Konular Mikroişlemci Programlama</p>
+<ul><li>Makrolar</li></ul>
+<ul><li>BIOS ve DOS Fonksiyonları</li></ul>
+<ul><li>Klavye Kullanımı</li></ul>
+<ul><li>Klavyeden bir karakter alma</li></ul>
+<ul><li>Klavyeden bir string alma</li></ul>
+<ul><li>Ekran Fonksiyonları</li></ul>
+<ul><li>Ekrana bir karakter yazma</li></ul>
+<ul><li>Ekrana bir string yazma</li></ul>
+<ul><li>Ekran ayarları</li></ul>
+<ul><li>Mouse Kullanımı</li></ul>
+<p>Makrolar</p>
+<ul><li>Makrolar prosedürler gibi bir işi yapmak için kullanılırlar.</li></ul>
+<ul><li>Prosedürler call ile çağrılır makrolar sadece ismi yazılarak</li></ul>
+<p>çağrılır.</p>
+<ul><li>Prosedürler programın sonunda bulunur, makrolar kullanıldığı</li></ul>
+<p>yerden önce bulunur.</p>
+<ul><li>Bir makro MACRO deyimiyle ENDM deyimi arasındaki</li></ul>
+<p>komutlardan oluşur.</p>
+<ul><li>Prosedürlerde olduğu gibi MACRO deyiminden önce bir isim</li></ul>
+<p>girilmelidir.</p>
+<ul><li>MACRO deyiminden sonra dışarıdan giriş yapmak için</li></ul>
+<p>parametreler tanımlanabilir.</p>
+<p>Makrolar - Örnek</p>
+<p>BIOS ve DOS Fonksiyonları</p>
+<ul><li>INT komutuyla bazı özel işlemler için gerekli BIOS ve DOS</li></ul>
+<p>fonksiyonları kullanılabilir.</p>
+<ul><li>INT komutu çalıştırıldığında önce CS:IP ve flag değerlerini</li></ul>
+<p>stack’a push eder.</p>
+<ul><li>Bir interrupt çalıştırılmadan önce kullanacağı register’lara</li></ul>
+<p>ilgili değerlerin aktarılması gerekir.</p>
+<ul><li>Her bir interrupt için çok sayıda alt fonksiyon tanımlıdır.</li></ul>
+<p>Hangi fonksiyonun çalışacağı AH register’ının değerine göre belirlenir.</p>
+<p>Klavye Kullanımı Ekrana yazdırarak (echo) bir karakter okuma</p>
+<ul><li>INT 21H / AH=01h alt fonksiyonuyla kullanılır.</li></ul>
+<ul><li>Okunan karakter AL register’ına kaydedilir.</li></ul>
+<p>Klavye Kullanımı Ekrana yazmadan bir karakter okuma</p>
+<ul><li>INT 21H / AH=06h alt fonksiyonuyla kullanılır. Okuma işlemi için dl</li></ul>
+<p>register’ına 0FFh değeri aktarılır.</p>
+<ul><li>Okunan karakter AL register’ına kaydedilir. Ancak ekranda</li></ul>
+<p>gösterilmez. AH=1 deki gibi beklenmez işlemci bekleme sırasında başka iş yapabilir.</p>
+<p>Klavye Kullanımı Ekrana yazmadan bir karakter okuma - devam</p>
+<p>Klavye Kullanımı Klavyeden string okuma</p>
+<ul><li>INT 21H / AH=0Ah alt fonksiyonuyla kullanılır. Okunan string en çok</li></ul>
+<p>255 karakter olabilir.</p>
+<ul><li>Enter yapılana kadar veya 255 karakter olana kadar alınan string’i</li></ul>
+<p>DS:DX adresine kaydeder. Ilk byte buffer boyutunu ikinci byte girilen karakter sayısını saklar.</p>
+<p>Klavye Kullanımı Klavyede bir tuşa basıldığını kontrol etmek</p>
+<ul><li>INT 16H / AH=01h alt fonksiyonuyla bir tuşa basıldığında buffer’a</li></ul>
+<p>alınır.</p>
+<ul><li>INT 16H / AH=00h alt fonksiyonuyla buffer’daki karakter AL’ye</li></ul>
+<p>alınır.</p>
+<p>Ekran Fonksiyonları Ekrana bir karakter yazdırma</p>
+<ul><li>INT 21H / AH=02h alt fonksiyonuyla kullanılır. Yazılacak karakter DL</li></ul>
+<p>register’ındadır.</p>
+<p>Ekran Fonksiyonları Ekrana string yazdırma</p>
+<ul><li>INT 21H / AH=09h alt fonksiyonuyla kullanılır.</li></ul>
+<ul><li>Yazılacak string’in offset adresi dx register’ındadır.</li></ul>
+<ul><li>String sonunun $ ile bitirilmesi gerekir.</li></ul>
+<p>Ekran Fonksiyonları Ekran ayarları – ekran boyutu değiştirme</p>
+<ul><li>INT 10H / AH=00h alt fonksiyonuyla kullanılır.</li></ul>
+<ul><li>İstenen ekran boyutu AL register’ındadır.</li></ul>
+<p>AL = 00h için, boyut=40x25, renk=16 renk, sayfa sayısı=8 sayfa. AL = 03h için, boyut=80x25, renk=16 renk, sayfa sayısı=8 sayfa. AL = 13h için, boyut=40x25, renk=256 renk, 320x200 piksel, 1 sayfa.</p>
+<p>Ekran Fonksiyonları Ekran ayarları – imleç (cursor) yeri</p>
+<ul><li>INT 10H / AH=02h alt fonksiyonuyla cursor pozisyonu girilir.</li></ul>
+<ul><li>INT 10H / AH=03h alt fonksiyonuyla cursor pozisyonu okunur.</li></ul>
+<ul><li>Her ikisinde de DH=satır, DL=sütun ve BH=sayfa sayısı.</li></ul>
+<p>Ekran Fonksiyonları Ekran ayarları – imleç renk özelliği</p>
+<ul><li>INT 10H / AH=09h alt fonksiyonuyla cursor özelliği girilir.</li></ul>
+<ul><li>AL=karakter, BL=renk, CX=yazma adedi ve BH=sayfa sayısı.</li></ul>
+<p>Mouse Kullanımı Mouse başlatma</p>
+<ul><li>INT 33H / AX=0000h alt fonksiyonuyla mouse başlatılır.</li></ul>
+<ul><li>Başarılı olursa AX=0FFFFH olur ve BX buton sayısını gösterir.</li></ul>
+<ul><li>Başarısız olursa AX=0 gösterir.</li></ul>
+<p>Mouse Kullanımı Mouse pointer gösterme</p>
+<ul><li>INT 33H / AX=0001h alt fonksiyonuyla mouse pointer</li></ul>
+<p>görüntülenir.</p>
+<p>Mouse pointer gizleme</p>
+<ul><li>INT 33H / AX=0002h alt fonksiyonuyla mouse pointer gizlenir.</li></ul>
+<p>Mouse Kullanımı Mouse butonları ve pozisyonu algılama</p>
+<ul><li>INT 33H / AX=0003h alt fonksiyonuyla mouse butonları ve</li></ul>
+<p>pozisyonu bilgilerine ulaşılır.</p>
+<ul><li>Sol butona basıldıysa BX=1, sağ butona basıldıysa BX=2, ikisine</li></ul>
+<p>birden basıldıysa BX=3 olur.</p>
+<ul><li>CX register’ı x pozisyonunu, DX register’ı y pozisyonunu</li></ul>
+<p>gösterir.</p>
+<ul><li>Scrool butonu için BX=4 olur.</li></ul>
+<ul><li>Scrool butonuyla sol ve sağ butona basıldığında sırasıyla BX=5</li></ul>
+<p>ve BX=6 olur.</p>
+<p>Ödev</p>
+<ul><li>Hafızada bulunan 5000 byte (karakter) blok içerisinde dışarıdan girilen bir</li></ul>
+<p>string’i (boyutu değişebilir – enter’a basana kadar) arayan program yazınız.</p>
+<ul><li>String bulunursa ilk karakterinin sıra numarasını ekrana yazacak,</li></ul>
+<p>bulunamazsa kullanıcıya mesaj verecektir.</p>
+<ul><li>Arama işlemi için SCAS komutu kullanılmayacaktır. Karakter bazında</li></ul>
+<p>kontrollerle arama işlemi yapılacaktır.</p>
+<ul><li>Boyer-Moore arama algoritması kullanılacaktır.</li></ul>
+<ul><li>Program emu8086 ile yazılacaktır.</li></ul>
+<ul><li>Ödevin çıktısı teslim edilecek ve kaynak kodu akcayol@gazi.edu.tr adresine</li></ul>
+<p>e-posta ile gönderilecektir.</p>
+<figure class="yazi-gorsel"><img src="sekil-652-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL8Programming: sayfa 3, devre, tablo ve şekiller"><figcaption>CPUL8Programming, sayfa 3.</figcaption></figure>
+<p><em>Not: Aritmetik ve mantık sunumunun metin katmanı bozuk olduğundan bu bölüm görsellerden OCR ile aktarılmıştır. Üstbilgideki “CHOROCHRONOS Midter Review / Timos Sellis” ibaresi şablondan kalmıştır; kapakta M. Ali Akcayol ve Gazi Üniversitesi yazmaktadır.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-gazi-komutlar.zip" download>eem332-gazi-komutlar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 7.0 MB · 10.11.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-gazi-komutlar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

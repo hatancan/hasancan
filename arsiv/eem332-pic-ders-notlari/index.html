@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: PIC16F84 Notları ve Uygulamaları (Başkent Üniversitesi ve Ozan Akı) — hasancan.net</title>
+<meta name="description" content="PIC16F84 portları, bellek bankaları, bit testleri, gecikme döngüleri ve LED uygulamaları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-pic-ders-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: PIC16F84 Notları ve Uygulamaları (Başkent Üniversitesi ve Ozan Akı)">
+<meta property="og:description" content="PIC16F84 portları, bellek bankaları, bit testleri, gecikme döngüleri ve LED uygulamaları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-pic-ders-notlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: PIC16F84 Notları ve Uygulamaları (Başkent Üniversitesi ve Ozan Akı)", "description": "PIC16F84 portları, bellek bankaları, bit testleri, gecikme döngüleri ve LED uygulamaları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-pic-ders-notlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-pic-ders-notlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-pic-ders-notlari/eem332-pic-ders-notlari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: PIC16F84 Notları ve Uygulamaları (Başkent Üniversitesi ve Ozan Akı)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.05.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#pic">PIC</a></li><li><a href="#pic-sunum1-2013-uyumluluk-modu">pic_Sunum1_2013 [Uyumluluk Modu]</a></li><li><a href="#pic-sunum2-2013-uyumluluk-modu">Pic_sunum2_2013 [Uyumluluk Modu]</a></li><li><a href="#pic-application">pic_application</a></li><li><a href="#pic-examples">pic_examples</a></li><li><a href="#pic-asm-komutlari2">pic-asm-komutlari2</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: PIC16F84 Notları ve Uygulamaları (Başkent Üniversitesi ve Ozan Akı)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 15.05.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2006–2015). PIC16F84 portları, bellek bankaları, bit testleri, gecikme döngüleri ve LED uygulamaları. Kaynak: Başkent Üniversitesi ders sunumları ve Trakya Üniversitesi İpsala MYO, Ozan Akı, PIC Assembly komutları (9 Ocak 2009). Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="pic">PIC</h2>
+<p>Microchip PIC Mikrodenetleyicileri EEM 332 Mikroişlemciler</p>
+<p>PIC Nedir?</p>
+<ul><li>PIC:Peripheral Interface Controller</li></ul>
+<ul><li>Çevresel Arayüz Birimi Denetleyicisi</li></ul>
+<ul><li>Amacı: Çok fonksiyonlu logic uygulamalarının</li></ul>
+<p>hızlı ve ucuz bir mikroişlemci ile yazılım yoluyla karşılanmasıdır</p>
+<ul><li>İlk PIC: PIC16C54 (1994)</li></ul>
+<ul><li>En Popüler PIC: PIC16F(C)84</li></ul>
+<p>Neden PIC?</p>
+<p>Neden PIC?</p>
+<ul><li>Lojik uygulamalarının hızlı olması</li></ul>
+<ul><li>Fiyatının oldukça ucuz olması</li></ul>
+<ul><li>8 bitlik mikrodenetleyici olması, bellek ve veri için ayrı</li></ul>
+<p>yerleşik bus’ ların kullanılması</p>
+<ul><li>Veri ve belleğe hızlı olarak erişimin sağlanması</li></ul>
+<ul><li>PIC’e göre diğer mikrodenetleyicilerde veri ve programı</li></ul>
+<p>taşıyan bir tek bus bulunması, dolayısıyla PIC’ in bu özelliği ile diğer mikrodenetleyicilerden iki kat daha hızlı olması</p>
+<ul><li>Yüksek frekanslarda çalışabilme özelliği</li></ul>
+<ul><li>Standby durumunda çok düşük akım çekmesi</li></ul>
+<ul><li>Azaltılmış kod yapısı (RISC yapısı) ile işlemleri daha</li></ul>
+<p>hızlı gerçekleştirebilmesi</p>
+<p>Neden PIC?</p>
+<ul><li>Herhangi bir ek bellek veya giriş/çıkış</li></ul>
+<p>elemanı gerektirmeden sadece 2 kondansatör, bir kristal ve bir direnç ile çalışabilmeleri</p>
+<ul><li>Program belleğinin Eeprom olması</li></ul>
+<ul><li>Seri olarak dört adet kabloyla bulunduğu</li></ul>
+<p>devreden sökülmeden programlanabilmesi</p>
+<p>RISC Programlama</p>
+<ul><li>RISC: reduced instruction set computer</li></ul>
+<ul><li>Avantajları:</li></ul>
+<p>Komutlar daha hızlı çalıştırılır RISC tabanlı çipler daha az transistor’e ihtiyac duyar. Tasarlanması kolay ve maliyeti ucuzdur.</p>
+<p>Komutlar - I</p>
+<ul><li>Assembly dili ile PIC’e istediklerinizi yaptırmak</li></ul>
+<p>için 35 komut öğrenmek yeterlidir</p>
+<ul><li>Yazılım Pascal, C/C++, Basic, Assembler ve</li></ul>
+<p>hatta Binary olarak yazılabilir</p>
+<ul><li>Her komut 14 bit uzunluğundadır ve istisnai bir</li></ul>
+<p>kaç komut dışında (CALL, GOTO ve bit test eden BTFSS, INCFSZ gibi) her komut tek çevrimde çalışır</p>
+<p>Komutlar - II</p>
+<p>Komutlar - III</p>
+<p>Accumulator</p>
+<ul><li>8086’daki kullanılan yazmaçlar</li></ul>
+<p>(AX,BX,CX,DX) yerine PIC yalnızca W Yazmacı’nı kullanır</p>
+<ul><li>8086’dakinin aksine, bir değeri bir</li></ul>
+<p>değişkene atmak istediğimizde mutlaka W yazmacını kullanmak zorundayız</p>
+<p>W Yazmacı (W Register)</p>
+<ul><li>Bu register sanal bir saklayıcıdır. İçeriğine direk ulaşmak</li></ul>
+<p>mümkün değildir. Ancak bütün yükleme işlemleri bu register yardımıyla yapılmaktadır.</p>
+<ul><li>Bir değişkene, bir registere yada bir porta bilgi göndermek için,</li></ul>
+<p>önce bu bilgiyi W registerine, daha sonra W registerini ilgili porta ya da değişkene yüklemek yolunu kullanmak şarttır.</p>
+<ul><li>Örnek: Bir değişkene bilgi yükleme:</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW D'15'            ;W=15
+MOVWF SAYAC           ;sayac=15</code></pre>
+<p>W Yazmacı (W Register)</p>
+<ul><li>Örnek: Bir değişken içeriğini başka bir değişkene yükleme.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVF SAYAC1,W ;W=SAYAC1
+MOVWF SAYAC2 ;SAYAC1=SAYAC2</code></pre>
+<p>!!! Bir değişken ya da register içeriğini W'e yüklemek için MOVF (ya da MOVFW) komutunu kullanmak şarttır. MOWLW komutunu kullanarak W'e sadece sabit bir değer yüklenebilir.</p>
+<p>Giriş Çıkış Bacakları</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Uçları ve Bağlantıları</code></pre>
+<ul><li>PIC’in clock sinyal girişi olarak kullanılan 2 ucu vardır.</li></ul>
+<ul><li>Bu uçlara farklı tipte osilatörlerden elde edilen sinyaller</li></ul>
+<p>uygulanabilir. RC-Direnç/Kondansatör XT-Kristal veya seramik resonatör (XTAL) HS-Yüksek hızlı kristal veya resonatör (High Speed) LP-Düşük frekanslı kristal (Low Power)</p>
+<ul><li>PIC’e bağlanan clock’un tipi programlama sırasında</li></ul>
+<p>konfigurasyon bitlerine yazılır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Uçları ve Bağlantıları</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Uçları ve Bağlantıları</code></pre>
+<p>Reset Devresi</p>
+<p>Bank (16F84)</p>
+<ul><li>8086’daki</li></ul>
+<p>Segment’ler yerine PIC’te Bank’lar ve bankların içinde bulunan özel ve genel amaçlı Register’lar kullanılır.</p>
+<p>Bank (16F628)</p>
+<p>Bank (16F877)</p>
+<p>PIC Nasıl Programlanır ?</p>
+<ul><li>PIC Programlamak İçin Gerekenler</li></ul>
+<p>IBM uyumlu bilgisayar Metin editörü Assembler programı (MPLAB) PIC programlayıcı donanım ve yazılım</p>
+<h3 id="pic">PIC</h3>
+<p>Assembler programı (MPLAB)</p>
+<ul><li>Ücretsiz bir yazılım</li></ul>
+<ul><li>Simulasyon yapılabilir</li></ul>
+<ul><li>www.microchip.com ve</li></ul>
+<p>www.baskent.edu.tr/~eemekdas/dersler/ee m332l.htm adreslerinden edinilebilir.</p>
+<p>Status Yazmacı-1</p>
+<ul><li>Status Yazmacı: Bank’lar arasındaki geçişi</li></ul>
+<p>sağlar.</p>
+<p>Status Yazmacı-2</p>
+<ul><li>BSF               STATUS,RP0                           ;Bit Set f</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;(Status’da RP0)</code></pre>
+<ul><li>BSF               STATUS,5                             ;Bit Set f</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;(Status’da Bit 5)</code></pre>
+<p>Program Bölümleri</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST                P=16F877        Başlık Bloğu
+INCLUDE             P16F877.INC</code></pre>
+<p>Adres ve Değişken #DEFINE             DEGISKEN_1                d’100’      Atama Bloğu #DEFINE             DEGISKEN_2                b’10010110’          ;=d’150’=0x96</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEGIS_3             EQU                       0x20      ;HAFIZADA SEÇİLEN BİR YERE
+DEGIS_4             EQU                       0x21      ;ATANAN DEĞİŞKEN</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG       0                         ;PROGRAMI 0X00’DAN BAŞLAT</code></pre>
+<p>Port Durumu Belirleme Bloğu                  Açıklama Bloğu</p>
+<h3 id="basla">BASLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF       STATUS,RP0                ;BANK1’E GEÇİŞ
+MOVLW     b'00000111'               ;İSTENEN I/O KONFİGURASYONU SEÇİLİR
+MOVWF     TRISA                     ;TRISA REGISTER’INA ATANIR
+CLRF      TRISB                     ;TRISB ÇIKIŞ MODUNA ATANIR (BÖYLECE
+;PORTB’YE ATANACAK BİLGİLER ÇIKIŞ OLARAK
+;GÖRÜLÜR)
+BCF       STATUS,RP0                ;BANK0’A GEÇİŞ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW     b'00001010'               ;B PORTUNA 1010 BILGISI GONDER
+MOVWF     PORTB                     ;
+;         CLRF      PORTB                     DİYEREK ÇIKIŞI TAMAMEN SIFIRLAYABİLİRİZ</code></pre>
+<p>Program Bloğu</p>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO DONGU                          ;SONSUZ LOOP</code></pre>
+<p>Etiket Bloğu   END</p>
+<p>Sonlandırma Bloğu</p>
+<p>Büyük ve Küçük Harf Kullanımı</p>
+<ul><li>PIC Komutlarının büyük veya küçük harfle</li></ul>
+<h3 id="yazilmasi-onemli-degildir">yazılması önemli değildir</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MoVlW=movlw=MOVLW</code></pre>
+<ul><li>Ancak etiketler harf büyüklüğüne duyarlıdır</li></ul>
+<p>Dongu≠DONGU</p>
+<p>Başlık Bloğu</p>
+<ul><li>LIST P=16F877</li></ul>
+<p>Kullanılacak PIC’i tanımlar</p>
+<ul><li>INCLUDE             P16F877.INC</li></ul>
+<p>Kullanılan PIC’teki Yazmaç tanımlamaları bu dosyada saklanır. Böylece ‘Default’ olan yazmaçların teker teker tanımlanması gerekmez.</p>
+<p>Kullanılan Sayı/Karakter Tipleri</p>
+<ul><li>Hexadecimal</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STATUS       EQU     0x03</code></pre>
+<p>3         Adres ve Değişken 03        Atama Bloğu 03h h’03’</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW        0x03</code></pre>
+<p>h’03’ Program Bloğu 03h</p>
+<ul><li>Binary</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW        b’00010110’</code></pre>
+<ul><li>Decimal</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW        d’15’</code></pre>
+<ul><li>ASCII Character</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW        ‘A’</code></pre>
+<p>CONFIG Satırı Koşul                        Yazılacak Tanım Kodu</p>
+<ul><li>Konfigurasyon bit’leri, PIC’e</li></ul>
+<p>gerilim uygulandığı anda               Kod koruma var               _CP_ON</p>
+<p>PIC’in uyması gereken                  Kod koruma yok               _CP_OFF</p>
+<p>koşulları belirler.                    Power-on-reset var           _PWRTE_ON</p>
+<p>Power-on-reset yok           _PWRTE_OFF</p>
+<p>Watchdog timer devrede       _WDT_ON</p>
+<p>Watchdog timer devrede yok   _WDT_OFF</p>
+<p>Low Power Osilatör           _LP_OSC</p>
+<p>Kristal Osilatör             _XT_OSC</p>
+<p>High Speed Osilatör          _HS_OSC</p>
+<p>RC Osilatör                  _RC_OSC</p>
+<p>Örnek Program - 1</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST             P=16F877
+INCLUDE          P16F877.INC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG        0                    ;PROGRAMI 0X00’DAN BAŞLAT</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF        STATUS,RP0           ;BANK1’E GEÇİŞ
+CLRF       TRISD                ;TRISD ÇIKIŞ MODUNA ATANIR
+BCF        STATUS,RP0           ;BANK0’A GEÇİŞ</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      b'01100110'          ;D PORTUNA 01100110 BILGISI GONDER
+MOVWF      PORTD</code></pre>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO DONGU                      ;SONSUZ LOOP
+END</code></pre>
+<p>Örnek Program - 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST           P=16F877                        CALL   BEK
+INCLUDE         P16F877.INC                     MOVLW DSAYI
+__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp;            MOVWF PORTD</code></pre>
+<h3 id="xt-osc-call-bek">_XT_OSC                                          CALL   BEK</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;-------------------------------------------         MOVLW 0x05</code></pre>
+<h1 id="define-dsayi-0xff-movwf-porte">DEFINE    DSAYI      0xFF                           MOVWF PORTE</h1>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CNTKH      EQU        0x25                           CALL   BEK
+CNTKL      EQU        0x26                           CALL   BEK
+CNTKM      EQU        0x27                           GOTO   DONGU
+;-------------------------------------------    ;------------------------------------------
+ORG    0x00                                 BEK</code></pre>
+<h3 id="basla-movlw-0x05">BASLA                                                MOVLW 0X05</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF   PORTA                                     MOVWF CNTKM
+CLRF   PORTB                                TEKM
+CLRF   PORTC                                     MOVLW 0XF0
+CLRF   PORTD                                     MOVWF CNTKH
+CLRF   PORTE                                TEK1
+MOVLW 0XFF
+BSF    STATUS,RP0                                MOVWF CNTKL
+CLRF   TRISB                                TEK2
+CLRF   TRISC                                     DECFSZ CNTKL,F
+CLRF   TRISD                                     GOTO   TEK2
+CLRF   TRISE                                     DECFSZ CNTKH,F
+BCF    STATUS,RP0                                GOTO   TEK1
+;-------------------------------------------         DECFSZ CNTKM,F
+CALL   BEK                                       GOTO   TEKM
+MOVLW b'01010101'                                RETURN
+MOVWF PORTB
+CALL   BEK                                  DONGU
+MOVLW b'11001100'                                     GOTO BASLA
+MOVWF PORTC                                           END</code></pre>
+<h2 id="pic-sunum1-2013-uyumluluk-modu">pic_Sunum1_2013 [Uyumluluk Modu]</h2>
+<p>(Microcontroller)</p>
+<p>PIC 16f84 8086 microprocessor</p>
+<p>Pin no.1 RA2 Second pin on port A. Has no additional function Pin no.2 RA3 Third pin on port A. Has no additional function. Pin no.3 RA4 Fourth pin on port A. TOCK1 which functions as a timer is also found on this pin Pin no.4 MCLR Reset input and Vpp programming voltage of a microcontroller Pin no.5 Vss Ground of power supply. Pin no.6 RB0 Zero pin on port B. Interrupt input is an additional function. Pin no.7 RB1 First pin on port B. No additional function. Pin no.8 RB2 Second pin on port B. No additional function. Pin no.9 RB3 Third pin on port B. No additional function. Pin no.10 RB4 Fourth pin on port B. No additional function. Pin no.11 RB5 Fifth pin on port B. No additional function. Pin no.12 RB6 Sixth pin on port B. 'Clock' line in program mode. Pin no.13 RB7 Seventh pin on port B. 'Data' line in program mode. Pin no.14 Vdd Positive power supply pole. Pin no.15 OSC2 Pin assigned for connecting with an oscillator Pin no.16 OSC1 Pin assigned for connecting with an oscillator Pin no.17 RA2 Second pin on port A. No additional function Pin no.18 RA1 First pin on port A. No additional function.</p>
+<p>Memory organization PIC16F84 has two separate memory blocks, one for data and the other for program. EEPROM memory and GPR registers in RAM memory make up a data block, and FLASH memory makes up a program block.</p>
+<h3 id="program-memory">Program memory</h3>
+<p>Program memory has been realized in FLASH technology which makes it possible to program a microcontroller many times before it's installed into a device, and even after its installment if eventual changes in program or process parameters should occur. The size of program memory is 1024 locations with 14 bits width where locations zero and four are reserved for reset and interrupt vector.</p>
+<p>Data memory</p>
+<p>Data memory consists of EEPROM and RAM memories. EEPROM memory consists of 64 eight bit locations whose contents is not lost during loosing of power supply. EEPROM is not directly addressible, but is accessed indirectly through EEADR and EEDATA registers. As EEPROM memory usually serves for storing important parameters (for example, of a given temperature in temperature regulators) , there is a strict procedure for writing in EEPROM which must be followed in order to avoid accidental writing. RAM memory for data occupies space on a memory map from location 0x0C to 0x4F which comes to 68 locations. Locations of RAM memory are also called GPR registers which is an abbreviation for General Purpose Registers. GPR registers can be accessed regardless of which bank is selected at the moment.</p>
+<p>Osilator: RC, Crystal,..</p>
+<p>Simple Power supply</p>
+<p>2.2 Reset Reset is used for putting the microcontroller into a 'known' condition. That practically means that microcontroller can behave rather inaccurately under certain undesirable conditions. In order to continue its proper functioning it has to be reset, meaning all registers would be placed in a starting position. Reset is not only used when microcontroller doesn't behave the way we want it to, but can also be used when trying</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>out a device as an interrupt in program execution, or to get a microcontroller ready when</code></pre>
+<p>reading in a program.</p>
+<p>SFR registers Registers (Special Function Registers) which take up first 12 locations in banks 0 and 1 are registers of specialized function assigned with certain blocks of the microcontroller</p>
+<p>STATUS Register</p>
+<p>I/O selection (Bidirectional ports)</p>
+<h3 id="portb">PORTB</h3>
+<p>: The example shows how pins 0, 1, 2, and 3 are declared for input, and pins 4, 5, 6, and 7 for output.</p>
+<p>Example shows how pins 0, 1, 2, 3, and 4 are declared to be input,</p>
+<h3 id="porta">PORTA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and pins 5, 6, and 7 to be output pins.</code></pre>
+<p>STATUS Register bit 0 C (Carry) TransferBit that is affected by operations of addition, subtraction and shifting. 1= transfer occured from the highest resulting bit 0=transfer did not occur C bit is affected by ADDWF, ADDLW, SUBLW, SUBWF instructions. bit 1 DC (Digit Carry) DC TransferBit affected by operations of addition, subtraction and shifting. Unlike C bit, this bit represents transfer from the fourth resulting place. It is set by addition when occurs carry from bit3 to bit4, or by</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>subtraction when occurs borrow from bit4 to bit3, or by shifting in both direction. 1=transfer occured on the fourth</code></pre>
+<p>bit according to the order of the result0=transfer did not occurDC bit is affected by ADDWF, ADDLW, SUBLW,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBWF instructions.</code></pre>
+<p>bit 2 Z (Zero bit) Indication of a zero resultThis bit is set when the result of an executed arithmetic or logic operation is zero. 1=result equals zero0=result does not equal zero bit 3 PD (Power-down bit)Bit which is set whenever power supply is brought to a microcontroller as it starts running, after each regular reset and after execution of instruction CLRWDT. Instruction SLEEP resets it when microcontroller falls into low consumption/usage regime. Its repeated setting is possible via reset or by turning the supply on, or off . Setting can be triggered also by a signal on RB0/INT pin, change on RB port, completion of writing in internal DATA EEPROM, and by a watchdog, too.1=after supply has been turned on0= executing SLEEP instruction bit 4 TO Time-out ; Watchdog overflow.Bit is set after turning on the supply and execution of CLRWDT and SLEEP instructions. Bit is reset when watchdog gets to the end signaling that something is not right.1=overflow did not occur0=overflow did occur bit6:5 RP1:RP0 (Register Bank Select bits) These two bits are upper part of the address for direct addressing. Since instructions which address the memory directly have only seven bits, they need one more bit in order to</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address all 256 bytes which is how many bytes PIC16F84 has. RP1 bit is not used, but is left for some future</code></pre>
+<p>expansions of this microcontroller.01=first bank00=zero bank bit 7 IRP (Register Bank Select bit) Bit whose role is to be an eighth bit for indirect addressing of internal RAM.1=bank 2 and 30=bank 0 and 1 (from 00h to FFh)STATUS register contains arithmetic status ALU (C, DC, Z), RESET status (TO, PD) and bits for selecting of memory bank (IRP, RP1, RP0). Considering that selection of memory bank is controlled through this register, it has to be present in each bank. Memory bank will be discussed</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in more detail in Memory organization chapter. STATUS register can be a destination for any instruction, with any</code></pre>
+<p>other register. If STATUS register is a destination for instructions which affect Z, DC or C bits, then writing to these three bits is not possible.</p>
+<p>Creating time delays in 8088/8086 based system for a delay loop Or Timer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,N
+Again: LOOP again</code></pre>
+<p>Evrey loop takes total of 17 clock pulse to be executed so the time delay is Nx17 example : system frequency is 4.7 MHZ (t=210 ns). For 100ms delay its needed N) 28000</p>
+<p>Another way for delay generation is using of external hardware timers</p>
+<h3 id="q-q-q">Q                             Q                          Q</h3>
+<h3 id="d-d-d">D                            D                           D</h3>
+<p>Asynchronous Counter</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK</code></pre>
+<p>Synchronous Counter</p>
+<h3 id="q-q-q">Q                     Q                          Q</h3>
+<h3 id="d-d-d">D                      D                          D</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK
+BUFGP</code></pre>
+<p>OPTION register (Timer)</p>
+<p>bit 0:2 PS0, PS1, PS2 (Prescaler Rate Select bit) These three bits define prescaler rate select bit. What a prescaler is and how these bits can affect the work of a microcontroller will be explained in section on TMR0. bit 3 PSA (Prescaler Assignment bit)Bit which assigns prescaler between TMR0 and watchdog.1=prescaler is assigned to watchdog0=prescaler is assigned to a free-run timer TMR0 bit 4 T0SE (TMR0 Source Edge Select bit)If it is allowed to trigger TMR0 by impulses from the pin RA4/T0CKI, this bit determines whether this will be to the falling or rising edge of a signal.1=falling edge0=rising edge bit 5 TOCS (TMR0 Clock Source Select bit)This pin enables free-run timer to increment its state either from internal oscillator on every ¼ oscillator clock, or through external impulses on RA4/T0CKI pin.1=external impulses0=1/4 internal clock bit 6 INTEDG (Interrupt Edge Select bit)If interrupt is enabled possible this bit will determine the edge at which an interrupt will be activated on pin RB0/INT.1=rising edge0=falling edge bit 7 RBPU (PORTB Pull-up Enable bit) This bit turns on and off internal 'pull-up' resistors on port B.1= "pull-up" resistors turned off 0= "pull-up" resistors turned on</p>
+<p>Timer</p>
+<p>İnterrupt Register (INTCON Register )</p>
+<p>Interrupt initialization</p>
+<p>İnterrupt Register (INTCON Register )</p>
+<p>bit 0 RBIF (RB Port Change Interrupt Flag bit) Bit which informs about changes on pins 4, 5, 6 and 7 of port B.1=at least one pin has changed its status0=no change occured on any of the pins bit 1 INTF (INT External Interrupt Flag bit) External interrupt occured.1=interrupt occured0=interrupt did not occurIf a rising or falling edge was detected on pin RB0/INT, (which is defined with bit INTEDG in OPTION register), bit INTF is set. Bit must be cleared in interrupt subprogram in order to detect the next interrupt. bit 2 T0IF (TMR0 Overflow Interrupt Flag bit) Overflow of counter TMR0.1= counter changed its status from FFh to 00h0=overflow did not occurBit must be cleared in program in order for an interrupt to be detected .bit 3 RBIE (RB port change Interrupt Enable bit) Enables interrupts to occur at the change of status of pins 4, 5, 6, and 7 of port B. 1= enables interrupts at the change of status0=interrupts disabled at the change of statusIf RBIE and RBIF were simultaneously set, an interrupt would occur. bit 4 INTE (INT External Interrupt Enable bit) Bit which enables external interrupt from pin RB0/INT.1=external interrupt enabled0=external interrupt disabledIf INTE and INTF were set simultaneously, an interrupt would occur .bit 5 T0IE (TMR0 Overflow Interrupt Enable bit) Bit which enables interrupts during counter TMR0 overflow.1=interrupt enabled0=interrupt disabledIf T0IE and T0IF were set simultaneously, interrupt would occur. Bit 6 EEIE (EEPROM Write Complete Interrupt Enable bit) Bit which enables an interrupt at the end of a writing routine to EEPROM1=interrupt enabled0=interrupt disabledIf EEIE and EEIF (which is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in EECON1 register) were set simultaneously , an interrupt would occur.</code></pre>
+<p>Bit 7 GIE (Global Interrupt Enable bit) Bit which enables or disables all interrupts.1=all interrupts are enabled0=all interrupts are disabledPIC16F84 has four interrupt sources:1. Termination of writing data to EEPROM2. TMR0 interrupt caused by timer overflow3. Interrupt during alteration on RB4, RB5, RB6 and RB7 pins of port B.4. External interrupt from RB0/INT pin of microcontroller</p>
+<p>Instructions</p>
+<h3 id="example">Example</h3>
+<p>Optocoupler on an input line (İzolation) The way it works is simple: when a signal arrives, the LED within the optocoupler is turned on, and it shines on the base of a photo-transistor within the same case. When the transistor is activated, the voltage between collector and emitter falls to 0.5V or less</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and the microcontroller sees this as a logic zero on its RA4 pin. The example below is a</code></pre>
+<p>counter, used for counting products on production line, determining motor speed, counting the number of revolutions of an axis etc. Let the sensor be a micro-switch. Each time the switch is closed, the LED is illuminated. The LED 'transfers' the signal to the phototransistor and the operation of the photo-transistor delivers a LOW to input RA4 of a microcontroller. A program in the microcontroller will be needed to prevent false counting and an indicator connected to any of the outputs of the microcontroller will shows the current state of the counter.</p>
+<p>(Relay control)</p>
+<p>Seven-Segment Display (multiplexing) The segments in a 7-segment display are arranged to form a single digit from 0 to F as</p>
+<h3 id="shown-in-the-animation">shown in the animation</h3>
+<p>Shift registers for 16f84 There are two types of shift registers: input and output. Input shift registers receive data in parallel, through 8 lines and then send it serially through two lines to a microcontroller. Output shift registers work in the opposite direction; they receive serial data and on a "latch" line signal, they turn it into parallel data. Shift registers are generally used to expand the number of input-output lines of a microcontroller. They are not so much in use any more though, because most modern microcontrollers have a large number of input/output lines. However, their use with microcontrollers such as PIC16F84 is very important.</p>
+<p>How to connect an input shift register to a microcontroller</p>
+<h3 id="serial-communication">Serial Communication</h3>
+<p>Connecting a microcontroller to a PC via a MAX232 line interface chip.</p>
+<figure class="yazi-gorsel"><img src="sekil-1029-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="pic_Sunum1_2013 [Uyumluluk Modu]: sayfa 1, devre, tablo ve şekiller"><figcaption>pic_Sunum1_2013 [Uyumluluk Modu], sayfa 1.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1029-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="pic_Sunum1_2013 [Uyumluluk Modu]: sayfa 4, devre, tablo ve şekiller"><figcaption>pic_Sunum1_2013 [Uyumluluk Modu], sayfa 4.</figcaption></figure>
+<h2 id="pic-sunum2-2013-uyumluluk-modu">Pic_sunum2_2013 [Uyumluluk Modu]</h2>
+<p>Program Örneği 1: PIC’ e enerji verildiği anda PORTA da basılı bütona karşılık gelen B Portundaki LED’ leri söndüren bir program yazalım.</p>
+<p>Inputs</p>
+<p>Outputs</p>
+<p>Sonsuz Döngü: PIC16F84 de duraklama komutu olmadığı için Döngü kullanılmaktadır. Programda bekleme yerine yeni butonların durumu okunmak isterse,</p>
+<h3 id="karar-i-ci-n-bi-t-test-etme-i-slemi">KARAR İÇİN BİT TEST ETME İŞLEMİ</h3>
+<p>Herhangi bir register içindeki bir bit BTFSC ve BTFSS komutları ile test edilip sonuca göre ya bir sonraki (sıradaki) satırdan devam edebilir yada bir satır atlanabilir (Program Yönlendirilir).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC Komutu: Bu komut ingilizcede “File Register bitini test et, bu bit</code></pre>
+<p>(0) ise bir sonraki komuta atla” anlamına gelmektedir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS Komutu: Bu komut ise BTFSC komutuna benzerdir. Ancak, file</code></pre>
+<p>register bitinin (0) yerine (1) olduğunu test etmektedir. Bu bit eğer (1) ise komuttan sonraki (sıradaki) komut atlanmakta; değilse (0) ise sıradaki komuttan devam edilmektedir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: PORTA ve PORTB’ nin</code></pre>
+<p>önceden tanımlandığı kabul edilmiştir.</p>
+<p>Program Örneği 2: ( Yukarıdaki aynı devre için) A portunun 2. bitindeki butona basınca B portunun (RB0,.........,RB4) LED’ lerini yakan bir program yazalım.</p>
+<p>Program3: PortB’nin 0. Bitine bağlı LED’I, A portunun 1. Bit’indeki butona basınca yakan program</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84
+INCLUDE "P16F84.INC"
+CLRF PORTB
+BSF STATUS, 5
+CLRF TRISB
+MOVLW H'FF'
+MOVWF TRISA
+BCF STATUS, 5
+TEST_PORTA
+BTFSC PORTA, 1
+GOTO TEST_PORTA
+BSF PORTB, 0
+DONGU
+GOTO DONGU
+END</code></pre>
+<p>Program Örneği 4: PORTA’ nın 5. bitine bağlı buton normalde (0) durumunda olup butona basılınca (1) gönderilmektedir. PORTA’ nın 5. bitine 1 (RA5 = 1) gelince B portuna bağlı 8 LED’ in tamamının yanması istenmektedir. Akış diyagramı ile birlikte programı PIC16F84 için yazınız.</p>
+<h3 id="dongu-kullanmak">DÖNGÜ KULLANMAK</h3>
+<p>Bazen belli işlem ya da işlemlerin belirli sayıda tekrarlanması istenebilir. Böyle bir durumda bir register SAYAÇ olarak kullanılır. Genellikle tekrar sayısı ( SAYAÇ)’ a yüklendikten sonra her seferinde ( SAYAÇ ) 1 azaltılarak ( 0 )’ a ulaşılana kadar Döngü devamı ettirilir. Bu amaçla DECFSZ komutu kullanılması gerekir. Bu komut her icra edildiğinde bu register ( burada SAYAC ) 1 azaltılır ve SAYAC =0 olunca bir sonraki komuta atlanır. Aksi halde ( SAYAC ≠0 ise )</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ komutundan hemen sonraki (sıradaki) komut icra edilir.</code></pre>
+<p>Aşağıdaki program parçasında SAYAC’ ın daha önce tanımladığı ve belli bir değerle ( döngü sayısı ) yüklendiği farz edilmiştir. Döngü bitince PORTB’ ye ( FF ) yüklenmektedir.</p>
+<h3 id="karsilastirma-i-slemi-ve-dongu">KARŞILAŞTIRMA İŞLEMİ VE DÖNGÜ</h3>
+<p>SAYAC her zaman azalan yönde çalışmaz. Her döngüde SAYAC’ ın arttığı durumlarda SAYAC değeri istenen bir sayı ile karşılaştırılmalıdır. Eşitlik sağlanınca döngü sona erdirilir. Örnek olarak ( 09 ) kere tekrarlanan tekrar etiketli bir döngü ( çevrim ) düzenleyelim: ( Program parçası )</p>
+<p>Yeni değişken atama ve gecikme döngüsü oluşturma</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84
+INCLUDE "P16F84.INC"
+SAYAC EQU H'0C'
+CLRF PORTB
+BSF STATUS, 5
+CLRF TRISB
+MOVLW H'FF'
+MOVWF TRISA
+BCF STATUS, 5
+BASLA
+MOVLW H'0F'
+MOVWF SAYAC
+TEST
+DECFSZ SAYAC, F
+GOTO TEST
+CLRW
+DONGU
+GOTO DONGU
+END</code></pre>
+<p>Program12. portB’ye bağlı 8 LED vardır.. Burada bir LED’ın yanışı kayarak devam eder.. Yanarak kayan LED en sona geldiğinde tüm LED’ler söner.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84A               DONGU
+INCLUDE "P16F84A.INC"       GOTO DONGU
+SAYAC1 EQU H'0C'            GECIKME
+SAYAC2 EQU H'0D'            MOVLW H'0F'
+CLRF PORTB                  MOVWF SAYAC1
+BCF STATUS, 0               DONGU1
+BSF STATUS, 5               MOVLW H'0F'
+CLRF TRISB                  MOVWF SAYAC2
+BCF STATUS, 5               DONGU2
+MOVLW H'01'                 DECFSZ SAYAC2, F
+MOVWF PORTB                 GOTO DONGU2</code></pre>
+<h3 id="tekrar-decfsz-sayac1-f">TEKRAR                      DECFSZ SAYAC1, F</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL GECIKME                GOTO DONGU1
+RLF PORTB, F                RETURN
+BTFSS STATUS, 0             END
+GOTO TEKRAR</code></pre>
+<p>Program6: A portunun 1.bitine bağlı butona 10 defa basılınca B portunun 0.bitindeki LED’I yakan program.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84           NOP
+INCLUDE "P16F84.INC"   NOP
+SAYAC EQU H'0C'        NOP
+CLRF PORTB             NOP
+BSF STATUS, 5          NOP
+CLRF TRISB             NOP
+MOVLW H'FF'            NOP
+MOVWF TRISA            NOP
+BCF STATUS, 5          NOP</code></pre>
+<h3 id="basla-nop">BASLA                  NOP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW D'10'            NOP
+MOVWF SAYAC            NOP
+TEST                   NOP
+BTFSC PORTA, 1         DECFSZ SAYAC, F
+GOTO TEST              GOTO TEST
+NOP                    BSF PORTB, 0
+NOP                    END</code></pre>
+<p>Look up Table: 7 segment üzerinde “5” sayısını gösteren program “5”=“05h”=01101101b = ‘6Dh’ LIST P=16F84A             RETLW H'5B'</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"    RETLW H'4F'
+CLRF PORTB               RETLW H'66'
+BSF STATUS, 5            RETLW H'6D'
+CLRF TRISB               RETLW H'7D'
+BCF STATUS, 5            RETLW H'07'</code></pre>
+<h3 id="basla-retlw-h-7f">BASLA                    RETLW H'7F'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW H'05'              RETLW H'6F'
+CALL CEV_TAB             RETLW H'77'
+MOVWF PORTB              RETLW H'7C'</code></pre>
+<h3 id="dongu-retlw-h-39">DONGU                    RETLW H'39'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO DONGU               RETLW H'5E'</code></pre>
+<h3 id="cev-tab-retlw-h-79">CEV_TAB                  RETLW H'79'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF PCL,F              RETLW H'71'
+RETLW H'3F'              RETLW H'80'
+RETLW H'06'              END</code></pre>
+<p>Program10--Zaman gecikme döngüsü kullanarak, porB’ye bağlı olan tüm LED’leri belirli zaman aralıklarıyla yakıp-söndüren program.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84A           GOTO TEKRAR
+INCLUDE "P16F84A.INC" GECIKME
+SAYAC1 EQU H'0C'       MOVLW H'FF'
+SAYAC2 EQU H'0D'      MOVWF SAYAC1
+CLRF PORTB            DONGU1
+BSF STATUS, 5           MOVLW H'FF'
+CLRF TRISB              MOVWF SAYAC2
+BCF STATUS, 5         DONGU2</code></pre>
+<h3 id="tekrar-decfsz-sayac2-f">TEKRAR                   DECFSZ SAYAC2, F</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW H'00'            GOTO DONGU2
+MOVWF PORTB            DECFSZ SAYAC1, F
+CALL GECIKME            GOTO DONGU1
+MOVLW H'FF'             RETURN
+MOVWF PORTB            END
+CALL GECIKME</code></pre>
+<p>Program 22–Port B uçlarına bağlı 7 segment display’de 0-F arasında saydıran program. Sayılar arası gecikme kullanılmıştır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW H'7C'
+LIST P=16F84A          MOVWF PORTB             RETLW H'39'
+INCLUDE "P16F84A.INC"     INCF SAYAC, F          RETLW H'5E'
+SAYAC1 EQU H'0C'        CALL GECIKME           RETLW H'79'
+SAYAC2 EQU H'0D'       GOTO DONGU             RETLW H'71‘ F
+SAYAC EQU H'0E'
+CLRF PORTB          CEV7SEG                 GECIKME
+BSF STATUS, 5          ADDWF PCL,F            MOVLW H'FF'
+CLRF TRISB          RETLW H'3F‘ 0              MOVWF SAYAC1
+BCF STATUS, 5       RETLW H'06‘ 1           DONGU1</code></pre>
+<h3 id="basla-retlw-h-5b-2-movlw-h-ff">BASLA                  RETLW H'5B‘ 2              MOVLW H'FF'</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW H'00'         RETLW H'4F‘ 3              MOVWF SAYAC2
+MOVWF SAYAC         RETLW H'66‘ 4           DONGU2</code></pre>
+<h3 id="dongu-retlw-h-6d-5-decfsz-sayac2-f">DONGU                 RETLW H'6D‘ 5             DECFSZ SAYAC2, F</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVF SAYAC, W       RETLW H'7D‘…              GOTO DONGU2
+ANDLW B'00001111' RETLW H'07'                  DECFSZ SAYAC1, F
+CALL CEV7SEG        RETLW H'7F'               GOTO DONGU1
+RETLW H'6F'               RETURN
+RETLW H'77'               END</code></pre>
+<p>Program 26--PortB’nin 0. Bitine bağlı LED’ı flash yaptıran program.LED’in yanıp sönme gecikmesini, TMR0 sayıcısı yapmaktadır. Timer ,dahili clock ile çalışır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84A                  CLRF PORTB
+INCLUDE "P16F84A.INC"        YAK
+CLRF PORTB                    BSF PORTB,0
+BSF STATUS, 5                 CALL GECIKME
+CLRF TRISB                   SONDUR
+BCF STATUS, 5                  BCF PORTB,0</code></pre>
+<p>Basla                           CALL GECIKME</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRWDT                         GOTO YAK
+BSF STATUS,5                 GECIKME
+MOVLW b’11010111’              CLRF TMR0
+MOVWF OPTION_REG             TEST_BIT
+BCF STATUS,5                   BTFSS TMR0,5
+GOTO TEST_BIT
+RETURN
+END</code></pre>
+<p>Program28– PortB’deki LED’lerin binary olarak artan sayıların gösterilmesini sağlayan program. TMR0 ve ilgili kesme kullanılmıştır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST P=16F84A                  MOVLW b’10100000’
+INCLUDE "P16F84A.INC"          MOVWF INTCON
+ORG h’00’                     CLRF PORTB
+GOTO BASLA                   DONGU
+ORG h’04’                       GOTO DONGU
+GOTO LED_YAK                 LED_YAK</code></pre>
+<h3 id="basla-bcf-intcon-t0if">BASLA                           BCF INTCON,T0IF</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5                 INCF PORTB,F
+CLRF TRISB                     MOVLW h’00’
+MOVLW b’00000111’              MOVWF TMR0
+MOVWF OPTION_REG               RETFIE
+BCF STATUS,5                   END
+MOVLW h’00
+MOVWF TMR0</code></pre>
+<figure class="yazi-gorsel"><img src="sekil-1025-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="Pic_sunum2_2013 [Uyumluluk Modu]: sayfa 1, devre, tablo ve şekiller"><figcaption>Pic_sunum2_2013 [Uyumluluk Modu], sayfa 1.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1025-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="Pic_sunum2_2013 [Uyumluluk Modu]: sayfa 4, devre, tablo ve şekiller"><figcaption>Pic_sunum2_2013 [Uyumluluk Modu], sayfa 4.</figcaption></figure>
+<h2 id="pic-application">pic_application</h2>
+<p>(Microcontroller)</p>
+<p>Simple Power supply</p>
+<p>2.2 Reset Reset is used for putting the microcontroller into a 'known' condition. That practically means that microcontroller can behave rather inaccurately under certain undesirable conditions. In order to continue its proper functioning it has to be reset, meaning all registers would be placed in a starting position. Reset is not only used when microcontroller doesn't behave the way we want it to, but can also be used when trying</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>out a device as an interrupt in program execution, or to get a microcontroller ready when</code></pre>
+<p>reading in a program.</p>
+<p>I/O selection</p>
+<p>STATUS Register bit 0 C (Carry) TransferBit that is affected by operations of addition, subtraction and shifting. 1= transfer occured from the highest resulting bit 0=transfer did not occur C bit is affected by ADDWF, ADDLW, SUBLW, SUBWF instructions. bit 1 DC (Digit Carry) DC TransferBit affected by operations of addition, subtraction and shifting. Unlike C bit, this bit represents transfer from the fourth resulting place. It is set by addition when occurs carry from bit3 to bit4, or by</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>subtraction when occurs borrow from bit4 to bit3, or by shifting in both direction. 1=transfer occured on the fourth</code></pre>
+<p>bit according to the order of the result0=transfer did not occurDC bit is affected by ADDWF, ADDLW, SUBLW,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBWF instructions.</code></pre>
+<p>bit 2 Z (Zero bit) Indication of a zero resultThis bit is set when the result of an executed arithmetic or logic operation is zero. 1=result equals zero0=result does not equal zero bit 3 PD (Power-down bit)Bit which is set whenever power supply is brought to a microcontroller as it starts running, after each regular reset and after execution of instruction CLRWDT. Instruction SLEEP resets it when microcontroller falls into low consumption/usage regime. Its repeated setting is possible via reset or by turning the supply on, or off . Setting can be triggered also by a signal on RB0/INT pin, change on RB port, completion of writing in internal DATA EEPROM, and by a watchdog, too.1=after supply has been turned on0= executing SLEEP instruction bit 4 TO Time-out ; Watchdog overflow.Bit is set after turning on the supply and execution of CLRWDT and SLEEP instructions. Bit is reset when watchdog gets to the end signaling that something is not right.1=overflow did not occur0=overflow did occur bit6:5 RP1:RP0 (Register Bank Select bits) These two bits are upper part of the address for direct addressing. Since instructions which address the memory directly have only seven bits, they need one more bit in order to</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address all 256 bytes which is how many bytes PIC16F84 has. RP1 bit is not used, but is left for some future</code></pre>
+<p>expansions of this microcontroller.01=first bank00=zero bank bit 7 IRP (Register Bank Select bit) Bit whose role is to be an eighth bit for indirect addressing of internal RAM.1=bank 2 and 30=bank 0 and 1 (from 00h to FFh)STATUS register contains arithmetic status ALU (C, DC, Z), RESET status (TO, PD) and bits for selecting of memory bank (IRP, RP1, RP0). Considering that selection of memory bank is controlled through this register, it has to be present in each bank. Memory bank will be discussed</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in more detail in Memory organization chapter. STATUS register can be a destination for any instruction, with any</code></pre>
+<p>other register. If STATUS register is a destination for instructions which affect Z, DC or C bits, then writing to these three bits is not possible.</p>
+<p>OPTION register (Timer)</p>
+<p>bit 0:2 PS0, PS1, PS2 (Prescaler Rate Select bit) These three bits define prescaler rate select bit. What a prescaler is and how these bits can affect the work of a microcontroller will be explained in section on TMR0. bit 3 PSA (Prescaler Assignment bit)Bit which assigns prescaler between TMR0 and watchdog.1=prescaler is assigned to watchdog0=prescaler is assigned to a free-run timer TMR0 bit 4 T0SE (TMR0 Source Edge Select bit)If it is allowed to trigger TMR0 by impulses from the pin RA4/T0CKI, this bit determines whether this will be to the falling or rising edge of a signal.1=falling edge0=rising edge bit 5 TOCS (TMR0 Clock Source Select bit)This pin enables free-run timer to increment its state either from internal oscillator on every ¼ oscillator clock, or through external impulses on RA4/T0CKI pin.1=external impulses0=1/4 internal clock bit 6 INTEDG (Interrupt Edge Select bit)If interrupt is enabled possible this bit will determine the edge at which an interrupt will be activated on pin RB0/INT.1=rising edge0=falling edge bit 7 RBPU (PORTB Pull-up Enable bit) This bit turns on and off internal 'pull-up' resistors on port B.1= "pull-up" resistors turned off 0= "pull-up" resistors turned on</p>
+<p>İnterrupt Register</p>
+<p>İnterrupt Register</p>
+<p>bit 0 RBIF (RB Port Change Interrupt Flag bit) Bit which informs about changes on pins 4, 5, 6 and 7 of port B.1=at least one pin has changed its status0=no change occured on any of the pins bit 1 INTF (INT External Interrupt Flag bit) External interrupt occured.1=interrupt occured0=interrupt did not occurIf a rising or falling edge was detected on pin RB0/INT, (which is defined with bit INTEDG in OPTION register), bit INTF is set. Bit must be cleared in interrupt subprogram in order to detect the next interrupt. bit 2 T0IF (TMR0 Overflow Interrupt Flag bit) Overflow of counter TMR0.1= counter changed its status from FFh to 00h0=overflow did not occurBit must be cleared in program in order for an interrupt to be detected .bit 3 RBIE (RB port change Interrupt Enable bit) Enables interrupts to occur at the change of status of pins 4, 5, 6, and 7 of port B. 1= enables interrupts at the change of status0=interrupts disabled at the change of statusIf RBIE and RBIF were simultaneously set, an interrupt would occur. bit 4 INTE (INT External Interrupt Enable bit) Bit which enables external interrupt from pin RB0/INT.1=external interrupt enabled0=external interrupt disabledIf INTE and INTF were set simultaneously, an interrupt would occur .bit 5 T0IE (TMR0 Overflow Interrupt Enable bit) Bit which enables interrupts during counter TMR0 overflow.1=interrupt enabled0=interrupt disabledIf T0IE and T0IF were set simultaneously, interrupt would occur. Bit 6 EEIE (EEPROM Write Complete Interrupt Enable bit) Bit which enables an interrupt at the end of a writing routine to EEPROM1=interrupt enabled0=interrupt disabledIf EEIE and EEIF (which is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in EECON1 register) were set simultaneously , an interrupt would occur.</code></pre>
+<p>Bit 7 GIE (Global Interrupt Enable bit) Bit which enables or disables all interrupts.1=all interrupts are enabled0=all interrupts are disabledPIC16F84 has four interrupt sources:1. Termination of writing data to EEPROM2. TMR0 interrupt caused by timer overflow3. Interrupt during alteration on RB4, RB5, RB6 and RB7 pins of port B.4. External interrupt from RB0/INT pin of microcontroller</p>
+<p>(Relay control)</p>
+<p>Seven-Segment Display (multiplexing) The segments in a 7-segment display are arranged to form a single digit from 0 to F as</p>
+<h3 id="shown-in-the-animation">shown in the animation</h3>
+<p>Serial Communication</p>
+<figure class="yazi-gorsel"><img src="sekil-948-02.jpg" width="781" height="1039" loading="lazy" decoding="async" alt="pic_application: sayfa 2, devre, tablo ve şekiller"><figcaption>pic_application, sayfa 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-948-06.jpg" width="781" height="1039" loading="lazy" decoding="async" alt="pic_application: sayfa 6, devre, tablo ve şekiller"><figcaption>pic_application, sayfa 6.</figcaption></figure>
+<h2 id="pic-examples">pic_examples</h2>
+<p>LED Flash Example</p>
+<h3 id="u1-vdd">U1_VDD</h3>
+<h3 id="r9">R9</h3>
+<p>10k</p>
+<h3 id="x1-u1">X1                             U1</h3>
+<p>16                               17</p>
+<h3 id="osc1-clkin-ra0">OSC1/CLKIN       RA0</h3>
+<p>15                               18</p>
+<h3 id="osc2-clkout-ra1">OSC2/CLKOUT      RA1</h3>
+<h3 id="ra2">RA2</h3>
+<p>4                            2</p>
+<h3 id="crystal-mclr-ra3">CRYSTAL                         MCLR             RA3</h3>
+<h3 id="c1-ra4-t0cki">C1                                                RA4/T0CKI</h3>
+<p>22pF                 C2 22pF                                      6</p>
+<h3 id="rb0-int">RB0/INT</h3>
+<h3 id="rb1">RB1</h3>
+<h3 id="rb2">RB2</h3>
+<h3 id="rb3">RB3</h3>
+<h3 id="rb4">RB4</h3>
+<h3 id="rb5">RB5</h3>
+<h3 id="u1-vss-rb6">U1_VSS                                 RB6</h3>
+<h3 id="rb7">RB7</h3>
+<h3 id="pic16f84a">PIC16F84A</h3>
+<h3 id="r1-r2-r3-r4-r5-r6-r7-r8">R1    R2    R3    R4    R5    R6    R7    R8</h3>
+<p>330   330   330   330   330   330   330   330</p>
+<h3 id="d1-d2-d3-d4-d5-d6-d7-d8">D1    D2    D3    D4    D5    D6    D7    D8</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST p=16F84A</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp; _XT_OSC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>j            EQU 0x0c</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>k            EQU 0x0d</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG            0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW 0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF TRISB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS,5</code></pre>
+<h3 id="ledonoff">LEDonoff</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw b'00000001'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>call delay</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw b'00000000'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>call delay</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto LEDonoff</code></pre>
+<h3 id="delay">delay</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw d'200'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf j</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jloop:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf k</code></pre>
+<h3 id="kloop">kloop</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz k,f</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto kloop</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz j,f</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto jloop</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End</code></pre>
+<p>LED Flash / Push Button Example</p>
+<h3 id="u1-vdd">U1_VDD</h3>
+<h3 id="r9-r10">R9                                      R10</h3>
+<p>10k                                     10k</p>
+<h3 id="x1-u1">X1                             U1</h3>
+<p>16                               17</p>
+<h3 id="osc1-clkin-ra0">OSC1/CLKIN       RA0</h3>
+<p>15                               18</p>
+<h3 id="osc2-clkout-ra1">OSC2/CLKOUT      RA1</h3>
+<h3 id="ra2">RA2</h3>
+<p>4                            2</p>
+<h3 id="crystal-mclr-ra3">CRYSTAL                         MCLR             RA3</h3>
+<h3 id="c1-ra4-t0cki">C1                                                RA4/T0CKI</h3>
+<p>22pF                 C2 22pF                                      6</p>
+<h3 id="rb0-int">RB0/INT</h3>
+<h3 id="rb1">RB1</h3>
+<h3 id="rb2">RB2</h3>
+<h3 id="rb3">RB3</h3>
+<h3 id="rb4">RB4</h3>
+<h3 id="rb5">RB5</h3>
+<h3 id="u1-vss-rb6">U1_VSS                                 RB6</h3>
+<h3 id="rb7">RB7</h3>
+<h3 id="pic16f84a">PIC16F84A</h3>
+<h3 id="r1-r2-r3-r4-r5-r6-r7-r8">R1    R2    R3    R4    R5    R6    R7    R8</h3>
+<p>330   330   330   330   330   330   330   330</p>
+<h3 id="d1-d2-d3-d4-d5-d6-d7-d8">D1    D2    D3    D4    D5    D6    D7    D8</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST p=16F84A</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp; _XT_OSC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG   0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW 0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF TRISB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW 0x01</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF TRISA</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS,5</code></pre>
+<h3 id="ledcntrl">LEDcntrl</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS PORTA,0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO TURN_ON</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF PORTB,0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO LEDcntrl</code></pre>
+<h3 id="turn-on">TURN_ON</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF PORTB,0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO LEDcntrl</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End</code></pre>
+<p>Counter Example</p>
+<h3 id="u1-vdd">U1_VDD</h3>
+<h3 id="r9">R9</h3>
+<p>10k</p>
+<h3 id="x1-u1">X1                             U1</h3>
+<p>16                               17</p>
+<h3 id="osc1-clkin-ra0">OSC1/CLKIN       RA0</h3>
+<p>15                               18</p>
+<h3 id="osc2-clkout-ra1">OSC2/CLKOUT      RA1</h3>
+<h3 id="ra2">RA2</h3>
+<p>4                            2</p>
+<h3 id="crystal-mclr-ra3">CRYSTAL                         MCLR             RA3</h3>
+<h3 id="c1-ra4-t0cki">C1                                                RA4/T0CKI</h3>
+<p>22pF                 C2 22pF                                      6</p>
+<h3 id="rb0-int">RB0/INT</h3>
+<h3 id="rb1">RB1</h3>
+<h3 id="rb2">RB2</h3>
+<h3 id="rb3">RB3</h3>
+<h3 id="rb4">RB4</h3>
+<h3 id="rb5">RB5</h3>
+<h3 id="u1-vss-rb6">U1_VSS                                 RB6</h3>
+<h3 id="rb7">RB7</h3>
+<h3 id="pic16f84a">PIC16F84A</h3>
+<h3 id="r1-r2-r3-r4-r5-r6-r7-r8">R1    R2    R3    R4    R5    R6    R7    R8</h3>
+<p>330   330   330   330   330   330   330   330</p>
+<h3 id="d1-d2-d3-d4-d5-d6-d7-d8">D1    D2    D3    D4    D5    D6    D7    D8</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST p=16F84A</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp; _XT_OSC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>j       EQU 0x0c</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>k       EQU 0x0d</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG       0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW 0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF TRISB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS,5</code></pre>
+<h3 id="mloop">MLOOP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCF PORTB,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL DELAY</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO MLOOP</code></pre>
+<h3 id="delay">DELAY</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw d'200'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf j</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jloop:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf k</code></pre>
+<h3 id="kloop">kloop</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz k,f</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto kloop</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz j,f</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto jloop</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Push Button Counter</code></pre>
+<h3 id="u1-vdd">U1_VDD</h3>
+<h3 id="r9-r10">R9                                      R10</h3>
+<p>10k                                     10k</p>
+<h3 id="x1-u1">X1                             U1</h3>
+<p>16                               17</p>
+<h3 id="osc1-clkin-ra0">OSC1/CLKIN       RA0</h3>
+<p>15                               18</p>
+<h3 id="osc2-clkout-ra1">OSC2/CLKOUT      RA1</h3>
+<h3 id="ra2">RA2</h3>
+<p>4                            2</p>
+<h3 id="crystal-mclr-ra3">CRYSTAL                         MCLR             RA3</h3>
+<h3 id="c1-ra4-t0cki">C1                                                RA4/T0CKI</h3>
+<p>22pF                 C2 22pF                                      6</p>
+<h3 id="rb0-int">RB0/INT</h3>
+<h3 id="rb1">RB1</h3>
+<h3 id="rb2">RB2</h3>
+<h3 id="rb3">RB3</h3>
+<h3 id="rb4">RB4</h3>
+<h3 id="rb5">RB5</h3>
+<h3 id="u1-vss-rb6">U1_VSS                                 RB6</h3>
+<h3 id="rb7">RB7</h3>
+<h3 id="pic16f84a">PIC16F84A</h3>
+<h3 id="r1-r2-r3-r4-r5-r6-r7-r8">R1    R2    R3    R4    R5    R6    R7    R8</h3>
+<p>330   330   330   330   330   330   330   330</p>
+<h3 id="d1-d2-d3-d4-d5-d6-d7-d8">D1    D2    D3    D4    D5    D6    D7    D8</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST p=16F84A</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp; _XT_OSC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAYAC1        EQU   h'0C'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAYAC2        EQU   h'0D'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MEM           EQU   h'0E'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG   0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF TRISB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF TRISA,0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF MEM</code></pre>
+<h3 id="tekrar">TEKRAR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC PORTA,0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO TEKRAR</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCF MEM</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVF MEM,W</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBLW d'3'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC STATUS,2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO YAK</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL GECIKME</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO TEKRAR</code></pre>
+<h3 id="yak">YAK</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW h'00'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF MEM</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW h'FF'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF PORTB</code></pre>
+<h3 id="gecikme">GECIKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw h'FF'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf SAYAC1</code></pre>
+<h3 id="dongu1">DONGU1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf SAYAC2</code></pre>
+<h3 id="dongu2">DONGU2</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz SAYAC2,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto DONGU2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz SAYAC1,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto DONGU1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Seven Segment Display Example</code></pre>
+<h3 id="u1-vdd">U1_VDD</h3>
+<h3 id="r9">R9</h3>
+<p>10k</p>
+<h3 id="x1-u1">X1                             U1</h3>
+<p>16                               17</p>
+<h3 id="osc1-clkin-ra0">OSC1/CLKIN       RA0</h3>
+<p>15                               18</p>
+<h3 id="osc2-clkout-ra1">OSC2/CLKOUT      RA1</h3>
+<h3 id="ra2">RA2</h3>
+<p>4                            2</p>
+<h3 id="crystal-mclr-ra3">CRYSTAL                         MCLR             RA3</h3>
+<h3 id="c1-ra4-t0cki">C1                                                RA4/T0CKI</h3>
+<p>22pF                 C2 22pF                                      6</p>
+<h3 id="rb0-int">RB0/INT</h3>
+<h3 id="rb1">RB1</h3>
+<h3 id="rb2">RB2</h3>
+<h3 id="rb3">RB3</h3>
+<h3 id="rb4">RB4</h3>
+<h3 id="rb5">RB5</h3>
+<h3 id="u1-vss-rb6">U1_VSS                                 RB6</h3>
+<h3 id="rb7">RB7</h3>
+<h3 id="pic16f84a">PIC16F84A</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST p=16F84A</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE "P16F84A.INC"</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>__CONFIG _CP_OFF &amp; _WDT_OFF &amp; _PWRTE_ON &amp; _XT_OSC</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAYAC1       EQU 0x0C</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAYAC2       EQU 0x0D</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG   0x00</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF STATUS,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRF TRISB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS,5</code></pre>
+<h3 id="basla">BASLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW h'05'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL CEV_TAB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL GECIKME</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW h'09'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL CEV_TAB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL GECIKME</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO BASLA</code></pre>
+<h3 id="gecikme">GECIKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movlw h'FF'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf SAYAC1</code></pre>
+<h3 id="dongu1">DONGU1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>movwf SAYAC2</code></pre>
+<h3 id="dongu2">DONGU2</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz SAYAC2,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto DONGU2</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decfsz SAYAC1,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>goto DONGU1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return</code></pre>
+<h3 id="cev-tab">CEV_TAB</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF PCL,F</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'3F'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'06'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'5B'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'4F'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'66'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'6D'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'7D'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'07'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'7F'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'6F'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'77'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'7C'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'39'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'5E'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'79'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'71'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETLW         h'80'</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>Reference: Microcontroller Programming, Julio Sanchez, Maria P. Canton</p>
+<p>Mikrodenetleyiciler ve PIC Programlama, Orhan Altınbaşak</p>
+<figure class="yazi-gorsel"><img src="sekil-1186-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="pic_examples: sayfa 1, devre, tablo ve şekiller"><figcaption>pic_examples, sayfa 1.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1186-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="pic_examples: sayfa 3, devre, tablo ve şekiller"><figcaption>pic_examples, sayfa 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1186-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="pic_examples: sayfa 5, devre, tablo ve şekiller"><figcaption>pic_examples, sayfa 5.</figcaption></figure>
+<h2 id="pic-asm-komutlari2">pic-asm-komutlari2</h2>
+<h3 id="pic-mi-krodenetleri-ci-leri-16x-ai-lesi-i-ci-n-komut-seti-instruction-set">PIC MİKRODENETLERİCİLERİ 16X AİLESİ İÇİN KOMUT SETİ (INSTRUCTION SET)</h3>
+<ul><li>f : İşlem görecek bellek adresi veya bellek adresinin önceden tanımlanmış etiket ismi.</li></ul>
+<ul><li>k : Komutun yanında verilen ve işleme tabi tutulacak sabit sayı.</li></ul>
+<ul><li>d : İşlem sonucunun yazılacağı hedefi belirtir. 0 ise hedef W, 1 ise hedef verilen adresin kendisi olur.</li></ul>
+<ul><li>b : Verilen adresteki bilginin kaçıncı bitinin işlem göreceğini belirtir. 0..7 arasında bir değer olmalıdır.</li></ul>
+<p>Komut                                                             Açıklama                                                          Cycle   Etkilenen * * * Veri Transfer Komutları * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW       k      Verilen k sabit sayısını W kaydedicisine yazar                                                                       1         -
+MOVWF       f      W kaydedicisindeki sayıyı f ile belirtilen adrese kopyalar                                                           1         -
+MOVF        f,d    f adresindeki sayıyı d ile belirtilen hedefe kopyalar                                                                1         Z</code></pre>
+<p>* * * Aritmetik İşlem Komutları * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDLW       k      Verilen k sabit sayısı ile W kaydedicisindeki sayıyı toplar ve sonucu W kaydedicisine yazar.                         1      C DC Z
+ADDWF       f,d    W ile f adresindeki sayıyı toplar ve sonucu d ile belirtilen hedefe kaydeder.                                        1      C DC Z
+SUBLW       k      Verilen k sabit sayısından W kaydedicisindeki sayıyı çıkarır ve sonucu W kaydedicisine yazar                         1      C DC Z
+SUBWF       f,d    f adresindeki sayıdan W kaydedicisindeki sayıyı çıkartır ve sonucu d ile belirtilen hedefe kaydeder.                 1      C DC Z</code></pre>
+<p>* * * Mantıksal (Lojik) İşlem Komutları * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW       k      Verilen   k sabit sayısı ile W kaydedicisindeki  sayıyı bit bit lojik AND (VE) işlemine tabi tutar ve</code></pre>
+<h3 id="1-z">1         Z</h3>
+<p>sonucu W kaydedicisine yazar.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDWF       f,d    f adresindeki sayı ile W kaydedicisindeki sayıyı bit bit lojik AND (VE) işlemine tabi tutar ve sonucu d</code></pre>
+<h3 id="1-z">1         Z</h3>
+<p>ile belirtilen hedefe kaydeder. IORLW       k      Verilen   k sabit sayısı ile W kaydedicisindeki sayıyı bit bit lojik OR (VEYA) işlemine tabi tutar ve</p>
+<h3 id="1-z">1         Z</h3>
+<p>sonucu W kaydedicisine yazar. IORWF       f,d    f adresindeki sayı ile W kaydedicisindeki sayıyı bit bit lojik OR (VEYA) işlemine tabi tutar ve sonucu</p>
+<h3 id="1-z">1         Z</h3>
+<p>d ile belirtilen hedefe kaydeder. XORLW       k      Verilen k sabit sayısı ile W kaydedicisindeki sayıyı bit bit lojik XOR (ÖZEL VEYA) işlemine tabi</p>
+<h3 id="1-z">1         Z</h3>
+<p>tutar ve sonucu W kaydedicisine yazar f adresindeki sayı ile W kaydedicisindeki sayıyı bit bit lojik XOR (ÖZEL-VEYA) işlemine tabi tutar XORWF       f,d                                                                                                                         1         Z ve sonucu d ile belirtilen hedefe kaydeder. * * * Bit Düzeyinde İşlemYapan Komutlar * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF         f,b    f adresindeki sayının b ninci bitini sıfırlar                                                                        1         -
+BSF         f,b    f adresindeki sayının b ninci bitini bir yapar                                                                       1         -</code></pre>
+<p>f adresindeki sayının bitlerini bir bit sola kaydırır. C (Carry) biti, en sağdaki yeni bitin yerine</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RLF         f,d                                                                                                                         1         C</code></pre>
+<p>kopyalanır ve en soldan çıkan bit C (Carry) bitine kopyalanır. Sonuç d ile belirtilen hedefe kaydedilir. f adresindeki sayının bitlerini bir bit sağa kaydırır. C (Carry) biti, en soldaki yeni bitin yerine</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RRF         f,d                                                                                                                         1         C</code></pre>
+<p>kopyalanır ve en sağdan çıkan bit C (Carry) bitine kopyalanır. Sonuç d ile belirtilen hedefe kaydedilir. f adresindeki sayının bitlerin her birinin tek tek tersini alır. (sıfırları bir, birleri sıfır yapar) ve sonucu d COMF        f,d                                                                                                                         1         Z ile belirtilen hedefe kaydeder. f adresindeki sayının ilk dört biti ile son dört bitinin yerini değiştirir ve sonucu d ile belirtilen hedefe</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SWAPF       f,d                                                                                                                         1         -
+kaydeder.</code></pre>
+<p>* * * Sıfırlama / Arttırma / EksiltmeKomutları * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRW               W kaydedicisini sıfırlar                                                                                             1         Z
+CLRF        f      f adresindeki sayıyı sıfırlar                                                                                        1         Z
+DECF        f,d    f adresindeki sayıyı bir eksiltir ve sonucu d ile belirtilen hedefe kaydeder.                                        1         Z
+INCF        f,d    f adresindeki sayıyı bir arttırır ve sonucu d ile belirtilen hedefe kaydeder.                                        1         Z</code></pre>
+<p>* * * Dallanma Komutları (Program Akışını Değiştiren Komutlar) * * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO        k      k ile tanımlanan adrese yada adres etiketine koşulsuz dallanır.                                                      2         -</code></pre>
+<p>f adresindeki sayıyı bir arttırarak sonucu d ile belirtilen hedefe kaydeder ve bu sonucun sıfır olup</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCFSZ f,d         olmadığını kontrol eder. Eğer sonuç sıfır ise kendisinden sonra gelen komutun üzerinden atlar, değilse              1(2)       -</code></pre>
+<p>normal çalışmaya devam eder. f adresindeki sayıyı bir eksiltirek sonucu d ile belirtilen hedefe kaydeder ve bu sonucun sıfır olup</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ f,d         olmadığını kontrol eder. Eğer sonuç sıfır ise kendisinden sonra gelen komutun üzerinden atlar, değilse              1(2)       -</code></pre>
+<p>normal çalışmaya devam eder.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC       f,b    f adresindeki sayının b ninci bitini kontrol eder. Eğer sıfır ise, kendisinden sonra gelen komutun                  1(2)       -</code></pre>
+<p>üzerinden atlar. Değilse normal çalışmaya devam eder. f adresindeki sayının b ninci bitini kontrol eder.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS       f,b    Eğer bir ise, kendisinden sonra gelen komutun üzerinden atlar.                                                      1(2)       -</code></pre>
+<p>Değilse normal çalışmaya devam eder. * * * Alt Program Çağırma ile İlgili Komutlar* * *</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL        k      k ile tanımlanan adrese yada adres etiketindeki alt programa geri dönmek üzere dallanır                              2         -
+RETURN             Alt programdan çağırıldığı noktaya geri döner                                                                        2         -
+RETLW       k      Verilen k sabit sayısını W kaydedicisine yazarak alt programdan çağrıldığı noktaya geri döner                        2         -
+RETFIE             İnterrupttan (kesmeden) geri dönüş komutudur.                                                                        2         -</code></pre>
+<p>* * * Özel Amaçlı Komutlar* * * Mikrodenetleyicinin kilitlenmesi durumunda resetlenmesini sağlayan “Watchdog Timer”</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLRWDT             zamanlayıcısını sıfırlar. (Zamanlayıcı belirli bir süre boyunca sıfırlanmazsa mikrodenetleyici                       1       TO PD</code></pre>
+<p>resetlenir) SLEEP              İşlemciyi uyku moduna sokar, işlemciyi uyutur                                                                        1       TO PD</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP                Hiçbir şey yapmaz. Sadece 1 periyotluk zaman harcanır.                                                               1         -</code></pre>
+<p>T.Ü.Ipsala M.Y.O ~ Ozan AKI ©09012009</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-pic-ders-notlari.zip" download>eem332-pic-ders-notlari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.6 MB · 15.05.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-pic-ders-notlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

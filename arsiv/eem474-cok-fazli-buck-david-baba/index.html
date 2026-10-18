@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM474 Güç Elektroniği: Çok fazlı buck dönüştürücü (David Baba, Texas Instruments) — hasancan.net</title>
+<meta name="description" content="2012 tarihli makalede faz kaydırmalı buck, giriş ve çıkış dalgalanması, 40 A uygulama örneği ve yerleşim ilkeleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem474-cok-fazli-buck-david-baba/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM474 Güç Elektroniği: Çok fazlı buck dönüştürücü (David Baba, Texas Instruments)">
+<meta property="og:description" content="2012 tarihli makalede faz kaydırmalı buck, giriş ve çıkış dalgalanması, 40 A uygulama örneği ve yerleşim ilkeleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem474-cok-fazli-buck-david-baba/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM474 Güç Elektroniği: Çok fazlı buck dönüştürücü (David Baba, Texas Instruments)", "description": "2012 tarihli makalede faz kaydırmalı buck, giriş ve çıkış dalgalanması, 40 A uygulama örneği ve yerleşim ilkeleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem474-cok-fazli-buck-david-baba/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM474 – Güç Elektroniği", "associatedMedia": {"@type": "MediaObject", "name": "cok-fazli-buck-david-baba.pdf", "contentUrl": "https://hasancan.net/arsiv/eem474-cok-fazli-buck-david-baba/cok-fazli-buck-david-baba.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM474 Güç Elektroniği: Çok fazlı buck dönüştürücü (David Baba, Texas Instruments)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem474">EEM474</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM474 – Güç Elektroniği</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>22.02.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#faz-kaydirmali-calisma">Faz kaydırmalı çalışma</a></li><li><a href="#dalgalanmanin-gorev-oranina-bagimliligi">Dalgalanmanın görev oranına bağımlılığı</a></li><li><a href="#giris-kondansatoru-ve-gecici-yanit">Giriş kondansatörü ve geçici yanıt</a></li><li><a href="#uygulama-ornegi">Uygulama örneği</a></li><li><a href="#yerlesim">Yerleşim</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM474</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM474 Güç Elektroniği: Çok fazlı buck dönüştürücü (David Baba, Texas Instruments)</h1>
+            <p class="kucuk">EEM474 – Güç Elektroniği · 22.02.2012 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>David Baba'nın Texas Instruments Analog Applications Journal dergisinin 2012 ilk çeyrek sayısında yayımlanan “Benefits of a multiphase buck converter” makalesi. PDF oluşturma tarihi 22 Şubat 2012'dir; makalenin tamamı yazının sonundan indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="faz-kaydirmali-calisma">Faz kaydırmalı çalışma</h2>
+<p>İki fazlı buck'ta aynı çıkışı besleyen iki endüktörün anahtarlama zamanları kaydırılır. 40 A yükün dengeli paylaşımında her fazın ortalama akımı 20 A olur. Akımın paylaşılması elemanlardaki ısıl yükü dağıtır; akım dalgalanmalarının kısmen birbirini götürmesi giriş ve çıkış kondansatörlerini rahatlatır.</p>
+<h2 id="dalgalanmanin-gorev-oranina-bagimliligi">Dalgalanmanın görev oranına bağımlılığı</h2>
+<p>N faz ve görev oranı D için k = floor(ND) alınarak makaledeki normalize çıkış dalgalanması:</p>
+<p>r(D) = N [D − k/N][(k + 1)/N − D] / [D(1 − D)]</p>
+<p>İki fazda D = 0,20 için r = 0,75, yani %25 azalma bulunur. D = 0,25 benzetiminde tek endüktör dalgalanması 2,2 A iken çıkıştaki toplam dalgalanma yaklaşık 1,5 A'dır. İdeal iki fazlı sistemde D = 0,5 noktasında dalgalanmalar birbirini tamamen götürür.</p>
+<p><em>Not: Sıfır dalgalanma sonucu eşit fazlar ve ideal zamanlama varsayımına aittir; gerçek devrede toleranslar ve parazitler bulunur. Formül uç noktalar D = 0 ve D = 1'de doğrudan bölme yapılarak kullanılmaz.</em></p>
+<h2 id="giris-kondansatoru-ve-gecici-yanit">Giriş kondansatörü ve geçici yanıt</h2>
+<p>Makale giriş kondansatörünün RMS akım gereksinimini de görev oranına göre karşılaştırır. Endüktör başına daha düşük enerji depolanması yük basamağına yanıtı iyileştirebilir. Dalgalanma iptali çıkıştaki ESR kaynaklı gerilim dalgalanmasını azaltır.</p>
+<h2 id="uygulama-ornegi">Uygulama örneği</h2>
+<p>LM3754 değerlendirme kartında 10,8–13,2 V giriş, 1,2 V çıkış, 40 A maksimum yük ve 300 kHz anahtarlama kullanılır. Faz başına 0,5 µH endüktör ve toplam 2000 µF çıkış kapasitesi listelenir. Makaledeki ölçümlerde 10 A yük basamağına yaklaşık 20 µs yanıt ve yaklaşık 27 mV alt/üst aşım gösterilir. Verim ve güç kaybı grafikleri 0,9 V ile 1,2 V çıkışları karşılaştırır.</p>
+<h2 id="yerlesim">Yerleşim</h2>
+<p>Yüksek akımlı yollar ve kapı sürme dönüş yolları kısa tutulur. Sinyal toprağı ile güç toprağı uygun noktada birleştirilir. Küçük sinyal elemanları kontrolcüye yakın konur; anahtarlama düğümünün bakır alanı ve hassas işaretlerle kuplajı sınırlanır. Giriş kondansatörünün MOSFET çiftine yakınlığı özellikle vurgulanır.</p>
+<p><em>Not: Ürün adları ve ölçüm değerleri 2012 tarihli makaledeki uygulamaya aittir; güncel ürün tavsiyesi veya her çok fazlı devre için garanti edilmiş performans değildir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="cok-fazli-buck-david-baba.pdf" download>cok-fazli-buck-david-baba.pdf</a></p>
+              <p class="kucuk">PDF · 901 KB · 8 <span data-i18n="arch.pagesLower"></span> · 22.02.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="cok-fazli-buck-david-baba.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (901 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

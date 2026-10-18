@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Ayrık Zamanlı DC Motor ve PID Laboratuvarı — hasancan.net</title>
+<meta name="description" content="DC motorun ZOH ile ayrıklaştırılması, Tustin PID denetleyicisi, kök yer eğrisi ve MATLAB kaynak kodları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ayrik-zaman-motor-pid-lab/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Ayrık Zamanlı DC Motor ve PID Laboratuvarı">
+<meta property="og:description" content="DC motorun ZOH ile ayrıklaştırılması, Tustin PID denetleyicisi, kök yer eğrisi ve MATLAB kaynak kodları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ayrik-zaman-motor-pid-lab/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Ayrık Zamanlı DC Motor ve PID Laboratuvarı", "description": "DC motorun ZOH ile ayrıklaştırılması, Tustin PID denetleyicisi, kök yer eğrisi ve MATLAB kaynak kodları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem322-ayrik-zaman-motor-pid-lab/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Motor-PID-Laboratuvar.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ayrik-zaman-motor-pid-lab/Motor-PID-Laboratuvar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Ayrık Zamanlı DC Motor ve PID Laboratuvarı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.03.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#motor-modeli">Motor modeli</a></li><li><a href="#kontrolsuz-kapali-dongu-ve-pid">Kontrolsüz kapalı döngü ve PID</a></li><li><a href="#matlab-kaynak-kodu">MATLAB kaynak kodu</a></li><li><a href="#kok-yer-ve-son-basamak-yaniti">Kök yer ve son basamak yanıtı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Ayrık Zamanlı DC Motor ve PID Laboratuvarı</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 18.03.2014 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM322 klasöründeki <strong>“Denetim Lab - 2”</strong> çalışması, bir DC motor modelinin ayrıklaştırılmasını ve PID denetimini inceliyor. Bir arkadaşın derlediği Word belgesinin adı EEM464 kodunu taşıyor; içerikte yazar ve tarih belirtilmemiş. Arşiv tarihi özgün Word belgesinin 18 Mart 2014 oluşturulma bilgisine dayanıyor. Belgenin PDF karşılığı ve iki MATLAB kaynak dosyası yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="motor-modeli">Motor modeli</h2>
+<p>Parametreler R = 1, L = 0.5, Kt = 0.01, J = 0.01 ve b = 0.1’dir. Kodun kullandığı transfer fonksiyonu:</p>
+<p>G(s) = Kt / [JL s² + (JR + Lb)s + Rb + Kt²]</p>
+<p>Sayılar yerine konulduğunda:</p>
+<p><strong>G(s) = 0.01/(0.005s² + 0.06s + 0.1001)</strong></p>
+<p>Örnekleme süresi <strong>Ts = 0.12 s</strong>. <code>c2dm(...,'zoh')</code> sıfır dereceli tutma ile ayrıklaştırma yapar. İlk kısa dosya yalnız bu modeli ve ayrıklaştırmayı içerir; uzun dosya kapalı döngü ve denetleyici aşamalarını da sürdürür.</p>
+<h2 id="kontrolsuz-kapali-dongu-ve-pid">Kontrolsüz kapalı döngü ve PID</h2>
+<p><code>cloop</code> ile birim geri beslemeli model oluşturulup <code>dstep</code> ile 101 örneklik basamak yanıtı alınır. Zaman vektörü 0’dan 12 saniyeye 0.12 saniyelik adımlarla ilerler; sonuç <code>stairs</code> ile çizilir.</p>
+<p>PID katsayıları <strong>Kp = 100, Ki = 200, Kd = 10</strong>. Tustin dönüşümüyle ayrık denetleyici elde edilir; motor ve denetleyicinin pay/payda polinomları <code>conv</code> ile çarpılır.</p>
+<p>Son aşamada denetleyici paydası <code>conv([1 -1],[1.6 1])</code> ile değiştirilir, kök yer eğrisi yeniden çizilir ve <code>rlocfind</code> ile etkileşimli kazanç seçilir. Bu yüzden son kapalı döngü sonucu seçilen noktaya bağlıdır.</p>
+<h2 id="matlab-kaynak-kodu">MATLAB kaynak kodu</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>R=1;
+L=0.5;
+Kt=0.01;
+J=0.01;
+b=0.1;
+
+num = Kt;
+den = [(J*L) (J*R)+(L*b) (R*b)+(Kt^2)];
+
+Ts = 0.12;
+[numz,denz] = c2dm(num,den,Ts,'zoh')
+
+numz = [numz(2) numz(3)];
+[numz_cl,denz_cl] = cloop(numz,denz);
+
+[x1] = dstep(numz_cl,denz_cl,101);
+t=0:0.12:12;
+stairs(t,x1)
+xlabel('Time (seconds)')
+ylabel('Velocity (rad/s)')
+title('Stairstep Response:Original')
+% Discrete PID controller with bilinear approximation
+Kp = 100;
+Ki = 200;
+Kd = 10;
+
+[dencz,numcz]=c2dm([1 0],[Kd Kp Ki],Ts,'tustin'); 
+numaz = conv(numz,numcz);
+denaz = conv(denz,dencz);
+[numaz_cl,denaz_cl] = cloop(numaz,denaz);
+
+[x2] = dstep(numaz_cl,denaz_cl,101);
+t=0:0.12:12;
+stairs(t,x2)
+xlabel('Time (seconds)')
+ylabel('Velocity (rad/s)')
+title('Stairstep Response:with PID controller')
+rlocus(numaz,denaz)
+title('Root Locus of Compensated System')
+
+dencz = conv([1 -1],[1.6 1]) 
+numaz = conv(numz,numcz);
+denaz = conv(denz,dencz);
+
+rlocus(numaz,denaz)
+title('Root Locus of Compensated System');
+[K,poles] = rlocfind(numaz,denaz)
+[numaz_cl,denaz_cl] = cloop(K*numaz,denaz);
+
+[x3] = dstep(numaz_cl,denaz_cl,101);
+t=0:0.12:12;
+stairs(t,x3)
+xlabel('Time (seconds)')
+ylabel('Velocity (rad/s)')
+title('Stairstep Response:with PID controller')</code></pre>
+<p><em>Not: Bu arşiv kodu çalıştırılmadı; <code>c2dm</code>, <code>cloop</code>, <code>dstep</code> gibi eski MATLAB komutlarını ve etkileşimli <code>rlocfind</code> adımını korur. Word belgesinin ilk PID çiziminde <code>stairs(t,x1)</code>, uzun kaynak dosyada ise <code>stairs(t,x2)</code> yazılıdır. İlk ifade önceki yanıtı yeniden çizer; fark kaynaklarda olduğu gibi korunmuştur.</em></p>
+<h2 id="kok-yer-ve-son-basamak-yaniti">Kök yer ve son basamak yanıtı</h2>
+<figure class="yazi-gorsel"><img src="motor-3.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Denetleyici kutupları değiştirildikten sonra motorun kök yer eğrisi"><figcaption>Denetleyici paydasının değiştirilmesi ve kazanç seçimi</figcaption></figure>
+<figure class="yazi-gorsel"><img src="motor-4.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Seçilen kazançla telafi edilmiş motorun basamak yanıtı"><figcaption>Belgede yer alan son kapalı döngü yanıtı</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="Motor-PID-Laboratuvar.zip" download>Motor-PID-Laboratuvar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 41 KB · 18.03.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Motor-PID-Laboratuvar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (41 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Elektronik II: 2010 Ödev Çözüm Taslakları, Üç Katlı Yükselteç ve Transistörlü Op-amp — hasancan.net</title>
+<meta name="description" content="Üç BJT&#x27;li yükseltecin DC çalışma noktaları ve küçük işaret hesabı; iki fark katı ve çıkış katından oluşan dokuz transistörlü op-amp tasarımının el yazısı çözüm taslağı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-odev-2010-uc-katli-opamp/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Elektronik II: 2010 Ödev Çözüm Taslakları, Üç Katlı Yükselteç ve Transistörlü Op-amp">
+<meta property="og:description" content="Üç BJT&#x27;li yükseltecin DC çalışma noktaları ve küçük işaret hesabı; iki fark katı ve çıkış katından oluşan dokuz transistörlü op-amp tasarımının el yazısı çözüm taslağı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-odev-2010-uc-katli-opamp/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Elektronik II: 2010 Ödev Çözüm Taslakları, Üç Katlı Yükselteç ve Transistörlü Op-amp", "description": "Üç BJT'li yükseltecin DC çalışma noktaları ve küçük işaret hesabı; iki fark katı ve çıkış katından oluşan dokuz transistörlü op-amp tasarımının el yazısı çözüm taslağı.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem311-odev-2010-uc-katli-opamp/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM311 Elektronik II: 2010 Ödev Çözüm Taslakları, Üç Katlı Yükselteç ve Transistörlü Op-amp">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.12.2010</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#odev-i-uc-transistorlu-yukseltec">Ödev I: Üç transistörlü yükselteç</a></li><li><a href="#i-ki-fark-katli-dokuz-transistorlu-op-amp-tasarimi">İki fark katlı, dokuz transistörlü op-amp tasarımı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM311 Elektronik II: 2010 Ödev Çözüm Taslakları, Üç Katlı Yükselteç ve Transistörlü Op-amp</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 17.12.2010 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM311 Elektronik II</strong> dersinde arkadaşların hazırladığı iki el yazısı çözüm taslağını içeriyor. Kişisel bilgiler çıkarıldı; <strong>fotoğraflanmış sayfalardan metne aktarıldı</strong>. Fotoğraflar 9–10 Kasım ve 17 Aralık 2010 tarihlerinde çekilmiş. Aynı sayfaların tekrarlanan çekimleri birleştirildi. Bu yazının indirilebilir dosyası yok. Dönemin ödev soruları ayrıca <a href="/arsiv/eem311-odevler-2010/">2010 ödevleri yazısında</a> bulunuyor.</p>
+<h2 id="odev-i-uc-transistorlu-yukseltec">Ödev I: Üç transistörlü yükselteç</h2>
+<p>Devrede V_CC = 10 V, β = 100 ve V_BE(on) = 0,7 V verilmiş. İlk npn transistörün baz bölücüsü 730 kΩ ve 270 kΩ; emetör direnci 10 kΩ, buna paralel AC kolunda 100 µF ve 230 Ω var. İkinci transistör pnp; baz düğümünden 270 kΩ toprağa ve 100 µF baypas kondansatörü bağlanmış. İkinci katın emetör tarafındaki direnç 730 kΩ. Üçüncü transistör emetör izleyici; kolektör beslemeye, emetör 5 mA akım kaynağına bağlı. Çıkış 100 µF üzerinden 1 kΩ yüke gidiyor. İkinci katın kolektör direnci 10 kΩ.</p>
+<h3 id="birinci-katin-dc-cozumu">Birinci katın DC çözümü</h3>
+<p>Baz bölücüsünün eşdeğeri:</p>
+<p>V_BB1 = (270/1000)·10 = 2,7 V</p>
+<p>R_B1 = 270 kΩ ∥ 730 kΩ = 197,1 kΩ</p>
+<p>2,7 = 0,7 + (β + 1)I_B1·10 kΩ + I_B1·197,1 kΩ</p>
+<p>2 V = (1207,1 kΩ)I_B1</p>
+<p><strong>I_B1 = 1,657 µA</strong>, <strong>I_C1 = 0,1657 mA</strong></p>
+<h3 id="cikis-katinin-dc-cozumu">Çıkış katının DC çözümü</h3>
+<p>I_B3 + I_C3 = 5 mA</p>
+<p>(β + 1)I_B3 = 5 mA</p>
+<p><strong>I_B3 = 0,04950 mA</strong>, <strong>I_C3 = 4,9504 mA</strong></p>
+<h3 id="i-kinci-katin-dugum-denklemleri">İkinci katın düğüm denklemleri</h3>
+<p>B₂ düğümüne göre notta şu iki ilişki kurulmuş:</p>
+<p>I_T + I_E2 = I_C1 + I₁</p>
+<p>I₁ = I_B2 + I</p>
+<p>Ara adımda I₁ ≈ 13,7 µA bulunuyor ve:</p>
+<p>βI_B2 − I = 0,152 mA</p>
+<p>0 = (730 kΩ)I_B2 − 0,7 + (270 kΩ)I</p>
+<p>Birlikte çözümün yanına <strong>I_B2 = 1,566 µA</strong> ve <strong>I = 0,0346 mA</strong> yazılmış. Başka satırda I_C2 ≈ 0,1566 mA gösterilmiş.</p>
+<p>Fotoğraftaki çalışma noktası listesi:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Transistör</th><th scope="col">Listede yazılan Q(I_C, V_CE)</th></tr></thead><tbody><tr><th scope="row">Q₁</th><td>(0,1657 mA, 7,73 V)</td></tr><tr><th scope="row">Q₂</th><td>(3,46 mA, 6,339 V)</td></tr><tr><th scope="row">Q₃</th><td>(4,9504 mA, 2,321 V)</td></tr></tbody></table></div>
+<p><em>Not: Q₂ için sonuç listesindeki 3,46 mA, aynı sayfadaki I_B2 = 1,566 µA ve β = 100 ile uyuşmuyor; bu ikisi I_C2 = 0,1566 mA verir. Sonraki küçük işaret hesaplarında 3,46 mA kullanıldığı için tutarsızlık devam ediyor. Liste düzeltilmeden aktarıldı.</em></p>
+<h3 id="kucuk-isaret-parametreleri">Küçük işaret parametreleri</h3>
+<p>V_A = 100 V kullanılarak r_o = (V_A + V_CE)/I_C, r_π = βV_T/I_C bağıntıları yazılmış. Taslağın kullandığı değerler:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parametre</th><th scope="col">Değer</th></tr></thead><tbody><tr><th scope="row">r_o1</th><td>yaklaşık 650 kΩ</td></tr><tr><th scope="row">r_o2</th><td>yaklaşık 30,73 kΩ</td></tr><tr><th scope="row">r_o3</th><td>yaklaşık 20,68 kΩ</td></tr><tr><th scope="row">r_π1</th><td>15,08 kΩ</td></tr><tr><th scope="row">r_π2</th><td>722,54 Ω</td></tr><tr><th scope="row">r_π3</th><td>505,0097 Ω</td></tr></tbody></table></div>
+<p>Giriş direnci:</p>
+<p>R_in = 730 kΩ ∥ 270 kΩ ∥ 15,08 kΩ = <strong>14,0142 kΩ</strong></p>
+<p>Toplam kazanç, üç katın oranları çarpılarak yazılmış:</p>
+<p>A_v = (v_out1/v_in1)(v_out2/v_in2)(v_out3/v_in3)</p>
+<p>Son sayısal satırda <strong>A_v = −10,4923</strong> sonucu var.</p>
+<p>Çıkış direnci hesabında giriş sıfırlanmış ve çıkışa test gerilimi uygulanmış. Sayfanın sonunda <strong>R_out = r_o3/2</strong> yazıyor; aradaki cebir bazı yerlerde eksik.</p>
+<p><em>Not: Üçüncü katın fiziksel bağlantısı emetör izleyicidir; fotoğraftaki AC eşdeğer ise emetör topraklanmış gibi çizilmiş. Bu nedenle −10,4923 kazancı ve r_o3/2 çıkış direnci, özgün devre için doğrulanmış sonuçlar değildir. Giriş direnci paralel direnç hesabı yaklaşık 14,01 kΩ ile tutarlıdır.</em></p>
+<h2 id="i-ki-fark-katli-dokuz-transistorlu-op-amp-tasarimi">İki fark katlı, dokuz transistörlü op-amp tasarımı</h2>
+<p>İkinci taslağın devresi üç bloğa ayrılmış: <strong>birinci fark yükselteci</strong>, <strong>ikinci fark yükselteci</strong>, <strong>çıkış katı</strong>. Birinci fark çifti Q₁–Q₂; akım kaynağı Q₃–Q₄. İkinci fark çifti Q₅–Q₆; akım kaynağı Q₇–Q₈. Q₉ emetör izleyici olarak çıkışı sürüyor. Girişler 1 ve 2, çıkış 3 numaralı terminaller olarak işaretlenmiş.</p>
+<p>Besleme +5 V ve −5 V. Notta kolektör dirençleri R₁ = R₂ = 5 kΩ, R₄ = R₅ = 5 kΩ; çıkış katındaki R₆ = 10 kΩ yazıyor. Baz akımı hesabında R_B3 = 1 MΩ kullanılmış. Dirençlerin, devre ve kazanç hesabına göre seçildiği belirtiliyor.</p>
+<h3 id="dc-analiz">DC analiz</h3>
+<p>İlk akım kaynağı için 4,3 V/1 MΩ hesabıyla I_B3 = 4,3 µA bulunmuş. İkinci katın baz akımı, I_B5 = 0,36 mA/β = 3,6 µA olarak yazılmış. Bir sonraki satırda:</p>
+<p>I_B7 = I_B4 − I_B5 = 5,26 µA − 3,6 µA = 1,66 µA</p>
+<p>I_C7 = <strong>0,166 mA</strong></p>
+<p>I_C8 = 0,720 − 0,166 = <strong>0,554 mA</strong></p>
+<p>Sonuç listesinde şu Q noktaları yer alıyor:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Transistörler</th><th scope="col">Kaynakta yazılan Q(I_C, V_CE)</th></tr></thead><tbody><tr><th scope="row">Q₁, Q₂</th><td>(0,298 mA, 4,05 V)</td></tr><tr><th scope="row">Q₃</th><td>(0,43 mA, 0,7 V)</td></tr><tr><th scope="row">Q₄</th><td>(0,596 mA, 5,7 V)</td></tr><tr><th scope="row">Q₅, Q₆</th><td>(0,360 mA, 3,90 V)</td></tr><tr><th scope="row">Q₇</th><td>(0,166 mA, 5 V)</td></tr><tr><th scope="row">Q₈</th><td>(0,554 mA, 4,7 V)</td></tr><tr><th scope="row">Q₉</th><td>(0,306 mA, 1,94 V)</td></tr></tbody></table></div>
+<p>Q₉ için kullanılan adımlar:</p>
+<p>I_E9 ≈ I_C9 = 0,306 mA</p>
+<p>V_E9 = 0,306 mA·10 kΩ = 3,06 V</p>
+<p>V_CE9 = 5 − 3,06 = <strong>1,94 V</strong></p>
+<h3 id="ac-analiz">AC analiz</h3>
+<p>Küçük işaret emetör dirençleri r_e = 26 mV/I_E bağıntısıyla hesaplanmış. Sonraki katın giriş direnci, önceki katın yükü olarak hesaba katılıyor; sayfanın üzerinde <strong>“bir sonraki katın giriş direncinin yarısı”</strong> notu var.</p>
+<p>Tek uçtan alınan fark katı çıkışında, yüklenmiş kolektör direnci R_C ∥ R_giriş,sonraki ile gösterilerek kullanılan kazanç biçimi:</p>
+<p>A_v ≈ −(R_C ∥ R_giriş,sonraki)/(2r_e)</p>
+<p>Çıkış izleyicisinde r_e9 ≈ 84,97 Ω yazılmış. Çıkış katı için R_L ∥ R₆ üzerinden kazanç hesabı, iki fark katı ve çıkış katı kazançlarının çarpımı, ayrıca <strong>CMRR_dB = 20 log₁₀|A_d/A_cm|</strong> hesabı bulunuyor. Toplam kazancın ve CMRR'nin sonuç rakamları fotoğraflarda yeterince net seçilemiyor; tahmin edilmedi.</p>
+<p><em>Not: Bu bölüm bir tasarım taslağıdır. Çalışma noktası listesi ve formüller okunabilen satırları korur; tüm düğüm gerilimleri ve akım yönleri net okunamadığından devrenin bütünü için bağımsız doğrulama yapılamadı.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

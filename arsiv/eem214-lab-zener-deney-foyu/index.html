@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Zener Diyot Karakteristikleri ve Gerilim Regülatörü Deney Föyü — hasancan.net</title>
+<meta name="description" content="Deney 5 föyünde Zener diyodun parçalı doğrusal modeli, hat ve yük regülasyonu, PSpice ön çalışması, BZX55C ölçüm tabloları ve regülatörün güç hesabı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-zener-deney-foyu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Zener Diyot Karakteristikleri ve Gerilim Regülatörü Deney Föyü">
+<meta property="og:description" content="Deney 5 föyünde Zener diyodun parçalı doğrusal modeli, hat ve yük regülasyonu, PSpice ön çalışması, BZX55C ölçüm tabloları ve regülatörün güç hesabı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-zener-deney-foyu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Zener Diyot Karakteristikleri ve Gerilim Regülatörü Deney Föyü", "description": "Deney 5 föyünde Zener diyodun parçalı doğrusal modeli, hat ve yük regülasyonu, PSpice ön çalışması, BZX55C ölçüm tabloları ve regülatörün güç hesabı.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-lab-zener-deney-foyu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I", "associatedMedia": {"@type": "MediaObject", "name": "Zener-Diyot-Deney-Foyu.pdf", "contentUrl": "https://hasancan.net/arsiv/eem214-lab-zener-deney-foyu/Zener-Diyot-Deney-Foyu.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Zener Diyot Karakteristikleri ve Gerilim Regülatörü Deney Föyü">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#aim-and-theory">Aim and theory</a></li><li><a href="#voltage-regulator">Voltage regulator</a></li><li><a href="#preliminary-work">Preliminary work</a></li><li><a href="#part-i-zener-diode-test">Part I: Zener diode test</a></li><li><a href="#part-ii-forward-and-reverse-characteristics">Part II: Forward and reverse characteristics</a></li><li><a href="#part-iii-zener-regulator">Part III: Zener regulator</a></li><li><a href="#equipment-and-result-sheet">Equipment and result sheet</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Zener Diyot Karakteristikleri ve Gerilim Regülatörü Deney Föyü</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 17.03.2015 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi EEM214 Elektronik I laboratuvarının <strong>Zener Diode Characteristics &amp; Zener Diode Voltage Regulator</strong> başlıklı Deney 5 föyüdür. Belgede hazırlayan ve tarih belirtilmemiştir; kaynak kopyası Mart 2015 tarihlidir. İngilizce deney yönergeleri aşağıda metne aktarıldı; Word belgesinden dönüştürülen PDF yazının sonunda indirilebilir. Bu deneyin önceki yıllardaki sonuçları <a href="/arsiv/eem214-lab-zener-raporlar/">Zener öğrenci raporları</a> yazısındadır.</p>
+<h2 id="aim-and-theory">Aim and theory</h2>
+<p>The aim is to investigate the i–v characteristics of Zener diodes and their application to voltage regulation. A Zener diode is optimized for operation in the reverse breakdown region. In the forward direction it behaves as a normal diode.</p>
+<p>Above the knee current I_ZK, the reverse characteristic is approximately a straight line. The specified Zener voltage is measured at a test current I_ZT: for example, a 6.8 V device may have this drop at 10 mA. Changes near the operating point obey:</p>
+<ul><li>ΔV = r_z ΔI</li><li>r_z = ΔV_d2 / ΔI_d2</li><li>r_f = ΔV_d1 / ΔI_d1</li></ul>
+<p>The incremental or dynamic resistance r_z is the inverse slope of the characteristic at Q. Typical values in the handout range from a few ohms to a few tens of ohms. Smaller r_z gives more nearly constant voltage. Near the knee, r_z increases and regulation becomes poorer. The voltage, dynamic resistance, knee current and maximum power rating must all be considered.</p>
+<figure class="yazi-gorsel"><img src="zener-karakteristik.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Zener diyot karakteristiği, kırılma bölgesi, IZT çalışma noktası ve dinamik direnç"><figcaption>Ters kırılma bölgesi ve parçalı doğrusal model</figcaption></figure>
+<p><em>Not: Word kaynağındaki bazı gömülü model çizimleri PDF dönüşümünde görünmüyor. Eksik çizimler tahminle tamamlanmadı; okunabilen karakteristik ve denklemler aktarıldı.</em></p>
+<h2 id="voltage-regulator">Voltage regulator</h2>
+<p>The circuit contains a source V_S, series resistance R_S, and a reverse-connected Zener in parallel with R_L. The aim is to keep V_out approximately constant as source voltage and load current change. The diode must support the desired output voltage and dissipate the power occurring at large R_L. A smaller R_S improves the available load current but increases the diode current and dissipation at light load.</p>
+<ul><li>Line regulation = ΔV_out / ΔV_S, usually expressed in mV/V.</li><li>Load regulation = ΔV_out / ΔI_L, usually expressed in mV/mA.</li></ul>
+<figure class="yazi-gorsel"><img src="zener-regulator.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Seri RS direnci, ters bağlı Zener ve paralel RL yükünden oluşan regülatör"><figcaption>Regülatör bağlantısı ve regülasyon tanımları</figcaption></figure>
+<p><em>Not: Föy, ideal modele dayanarak çıkışın V_Z’yi aşamayacağını söylüyor. Gerçek diyotta r_z sıfır olmadığından çıkış gerilimi akımla bir miktar değişir; aynı föyün ΔV = r_z ΔI bağıntısı bunu ifade eder.</em></p>
+<h2 id="preliminary-work">Preliminary work</h2>
+<ol><li>Review textbook sections 3.6 and 3.12.</li><li>Construct the circuit of Figure 7 in PSpice with R = 1 kΩ and a 1N750 Zener. Sweep V_in from −20 V to +10 V and plot diode current against diode voltage. Change the graph’s horizontal variable to the diode voltage.</li><li>Briefly describe the difference between a Zener diode and a standard diode.</li><li>For the regulator of Figure 6, use V_Z = 6.8 V at I_ZT = 5 mA, r_z = 20 Ω, I_ZK = 0.2 mA, and a nominal supply V_S = 10 V varying by ±1 V. Find the model’s Zener voltage; V_out with no load and R_S = 0.5 kΩ; the output change for the supply variation; the output change after connecting R_L = 2 kΩ; V_out at R_L = 0.5 kΩ; and the minimum R_L for which breakdown operation continues.</li><li>Read the experimental procedure.</li></ol>
+<h2 id="part-i-zener-diode-test">Part I: Zener diode test</h2>
+<p>Check the diode with the DMM’s diode function. For a Zener voltage above the meter’s test voltage, forward connection acts like a normal silicon diode and reverse connection appears as high resistance. Record the displayed forward and reverse values and decide whether the device is good or defective.</p>
+<p>The handout gives a forward reading of 0.500–0.900 V and describes a blinking “000.0” in reverse connection.</p>
+<p><em>Not: Ters yöndeki ekran gösterimi multimetre modeline bağlıdır; “000.0” ifadesi bütün ölçü aletlerine genellenemez.</em></p>
+<h2 id="part-ii-forward-and-reverse-characteristics">Part II: Forward and reverse characteristics</h2>
+<p>Use R = 330 Ω and a BZX55C 6.2 V Zener. Increase the supply until the measured forward diode voltage reaches each target; record actual voltage and current.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Target diode voltage (V)</th><th scope="col">Measured voltage (V)</th><th scope="col">Measured current (mA)</th></tr></thead><tbody><tr><th scope="row">0.35</th><td></td><td></td></tr><tr><th scope="row">0.45</th><td></td><td></td></tr><tr><th scope="row">0.55</th><td></td><td></td></tr><tr><th scope="row">0.60</th><td></td><td></td></tr><tr><th scope="row">0.65</th><td></td><td></td></tr><tr><th scope="row">0.70</th><td></td><td></td></tr><tr><th scope="row">0.75</th><td></td><td></td></tr><tr><th scope="row">0.80</th><td></td><td></td></tr></tbody></table></div>
+<p>Reverse the diode and record V_Z and I_Z for applied voltages <strong>3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10, 11, 12, 13, 14 and 15 V</strong>. Plot the complete i–v curve on graph paper or in Excel and label its operating regions.</p>
+<h2 id="part-iii-zener-regulator">Part III: Zener regulator</h2>
+<ol><li>Construct the regulator with BZX55C and R_S = 390 Ω.</li><li>Measure stabilized V_out at V_S = 12 V and 8 V, first with R_L = 820 Ω, then with 330 Ω.</li><li>Repeat for R_S = 620 Ω and 100 Ω.</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R_S</th><th scope="col">V_S = 12 V, R_L = 820 Ω</th><th scope="col">V_S = 12 V, R_L = 330 Ω</th><th scope="col">V_S = 8 V, R_L = 820 Ω</th><th scope="col">V_S = 8 V, R_L = 330 Ω</th></tr></thead><tbody><tr><th scope="row">620 Ω</th><td></td><td></td><td></td><td></td></tr><tr><th scope="row">390 Ω</th><td></td><td></td><td></td><td></td></tr><tr><th scope="row">100 Ω</th><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+<p>For all twelve combinations:</p>
+<ol><li>Calculate load current I_L and Zener current I_Z.</li><li>Calculate line regulation at each fixed R_L, then load regulation at each fixed V_S.</li><li>Identify cases where I_Z approaches zero and regulation is lost. In this condition V_out depends on V_S, R_S and R_L rather than the breakdown voltage.</li><li>Calculate P_Z and P_RS; compare with the components’ maximum ratings.</li><li>Predict the voltage across a Zener accidentally reversed in the regulator.</li><li>Decide which R_S gives the best overall regulation and explain the other cases.</li></ol>
+<p>The handout’s finite-difference expressions are:</p>
+<ul><li>Line regulation = 1000(V_out,max − V_out,min)/(V_S,max − V_S,min), at constant R_L, in mV/V.</li><li>Load regulation = (V_out,max − V_out,min)/(I_L,max − I_L,min), at constant V_S, in mV/mA when consistent units are used.</li></ul>
+<h2 id="equipment-and-result-sheet">Equipment and result sheet</h2>
+<p>Breadboard, multimeter, DC power supply; one BZX55C 6.2 V Zener and resistors of 100 Ω, 390 Ω, 620 Ω, 330 Ω and 820 Ω. The final page repeats the forward, reverse and regulator tables as a blank result sheet.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="Zener-Diyot-Deney-Foyu.pdf" download>Zener-Diyot-Deney-Foyu.pdf</a></p>
+              <p class="kucuk">PDF · 116 KB · 8 <span data-i18n="arch.pagesLower"></span> · 17.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Zener-Diyot-Deney-Foyu.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (116 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

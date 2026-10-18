@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: VHDL Tutorial (UTEP, EE3109, 2006) — hasancan.net</title>
+<meta name="description" content="Entity, architecture, veri türleri, modelleme biçimleri, tam toplayıcı ve kod çözücü örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-utep-vhdl-ders-notu-2006/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: VHDL Tutorial (UTEP, EE3109, 2006)">
+<meta property="og:description" content="Entity, architecture, veri türleri, modelleme biçimleri, tam toplayıcı ve kod çözücü örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-utep-vhdl-ders-notu-2006/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: VHDL Tutorial (UTEP, EE3109, 2006)", "description": "Entity, architecture, veri türleri, modelleme biçimleri, tam toplayıcı ve kod çözücü örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem211-utep-vhdl-ders-notu-2006/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "utep-vhdl-lecture8-maskeli.pdf", "contentUrl": "https://hasancan.net/arsiv/eem211-utep-vhdl-ders-notu-2006/utep-vhdl-lecture8-maskeli.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: VHDL Tutorial (UTEP, EE3109, 2006)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>27.10.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#vhdl-ve-tasarim-birimleri">VHDL ve tasarım birimleri</a></li><li><a href="#tanimlayicilar-turler-ve-nesneler">Tanımlayıcılar, türler ve nesneler</a></li><li><a href="#i-slecler-ve-modelleme-bicimleri">İşleçler ve modelleme biçimleri</a></li><li><a href="#tam-toplayici-ornegi">Tam toplayıcı örneği</a></li><li><a href="#i-ki-bitlik-yapisal-toplayici">İki bitlik yapısal toplayıcı</a></li><li><a href="#kod-cozuculer-ve-hiyerarsik-tasarim">Kod çözücüler ve hiyerarşik tasarım</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: VHDL Tutorial (UTEP, EE3109, 2006)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 27.10.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>University of Texas at El Paso (UTEP) EE3109 Computer Aided Digital Design dersinin 2006 güz dönemine ait “VHDL Tutorial” sunumu. Kurum bilgisi sunumdaki UTEP işaretinden, ders ve dönem bilgisi kapaktan alındı. PDF tarihi 27 Ekim 2006. Son sayfadaki öğrenci sunum listeleri çıkarılmış kopya yazının sonunda indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="vhdl-ve-tasarim-birimleri">VHDL ve tasarım birimleri</h2>
+<p>VHDL, sayısal donanımı betimlemek için kullanılan bir dildir. Sunum, dilin eşzamanlı ve eşzamansız davranışları, gecikmeleri ve farklı soyutlama düzeylerini ifade edebildiğini anlatır.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Tasarım birimi</th><th scope="col">Görevi</th></tr></thead><tbody><tr><th scope="row">Entity</th><td>Devrenin dış arayüzünü, portlarını ve parametrelerini tanımlar</td></tr><tr><th scope="row">Architecture</th><td>Entity'nin belirli bir gerçekleştirmesini açıklar</td></tr><tr><th scope="row">Configuration</th><td>Entity, architecture ve component bağlarını belirler</td></tr><tr><th scope="row">Package declaration</th><td>Ortak tür, fonksiyon, prosedür ve bileşen bildirimlerini toplar</td></tr><tr><th scope="row">Package body</th><td>Pakette bildirilen işlevlerin gerçekleştirmesini içerir</td></tr></tbody></table></div>
+<p>Aynı entity için farklı architecture tanımları bulunabilir. Arayüzün ayrı tutulması, davranışsal model ile bileşen bağlantılarından oluşan modelin aynı devre için kullanılmasına imkân verir.</p>
+<h2 id="tanimlayicilar-turler-ve-nesneler">Tanımlayıcılar, türler ve nesneler</h2>
+<p>Sunumdaki temel tanımlayıcı kuralları harfle başlama, boşluk kullanmama, art arda iki alt çizgi yazmama ve anahtar sözcükleri ad olarak kullanmamadır. Büyük/küçük harf ayrımı yapılmaz.</p>
+<p>Veri türleri skaler, erişim, dosya ve bileşik türler olarak sınıflandırılır. Tamsayı, gerçek sayı, sıralama ve fiziksel türler; dizi ve record yapıları örneklenir. Fiziksel türlerde birim bilgisi kullanılır. <code>bit_vector</code> çok bitli bağlantıları ifade eder.</p>
+<p>Nesneler constant, variable, signal ve file başlıklarında açıklanır. Değişken ataması <code>:=</code>, sinyal ataması <code>&lt;=</code> ile gösterilir. Sinyaller modüller arasındaki ve modül içindeki donanım bağlantılarını ifade etmek için kullanılır.</p>
+<h2 id="i-slecler-ve-modelleme-bicimleri">İşleçler ve modelleme biçimleri</h2>
+<p>Mantıksal işleçler, karşılaştırmalar, aritmetik işlemler ve kaydırmalar tanıtılır. <code>if</code>, <code>case</code>, döngüler ve <code>process</code> içindeki sıralı ifadeler ile eşzamanlı ifadeler ayrılır. Davranışsal model davranışı, veri akışı modeli sinyaller arasındaki ifadeleri, yapısal model ise bileşen örnekleri ve bağlantılarını öne çıkarır. Aynı tasarımda bu yaklaşımlar birlikte kullanılabilir.</p>
+<h2 id="tam-toplayici-ornegi">Tam toplayıcı örneği</h2>
+<p>Kaynak entity örneğinde <code>a</code>, <code>b</code>, <code>cin</code> giriş; <code>sum</code>, <code>cout</code> çıkıştır. İç sinyal <code>temp</code>, ilk iki girişin XOR sonucunu tutar. Sunumdaki kodun ilgili kısmı şöyledir:</p>
+<pre class="kaynak" data-dosya="vhdl - Not Defteri"><code>P1: temp &lt;= a xor b;
+P2: sum &lt;= cin xor temp;
+P3: cout &lt;= ( and b) or (a and cin) or (b and cin);</code></pre>
+<p><em>Not: Kaynakta P3 satırının ilk parantezinde bir işlenen eksik. Tam toplayıcı bağıntısı cout=ab+a·cin+b·cin olduğundan burada “a and b” beklenir. Kaynağın hatalı satırı yukarıda korunmuştur; örnek derlenmedi.</em></p>
+<h2 id="i-ki-bitlik-yapisal-toplayici">İki bitlik yapısal toplayıcı</h2>
+<p>İki FullAdder bileşeni ardışık bağlanır. İlk kademenin girişleri A(0), B(0), Cin; ikinci kademenin girişleri A(1), B(1) ve ara elde C0'dır. Çıkışlar S(0), S(1) ve Cout olur.</p>
+<p>Sunumun bileşen bildiriminde son iki port <code>cout, sum</code> sırasındadır; bağlantı satırları ise <code>S(0), C0</code> ve <code>S(1), Cout</code> sırasını kullanır.</p>
+<p><em>Not: Konumsal port eşlemesindeki bu sıralama, bildirilen port sırasıyla uyuşmuyor. Kaynaktaki çizim toplam ve elde bağlantılarının amaçlanan yönünü gösteriyor.</em></p>
+<figure class="yazi-gorsel"><img src="s-08.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="İki bitlik toplayıcı ve kod çözücü örnekleri"><figcaption>Sunumun yapısal modelleme ve decoder sayfası</figcaption></figure>
+<h2 id="kod-cozuculer-ve-hiyerarsik-tasarim">Kod çözücüler ve hiyerarşik tasarım</h2>
+<p>2'den 4'e kod çözücüde iki bitlik girişe karşılık dört çıkıştan biri etkinleşir. 3'ten 8'e kod çözücü aynı fikri üç girişe genişletir. Etkinleştirme girişi kullanılarak küçük kod çözücülerden daha büyükleri kurulabilir. Son bölümün görevi, önce 2'den 4'e devreyi tasarlayıp sembolünü oluşturmak, ardından 3'ten 8'e devreyi hiyerarşik olarak kurmak ve çıkış dalga şekillerini incelemektir.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="utep-vhdl-lecture8-maskeli.pdf" download>utep-vhdl-lecture8-maskeli.pdf</a></p>
+              <p class="kucuk">PDF · 1.2 MB · 9 <span data-i18n="arch.pagesLower"></span> · 27.10.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="utep-vhdl-lecture8-maskeli.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

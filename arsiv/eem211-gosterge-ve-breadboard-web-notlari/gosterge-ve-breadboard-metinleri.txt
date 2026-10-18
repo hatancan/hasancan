@@ -1,0 +1,112 @@
+AllAboutCircuits — http://www.allaboutcircuits.com/vol_6/chpt_7/9.html
+
+PARTS AND MATERIALS
+4511 BCD-to-7seg latch/decoder/driver (Radio Shack catalog # 900-4437)
+Common-cathode 7-segment LED display (Radio Shack catalog # 276-075)
+Eight-position DIP switch (Radio Shack catalog # 275-1301)
+Four 10 kΩ resistors
+Seven 470 Ω resistors
+One 6 volt battery
+Caution! The 4511 IC is CMOS, and therefore sensitive to static
+electricity!
+CROSS-REFERENCES
+Lessons In Electric Circuits, Volume 4, chapter 9: "Combinational
+Logic Functions"
+LEARNING OBJECTIVES
+How to use the 4511 7-segment decoder/display driver IC
+Gain familiarity with the BCD code
+How to use 7-segment LED assemblies to create decimal digit displays
+How to identify and use both "active-low" and "active-high" logic inputs
+SCHEMATIC DIAGRAM
+ILLUSTRATION
+INSTRUCTIONS
+This experiment is more of an introduction to the 4511 decoder/display driver
+IC than it is a lesson in how to "build up" a digital function from lower-level
+components. Since 7-segment displays are very common components of
+digital devices, it is good to be familiar with the "driving" circuits behind
+them, and the 4511 is a good example of a typical driver IC.
+Its operating principle is to input a four-bit BCD (Binary-Coded Decimal)
+value, and energize the proper output lines to form the corresponding decimal
+digit on the 7-segment LED display. The BCD inputs are designated A, B, C, and D
+in order from least-significant to most-significant. Outputs are labeled a, b,
+c, d, e, f, and g, each letter corresponding to a standardized segment
+designation for 7-segment displays. Of course, since each LED segment requires
+its own dropping resistor, we must use seven 470 Ω resistors placed in series
+between the 4511's output terminals and the corresponding terminals of the
+display unit.
+Most 7-segment displays also provide for a decimal point (sometimes two!), a
+separate LED and terminal designated for its operation. All LEDs inside the
+display unit are made common to each other on one side, either cathode or anode.
+The 4511 display driver IC requires a common-cathode 7-segment display unit, and
+so that is what is used here.
+After building the circuit and applying power, operate the four switches in a
+binary counting sequence (0000 to 1111), noting the 7-segment display. A 0000
+input should result in a decimal "0" display, a 0001 input should result in a
+decimal "1" display, and so on through 1001 (decimal "9"). What happens for the
+binary numbers 1010 (10) through 1111 (15)? Read the datasheet on the 4511 IC
+and see what the manufacturer specifies for operation above an input value of 9.
+In the BCD code, there is no real meaning for 1010, 1011, 1100, 1101, 1110, or
+1111. These are binary values beyond the range of a single decimal digit, and so
+have no function in a BCD system. The 4511 IC is built to recognize this, and
+output (or not output!) accordingly.
+Three inputs on the 4511 chip have been permanently connected to either
+Vdd or ground: the "Lamp Test," "Blanking Input," and "Latch Enable."
+To learn what these inputs do, remove the short jumpers connecting them to
+either power supply rail (one at a time!), and replace the short jumper with a
+longer one that can reach the other power supply rail. For example,
+remove the short jumper connecting the "Latch Enable" input (pin #5) to ground,
+and replace it with a long jumper wire that can reach all the way to the
+Vdd power supply rail. Experiment with making this input "high" and
+"low," observing the results on the 7-segment display as you alter the BCD code
+with the four input switches. After you've learned what the input's function is,
+connect it to the power supply rail enabling normal operation, and proceed to
+experiment with the next input (either "Lamp Test" or "Blanking Input").
+Once again, the manufacturer's datasheet will be informative as to the
+purpose of each of these three inputs. Note that the "Lamp Test" (LT) and
+"Blanking Input" (BI) input labels are written with boolean complementation bars
+over the abbreviations. Bar symbols designate these inputs as active-low,
+meaning that you must make each one "low" in order to invoke its particular
+function. Making an active-low input "high" places that particular input into a
+"passive" state where its function will not be invoked. Conversely, the "Latch
+Enable" (LE) input has no complementation bar written over its abbreviation, and
+correspondingly it is shown connected to ground ("low") in the schematic so as
+to not invoke that function. The "Latch Enable" input is an active-high
+input, which means it must be made "high" (connected to Vdd) in order
+to invoke its function.
+
+
+SDD notebook, 6 September 2006; original excerpt source: Iguana Labs, http://www.iguanalabs.com/breadboard.htm
+
+Computer Hardware
+Using the
+Breadboard
+(Socket Board)
+The bread board has many
+strips of metal (copper usually) which run underneath the board.
+The metal strips are laid out as shown below.
+These strips connect the holes on the top of the
+board. This makes it easy to connect components together to build
+circuits. To use the bread board, the legs of components are
+placed in the holes (the sockets). The holes are made so that they
+will hold the component in place. Each hole is connected to one of
+the metal strips running underneath the board.
+Each wire forms a node. A
+node is a point in a circuit where two components are connected.
+Connections between different components are formed by putting their
+legs in a common node. On the bread board, a node is the row of
+holes that are connected by the strip of metal underneath.
+The long top and bottom row of holes are usually
+used for power supply connections.
+The rest of the circuit is built by placing
+components and connecting them together with jumper wires. Then
+when a path is formed by wires and components from the positive supply
+node to the negative supply node, we can turn on the power and current
+flows through the path and the circuit comes alive.
+For chips with many legs (ICs), place them in the
+middle of the board so that half of the legs are on one side of the
+middle line and half are on the other side.
+A completed circuit might look like the
+following. This circuit is
+from our Microcontroller Beginner Kit.
+How to use a Breadboard
+(Socket Board) – www.iguanalabs.com/...

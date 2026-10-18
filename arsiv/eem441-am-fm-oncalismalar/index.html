@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM441 Haberleşme I: AM ve FM Laboratuvar Ön Çalışmaları — hasancan.net</title>
+<meta name="description" content="AM, DSB-SC, VCO ve süperheterodin alıcı hazırlıkları; MATLAB ile FM işareti oluşturma örnekleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem441-am-fm-oncalismalar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM441 Haberleşme I: AM ve FM Laboratuvar Ön Çalışmaları">
+<meta property="og:description" content="AM, DSB-SC, VCO ve süperheterodin alıcı hazırlıkları; MATLAB ile FM işareti oluşturma örnekleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem441-am-fm-oncalismalar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM441 Haberleşme I: AM ve FM Laboratuvar Ön Çalışmaları", "description": "AM, DSB-SC, VCO ve süperheterodin alıcı hazırlıkları; MATLAB ile FM işareti oluşturma örnekleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem441-am-fm-oncalismalar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM441 – Haberleşme I", "associatedMedia": {"@type": "MediaObject", "name": "am-fm-oncalismalar.zip", "contentUrl": "https://hasancan.net/arsiv/eem441-am-fm-oncalismalar/am-fm-oncalismalar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM441 Haberleşme I: AM ve FM Laboratuvar Ön Çalışmaları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem441">EEM441</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM441 – Haberleşme I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.12.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#am-ve-dsb-sc-hazirligi">AM ve DSB-SC hazırlığı</a></li><li><a href="#superheterodin-costas-ve-eszamanli-alici">Süperheterodin, Costas ve eşzamanlı alıcı</a></li><li><a href="#vco-turleri-ve-am-fm-karsilastirmasi">VCO türleri ve AM–FM karşılaştırması</a></li><li><a href="#sayisal-integral-ile-fm">Sayısal integral ile FM</a></li><li><a href="#fmmod-ornegi">fmmod örneği</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM441</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM441 Haberleşme I: AM ve FM Laboratuvar Ön Çalışmaları</h1>
+            <p class="kucuk">EEM441 – Haberleşme I · 06.12.2011 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM441 laboratuvarına ait bu ön çalışmalar, AM ve FM işaretlerini, süperheterodin alıcıyı, VCO türlerini ve MATLAB çizimlerini ele alıyor. 30 Aralık 2010, 22 Kasım 2011 ve 6 Aralık 2011 tarihli çalışmalar ile tarihsiz tamamlayıcı sayfalar bir araya getirildi. Öğrenci bilgileri çıkarılmış PDF kopyaları yazının sonunda indirilebilir.</p>
+<h2 id="am-ve-dsb-sc-hazirligi">AM ve DSB-SC hazırlığı</h2>
+<p>22 Kasım 2011 tarihli uygulama, deney föyündeki kare dalga mesajı 1 MHz taşıyıcıyla modüle ediyor. İlk bölümde bilgi, taşıyıcı ve taşıyıcılı çift yan bant çıkışı; ikinci bölümde aynı mesajın taşıyıcısı bastırılmış çift yan bant çıkışı çiziliyor.</p>
+<p>Tam AM için işaret, s(t) = Ac[1 + ka m(t)] cos(2πfc t) biçimindedir. DSB-SC örneğinde mesaj taşıyıcıyla çarpılır; mesajın işaret değiştirdiği yerde taşıyıcının fazı ters döner.</p>
+<p>Modülasyon indisi sayfalarında m = Vm/Vc ve modülasyon yüzdesi 100m olarak tanımlanıyor. Osiloskoptaki zarfın en büyük ve en küçük değerleriyle m = (Vmax − Vmin)/(Vmax + Vmin) bulunuyor. m = 1, yüzde yüz modülasyona; m &gt; 1, zarf algılamada bozulmaya karşılık geliyor. Tek tonlu çift yan bant AM için BW = 2fm.</p>
+<h2 id="superheterodin-costas-ve-eszamanli-alici">Süperheterodin, Costas ve eşzamanlı alıcı</h2>
+<p>Süperheterodin alıcı, anten ve RF süzgecinden geçen işareti yerel osilatörle karıştırarak sabit ara frekansa taşır. Ara frekansta yükseltme ve süzme, ardından demodülasyon yapılır. Böylece farklı yayınları seçerken aynı ara frekans katı kullanılabilir.</p>
+<p>Tamamlayıcı sayfada Costas alıcısı ve eşzamanlı algılayıcı da anılıyor. DSB-SC işareti uygun taşıyıcıyla çarpılıp alçak geçiren süzgeçten geçirilerek mesaj elde edilir. AM için radyo ve çift yönlü telsiz kullanımları veriliyor.</p>
+<h2 id="vco-turleri-ve-am-fm-karsilastirmasi">VCO türleri ve AM–FM karşılaştırması</h2>
+<p>VCO, kontrol gerilimiyle salınım frekansı değişen osilatördür. Yüksek frekans uygulamasında LC tankına bağlı varikap; düşük frekansta kondansatörün dolma hızını değiştiren akım kaynağı örnekleri bulunuyor. Seri ve paralel Colpitts, Clapp ve Hartley osilatörleri sıralanıyor. Colpitts ve Clapp kapasitif, Hartley endüktif geri beslemeyle açıklanıyor. Küçük frekans ayarı gerektiren durumlarda VCXO anılıyor.</p>
+<p>AM'de mesaj taşıyıcı genliğini, FM'de anlık frekansı değiştirir. İdeal FM zarfı sabittir. AM'nin iki yan bandına karşılık tek tonlu FM'de çok sayıda yan bant vardır. FM'de bant genişliği frekans sapmasına ve mesaj bant genişliğine bağlıdır.</p>
+<h2 id="sayisal-integral-ile-fm">Sayısal integral ile FM</h2>
+<p>Tarihsiz ön çalışmanın MATLAB kodu şöyledir:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>Ac = 1;
+Am = 5;
+fm = 10;
+fc = 100;
+kf = 100;
+t = 0:0.00001:0.2;
+m_t = Am*cos(2*pi*fm*t);
+integral_m_t = cumtrapz(t,m_t);
+s_t = Ac*cos(2*pi*fc*t + kf*integral_m_t);
+figure(1); plot(t,m_t); title('Mesaj Sinyali');
+figure(2); plot(t,integral_m_t); title('Mesaj Sinyalinin Integrali');
+figure(3); plot(t,Ac*cos(2*pi*fc*t)); title('Tasiyici Sinyal');
+figure(4); plot(t,s_t); title('Moduleli Sinyal');</code></pre>
+<p>Çizimler 0–0,2 saniye aralığını kapsar. Mesajın genliği 5, taşıyıcının genliği 1'dir; integral grafiğinin tepe değeri yaklaşık 0,08'dir. 6 Aralık 2011 sürümünde Ac = 10 ve Am = 20 seçilmiştir; aynı <code>integral_m_t</code> değişkeni kullanılır, fakat bu değişkeni hesaplayan satır belgede yoktur.</p>
+<p><em>Not: Belgede kf için Hz yazılsa da faza doğrudan kf∫m(t)dt ekleyen bu kod, kf'yi açısal frekans duyarlılığı olarak kullanır. Hz/birim duyarlılığı amaçlanıyorsa faz teriminde 2π çarpanı gerekir. Kaynak kod değiştirilmeden aktarılmıştır; çalıştırılmamıştır.</em></p>
+<h2 id="fmmod-ornegi">fmmod örneği</h2>
+<p>30 Aralık 2010 tarihli çalışmadaki ikinci yaklaşım:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>Fs = 300;
+Fc = 100;
+t = [0:Fs]'/Fs;
+x = sin(2*pi*300*t);
+dev = 50;
+y = fmmod(x,Fc,Fs,dev);
+figure();
+xlabel('fc = 100Hz');
+ylabel('fs = 300Hz');
+plot(t,y);</code></pre>
+<p><em>Not: Kapakta EEM401 yazıyor; dosya EEM441 arşivinde bulunduğu için burada saklandı. 300 Hz sinüsün yine 300 Hz ile örneklenmesi ideal aritmetikte tüm örnekleri sıfıra getirir; bu kod mesajın doğru örneklenmesine örnek değildir. Kaynaktaki “FM her zaman daha az güç gerektirir”, “AM indisi daima 1'dir” ve AM sıfır geçişlerinin mesaj taşıdığı yönündeki genellemeler de koşulsuz geçerli değildir.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="am-fm-oncalismalar.zip" download>am-fm-oncalismalar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.5 MB · 06.12.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="am-fm-oncalismalar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

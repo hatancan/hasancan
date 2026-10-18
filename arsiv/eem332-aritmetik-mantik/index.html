@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: Veri Aktarımı, Aritmetik ve Mantık Komutları — hasancan.net</title>
+<meta name="description" content="MOV, LDS, XLAT, ADD, SUB, çarpma, bölme, mantık işlemleri, kaydırma ve döndürme komutları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-aritmetik-mantik/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: Veri Aktarımı, Aritmetik ve Mantık Komutları">
+<meta property="og:description" content="MOV, LDS, XLAT, ADD, SUB, çarpma, bölme, mantık işlemleri, kaydırma ve döndürme komutları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-aritmetik-mantik/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: Veri Aktarımı, Aritmetik ve Mantık Komutları", "description": "MOV, LDS, XLAT, ADD, SUB, çarpma, bölme, mantık işlemleri, kaydırma ve döndürme komutları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-aritmetik-mantik/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-aritmetik-mantik.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-aritmetik-mantik/eem332-aritmetik-mantik.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: Veri Aktarımı, Aritmetik ve Mantık Komutları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.03.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu04-08">CPU04_08</a></li><li><a href="#cpu05-08">Cpu05_08</a></li><li><a href="#cpu05-06">CPU05_06</a></li><li><a href="#cpu07-06">cpu07_06</a></li><li><a href="#cpu06">Cpu06</a></li><li><a href="#cpu06-06">Cpu06_06</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: Veri Aktarımı, Aritmetik ve Mantık Komutları</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 16.03.2005 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2005–2015). MOV, LDS, XLAT, ADD, SUB, çarpma, bölme, mantık işlemleri, kaydırma ve döndürme komutları. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cpu04-08">CPU04_08</h2>
+<p>LDS : Load Data Segment....</p>
+<p>After..</p>
+<p>XLAT :Traslate instruction</p>
+<p>Arithmetic : Addition ;                         Decimal arithmetic</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Subtraction; Multiplication; Division
+AAA (adjust after addition)</code></pre>
+<p>ASCII, unpacked decimal AAS (adjust after subtraction) ASCII, unpacked decimal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AAM (adjust after multip..)</code></pre>
+<p>unpacked decimal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AAD (adjust before division)</code></pre>
+<p>unpacked decimal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DAA ( adjust after addition)</code></pre>
+<p>packed decimal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DAS ( adjust after subtraction)</code></pre>
+<p>packed decimal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal arithmetic : Storing decimal numbers 12345</code></pre>
+<p>ASCII format:         31 32 33 34 35</p>
+<p>unpacked BCD:         01 02 03 04 05 packed decimal:          01 23 45</p>
+<p>Flag Register and ADD instruction</p>
+<ul><li>Example</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, 0                 ; AX = 00 ??
+mov al, "9"     ;        AX = 00 39
+add al, "3"     ;        AX = 00 6C
+aaa             ;        AX = 01 02
+or    ax, 3030h ;        AX = 31 32</code></pre>
+<ul><li>We have the answer in ASCII decimal</li></ul>
+<ul><li>Slower than normal binary adds</li></ul>
+<ul><li>May be faster than converting ASCII decimal to binary, adding,</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and converting back to ASCII decimal</code></pre>
+<p>0010 0101 1100 &gt; 9</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Subtraction:</code></pre>
+<h3 id="1-take-the-2-s-complement-of-the-subtrahend-source-operand">1. Take the 2’s complement of the subtrahend (source operand)</h3>
+<h3 id="2-add-it-to-the-minuend-destination-operand">2. Add it to the minuend (destination operand)</h3>
+<h3 id="3-invert-the-carry">3. Invert the carry</h3>
+<p>If the CF=0, the result is positive and the destination has the result. If the CF=1, the result is negative and the destination has the 2’s complement of the result. NOT</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and INC increment instructions can be used to change it.</code></pre>
+<p>Flags Affected: OF, SF, ZF, AF, PF, CF</p>
+<p>’15’</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,0105H ;      AX=0105 unpacked BCD for 15
+MOV CL,06          ; CL=06H
+SUB AL,CL          ; 5-6=-1 (FFH)</code></pre>
+<p>AAS              ;FFH in AL is adjusted to 09 and</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;AH is decremented leaving AX=0009</code></pre>
+<p>ASCII to Unpacked BCD Conversion</p>
+<p>ASCII to packed BCD Conversion</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov BL,0FEh
+mov AL,0E5h
+mul BL</code></pre>
+<ul><li>BL contains 254, AL contains 229</li></ul>
+<ul><li>After MUL</li></ul>
+<ul><li>AX contains 0E336h (58166d)</li></ul>
+<ul><li>CF=OF=1 (result requires a word)</li></ul>
+<ul><li>SF, AF, PF, and ZF are undefined</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov BL,0FEh
+mov AL,0E5h</code></pre>
+<p>imul BL</p>
+<ul><li>BL contains -2, AL contains -27</li></ul>
+<ul><li>After IMUL</li></ul>
+<ul><li>AX contains 0036h (54d)</li></ul>
+<ul><li>CF=OF=0 (result still fits in byte)</li></ul>
+<ul><li>SF, AF, PF, and ZF are undefined</li></ul>
+<p>AL=20 H……..32</p>
+<h3 id="cl-80-h-128">CL= 80 H…….128</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL CL ………AX= 1000</code></pre>
+<p>------------------------------------------ IMUL CL ………….AX=F000</p>
+<p>AL=95</p>
+<pre class="kod"><code>AX=2711 H………10001 d</code></pre>
+<p>BL=10 BL=32 H…………..50 d</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV BL
+Div BL….. …….. AX=01C8</code></pre>
+<p>AL=09 ; AH=05</p>
+<p>Examples of MUL and IMUL</p>
+<ul><li>AX = 1h and BX = FFFFh, then:</li></ul>
+<ul><li>Instruction      Result DX     AX               CF/OF</li></ul>
+<p> mul        bx    65535 0000    FFFF              0  imul       bx    -1       FFFF FFFF              0</p>
+<h3 id="ax-ffffh-and-bx-ffffh-then">AX = FFFFh and BX = FFFFh, then</h3>
+<ul><li>Instruction      Result DX      AX              CF/OF</li></ul>
+<p> mul        bx    4294836225 FFFE 0001            1  imul       bx       1            0000 0001      0</p>
+<ul><li>AL = 30h and BL = 4h, then:</li></ul>
+<ul><li>Instruction       Result     AH       AL        CF/OF</li></ul>
+<p> mul        bl     192                 00        C0        0  imul       bl     192                 00        C0        1</p>
+<ul><li>AL = 80h and BL = FFh, then</li></ul>
+<ul><li>Instruction       Result     AH       AL        CF/OF</li></ul>
+<p> mul        bl     32640      7F       80         1  imul       bl     128                 00        80        1</p>
+<p>Examples of DIV and IDIV</p>
+<ul><li>DX = 0000h, AX = 0005h, BX = FFFEh:</li></ul>
+<ul><li>Instruction          Quot. Rem. AX DX</li></ul>
+<p>div bx                0     5    0000 0005 idiv bx               -2        1     FFFE 0001</p>
+<ul><li>DX = FFFFh, AX = FFFBh, BX = 0002h:</li></ul>
+<ul><li>Instruction          Quot. Rem. AX DX</li></ul>
+<p>div bx                Divide Overflow idiv bx               -2    -1    FFFE FFFF</p>
+<ul><li>Example 1</li></ul>
+<h3 id="before-the-instruction-executes">Before the instruction executes</h3>
+<h3 id="dx-ax-0002-bx-0010-16-cf-of">DX:???? AX: 0002                   BX: 0010 (16)     CF/OF:?</h3>
+<p>IMUL     BX        multiplies the contents of AX by BX placing the 32 bit answer in DX:AX</p>
+<h3 id="after-the-instruction-executes">After the instruction executes</h3>
+<p>DX:0000 AX: 0020 (32) BX: 0010 CF/OF:0 (Result fits in AX)</p>
+<ul><li>Example 2</li></ul>
+<h3 id="before-the-instruction-executes">Before the instruction executes</h3>
+<h3 id="dx-ax-0003-bx-7000-28672-cf-of">DX:????      AX: 0003           BX: 7000 (28672)   CF/OF:?</h3>
+<p>IMUL         BX          multiplies the contents of AX by BX placing the 32 bit answer in DX:AX</p>
+<h3 id="after-the-instruction-executes">After the instruction executes</h3>
+<h3 id="dx-0001-ax-5000-bx-7000-cf-of-1">DX:0001 AX: 5000 BX: 7000 CF/OF:1</h3>
+<p>(Result [86016] does not fit in AX)</p>
+<p>CBW Instruction</p>
+<ul><li>This instruction converts the signed 8-bit number in AL</li></ul>
+<p>into a signed 16-bit number in AX</p>
+<ul><li>NOTE: Use this instruction only with signed arithmetic!!</li></ul>
+<ul><li>Syntax: CBW</li></ul>
+<p>If bit 7 of AL is a 1, the instruction will place FF in AH. If bit 7 of AL is a 0, the instruction will place 00 in AH. No flags are affected by this instruction.</p>
+<ul><li>Examples:</li></ul>
+<p>Before:       AX:??40 (64) CBW converts the signed 8-bit number in AL to a 16-bit signed number in AX After:        AX:0040 (64)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: ADD</code></pre>
+<p>Overflow problem in signed number operations When using signed numbers Overflow problem can arise after an operation. This problem arises if the result in a register after an operation is too large. In such a case CPU sets the OF (Overflow Flag). The programmer must consider the overflow case.</p>
+<p>When the OF is set in 8-bit operations</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In 8-bit signed number operations, OF is set to 1 is either of the following two conditions occurs:</code></pre>
+<h3 id="1-there-is-a-carry-out-from-d6-to-d7-but-no-carry-out-from-d7-cf-0">1. There is a carry out from D6 to D7, but no carry out from D7 (CF=0).</h3>
+<h3 id="2-there-is-a-carry-out-from-d7-cf-1-but-no-carry-out-from-d6-to-d7">2. There is a carry out from D7 (CF=1), but no carry out from D6 to D7.</h3>
+<p>CBW ; Convert signed Byte to signed Word CBW will copy D7 (the sign flag) of AL to all bits of AH. Notice that the operand is assumed to be AL and the contents of AH is destroyed.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,+96 ;AL = 0110 0000</code></pre>
+<p>CBW ;now AH= 0000 0000 and AL=0110 0000</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,–2 ;AL = 1111 1110</code></pre>
+<p>CBW ;now AH= 1111 1111 and AL=1111 1110</p>
+<figure class="yazi-gorsel"><img src="sekil-700-02.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="CPU04_08: sayfa 2, devre, tablo ve şekiller"><figcaption>CPU04_08, sayfa 2.</figcaption></figure>
+<h2 id="cpu05-08">Cpu05_08</h2>
+<p>Logic Instructions Truth tables for AND, OR, XOR, NOT</p>
+<h3 id="0-and-0-0-0-or-0-0-0-xor-0-0">0 AND 0 = 0   0 OR 0 = 0      0 XOR 0 = 0</h3>
+<h3 id="0-and-1-0-0-or-1-1-0-xor-1-1">0 AND 1 = 0   0 OR 1 = 1      0 XOR 1 = 1</h3>
+<h3 id="1-and-0-0-1-or-0-1-1-xor-0-1">1 AND 0 = 0   1 OR 0 = 1      1 XOR 0 = 1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT 0 = 1     ; NOT 1 = 0</code></pre>
+<h3 id="1-and-1-1-1-or-1-1-1-xor-1-0">1 AND 1 = 1   1 OR 1 = 1      1 XOR 1 = 0</h3>
+<ul><li>OR</li></ul>
+<ul><li>If you OR in a 1 bit, you force the result to be a 1 bit</li></ul>
+<ul><li>If you OR in a 0 bit, you do not change the original bit</li></ul>
+<ul><li>Thus OR can be used to turn bits on (SET a bit)</li></ul>
+<ul><li>AND</li></ul>
+<ul><li>If you AND in a 1 bit, you do not change the original bit</li></ul>
+<ul><li>If you AND in a 0 bit, you force the result to be a 0 bit</li></ul>
+<ul><li>Thus AND can be used to turn bits off (CLEAR bits)</li></ul>
+<ul><li>XOR</li></ul>
+<ul><li>If you XOR a bit with itself, you force the result to be a 0 bit</li></ul>
+<ul><li>If you XOR a 0 bit, you do not change the original bit</li></ul>
+<ul><li>If you XOR a 1 bit, you flip the state of the original bit</li></ul>
+<ul><li>Thus XOR can be used to COMPLEMENT individual bits or to CLEAR a</li></ul>
+<p>group of bits</p>
+<ul><li>NOT</li></ul>
+<ul><li>NOT flips the state of the original bits</li></ul>
+<ul><li>Thus NOT can be used to COMPLEMENT all the bits in an</li></ul>
+<p>operand</p>
+<ul><li>To modify bits in the destination field, you usually</li></ul>
+<p>construct a source bit pattern called a MASK field</p>
+<ul><li>The MASK field can be expressed in Binary, Hex, or</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal.                                          NOT: 1’s complement</code></pre>
+<p>Logic inversion</p>
+<ul><li>AND and OR instructions are often used to mask</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>out data</code></pre>
+<ul><li>a mask value is used to force certain bits to zero   NEG: 2’s complement</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or one within some other value                          Logic inversion + 1</code></pre>
+<ul><li>a mask typically affects certain bits and leaves</li></ul>
+<p>other bits unaffected</p>
+<ul><li>AND forces selected bits to zero AND CL,</li></ul>
+<p>0Fh</p>
+<ul><li>OR forces selected bits to one</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR CL, 0Fh</code></pre>
+<p>Logic examples</p>
+<h3 id="al-1100-1010-al-0011-0101">AL     1100 1010    AL       0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT AL           BL       0110 1101</code></pre>
+<h3 id="al-0011-0101-or-al-bl">AL     0011 0101       OR AL, BL</h3>
+<h3 id="al-0111-1101">AL       0111 1101</h3>
+<h3 id="al-0011-0101">AL      0011 0101</h3>
+<h3 id="bl-0110-1101-al-0011-0101">BL      0110 1101   AL       0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL, BL        BL       0000 1111</code></pre>
+<h3 id="al-0010-0101-or-al-bl">AL      0010 0101      OR AL, BL</h3>
+<h3 id="al-0011-1111">AL       0011 1111</h3>
+<h3 id="al-0011-0101">AL      0011 0101</h3>
+<h3 id="bl-0000-1111-al-0011-0101">BL      0000 1111   AL      0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL, BL        BL      0110 1101</code></pre>
+<h3 id="al-0000-0101-xor-al-bl">AL      0000 0101     XOR AL, BL</h3>
+<h3 id="al-0101-1000">AL      0101 1000</h3>
+<h3 id="1-before-the-instruction-executes-ax-8935">1. Before the instruction executes: AX: 8935</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AX,0000h A MASK of 0000000000000000b is ANDed</code></pre>
+<p>with               the AX register After the instruction executes: AX: 0000</p>
+<h3 id="2-before-the-instruction-executes-al-01">2. Before the instruction executes: AL: 01</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL,40h             A MASK of 01000000b is ORed with</code></pre>
+<p>the AL register After the instruction executes: AL: 41</p>
+<h3 id="3-before-the-instruction-executes-ax-7849">3. Before the instruction executes: AX: 7849</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR AX,AX              The AX register is XORed with itself</code></pre>
+<p>After the instruction executes: AX: 0000</p>
+<h3 id="4-convert-the-ascii-digit-in-al-to-a-pure-number-remember-the-ascii-codes">4. Convert the ASCII digit in AL to a pure number (remember the ASCII codes</h3>
+<p>for 0-9 are 30h-39h)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB     AL,30h or
+AND AL,00001111b or
+AND AL,Of h</code></pre>
+<h3 id="5-convert-the-digit-in-al-to-its-ascii-code">5. Convert the digit in AL to its ASCII code</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL,00110000b or
+OR AL,30h or
+ADD AL,30h</code></pre>
+<h3 id="6-convert-the-upper-case-letter-at-char-to-its-corresponding-lower-case-letter">6. Convert the upper case letter at CHAR to its corresponding lower case letter</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR CHAR,00100000b or
+OR CHAR,20h or
+ADD CHAR,20h</code></pre>
+<p>Shift left</p>
+<ul><li>Syntax:         SHL reg, count      (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL reg, CL         (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the left the number of</li></ul>
+<p>times specified by the count operand</p>
+<ul><li>zeros fill vacated positions at the L.O. bit</li></ul>
+<ul><li>H.O. bit shifts into the carry flag</li></ul>
+<ul><li>a quick way to multiply by two</li></ul>
+<ul><li>useful in packing data, e.g., consider two nibbles in AL and AH that we want to</li></ul>
+<p>combine</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>shl ah, 4
+or al,ah</code></pre>
+<ul><li>the 8086 and 8088 allow an immediate shift of 1 only</li></ul>
+<p>C             Register</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL                                            0</code></pre>
+<p>Shift right</p>
+<ul><li>Syntax:        SHR reg, count (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHR reg, CL       (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the right the number</li></ul>
+<p>of times specified by the count operand</p>
+<ul><li>zeros fill vacated positions at the H.O. bit</li></ul>
+<ul><li>L.O. bit shifts into the carry flag</li></ul>
+<ul><li>a quick way to divide by two</li></ul>
+<ul><li>useful in unpacking data, e.g., suppose you want to extract the two nibbles</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in the AL register, leaving the H.O. nibble in AH and the L.O. nibble in
+AL
+mov ah, al
+shr ah, 4
+and al, 0Fh                                  Register            C
+SHL      0</code></pre>
+<ul><li>the 8086 and 8088 allow an immediate shift of 1 only</li></ul>
+<p>Shift arithmetic right</p>
+<ul><li>Syntax:             SAR reg, count            (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR reg, CL               (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the left the number of times specified by the count</li></ul>
+<p>operand</p>
+<ul><li>H.O. bit replicates</li></ul>
+<ul><li>L.O. bit shifts into the carry flag</li></ul>
+<ul><li>main purpose is to perform a signed division by some power of two</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ax, -15
+sar ax, 1             ; result is -8</code></pre>
+<ul><li>In 80286 and later you can use SAR to sign extend one register into another</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, al
+sar ah, 7</code></pre>
+<p>if AL contains 1111 0001 then AX will be 1111 1111 1111 0001 after execution</p>
+<p>Register                  C</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR</code></pre>
+<h3 id="examples">Examples</h3>
+<h3 id="1-shift-the-contents-of-register-ax-to-the-left-by-3-bits">1. Shift the contents of register AX to the left by 3 bits</h3>
+<p>Before: AX: 0001 CL:??</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL,3   ;Puts a 3 into register CL
+SHL AX,CL ;Shifts register AX 3 bits to the left</code></pre>
+<p>After: AX: 0008 CL:03</p>
+<h3 id="2-multiply-the-contents-of-bx-by-2">2. Multiply the contents of BX by 2</h3>
+<p>Before: BX: 0001</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAL BX,1     ;Shifts register BX 1 bit to the left</code></pre>
+<p>After: BX: 0002</p>
+<p>AX =091A</p>
+<p>Rotate through carry L/R</p>
+<ul><li>Syntax:        RCL reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL reg, CL                  (count stored in CL)</code></pre>
+<ul><li>rotates bits to the left, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into bit zero on the right</li></ul>
+<ul><li>Syntax:        RCR reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR reg                      (count stored in CL)</code></pre>
+<ul><li>rotates bits to the right, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into the H.O. bit on the left</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL</code></pre>
+<p>Rotate left/right</p>
+<ul><li>Syntax:          ROL reg, count             (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL reg, CL                (count stored in CL)</code></pre>
+<ul><li>rotates bits to the left</li></ul>
+<ul><li>H.O. bit goes to carry flag and L.O. bit</li></ul>
+<ul><li>Syntax:          ROR reg, count             (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROR reg                    (count stored in CL)</code></pre>
+<ul><li>rotates bits to the right</li></ul>
+<ul><li>L.O. bit goes to carry flag and H.O. bit</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL                                                                  ROR</code></pre>
+<ul><li>mov ah,40h     ;ah = 0100 0000b</li></ul>
+<ul><li>rol ah,1      ;ah = 1000 0000b, CF = 0</li></ul>
+<ul><li>rol ah,1      ;ah = 0000 0001b, CF = 1</li></ul>
+<ul><li>rol ah,1    ;ah = ____________b,</li></ul>
+<h3 id="cf">CF = ___</h3>
+<ul><li>mov ax,1234h ;ax = 0001 0010 0011</li></ul>
+<p>0100b = 1234h</p>
+<ul><li>ror ax,4     ;ax = 4123h</li></ul>
+<ul><li>ror ax,4     ;ax = 3412h</li></ul>
+<ul><li>ror ax,4     ;ax = 2341h</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR</code></pre>
+<figure class="yazi-gorsel"><img src="sekil-702-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="Cpu05_08: sayfa 3, devre, tablo ve şekiller"><figcaption>Cpu05_08, sayfa 3.</figcaption></figure>
+<h2 id="cpu05-06">CPU05_06</h2>
+<p>XLAT :Traslate instruction</p>
+<p>LDS : Load Data Segment....</p>
+<p>After..</p>
+<p>Arithmetic</p>
+<ul><li>Addition ;Subtraction; Multiplication; Division</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal arithmetic</code></pre>
+<ul><li>Many computers can do decimal arithmetic.</li></ul>
+<ul><li>Storing decimal numbers 12345</li></ul>
+<ul><li>ASCII format:         31 32 33 34 35</li></ul>
+<ul><li>unpacked BCD:         01 02 03 04 05</li></ul>
+<ul><li>packed decimal: 01 23 45</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal arithmetic</code></pre>
+<ul><li>AAA (adjust after addition)</li></ul>
+<p>ASCII, unpacked decimal</p>
+<ul><li>AAS (adjust after subtraction)</li></ul>
+<p>ASCII, unpacked decimal</p>
+<ul><li>AAM (adjust after multiplication)</li></ul>
+<p>unpacked decimal</p>
+<ul><li>AAD (adjust before division)</li></ul>
+<p>unpacked decimal</p>
+<ul><li>DAA (decimal adjust after addition)</li></ul>
+<p>packed decimal</p>
+<ul><li>DAS (decimal adjust after subtraction)</li></ul>
+<p>packed decimal</p>
+<ul><li>Example</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, 0                 ; AX = 00 ??
+mov al, "9"     ;        AX = 00 39
+add al, "3"     ;        AX = 00 6C
+aaa             ;        AX = 01 02
+or    ax, 3030h ;        AX = 31 32</code></pre>
+<ul><li>We have the answer in ASCII decimal</li></ul>
+<ul><li>Slower than normal binary adds</li></ul>
+<ul><li>May be faster than converting ASCII decimal to binary, adding,</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and converting back to ASCII decimal</code></pre>
+<p>neg Two's complement negate Syntax: neg op register or memory Action: op = 0 - op Flags Affected: OF, SF, ZF, AF, PF, CF</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov BL,0FEh
+mov AL,0E5h
+mul BL</code></pre>
+<ul><li>BL contains 254, AL contains 229</li></ul>
+<ul><li>After MUL</li></ul>
+<ul><li>AX contains 0E336h (58166d)</li></ul>
+<ul><li>CF=OF=1 (result requires a word)</li></ul>
+<ul><li>SF, AF, PF, and ZF are undefined</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov BL,0FEh
+mov AL,0E5h</code></pre>
+<p>imul BL</p>
+<ul><li>BL contains -2, AL contains -27</li></ul>
+<ul><li>After IMUL</li></ul>
+<ul><li>AX contains 0036h (54d)</li></ul>
+<ul><li>CF=OF=0 (result still fits in byte)</li></ul>
+<ul><li>SF, AF, PF, and ZF are undefined</li></ul>
+<p>AL=20 H……..32</p>
+<h3 id="cl-80-h-128">CL= 80 H…….128</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL CL ………AX= 1000</code></pre>
+<p>------------------------------------------ IMUL CL ………….AX=F000</p>
+<p>AL=95</p>
+<pre class="kod"><code>AX=2711 H………10001 d</code></pre>
+<p>BL=10 BL=32 H…………..50 d</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV BL
+Div BL….. …….. AX=01C8</code></pre>
+<p>AL=09 ; AH=05</p>
+<p>Examples of MUL and IMUL</p>
+<ul><li>Say that AX = 1h and BX = FFFFh, then:</li></ul>
+<ul><li>Instruction   Result    DX AX        CF/OF</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mul bx        655350000 FFFF 0</code></pre>
+<p>imul bx       -1         FFFF FFFF    0</p>
+<ul><li>Say that AX = FFFFh and BX = FFFFh,</li></ul>
+<h3 id="then">then</h3>
+<ul><li>Instruction   Result     DX AX CF/OF</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mul bx        4294836225 FFFE 0001 1</code></pre>
+<p>imul bx       1          0000 0001    0</p>
+<p>Examples of MUL and IMUL (cont.)</p>
+<ul><li>AL = 30h and BL = 4h, then:</li></ul>
+<ul><li>Instruction   ResultAH   AL   CF/OF</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mul bl        192        00   C0    0</code></pre>
+<p>imul bl       192        00   C0      1</p>
+<ul><li>AL = 80h and BL = FFh, then</li></ul>
+<ul><li>Instruction   ResultAH   AL   CF/OF</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mul bl        326407F    80    1</code></pre>
+<p>imul bl       128        00   80      1</p>
+<p>Examples of DIV and IDIV</p>
+<ul><li>DX = 0000h, AX = 0005h, BX = FFFEh:</li></ul>
+<ul><li>Instruction          Quot. Rem. AX DX</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>div bx             0     5    0000 0005</code></pre>
+<p>idiv bx            -2        1     FFFE 0001</p>
+<ul><li>DX = FFFFh, AX = FFFBh, BX = 0002h:</li></ul>
+<ul><li>Instruction          Quot. Rem. AX DX</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>div bx              Divide Overflow</code></pre>
+<p>idiv bx             -2    -1    FFFE FFFF</p>
+<ul><li>Example 1</li></ul>
+<h3 id="before-the-instruction-executes">Before the instruction executes</h3>
+<h3 id="dx-ax-0002-bx-0010-16-cf-of">DX:???? AX: 0002                   BX: 0010 (16)     CF/OF:?</h3>
+<p>IMUL     BX        multiplies the contents of AX by BX placing the 32 bit answer in DX:AX</p>
+<h3 id="after-the-instruction-executes">After the instruction executes</h3>
+<p>DX:0000 AX: 0020 (32) BX: 0010 CF/OF:0 (Result fits in AX)</p>
+<ul><li>Example 2</li></ul>
+<h3 id="before-the-instruction-executes">Before the instruction executes</h3>
+<h3 id="dx-ax-0003-bx-7000-28672-cf-of">DX:????      AX: 0003           BX: 7000 (28672)   CF/OF:?</h3>
+<p>IMUL         BX          multiplies the contents of AX by BX placing the 32 bit answer in DX:AX</p>
+<h3 id="after-the-instruction-executes">After the instruction executes</h3>
+<h3 id="dx-0001-ax-5000-bx-7000-cf-of-1">DX:0001 AX: 5000 BX: 7000 CF/OF:1</h3>
+<p>(Result [86016] does not fit in AX)</p>
+<p>CBW Instruction</p>
+<ul><li>This instruction converts the signed 8-bit number in AL</li></ul>
+<p>into a signed 16-bit number in AX</p>
+<ul><li>NOTE: Use this instruction only with signed arithmetic!!</li></ul>
+<ul><li>Syntax: CBW</li></ul>
+<p>If bit 7 of AL is a 1, the instruction will place FF in AH. If bit 7 of AL is a 0, the instruction will place 00 in AH. No flags are affected by this instruction.</p>
+<ul><li>Examples:</li></ul>
+<p>Before:       AX:??40 (64) CBW converts the signed 8-bit number in AL to a 16-bit signed number in AX After:        AX:0040 (64)</p>
+<h2 id="cpu07-06">cpu07_06</h2>
+<p>Compare operands       CF   ZF Destination &gt; source   0    0 Destination = source   0    1 Destination &lt; source   1    0</p>
+<p>String and String-Handling Instructions Autoindexing for string instruction – CLD and STD instructions</p>
+<h2 id="cpu06">Cpu06</h2>
+<p>Logic Instructions Truth tables for AND, OR, XOR, NOT</p>
+<h3 id="0-and-0-0-0-or-0-0-0-xor-0-0">0 AND 0 = 0       0 OR 0 = 0              0 XOR 0 = 0</h3>
+<p>0 AND 1 = 0       0 OR 1 = 1              0 XOR 1 = 1              NOT 0 = 1   ; NOT 1 = 0</p>
+<h3 id="1-and-0-0-1-or-0-1-1-xor-0-1">1 AND 0 = 0       1 OR 0 = 1              1 XOR 0 = 1</h3>
+<h3 id="1-and-1-1-1-or-1-1-1-xor-1-0">1 AND 1 = 1       1 OR 1 = 1              1 XOR 1 = 0</h3>
+<ul><li>OR</li></ul>
+<ul><li>If you OR in a 1 bit, you force the result to be a 1 bit</li></ul>
+<ul><li>If you OR in a 0 bit, you do not change the original bit</li></ul>
+<ul><li>Thus OR can be used to turn bits on (SET a bit)</li></ul>
+<ul><li>AND</li></ul>
+<ul><li>If you AND in a 1 bit, you do not change the original bit</li></ul>
+<ul><li>If you AND in a 0 bit, you force the result to be a 0 bit</li></ul>
+<ul><li>Thus AND can be used to turn bits off (CLEAR bits)</li></ul>
+<ul><li>XOR</li></ul>
+<ul><li>If you XOR a bit with itself, you force the result to be a 0 bit</li></ul>
+<ul><li>If you XOR a 0 bit, you do not change the original bit</li></ul>
+<ul><li>If you XOR a 1 bit, you flip the state of the original bit</li></ul>
+<ul><li>Thus XOR can be used to COMPLEMENT individual bits or to CLEAR a group of bits</li></ul>
+<ul><li>NOT</li></ul>
+<ul><li>NOT flips the state of the original bits</li></ul>
+<ul><li>Thus NOT can be used to COMPLEMENT all the bits in an</li></ul>
+<p>operand</p>
+<ul><li>To modify bits in the destination field, you usually</li></ul>
+<p>construct a source bit pattern called a MASK field</p>
+<ul><li>The MASK field can be expressed in Binary, Hex, or</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal. For example, the following three mask fields are</code></pre>
+<h3 id="all-equivalent">all equivalent</h3>
+<p>01000000b in Binary is the same as 40h in Hex is the same as 64 in Decimal                            NOT: 1’s complement Logic inversion</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND and OR instructions are often used to mask out data</code></pre>
+<ul><li>a mask value is used to force certain bits to zero or one within some other value</li></ul>
+<ul><li>a mask typically affects certain bits and leaves other bits unaffected     NEG: 2’s complement</li></ul>
+<ul><li>AND forces selected bits to zero AND CL, 0Fh                                 Logic inversion + 1</li></ul>
+<ul><li>OR forces selected bits to one                     OR CL, 0Fh</li></ul>
+<p>Shift right</p>
+<ul><li>Syntax:             SHR reg, count            (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHR reg, CL               (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the right the number of times specified by the count</li></ul>
+<p>operand</p>
+<ul><li>zeros fill vacated positions at the H.O. bit</li></ul>
+<ul><li>L.O. bit shifts into the carry flag</li></ul>
+<ul><li>a quick way to divide by two</li></ul>
+<ul><li>useful in unpacking data, e.g., suppose you want to extract the two nibbles in the AL register,</li></ul>
+<p>leaving the H.O. nibble in AH and the L.O. nibble in AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, al
+shr ah, 4
+and al, 0Fh</code></pre>
+<ul><li>the 8086 and 8088 allow an immediate shift of 1 only</li></ul>
+<p>Register                  C</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL       0</code></pre>
+<h3 id="1-shift-the-contents-of-register-ax-to-the-left-by-3-bits">1. Shift the contents of register AX to the left by 3 bits</h3>
+<p>Before: AX: 0001 CL:??</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL,3   ;Puts a 3 into register CL
+SHL AX,CL ;Shifts register AX 3 bits to the left</code></pre>
+<p>After: AX: 0008 CL:03</p>
+<h3 id="2-multiply-the-contents-of-bx-by-2">2. Multiply the contents of BX by 2</h3>
+<p>Before: BX: 0001</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAL BX,1    ;Shifts register BX 1 bit to the left</code></pre>
+<p>After: BX: 0002</p>
+<p>Rotate through carry L/R</p>
+<ul><li>Syntax:           RCL reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL reg, CL                  (count stored in CL)</code></pre>
+<ul><li>rotates bits to the left, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into bit zero on the right</li></ul>
+<ul><li>Syntax:           RCR reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR reg                      (count stored in CL)</code></pre>
+<ul><li>rotates bits to the right, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into the H.O. bit on the l eft</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL                                                                            RCR</code></pre>
+<h2 id="cpu06-06">Cpu06_06</h2>
+<p>Logic Instructions Truth tables for AND, OR, XOR, NOT</p>
+<h3 id="0-and-0-0-0-or-0-0-0-xor-0-0">0 AND 0 = 0      0 OR 0 = 0          0 XOR 0 = 0</h3>
+<h3 id="0-and-1-0-0-or-1-1-0-xor-1-1-not-0-1-not-1-0">0 AND 1 = 0      0 OR 1 = 1          0 XOR 1 = 1        NOT 0 = 1        ; NOT 1 = 0</h3>
+<h3 id="1-and-0-0-1-or-0-1-1-xor-0-1">1 AND 0 = 0      1 OR 0 = 1          1 XOR 0 = 1</h3>
+<h3 id="1-and-1-1-1-or-1-1-1-xor-1-0">1 AND 1 = 1      1 OR 1 = 1          1 XOR 1 = 0</h3>
+<ul><li>OR</li></ul>
+<ul><li>If you OR in a 1 bit, you force the result to be a 1 bit</li></ul>
+<ul><li>If you OR in a 0 bit, you do not change the original bit</li></ul>
+<ul><li>Thus OR can be used to turn bits on (SET a bit)</li></ul>
+<ul><li>AND</li></ul>
+<ul><li>If you AND in a 1 bit, you do not change the original bit</li></ul>
+<ul><li>If you AND in a 0 bit, you force the result to be a 0 bit</li></ul>
+<ul><li>Thus AND can be used to turn bits off (CLEAR bits)</li></ul>
+<ul><li>XOR</li></ul>
+<ul><li>If you XOR a bit with itself, you force the result to be a 0 bit</li></ul>
+<ul><li>If you XOR a 0 bit, you do not change the original bit</li></ul>
+<ul><li>If you XOR a 1 bit, you flip the state of the original bit</li></ul>
+<ul><li>Thus XOR can be used to COMPLEMENT individual bits or to CLEAR a group of bits</li></ul>
+<ul><li>NOT</li></ul>
+<ul><li>NOT flips the state of the original bits</li></ul>
+<ul><li>Thus NOT can be used to COMPLEMENT all the bits in an</li></ul>
+<p>operand</p>
+<ul><li>To modify bits in the destination field, you usually</li></ul>
+<p>construct a source bit pattern called a MASK field</p>
+<ul><li>The MASK field can be expressed in Binary, Hex, or</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Decimal. For example, the following three mask fields are</code></pre>
+<h3 id="all-equivalent">all equivalent</h3>
+<p>01000000b in Binary is the same as 40h in Hex is the same as 64 in Decimal                           NOT: 1’s complement Logic inversion</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND and OR instructions are often used to mask out data</code></pre>
+<ul><li>a mask value is used to force certain bits to zero or one within some other value</li></ul>
+<ul><li>a mask typically affects certain bits and leaves other bits unaffected      NEG: 2’s complement</li></ul>
+<ul><li>AND forces selected bits to zero AND CL, 0Fh                                 Logic inversion + 1</li></ul>
+<ul><li>OR forces selected bits to one                     OR CL, 0Fh</li></ul>
+<p>Logic examples</p>
+<h3 id="al-1100-1010-al-0011-0101">AL     1100 1010                        AL       0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT AL                               BL       0110 1101</code></pre>
+<h3 id="al-0011-0101-or-al-bl">AL     0011 0101                           OR AL, BL</h3>
+<h3 id="al-0111-1101">AL       0111 1101</h3>
+<h3 id="al-0011-0101">AL      0011 0101</h3>
+<h3 id="bl-0110-1101-al-0011-0101">BL      0110 1101                       AL       0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL, BL                            BL       0000 1111</code></pre>
+<h3 id="al-0010-0101-or-al-bl">AL      0010 0101                          OR AL, BL</h3>
+<h3 id="al-0011-1111">AL       0011 1111</h3>
+<h3 id="al-0011-0101">AL      0011 0101</h3>
+<h3 id="bl-0000-1111-al-0011-0101">BL      0000 1111                       AL      0011 0101</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL, BL                            BL      0110 1101</code></pre>
+<h3 id="al-0000-0101-xor-al-bl">AL      0000 0101                         XOR AL, BL</h3>
+<h3 id="al-0101-1000">AL      0101 1000</h3>
+<h3 id="1-before-the-instruction-executes-ax-8935">1. Before the instruction executes: AX: 8935</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AX,0000h A MASK of 0000000000000000b is ANDed</code></pre>
+<p>with               the AX register After the instruction executes: AX: 0000</p>
+<h3 id="2-before-the-instruction-executes-al-01">2. Before the instruction executes: AL: 01</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL,40h             A MASK of 01000000b is ORed with</code></pre>
+<p>the AL register After the instruction executes: AL: 41</p>
+<h3 id="3-before-the-instruction-executes-ax-7849">3. Before the instruction executes: AX: 7849</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR AX,AX             The AX register is XORed with itself</code></pre>
+<p>After the instruction executes: AX: 0000</p>
+<h3 id="4-convert-the-ascii-digit-in-al-to-a-pure-number-remember-the-ascii-codes">4. Convert the ASCII digit in AL to a pure number (remember the ASCII codes</h3>
+<p>for 0-9 are 30h-39h)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB     AL,30h or
+AND AL,00001111b or
+AND AL,Ofh</code></pre>
+<h3 id="5-convert-the-digit-in-al-to-its-ascii-code">5. Convert the digit in AL to its ASCII code</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL,00110000b or
+OR AL,30h or
+ADD AL,30h</code></pre>
+<h3 id="6-convert-the-upper-case-letter-at-char-to-its-corresponding-lower-case-letter">6. Convert the upper case letter at CHAR to its corresponding lower case letter</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR CHAR,00100000b or
+OR CHAR,20h or
+ADD CHAR,20h</code></pre>
+<p>Shift left</p>
+<ul><li>Syntax:             SHL reg, count            (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL reg, CL               (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the left the number of times specified by the count</li></ul>
+<p>operand</p>
+<ul><li>zeros fill vacated positions at the L.O. bit</li></ul>
+<ul><li>H.O. bit shifts into the carry flag</li></ul>
+<ul><li>a quick way to multiply by two</li></ul>
+<ul><li>useful in packing data, e.g., consider two nibbles in AL and AH that we want to combine</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>shl ah, 4
+or al,ah</code></pre>
+<ul><li>the 8086 and 8088 allow an immediate shift of 1 only</li></ul>
+<p>C               Register</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL                                                      0</code></pre>
+<p>Shift right</p>
+<ul><li>Syntax:             SHR reg, count            (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHR reg, CL               (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the right the number of times specified by the count</li></ul>
+<p>operand</p>
+<ul><li>zeros fill vacated positions at the H.O. bit</li></ul>
+<ul><li>L.O. bit shifts into the carry flag</li></ul>
+<ul><li>a quick way to divide by two</li></ul>
+<ul><li>useful in unpacking data, e.g., suppose you want to extract the two nibbles in the AL register,</li></ul>
+<p>leaving the H.O. nibble in AH and the L.O. nibble in AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, al
+shr ah, 4
+and al, 0Fh</code></pre>
+<ul><li>the 8086 and 8088 allow an immediate shift of 1 only</li></ul>
+<p>Register                  C</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL       0</code></pre>
+<p>Shift arithmetic right</p>
+<ul><li>Syntax:              SAR reg, count            (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR reg, CL               (count stored in CL)</code></pre>
+<ul><li>moves each bit of the operand one bit position to the left the number of times specified by the count</li></ul>
+<p>operand</p>
+<ul><li>H.O. bit replicates</li></ul>
+<ul><li>L.O. bit shifts into the carry flag</li></ul>
+<ul><li>main purpose is to perform a signed division by some power of two</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ax, -15
+sar ax, 1             ; result is -8</code></pre>
+<ul><li>In 80286 and later you can use SAR to sign extend one register into another</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, al
+sar ah, 7</code></pre>
+<p>if AL contains 1111 0001 then AX will be 1111 1111 1111 0001 after execution</p>
+<p>Register                  C</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR</code></pre>
+<h3 id="1-shift-the-contents-of-register-ax-to-the-left-by-3-bits">1. Shift the contents of register AX to the left by 3 bits</h3>
+<p>Before: AX: 0001  CL:??</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL,3    ;Puts a 3 into register CL
+SHL AX,CL     ;Shifts register AX 3 bits to the left</code></pre>
+<p>After: AX: 0008  CL:03</p>
+<h3 id="2-multiply-the-contents-of-bx-by-2">2. Multiply the contents of BX by 2</h3>
+<p>Before: BX: 0001</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAL BX,1           ;Shifts register BX 1 bit to the left</code></pre>
+<p>After: BX: 0002</p>
+<p>Rotate through carry L/R</p>
+<ul><li>Syntax:           RCL reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL reg, CL                  (count stored in CL)</code></pre>
+<ul><li>rotates bits to the left, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into bit zero on the right</li></ul>
+<ul><li>Syntax:           RCR reg, count               (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR reg                      (count stored in CL)</code></pre>
+<ul><li>rotates bits to the right, through the carry flag</li></ul>
+<ul><li>bit in the carry flag is written back into the H.O. bit on the left</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCL                                                                           RCR</code></pre>
+<p>Rotate left/right</p>
+<ul><li>Syntax:          ROL reg, count             (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL reg, CL                (count stored in CL)</code></pre>
+<ul><li>rotates bits to the left</li></ul>
+<ul><li>H.O. bit goes to carry flag and L.O. bit</li></ul>
+<ul><li>Syntax:          ROR reg, count             (immediate count)</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROR reg                    (count stored in CL)</code></pre>
+<ul><li>rotates bits to the right</li></ul>
+<ul><li>L.O. bit goes to carry flag and H.O. bit</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL                                                                  ROR</code></pre>
+<ul><li>mov ah,40h                        ;ah = 0100 0000b</li></ul>
+<ul><li>rol ah,1                         ;ah = 1000 0000b, CF = 0</li></ul>
+<ul><li>rol ah,1                         ;ah = 0000 0001b, CF = 1</li></ul>
+<ul><li>rol ah,1    ;ah = ____________b,</li></ul>
+<h3 id="cf">CF = ___</h3>
+<ul><li>mov ax,1234h ;ax = 0001 0010 0011</li></ul>
+<p>0100b = 1234h</p>
+<ul><li>ror ax,4     ;ax = 4123h</li></ul>
+<ul><li>ror ax,4     ;ax = 3412h</li></ul>
+<ul><li>ror ax,4     ;ax = 2341h</li></ul>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-aritmetik-mantik.zip" download>eem332-aritmetik-mantik.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 4.2 MB · 16.03.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-aritmetik-mantik.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

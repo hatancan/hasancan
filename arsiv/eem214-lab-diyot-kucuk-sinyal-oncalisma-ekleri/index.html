@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: Zener ve Diyot Küçük Sinyal Ön Çalışma Ekleri — hasancan.net</title>
+<meta name="description" content="Zener regülasyonu, diyodun DC ve AC eşdeğeri, küçük sinyal direnci ve 0,7 gerilim aktarım oranı için direnç tasarımının el yazısı çözümleri.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: Zener ve Diyot Küçük Sinyal Ön Çalışma Ekleri">
+<meta property="og:description" content="Zener regülasyonu, diyodun DC ve AC eşdeğeri, küçük sinyal direnci ve 0,7 gerilim aktarım oranı için direnç tasarımının el yazısı çözümleri.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: Zener ve Diyot Küçük Sinyal Ön Çalışma Ekleri", "description": "Zener regülasyonu, diyodun DC ve AC eşdeğeri, küçük sinyal direnci ve 0,7 gerilim aktarım oranı için direnç tasarımının el yazısı çözümleri.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: Zener ve Diyot Küçük Sinyal Ön Çalışma Ekleri">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>23.03.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#zener-on-calismasi">Zener ön çalışması</a></li><li><a href="#diyodun-dc-calisma-noktasi">Diyodun DC çalışma noktası</a></li><li><a href="#kucuk-sinyal-direnci-ve-gerilim-aktarimi">Küçük sinyal direnci ve gerilim aktarımı</a></li><li><a href="#0-7-aktarim-orani-icin-direnc-tasarimi">0,7 aktarım oranı için direnç tasarımı</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: Zener ve Diyot Küçük Sinyal Ön Çalışma Ekleri</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 23.03.2014 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM214 laboratuvarı için hazırlanmış Zener ve diyot küçük sinyal ön çalışmaları, fotoğraflanmış ve taranmış sayfalardan metne aktarıldı. Öğrenci adları ve numaraları çıkarıldı; kaynak görüntüler ve indirme dosyası paylaşılmıyor. Küçük sinyal çalışmasının arşivdeki tarihi 23 Mart 2014'tür.</p>
+<h2 id="zener-on-calismasi">Zener ön çalışması</h2>
+<p>İki fotoğraftaki aynı hesap birlikte aktarılmıştır. Kaynak açıklama, Zener diyodun ters yönde belirli bir eşik sonrasında akım geçirmesi ile sıradan diyodun ters yönde kullanılmamasını karşılaştırır; sıradan diyodun ters iletimde yanacağını söyler.</p>
+<p><em>Not: Sıradan diyotta da ters kırılma oluşabilir. Kalıcı hasar akım ve güç sınırlarına bağlıdır; “her ters akımda yanar” ifadesi genel bir fizik kuralı değildir.</em></p>
+<p>Devrede V_s kaynağı R_s üzerinden çıkışa bağlıdır; Zener ile yük R_L çıkışa paraleldir. Kaynaktaki hesaplar:</p>
+<ul><li>r_z = ΔV_z/ΔI_z = 20 Ω.</li><li>r_z I_zk = 20 Ω × 0,2 mA = 4 mV; kaynak bunu V_z olarak adlandırır.</li><li>10 V − 0,5 kΩ × 5 mA = 7,5 V karşılaştırmasıyla Zenerin iletimde olduğu ve V_out = 6,8 V yazılır.</li><li>“V_s + 1” için 8,5 V ve V_out = 6,8 V; “V_s − 1” için 6,5 V ve Zenerin iletimde olmadığı belirtilir.</li><li>R_L = 2 kΩ, V_in = 6,5 V ve Zener kesimdeyken V_out = [R_L/(R_s + R_L)]V_in = (2/2,5) × 6,5 V.</li><li>R_L = 0,5 kΩ için V_out = [0,5/(0,5 + 0,5)]V_in; V_in = 10 V ile 5 V bulunur.</li></ul>
+<p><em>Not: 4 mV, verilen dinamik dirençle hesaplanan gerilim değişimidir; Zenerin nominal 6,8 V gerilimi değildir. 2 kΩ yüklü ve 6,5 V girişli durumda bölücü sonucu 5,2 V'tur. Kaynaktaki “V_s ± 1” satırları 7,5 V merkezli değerlerdir; 10 V kaynağın doğrudan ±1 V değişimiyle karıştırılmamalıdır. Yüklü regülasyon sınırında Zener akımı da kontrol edilmelidir.</em></p>
+<h2 id="diyodun-dc-calisma-noktasi">Diyodun DC çalışma noktası</h2>
+<p>D1N4148 diyodu +5 V kaynağına 1 kΩ üzerinden, alt ucu R üzerinden toprağa bağlıdır. Giriş üst uca ve çıkış alt uçtaki 1 kΩ yüke 10 µF kondansatörlerle kuplajlanmıştır. Giriş v_i(t) = V_m cos(ωt) olarak yazılır.</p>
+<p>Kaynak modelde eşik V_γ = 0,6 V, seri direnç r = 20 Ω ve idealite katsayısı n = 2'dir. DC'de kondansatörler açık devredir:</p>
+<p>I_DQ = (5 − 0,6)/(1 kΩ + R + 20 Ω).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R</th><th scope="col">Toplam DC direnç</th><th scope="col">I_DQ</th></tr></thead><tbody><tr><th scope="row">3,9 kΩ</th><td>4920 Ω</td><td>Yaklaşık 894 µA</td></tr><tr><th scope="row">56 kΩ</th><td>57020 Ω</td><td>Yaklaşık 77,1 µA</td></tr></tbody></table></div>
+<p>Kaynak eğride çalışma noktası ile doğrusallaştırma gösterilir. AC için besleme toprağa alınır, kuplaj kondansatörleri kısa devre sayılır ve diyot r_d ile değiştirilir.</p>
+<h2 id="kucuk-sinyal-direnci-ve-gerilim-aktarimi">Küçük sinyal direnci ve gerilim aktarımı</h2>
+<p>r_d = nV_T/I_DQ, V_T = 25 mV:</p>
+<ul><li>894 µA için r_d ≈ 56 Ω.</li><li>77,1 µA için r_d ≈ 650 Ω.</li></ul>
+<p>Çıkış yükü R_eq = R || 1 kΩ ve A_V = V_o/V_in = R_eq/(R_eq + r_d).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R</th><th scope="col">Kaynaktaki paralel eşdeğer</th><th scope="col">r_d</th><th scope="col">Kaynaktaki A_V</th></tr></thead><tbody><tr><th scope="row">3,9 kΩ</th><td>Yaklaşık 800 Ω</td><td>56 Ω</td><td>0,92</td></tr><tr><th scope="row">56 kΩ</th><td>Yaklaşık 980 Ω</td><td>650 Ω</td><td>0,60</td></tr></tbody></table></div>
+<p><em>Not: 800/(800 + 56) ≈ 0,935 olduğundan ilk satırdaki 0,92 sonucu aritmetik olarak uyuşmaz. İkinci oran yaklaşık 0,601'dir. Kaynak, DC'de kullandığı 20 Ω seri direnci AC'de r_d'ye ayrıca eklememiştir; sonuçlar bu kabulle aktarılmıştır.</em></p>
+<p>Kaynak küçük sinyal sınırını v_d ≪ nV_T = 50 mV olarak yazar.</p>
+<p><em>Not: Bu eşitsizlik diyot üzerindeki AC gerilim içindir; giriş kaynağı genliğiyle aynı olmak zorunda değildir.</em></p>
+<h2 id="0-7-aktarim-orani-icin-direnc-tasarimi">0,7 aktarım oranı için direnç tasarımı</h2>
+<p>Tasarım koşulları 0,67 &lt; A_V &lt; 0,73 ve I_DQ &lt; 3 mA'dir. Çözüm, bu aşamada 20 Ω'u ihmal ederek I_DQ ≈ 4,4 V/(1 kΩ + R) kullanır. Akım koşulundan R &gt; 466 Ω bulunur.</p>
+<p>Dirençler kΩ ile ifade edildiğinde r_d ≈ 0,0113(1 + R), R_eq = R/(1 + R) ve hedef:</p>
+<p>0,7 = R_eq/(R_eq + r_d).</p>
+<p>Kaynak cebirinde 7r_d = 3R_eq, ardından yaklaşık 8R² − 284R + 8 = 0 yazılır. Kökler yaklaşık 35,4 kΩ ve 28 Ω'dur; akım sınırı nedeniyle küçük kök elenir. İlk deneme satırında 27 kΩ da yazılıdır, nihai çözümde kullanılmaz.</p>
+<p>35,4 kΩ için kaynak denetimi:</p>
+<ul><li>R_eq ≈ 0,972 kΩ.</li><li>r_d ≈ 0,411 kΩ.</li><li>A_V ≈ 0,972/(0,972 + 0,411) = 0,702.</li></ul>
+<p>Standart 33 kΩ ile R_eq ≈ 0,970 kΩ, r_d ≈ 0,384 kΩ ve A_V ≈ 0,716 yazılır; 33 kΩ'un kullanılabileceği sonucuna varılır.</p>
+<p><em>Not: Yuvarlatılmamış nV_T = 50 mV ve 4,4 V ile büyük kök yaklaşık 35,69 kΩ'dur; 35,4 kΩ ara katsayıların yuvarlatılmasından doğar. 33 kΩ için aynı model yaklaşık 0,715 verir ve istenen aralıktadır. I_DQ ≈ 0,129 mA ile 3 mA sınırı da sağlanır.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

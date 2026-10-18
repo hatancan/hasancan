@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Denetim Sistemleri: Arduino ile DS18B20 Sıcaklık Okuma Örnekleri (Hacktronics ve Arduino Türkiye) — hasancan.net</title>
+<meta name="description" content="2015 sıcaklık kontrol projesine eşlik eden Arduino örnekleri: çoklu sensör adresleri, DallasTemperature ve doğrudan OneWire okuma.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-arduino-sicaklik-okuma-kodlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Denetim Sistemleri: Arduino ile DS18B20 Sıcaklık Okuma Örnekleri (Hacktronics ve Arduino Türkiye)">
+<meta property="og:description" content="2015 sıcaklık kontrol projesine eşlik eden Arduino örnekleri: çoklu sensör adresleri, DallasTemperature ve doğrudan OneWire okuma.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-arduino-sicaklik-okuma-kodlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Denetim Sistemleri: Arduino ile DS18B20 Sıcaklık Okuma Örnekleri (Hacktronics ve Arduino Türkiye)", "description": "2015 sıcaklık kontrol projesine eşlik eden Arduino örnekleri: çoklu sensör adresleri, DallasTemperature ve doğrudan OneWire okuma.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem322-arduino-sicaklik-okuma-kodlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "Arduino-Sicaklik-Ornekleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-arduino-sicaklik-okuma-kodlari/Arduino-Sicaklik-Ornekleri.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM322 Denetim Sistemleri: Arduino ile DS18B20 Sıcaklık Okuma Örnekleri (Hacktronics ve Arduino Türkiye)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.05.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#uc-sensorun-adresle-okunmasi">Üç sensörün adresle okunması</a></li><li><a href="#bir-sensorun-indeksle-okunmasi">Bir sensörün indeksle okunması</a></li><li><a href="#onewire-ile-scratchpad-okunmasi">OneWire ile scratchpad okunması</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM322 Denetim Sistemleri: Arduino ile DS18B20 Sıcaklık Okuma Örnekleri (Hacktronics ve Arduino Türkiye)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 13.05.2015 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM322’nin 2015 bahar dönemi sıcaklık denetimi projesi yanında saklanan üç <strong>Arduino sıcaklık okuma örneği</strong> bu yazıda bir araya getirildi. Çoklu sensör örneği yorumlarında Hacktronics’i; doğrudan OneWire örneği Arduinoturkiye.com’u ve düzenleyen İsmail Buçgün’ü kaynak gösteriyor. Öğrenci adı taşıyan dosya yolları kaldırıldı. Kaynakların arşiv tarihleri Mayıs 2015; kodlar yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<p>Röle denetimini de içeren tamamlanmış öğrenci projesi <a href="/arsiv/eem322-kettle-kontrol-projesi/">Kettle Kontrol yazısında</a> yer alır. Buradaki dosyalar sıcaklık ölçümünü denemek için kullanılan farklı örneklerdir.</p>
+<h2 id="uc-sensorun-adresle-okunmasi">Üç sensörün adresle okunması</h2>
+<p><code>OneWire</code> ve <code>DallasTemperature</code> kütüphaneleri kullanılır. Veri hattı 3 numaralı pine bağlıdır. Üç aygıt adresi kodda tanımlanır; çözünürlük 10 bit, seri iletişim 9600 baud’dur. İki saniyede bir dönüşüm istenir; her sensörün Celsius ve Fahrenheit değerleri yazdırılır. −127 °C sonucu hata olarak işlenir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// This Arduino sketch reads DS18B20 "1-Wire" digital
+// temperature sensors.
+// Tutorial:
+// http://www.hacktronics.com/Tutorials/arduino-1-wire-tutorial.html
+
+#include &lt;OneWire.h&gt;
+#include &lt;DallasTemperature.h&gt;
+
+// Data wire is plugged into pin 3 on the Arduino
+#define ONE_WIRE_BUS 3
+
+// Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(ONE_WIRE_BUS);
+
+// Pass our oneWire reference to Dallas Temperature. 
+DallasTemperature sensors(&amp;oneWire);
+
+// Assign the addresses of your 1-Wire temp sensors.
+// See the tutorial on how to obtain these addresses:
+// http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html
+
+DeviceAddress insideThermometer = { 0x28, 0x94, 0xE2, 0xDF, 0x02, 0x00, 0x00, 0xFE };
+DeviceAddress outsideThermometer = { 0x28, 0x6B, 0xDF, 0xDF, 0x02, 0x00, 0x00, 0xC0 };
+DeviceAddress dogHouseThermometer = { 0x28, 0x59, 0xBE, 0xDF, 0x02, 0x00, 0x00, 0x9F };
+
+void setup(void)
+{
+  // start serial port
+  Serial.begin(9600);
+  // Start up the library
+  sensors.begin();
+  // set the resolution to 10 bit (good enough?)
+  sensors.setResolution(insideThermometer, 10);
+  sensors.setResolution(outsideThermometer, 10);
+  sensors.setResolution(dogHouseThermometer, 10);
+}
+
+void printTemperature(DeviceAddress deviceAddress)
+{
+  float tempC = sensors.getTempC(deviceAddress);
+  if (tempC == -127.00) {
+    Serial.print("Error getting temperature");
+  } else {
+    Serial.print("C: ");
+    Serial.print(tempC);
+    Serial.print(" F: ");
+    Serial.print(DallasTemperature::toFahrenheit(tempC));
+  }
+}
+
+void loop(void)
+{ 
+  delay(2000);
+  Serial.print("Getting temperatures...\n\r");
+  sensors.requestTemperatures();
+  
+  Serial.print("Inside temperature is: ");
+  printTemperature(insideThermometer);
+  Serial.print("\n\r");
+  Serial.print("Outside temperature is: ");
+  printTemperature(outsideThermometer);
+  Serial.print("\n\r");
+  Serial.print("Dog House temperature is: ");
+  printTemperature(dogHouseThermometer);
+  Serial.print("\n\r\n\r");
+}</code></pre>
+<h2 id="bir-sensorun-indeksle-okunmasi">Bir sensörün indeksle okunması</h2>
+<p>Bu sürümde veri hattı 2 numaralı pindedir. <code>requestTemperatures</code> sonrasında <code>getTempCByIndex(0)</code> aynı hatta bulunan ilk aygıtın sıcaklığını verir.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;OneWire.h&gt;
+#include &lt;DallasTemperature.h&gt;
+ 
+// Data wire is plugged into pin 2 on the Arduino
+#define ONE_WIRE_BUS 2
+ 
+// Setup a oneWire instance to communicate with any OneWire devices 
+// (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+ 
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&amp;oneWire);
+ 
+void setup(void)
+{
+  // start serial port
+  Serial.begin(9600);
+  Serial.println("Dallas Temperature IC Control Library Demo");
+
+  // Start up the library
+  sensors.begin();
+}
+ 
+ 
+void loop(void)
+{
+  // call sensors.requestTemperatures() to issue a global temperature
+  // request to all devices on the bus
+  Serial.print(" Requesting temperatures...");
+  sensors.requestTemperatures(); // Send the command to get temperatures
+  Serial.println("DONE");
+
+  Serial.print("Temperature for Device 1 is: ");
+  Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"? 
+    // You can have more than one IC on the same bus. 
+    // 0 refers to the first IC on the wire
+ 
+}</code></pre>
+<h2 id="onewire-ile-scratchpad-okunmasi">OneWire ile scratchpad okunması</h2>
+<p>Üçüncü örnek, sensör aramasını, CRC kontrolünü, dönüşüm komutunu ve dokuz baytlık scratchpad okumasını doğrudan gerçekleştirir. Tanınan aile kodları 0x10 ve 0x28’dir. Hata yollarında −1000 döndürülür.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Arduinoturkiye.com DS18B20 Dijital Sıcaklık Sensörü Kullanımı
+// Tek Sensör Örnek Programı
+// Düzenleme: İsmail BUÇGÜN
+
+#include &lt;OneWire.h&gt; // OneWire kütüphanesini ekliyoruz.
+
+// Sıcaklık sensörünü bağladığımız dijital pini 2 olarak belirliyoruz.
+int DS18S20_Pin = 2; 
+
+// Sıcaklık Sensörü Giriş-Çıkışı
+OneWire ds(DS18S20_Pin);  // 2. Dijital pinde.
+
+void setup(void) {
+  Serial.begin(9600); // Seri iletişimi başlatıyoruz.
+}
+
+void loop(void) {
+  // temperature değişkenini sıcaklık değerini alma fonksiyonuna bağlıyoruz.
+  float temperature = getTemp();
+  // Sensörden gelen sıcaklık değerini Serial monitörde yazdırıyoruz.
+  Serial.print("Sicaklik: ");
+  Serial.println(temperature);
+  // 1 saniye bekliyoruz. Monitörde saniyede 1 sıcaklık değeri yazmaya devam edecek.
+  delay(1000);
+
+}
+
+// Aşağıdaki fonksiyon DS18B20 sıcaklık sensörümüzden gelen verileri
+// Celcius cinsinden sıcaklık değerlerine çevirmek için kullanılıyor.
+// Herhangi bir değişiklik yapmamız gerekmiyor.
+
+float getTemp(){
+  //returns the temperature from one DS18S20 in DEG Celsius
+
+  byte data[12];
+  byte addr[8];
+
+  if ( !ds.search(addr)) {
+      //no more sensors on chain, reset search
+      ds.reset_search();
+      return -1000;
+  }
+
+  if ( OneWire::crc8( addr, 7) != addr[7]) {
+      Serial.println("CRC is not valid!");
+      return -1000;
+  }
+
+  if ( addr[0] != 0x10 &amp;&amp; addr[0] != 0x28) {
+      Serial.print("Device is not recognized");
+      return -1000;
+  }
+
+  ds.reset();
+  ds.select(addr);
+  ds.write(0x44,1); // start conversion, with parasite power on at the end
+
+  byte present = ds.reset();
+  ds.select(addr);    
+  ds.write(0xBE); // Read Scratchpad
+
+  for (int i = 0; i &lt; 9; i++) { // we need 9 bytes
+    data[i] = ds.read();
+  }
+
+  ds.reset_search();
+
+  byte MSB = data[1];
+  byte LSB = data[0];
+
+  float tempRead = ((MSB &lt;&lt; 8) | LSB); //using two's compliment
+  float TemperatureSum = tempRead / 16;
+
+  return TemperatureSum;
+
+}</code></pre>
+<p><em>Not: Son örnekte 0x10 ve 0x28 aileleri kabul edilmesine karşın ham değer her iki durumda da 16’ya bölünüyor. Bu kodda aileye özgü dönüşüm, dönüşümün bitmesini bekleme ve negatif sıcaklığın işaretli ham değer olarak ele alınması ayrıca doğrulanmış değildir. Kaynak kod derlenmeden ve donanımda çalıştırılmadan aktarılmıştır.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="Arduino-Sicaklik-Ornekleri.zip" download>Arduino-Sicaklik-Ornekleri.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3 KB · 13.05.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="Arduino-Sicaklik-Ornekleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

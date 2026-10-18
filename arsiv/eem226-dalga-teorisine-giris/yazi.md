@@ -1,9 +1,9 @@
 ---
-baslik: EEM226 Elektromanyetik II: Elektromanyetik Dalga Teorisine Giriş (S. Gökhun Tanyer)
+baslik: EEM226 Elektromanyetik Dalga Teorisi I: Elektromanyetik Dalga Teorisine Giriş (S. Gökhun Tanyer)
 ozet: EEM226 giriş sunumu: vektör analizi, dalga olayları, ışık hızı, spektrum, soğurma, antenler ve mikrodalga uygulamaları.
 ---
 
-Prof. S. Gökhun Tanyer'in Başkent Üniversitesi EEM226 dersi için hazırladığı 49 sayfalık “Introduction to the Course – 0C” sunumunun metin dökümüdür. PDF 17 Şubat 2015 tarihlidir; belgede dersin İngilizce adı Electromagnetic Wave Theory I olarak geçer. Arşiv sınıflandırması EEM226 – Elektromanyetik II'dir. Orijinal PDF yazının sonunda indirilebilir.
+Prof. S. Gökhun Tanyer'in Başkent Üniversitesi EEM226 dersi için hazırladığı 49 sayfalık “Introduction to the Course – 0C” sunumunun metin dökümüdür. PDF 17 Şubat 2015 tarihlidir; belgede dersin İngilizce adı Electromagnetic Wave Theory I olarak geçer. Orijinal PDF yazının sonunda indirilebilir.
 
 *Not: Kaynak sayfası, Cheng kitapları ve Course Outline kaynaklarından yararlanıldığını; belgenin Başkent Üniversitesi öğrencileri için hazırlandığını ve kopyalama/internette yayımlamanın belge sahibinin iznine bağlı olduğunu belirtmektedir. Bu uyarı kaynakta aynen bulunmaktadır.*
 

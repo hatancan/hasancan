@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Chapter 5 — Ayrık Zamanlı Fourier Dönüşümü (İsmail Avcıbaş) — hasancan.net</title>
+<meta name="description" content="DTFT tanımı ve periyodikliği, dönüşüm özellikleri, sıfır ekleme, periyodik konvolüsyon, dualite ve fark denklemlerinin çözümü.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-avcibas-05-ayrik-fourier/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Chapter 5 — Ayrık Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)">
+<meta property="og:description" content="DTFT tanımı ve periyodikliği, dönüşüm özellikleri, sıfır ekleme, periyodik konvolüsyon, dualite ve fark denklemlerinin çözümü.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-avcibas-05-ayrik-fourier/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Chapter 5 — Ayrık Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)", "description": "DTFT tanımı ve periyodikliği, dönüşüm özellikleri, sıfır ekleme, periyodik konvolüsyon, dualite ve fark denklemlerinin çözümü.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-avcibas-05-ayrik-fourier/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-avcibas-05-ayrik-fourier.pdf", "contentUrl": "https://hasancan.net/arsiv/eem301-avcibas-05-ayrik-fourier/eem301-avcibas-05-ayrik-fourier.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Chapter 5 — Ayrık Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.08.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#dt-fourier-transform">DT Fourier transform</a></li><li><a href="#transform-examples">Transform examples</a></li><li><a href="#periodic-sequences">Periodic sequences</a></li><li><a href="#properties">Properties</a></li><li><a href="#expansion-by-inserting-zeros">Expansion by inserting zeros</a></li><li><a href="#convolution-multiplication-and-filters">Convolution, multiplication and filters</a></li><li><a href="#duality">Duality</a></li><li><a href="#difference-equations">Difference equations</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Chapter 5 — Ayrık Zamanlı Fourier Dönüşümü (İsmail Avcıbaş)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 16.08.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi EEM301 dersi için İsmail Avcıbaş’ın hazırladığı <strong>Chapter V: Discrete Time Fourier Transform</strong> sunumu (61 sayfa). Kaynak PowerPoint’in oluşturulma tarihi 16 Ağustos 2006, son kaydı 6 Ekim 2009. Metni görsel olarak saklanan slaytların konu anlatımı, temel formülleri ve örnekleri aşağıya aktarıldı. Sunumun PDF kopyası yazının sonunda indirilebilir.</p>
+<h2 id="dt-fourier-transform">DT Fourier transform</h2>
+<p>Starting from a finite-duration sequence and its periodic extension, the DT Fourier series approaches a transform as N→∞:</p>
+<ul><li>X(e^(jω))=Σₙ₌₋∞^∞ x[n]e^(−jωn).</li><li>x[n]=(1/2π)∫ over any 2π interval X(e^(jω))e^(jωn)dω.</li></ul>
+<p>Since e^(−j2πn)=1, the transform is always 2π-periodic. Frequencies near 0 modulo 2π are low frequencies; frequencies near π modulo 2π are high frequencies. The slides distinguish absolute summability from finite-energy convergence.</p>
+<h2 id="transform-examples">Transform examples</h2>
+<p>For x[n]=aⁿu[n], |a|&lt;1, X(e^(jω))=1/(1−ae^(−jω)). Positive real a emphasizes low frequencies, while negative a emphasizes high frequencies.</p>
+<p>For x[n]=a^|n|, real |a|&lt;1:</p>
+<p>X(e^(jω))=(1−a²)/(1−2a cosω+a²).</p>
+<p>For a finite rectangle x[n]=1 on |n|≤N₁, the transform is sin[ω(N₁+1/2)]/sin(ω/2), with limiting value 2N₁+1 at zero. The unit impulse δ[n] transforms to 1.</p>
+<p>An ideal lowpass response equal to 1 on |ω|&lt;W within −π≤ω≤π has inverse transform sin(Wn)/(πn), with the n=0 limit W/π. The slides show how widening W toward π approaches δ[n].</p>
+<h2 id="periodic-sequences">Periodic sequences</h2>
+<p>The transform of e^(jω₀n) is 2πΣₗδ(ω−ω₀−2πl). A periodic sequence of period N has spectral impulses at k2π/N, weighted by 2πaₖ, where aₖ are its periodic Fourier-series coefficients.</p>
+<p>For Σₖδ[n−kN], all N distinct coefficients equal 1/N, and its transform is (2π/N)Σₖδ(ω−2πk/N).</p>
+<h2 id="properties">Properties</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Operation</th><th scope="col">DTFT</th></tr></thead><tbody><tr><th scope="row">Ax[n]+By[n]</th><td>AX+BY</td></tr><tr><th scope="row">x[n−n₀]</th><td>e^(−jωn₀)X(e^(jω))</td></tr><tr><th scope="row">e^(jω₀n)x[n]</th><td>X(e^(j(ω−ω₀)))</td></tr><tr><th scope="row">x*[n]</th><td>X*(e^(−jω))</td></tr><tr><th scope="row">x[−n]</th><td>X(e^(−jω))</td></tr><tr><th scope="row">x[n]−x[n−1]</th><td>(1−e^(−jω))X(e^(jω))</td></tr><tr><th scope="row">n x[n]</th><td>j dX(e^(jω))/dω</td></tr></tbody></table></div>
+<p>For real x[n], the transform is conjugate symmetric. Its real part corresponds to the even part of the sequence; j times its imaginary part corresponds to the odd part.</p>
+<p>Multiplying a lowpass impulse response by (−1)ⁿ shifts its response by π, producing the highpass example.</p>
+<h2 id="expansion-by-inserting-zeros">Expansion by inserting zeros</h2>
+<p>Define x₍ₖ₎[n]=x[n/k] when n is a multiple of k and zero otherwise. Its transform is X(e^(jkω)). The additional zeros create compressed repetitions in frequency.</p>
+<p>The illustrated example writes a sequence as x[n]=y₂[n]+2y₂[n−1], where y₂ is obtained by inserting one zero between successive samples of a five-sample rectangle. This combines expansion with time shifting.</p>
+<figure class="yazi-gorsel"><img src="s-29.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Sıfır eklenen diziler ve spektrumlarının karşılaştırması"><figcaption>Zamanda iki ve üç kat genişletme</figcaption></figure>
+<p>Parseval’s relation is Σ|x[n]|²=(1/2π)∫ over 2π |X(e^(jω))|²dω.</p>
+<h2 id="convolution-multiplication-and-filters">Convolution, multiplication and filters</h2>
+<p>Convolution in time gives Y(e^(jω))=X(e^(jω))H(e^(jω)). Multiplication gives a periodic convolution in frequency:</p>
+<p>R(e^(jω))=(1/2π)∫ over 2π S(e^(jθ))P(e^(j(ω−θ)))dθ.</p>
+<p>For h[n]=aⁿu[n] and x[n]=bⁿu[n], |a|,|b|&lt;1, a≠b:</p>
+<p>y[n]=[a^(n+1)−b^(n+1)]u[n]/(a−b).</p>
+<p>When a=b, y[n]=(n+1)aⁿu[n]. An ideal lowpass impulse response extends in both directions and is therefore noncausal.</p>
+<p>One block-diagram example modulates an input by (−1)ⁿ before and after a lowpass filter, then adds a direct lowpass branch. The combined highpass and lowpass bands form a bandstop response.</p>
+<figure class="yazi-gorsel"><img src="s-42.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Modülasyon ve paralel alçak geçiren kollarla bant durduran sistem"><figcaption>H(e^(jω))=Hlp(e^(j(ω−π)))+Hlp(e^(jω))</figcaption></figure>
+<h2 id="duality">Duality</h2>
+<p>DT Fourier-series coefficients are themselves periodic sequences. If x[n] has coefficients aₖ with period N, treating aₙ as a sequence gives coefficients x[−k]/N. The slides also compare DTFT with the Fourier series of a continuous periodic function: a discrete sequence in one domain corresponds to a periodic function in the other.</p>
+<h2 id="difference-equations">Difference equations</h2>
+<p>For Σₖ₌₀ᴺ aₖy[n−k]=Σₖ₌₀ᴹ bₖx[n−k],</p>
+<p>H(e^(jω))=[Σbₖe^(−jkω)]/[Σaₖe^(−jkω)].</p>
+<p>The example y[n]−(3/4)y[n−1]+(1/8)y[n−2]=2x[n] has</p>
+<p>H(e^(jω))=2/[(1−(1/2)e^(−jω))(1−(1/4)e^(−jω))].</p>
+<p>Partial fractions give h[n]=[4(1/2)ⁿ−2(1/4)ⁿ]u[n]. With x[n]=(1/4)ⁿu[n], the resulting output is</p>
+<p>y[n]=[8(1/2)ⁿ−4(1/4)ⁿ−2(n+1)(1/4)ⁿ]u[n].</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-avcibas-05-ayrik-fourier.pdf" download>eem301-avcibas-05-ayrik-fourier.pdf</a></p>
+              <p class="kucuk">PDF · 2.4 MB · 61 <span data-i18n="arch.pagesLower"></span> · 16.08.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-avcibas-05-ayrik-fourier.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

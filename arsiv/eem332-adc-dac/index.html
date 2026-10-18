@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: ADC-DAC Arabirimleri ve Sıcaklık Denetimi — hasancan.net</title>
+<meta name="description" content="Analog-dijital ve dijital-analog dönüşüm, 8255 üzerinden sıcaklık okuma ve ısıtıcı denetimi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-adc-dac/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: ADC-DAC Arabirimleri ve Sıcaklık Denetimi">
+<meta property="og:description" content="Analog-dijital ve dijital-analog dönüşüm, 8255 üzerinden sıcaklık okuma ve ısıtıcı denetimi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-adc-dac/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: ADC-DAC Arabirimleri ve Sıcaklık Denetimi", "description": "Analog-dijital ve dijital-analog dönüşüm, 8255 üzerinden sıcaklık okuma ve ısıtıcı denetimi.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-adc-dac/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-adc-dac.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-adc-dac/eem332-adc-dac.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: ADC-DAC Arabirimleri ve Sıcaklık Denetimi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.05.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu09-2013">cpu09_2013</a></li><li><a href="#cpu10-07">cpu10_07</a></li><li><a href="#cpu10-06">cpu10_06</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: ADC-DAC Arabirimleri ve Sıcaklık Denetimi</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 13.05.2014 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2014–2015). Analog-dijital ve dijital-analog dönüşüm, 8255 üzerinden sıcaklık okuma ve ısıtıcı denetimi. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cpu09-2013">cpu09_2013</h2>
+<h3 id="eem332-lecture9">EEM332 Lecture9</h3>
+<p>Input/Output instructions of 8086 ADC-DAC interface</p>
+<p>Example design The heater is controlled by using an cpu and 8255 PPI chip. The output of sensor is sent to 8255 after A/D convertion . The on/off control of</p>
+<h3 id="heater-is-down-by-port-c-pc0">heater is down by port C (PC0)</h3>
+<p>If PC0 is 0 heater is OFF and for PC04 =1 heater is ON. Control condition: IF temp is lower then 100 the heater will be ON.</p>
+<h3 id="code-heat-segment">CODE         HEAT SEGMENT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 90H;
+MOV DX, 0FF06 H;
+OUT DX, AL
+;***      End of initalization of 8255 ***</code></pre>
+<p>TEMP-IN: MOV DX, 0FF00H; (port A)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN AL, DX;
+CMP AL, 100;
+JAE HEAT-OFF
+MOV AL, 01H;
+MOV DX, 0FF04H; PortC
+OUT DX, AL;
+JMP TEMP-IN;</code></pre>
+<h3 id="heat-off-mov-al-00h">HEAT OFF: MOV AL, 00H;</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, FF04H;
+OUT DX. AL; (PC 0 = 0)
+JMP TEMP-IN;</code></pre>
+<h3 id="code-heat-ends">CODE      HEAT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>Example 2:                                      CODE      LIGHT SEGMENT</p>
+<p>Control of temp with LEDs. (Port A input,            MOV DX, 0FF06H; cont.reg</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 90H;</code></pre>
+<p>PortC output)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Out DX,AL;</code></pre>
+<p>İf temp &lt;30 C y led is ON (PC0= high)        ;<strong>*     End of initalization of 8255 </strong>* TEMP-IN: MOV DX, 0FF00H; PortA İf temp &lt;30 C &lt; 50 C G led is ON (PC1= high)          IN AL, DX İf temp &gt;50 C R led is ON (PC1= high)                 MOV DX, 0FF04H;PortC</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL, 1EH;
+JB YELLOW;
+CMP AL, 32H;
+JB GREEN;
+RED:     MOV AL, 04H;
+OUT DX, AL; (PC2=0)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN
+YELLOW: MOV AL, 01H;
+OUT DX, AL;</code></pre>
+<h3 id="pc0-1">(PC0 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN;
+GREEN: MOV AL, 02H;
+OUT DX, AL;</code></pre>
+<h3 id="pc1-1">(PC1 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN</code></pre>
+<h3 id="code-light-ends">CODE    LIGHT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is not used due to timing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>incompatibility with</code></pre>
+<p>devices such as the printer.</p>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is not used due to timing incompatibility with devices such as the printer.</p>
+<p>Mode 2. In this mode, port A can be used as a bidirectional I/O port with handshaking capabilities. This mode is rarely used.</p>
+<p>OBFa (output buffer full for port A) This is an activ-low signal going out of PC7 to indicate the fact that the CPU has written a byte of data into port A. OBF a must be connected to STROBE of the receiving equipment (such as a printer) to inform it that now it can read a byte of data from the port A latch. INTRa (interrupt request for port A): This is an active-high signal coming out PC3. the ACK signal is a signal of limited duration. When it goes active (low) it makes OBFa inactive, stays low for a small amount of time and then goes back to high (inactive). It is the rising edge of ACK that activates INTRa by making it high. This high signal on INTRa can be used to get the attention of The CPU. The CPU is informed through INTRa that the printer has received the last byte and is ready to receive another one. INTRa interrupts the CPU from whatever it is doing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and forces it to write the next byte to port A to be printed.</code></pre>
+<p>STB (storbe) : This is an active-low input signal. When an external peripheral device provides a byte of the data to an input port (A or B), it informs the 8255 through the STB pin that it can load (latch in) the data into its internal register. IBF (input buffer full) This is an active-high output signal. In response to STB, the 8255 latches into its internal register the data present PA0 – PA7 or Pb0 – PB7, and through IBF indicates that it has latched the data, but it has not been read by the CPU yet. INTR (interrupt request) : This is an active-high output signal. If INTE = 1 when IBF goes active, INTR is activated (set to high) to inform the CPU that is a byte of data in the 8255. either an interrupt or pulling the status word can be used to read the data from port A or B.</p>
+<p>Analog Signal Conditioning Signal conditioning refers to operations performed on signals to convert them to a form suitable for interface with other elements in the digital circuits. The primary purpose for the analog signal conditioning circuitry is to modify the sensor output into a form that can be optimally converted to a digital signal. signal conditioning</p>
+<h3 id="are-as-follows">are as follows</h3>
+<p>Signal-level Changes The simplest type of signal conditioning is to change the level of a signal. To amplify or attenuate a voltage level.</p>
+<ul><li>amplification: raise milivolt signals to volts</li></ul>
+<p>Linearization · Often the dependence that exists between input and output of sensor or system is nonlinear.· Analog signal conditioning is to maximize the linearity of a transducers response. Filtering and Impedance Matching It is necessary to use high-pass, low-pass, or notch filters to eliminate unwanted signals from the loop. (a) passive filters (b) active filters using op amps.– filtering remove frequencies above Nyquist Frequency Impedance matching is an important element of signal conditioning when transducer internal impedance or line impedance can cause errors in measurement of a dynamic variable.</p>
+<ul><li>electrical isolation: protect microprocessor based system from high voltages</li></ul>
+<h3 id="what-is-an-adc">WHAT IS AN ADC?</h3>
+<p>An analog to digital converter is a peripheral which converts analog signals in a defined range to the digital outputs. In the real world, signals are mostly available in analog form. To use a microcontroller in this type of system, an ADC is required, so that the signals can be converted to the digital values. The application software can then process the digital outputs and take decisions depending on the application or system requirements. The limitation imposed by the finite number of digital outputs decides how close the output is to the analog input. The more bits there are in the output, the closer the digital result will be to the analog signal. In other words, the resolution of the ADC is defined by the number of bits in the digital result (8 bits, 10 bits etc) Step Size =Vout = VR2-n The difference between an analogue and a digital parameter is thus exactly the same as between the mathematical "real number", which can have any value,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and the "integer", which can only have whole-number values.</code></pre>
+<p>Resolution :The number of bits that the ADC uses to represent the analog signal is its resolution. The higher the resolution, the higher the number of divisions the range is broken into, and therefore, the smaller the detectable voltage change. ( n=number of bits) Vin n</p>
+<h3 id="n-int-2">N  INT (        2 )</h3>
+<p>Vref</p>
+<p>Three bit ADC</p>
+<h3 id="example">Example</h3>
+<p>The input to a 10-bit ADC with a 2.500-V reference is 1.45V.What is the hex output?</p>
+<h3 id="n-int-1-45-2-5-210">N = INT (1.45/2.5)210</h3>
+<p>Analog digital conversion Vref/2 Relation Vin rang in ADC 804 Vref/2(V)      Vin(V) Step Size (mV)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not connected* 0 to 5    5/256 = 19.53</code></pre>
+<p>2              0 to 4    4/255 = 15.62 1.5            0 to 3    3/256 = 11.71 1.28           0 to 2.56 2.56/256 = 10 1              0 to 2    2/256 = 7.81 0.5            0 to 1    1/256 = 3.90</p>
+<p>The following steps must be followed for data conversion by the 804 IC</p>
+<h3 id="1-make-cs-0-and-send-a-low-to-high-pulse-to-the-wr-pin-to-start-the">1. Make CS = 0 and send a low-to-high pulse to the WR pin to start the</h3>
+<p>conversion.</p>
+<h3 id="2-keep-monitoring-the-intr-pin-if-intr-is-low-the-conversion-is">2. Keep monitoring the INTR pin. If INTR is low, the conversion is</h3>
+<p>finished and we can go to the next step. If INTR is high, keep polling until it goes low.</p>
+<h3 id="3-after-the-intr-has-become-low-we-make-cs-0-and-send-a-high-to">3. After the INTR has become low, we make CS = 0 and send a high-to-</h3>
+<p>low pulse to the RD pin to get the data out of the 804 IC chip. The timing for this process is shown in Figure</p>
+<p>ADC 804 chip The 804 IC is an analog-to-digital converter in the family of the ADC800 series from National Semiconductor. It is also available from many other manufactures. It works with +5 volts and has a resolution of 8 bits. In addition to resolution, conversion time is another major factor in judging an ADC. Conversion time is defined as the time it takes the ADC to converter the analog input to a digital (binary) number. In the ADC 804, the conversion time varies depending on the clocking signals applied to the CLK R and CLK IN pins, but it cannot be faster than 110 μs. The ADC 804 pin descriptions follow. CS: Chip select is an active low input used to activate the 804 chip.to access the 804, this pin must be low. RD (read): this is an input signal and is active low. ADC converts the analog input to its binary equivalent and holds it in an internal register. RD is used to get the converted data out of the 804 chip. When CS = 0, if a high-to-low pulse is applied to the RD pin, the 8-bit digital output shows up at the D0 –D7 data pins. The RD pin is also referred to as output enable.</p>
+<p>WR (write; a better name might be start conversion): This is an active low input used to inform the 804 ADC to start the conversion process. If CS = 0 when WR makes a low-to-high transition, the ADC 804 starts converting the analog input value of Vin to an 8-bit digital number. The amount of time it takes to convert varies depending on the CLK IN and CLK R values explained below. When the data conversion is complete, the INTR pin is forced low by the 804.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK IN and CLK r: CLK IN is an input pin connected to an external clock source</code></pre>
+<p>when an external clock is used for timing. However, the 804 has an internal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clock generator. To use the internal clock generator (also called self-clocking) of</code></pre>
+<p>the 804, the CLK IN and CLK R pins are connected to a capacitor and a resistor, as shown in Figure . In that case the clock frequency is determined by the equation: f=1/1RC. Typical values are R = 10K ohms and C = 150 pF. Substituting in the above equation, we get f = 606 KHz. In that case, the conversion time is 110 μs. INTR (interrupt; a bettr name might be end of conversion): It is a normally high pin and when the conversion is finished, it goes low to signal the CPU that the converted data is ready to be picked up. After INTR goes low, we make CS = 0 and send a high-to-low pulse to the RD pin to get the data out of the 804 chip. Vin(+) and Vin(-) are the differential analog inputs where Vin = Vin (+) – Vin (- ). Often the Vin (-) pin is connected to ground and the Vin (+) pin is used as the analog input to be converted to digital.</p>
+<p>of the ADC800 series from Nwith +5 votaking a sa ADC804 Chip ADC804 IC is an analog-to-digital converter in the fa ational Semiconductor. It is also available from many other manufacturers. It works lts and has a resolution of 8 bits. Figure shows a typical timing diagram for mple of data via an</p>
+<h3 id="adc804">ADC804.</h3>
+<ul><li>CS(chip select):</li></ul>
+<ul><li>WR(write): (Start convertion)</li></ul>
+<ul><li>INTR(interrupt): (ADC isfinished)</li></ul>
+<ul><li>RD(read): ( The digital value is read by CPU)</li></ul>
+<p>Interfacing ADC chip tp 8255) The 8255 in Figure is configured for mode 0, port A in, port B out, PC0 through PC3</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in, and PC4 through PC7 out. The 8255 has a base address of 40H. an 8-bit analog-</code></pre>
+<p>to-digital converter (ADC0804) is connected to ports A and C. port c is used to control the RD and WR inputs on the 00804, and to read the end-of-conversion status. The 741 op-amp converts a +/- input voltage swing into a 0-5 V signal that can be digitized by the 0804. to start a conversion, the 0804s WR line must be pulled low. This will force the INT output high until the conversion is complete. When INT goes low, the 0804 can be read by pulling the RD input low and reading port A. The following subroutine is called to perform a signal conversion and return the results</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in AH:</code></pre>
+<p>Port A =40 H Port B =41 H Port C =42 H Control register =43 H ...........</p>
+<h3 id="pc0-int">PC0=INT</h3>
+<h3 id="pc4-wr">PC4 =WR</h3>
+<p>PC7=read</p>
+<p>Port A =40 H (input) Port B =41 H (Output) Port C =42 H (control pins) Control register =43 H ...........</p>
+<h3 id="pc0-int">PC0=INT</h3>
+<h3 id="pc4-wr">PC4 =WR</h3>
+<p>PC7=read</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>VCON       PROC         FAR
+MOV          AL, 80H    start a conversion by pulling ;WR low..PC7=high,
+OUT          42H, AL    pc4=0
+MOV          AL, 90H    ;; now pull WR high(pc7 and pc4 =high)
+OUT          42H, AL
+EOC:       IN           AL, 42H
+AND          AL, 1      ;read port C (read interrupt)
+JNZ          EOC        ;test bit-0 (read port C for int detection)
+MOV          AL, 10H    ;wait for end of conversion (test of PC0 for INT)
+OUT          42H, AL    ;enable RD
+IN           AL, 40H    ;
+OUT          41H, AL    ;read port A (the 0804)
+MOV          AH, AL     ;echo data to port B
+MOV          AL,90H
+;return result in AH
+OUT          42H, AL
+RET                     ;get RD back to normal</code></pre>
+<h3 id="vcon-endp">VCON       ENDP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV    AL, 91H   ;mode 0, Ain, Bout,</code></pre>
+<p>The 8255 is configured and            OUT    43H, AL   CLin, Chout initialized in this way:              MOV    AL, 90H   ;send to control port</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT    42H, AL   ;RD and WR both high
+;send to port C</code></pre>
+<p>The data read from the 0804 is sent out to the LEDs on port B. this gives a visual indication that everything is working properly. Being able to split up port C makes the interface with the 0804 easy to accomplish.</p>
+<p>Example: ADC in microcontroller (PIC 16f877)</p>
+<ul><li>Start Conversion by GO bit =high in ADCON0 register (write)</li></ul>
+<ul><li>Wait for ADC for 20 micro second (interrupt)</li></ul>
+<ul><li>The result of conversion is in ADRESH register (Read)</li></ul>
+<ul><li>Firstly send result into W (acu..), Then send result to PORT C</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>bsf     ADCON0,GO         ;Start A/D conversion
+Wait
+btfsc ADCON0,GO             ;Wait for conversion to complete
+goto      Wait
+movf        ADRESH,W         ;Write A/D result to PORTC
+movwf PORTC                  ;LEDs     return</code></pre>
+<p>Digital-to-analog (DAC) converter The digital-to-analog converter (DAC) is a device widely used to convert digital pulses to analog signals. In this section we discuss the basics of interfacing a DAC to PC.</p>
+<h3 id="example">Example</h3>
+<p>What is the output voltage of a 10-bit DAC with a 10.0-V reference if the input is (a) 0010110101 = 0B5H, (b) 20FH? The answers are; a) Vout = 1.767578 V b) Vout = 5.14648 V</p>
+<p>Generating sine wave To generate a sine wave, we first need a table whose values represent the magnituda of the sine of angles between 0 and 360 degrees. The values for the sine fuction vary from –1.0 to +1.0 for 0 to 360 degree angles. Therefore, the table values are integer numbers representing the voltage magnitude for the sine of theta. This method ensures that only integer numbers are output to the DAC by the x86 processor. Table shows the angles, the sine values, the voltage magnitude, and the integer values representing the voltage magnitude for each angle with 30-degree increments. To generate Table , we assumed the full-scale voltage of 10V for DAC output (as designed in Figure ). Full-scal output of the DAC is achieved when all the data inputs of the DAC are high. Therefore. To achieve the full-scale 10V output, we use the following equation. Vout of DAC (for various sine degrees) = 5V + (5 × sin θ)                 To fined the value sent to DAC for various angles, we simply multiply the Vout voltage by 25.60 because there are 256 steps and full-scale Vout is 10 volts. Therefore, 256 steps / 10 V = 25.6 steps per volt. To further clarify this., look at Example . The following program sends the value to DAC continuously (in an infinite loop) to produce a crude sine wave. See Figure .</p>
+<p>Thee bir DAC</p>
+<p>Angle v. Voltage Magnitude for Sine Wave (Sine wave generation in CPU- 8bit) Angle θ          Vout (Voltage Magnitude) Values Sent to DAC (decimel) (degress) Sin θ 5V + (5V × sin θ)         (Voltage Mag x 25.6) 0         0       5                       128 30        0.5       7.5                   192 60        0.866 9.33                      238 90        1.000 10                        255 120       0.866 9.33                      238 150       0.5    7.5                      192 180       0      5                        128 210       -0.5   2.5                      64 240       -0.866 0.669                    17 270       -1.0   0                        0 300       -0.866 0.669                    17 330       -0.5   2.5                      64 360       0      5                        128</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TABLE DB 128,192,238,255,192,128,64,17,0,17,64,128
+;in code segment
+MOV AL,80H          ;make all ports as output
+MOV DX,CONPORT
+OUT DX,AL
+A1:                MOV CX,12           ;count
+MOV BX,OFFSET TABLE
+MOV DX,PORTA        ;port A address
+NEXT:              MOV AL,[BX]
+OUT DX,AL
+INC BX
+CALL DELAY          ;let DAC recover
+LOOP NEXT
+JMP A1              ;do it again</code></pre>
+<p>DAC circuit</p>
+<h3 id="dac-808">(DAC 808)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In high-speed CPUs (30 MHz and higher), the use of two I/O instructions (IN, OUT)</code></pre>
+<h3 id="right-after-each-other-might-not-work">right after each other might not work</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV       AL, 55H
+OUT       PORT_A,AL
+OUT       PORT_B,AL</code></pre>
+<p>You need to place a delay (or other code) between</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>subsequent OUT or IN instructions:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,55H
+OUT PORT_A,AL
+MOV CX,5
+HERE:            LOOP HERE
+OUT PORT_B,AL</code></pre>
+<figure class="yazi-gorsel"><img src="sekil-1179-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="cpu09_2013: sayfa 2, devre, tablo ve şekiller"><figcaption>cpu09_2013, sayfa 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1179-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="cpu09_2013: sayfa 6, devre, tablo ve şekiller"><figcaption>cpu09_2013, sayfa 6.</figcaption></figure>
+<h2 id="cpu10-07">cpu10_07</h2>
+<p>Example design The heater is controlled by using an cpu and 8255 PPI chip. The output of sensor is sent to</p>
+<h3 id="8255-after-a-d-convertion-the-on-off-control-of-heater-is-down-by-port-c-pc0">8255 after A/D convertion . The on/off control of heater is down by port C (PC0)</h3>
+<p>If PC0 is 0 heater is OFF and for PC04 =1 heater is ON.</p>
+<h3 id="control-condition">Control condition</h3>
+<p>IF temp is lower then 100 the heater will be ON.</p>
+<h3 id="code-heat-segment">CODE         HEAT SEGMENT</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, 90H;
+MOV DX, 0FF06 H;
+OUT DX, AL
+;***      End of initalization of 8255 ***</code></pre>
+<p>TEMP-IN: MOV DX, 0FF00H; (port A)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN AL, DX;
+CMP AL, 100;
+JAE HEAT-OFF
+MOV AL, 01H;
+MOV DX, 0FF04H; PortC
+OUT DX, AL;
+JMP TEMP-IN;</code></pre>
+<h3 id="heat-off-mov-al-00h">HEAT OFF: MOV AL, 00H;</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, FF04H;
+OUT DX. AL; (PC0 = 0)
+JMP TEMP-IN;</code></pre>
+<h3 id="code-heat-ends">CODE      HEAT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<h3 id="example-2">Example 2</h3>
+<p>Control of temp with LEDs. (Port A input, PortC output)</p>
+<h3 id="code-light-segment">CODE       LIGHT SEGMENT</h3>
+<p>İf temp &lt;30 C y led is ON (PC0= high)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, 0FF06H; cont.reg</code></pre>
+<p>İf temp &lt;30 C &lt; 50 C G led is ON (PC1= high)                    MOV AL, 90H;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Out DX,AL;</code></pre>
+<p>İf temp &gt;50 C R led is ON (PC1= high)                  ;<strong>*     End of initalization of 8255 </strong>* TEMP-IN: MOV DX, 0FF00H; PortA</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN AL, DX
+MOV DX, 0FF04H;PortC
+CMP AL, 1EH;
+JB YELLOW;
+CMP AL, 32H;
+JB GREEN;
+RED:     MOV AL, 04H;
+OUT DX, AL; (PC2=0)</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN
+YELLOW: MOV AL, 01H;
+OUT DX, AL;</code></pre>
+<h3 id="pc0-1">(PC0 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN;
+GREEN: MOV AL, 02H;
+OUT DX, AL;</code></pre>
+<h3 id="pc1-1">(PC1 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN</code></pre>
+<h3 id="code-light-ends">CODE    LIGHT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is not used due to timing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>incompatibility with</code></pre>
+<p>devices such as the printer.</p>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>not used due to timing
+incompatibility with</code></pre>
+<p>devices such as the printer.</p>
+<p>Mode 2. In this mode, port A can be used as a bidirectional I/O port with handshaking capabilities. This mode is rarely used.</p>
+<p>OBFa (output buffer full for port A) This is an activ-low signal going out of PC7 to indicate the fact that the CPU has written a byte of data into port A. OBF a must be connected to STROBE of the receiving equipment (such as a printer) to inform it that now it can read a byte of data from the port A latch. INTRa (interrupt request for port A) This is an active-high signal coming out PC3. the ACK signal is a signal of limited duration. When it goes active (low) it makes OBFa inactive, stays low for a small amount of time and then goes back to high (inactive). It is the rising edge of ACK that activates INTRa by making it high. This high signal on INTRa can be used to get the attention of The CPU. The CPU is informed through INTRa that the printer has received the last byte and is ready to receive another one. INTRa interrupts the CPU from whatever it is doing and forces it to write the next byte to port A to be printed. STB (storbe) This is an active-low input signal. When an external peripheral device provides a byte of the data to an input port (A or B), it informs the 8255 through the STB pin that it can load (latch in) the data into its internal register. IBF (input buffer full) This is an active-high output signal. In response to STB, the 8255 latches into its internal register the data present PA0 – PA7 or Pb0 – PB7, and through IBF indicates that it has latched the data, but it has not been read by the CPU yet. INTR (interrupt request) This is an active-high output signal. If INTE = 1 when IBF goes active, INTR is activated (set to high) to inform the CPU that is a byte of data in the 8255. either an interrupt or pulling the status word can be used to read the data from port A or B.</p>
+<p>Analog Signal Conditioning Signal conditioning refers to operations performed on signals to convert them to a form suitable for interface with other elements in the digital circuits. The primary purpose for the analog signal conditioning circuitry is to modify the sensor output into a form that can be optimally converted to a discrete time digital data stream by the data acquisition system. It is possible to categorize signal conditioning into several general types. Signal-level Changes The simplest type of signal conditioning is to change the level of a signal. The most common example is the necessity to either amplify or attenuate a voltage level.</p>
+<ul><li>amplification: raise milivolt signals to volts</li></ul>
+<p>Linearization · Process control engineer has little choice of the characteristics of a transducer's dynamic response --- Physics, Chemistry. · Often the dependence that exists between input and output is nonlinear. · Analog signal conditioning is to maximize the linearity of a transducers response. Filtering and Impedance Matching</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In many cases, it is necessary to use high-pass, low-pass, or notch filters to eliminate</code></pre>
+<p>unwanted signals from the loop. Such filtering can be accomplished by (a) passive filters (b) active filters using op amps.</p>
+<ul><li>filtering : remove frequencies above Nyquist Frequency</li></ul>
+<p>Impedance matching is an important element of signal conditioning when transducer internal impedance or line impedance can cause errors in measurement of a dynamic variable.</p>
+<ul><li>electrical isolation: protect microprocessor based system from high voltages</li></ul>
+<h3 id="what-is-an-adc">WHAT IS AN ADC?</h3>
+<p>An analog to digital converter is a peripheral which converts analog signals in a defined range to the digital outputs. In the real world, signals are mostly available in analog form. To use a microcontroller in this type of system, an ADC is required, so that the signals can be converted to the digital values. The application software can then process the digital outputs and take decisions depending on the application or system requirements. The limitation imposed by the finite number of digital outputs decides how close the output is to the analog input. The more bits there are in the output, the closer the digital result will be to the analog signal. In other words, the resolution of the ADC is defined by the number of bits in the digital result (8 bits, 10 bits etc) and the input voltage range. The difference between an analogue and a digital parameter is thus exactly the same as between the mathematical "real number", which can have any value, and the "integer", which can only have whole-number values. Resolution                                                  Step Size = Vout = VR2-n The number of bits that the ADC uses to represent the analog signal is its resolution. The higher the resolution, the higher the number of divisions the range is broken into, and therefore, the smaller the detectable voltage change. ( n=number of bits)                        Vin n</p>
+<h3 id="n-int-2">N  INT (           2 )</h3>
+<p>Vref</p>
+<h3 id="example">Example</h3>
+<p>The input to a 10-bit ADC with a 2.500-V reference is 1.45V.What is the hex output?</p>
+<h3 id="n-int-1-45-2-5-210">N = INT (1.45/2.5)210</h3>
+<p>Analog digital conversion Vref/2 Relation Vin rang in ADC 804 Vref/2(V)      Vin(V)    Step Size (mV)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not connected* 0 to 5    5/256 = 19.53</code></pre>
+<p>2              0 to 4    4/255 = 15.62 1.5            0 to 3    3/256 = 11.71 1.28           0 to 2.56 2.56/256 = 10 1              0 to 2    2/256 = 7.81 0.5            0 to 1    1/256 = 3.90</p>
+<p>From this discussion we conclude that the following steps must be followed for data conversion by the 804 chip.</p>
+<h3 id="1-make-cs-0-and-send-a-low-to-high-pulse-to-the-wr-pin-to-start-the-conversion">1. Make CS = 0 and send a low-to-high pulse to the WR pin to start the conversion.</h3>
+<h3 id="2-keep-monitoring-the-intr-pin-if-intr-is-low-the-conversion-is-finished-and-we-can-go-to-the-next-step">2. Keep monitoring the INTR pin. If INTR is low, the conversion is finished and we can go to the next step.</h3>
+<p>If INTR is high, keep polling until it goes low.</p>
+<h3 id="3-after-the-intr-has-become-low-we-make-cs-0-and-send-a-high-to-low-pulse-to-the-rd-pin-to-get-the">3. After the INTR has become low, we make CS = 0 and send a high-to-low pulse to the RD pin to get the</h3>
+<p>data out of the 804 IC chip. The timing for this process is shown in Figure</p>
+<p>ADC 804 chip</p>
+<p>The 804 IC is an analog-to-digital converter in the family of the ADC800 series from National Semiconductor. It is also available from many other manufactures. It works with +5 volts and has a resolution of 8 bits. In addition to resolution, conversion time is another major factor in judging an ADC. Conversion time is defined as the time it takes the ADC to converter the analog input to a digital (binary) number. In the ADC 804, the conversion time varies depending on the clocking signals applied to the CLK R and CLK IN pins, but it cannot be faster than 110 μs. The ADC 804 pin descriptions follow. CS: Chip select is an active low input used to activate the 804 chip.to access the 804, this pin must be low. RD (read): this is an input signal and is active low. ADC converts the analog input to its binary equivalent and holds it in an internal register. RD is used to get the converted data out of the 804 chip. When CS = 0, if a high-to- low pulse is applied to the RD pin, the 8-bit digital output shows up at the D0 –D7 data pins. The RD pin is also referred to as output enable. WR (write; a better name might be start conversion): This is an active low input used to inform the 804 ADC to start the conversion process. If CS = 0 when WR makes a low-to-high transition, the ADC 804 starts converting the analog input value of Vin to an 8-bit digital number. The amount of time it takes to convert varies depending on the CLK IN and CLK R values explained below. When the data conversion is complete, the INTR pin is forced low by the 804. CLK IN and CLK r: CLK IN is an input pin connected to an external clock source when an external</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clock is used for timing. However, the 804 has an internal clock generator. To use the internal clock generator</code></pre>
+<p>(also called self-clocking) of the 804, the CLK IN and CLK R pins are connected to a capacitor and a resistor, as shown in Figure . In that case the clock frequency is determined by the equation: f=1/1RC. Typical values are R = 10K ohms and C = 150 pF. Substituting in the above equation, we get f = 606 KHz. In that case, the conversion time is 110 μs. INTR (interrupt; a bettr name might be end of conversion): It is a normally high pin and when the conversion is finished, it goes low to signal the CPU that the converted data is ready to be picked up. After INTR goes low, we make CS = 0 and send a high-to-low pulse to the RD pin to get the data out of the 804 chip. Vin(+) and Vin(-) are the differential analog inputs where Vin = Vin (+) – Vin (-). Often the Vin (-) pin is connected to ground and the Vin (+) pin is used as the analog input to be converted to digital.</p>
+<p>of the ADC800 series from Nwith +5 votaking a sa ADC804 Chip ADC804 IC is an analog-to-digital converter in the fa ational Semiconductor. It is also available from many other manufacturers. It works lts and has a resolution of 8 bits. Figure shows a typical timing diagram for mple of data via an ADC804.</p>
+<h3 id="cs-chip-select">CS(chip select)</h3>
+<p>WR(write): (Start convertion) INTR(interrupt): (ADC isfinished) RD(read): ( The digital value is read by CPU)</p>
+<p>Interfacing ADC chip tp 8255) The 8255 in Figure is configured for mode 0, port A in, port B out, PC0 through PC3</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in, and PC4 through PC7 out. The 8255 has a base address of 40H. an 8-bit analog-</code></pre>
+<p>to-digital converter (ADC0804) is connected to ports A and C. port c is used to control the RD and WR inputs on the 00804, and to read the end-of-conversion status. The 741 op-amp converts a +/- input voltage swing into a 0-5 V signal that can be digitized by the 0804. to start a conversion, the 0804s WR line must be pulled low. This will force the INT output high until the conversion is complete. When INT goes low, the 0804 can be read by pulling the RD input low and reading port A. The following subroutine is called to perform a signal conversion and return the results</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in AH:</code></pre>
+<p>Port A =40 H Port B =41 H Port C =42 H Control register =43 H ...........</p>
+<h3 id="pc0-int">PC0=INT</h3>
+<h3 id="pc4-wr">PC4 =WR</h3>
+<p>PC7=read</p>
+<p>Port A =40 H (input) Port B =41 H (Output) Port C =42 H (control pins) Control register =43 H ...........</p>
+<h3 id="pc0-int">PC0=INT</h3>
+<h3 id="pc4-wr">PC4 =WR</h3>
+<p>PC7=read</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>VCON     PROC     FAR
+MOV      AL, 80H    start a conversion by pulling ;WR low..PC7=high,
+OUT      42H, AL    pc4=0
+MOV      AL, 90H    ;; now pull WR high(pc7 and pc4 =high)
+OUT      42H, AL
+EOC:     IN       AL, 42H
+AND      AL, 1      ;read port C (read interrupt)
+JNZ      EOC        ;test bit-0 (read port C for int detection)
+MOV      AL, 10H    ;wait for end of conversion (test of PC0 for INT)
+OUT      42H, AL    ;enable RD
+IN       AL, 40H    ;
+OUT      41H, AL    ;read port A (the 0804)
+MOV      AH, AL     ;echo data to port B
+MOV      AL,90H
+;return result in AH
+OUT      42H, AL
+RET                 ;get RD back to normal</code></pre>
+<h3 id="vcon-endp">VCON     ENDP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV    AL, 91H   ;mode 0, Ain, Bout,</code></pre>
+<p>The 8255 is configured and           OUT    43H, AL   CLin, Chout initialized in this way:             MOV    AL, 90H   ;send to control port</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT    42H, AL   ;RD and WR both high
+;send to port C</code></pre>
+<p>The data read from the 0804 is sent out to the LEDs on port B. this gives a visual indication that everything is working properly. Being able to split up port C makes the interface with the 0804 easy to accomplish.</p>
+<p>ADC in microcontroller (PIC 16f877)</p>
+<ul><li>Start Conversion by GO bit =high in ADCON0 register (write)</li></ul>
+<ul><li>Wait for ADC for 20 micro second (interrupt)</li></ul>
+<ul><li>The result of conversion is in ADRESH register (Read)</li></ul>
+<ul><li>Firstly send result into W (acu..), Then send result to PORT C</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>bsf   ADCON0,GO     ;Start A/D conversion
+Wait
+btfsc ADCON0,GO        ;Wait for conversion to complete
+goto      Wait
+movf       ADRESH,W     ;Write A/D result to PORTC
+movwf PORTC            ;LEDs     return</code></pre>
+<p>Digital-to-analog (DAC) converter The digital-to-analog converter (DAC) is a device widely used to convert digital pulses to analog signals. In this section we discuss the basics of interfacing a DAC to PC.</p>
+<h3 id="example">Example</h3>
+<p>What is the output voltage of a 10-bit DAC with a 10.0-V reference if the input is (a) 0010110101 = 0B5H, (b) 20FH? The answers are; a) Vout = 1.767578 V b) Vout = 5.14648 V</p>
+<p>Generating sine wave To generate a sine wave, we first need a table whose values represent the magnituda of the sine of angles between 0 and 360 degrees. The values for the sine fuction vary from –1.0 to +1.0 for 0 to 360 degree angles. Therefore, the table values are integer numbers representing the voltage magnitude for the sine of theta. This method ensures that only integer numbers are output to the DAC by the x86 processor. Table shows the angles, the sine values, the voltage magnitude, and the integer values representing the voltage magnitude for each angle with 30-degree increments. To generate Table , we assumed the full-scale voltage of 10V for DAC output (as designed in Figure ). Full-scal output of the DAC is achieved when all the data inputs of the DAC are high. Therefore. To achieve the full-scale 10V output, we use the following equation. Vout of DAC (for various sine degrees) = 5V + (5 × sin θ) To fined the value sent to DAC for various angles, we simply multiply the Vout voltage by 25.60 because there are 256 steps and full- scale Vout is 10 volts. Therefore, 256 steps / 10 V = 25.6 steps per volt. To further clarify this., look at Example . The following program sends the value to DAC continuously (in an infinite loop) to produce a crude sine wave. See Figure .</p>
+<p>Angle v. Voltage Magnitude for Sine Wave (Sine wave generation in CPU) Angle θ          Vout (Voltage Magnitude) Values Sent to DAC (decimel) (degress) Sin θ 5V + (5V × sin θ)         (Voltage Mag x 25.6) 0         0       5                       128 30        0.5       7.5                   192 60        0.866 9.33                      238 90        1.000 10                        255 120       0.866 9.33                      238 150       0.5    7.5                      192 180       0      5                        128 210       -0.5   2.5                      64 240       -0.866 0.669                    17 270       -1.0   0                        0 300       -0.866 0.669                    17 330       -0.5   2.5                      64 360       0      5                        128</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TABLE DB 128,192,238,255,192,128,64,17,0,17,64,128
+;in code segment
+MOV AL,80H          ;make all ports as output
+MOV DX,CONPORT
+OUT DX,AL
+A1:              MOV CX,12           ;count
+MOV BX,OFFSET TABLE
+MOV DX,PORTA        ;port A address
+NEXT:            MOV AL,[BX]
+OUT DX,AL
+INC BX
+CALL DELAY          ;let DAC recover
+LOOP NEXT
+JMP A1              ;do it again</code></pre>
+<p>DAC circuit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In high-speed CPUs (30 MHz and higher), the use of two I/O instructions (IN, OUT)</code></pre>
+<h3 id="right-after-each-other-might-not-work">right after each other might not work</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV       AL, 55H
+OUT       PORT_A,AL
+OUT       PORT_B,AL</code></pre>
+<p>You need to place a delay (or other code) between</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>subsequent OUT or IN instructions:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,55H
+OUT PORT_A,AL
+MOV CX,5
+HERE:         LOOP HERE
+OUT PORT_B,AL</code></pre>
+<h2 id="cpu10-06">cpu10_06</h2>
+<p>Example design The heater is controlled by using an cpu and 8255 PPI chip. The output of sensor is sent to</p>
+<h3 id="8255-after-a-d-convertion-the-on-off-control-of-heater-is-down-by-port-c-pc04">8255 after A/D convertion . The on/off control of heater is down by port C (PC04)</h3>
+<p>If PC04 is 0 heater is OFF and for PC04 =1 heater is ON. Control condition:                                 CODE        HEAT SEGMENT</p>
+<p>IF temp is lower then 100 the heater will be ON.             MOV AL, 90H;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, 0FF06 H;
+OUT DX, AL
+;***      End of initalization of 8255 ***</code></pre>
+<h3 id="temp-in-mov-dx-0ff00h">TEMP-IN: MOV DX, 0FF00H;</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN AL, DX;
+CMP AL, 100;
+JAE HEAT-OFF
+MOV AL, 01H;
+MOV DX, 0FF04H;
+OUT DX, AL;
+JMP TEMP-IN;</code></pre>
+<h3 id="heat-off-mov-al-00h">HEAT OFF: MOV AL, 00H;</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, FF04H;
+OUT DX. AL; (PC0 = 0)
+JMP TEMP-IN;</code></pre>
+<h3 id="code-heat-ends">CODE      HEAT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<h3 id="example-2">Example 2</h3>
+<p>Control of temp with LEDs.</p>
+<h3 id="code-light-segment">CODE        LIGHT SEGMENT</h3>
+<p>İf temp &lt;30 C y led is ON (PC0= high)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX, 0FF06H;
+MOV AL, 90H;</code></pre>
+<p>İf temp &lt;30 C &lt; 50 C G led is ON (PC1= high)                    Out DX,AL;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;***     End of initalization of 8255 ***</code></pre>
+<p>İf temp &gt;50 C R led is ON (PC1= high)                  TEMP-IN: MOV DX, 0FF00H;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN AL, DX
+MOV DX, 0FF04H;
+CMP AL, 1EH;
+JB YELLOW;
+CMP AL, 32H;
+JB GREEN;
+RED:     MOV AL, 04H;
+OUT DX, AL;</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN
+YELLOW: MOV AL, 01H;
+OUT DX, AL;</code></pre>
+<h3 id="pc0-1">(PC0 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN;
+GREEN: MOV AL, 02H;
+OUT DX, AL;</code></pre>
+<h3 id="pc1-1">(PC1 = 1)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>JMP TEMP-IN</code></pre>
+<h3 id="code-light-ends">CODE    LIGHT ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is not used due to timing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>incompatibility with</code></pre>
+<p>devices such as the printer.</p>
+<p>Mode 1. In this mode, ports A and B can be used as input or output ports with handshaking capabilities. This mode is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>not used due to timing
+incompatibility with</code></pre>
+<p>devices such as the printer.</p>
+<p>Mode 2. In this mode, port A can be used as a bidirectional I/O port with handshaking capabilities. This mode is rarely used.</p>
+<p>OBFa (output buffer full for port A) This is an activ-low signal going out of PC7 to indicate the fact that the CPU has written a byte of data into port A. OBF a must be connected to STROBE of the receiving equipment (such as a printer) to inform it that now it can read a byte of data from the port A latch. INTRa (interrupt request for port A) This is an active-high signal coming out PC3. the ACK signal is a signal of limited duration. When it goes active (low) it makes OBFa inactive, stays low for a small amount of time and then goes back to high (inactive). It is the rising edge of ACK that activates INTRa by making it high. This high signal on INTRa can be used to get the attention of yhe CPU. The CPU is informed through INTRa that the printer has received the last byte and is ready to receive another one. INTRa interrupts the CPU from whatever it is doing and forces it to write the next byte to port A to be printed. STB (storbe) This is an active-low input signal. When an external peripheral device provides a byte of the data to an input port (A or B), it informs the 8255 through the STB pin that it can load (latch in) the data into its internal register. IBF (input buffer full) This is an active-high output signal. In response to STB, the 8255 latches into its internal register the data present PA0 – PA7 or Pb0 – PB7, and through IBF indicates that it has latched the data, but it has not been read by the CPU yet. INTR (interrupt request) Tis is an active-high output signal. If INTE = 1 when IBF goes active, INTR is activated (set to high) to inform the CPU that is a byte of data in the 8255. either an interrupt or pulling the status word can be used to read the data from port A or B.</p>
+<p>Analog Signal Conditioning Signal conditioning refers to operations performed on signals to convert them to a form suitable for interface with other elements in the digital circuits. The primary purpose for the analog signal conditioning circuitry is to modify the sensor output into a form that can be optimally converted to a discrete time digital data stream by the data acquisition system. It is possible to categorize signal conditioning into several general types. Signal-level Changes The simplest type of signal conditioning is to change the level of a signal. The most common example is the necessity to either amplify or attenuate a voltage level.</p>
+<ul><li>amplification: raise milivolt signals to volts</li></ul>
+<p>Linearization · Process control engineer has little choice of the characteristics of a transducer's dynamic response --- Physics, Chemistry. · Often the dependence that exists between input and output is nonlinear. · Analog signal conditioning is to maximize the linearity of a transducers response. Filtering and Impedance Matching</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In many cases, it is necessary to use high-pass, low-pass, or notch filters to eliminate</code></pre>
+<p>unwanted signals from the loop. Such filtering can be accomplished by (a) passive filters (b) active filters using op amps.</p>
+<ul><li>filtering : remove frequencies above Nyquist Frequency</li></ul>
+<p>Impedance matching is an important element of signal conditioning when transducer internal impedance or line impedance can cause errors in measurement of a dynamic variable.</p>
+<ul><li>electrical isolation: protect computer from high voltages</li></ul>
+<h3 id="what-is-an-adc">WHAT IS AN ADC?</h3>
+<p>An analog to digital converter is a peripheral which converts analog signals in a defined range to the digital outputs. In the real world, signals are mostly available in analog form. To use a microcontroller in this type of system, an ADC is required, so that the signals can be converted to the digital values. The application software can then process the digital outputs and take decisions depending on the application or system requirements. The limitation imposed by the finite number of digital outputs decides how close the output is to the analog input. The more bits there are in the output, the closer the digital result will be to the analog signal. In other words, the resolution of the ADC is defined by the number of bits in the digital result (8 bits, 10 bits etc) and the input voltage range. The difference between an analogue and a digital parameter is thus exactly the same as between the mathematical "real number", which can have any value, and the "integer", which can only have whole-number values. Resolution                                                 ∆ Step Size = Vout = VR2-n The number of bits that the ADC uses to represent the analog signal is its resolution. The higher the resolution, the higher the number of divisions the range is broken into, and therefore, the smaller the detectable voltage change. ( n=number of bits)                        Vin n</p>
+<h3 id="n-int-2">N = INT (           2 )</h3>
+<h3 id="example">Example</h3>
+<p>Vref The input to a 10-bit ADC with a 2.500-V reference is 1.45V.What is the hex output?</p>
+<h3 id="n-int-1-45-2-5-210">N = INT (1.45/2.5)210</h3>
+<p>Analog digital conversion Vref/2 Relation Vin rang in ADC 804 Vref/2(V)      Vin(V)    Step Size (mV)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not connected* 0 to 5    5/256 = 19.53</code></pre>
+<p>2              0 to 4    4/255 = 15.62 1.5            0 to 3    3/256 = 11.71 1.28           0 to 2.56 2.56/256 = 10 1              0 to 2    2/256 = 7.81 0.5            0 to 1    1/256 = 3.90</p>
+<p>From this discussion we conclude that the following steps must be followed for data conversion by the 804 chip.</p>
+<h3 id="1-make-cs-0-and-send-a-low-to-high-pulse-to-the-wr-pin-to-start-the-conversion">1. Make CS = 0 and send a low-to-high pulse to the WR pin to start the conversion.</h3>
+<h3 id="2-keep-monitoring-the-intr-pin-if-intr-is-low-the-conversion-is-finished-and-we-can-go-to-the-next-step-if-intr-is-high">2. Keep monitoring the INTR pin. If INTR is low, the conversion is finished and we can go to the next step. If INTR is high,</h3>
+<p>keep polling until it goes low.</p>
+<h3 id="3-after-the-intr-has-become-low-we-make-cs-0-and-send-a-high-to-low-pulse-to-the-rd-pin-to-get-the-data-out-of-the">3. After the INTR has become low, we make CS = 0 and send a high-to-low pulse to the RD pin to get the data out of the</h3>
+<p>804 IC chip. The timing for this process is shown in Figure</p>
+<p>ADC 804 chip The 804 IC is an analog-to-digital converter in the family of the ADC800 series from National Semiconductor. It is also available from many other manufactures. It works with +5 volts and has a resolution of 8 bits. In addition to resolution, conversion time is another major factor in judging an ADC. Conversion time is defined as the time it takes the ADC to converter the analog input to a digital (binary) number. In the ADC 804, the conversion time varies depending on the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clocking signals applied to the CLK R and CLK IN pins, but it cannot be faster than 110 µs.</code></pre>
+<p>The ADC 804 pin descriptions follow. CS: Chip select is an active low input used to activate the 804 chip.to access the 804, this pin must be low. RD (read): this is an input signal and is active low. ADC converts the analog input to its binary equivalent and holds it in an internal register. RD is used to get the converted data out of the 804 chip. When CS = 0, if a high-to-low pulse is applied to the RD pin, the 8-bit digital output shows up at the D0 –D7 data pins. The RD pin is also referred to as output enable. WR (write; a better name might be start conversion): This is an active low input used to inform the 804 ADC to start the conversion process. If CS = 0 when WR makes a low-to-high transition, the ADC 804 starts converting the analog input value of Vin to an 8-bit digital number. The amount of time it takes to convert varies depending on the CLK IN and CLK R values explained below. When the data conversion is complete, the INTR pin is forced low by the 804.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK IN and CLK r: CLK IN is an input pin connected to an external clock source when an external clock is used for timing.</code></pre>
+<p>However, the 804 has an internal clock generator. To use the internal clock generator (also called self-clocking) of the 804, the CLK IN and CLK R pins are connected to a capacitor and a resistor, as shown in Figure . In that case the clock frequency is determined by the equation: f=1/1RC. Typical values are R = 10K ohms and C = 150 pF. Substituting in the above equation, we get f = 606 KHz. In that case, the conversion time is 110 µs. INTR (interrupt; a bettr name might be end of conversion): It is a normally high pin and when the conversion is finished, it goes low to signal the CPU that the converted data is ready to be picked up. After INTR goes low, we make CS = 0 and send a high-to-low pulse to the RD pin to get the data out of the 804 chip. Vin(+) and Vin(-) are the differential analog inputs where Vin = Vin (+) – Vin (-). Often the Vin (-) pin is connected to ground</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and the Vin (+) pin is used as the analog input to be converted to digital.</code></pre>
+<p>of the ADC800 series from Nwith +5 votaking a sa ADC804 Chip ADC804 IC is an analog-to-digital converter in the fa ational Semiconductor. It is also available from many other manufacturers. It works lts and has a resolution of 8 bits. Figure shows a typical timing diagram for mple of data via an ADC804.</p>
+<h3 id="cs-chip-select">CS(chip select)</h3>
+<p>WR(write): (Start convertion) INTR(interrupt): (ADC isfinished) RD(read): ( The digital value is read by CPU)</p>
+<p>Interfacing ADC chip tp 8255) The 8255 in Figure is configured for mode 0, port A in, port B out, PC0 through PC3</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in, and PC4 through PC7 out. The 8255 has a base address of 40H. an 8-bit analog-</code></pre>
+<p>to-digital converter (ADC0804) is connected to ports A and C. port c is used to control the RD and WR inputs on the 00804, and to read the end-of-conversion status. The 741 op-amp converts a +/- input voltage swing into a 0-5 V signal that can be digitized by the 0804. to start a conversion, the 0804s WR line must be pulled low. This will force the INT output high until the conversion is complete. When INT goes low, the 0804 can be read by pulling the RD input low and reading port A. The following subroutine is called to perform a signal conversion and return the results</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in AH:</code></pre>
+<p>Port A =40 H Port B =41 H Port C =42 H Control register =43 H ...........</p>
+<h3 id="pc0-int">PC0=INT</h3>
+<h3 id="pc4-wr">PC4 =WR</h3>
+<p>PC7=read</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>VCON        PROC    FAR
+MOV     AL, 80H    start a conversion by pulling
+OUT     42H, AL    ;WR low..PC7=high and pc4=0
+MOV     AL, 90H    ;now pull WR high(pc7 and pc4 =high)
+OUT     42H, AL    ;
+EOC:        IN      AL, 42H    ;read port C
+AND     AL, 1      ;test bit-0 (read port C for int detection)
+JNZ     EOC        ;wait for end of conversion (test of PC0 for INT)
+MOV     AL, 10H    ;enable RD
+OUT     42H, AL    ;
+IN      AL, 40H    ;read port A (the 0804)
+OUT     41H, AL    ;echo data to port B
+MOV     AH, AL     ;return result in AH
+MOV     AL,90H     ;get RD back to normal
+OUT     42H, AL
+RET</code></pre>
+<h3 id="vcon-endp">VCON        ENDP</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV     AL, 91H     ;mode 0, Ain, Bout,</code></pre>
+<p>The 8255 is configured and               OUT     43H, AL     CLin, Chout initialized in this way:                 MOV     AL, 90H     ;send to control port</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT     42H, AL     ;RD and WR both high
+;send to port C</code></pre>
+<p>The data dear from the 0804 is sent out to the LEDs on port B. this gives a visual indication that everything is working properly. Being able to split up port C makes the interface with the 0804 easy to accomplish.</p>
+<p>ADC in microcontroller (PIC 16f877) Start Conversion by GO bit =high in ADCON0 register (write) Wait for ADC for 20 micro second (interrupt) The result of conversion is in ADRESH register (Read) Firstly send result into W (acu..), Then send result to PORT C</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>bsf       ADCON0,GO                  ;Start A/D conversion
+Wait
+btfsc ADCON0,GO                       ;Wait for conversion to complete
+goto       Wait
+movf       ADRESH,W                   ;Write A/D result to PORTC
+movwf PORTC                         ;LEDs              return</code></pre>
+<p>Digital-to-analog (DAC) converter The digital-to-analog converter (DAC) is a device widely used to convert digital pulses to analog signals. In this section we discuss the basics of interfacing a DAC to PC.</p>
+<h3 id="example">Example</h3>
+<p>What is the output voltage of a 10-bit DAC with a 10.0-V reference if the input is (a) 00101101012 = 0B5H, (b) 20FH? The answers are; a) Vout = 1.767578 V b) Vout = 5.14648 V</p>
+<p>Generating sine wave To generate a sine wave, we first need a table whose values represent the magnituda of the sine of angles between 0 and 360 degrees. The values for the sine fuction vary from –1.0 to +1.0 for 0 to 360 degree angles. Therefore, the table values are integer numbers representing the voltage magnitude for the sine of theta. This method ensures that only integer numbers are output to the DAC by the x86 processor. Table shows the angles, the sine values, the voltage magnitude, and the integer values representing the voltage magnitude for each angle with 30-degree increments. To generate Table , we assumed the full-scale voltage of 10V for DAC output (as designed in Figure ). Full-scal output of the DAC is achieved when all the data inputs of the DAC are high. Therefore. To achieve the full-scale 10V output, we use the following equation. Vout of DAC (for various sine degrees) = 5V + (5 × sin θ) To fined the value sent to DAC for various angles, we simply multiply the Vout voltage by 25.60 because there are 256 steps and full- scale Vout is 10 volts. Therefore, 256 steps / 10 V = 25.6 steps per volt. To further clarify this., look at Example . The following program sends the value to DAC continuously (in an infinite loop) to produce a crude sine wave. See Figure .</p>
+<p>Angle v. Voltage Magnitude for Sine Wave Angle θ          Vout (Voltage Magnitude) Values Sent to DAC (decimel) (degress) Sin θ 5V + (5V × sin θ)         (Voltage Mag x 25.6) 0         0       5                       128 30        0.5       7.5                   192 60        0.866 9.33                      238 90        1.000 10                        255 120       0.866 9.33                      238 150       0.5    7.5                      192 180       0      5                        128 210       -0.5   2.5                      64 240       -0.866 0.669                    17 270       -1.0   0                        0 300       -0.866 0.669                    17 330       -0.5   2.5                      64 360       0      5                        128</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TABLE DB 128,192,238,255,192,128,64,17,0,17,64,128
+;in code segment
+MOV AL,80H          ;make all ports as output
+MOV DX,CONPORT
+OUT DX,AL
+A1:                MOV CX,12           ;count
+MOV BX,OFFSET TABLE
+MOV DX,PORTA        ;port A address
+NEXT:              MOV AL,[BX]
+OUT DX,AL
+INC BX
+CALL DELAY          ;let DAC recover
+LOOP NEXT
+JMP A1              ;do it again</code></pre>
+<p>DAC circuit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In high-speed CPUs (30 MHz and higher), the use of two I/O instructions (IN, OUT)</code></pre>
+<h3 id="right-after-each-other-might-not-work">right after each other might not work</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV       AL, 55H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT       PORT_A,AL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT       PORT_B,AL</code></pre>
+<h3 id="you-need-to-place-a-delay-or-other-code-between-subsequent-out-or-in-instructions">You need to place a delay (or other code) between subsequent OUT or IN instructions</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,55H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT PORT_A,AL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,5</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>HERE:            LOOP HERE
+OUT PORT_B,AL</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-adc-dac.zip" download>eem332-adc-dac.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.3 MB · 13.05.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-adc-dac.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

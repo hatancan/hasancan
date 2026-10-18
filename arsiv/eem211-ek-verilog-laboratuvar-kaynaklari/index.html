@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Sayısal Mantık Tasarımı: Toplayıcı ve Gösterge İçin Ek Verilog Kaynakları — hasancan.net</title>
+<meta name="description" content="On kaynak dosyada veri akışı, yapısal modelleme, kapı gecikmeleri ve dört haneli gösterge sürücüsü.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-ek-verilog-laboratuvar-kaynaklari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Sayısal Mantık Tasarımı: Toplayıcı ve Gösterge İçin Ek Verilog Kaynakları">
+<meta property="og:description" content="On kaynak dosyada veri akışı, yapısal modelleme, kapı gecikmeleri ve dört haneli gösterge sürücüsü.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-ek-verilog-laboratuvar-kaynaklari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Sayısal Mantık Tasarımı: Toplayıcı ve Gösterge İçin Ek Verilog Kaynakları", "description": "On kaynak dosyada veri akışı, yapısal modelleme, kapı gecikmeleri ve dört haneli gösterge sürücüsü.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem211-ek-verilog-laboratuvar-kaynaklari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "ek-verilog-kaynaklari.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-ek-verilog-laboratuvar-kaynaklari/ek-verilog-kaynaklari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM211 Sayısal Mantık Tasarımı: Toplayıcı ve Gösterge İçin Ek Verilog Kaynakları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.11.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#1-decoder-v">1. decoder.v</a></li><li><a href="#2-fourbitadder1-v">2. fourbitadder1.v</a></li><li><a href="#3-fourbitadder2-v">3. fourbitadder2.v</a></li><li><a href="#4-tamtoplayici-v">4. tamtoplayici.v</a></li><li><a href="#5-fourbitadder4-v">5. fourbitadder4.v</a></li><li><a href="#6-fourbitscarryahead-v">6. fourbitscarryahead.v</a></li><li><a href="#7-forbitadder1-v">7. forbitadder1.v</a></li><li><a href="#8-fourbitadder2-v">8. fourbitadder2.v</a></li><li><a href="#9-fourbitadder-v">9. fourbitadder.v</a></li><li><a href="#10-fourbitscarrylookahead-v">10. fourbitscarrylookahead.v</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM211 Sayısal Mantık Tasarımı: Toplayıcı ve Gösterge İçin Ek Verilog Kaynakları</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 13.11.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>2005–2006 laboratuvar çalışmalarından, arkadaşların hazırladığı ek Verilog örnekleri. Kişisel bilgiler yorumlardan çıkarıldı. Aynı adla farklı içerik taşıyan dosyalar ZIP içinde ayrı örnek klasörlerine yerleştirildi; kişisel klasör yolları kullanılmadı. Kodlar yazının sonunda indirilebilir.</p>
+<p>Örnekler arşivde bulunduğu hâliyle metne aktarıldı; çalıştırılmadı veya derlenmedi. Bazı modül adları dosyalar arasında tekrar eder; bunlar ayrı çalışmalardır. Kod incelemesinde görülen hatalar ilgili örneğin altında belirtilmiştir.</p>
+<h2 id="1-decoder-v">1. decoder.v</h2>
+<p>Dört haneli gösterge sürücüsü: decoder, anode_decoder, clkdiv ve SSdriver. Bu sürüm saat bölücüde cnt[2] bitini kullanır. <em>Not: Son always bloğu yalnız cnt değişimine duyarlı; veri girişlerindeki değişimler için ayrı hassasiyet yazılmamış. Kaynak davranışı korunmuştur.</em></p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module decoder(SS,S);
+output reg [7:0] SS;
+input [3:0] S;
+always @(S)
+case (S)
+	0				:SS=8'b10000001;
+	1				:SS=8'b10101111;
+	2				:SS=8'b01001001;
+	3				:SS=8'b00001101;
+	4				:SS=8'b00010111;
+	5				:SS=8'b00100101;
+	6				:SS=8'b00100001;
+	7				:SS=8'b10001111;
+	8				:SS=8'b00000001;
+	9				:SS=8'b00000101;
+	10				:SS=8'b11111110;
+	default		:SS=8'b11111111;
+	endcase
+	endmodule
+	
+module anode_decoder(AN,cnt);
+output reg [3:0] AN;
+input	[1:0] cnt;
+always @(cnt)
+case (cnt)
+	0				:AN=4'b1110;
+	1				:AN=4'b1101;	
+	2				:AN=4'b1011;
+	3				:AN=4'b0111;
+	default		:AN=4'b1111;
+	endcase
+	endmodule
+
+module clkdiv(clk,mclk);
+output clk;
+input mclk;
+reg [15:0] cnt;
+assign clk=cnt[2];
+initial cnt=0;
+
+	always @(posedge mclk)
+	begin
+			cnt=cnt+1;						
+	end
+endmodule
+
+module SSdriver(SS,AN,mclk,S1,S2,S3,S4);
+input mclk;
+input[3:0] S1,S2,S3,S4;
+output reg [7:0] SS;
+output reg [3:0] AN;
+wire [7:0] w1,w2,w3,w4;
+wire clk;
+wire [3:0] w5;
+reg [1:0] cnt;
+
+clkdiv cdiv(clk,mclk);
+
+decoder d1(w1,S1);
+decoder d2(w2,S2);
+decoder d3(w3,S3);
+decoder d4(w4,S4);
+
+anode_decoder d5(w5,cnt);
+
+initial cnt=0;
+always @(posedge clk)
+begin
+		cnt=cnt+1;
+end
+
+always @(cnt)
+begin							
+	AN&lt;=w5;
+	case (cnt)
+		2'b00 : SS&lt;=w1;
+		2'b01	: SS&lt;=w2;
+		2'b10	: SS&lt;=w3;
+		2'b11 : SS&lt;=w4;	 
+
+	endcase
+	end
+	endmodule</code></pre>
+<h2 id="2-fourbitadder1-v">2. fourbitadder1.v</h2>
+<p>Tam toplayıcıyı toplam-çarpım ifadeleriyle kuran dört bitlik bağlantı.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module fadder (s,co,c,a,b);
+	output s,co;
+	input c,a,b;
+	assign co=(~c &amp; a &amp; b)|(c &amp; ~a &amp; b)|(c &amp; a &amp; ~b)|(a &amp; b &amp; c);
+	assign s=(~c &amp; ~a &amp; b)|(~c &amp; a &amp; ~b)|(c &amp; ~a &amp; ~b)|(c &amp; a &amp; b);
+endmodule
+
+module fourbitadder1 (LD0,LD1,LD2,LD3,LD4,SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,BTN0);
+	 output LD0,LD1,LD2,LD3,LD4;
+	 input  SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,BTN0;
+	 wire W1,W2,W3;
+	 fadder a1(LD0,W1,BTN0,SW0,SW4);
+	 fadder a2(LD1,W2,W1,SW1,SW5);
+	 fadder a3(LD2,W3,W2,SW2,SW6);
+	 fadder a4(LD3,LD4,W3,SW3,SW7);
+endmodule</code></pre>
+<h2 id="3-fourbitadder2-v">3. fourbitadder2.v</h2>
+<p>Kapı düzeyinde yapısal tam toplayıcı ve dört kademeli bağlantı. <em>Not: g18 kapısının girişlerinde hem c hem ~c bulunuyor; bu terim daima 0 olur. Beklenen toplam fonksiyonunun bir terimi böylece eksik kalır. Kaynak değiştirilmedi.</em></p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module andgate (y,a,b,c);
+	output y;
+	input a,b,c;
+	assign  y=a &amp; b &amp; c;
+endmodule
+
+module orgate (y,a,b,c);
+	output y;
+	input a,b,c;
+	assign y=a | b | c;
+endmodule
+
+module invgate (y,a);
+	output y;
+	input a;
+	assign y=~a;
+endmodule
+
+module fadderStr(s,co,a,b,c);
+output s,co; 
+input a,b,c;
+wire w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11,w12,w13,w14,w15,w16,w17;
+not g1(w1,c);
+not g2(w2,a);
+not g3(w3,b);
+and g4(w4,a,b,w1);
+and g5(w5,w2,b,c);
+and g6(w6,a,w3,c);
+and g7(w7,a,b,c);
+or g8(co,w4,w5,w6,w7);
+not g9(w8,a);
+not g10(w9,c);
+not g11(w10,b);
+not g12(w11,c);
+not g13(w12,a);
+not g14(w13,b);
+and g16(w14,w8,b,w9);
+and g17(w15,a,w10,w11);
+and g18(w16,w12,w13,c);
+and g15(w17,a,b,c);
+or g19(s,w14,w15,w16,w17);
+endmodule 
+
+module fourbitadder2 (LD0,LD1,LD2,LD3,LD4,SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,BTN0);
+	 output LD0,LD1,LD2,LD3,LD4;
+	 input  SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,BTN0;
+	 wire W1,W2,W3,W4,W5,W6,W7,W8,W9;
+	 fadderStr a1(LD0,W1,BTN0,SW0,SW4);
+	 fadderStr a2(LD1,W2,W1,SW1,SW5);
+	 fadderStr a3(LD2,W3,W2,SW2,SW6);
+	 fadderStr a4(LD3,LD4,W3,SW3,SW7);
+endmodule</code></pre>
+<h2 id="4-tamtoplayici-v">4. tamtoplayici.v</h2>
+<p>17 ns XOR, 14 ns AND ve 15 ns OR gecikmeleriyle tek bitlik tam toplayıcı.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module tamtoplayici(LD0,LD1,SW0,SW1,BTN0);
+input SW0,SW1,BTN0;
+output LD0,LD1;
+wire w1,w2,w3;
+xor #(17) xor1(w1,SW0,SW1);
+and #(14) and1(w2,SW0,SW1);
+xor #(17) xor2(LD0,w1,BTN0);
+and #(14) and2(w3,BTN0,w1);
+or #(15) or1(LD1,w2,w3);
+
+
+endmodule</code></pre>
+<h2 id="5-fourbitadder4-v">5. fourbitadder4.v</h2>
+<p>Gecikmeli tam toplayıcının dört kademeli sürümü; toplam ve elde LD çıkışlarına bağlanır.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module tamtoplayici(s,cout,a,b,cin);
+input a,b,cin;
+output s,cout;
+wire w1,w2,w3;
+xor #(17) xor1(w1,a,b);
+and #(14) and1(w2,a,b);
+xor #(17) xor2(s,w1,cin);
+and #(14) and2(w3,cin,w1);
+or #(15) or1(cout,w2,w3);
+
+
+endmodule
+
+module tamtoplayici4(LD,SW,BTN0);
+input [7:0] SW;
+input BTN0;
+output [4:0] LD;
+wire W1,W2,W3;
+tamtoplayici a1(LD[0],W1,SW[4],SW[0],BTN0 );
+tamtoplayici a2(LD[1],W2,SW[5],SW[1],W1);
+tamtoplayici a3(LD[2],W3,SW[6],SW[2],W2);
+tamtoplayici a4(LD[3],LD[4],SW[7],SW[3],W3);
+
+endmodule</code></pre>
+<h2 id="6-fourbitscarryahead-v">6. fourbitscarryahead.v</h2>
+<p>PCgen ve carrygen modülleriyle kurulan sürüm. <em>Not: Adında carrylookahead geçse de c1→c2→c3 elde zinciri ardışık ilerliyor; tam bir paralel elde öngörü ağı yazılmamış.</em></p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module PCgen(s,c,x,y);
+input x,y;
+output s,c;
+xor #(17) (s,x,y);
+and #(14) (c,x,y);
+endmodule
+
+module carrygen(s,c,x,y,z);
+input x,y,z;
+output s,c;
+wire w1,w2,w3;
+PCgen pc1(w1,w2,x,y);
+PCgen pc2(s,w3,w1,z);
+or #(15) g1(c,w2,w3);
+endmodule
+
+module fourbitscarrylookahead(LD,BTN0,SW);
+input [0:7] SW;
+input BTN0;
+output [0:4] LD;
+wire c1,c2,c3,s0,s1,s2,s3,p0,p1,p2,p3;
+
+carrygen ca1(s0,c1,SW[4],SW[0],BTN0);
+carrygen ca2(s1,c2,SW[5],SW[1],c1);
+carrygen ca3(s2,c3,SW[6],SW[2],c2);
+carrygen ca4(s3,LD[4],SW[7],SW[3],c3);
+xor #(17) x1(p0,SW[4],SW[0]);
+xor #(17) x2(p1,SW[5],SW[1]);
+xor #(17) x3(p2,SW[6],SW[2]);
+xor #(17) x4(p3,SW[7],SW[3]);
+xor #(17) x5(LD[3],c3,p3);
+xor #(17) x6(LD[2],c2,p2);
+xor #(17) x7(LD[1],c1,p1);
+xor #(17) x8(LD[0],BTN0,p0);
+endmodule</code></pre>
+<h2 id="7-forbitadder1-v">7. forbitadder1.v</h2>
+<p>Farklı port sırasına sahip dört bitlik veri akışı sürümü.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module fadder(s,co,c,a,b);
+	input c,a,b;
+	output s,co;
+	assign co=(~c&amp;a&amp;b)|(c&amp;~a&amp;b)|(c&amp;a&amp;~b)|(a&amp;b&amp;c);
+	assign s=(~c&amp;~a&amp;b)|(~c&amp;a&amp;~b)|(c&amp;~a&amp;~b)|(c&amp;a&amp;b);
+endmodule
+
+
+
+
+module fourbitadder1(ld0,ld1,ld2,ld3,ld4,btn0,sw0,sw4,sw1,sw5,sw2,sw6,sw3,sw7);
+	input btn0,sw0,sw4,sw1,sw5,sw2,sw6,sw3,sw7;
+	output ld0,ld1,ld2,ld3,ld4;
+	wire w1,w2,w3;
+	fadder f0(ld0,w1,sw0,sw4,btn0);
+	fadder f1(ld1,w2,sw1,sw5,w1);
+	fadder f2(ld2,w3,sw2,sw6,w2);
+	fadder f3(ld3,ld4,sw3,sw7,w3);
+endmodule</code></pre>
+<h2 id="8-fourbitadder2-v">8. fourbitadder2.v</h2>
+<p>andgate, orgate ve invgate alt modülleriyle kurulan yapısal sürüm.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module andgate(y,a,b,c);
+	input c,b,a ;
+	output y ;
+	assign y=(a&amp;b&amp;c);
+endmodule
+
+ module orgate(y,a,b,c,d);
+	input a,b,c,d;
+	output y ;
+	assign y=(a|b|c|d);
+endmodule
+
+ module invgate(y,a);
+	input a;
+	output y;
+	assign y=(~a);
+endmodule
+
+
+ module fadderstr(s,co,a,b,c);
+	input a,b,c;
+	output s,co;
+	wire w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11;
+	invgate i1(w1,a);
+	invgate i2(w2,b);
+	invgate i3(w3,c);
+	andgate a0(w4,w3,a,b);
+	andgate a1(w5,c,w1,b);
+	andgate a2(w6,c,a,w2);
+	andgate a3(w7,a,b,c);
+	orgate o0(co,w4,w5,w6,w7);
+	andgate a7(w8,w3,w1,b);
+	andgate a4(w9,w3,a,w2);
+	andgate a5(w10,c,w1,w2);
+	andgate a6(w11,c,a,b);
+	orgate o2(s,w8,w9,w10,w11);
+endmodule
+
+module fourbitadder2(ld0,ld1,ld2,ld3,ld4,btn0,sw0,sw4,sw1,sw5,sw2,sw6,sw3,sw7);
+	input btn0,sw0,sw4,sw1,sw5,sw2,sw6,sw3,sw7;
+	output ld0,ld1,ld2,ld3,ld4;
+	wire w1,w2,w3;
+	fadderstr f0(ld0,w1,sw0,sw4,btn0);
+	fadderstr f1(ld1,w2,sw1,sw5,w1);
+	fadderstr f2(ld2,w3,sw2,sw6,w2);
+	fadderstr f3(ld3,ld4,sw3,sw7,w3);
+
+
+
+endmodule</code></pre>
+<h2 id="9-fourbitadder-v">9. fourbitadder.v</h2>
+<p>İki yarım toplayıcıdan tam toplayıcı, dört tam toplayıcıdan dört bitlik devre kurulması.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module halfadder (S,C,a,b);
+	input a,b;
+	output S,C;
+	xor #(17)(S,a,b);
+	and #(14)(C,a,b);
+endmodule
+
+module tamtoplayici(S,C,a,b,cin);
+	input a,b,cin;
+	output S,C;
+	wire S1,D1,D2;
+	halfadder HA1 (S1,D1,a,b),
+				 HA2 (S,D2,S1,cin);
+	or #(15) g1(C,D2,D1);
+endmodule
+
+module fourbitadder (S,C,A,B,cin);
+	input [3:0] A,B;
+	input cin;
+	output [3:0] S;
+	output C;
+	wire C1,C2,C3;
+	tamtoplayici FA0(S[0],C1,A[0],B[0],cin),
+				    FA1(S[1],C2,A[1],B[1],C1),
+				    FA2(S[2],C3,A[2],B[2],C2),
+				    FA3(S[3],C,A[3],B[3],C3);
+endmodule</code></pre>
+<h2 id="10-fourbitscarrylookahead-v">10. fourbitscarrylookahead.v</h2>
+<p>Yayılma Pi=A⊕B ve üretme Gi=AB sinyallerini ayrı modüllerde hesaplayan sürüm. <em>Not: Elde kademeleri birbirine seri bağlı; dosya adı carrylookahead olsa da elde bağımlılığı zincir hâlinde.</em></p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>`timescale 1ns / 1ps
+module PGgen(Pi,Gi,A,B);
+
+output Pi,Gi;
+input A,B;
+xor #(17)(Pi,A,B);
+and #(14) (Gi,A,B);
+
+endmodule
+
+module carrygen (S,ea,Pi,Gi,cout);
+
+output S,ea;
+input Pi,Gi,cout;
+wire w;
+
+xor # (17) (S,Pi,cout);
+and # (14) (w,Pi,cout);
+or  # (15) (ea,Gi,w);
+
+endmodule
+
+
+module fourbitscarrylookahead (S,cout,A,B,cin);
+
+output [3:0] S;
+output cout;
+input [3:0] A,B;
+input cin;
+
+wire P0,P1,P2,P3,G0,G1,G2,G3,C0,C1,C2,C3;
+
+PGgen pg1 (P0,G0,A[0],B[0]);
+PGgen pg2 (P1,G1,A[1],B[1]);
+PGgen pg3 (P2,G2,A[2],B[2]);
+PGgen pg4 (P3,G3,A[3],B[3]);
+
+carrygen C6 (S[0],C1,P0,G0,cin);
+carrygen C7 (S[1],C2,P1,G1,C1);
+carrygen C8 (S[2],C3,P2,G2,C2);
+carrygen C9 (S[3],cout,P3,G3,C3);
+
+endmodule</code></pre>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="ek-verilog-kaynaklari.zip" download>ek-verilog-kaynaklari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 6 KB · 13.11.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="ek-verilog-kaynaklari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (6 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

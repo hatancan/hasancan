@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Sinyaller ve Sistemler I: Fourier, Modülasyon ve Örnekleme — 2008 Sunumları (İsmail Avcıbaş) — hasancan.net</title>
+<meta name="description" content="Sürekli ve ayrık frekans yöntemleri, genlik modülasyonu, eşzamanlı demodülasyon, örnekleme teoremi, sıfırıncı dereceden tutucu ve aliasing.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-avcibas-fourier-modulasyon-ornekleme-2008/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Sinyaller ve Sistemler I: Fourier, Modülasyon ve Örnekleme — 2008 Sunumları (İsmail Avcıbaş)">
+<meta property="og:description" content="Sürekli ve ayrık frekans yöntemleri, genlik modülasyonu, eşzamanlı demodülasyon, örnekleme teoremi, sıfırıncı dereceden tutucu ve aliasing.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-avcibas-fourier-modulasyon-ornekleme-2008/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Sinyaller ve Sistemler I: Fourier, Modülasyon ve Örnekleme — 2008 Sunumları (İsmail Avcıbaş)", "description": "Sürekli ve ayrık frekans yöntemleri, genlik modülasyonu, eşzamanlı demodülasyon, örnekleme teoremi, sıfırıncı dereceden tutucu ve aliasing.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem301-avcibas-fourier-modulasyon-ornekleme-2008/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-avcibas-fourier-modulasyon-ornekleme-2008.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-avcibas-fourier-modulasyon-ornekleme-2008/eem301-avcibas-fourier-modulasyon-ornekleme-2008.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM301 Sinyaller ve Sistemler I: Fourier, Modülasyon ve Örnekleme — 2008 Sunumları (İsmail Avcıbaş)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>14.07.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#continuous-time-frequency-methods">Continuous-time frequency methods</a></li><li><a href="#amplitude-modulation">Amplitude modulation</a></li><li><a href="#synchronous-demodulation">Synchronous demodulation</a></li><li><a href="#envelope-detection-and-single-sideband-modulation">Envelope detection and single-sideband modulation</a></li><li><a href="#discrete-time-fourier-series-and-transform">Discrete-time Fourier series and transform</a></li><li><a href="#selected-worked-problems">Selected worked problems</a></li><li><a href="#sampling-theorem">Sampling theorem</a></li><li><a href="#zero-order-hold">Zero-order hold</a></li><li><a href="#aliasing">Aliasing</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM301 Sinyaller ve Sistemler I: Fourier, Modülasyon ve Örnekleme — 2008 Sunumları (İsmail Avcıbaş)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 14.07.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>İsmail Avcıbaş’ın EEM301 arşivindeki <strong>Continuous-Time Frequency Domain Methods</strong> ve <strong>Discrete-Time Frequency Domain Methods</strong> sunumları, kaynak dosyalarının oluşturulma tarihlerine göre 14 ve 28 Temmuz 2008’e ait. 50 ve 66 sayfalık bu sürümler, modülasyon ve örnekleme bölümleriyle Chapter 1–5 dizisini tamamlıyor. İki sunumun PDF’leri yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="continuous-time-frequency-methods">Continuous-time frequency methods</h2>
+<p>The CT Fourier-series analysis and synthesis equations are aₖ=(1/T₀)∫ over T₀ x(t)e^(−jkω₀t)dt and x(t)=Σaₖe^(jkω₀t), with ω₀=2π/T₀. An LTI system multiplies each harmonic coefficient by H(jkω₀).</p>
+<p>Increasing the period of a repeated finite pulse makes its spectral lines denser. In the limit, the Fourier transform pair is X(jω)=∫x(t)e^(−jωt)dt and x(t)=(1/2π)∫X(jω)e^(jωt)dω. The presentation derives the transform of rectangular and exponential signals and introduces impulse spectra for periodic signals.</p>
+<p>The main properties are linearity, time shifting, conjugate symmetry, differentiation, integration, time scaling, duality and Parseval’s relation. Time convolution becomes multiplication of transforms; time multiplication becomes frequency convolution divided by 2π. These properties connect signal descriptions to LTI frequency responses.</p>
+<h2 id="amplitude-modulation">Amplitude modulation</h2>
+<p>Multiplication by a complex exponential shifts a spectrum: x(t)e^(jω꜀t) ↔ X(j(ω−ω꜀)). Multiplication by a real cosine creates two shifted copies:</p>
+<p>y(t)=x(t)cosω꜀t,</p>
+<p>Y(jω)=[X(j(ω−ω꜀))+X(j(ω+ω꜀))]/2.</p>
+<p>A baseband spectrum supported on |ω|≤ωₘ occupies bands around ±ω꜀ after modulation. The diagrams track this change through the transmitter and receiver.</p>
+<h2 id="synchronous-demodulation">Synchronous demodulation</h2>
+<p>Multiplying the modulated signal again by cosω꜀t gives x(t)/2 plus a component centered around twice the carrier frequency. An ideal lowpass filter with gain 2 recovers x(t), provided the bands are separated.</p>
+<p>If the local oscillator has phase error θ, the recovered baseband is scaled by cosθ. Frequency mismatch prevents a constant recovery gain and introduces a time-varying factor. The receiver therefore needs carrier synchronization.</p>
+<figure class="yazi-gorsel"><img src="ch4-44.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Eşzamanlı demodülasyonda faz hatasının etkisi"><figcaption>Faz farkı π/2 olduğunda çıkış sıfırdır</figcaption></figure>
+<h2 id="envelope-detection-and-single-sideband-modulation">Envelope detection and single-sideband modulation</h2>
+<p>For envelope detection, a DC offset is added before multiplication: [A+x(t)]cosω꜀t. Choosing A so that A+x(t) remains positive makes the envelope proportional to the message plus its offset. The source compares this method with coherent reception.</p>
+<p>Single-sideband modulation removes one of the redundant sidebands. The presentation uses phase shifts and parallel branches to illustrate how the unwanted sideband cancels.</p>
+<figure class="yazi-gorsel"><img src="ch4-48.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Çift yan bant, üst yan bant ve alt yan bant spektrumları"><figcaption>Single-sideband modulation</figcaption></figure>
+<h2 id="discrete-time-fourier-series-and-transform">Discrete-time Fourier series and transform</h2>
+<p>For a period-N sequence, x[n]=Σ over N values of k aₖe^(jk2πn/N), and aₖ=(1/N)Σ over N values of n x[n]e^(−jk2πn/N). The coefficients repeat with period N. Finite-dimensional orthogonality makes the synthesis exact.</p>
+<p>The DTFT is X(Ω)=Σx[n]e^(−jΩn), with inverse x[n]=(1/2π)∫₋π^π X(Ω)e^(jΩn)dΩ. X(Ω) repeats every 2π. A finite rectangle on |n|≤N₁ has transform sin[Ω(N₁+1/2)]/sin(Ω/2).</p>
+<p>Time shifting multiplies the transform by e^(−jΩn₀); modulation shifts its argument. First differencing multiplies it by 1−e^(−jΩ). Inserting k−1 zeros between adjacent samples gives X(kΩ). Multiplication of sequences corresponds to periodic convolution of their transforms.</p>
+<p>The worked examples include an impulse train, a sequence formed by zero insertion and shifting, multiplication of sinc sequences, and partial-fraction evaluation of an LTI impulse response.</p>
+<h2 id="selected-worked-problems">Selected worked problems</h2>
+<ul><li>Problem 3.26 uses a₀=2 and aₖ=j(1/2)^|k| for k≠0. The coefficients are even but not conjugate symmetric, so the signal is even and not real. Its derivative has coefficients jkω₀aₖ and is not even.</li><li>Problem 3.35 considers a highpass response equal to 1 for |ω|≥250. With T₀=π/7, ω₀=14. For the output to equal the input, aₖ must vanish for |k|&lt;18.</li><li>Problem 4.5 uses a spectrum of magnitude 2 on |ω|&lt;3 and phase −3ω/2+π. Its inverse is −2sin[3(t−3/2)]/[π(t−3/2)], with the continuous limit at t=3/2.</li><li>Problem 4.30 asks for x(t) when g(t)=x(t)cos t has a unit rectangular spectrum on |ω|≤2. The slide presents the question without a worked answer.</li><li>Problem 4.33 has y″+6y′+8y=2x. Its impulse response is [e^(−2t)−e^(−4t)]u(t). The input t e^(−2t)u(t) is handled by repeated-pole partial fractions.</li><li>Problem 5.21 considers the period-6 extension of five unit samples and one zero, giving discrete spectral lines weighted by its six Fourier-series coefficients.</li><li>Problem 5.19 has y[n]−y[n−1]/6−y[n−2]/6=x[n]. Factoring the denominator gives h[n]=[(3/5)(1/2)ⁿ+(2/5)(−1/3)ⁿ]u[n].</li></ul>
+<p><em>Not: 4.33 çözüm slaytında H(ω) paydasının orta terimi “2jω” basılmış. Verilen diferansiyel denklemden bu terim 6jω olur; slayttaki (jω+2)(jω+4) çarpanları da 6jω ile tutarlıdır. Son satırda (jω+2)⁻³ teriminin ters dönüşümü t²e^(−2t)u(t) yazılmış; doğru çarpan t²/2’dir. Böylece y(t)=[(1/4)e^(−2t)−(1/2)t e^(−2t)+(1/2)t²e^(−2t)−(1/4)e^(−4t)]u(t) olur.</em></p>
+<h2 id="sampling-theorem">Sampling theorem</h2>
+<p>Sampling with an impulse train p(t)=Σδ(t−nT) gives</p>
+<p>xₚ(t)=Σx(nT)δ(t−nT),</p>
+<p>Xₚ(jω)=(1/T)ΣX(j(ω−kωₛ)), where ωₛ=2π/T.</p>
+<p>Sampling repeats the original spectrum at multiples of ωₛ. If X is zero for |ω|&gt;ωₘ and ωₛ&gt;2ωₘ, these copies do not overlap. A lowpass filter with gain T then selects the baseband copy.</p>
+<figure class="yazi-gorsel"><img src="ch5-55.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Örnekleme sonrası spektrum kopyaları ve örtüşmeme koşulu"><figcaption>ωₛ&gt;2ωₘ</figcaption></figure>
+<p>In time, ideal reconstruction interpolates the samples with shifted sinc functions. With cutoff ω꜀ between the original band edge and the nearest replica:</p>
+<p>xᵣ(t)=Σx(nT) T sin[ω꜀(t−nT)]/[π(t−nT)].</p>
+<h2 id="zero-order-hold">Zero-order hold</h2>
+<p>A zero-order hold keeps each sample value until the next sampling instant. It equals impulse-train sampling followed by a system with h₀(t)=u(t)−u(t−T).</p>
+<p>H₀(jω)=e^(−jωT/2)·2sin(ωT/2)/ω.</p>
+<p>Its sinc-shaped magnitude attenuates high frequencies, and its phase introduces a half-sample delay. The reconstruction response is Hᵣ=H/H₀, where H is the desired ideal lowpass response; this compensates for both effects inside the passband.</p>
+<figure class="yazi-gorsel"><img src="ch5-61.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Dürtü örnekleme ile sıfırıncı dereceden tutucunun ardışık modeli"><figcaption>Örnek değerlerini bir periyot boyunca tutma</figcaption></figure>
+<h2 id="aliasing">Aliasing</h2>
+<p>If ωₛ is too small, shifted spectra overlap. Different continuous-time sinusoids then produce the same sample sequence, so ideal lowpass reconstruction alone cannot recover the original. The final slides compare sinusoidal examples sampled above and below the required rate.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem301-avcibas-fourier-modulasyon-ornekleme-2008.zip" download>eem301-avcibas-fourier-modulasyon-ornekleme-2008.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 593 KB · 14.07.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem301-avcibas-fourier-modulasyon-ornekleme-2008.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (593 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

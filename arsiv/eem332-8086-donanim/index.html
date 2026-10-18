@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: 8086 Donanımı ve Bellek Tasarımı — hasancan.net</title>
+<meta name="description" content="Minimum ve maksimum çalışma kipleri, veri yolu zamanlaması, bellek arabirimi ve adres çözümleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-8086-donanim/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: 8086 Donanımı ve Bellek Tasarımı">
+<meta property="og:description" content="Minimum ve maksimum çalışma kipleri, veri yolu zamanlaması, bellek arabirimi ve adres çözümleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-8086-donanim/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: 8086 Donanımı ve Bellek Tasarımı", "description": "Minimum ve maksimum çalışma kipleri, veri yolu zamanlaması, bellek arabirimi ve adres çözümleme.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-8086-donanim/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-8086-donanim.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-8086-donanim/eem332-8086-donanim.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: 8086 Donanımı ve Bellek Tasarımı">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.04.2003</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu07-2013">cpu07_2013</a></li><li><a href="#cpu08-07">cpu08_07</a></li><li><a href="#cpu08-06">cpu08_06</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: 8086 Donanımı ve Bellek Tasarımı</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 15.04.2003 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2003–2015). Minimum ve maksimum çalışma kipleri, veri yolu zamanlaması, bellek arabirimi ve adres çözümleme. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="cpu07-2013">cpu07_2013</h2>
+<h3 id="eem332-lecture7">EEM332 Lecture7</h3>
+<p>Hardware of 8086 based system Adress bus, Data Bus, Control Bus Memory design, Adress decoding</p>
+<p>8086 Hardware design</p>
+<h3 id="the-8086-and-8088-microprocessors-can-be-configured-to-work-in-either-of-two-modes">The 8086 and 8088 microprocessors can be configured to work in either of two modes</h3>
+<p>The minimum mode - The maximum mode - The mode selection feature lets the 8088 or 8086 better meet the needs of a wide variety of system requirement. Minimum mode 8088/8086 systems are typically smaller and contain a single processor..</p>
+<p>Note: that for 8088 the address bus is 20 bit and data bus is 8-bit.</p>
+<p>System Clock The time base for synchronization of the internal and external operations of the microprocessor in a microcomputer system is provided by the clock (CLK) input signal. The standard 8088 operates at 5 MHz and the 8088- 2 operates at 8 MHz. The 8086 is manufactured in three speeds: 5-MHz 8086, 8-MHz 8086-2, and the 10-MHz 8086-1. The CLK is externally generated by the 8284 clock generator and driver IC. System Clock Connecting the 8284 to the 8088</p>
+<p>System Clock</p>
+<p>Pin Descriptions of the Control Signals of 8086 CPU</p>
+<p>RESET : Microprocessor resets if this pin is held high for 4 clock periods. Direct Memory Access (DMA) To transfer a large amount of data between the memory and peripherals such as hard disk. In such a case using the CPU to transfer data is too slow, since the data first must be fetched into the CPU and then sent to its destination. For this reason Direct Memory Access controller is used to bypass the CPU and provide a direct connection between the peripherals and memory, thus transferring the data as fast as possible.</p>
+<p>Pin descriptions of 8086 Microprocessor Data Bus: - In 8086 microprocessor Pins AD0 – AD15 are used for the data bus. - However the same pins are also used for Address bus as well. - The ALE (Address Latch Enable –pin 25) signals whether the information on pins AD0 – AD15 is used address or data. - When the data is sent out or in, the case when ALE is low indicates that AD0-AD15 will be used as data bus. - When the address data is sent out, the ALE is high indicating that AD0-AD15 will be used as address bus, - This process of separating address and data from pins AD0- AD15 is called demultiplexing.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus: - The 8086 CPU is has 20-bit address bus, where the AD0-AD15
+and A16-A20 are used as the address bus. To demultiplex the address signals from</code></pre>
+<p>the address/data pins (AD0-AD15) a latch must be used to grab the addresses. - In 8086 microprocessor the address bus is 20-bit wide, however only 16-bit is shared with data bus (AD0-AD15) through demultiplexing. The most widely used latch for demultiplexing is 74LS373 IC -Control Bus : is used to indicate - When a valid address is on the address bus - In which direction data are to be transferred over the data bus (in/out) - When external devices can read/write data on the data bus. - When valid read/write data are on the data bus. - Etc.</p>
+<p>Adress, Data and control Buses</p>
+<h3 id="adress-latching">Adress latching</h3>
+<p>Using the 74LS373 Address Latch</p>
+<p>Memory Interface Circuit (Latch circuit- Common bus)</p>
+<p>Memory</p>
+<p>Memory</p>
+<p>Memory</p>
+<h3 id="bus-cycle">Bus Cycle</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address decoding
+Address decoding is the process of generating chip select (CS*) signals from the
+address bus for each device in the system The address bus lines are split into two</code></pre>
+<p>sections. The N most significant bits are used to generate the CS* signals for the different devices The M least significant signals are passed to the devices as addresses to the different memory cells or internal registers Memory Address Decoding</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In order to splice a memory device into the address space of the processor, decoding is
+necessary.</code></pre>
+<p>For 32 K byte chip</p>
+<p>For 2 K byte chip</p>
+<p>74LS 3x8 decoder chip</p>
+<ul><li>Note that all three Enables (G2A, G2B, and G1) must be active, e.g. low, low</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and high, respectively. Each output of the decoder can be attached to an 2764</code></pre>
+<h3 id="eprom-8k-x-8">EPROM ( 8K X 8 ).</h3>
+<h3 id="example">Example</h3>
+<p>Figure: 10-3</p>
+<figure class="yazi-gorsel"><img src="sekil-1177-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="cpu07_2013: sayfa 3, devre, tablo ve şekiller"><figcaption>cpu07_2013, sayfa 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1177-07.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="cpu07_2013: sayfa 7, devre, tablo ve şekiller"><figcaption>cpu07_2013, sayfa 7.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1177-12.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="cpu07_2013: sayfa 12, devre, tablo ve şekiller"><figcaption>cpu07_2013, sayfa 12.</figcaption></figure>
+<h2 id="cpu08-07">cpu08_07</h2>
+<p>8086 Hardware design</p>
+<h3 id="the-8086-and-8088-microprocessors-can-be-configured-to-work-in-either-of-two-modes">The 8086 and 8088 microprocessors can be configured to work in either of two modes</h3>
+<p>The minimum mode - The maximum mode - The mode selection feature lets the 8088 or 8086 better meet the needs of a wide variety of system requirement. Minimum mode 8088/8086 systems are typically smaller and contain a single processor..</p>
+<p>Note: that for 8088 the address bus is 20 bit and data bus is 8-bit. So only 8-bit is latched).</p>
+<p>8.6 System Clock The time base for synchronization of the internal and external operations of the microprocessor in a microcomputer system is provided by the clock (CLK) input signal. The standard 8088 operates at 5 MHz and the 8088- 2 operates at 8 MHz. The 8086 is manufactured in three speeds: 5-MHz 8086, 8-MHz 8086-2, and the 10-MHz 8086-1. The CLK is externally generated by the 8284 clock generator and driver IC. System Clock Connecting the 8284 to the 8088</p>
+<p>System Clock</p>
+<p>Pin Descriptions of the Control Signals of 8086 CPU</p>
+<p>RESET : Microprocessor resets if this pin is held high for 4 clock periods.</p>
+<p>Direct Memory Access (DMA)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In computers there is often need to transfer a large amount of data between the memory and</code></pre>
+<p>peripherals such as hard disk. In such a case using the CPU to transfer data is too slow, since the data first must be fetched into the CPU and then sent to its destination. For this reason Direct Memory Access controller is used to bypass the CPU and provide a direct connection between the peripherals and memory, thus transferring the data as fast as possible.</p>
+<p>Pin descriptions of 8086 Microprocessor Data Bus: - In 8086 microprocessor Pins AD0 – AD15 are used for the data bus. - However the same pins are also used for Address bus as well. - The ALE (Address Latch Enable –pin 25) signals whether the information on pins AD0 – AD15 is used address or data. - When the data is sent out or in, the case when ALE is low indicates that AD0-AD15 will be used as data bus. - When the address data is sent out, the ALE is high indicating that AD0-AD15 will be used as address bus - This process of separating address and data from pins AD0-AD15 is called demultiplexing.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus: - The 8086 CPU is has 20-bit address bus, where the AD0-AD15 and A16-</code></pre>
+<p>A20 are used as the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address bus. To demultiplex the address signals from the address/data pins (AD0-AD15) a</code></pre>
+<p>latch must be used to grab the addresses. - In 8086 microprocessor the address bus is 20-bit wide, however only 16-bit is shared with data bus (AD0-AD15) through demultiplexing. -The most widely used latch for demultiplexing is 74LS373 IC -Control Bus : is used to indicate - When a valid address is on the address bus - In which direction data are to be transferred over the data bus (in/out) - When external devices can read/write data on the data bus. - When valid read/write data are on the data bus. - Etc.</p>
+<p>Adress, Data and control Buses</p>
+<h3 id="adress-latching">Adress latching</h3>
+<p>Using the 74LS373 Address Latch</p>
+<p>Memory Interface Circuit (Latch circuit- Common bus)</p>
+<p>Memory</p>
+<p>Memory</p>
+<p>Memory</p>
+<h3 id="bus-cycle">Bus Cycle</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address decoding
+Address decoding is the process of generating chip select (CS*) signals from the
+address bus for each device in the system The address bus lines are split into two</code></pre>
+<p>sections. The N most significant bits are used to generate the CS* signals for the different devices The M least significant signals are passed to the devices as addresses to the different memory cells or internal registers Memory Address Decoding</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In order to splice a memory device into the address space of the processor, decoding is
+necessary.</code></pre>
+<p>For 32 K byte chip</p>
+<p>For 2 K byte chip</p>
+<p>74LS 3x8 decoder chip</p>
+<ul><li>Note that all three Enables (G2A, G2B, and G1) must be active, e.g. low, low</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and high, respectively. Each output of the decoder can be attached to an 2764</code></pre>
+<h3 id="eprom-8k-x-8">EPROM ( 8K X 8 ).</h3>
+<h3 id="example">Example</h3>
+<p>Figure: 10-3</p>
+<h2 id="cpu08-06">cpu08_06</h2>
+<p>8086 Hardware design</p>
+<h3 id="the-8086-and-8088-microprocessors-can-be-configured-to-work-in-either-of-two-modes">The 8086 and 8088 microprocessors can be configured to work in either of two modes</h3>
+<p>The minimum mode - The maximum mode - The mode selection feature lets the 8088 or 8086 better meet the needs of a wide variety of system requirement. Minimum mode 8088/8086 systems are typically smaller and contain a single processor. Depending on the mode of operation selected, the assignment for a number of the pins on the microprocessor package are changed.</p>
+<p>Minimum-Mode Interface</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address/Data bus</code></pre>
+<p>The address bus is used to carry address information to the memory and I/O ports. The address bus is 20-bit long and consists of signal lines A0 through A19. A 20-bit address gives the 8088 a 1 Mbyte memory address space. Only address line A0 through A15 are used when</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressing I/O. This give an I/O address space 64 Kbytes. The 8088 has 8 multiplexed
+address/data bus lines (A0~A7) while 8086 has 16 multiplexed address/data bus lines (A0~A15).</code></pre>
+<h3 id="control-signals">Control signals</h3>
+<p>The control signals are provided to support the memory and I/O interfaces of the 8088 and 8086.</p>
+<p>RESET : Microprocessor resets if this pin is held high for 4 clock periods.</p>
+<p>8.6 System Clock The time base for synchronization of the internal and external operations of the microprocessor in a microcomputer system is provided by the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clock (CLK) input signal.</code></pre>
+<p>The standard 8088 operates at 5 MHz and the 8088- 2 operates at 8 MHz. The 8086 is manufactured in three speeds: 5-MHz 8086, 8-MHz 8086-2, and the 10-MHz 8086-1. The CLK is externally generated by the 8284 clock generator and driver IC.</p>
+<p>System Clock</p>
+<p>System Clock Connecting the 8284 to the 8088</p>
+<p>8.7 Bus Cycle and Time States A bus cycle defines the basic operation that a microprocessor performs to communicate with external devices. Examples of bus cycles are the memory read, memory write, input/output read, and input/output write. The bus cycle of the 8088 and 8086 microprocessors consists of at least four clock periods. If no bus cycles are required, the microprocessor performs what are known as idle states. When READY is held at the 0 level, wait states are inserted between states T3 and T4 of the bus cycle.</p>
+<h3 id="bus-cycle">Bus Cycle</h3>
+<p>Memory Interface Circuit (Latch circuit)</p>
+<h3 id="adress-latching">Adress latching</h3>
+<p>Using the 74LS373 Address Latch</p>
+<p>For 32 K byte chip</p>
+<p>For 2 K byte chip</p>
+<p>74LS 3x8 decoder chip</p>
+<ul><li>Note that all three Enables (G2A, G2B, and</li></ul>
+<p>G1) must be active, e.g. low, low and high, respectively.</p>
+<ul><li>Each output of the decoder can be attached</li></ul>
+<p>to an 2764 EPROM ( 8K X 8 ).</p>
+<h3 id="a14-a14">A14   A14</h3>
+<p>Rom1 FFFFFH-FE000H Rom1 FDFFFH-FC000H Ram2 03FFFH-02000H Ram1 01FFFH-00000H</p>
+<p>4 ROM memory and 4 RAM memory chip are used for total memory . Each memory chip is 2 kbyte Ao and A10 are used as adress bus IC1......IC4 Ram</p>
+<h3 id="ic5-ic8-rom">IC5,.....IC8 ROM</h3>
+<p><em>Not: Bazı eski sunum sayfalarında kaynak dosyanın kendi “Resim görüntülenemiyor” uyarısı vardır. Eksik şekiller yeniden oluşturulmadı; diğer yıl sürümleriyle birlikte arşivlendi.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-8086-donanim.zip" download>eem332-8086-donanim.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3.1 MB · 15.04.2003</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-8086-donanim.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

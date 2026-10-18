@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: 8086 Donanım ve Assembly El Yazısı Notları — hasancan.net</title>
+<meta name="description" content="2011 tarihli ve 2014 arşivli ders sayfalarından adresleme, yığın, bayraklar, döngüler ve bellek bağlantıları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: 8086 Donanım ve Assembly El Yazısı Notları">
+<meta property="og:description" content="2011 tarihli ve 2014 arşivli ders sayfalarından adresleme, yığın, bayraklar, döngüler ve bellek bağlantıları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: 8086 Donanım ve Assembly El Yazısı Notları", "description": "2011 tarihli ve 2014 arşivli ders sayfalarından adresleme, yığın, bayraklar, döngüler ve bellek bağlantıları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-el-yazisi-notlar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: 8086 Donanım ve Assembly El Yazısı Notları">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.04.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#mikroislemciye-yazilim-ve-donanim-acisindan-bakis">Mikroişlemciye yazılım ve donanım açısından bakış</a></li><li><a href="#kontrol-sinyalleri-ve-saat">Kontrol sinyalleri ve saat</a></li><li><a href="#bellek-kapasitesi-ve-adres-cozumleme">Bellek kapasitesi ve adres çözümleme</a></li><li><a href="#segment-ve-fiziksel-adres">Segment ve fiziksel adres</a></li><li><a href="#mov-ve-adresleme-ornekleri">MOV ve adresleme örnekleri</a></li><li><a href="#yazmaclar-ve-debug-bayraklari">Yazmaçlar ve DEBUG bayrakları</a></li><li><a href="#yigin">Yığın</a></li><li><a href="#sifir-bitlerini-sayma">Sıfır bitlerini sayma</a></li><li><a href="#bes-bayti-toplama">Beş baytı toplama</a></li><li><a href="#dizinin-her-elemanina-bes-ekleme">Dizinin her elemanına beş ekleme</a></li><li><a href="#i-saretli-toplam">İşaretli toplam</a></li><li><a href="#karsilastirma-ve-kosullu-atlama">Karşılaştırma ve koşullu atlama</a></li><li><a href="#bayrak-aktarimi-ve-kontrolu">Bayrak aktarımı ve kontrolü</a></li><li><a href="#dizi-komutlari-ve-ic-ice-donguler">Dizi komutları ve iç içe döngüler</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: 8086 Donanım ve Assembly El Yazısı Notları</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 06.04.2011 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi EEM332 Mikroişlemciler ders arşivindeki bu içerik, fotoğraflanmış sayfalardan metne aktarıldı. 2011 tarihli ve 2014 arşivli ders sayfalarından adresleme, yığın, bayraklar, döngüler ve bellek bağlantıları. Öğrenci adları ve numaraları çıkarıldı. Fotoğraflar özel arşivde tutulur; bu yazının indirme dosyası yoktur.</p>
+<h2 id="mikroislemciye-yazilim-ve-donanim-acisindan-bakis">Mikroişlemciye yazılım ve donanım açısından bakış</h2>
+<p>6 Nisan 2011 tarihli notlar işlemciyi iki yönden ele alır: yazılım tarafında yazmaçlar ve komut kümesi, donanım tarafında bacaklar, veri yolu ve kontrol sinyalleri. 8086 ve 8088 için 40 bacaklı kılıf; sırasıyla 16 ve 8 bit dış veri yolu gösterilmiştir. Minimum mod tek işlemcili bağlantı, maksimum mod daha geniş sistem bağlantıları için anlatılır.</p>
+<p><em>Not: Kaynaktaki “8086 ile 8088 arasındaki tek fark veri yoludur” ifadesi bir sadeleştirmedir; komut kuyruğu ve bazı bacak işlevleri de farklıdır.</em></p>
+<h2 id="kontrol-sinyalleri-ve-saat">Kontrol sinyalleri ve saat</h2>
+<p>RD ve WR okuma/yazma yönünü, bellek/port seçimi ilgili kontrol sinyalini belirler. ALE, çoklanmış adres/veri hatlarındaki adresin latch üzerinde tutulmasını sağlar; daha sonra aynı uçlardan veri taşınabilir. NMI maskelenemeyen kesme olarak gösterilir; IF ile engellenmez. Reset işlemciyi başlangıç yürütüm durumuna getirir.</p>
+<p>Saat darbeleri işlemlerin zamanlamasını belirler. Notlarda bir bellek okuma/yazma çevrimi dört saat darbesiyle gösterilir; tek bir komut birden fazla çevrim gerektirebilir.</p>
+<p><em>Not: Dört saatlik gösterim bekleme durumları eklenmeyen temel bus çevrimidir. Dinamik RAM için nottaki “reset” sözcüğü yenileme (refresh) işlemini anlatmaktadır. NMI geldiğinde bütün veriler kendiliğinden kaydedilmez; gerekli saklama işlemleri kesme yordamıyla yapılır.</em></p>
+<h2 id="bellek-kapasitesi-ve-adres-cozumleme">Bellek kapasitesi ve adres çözümleme</h2>
+<p>k adres hattı ve N bit veri genişliği için kapasite 2ᵏ×N bittir. 32 KiB×8 bitlik düzen için 15 adres hattı, 2 KiB bellek için 11 adres hattı gerekir. Üst adres bitleri kod çözücüye, alt bitler belleğin kendi adres girişlerine bağlanır. A19–A14=111100 olan 16 KiB blok F0000H–F3FFFH aralığıdır.</p>
+<h2 id="segment-ve-fiziksel-adres">Segment ve fiziksel adres</h2>
+<p>Fiziksel adres = segment×10H + ofset. Segment başlangıcı 16 bayt sınırındadır; 16 bit ofset bir segment içinde 64 KiB alanı adresler. CS:IP komut, DS veri, SS:SP yığın için kullanılır. LEA bellekteki veriyi değil etkin adresi yükler.</p>
+<p>CS=3489H ve IP=2500H örneğinde nottaki toplama sonucunun son basamakları karışıktır.</p>
+<p><em>Not: Hesap 34890H+2500H=36D90H olmalıdır. Bu segmentin 0000H–FFFFH ofsetleri 34890H–4488FH aralığına karşılık gelir.</em></p>
+<h2 id="mov-ve-adresleme-ornekleri">MOV ve adresleme örnekleri</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,BL
+MOV AL,0005H
+MOV [1234H],AL
+MOV CX,DX
+MOV AX,857AH</code></pre>
+<p>Notlarda doğrudan bellekten belleğe MOV ve farklı genişlikte MOV AL,CX üzeri çizilerek geçersiz gösterilmiştir. Bir yazmaç ara basamak olarak kullanılmalıdır. Temel adresleme biçimleri anlık, yazmaç, doğrudan bellek, yazmaç dolaylı, indisli ve taban+indis+yer değiştirmedir.</p>
+<p>MOV AX,[BX+4] örneğinde DS=0100H ve BX=0600H için fiziksel adres 01604H bulunur. Bu adreste B0H, sonraki adreste C0H varsa AX=C0B0H olur. MOV [BP][SI],AH örneğinde varsayılan segment SS’dir; SS=2000H, BP=4000H, SI=0800H için adres 24800H’tir. AH=07H bu adrese yazılır.</p>
+<h2 id="yazmaclar-ve-debug-bayraklari">Yazmaçlar ve DEBUG bayrakları</h2>
+<p>AX/BX/CX/DX, AH/AL gibi yüksek ve düşük baytlarına ayrılabilir. SP yığın işaretçisi, BP taban işaretçisi, SI ve DI indis yazmaçlarıdır. Laboratuvar fotoğrafında DEBUG’un bayrak kısaltmaları gösterilir:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Bayrak</th><th scope="col">1</th><th scope="col">0</th></tr></thead><tbody><tr><th scope="row">OF</th><td>OV</td><td>NV</td></tr><tr><th scope="row">DF</th><td>DN</td><td>UP</td></tr><tr><th scope="row">IF</th><td>EI</td><td>DI</td></tr><tr><th scope="row">SF</th><td>NG</td><td>PL</td></tr><tr><th scope="row">ZF</th><td>ZR</td><td>NZ</td></tr><tr><th scope="row">AF</th><td>AC</td><td>NA</td></tr><tr><th scope="row">PF</th><td>PE</td><td>PO</td></tr><tr><th scope="row">CF</th><td>CY</td><td>NC</td></tr></tbody></table></div>
+<p>CF işaretsiz elde/ödünç, OF işaretli taşma, ZF sıfır, SF işaret ve PF düşük baytın çift paritesini ifade eder. BCD işlemlerinde her onluk basamak dört bit ile temsil edilir; aritmetik sonrasında uygun BCD düzeltme komutları gerekir.</p>
+<h2 id="yigin">Yığın</h2>
+<p>8086’da word PUSH, SP’yi 2 azaltır; POP 2 artırır. SS değişmez. SS=0000H, SP=2000H ve AX=1234H için PUSH AX sonrasında SP=1FFEH; [1FFE]=34H, [1FFF]=12H olur.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH AX
+PUSH BX
+POP AX
+POP BX</code></pre>
+<p>Bu sıra iki yazmacın içeriğini değiştirir. CALL/RET ile kullanılan alt programlarda gerekli yazmaçlar PUSH/POP ile korunabilir.</p>
+<h2 id="sifir-bitlerini-sayma">Sıfır bitlerini sayma</h2>
+<p>NUM=F0E0H için kaynak örnek:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,16
+SUB BX,BX
+MOV AX,NUM
+Back: SHR AX,1
+      JC SON
+      INC BX
+SON: LOOP Back
+MOV Count,BX</code></pre>
+<p>F0E0H içinde yedi adet 1 ve dokuz adet 0 vardır; Count=9 olur. SHR ile çıkan bit CF’ye alınır. JC, 1 biti olduğunda artırmayı atlar.</p>
+<h2 id="bes-bayti-toplama">Beş baytı toplama</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AL,AL
+MOV CX,5
+MOV BX,200H
+NEXT: ADD AL,[BX]
+      INC BX
+      LOOP NEXT</code></pre>
+<p>DS:0200H–0204H baytları AL’de toplanır. Sonuç sekiz bit olduğundan taşma ayrıca izlenmelidir.</p>
+<h2 id="dizinin-her-elemanina-bes-ekleme">Dizinin her elemanına beş ekleme</h2>
+<p>DS:1000H–100FH aralığındaki 16 bayt için notta CX=16, DI=1000H başlangıcı; ADD [DI],5, INC DI ve LOOP döngüsü yer alır.</p>
+<p><em>Not: Kaynakta bellek işleneninin genişliği yazılmamıştır; assembler’ın bunu belirleyebilmesi için ADD BYTE PTR [DI],5 biçimi gerekir. LOOP komutunun CX=0 olması nedeniyle ZF’yi 1 yaptığına dair el yazısı ifade yanlıştır: LOOP bayrakları değiştirmez.</em></p>
+<h2 id="i-saretli-toplam">İşaretli toplam</h2>
+<p>DATA1=+80 ve DATA2=+85 için sekiz bit toplam A5H’dir; OF=1, CF=0, SF=1. CBW ile her işlenen ayrı ayrı word’e genişletilip toplandığında sonuç 00A5H, yani +165 olur.</p>
+<h2 id="karsilastirma-ve-kosullu-atlama">Karşılaştırma ve koşullu atlama</h2>
+<p>CMP, çıkarma sonucunu saklamadan bayrakları ayarlar. JE/JZ eşitliği, JNE/JNZ eşit olmamayı, JNC elde olmamasını, JS negatif işareti sınar. JA/JAE işaretsiz büyüklük karşılaştırması içindir. AND AL,04H bit 2’yi maskeleyerek sınama örneğidir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL,03H
+SHR AL,CL
+JC BIT2_ONE</code></pre>
+<p>Üç sağa kaydırmadan sonra başlangıçtaki bit 2 CF’de bulunur. Notlardaki başka bir sayaç döngüsü DEC CL ve JNZ kullanır.</p>
+<h2 id="bayrak-aktarimi-ve-kontrolu">Bayrak aktarımı ve kontrolü</h2>
+<p>LAHF durum bayraklarının bir bölümünü AH’ye, SAHF AH’den bu bayraklara aktarır. CLC taşıma bayrağını temizler, STC kurar; CLI ve STI maskelenebilir kesmeleri kontrol eder. CLD, DF=0 yaparak dizi işlemlerinin artan adreslere doğru ilerlemesini sağlar.</p>
+<h2 id="dizi-komutlari-ve-ic-ice-donguler">Dizi komutları ve iç içe döngüler</h2>
+<p>MOVSB, DS:SI’den ES:DI’ye bir bayt; MOVSW bir word taşır. LODS kaynak değeri AL/AX’e, STOS AL/AX’i hedefe aktarır. SCAS, AL/AX ile ES:DI’deki değeri karşılaştırır. REP sayacı CX’tir. Notlardaki STOS örneğinde AL=42 değeri ardışık hedef konumlarına yazılır. LODS ve STOS karşılaştırma yapmaz, aritmetik durum bayraklarını değiştirmez.</p>
+<p>LOOPE için CX’in sıfır olmaması ve ZF=1, LOOPNE için CX’in sıfır olmaması ve ZF=0 gerekir. İç içe döngülerde dış CX değerinin korunması için yığın kullanılabilir. HLT işlemci yürütümünü uygun kesme veya reset koşuluna kadar durdurur.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

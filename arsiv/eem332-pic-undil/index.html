@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Mikroişlemciler: PIC Programlama Örnekleri (Hakan Ündil) — hasancan.net</title>
+<meta name="description" content="INCLUDE dosyaları, port ayarları, bit testi, LED ve gecikme alt programları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-pic-undil/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Mikroişlemciler: PIC Programlama Örnekleri (Hakan Ündil)">
+<meta property="og:description" content="INCLUDE dosyaları, port ayarları, bit testi, LED ve gecikme alt programları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-pic-undil/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Mikroişlemciler: PIC Programlama Örnekleri (Hakan Ündil)", "description": "INCLUDE dosyaları, port ayarları, bit testi, LED ve gecikme alt programları.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-pic-undil/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-pic-undil.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-pic-undil/eem332-pic-undil.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM332 Mikroişlemciler: PIC Programlama Örnekleri (Hakan Ündil)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.12.2003</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#help2-1">help2 (1)</a></li><li><a href="#help3">help3</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM332 Mikroişlemciler: PIC Programlama Örnekleri (Hakan Ündil)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 15.12.2003 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM332 Mikroişlemciler</strong> ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2003–2003). INCLUDE dosyaları, port ayarları, bit testi, LED ve gecikme alt programları. Kaynak: Doç. Dr. Hakan Ündil, Mikroişlemciler ve Mikrodenetleyiciler 1 ders notları, 2003. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="help2-1">help2 (1)</h2>
+<p>MİKROİŞLEMCİLER VE MİKRODENETLEYİCİLER 1 - DERS NOTLARI (Kısım 3) Doç. Dr. Hakan Ündil</p>
+<p>Program Örneği 9 : Gecikme altprogramı kullanarak Port B’ ye bağlı tüm LED’ leri yakıp söndüren bir program için akış diyagramı çizerek gerekli assembly programını PIC 16F84 için yapınız.</p>
+<p>Çözüm: ; PROGRAM9 . ASM-----15 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST       P = 16F84
+INCLUDE    “ P16F84.INC”
+SAYAC1 EQU          h‘0C’ ;16F84 de genel amaçlı RAM (Veri Hafızasında) ilk adres
+SAYAC2 EQU          h‘0D’
+BSF         STATUS,5
+CLRF        TRISB                             BAŞLA
+BCF        STATUS,5
+DEVAM
+MOVLW      h‘00’                              16F84’ ü
+MOVWF      PORTB                            tanıt, PORTB
+CALL       GECİKME                              çıkış
+MOVLW      h‘FF’</code></pre>
+<h3 id="mowf-portb">MOWF       PORTB</h3>
+<p>PORTB’ yi sıfırla</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL       GECİKME
+GOTO       DEVAM</code></pre>
+<h3 id="geci-kme-call-geci-kme">GECİKME                                            CALL GECİKME</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      h‘FF’</code></pre>
+<h3 id="mowf-sayac1">MOWF       SAYAC1</h3>
+<p>PORTB       h‘FF’</p>
+<h3 id="tekrar1-mowf-sayac2">TEKRAR1 MOWF        SAYAC2</h3>
+<h3 id="tekrar2-decfsz-sayac2-f">TEKRAR2 DECFSZ      SAYAC2, F</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO       TEKRAR2                        CALL GECİKME
+DECFSZ     SAYAC1, F
+GOTO       TEKRAR1
+RETURN
+END</code></pre>
+<p>Program Örneği 10: PORTA’ nın 0. bitine bağlı ve basıldığında ( 0 ) üreten bir bütona 8 kere basıldıktan sonra yine PORTA’ nın 1. bitine 2 kere basılırsa PORTB’ ye bağlı bütün LED’lerin yanması isteniyor ( Her tuşa basıldıktan sonra GECİKME alt programı kullanılacaktır ). Gerekli akış diyagramını çizerek programı yazınız.</p>
+<p>Çözüm:                             ; PROGRAM10.ASM-------22 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST        P = 16F84
+INCLUDE     “ P16F84.INC”
+GECİK1     EQU          h‘0C’
+GECİK2     EQU          h‘0D’
+SAYAC1     EQU          h‘0E’
+SAYAC2     EQU          h‘0F’
+CLRF        PORTB         ; PORTB yi sıfırla
+BSF         STATUS,5 ;Bank1’ e geç
+CLRF        TRISB         ;PORTB çıkış
+BSF         TRISA, 0
+BSF         TRISA, 1 ;RA0veRA1 Giriş
+BCF         STATUS,5 ; Bank0’ a geç
+MOVLW      h‘03’
+MOVWF       SAYAC1 ; SAYAC1’e 03 yaz
+MOVLW       h‘02’</code></pre>
+<h3 id="basla">BAŞLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF      SAYAC2 ;SAYAC2’ye 02 yaz</code></pre>
+<p>16F84’ ü tanıt          TEKRAR    BTFSC     PORTA, 0 ; RA0 = 0 mı? A portu giriş                   GOTO        TEKRAR ;Değilse TEKRAR’a B portu çıkış                   CALL       GECİKME ;Evetse GECIKMEye</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ     SAYAC1       ;SAYAC1’i 1 azalt</code></pre>
+<p>SAYAC1           03                GOTO       TEKRAR       ; Sonuç 0 değilse SAYAC2 “         02       DEVAM     BTFSC     PORTA, 1 ; RA1 = 0 mı?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO       DEVAM         ; Değilse DEVAM’a
+CALL      GECİKME ;Evetse GECIKMEye</code></pre>
+<p>RA0 = 0                       DECFSZ     SAYAC2        ; SAYAC2’i 1 azalt HAYIR     mı?                         GOTO       DEVAM         ;Sonuç 0 değilse EVET                      MOVLW      h‘FF’</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF      PORTB         ;PORTB’ye FF yükle
+GECİKME
+; GECİKME ALT PROGRAMI
+GECİKME</code></pre>
+<p>SAYAC1’i 1 azalt                    MOVLW     h‘FF’</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF     GECİK1       ;GECIK1’e FF yükle</code></pre>
+<p>DONGU1    MOVLW     h‘FF’ SAYAC1                        MOVWF     GECİK2       ;GECIK2’ye FF yükle 0 mı? HAYIR DONGU2    DECFSZ   GECIK2, F ; GECIK2’yi 1 azalt</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO      DONGU2 ;Sonuç 0 değilse</code></pre>
+<p>EVET                DECFSZ    GECİK1,F ;GECIK1’i 1 azalt RA1 = 0                        GOTO     DONGU1 ; DONGU1 ‘e git. HAYIR     mı?                         RETURN    ; Alt Programdan dön</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END       ; SON
+GECİKME</code></pre>
+<p>SAYAC2’yi 1 azalt</p>
+<h3 id="sayac2">SAYAC2</h3>
+<p>0 mı? HAYIR</p>
+<h3 id="evet">EVET</h3>
+<p>PORTB’ ye FF yaz</p>
+<h3 id="son">SON</h3>
+<h3 id="loji-k-i-slem-komutlari">LOJİK İŞLEM KOMUTLARI</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RLF Komutu (Bir bit Sola Kaydırma)</code></pre>
+<p>Bir file register içinde bulunan bitlerin birer bit sola kaydırılması işlemidir. Bu durumda en solda bulunan ( 7. bit ) C ( elde ) bayrağına geçmekte, daha önce C’ de bulunan bit ise en sağdaki ( 0.) bite geçmektedir. Komutun formatı;</p>
+<p>RFL        FİLE REGISTER        ,    d           W yada F ( Sonucun Yeri )</p>
+<p>Komutu şematik gösterirsek;</p>
+<p>Program Örneği 11: Bir programla önce B portunun sadece 0. bitini (RB0) 1 yapın. Daha sonra 1 defa bu biti sola kaydırın. Bu işlemin daha iyi görülebilmesi için üst üste 2 kere GECIKME alt programı kullanın.</p>
+<p>Çözüm:                          ; PROGRAM 11 . ASM_ TARİH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST        P = 16F84
+INCLUDE     “ P16F84.INC”
+BASLA
+GECİK1   EQU         h‘0C’
+GECİK2   EQU         h‘0D’
+BCF          STATUS, 0 ; Elde yi sıfırla</code></pre>
+<p>16F84’ ü tanıt               BSF         STATUS, 5 ; Bank1’e geç PORTB çıkış                  CLRF        TRISB       ; PORTB Çıkış</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF         STATUS, 5 ; Bank0’a geç
+MOVLW        h‘01’</code></pre>
+<h3 id="portb-01">PORTB        01</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF        PORTB      ;PORTB’ ye 01 yaz
+CALL         GECIKME_ALTPROG
+CALL GECIKME                  CALL         GECIKME_ALTPROG</code></pre>
+<h3 id="bekle-goto-bekle">BEKLE   GOTO         BEKLE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL GECIKME</code></pre>
+<p>GECIKME_ALTPROG              ; Önceki Gecikme Alt Prog ile aynı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RLF PORT B
+MOVLF                h‘FF’
+MOVWF                GECIK1</code></pre>
+<p>DONGU 1 MOVLW                h‘FF’</p>
+<h3 id="son">SON</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF                GECIK2</code></pre>
+<h3 id="dongu2-decfsz-gecik2-f">DONGU2 DECFSZ                GECIK2, F</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO                  DONGU2
+DECFSZ               GECIK1, F
+GOTO                 DONGU1
+RETURN
+END</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RRF Komutu (Bir Bit Sağa Kaydırma)
+RRF komutu da RLF komutuna benzer olup fark bu defa kaydırma işleminin sağa olması</code></pre>
+<p>dolayısıyla en sağdaki bit C ( elde ) bayrağına geçecektir. Daha önce C bayrağında bulunan bit ise bu sefer en soldaki (7.( bite geçecektir. Komut formatı;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RRF FİLE REGİSTER         ,   d          Sonucun gideceği yer</code></pre>
+<p>W yada F Mesela MEM adlı bir file registere hex 30 sayısını yazın. Aynı anda C bayrağı da (C= 1) ise</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RRF komutunun icrasından önce ve sonraki durum:</code></pre>
+<h3 id="bu-islem-icin-kullanilacak-program-komutlari">Bu işlem için kullanılacak program komutları</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW           h‘49’      ; W Registerine (49)16 yükle
+MOVWF           MEM        ; W ‘ yi MEM adresine sakla
+RRF             MEM, F     ; MEM ’ i Sağa bir bit ötele.</code></pre>
+<p>şeklinde olacaktır.</p>
+<p>Program Örneği 12: Önce C bayrağını (1) yapın ve başlangıçta sıfırlanmış PORT B üzerinden birer bit sola kaydırın. Her kaydırma arasında GECIKME alt programına gönderin. C bayrağı tekrar ( 1 ) olunca programı bitirin.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: GECIKME_ALTPROG Gösterilmeyecektir.</code></pre>
+<h3 id="cozum">Çözüm</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; PROGRAM 12.ASM----------Tarih</code></pre>
+<h3 id="basla-include-pic16f84-inc">BAŞLA                 INCLUDE    “PIC16F84.INC”</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF         STATUS, 5           ; Bank1’e geç
+CLRF        TRISB               ; PORTB Çıkış</code></pre>
+<p>16F84’ ü tanıt             BCF         STATUS, 5           ; Bank0’ a geç PORTB çıkış            KAYDIR</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RLF          PORTB               ; PORTB yi sola kaydır</code></pre>
+<h3 id="c-1-call-gecikme-altprog">C         1               CALL         GECIKME_ALTPROG</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS        STATUS, 0                ; C bayrağı 1 mi?</code></pre>
+<p>PORTB             00          GOTO         KAYDIR                   ; Değilse KAYDIR’a</p>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RLF PORTB                   GOTO DONGU       ; Evetse burada bekle
+END
+CALL GECIKME</code></pre>
+<p>C=1 mi?</p>
+<h3 id="son">SON</h3>
+<p>COMF ve SWAPF Komutları COMF komutu ile istenen bir file register içinde (0) lar (1) ve (1) ler (0) yapılabilir [1’ e göre tümleyen işlemi !.. ] . Komut formatı;</p>
+<p>COMF      FİLE REGİSTER            ,       d           Sonucun gideceği yer ( destination ) ( W yada F yazılır )</p>
+<p>şeklindedir. Örnek: HAFIZA1 adlı registere ( 1F )16 yüklendikten sonra bunun tersi olan ( E0 )16 ’ ı HAFIZA2’ ye saklayın. Bunun için gerekli rutini (Program Parçasını) yazın.</p>
+<h3 id="cozum">Çözüm</h3>
+<h3 id="hafiza1">HAFIZA1</h3>
+<p>0001 1111</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW          h‘0F’
+MOVWF          HAFIZA1                                       HAFIZA2</code></pre>
+<h3 id="comf-hafiza1-w">COMF           HAFIZA1, W</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF          HAFIZA2                                      1110 0000</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SWAPF komutu ise bir file register içindeki ilk dört bit (Yüksek anlamlı Nibble) ile son dört</code></pre>
+<p>bitlerin (Düşük anlamlı Nibble) yerlerini değiştirir. Komut formatı;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SWAPF       FİLE REGİSTER ,                    d         şeklindedir.</code></pre>
+<p>Örnek: PORTB’ ye ( 3F ) yazdıktan sonra ilk ve son bitlerin yerini değiştiren ve sonucu W ye yazan Program parçası yazın.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW          h‘3F’
+MOVWF          PORTB
+SWAPF          PORTB, W</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW Komutu</code></pre>
+<p>W registerinin içeriğini sabit bir sayı ile Lojik AND (VE) işlemine tabi tutar. Sonucu tekrar W ’ye yazar. Bilindiği gibi işlemin sonunda her iki sayıda 1-1 olan bitler 1; diğerleri 0 olarak neticelenecektir. Komut formatı;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW              Sabit sayı
+şeklindedir.</code></pre>
+<p>Bu komutla bir sayının ( veri ) istenen bitleri ( 0 ) yapılırken diğerleri olduğu gibi bırakılır. Bunun için sabit sayı ( maske ) seçilirken sıfır yapılmak istenenler ( 0 ), diğerleri ( 1 ) olarak seçilmelidir.</p>
+<p>Örnek: W içinde (3C) sayısı olsun. Bu sayının 2.,3. ve 6. bitlerini (0) yapıp diğerlerini aynen bırakan komutu yazalım. Sonuçta sayı ne olur? Önce W deki sayıya hiç bakmadan 2.,3.,6. bitleri 0, öteki bitleri 1 olan bir maske seçelim. 7   6   5   4    3   2       1   0</p>
+<h3 id="1-0-1-1-0-0-1-1-b3-16">1 0 1        1 0      0 1 1         = (B3)16</h3>
+<h3 id="bu-maskeyle-w-deki-sayiyi-3c-yi-lojik-ve-islemine-tabi-tutmak-icin-gerekli-komut">Bu maskeyle W deki sayıyı (3C yi) Lojik VE işlemine tabi tutmak için gerekli komut</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDLW                h’B3’                  olacaktır.</code></pre>
+<p>Sonucu bulmak için ise, W deki sayı (3C)16 verildiğine göre bu sayının 2.,3. ve 6. bitlerinin sıfırlanmış halini yazmamız gerekir. O da (30)16 olarak elde edilecektir. [ 3C de 6. bit zaten 0 olduğuna göre, 3C yi binary yazın ve 2. ve 3. bitlerini sıfırlayın]</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDWF Komutu</code></pre>
+<p>Bu komut ANDLW komutuna benzer olup bu defa W ile herhangi bir file register arasında Lojik AND (ve) işlemi gerçekleştirilir. Sonuç ise ya W ‘ye ya da F ‘e yazılır. Komut formatı:</p>
+<p>File Register</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ANDWF                                    ,d       (Sonucun yeri, W ya da F)
+şeklindedir.</code></pre>
+<p>Örnek: PORTB registerinin içinde b’00101100’ sayısı olsun. W Registerine de b’11011111’ değerini (maske) yerleştirelim. Bu iki sayıyı Lojik AND işlemine tabi tutarak neticeyi yine PORTB ye yazalım.</p>
+<h3 id="bunun-icin-gerekli-program-parcasi">Bunun için gerekli program parçası</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW            b’00101100’ ; W Registerine 2C yükle.
+ANDWF            PORTB , F ; PORTB ile W yi AND (VE) işlemine tabi tut
+; ve sonucu yine PORTB ye yaz.</code></pre>
+<p>IORLW Komutu Bu komut istenen bir biti 1 yapıp diğerlerini aynen bırakmak için kullanılır. Verilen sabit sayı ile W registeri Lojik OR (VEYA) işlemini yapar ve sonucu yine W registerine yazar. Komut Formatı:</p>
+<p>IORLW                 Sabit sayı                        şeklindedir.</p>
+<p>Bu amaçla seçilecek sabit sayıda (Maske’de), (1) yapılmak istenen bitler (1), değiştirilmesi istenmeyen bitler (0) seçilmelidir.</p>
+<p>Örnek: W Registerinde bulunan sayının 5.,6.,7. bitleri 1 yapılıp diğer bitler aynen bırakılmak istensin. Önce Maskemizi seçelim; 7    6   5    4   3    2   1   0</p>
+<p>1    1       1 0 0 0 0 0                          = E0 (Sayıda 1 yapılacak bitler 1)</p>
+<p>Bu durumda gerekli program parçası (komut)</p>
+<p>IORLW               b’1110 0000’                        olacaktır.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: Maske seçimi işlemi için W da bulunan sayının bilinmesine gerek yoktur. Hangi sıradaki</code></pre>
+<p>bitlerin (burada 5,6,7 idi) 1 yapılacağının bilinmesi yeterlidir. Soruda “sayı W dadır” denildiği için program parçasında W ‘ya yükleme komutuna ihtiyaç yoktur.</p>
+<p>Örnek: Yukarıdaki örnekte W daki sayımız (04)16 olsaydı sonuç ne olurdu?</p>
+<p>W ile Maske arasında OR işlemi: (sonuç E4 olacaktır) Bit No:      7    6        5       4   3      2     1    0 W Reg.       0    0        0       0   0      1     0    0 Maske        1    1        1       0   0      0     0    0 Sonuç        1    1        1       0   0      1     0    0</p>
+<p>IORWF Komutu Bu komut da IORLW komutuna benzer olup fark, maskenin sabit sayı yerine bir file registerde bulunmuş olmasından ibarettir. Sonuç ise ister W ‘ye , ister File Register ’a yazılabilir.</p>
+<h3 id="komut-formati">Komut Formatı</h3>
+<p>IORWF            File Register         , d     (Sonucun yeri, W ya da F)</p>
+<p>XORLW            Komutu Bu komut ise W Registeri ile verilen sabit sayı arasında EXOR ( Özel VEYA) işlemi gerçekleştirerek</p>
+<h3 id="sonucu-w-ye-yazar-komut-formati">sonucu W ‘ye yazar. Komut Formatı</h3>
+<p>XORLW                Sabit Sayı         şeklindedir.</p>
+<p>Bu komut da W Registerde bulunan 8 bitlik sayının istenen bitlerinin tersini almak diğer bitleri aynen bırakmak için kullanılabilir. Bu maksatla belirlenecek Maske baytında tersi alınmak istenen bitler (1), diğerleri (0) seçilmelidir.</p>
+<p>Örnek: Önce W ‘ya (3B)16 sayısını yükledikten sonra bu sayının sadece 1. , 3. , 5. , 7. bitlerinin tersini alıp neticeyi PORTA ya yazmak için gerekli komutları verin. Bu durumda sonuç ne olur?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW           h ‘3B’             ;W ye 3b yaz</code></pre>
+<p>XORLW           b’10101010’        ; maskede 7,5,3,1. bitler 1, yapıldı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF           PORTA              ; Sonuç PORTA ya yazıldı.</code></pre>
+<p>W ile sabit sayı arasında (EXOR işlemi) Bit No:          7     6       5   4   3     2     1    0 W Reg.de(3B)     0     0       1   1   1     0     1    1 Maske (AA)       1     0       1   0   1     0     1    0 Sonuç (91)       1     0       0   1   0     0     0    1</p>
+<p>XORWF            Komutu Bu komut da XORLW komutuna benzer olup burada asıl sayı W registerde, maske ise file registerde bulunur. İşlem sırası önemli olmadığı için maskeyi W’ya asıl sayıyı File Registere yazmak da mümkündür.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: XORLW ve XORWF iki tane 8 bitlik sayının aynı olup olmadıklarını test etmek için</code></pre>
+<p>kullanılabilir. Sayılar aynı ise EXOR lanınca sonuç (00)16 olacağından Z bayrağı (1) olacaktır. Aksi takdirde Z bayrağı (0) kalacaktır. [ Z bayrağının STATUS ‘un 2. biti olduğunu hatırlayın]</p>
+<p>Örnek: PORTA da bulunan bir baytlık sayı (09)16 dan farklı ise A Portu test edilmeye devam edilecek, (09)16 ‘a eşit ise bu sayı PORTB ‘ye yazılsın isteniyor. Gerekli Program Parçası:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW         h’09’
+TEST</code></pre>
+<p>XORWF         PORTA,W        ; W ile PortA ya Lojik EXOR işlemi uygula</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS         STATUS,2       ; Z bayrağı 1 mi?
+GOTO          TEST           ; Değilse TEST ‘e git
+MOVF          PORTA , W      ; Evetse PortA yı W ye aktar.
+MOVWF         PORTB          ; W yi PortB ye yaz.</code></pre>
+<p>Mesela, PORTA ya gelen sayı (07)16 olsa ve (09)16 ile XORWF işlemi yapıldığında;</p>
+<p>0000 0111     (07) 0000 1001     (09) 0000 1110     (0E)    Sonuç 0 ‘dan farklı olduğuna göre test etmeye devam et.</p>
+<p>Benzer şekilde bir baytlık veriyi sıfır sayısı ile karşılaştırmak için IORLW ve IORWF komutları kullanılabilir.</p>
+<p>Örnek: PORTA daki sayının (00)16 olup olmadığını test eden, sıfır ise ILERI adresine atlayan aksi takdirde test etmeye devam eden bir program parçasını IOR türü bir komutla yazın.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST
+MOVF          PORTA ,W       ; PortA yı W ye kopyala (yaz)</code></pre>
+<p>IORLW         h’00’          ; W ile 00 arasında Lojik VEYA uygula</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS         STATUS , 2     ; Sonuç=0 mı ( Z=1 mi?)
+GOTO          TEST           ; Değilse TEST ‘e git
+GOTO          ILERI          ; Evetse ILERI adresine git.</code></pre>
+<p>Program Örneği 13 : PORTA nın bütün bitleri normalde (1) iken PORTA da 0,1,2. bitlerin (RA0,RA1,RA2) hepsine basılınca PORTB ye (0F)16 yükleyen aksi halde test etmeye devam eden bir program için akış diyagramı çizerek assembly programı yazınız. Maske:          0001 1000 [ilk 3 bit(0) PORTA da yok, son üç bit(0) test edilecek]</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; PROGRAM13.ASM-------TARİH
+LIST     P=16F84
+INCLUDE  “P16F84.INC”
+CLRF     PORTB
+BSF      STATUS,5
+MOVLW    h’FF’
+MOVWF    TRISA          ;PortA Giriş
+CLRF     TRISB          ;PortB Çıkış
+BCF      STATUS,5 ;Bank0 a geç
+TEST
+MOVLW    b’00011000’ ;Maskeyi W ye</code></pre>
+<p>XORWF    PORTA,W ;PortA ile EXOR</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS    STATUS,2 ; Z bayrağı 1 mi?
+GOTO     TEST           ;Değilse TEST e
+MOVLW    h’0F’     ;Evetse W ‘ ye 0F yaz
+MOVWF    PORTB          ; PortB ye aktar
+END</code></pre>
+<h3 id="cesi-tli-ornekler">ÇEŞİTLİ ÖRNEKLER</h3>
+<h3 id="1-porta-nin-0-bitine-ra0-lojik-0-uygulanarak-enerji-verilen-bir-pic16f84-e-daha-sonra">1)      PORTA ‘nın 0. bitine (RA0) Lojik 0 uygulanarak enerji verilen bir PIC16F84’e daha sonra</h3>
+<p>PORTA ‘nın tamamına (FF)16 uygulanırsa PORTB nin tüm bitleri (1) yapılacak aksi takdirde PORTA</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>test edilmeye devam edilecektir. Akış diyagramı çizerek gerekli assembly programını yazınız.
+; ORNEK1.ASM
+LIST           P=16F84
+INCLUDE        “P16F84.INC”
+CLRF           PORTB
+BSF            STATUS,5
+MOVLW          h’FF’
+MOVWF          TRISA
+CLRF           TRISB
+BCF            STATUS,5
+TEST
+BTFSC          PORTA,0 ; RA0=0 mı?
+GOTO           TEST       ; Değilse TEST’e
+BEKLE</code></pre>
+<p>XORWF          PORTA,W ; W ile PORTA aynı mı?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS          STATUS,2 ; Z bayrağı 1 mi?
+GOTO           BEKLE          ; Değilse BEKLE ’ye
+MOVLW          h’FF’
+MOVWF          PORTB          ; Aynıysa PORTB ye FF yaz
+END                           ; Son</code></pre>
+<h3 id="2-porta-nin-1-bitine-ra1-2-kere-ustuste-bir-lojik-devreden-0-uygulandigi-takdirde-w">2) PORTA nın 1. bitine (RA1) 2 kere üstüste bir Lojik devreden (0) uygulandığı takdirde W</h3>
+<p>Registerine (01)16 yazıp son bulan bir program yazınız. Tuşa basılmalar arasında 10 tane NOP komutunun yaklaşık 255 defa icrası ile elde edilecektir. Gecikmeden hemen sonra ikinci (0) işareti gelmediği halde test işlemine baştan başlanacaktır. (Yani, yeniden iki (0) beklenecektir, Gecikme için Alt Program kullanılmayacaktır.) Gerekli assembly programını yazınız.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;ORNEK2.ASM
+LIST               P=16F84
+INCLUDE            “P16F84.INC”
+SAYAC     EQU                h’0C’       ; SAYAC için 1 bayt yer ayır.
+BSF                STATUS,5 ; Bank1 ‘e geç
+MOVLW              h’FF’
+MOVWF              TRISA       ; PORTA yı Giriş yap
+BCF                STATUS,5 ; Bank0 ‘a geç
+TEST
+BTFSC              PORTA,1        ; RA1=0 mı?
+GOTO               TEST           ; Değilse TEST ‘e git
+MOVLW              h’FF’          ; Evetse W ‘ye FF yükle
+MOVWF              SAYAC          ; Sayaca W deki FF sayısını yaz
+GECIKME
+NOP
+NOP
+NOP
+.</code></pre>
+<p>. .</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP                          ; 10 tane NOP komutu
+DECFSZ         SAYAC,F       ; Sayacı 1 azalt
+GOTO           GECIKME       ; SAYAC sıfırdan farklıysa GECIKME’ye
+BTFSC          PORTA,1       ; SAYAC sıfırsa, tekrar RA1=0 mı? bak
+GOTO           TEST          ; Değilse TEST ‘e git, yeniden iki 0 bekle
+MOVLW          h’01’         ; İstenen (01) sayısını W ‘ye yükle
+END                          ; Son</code></pre>
+<h3 id="3-porta-da-bulunan-8-bitlik-1-baytlik-sayi-2-kere-sola-otelendikten-sonra-ortaya-cikan-sayi">3) PORTA ‘da bulunan 8 bitlik (1 baytlık) sayı 2 kere sola ötelendikten sonra ortaya çıkan sayı</h3>
+<p>(6C)16 ise PORTB ‘ye (01) ; aksi takdirde yine PORTB ‘ye (02) yazan bir programı assembly dilinde yazınız.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: Başlangıçta C bayrağı (0) yapılacaktır.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;ORNEK3.ASM
+LIST            P=16F84
+INCLUDE         “P16F84.INC”
+BSF             STATUS,5
+MOVLW           h’FF’
+MOVWF           TRISA       ; PortA Giriş
+CLRF            TRISB       ; PortB Çıkış
+BCF             STATUS,5 ; Bank0 ‘a geç
+BCF             STATUS,0 ; C Bayrağı sıfır yapıldı.
+RLF             PORTA,F     ; PortA ‘yı 1 bit sola ötele
+RLF             PORTA,F     ; PortA ‘yı 1 bit (kere daha) sola ötele
+MOVLW           h’FF’       ; W registerine FF yükle</code></pre>
+<p>XORWF           PORTA,W ; W deki (FF) ile PortA daki sayı aynı mı?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS           STATUS,2 ; Z bayrağı 1 ise bir satır atla.
+GOTO            GIT         ; Değilse GIT etiketine git.
+MOVLW           h’01’</code></pre>
+<p>YAZ MOVWF            PORTB       ; PortB ye (01) yaz</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO            SON         ; SON etiketine git.</code></pre>
+<p>GIT MOVLW            h’02’</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF           PORTB       ; PortB ye (02) yaz</code></pre>
+<h3 id="son-end">SON END</h3>
+<h3 id="kaynaklar">KAYNAKLAR</h3>
+<p>1- Mikroişlemciler Ders Notları 1 - 2 (6502) , Doç. Dr. Hakan ÜNDİL 2- Mikrodenetleyiciler ve PIC Programlama, Orhan ALTINBAŞ 3- Adım Adım PIC Programlama, Yaşar BODUR 4- PIC Microcontroller Uygulama Devreleri, Gökhan DİNÇER 5- PIC16F8X, Microchip PIC Data Sheet, (www.microchip.com)</p>
+<figure class="yazi-gorsel"><img src="sekil-1027-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="help2 (1): sayfa 1, devre, tablo ve şekiller"><figcaption>help2 (1), sayfa 1.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1027-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="help2 (1): sayfa 3, devre, tablo ve şekiller"><figcaption>help2 (1), sayfa 3.</figcaption></figure>
+<h2 id="help3">help3</h2>
+<p>MİKROİŞLEMCİLER VE MİKRODENETLEYİCİLER 1 - DERS NOTLARI (Kısım 2) Doç. Dr. Hakan Ündil</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCLUDE Dosyalar</code></pre>
+<p>Assembly programlarını yazarken kullanılacak register adreslerini (EQU) komutu ile tanımlamak hem kolaylık sağlamakta hem de anlaşılırlığı arttırmakta idi. Ancak her sefer bu tanımları tekrar tekrar yapmak gereksiz gibidir. Bunun yerine Include Dosya kullanarak aynı isimli her PIC için sabit olan bu tanımları her programda yeniden yapmaktan kurtulmuş oluruz. Mesela; P16F84.INC dosyası PIC16F84 için gerekli tanımları içerir ve MPASM klasörü içinde ( .asm) dosyamızla aynı yerde bulunmalıdır. Include dosyası içinde Register adres tanımlarının yanı sıra RAM bölgesinin tanımı ve Konfigüration Bitleri denilen bazı bitlerin tarifi de yapılmaktadır. Programımız içinde Include Dosyası kullanabilmemiz için (PIC16F84 de) INCLUDE “P16F84.INC” satırını yazmamız yeterlidir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Include dosya sayesinde (örneğin) STATUS registerinin her bir bitine isim verildiği için:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF STATUS, 5                yerine
+BCF STATUS, RP0              yazmak mümkündür. Aynı şeyler INTCON, OPTION gibi diğer</code></pre>
+<p>registerler içinde geçerlidir. Artık her File Register için kullanılan (EQU) komutları kalktığı için kaynak (assembly) programımız önemli ölçüde kısalıp sadeleşecektir. Sadece Genel Amaçlı RAM bölgesinde kullanacağımız bir değişken için (SAYAC gibi) EQU komutu yazmamız gerekebilecektir.</p>
+<h3 id="konfi-gurasyon-bi-tleri">KONFİGÜRASYON BİTLERİ</h3>
+<p>Bu bitler PIC’ e gerilim verildiği anda geçerli kuralları belirlemek içindir. Mesela; PIC devremizin saatini (osilatörünü) RC tipi olarak kullanacaksak bunu programda bildirmemiz lazımdır. Benzer şekilde; Watchdog timer’ i devreye sokmak veya çıkarmak, Power-on Reset özelliğini devreye sokmak ya da çıkarmak, Kod korumayı devreye almak veya almamak için bu konfigürasyon bitleri kullanılır. Aslında konfigürasyon bitleri programa yazılmadan programlama esnasında da doğrudan belirlenebilir. Zira bütün programlayıcı programları bu imkanı vermektedir. Eğer program içersinde bir satır olarak Konfigürasyon Bitlerini vermek istersek bu komutun yazılışına ait bir örnek şöyle</p>
+<h3 id="verilebilir">verilebilir</h3>
+<h3 id="config-cp-off-wdt-off-pwrte-off-rc-osc">_CONFIG _CP_ OFF &amp; WDT_OFF &amp; PWRTE_OFF &amp; RC_OSC</h3>
+<p>Kod Komut Yok   Watchdog Timer OFF Power-on Reset Yok   Osilatör Tipi (RC)</p>
+<p>&amp;    : “ve” demektir. _    : Alt çizgi boşluk yerine kullanılıyor. OFF :    Yok, devre dışı anlamına gelir.</p>
+<h3 id="veri-aktarma-i-slemleri">VERİ AKTARMA İŞLEMLERİ</h3>
+<p>PIC’ de veri aktarma (transfer) işlemleri W registeri üzerinden yapılmaktadır.</p>
+<h3 id="ornek">Örnek</h3>
+<h3 id="i-slem-1-i-slem-2">İŞLEM 1              İŞLEM 2</h3>
+<p>W Reg.</p>
+<h3 id="portb">PORTB</h3>
+<h3 id="porta">PORTA</h3>
+<h3 id="bu-islemi-yapmak-icin-gerekli-komutlar">Bu işlemi yapmak için Gerekli Komutlar</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVF         PORT A , W    ; (İŞLEM 1) Port A ’ yı W’ ye aktar.
+MOVWF        PORT B        ; (İŞLEM 2) W ’yi Port B’ ye aktar.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: PORTA asla doğrudan Port B’ ye aktarılmaz.</code></pre>
+<p>Örnek: ‘0F’ sayısını PORT B’ ye yazmak için</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW           h‘OF’
+MOVWF           PORT B        yazılmalıdır.</code></pre>
+<p>Program Örneği 1: PIC’ e enerji verildiği anda PORTA da basılı bütona karşılık gelen B Portundaki LED’ leri söndüren bir program yazalım.</p>
+<h3 id="cozum-once-akis-diyagramini-cizelim">Çözüm: Önce akış diyagramını çizelim</h3>
+<h3 id="basla">BAŞLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: Akış Diyagramında Bank değiştirme işlemi ayrıntıları
+gösterilmemiştir.
+PIC16F84
+tanıt</code></pre>
+<p>Port A’ yı Giriş, Port B’ yi Çıkış yap</p>
+<p>PORT A’ yı oku</p>
+<p>PORT B’ ye gönder</p>
+<p>Döngü</p>
+<h3 id="son">SON</h3>
+<p>Programda INCLUDE komutu kullanalım.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; PROGRAM1.ASM ---------09 / 11 / 2003
+LIST    P = 16F84
+INCLUDE “P16F84.INC”
+CLRF    PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF          STATUS,5                    ; BANK 1’ e geç
+CLRF         TRISB                       ; B portu tümü çıkış
+MOVLW        h‘FF’
+MOVWF        TRISA                           ; TRISA’ yı FF yükle, PORTA tamamen Giriş.
+BCF          STATUS,5                        ; BANK 0’ a geç
+OKU
+MOVF    PORTA,W                              ; PORTA’ yı oku sonucu W’ ye yaz
+MOVWF   PORTB                                ; W ‘ yi PORT B’ ye yaz (kopyala)
+DONGU
+GOTO DONGU                                    ; Sonsuz Döngü, GOTO OKU da denebilir.
+END                                          ; Son</code></pre>
+<h3 id="pratik-gerceklestirme-i-cin-gerekli-adimlar">Pratik Gerçekleştirme İçin Gerekli Adımlar</h3>
+<h3 id="1-programi-yazip-program1-asm-olarak-kayit-save-ediniz">1) Programı yazıp PROGRAM1.ASM olarak kayıt (save) ediniz.</h3>
+<h3 id="2-mpasm-ile-derleme-yapip-program1-hex-dosyasini-elde-ediniz-konfigurasyon-bitlerine">2) MPASM ile derleme yapıp (PROGRAM1.hex) dosyasını elde ediniz. Konfigürasyon bitlerine</h3>
+<p>dikkat ederek programlayıcıya PIC’ i yerleştirip programı yükleyiniz. Konfigürasyon bitleri için Osilatör tipi : RC       PWRT : ON WDT           : OFF      CP   : OFF               yazılabilir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Not: INCLUDE ( .INC) dosya kullanıldığı için 16F84.INC dosyasının da aynı klasör (directory)</code></pre>
+<p>içinde bulunmasını sağlamayı ihmal etmeyin.</p>
+<h3 id="3-devreyi-asagidaki-gibi-kurun">3) Devreyi aşağıdaki gibi kurun.</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT 1: RA0, RA3 girişleri de (+) beslemeye bağlıdır. Yani Lojik 1 almaktadır.
+NOT 2: PIC devrelerinde besleme gerilimi (+ 5V) en az 0,1 F bir kondansatör ile şaseye
+bağlanmalıdır.</code></pre>
+<h3 id="4-devreye-enerji-vermeden-a1-a2-a4-butonlarina-tek-yada-birlikte-basiniz">4) Devreye enerji vermeden A1, A2, A4 butonlarına tek yada birlikte basınız.</h3>
+<h3 id="5-basilan-buton-ve-yana-led-iliskisini-inceleyin">5) Basılan buton ve yana LED ilişkisini inceleyin.</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT: Hiçbir butona basılmazsa PortA bitlerinin harici pull-up dirençleri (10k) dolayısıyla LED’ leri</code></pre>
+<p>yaktığı görülecektir. Zira A portu normalde (1) olup basınca (0) olmaktadır.</p>
+<h3 id="6-durum-degistirirken-once-istediginiz-butonlara-basin-sonra-reset-yapin">6) Durum değiştirirken önce istediğiniz butonlara basın sonra RESET yapın.</h3>
+<p>Sonsuz Döngü: PIC16F84 de duraklama komutu olmadığı için Döngü kullanılmaktadır. Programda bekleme yerine yeni butonların durumu okunmak isterse,</p>
+<h3 id="dongu">DONGU</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO DONGU                        komutu yerine</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO OKU         yazabiliriz. Artık RESET ‘e gerek kalmadan tuşlara bastıkça LED</code></pre>
+<p>değişmelerini göreceğiz.</p>
+<h3 id="karar-i-ci-n-bi-t-test-etme-i-slemi">KARAR İÇİN BİT TEST ETME İŞLEMİ</h3>
+<p>Herhangi bir register içindeki bir bit BTFSC ve BTFSS komutları ile test edilip sonuca göre ya bir sonraki (sıradaki) satırdan devam edebilir yada bir satır atlanabilir (Program Yönlendirilir).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC Komutu: Bu komut ingilizcede “File Register bitini test et, bu bit (0) ise bir</code></pre>
+<p>sonraki komuta atla” anlamına gelmektedir.</p>
+<p>Komut Formatı:                  7, 6, 5, 4, 3, 2, 1, 0</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSC     File Register           ,</code></pre>
+<p>f                     b   (0,........,7 arası bir sayı)</p>
+<p>şeklindedir. Bir örnek program parçası için akış diyagramı ile birlikte komutun çalışmasını</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>inceleyelim:</code></pre>
+<p>Bu program parçası PORTA’ nın 3. bitini (RA3) test etmekte bu bit (0) ise PORTB’ nin 5. bitini (1) yapmakta ; aksi halde test etmeye devam etmektedir.</p>
+<h3 id="porta-test">PORTA,                       TEST</h3>
+<p>Evet bit 3                                  BTFSC PORTA, 3 0 mı?                                  GOTO TEST</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF   PORTB, 5
+Hayır</code></pre>
+<p>Tekrar Test                     NOT: PORTA ve PORTB’ nin önceden tanımlandığı kabul edilmiştir.</p>
+<p>PORTB’nin 5. bitini (1) yap</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS Komutu: Bu komut ise BTFSC komutuna benzerdir. Ancak, file register bitinin (0)</code></pre>
+<p>yerine (1) olduğunu test etmektedir. Bu bit eğer (1) ise komuttan sonraki (sıradaki) komut atlanmakta; değilse (0) ise sıradaki komuttan devam edilmektedir.</p>
+<p>Program Örneği 2: ( Yukarıdaki aynı devre için)</p>
+<p>A portunun 2. bitindeki bütona basınca B portunun (RB0,.........,RB4) LED’ lerini yakan bir program yazalım.</p>
+<h3 id="cozum">Çözüm</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>; PROGRAM 2.ASM------08 / 12 / 2003
+LIST     P = 16F84
+INCLUDE “P16F84.INC”</code></pre>
+<h3 id="basla-clrf-portb">BAŞLA                                CLRF     PORTB</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF     STATUS, 5
+CLRF    TRISA
+MOVLW   h‘FF’</code></pre>
+<p>PIC16F84’ ü</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF   TRISA
+tanıt
+BCF     STATUS, 5
+TEST</code></pre>
+<p>B portunu sil                            BTFSC   PORTA, 2</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO    TEST
+MOVLW h‘0F’</code></pre>
+<p>PORT A Giriş,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF PORTB</code></pre>
+<p>PORT B Çıkış yap</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>PORT A’ nın   Evet 2.biti 0 mı? Hayır Tekrar test et</p>
+<h3 id="rb0-rb4">RB0,.....RB4</h3>
+<p>(1) yap</p>
+<h3 id="son">SON</h3>
+<p>Program Örneği 3: PORTA’ nın 1. bitine (RA1) bağlı bütonuna basılı olarak enerji verildikten sonra PORTB’ deki RB4’ e bağlı (LED4) yakacak, daha sonra bütondan el çekilince PORTB’ nin tüm LED’ lerini yakan bir program yapınız. [Bütona basılı değilken PORTA ‘nın girişlerinin (1) kabul edilmektedir.]</p>
+<p>( Devamı Yan Tarafta)</p>
+<h3 id="program3-asm-08-12-2003">-;PROGRAM3.ASM----08/12/ 2003</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST     P = 16F84
+INCLUDE  “P16F84.INC”</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF             STATUS, 5
+CLRF            TRISB          ; B Portu Çıkış
+MOVLW          h‘FF’
+MOVWF          TRISA           ;PortA Giriş
+BCF            STATUS, 5       ; Bank 0 ‘ a geç
+BSF            PORTB, 4        ; RB4 ‘ü 1 yap.
+TEST2
+BTFSS             PORTA, 1     ;RA1 =1 mi?
+GOTO              TEST2        ;Değilse TEST2 ye git
+MOVLW             h‘FF’
+MOVWF             PORTB        ;PortB ‘nin tümünü 1 yap
+DONGU
+GOTO             DONGU
+END</code></pre>
+<p>Program Örneği 4: PORTA’ nın 5. bitine bağlı buton normalde (0) durumunda olup butona basılınca (1) gönderilmektedir. PORTA’ nın 5. bitine 1 (RA5 = 1) gelince B portuna bağlı 8 LED’ in tamamının yanması istenmektedir. Akış diyagramı ile birlikte programı PIC16F84 için yazınız.</p>
+<h3 id="cozum">Çözüm</h3>
+<h3 id="basla">BAŞLA</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;PROGRAM 4.ASM---11 / 12 / 2003
+LIST     P = 16F84</code></pre>
+<h3 id="pic-16f84-include-p16f84-inc">PIC 16F84                     INCLUDE “P16F84.INC”</h3>
+<p>tanıt                       CLRF     PORTB          ;B Portunu sil</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF      STATUS, 5     ; Bank 1 ‘e geç</code></pre>
+<p>PORTB’ yi sil                  CLRF     TRISB         ; B Portu Çıkış</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW    h‘FF’
+MOVWF    TRISA         ; A Portu Giriş</code></pre>
+<p>PORTB Çıkış</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF     STATUS, 5      ; Bank 0 ‘ a geç</code></pre>
+<p>PORTA Giriş            TEST</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BTFSS           PORTA, 5         ;RA5=1 mi?</code></pre>
+<p>PORTA EVET              GOTO            TEST             ;Değilse TEST ’e bit 5                  MOVLW           h‘FF’ 1 mı?                   MOVWF           PORTB            ;PortB ‘ye FF yaz.</p>
+<h3 id="hayir-dongu">HAYIR           DONGU</h3>
+<p>Tekrar Test Et             GOTO            DONGU</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>PORTB nin tüm bitlerini yap</p>
+<h3 id="dongu">DONGU</h3>
+<h3 id="son">SON</h3>
+<p>Program Örneği 5: Enerji verildiği anda A portunun 3. ve 4. bitleri (RA3, RA4) Lojik 1 olduğuna göre, her ikisine de (0) verildiğinde B portunun 5. , 6. , 7. bitlerini (1), diğerlerini (0) yapan aksi takdirde test etmeye devam eden bir assembly programını PIC16F84 için yazınız. Çözüm:      ; PROGRAM 5.ASM----11 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST     P = 16F84
+INCLUDE “P16F84.INC”
+CLRF     PORTB</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BSF             STATUS, 5         ; Bank 1’ e geç
+CLRF            TRISB             ; PORTB tamamı Çıkış
+MOVLW           h‘FF’
+MOVWF           TRISA             ; PORTA Giriş
+BCF             STATUS            ; BANK 0’ a geç
+TEST
+BTFSC          PORTA, 3          ; PORTA’ nın 3. biti 0 mı?
+GOTO           TEST
+BTFSC          PORTA, 4          ; PORTA’ nın 4. biti 0 mı?
+GOTO           TEST
+MOVLW          b‘11100000’       ; W ‘ye h‘E0’ yükle.
+MOVWF          PORTB             ; PortB ‘ye (E0) yükle
+DONGU
+GOTO            DONGU
+END</code></pre>
+<h3 id="dongu-kullanmak">DÖNGÜ KULLANMAK</h3>
+<p>Bazen belli işlem ya da işlemlerin belirli sayıda tekrarlanması istenebilir. Böyle bir durumda bir register SAYAÇ olarak kullanılır. Genellikle tekrar sayısı ( SAYAÇ)’ a yüklendikten sonra her seferinde ( SAYAÇ ) 1 azaltılarak ( 0 )’ a ulaşılana kadar Döngü devamı ettirilir. Bu amaçla</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ komutu kullanılması gerekir.</code></pre>
+<p>Bu komut her icra edildiğinde bu register ( burada SAYAC ) 1 azaltılır ve SAYAC =0 olunca bir sonraki komuta atlanır. Aksi halde ( SAYAC  0 ise ) DECFSZ komutundan hemen sonraki (sıradaki) komut icra edilir.</p>
+<h3 id="bu-komutun-formati">Bu komutun formatı</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ                 Sayaç       ,      d          W yada F       şeklindedir.</code></pre>
+<p>Aşağıdaki program parçasında SAYAC’ ın daha önce tanımladığı ve belli bir değerle ( döngü sayısı ) yüklendiği farz edilmiştir. Döngü bitince PORTB’ ye ( FF ) yüklenmektedir.</p>
+<p>.</p>
+<h3 id="sayac-sayac-1">SAYAC = SAYAC - 1                                            .</h3>
+<h3 id="tekrar">TEKRAR</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ SAYAC, F</code></pre>
+<h3 id="sayac-evet-goto-tekrar">SAYAC      EVET                             GOTO   TEKRAR</h3>
+<p>0 mı?                                      MOVLW h‘FF’</p>
+<h3 id="hayir-movwf-portb">HAYIR                                 MOVWF PORTB</h3>
+<p>Tekrar Et                                . . Port B’ yi FF yap</p>
+<p>Program Örneği 6: PORTA’ nın 2. bitine bağlı butona 10 kere basıldıktan sonra PORTB’ nin 0. bitine bağlı LED’ in yakılması isteniyor ( Her butona basılması arasında 25 peryot beklenmesi arzu edilmektedir. Böylelikle butondan doğan parazitler engellenmiş ve bir basışta 10 kereyi birden saymasının önüne geçilmiş olacaktır ). Gerekli programı PIC 16F84 için assembly dili ile yazınız.</p>
+<p>Çözüm: :    ; PROGRAM 6.ASM-----20 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST            P = 16F84
+INCLUDE         “P16F84.INC”
+SAYAC       EQU             h‘0C’     ; Genel amaçlı RAM ilk adresi
+CLRF            PORTB
+BSF             STATUS, 5
+CLRF            TRISB
+MOVLW           h‘FF’</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF           TRISA
+BCF             STATUS, 5
+BASLA
+MOVLW           d‘10’
+MOVWF           SAYAC
+TEST
+BTFSC               PORTA, 2        ; RA2= 0 mı?
+GOTO               TEST             ; Değilse TEST etmeye devam et
+NOP                                 ; İşlem yapma
+.</code></pre>
+<p>.                                ; .                                ;(NOP : İşlem yapma. 1 peryot bekleme için ) . .</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP                                 ; Toplam 25 adet NOP komutu var.
+DECFSZ               SAYAC, F        ; Sayacı 1 azalt sonuç 0 mı?
+GOTO                 TEST            ; Değilse TEST ‘e git
+BSF                  PORT B, 0       ; Evetse, PORTB nin 0. bitini 1 yap.
+DONGU
+GOTO                DONGU
+END</code></pre>
+<p>Yukarıdaki örnekte 25 adet NOP kullanılmıştır. Böyle bir sistemde iki basma arasında bekleme süresi arttırılmak istenirse bu sayı arttırılır. Ancak bu durumda hafızanın gereksiz dolması gibi bir sorunla karşılaşırız. Bunun yerine 2. bir sayaç tanımlayarak az sayıda (aşağıdaki örnekte 3 tane ) NOP’ un defalarca icrası ( mesela 255 kere) sağlanabilir. Bunun için STATUS ‘un 2. bitini olan</p>
+<p>SAYAC 2’ yi FF yap</p>
+<p>3 tane NOP komutu</p>
+<h3 id="sayac2">SAYAC2 =</h3>
+<h3 id="sayac2-1">SAYAC2 - 1</h3>
+<h3 id="hayir">HAYIR</h3>
+<h3 id="sayac-2">SAYAC 2</h3>
+<p>0 mı?</p>
+<h3 id="evet">EVET</h3>
+<p>SAYAC1 ‘i azaltma ve diğerleri aynı, Dış ta bir çevrim daha var</p>
+<h3 id="karsilastirma-i-slemi-ve-dongu">KARŞILAŞTIRMA İŞLEMİ VE DÖNGÜ</h3>
+<p>SAYAC her zaman azalan yönde çalışmaz. Her döngüde SAYAC’ ın arttığı durumlarda SAYAC değeri istenen bir sayı ile karşılaştırılmalıdır. Eşitlik sağlanınca döngü sona erdirilir. Örnek olarak ( 09 ) kere tekrarlanan tekrar etiketli bir döngü ( çevrim ) düzenleyelim: ( Program parçası )</p>
+<p>............ ............ SAYAC’ ı sıfırla          CLRF          SAYAC</p>
+<h3 id="tekrar">TEKRAR</h3>
+<p>SAYAC’ ı 1 arttır          INCF          SAYAC, F              ; SAYAC ‘ı 1 arttır</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW         h‘09’
+SUBWF         SAYAC, W              ; SAYACdan W yi çıkart</code></pre>
+<p>W       h‘09’           BTFSS         STATUS, 2             ; Z bayrağı 0 mı?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO          TEKRAR                ; Değilse TEKRAR ‘a git</code></pre>
+<p>W’ den SAYACI çıkart     DONGU</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO         DONGU                  ; Evetse burada   bekle
+STATUS
+END</code></pre>
+<p>HAYIR 2 biti 1 mi?</p>
+<h3 id="evet">EVET</h3>
+<h3 id="son">SON</h3>
+<p>Programda SAYAC o ana kadar ki tekrar sayısını belirtir. Çıkarma komutu SUBWF ile STATUS registerinde bulunan Z ( Sıfır bayrağı ) ve C ( Elde bayrağı ) etkilenir.</p>
+<p>2            0</p>
+<h3 id="status">STATUS</h3>
+<p>Register                 Z            C            Elde bayrağı</p>
+<p>Sıfır bayrağı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBWF Komutu:</code></pre>
+<p>Bu komut o andaki File registerinin içeriğini W registerinden çıkarır ve sonucu W yada file registerine yazar.Komut Formatı;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBWF          File registeri       , W yada f</code></pre>
+<p>Çıkarma sonucunda Z ve C bayraklarının değeri çıkartılan iki sayı arasındaki ilişki bilgisini taşır. File registeri &gt; W ise Z = 0 C = 1 File registeri = W ise Z = 1 C = 0 File registeri &lt; W ise Z = 0 C = 0 olur. Bu bayrakların değerine göre dallanma gerçekleştirilir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBLW Komutu:</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBLW komutuna benzer olup bu komutla sabit sayıdan W nin içeriği çıkarılır. Sonuç W registerine</code></pre>
+<p>yazılır. Komut formatı aşağıda verilmiştir.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBLW       k         ; Burada k sabit sayıyı temsil etmektedir.</code></pre>
+<p>Örnek: Önce HAFIZA adı verilen ve daha önce tanımlanmış bir adreste h‘35’ sayısını yazalım. Bu sayı W’ ye yüklenen sayıdan küçük yada büyük ise PORTB’ nin 0. bitini ( 1 ) yapalım. Aksi takdirde</p>
+<h3 id="git-adresine-gonderelim-gerekli-program-parcasi">(GIT) adresine gönderelim. Gerekli program parçası</h3>
+<h3 id="cozum">Çözüm</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      h‘35’
+MOVWF     HAFIZA
+MOVLW     ( SAYI )</code></pre>
+<h3 id="hafiza-subwf-hafiza-w">HAFIZA &gt;             SUBWF      HAFIZA, W</h3>
+<h3 id="sayi-hafiza-sayi">&lt; SAYI                                   HAFIZA = SAYI</h3>
+<p>ise               BTFSC     STATUS, 2             ise</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO      GIT
+BSF       PORTB, 0
+NOT</code></pre>
+<ul><li>( SAYI ) yerine h‘28’, h‘35’, h‘4A’ gibi bir baytlık sayı yazılacaktır.</li></ul>
+<ul><li>GIT adresi programda başka yerdedir.</li></ul>
+<p>Örnek: W registerine h‘60’ yazdıktan sonra, h‘50’ sayısından W ’de bulunan sayıyı çıkartalım. C bayrağı ( 0 ) ise PORTB’ nin 3., 4., ve 5. bitlerine ( 1 ) yüklensin. Aksi halde GIT adresine dallanmak üzere bir program parçası yazalım.</p>
+<h3 id="cozum">Çözüm</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW      h‘60’
+SUBWF      h‘50’
+BTFSC      STATUS, 0
+GOTO       GIT
+MOVLW      b‘00111000’
+MOVWF      PORTB</code></pre>
+<p>Program Örneği 7: PIC 16F84 için bir program yazarak h‘1A’ sayısından h‘09’ sayısını çıkarınız ve farkı PORTB’ ye yazınız. STATUS registerinin içeriğini de W’ ye aktarınız. Çözüm:             ;PROGRAM 7.ASM---08 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST     P = 16F84
+INCLUDE “P16F84.INC”
+CLRF     PORTB
+BSF     STATUS, 5      ; Bank 1’ e geç
+CLRF    TRISB         ; B portu çıkış
+BCF     STATUS, 5      ; Bank 1’ e geç
+BASLA
+MOVLW    h‘09’
+SUBLW    h‘1A’         ; 1A sayısından W deki 09 u çıkar
+MOVWF    PORTB          ; Fark Port B’ ye yazıldı
+MOVF     STATUS, W ; STATUS Reg.’ i W’ ye aktarıldı
+DONGU
+GOTO     DONGU
+END</code></pre>
+<h3 id="status-regi-ster">STATUS REGİSTER</h3>
+<h3 id="bu-register-pic-16f84-icin-0x03-ve-0x83-adreslerinde-bulunur-i-cerdigi-bitler-sunlardir">Bu register PIC 16F84 için 0x03 ve 0x83 adreslerinde bulunur. İçerdiği bitler şunlardır</h3>
+<p>C ( bit 0 ) :Elde Bayrağı denir. ( En soldaki 7. bitte taşma varsa 1 olur ). DC ( bit 1) : Dijit Elde Bayrağı adını alır. Alt 4 bit ( nibble )’ den 5. bite elde ya da borç geçişinde ( 1 ) olur. Z ( bit 2 ) : Sıfır bayrağı denir. Bir aritmetik yada mantık komutun sonucu ( 0 ) ise bu bayrak ( 1 ) olur. PD ( bit 3) :Enerji kesilme biti.</p>
+<ul><li>PIC’ e enerji verilince yada CLRWDT komutu çalışınca ( 1 ) olur.</li></ul>
+<ul><li>SLEEP komutu ile ( 0 ) olur.</li></ul>
+<p>TD ( bit 4 ) : Zaman doldu biti.</p>
+<ul><li>PIC’ e enerji verildiğinde CLR WDT ve SLEEP komutu ile ( 1 ) olur.</li></ul>
+<ul><li>WDT zamanlayıcısı zamanı dolduğu vakit (0) olur.</li></ul>
+<p>RP1 – RPO ( bit 6 – bit 5 ) : Bank seçme bitleridir. ( 00 ) yapılırsa Bank 0, ( 01 ) yapılırsa Bank 1 seçilir ( 16F84’ de daima RP1 = 0 kalmalıdır). IRP ( bit 7 ) : PIC 16F84’ de kullanılmaz ve daima ( 0 ) kalmalıdır.</p>
+<p>Program Örneği 8: PORT B’ ye ( 00 )16’ dan başlayarak ( 08 )16’ e kadar sayılan ( 00, 01, 02, ........., 08 ) ( sayıcı gibi ) yazan bir program PIC16F84 için assembly dilinde yazınız.</p>
+<p>Çözüm:      ; PROGRAM8.ASM----08 / 12 / 2003</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LIST     P = 16F84
+INCLUDE “P16F84.INC”
+SAYAC        EQU      h‘0E’         ; Sayaç genel amaçlı RAM de ( 0E ) de olsun.
+CLRF     PORTB         ; Bank 1 e geç
+BSF      STATUS, 5
+CLRF     TRISB           ; Port B tamamı çıkış
+BCF      STATUS, 5       ; Bank 0 a geç
+BASLA
+CLRF           SAYAC
+TEKRAR
+MOVF          SAYAC, W          ; SAYAC ‘yı W ‘ ye yükle
+MOVWF         PORT B           ; Port B den yolla
+INCF          SAYAC, F          ; SAYAC’ ı 1 arttır
+MOVLW         h‘09’
+SUBWF         SAYAC, W          ; ( SAYAC – W ) yi W ye yaz
+BTFSS         STATUS, Z        ; Z bayrağı 1 mı?
+GOTO          TEKRAR            ; Değilse TEKRAR’ a
+DONGU
+GOTO          DONGU            ; Bekle
+END</code></pre>
+<h3 id="zaman-geci-kti-rme-donguleri">ZAMAN GECİKTİRME DÖNGÜLERİ</h3>
+<p>Bazı programlarda GECİKME bloğu kullanıldığı yani hiçbir şey yapmadan bir süre beklenmesi gerektiği daha önce belirtilmişti. Zaman geciktirme için ya yazılım ya da donanım imkanlarından yararlanmak gerekir. Yazılım kullanıldığında her komutun icra süresi bilinmeli ve ona göre toplam GECİKME hesaplanmalıdır. RC tipi osilatör kullanıldığında bu elemanların sıcaklığa bağlı değer değiştirilmelerinden dolayı hassas bir gecikme süresi elde etmek mümkün olmaz. Böyle bir durumda kristal / rezonatör kullanılması şarttır.</p>
+<p>Komut Peryodu: PIC16F84 genellikle 4 MHz’ de çalıştırılır ve bu frekans içerde 4’ e bölünerek f = 1 MHz’ lik dahili frekans elde edilir. Bu da 1    1 T          1μs bir komut icra süresidir. f 1MHz</p>
+<h3 id="bazi-komutlar-ise-2-peryotta-icra-edilir-bunlar">Bazı komutlar ise 2 peryotta icra edilir. Bunlar</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO                                          RETFIE
+CALL                                          INCFSZ ( Sayaç  0 ise 1 peryot )
+RETURN                                        BTFSC ( Bit 1 ise 1 peryot )
+DECFSZ ( Sayaç  0 ise 1 peryot )             BTFSS ( Bit 1 ise 1 peryot )
+RETLW                                         PC’ye (Prog. Sayacına) veri yazan komutla</code></pre>
+<p>Tek Döngü İle Maksimum ve Minimum Gecikme Bir sayaç için “FF” yazarsak maksimum, “01” yazarsak minimum gecikme elde edilir. Aşağıdaki programda maksimum gecikme ( N = FF = 255 ) sağlanmaktadır.</p>
+<p>Komut                                                Peryot Sayısı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW                 h‘FF’                                 1
+MOVWF                 SAYAC                                 1                 N-1
+TEKRAR
+DECFSZ                SAYAC, F                              1 x 254 + 2
+GOTO                  TEKRAR                               2 x 254</code></pre>
+<p>Toplam : 766 peryot</p>
+<p>Örnek : 4 MHz bir osilatörden beslenen PIC 16F84’ de 250 s gecikme sağlamak için bir GECİKME rutini ( program parçası ) yazalım. 4 MHz 1MHz            1μs      Bir dahili komut peryodu</p>
+<p>Komut                                      Peryot Sayısı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW    h‘52’                                     1                             MOVWF</code></pre>
+<h3 id="sayac-1">SAYAC                                1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOP                                                  1             ( 56 )16 = ( 82 )16
+NOP                                                  1
+NOP                                                  1
+TEKRAR
+DECFSZ   SAYAC, F                                    1 x 81 + 2
+GOTO     TEKRAR                                      2 x 81</code></pre>
+<p>250 peryot 1 x 250 = 250 s gecikme süresi</p>
+<p>İçiçe İki Döngü İle Gecikme SAYAC ( FF ) ile yüklense bile 766 peryot gecikme sağlanmakta idi. Bu süre az gelebilir. Bu durumda içiçe 2 yada daha fazla döngü kullanılabilir. Bu amaçla kullanılacak bir çift döngü rutin için akış diyagramı ve programı yapalım ( süre maximum olsun ). İçiçe iki Döngü kullanan Program Algoritması ve Programı aşağıda verilmiştir. Böyle bir program için elde edilebilecek yaklaşık Gecikme süresi de tabloda verilmiştir.</p>
+<p>SAYAC 1        h‘FF’</p>
+<p>SAYAC 2        h‘FF’</p>
+<h3 id="hayir">HAYIR</h3>
+<p>SAYAC 2            SAYAC 2’ yi 0 mı?               1 azalt</p>
+<h3 id="evet">EVET</h3>
+<h3 id="hayir">HAYIR</h3>
+<p>SAYAC 1            SAYAC 1’ i 0 mı?               1 azalt</p>
+<h3 id="evet">EVET</h3>
+<p>Komut                                 Peryot Sayısı</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW        h‘FF’                          1
+MOVWF        SAYAC 1                        1
+TEKRAR1
+MOVLW            h‘FF’                            1 x 255
+MOVWF            SAYAC 2                          1 x 255
+TEKRAR2
+DECFSZ            SAYAC2, F                       1 x 255 x 255
+GOTO              TEKRAR2                         2 x 255 x 255
+DECFSZ            SAYAC1, F                       1 x 255
+GOTO              TEKRAR1                         2 x 255</code></pre>
+<p>Toplam : 196606 peryot</p>
+<p>1 s (mikro saniye)dahili komut peryodu için 196606.s = 0,196 saniye yaklaşık gecikme elde edilir. SAYAC 1 ile SAYAC 2 farklı da olabilir. Bu durumda ( 255 ) yerine o sayının karşılığı olan desimal sayı hesaba katılmalıdır.</p>
+<h3 id="alt-programlar">ALT PROGRAMLAR</h3>
+<p>Program içerisinde birden fazla kullanılacak rutinler ( program parçaları ) varsa bunlar tekrar yazılmaz ( Hafıza tasarrufu ! ). Bu durumda tekrar kullanılacak program parçaları ALTPROGRAM olarak düzenlenir . Ana (asıl) Programdan Alt Programa CALL komutu ile gidilir, RETURN komutu ile geri dönülür. CALL komutuyla atlanırken geri dönüş adresinin saklanması gerekir. Bunun için STACK REGISTER denilen özel bir registerden faydalanılır. Bu işlem otomatik yapıldığı için programcının bununla ilgilenmesi gerekmez.</p>
+<p>Bir alt programın çalışmasını şematik çizersek ve numaralanmış olarak gerçekleşen</p>
+<h3 id="islemleri-gosterirsek">işlemleri gösterirsek</h3>
+<p>Ana           CALL ALTP Program                                           STACK REG</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END</code></pre>
+<p>İlk Komut</p>
+<p>Alt Program</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETURN</code></pre>
+<p>Bu işlemleri sırayla yazarsak;</p>
+<h3 id="1-ana-program-baslangictan-itibaren-calisir">1. Ana program başlangıçtan itibaren çalışır.</h3>
+<h3 id="2-call-altp-komutu-ile-alt-programin-ilk-komutuna-atlanir">2. CALL _ ALTP komutu ile Alt programın ilk komutuna atlanır.</h3>
+<h3 id="3-ana-programdan-ayrilma-adresi-stack-registere-otomatik-olarak-saklanir">3. Ana programdan ayrılma adresi STACK Registere otomatik olarak saklanır.</h3>
+<h3 id="4-alt-program-ilk-komuttan-itibaren-icra-edilir">4. Alt program ilk komuttan itibaren icra edilir.</h3>
+<h3 id="5-return-komutu-ile-karsilasinca-alt-programin-bittigi-anlasilir-ve-ana-programda">5. RETURN komutu ile karşılaşınca Alt programın bittiği anlaşılır ve Ana programda</h3>
+<p>kaldığımız yere geri dönülür.</p>
+<h3 id="6-stack-registerde-saklanmis-ayrilma-adresi-alinir">6. STACK Registerde saklanmış ayrılma adresi alınır.</h3>
+<h3 id="7-ana-program-devam-eder-ve-normal-olarak-end-komutu-ile-son-bulur">7. Ana program devam eder ve normal olarak END komutu ile son bulur.</h3>
+<p>Şeklinde Alt Programa ait aşamalar elde edilir. Burada Programcı sadece CALL komutunu ve alt programı yazmak ve bunların isimlerinin (etiketin) aynı olmasını sağlamakla yükümlüdür. Alt Program sonuna RETURN yazılması, tüm programın (ana ve alt Programın) en altında END komutu bulunması zorunludur. Diğer işlemler otomatik olarak yapılmaktadır.</p>
+<figure class="yazi-gorsel"><img src="sekil-1028-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="help3: sayfa 2, devre, tablo ve şekiller"><figcaption>help3, sayfa 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="sekil-1028-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="help3: sayfa 6, devre, tablo ve şekiller"><figcaption>help3, sayfa 6.</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem332-pic-undil.zip" download>eem332-pic-undil.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 344 KB · 15.12.2003</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem332-pic-undil.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (344 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

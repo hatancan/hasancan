@@ -1,0 +1,1194 @@
+---
+baslik: EEM332 Mikroişlemciler: Assembly ile Arama, Sıralama ve Sayı İşlemleri
+ozet: Doğrusal ve ikili arama, sıralama, asal sayılar, büyük sayılarla toplama, matris çarpımı ve taban dönüşümü.
+---
+
+Bu yazı, Başkent Üniversitesi **EEM332 Mikroişlemciler** ders arşivindeki ilgili notları ve uygulamaları bir araya getiriyor (2015–2015). Doğrusal ve ikili arama, sıralama, asal sayılar, büyük sayılarla toplama, matris çarpımı ve taban dönüşümü. Bir arkadaşın hazırladığı çalışmalar ve ders belgeleri birlikte aktarılmış; öğrenci adları, numaraları ve grup bilgileri çıkarılmıştır. Belgelerin PDF arşiv kopyaları ve varsa kaynak kodları yazının sonunda ZIP olarak indirilebilir.
+
+## 1000basamaktoplamD
+
+```asm
+; hafizada yeralan ve herbirisi 1000 rakamdan olusan
+; 10'luk tabandaki iki sayinin toplamini yapar.
+; ilk sayi 1000-1999
+; ikinci sayi 2000-2999
+; sonuc 3000-4000
+; m.ali akcayol                  
+; 04.07.2007
+
+org 0100h      
+ADET equ 1000           ; toplam rakam sayisi
+mov dl,10               ; sayilari onluk tabanda gostermek icin
+
+call baslangic          ; baslangic degerleri atanir
+call degerata           ; iki sayinin degerleri atanir
+call topla              ; toplama islemi yapilir
+call mesajyaz           ; kullaniciya islemin bittigi bildirilir
+
+hlt
+
+topla proc    
+    call baslangic
+    mov bx,0            ; bl'de kalan saklanacak
+    mov cx,ADET         ; cx sayaci rakam sayisina esitleniyor
+    sonrakibasamak:
+        mov al,[si]         ; ilk sayinin en sagdaki basamagi
+        add al,[si+1000]    ; ikinci sayinin en sagdaki basamagiyla toplaniyor
+        add al,bl           ; onceki basamaktan gelen toplandi
+        div dl              ; toplam 10'a bolunerek kanal alinacak
+        mov [si+2001],ah    ; elde olursa 1001 byte gerekir o yuzden 2001
+        xor ah,ah           ; bir sonraki bolme icin 
+        mov bl,al           ; kalan saklandi sonraki basamaga eklenecek
+        dec si              ; onceki basamaklara gecilir
+        loop sonrakibasamak
+    mov [si+2001],bl        ; elde varsa bir onceki adrese yazildi    
+    ret    
+topla endp
+
+baslangic proc
+    mov cx,ADET     ; her sayidaki rakam sayisi
+    mov si,1000     ; ilk dizinin en soldaki rakami
+    add si,cx       ; ilk dizinin en sagdaki rakami
+    ret
+baslangic endp         
+
+degerata proc       ; dizilere baslangic degerleri atar
+    dongu:
+        mov ax,cx   ; her eleman (cx mod 10) ile belirleniyor
+        div dl      
+        mov al,ah   ; kalan deger alinacak
+        xor ah,ah
+        mov [si],al         ; ilk diziye
+        mov [si+1000],al    ; ikinci diziye
+        dec si              ; bir soldaki rakam
+        loop dongu
+        ret
+degerata endp  
+
+mesajyaz proc
+    mov dx, offset mesajvar
+    mov ah, 9
+    int 21h
+    ret
+    mesajvar db "toplama islemi tamamlandi... $"         
+mesajyaz endp
+```
+
+## 20basamaktoplamiH
+
+```asm
+; hafizada yeralan ve herbirisi 20 rakamdan olusan
+; 16'lik tabandaki iki sayinin toplamini yapar.
+; ilk sayi 0100h-0109h
+; ikinci sayi 010Ah-0113h
+; sonuc 0114h-011Dh
+; m.ali akcayol                  
+; 01.07.2007
+
+org 0100h
+mov [0100h],8A76h
+mov [0102h],6557h
+mov [0104h],1A98h
+mov [0106h],713Eh
+mov [0108h],8797h
+mov [010Ah],2587h
+mov [010Ch],8B96h
+mov [010Eh],2588h
+mov [0110h],46D1h
+mov [0112h],9854h
+
+mov si, 0108h           ; 1.sayinin en sagdaki 4 rakam (1 word) aliniyor
+mov bx,[si]         
+add bx,[si+000Ah]       ; 2.sayinin en sagdaki 4 rakami ile toplaniyor
+mov [si+0014h],bx       ; sonuc hafizaya yaziliyor
+jnc atla1               ; carry=0 ise atla
+    mov dx,1            ; sub isleminden once carry dx'e saklaniyor
+    atla1:              
+sub si,2                ; sola dogru 4 rakam (1 word) gidiliyor
+dongu:
+    mov bx,[si]         ; 1.sayinin onceki 4 rakami (1 word) aliniyor
+    add bx,[si+000Ah]   ; 2.sayinin onceki 4 rakami ile toplaniyor 
+    add bx,dx           ; varsa carry ekleniyor
+    xor dx,dx           ; saklanan carry degeri sifirlaniyor
+    mov [si+0014h],bx   ; sonuc hafizaya yaziliyor
+    jnc atla2           ; carry=0 ise atla
+      mov dl,1
+    atla2:
+        sub si,2        ; sola dogru 4 rakam (1 word) gidiliyor
+        cmp si,0100h    ; en sola gelindimi?
+        jae dongu       ; gelinmediyse basa doner
+call mesajyaz
+hlt      
+
+mesajyaz proc
+    mov dx, offset mesajvar
+    mov ah, 9
+    int 21h
+    ret
+    mesajvar db "toplama islemi tamamlandi... $"         
+mesajyaz endp
+```
+
+## HexToDec
+
+```asm
+; 16 lik tabandaki sayiyi 10 luk tabana cevirir
+; ekrana 10 luk tabanda yazilir
+; m.ali akcayol - 23.07.2007
+
+MACRO YAZDIR
+MOV AH, 2
+DONGU:
+    POP BX      ; soldan saga dogru sayi pop edilir
+    MOV DL, BL  ; yazdirilacak deger
+    ADD DL, 48  ; 48 eklenerek karakter karsiligi bulundu
+    INT 21h
+    DEC CL      ; sagdaki basamak icin azaltildi
+    CMP CL,0    ; sifirsa en sagdaki basamak yazilmistir
+    JNE DONGU
+ENDM YAZDIR
+
+org 0100h
+mov ax, 231h    ; 10 luk tabana donusturulecek sayi
+mov dl,10       ; bolme icin
+mov cl,0        ; kac defa bolme yapildigini tutar
+basa:           ; her dongude 10 luk sayinin 1 basamagi hesaplanir
+    inc cl      ; basamak artirildi
+    div dl      ; kalan bulunacak
+    mov bl,ah   ; kalan sagdaki basamak degeri
+    push bx     ; sagdan sola dogru sayi push edilir
+    cmp al,10   ; bolum sonucu 10 dan kucukse son basamak bulundu
+    jb atla     ; son basamaksa atla
+    xor ah,ah   ; kalani sifirla basa don
+    jmp basa    ; yeni basamak hesapla
+atla:    
+inc cl
+mov bl,al       ; son basamakta stack a push edilir
+push bx
+YAZDIR          ; yazdirma islemi
+hlt
+```
+
+## arama
+
+```asm
+; 10000 kisiye ait ogrenim durumu bilgileri 
+; hafizaya kaydedilmistir. 
+; Ogrenim durumu LISANSUSTU icin 'M', 
+; UNIVERSITE icin 'U', 
+; LISE icin 'L' 
+; ILKOGRETIM icin 'I' girilmistir. 
+; Herbir ogrenim durumu icin kisi sayisini bulup 
+; tumunu buyukten kucuge sirali olarak 10'luk tabanda ekrana yazar.
+; m.ali akcayol - 26.07.2007
+
+MACRO YAZDIR HEXSAYI
+    MOV AX,HEXSAYI  ; sayi 10 a bolunerek her seferinde kalan
+    MOV DL,10       ; alinmistir. 
+    MOV CL,0
+    DONGU:
+        DIV DL
+        MOV BL,AH
+        XOR AH,AH
+        XOR BH,BH
+        PUSH BX     ; stack'a once birler basamagi atilir
+        INC CL
+        CMP AL,10
+        JNB DONGU
+    MOV BL,AL
+    XOR BH,BH
+    PUSH BX
+    INC CL
+    
+    MOV AH,2
+    MOV DL,' '
+    INT 21H         ; bosluk verildi
+    DONGU2:
+        POP DX       ; stack'tan once yuzler basamagi alinir
+        ADD DX,30H   ; karakter karsiligi hesaplaniyor
+        MOV AH,2     ; karakter yazdirma islemi yapiliyor
+        INT 21H
+        DEC CL   
+        CMP CL,0
+        JE CIKIS
+        JMP DONGU2
+    CIKIS:
+ENDM YAZDIR
+
+org 0100h
+kayitM db 2485 dup('M')
+kayitU db 2459 dup('U')
+kayitL db 2541 dup('L')
+kayitI db 2515 dup('I')
+xor bx,bx   ; lisansustu
+xor cx,cx   ; universite
+xor dx,dx   ; lise
+xor di,di   ; ilkogretim
+mov si,0
+dongubasi:              ; her dongude bir karakter karsilastirilir
+    mov al,[0100h+si]
+    cmp al,'M'          ; Lisansustu
+    je lisansustu        
+    cmp al,'U'          ; Universite
+    je universite
+    cmp al,'L'          ; Lise
+    je lise
+    cmp al,'I'          ; Ilkogretim
+    je ilkogretim
+    lisansustu:
+        inc bx          ; Lisansustu sayisi artirildi
+        jmp devam
+    universite:
+        inc cx          ; Universite sayisi artirildi
+        jmp devam
+    lise:
+        inc dx          ; Lise sayisi artirildi
+        jmp devam
+    ilkogretim:
+        inc di          ; Ilkogretim sayisi artirildi
+    devam:
+        inc si          ; Sonraki karakter
+        cmp si,10000    ; Hepsi kontrol edildiyse donguden cik
+        jb dongubasi
+mov ah,4                ; 4 farkli karakter icin
+tekrar:
+    xor si,si           ; si gecici sayi tutmak icin kullanilacak
+    cmp bx,0            ; her yazilan -1 yapilacak
+    jl atlaM            ; -1 ise onceden yazilmistir
+    cmp si,bx           ; Lisansustu degeri mevcuttan buyukse onu al
+    ja atlaM            ; degilse degistirme yapma
+    mov si,bx           ; yeni en buyuk lisansustu
+    mov al,'M'          ; bu donguler 4 defa tekrarlanir
+atlaM:                  ; her defasinda kalanlardan en buyugu yazilir
+    cmp cx,0            
+    jl atlaU
+    cmp si,cx
+    ja atlaU
+    mov si,cx
+    mov al,'U'
+atlaU:
+    cmp dx,0
+    jl atlaL
+    cmp si,dx
+    ja atlaL
+    mov si,dx
+    mov al,'L'
+atlaL:
+    cmp di,0
+    jl atlaI
+    cmp si,di
+    ja atlaI
+    mov si,di
+    mov al,'I'
+atlaI:
+    cmp al,'M'
+    jne MGec
+    mov bx,-1           ; yazilana -1 atanir 
+	pusha 
+	call yenisatir
+	mov dx, offset msgM
+	mov ah, 9
+	int 21h             ; lisansustu ise ilgili mesaj yazilir
+	popa 
+MGec:
+    cmp al,'U'
+    jne UGec
+    mov cx,-1           ; yazilana -1 atanir
+	pusha 
+	call yenisatir
+	mov dx, offset msgU
+	mov ah, 9
+	int 21h             ; universite ise ilgili mesaj yazilir
+	popa
+UGec:
+    cmp al,'L'
+    jne LGec
+    mov dx,-1           ; yazilana -1 atanir
+    pusha
+	call yenisatir
+	mov dx, offset msgL
+	mov ah, 9
+	int 21h             ; lise ise ilgili mesaj yazilir
+	popa
+LGec:
+    cmp al,'I'
+    jne IGec
+    mov di,-1           ; yazilana -1 atanir 
+	pusha  
+	call yenisatir
+	mov dx, offset msgI
+	mov ah, 9
+	int 21h             ; ilkogretim ise ilgili mesaj yazilir
+	popa 
+IGec: 
+    pusha 
+    YAZDIR SI           ; toplam adet degeri yazilir
+    popa
+dec ah
+cmp ah,0
+je bitis
+jmp tekrar
+bitis:
+msgM db "LISANSUSTU = $"   
+msgU db "UNIVERSITE = $"
+msgL db "LISE = $"
+msgI db "ILKOGRETIM = $"
+hlt
+
+yenisatir proc 
+    mov ah,2
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h 
+    ret
+yenisatir endp
+```
+
+## asalsayi
+
+```asm
+; Girilen 3 basamakli bir sayidan
+; kucuk asal sayilari bulup ekrana yazan program
+; m.ali akcayol - 26.07.2007
+
+MACRO YAZDIR HEXSAYI
+    MOV AX,HEXSAYI  ; sayi 10 a bolunerek her seferinde kalan
+    MOV DL,10       ; alinmistir. 
+    MOV CL,0
+    DONGU:
+        DIV DL
+        MOV BL,AH
+        XOR AH,AH
+        XOR BH,BH
+        PUSH BX     ; stack'a once birler basamagi atilir
+        INC CL
+        CMP AL,10
+        JNB DONGU
+    MOV BL,AL
+    XOR BH,BH
+    PUSH BX
+    INC CL
+    
+    MOV AH,2
+    MOV DL,' '
+    INT 21H         ; bosluk verildi
+    DONGU2:
+        POP DX       ; stack'tan once yuzler basamagi alinir
+        ADD DX,30H   ; karakter karsiligi hesaplaniyor
+        MOV AH,2     ; karakter yazdirma islemi yapiliyor
+        INT 21H
+        DEC CL   
+        CMP CL,0
+        JE CIKIS
+        JMP DONGU2
+    CIKIS:
+ENDM YAZDIR
+
+
+org 0100h
+buffer db 4,?,4 dup(1)
+
+mov bl,10  
+mov dx,offset buffer
+mov ah,0Ah
+int 21h             ; 3 basamakli bir sayi girildi           
+
+mov al,[buffer+2]   ; yuzler basamagi alindi
+sub al,30h          ; karakter sayisal degere cevrildi
+mul bl              ; 10 la carpildi
+mul bl              ; 100 le carpildi
+mov cx,ax           ; 100 ler basamagi cx e aktarildi
+
+mov al,[buffer+3]   ; onlar basamagi alindi
+sub al,30h           
+mul bl
+add cx,ax
+
+mov al,[buffer+4]   ; birler basamagi alindi
+sub al,30h 
+add cx,ax   ; cx e 3 basamakli sayi aktarildi
+
+mov ah,2    ; 1 ve 2 dogrudan yazdiriliyor
+mov dl,' '
+int 21h
+mov dl,'0'
+int 21h
+mov dl,'1'  ; 01
+int 21h
+mov dl,' '
+int 21h
+mov dl,'0'
+int 21h
+mov dl,'2'  ; 02
+int 21h
+
+mov dl,3    ; 3 ve ustu sayilar kontrol edilecek
+xor dh,dh
+
+disdongu:       ; her sayi icin tekrarlanir
+    mov bl,2    ; bolme islemi 2 ile baslar
+    icdongu:
+        mov ax,dx   ; dx kontrol edilen sayiyi tutar  
+        div bl      ; ax bolme islemleri icin kullanildi
+        cmp ah,0    ; kalan kotrol edildi
+        je sonrakisayi    ; kalan yoksa asal degildir  
+        inc bl      ; bolen artiriliyor
+        cmp bl,dl   ; bolen sayiya esitse asal sayidir 
+        je asalsayi
+        jmp icdongu ; degilse yeni bolenle devam edilir
+        asalsayi:
+            push dx ; dx ve cx kullanildigi icin stack'a atildi 
+            push cx
+            YAZDIR DX   ; sayi 10 luk tabanda yazdiriliyor
+            pop cx
+            pop dx
+        sonrakisayi:
+        inc dl      ; sonraki sayiya geciliyor
+        cmp dx,cx   ; girilen sayiya esitse program biter
+        jne disdongu    
+hlt
+```
+
+## binarysearch
+
+```asm
+; binary search --- 
+; sirali bir dizide en cok log(2)sayiadedi 
+; kadar kontrolle aranan sayinin olup
+; olmadigini bulur
+; m.ali akcayol
+; 29.06.2007
+
+
+org 0100h
+mov [0100h], 1
+mov [0101h], 2
+mov [0102h], 3
+mov [0103h], 4
+mov [0104h], 6
+mov [0105h], 8
+mov [0106h], 9
+mov [0107h], 10
+mov [0108h], 11
+mov [0109h], 13
+mov [010Ah], 14
+mov [010Bh], 15
+mov [010Ch], 16
+mov [010Dh], 17
+mov [010Eh], 19
+mov [010Fh], 20
+mov [0110h], 22
+mov [0111h], 23
+mov [0112h], 25
+mov [0113h], 27
+mov [0114h], 28
+mov [0115h], 30
+
+mov dl,2        ; bolen
+mov dh,28       ; aranan sayi   
+mov bx,0100h    ; en kucuk adres
+mov cx,0115h    ; en buyuk adres
+mov si,0100h
+
+mov ax,cx       ; eleman sayisi hesaplaniyor
+dec bx
+sub ax,bx
+div dl          ; ortadaki sayi bulunuyor
+xor ah,ah       ; kalan atiliyor
+add si,ax       ; ortadaki sayinin adresi
+dongu:
+    cmp [si],dh     ; ortadaki sayi arananla karsilastiriliyor
+    jb sagtaraf     ; kucukse saga gidilir
+    ja soltaraf     ; buyukse sola gidilir
+    je bulundu      ; esitse bulunmustur
+    sagtaraf:
+        mov bx,si
+        mov ax,cx       ; eleman sayisi hesaplaniyor
+        sub ax,bx
+        div dl          ; ortadaki sayi bulunuyor
+        cmp al,0
+        jz kalanal1
+        xor ah,ah       ; kalan atiliyor
+        add si,ax       ; ortadaki sayinin adresi
+        jmp dongu       ; basa don
+        kalanal1:       ; son kalan eleman kontrol ediliyor
+            xchg al,ah
+            add si,ax
+            cmp [si],dh
+            je bulundu
+            jne sayiyok
+    soltaraf:
+        mov cx,si
+        mov ax,cx       ; eleman sayisi hesaplaniyor
+        sub ax,bx
+        div dl          ; ortadaki sayi bulunuyor
+        cmp al,0
+        jz kalanal2
+        xor ah,ah       ; kalan atiliyor
+        sub si,ax       ; ortadaki sayinin adresi
+        jmp dongu       ; basa don
+        kalanal2:       ; son kalan eleman kontrol ediliyor
+            xchg al,ah
+            sub si,ax
+            cmp [si],dh
+            je bulundu
+            jne sayiyok
+
+; yazdirma islemleri
+
+bulundu:                
+    mov dx, offset mesajvar
+    mov ah, 9
+    int 21h
+    ret
+    mesajvar db "sayi bulundu $"         
+    jmp cikis         
+sayiyok:
+    mov dx, offset mesajyok
+    mov ah, 9
+    int 21h 
+    ret
+    mesajyok db "sayi yok $"         
+cikis:
+hlt
+```
+
+## bubblesort
+
+```asm
+; hafizada yeralan toplam 100 karakterden
+; ADET ile belirtilen kadarini kendi 
+; yerinde siralayan algoritma - bubblesort
+; m.ali akcayol                  
+; 28.06.2007
+
+
+org 0100h
+dizi0 db 'v','a','z','b','t','r','z','k','m','a'
+dizi1 db 'v','a','z','b','t','r','z','k','m','a'
+dizi2 db 'v','a','z','b','t','r','z','k','m','a'
+dizi3 db 'v','a','z','b','t','r','z','k','m','a'
+dizi4 db 'v','a','z','b','t','r','z','k','m','a'
+dizi5 db 'v','a','z','b','t','r','z','k','m','a'
+dizi6 db 'v','a','z','b','t','r','z','k','m','a'
+dizi7 db 'v','a','z','b','t','r','z','k','m','a'
+dizi8 db 'v','a','z','b','t','r','z','k','m','a'
+dizi9 db 'v','a','z','b','t','r','z','k','m','a'
+        
+ADET dw 9                   ; ilk 10 karakter siralanir
+
+mov dx,ADET                 ; eleman sayisi-1
+call ekranayazdir
+
+dongu:                      ; toplam eleman sayisi kadar tekrar
+    mov cx,0                ; siralanmamis eleman sayisi
+    icdongu:                ; kalan eleman sayisi kadar tekrar         
+        mov si,cx
+        mov al,[dizi0+si]   ; soldaki eleman
+        mov bl,[dizi0+si+1] ; sagdaki eleman
+        cmp al,bl
+        jbe devam           ; soldaki kucukse degistrme yapma
+        call degistir       ; soldaki buyukse degistir
+        devam:               
+            inc cx          ; siralanmamis elemanlarda bir artir
+            cmp cx,dx       ; siralanmamis elemanlarin sonuna geldimi
+            jnb icdongusonu ; siralanmamis elemanlarin sonu
+    jmp icdongu             ; siralanmamis eleman devam ediyor
+    icdongusonu:            ; ic dongude siralanmamis eleman kalmadi    
+    dec dx                  ; sirasiz kalan eleman sayisini bir azalt
+    cmp dx,0                ; sirasiz eleman sayisi 0 mi?
+    je bitir                ; sirasiz eleman sayisi 0 ise bitir
+    jmp dongu               ; sirasiz eleman varsa basa git
+bitir: 
+call ekranayazdir           ; sirali yazdir
+hlt                         ; program bitisi
+
+degistir proc               ; yanyana iki karakter yer degistirir
+    mov [dizi0+si],bl
+    mov [dizi0+si+1],al 
+    ret
+degistir endp
+
+ekranayazdir proc
+    push dx                 ; dl ye deger atanacak
+    mov cx, 0               ; karakter sayaci
+    mov ah, 2               ; int 21, ah=2, ekrana karakter yazdir
+    tekrar:  
+        mov si,cx
+        mov dl, [dizi0+si]
+        int 21h             ; int 21, ah=2, ekrana karakter yazdir
+        inc cx
+        cmp cx, ADET
+        ja cikis
+    jmp tekrar  
+    cikis:  
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h
+    pop dx                  ; dl nin eski degeri alindi
+    ret    
+ekranayazdir endp
+```
+
+## carpmaislemi
+
+```asm
+org 0100h
+mov [0100h], word ptr 121   ; 1.sayi
+mov [0102h], word ptr 235   ; 2.sayi
+mov bx,[0100h]                
+mov ax,[0102h]  
+mov dl,2                    ; bolen (2)
+mov cx,0                    ; kalanlarin toplami saklanacak        
+cmp bx,0                    ; 1.sayi sifirmi?
+jz bitis                    ; sifirsa bitir
+dongu:                      ; her dongude 1.sayi iki katina cikar 2.sayi 2'ye bolunur
+    cmp ax,0                ; 2.sayi sifirsa veya dongude sifir olduysa bitir
+    jz bitis
+    div dl                  ; 2.sayi 2'ye bolunur
+    cmp ah,0                ; kalan kontrol ediliyor
+    jz atla                 ; kalan yoksa ekleme yapmadan devam et
+    add cx,bx               ; kalan 1 ise 1.sayiyi sonuca ekle
+    atla:                   
+        add bx,bx           ; 1.sayiyi iki katina cikar
+        xor ah,ah           ; bir onceki islemden kalani sifirla
+        jmp dongu           
+bitis:  
+mov [0104h],cx              ; sonucu bir sonraki adrese kaydet
+hlt
+```
+
+## matriscarpimi
+
+```asm
+; 2x2 iki matrisin carpimini hesaplar
+; 0100h-0103h birinci matris
+; 0104h-0107h ikinci matris
+; m.ali akcayol - 26.07.2007
+;
+; 1   2   3   5   7   D
+;       X       = 
+; 3   8   2   4   19  2F
+;
+                        
+org 0100h
+mov [0100h],1
+mov [0101h],2
+mov [0102h],3
+mov [0103h],8
+mov [0104h],3
+mov [0105h],5
+mov [0106h],2
+mov [0107h],4
+
+mov al,[0100h]
+mul [0102h]
+mov bl,al
+mov al,[0101h]
+mul [0106h]
+add al,bl
+mov [0108h],al
+
+mov al,[0100h]
+mul [0105h]
+mov bl,al
+mov al,[0101h]
+mul [0107h]
+add al,bl
+mov [0109h],al
+
+mov al,[0102h]
+mul [0104h]
+mov bl,al
+mov al,[0103h]
+mul [0106h]
+add al,bl
+mov [010Ah],al
+
+mov al,[0102h]
+mul [0105h]
+mov bl,al
+mov al,[0103h]
+mul [0107h]
+add al,bl
+mov [010Bh],al
+
+hlt
+```
+
+## radixsort
+
+```asm
+; radix sort - kelimeleri alfabetik olarak siralar
+; m.ali akcayol
+; 11.07.2007
+
+org 0100h
+kelimeler db 'klf','dfa','fez','zas','ser','akf','kle','mys','mhv','akc'
+
+mov di,0                    ; hangi karakterin karsilatirilmakta oldugunu saklar
+mov si,offset kelimeler     ; kelime sayisi kadar dongu icin
+mov ch,0                    ; her kelime icin
+mov dl,9                    ; siralanmamis eleman sayisi
+
+call ekranayazdir           ; kelimelerin ilk sirasini ekrana yazar
+
+sonrakikelime:              ; her dongude bir sonraki kelimeyi secer
+    cmp di,2                ; di=2 ise 3.karakterlere gore siralaniyor
+    je karakter3            
+    cmp di,1                ; di=1 ise 2.karakterlere gore siralaniyor
+    je karakter2            
+    cmp di,0                ; di=0 ise 1.karakterlere gore siralaniyor
+    je karakter1            
+    karakter3:              ; ucuncu karakterlere gore siralaniyor
+        mov al,[si-2]       ; ucuncu karaktere gore siralamayi...
+        cmp al,[si+3-2]     ; ...birinci ve ikinci karakterleri ayni olanlar arasinda yap
+        jne atla            ; birinci karakterler ayni degilse gec
+    karakter2:              ; ikinci karakterlere gore siralaniyor 
+        mov al,[si-1]       ; ikinci karaktere gore siralamayi...
+        cmp al,[si+3-1]     ; ...birinci karakterleri ayni olanlar arasinda yap
+        jne atla            ; birinci karakterler ayni degilse gec
+    karakter1:              ; ikinci karakterlere gore siralaniyor 
+        mov al,[si]         
+        cmp al,[si+3]       ; birinci karakterler ayni ikincileri karsilastir
+        jbe atla            ; birinci ikinciden kucukse yer degistirme
+
+        push si             ; su andaki si push edilir
+        sub si,di              ; yer degisterecek kelimenin ilk karakter adresi
+        call yerdegistir
+        pop si              ; eski si geri alindi
+    atla:
+        inc ch              ; bir kelime ilerle
+        cmp ch,dl           
+        je sonrakitur       ; siralanmamislarin sonuysa bir sonraki tura gec
+        add si,3            ; degilse bir sonraki kelimeye gec
+        jmp sonrakikelime       
+    sonrakitur:             ; kelime sayisi kadar tur yapilir
+        dec dl              ; her turda bir kelime dogru yere getirilir (bubble sort)
+        cmp dl,0            ; en son tur bittimi?
+        je sonrakikarakter  ; bir sonraki karaktere gec
+        mov si, offset kelimeler    ; yeni tur
+        mov ch,0                    
+        jmp sonrakikelime   ; sonraki kelimeye gec
+    sonrakikarakter:        ; bir sonraki karaktere gore siralar
+        mov dl,9            ; siralanmamis kelime sayisi
+        inc di              ; siralanacak yeni kaakter sira nosu
+        cmp di,3            ; karakter bittimi? 3=4.karakter
+        je bitis            ; evet bitir
+        mov si, offset kelimeler    ; ilk kelimenin ilk karakterini gosterir
+        add si,di                   ; si her kelimenin di.karakterini gosterir
+        mov ch,0                    ; ilk kelimeye gecmek icin 
+        jmp sonrakikelime           
+bitis:
+call ekranayazdir 
+call mesajyaz
+hlt
+
+yerdegistir proc                    ; si ile verilen kelimeyle yanindakini yer degistir
+    push si
+    push cx
+    mov cl,0
+    dongu:
+        mov al,[si]
+        mov bl,[si+3]
+        mov [si],bl
+        mov [si+3],al
+        inc si
+        inc cl
+        cmp cl,3
+        je cikis
+        jmp dongu 
+    cikis:    
+    pop cx
+    pop si       
+    ret
+yerdegistir endp                               
+
+ekranayazdir proc           ; ekrana 3 karakterlik kelimeleri alt alta yazar
+    pusha
+    mov cx, 0               ; karakter sayaci
+    devam:  
+        mov si,cx 
+        mov dl, [0100h+si]
+        mov ah, 2           
+        int 21h             ; int 21, ah=2, ekrana dl'deki karakteri yazar
+        inc cx
+        cmp cx,30           ; toplam 30 karakter
+        je yazmacikisi
+        mov ax,cx
+        mov bl,3            ; her kelimeden sonra alt satira gecer
+        div bl
+        cmp ah,0
+        jne devam
+        mov ah, 2           
+        mov dl, 0Dh         ; return
+        int 21h                 
+        mov dl, 0Ah         ; yeni satir
+        int 21h
+        jmp devam
+    yazmacikisi:
+    mov ah, 2           
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h
+    popa
+    ret    
+ekranayazdir endp   
+
+mesajyaz proc
+    mov dx, offset mesaj
+    mov ah, 9
+    int 21h
+    ret
+    mesaj db "alfabetik siralama islemi tamamlandi... $"         
+mesajyaz endp
+```
+
+## selectionsort
+
+```asm
+org 0100h
+mov [0100h],'7'
+mov [0101h],'5'
+mov [0102h],'9'
+mov [0103h],'3'
+mov [0104h],'2'
+mov [0105h],'7'
+mov [0106h],'8'
+mov [0107h],'6'
+mov [0108h],'5'
+mov [0109h],'1'
+mov [010Ah],'3'
+
+call ekranayazdir   ; baslangic durumunu yazdir
+
+mov dx,0100h        ; soldaki gosterge
+mov cx,0100h        ; kontrol edilen 
+mov bx,0100h        ; en kucuk sayinin adresi icin 
+
+dongu:              ; her sayinin dogru yeri bulunur
+    mov si, cx      
+    mov al,[si]     
+    cmp al,[bx]     ; bir sonraki sayi en kucukle karsilastirilir
+    jae atla        ; buyuk veya esitse bir sonrakine gec
+    mov bx,cx       ; yeni sayi en kucukten kucukse en kucuk yap
+    inc cx          ; bir sonrakine gec
+    cmp cx,010Bh    ; sona gelindimi?
+    je yerdegistir  ; sonda ise yer degistir
+    jmp dongu       ; sona gelinmedi basa don
+    yerdegistir:
+        cmp bx,dx
+        je ayniatla ; ayni eleman yer degistirme
+            call degistir   ; dx ile bx yer degistirir
+        ayniatla:
+        inc dx          ; soldaki gosterge bir ilerler
+        cmp dx, 010Ah   ; sona gelindimi?
+        je cikis        ; son elemanda sirasina konduysa cikis yap 
+        mov cx,dx       ; siralanmamis sayinin adresi cx bx e atilir
+        mov bx,dx
+        jmp dongu       ; basa don 
+    atla:               ; yeni sayi buyuk veya esitse bir sonrakini sec
+        inc cx
+        cmp cx,010Bh    ; sona gelindimi?
+        je yerdegistir  ; son elemanda en kucukle karsilastirildigi
+        jmp dongu       ; yer degirme yapilir ve basa donulur
+          
+cikis:
+    call ekranayazdir
+hlt    
+                              
+degistir proc
+    push ax
+    push si
+    mov si,dx
+    mov al,[si]
+    mov ah,[bx]
+    mov [si],ah
+    mov [bx],al
+    pop si
+    pop ax
+    ret    
+degistir endp    
+
+ekranayazdir proc
+    mov cx, 0               ; karakter sayaci
+    mov ah, 2               ; int 21, ah=2, ekrana karakter yazdir
+    tekrar:  
+        mov si,cx
+        mov dl, [0100h+si]
+        int 21h             ; int 21, ah=2, ekrana karakter yazdir
+        inc cx
+        cmp cx,11
+        je yazmacikisi
+        mov dl, ','
+        int 21h             ; int 21, ah=2, ekrana karakter yazdir
+    jmp tekrar  
+    yazmacikisi:  
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h
+    ret    
+ekranayazdir endp
+```
+
+## tekcift
+
+```asm
+; bir dizideki tek sayilari dizinin on kismina
+; cift sayilari arka kismina alir
+; m.ali akcayol                  
+; 01.07.2007
+
+org 0100h
+mov [0100h],'1'
+mov [0101h],'4'
+mov [0102h],'2'
+mov [0103h],'8'
+mov [0104h],'7'
+mov [0105h],'3'
+mov [0106h],'5'
+mov [0107h],'9'
+mov [0108h],'2'
+mov [0109h],'6'
+
+call ekranayazdir   ; baslangic durumunu yazdir
+
+mov bx,0100h        ; ilk sayi
+mov cx,0109h        ; son sayi
+mov dl,2            ; bolen
+
+teksayidongu:       ; soldaki ilk cift sayiyi bulur
+    mov si, bx
+    mov al,[si]     
+    xor ah,ah       ; onceki bolme sonucu atiliyor
+    div dl          
+    cmp ah,0        ; bolmede kalan varmi?
+    jnz devamtek        ; kalan varsa tektir
+    jmp ciftsayidongu   ; kalan yoksa cifttir
+    
+    devamtek:
+        inc bx
+        cmp bx,cx
+        je cikis
+        jmp teksayidongu
+        
+ciftsayidongu:
+    mov si,cx
+    mov al,[si]
+    xor ah,ah
+    div dl
+    cmp ah,0
+    jz devamcift
+    jmp degistir
+    
+    devamcift:
+        dec cx
+        cmp bx,cx
+        je cikis
+        jmp ciftsayidongu
+        
+degistir:
+    push ax
+    mov al,[bx]
+    mov ah,[si]
+    mov [bx],ah
+    mov [si],al
+    pop ax
+    jmp teksayidongu
+          
+cikis:
+call ekranayazdir
+hlt    
+                              
+ekranayazdir proc
+    mov cx, 0               ; karakter sayaci
+    mov ah, 2               ; int 21, ah=2, ekrana karakter yazdir
+    tekrar:  
+        mov si,cx
+        mov dl, [0100h+si]
+        int 21h             ; int 21, ah=2, ekrana karakter yazdir
+        inc cx
+        cmp cx,9
+        ja yazmacikisi
+        mov dl, ','
+        int 21h             ; int 21, ah=2, ekrana karakter yazdir
+    jmp tekrar  
+    yazmacikisi:  
+    mov dl, 0Dh             ; return
+    int 21h                 
+    mov dl, 0Ah             ; yeni satir
+    int 21h
+    ret    
+ekranayazdir endp
+```
+
+## deci to hex
+
+```asm
+; decibin - get decimal digits from keyboard
+; and convert them to binary in BX register
+
+.model tiny
+
+.code
+.startup
+
+;- - - - - - - - - - - -
+
+; main program loop
+
+start:
+  call    read_num
+  call    print_crlf
+  call    print_hex
+  call    print_crlf
+  jmp     start       ; loop endlessly
+
+
+; *********************************************
+; print_crlf
+; prints out a carriage return and linefeed
+; *********************************************
+
+print_crlf  proc
+
+    mov   ah, 2h    ; print character function
+    mov   dl, 0dh   ; carriage return
+    int   21h       ; print it
+    mov   dl, 0ah   ; linefeed
+    int   21h       ; print it
+    
+  ret
+print_crlf endp
+
+
+
+; *********************************************
+; read_num
+; reads a number from keyboard input
+; and stores it in BX in binary
+; *********************************************
+
+read_num  proc
+
+    mov   bx, 0h      ; clear bx for number
+  
+  ;
+  ; get digit from keyboard and
+  ; convert it to binary
+  ;
+  newchar:
+    mov   ah, 1h      ; keyboard input function
+    int   21h         ; execute ^ with dos
+    sub   al, 30h     ; ascii to binary
+    jl    endinpt     ; jump if < 0
+    cmp   al, 9d      ; is it > 9d?
+    jg    endinpt     ; yes, not decimal digit
+    cbw               ; byte in al to word in ax
+    
+  ;
+  ; digit is now in AX
+  ; multiply number in BX by 10d
+  ;
+    xchg  ax, bx      ; trade digit and number
+    mov   cx, 10d     ; put 10d in CX
+    mul   cx          ; number times 10d
+    xchg  ax, bx      ; trade number and digit
+  
+  ; 
+  ; add digit in AX to number in BX
+  ;
+    add   bx, ax      ; add digit to number
+    jmp   newchar     ; get next digit
+  
+  ;
+  ; check to see what they entered
+  ; if nothing, exit
+  ; otherwise, return from process
+  ;
+  endinpt:
+    cmp   bx, 0h      ; is it 0?
+    jne   return      ; nope, return from process
+    .exit             ; yup, exit program
+  
+  return:
+  
+  ret
+read_num endp
+
+
+
+; *********************************************
+; print_hex
+; prints in hex to the screen the contents of 
+; BX
+; *********************************************
+
+print_hex proc
+
+    mov   ch, 4h    ; number of digits to print
+  
+  ; start with first digit in BX
+  ; register
+
+  rotate:
+    mov   cl, 4h    ; set count to 4 bits
+    rol   bx, cl    ; left digit to right
+  
+  ; convert to number
+
+    mov   al, bl    ; mov to AL
+    and   al, 0fh   ; mask off left digit
+    add   al, 30h   ; convert hex to ascii
+    cmp   al, 3ah   ; is it > 9?
+    jl    printit   ; jump if digit =0 to 9
+    add   al, 27h   ; digit is A to F
+  
+  ; print the digit in
+  ; the AL register
+
+  printit:
+    mov   dl, al    ; put ASCII char in DL
+    mov   ah, 2h    ; display output function
+    int   21h       ; call DOS
+    dec   ch        ; done 4 digits?
+    jnz   rotate    ; not yet
+    
+  ; fallthrough and return
+  
+  ret
+print_hex endp
+
+    
+;- - - - - - - - - - - -
+
+  end
+```
+
+## hex-dec çevrimi
+
+```asm
+                .MODEL SMALL
+		.STACK 64
+		.DATA
+DATA1		DB	6H
+DATA2		DB	?
+MAIN		PROC	FAR
+MOV AX,DATA1
+MOV BX,0AH
+DIV BX
+MOV DH,AL
+MUL BX
+MOV CX,DATA1
+SUB CX,AX
+MOV DL,CL
+http://eng.harran.edu.tr/~nbesli/RBT/80x86_Komut.pdf
+```

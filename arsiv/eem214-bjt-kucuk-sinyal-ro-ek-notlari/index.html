@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Elektronik I: BJT Küçük Sinyal Modeli ve rₒ’nun Giriş Direncine Etkisi — hasancan.net</title>
+<meta name="description" content="Ortak baz ve ortak emetör bağlantıları, hibrit-π modeli, 12 voltluk BJT yükselteci örneği; emetör dirençli bağlantıda ve emetör izleyicide sonlu çıkış direncinin etkisi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Elektronik I: BJT Küçük Sinyal Modeli ve rₒ’nun Giriş Direncine Etkisi">
+<meta property="og:description" content="Ortak baz ve ortak emetör bağlantıları, hibrit-π modeli, 12 voltluk BJT yükselteci örneği; emetör dirençli bağlantıda ve emetör izleyicide sonlu çıkış direncinin etkisi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Elektronik I: BJT Küçük Sinyal Modeli ve rₒ’nun Giriş Direncine Etkisi", "description": "Ortak baz ve ortak emetör bağlantıları, hibrit-π modeli, 12 voltluk BJT yükselteci örneği; emetör dirençli bağlantıda ve emetör izleyicide sonlu çıkış direncinin etkisi.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM214 Elektronik I: BJT Küçük Sinyal Modeli ve rₒ’nun Giriş Direncine Etkisi">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.04.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ortak-baz-baglantisi-ve-hibrit-modeli">Ortak baz bağlantısı ve hibrit-π modeli</a></li><li><a href="#ortak-emetorlu-yukseltec-ornegi">Ortak emetörlü yükselteç örneği</a></li><li><a href="#ek-1-emetor-direncli-ortak-emetorde-sonlu-r">Ek 1: Emetör dirençli ortak emetörde sonlu rₒ</a></li><li><a href="#ek-2-emetor-izleyicide-sonlu-r">Ek 2: Emetör izleyicide sonlu rₒ</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM214 Elektronik I: BJT Küçük Sinyal Modeli ve rₒ’nun Giriş Direncine Etkisi</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 08.04.2013 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, EEM214 Elektronik I klasöründeki bir arkadaşın <strong>8 Nisan 2013</strong> tarihli ders notlarını ve iki el yazısı ek türetmeyi içeriyor. Fotoğraflanmış sayfalardan metne aktarıldı; kişisel bilgiler çıkarıldı. Kaynak görüntüler özel arşivde tutulduğundan bu yazıda görsel veya indirme dosyası bulunmuyor.</p>
+<h2 id="ortak-baz-baglantisi-ve-hibrit-modeli">Ortak baz bağlantısı ve hibrit-π modeli</h2>
+<p>Ortak baz bağlantısında giriş emetör ile baz, çıkış kolektör ile baz arasındadır. Küçük sinyal eşdeğerinde emetör giriş direnci r_e, kolektör akım kaynağı αi_e ile gösterilir:</p>
+<p>Z_E = v_i/i_e = r_e.</p>
+<p>BJT’nin hibrit-π modelinde baz-emetör arasında r_π, kolektör-emetör arasında g_m v_be bağımlı akım kaynağı ve r_o bulunur. Baz-kolektör arasındaki r_μ çok büyük kabul edilerek ihmal edilir.</p>
+<ul><li>g_m = I_C/V_T, birimi siemens.</li><li>V_T yaklaşık 25–26 mV.</li><li>r_π = v_be/i_b = β/g_m = V_T/I_B.</li><li>i_b = i_c/β = (g_m/β)v_be.</li><li>r_e = V_T/I_E.</li><li>I_C ≈ I_E kabulüyle r_e ≈ 1/g_m ve r_π ≈ βr_e.</li></ul>
+<p><em>Not: r_π = βr_e eşitliği nottaki I_C ≈ I_E yaklaşımıyla kullanılmıştır. r_e = V_T/I_E tanımı tam uygulanırsa r_π = (β + 1)r_e olur.</em></p>
+<h2 id="ortak-emetorlu-yukseltec-ornegi">Ortak emetörlü yükselteç örneği</h2>
+<p>Verilen devrede <strong>V_CC = 12 V, R_B = 470 kΩ, R_C = 3 kΩ, β = 100, r_o = 50 kΩ</strong>; emetör topraklıdır. İstenenler giriş/çıkış dirençleri ve gerilim/akım kazançlarıdır.</p>
+<h3 id="dc-calisma-noktasi">DC çalışma noktası</h3>
+<p>I_B = (12 − 0.7)/470 kΩ = <strong>24.04 µA</strong>.</p>
+<p>I_E = (β + 1)I_B ≈ <strong>2.428 mA</strong>.</p>
+<p>r_e = 26 mV/2.428 mA ≈ <strong>10.71 Ω</strong>.</p>
+<p>Not, I_C ≈ 2.4 mA kullanarak:</p>
+<p>V_CEQ = 12 − 2.4 mA·3 kΩ = <strong>4.8 V</strong></p>
+<p>bulur. Yük doğrusunun uçları I_C,sat = 4 mA ve V_CE,cutoff = 12 V’tur. Q noktasının daha küçük salınım payı 4.8 V olduğundan ideal sınırlarla çizilen en büyük simetrik çıkış <strong>9.6 V_pp</strong> olarak gösterilir.</p>
+<p><em>Not: 9.6 V_pp hesabı doyumdaki V_CE’yi sıfır kabul eder; gerçek doyum gerilimi ve doğrusal çalışma sınırları kullanılabilir salınımı azaltır.</em></p>
+<h3 id="giris-ve-cikis-direnci">Giriş ve çıkış direnci</h3>
+<p>AC eşdeğerde besleme toprak, kuplaj kondansatörleri kısa devredir:</p>
+<ul><li>Z_i = R_B ∥ βr_e = 470 kΩ ∥ 1071 Ω ≈ <strong>1.07 kΩ</strong>.</li><li>Z_o = R_C ∥ r_o = 3 kΩ ∥ 50 kΩ ≈ <strong>2.83 kΩ</strong>.</li><li>r_o ihmal edilirse Z_o ≈ R_C.</li></ul>
+<p>Çıkış direnci hesabında girişteki bağımsız işaret kaynağı sıfırlanır. Yük bağlanmışsa çıkış düğümündeki toplam paralel direnç R_C ∥ r_o ∥ R_L olur.</p>
+<h3 id="gerilim-kazanci">Gerilim kazancı</h3>
+<p>Notta akım bölüşümüyle:</p>
+<ul><li>i_RC = βi_b·r_o/(r_o + R_C).</li><li>i_ro = βi_b·R_C/(r_o + R_C).</li><li>v_o = −βi_b(R_C ∥ r_o).</li></ul>
+<p>Buradan:</p>
+<p>A_v ≈ −(R_C ∥ r_o)/r_e.</p>
+<p>r_o → ∞ için A_v ≈ −R_C/r_e = −3000/10.71 ≈ <strong>−280.11</strong>. Eksi işareti faz terslemesini belirtir. Yük varsa A_v ≈ −(R_C ∥ r_o ∥ R_L)/r_e.</p>
+<h3 id="akim-kazanci">Akım kazancı</h3>
+<p>Giriş akımının baz direnci ile transistör girişi arasında bölünmesi:</p>
+<p>i_b/i_i = R_B/(R_B + βr_e).</p>
+<p>Çıkış akım yönü nottaki oklarla alındığında:</p>
+<p>A_i = [βr_o/(r_o + R_C)]·[R_B/(R_B + βr_e)].</p>
+<p>r_o → ∞ için A_i = βR_B/(R_B + βr_e).</p>
+<h2 id="ek-1-emetor-direncli-ortak-emetorde-sonlu-r">Ek 1: Emetör dirençli ortak emetörde sonlu rₒ</h2>
+<p>Devrede bazın toprağa direnci R_B, emetörün toprağa direnci R_E ve kolektörün toprağa direnci R_C’dir. Transistörün baz-emetör direnci βr_e, kolektör-emetör direnci r_o alınır.</p>
+<p>Not, bağımlı kaynak dönüşümleriyle önce:</p>
+<p>R′ = R_E ∥ (r_o + R_C) = R_E(r_o + R_C)/(R_E + r_o + R_C)</p>
+<p>tanımını yapar. Baz gerilimi:</p>
+<p>v_b = i_b(βr_e + R′) + [βi_b r_o/(r_o + R_C)]R′.</p>
+<p>Böylece:</p>
+<p>Z_b = v_b/i_b = βr_e + R′ + βr_oR′/(r_o + R_C)</p>
+<p>= βr_e + R_E[(β + 1)r_o + R_C]/(R_E + r_o + R_C)</p>
+<p>= <strong>βr_e + R_E[(β + 1) + R_C/r_o]/[1 + (R_E + R_C)/r_o]</strong>.</p>
+<p>Yükseltecin giriş direnci <strong>Z_i = R_B ∥ Z_b</strong>’dir. Sonlu r_o, emetör direncinin baza yansıyan katkısını değiştirir.</p>
+<h2 id="ek-2-emetor-izleyicide-sonlu-r">Ek 2: Emetör izleyicide sonlu rₒ</h2>
+<p>Kolektör AC toprakta olduğundan emetörün gördüğü direnç R_E ∥ r_o olur. Notun eşdeğerinden:</p>
+<p>v_b = i_b[βr_e + (R_E ∥ r_o)] + βi_b(R_E ∥ r_o).</p>
+<p>Z_b = βr_e + (β + 1)(R_E ∥ r_o)</p>
+<p>= <strong>βr_e + R_E(β + 1)/(1 + R_E/r_o)</strong>.</p>
+<p>Toplam giriş yine <strong>Z_i = R_B ∥ Z_b</strong>’dir. İki ek sayfadaki çizimler bu sonuçlara ulaşan kaynak dönüşümlerini adım adım gösterir; burada bağlantıların tanımı ve ara bağıntılar metinle korundu.</p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>

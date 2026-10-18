@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM413 Bilgisayar Ağları: TCP Laboratuvarı: El Sıkışma, RTT ve ACK — hasancan.net</title>
+<meta name="description" content="TCP Laboratuvarı: El Sıkışma, RTT ve ACK. Ders arşivinden soru, açıklama ve belgeler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem413-tcp-laboratuvar-raporlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM413 Bilgisayar Ağları: TCP Laboratuvarı: El Sıkışma, RTT ve ACK">
+<meta property="og:description" content="TCP Laboratuvarı: El Sıkışma, RTT ve ACK. Ders arşivinden soru, açıklama ve belgeler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem413-tcp-laboratuvar-raporlari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202610181238">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM413 Bilgisayar Ağları: TCP Laboratuvarı: El Sıkışma, RTT ve ACK", "description": "TCP Laboratuvarı: El Sıkışma, RTT ve ACK. Ders arşivinden soru, açıklama ve belgeler.", "inLanguage": "tr", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem413-tcp-laboratuvar-raporlari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM413 – Bilgisayar Ağları", "associatedMedia": {"@type": "MediaObject", "name": "eem413-tcp-laboratuvar-raporlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem413-tcp-laboratuvar-raporlari/eem413-tcp-laboratuvar-raporlari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM413 Bilgisayar Ağları: TCP Laboratuvarı: El Sıkışma, RTT ve ACK">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem413">EEM413</a></nav>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM413 – Bilgisayar Ağları</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.12.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#tcp-raporu-a">TCP raporu A</a></li><li><a href="#tcp-raporu-b">TCP raporu B</a></li><li><a href="#tcp-raporu-1-aralik-2011">TCP raporu, 1 Aralık 2011</a></li><li><a href="#tcp-raporu-c">TCP raporu C</a></li><li><a href="#tcp-raporu-d">TCP raporu D</a></li></ol>
+      </nav>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM413</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM413 Bilgisayar Ağları: TCP Laboratuvarı: El Sıkışma, RTT ve ACK</h1>
+            <p class="kucuk">EEM413 – Bilgisayar Ağları · 16.12.2015 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Ders arşivindeki öğrenci laboratuvar raporlarıdır; öğrenci adları, numaraları ve kimlik bilgileri çıkarılmıştır. Belge üzerindeki tarih bulunmadığında kaynak dosyanın oluşturulma ya da son değiştirilme tarihi kullanılmıştır. Belgelerin arşiv için hazırlanmış PDF kopyaları yazının sonunda indirilebilir.</p>
+<h2 id="tcp-raporu-a">TCP raporu A</h2>
+<p>EEM413_Lab5</p>
+<p><strong>1.</strong> IP numaramız: 192.168.1.121 Source port numarası: 49438</p>
+<p><strong>2.</strong> IP adresi: 128.119.245.12 ve port numarası 80 (HTTP)</p>
+<p><strong>3.</strong> Source IP adres: 192.168.1.121 ve port numarası 49438'dir</p>
+<p><strong>4.</strong> Sıra numarası olarak 0 ile işaretlenir. Syn flag :1</p>
+<p><strong>5.</strong> Sıra numarası 0 olarak ayarlanır. Syn ve Ack flag'leri set yapılır.</p>
+<p><strong>6.</strong> sequence number: 153123</p>
+<p><strong>7.</strong> EstimatedRTT=(1−α)EstimatedRTT+α SampleRTT</p>
+<p><strong>8.</strong> İlk altı TCP segmetin uzunluğu 20 byte.</p>
+<p><strong>9.</strong> Son ACK onay kaynağı 6012 olarak görünüyor.</p>
+<p><strong>10.</strong> Bilgisayarımızda herhangi bir transfer gözükmüyor. Yeniden göndermek için sıra numarasını kontrol etmek gerekiyor.</p>
+<p><strong>11.</strong> ACK'in kaynağı kendi segmentinde görünüyor.</p>
+<p><strong>12.</strong> Gönderilen byte 152198 Troughput= = = 776354 bps Gönderim zamanı 17.152008-16.955966</p>
+<p><strong>13.</strong> Aktarımın yavaşça başlayıp, daha sonra hızlandığını görebiliriz. Ayrıca oluşan sıkışıklıkta grafiğin sağ tarafında görülebilmekte.</p>
+<p><strong>14.</strong> Transfer yavaşça başladı ve giderek hızlanarak son buldu. Transfer sırasında ki sıkışıklık grafikte sağ tarata görülebilmekte.</p>
+<figure class="yazi-gorsel"><img src="belge-01-sekil-02.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu A: şekil ve hesap tabloları, sayfa 2"><figcaption>TCP raporu A, sayfa 2</figcaption></figure>
+<figure class="yazi-gorsel"><img src="belge-01-sekil-04.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu A: şekil ve hesap tabloları, sayfa 4"><figcaption>TCP raporu A, sayfa 4</figcaption></figure>
+<h2 id="tcp-raporu-b">TCP raporu B</h2>
+<p>EEM 413</p>
+<p>BİLGİSAYAR AĞLARI</p>
+<p>LAB 3 : TCP</p>
+<p><strong>1.</strong> Source IP nadresi: 192.168.1.121 Source port numarası: 49438</p>
+<p><strong>2.</strong> Hedef IP adresi: 128.119.245.12 ve port numarası 80 (HTTP)</p>
+<p><strong>3.</strong> Source IP adres: 192.168.1.121 ve port numarası 49438'dir</p>
+<p><strong>4.</strong> Sequence numarası olarak 0 ile işaretlenir. Syn flag :1 olmuştur</p>
+<p><strong>5.</strong> Sequence numarası 1 olarak ayarlanır. Syn ve Ack flag'leri set yapılır.</p>
+<p><strong>6.</strong> sequence number: 153123 , 4 numaralı segmenttir.</p>
+<p><strong>7.</strong> Programdan elde edilen grafik:</p>
+<p><strong>8.</strong> İlk altı TCP segmetin uzunluğu 20 byte.</p>
+<p><strong>9.</strong> Son ACK onay kaynağı 6012 olarak görünüyor.</p>
+<p><strong>10.</strong> Bilgisayarımızda herhangi bir transfer gözükmüyor. Yeniden göndermek için sıra numarasını kontrol etmek gerekiyor.</p>
+<p><strong>11.</strong> ACK'in kaynağı kendi segmentinde görünüyor.</p>
+<p><strong>12.</strong> Gönderilen byte 152198 Troughput= = = 776354 bps Gönderim zamanı 17.152008-16.955966</p>
+<p><strong>13.</strong> Aktarımın yavaşça başlayıp, daha sonra hızlandığını görebiliriz. Ayrıca oluşan sıkışıklıkta grafiğin sağ tarafında görülebilmekte.</p>
+<p><strong>14.</strong> Transfer yavaşça başladı ve giderek hızlanarak son buldu. Transfer sırasında ki sıkışıklık grafikte sağ tarafta görülebilmekte.</p>
+<p>Bu deneyde TCP üzerinde incelemelerde bulunduk. 150kb’lık bir “.txt” dosyasını internet üzerinde bir server’a yükledik. Sequence ve acknowledge numaralarını inceledik. Ayrıca TCP’nin congestion control, slow-start ve congestion avoidence yapılarını gördük.</p>
+<figure class="yazi-gorsel"><img src="belge-02-sekil-03.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu B: şekil ve hesap tabloları, sayfa 3"><figcaption>TCP raporu B, sayfa 3</figcaption></figure>
+<figure class="yazi-gorsel"><img src="belge-02-sekil-04.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu B: şekil ve hesap tabloları, sayfa 4"><figcaption>TCP raporu B, sayfa 4</figcaption></figure>
+<h2 id="tcp-raporu-1-aralik-2011">TCP raporu, 1 Aralık 2011</h2>
+<p>EEM-413 Bilgisayar Ağları Lab4 (TCP)</p>
+<p>İlk olarak http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip adresinden trace’leri yükledim ve ethernal-trace-1 dosyasını Wireshark programında açtım.</p>
+<p><strong>1.</strong> Source(Client computer) IP adresi 192.168.1.102 dir. Ayrıca source port 1161’dir.</p>
+<p><strong>2.</strong> Hedef (destination) IP adresi, 128.119.245.12’dir. Port 80’den alışveriş yapılmıştır. Yani HTTP portu. Bu 1. Sorunun resminde görülmektedir.</p>
+<p><strong>3.</strong> Bu sorunun cevabı 1. Soruda verilmiştir.</p>
+<p>Wireshark programında analysis -&gt; enabled protocols’e girip http’yi devredışı bıraktım.</p>
+<p><strong>4.</strong> Değerler aşağıda görüldüğü gibidir. SYN flag 1 olmuştur. Sequence numarası 0’dır.</p>
+<p><strong>5.</strong> Değerler aşağıda görüldüğü gibidir. Acknowledgement bayrağı set olmuştur. Sequence numarası 1’dir.</p>
+<p><strong>6.</strong> 4 numaralı segmenttir. HTTP POST komutu içeren TCP segmentidir. Bu segmentin dizi numarası 1 dir.</p>
+<p><strong>7.</strong> Elde edilen grafik bu şekildedir.</p>
+<p><strong>8.</strong> İlk TCP segmentinin boyutu 565 byte’tır. Diğer 5 TCP segmentinin her birinin boyu ise 1460 byte’tır.</p>
+<p><strong>9.</strong> Minimum miktar 5840’dir. Bu değer handshaking için son ACK alışverişi esnasında görülmektedir.</p>
+<p><strong>10.</strong> Transferlerde tekrar gönderilen bir paket görülmektedir. Yani kayıp söz konusu değildir. Bunu TCP segmentlerinin dizi numaralarını kontrol ederek gördüm.</p>
+<p><strong>11.</strong> Aşağıdaki tabloda istenen bilgiler görülmektedir.</p>
+<p>Acknowledged Sequence Number Acknowledged Data</p>
+<p>ACK1 1 776 ACK2 777 1426 ACK3 2203 1426 ACK4 3629 1426 ACK5 5505 1426 ACK6 6481 1426 ACK7 7907 1062 ACK8 8969 1426 ACK9 10395 126</p>
+<p><strong>12.</strong> TCP için througput değeri aşağıdaki gibi hesaplanmaktadır.</p>
+<p>Throughput = Bytes Send / Time to send = 152959 / (6.317617 – 6.030425) = 539791</p>
+<p><strong>13.</strong> Grafik aşağıdaki gibidir.</p>
+<p>YORUM</p>
+<p>Bu deneyde TCP üzerinde incelemelerde bulunduk. 150kb’lık bir “.txt” dosyasını internet üzerinde bir server’a yükledik. Sequence ve acknowledge numaralarını inceledik. Ayrıca TCP’nin congestion control, slow-start ve congestion avoidence yapılarını gördük.</p>
+<figure class="yazi-gorsel"><img src="belge-03-sekil-04.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu, 1 Aralık 2011: şekil ve hesap tabloları, sayfa 4"><figcaption>TCP raporu, 1 Aralık 2011, sayfa 4</figcaption></figure>
+<h2 id="tcp-raporu-c">TCP raporu C</h2>
+<p>BİLGİSAYAR AĞLARI LABORATUVARI – 3 TCP</p>
+<p><strong>1.</strong> </p>
+<ul><li>IP adresim : 192.168.2.2</li></ul>
+<ul><li>TCP port numarası : 54582</li></ul>
+<p><strong>2.</strong> </p>
+<ul><li>Destination IP Adres : 128.119.254.12</li></ul>
+<ul><li>TCP port numarası : 80</li></ul>
+<p><strong>3.</strong>  HTTP seçimi kaldırıldığımız zaman TCP bağlantılarını görürüz.</p>
+<p><strong>4.</strong>  TCP SYN segmenti 0’dır.</p>
+<p><strong>5.</strong> </p>
+<ul><li>Sorunun ekran görüntüsü 6. Sorunun altıdaki görüntüdür.</li></ul>
+<ul><li>SYN ACK ’nın sequence numarası 0’dır.</li></ul>
+<ul><li>SYN ACK 1 değerini gösterdiğinde acknowledge da 1 değerini gösterir.</li></ul>
+<p><strong>6.</strong>  SYN, ACK ve PUSH “set” olmuş durumdadır:</p>
+<p><strong>9.</strong>  Win = 64621 alabileceği en yüksek değerdir.</p>
+<p><strong>10.</strong>  Başlangıçta iletimde değildi. Ancak sonradan iletimde olduğunu gösterdi.</p>
+<p><strong>11.</strong> </p>
+<p>ACK seq. no: ACK data:</p>
+<p>ACK1 639 60 byte</p>
+<p>ACK2 2091 1460 byte</p>
+<p>ACK3 3543 1460 byte</p>
+<figure class="yazi-gorsel"><img src="belge-04-sekil-03.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu C: şekil ve hesap tabloları, sayfa 3"><figcaption>TCP raporu C, sayfa 3</figcaption></figure>
+<figure class="yazi-gorsel"><img src="belge-04-sekil-04.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu C: şekil ve hesap tabloları, sayfa 4"><figcaption>TCP raporu C, sayfa 4</figcaption></figure>
+<figure class="yazi-gorsel"><img src="belge-04-sekil-05.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu C: şekil ve hesap tabloları, sayfa 5"><figcaption>TCP raporu C, sayfa 5</figcaption></figure>
+<h2 id="tcp-raporu-d">TCP raporu D</h2>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP) *İlk olarak gerekli işlemleri yapıp yaptığımız trace işleminden sonra TCP araması yaparak ilk screenshotımızı alıyoruz.</p>
+<p><strong>1.</strong> </p>
+<p>Yukarıda da görüldüğü gibi source IP 192.168.2.2 olan benim adresim ve TCP port numarasıda Source port : 54852 dir.</p>
+<p><strong>2.</strong> </p>
+<p>gaia.cs.umass.edu adresinin yani destination ın IP Adresi : 128.119.245.12 ve</p>
+<p>TCP port numarası yukarıda da görüldüğü gibi ;</p>
+<p>TCP port numarası : 80 dir.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP)</p>
+<p><strong>3.</strong> </p>
+<p>Bahsedildiği üzere analyse kısmından http işareti kaldırıldığında sadece TCP connectionları görebilmekteyiz. Screenshotı aşağıdadır.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP)</p>
+<p><strong>4.</strong> TCP SYN segmenti aşağıda da gösterildiği gibi 0 değerine sahiptir. Flag kısmı ile birlikte gösterilmektedir.</p>
+<p><strong>5.</strong> </p>
+<p>SYN ACK nın sequence numarası tracelerdeki 2. Sırada belirtildiği gibi Seq=0 dır.</p>
+<p>SYN ACK kısmındaki ACK =1 kısmı acknowlegde değerinin 1 olduğunu göstermektedir.</p>
+<p>Gaia.cs.umass.edu adresi bu değeri SYN ve ack flaglarının set olma durumuna göre tanımlamıştır.</p>
+<p>Syn flagının set olma durumu ve diğer flagların durumu yukarıdaki screenshotta belirtilmektedir.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP)</p>
+<p><strong>6.</strong> </p>
+<p>Aşağıdaki screenshottada görüldüğü gibi SYN ve ACK set olmuş durumda ve push flagi set edilmiş durumdadır. Bundan dolayı HTTP POST command kısmıda mavi ile belirtilen kısımdır.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP) 7-8) **Veri paketleri arka arkaya olmayıp araya başka paketlerde girdiği için 2 screen shottada kırmızı ile belirtilmiş olan 6 paket veriyi göstermekteyim.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP) Yukarıda kırmızı ile gösterilen her ikili için gelen ACK mesajları bu ikililerin altlarında bulunmaktadır.</p>
+<p>**Hocam tüm değerleri kendi traceimden hesaplıyorum ancak hepsinin ACK sürelerini veye normal sürelerini yukarıdaki iki screenshoot da görebilirsiniz. Segment numaralarını göstermedim ama içlerini açıp yazdım .</p>
+<p>.</p>
+<p>Segment Gönderme ACK Uzunluk(byte) RTT(sn) Numarası Süresi(sn) süresi(sn) 1 0,143234 0.144592 692 0.001358 639 0,148036 0.297894 1506 0.149858 125511 2.219200 2.195250 1506 0.000325 126963 2.219205 2.219524 1506 0.000474 129867 2.445199 2.592395 1506 0.147196 131319 2.445204 2.611942 1506 0.166738</p>
+<p>EstimatedRTT leri her segment için aşağıya yazıcam ancak 1 tanesinin çözümünü göstericem.</p>
+<p>EstimatedRTT = 0.875 * EstimatedRTT + 0.125 * SampleRT</p>
+<p>Birinci için RTT =0.001358 sn</p>
+<p>İkinci için RTT = 0.875*0.001358 + 0.125*0.149858 = 0.0199205</p>
+<p>Üçüncü için RTT = 0.0174710</p>
+<p>Dördüncü için RTT = 0.0153463</p>
+<p>Beşinci RTT = 0.0318275</p>
+<p>Altıncı için RTT = 0.0486913</p>
+<p><strong>9.</strong> </p>
+<p>gaia.cs.umass.edu bu adres için ilk serverdan gelen ack 5840 byte ve son Ack geldiğinde windows size en çok 64621 olabiliyor. Aşağıdaki screenshoot daka win : kısmında belirtilmiştir. Bu trace de receiver buffer kapasitesiyle ilgili bir sıkıntı çekmemiştir.</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP)</p>
+<p><strong>10.</strong> Benim traceimde retransmittion var ancak bu birden fazla kere denediğim için olduğunu düşünüyorum çünkü ilkinde yoktu .</p>
+<p><strong>11.</strong> </p>
+<p>ACK isim Ack seq. numarası Ack data ACK1 639 60byte ACK2 2091 1460byte ACK3 3543 1460byte *Daha çook uzun bi şekilde devam etsede örnek olarak 3 tane gösterdim.</p>
+<p>Cumulatif ACK receiverın her aldığında gidiyor.</p>
+<p><strong>12.</strong> Throughtput nedir nasıl hesaplanır sorusunun cevabı :</p>
+<p>As a common throughput computation, in this question, we select the average time period as the whole connection time. Then, the average throughput for this TCP connection is computed as the ratio between the total amount data and the total transmission time. The total amount data transmitted can be computed by the difference between the sequence number of the first TCP segment (i.e. 1 byte for No. 4 segment) and the acknowledged sequence number of the last ACK (164091 bytes for No. 202 segment). Therefore, the total data are 164091 - 1 = 164090 bytes. The whole transmission time is the difference of the time instant of the first TCP segment (i.e.,</p>
+<p><strong>0.</strong> 026477 second for No.4 segment) and the time instant of the last ACK (i.e., 5.455830 second for No. 202 segment). Therefore, the total transmission time is 5.455830 -</p>
+<p><strong>0.</strong> 026477 = 5.4294 seconds. Hence, the throughput for the TCP connection is computed</p>
+<p>EEM-413 Bilgisayar Ağları Lab3 (TCP) as 164090/5.4294 = 30.222 KByte/sec.</p>
+<p><strong>13.</strong> ** Benim grafiğim örnek gösterilenden biraz farklı çıktı ama trace den almak istemediğim için kendiminkini koydum .</p>
+<p>*Slow startı baktığımızda tanımlayabiliriz. HTTP POST gönderisi ve grafiğin eğimindende bu sonuca varılabiliceğini düşnüyorum.</p>
+<p>*Tcp göndericisi bu yapıda daha agresif ve ağ çok yoğun olduğunda karışabiliceğini düşünüyorum ayrıca ACK lar bazen düzenli gelemeyebiliyor.TCP nin slow start fazında küçük web objelerinin gönderilmesi ciddi bi zaman kaybı olabilir.Ayrıca TCP nin davranışı direk kullanıldığı uygulamaya bağlıdır.</p>
+<figure class="yazi-gorsel"><img src="belge-05-sekil-05.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu D: şekil ve hesap tabloları, sayfa 5"><figcaption>TCP raporu D, sayfa 5</figcaption></figure>
+<figure class="yazi-gorsel"><img src="belge-05-sekil-07.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="TCP raporu D: şekil ve hesap tabloları, sayfa 7"><figcaption>TCP raporu D, sayfa 7</figcaption></figure>
+<p><em>Not: Bir raporda 1 Aralık 2011 tarihi bulunur; diğerleri farklı dönemlerden örneklerdir. Wireshark’ın göreli sıra numarası 0 gerçek başlık alanının sıfır olduğu anlamına gelmez. 1460 bayt TCP yükü ile 1500 bayt IP datagramı aynı ölçü değildir. Bunlar öğrenci raporlarıdır; cevaplar resmî anahtar değildir.</em></p>
+<p><em>Not: İlk rapordaki 152.198 bayt / (17,152008−16,955966) s hesabı yaklaşık 776.354 bayt/s verir; bit/s değildir. 1 Aralık 2011 raporundaki 152.959 / (6,317617−6,030425) işlemi yaklaşık 532.602 bayt/s’dir; yazılan 539.791 değeri bu sayılarla uyuşmaz.</em></p>
+          </div>
+        </div>
+      </article>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem413-tcp-laboratuvar-raporlari.zip" download>eem413-tcp-laboratuvar-raporlari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3.0 MB · 16.12.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem413-tcp-laboratuvar-raporlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202610181238"></script>
+<script src="/assets/lang/en.js?v=202610181238"></script>
+<script src="/assets/lang/de.js?v=202610181238"></script>
+<script src="/assets/js/site.js?v=202610181238"></script>
+</body>
+</html>
