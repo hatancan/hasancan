@@ -12,6 +12,8 @@ window.I18N.en = {
   'nav.blog': 'Blog',
   'nav.guestbook': 'Guestbook',
   'nav.contact': 'Contact',
+  'ad.label': 'Advertisement',
+  'ad.slot': 'AD SPACE',
 
   'ticker.label': 'BREAKING',
   'ticker.text': 'hasancan.net is live! · Under construction, content is coming bit by bit. · Don\'t forget to sign the guestbook :)',

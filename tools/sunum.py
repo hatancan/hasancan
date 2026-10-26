@@ -261,11 +261,19 @@ def parca(kaynak_html, desen):
     return re.sub(r'href="#', 'href="/#', m.group(0))  # ana sayfa bölüm bağlantıları alt sayfalardan da çalışsın
 
 
+def reklam(ad, olcu):
+    """Boş reklam alanı (yer tutucu). Doldurma kuralları REKLAM.md'de; ad/ölçü değişirse orayı da güncelle."""
+    return (f'<aside class="reklam reklam-{olcu} yer-tutucu" data-reklam="{ad}" data-i18n-attr="aria-label:ad.label">'
+            f'<span class="reklam-etiket" data-i18n="ad.label"></span>'
+            f'<div class="reklam-yer">[<span data-i18n="ad.slot"></span> · {olcu.replace("x", "×")}]</div></aside>')
+
+
 def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
     ana = (KOK / 'index.html').read_text(encoding='utf-8')
     ust = parca(ana, r'<header class="ust">.*?</header>')
     menu = parca(ana, r'<nav class="sekmeler".*?</nav>').replace(' class="aktif"', '')
     alt = parca(ana, r'<footer class="alt">.*?</footer>')
+    banner = parca(ana, r'<aside class="reklam[^"]*" data-reklam="ust-banner".*?</aside>')
     yol_html = ' <span aria-hidden="true">»</span> '.join(
         f'<a href="{h}">{t}</a>' if h else f'<span aria-current="page">{t}</span>' for t, h in yol)
     return f'''<!doctype html>
@@ -291,6 +299,7 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
   {ust}
   {menu}
   <nav class="yol" data-i18n-attr="aria-label:arch.crumbs">{yol_html}</nav>
+  {banner}
 {govde}
   {alt}
 </div>
@@ -373,6 +382,7 @@ def yazi_sayfasi(k, on, govde, icindekiler):
         <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
         <ol class="icindekiler">{toc}</ol>
       </nav>
+      {reklam('sol-dikey', '160x600')}
     </aside>
     <main class="orta">
       <article class="kutu yazi-sayfa" lang="tr">
@@ -387,6 +397,7 @@ def yazi_sayfasi(k, on, govde, icindekiler):
           </div>
         </div>
       </article>
+      {reklam('yazi-sonu', '468x60')}
       {indir}
     </main>
   </div>'''
@@ -449,6 +460,7 @@ def arsiv_dizini(kayitlar):
           <dt data-i18n="arch.lastAdded"></dt><dd>{e(son)}</dd>
         </dl>
       </section>
+      {reklam('sol-dikey', '160x600')}
     </aside>
     <main class="orta">
       <section class="kutu">

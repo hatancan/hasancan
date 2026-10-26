@@ -12,6 +12,8 @@ window.I18N.de = {
   'nav.blog': 'Tagebuch',
   'nav.guestbook': 'Gästebuch',
   'nav.contact': 'Kontakt',
+  'ad.label': 'Anzeige',
+  'ad.slot': 'WERBEFLÄCHE',
 
   'ticker.label': 'EILMELDUNG',
   'ticker.text': 'hasancan.net ist online! · Die Seite ist im Aufbau, Inhalte folgen nach und nach. · Vergiss nicht, dich ins Gästebuch einzutragen :)',

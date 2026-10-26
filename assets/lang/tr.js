@@ -13,6 +13,8 @@ window.I18N.tr = {
   'nav.blog': 'Günlük',
   'nav.guestbook': 'Ziyaretçi Defteri',
   'nav.contact': 'İletişim',
+  'ad.label': 'Reklam',
+  'ad.slot': 'REKLAM ALANI',
 
   'ticker.label': 'SON DAKİKA',
   'ticker.text': 'hasancan.net yayında! · Site yapım aşamasında, içerikler yavaş yavaş doluyor. · Ziyaretçi defterine uğramayı unutmayın :)',
