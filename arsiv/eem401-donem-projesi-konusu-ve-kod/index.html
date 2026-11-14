@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Sayısal Sinyal İşleme: 2014 Dönem Projesi (Gaussian Gürültü ve Üç Butterworth Süzgeç) ve MATLAB Çözümü — hasancan.net</title>
+<meta name="description" content="EEM401 Sayısal Sinyal İşleme dersinin Kasım 2014 dönem projesi konusu: gri tonlu görüntüye Gaussian gürültü ekleme ve üç Butterworth alçak geçiren süzgeçle frekans uzayında süzme; bir arkadaşın MATLAB çözümü (kişisel bilgisi çıkarılmış).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Sayısal Sinyal İşleme: 2014 Dönem Projesi (Gaussian Gürültü ve Üç Butterworth Süzgeç) ve MATLAB Çözümü">
+<meta property="og:description" content="EEM401 Sayısal Sinyal İşleme dersinin Kasım 2014 dönem projesi konusu: gri tonlu görüntüye Gaussian gürültü ekleme ve üç Butterworth alçak geçiren süzgeçle frekans uzayında süzme; bir arkadaşın MATLAB çözümü (kişisel bilgisi çıkarılmış).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Sayısal Sinyal İşleme: 2014 Dönem Projesi (Gaussian Gürültü ve Üç Butterworth Süzgeç) ve MATLAB Çözümü", "description": "EEM401 Sayısal Sinyal İşleme dersinin Kasım 2014 dönem projesi konusu: gri tonlu görüntüye Gaussian gürültü ekleme ve üç Butterworth alçak geçiren süzgeçle frekans uzayında süzme; bir arkadaşın MATLAB çözümü (kişisel bilgisi çıkarılmış).", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "eem401-donem-projesi.zip", "contentUrl": "https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/eem401-donem-projesi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM401 Sayısal Sinyal İşleme: 2014 Dönem Projesi (Gaussian Gürültü ve Üç Butterworth Süzgeç) ve MATLAB Çözümü">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.11.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#proje-konusu">Proje konusu</a></li><li><a href="#matlab-cozumu">MATLAB çözümü</a></li><li><a href="#nasil-calisiyor">Nasıl çalışıyor?</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM401 Sayısal Sinyal İşleme: 2014 Dönem Projesi (Gaussian Gürültü ve Üç Butterworth Süzgeç) ve MATLAB Çözümü</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 21.11.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p><strong>EEM401 Sayısal Sinyal İşleme</strong> dersinin (Yrd. Doç. Dr. Selda Güney) 21 Kasım 2014 tarihli dönem projesi konusu ve bir arkadaşımın bu konuya yazdığı MATLAB kodu. Koddaki yorum satırlarından ad ve numara bilgisi çıkarıldı; görüntü dosyasının adı <code>girdi.jpg</code> olarak değiştirildi, projede kullanılan kişisel fotoğraf paylaşılmadı. Proje konusu PDF'i ve kod yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="proje-konusu">Proje konusu</h2>
+<p>"EEM401-Sayısal Sinyal İşleme Dersi Projesi": Ders projesi MATLAB programı kullanılarak gerçekleştirilecek; kütüphanelerdeki hazır fonksiyonlardan yararlanılabilir.</p>
+<p><strong>Amaç.</strong> Öğrencinin kendi renkli bir resmi MATLAB'a yüklenip siyah-beyaza çevrilecektir. Bu resmin üstüne</p>
+<ul><li>a) ortalaması 0,</li><li>b) standart sapması 0,02·x</li></ul>
+<p>değerlerine sahip Gaussian gürültüsü eklenecektir; buradaki x, projeyi gerçekleştiren öğrencinin numarasının son hanesidir.</p>
+<p>Gürültü eklenmiş resim, <strong>derecesi ve kesim frekansı öğrenci tarafından belirlenecek birbirinden farklı üç adet Butterworth filtresi</strong> ile süzgeçlenecek ve sonuçlar karşılaştırılacaktır. Projenin çalıştırılması sonucu altı resim çıktısı elde edilecektir: 1) orijinal resim, 2) siyah-beyaz resim, 3) gürültü eklenmiş resim, 4) birinci, 5) ikinci, 6) üçüncü süzgeç çıkışı.</p>
+<p><strong>Teslim.</strong> Proje en geç dersin final sınavı tarihine kadar, .m dosyası ekli olarak e-postayla gönderilecek (konu satırı "EEM401-Dönem Projesi"; mesajda öğrencinin adı, soyadı ve numarası). Ek rapor teslim edilmeyecek; gerekirse kaynak koda açıklama satırları yazılabilir.</p>
+<h2 id="matlab-cozumu">MATLAB çözümü</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>clear all;
+% program resmi okuyor
+resimorg = imread('girdi.jpg');
+% resim siyah-beyaz yapıldı
+resimsiyahbeyaz = rgb2gray(resimorg);
+resimgaus = imnoise(resimsiyahbeyaz,'gaussian',0,0.029);
+% süzgeçler
+cf = fftshift(fft2(resimgaus));
+% butterworth 1
+[x,y] = meshgrid(-128:127,-128:127);
+bl1 = 1./(1+((x.^2+y.^2)/15).^5);
+cfbl1 = cf.*bl1;
+bt1 = ifft2(cfbl1);
+bt1 = uint8(abs(bt1));
+% butterworth 2
+bl2 = 1./(1+((x.^2+y.^2)/15).^2);
+bt2 = uint8(abs(ifft2(cf.*bl2)));
+% butterworth 3
+bl3 = 1./(1+((x.^2+y.^2)/15).^0.25);
+bt3 = uint8(abs(ifft2(cf.*bl3)));
+% çıktılar
+figure;
+subplot(2,3,1), imshow(resimorg), title('Orijinal Resim');
+subplot(2,3,2), imshow(resimsiyahbeyaz), title('Siyah Beyaz Resim');
+subplot(2,3,3), imshow(resimgaus), title('Gürültü Eklenmiş Resim');
+subplot(2,3,4), imshow(bt1), title('Birinci Süzgeç Çıkışı Resim');
+subplot(2,3,5), imshow(bt2), title('İkinci Süzgeç Çıkışı Resim');
+subplot(2,3,6), imshow(bt3), title('Üçüncü Süzgeç Çıkışı Resim');</code></pre>
+<p>(Kod, orijinal dosyadan okunabilirlik için üç süzgeç bloğundaki tekrarlar kısaltılarak aktarılmıştır; ZIP içindeki dosya özgün hâlidir.)</p>
+<h2 id="nasil-calisiyor">Nasıl çalışıyor?</h2>
+<ol><li>Resim gri seviyeye çevrilir ve <code>imnoise</code> ile ortalaması 0 olan Gaussian gürültü eklenir. <code>imnoise</code>'un son parametresi *varyans*tır; proje ise standart sapmayı 0,02·x olarak tanımlar. Kodda 0,029 değeri kullanılmıştır.</li><li>2 boyutlu FFT alınıp <code>fftshift</code> ile sıfır frekans merkeze taşınır.</li><li>Merkezden uzaklığın karesi D² = x² + y² olan 256×256'lık ızgarada Butterworth alçak geçiren süzgeç H = 1 / (1 + (D²/15)ⁿ) üç farklı n ile (5; 2; 0,25) oluşturulur. Derece büyüdükçe kesim keskinleşir; 0,25 gibi küçük bir değerde süzgeç çok yumuşaktır ve gürültüyü daha az bastırır.</li><li>Her süzgeç, kaydırılmış spektrumla elemanter çarpılır (frekans uzayında çarpma = uzamsal evrişim), ters FFT ile görüntüye dönülür ve <code>uint8(abs(·))</code> ile görüntülenir.</li></ol>
+<p>Dikkat: Meshgrid ızgarası 256×256 olarak sabittir; görüntü başka boyutta ise yeniden boyutlandırılmalıdır.</p>
+<p>Bu projenin 2016'daki sürümü (periyodik gürültünün FFT genlik spektrumunda maskelenmesi) için bkz. "Spektral Görüntü Filtreleme Tasarım Projesi".</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem401-donem-projesi.zip" download>eem401-donem-projesi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 125 KB · 21.11.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem401-donem-projesi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (125 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

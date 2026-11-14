@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: CMOS Eşik Gerilimi, Gürültü ve Tersleyici Zinciri, El Yazısı Notlar — hasancan.net</title>
+<meta name="description" content="İdeal tersleyici, fan-out, CMOS anahtarlama eşiğinin türetilmesi, eklem sığası hesabı ve tersleyici zincirinde en uygun kademe sayısı. El yazısı notların formül ve sonuçları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: CMOS Eşik Gerilimi, Gürültü ve Tersleyici Zinciri, El Yazısı Notlar">
+<meta property="og:description" content="İdeal tersleyici, fan-out, CMOS anahtarlama eşiğinin türetilmesi, eklem sığası hesabı ve tersleyici zincirinde en uygun kademe sayısı. El yazısı notların formül ve sonuçları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: CMOS Eşik Gerilimi, Gürültü ve Tersleyici Zinciri, El Yazısı Notlar", "description": "İdeal tersleyici, fan-out, CMOS anahtarlama eşiğinin türetilmesi, eklem sığası hesabı ve tersleyici zincirinde en uygun kademe sayısı. El yazısı notların formül ve sonuçları.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: CMOS Eşik Gerilimi, Gürültü ve Tersleyici Zinciri, El Yazısı Notlar">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.04.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-deal-tersleyici-ve-gurultu-olculeri">İdeal tersleyici ve gürültü ölçüleri</a></li><li><a href="#fan-in-ve-fan-out">Fan-in ve fan-out</a></li><li><a href="#cmos-anahtarlama-esigi">CMOS anahtarlama eşiği</a></li><li><a href="#eklem-sigasinin-ortalama-degeri">Eklem sığasının ortalama değeri</a></li><li><a href="#tersleyici-zincirinde-esit-kademe-orani">Tersleyici zincirinde eşit kademe oranı</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: CMOS Eşik Gerilimi, Gürültü ve Tersleyici Zinciri, El Yazısı Notlar</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 08.04.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, <strong>EEM312 Sayısal Elektronik</strong> klasöründeki bir arkadaşın CMOS tersleyiciler üzerine hazırladığı çalışma sayfalarını içeriyor. Fotoğraflanmış sayfalardan metne aktarıldı; kişisel bilgiler çıkarıldı. Sayfalarda tarih yok, dosyalar Nisan 2014 arşiv tarihini taşıyor. Kaynak fotoğraflar özel arşivde tutuluyor; yazının indirme dosyası bulunmuyor.</p>
+<h2 id="i-deal-tersleyici-ve-gurultu-olculeri">İdeal tersleyici ve gürültü ölçüleri</h2>
+<p>İdeal tersleyicinin gerilim geçiş eğrisi, V_in = V_DD/2 noktasında V_DD'den sıfıra iner:</p>
+<ul><li>V_OL = 0; V_OH = V_DD; V_SW = V_DD.</li><li>V_IL = V_IH = V_DD/2.</li><li>V_NMH = V_OH − V_IH = V_DD/2.</li><li>V_NML = V_IL − V_OL = V_DD/2.</li></ul>
+<p>Gerçek tersleyicide geçiş sonlu genişliktedir. Sayfadaki adlandırmayla belirsiz bölge V_IL ile V_IH arasındadır; V_M, giriş ile çıkışın eşitlendiği noktadır.</p>
+<p>Gürültü duyarlılıkları:</p>
+<p><strong>V_NSH = V_OH − V_M</strong>, <strong>V_NSL = V_M − V_OL</strong>.</p>
+<p>Normalize gürültü bağışıklıkları:</p>
+<p><strong>V_NIH = V_NSH/V_SW</strong>, <strong>V_NIL = V_NSL/V_SW</strong>.</p>
+<p>İdeal simetrik durumda her iki duyarlılık V_DD/2 ve her iki normalize bağışıklık 1/2 olur.</p>
+<h2 id="fan-in-ve-fan-out">Fan-in ve fan-out</h2>
+<p>Not, fan-in'i bir kapının giriş sayısı olarak tanımlar. Çıkışın sürmesi gereken girişler için <strong>I_out = N I′_in</strong> yazılır. İdeal durumda R_in → ∞ ile giriş yüklenmesi azalır; R_out → 0 ile yükün şarj süresi küçülür.</p>
+<p>Yüksek ve düşük mantık seviyelerindeki ayrı sınırlar:</p>
+<p>N_high = I_out(high)/I′_in(high),</p>
+<p>N_low = I_out(low)/I′_in(low).</p>
+<p>En büyük fan-out, bu iki değerin küçüğünü aşmayan tamsayıdır.</p>
+<p><em>Not: Kaynak fan-out'u bir yerde “çıkış sayısı” diye kısaltıyor. Hesaplanan büyüklük fiziksel çıkış ucu sayısı değil, tek çıkışın sürebildiği kapı girişlerinin sayısıdır.</em></p>
+<h2 id="cmos-anahtarlama-esigi">CMOS anahtarlama eşiği</h2>
+<p>V_in = V_out = V_M noktasında iki transistörün doyum akımları eşitlenir. Kaynağın işaretli PMOS gerilimleriyle yazdığı başlangıç eşitliği:</p>
+<p>k_n V_DSATn[V_M − V_Tn − V_DSATn/2]</p>
+<p>+ k_p V_DSATp[V_M − V_DD − V_Tp − V_DSATp/2] = 0.</p>
+<p>V_M içeren terimler toplandığında:</p>
+<p>V_M(k_nV_DSATn + k_pV_DSATp)</p>
+<p>= k_nV_DSATn(V_Tn + V_DSATn/2)</p>
+<p>+ k_pV_DSATp(V_DD + V_Tp + V_DSATp/2).</p>
+<p><strong>r = k_pV_DSATp/(k_nV_DSATn)</strong> tanımıyla:</p>
+<p><strong>V_M = [(V_Tn + V_DSATn/2) + r(V_DD + V_Tp + V_DSATp/2)]/(1 + r)</strong>.</p>
+<p>Notta k = μC_ox(W/L) kullanılarak:</p>
+<p>r = [μ_p C_ox,p(W_p/L_p)V_DSATp] / [μ_n C_ox,n(W_n/L_n)V_DSATn].</p>
+<h3 id="buyuk-overdrive-yaklasimi">Büyük overdrive yaklaşımı</h3>
+<p>V_DSAT = E_cL V_GT/(E_cL + V_GT) ifadesi büyük V_GT için E_cL'ye yaklaşır. Bu sayfada E_cL = Lv_sat/μ yazılmış. Eşit oksit kalınlıklarında C_ox,n = C_ox,p alınırsa notun ulaştığı oran:</p>
+<p>r ≈ v_sat,p W_p/(v_sat,n W_n).</p>
+<p>V_DD, eşik ve doyum gerilimlerinden büyük kabul edildiğinde:</p>
+<p>V_M ≈ rV_DD/(1 + r).</p>
+<p>r = 1 seçimi V_M ≈ V_DD/2 verir. Buna karşılık gelen boyutlandırma:</p>
+<p>(W_p/L_p) = (W_n/L_n)[V_DSATn k′_n/(V_DSATp k′_p)].</p>
+<p><em>Not: MOS hız doyumu türetmesinin diğer sayfasında E_c = 2v_sat/μ kullanılıyor; bu sayfadaki yaklaşımın kritik alan tanımıyla aynı değil. İşaretli PMOS büyüklükleri de mutlak değerli formüllerle karıştırılmamalıdır.</em></p>
+<h3 id="genel-w-l-orani">Genel W/L oranı</h3>
+<p>Hedeflenen V_M için ayrı sayfada bulunan sonuç:</p>
+<p><strong>(W/L)_p/(W/L)_n = k′_n V_DSATn(V_M − V_Tn − V_DSATn/2) / [k′_p V_DSATp(V_DD − V_M + V_Tp + V_DSATp/2)]</strong>.</p>
+<p>Bu, başlangıç akım eşitliğinin transistör boyutları için yeniden düzenlenmiş hâlidir.</p>
+<h2 id="eklem-sigasinin-ortalama-degeri">Eklem sığasının ortalama değeri</h2>
+<p>V_DD = 2,5 V örneğinde çıkışın ilk yarı geçişi ele alınıyor. Ters kutuplama gerilimi 2,5 V'tan 1,25 V'a değişirken taban eklemi için m = 0,5 ve Φ₀ = 0,9 V kullanılıyor. Sayfadaki eşdeğer katsayı:</p>
+<p>K_eq = −Φ₀^m [(Φ₀ + 2,5)^(1−m) − (Φ₀ + 1,25)^(1−m)] / [(-2,5 + 1,25)(1−m)] ≈ <strong>0,57</strong>.</p>
+<p>0 V'tan 1,25 V ters kutuplamaya karşılık gelen yarı geçiş için:</p>
+<p>K_eq = −Φ₀^m [(Φ₀ + 1,25)^(1−m) − Φ₀^(1−m)] / [(-1,25)(1−m)] ≈ <strong>0,79</strong>.</p>
+<p>0,25 µm süreç için 2λ = 0,25 µm, λ = 0,125 µm ve 19λ² ≈ 0,3 µm² yazılıyor. Kapı-drain örtüşme katkıları:</p>
+<ul><li>NMOS: 2 × 0,31 × 0,375 ≈ 0,23 fF.</li><li>PMOS: 2 × 0,27 × 1,125 ≈ 0,61 fF.</li></ul>
+<p>Arka sayfada K_eq,n = 0,57, K_eq,sw,n = 0,61, A_D = 0,3 µm², P_D = 1,875 µm alınmış:</p>
+<p>C_db1 = K_eq,n A_D C_j + K_eq,sw,n P_D C_jsw</p>
+<p>= 0,57 × 0,3 × 2 + 0,61 × 1,875 × 0,28 ≈ <strong>0,66 fF</strong>.</p>
+<p>Çevre hesabındaki küçük çizimde 5λ + 4λ + 4λ + λ + λ = 15λ; 15 × 0,125 = 1,875 µm. Notun devamı, tersleyici geçici durum örneğinde bu yük sığasının ve W/L ile ölçeklenen R_eq'nin kullanılacağını söylüyor; sayfada nihai gecikme hesabı yok.</p>
+<h2 id="tersleyici-zincirinde-esit-kademe-orani">Tersleyici zincirinde eşit kademe oranı</h2>
+<p>Üç kademeli çizimde giriş sığaları a, b, c ve son yük d olarak gösterilmiş:</p>
+<p>d/c = c/b = b/a = f.</p>
+<p>Böylece b = af, c = af², d = af³; <strong>f = (d/a)^(1/3)</strong>. Ara sığalar için b = √(ac), c = √(bd) yazılıyor.</p>
+<p>Genel N kademede F = C_L/C_in ve f = F^(1/N). Notun toplam gecikme modeli:</p>
+<p><strong>t_p = Nt_p0[1 + F^(1/N)/γ]</strong>.</p>
+<p>N'ye göre türev alıp sıfıra eşitleyince:</p>
+<p>γ + F^(1/N) − F^(1/N)ln(F)/N = 0.</p>
+<p>F = f^N konulursa γ + f − f ln f = 0 ve dolayısıyla:</p>
+<p><strong>f = e^(1 + γ/f)</strong>.</p>
+<p>Notta γ = 0 sınırında N = ln F ve f = e sonucu ayrıca kutulanmış.</p>
+<p><em>Not: γ = 0 sonucu, türev koşulunun ideal sınırına aittir; 1/γ içeren gecikme ifadesine doğrudan sıfır koymak tanımsızdır.</em></p>
+<h3 id="f-64-1-ornegi">F = 64, γ = 1 örneği</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kademe sayısı N</th><th scope="col">Kademe oranı F^(1/N)</th><th scope="col">Kaynaktaki t_p/t_p0</th></tr></thead><tbody><tr><th scope="row">1</th><td>64</td><td>65</td></tr><tr><th scope="row">2</th><td>8</td><td>18</td></tr><tr><th scope="row">3</th><td>4</td><td>15</td></tr><tr><th scope="row">4</th><td>Yaklaşık 2,8</td><td>15,3</td></tr></tbody></table></div>
+<p>Bu seçenekler arasında üç kademe en küçük toplam gecikmeyi verir. Dört kademe için tam hesap 4(1 + 64^(1/4)) ≈ 15,314'tür; kaynaktaki 15,3 sonucu ile uyumludur.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

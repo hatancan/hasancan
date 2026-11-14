@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Sayısal Elektronik: Mantık Kapıları İçin Ek SPICE Ağ Listeleri, NAND, NOR ve XOR — hasancan.net</title>
+<meta name="description" content="İki ve üç girişli CMOS kapılar, sabit girişli XOR denemeleri ve gecikme incelemeleri için arşivdeki ek SPICE kaynak kodları; bağlantı ve yükleme notlarıyla.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-mantik-kapilari-ek-kodlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Sayısal Elektronik: Mantık Kapıları İçin Ek SPICE Ağ Listeleri, NAND, NOR ve XOR">
+<meta property="og:description" content="İki ve üç girişli CMOS kapılar, sabit girişli XOR denemeleri ve gecikme incelemeleri için arşivdeki ek SPICE kaynak kodları; bağlantı ve yükleme notlarıyla.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-mantik-kapilari-ek-kodlar/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Sayısal Elektronik: Mantık Kapıları İçin Ek SPICE Ağ Listeleri, NAND, NOR ve XOR", "description": "İki ve üç girişli CMOS kapılar, sabit girişli XOR denemeleri ve gecikme incelemeleri için arşivdeki ek SPICE kaynak kodları; bağlantı ve yükleme notlarıyla.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem312-mantik-kapilari-ek-kodlar/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "eem312-mantik-kapilari-ek-kodlar.zip", "contentUrl": "https://hasancan.net/arsiv/eem312-mantik-kapilari-ek-kodlar/eem312-mantik-kapilari-ek-kodlar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM312 Sayısal Elektronik: Mantık Kapıları İçin Ek SPICE Ağ Listeleri, NAND, NOR ve XOR">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.04.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#baglantilar-ve-kaynakta-gorulen-sorunlar">Bağlantılar ve kaynakta görülen sorunlar</a></li><li><a href="#model-ve-dosya-duzeni">Model ve dosya düzeni</a></li><li><a href="#xor-denemesi-cikis-dugumunde-ek-darbe-kaynagi">XOR denemesi, çıkış düğümünde ek darbe kaynağı</a></li><li><a href="#sabit-girisli-xor-a-0-ve-b-1">Sabit girişli XOR, A=0 ve B=1</a></li><li><a href="#nand-baglanti-denemesi">NAND bağlantı denemesi</a></li><li><a href="#uc-girisli-nor-800-ns-analiz">Üç girişli NOR, 800 ns analiz</a></li><li><a href="#i-ki-darbe-girisiyle-xor">İki darbe girişiyle XOR</a></li><li><a href="#uc-girisli-nand-1-ff-yuk">Üç girişli NAND, 1 fF yük</a></li><li><a href="#uc-girisli-nor-1600-ns-analiz">Üç girişli NOR, 1600 ns analiz</a></li><li><a href="#i-ki-girisli-nand-genisletilmis-nmos">İki girişli NAND, genişletilmiş NMOS</a></li><li><a href="#i-ki-girisli-nor-genisletilmis-pmos">İki girişli NOR, genişletilmiş PMOS</a></li><li><a href="#xor-01-girisleri">XOR, 01 girişleri</a></li><li><a href="#xor-10-girisleri">XOR, 10 girişleri</a></li><li><a href="#xor-00-girisleri">XOR, 00 girişleri</a></li><li><a href="#xor-11-girisleri">XOR, 11 girişleri</a></li><li><a href="#i-ki-girisli-nand-iki-darbe-kaynagi">İki girişli NAND, iki darbe kaynağı</a></li><li><a href="#i-ki-girisli-nand-bir-giris-5-v">İki girişli NAND, bir giriş 5 V</a></li><li><a href="#i-ki-girisli-nor-iki-darbe-kaynagi">İki girişli NOR, iki darbe kaynağı</a></li><li><a href="#i-ki-girisli-nor-bir-giris-0-v">İki girişli NOR, bir giriş 0 V</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM312 Sayısal Elektronik: Mantık Kapıları İçin Ek SPICE Ağ Listeleri, NAND, NOR ve XOR</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 26.04.2017 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi <strong>EEM312 Sayısal Elektronik</strong> laboratuvarı için arkadaşların hazırladığı ek mantık kapısı ağ listelerini topluyor. 2005–2011 çalışmalarının arşiv kopyalarındaki öğrenci adları ve kişisel klasör adları çıkarıldı. Önceki <a href="/arsiv/eem312-rapor-mantik-kapisi-tasarimi/">mantık kapısı raporlarında</a> bulunan kodlardan farklı bağlantı, boyutlandırma veya analiz ayarı içeren dosyalar seçildi. Temizlenmiş kaynaklar yazının sonunda ZIP olarak indirilebilir; kodlar çalıştırılmadı.</p>
+<h2 id="baglantilar-ve-kaynakta-gorulen-sorunlar">Bağlantılar ve kaynakta görülen sorunlar</h2>
+<p>Üç girişli NAND ağında üç PMOS paralel, üç NMOS seri bağlıdır; NOR ağında bunun tersi vardır. Giriş darbelerinin 200, 400 ve 800 ns periyotları farklı mantık birleşimlerini oluşturur. Geçici durum komutları çıkışın zamana göre değişimini çizer.</p>
+<p><em>Not: <code>grup-a/b.cir</code> içindeki NMOS zinciri 9 numaralı düğümde bitiyor; bu düğüm toprağa bağlanmamış. Üçüncü darbe kaynağına karşılık gelen transistörler de yok. Dosya tamamlanmış bir üç girişli NAND olarak değerlendirilmemelidir; kaynak değiştirilmedi.</em></p>
+<p><em>Not: <code>grup-a/a.cir</code> içindeki <code>vin3</code>, gözlenen 5 numaralı çıkış düğümünü doğrudan sürüyor. Çıkış bu durumda yalnız transistör ağının mantık işlevini göstermeyecektir.</em></p>
+<p><em>Not: <code>giris-denemeleri/3-NOR.cir</code> adına rağmen iki girişlidir; ayrıca iki darbe kaynağının dalga biçimleri aynıdır. <code>grup-c/Nand.cir</code> içindeki <code>c1 5 0 1fF</code> ise 2 numaralı çıkış yerine 5 numaralı girişe bağlıdır.</em></p>
+<h2 id="model-ve-dosya-duzeni">Model ve dosya düzeni</h2>
+<p>Dosyalar Level 2 MOSN/MOSP modelleri kullanıyor. Genellikle L = 1,2 µm, NMOS W = 1,8 µm ve PMOS W = 5,4 µm; bazı kapılarda boyutlar değiştirilmiş. Model satırları her dosyada korunmuştur. Kişi adı taşıyan dosya/klasörler tarafsız adlarla değiştirilmiştir.</p>
+<h2 id="xor-denemesi-cikis-dugumunde-ek-darbe-kaynagi">XOR denemesi, çıkış düğümünde ek darbe kaynağı</h2>
+<p>Dosya: <code>grup-a/a.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+*  D G S B
+
+M1 1 2 3 1 MOSP W=3.6u L=1.2u
+M2 2 4 5 2 MOSP W=3.6u L=1.2u
+M3 5 2 4 5 MOSP W=3.6u L=1.2u
+
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+M5 5 4 3 0 MOSN W=1.8u L=1.2u
+M6 4 3 5 5 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+*va 2 0 5V
+*vb 4 0 5V
+
+Vin1 2 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+Vin2 4 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+vin3 5 0 pulse(0V 5V 100ns 0ns 0ns 200ns 500ns)
+.control
+tran 0.05n 500n
+plot v(2) 
+plot v(4)
+plot v(5)
+ 
+.endc
+.end</code></pre>
+<h2 id="sabit-girisli-xor-a-0-ve-b-1">Sabit girişli XOR, A=0 ve B=1</h2>
+<p>Dosya: <code>grup-a/abc.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+*  D G S B
+
+M1 3 2 1 1 MOSP W=3.6u L=1.2u
+M2 2 4 5 5 MOSP W=3.6u L=1.2u
+M3 5 2 4 4 MOSP W=3.6u L=1.2u
+
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+M5 5 4 3 3 MOSN W=1.8u L=1.2u
+M6 4 3 5 5 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+v2 2 0 0v
+v4 4 0 5v
+
+*Vin1 2 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+*Vin2 4 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+
+.control
+tran 0.05n 500n
+plot v(2) 
+plot v(4)
+plot v(5)
+ 
+.endc
+.end</code></pre>
+<h2 id="nand-baglanti-denemesi">NAND bağlantı denemesi</h2>
+<p>Dosya: <code>grup-a/b.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 1 1 MOSP W=5.4u L=1.2u
+M2 5 3 1 1 MOSP W=5.4u L=1.2u
+
+M4 5 2 7 7 MOSN W=1.8u L=1.2u
+M5 7 3 9 9 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 3 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin2 4 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 800n
+plot v(5)
+ 
+.endc
+.end</code></pre>
+<h2 id="uc-girisli-nor-800-ns-analiz">Üç girişli NOR, 800 ns analiz</h2>
+<p>Dosya: <code>grup-a/c.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 7 2 0 0 MOSN W=1.8u L=1.2u
+M2 7 4 0 0 MOSN W=1.8u L=1.2u
+M3 7 6 0 0 MOSN W=1.8u L=1.2u
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+M6 7 6 5 5 MOSP W=5.4u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+Vin2 6 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 7 0 1fF
+
+.control
+tran 0.05n 800n
+plot v(7) 
+.endc
+.end</code></pre>
+<h2 id="i-ki-darbe-girisiyle-xor">İki darbe girişiyle XOR</h2>
+<p>Dosya: <code>grup-b/xor.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+vdd 4 0 5V
+Vin 1 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+Vin1 2 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+
+.control
+tran 0.05n 400n
+plot v(3)
+plot v(1)
+plot v(2)
+ 
+.endc
+.end</code></pre>
+<h2 id="uc-girisli-nand-1-ff-yuk">Üç girişli NAND, 1 fF yük</h2>
+<p>Dosya: <code>grup-b/nand.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 1 1 MOSP W=5.4u L=1.2u
+
+M2 5 3 1 1 MOSP W=5.4u L=1.2u
+
+M3 5 4 1 1 MOSP W=5.4u L=1.2u
+
+M4 5 2 7 7 MOSN W=1.8u L=1.2u
+
+M5 7 3 9 9 MOSN W=1.8u L=1.2u
+
+M6 9 4 0 0 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 3 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin2 4 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2) 
+plot v(3)
+plot v(4)
+plot v(5)
+ 
+.endc
+.end</code></pre>
+<h2 id="uc-girisli-nor-1600-ns-analiz">Üç girişli NOR, 1600 ns analiz</h2>
+<p>Dosya: <code>grup-b/nor.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 7 2 0 0 MOSN W=1.8u L=1.2u
+
+M2 7 4 0 0 MOSN W=1.8u L=1.2u
+
+M3 7 6 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+M6 7 6 5 5 MOSP W=5.4u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+Vin2 6 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 7 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2)
+plot v(4)
+plot v(6)
+plot v(7) 
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nand-genisletilmis-nmos">İki girişli NAND, genişletilmiş NMOS</h2>
+<p>Dosya: <code>giris-denemeleri/2-NAND.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 3 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 4 4 MOSP W=5.4u L=1.2u
+M3 3 1 5 5 MOSN W=3.6u L=1.2u
+M6 5 2 0 0 MOSN W=3.6u L=1.2u
+
+vdd 4 0 5V
+Vin1  1 0 pulse(5V 0V 0 10ns 10ns 100ns 200ns)
+Vin2  2 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+
+.control
+tran 0.1n  800n
+plot v(3)
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nor-genisletilmis-pmos">İki girişli NOR, genişletilmiş PMOS</h2>
+<p>Dosya: <code>giris-denemeleri/3-NOR.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=10.8u L=1.2u
+M2 3 2 5 5 MOSP W=10.8u L=1.2u
+M3 3 1 0 0 MOSN W=1.8u L=1.2u
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+Vin1  1 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+Vin2  2 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+
+.control
+tran 0.1n 800n
+plot v(3)
+.endc
+.end</code></pre>
+<h2 id="xor-01-girisleri">XOR, 01 girişleri</h2>
+<p>Dosya: <code>giris-denemeleri/A=0 B=1.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 1 2 3 4 MOSP W=5.4u L=1.2u
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+M6 5 2 3 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 0V 
+vin2 2 0 5V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end</code></pre>
+<h2 id="xor-10-girisleri">XOR, 10 girişleri</h2>
+<p>Dosya: <code>giris-denemeleri/A=1 B=0.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+M3 2 1 3 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 3 5 2 0 MOSN W=1.8u L=1.2u
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 5V 
+vin2 2 0 0V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end</code></pre>
+<h2 id="xor-00-girisleri">XOR, 00 girişleri</h2>
+<p>Dosya: <code>giris-denemeleri/A=B=0.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 1 2 3 4 MOSP W=5.4u L=1.2u
+M3 2 1 3 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 3 5 2 0 MOSN W=1.8u L=1.2u
+M6 5 2 3 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 0V
+vin2 2 0 0V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end</code></pre>
+<h2 id="xor-11-girisleri">XOR, 11 girişleri</h2>
+<p>Dosya: <code>giris-denemeleri/A=B=1.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 5V
+vin2 2 0 5V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nand-iki-darbe-kaynagi">İki girişli NAND, iki darbe kaynağı</h2>
+<p>Dosya: <code>grup-c/Nand.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nand
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 2 4 1 1 MOSP W=5.4u L=1.2u
+M2 2 5 1 1 MOSP W=5.4u L=1.2u
+
+
+M4 2 5 3 3 MOSN W=1.8u L=1.2u
+M5 3 4 0 0 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  4 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 5 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2) v(4)+0.05 v(5)+0.1
+ 
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nand-bir-giris-5-v">İki girişli NAND, bir giriş 5 V</h2>
+<p>Dosya: <code>grup-c/Nand5.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nand
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 2 4 1 1 MOSP W=5.4u L=1.2u
+M2 2 5 1 1 MOSP W=5.4u L=1.2u
+
+
+M4 2 5 3 3 MOSN W=1.8u L=1.2u
+M5 3 4 0 0 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  4 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 5 0 5V
+
+.control
+tran 0.005n 200n
+plot v(2) v(4)+0.05 v(5)+0.1
+ 
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nor-iki-darbe-kaynagi">İki girişli NOR, iki darbe kaynağı</h2>
+<p>Dosya: <code>grup-c/Nor.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nor
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 0 0 MOSN W=1.8u L=1.2u
+M2 5 4 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 400n
+plot v(5) v(2)+0.1 v(4)+0.05
+
+.endc
+.end</code></pre>
+<h2 id="i-ki-girisli-nor-bir-giris-0-v">İki girişli NOR, bir giriş 0 V</h2>
+<p>Dosya: <code>grup-c/Nor5.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nor
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 0 0 MOSN W=1.8u L=1.2u
+M2 5 4 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin1 4 0 0V
+
+.control
+tran 0.05n 400n
+plot v(5) v(2)+0.1 v(4)+0.05
+
+.endc
+.end</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem312-mantik-kapilari-ek-kodlar.zip" download>eem312-mantik-kapilari-ek-kodlar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 10 KB · 26.04.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem312-mantik-kapilari-ek-kodlar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (10 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

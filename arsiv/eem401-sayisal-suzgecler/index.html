@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Sayısal Sinyal İşleme: Sayısal Süzgeçler (Ağ Yapıları, IIR Tasarımı, FIR Tasarımı) — hasancan.net</title>
+<meta name="description" content="Selda Güney&#x27;in EEM401 Sayısal Süzgeçler I–III sunumları: IIR ve FIR gerçeklemeleri (doğrudan, kanonik, kaskat, paralel, transpoze), Butterworth/Chebyshev/eliptik analog süzgeçler, değişmez dürtü cevabı ve çift doğrusal dönüşüm, pencereleme ve frekans örnekleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Sayısal Sinyal İşleme: Sayısal Süzgeçler (Ağ Yapıları, IIR Tasarımı, FIR Tasarımı)">
+<meta property="og:description" content="Selda Güney&#x27;in EEM401 Sayısal Süzgeçler I–III sunumları: IIR ve FIR gerçeklemeleri (doğrudan, kanonik, kaskat, paralel, transpoze), Butterworth/Chebyshev/eliptik analog süzgeçler, değişmez dürtü cevabı ve çift doğrusal dönüşüm, pencereleme ve frekans örnekleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Sayısal Sinyal İşleme: Sayısal Süzgeçler (Ağ Yapıları, IIR Tasarımı, FIR Tasarımı)", "description": "Selda Güney'in EEM401 Sayısal Süzgeçler I–III sunumları: IIR ve FIR gerçeklemeleri (doğrudan, kanonik, kaskat, paralel, transpoze), Butterworth/Chebyshev/eliptik analog süzgeçler, değişmez dürtü cevabı ve çift doğrusal dönüşüm, pencereleme ve frekans örnekleme.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-sayisal-suzgecler/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "eem401-sayisal-suzgecler.zip", "contentUrl": "https://hasancan.net/arsiv/eem401-sayisal-suzgecler/eem401-sayisal-suzgecler.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM401 Sayısal Sinyal İşleme: Sayısal Süzgeçler (Ağ Yapıları, IIR Tasarımı, FIR Tasarımı)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>04.12.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-sayisal-suzgeclerin-gerceklenmesi">I. Sayısal süzgeçlerin gerçeklenmesi</a></li><li><a href="#ii-iir-suzgeclerin-tasarimi">II. IIR süzgeçlerin tasarımı</a></li><li><a href="#iii-fir-suzgeclerin-tasarimi">III. FIR süzgeçlerin tasarımı</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM401 Sayısal Sinyal İşleme: Sayısal Süzgeçler (Ağ Yapıları, IIR Tasarımı, FIR Tasarımı)</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 04.12.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>EEM401 Sayısal Sinyal İşleme dersinin (Yrd. Doç. Dr. Selda Güney, 2014–2015 güz) aralık ayındaki üç sunumu: <em>Sayısal Filtreler I</em> (gerçekleme), <em>II</em> (IIR tasarımı) ve <em>III</em> (FIR tasarımı). Orijinal sunumlar yazının sonunda ZIP olarak indirilebilir. Dersin adı slaytlarda "EEM 401 Sayısal Sinyal İşleme"dir.</p>
+<h2 id="i-sayisal-suzgeclerin-gerceklenmesi">I. Sayısal süzgeçlerin gerçeklenmesi</h2>
+<p><strong>Avantajlar:</strong> katsayılar değiştirilerek transfer fonksiyonu değiştirilebilir; yüksek güvenirlik ve doğruluk; analog süzgeçlerle gerçeklenemeyecek transfer fonksiyonları gerçeklenebilir. <strong>Dezavantajlar:</strong> maliyet, sürekli enerji kaynağı ihtiyacı.</p>
+<p>Tasarıma göre iki tür:</p>
+<ol><li><strong>Tekrarlı (özyinelemeli, rekürsif)</strong>: çıkış hem girişin hem çıkışın fonksiyonudur; faz tepkisi doğrusal değildir; kararlı olması için transfer fonksiyonunun kutupları z düzleminde birim daire içinde olmalıdır.</li><li><strong>Tekrarsız</strong>: çıkış yalnızca girişe ve girişin önceki değerlerine bağlıdır; doğrusal faz tepkisi vardır, kararlıdır; keskin geçişli transfer fonksiyonu için çok sayıda geciktirme elemanı gerekir.</li></ol>
+<p>Doğrusal zamanla değişmeyen (DZD) sistemler <strong>FIR</strong> (sonlu süreli dürtü tepkisi: y[n] = Σ_{k=0}^{M−1} h(k) x(n − k), genelde tekrarsız) ve <strong>IIR</strong> (sonsuz süreli dürtü tepkisi, genelde tekrarlı) olarak ikiye ayrılır.</p>
+<p>Gerçekleme yöntemleri: doğrudan, kanonik form, seri (kaskat), paralel, basamak ve kafes gerçekleme.</p>
+<p>Sabit katsayılı fark denklemi: y[n] = −Σ_{k=1}^{N} a_k y[n − k] + Σ_{k=0}^{M} b_k x[n − k] ve H(z) = Σ b_k z^(−k) / (1 + Σ a_k z^(−k)). Temel elemanlar: toplayıcı, çarpıcı ve birim geciktirici. Örnek: y[n] = a1·y[n−1] + a2·y[n−2] + b0·x[n].</p>
+<h3 id="iir-sistemler-icin-ag-yapilari">IIR sistemler için ağ yapıları</h3>
+<ul><li><strong>Doğrudan biçim I:</strong> H(z) = H2(z)·H1(z); önce v[n] = Σ b_k x[n − k], sonra y[n] = Σ a_k y[n − k] + v[n].</li><li><strong>Doğrudan biçim II (kanonik):</strong> H1 ve H2'nin sırası değiştirilerek w[n] = Σ a_k w[n − k] + x[n] ve y[n] = Σ b_k w[n − k]; gecikme elemanı sayısı en azdır. Örneğin tek kutuplu sistem için w1[n] = a·w1[n−1] + x[n], y[n] = b0·w1[n] + b1·w1[n−1]. Sinyal akış şemasından dalga değişkenleri (w1[n], w2[n], …) yazılıp z dönüşümüyle birim dürtü tepkisinin elde edilmesi bir örnekle gösterilir.</li><li><strong>Kaskat biçim:</strong> H(z) birinci/ikinci dereceden bölümlerin çarpımıdır; ikinci dereceden bölümler pratiktir. Örnek:</li></ul>
+<p>  H(z) = (1 + 2z⁻¹ + z⁻²) / (1 − 0,75z⁻¹ + 0,125z⁻²) = (1 + z⁻¹)(1 + z⁻¹) / ((1 − 0,5z⁻¹)(1 − 0,25z⁻¹)); doğrudan biçim I ve II ile kaskat gerçeklemesi gösterilir.</p>
+<ul><li><strong>Paralel biçim:</strong> kısmi kesirlere ayırma. Aynı örnekte H(z) = 8 + 18/(1 − 0,5z⁻¹) − 25/(1 − 0,25z⁻¹) ve ikinci dereceden bölümlerle H(z) = 8 + (−7 + 8z⁻¹)/(1 − 0,75z⁻¹ + 0,125z⁻²).</li><li><strong>Transpoze biçim:</strong> sinyal akış şemasının tüm dalgalarının yönü değiştirilip giriş ile çıkış yer değiştirirse giriş-çıkış ilişkisi değişmez.</li></ul>
+<h3 id="fir-sistemler-icin-ag-yapilari">FIR sistemler için ağ yapıları</h3>
+<p>Doğrudan biçim I; doğrudan biçim II (I'in transpozesi); kaskat biçim H(z) = Π (b0k + b1k z⁻¹ + b2k z⁻²); doğrusal fazlı FIR sistemler için <strong>kafes biçimi</strong> (h[n] dizisinin simetrik olması gerekir; M çift ve tek durumları ayrı).</p>
+<h2 id="ii-iir-suzgeclerin-tasarimi">II. IIR süzgeçlerin tasarımı</h2>
+<p>Amaç, verilen bir frekans yanıtını yaklaşık olarak sağlayan gerçeklenebilir bir G(z) elde etmektir; derste yalnızca genlik yaklaşıklığı ele alınır.</p>
+<p>Dört ideal süzgecin dürtü yanıtları nedensel olmadığından ve sonsuz uzunlukta olduğundan gerçeklenemez. Pratikte genlik yanıtı geçirme ve söndürme bandında kabul edilebilir toleranslarla belirtilir; arada <strong>geçiş bandı</strong> vardır. Alçak geçiren süzgeç için: ωp geçirme bandı kenarı, ωs söndürme bandı kenarı, δp geçirme bandındaki en büyük dalgalanma, δs söndürme bandındaki en küçük dalgalanma. Kayıp fonksiyonu A(ω) = −20·log10|G(e^jω)|; αp = −20·log10(1 − δp) ve αs = −20·log10(δs). Hz cinsinden verilen kenar frekanslar örnekleme frekansı F_T ile radyana çevrilir (ω = 2πF/F_T).</p>
+<p>En sık kullanılan yöntem: (1) sayısal süzgeç karakteristikleri prototip analog alçak geçiren süzgeç karakteristiklerine dönüştürülür; (2) analog Ha(s) belirlenir; (3) Ha(s) sayısal G(z)'ye dönüştürülür. Nedeni: analog süzgeç tasarımı çok gelişmiştir ve tabloları vardır.</p>
+<h3 id="analog-suzgec-turleri">Analog süzgeç türleri</h3>
+<ol><li><strong>Butterworth:</strong> |Ha(jΩ)|² = 1 / (1 + (jΩ/jΩc)^(2N)); kutuplar s_k = Ωc·e^(jπ(2k + N + 1)/2N).</li><li><strong>Chebyshev:</strong> |Ha(jΩ)|² = 1 / (1 + ε²·V_N²(Ω/Ωc)), V_N(x) = cos(N·cos⁻¹x).</li><li><strong>Eliptik.</strong></li></ol>
+<h3 id="analog-suzgecten-sayisal-suzgece-donusum">Analog süzgeçten sayısal süzgece dönüşüm</h3>
+<ul><li><strong>Değişmez dürtü cevabı yöntemi:</strong> h[n] = Td·ha(nTd). Ha(s) = Σ A_k/(s − s_k) ise H(z) = Σ Td·A_k / (1 − e^(s_k·Td)·z⁻¹); s düzlemindeki s_k kutupları z düzleminde e^(s_k·Td) kutularına gider. Örnek: 0,89125 ≤ |H(e^jω)| ≤ 1 (0 ≤ ω ≤ 0,2π) ve |H(e^jω)| ≤ 0,17783 (0,3π ≤ ω ≤ π), Td = 1 için Butterworth tasarımında N = 5,8858 ≈ <strong>6</strong> ve Ωc = 0,70474 bulunur; 6. derece Ha(s) = 0,12093 / [(s² + 0,364s + 0,4945)(s² + 0,9945s + 0,4945)(s² + 1,3585s + 0,4945)]; sonuç üç ikinci dereceden bölümden oluşan H(z)'dir.</li><li><strong>Çift doğrusal dönüşüm (ÇDD):</strong> örtüşme ve kararlılığı etkileyen etmenler nedeniyle daha sık kullanılır: s = (2/T)·(1 − z⁻¹)/(1 + z⁻¹). Sol yarı s düzlemi birim çemberin içine, sağ yarı dışına, jΩ ekseni birim çembere dönüşür; yani kararlı analog fonksiyon kararlı sayısal fonksiyona dönüşür. Frekans ilişkisi Ω = (2/T)·tan(ω/2) doğrusal değildir ve <strong>frekans bükmesi (frequency warping)</strong> yaratır. Tasarım adımları: (1) kenar frekanslara ön bükme uygula (Ωp, Ωs bul); (2) analog süzgeci tasarla; (3) ÇDD ile G(z)'yi elde et. ÇDD yalnız parçalı sabit genlik yanıtlı süzgeçler için kullanılabilir ve analog süzgecin faz yanıtını korumaz. Aynı örnekte ÇDD ile N = 5,305 ≈ 6 ve Ωc = 0,766 bulunup H(z) = 0,0007378(1 + z⁻¹)⁶ / [(1 − 1,2686z⁻¹ + 0,7051z⁻²)(1 − 1,0106z⁻¹ + 0,3583z⁻²)(1 − 0,9044z⁻¹ + 0,2155z⁻²)] elde edilir.</li><li><strong>Uygunlaştırılmış z dönüşümü</strong> üçüncü yöntem olarak anılır. Sunum, ωp = 0,25π, ωs = 0,55π, αp = 0,5 dB, αs = 15 dB'lik bir alçak geçiren Butterworth tasarımıyla biter.</li></ul>
+<h2 id="iii-fir-suzgeclerin-tasarimi">III. FIR süzgeçlerin tasarımı</h2>
+<p>FIR tasarımı, belirtilen genlik yanıtının doğrudan yaklaşıklığına dayanır; genelde doğrusal faz istenir. N. dereceden FIR tasarımı (N + 1) uzunluklu dürtü yanıtı katsayıları {h[n]} ya da frekans yanıtının (N + 1) örneğini bulmaktır. Yöntemler: pencerelenmiş Fourier serisi, frekans örnekleme, bilgisayar tabanlı eniyileme (Parks–McClellan).</p>
+<ul><li>FIR tasarımı ayrık bir işlemdir; analog bölgede eşdeğeri yoktur; tanımlar çoğunlukla zaman bölgesindedir.</li><li>İki avantaj: <strong>kararlılık</strong> ve <strong>doğrusal faz</strong>; aynı özellikli IIR'ye göre katsayı sayısı (derece) çok daha fazladır.</li><li>En basit FIR süzgeç <strong>kayan ortalama (moving average)</strong> süzgecidir: genlik cevabı bakımından oldukça zayıf bir alçak geçirendir ve bant genişliği yalnızca derece ile kontrol edilir.</li><li>Süzgeç denklemi y[n] = Σ_{k=0}^{N−1} b_k x[n − k]; girişe dürtü uygulanırsa katsayılar dürtü cevabının örneklerine eşit olur (b_k = h[k]). Dürtü cevabı simetrik olan nedensel FIR süzgeçler doğrusal fazdadır (çift simetri N = 2n + 2, tek simetri N = 2n + 1).</li></ul>
+<p><strong>Beş aşamalı tasarım:</strong> (1) özellikler belirlenir (geçirme bandı kenarı, söndürme bandı kenarı, kesim frekansı, dalgalanmalar); (2) katsayılar hesaplanır; (3) yapı belirlenir; (4) (isteğe bağlı) benzetim; (5) uygulama.</p>
+<h3 id="pencereleme-yontemi">Pencereleme yöntemi</h3>
+<p>h[n] = h_d[n]·w[n]. Önce ideal süzgecin katsayıları h_d[n] = sin(nω_c)/(nπ) hesaplanır (n = 0 için 2f_c); sonuç, h_d'nin frekans bölgesinde pencere yanıtıyla dairesel evrişimidir. Sonra pencere seçilir:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Pencere</th><th scope="col">Ana lob genişliği</th><th scope="col">Yan lob tepesi</th></tr></thead><tbody><tr><th scope="row">Dikdörtgen</th><td>4π/M</td><td>−13 dB</td></tr><tr><th scope="row">Bartlett</th><td>8π/M</td><td>−25 dB</td></tr><tr><th scope="row">Hanning</th><td>8π/M</td><td>−31 dB</td></tr><tr><th scope="row">Hamming</th><td>8π/M</td><td>−41 dB</td></tr><tr><th scope="row">Blackman</th><td>12π/M</td><td>−57 dB</td></tr></tbody></table></div>
+<p>Dikdörtgen pencere en basit olanıdır (w[n] = 1, 0 ≤ n ≤ M), keskin ana lobu fakat geniş yan lobları ve süreksizlik çevresinde büyük salınımı vardır. Hamming, Hanning'den ve Bartlett'ten iyi, Blackman'dan basittir; Blackman'ın yan lobları en iyidir ama denklemi karmaşıktır.</p>
+<h3 id="frekans-ornekleme-yontemi">Frekans örnekleme yöntemi</h3>
+<p>Frekans cevabı H(e^jω)'nın 0–2π aralığından eşit aralıklı N örnek H_k seçilir ve ters AFD alınır: h[n] = (1/N) Σ_{k=0}^{N−1} H_k·W_N^(−nk), n = 0, 1, …, N − 1. Sunum bu yöntemi örneklerle çözer.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem401-sayisal-suzgecler.zip" download>eem401-sayisal-suzgecler.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.7 MB · 04.12.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem401-sayisal-suzgecler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

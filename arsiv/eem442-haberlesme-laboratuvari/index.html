@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM442 Haberleşme II Laboratuvarı: Deney 1 Kuantalama-PCM, Deney 2 µ-Law Sıkıştırma-Genleştirme, Deney 3 Delta Modülasyonu (MATLAB) — hasancan.net</title>
+<meta name="description" content="EEM442/444 Haberleşme II laboratuvarı Mayıs 2017: eş biçimli kuantalama ve PCM, SQNR&#x27;nin kuramsal ve ölçülen değerleri, µ-law companding ile ses işareti, doğrusal ve uyarlanır delta modülasyonu; deney raporları ve MATLAB kodları.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM442 Haberleşme II Laboratuvarı: Deney 1 Kuantalama-PCM, Deney 2 µ-Law Sıkıştırma-Genleştirme, Deney 3 Delta Modülasyonu (MATLAB)">
+<meta property="og:description" content="EEM442/444 Haberleşme II laboratuvarı Mayıs 2017: eş biçimli kuantalama ve PCM, SQNR&#x27;nin kuramsal ve ölçülen değerleri, µ-law companding ile ses işareti, doğrusal ve uyarlanır delta modülasyonu; deney raporları ve MATLAB kodları.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142137">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM442 Haberleşme II Laboratuvarı: Deney 1 Kuantalama-PCM, Deney 2 µ-Law Sıkıştırma-Genleştirme, Deney 3 Delta Modülasyonu (MATLAB)", "description": "EEM442/444 Haberleşme II laboratuvarı Mayıs 2017: eş biçimli kuantalama ve PCM, SQNR'nin kuramsal ve ölçülen değerleri, µ-law companding ile ses işareti, doğrusal ve uyarlanır delta modülasyonu; deney raporları ve MATLAB kodları.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM442 – Haberleşme II", "associatedMedia": {"@type": "MediaObject", "name": "eem442-haberlesme-laboratuvari.zip", "contentUrl": "https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/eem442-haberlesme-laboratuvari.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM442 Haberleşme II Laboratuvarı: Deney 1 Kuantalama-PCM, Deney 2 µ-Law Sıkıştırma-Genleştirme, Deney 3 Delta Modülasyonu (MATLAB)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem442">EEM442</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM442 – Haberleşme II</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.05.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#deney-1-kuantalama-pcm">Deney 1: Kuantalama – PCM</a></li><li><a href="#deney-2-law-sikistirma-genlestirme-companding">Deney 2: µ-Law sıkıştırma-genleştirme (companding)</a></li><li><a href="#deney-3-delta-modulasyonu-dm">Deney 3: Delta modülasyonu (DM)</a></li><li><a href="#matlab-kodlari-zip-icindeki-kod-klasoru">MATLAB kodları (ZIP içindeki <code>kod/</code> klasörü)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM442</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM442 Haberleşme II Laboratuvarı: Deney 1 Kuantalama-PCM, Deney 2 µ-Law Sıkıştırma-Genleştirme, Deney 3 Delta Modülasyonu (MATLAB)</h1>
+            <p class="kucuk">EEM442 – Haberleşme II · 07.05.2017 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi'nde <strong>EEM 442/444 Haberleşme II – Laboratuvarı</strong> (Mayıs 2017) için hazırlanan üç deney raporu ve MATLAB fonksiyonları. Deney 1 ve 2'yi ben hazırladım; Deney 3 bir arkadaşımın raporudur (ad ve numara çıkarıldı). Öğrenci numaraları maskelenmiş raporlar ve kodlar yazının sonunda ZIP olarak indirilebilir. Klasördeki bir arkadaşın aynı Deney 1 raporunun ikinci kopyası ve <code>.wav</code> ses dosyaları yayımlanmadı.</p>
+<h2 id="deney-1-kuantalama-pcm">Deney 1: Kuantalama – PCM</h2>
+<p><strong>Amaç:</strong> temel bant sayısal haberleşme modülasyonlarından PCM'in ve kuantalama işleminin gerçekleştirilmesi; kuantalama gürültüsü ve SNR değerlerinin ölçülmesi.</p>
+<p><strong>Kuram.</strong> Analogdan sayısala dönüşümün iki adımı vardır: zaman bölgesinde ayrıklaştırma (örnekleme) ve genlik bölgesinde ayrıklaştırma (<strong>kuantalama</strong>). Deneyde eş biçimli (uniform) kuantalayıcı MATLAB'da incelenir. Mesaj m(t) = A·cos(2πf_m·t) tek tonlu ve kuantalama hatası düzgün olasılık yoğunluklu varsayılırsa mesaj gücü ⟨x²⟩ = A²/2, hata gücü ⟨e²⟩ = a²/12 (a = 2A/2ⁿ adım aralığı) ve</p>
+<p>SQNR_dB = 10·log10((3/2)·2^{2n}) = 1,76 + 6,02·n</p>
+<p>(n: örnek başına bit sayısı).</p>
+<p><strong>Yapılışı.</strong> <code>u_pcm.m</code> fonksiyonu tek ton mesajla kullanılır: a) farklı kuantalama seviyeleri için kuantalanmış işaret çizilir; kuantalama seviyesi arttıkça hassasiyet ve orijinale yakınlık artar (8 seviyeli kuantalamada iki farklı zamanda aynı bit değeri çıkarken 16 seviyede farklı değerler çıkar); b) farklı seviyeler için PCM kodu oluşturulur:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t = [0:0.01:10];
+a = sin(t);
+[sqnr8,  aquan8,  code8 ] = u_pcm(a, 8);
+[sqnr16, aquan16, code16] = u_pcm(a, 16);
+[sqnr32, aquan32, code32] = u_pcm(a, 32);
+[sqnr64, aquan64, code64] = u_pcm(a, 64);
+subplot(5,1,1), plot(t,a), title('örneklenen sinyal');
+subplot(5,1,2), plot(t,aquan8),  title('8 seviyeli kuantalanmış sinyal');
+subplot(5,1,3), plot(t,aquan16), title('16 seviyeli kuantalanmış sinyal');
+subplot(5,1,4), plot(t,aquan32), title('32 seviyeli kuantalanmış sinyal');
+subplot(5,1,5), plot(t,aquan64), title('64 seviyeli kuantalanmış sinyal');</code></pre>
+<p>c) SQNR değerleri hesaplanan değerlerle karşılaştırılır:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kuantalama seviyesi (Q)</th><th scope="col">SQNR (hesaplanan)</th><th scope="col">SQNR (ölçülen)</th></tr></thead><tbody><tr><th scope="row">8</th><td>19,280</td><td>18,9023</td></tr><tr><th scope="row">16</th><td>25,84</td><td>25,1272</td></tr><tr><th scope="row">32</th><td>31,86</td><td>31,3002</td></tr><tr><th scope="row">64</th><td>37,88</td><td>37,4202</td></tr></tbody></table></div>
+<p><em>Not: Q = 8 (n = 3) için 1,76 + 6,02·3 = 19,82 dB'dir; tabloda 19,280 yazılmıştır, bu bir yazım hatasıdır. Ölçülen değerler kuramsal değerlerin biraz altındadır.</em></p>
+<p><strong>Sonuç.</strong> Örneklenen orijinal işarete en yakın sonuç 64 seviyeli kuantalamadan çıkmıştır.</p>
+<h2 id="deney-2-law-sikistirma-genlestirme-companding">Deney 2: µ-Law sıkıştırma-genleştirme (companding)</h2>
+<p><strong>Amaç:</strong> PCM ve kuantalamanın µ-law sıkıştırma-genleştirme tekniğiyle gerçekleştirilmesi; kuantalama gürültüsü ve SNR ölçümü.</p>
+<p><strong>Kuram.</strong> Düzgün olmayan PCM, sıkıştırma ve genleştirme yapıları sayesinde eş biçimli kuantalamayla gerçeklenebilir: sıkıştırıcı → düzgün kuantalayıcı → genleştirici. |x| ≤ 1 normalize giriş için µ-law sıkıştırma fonksiyonu</p>
+<p>y = [ln(1 + µ|x|) / ln(1 + µ)]·sgn(x),</p>
+<p>tersi (genleştirme)</p>
+<p>x = [((1 + µ)^{|y|} − 1) / µ]·sgn(y).</p>
+<p><strong>Yapılışı.</strong> <code>mulaw_pcm.m</code> fonksiyonu bir ses işareti için kullanılır (µ = 255; Q = 8, 16, 32, 64):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>x = audioread('history.wav');
+x = x(1:50000);
+[sqnrmu8,  aquanmu8,  codemu8 ] = mulaw_pcm(x, 8,  255);
+[sqnrmu16, aquanmu16, codemu16] = mulaw_pcm(x, 16, 255);
+[sqnrmu32, aquanmu32, codemu32] = mulaw_pcm(x, 32, 255);
+[sqnrmu64, aquanmu64, codemu64] = mulaw_pcm(x, 64, 255);</code></pre>
+<p>Ölçülen SQNR (dB): Q = 8 → 8,2776; Q = 16 → 13,4264; Q = 32 → 19,8473; Q = 64 → 25,9201.</p>
+<p><strong>Sonuç.</strong> Orijinal sese en yakın sonuç Q = 64'te alınmıştır (neredeyse orijinal ses duyulur); kuantalama seviyesi düştükçe ses bozulur. Seviye artırıldıkça hassasiyet artmış, orijinal ses sinyaline daha yakın sonuç alınmıştır.</p>
+<h2 id="deney-3-delta-modulasyonu-dm">Deney 3: Delta modülasyonu (DM)</h2>
+<p><strong>Amaç:</strong> PCM'in delta modülasyonu ve uyarlanır delta modülasyonuyla gerçeklenmesi; kuantalama gürültüsü ve SNR ölçümü.</p>
+<p><strong>Kuram.</strong> PCM'de her örnek birden çok bitle gönderilir, bu da çok güç ve enerji harcar; bunun yerine işaretteki <em>değişimler</em> gönderilebilir: iki örnek arasındaki farkın pozitif ya da negatif olduğuna göre kodlama yapılır (delta modülasyonu), böylece örnek başına bit sayısı çok azalır. <strong>Doğrusal DM</strong> vericisi keskin bir sınırlayıcı (karşılaştırıcı), örnekleyici ve geri besleme yolunda bir integral alıcıdan oluşur; alıcıda integral alıcı ve bir alçak geçiren filtre (AGF) vardır. Giriş ile geri beslemeyle üretilen yaklaşık işaret arasındaki farkın işaretine göre bit darbeleri üretilir; sınırlayıcı çıkışı Nyquist frekansının çok üstünde bir f_s ile örneklenir. AGF süreksizlikleri düzgünleştirir; çıkışın x(t) ile aynı olmamasının nedeni kuantalama hatalarıdır.</p>
+<p>DM'de üç istenmeyen durum görülebilir:</p>
+<ol><li>Başlangıçta x̂(t)'nin x(t)'ye yetişmesi için birkaç basamak gerekir (<strong>başlama süresi</strong>, start-up period).</li><li>x(t) sabit kaldığında x̂(t) bir artı bir eksi basamakla izler (<strong>boşta çalışma gürültüsü</strong>, idling noise).</li><li>x(t) hızlı değişirse x̂(t) yalnızca ±Δ kadar değişebildiğinden izleyemez (<strong>eğim sınırlaması</strong>, slope overload).</li></ol>
+<p>Bu sorunlar için <strong>uyarlanır (adaptive) DM</strong> geliştirilmiştir: basamak boyu her örnekleme anında uyarlanır. Kuantalanmış fark dizisi, dalga biçiminin eğimi hakkında bilgi verir: art arda gelen işaretler değişiyorsa eğim küçüktür, aynı işaretliyse eğim diktir. Jayant'ın basit kuralına göre Δ(n) = Δ(n − 1)·K^{ε(n)·ε(n−1)} (K: yerel distorsiyonu en küçük yapacak sabit, K &gt; 1).</p>
+<p><strong>Yapılışı.</strong> <code>delta_mod.m</code> ve <code>adpt_delta_mod.m</code> dosyaları ses işareti için kullanılır; doğrusal DM, Δ = 1; 0,1; 0,01 ve 0,001 için denenir. <strong>Sonuç:</strong> Δ giderek küçüldükçe SQNR artmıştır, fakat son değerde eğim sınırlaması (slope overload) nedeniyle SQNR yeniden düşmüştür.</p>
+<h2 id="matlab-kodlari-zip-icindeki-kod-klasoru">MATLAB kodları (ZIP içindeki <code>kod/</code> klasörü)</h2>
+<p>Fonksiyonlar <code>u_pcm.m</code> (düzgün PCM), <code>mulaw.m</code>, <code>invmulaw.m</code>, <code>mulaw_pcm.m</code>, <code>delta_mod.m</code>, <code>adpt_delta_mod.m</code> ve örnek betikler. Temel iki fonksiyon:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [ sqnr, a_quan, code ] = u_pcm( a, n )
+% uniform PCM encoding of a sequence; n = number of quantization levels
+amax = max(abs(a));
+a_quan = a/amax;
+b_quan = a_quan;
+d = 2/n;
+q = d.*[0:n-1];
+q = q-((n-1)/2)*d;
+for i=1:n
+    a_quan(find((q(i)-d/2&lt;=a_quan) &amp; (a_quan&lt;=q(i)+d/2)))= q(i).*ones(1,length(find((q(i)-d/2&lt;=a_quan) &amp; (a_quan&lt;=q(i)+d/2))));
+    b_quan(find( a_quan== q(i) )) = (i-1).*ones(1,length(find( a_quan== q(i) )));
+end
+a_quan = a_quan*amax;
+nu = ceil(log2(n));
+code = zeros(length(a),nu);
+for i = 1:length(a)
+    for j=nu:-1:0
+        if ( fix(b_quan(i)/2^j) == 1)
+            code(i,(nu-j)) = 1;
+            b_quan(i) = b_quan(i) - 2^j;
+        end
+    end
+end
+sqnr = 20*log10(norm(a)/norm(a-a_quan));
+end</code></pre>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [X_quan, sqnr]=delta_mod(X,delta)
+l = size(X,2);
+Y_quan = zeros(1,l);
+X_quan = zeros(1,l);
+if X(1) &gt;= 0, epsi = 1; else epsi = -1; end
+Y_quan(1) = epsi * delta;
+X_quan(1) = Y_quan(1);
+for n = 2:l
+    if X(n) &gt;= X_quan(n-1), epsi = 1; else epsi = -1; end
+    Y_quan(n) = epsi * delta;
+    X_quan(n) = X_quan(n-1) + Y_quan(n);
+end
+sqnr = 20*log10(norm(X)/norm(X-X_quan));</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem442-haberlesme-laboratuvari.zip" download>eem442-haberlesme-laboratuvari.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 1.7 MB · 07.05.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem442-haberlesme-laboratuvari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142137"></script>
+<script src="/assets/lang/en.js?v=202611142137"></script>
+<script src="/assets/lang/de.js?v=202611142137"></script>
+<script src="/assets/js/site.js?v=202611142137"></script>
+</body>
+</html>

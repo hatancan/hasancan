@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM424 Mikrodalga Teorisi: Elektromanyetik Dalga Yayılımı - Dispersiyon Etkisi Proje Raporu (Kare ve Üçgen Dalga, MATLAB) — hasancan.net</title>
+<meta name="description" content="İki arkadaşın EEM424 Mikrodalga Teorisi dersi 2015 proje raporu: kare ve üçgen işaretlerin dispersiyonlu yayılımda uğradığı bozulma; kavram ve işletim, iş kırılım ağacı, çalışma takvimi, araştırma ara sonuçları ve MATLAB kodları. Kişisel bilgiler çıkarıldı.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem424-dalga-yayilimi-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM424 Mikrodalga Teorisi: Elektromanyetik Dalga Yayılımı - Dispersiyon Etkisi Proje Raporu (Kare ve Üçgen Dalga, MATLAB)">
+<meta property="og:description" content="İki arkadaşın EEM424 Mikrodalga Teorisi dersi 2015 proje raporu: kare ve üçgen işaretlerin dispersiyonlu yayılımda uğradığı bozulma; kavram ve işletim, iş kırılım ağacı, çalışma takvimi, araştırma ara sonuçları ve MATLAB kodları. Kişisel bilgiler çıkarıldı.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem424-dalga-yayilimi-projesi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM424 Mikrodalga Teorisi: Elektromanyetik Dalga Yayılımı - Dispersiyon Etkisi Proje Raporu (Kare ve Üçgen Dalga, MATLAB)", "description": "İki arkadaşın EEM424 Mikrodalga Teorisi dersi 2015 proje raporu: kare ve üçgen işaretlerin dispersiyonlu yayılımda uğradığı bozulma; kavram ve işletim, iş kırılım ağacı, çalışma takvimi, araştırma ara sonuçları ve MATLAB kodları. Kişisel bilgiler çıkarıldı.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem424-dalga-yayilimi-projesi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM424 – Mikrodalga Kuramı", "associatedMedia": {"@type": "MediaObject", "name": "eem424-dalga-yayilimi-projesi.zip", "contentUrl": "https://hasancan.net/arsiv/eem424-dalga-yayilimi-projesi/eem424-dalga-yayilimi-projesi.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM424 Mikrodalga Teorisi: Elektromanyetik Dalga Yayılımı - Dispersiyon Etkisi Proje Raporu (Kare ve Üçgen Dalga, MATLAB)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem424">EEM424</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM424 – Mikrodalga Kuramı</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.04.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#kavram-ve-isletim">Kavram ve işletim</a></li><li><a href="#i-s-kirilim-agaci-ve-calisma-takvimi">İş kırılım ağacı ve çalışma takvimi</a></li><li><a href="#arastirma-ara-sonuclari">Araştırma ara sonuçları</a></li><li><a href="#matlab-kodlari">MATLAB kodları</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM424</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM424 Mikrodalga Teorisi: Elektromanyetik Dalga Yayılımı - Dispersiyon Etkisi Proje Raporu (Kare ve Üçgen Dalga, MATLAB)</h1>
+            <p class="kucuk">EEM424 – Mikrodalga Kuramı · 17.04.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, <strong>EEM 424 Mikrodalga Teorisi</strong> dersinde (Prof. Dr. S. Gökhun Tanyer) iki arkadaşımın hazırladığı proje raporunu (17 Nisan 2015, "Elektromanyetik Dalga Yayılımı – Dispersiyon Etkisi") ve proje klasöründeki ek belgeleri anlatır. Öğrenci adları ve numaraları çıkarılmış, rapor sayfaları maskelenmiştir. Maskelenmiş rapor ve MATLAB dosyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="kavram-ve-isletim">Kavram ve işletim</h2>
+<ol><li>Girdi olarak verilen <strong>kare ve üçgen işaretlerin EM dalga yayılımında uğrayabilecekleri genlik bozulmalarının</strong> dalgaya etkileri incelenecektir.</li><li>Açık kaynak incelemesiyle şu konular araştırılır: Fourier serisi/dönüşümü, hızlı Fourier dönüşümü, ayrık Fourier dönüşümü, distorsiyon, dispersiyon, kanal modelleme, kanal dengeleme.</li><li>Girdi olarak kare ve üçgen dalga verilir; dalga değişkenleri ile zayıflama fonksiyonları belirlenir.</li><li>Çıktı olarak: giriş dalga şekillerinin zamanda gösterimi, frekans spektrumu, belirlenen uzaklıkta dalga şekilleri (tek grafikte) ve bu uzaklıkta dalga şekillerinin frekans spektrumu (tek grafikte).</li><li><strong>Sürüm 1:</strong> tüm girdiler yazılım metnine elle girilerek koşturulur. <strong>Sürüm 2:</strong> girdiler grafiksel arayüzden girilir.</li><li>Proje raporu hazırlanır.</li></ol>
+<h2 id="i-s-kirilim-agaci-ve-calisma-takvimi">İş kırılım ağacı ve çalışma takvimi</h2>
+<p>Ağaç: 1.0 EM dalga yayılımı – dispersiyon etkisi → 1.1 hazırlık çalışması (açık kaynak araştırması) → 1.2 sürüm 1 çalışmaları (girdilerin yazılıma elle girilmesi) → 1.3 sürüm 2 çalışmaları (girdilerin grafiksel arayüzle girilmesi) → 1.4 derleme → 1.5 testler → 1.6 dokümanların hazırlanması.</p>
+<p>Takvim: 7. hafta kavram ve işletim, iş kırılım ağacı; 9. hafta hazırlık çalışması, sürüm 1'in tamamlanması; 10. hafta girdilerin MATLAB'da hazırlanması; 11. hafta çıktıların MATLAB'da elde edilmesi; 12. hafta sürüm 2'nin tamamlanması ve makale biçiminde rapor; 13. hafta proje teslimi.</p>
+<h2 id="arastirma-ara-sonuclari">Araştırma ara sonuçları</h2>
+<ul><li><strong>Fourier serisi / dönüşümü:</strong> periyodik bir fonksiyonu sinüs ve kosinüslü sonsuz seriye açar; Fourier ilk kez metal çubuk veya levhadaki ısı denklemi için kullanmıştır. Dönüşüm, zaman düzlemindeki işareti frekans düzlemine çevirir. Bir diğer çalışma, Fourier serisini Euler açılımıyla üssel forma getirmenin ve periyodik olmayan işaretleri fazör uzayında göstermek için dönüşüm kullanmanın özetidir.</li><li><strong>FFT:</strong> zaman düzlemindeki işaretleri frekans düzlemine aktarmak için ayrık Fourier dönüşümünde kullanılan bir algoritmadır (Cooley–Tukey en yaygın olanıdır, mantığı Gauss'un çalışmalarına dayanır); verilerin eşit aralıklı alınmış olması gerekir.</li><li><strong>Ayrık Fourier dönüşümü:</strong> Fourier dönüşümünün eşit aralıklı frekanslardaki örneklerine eşittir; sonlu sayıda nokta için değerlendirme sağlar.</li><li><strong>Distorsiyon:</strong> sinyal genliğinde oluşan bozulmadır; çıkış sinyalinde girişte olmayan harmonikler görülür, bunların sinyale oranı dB olarak ifade edilir. Genlik, frekans, faz, harmonik ve grup hızı bozulması gibi türleri vardır; müzikte (elektro gitar) sıkça kullanılır, haberleşmede önlenmeye çalışılan bir etkidir.</li><li><strong>Nyquist oranı:</strong> bant sınırlı sinyallerde aliasing olmaması için gereken minimum örnekleme oranı (fmax'ın iki katı).</li><li><strong>Dispersiyon (dağılma):</strong> bir sinyali oluşturan farklı dalga boylu bileşenlerin farklı faz hızlarıyla ilerlemesinin dalga şeklinde yarattığı bozulma; akustik, optik, haberleşme, sismik ve okyanus dalgalarında görülür.</li><li><strong>Kanal modelleme:</strong> bir kanalı kodlama ve işleme aşamasından önce, çevre koşullarının yeterince iyi modellenmesi (performans, maliyet ve zaman tasarrufu). <strong>Kanal dengeleme:</strong> kanal boyunca iletilen sinyalde oluşan bozulmaları tersine çevirmek için kullanılır.</li><li><strong>Radar darbe görev faktörü:</strong> darbe süresinin boşluk süresine oranı.</li></ul>
+<h2 id="matlab-kodlari">MATLAB kodları</h2>
+<p>Üçgen ve kare dalga girdileri (ZIP'te <code>ucgen-dalga.m</code> ve <code>kare-dalga.m</code>):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>fs = 1000;
+t = 0:1/fs:1;
+x1 = sawtooth(2*pi*50*t);
+plot(211),plot(t,x1), axis([0 0.2 -1.2 1.2])
+xlabel('Zaman (san)');
+ylabel('Genlik');
+title('Ucgen Dalga');</code></pre>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>fs = 10000;
+t = 0:1/fs:1.5;
+x1 = square(2*pi*50*t);
+subplot(211)
+plot(t,x1)
+axis([0 0.2 -1.2 1.2]);
+xlabel('Zaman');
+ylabel('Genlik');
+title('Kare Dalga');</code></pre>
+<p>50 Hz'lik kare ve üçgen (testere) dalga üretilir ve ilk 0,2 saniyesi çizilir; üretilen şekiller ZIP içinde PNG olarak da vardır. Klasördeki kodlar yalnızca giriş dalgalarını üretir; dispersiyonlu yayılım hesabı (belirli uzaklıkta dalga şekli) klasörde bulunmayan sürüm 2'ye bırakılmıştır, rapor ise yalnızca kavram, takvim ve araştırma ara sonuçlarını içerir.</p>
+<p><em>Not: Rapor kapağındaki ad ve numaralar çıkarılmıştır. Klasörde ayrıca farklı bir derse ait (BME 314) proje dosyaları, "ÖDEV 3" adlı bir üç fazlı devre ödevi ve bir ders slaytı da bulunuyordu; bunlar bu yazıya dahil edilmemiştir.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem424-dalga-yayilimi-projesi.zip" download>eem424-dalga-yayilimi-projesi.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 555 KB · 17.04.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem424-dalga-yayilimi-projesi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (555 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

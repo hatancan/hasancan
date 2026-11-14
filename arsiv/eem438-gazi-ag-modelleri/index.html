@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Veri İletişimi: Ağ Modelleri: OSI, TCP/IP ve Adresleme (Gazi Üniversitesi, Suat Özdemir) — hasancan.net</title>
+<meta name="description" content="Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: OSI ve TCP/IP katman modelleri, her katmanın görevleri ve fiziksel, mantıksal, port ve özel adresleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-gazi-ag-modelleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Veri İletişimi: Ağ Modelleri: OSI, TCP/IP ve Adresleme (Gazi Üniversitesi, Suat Özdemir)">
+<meta property="og:description" content="Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: OSI ve TCP/IP katman modelleri, her katmanın görevleri ve fiziksel, mantıksal, port ve özel adresleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-gazi-ag-modelleri/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Veri İletişimi: Ağ Modelleri: OSI, TCP/IP ve Adresleme (Gazi Üniversitesi, Suat Özdemir)", "description": "Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: OSI ve TCP/IP katman modelleri, her katmanın görevleri ve fiziksel, mantıksal, port ve özel adresleme.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem438-gazi-ag-modelleri/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "dc02.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-gazi-ag-modelleri/dc02.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM438 Veri İletişimi: Ağ Modelleri: OSI, TCP/IP ve Adresleme (Gazi Üniversitesi, Suat Özdemir)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>04.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ag-modelleri">Ağ Modelleri</a></li><li><a href="#ag-modelleri">Ağ modelleri</a></li><li><a href="#osi-modeli">OSI modeli</a></li><li><a href="#osi-modeli-2">OSI modeli (2)</a></li><li><a href="#osi-katmanlari-arasinda-etkilesim">OSI katmanları arasında etkileşim</a></li><li><a href="#osi-modeli-katmanlar">OSI modeli katmanlar</a></li><li><a href="#osi-modeli-katmanlar-2">OSI modeli katmanlar (2)</a></li><li><a href="#osi-modeli-physical-layer">OSI modeli - Physical layer</a></li><li><a href="#osi-modeli-data-link-layer">OSI modeli - Data link layer</a></li><li><a href="#osi-modeli-data-link-layer-2">OSI modeli - Data link layer (2)</a></li><li><a href="#osi-model-network-layer">OSI model – Network layer</a></li><li><a href="#osi-model-network-layer">OSI model - Network layer</a></li><li><a href="#osi-model-transport-layer">OSI model - Transport layer</a></li><li><a href="#osi-model-transport-layer-2">OSI model - Transport layer (2)</a></li><li><a href="#osi-model-session-layer">OSI model - Session layer</a></li><li><a href="#osi-model-presentation-layer">OSI model - Presentation layer</a></li><li><a href="#osi-model-application-layer">OSI model - Application layer</a></li><li><a href="#tcp-ip-protocol-architecture">TCP/IP Protocol Architecture</a></li><li><a href="#tcp-ip-protokolu">TCP/IP protokolü</a></li><li><a href="#tcp-ip-protokolu-2">TCP/IP protokolü (2)</a></li><li><a href="#tcp-ip-protokolu-3">TCP/IP protokolü (3)</a></li><li><a href="#adresleme">Adresleme</a></li><li><a href="#adresleme-fiziksel-adresleme">Adresleme - Fiziksel adresleme</a></li><li><a href="#adresleme-mantiksal-adresleme">Adresleme - Mantıksal adresleme</a></li><li><a href="#adresleme-mantiksal-adresleme-2">Adresleme - Mantıksal adresleme (2)</a></li><li><a href="#adresleme-port-adresleme">Adresleme - Port adresleme</a></li><li><a href="#adresleme-port-adresleme-2">Adresleme - Port adresleme (2)</a></li><li><a href="#adresleme-ozel-adresleme">Adresleme - Özel adresleme</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM438 Veri İletişimi: Ağ Modelleri: OSI, TCP/IP ve Adresleme (Gazi Üniversitesi, Suat Özdemir)</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 04.03.2011 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü’nden Suat Özdemir’in “Veri İletişimi / Data Communications” dersi için hazırladığı 2. bölüm (Ağ Modelleri) slaytlarıdır (slayt tarihi 4 Mart 2011; alt bilgide BM 403 Veri İletişimi yazar). EEM438 klasöründe ikinci bir hocanın ders materyali olarak saklanmıştır. Slayt metni aşağıya aktarıldı; kitaptan alınmış şekiller ve tablolar yayımlanmadı, metni olmayan slaytlar belirtildi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Kapsam: OSI ve TCP/IP katman modelleri, her katmanın görevleri ve fiziksel, mantıksal, port ve özel adresleme.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="ag-modelleri">Ağ Modelleri</h2>
+<ul><li>Bir ağ bir noktadan diğer bir noktaya veri ileten donanım ve yazılımların tümüdür.</li><li>Donanım fiziksel elemanlardan, yazılım ise komut kümelerinden oluşur.</li><li>Bir verinin bir noktadan diğerine iletilmesi çok sayıda iş parçasına bölünebilir.</li><li>Her iş katmanlar (layers) halinde gösterilebilir. Örnek: posta ile mektup gönderimi.</li><li>Bilgisayar ağlarında 1990 yılına kadar OSI (Open Systems Interconnection) modeli yaygın kullanılmıştır.</li></ul>
+<h2 id="ag-modelleri">Ağ modelleri</h2>
+<ul><li>Geleneksel yolla posta gönderimi.</li></ul>
+<h2 id="osi-modeli">OSI modeli</h2>
+<ul><li>Bir açık sistem (open system) iki sistemin altyapılarına bağlı kalmaksızın iletişimini sağlayan protokoller kümesidir.</li><li>OSI bir protokol değildir ! OSI bir ağ mimarisinin tasarlanması ve anlaşılmasında kullanılan modeldir</li><li>OSI birbirinden ayrı ancak ilişkide olan 7 katmandan oluşur.</li><li>Her katman iletişim için kendisine atanmış bazı işlemleri yapar.</li></ul>
+<h2 id="osi-modeli-2">OSI modeli (2)</h2>
+<ul><li>A ve B arasında veri giderken aradaki bir çok node’dan geçebilir.</li><li>Her katman bir altındakinden hizmet alır ve bir üstündekine hizmet sunar.</li><li>Cihazlar arasında, aynı seviyedeki katmanlar kendi arasında haberleşir (peer-to-peer process).</li><li>Her katman kendi bilgisini pakete ekler ve bir alt katmana gönderir. Alıcı her katmanda kendi bilgisini açarak üst katmana iletir.</li><li>Komşu katmanlar arasında arayüzler (interface) vardır.</li><li>Arayüzler modülerlik sağlar.</li></ul>
+<h2 id="osi-katmanlari-arasinda-etkilesim">OSI katmanları arasında etkileşim</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="osi-modeli-katmanlar">OSI modeli katmanlar</h2>
+<ul><li>Katmanlar 3 grupta toplanır. Network support layers (fiziksel, data link ve network), user support layers (oturum, sunuş ve uygulama) ve transport layer iki grubu birbirine bağlar.</li><li>Üst katmanlar hemen hemen tümüyle yazılımla gerçekleştirilir, alt katmanlar ise genellikle yazılım ve donanımla gerçekleştirilir. Fiziksel katman çoğunlukla donanımla gerçekleştirilir.</li><li>Her katmanda veriye header ve/veya trailer eklenir. Trailer data link katmanında eklenir.</li><li>Her katman üst katmandaki verinin tümünü (header, trailer, data) data olarak alır. (Encapsulation)</li></ul>
+<h2 id="osi-modeli-katmanlar-2">OSI modeli katmanlar (2)</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="osi-modeli-physical-layer">OSI modeli - Physical layer</h2>
+<ul><li>Fiziksel ortamda bitlerin taşınması için gerekli işlemler gerçekleştirilir.</li><li>Arayüz ve iletim ortamının mekaniksel, elektriksel özellikleri belirlenir.</li><li>Bitlerin gösterimi tanımlanır. Bitlerin sinyallerle ifade ediliş şeklini (encode) belirler.</li><li>Data rate belirlenir. (bps)</li><li>Alıcı ve gönderici arasında bit seviyesinde senkronizasyon yapılır.</li><li>Point-to-point veya multipoint line konfigürasyonu belirlenir.</li><li>Topoloji tanımlanır. (mesh, star, bus, ring)</li><li>İletim modu tanımlanır. (simplex, half-duplex, full-duplex)</li></ul>
+<h2 id="osi-modeli-data-link-layer">OSI modeli - Data link layer</h2>
+<ul><li>Fiziksel katmandaki basit veri iletimini güvenilir bağlantıya çevirir.</li><li>Network layer’dan gelen bitleri frame’lere böler.</li><li>Fiziksel adresleme yapar. Frame’lere header (alıcı ve verici adresleri) ve trailer (hata kontrol bilgisi) ekler.</li><li>Frame bazında akış kontrolü yapar.</li><li>Hata denetimi yapar. Kaybolan ve bozulan frame’ler yeniden gönderilir (retransmit).</li><li>Erişim denetimi yapar. Tek bağlantı üzerindeki cihazların paylaşımını denetleyen protokol çalıştırılır.</li></ul>
+<h2 id="osi-modeli-data-link-layer-2">OSI modeli - Data link layer (2)</h2>
+<ul><li>Hop-to-hop (node-to-node) iletim yapar.</li><li>Şekilde A ile F arasında veri gönderimi görülmektedir.</li></ul>
+<h2 id="osi-model-network-layer">OSI model – Network layer</h2>
+<ul><li>Birden fazla ağdan geçerek source-to-destination paket gönderimden sorumludur.</li><li>Data link katmanı aynı ağdaki iki node arasında veri iletimi yaparken, network katmanı iki ağ arasında veri iletimi yapar.</li></ul>
+<h2 id="osi-model-network-layer">OSI model - Network layer</h2>
+<ul><li>Logical addressing (mantıksal adresleme) yapar. Alıcı ve göndericinin mantıksal adresleri pakete eklenir.</li><li>Routing yapar. Paketlerin farklı ağlardan geçmesi sırasında yönlendirme yapar.</li></ul>
+<h2 id="osi-model-transport-layer">OSI model - Transport layer</h2>
+<ul><li>Tüm mesajın process-to-process gönderimden sorumludur. Bir process uygulama programıdır.</li><li>Network layer gönderilen paketler arasında ilişki oluşturmaz. Transport layer tüm mesajı oluşturmaz. Sıralar, hata denetimi ve akış denetimi yapar.</li></ul>
+<h2 id="osi-model-transport-layer-2">OSI model - Transport layer (2)</h2>
+<ul><li>Service-point adresleme yapar. Her uygulama için adresleme (port) yapar.</li><li>Segmentation ve reassembly yapar. Mesaj iletilebilecek segmentlere bölünür ve sıra numarası verilir.</li><li>Connection-oriented (TCP) ve connectionless (UDP) iletişim yapar.</li><li>Tüm mesaj için end-to-end akış kontrolü yapar, data link layer bir bağlantı için yapar.</li><li>Tüm mesaj için process-to-process hata denetimi yapar.</li></ul>
+<h2 id="osi-model-session-layer">OSI model - Session layer</h2>
+<ul><li>Dialog kontrolörü görevi yapar.</li><li>Process tarafından veriye checkpoint eklenmesini sağlar (senkronizasyon). Bir hata oluştuğunda en son doğru giden kısımdan itibaren yeniden gönderim yapılır.</li><li>İki sistemin half duplex veya full duplex diyalog yapmasını sağlar.</li></ul>
+<p>  - Örnek: 1000 sayfalık bir dökümanın gönderilmesi?</p>
+<h2 id="osi-model-presentation-layer">OSI model - Presentation layer</h2>
+<ul><li>İki sistem arasında iletilen verinin syntax ve semantics özelliklerini belirler.</li><li>Translation. Farklı bilgisayarlar farklı kodlama teknikleri kullandığından gönderen bilgisayar bilgiyi ortak bir formata çevirir</li></ul>
+<p>  - char string → bit stream</p>
+<ul><li>Encryption. Bilginin gizliliğini ve güvenliğini sağlamak için şifreler.</li><li>Compression. Ağ trafiğini azaltmak için veri daha az bitle ifade edilir.</li></ul>
+<h2 id="osi-model-application-layer">OSI model - Application layer</h2>
+<ul><li>e-mail, uzak erişim, dosya transferi, veritabanı yönetimi veya dağıtık uygulamalar için kullanıcı arayüzlerini sağlar.</li><li>X.400 mesaj alma (e mail) hizmeti, X.500 dizin hizmeti, FTAM (file transfer and management) hizmeti vb. hizmetleri sunar.</li></ul>
+<h2 id="tcp-ip-protocol-architecture">TCP/IP Protocol Architecture</h2>
+<ul><li>TCP/IP, ARPANET üzerinde yürütülen protokol araştırma ve geliştirme çalışmalarının sonucudur; “TCP/IP protocol suite” olarak anılır ve İnternet standardı olan çok sayıda protokolden oluşur.</li><li>OSI modelinden önce geliştirildiği için katmanlar farklıdır.</li><li>Orijinal TCP/IP’de 4 katman vardır. (host-to-network, internet, transport ve TCP/IP protokol kümesi application)</li><li>Host-to-network layer, OSI’de physical ve data link layer’ın birleşimine eşittir.</li><li>Internet layer, OSI’de network layer’a eşittir.</li><li>Application layer, OSI’de session, presentation ve application layer’a eşit.</li><li>Sonuç olarak, günümüzde TCP/IP 5 katman olarak tanımlanır: physical, data link, network, transport ve application.</li></ul>
+<h2 id="tcp-ip-protokolu">TCP/IP protokolü</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="tcp-ip-protokolu-2">TCP/IP protokolü (2)</h2>
+<ul><li>Physical ve data link katmanları herhangi özel bir protokolü desteklemez.</li><li>Network katmanı IP (Internetworking Protocol)nı destekler. IP Datagram’ların yönlendirilmesi ve best-effort (hata denetimi yapmaz) gönderimini yapar.</li><li>ARP (Address Resolution Protocol). Mantıksal adresi fiziksel adresle ilişkilendirir.</li><li>RARP (Reverse Address Resolution Protocol). Sadece fiziksel adresini bilen host için Internet adresi atar. (Disksiz bilgisayar)</li><li>ICMP (Internet Control Message Protocol). Datagram’lardaki problemlerin gönderene bildirilmesi için kullanılır.</li></ul>
+<h2 id="tcp-ip-protokolu-3">TCP/IP protokolü (3)</h2>
+<ul><li>IGMP (Internet Group Message Protocol). Eşzamanlı bir grup mesaj göndermek için kullanılır.</li><li>Transport katmanı UDP ve TCP yi destekler. UDP (User Datagram Protocol). Sadece port adresi, hata denetim bitleri ve bilgi boyutunu pakete ekler. Connectionless çalışır. (ping)</li><li>TCP (Transmission Control Protocol). Güvenilirdir ve connection oriented çalışır. Veriyi segmentlere böler, sıralar, sırayı denetler.</li><li>SCTP (Stream Control Transmission Protocol). Yeni Internet uygulamalarını sağlar (VoIP). UDP ve TCP’nin birleşimidir.</li></ul>
+<h2 id="adresleme">Adresleme</h2>
+<ul><li>TCP/IP protokol kümesiyle fiziksel (physical), mantıksal (logical), port ve özel (specific) olarak 4 seviyeli adresleme yapılır.</li></ul>
+<h2 id="adresleme-fiziksel-adresleme">Adresleme - Fiziksel adresleme</h2>
+<ul><li>Data link layer’da frame içinde bulunur. Ağ yapısına göre farklı uzunluktadır. (Ethernet için 6 byte NIC, LocalTalk Apple için 1 byte)</li></ul>
+<h2 id="adresleme-mantiksal-adresleme">Adresleme - Mantıksal adresleme</h2>
+<ul><li>Adres bilgisi network layer’da paket içinde bulunur.</li><li>Internet için 32 bit boyutundadır (IPv4)</li><li>IPv6 128 bit adresleme yapar.</li></ul>
+<h2 id="adresleme-mantiksal-adresleme-2">Adresleme - Mantıksal adresleme (2)</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="adresleme-port-adresleme">Adresleme - Port adresleme</h2>
+<ul><li>IP adresi ve fiziksel adres bilgisayarlar arasında source-to-destination iletişim için yeterlidir.</li><li>Ancak günümüzde bilgisayarlar aynı anda birden fazla program çalıştırabilir.</li><li>TCP/IP’de port adresi her uygulama için atanır ve 16-bit (0-65535) uzunluğundadır.</li><li>Fiziksel adres hop-to-hop değişir, mantıksal ve port adresi sabit kalır.</li></ul>
+<h2 id="adresleme-port-adresleme-2">Adresleme - Port adresleme (2)</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="adresleme-ozel-adresleme">Adresleme - Özel adresleme</h2>
+<ul><li>Bazı uygulamalar kullanıcı için kolay adreslemeler yapar. (forouzan@fhda.edu, www.mhhe.com)</li><li>Özel adresler port adreslerine ve mantıksal adreslere dönüştürülür</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dc02.pdf" download>dc02.pdf</a></p>
+              <p class="kucuk">PDF · 1.2 MB · 15 <span data-i18n="arch.pagesLower"></span> · 04.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dc02.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

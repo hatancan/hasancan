@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM424 Mikrodalga Kuramı: Mikrodalga Ağ Analizi Ders Notları (Z, Y, S ve ABCD Matrisleri, 3 dB Zayıflatıcı Örneği) — hasancan.net</title>
+<meta name="description" content="EEM424 dersinden el yazısı notların metne aktarımı: empedans ve admitans matrisleri, kayıpsız ağlar, saçılma (S) matrisi, 8,56 ohm - 141,8 ohm - 8,56 ohm T tipi 3 dB zayıflatıcı örneği ve iletim (ABCD) matrisi.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem424-mikrodalga-ag-analizi-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM424 Mikrodalga Kuramı: Mikrodalga Ağ Analizi Ders Notları (Z, Y, S ve ABCD Matrisleri, 3 dB Zayıflatıcı Örneği)">
+<meta property="og:description" content="EEM424 dersinden el yazısı notların metne aktarımı: empedans ve admitans matrisleri, kayıpsız ağlar, saçılma (S) matrisi, 8,56 ohm - 141,8 ohm - 8,56 ohm T tipi 3 dB zayıflatıcı örneği ve iletim (ABCD) matrisi.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem424-mikrodalga-ag-analizi-el-yazisi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM424 Mikrodalga Kuramı: Mikrodalga Ağ Analizi Ders Notları (Z, Y, S ve ABCD Matrisleri, 3 dB Zayıflatıcı Örneği)", "description": "EEM424 dersinden el yazısı notların metne aktarımı: empedans ve admitans matrisleri, kayıpsız ağlar, saçılma (S) matrisi, 8,56 ohm - 141,8 ohm - 8,56 ohm T tipi 3 dB zayıflatıcı örneği ve iletim (ABCD) matrisi.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem424-mikrodalga-ag-analizi-el-yazisi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM424 – Mikrodalga Kuramı"}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM424 Mikrodalga Kuramı: Mikrodalga Ağ Analizi Ders Notları (Z, Y, S ve ABCD Matrisleri, 3 dB Zayıflatıcı Örneği)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem424">EEM424</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM424 – Mikrodalga Kuramı</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>30.05.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>Fotoğraflardan metin</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#1-empedans-matrisi-v-z-i">1. Empedans matrisi: V = Z·I</a></li><li><a href="#2-admitans-matrisi">2. Admitans matrisi</a></li><li><a href="#3-sacilma-scattering-matrisi">3. Saçılma (scattering) matrisi</a></li><li><a href="#4-i-letim-abcd-matrisi">4. İletim (ABCD) matrisi</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM424</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM424 Mikrodalga Kuramı: Mikrodalga Ağ Analizi Ders Notları (Z, Y, S ve ABCD Matrisleri, 3 dB Zayıflatıcı Örneği)</h1>
+            <p class="kucuk">EEM424 – Mikrodalga Kuramı · 30.05.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Mayıs 2015'te <strong>EEM424 Mikrodalga Kuramı</strong> dersinde (Prof. Dr. S. Gökhun Tanyer, konu: <em>mikrodalga ağ analizi</em>) tuttuğum 19 sayfalık el yazısı notun metne aktarılmış hâlidir. Notlar ağırlıkla İngilizce yazılmış; açıklamalar burada Türkçeleştirildi. Fotoğraflanmış sayfalar yayımlanmamıştır.</p>
+<h2 id="1-empedans-matrisi-v-z-i">1. Empedans matrisi: V = Z·I</h2>
+<p>V = [V1, V2, …]ᵀ ve I = [I1, I2, …]ᵀ vektörleri ile V = Z·I (ve I = Y·V).</p>
+<p><strong>Soru:</strong> Kaynak olarak yalnızca I_j verilmiş, diğer kapılarda kaynak yok (I_k = 0, k ≠ j). Gözlem V_i'dir:</p>
+<p>Z_ij = V_i / I_j |_{I_k = 0, k ≠ j}   (kaynak: I_j, gözlem: V_i)</p>
+<p><strong>Örnek (T ağı).</strong> Seri kollarda Z_A ve Z_B, ortak (paralel) kolda Z_C bulunan iki kapılı ağ için:</p>
+<ul><li>Z11 = V1/I1 |_{I2=0} = Z_A + Z_C,</li><li>Z22 = Z_B + Z_C,</li><li>Z21 = V2/I1 |_{I2=0}: V2 = I1·Z_C ⇒ Z21 = Z_C (aynı sonuç V2 = V1·Z_C/(Z_B + Z_C) ve I1 = V1/(Z_A + Z_C) ile de bulunur),</li><li>Z12 = V1/I2 |_{I1=0} = Z_C.</li></ul>
+<p>Dolayısıyla Z12 = Z21: <strong>karşılıklı (reciprocal) ağ</strong>; benzer biçimde Y_ij = Y_ji. Matris biçiminde:</p>
+<p>[V1; V2] = [[Z_A + Z_C, Z_C]; [Z_C, Z_B + Z_C]] · [I1; I2]</p>
+<p><strong>Kayıpsız ağ:</strong> Re{Z_mn} = 0 (tüm m, n için); yani Z_ij'ler tamamen sanaldır.</p>
+<h2 id="2-admitans-matrisi">2. Admitans matrisi</h2>
+<p>Y_ij = I_i / V_j |_{V_k = 0, k ≠ j} (kaynak/giriş: V_j, gözlem: I_i). Örnek: aynı T ağında Y12 = I1/V2 |_{V1=0}: I1 = V2 · (Z_A ∥ Z_C)/(Z_B + (Z_A ∥ Z_C)); buradan Y12 = (Z_A ∥ Z_C)/(Z_B + (Z_A ∥ Z_C)) (defterde bu biçimde yazılmıştır; birim açısından bu ifadenin bir admitansa karşılık gelmesi için ek bir 1/Z çarpanı gerekir). Z ve Y matrislerinin ilişkisi, [Y] = [Z]⁻¹, ödev olarak bırakılmıştır.</p>
+<h2 id="3-sacilma-scattering-matrisi">3. Saçılma (scattering) matrisi</h2>
+<p>[V⁻] = S·[V⁺]: gözlem V_i⁻ (giden dalga), giriş V_j⁺ (gelen dalga):</p>
+<p>S_ij = V_i⁻ / V_j⁺ |_{V_k⁺ = 0, k ≠ j}</p>
+<p><em>Soru:</em> V_k⁺ = 0 (k ≠ j) nasıl sağlanır? <em>Cevap:</em> k ≠ j olan kapılara <strong>uyumlu yük (matched load)</strong> bağlayarak.</p>
+<h3 id="ornek-t-tipi-zayiflatici-r-a-r-b-r-c-50-hat">Örnek: T tipi zayıflatıcı (R_A, R_B, R_C, 50 Ω hat)</h3>
+<p>Kapı 1 ile 2 arasında R_A (seri), R_B (seri) ve ortada R_C (paralel) vardır; kapılara bağlanan hat 50 Ω'dur.</p>
+<ul><li><strong>S11</strong> = V1⁻/V1⁺ |_{V2⁺=0}: 2. kapıda 50 Ω yük varken giriş empedansı Z_in^(1) = R_A + R_C ∥ (R_B + 50) = R_A + R_C(R_B + 50)/(R_C + R_B + 50). S11 = Γ^(1) = (Z_in^(1) − Z0)/(Z_in^(1) + Z0). Z_in^(1) = 50 Ω ise <strong>S11 = 0</strong>.</li><li>Verilen değerler: <strong>R_A = R_B = 8,56 Ω, R_C = 141,8 Ω</strong>; bu değerlerde Z_in = 8,56 + 141,8 ∥ 58,56 = 8,56 + 41,44 ≈ 50 Ω olur, yani S11 = 0 (simetriden S22 = 0).</li><li><strong>S12 = ?</strong> S12 = V1⁻/V2⁺ |_{V1⁺=0}; simetri (karşılıklı ağ) nedeniyle S12 = S21.</li><li><strong>S21</strong> = V2⁻/V1⁺ |_{V2⁺=0}. S11 = S22 = 0 ve 2. kapı uyumlu yükle sonlandırılmış olduğundan V1 = V1⁺ (V1⁻ = 0) ve V2 = V2⁻ (V2⁺ = 0). Bölücü ilişkisiyle:</li></ul>
+<p>V2⁻ = V2 = V1 · [R_C ∥ (R_B + 50) / (R_A + R_C ∥ (R_B + 50))] · [50/(50 + R_B)]</p>
+<p>Sayısal değerlerle = V1⁺ · [141,8 ∥ (8,56 + 50) / (8,56 + 141,8 ∥ (8,56 + 50))] · [50/(50 + 8,56)] = <strong>0,707·V1⁺</strong> ⇒ <strong>S21 = S12 = 0,707</strong>.</p>
+<p><strong>Güç hesabı.</strong> Yalnız V1⁺ girişi için P_in = ½·|V1⁺|²/Z0 ve P_out = ½·|V2⁻|²/Z0, V2⁻ = S21·V1⁺ olduğundan P_out = ½·S21²·|V1⁺|²/Z0. Buradan</p>
+<p>P_out / P_in = S21² = 1/2 ⇒ <strong>S21 = −3 dB</strong>.</p>
+<p>Yani bu ağ bir <strong>3 dB zayıflatıcıdır (pad)</strong>: giriş gücünün yarısı çıkışa iletilir, her iki kapıda da uyumludur.</p>
+<h2 id="4-i-letim-abcd-matrisi">4. İletim (ABCD) matrisi</h2>
+<p>İki kapılı ağ için: V1 = A·V2 + B·I2 ve I1 = C·V2 + D·I2, yani [V1; I1] = [[A, B]; [C, D]] · [V2; I2].</p>
+<p><strong>Soru:</strong> 1–2–3 şeklinde ardışık iki ağ bağlanırsa 1 ile 3 arasındaki ilişki nedir? Cevap: [V1; I1] = M1·[V2; I2] ve [V2; I2] = M2·[V3; I3] olduğundan <strong>[V1; I1] = M1·M2·[V3; I3]</strong>: ağların kaskat (zincir) bağlantısında ABCD matrisleri çarpılır.</p>
+<p><strong>Örnekler.</strong></p>
+<ul><li><em>Seri empedans Z:</em> A için I2 = 0 (açık devre): V1 = V2 ⇒ A = 1. B için V2 = 0 (kısa devre): V1 = Z·I2 ⇒ B = Z. C için I2 = 0: I1 = 0 ⇒ C = 0. D için V2 = 0: I1 = I2 ⇒ D = 1. Sonuç: [[1, Z], [0, 1]].</li><li><em>Ödev:</em> paralel admitans Y için ABCD matrisi.</li><li><em>Ödev:</em> uzunluğu ℓ, karakteristik empedansı Z0 ve yayılma sabiti β olan iletim hattı parçasının ABCD matrisi.</li></ul>
+<p><em>Not: El yazısında Y matrisi örneğinin formülleri kısaltılmış yazıldı; yukarıdaki Z ve Y bağıntıları ders kitabındaki standart tanımlara göre yeniden düzenlenmiştir.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

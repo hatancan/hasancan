@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Bilgisayarlı Görü: MATLAB Giriş Föyü, Renkli Görüntü ve FFT-Gürültü Laboratuvarları, Programlama Ödevi 1 — hasancan.net</title>
+<meta name="description" content="BIL437 Bilgisayarlı Görü dersinin MATLAB&#x27;a giriş föyü, renkli görüntü işleme ve frekans uzayında süzgeçleme/gürültü laboratuvar kodları, görüntü küçültme ve logaritmik/üstel dönüşüm içeren programlama ödevi ile artı işareti bulma kodu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Bilgisayarlı Görü: MATLAB Giriş Föyü, Renkli Görüntü ve FFT-Gürültü Laboratuvarları, Programlama Ödevi 1">
+<meta property="og:description" content="BIL437 Bilgisayarlı Görü dersinin MATLAB&#x27;a giriş föyü, renkli görüntü işleme ve frekans uzayında süzgeçleme/gürültü laboratuvar kodları, görüntü küçültme ve logaritmik/üstel dönüşüm içeren programlama ödevi ile artı işareti bulma kodu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Bilgisayarlı Görü: MATLAB Giriş Föyü, Renkli Görüntü ve FFT-Gürültü Laboratuvarları, Programlama Ödevi 1", "description": "BIL437 Bilgisayarlı Görü dersinin MATLAB'a giriş föyü, renkli görüntü işleme ve frekans uzayında süzgeçleme/gürültü laboratuvar kodları, görüntü küçültme ve logaritmik/üstel dönüşüm içeren programlama ödevi ile artı işareti bulma kodu.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-uygulamalar.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/bil437-uygulamalar.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="BIL437 Bilgisayarlı Görü: MATLAB Giriş Föyü, Renkli Görüntü ve FFT-Gürültü Laboratuvarları, Programlama Ödevi 1">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>29.07.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#matlab-giris-foyu-437l1-pdf-8-sayfa">MATLAB giriş föyü (437L1.pdf, 8 sayfa)</a></li><li><a href="#laboratuvar-1-renkli-goruntu-isleme-lab-color-pdf">Laboratuvar 1: renkli görüntü işleme (lab_color.pdf)</a></li><li><a href="#laboratuvar-2-frekans-uzayinda-suzgecleme-ve-gurultu-lab-fft-noise-pdf">Laboratuvar 2: frekans uzayında süzgeçleme ve gürültü (lab_fft_noise.pdf)</a></li><li><a href="#programlama-odevi-1-teslim-22-temmuz-2015-laboratuvarda-gosterim">Programlama ödevi 1 (teslim: 22 Temmuz 2015, laboratuvarda gösterim)</a></li><li><a href="#arti-isareti-bulma-arti-isareti-bulma-m">Artı işareti bulma (arti-isareti-bulma.m)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>BIL437 Bilgisayarlı Görü: MATLAB Giriş Föyü, Renkli Görüntü ve FFT-Gürültü Laboratuvarları, Programlama Ödevi 1</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 29.07.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>2015 yaz okulundaki <strong>BIL437 Bilgisayarlı Görü</strong> (laboratuvar föylerinin başlığına göre "BİL421 İmge İşleme" ile ortak içerik) dersinde kullanılan uygulama malzemeleri: bir MATLAB giriş föyü, iki laboratuvar föyü, programlama ödevi ve benim yazdığım küçük bir kod. Orijinal dosyalar yazının sonunda ZIP olarak indirilebilir. Laboratuvar föyleri ve ödev dersin öğretim elemanının malzemesidir; MATLAB giriş föyünün yazarı belirtilmemiştir (Kermit Sigmon'un "MATLAB Primer" metnine dayanıyor görünüyor).</p>
+<h2 id="matlab-giris-foyu-437l1-pdf-8-sayfa">MATLAB giriş föyü (437L1.pdf, 8 sayfa)</h2>
+<p>Föy, MATLAB'ı 18 başlıkta tanıtır:</p>
+<ol><li>MATLAB'a erişim.</li><li>Matris girişi: <code>A = [1 2 3; 4 5 6; 7 8 9]</code>, karmaşık sayılar (<code>1+5i</code>), <code>rand(n)</code>, <code>magic(n)</code>; <code>A(2,3)</code> ikinci satır üçüncü sütun.</li><li>Matris ve dizi (eleman eleman) işlemleri: <code>+ - * ^ ' \ /</code>; nokta ile <code>.*</code>, <code>.^</code> eleman eleman çalışır (<code>[1,2,3,4].^2</code> → <code>[1,4,9,16]</code>). <code>x = A\b</code>, Ax = b'nin çözümüdür.</li><li>İfadeler, değişkenler, oturumu kaydetme (<code>who</code>, <code>whos</code>, <code>clear</code>, <code>save</code>, <code>load</code>, <code>eps</code>).</li><li>Matris üreten fonksiyonlar: <code>eye, zeros, ones, diag, triu, tril, rand, hilb, magic, toeplitz</code>.</li><li><code>for</code>, <code>while</code>, <code>if</code> ve ilişkisel/mantıksal işleçler (<code>&lt;, &gt;, &lt;=, &gt;=, ==, ~=, &amp;, |, ~</code>).</li><li>Skaler fonksiyonlar (<code>sin, cos, exp, log, abs, round, floor, ceil, rem, sign, sqrt</code>).</li><li>Vektör fonksiyonları (<code>max, min, sort, sum, prod, mean, median, std, any, all</code>) sütun sütun çalışır; matrisin en büyük elemanı <code>max(max(A))</code>.</li><li>Matris fonksiyonları (<code>eig, chol, svd, inv, lu, qr, det, rank, norm, cond, expm</code> …).</li><li>Komut satırı düzenleme ve geri çağırma (ok tuşları).</li><li>Alt matrisler ve iki nokta gösterimi: <code>1:5</code>, <code>0.2:0.2:1.2</code>, <code>A(:,3)</code>, <code>A(1:4,:)</code>, <code>A(:,[2 4]) = …</code>.</li><li>M-dosyaları ve fonksiyon dosyaları; örnek:</li></ol>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function a = randint(m,n,a,b)
+%RANDINT Randomly generated integral matrix.
+if nargin &lt; 3, a = 0 ; b = 9 ; end
+a = floor((b-a+1)*rand(m,n)) + a;</code></pre>
+<p>13. Metin dizgeleri, <code>disp</code>, <code>error</code>, <code>input</code>. 16. Çıktı biçimi: <code>format short</code>, <code>format long</code>, <code>format rat</code> … 18. Grafikler: <code>plot</code>, <code>plot3</code>, <code>mesh</code>, <code>surf</code>; başlık/eksen komutları (<code>title</code>, <code>xlabel</code>, <code>ylabel</code>, <code>axis</code>), <code>hold on</code>, çizgi tipleri, işaret tipleri ve renk kodları (<code>plot(x,y,'r--')</code>).</p>
+<h2 id="laboratuvar-1-renkli-goruntu-isleme-lab-color-pdf">Laboratuvar 1: renkli görüntü işleme (lab_color.pdf)</h2>
+<p>Altı alıştırmayı <code>peppers.png</code> görüntüsü üzerinde yapar:</p>
+<ol><li><strong>RGB – HSV</strong>: <code>hsv2rgb</code>/<code>rgb2hsv</code> ile H (renk), S (renk miktarı) ve V (şiddet) bileşenlerini göster.</li><li><strong>Gri seviyeye çevirme</strong>: <code>rgb2gray</code> ile ortalama <code>(R+G+B)/3</code> karşılaştırılır; ağırlıklı formül <code>0.2989*R + 0.5870*G + 0.1140*B</code>.</li><li><strong>RGB – CMY</strong>: <code>C = 255 − R</code>, <code>M = 255 − G</code>, <code>Y = 255 − B</code> (cyan = beyaz − kırmızı).</li><li><strong>RGB histogram eşitleme</strong>: her bant ayrı ayrı <code>histeq</code> ile eşitlenir.</li><li><strong>Parlaklık artırma</strong>: her banda 128 eklenir. Föyde "Her banda (R,G,B) ayrı ayrı uygulanır!" uyarısı vardır.</li><li><strong>RGB süzgeçleme</strong>: <code>fspecial('average',7)</code> ile <code>imfilter(I,H,'replicate')</code> ve her bantta <code>medfilt2(…,[7 7])</code>.</li></ol>
+<h2 id="laboratuvar-2-frekans-uzayinda-suzgecleme-ve-gurultu-lab-fft-noise-pdf">Laboratuvar 2: frekans uzayında süzgeçleme ve gürültü (lab_fft_noise.pdf)</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>I = imread('eight.tif');
+fI = fft2(I);
+fS = fftshift(fI);            % spektrumu görüntünün ortasına öteler
+H  = fspecial('average',9);
+fH = fft2(H, x, y);           % süzgecin FFT'si (görüntü boyutuna tamamlanmış)
+NI = ifft2(fI .* fH);         % frekans uzayında çarpma = uzamsal evrişim</code></pre>
+<p>Aynı sonucun <code>imfilter(I,H)</code> ile (2 boyutlu evrişim) elde edildiği gösterilir. İkinci bölüm gürültü üretimidir: <code>imnoise(I,'salt &amp; pepper',0.02)</code> (yoğunluk 0,02) ve <code>imnoise(I,'gaussian',0,0.01)</code> (ortalama 0, varyans 0,01).</p>
+<h2 id="programlama-odevi-1-teslim-22-temmuz-2015-laboratuvarda-gosterim">Programlama ödevi 1 (teslim: 22 Temmuz 2015, laboratuvarda gösterim)</h2>
+<p><strong>Problem 1: piksel azaltarak görüntü küçültme.</strong> Kullanıcının verdiği tamsayı küçültme çarpanı X için görüntüyü küçülten bir MATLAB programı yazılacak; Şekil 2.20(a) kullanılacak ve sonuçlar <code>imwrite</code> ile özgün biçimde ayrı dosyalara yazılacak.</p>
+<p><strong>Problem 2: yoğunluk dönüşümleriyle iyileştirme.</strong> Şekil 3.8(a) için (a) s = c·log(1 + r) ve (b) s = c·r^γ dönüşümleri uygulanacak. (a)'da tek parametre c, (b)'de c ve γ vardır; amaç her dönüşümle elde edilen en iyi görsel iyileştirmeyi deneyerek bulmak ve ikisi arasındaki farklı sonuçların nedenini açıklamaktır (açıklama program içinde yorum satırı olarak yazılabilir).</p>
+<p>Notlar: yalnızca .m kaynak dosyaları teslim edilir; görüntü okuma/yazma ve giriş/çıkış dışında MATLAB kütüphane fonksiyonu kullanılmaz; kodda yeterince yorum ve anlamlı değişken adları beklenir.</p>
+<h2 id="arti-isareti-bulma-arti-isareti-bulma-m">Artı işareti bulma (arti-isareti-bulma.m)</h2>
+<p>İkili bir görüntüde "+" biçimli (merkez ve dört komşusu 1 olan) pikselleri bulan kısa bir kod:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function islem1 = islem1(image)
+[x,y]=size(image);
+image2=zeros(x,y);
+for m=1:x-2
+    for n=1:y-2
+        if image(m+1,n+1)==1 &amp;&amp; image(m,n+1)==1 &amp;&amp; image(m+1,n)==1 &amp;&amp; image(m+1,n+2) &amp;&amp; image(m+2,n+1)==1
+            image2(m+1,n+1)=1;
+        end
+    end
+end
+islem1=image2;
+end</code></pre>
+<p><em>Not: <code>image(m+1,n+2)</code> karşılaştırmasında <code>==1</code> eksik; sayısal değer sıfırdan farklı olduğunda koşul doğru sayıldığı için ikili görüntüde sonuç değişmez.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="bil437-uygulamalar.zip" download>bil437-uygulamalar.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 433 KB · 29.07.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="bil437-uygulamalar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (433 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

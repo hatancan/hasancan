@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Bilgisayarlı Görü: Sayısal Görüntü İşlemeye Giriş, Görüntü Temelleri, Histogram ve Nokta İşleme — hasancan.net</title>
+<meta name="description" content="BIL437 Bilgisayarlı Görü (Computer Vision) dersinin ilk dört sunumu: sayısal görüntü nedir, insan görme sistemi, örnekleme ve nicemleme, histogram eşitleme, logaritmik ve üstel (gamma) dönüşümler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-goruntu-isleme-giris-ve-iyilestirme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Bilgisayarlı Görü: Sayısal Görüntü İşlemeye Giriş, Görüntü Temelleri, Histogram ve Nokta İşleme">
+<meta property="og:description" content="BIL437 Bilgisayarlı Görü (Computer Vision) dersinin ilk dört sunumu: sayısal görüntü nedir, insan görme sistemi, örnekleme ve nicemleme, histogram eşitleme, logaritmik ve üstel (gamma) dönüşümler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-goruntu-isleme-giris-ve-iyilestirme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Bilgisayarlı Görü: Sayısal Görüntü İşlemeye Giriş, Görüntü Temelleri, Histogram ve Nokta İşleme", "description": "BIL437 Bilgisayarlı Görü (Computer Vision) dersinin ilk dört sunumu: sayısal görüntü nedir, insan görme sistemi, örnekleme ve nicemleme, histogram eşitleme, logaritmik ve üstel (gamma) dönüşümler.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-goruntu-isleme-giris-ve-iyilestirme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-goruntu-isleme-giris-ve-iyilestirme.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-goruntu-isleme-giris-ve-iyilestirme/bil437-goruntu-isleme-giris-ve-iyilestirme.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="BIL437 Bilgisayarlı Görü: Sayısal Görüntü İşlemeye Giriş, Görüntü Temelleri, Histogram ve Nokta İşleme">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.07.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#1-giris-sayisal-goruntu-ve-goruntu-isleme">1. Giriş: sayısal görüntü ve görüntü işleme</a></li><li><a href="#2-sayisal-goruntu-temelleri">2. Sayısal görüntü temelleri</a></li><li><a href="#3-goruntu-iyilestirme-histogram-isleme">3. Görüntü iyileştirme: histogram işleme</a></li><li><a href="#4-nokta-isleme-ve-gri-seviye-donusumleri">4. Nokta işleme ve gri seviye dönüşümleri</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>BIL437 Bilgisayarlı Görü: Sayısal Görüntü İşlemeye Giriş, Görüntü Temelleri, Histogram ve Nokta İşleme</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 07.07.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, Başkent Üniversitesi'nde 2015 yaz okulunda aldığım <strong>BIL437 Bilgisayarlı Görü (Computer Vision)</strong> dersinin ilk dört sunumunun (Lecture 1_1 – 1_4) ders notu özetidir. Klasör adı "Bilgisayar Güvenliği" olsa da sunumların başlığı "Bil-437 Computer Vision", laboratuvar föylerinin başlığı ise "İmge İşleme"dir; içerik sayısal görüntü işlemedir. Slaytlardaki görüntülerin kaynağı olarak Gonzalez &amp; Woods, <em>Digital Image Processing</em> (2002) belirtiliyor; slaytlarda yazar adı yazmıyor, ama PDF belge özelliklerinde yazar <strong>Brian Mac Namee</strong> olarak kayıtlı. Dört sunumun orijinali yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="1-giris-sayisal-goruntu-ve-goruntu-isleme">1. Giriş: sayısal görüntü ve görüntü işleme</h2>
+<p>Derse "bir resim on bin kelimeye bedeldir" sözüyle başlanıyor.</p>
+<ul><li><strong>Sayısal görüntü</strong>, iki boyutlu bir görüntünün sonlu sayıda sayısal değerle (piksel) gösterimidir. Piksel değerleri gri seviye, renk, yükseklik, saydamlık gibi şeyleri temsil edebilir. Sayısallaştırma, görüntünün gerçek sahnenin bir yaklaşığı olması demektir.</li><li>Yaygın biçimler: nokta başına 1 örnek (siyah-beyaz ya da gri), 3 örnek (R, G, B), 4 örnek (R, G, B ve alfa/saydamlık). Derste çoğunlukla gri seviyeli görüntüler kullanılıyor.</li><li>Görüntü işlemenin iki ana işi: insan yorumu için görüntü bilgisini iyileştirmek; depolama, iletim ve makine algısı için görüntü verisini işlemek.</li><li>İşleme düzeyleri: <strong>alt düzey</strong> (girdi görüntü, çıktı görüntü; gürültü giderme, keskinleştirme), <strong>orta düzey</strong> (girdi görüntü, çıktı öznitelik; nesne bölütleme ve tanıma), <strong>üst düzey</strong> (girdi öznitelik, çıktı anlama; sahne anlama, otonom gezinme).</li></ul>
+<h3 id="kisa-tarihce">Kısa tarihçe</h3>
+<ul><li>1920'ler: gazete sektöründe Bartlane kablo resim iletimi; Londra–New York arası denizaltı kablosuyla görüntüler kodlanıp gönderiliyor, alıcıda telgraf yazıcısıyla yeniden oluşturuluyor. Sonraki iyileştirmelerle ton sayısı 15'e çıkıyor.</li><li>1960'lar: uzay yarışı ve bilgisayarlar; 1964'te Ranger 7 ay görüntülerinin bilgisayarla iyileştirilmesi.</li><li>1970'ler: tıpta kullanım; 1979'da Hounsfield ve Cormack bilgisayarlı tomografi (CAT) icadıyla tıp Nobeli'ni paylaşıyor.</li><li>1980'lerden bugüne: görüntü iyileştirme/onarma, sanatsal efektler, tıbbi görselleştirme, endüstriyel denetim, adli bilişim, insan-bilgisayar arayüzleri.</li></ul>
+<p>Sunumdaki uygulama örnekleri: Hubble teleskobunun hatalı aynasından gelen görüntülerin düzeltilmesi, köpek kalbi MR kesitinde kenar bulma, uydu görüntüleri ve CBS (gece ışıkları haritası), baskılı devre kartı (PCB) denetimi, plaka ve parmak izi tanıma, yüz ve hareket tanıma.</p>
+<h3 id="sayisal-goruntu-islemenin-temel-asamalari">Sayısal görüntü işlemenin temel aşamaları</h3>
+<p>Görüntü edinme, görüntü iyileştirme, görüntü onarma, morfolojik işleme, bölütleme, nesne tanıma, temsil ve betimleme, görüntü sıkıştırma ve renkli görüntü işleme; hepsi bir "bilgi tabanı" (problem alanı) etrafında toplanıyor.</p>
+<h2 id="2-sayisal-goruntu-temelleri">2. Sayısal görüntü temelleri</h2>
+<h3 id="i-nsan-gorme-sistemi">İnsan görme sistemi</h3>
+<ul><li>Mercek, ışığı retinaya odaklar. Retinada yaklaşık 6–7 milyon <strong>koni</strong> (renge duyarlı, fovea çevresinde yoğun) ve 75–150 milyon <strong>çubuk</strong> (düşük ışığa duyarlı, daha yaygın) bulunur.</li><li>Kör nokta deneyi: kâğıda 6 inç arayla bir nokta ve bir çarpı çizilir, sağ göz kapatılıp sol gözle çarpıya bakılırken kâğıt yüzden yavaşça yaklaştırılınca nokta kaybolur.</li><li>Göz yaklaşık 10^10 farklı ışık şiddetini algılayabilir; ama aynı anda ayırt edebildiği düzey sayısı çok daha azdır (parlaklık uyumu). Algılanan şiddet çevresindeki bölgelere de bağlıdır (Mach bantları, optik yanılsamalar).</li></ul>
+<h3 id="isik-ve-elektromanyetik-tayf">Işık ve elektromanyetik tayf</h3>
+<p>Işık, elektromanyetik tayfın gözün algılayabildiği dar bir parçasıdır. Algıladığımız renk, nesneden yansıyan ışığın niteliğine bağlıdır: beyaz ışık yeşil bir nesneye düştüğünde çoğu dalga boyu soğurulur, yeşil yansır.</p>
+<h3 id="goruntu-gosterimi-ve-edinimi">Görüntü gösterimi ve edinimi</h3>
+<ul><li>Görüntü M satır ve N sütunluk piksel dizisidir; gri seviyeler çoğunlukla 0 (siyah) – 255 (beyaz) aralığındadır ve görüntü f(satır, sütun) matrisi olarak ele alınır.</li><li>Görüntü, bir sahnenin aydınlatılıp nesnelerden yansıyan enerjinin emilmesiyle oluşur (röntgen, ultrason, elektron mikroskobu da aynı mantıkta). Gelen enerji sensör malzemesinde gerilim üretir; sensörler tek, şerit (çizgi) ya da dizi (matris) hâlinde düzenlenir.</li></ul>
+<h3 id="ornekleme-nicemleme-ve-cozunurluk">Örnekleme, nicemleme ve çözünürlük</h3>
+<ul><li><strong>Örnekleme</strong>: uzayda sınırlı sayıda noktada ölçüm; <strong>nicemleme (quantisation)</strong>: sürekli genlik değerlerinin sınırlı sayıda seviyeye yuvarlanması.</li><li><strong>Uzamsal çözünürlük</strong>: görüntüde ayırt edilebilen en küçük ayrıntı (piksel boyutu, baskıda DPI).</li><li><strong>Yoğunluk seviyesi çözünürlüğü</strong>: seviye sayısı 2^k; 1 bit = 2, 4 bit = 16, 8 bit = 256, 16 bit = 65.536 seviye. Seviye sayısı düştükçe (256 → 128 → 64 → 32 → 16 → 8 → 4 → 2) sahte konturlar belirir.</li><li>"Ne kadar çözünürlük yeter?" sorusunun yanıtı, görüntüde ne görmek istendiğine bağlıdır: araç saymak için yeterli bir görüntü plaka okumak için yetmeyebilir.</li></ul>
+<h2 id="3-goruntu-iyilestirme-histogram-isleme">3. Görüntü iyileştirme: histogram işleme</h2>
+<p>Görüntü iyileştirme, görüntüyü daha kullanışlı yapma işidir: ayrıntıyı vurgulamak, gürültüyü gidermek, daha hoş göstermek. Teknikler iki gruba ayrılır:</p>
+<ul><li><strong>Uzamsal bölge</strong> teknikleri: pikseller üzerinde doğrudan işlem,</li><li><strong>Frekans bölgesi</strong> teknikleri: Fourier ya da dalgacık dönüşümü üzerinde işlem.</li></ul>
+<p>Bu derste gri seviyeler çoğu işlemde [0, 1] aralığında alınır (0 siyah, 1 beyaz).</p>
+<p><strong>Histogram</strong>, görüntüdeki gri seviyelerin dağılımını gösterir ve özellikle bölütlemede çok işe yarar. Koyu görüntünün histogramı sola, parlak görüntünün sağa yığılır; yüksek kontrastlı görüntünün histogramı en düzgün yayılandır.</p>
+<p><strong>Histogram eşitleme</strong>, frekansları yayarak koyu ya da soluk görüntüleri düzeltir:</p>
+<ul><li>s_k = T(r_k) = Σ (j = 1..k) p_r(r_j) = Σ (j = 1..k) n_j / n</li><li>r_k: girdi şiddeti, s_k: işlenmiş şiddet, n_j: j şiddetinin sıklığı, n: toplam piksel sayısı.</li></ul>
+<h2 id="4-nokta-isleme-ve-gri-seviye-donusumleri">4. Nokta işleme ve gri seviye dönüşümleri</h2>
+<p>Çıktı pikselinin değeri yalnızca aynı yerdeki girdi pikseline bağlıysa s = T(r) biçiminde yazılır.</p>
+<ul><li><strong>Eşikleme</strong>: r ≤ eşik ise s = 0,0; r &gt; eşik ise s = 1,0.</li><li><strong>Negatif/özdeşlik</strong> (doğrusal), <strong>logaritmik</strong> ve <strong>üstel</strong> (kuvvet yasası) dönüşümler en yaygın üç gruptur.</li><li><strong>Logaritmik dönüşüm</strong>: s = c · log(1 + r). Dar bir düşük gri seviye aralığını geniş bir çıktı aralığına açar; değer aralığı çok geniş olan girdiler için yararlıdır (örneğin bir görüntünün Fourier tayfını görünür kılmak). Ters log dönüşümü tersini yapar. Genellikle c = 1 alınır.</li><li><strong>Kuvvet yasası (gamma)</strong>: s = c · r^γ. γ &lt; 1 koyu girdi aralığını genişletir (örnekte γ = 0,6; 0,4; 0,3 ile kırık omurga MR görüntüsü), γ &gt; 1 görüntüyü koyulaştırır (γ = 3,0; 4,0; 5,0 ile pist havadan fotoğrafı). Monitörlerin tepkisi doğrusal olmadığından <strong>gama düzeltmesi</strong> bu dönüşümle yapılır.</li><li><strong>Parçalı doğrusal dönüşümler</strong>: kullanıcı tanımlı eğrilerle kontrast germe.</li><li><strong>Gri seviye dilimleme</strong>: belirli bir gri aralığı vurgulanır, diğer seviyeler bastırılır ya da korunur.</li></ul>
+<p>Bir sonraki konu komşuluk işlemleri, süzgeçleme ve evrişimdir; bkz. serinin ikinci yazısı.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="bil437-goruntu-isleme-giris-ve-iyilestirme.zip" download>bil437-goruntu-isleme-giris-ve-iyilestirme.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 7.1 MB · 07.07.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="bil437-goruntu-isleme-giris-ve-iyilestirme.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

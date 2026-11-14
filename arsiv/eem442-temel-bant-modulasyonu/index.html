@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM442 Haberleşme II: Temel Bant Modülasyonu (PAM, PDM/PWM, PPM, PCM, Hat Kodları, Delta Modülasyonu) — hasancan.net</title>
+<meta name="description" content="EEM442 Haberleşme II dersinin 2017 bahar 02 ve 03 numaralı sunumları: örnekleme ve Nyquist, bant geçiren örnekleme, doğal ve tut-bırak örnekleme, darbe modülasyonları, PCM, nicemleme SNR&#x27;si, hat kodları, mu-law ve A-law, delta modülasyonu.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem442-temel-bant-modulasyonu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM442 Haberleşme II: Temel Bant Modülasyonu (PAM, PDM/PWM, PPM, PCM, Hat Kodları, Delta Modülasyonu)">
+<meta property="og:description" content="EEM442 Haberleşme II dersinin 2017 bahar 02 ve 03 numaralı sunumları: örnekleme ve Nyquist, bant geçiren örnekleme, doğal ve tut-bırak örnekleme, darbe modülasyonları, PCM, nicemleme SNR&#x27;si, hat kodları, mu-law ve A-law, delta modülasyonu.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem442-temel-bant-modulasyonu/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142137">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM442 Haberleşme II: Temel Bant Modülasyonu (PAM, PDM/PWM, PPM, PCM, Hat Kodları, Delta Modülasyonu)", "description": "EEM442 Haberleşme II dersinin 2017 bahar 02 ve 03 numaralı sunumları: örnekleme ve Nyquist, bant geçiren örnekleme, doğal ve tut-bırak örnekleme, darbe modülasyonları, PCM, nicemleme SNR'si, hat kodları, mu-law ve A-law, delta modülasyonu.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem442-temel-bant-modulasyonu/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM442 – Haberleşme II", "associatedMedia": {"@type": "MediaObject", "name": "eem442-temel-bant-modulasyonu.zip", "contentUrl": "https://hasancan.net/arsiv/eem442-temel-bant-modulasyonu/eem442-temel-bant-modulasyonu.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM442 Haberleşme II: Temel Bant Modülasyonu (PAM, PDM/PWM, PPM, PCM, Hat Kodları, Delta Modülasyonu)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem442">EEM442</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM442 – Haberleşme II</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.03.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#02-temel-bant-modulasyonu-ornekleme-ve-darbe-modulasyonlari">02 – Temel bant modülasyonu: örnekleme ve darbe modülasyonları</a></li><li><a href="#03-pcm-ve-delta-modulasyonu">03 – PCM ve delta modülasyonu</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM442</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM442 Haberleşme II: Temel Bant Modülasyonu (PAM, PDM/PWM, PPM, PCM, Hat Kodları, Delta Modülasyonu)</h1>
+            <p class="kucuk">EEM442 – Haberleşme II · 28.03.2017 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent Üniversitesi'nde 2017 bahar yarıyılında verilen <strong>EEM 442 Haberleşme II (Communications II)</strong> dersinin iki sunumu: <em>02 – Baseband Modulation (PAM-PDM-PPM)</em> ve <em>03 – Baseband Modulation (PCM-DM)</em> (28 Mart 2017). Sunumlar İngilizcedir, açıklamalar burada Türkçedir; formüller sunum içeriğine sadıktır, slayttaki şekiller metne dökülmüştür. Ders adını dosya adları ve slayt başlığından doğruluyorum (klasörde "Haberleşme II", sunum başlığında "EEM 442 Communications II"). Sunumların yazarı dosyada belirtilmemiştir (ders öğretim elemanının kendi sunumu). İki sunumun orijinali yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="02-temel-bant-modulasyonu-ornekleme-ve-darbe-modulasyonlari">02 – Temel bant modülasyonu: örnekleme ve darbe modülasyonları</h2>
+<h3 id="i-deal-ornekleme">İdeal örnekleme</h3>
+<p>Mesaj m(t), dürtü dizisi p(t) = Σδ(t − kT_s) ile çarpılır: m_s(t) = m(t)·p(t) (dürtü örnekleme); örnek değerleri m_s[k] = m_s(t)|_{t = kT_s} (nokta örnekleme). Frekans bölgesinde çarpma evrişime dönüşür: M_s(f) = M(f) * P(f), P(f) = (1/T_s)·Σδ(f − n/T_s) ve</p>
+<p>M_s(f) = (1/T_s)·Σ M(f − n/T_s),</p>
+<p>yani mesaj tayfı f_s aralıklarla tekrarlanır.</p>
+<p><strong>Örtüşme ve Nyquist ölçütü:</strong> f_s − f_m &lt; f_m olduğunda frekans bölgesinde örtüşme (aliasing) olur; örtüşme olmaması için <strong>f_s ≥ 2·f_m</strong> olmalıdır (Nyquist ölçütü).</p>
+<p><em>Örnek:</em> Aşağıdaki işaretler için minimum örnekleme hızını bulunuz: a) x(t) = sinc(6000t), b) x(t) = rect(3000t), c) x(t) = cos(2π·10⁴t) + sin(2π·10⁵t).</p>
+<h3 id="bant-geciren-ornekleme">Bant geçiren örnekleme</h3>
+<ul><li>Basit durum f_H = k·B: k tek ise F_s = 2B (f_H = 3B, 5B, …), k çift ise de F_s = 2B (f_H = 6B…) olarak gösterilir.</li><li>Genel durum f_H ≠ k·B: (k − 1)F_s ≤ 2F_L ve 2F_H ≤ k·F_s, yani 2F_H/k ≤ F_s ≤ 2F_L/(k − 1); k_max ≤ F_H/B. F_s seçimi için grafik verilir.</li><li>Pratik yaklaşım: n = ⌊(2f_c − B)/B⌋ = ⌊2f_L/B⌋ olmak üzere (2f_c − B)/n ≥ f_s ≥ (2f_c + B)/(n + 1), yani 2f_L/n ≥ f_s ≥ 2f_H/(n + 1).</li><li><em>Örnekler:</em> (a) −100…−75 ve 75…100 MHz bandındaki bir işaret; (b) x(t) = sinc(600t)·cos(2π·20·10³t) için minimum örnekleme hızı.</li></ul>
+<h3 id="dogal-ornekleme">Doğal örnekleme</h3>
+<p>s(t) = Σ c_n·e^{j2πnf_s t} = c_0 + Σ c_n·cos(2πnf_s t); c_n = (τ/T_s)·sinc(nτ/T_s). x_s(t) = x(t)·s(t) için X_s(f) = c_0·X(f) + Σ c_n·X(f − nf_s) + Σ c_n·X(f + nf_s): tayf c_n ağırlıklarıyla f_s katlarına kopyalanır.</p>
+<p><em>Örnek:</em> x(t) = 10000·sinc(2000t) Nyquist hızıyla örneklenirse örneklenmiş işaretin tayfı yukarıdaki biçimdedir, c_n = (τ/T_s)·sinc(nτ/T_s), τ/T_s = 0,1: (a) Nyquist hızını bulunuz, (b) Nyquist hızında örneklenmiş işaretin tayfını çiziniz, (c) 50 Hz koruma bandı kullanıldığında tayfı çiziniz.</p>
+<h3 id="tut-ve-birak-flat-top-ornekleme-ve-darbe-modulasyonlari">Tut ve bırak (flat-top) örnekleme ve darbe modülasyonları</h3>
+<ul><li><strong>PAM (darbe genlik modülasyonu):</strong> örnekleme dürtüleri x(t) ile modüle edilir; darbe genliği örnek değerine karşılık gelir, darbe genişliği τ sabittir. Ortalama güç P_avg = (A²·τ/T_s)·⟨x²(t)⟩.</li><li><strong>PDM/PWM (darbe süre/genişlik modülasyonu):</strong> darbe süresi mesaja göre değişir, τ(t) = τ_0 + t_0·x(t) (τ_3 &gt; τ_2 &gt; τ_1); P_avg = (A²/T_s)·⟨τ(t)⟩.</li><li><strong>PPM (darbe konum modülasyonu):</strong> darbe sabit genlik ve genişlikte, konumu (gecikmesi d) mesaja göre değişir; P_avg = A²·τ/T_s = A²·τ·f_s.</li></ul>
+<h2 id="03-pcm-ve-delta-modulasyonu">03 – PCM ve delta modülasyonu</h2>
+<h3 id="darbe-kod-modulasyonu-pcm">Darbe kod modülasyonu (PCM)</h3>
+<p><strong>Nicemleme:</strong> seviye sayısı Q = 2ⁿ (n: bit sayısı); adım a = (A_max − A_min)/Q. Örnek: 8 seviyeli, 3 bitli nicemleme (000 … 111); PCM çıkışı örnekleme anlarındaki seviye kodlarının art arda dizilmesidir (örnek: PCM = 111101010110).</p>
+<p><strong>Nicemleme bozulması:</strong> e(t) = x(t) − x_q(t), e düzgün dağılımlıysa ⟨e²⟩ = ∫ e²·P_e(e) de = a²/12. SNR = ⟨x²(t)⟩/⟨e²(t)⟩. x(t) = A·cos(2πft) ve a = 2A/2ⁿ için ⟨x²⟩ = A²/2 olduğundan</p>
+<p><strong>SNR = (3/2)·2^{2n}</strong>, <strong>SNR_dB = 10·log10((3/2)·2^{2n}) = 1,76 + 6,02n.</strong></p>
+<p>Dinamik aralık ve SNR: SNR = 1,76 + 6,02n; (S/N)_q = 10·log10(3Q²). <em>Örnek:</em> Bir sayısallaştırma sistemi 55 dB dinamik aralık belirtiyor; kaç bit gerekir, sistemin SNR'si ve (S/N)_q değeri nedir?</p>
+<p><strong>Zaman bölmeli çoklama (TDM):</strong> birden çok mesaj bir anahtarla (komütatör) sırayla örneklenir ve tek PCM kanalından gönderilir (örnek soru verilmiştir).</p>
+<h3 id="hat-kodlari">Hat kodları</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Kod</th><th scope="col">Kuralı</th><th scope="col">Avantajları</th><th scope="col">Dezavantajları</th></tr></thead><tbody><tr><th scope="row"><strong>Tek kutuplu NRZ</strong></th><td>1 → +V, 0 → 0</td><td>basit gerçekleme, düşük bant genişliği</td><td>DC düzeyi, düşük frekans bileşenleri, hata düzeltme yok, senkronizasyon zor</td></tr><tr><th scope="row"><strong>Tek kutuplu RZ</strong></th><td>1 → +V yarım bit, sonra 0</td><td>basit, sembol hızında spektral çizgi</td><td>DC düzeyi, düşük frekans bileşenleri, hata düzeltme yok, tek kutuplu NRZ'nin iki katı bant genişliği</td></tr><tr><th scope="row"><strong>Kutuplu (polar) NRZ</strong></th><td>1 → +V, 0 → −V</td><td>basit, DC bileşeni yok</td><td>hata düzeltme yok, senkronizasyon zor</td></tr><tr><th scope="row"><strong>Kutuplu RZ</strong></th><td>1 → +V yarım bit, 0 → −V yarım bit</td><td>basit, DC yok</td><td>hata düzeltme yok, polar NRZ'nin iki katı bant genişliği</td></tr><tr><th scope="row"><strong>İki kutuplu (bipolar, AMI)</strong></th><td>0 → darbe yok; 1 → +V ve −V art arda dönüşümlü (üç düzey: +V, 0, −V)</td><td>DC yok, tek kutuplu ve polar NRZ'ye göre daha az bant genişliği, hata algılama yeteneği</td><td>senkronizasyon zor</td></tr><tr><th scope="row"><strong>Manchester</strong></th><td>bit süresi ikiye bölünür; 0 → ilk yarı +, ikinci yarı −; 1 → ilk yarı −, ikinci yarı +</td><td>DC yok, senkronizasyon kolay</td><td>çok geniş bant gerekir, hata algılama yok</td></tr></tbody></table></div>
+<p>Slaytlar ayrıca hat kodlarının güç spektral yoğunluklarını ve bir karşılaştırma tablosunu gösterir.</p>
+<h3 id="duzgun-olmayan-nicemleme-ve-sikistirma-genlestirme-companding">Düzgün olmayan nicemleme ve sıkıştırma-genleştirme (companding)</h3>
+<p>Düzgün (uniform) ve düzgün olmayan (non-uniform) nicemleme karşılaştırılır; düzgün olmayan nicemleme, sıkıştırıcı (compressor) + düzgün nicemleyici + genleştirici (expander) ile gerçeklenir. İki standart:</p>
+<ul><li><strong>µ-law</strong>: dinamik aralığı daha büyüktür; küçük sinyallerde bozulma daha kötüdür; Kuzey Amerika ve Japonya'da kullanılır.</li><li><strong>A-law</strong>: Avrupa'da yaygındır.</li></ul>
+<h3 id="delta-modulasyonu-dm">Delta modülasyonu (DM)</h3>
+<p>İki ardışık örnek arasındaki farkın işaretini (1 bit) göndererek kodlama yapar; blok diyagramı karşılaştırıcı, örnekleyici ve geri beslemede entegratörden oluşur. Sorunlar: <strong>eğim aşırı yüklenmesi (slope overload)</strong>, sinyal adım büyüklüğünden hızlı değişince; <strong>granüler (tanecikli) gürültü</strong>, adım çok büyük olunca durağan sinyalde. Bu konuların laboratuvar uygulaması için bkz. "Haberleşme laboratuvarı: kuantalama, µ-law, delta modülasyonu".</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="eem442-temel-bant-modulasyonu.zip" download>eem442-temel-bant-modulasyonu.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 2.6 MB · 28.03.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="eem442-temel-bant-modulasyonu.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142137"></script>
+<script src="/assets/lang/en.js?v=202611142137"></script>
+<script src="/assets/lang/de.js?v=202611142137"></script>
+<script src="/assets/js/site.js?v=202611142137"></script>
+</body>
+</html>

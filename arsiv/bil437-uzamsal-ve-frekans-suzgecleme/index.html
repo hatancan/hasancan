@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Bilgisayarlı Görü: Uzamsal Süzgeçleme, Keskinleştirme (Laplace, Sobel) ve Frekans Uzayında Süzgeçleme — hasancan.net</title>
+<meta name="description" content="BIL437 Bilgisayarlı Görü dersinin 2 ve 3. hafta sunumları: komşuluk işlemleri, ortalama ve medyan süzgeç, kenar sorunu, korelasyon-evrişim, Laplace ve Sobel, ayrık Fourier dönüşümü, ideal/Butterworth/Gauss alçak ve yüksek geçiren süzgeçler.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-uzamsal-ve-frekans-suzgecleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Bilgisayarlı Görü: Uzamsal Süzgeçleme, Keskinleştirme (Laplace, Sobel) ve Frekans Uzayında Süzgeçleme">
+<meta property="og:description" content="BIL437 Bilgisayarlı Görü dersinin 2 ve 3. hafta sunumları: komşuluk işlemleri, ortalama ve medyan süzgeç, kenar sorunu, korelasyon-evrişim, Laplace ve Sobel, ayrık Fourier dönüşümü, ideal/Butterworth/Gauss alçak ve yüksek geçiren süzgeçler.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-uzamsal-ve-frekans-suzgecleme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Bilgisayarlı Görü: Uzamsal Süzgeçleme, Keskinleştirme (Laplace, Sobel) ve Frekans Uzayında Süzgeçleme", "description": "BIL437 Bilgisayarlı Görü dersinin 2 ve 3. hafta sunumları: komşuluk işlemleri, ortalama ve medyan süzgeç, kenar sorunu, korelasyon-evrişim, Laplace ve Sobel, ayrık Fourier dönüşümü, ideal/Butterworth/Gauss alçak ve yüksek geçiren süzgeçler.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-uzamsal-ve-frekans-suzgecleme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-uzamsal-ve-frekans-suzgecleme.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-uzamsal-ve-frekans-suzgecleme/bil437-uzamsal-ve-frekans-suzgecleme.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="BIL437 Bilgisayarlı Görü: Uzamsal Süzgeçleme, Keskinleştirme (Laplace, Sobel) ve Frekans Uzayında Süzgeçleme">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.07.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#uzamsal-suzgecleme-1-komsuluk-islemleri-ve-yumusatma">Uzamsal süzgeçleme 1: komşuluk işlemleri ve yumuşatma</a></li><li><a href="#uzamsal-suzgecleme-2-keskinlestirme">Uzamsal süzgeçleme 2: keskinleştirme</a></li><li><a href="#frekans-uzayinda-suzgecleme">Frekans uzayında süzgeçleme</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>BIL437 Bilgisayarlı Görü: Uzamsal Süzgeçleme, Keskinleştirme (Laplace, Sobel) ve Frekans Uzayında Süzgeçleme</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 07.07.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>BIL437 Bilgisayarlı Görü (Başkent Üniversitesi, 2015 yaz) dersinin Lecture 2_1, 2_2 ve 3_1 sunumlarının ders notu özetidir. Sunumlardaki görüntüler Gonzalez &amp; Woods, <em>Digital Image Processing</em> kitabından alınmıştır; slaytlarda yazar adı yazmıyor, ama PDF belge özelliklerinde yazar <strong>Brian Mac Namee</strong> olarak kayıtlı. Orijinal sunumlar yazının sonunda ZIP olarak indirilebilir. Önceki yazı: giriş ve histogram/nokta işleme.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="uzamsal-suzgecleme-1-komsuluk-islemleri-ve-yumusatma">Uzamsal süzgeçleme 1: komşuluk işlemleri ve yumuşatma</h2>
+<p><strong>Komşuluk işlemleri</strong>, nokta işlemlerinden farklı olarak merkez pikselin etrafındaki bir dikdörtgen komşuluğu kullanır. Basit örnekler:</p>
+<ul><li><strong>Min</strong>: piksel, komşuluktaki en küçük değere ayarlanır,</li><li><strong>Max</strong>: en büyük değere ayarlanır,</li><li><strong>Medyan</strong>: komşuluk değerleri sıralanınca ortadaki değer (örneğin [1, 7, 15, 18, 24] kümesinin medyanı 15'tir). Bazen ortalamadan daha iyi sonuç verir.</li></ul>
+<h3 id="suzgecleme-islemi">Süzgeçleme işlemi</h3>
+<p>3×3 bir süzgeç maskesi (w) görüntü üzerinde gezdirilir; her konumda maske katsayıları ile altındaki piksellerin çarpımları toplanır ve sonuç merkez piksele yazılır:</p>
+<p>g(x, y) = Σ_s Σ_t w(s, t) · f(x + s, y + t)  (s = −a..a, t = −b..b)</p>
+<p><strong>Ortalama (yumuşatma) süzgeci</strong>: 3×3 maskenin tüm katsayıları 1/9'dur; gürültüyü giderir ve ayrıntıyı bulanıklaştırır. Örnekte 3×3 komşuluğun değerleri (104 100 108 / 99 106 98 / 95 90 85) için merkez piksel 98,33 olur. 500×500'lük bir görüntüde süzgeç boyu 3, 5, 9, 15, 35 yapıldıkça ayrıntı giderek kaybolur. <strong>Ağırlıklı ortalama</strong> süzgeçte merkeze yakın pikseller daha önemlidir: 1/16 × [1 2 1; 2 4 2; 1 2 1].</p>
+<p>Gürültülü görüntüde (tuz-biber gürültüsü gibi) ortalama süzgeç yerine <strong>medyan süzgeç</strong> çoğu zaman daha iyi sonuç verir.</p>
+<h3 id="kenarlarda-ne-olur">Kenarlarda ne olur?</h3>
+<p>Görüntünün kenarındaki piksellerde komşuluk eksiktir. Çözümler: eksik pikselleri atlamak (yalnız bazı süzgeçlerde olur), görüntüyü tümüyle siyah ya da beyaz pikselle <strong>doldurmak (zero padding)</strong> ya da kenar piksellerini <strong>kopyalamak (replicate)</strong>.</p>
+<h3 id="korelasyon-ve-evrisim">Korelasyon ve evrişim</h3>
+<p>Şimdiye kadar anlatılan işlem <strong>korelasyondur</strong>. <strong>Evrişimde</strong> süzgeç maskesi 180° döndürülmüş (ters çevrilmiş) kullanılır. Simetrik süzgeçlerde ikisi aynı sonucu verir.</p>
+<h2 id="uzamsal-suzgecleme-2-keskinlestirme">Uzamsal süzgeçleme 2: keskinleştirme</h2>
+<p>Keskinleştirme süzgeçleri ince ayrıntıyı ve kenarları vurgular, bulanıklığı azaltır; uzamsal <strong>türev</strong> alma esasına dayanır.</p>
+<ul><li>1. türev: ∂f/∂x = f(x + 1) − f(x) (ardışık değerler arasındaki fark).</li><li>2. türev: ∂²f/∂x² = f(x + 1) + f(x − 1) − 2f(x).</li></ul>
+<p>Örnek bir sinyal (5 5 4 3 2 1 0 0 0 6 0 0 0 0 1 3 1 0 0 0 0 7 7 7 7) için 1. türev 0 −1 −1 −1 −1 0 0 6 −6 0 0 0 1 2 −2 −1 0 0 0 7 0 0 0 olur. 2. türev görüntü iyileştirmede daha yararlıdır: ince ayrıntıya daha güçlü yanıt verir ve gerçeklemesi daha basittir.</p>
+<h3 id="laplace-suzgeci">Laplace süzgeci</h3>
+<p>∇²f = [f(x+1, y) + f(x−1, y) + f(x, y+1) + f(x, y−1)] − 4f(x, y)</p>
+<p>Buna karşılık gelen maske: 0 1 0 / 1 −4 1 / 0 1 0 (izotropiktir). Laplace sonucu tek başına iyileştirilmiş görüntü değildir; keskinleştirilmiş görüntü g(x, y) = f(x, y) − ∇²f ile elde edilir. İkisi tek maskede birleştirilince: 0 −1 0 / −1 5 −1 / 0 −1 0. Köşegenleri de katan bir Laplace türü 1 1 1 / 1 −8 1 / 1 1 1; bunun tek adımlık keskinleştirme karşılığı −1 −1 −1 / −1 9 −1 / −1 −1 −1'dir.</p>
+<h3 id="1-turev-gradyan-ve-sobel">1. türev: gradyan ve Sobel</h3>
+<p>Gradyanın büyüklüğü |∇f| ≈ |Gx| + |Gy| ile yaklaşıklanır. <strong>Sobel</strong> işleçleri: Gy için −1 −2 −1 / 0 0 0 / 1 2 1, Gx için −1 0 1 / −2 0 2 / −1 0 1. Görüntü iki işleçle ayrı ayrı süzülüp sonuçlar toplanır. Sobel çoğunlukla kenar bulmada kullanılır (örnek: kontakt lens görüntüsünde kusurların belirginleştirilmesi).</p>
+<p><strong>1. ve 2. türevlerin karşılaştırması</strong>: 1. türev daha kalın kenar verir ve gri seviye basamağına daha güçlü yanıt verir; 2. türev ince çizgi gibi ayrıntılara daha güçlü yanıt verir ama basamak değişimlerinde çift yanıt üretir.</p>
+<h3 id="yontemleri-birlestirme">Yöntemleri birleştirme</h3>
+<p>Başarılı iyileştirme tek işlemle olmaz. Sunumdaki kemik sintigrafisi örneğinde sırayla: Laplace süzgeci → Laplace'ı çıkararak keskinleştirme → Sobel süzgeci → Sobel'in 5×5 ortalamayla yumuşatılması → Laplace'la keskinleştirilmiş görüntü ile yumuşatılmış Sobel'in çarpılarak maske oluşturulması → maskenin keskin görüntüyle toplanması → son olarak kuvvet yasası dönüşümü uygulanıyor.</p>
+<h2 id="frekans-uzayinda-suzgecleme">Frekans uzayında süzgeçleme</h2>
+<h3 id="fourier-ve-ayrik-fourier-donusumu">Fourier ve ayrık Fourier dönüşümü</h3>
+<p>Jean Baptiste Joseph Fourier (1768, Auxerre), <em>La Théorie Analytique de la Chaleur</em> adlı çalışmasıyla bilinir. Temel fikir: kendini periyodik olarak tekrarlayan her fonksiyon, farklı frekanstaki sinüs ve kosinüslerin katsayılı toplamı (Fourier serisi) olarak yazılabilir.</p>
+<p>M×N boyutlu f(x, y) görüntüsünün <strong>ayrık Fourier dönüşümü (DFT)</strong>:</p>
+<p>F(u, v) = Σ_x Σ_y f(x, y) · e^(−j2π(ux/M + vy/N))</p>
+<p>ve ters dönüşüm f(x, y) = (1/MN) Σ_u Σ_v F(u, v) · e^(j2π(ux/M + vy/N)). Dönüşüm tümüyle tersinirdir. Görüntü tayfı (frekans bileşenleri) görselleştirilebilir; örnekte bir entegre devrenin elektron mikroskobu görüntüsü ve tayfı gösteriliyor.</p>
+<h3 id="frekans-uzayinda-suzgecleme-adimlari">Frekans uzayında süzgeçleme adımları</h3>
+<ol><li>Görüntünün DFT'si F(u, v) hesaplanır.</li><li>F(u, v), süzgeç fonksiyonu H(u, v) ile çarpılır: G(u, v) = H(u, v) F(u, v).</li><li>Sonucun ters DFT'si alınır.</li></ol>
+<h3 id="yumusatma-alcak-geciren-suzgecler">Yumuşatma (alçak geçiren) süzgeçler</h3>
+<p>Yüksek frekanslar atılarak yumuşatma sağlanır. D(u, v) = [(u − M/2)² + (v − N/2)²]^(1/2) merkezden uzaklık ve D0 kesim uzaklığı olmak üzere:</p>
+<ul><li><strong>İdeal alçak geçiren</strong>: D ≤ D0 ise H = 1, aksi hâlde 0. D0 = 5, 15, 30, 80, 230 yarıçaplarıyla yapılan örneklerde küçük yarıçapta görüntü çok bulanıklaşır ve halka biçimli salınımlar (ringing) görülür.</li><li><strong>Butterworth</strong>: H(u, v) = 1 / (1 + [D(u, v)/D0]^(2n)) (n: derece). 2. derece Butterworth'ta ringing çok daha azdır.</li><li><strong>Gauss</strong>: H(u, v) = e^(−D²(u, v) / 2D0²). Ringing yoktur. Gauss alçak geçiren süzgeç, kopuk metin karakterlerini birleştirmek için de kullanılır.</li></ul>
+<h3 id="keskinlestirme-yuksek-geciren-suzgecler">Keskinleştirme (yüksek geçiren) süzgeçler</h3>
+<p>Yüksek geçiren süzgeç, alçak geçirenin tersidir: H_hp(u, v) = 1 − H_lp(u, v).</p>
+<ul><li><strong>İdeal</strong>: D ≤ D0 ise 0, D &gt; D0 ise 1.</li><li><strong>Butterworth</strong>: H = 1 / (1 + [D0/D(u, v)]^(2n)).</li><li><strong>Gauss</strong>: H = 1 − e^(−D²(u, v) / 2D0²).</li></ul>
+<p>D0 = 15, 30, 80 için sonuçlar karşılaştırılıyor; ayrıca yüksek frekans vurgulama ve ardından histogram eşitlemenin örneği ile <strong>frekans uzayında Laplace</strong> işleci (uzamsal Laplace maskesinin 2 boyutlu görüntüsüyle karşılaştırılarak) gösteriliyor.</p>
+<h3 id="hizli-fourier-donusumu-fft-ve-uzamsal-frekans-karsilastirmasi">Hızlı Fourier dönüşümü (FFT) ve uzamsal-frekans karşılaştırması</h3>
+<p>Fourier tabanlı yöntemlerin yaygınlaşmasının nedeni, dönüşüm süresini 100–600 kat azaltan <strong>FFT</strong> algoritmasıdır. Benzer işler hem uzamsal hem frekans uzayında yapılabilir: uzamsal süzgeçleme daha kolay anlaşılır, frekans uzayında süzgeçleme ise özellikle büyük görüntülerde çok daha hızlıdır.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="bil437-uzamsal-ve-frekans-suzgecleme.zip" download>bil437-uzamsal-ve-frekans-suzgecleme.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 3.3 MB · 07.07.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="bil437-uzamsal-ve-frekans-suzgecleme.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

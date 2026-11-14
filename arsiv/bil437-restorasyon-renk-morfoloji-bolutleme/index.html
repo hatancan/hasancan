@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Bilgisayarlı Görü: Gürültü Giderme, Renkli Görüntü İşleme, Morfolojik İşleme ve Bölütleme — hasancan.net</title>
+<meta name="description" content="BIL437 Bilgisayarlı Görü dersinin 4 ve 5. hafta sunumları: gürültü modelleri ve süzgeçleri (ortalama, medyan, sıra istatistiği), band durduran süzgeç, renk modelleri (RGB, HSI), erozyon, dilatasyon, kenar bulma ve eşikleme.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Bilgisayarlı Görü: Gürültü Giderme, Renkli Görüntü İşleme, Morfolojik İşleme ve Bölütleme">
+<meta property="og:description" content="BIL437 Bilgisayarlı Görü dersinin 4 ve 5. hafta sunumları: gürültü modelleri ve süzgeçleri (ortalama, medyan, sıra istatistiği), band durduran süzgeç, renk modelleri (RGB, HSI), erozyon, dilatasyon, kenar bulma ve eşikleme.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Bilgisayarlı Görü: Gürültü Giderme, Renkli Görüntü İşleme, Morfolojik İşleme ve Bölütleme", "description": "BIL437 Bilgisayarlı Görü dersinin 4 ve 5. hafta sunumları: gürültü modelleri ve süzgeçleri (ortalama, medyan, sıra istatistiği), band durduran süzgeç, renk modelleri (RGB, HSI), erozyon, dilatasyon, kenar bulma ve eşikleme.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-restorasyon-renk-morfoloji-bolutleme.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/bil437-restorasyon-renk-morfoloji-bolutleme.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="BIL437 Bilgisayarlı Görü: Gürültü Giderme, Renkli Görüntü İşleme, Morfolojik İşleme ve Bölütleme">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>30.10.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#goruntu-onarma-gurultu-giderme-lecture-4-1">Görüntü onarma: gürültü giderme (Lecture 4_1)</a></li><li><a href="#renkli-goruntu-isleme-lecture-4-2">Renkli görüntü işleme (Lecture 4_2)</a></li><li><a href="#morfolojik-goruntu-isleme-lecture-5-1">Morfolojik görüntü işleme (Lecture 5_1)</a></li><li><a href="#bolutleme-1-sureksizlikler-noktalar-cizgiler-kenarlar-lecture-5-2">Bölütleme 1: süreksizlikler, noktalar, çizgiler, kenarlar (Lecture 5_2)</a></li><li><a href="#bolutleme-2-esikleme-lecture-5-3">Bölütleme 2: eşikleme (Lecture 5_3)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>BIL437 Bilgisayarlı Görü: Gürültü Giderme, Renkli Görüntü İşleme, Morfolojik İşleme ve Bölütleme</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 30.10.2012 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>BIL437 Bilgisayarlı Görü dersinin Lecture 4_1, 4_2, 5_1, 5_2 ve 5_3 sunumlarının (2012 tarihli, Başkent Üniversitesi'nde 2015 yaz okulunda dağıtılan) ders notu özetidir. Sunumlardaki görüntüler Gonzalez &amp; Woods, <em>Digital Image Processing</em> kitabından alınmıştır; slaytlarda yazar adı yazmıyor, ama PDF belge özelliklerinde yazar <strong>Brian Mac Namee</strong> olarak kayıtlı. Orijinal sunumlar yazının sonunda ZIP olarak indirilebilir.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="goruntu-onarma-gurultu-giderme-lecture-4-1">Görüntü onarma: gürültü giderme (Lecture 4_1)</h2>
+<p><strong>Görüntü onarma (restoration)</strong>, bozulmuş görüntüyü düzeltmeye çalışır: bozulma sürecini belirleyip tersine çevirmek; iyileştirmeye benzer ama daha nesneldir.</p>
+<p>Gürültü, görüntü edinme (sensörlerin çevre koşullarından etkilenmesi) ve iletim sırasında ortaya çıkar. Gürültülü görüntü şöyle modellenir:</p>
+<p>g(x, y) = f(x, y) + η(x, y)</p>
+<p>(f: özgün piksel, η: gürültü terimi, g: bozulmuş piksel). Gürültü modelleri: <strong>Gauss</strong> (en yaygın), Rayleigh, Erlang, üstel, düzgün (uniform) ve <strong>dürtü (tuz-biber)</strong> gürültüsü.</p>
+<h3 id="uzamsal-suzgeclerle-gurultu-giderme">Uzamsal süzgeçlerle gürültü giderme</h3>
+<ul><li><strong>Aritmetik ortalama</strong>: f̂(x, y) = (1/mn) Σ g(s, t); basit yumuşatma, görüntüyü bulanıklaştırır.</li><li><strong>Geometrik ortalama</strong>: aritmetik ortalamaya benzer yumuşatma, ama ayrıntıyı daha az kaybeder.</li><li><strong>Harmonik ortalama</strong>: f̂ = mn / Σ (1/g(s, t)); tuz gürültüsünde iyi, biber gürültüsünde başarısız; Gauss gürültüsünde de iyidir.</li><li><strong>Kontraharmonik ortalama</strong>: f̂ = Σ g^(Q+1) / Σ g^Q; Q süzgecin derecesidir. Q &gt; 0 biber gürültüsünü, Q &lt; 0 tuz gürültüsünü giderir (örnekte Q = 1,5 ve Q = −1,5). Q yanlış seçilirse sonuç felaket olabilir.</li><li><strong>Sıra istatistiği süzgeçleri</strong>: komşuluktaki piksel değerlerinin sıralanmasına dayanır.</li></ul>
+<p>  - <strong>Medyan</strong>: yumuşatma etkisi olmadan mükemmel gürültü giderir; özellikle tuz-biber gürültüsünde iyidir (birkaç geçişle daha da iyileşir).   - <strong>Max süzgeç</strong> biber gürültüsünde, <strong>min süzgeç</strong> tuz gürültüsünde iyidir.   - <strong>Orta nokta (midpoint)</strong>: (max + min) / 2; Gauss ve düzgün gürültüde iyidir.   - <strong>Alfa kırpılmış ortalama</strong>: en düşük d/2 ve en yüksek d/2 seviye atılıp kalan mn − d pikselin ortalaması alınır.</p>
+<p>Sayısal bir örnek de verilir: 7×5'lik bir parça içinde 204 ve 0 değerli bozuk pikseller (tuz ve biber) süzgeçlerle gideriliyor.</p>
+<h3 id="periyodik-gurultu-ve-band-durduran-suzgecler">Periyodik gürültü ve band durduran süzgeçler</h3>
+<p>Elektriksel ya da elektromanyetik girişimden kaynaklanan, görüntüde düzenli desenler oluşturan <strong>periyodik gürültü</strong> en iyi Fourier uzayında giderilir: belirli bir frekans aralığı <strong>band durduran süzgeçle</strong> atılır. İdeal band durduran süzgeç: D(u, v) &lt; D0 − W/2 ve D(u, v) &gt; D0 + W/2 için 1, aradaki W genişlikli halkada 0. Butterworth (1. derece) ve Gauss sürümleri de vardır; sinüzoidal gürültü taşıyan görüntü ve Fourier tayfı üzerinde örnek gösterilir.</p>
+<h3 id="uyarlanir-suzgecler">Uyarlanır süzgeçler</h3>
+<p>Uyarlanır (adaptive) süzgeçlerin davranışı, süzgeç penceresi içindeki görüntü özelliklerine göre değişir. Tuz-biber olasılığı Pa = Pb = 0,25 olan görüntüde 7×7 medyan ile uyarlanır medyan süzgeç karşılaştırılıyor.</p>
+<p>Özet: Onarma iyileştirmeden daha nesneldir; rastgele gürültüde uzamsal, periyodik gürültüde frekans uzayı teknikleri daha etkilidir.</p>
+<h2 id="renkli-goruntu-isleme-lecture-4-2">Renkli görüntü işleme (Lecture 4_2)</h2>
+<ul><li>1666'da Isaac Newton, güneş ışığının cam prizmadan geçince renk tayfına ayrıldığını buldu.</li><li>Bir nesnede algıladığımız renk, yansıyan ışığın niteliğine bağlıdır (yeşil nesne 500–570 nm aralığını yansıtır, geri kalanı soğurur). Kromatik ışık yaklaşık 400–700 nm aralığını kapsar; insan gözünde 6–7 milyon koni renk görmeyi sağlar.</li><li>Renkli ışığı betimleyen üç nicelik: <strong>ışıma (radiance)</strong>: kaynaktan çıkan toplam enerji (watt); <strong>ışık akısı (luminance)</strong>: gözlemcinin algıladığı enerji (lümen), yüksek ışıma ama düşük ışık akısı olabilir; <strong>parlaklık (brightness)</strong>: öznel, ölçülemeyen şiddet kavramı.</li><li><strong>CIE renklilik (chromaticity) diyagramı</strong>: x ekseni kırmızının, y ekseni yeşilin oranını gösterir; mavi oranı z = 1 − (x + y). Sınırdaki renkler tamamen doygundur; eşit enerji noktası CIE standardında saf beyazdır. Üç rengin birleşimiyle bütün renk aralığı gösterilemez; RGB monitörlerin ve yüksek kaliteli yazıcıların renk gamutları diyagramda farklı üçgen/şekillerle görünür.</li></ul>
+<h3 id="renk-modelleri">Renk modelleri</h3>
+<ul><li><strong>RGB</strong>: kırmızı, yeşil, mavi bileşenlerin Kartezyen koordinat sisteminde küp biçiminde gösterimi; siyah orijinde, beyaz orijinden en uzak köşede, cyan-magenta-sarı diğer üç köşededir. Renkli görüntü üç bileşen görüntüsünden oluşur; piksel başına bit sayısı renk derinliğidir. 24 bitlik görüntü 2^24 = 16.777.216 renk verir (tam renk).</li><li><strong>HSI</strong>: renk (hue), doygunluk (saturation), şiddet (intensity). RGB donanım gerçeklemesi için uygundur, ama insanlar renkleri doğal olarak ton, doygunluk ve parlaklıkla anlatır: RGB renk üretimi, HSI renk betimlemesi için uygundur.</li></ul>
+<h2 id="morfolojik-goruntu-isleme-lecture-5-1">Morfolojik görüntü işleme (Lecture 5_1)</h2>
+<p>Bölütleme tamamlandıktan sonra morfolojik işlemlerle bölütlemedeki kusurlar giderilir ve görüntünün biçimi/yapısı hakkında bilgi çıkarılır. Tartışma, nesne piksellerinin 1, arka plan piksellerinin 0 olduğu ikili (bi-level) görüntüler için yapılır.</p>
+<ul><li><strong>Yapı elemanı (structuring element)</strong> herhangi bir boyut ve şekilde olabilir (derste kolaylık için merkezi orijinli dikdörtgen/artı biçimleri).</li><li><strong>Sığma (fit)</strong>: yapı elemanındaki tüm "açık" pikseller görüntüdeki açık piksellerin üzerine düşer. <strong>Çarpma (hit)</strong>: yapı elemanındaki herhangi bir açık piksel görüntüdeki açık bir piksele denk gelir.</li><li><strong>Erozyon (aşındırma)</strong>: f ⊖ s; yapı elemanı g(x, y) için "s, f'ye sığıyorsa 1, aksi hâlde 0". Birleşik nesneleri ayırır, çıkıntıları siler; ama nesneleri küçültür. 3×3 ve 5×5 kare eleman ile disk (yarıçap 5, 10, 20) örnekleri verilmiştir.</li><li><strong>Dilatasyon (genişletme)</strong>: f ⊕ s; "s, f'ye çarpıyorsa 1". Kopuklukları ve girintileri onarır, nesneleri büyütür.</li><li>Bunların bileşimi olan işlemlere (açma, kapama vb.) ve morfolojik algoritmalara geçilir.</li></ul>
+<h2 id="bolutleme-1-sureksizlikler-noktalar-cizgiler-kenarlar-lecture-5-2">Bölütleme 1: süreksizlikler, noktalar, çizgiler, kenarlar (Lecture 5_2)</h2>
+<p><strong>Bölütleme</strong>, görüntünün piksellerini nesnelerle güçlü ilişkili gruplara ayırır; otomatik bilgisayarlı görü uygulamalarının genellikle ilk adımıdır. Üç tür gri seviye süreksizliği aranır: <strong>nokta, çizgi, kenar</strong>; maske ve korelasyonla bulunur.</p>
+<ul><li><strong>Nokta algılama</strong>: tek bir maske uygulanır, süzülmüş görüntüde eşiği aşan pikseller nokta sayılır (türbin kanadı röntgeninde örnek).</li><li><strong>Çizgi algılama</strong>: bir piksel kalınlığında ve belirli yönde (yatay, düşey, +45°, −45°) çizgileri çıkaran maskelerle yapılır (tel bağlantı örneği).</li><li><strong>Kenar</strong>: iki bölge arasındaki sınırda yer alan bağlı piksel kümesi. 1. türev kenarın yerini, 2. türev kenar yönünü gösterir. Türev tabanlı kenar bulucular gürültüye çok duyarlıdır; bu yüzden kenar bulmadan önce görüntüyü yumuşatmak yararlıdır. Yaygın 3×3 kenar bulucular (3×3 bölge için): yatay ve düşey gradyan bileşenleri birleştirilir.</li><li><strong>Laplace</strong>, gürültüye çok duyarlı olduğu için tek başına kullanılmaz; <strong>Laplace of Gaussian (LoG, "Meksika şapkası")</strong> Gauss ile gürültü giderip Laplace ile kenar bulur.</li></ul>
+<h2 id="bolutleme-2-esikleme-lecture-5-3">Bölütleme 2: eşikleme (Lecture 5_3)</h2>
+<p>Eşikleme çoğu bölütleme yaklaşımının ilk adımıdır. Tek eşikle: f(x, y) &gt; T ise g = 1, aksi hâlde 0. Eşik yanlış seçilirse (çok düşük ya da çok yüksek) sonuç kötü olur. Poker oynayan robotun kartları yorumlaması örnek olarak verilir.</p>
+<p><strong>Temel genel (global) eşikleme algoritması</strong>:</p>
+<ol><li>T için başlangıç tahmini seç (genellikle görüntünün ortalama gri seviyesi).</li><li>Görüntüyü T ile iki gruba ayır: G1 (gri seviye &gt; T) ve G2 (≤ T).</li><li>G1 ve G2'nin ortalama gri seviyeleri μ1 ve μ2'yi hesapla.</li><li>Yeni eşik T = (μ1 + μ2) / 2.</li><li>T'deki değişim önceden belirlenen sınırdan küçük olana kadar 2–4'ü yinele.</li></ol>
+<p>Algoritma, histogram uygunsa (iki tepeli, bimodal) çok iyi çalışır. Başka histogramlar tek eşikle bölütlenemez; düzensiz aydınlatma da tek eşiği bozar (şişelerin içeriğini ayırma örneği). Çare: <strong>uyarlanır (adaptive) eşikleme</strong>: görüntü alt görüntülere bölünür ve her biri ayrı eşiklenir; sorunlu alt görüntüler daha da bölünerek başarılı sonuç alınır.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="bil437-restorasyon-renk-morfoloji-bolutleme.zip" download>bil437-restorasyon-renk-morfoloji-bolutleme.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 6.6 MB · 30.10.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="bil437-restorasyon-renk-morfoloji-bolutleme.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (6.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

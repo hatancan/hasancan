@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Veri İletişimi: Sayısal Veri İletimi: Hat Kodlama ve PCM (Gazi Üniversitesi, Suat Özdemir) — hasancan.net</title>
+<meta name="description" content="Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: hat kodlama teknikleri (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), PCM ile örnekleme, paralel ve seri iletim.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Veri İletişimi: Sayısal Veri İletimi: Hat Kodlama ve PCM (Gazi Üniversitesi, Suat Özdemir)">
+<meta property="og:description" content="Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: hat kodlama teknikleri (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), PCM ile örnekleme, paralel ve seri iletim.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Veri İletişimi: Sayısal Veri İletimi: Hat Kodlama ve PCM (Gazi Üniversitesi, Suat Özdemir)", "description": "Gazi Üniversitesi’nden Suat Özdemir’in Veri İletişimi ders slaytları: hat kodlama teknikleri (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), PCM ile örnekleme, paralel ve seri iletim.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "dc04.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/dc04.pdf"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM438 Veri İletişimi: Sayısal Veri İletimi: Hat Kodlama ve PCM (Gazi Üniversitesi, Suat Özdemir)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#sayisal-sayisal-cevirme">Sayısal sayısal çevirme</a></li><li><a href="#sayisal-sayisal-cevirme-2">Sayısal sayısal çevirme (2)</a></li><li><a href="#sayisal-sayisal-cevirme-3">Sayısal sayısal çevirme (3)</a></li><li><a href="#sinyal-iletiminde-sorunlar">Sinyal iletiminde sorunlar</a></li><li><a href="#sayisal-sinyal-kodlama-teknikleri">Sayısal sinyal kodlama teknikleri</a></li><li><a href="#unipolar-non-return-to-zero">Unipolar (non-return-to-zero)</a></li><li><a href="#polar-non-return-to-zero">Polar (non-return-to-zero)</a></li><li><a href="#polar-return-to-zero">Polar (return-to-zero)</a></li><li><a href="#polar-biphase-manchester-ve-differential-manchester">Polar (Biphase: Manchester ve Differential Manchester)</a></li><li><a href="#polar-biphase-manchester-ve-differential-manchester-2">Polar (Biphase: Manchester ve Differential Manchester) (2)</a></li><li><a href="#bipolar-ami-alternate-mark-inversion-ve-pseudoternary">Bipolar (AMI – Alternate Mark Inversion ve Pseudoternary)</a></li><li><a href="#multilevel-2b1q-8b6t-4d-pam5">Multilevel (2B1Q, 8B6T, 4D-PAM5)</a></li><li><a href="#multilevel-2b1q-8b6t-4d-pam5-2">Multilevel (2B1Q, 8B6T, 4D-PAM5) (2)</a></li><li><a href="#multilevel-2b1q">Multilevel (2B1Q)</a></li><li><a href="#multilevel-8b6t">Multilevel (8B6T)</a></li><li><a href="#multilevel-4d-pam5">Multilevel (4D-PAM5)</a></li><li><a href="#multiline-i-letisim-mlt-3">Multiline İletişim (MLT-3)</a></li><li><a href="#multiline-i-letisim-mlt-3-2">Multiline İletişim (MLT-3) (2)</a></li><li><a href="#line-coding-yontemleri-ozet">Line coding yöntemleri özet</a></li><li><a href="#blok-kodlama">Blok kodlama</a></li><li><a href="#blok-kodlama-2">Blok kodlama (2)</a></li><li><a href="#blok-kodlama-4b-5b">Blok kodlama (4B/5B)</a></li><li><a href="#blok-kodlama-4b-5b-2">Blok kodlama (4B/5B) (2)</a></li><li><a href="#blok-kodlama-8b-10b">Blok kodlama (8B/10B)</a></li><li><a href="#scrambling">Scrambling</a></li><li><a href="#scrambling-b8zs-bipolar-with-8-zero-substitution">Scrambling (B8ZS – Bipolar with 8-zero substitution)</a></li><li><a href="#scrambling-hdb3-high-density-bipolar-3-zero">Scrambling (HDB3 – High-density bipolar 3-zero)</a></li><li><a href="#analog-sayisal-cevirme">Analog sayısal çevirme</a></li><li><a href="#analog-sayisal-cevirme-2">Analog sayısal çevirme (2)</a></li><li><a href="#ornekleme-sampling">Örnekleme - Sampling</a></li><li><a href="#sampling-rate">Sampling rate</a></li><li><a href="#sampling-rate-2">Sampling rate (2)</a></li><li><a href="#sayisallastirma-quantization">Sayısallaştırma – Quantization</a></li><li><a href="#orijinal-sinyali-tekrar-olusturmak">Orijinal sinyali tekrar oluşturmak</a></li><li><a href="#delta-modulasyonu">Delta modülasyonu</a></li><li><a href="#i-letisim-modlari">İletişim modları</a></li><li><a href="#paralel-iletisim">Paralel iletişim</a></li><li><a href="#seri-iletisim">Seri iletişim</a></li><li><a href="#seri-iletisim-asenkron">Seri iletişim - asenkron</a></li><li><a href="#seri-iletisim-senkron">Seri iletişim - senkron</a></li><li><a href="#isochronous-iletisim">Isochronous iletişim</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM438 Veri İletişimi: Sayısal Veri İletimi: Hat Kodlama ve PCM (Gazi Üniversitesi, Suat Özdemir)</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 05.03.2011 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Gazi Üniversitesi Bilgisayar Mühendisliği Bölümü’nden Suat Özdemir’in “Veri İletişimi / Data Communications” dersi için hazırladığı 4. bölüm (Sayısal veri iletimi) slaytlarıdır (slayt tarihi 5 Mart 2011; alt bilgide BM 403 Veri İletişimi yazar). EEM438 klasöründe ikinci bir hocanın ders materyali olarak saklanmıştır. Slayt metni aşağıya aktarıldı; kitaptan alınmış şekiller ve tablolar yayımlanmadı, metni olmayan slaytlar belirtildi. Orijinal PDF yazının sonunda indirilebilir.</p>
+<p>Kapsam: hat kodlama teknikleri (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), PCM ile örnekleme, paralel ve seri iletim.</p>
+<p><em>Bu içerik üçüncü taraf bir kaynağa aittir; arşiv ve nostalji amacıyla kaynak belirtilerek paylaşılmıştır. Hak sahibinin talebi hâlinde kaldırılır.</em></p>
+<h2 id="sayisal-sayisal-cevirme">Sayısal sayısal çevirme</h2>
+<ul><li>Bilginin iki nokta arasında iletilmesi için analog veya sayısal sinyale çevrilmesi gerekir.</li><li>Sayısal sayısal çevirmede sayısal veri sayısal sinyale dönüştürülür.</li><li>Analog sayısal çevirmede analog veri sayısal sinyale dönüştürülür.</li><li>Çevirme işleminden elde edilen sinyal paralel veya seri olarak iki nokta arasında iletilir.</li></ul>
+<h2 id="sayisal-sayisal-cevirme-2">Sayısal sayısal çevirme (2)</h2>
+<ul><li>Line coding sayısal veriyi sayısal sinyale dönüştürme işlemidir.</li><li>Veri iletişiminde amaç, veri parçalarının iletilmesidir. En küçük parça bit olarak adlandırılır.</li><li>Şekilde r bir sinyal parçasıyla taşınan veri parçasının sayısını göstermektedir.</li></ul>
+<h2 id="sayisal-sayisal-cevirme-3">Sayısal sayısal çevirme (3)</h2>
+<ul><li>Data rate, bir saniyede iletilen bit sayısını gösterir (bps, bit/s).</li><li>Signal rate, bir saniyede iletilen sinyal sayısını gösterir (baud).</li><li>Data rate genellikle bit rate olarak ifade edilir.</li><li>Signal rate ise baud rate, pulse rate ya da modulation rate olarak ifade edilir.</li><li>Amaç baud rate düşürülürken bit rate değerini artırmaktır.</li><li>Bandwidth, sinyali taşımak için gereken frekans bant genişliğini gösterir.</li><li>Sinyaldeki değişim sayısını artırırken daha geniş frekans bandı kullanılır.</li></ul>
+<h2 id="sinyal-iletiminde-sorunlar">Sinyal iletiminde sorunlar</h2>
+<ul><li>Sinyal kodlamada uzun 1 ve 0 serilerinin alıcıda doğru çözülmesi zordur. Önlem alınması gerekir.</li><li>Bir sayısal sinyal belirli bir süre sabit kalırsa DC bileşen oluşur ve düşük frekansları geçirmeyen sistemler için problem oluşur. (Telefon hattı 200Hz altını geçirmez)</li><li>İki sistemde (alıcı ve verici) bit aralığının aynı olması gerekir.</li><li>Self-synchronizing sayısal sinyalin zamanlama bilgisini içinde bulundurmasıdır.</li></ul>
+<h2 id="sayisal-sinyal-kodlama-teknikleri">Sayısal sinyal kodlama teknikleri</h2>
+<ul><li>5 temel grupta toplanır</li></ul>
+<h2 id="unipolar-non-return-to-zero">Unipolar (non-return-to-zero)</h2>
+<ul><li>Bit 1 pozitif gerilim ve bit 0 negatif gerilim veya 0 V ile tanımlar.</li><li>Sinyal bitin ortasında 0’a dönmediği için non-return-to-zero denilmektedir.</li></ul>
+<h2 id="polar-non-return-to-zero">Polar (non-return-to-zero)</h2>
+<ul><li>İki seviyeli sinyal kullanılır. NRZ-Level ve NRZ-Invert olarak iki türdür.</li><li>NRZ-L kodlamada bit 0 pozitif gerilim ve bit 1 negatif gerilim ile tanımlar.</li><li>NRZ-I da gerilim seviyesindeki değişim bit 1 ve değişmeme bit 0 dır.</li><li>Uzun 1 ve 0 serilerinin algılanması zordur (NRZ-L da daha fazla).</li><li>Senkronizasyon problemi her ikisinde vardır (NRZ-L da daha fazla)</li></ul>
+<h2 id="polar-return-to-zero">Polar (return-to-zero)</h2>
+<ul><li>NRZ kodlamada problem alıcı verici senkronizasyonu olmamasıdır.</li><li>Return-to-zero’da pozitif, sıfır ve negatif gerilim seviyesi görülür.</li><li>RZ de sinyal bitin ortasında o seviyesine döner.</li><li>Bir bit için daha çok değişim gerekir(daha fazla band genişliği)</li><li>DC bileşen problemi yoktur.</li></ul>
+<h2 id="polar-biphase-manchester-ve-differential-manchester">Polar (Biphase: Manchester ve Differential Manchester)</h2>
+<ul><li>Manchester’da, sinyal bit 1 ve bit 0 için belirli işaretlere sahiptir.</li><li>Differential Manchester’da bit 0 için bit başında değişim olur, bit 1 için değişim olmaz.</li><li>Her ikisinde de bitin ortasında seviye değiştirilir. (senkronizasyon sağlanır)</li></ul>
+<h2 id="polar-biphase-manchester-ve-differential-manchester-2">Polar (Biphase: Manchester ve Differential Manchester) (2)</h2>
+<ul><li>Manchester ve Differential Manchester kodlamalarda DC bileşen yoktur. Her bit hem pozitif hem de negatif gerilime sahiptir.</li><li>Signal rate NRZ kodlamaya göre iki kat olur. (Bant genişliği iki kat olur)</li></ul>
+<h2 id="bipolar-ami-alternate-mark-inversion-ve-pseudoternary">Bipolar (AMI – Alternate Mark Inversion ve Pseudoternary)</h2>
+<ul><li>AMI kodlamada, bit 0 için seviye 0 dır, bit 1 için pozitif ve negatif arasında sürekli değişir.</li><li>Pseudoternary kodlamada, bit 1 için seviye 0 dır, bit 0 için pozitif ve negatif arasında sürekli değişir.</li><li>Bipolar kodlamada DC bileşen yoktur. Sürekli pozitif ve negatif arasında değişim yapılır.</li></ul>
+<h2 id="multilevel-2b1q-8b6t-4d-pam5">Multilevel (2B1Q, 8B6T, 4D-PAM5)</h2>
+<ul><li>Kodlamada temel amaç veri hızını artırmak ve bant genişliğini azaltmaktır.</li><li>m veri parçası sayısını, n sinyal parçası sayısını göstersin.</li><li>Binary veri için 1 ve 0 olduğundan m adet veriyi 2^m farklı sinyalle gösterebiliriz.</li><li>Her sinyalde L seviye olursa L^n adet farklı sinyal elde edilir.</li></ul>
+<h2 id="multilevel-2b1q-8b6t-4d-pam5-2">Multilevel (2B1Q, 8B6T, 4D-PAM5) (2)</h2>
+<ul><li>2^m = L^n olursa her veri için bir sinyal kullanabiliriz.</li><li>2^m &lt; L^n olursa tüm veriler sinyallerin bir kısmıyla ifade edilebilir.</li><li>2^m &gt; L^n olursa tüm veriler elde edilen sinyallerle ifade edilemez.</li><li>Bu şekildeki kodlama mBnL olarak adlandırılır.</li><li>Burada, m binary verinin uzunluğunu, B binary veriyi, n sinyal uzunluğunu ve L sinyal seviye sayısını gösterir.</li><li>L=2 ise B (binary), L=3 ise T (ternary), L=4 ise Q (quaternary) kullanılır.</li><li>İlk ikisi (mB) veriyi, son ikisi (nL) sinyali gösterir.</li></ul>
+<h2 id="multilevel-2b1q">Multilevel (2B1Q)</h2>
+<ul><li>2B1Q(two-binary- one-quaternary), kodlamada bir sinyal ile kodlanan veri boyutu 2 bit ve sinyaldeki toplam seviye sayısı 4 tür.</li><li>2B1Q, DSL(digital subscriber line) teknolojisinde kullanılır.</li></ul>
+<h2 id="multilevel-8b6t">Multilevel (8B6T)</h2>
+<ul><li>8B6T(eight-binary-six-ternary), kodlamada 8-bit data 3 seviyeli sinyalle gösterilir.</li><li>2⁸ = 256 farklı veri ve 3⁶ = 729 farklı sinyal kullanılır.</li><li>Sinyallerin bir kısmı senkronizasyon ve hata denetimi için kullanılır.</li><li>Her bit grubu için kullanılacak sinyal grubu sabittir.</li><li>8B6T, 10Base-4T ağlarda kullanılır.</li></ul>
+<h2 id="multilevel-4d-pam5">Multilevel (4D-PAM5)</h2>
+<ul><li>4D-PAM5 (four-dimensional five-level pulse-amplitude-modulation), kodlamada 4D verinin 4 kablo ile iletildiğini gösterir.</li><li>5 farklı sinyal seviyesi (-2,-1,0,1,2) kullanılır.</li><li>Bir sinyal elemanıyla 8 bit gönderilir.</li><li>Sinyal 4 parçayla gösterilir her parçası bir kablodan iletilir.</li><li>4D-PAM5 kodlama Gigabit LAN ağlarda kullanılır.</li></ul>
+<h2 id="multiline-i-letisim-mlt-3">Multiline İletişim (MLT-3)</h2>
+<ul><li>NRZ-I ve Differential Manchester datayı kodlarken iki geçiş kuralı uygular.</li><li>MLT-3 (Multiline Transmission, Three Level) kodlama, iki seviyeden fazla seviyeye sahip veri için kullanılır MLT-3 üç seviyeli (+V 0 -V) geçiş kuralı kullanılır.</li><li>Daha az değişim olduğu için bant genişliği ¼ oranındadır. (BW = ¼ Bit rate)</li><li>Bir sonraki bit 0 ise geçiş olmaz.</li><li>Bir sonraki bit 1 ise ve şimdiki seviye 0 değilse, bir sonraki seviye 0 olur.</li><li>Bir sonraki bit 1 ise şimdiki seviye 0 ise, bir sonraki seviye 0 olmayan son seviyenin tersi olur.</li></ul>
+<h2 id="multiline-i-letisim-mlt-3-2">Multiline İletişim (MLT-3) (2)</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="line-coding-yontemleri-ozet">Line coding yöntemleri özet</h2>
+<p><em>Bu slayt yalnızca şekil/tablo içerir; görsel orijinal PDF'te yer alır.</em></p>
+<h2 id="blok-kodlama">Blok kodlama</h2>
+<ul><li>Senkronizasyonu daha iyi yapmak ve hata denetimi yapmak için ekstra bitlere ihtiyaç olur.</li></ul>
+<h2 id="blok-kodlama-2">Blok kodlama (2)</h2>
+<ul><li>Block coding, m adet biti n adet bit haline çevirir (mB/nB). Burada (n &gt; m).</li><li>“/” işareti blok kodlamayı, multilevel kodlamadan ayırır (8B6T).</li><li>m-bit grup n-bit grup yerine yerleştirilir.</li><li>4B/5B de orijinal bitler 4-bit gruplara ayrılır ve her 4-bit yerine 5-bit yazılır.</li></ul>
+<h2 id="blok-kodlama-4b-5b">Blok kodlama (4B/5B)</h2>
+<ul><li>4B/5B (four binary/five binary) kodlama NRZ-I ile birlikte kullanılır. NRZ-I kodlama uzun 0 larda senkronizasyon problemi vardır. NRZ-I kodlamadan önce uzun 0 olmayacak şekilde değişiklik gerekir. Alıcı önce NRZ-I ile bitleri elde eder daha sonra fazlalık olan 1-bit atılır. 4B/5B ikiden fazla 0 bulundurmaz. Tüm gruplar içinde üçten fazla 0 olmaz.</li><li>Eklenen 1 bit %20 fazla trafik gerektirir. DC bileşen hala vardır.</li></ul>
+<h2 id="blok-kodlama-4b-5b-2">Blok kodlama (4B/5B) (2)</h2>
+<ul><li>Örnek: 1 Mbps hızda veri göndermek istiyoruz. 4B/5B ve NRZ-I ile Manchester kullanıldığında gereken minimum bant genişliği nedir ? 4B/5B bit rate değerini 1.25 Mbps olarak artırır. NRZ-I kodlama N/2 bant genişliği gerektirdiğinden 625 kHz gerekir. Manchester kodlama 1 MHz bant genişliği gerektirir. NRZ-I da DC bileşen vardır, Manchester’da DC bileşen yoktur.</li></ul>
+<h2 id="blok-kodlama-8b-10b">Blok kodlama (8B/10B)</h2>
+<ul><li>8B/10B (eight binary/ten binary) kodlama 8-bit yerine 10-bit kullanır.</li><li>Bir tane 5B/6B ile (soldaki 5 bit için) bir tane 3B/4B (sağdaki 3 bit için) vardır.</li><li>Disparity controller hata denetimi yapar. 2¹⁰ – 2⁸ = 768 fazla grup oluşur.</li></ul>
+<h2 id="scrambling">Scrambling</h2>
+<ul><li>Biphase yöntemi kısa mesafede iki istasyon arasında (LAN içinde) uygundur ancak geniş bant genişliği gerektirdiği için uzun mesafede uygun değildir.</li><li>Blok kodlama ve NRZ nin birlikte kullanımı da uzun mesafede DC bileşen olduğu için uygun değildir.</li><li>Bipolar AMI kodlama dar bant genişliği gerektirir ve DC bileşen yoktur. Ancak uzun 0 larda senkronizasyon yoktur.</li><li>Belirli sayıdaki 0 serisi farklı bir seriyle değiştirilir.</li></ul>
+<h2 id="scrambling-b8zs-bipolar-with-8-zero-substitution">Scrambling (B8ZS – Bipolar with 8-zero substitution)</h2>
+<ul><li>8 artarda gelen 0 seviye gerilim yerine 000VB0VB yerleştirilir.</li><li>V, AMI kodlamada bir önceki gerilim seviyesinin aynısını gösterir.</li><li>B, bipolar bir önceki gerilim seviyesinin tersini gösterir.</li></ul>
+<h2 id="scrambling-hdb3-high-density-bipolar-3-zero">Scrambling (HDB3 – High-density bipolar 3-zero)</h2>
+<ul><li>4 artarda sıfır gerilim seviyesi 000V veya B00V ile değiştirilir.</li><li>Son substitution’ dan sonra eğer sıfırdan farklı pulse sayısı tek ise, 000V işareti kullanılır. Böylece sıfırdan farklı pulse sayısı çift olur.</li><li>Son substitution’ dan sonra eğer sıfırdan farklı pulse sayısı çift ise, B00V işareti kullanılır. Böylece sıfırdan farklı pulse sayısı çift olur.</li></ul>
+<h2 id="analog-sayisal-cevirme">Analog sayısal çevirme</h2>
+<ul><li>Bazı uygulamalarda analog sinyal vardır (mikrofon veya kamera üretir).</li><li>Analog sinyal sayısal dataya çevirilir ardından sayısal sinyale dönüştürülür.</li><li>Pulse code modulation (PCM) En yaygın kullanılan analog sinyal-sayısal data dönüştürme yöntemidir.</li></ul>
+<h2 id="analog-sayisal-cevirme-2">Analog sayısal çevirme (2)</h2>
+<ul><li>Analog sayısal çevirmenin 3 aşaması vardır</li></ul>
+<p>  - Örnekleme (Sampling)   - Sayısallaştırma (Quantization)   - Orijinal sinyali tekrar oluşturma</p>
+<h2 id="ornekleme-sampling">Örnekleme - Sampling</h2>
+<ul><li>Her Ts aralığında analog sinyal örneklenir (sampling rate, sampling frequency).</li><li>Üç farklı örnekleme yapılır. Sample and hold (flat-top) yaygın kullanılır.</li></ul>
+<h2 id="sampling-rate">Sampling rate</h2>
+<ul><li>Nyquist teoremine göre örnekleme frekansı (sampling rate) en yüksek frekansın en az iki katı olmalıdır.</li></ul>
+<h2 id="sampling-rate-2">Sampling rate (2)</h2>
+<ul><li>Örnekleme frekansı düşükse saat ters dönüyor gibi görünür.</li><li>Bir filmde saniyede 24 frame geçer. 12’den az örnekleme undersampling’tir.</li></ul>
+<h2 id="sayisallastirma-quantization">Sayısallaştırma – Quantization</h2>
+<ul><li>Örneklenen değerler analogtur. Minimum ve maksimum arası L seviyeye bölünür. İki seviye arasındaki fark Δ = (Vmax–Vmin )/L olur.</li><li>Örnekte, Vmax = +20 V, Vmin = -20 V, L=8</li></ul>
+<h2 id="orijinal-sinyali-tekrar-olusturmak">Orijinal sinyali tekrar oluşturmak</h2>
+<ul><li>Bit dizisi tekrar analog sinyali oluşturmak için kullanılır.</li></ul>
+<h2 id="delta-modulasyonu">Delta modülasyonu</h2>
+<ul><li>Delta modülasyonu PCM’den daha basittir.</li><li>Örneklenen değer bir öncekinden büyükse artış, küçükse azalış gerçekleştirilir.</li></ul>
+<h2 id="i-letisim-modlari">İletişim modları</h2>
+<ul><li>Paralel ve seri iletişim yapılır.</li></ul>
+<h2 id="paralel-iletisim">Paralel iletişim</h2>
+<ul><li>Aynı anda n bit gönderilir.</li><li>Maliyet yüksektir, hızlıdır. Kısa mesafelerde kullanılır.</li></ul>
+<h2 id="seri-iletisim">Seri iletişim</h2>
+<ul><li>Aynı anda 1 bit gönderilir.</li><li>Maliyet düşüktür, yavaştır. Uzun mesafelerde kullanılır.</li></ul>
+<h2 id="seri-iletisim-asenkron">Seri iletişim - asenkron</h2>
+<ul><li>Bilgi gruplar halinde gönderilir. Bir grupta genellikle 8 bit olur.</li><li>Bir grubun geldiğini alıcıya start biti, bittiğini stop biti gösterir.</li><li>Byte seviyesinde asenkrondur, ama bit seviyesinde senkron yapmak gerekir.</li><li>Keyboard, mouse örnektir.</li></ul>
+<h2 id="seri-iletisim-senkron">Seri iletişim - senkron</h2>
+<ul><li>Start ve stop biti olmadan bitler ardarda gönderilir.</li><li>Bitleri gruplara ayırmak ve zamanlama işlemleri alıcı tarafından yapılır.</li><li>Asenkrona göre daha hızlıdır. </li></ul>
+<h2 id="isochronous-iletisim">Isochronous iletişim</h2>
+<ul><li>Gerçek zamanlı video ve audio uygulamalarında frame’ler arasında bekleme istenmez.</li><li>Isochronous iletişim sabit hızda verinin iletimini sağlar.</li></ul>
+<p><em>Not: Slaytlardaki üs ve alt simgeler PDF metninde düz rakam olarak çıktığı için (2^m, L^n, 2⁸, 3⁶, 2¹⁰) düzeltildi.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="dc04.pdf" download>dc04.pdf</a></p>
+              <p class="kucuk">PDF · 1.6 MB · 21 <span data-i18n="arch.pagesLower"></span> · 05.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="dc04.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>

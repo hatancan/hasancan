@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Sinyaller ve Sistemler II: Spektral Görüntü Filtreleme Projesi (2016) — hasancan.net</title>
+<meta name="description" content="Sinyaller arşivindeki sayısal sinyal işleme projesinin önerisi ve raporu: MATLAB ile iki boyutlu FFT, logaritmik spektrum maskesi ve ters dönüşümle periyodik gürültü azaltma.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-spektral-goruntu-filtreleme-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Sinyaller ve Sistemler II: Spektral Görüntü Filtreleme Projesi (2016)">
+<meta property="og:description" content="Sinyaller arşivindeki sayısal sinyal işleme projesinin önerisi ve raporu: MATLAB ile iki boyutlu FFT, logaritmik spektrum maskesi ve ters dönüşümle periyodik gürültü azaltma.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-spektral-goruntu-filtreleme-projesi/">
+<meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611142136">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Sinyaller ve Sistemler II: Spektral Görüntü Filtreleme Projesi (2016)", "description": "Sinyaller arşivindeki sayısal sinyal işleme projesinin önerisi ve raporu: MATLAB ile iki boyutlu FFT, logaritmik spektrum maskesi ve ters dönüşümle periyodik gürültü azaltma.", "inLanguage": "tr", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem308-spektral-goruntu-filtreleme-projesi/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "spektral-filtreleme-2016.zip", "contentUrl": "https://hasancan.net/arsiv/eem308-spektral-goruntu-filtreleme-projesi/spektral-filtreleme-2016.zip"}}</script>
+</head>
+<body data-sekme="arsiv" data-baslik="EEM308 Sinyaller ve Sistemler II: Spektral Görüntü Filtreleme Projesi (2016)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-728" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=728" data-i18n-attr="href:fsad.url.728;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.728"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.12.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP arşivi</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#onerilen-proje">Önerilen proje</a></li><li><a href="#raporun-uyguladigi-yontem">Raporun uyguladığı yöntem</a></li><li><a href="#matlab-kodu">MATLAB kodu</a></li><li><a href="#tartisma-ve-sonuc">Tartışma ve sonuç</a></li><li><a href="#rapordaki-kaynakca">Rapordaki kaynakça</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="tr">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <header class="yazi-bas">
+            <h1>EEM308 Sinyaller ve Sistemler II: Spektral Görüntü Filtreleme Projesi (2016)</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 21.12.2016 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Bu yazı, <strong>EEM308 Sinyaller ve Sistemler II arşivinde bulunan</strong>, Başkent Üniversitesi <strong>Sayısal Sinyal İşleme</strong> dersi için hazırlanmış 2016 tarihli spektral görüntü filtreleme proje önerisini ve öğrenci raporunu aktarıyor. Belgelerde EEM308 ders kodu yazmıyor; arşivde bulundukları ders altında sunuluyorlar. Öğrenci adı, öğrenci numaralı e-posta adresi ve fotoğraf örnekleri çıkarılmış PDF kopyaları yazının sonunda ZIP olarak indirilebilir.</p>
+<h2 id="onerilen-proje">Önerilen proje</h2>
+<p>Gri tonlu görüntüye belirli frekansta, düzenli tekrarlanan bir örüntü biçiminde gürültü eklenmesi isteniyor. Görüntünün FFT genlik gösteriminden kullanıcı fareyle dikdörtgen bir alan seçecek; seçilen gürültü bölgesi spektrumdan temizlenecek ve ters FFT ile görüntü geri elde edilecek.</p>
+<p>Amaç, bu işlemleri yapan MATLAB programını hazırlamak. Başarı ölçütü, seçilen gürültü alanının temizlenmesi ve görüntünün gürültüden arındırılması olarak yazılmış. Yönetim düzeni bölümü boş bırakılmış.</p>
+<h3 id="rapor-sunum-ve-takvim">Rapor, sunum ve takvim</h3>
+<ul><li>Rapor en az iki sayfa ve iki sütunlu olacak.</li><li>Sunum 15–20 slayt içerecek; 15 dakika anlatım ve 5 dakika soru-cevap için toplam 20 dakika ayrılacak.</li><li>Grup üyelerinin tümü sunum sırasında derslikte bulunacak.</li><li>Öneri teslimi: <strong>11 Kasım 2016</strong>.</li><li>Rapor teslimi: <strong>9 Aralık 2016</strong>.</li><li>Sunumlar: <strong>13–14 Aralık</strong> ders saatlerinde.</li><li>Her grup bir proje önerebilir; aynı konuya başvurulursa yeterli öneri formunu önce teslim eden grup önceliklidir.</li></ul>
+<h2 id="raporun-uyguladigi-yontem">Raporun uyguladığı yöntem</h2>
+<p>Raporda görüntü gri tona çevrilip normalize ediliyor ve <strong>256 × 256</strong> boyutuna getiriliyor. İki boyutlu FFT ve <code>fftshift</code> ile merkezlenmiş spektrum alınıyor. Gösterim için:</p>
+<p>fLog = log(1 + abs(f)).</p>
+<p>Maske iki eşikle oluşturulmuş:</p>
+<p>filter = (fLog &gt; 0,7 max(fLog)) veya (fLog &lt; 0,43 max(fLog)).</p>
+<p>Bu maskede en yüksek ve en düşük değerler korunuyor; iki eşik arasında kalan spektrum değerleri sıfırlanıyor. Kaynak, merkezi parlak bileşeni ve düşük genlikleri korumayı amaçladığını söylüyor. Maskenin siyah alanları sıfır, beyaz alanları bir değerindedir.</p>
+<p><em>Not: Öneride fareyle dikdörtgen seçim istenirken rapordaki kod otomatik genlik eşikleri kullanıyor; etkileşimli bölge seçimi bu kodda yok.</em></p>
+<h2 id="matlab-kodu">MATLAB kodu</h2>
+<p>Raporun kodu, yorumlardaki Türkçe karakter bozulmaları düzeltilerek aktarılmıştır:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>% Görüntüyü oku
+I = imread('clown.jpg');
+% Gri tona çevir ve normalize et
+I = rgb2gray(I);
+I = double(mat2gray(I));
+I = imresize(I, [256 256]);
+[rows,cols] = size(I);
+
+% Merkezlenmiş Fourier dönüşümü
+f = fftshift(fft2(I));
+fLog = log(1 + abs(f));
+
+% Genlik aralığına göre maskele
+filter = (fLog &gt; .7*max(fLog(:))) | (fLog &lt; .43*max(fLog(:)));
+B = abs(ifft2(f.*filter));
+
+% Sonucun Fourier gösterimi
+f1 = fftshift(fft2(B));
+fLog1 = log(1 + abs(f1));
+
+colormap(gray)
+subplot(3,2,1), imagesc(I); title('Orijinal Görüntü')
+subplot(3,2,2), imagesc(fLog); title('Fourier Görüntü')
+subplot(3,2,3), imagesc(fLog); title('Fourier Görüntü')
+subplot(3,2,4), imagesc(filter); title('Çıktı Maskesi')
+subplot(3,2,5), imagesc(fLog1); title('Temizlenme Sonrası Fourier Görüntü')
+subplot(3,2,6), imagesc(B); title('Temizlenmiş Görüntü')
+annotation('textbox', [0 0.9 1 0.1], ...
+    'String', 'FFT ile Görüntü Temizleme', ...
+    'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', ...
+    'FontSize', 15, ...
+    'FontWeight', 'bold')</code></pre>
+<p><em>Not: Kaynak kod <code>clown.jpg</code> adını kullanıyor, ancak rapor çıktısındaki örnek bir top görüntüsü. Ayrı giriş görüntüsü dosyası bu kaynak grubunda bulunmuyor.</em></p>
+<p><em>Not: Kod, <code>fftshift</code> uygulanmış spektrumu doğrudan <code>ifft2</code>ye veriyor. Merkezlenmiş spektrumun doğru ters dönüşümü için önce <code>ifftshift</code> uygulanır. Buradaki 256 × 256 çift boyutlu dizide kaydırmadan doğan işaret örüntüsü <code>abs</code> ile gizlenebilir; bu, genel olarak doğru yeniden oluşturma işleminin yerine geçmez. Kaynak satırı değiştirilmedi.</em></p>
+<h2 id="tartisma-ve-sonuc">Tartışma ve sonuç</h2>
+<p>Rapor, bazı gürültü bileşenlerinin temizlendiğini; seçilen maskenin bazı DC bileşenlerini koruduğunu ve yöntemin her görüntü için en iyi filtreleme yöntemi olmadığını belirtiyor. Sonuç kısmında görüntünün gürültülerden temizlendiği ifade edilmiş; hata ölçütü veya sayısal kalite karşılaştırması verilmemiş.</p>
+<p><em>Not: DC bileşeninin korunması tek başına hata değildir; görüntünün ortalama parlaklığıyla ilişkilidir. Rapordaki “hata payı” yorumu kaynak ifadesidir.</em></p>
+<h2 id="rapordaki-kaynakca">Rapordaki kaynakça</h2>
+<ul><li>Charles Van Loan, <em>Computational Frameworks for the Fast Fourier Transform</em>, SIAM, 1992.</li><li>Heideman, Johnson ve Burrus, “Gauss and the history of the fast Fourier transform”, IEEE ASSP Magazine, 1984; aynı başlıklı 1985 tarihli Archive for History of Exact Sciences makalesi.</li><li>Gilbert Strang, “Wavelets”, American Scientist, 1994.</li><li>Dongarra ve Sullivan, “Guest Editors Introduction to the top 10 algorithms”, Computing in Science &amp; Engineering, 2000.</li><li>Frank Yates, <em>The Design and Analysis of Factorial Experiments</em>, 1937.</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="spektral-filtreleme-2016.zip" download>spektral-filtreleme-2016.zip</a></p>
+              <p class="kucuk">ZIP arşivi · 747 KB · 21.12.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="spektral-filtreleme-2016.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (747 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611142136"></script>
+<script src="/assets/lang/en.js?v=202611142136"></script>
+<script src="/assets/lang/de.js?v=202611142136"></script>
+<script src="/assets/js/site.js?v=202611142136"></script>
+</body>
+</html>
