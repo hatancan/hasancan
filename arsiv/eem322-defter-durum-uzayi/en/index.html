@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Course Notebook (March 2013) – State Space, State Transition Matrix, Companion and Modal Forms, Controllability and Observability — hasancan.net</title>
+<meta name="description" content="State-space weeks from the 2013 EEM322 Control Systems course notebook: the resolvent matrix (sI−A)⁻¹ and e^(At), state equations of an RLC circuit, transformation to companion form and to modal form via Vandermonde, direct, cascade and parallel decomposition, and controllability and observability with water-tank examples.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Course Notebook (March 2013) – State Space, State Transition Matrix, Companion and Modal Forms, Controllability and Observability">
+<meta property="og:description" content="State-space weeks from the 2013 EEM322 Control Systems course notebook: the resolvent matrix (sI−A)⁻¹ and e^(At), state equations of an RLC circuit, transformation to companion form and to modal form via Vandermonde, direct, cascade and parallel decomposition, and controllability and observability with water-tank examples.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-defter-durum-uzayi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Course Notebook (March 2013) – State Space, State Transition Matrix, Companion and Modal Forms, Controllability and Observability", "description": "State-space weeks from the 2013 EEM322 Control Systems course notebook: the resolvent matrix (sI−A)⁻¹ and e^(At), state equations of an RLC circuit, transformation to companion form and to modal form via Vandermonde, direct, cascade and parallel decomposition, and controllability and observability with water-tank examples.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-defter-durum-uzayi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Course Notebook (March 2013) – State Space, State Transition Matrix, Companion and Modal Forms, Controllability and Observability">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>16.03.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#verification-with-mason-s-rule">Verification with Mason's rule</a></li><li><a href="#example-1-solution-of-the-state-equation">Example 1: Solution of the state equation</a></li><li><a href="#example-2-state-equations-of-an-rlc-circuit">Example 2: State equations of an RLC circuit</a></li><li><a href="#example-3-transformation-to-companion-form">Example 3: Transformation to companion form</a></li><li><a href="#example-4-modal-matrix">Example 4: Modal matrix</a></li><li><a href="#example-5-transfer-function-decompositions">Example 5: Transfer function decompositions</a></li><li><a href="#controllability-and-observability-water-tanks-example-6-1">Controllability and observability: water tanks (Example 6, ρ = 1)</a></li><li><a href="#example-7-invariance-under-similarity-transformation">Example 7: Invariance under similarity transformation</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Course Notebook (March 2013) – State Space, State Transition Matrix, Companion and Modal Forms, Controllability and Observability</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 16.03.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the state-space material from a friend's <strong>course notebook</strong> for the 2013 spring semester of Başkent University's <strong>EEM322 Control Systems</strong> course (pages photographed on 7, 14 and 16 March 2013). The content was <strong>transcribed from the photographed pages into text</strong>; the photos have not been published. The examples were written in English in class, and the Turkish margin notes were transcribed as well. The calculations were checked; small typos in the notebook are pointed out in notes. One blurry page could not be read and was skipped.</p>
+<p>For the topic explanation, see the post <a href="/arsiv/eem322-ders-03-durum-uzayi/">Lecture 3</a>. The previous and next sections of the notebook: <a href="/arsiv/eem322-defter-modelleme-blok-diyagram/">modeling and block diagrams</a>, <a href="/arsiv/eem322-defter-kalici-hata-routh-kok-yer/">steady-state error, Routh and root locus</a>.</p>
+<h2 id="verification-with-mason-s-rule">Verification with Mason's rule</h2>
+<p>At the top of the page, the result of a block diagram reduction, (G₁ + G₂)/(1 + G₁H), is verified with a signal flow graph: forward paths P₁ = G₁, P₂ = G₂, loop L₁ = −G₁H, Δ = 1 + G₁H, Δ₁ = Δ₂ = 1 ⇒ (P₁Δ₁ + P₂Δ₂)/Δ = (G₁ + G₂)/(1 + G₁H).</p>
+<h2 id="example-1-solution-of-the-state-equation">Example 1: Solution of the state equation</h2>
+<p>Block diagram of the state-space model: u → B → summing junction → ẋ → ∫ → x → C → (summed with D) y, with feedback through A.</p>
+<ul><li>ẋ = [[−1, −3], [1, −5]] x + [1, 0]ᵀ u, y = [1, −1] x, D = 0</li><li>u(t) = 1 (t ≥ 0), x(0) = [1, 0]ᵀ</li></ul>
+<p><strong>(a) Zero-input (homogeneous) solution:</strong> X(s) = (sI − A)⁻¹x(0) or x(t) = e^(At)x(0). Resolvent matrix:</p>
+<ul><li>sI − A = [[s + 1, 3], [−1, s + 5]], det(sI − A) = s² + 6s + 8 = (s + 2)(s + 4)</li><li>(sI − A)⁻¹ = (1/Δ(s))·[[s + 5, −3], [1, s + 1]]</li><li>Partial fractions: [[3/2/(s+2) − 1/2/(s+4), −3/2/(s+2) + 3/2/(s+4)], [1/2/(s+2) − 1/2/(s+4), −1/2/(s+2) + 3/2/(s+4)]]</li></ul>
+<p>State transition matrix via inverse Laplace transform:</p>
+<ul><li>Φ(t) = e^(At) = [[(3/2)e^(−2t) − (1/2)e^(−4t), −(3/2)e^(−2t) + (3/2)e^(−4t)], [(1/2)e^(−2t) − (1/2)e^(−4t), −(1/2)e^(−2t) + (3/2)e^(−4t)]]</li><li>Zero-input state response: x(t) = e^(At)[1, 0]ᵀ = [(3/2)e^(−2t) − (1/2)e^(−4t), (1/2)e^(−2t) − (1/2)e^(−4t)]ᵀ</li></ul>
+<p><strong>(b) Output for u(t) = 1 and x(0) = [1, 0]ᵀ:</strong></p>
+<ul><li>Y(s) = C(sI − A)⁻¹x(0) + C(sI − A)⁻¹B U(s)</li><li>= (1/Δ(s))·{[1, −1][s + 5, 1]ᵀ + [1, −1][(s + 5)/s, 1/s]ᵀ} = (s² + 5s + 4)/[sΔ(s)] = (s + 1)/[s(s + 2)]</li><li>y(t) = 1/2 + (1/2)e^(−2t)</li></ul>
+<p>Note from the source: All simplifications and matrix operations should be done in the Laplace domain, and the inverse Laplace transform should be applied at the very end.</p>
+<h2 id="example-2-state-equations-of-an-rlc-circuit">Example 2: State equations of an RLC circuit</h2>
+<p>A circuit consisting of a source vi, R₁ = 4 kΩ, C₁ = 0.25 mF, L = 2 mH, C₂ = 0.5 mF, R₂ = 1 kΩ, and a current source is. Node equations:</p>
+<ul><li>C₁ dv₁/dt + iL − (vi − v₁)/R₁ = 0 ⇒ 0.00025 dv₁/dt + iL − (vi − v₁)/4000 = 0</li><li>C₂ dv₂/dt − iL + v₂/R₂ − is = 0 ⇒ 0.0005 dv₂/dt − iL + v₂/1000 − is = 0</li><li>L diL/dt + v₂ − v₁ = 0 ⇒ 0.002 diL/dt + v₂ − v₁ = 0</li></ul>
+<p>State variables x₁ = v₁, x₂ = v₂, x₃ = iL; inputs u₁ = vi, u₂ = is; output y = v₂:</p>
+<ul><li>ẋ₁ = −x₁ − 4000x₃ + u₁</li><li>ẋ₂ = −2x₂ + 2000x₃ + 2000u₂</li><li>ẋ₃ = 500x₁ − 500x₂</li><li>A = [[−1, 0, −4000], [0, −2, 2000], [500, −500, 0]], B = [[1, 0], [0, 2000], [0, 0]], C = [0, 1, 0]</li></ul>
+<p><em>Note: In the notebook the first equation is written as "dv₁/dt = v₁ − 4000iL + vi"; the correct sign is −v₁ (the state-variable form is correct: −x₁).</em></p>
+<h2 id="example-3-transformation-to-companion-form">Example 3: Transformation to companion form</h2>
+<p>For the system in Example 1, the characteristic equation is Δ(s) = |sI − A| = s² + 6s + 8 = 0.</p>
+<ul><li>Controllability matrix U = [B, AB] = [[1, −1], [0, 1]], |U| ≠ 0 ⇒ companion form is possible</li><li>U⁻¹ = [[1, 1], [0, 1]], q = [0, 1]U⁻¹ = [0, 1] (last row of U⁻¹)</li><li>Q = [q; qA] = [[0, 1], [1, −5]], Q⁻¹ = [[5, 1], [1, 0]]</li><li>With the transformation w = Qx, ẇ = QAQ⁻¹w + QBu = [[0, 1], [−8, −6]]w + [0, 1]ᵀu</li><li>y = CQ⁻¹w + Du = [4, 1]w</li></ul>
+<h2 id="example-4-modal-matrix">Example 4: Modal matrix</h2>
+<p>System in companion form: ẇ = [[0, 1], [−8, −6]]w + [0, 1]ᵀu, y = [4, 1]w, w(0) = Qx(0) = [0, 1]ᵀ.</p>
+<ul><li>Δ(s) = |sI − Ac| = s² + 6s + 8 ⇒ λ₁ = −2, λ₂ = −4</li><li>With the Vandermonde approach, the eigenvectors follow directly: m₁ = [1, λ₁]ᵀ = [1, −2]ᵀ, m₂ = [1, λ₂]ᵀ = [1, −4]ᵀ</li><li>M = [[1, 1], [−2, −4]], M⁻¹ = [[2, 0.5], [−1, −0.5]]</li><li>Λ = M⁻¹AcM = diag(−2, −4), Γ = M⁻¹Bc = [0.5, −0.5]ᵀ, F = CcM = [2, 0]</li><li>ż = Λz + Γu, y = Fz</li></ul>
+<p>Transfer function in the three representations:</p>
+<ul><li>G(s) = C(sI − A)⁻¹B = (s + 4)/[(s + 2)(s + 4)] = 1/(s + 2)</li><li>Gc(s) = Cc(sI − Ac)⁻¹Bc = [4, 1]·(1/Δ)[[s + 6, 1], [−8, s]]·[0, 1]ᵀ = 1/(s + 2)</li><li>Gm(s) = F(sI − Λ)⁻¹Γ = 1/(s + 2)</li></ul>
+<p>G(s) = Gc(s) = Gm(s) and Δ(s) = |sI − A| = |sI − Ac| = |sI − Λ|, as expected.</p>
+<p><strong>4(b) Modal decomposition (free response):</strong> For ẇ = [[0, 1], [−8, −6]]w, the new initial vector is z(0) = M⁻¹w(0) = [0.5, −0.5]ᵀ.</p>
+<ul><li>w = Mz = M e^(Λt) z(0) = [m₁, m₂]·diag(e^(−2t), e^(−4t))·z(0)</li><li>w(t) = 0.5e^(−2t)[1, −2]ᵀ − 0.5e^(−4t)[1, −4]ᵀ</li></ul>
+<p><em>Note: At the beginning of Example 4, the notebook writes the companion-form matrix without signs ([[0, 1], [8, 6]]); the correct form is [[0, 1], [−8, −6]]. The second row of M⁻¹ is also written as [−1, 0.5]; the correct form is [−1, −0.5] (Γ was computed with this correct value). In the free response, the coefficient of the second term should be −0.5; this way w(0) = [0, 1]ᵀ is satisfied.</em></p>
+<h2 id="example-5-transfer-function-decompositions">Example 5: Transfer function decompositions</h2>
+<p>G(s) = (3s² + 9s + 6)/(s³ + 7s² + 12s) = 3(s + 1)(s + 2)/[s(s + 3)(s + 4)]</p>
+<p><strong>(i) Direct decomposition:</strong></p>
+<ul><li>Y/U = (3s⁻¹ + 9s⁻² + 6s⁻³)/(1 + 7s⁻¹ + 12s⁻²)</li><li>X(s) = U(s) − 7s⁻¹X(s) − 12s⁻²X(s), Y(s) = 3s⁻¹X(s) + 9s⁻²X(s) + 6s⁻³X(s)</li><li>Moving to the time domain by choosing the integrator outputs as state variables: ẋ = [[0, 1, 0], [0, 0, 1], [0, −12, −7]]x + [0, 0, 1]ᵀu, y = [6, 9, 3]x</li></ul>
+<p><strong>(ii) Cascade (series) decomposition:</strong> Y/U = (3/s)·[(s + 1)/(s + 3)]·[(s + 2)/(s + 4)]</p>
+<ul><li>(s + z)/(s + p) = (1 + z s⁻¹)/(1 + p s⁻¹) ⇒ X = U − p s⁻¹X, Y = X + z s⁻¹X</li><li>a/s ⇒ X = U, Y = a s⁻¹X</li><li>When the blocks 1/s·3 → (s + 1)/(s + 3) → (s + 2)/(s + 4) are arranged in this order and the integrators are expanded, a triangular-form A matrix results: ẋ = [[−4, −2, 3], [0, −3, 3], [0, 0, 0]]x + [0, 0, 1]ᵀu, y = [2 − 4, 1 − 3, 3]x = [−2, −2, 3]x</li></ul>
+<p><em>Note: The (2,3) element of the matrix in the notebook looks like −3; since the input of the (s + 1)/(s + 3) block is 3x₃, ẋ₂ = −3x₂ + 3x₃, so the element should be +3.</em></p>
+<p><strong>(iii) Parallel decomposition:</strong> The first step is the partial fraction expansion:</p>
+<ul><li>G(s) = (1/2)/s − 2/(s + 3) + (9/2)/(s + 4)</li><li>a/(s + p) = a s⁻¹/(1 + p s⁻¹) ⇒ X = U − p s⁻¹X, Y = a s⁻¹X</li><li>ẋ = [[0, 0, 0], [0, −3, 0], [0, 0, −4]]x + [1, 1, 1]ᵀu, y = [1/2, −2, 9/2]x</li></ul>
+<h2 id="controllability-and-observability-water-tanks-example-6-1">Controllability and observability: water tanks (Example 6, ρ = 1)</h2>
+<p><strong>(a)</strong> The upper tank (A₁, R₁) drains into the lower tank (A₂, R₂), the input u goes to the lower tank, and the output is y = x₂/R₂:</p>
+<ul><li>A₁ẋ₁ = −x₁/R₁, A₂ẋ₂ = x₁/R₁ − x₂/R₂ + u</li><li>For A₁ = A₂ = 1, R₁ = R₂ = 1: ẋ = [[−1, 0], [1, −1]]x + [0, 1]ᵀu, y = [0, 1]x</li><li>U = [B, AB] = [[0, 0], [1, −1]] ⇒ rank 1 (determinant 0) ⇒ uncontrollable</li><li>V = [C; CA] = [[0, 1], [1, −1]] ⇒ rank 2 ⇒ observable</li></ul>
+<p><em>Note: In the notebook the second row of the general matrix is written as [1/(R₁R₂), −1/(R₁A₂)]; according to the equations the correct form is [1/(R₁A₂), −1/(R₂A₂)], with B = [0, 1/A₂]ᵀ.</em></p>
+<p><strong>(b)</strong> The input goes to the upper tank, and the output is the flow rate of the upper tank (y = [1, 0]x): ẋ = [[−1, 0], [1, 0]]x + [1, 0]ᵀu ⇒ controllable, unobservable.</p>
+<p><strong>(c)</strong> The input and output are at the first tank, and the second tank is disconnected: ẋ = [[−1, 0], [0, 0]]x + [1, 0]ᵀu, y = [1, 0]x ⇒ uncontrollable, unobservable.</p>
+<p><strong>(d)</strong> Two side-by-side tanks connected through R₁; the input goes to the first tank, and the output is the flow rate of the second tank through R₂:</p>
+<ul><li>A₁ẋ₁ = (x₂ − x₁)/R₁ + u, A₂ẋ₂ = −(x₂ − x₁)/R₁ − x₂/R₂, y = x₂/R₂</li><li>With unit values, ẋ = [[−1, 1], [1, −2]]x + [1, 0]ᵀu, y = [0, 1]x ⇒ controllable and observable</li></ul>
+<h2 id="example-7-invariance-under-similarity-transformation">Example 7: Invariance under similarity transformation</h2>
+<p>Diagonal form from Example 4: ż = diag(−2, −4)z + [0.5, −0.5]ᵀu, y = [2, 0]z. Since the elements of Λ are negative, the system is stable; because of the 0 in the output matrix, the λ₂ = −4 mode is unobservable.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Representation</th><th scope="col">U = [B, AB]</th><th scope="col">det U</th><th scope="col">V = [C; CA]</th><th scope="col">det V</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">General (A, B, C)</th><td>[[1, −1], [0, 1]]</td><td>1</td><td>[[1, −1], [−2, 2]]</td><td>0</td><td>Controllable, unobservable</td></tr><tr><th scope="row">Companion form (Ac, Bc, Cc)</th><td>[[0, 1], [1, −6]]</td><td>−1</td><td>[[4, 1], [−8, −2]]</td><td>0</td><td>Controllable, unobservable</td></tr><tr><th scope="row">Diagonal (Λ, Γ, F)</th><td>[[0.5, −1], [−0.5, 2]]</td><td>0.5</td><td>[[2, 0], [−4, 0]]</td><td>0</td><td>Controllable, unobservable</td></tr></tbody></table></div>
+<p>The controllability and observability properties are <strong>invariant</strong> under similarity transformation. The unobservable λ₂ = −4 mode appears as the (s + 4) factor that cancels in the transfer function in Example 4: G(s) = Gc(s) = Gm(s) = (s + 4)/[(s + 2)(s + 4)] = 1/(s + 2).</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

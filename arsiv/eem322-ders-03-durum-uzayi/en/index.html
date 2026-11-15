@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 3 – State-Space Models, Transfer Function Conversions, and the State Transition Matrix — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture notes 3a, 3b, and 3c (Hamit Erdem, July 2013): state variables and state equations, state models for RLC circuits and a mass-spring system, conversion from state space to transfer function and from transfer function to phase-variable form, the state transition matrix e^(At); plus additional worked modeling examples in Turkish.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 3 – State-Space Models, Transfer Function Conversions, and the State Transition Matrix">
+<meta property="og:description" content="EEM322 Control Systems lecture notes 3a, 3b, and 3c (Hamit Erdem, July 2013): state variables and state equations, state models for RLC circuits and a mass-spring system, conversion from state space to transfer function and from transfer function to phase-variable form, the state transition matrix e^(At); plus additional worked modeling examples in Turkish.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 3 – State-Space Models, Transfer Function Conversions, and the State Transition Matrix", "description": "EEM322 Control Systems lecture notes 3a, 3b, and 3c (Hamit Erdem, July 2013): state variables and state equations, state models for RLC circuits and a mass-spring system, conversion from state space to transfer function and from transfer function to phase-variable form, the state transition matrix e^(At); plus additional worked modeling examples in Turkish.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-ders-03-durum-uzayi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-03-durum-uzayi/eem322-ders-03-durum-uzayi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 3 – State-Space Models, Transfer Function Conversions, and the State Transition Matrix">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>03.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#classical-and-modern-approaches">Classical and modern approaches</a></li><li><a href="#state-state-variables-and-the-state-vector">State, state variables, and the state vector</a></li><li><a href="#state-equations-for-electrical-circuits">State equations for electrical circuits</a></li><li><a href="#state-model-for-a-mechanical-system">State model for a mechanical system</a></li><li><a href="#from-state-space-to-transfer-function">From state space to transfer function</a></li><li><a href="#from-transfer-function-to-state-space-phase-variables">From transfer function to state space: phase variables</a></li><li><a href="#the-state-transition-equation-and-the-state-transition-matrix">The state transition equation and the state transition matrix</a></li><li><a href="#appendix-system-modeling-examples-turkish-handout">Appendix: System modeling examples (Turkish handout)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 3 – State-Space Models, Transfer Function Conversions, and the State Transition Matrix</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 03.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together three lecture notes and one worked-example handout from <strong>week 3</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University. The notes belong to the course instructor <strong>Hamit Erdem</strong>:</p>
+<ul><li><strong>Lecture 3</strong> (3a, 03.07.2013): Time-domain modeling, state-variable models.</li><li><strong>Lecture 3b</strong> (08.07.2013): Conversion from state space to transfer function and from transfer function to state space.</li><li><strong>Lecture 3C</strong> (09.07.2013): The state transition equation and the state transition matrix.</li><li><strong>System modeling examples</strong> (9 July 2013, "solution"): Differential equation, transfer function, and state-space models for a series RLC circuit, a mass-spring-damper, and a DC motor (in Turkish).</li></ul>
+<p>The notes are a mix of English and Turkish; the content is summarized below in English, and the worked examples have been written out. The PDFs of the four files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="classical-and-modern-approaches">Classical and modern approaches</h2>
+<p>There are two approaches to the analysis and design of feedback control systems. The greatest advantage of the <strong>classical (frequency-domain) approach</strong> is that it quickly gives stability and transient response information; the effect of changing system parameters is immediately visible. Its disadvantage is its limited applicability: it can only be applied to linear, time-invariant systems, or to systems that can be approximated as such.</p>
+<p>The <strong>state-space (time-domain, modern) approach</strong>, on the other hand, can be used for linear and nonlinear, time-varying and time-invariant, and multivariable systems. The state and output equations for a linear system are:</p>
+<p>ẋ(t) = A(t)x(t) + B(t)u(t) y(t) = C(t)x(t) + D(t)u(t)</p>
+<p>Here x(t) is the state vector, y(t) is the output vector, u(t) is the input vector, A(t) is the state (system) matrix, B(t) is the input matrix, C(t) is the output matrix, and D(t) is the direct transmission (feedforward) matrix.</p>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Block diagram of the state-space model: B, integrator, C, and the A matrix in the feedback path"><figcaption>Block diagram of the state-space model</figcaption></figure>
+<h2 id="state-state-variables-and-the-state-vector">State, state variables, and the state vector</h2>
+<ul><li><strong>State:</strong> The state of a dynamic system is the smallest set of variables (state variables) such that knowledge of them at t = t₀, together with knowledge of the input for t ≥ t₀, completely determines the behavior of the system for t ≥ t₀.</li><li><strong>State variables:</strong> The smallest set of variables that determines the state of the system. If at least n variables are needed to describe the behavior, then these n variables form a set of state variables.</li><li><strong>State vector:</strong> The vector x whose components are the n state variables.</li><li><strong>State equations:</strong> For an nth-order system, n simultaneous first-order differential equations written in terms of the state variables.</li></ul>
+<p>Notes:</p>
+<ul><li>The minimum number of state variables required equals the order of the differential equation; a second-order system requires at least two state variables.</li><li>State variables must be linearly independent; none of them can be written as a linear combination of the others. The concept of state is not limited to physical systems; it also applies to biological, economic, and social systems.</li><li>The state-space representation is not unique; a different choice of state variables gives a different representation of the same system.</li><li>State variables need not be physically measurable or observable; however, where possible it is practical to choose easily measured quantities, because optimal control laws require feeding back all state variables with appropriate weights.</li><li>The <strong>state space</strong> is the n-dimensional space whose axes are the state variables. The <strong>state trajectory</strong> is the path traced by the state vector x(t) in state space over time; in the two-dimensional case these are called the phase plane and phase trajectory.</li><li>In the physical-variable method, the state variables are chosen according to the system's <strong>energy-storing elements</strong>.</li></ul>
+<h2 id="state-equations-for-electrical-circuits">State equations for electrical circuits</h2>
+<p><strong>Example 1 – Series RL circuit:</strong> The only energy-storing element is the inductor; there is a single state variable x₁ = i (n = 1). Taking u = e, the loop equation is Rx₁ + Lẋ₁ = u, i.e., ẋ₁ = −(R/L)x₁ + (1/L)u.</p>
+<p><strong>Example 2 – Series RLC circuit:</strong> Since there are two energy-storing elements, there are two state variables: x₁ = v_C (capacitor voltage) and x₂ = i_L (inductor current). One writes a loop equation containing the derivative of the inductor current and a node equation containing the derivative of the capacitor voltage. The number of loop equations to be written equals the number of state variables that are currents, and the number of node equations equals the number of state variables that are voltages.</p>
+<p>Cẋ₁ = x₂,  Lẋ₂ + Rx₂ + x₁ = u</p>
+<p>ẋ₁ = (1/C)x₂,  ẋ₂ = −(1/L)x₁ − (R/L)x₂ + (1/L)u</p>
+<p>In matrix form, ẋ = Ax + bu, where A = [0, 1/C; −1/L, −R/L], b = [0; 1/L]. If the output is the capacitor voltage, y = [1 0]x + [0]u, i.e., cᵀ = [1 0], d = 0. (Source: <em>Linear Control System Analysis and Design with MATLAB</em>.)</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Choice of state variables and matrix form of the state equations for series RL and RLC circuits"><figcaption>State equations of the RL and RLC circuits</figcaption></figure>
+<p>The general method has five steps:</p>
+<ol><li>Label all branch currents in the circuit.</li><li>Choose the state variables (the energy-storing L and C elements) and write their derivative equations: C·dv_C/dt = i_C, L·di_L/dt = v_L.</li><li>Express the non-state variables (i_C and v_L) as linear combinations of the state variables (v_C and i_L) and the input.</li><li>Substitute and rearrange to obtain the state equations.</li><li>Find the output equation.</li></ol>
+<p>The notes also work through several more circuit examples: a circuit with three state variables (x₁ = i₁, x₂ = i₂, x₃ = v_C), a circuit with a current source and five state variables, a circuit with two inputs (e₁, e₂) and three outputs (v₁, v₂, v_C), and a circuit containing two capacitors and one inductor. For a multi-input multi-output (MIMO) system with m inputs and l outputs, A is the n×n plant matrix, B is the n×m control matrix, C is the l×n output matrix, D is the l×m feedforward matrix, u is the m-dimensional control vector, and y is the l-dimensional output vector.</p>
+<h2 id="state-model-for-a-mechanical-system">State model for a mechanical system</h2>
+<p>The spring-mass-damper system is described by the equation M·d²y/dt² + b·dy/dt + ky = u(t). Position and velocity are chosen as state variables: x₁ = y(t), x₂ = dy/dt. This gives two first-order equations:</p>
+<p>ẋ₁ = x₂,  ẋ₂ = −(k/M)x₁ − (b/M)x₂ + (1/M)u</p>
+<p>In matrix form, A = [0, 1; −k/M, −b/M], B = [0; 1/M], y = [1 0]x. The notes also write a four-state-variable model (x₁, v₁, x₂, v₂) for a system with two masses (M₁, M₂).</p>
+<h2 id="from-state-space-to-transfer-function">From state space to transfer function</h2>
+<p>Different choices of a system's state variables lead to the state equations being written in different canonical forms; that is, a system has many state models, but its transfer function representation is <strong>unique</strong>.</p>
+<p>Applying the Laplace transform to ẋ = Ax + Bu, y = Cx + Du gives:</p>
+<p>sX(s) − x(0) = AX(s) + BU(s),  Y(s) = CX(s) + DU(s)</p>
+<p>X(s) = (sI − A)⁻¹x(0) + (sI − A)⁻¹BU(s)</p>
+<p>Y(s) = C(sI − A)⁻¹x(0) + C(sI − A)⁻¹BU(s) + DU(s)</p>
+<p>By the definition of the transfer function, taking x(0) = 0 gives Y(s) = [C(sI − A)⁻¹B + D]U(s). For a single-input single-output system:</p>
+<p>G(s) = Y(s)/U(s) = C(sI − A)⁻¹B + D,  (sI − A)⁻¹ = Adj(sI − A)/|sI − A|</p>
+<p>G(s) = [C·Adj(sI − A)·B + |sI − A|·D] / |sI − A|</p>
+<p>The denominator of the transfer function is defined as the <strong>characteristic equation</strong>. The equation det(sI − A) = 0 is the characteristic equation of the matrix A, and its roots are the <strong>eigenvalues</strong> of A; hence the poles of the system are the same as the eigenvalues of the state matrix. The matrix C(sI − A)⁻¹B + D is called the <strong>transfer function matrix</strong>, since it relates the output vector to the input vector.</p>
+<p><strong>Example 1:</strong> A = [0, 1; −2, −3], B = [0; 1], C = [3 1], D = 0.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">sI − A</th><th scope="col">= s(s + 3) + 2 = s² + 3s + 2,  Adj(sI − A) = [s + 3, 1; −2, s]</th></tr></thead><tbody></tbody></table></div>
+<p>G(s) = [3 1] · (1/(s² + 3s + 2)) · [s + 3, 1; −2, s] · [0; 1] = (s + 3)/(s² + 3s + 2)</p>
+<p><strong>Example 2:</strong> A = [−4, −1.5; 4, 0], B = [2; 0], C = [1.5 0.625].</p>
+<p>det(sI − A) = s(s + 4) + 6 = s² + 4s + 6,  C·Adj(sI − A)·B = [1.5 0.625]·[2s; 8] = 3s + 5</p>
+<p>G(s) = (3s + 5)/(s² + 4s + 6)</p>
+<p>The notes also include two more third-order examples: A = [0, 1, 0; 0, 0, 1; −1, −2, −3], B = [10; 0; 0], C = [1 0 0] gives T(s) = 10(s² + 3s + 2)/(s³ + 3s² + 2s + 1); another system gives G(s) = (s + 2)/(s³ + 3s² + 2s + 10).</p>
+<h2 id="from-transfer-function-to-state-space-phase-variables">From transfer function to state space: phase variables</h2>
+<p>In the nth-order equation dⁿy/dtⁿ + aₙ₋₁dⁿ⁻¹y/dtⁿ⁻¹ + … + a₁dy/dt + a₀y = b₀u, the output y(t) and its (n − 1) derivatives are chosen as state variables; this is called the <strong>phase-variable</strong> choice:</p>
+<p>x₁ = y, x₂ = dy/dt, x₃ = d²y/dt², …, xₙ = dⁿ⁻¹y/dtⁿ⁻¹</p>
+<p>Differentiating both sides gives ẋ₁ = x₂, ẋ₂ = x₃, …, ẋₙ₋₁ = xₙ and ẋₙ = −a₀x₁ − a₁x₂ − … − aₙ₋₁xₙ + b₀u. This form is easily recognized by its distinctive structure: 1's above the diagonal, 0's elsewhere, and the differential equation coefficients written in reverse order with their signs changed in the last row. The output is y = [1 0 0 … 0]x.</p>
+<p>In summary: the transfer function is converted to a differential equation by cross-multiplying and taking the inverse Laplace transform with zero initial conditions; the differential equation is then represented in state space in phase-variable form.</p>
+<p><strong>Example (constant numerator):</strong> C(s)/R(s) = 24/(s³ + 9s² + 26s + 24).</p>
+<ol><li>Cross-multiplying: (s³ + 9s² + 26s + 24)C(s) = 24R(s); taking the inverse Laplace transform gives c⃛ + 9c̈ + 26ċ + 24c = 24r.</li><li>State variables: x₁ = c, x₂ = ċ, x₃ = c̈. Thus ẋ₁ = x₂, ẋ₂ = x₃, ẋ₃ = −24x₁ − 26x₂ − 9x₃ + 24r, y = c = x₁.</li></ol>
+<p>In vector-matrix form, A = [0, 1, 0; 0, 0, 1; −24, −26, −9], B = [0; 0; 24], C = [1 0 0]. The third row of the system matrix contains the coefficients of the transfer function's denominator in reverse order and with negative signs.</p>
+<figure class="yazi-gorsel"><img src="../s-20.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="State equations in phase-variable form and the block diagram with integrators for the 24/(s³+9s²+26s+24) system"><figcaption>Phase-variable form and block diagram</figcaption></figure>
+<p><strong>Example (polynomial numerator):</strong> If the degree of the numerator polynomial is less than that of the denominator, the system is split into two cascaded blocks: the first contains only the denominator, and the second contains only the numerator. The first block is converted to phase-variable form (x₁ is the output, the others are internal variables); the second block gives the output as a linear combination of the phase variables. For C(s)/R(s) = (s² + 7s + 2)/(s³ + 9s² + 26s + 24), since the numerator of the first block is 1/24 of that in the previous example, the input matrix becomes B = [0; 0; 1]; the second block (b₂ = 1, b₁ = 7, b₀ = 2) gives c = x₃ + 7x₂ + 2x₁ via the inverse Laplace transform, i.e., y = [2 7 1]x.</p>
+<h2 id="the-state-transition-equation-and-the-state-transition-matrix">The state transition equation and the state transition matrix</h2>
+<p>The state transition equation is the solution of the linear nonhomogeneous state equation. For the linear time-invariant system ẋ(t) = Ax(t) + Bu(t), y(t) = Cx(t) + Du(t), the state equation can be solved by differential equation methods or by the Laplace transform:</p>
+<p>x(t) = L⁻¹[(sI − A)⁻¹]x(0) + L⁻¹{(sI − A)⁻¹BU(s)}</p>
+<p>x(t) = e^(At)x(0) + ∫₀ᵗ e^(A(t−τ))Bu(τ)dτ,  t ≥ 0</p>
+<p>The first term is the <strong>natural (zero-input) solution</strong>, and the second term is the <strong>forced (zero-state) solution</strong>. The output equation is:</p>
+<p>y(t) = Ce^(At)x(0) + ∫₀ᵗ Ce^(A(t−τ))Bu(τ)dτ + Du(t),  t ≥ 0</p>
+<p>The <strong>state transition matrix</strong> Φ(t) = e^(At) = L⁻¹{(sI − A)⁻¹} can be computed by the inverse Laplace transform. Its properties are:</p>
+<ol><li>Φ(t₁ + t₂) = Φ(t₁)Φ(t₂), i.e., e^(A(t₁+t₂)) = e^(At₁)e^(At₂)</li><li>dΦ(t)/dt = AΦ(t), i.e., d(e^(At))/dt = Ae^(At)</li><li>Φ(0) = e^(A·0) = I</li><li>dΦ(t)/dt |t=0 = A</li></ol>
+<p>The matrix exponential function is defined analogously to the Taylor expansion of the exponential function: e^(At) = I + At + A²t²/2! + … + Aᵏtᵏ/k! + …</p>
+<p><strong>Example:</strong> For the system with A = [0, 1; −2, −3], B = [0; 1], find e^(At) and x(t) for u(t) = 1, t ≥ 0.</p>
+<p>(sI − A)⁻¹ = (1/(s² + 3s + 2)) · [s + 3, 1; −2, s]</p>
+<p>e^(At) = [2e^(−t) − e^(−2t), e^(−t) − e^(−2t); −2e^(−t) + 2e^(−2t), −e^(−t) + 2e^(−2t)]</p>
+<p>One way to find the forced solution is to evaluate L⁻¹[(sI − A)⁻¹BU(s)]:</p>
+<p>L⁻¹{(1/(s(s² + 3s + 2))) · [1; s]} = [0.5 − e^(−t) + 0.5e^(−2t); e^(−t) − e^(−2t)],  t ≥ 0</p>
+<p><strong>Example (RLC circuit, R = 3, L = 1, C = 0.5):</strong> A = [0, −1/C; 1/L, −R/L] = [0, −2; 1, −3], B = [1/C; 0].</p>
+<p>det(sI − A) = s(s + 3) + 2 = s² + 3s + 2 = (s + 1)(s + 2)</p>
+<p>Φ(s) = [(s + 3)/((s + 1)(s + 2)), −2/((s + 1)(s + 2)); 1/((s + 1)(s + 2)), s/((s + 1)(s + 2))]</p>
+<p>Φ(t) = [2e^(−t) − e^(−2t), −2e^(−t) + 2e^(−2t); e^(−t) − e^(−2t), −e^(−t) + 2e^(−2t)]</p>
+<p>The initial-condition response is x(t) = Φ(t)·x(0); the general solution for the states is X(s) = Φ(s)·x(0) + Φ(s)·B·U(s).</p>
+<p><em>Note: On this page of the lecture notes, the A matrix is written in one place as [0, 2; 1, −3]; the correct one is [0, −2; 1, −3] (sI − A and Φ(s) were computed with this correct matrix). Also, on page 2 of 3C, the expression sI − A is mistakenly labeled (sI − A)⁻¹.</em></p>
+<p>The last page of the notes shows how to draw a signal flow graph from state models: in some physical applications, writing the state equations may be easier than defining a single transfer function.</p>
+<figure class="yazi-gorsel"><img src="../s-26.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Finding the transfer function of an RLC circuit from the state model, and the signal flow graph from the state model"><figcaption>Transfer function from the state model and the signal flow graph</figcaption></figure>
+<h2 id="appendix-system-modeling-examples-turkish-handout">Appendix: System modeling examples (Turkish handout)</h2>
+<h3 id="example-1-series-rlc-circuit">Example 1: Series RLC circuit</h3>
+<p>Dynamic equations according to Kirchhoff's law: Ri(t) + L·di/dt + (1/C)∫i dt = e(t), (1/C)∫i dt = v(t). Hence i(t) = C·dv/dt and:</p>
+<p>d²v/dt² + (R/L)·dv/dt + (1/LC)·v(t) = (1/LC)·e(t)  (differential equation model)</p>
+<p>V(s)/E(s) = (1/LC) / (s² + (R/L)s + 1/LC)  (transfer function model)</p>
+<p>Since the input side of the differential equation contains no derivatives, x₁ = v, x₂ = v̇ are chosen: ẋ₁ = x₂, ẋ₂ = −(1/LC)x₁ − (R/L)x₂ + (1/LC)e; A = [0, 1; −1/LC, −R/L], B = [0; 1/LC], v = [1 0]x.</p>
+<h3 id="example-2-mass-spring-damper">Example 2: Mass-spring-damper</h3>
+<p>According to Newton's law of motion ΣF = Ma, f(t) − f_B(t) − f_K(t) = Ma; here f_B = B·dx/dt, f_K = Kx. Hence f(t) − B·dx/dt − Kx = M·d²x/dt². The handout gives the model as:</p>
+<p>d²x/dt² + (B/M)·dx/dt + (K/M)·x(t) = (1/K)·f(t),  X(s)/F(s) = (1/K) / (s² + (B/M)s + K/M)</p>
+<p>Choosing x₁ = x, x₂ = ẋ gives A = [0, 1; −K/M, −B/M], B = [0; 1/K], x = [1 0]x.</p>
+<p><em>Note: When the equation f − B·dx/dt − Kx = M·d²x/dt² is divided by M, the right-hand side should be (1/M)·f(t); the 1/K coefficient in the handout is incorrect. The correct form is X(s)/F(s) = (1/M)/(s² + (B/M)s + K/M) = 1/(Ms² + Bs + K), and the input matrix is [0; 1/M] (consistent with the 1/(Ms² + f_v s + K) result in Lecture 2).</em></p>
+<h3 id="example-3-dc-motor-electromechanical-system">Example 3: DC motor (electromechanical system)</h3>
+<p>From Kirchhoff's law, e_g = R_g i_g + L_g·di_g/dt + e_b, where e_b = K_b·dθ/dt is the back electromotive force voltage. From Newton's law, M = J·d²θ/dt² + B·dθ/dt, where M = K_m i_g is the torque produced by the motor. Solving for i_g and substituting into the first equation:</p>
+<p>e_g = R_g[(J/K_m)·d²θ/dt² + (B/K_m)·dθ/dt] + L_g[(J/K_m)·d³θ/dt³ + (B/K_m)·d²θ/dt²] + K_b·dθ/dt</p>
+<p>The handout ends at this point (pages 15–17).</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-ders-03-durum-uzayi.zip" download>eem322-ders-03-durum-uzayi.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.4 MB · 03.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-ders-03-durum-uzayi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

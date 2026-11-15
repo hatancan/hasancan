@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Circuit Theory II: Laplace Transform — hasancan.net</title>
+<meta name="description" content="The Laplace transform presentation from EEM202 Circuit Theory II (Asst. Prof. Dr. Selda Güney, 2014): definition, step and impulse functions, functional and operational transform tables, inverse Laplace examples using partial fractions, poles and zeros, initial and final value theorems.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-laplace-donusumu/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem202-laplace-donusumu/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem202-laplace-donusumu/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem202-laplace-donusumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Circuit Theory II: Laplace Transform">
+<meta property="og:description" content="The Laplace transform presentation from EEM202 Circuit Theory II (Asst. Prof. Dr. Selda Güney, 2014): definition, step and impulse functions, functional and operational transform tables, inverse Laplace examples using partial fractions, poles and zeros, initial and final value theorems.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-laplace-donusumu/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Circuit Theory II: Laplace Transform", "description": "The Laplace transform presentation from EEM202 Circuit Theory II (Asst. Prof. Dr. Selda Güney, 2014): definition, step and impulse functions, functional and operational transform tables, inverse Laplace examples using partial fractions, poles and zeros, initial and final value theorems.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-laplace-donusumu/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "EEM202_laplace.pdf", "contentUrl": "https://hasancan.net/arsiv/eem202-laplace-donusumu/EEM202_laplace.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM202 Circuit Theory II: Laplace Transform">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>14.05.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#topics">Topics</a></li><li><a href="#definition-of-the-laplace-transform">Definition of the Laplace transform</a></li><li><a href="#step-function">Step function</a></li><li><a href="#impulse-function">Impulse function</a></li><li><a href="#functional-transforms">Functional transforms</a></li><li><a href="#operational-transforms">Operational transforms</a></li><li><a href="#application-of-the-laplace-transform-to-circuits">Application of the Laplace transform to circuits</a></li><li><a href="#inverse-laplace-transform">Inverse Laplace transform</a></li><li><a href="#poles-and-zeros-in-the-s-plane">Poles and zeros in the s-plane</a></li><li><a href="#initial-and-final-value-theorems">Initial and final value theorems</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM202 Circuit Theory II: Laplace Transform</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 14.05.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the content of the <strong>Laplace Transform</strong> presentation prepared by Asst. Prof. Dr. Selda Güney for the <strong>EEM202 Circuit Theory II</strong> course in the Electrical-Electronics Engineering department at Başkent University (May 2014). Formulas and transform tables are written as text; graphs and the circuit diagram are included as images. The original 33-slide PDF can be downloaded at the end of the post.</p>
+<h2 id="topics">Topics</h2>
+<ul><li>Definition of the Laplace transform</li><li>Step function</li><li>Impulse function</li><li>Functional transforms</li><li>Operational transforms</li><li>Application of the Laplace transform to circuits</li><li>Inverse Laplace transform</li><li>Poles and zeros of F(s)</li><li>Initial and final value theorems</li></ul>
+<h2 id="definition-of-the-laplace-transform">Definition of the Laplace transform</h2>
+<p>The presentation begins with the signals encountered in circuits:</p>
+<ul><li>Electrical signals: analog, digital (sound, image, light, radiation, ultrasound; transducers; Fourier transform; sinusoidal signals)</li><li>Sources: DC source + switch (unit step), point of discontinuity; derivative at the point of discontinuity (Dirac delta function, impulse); integral at the point of discontinuity (an area with one dimension equal to zero); AC</li><li>Signals seen in linear circuits: DC voltage/current, AC voltage/current (damped), exponential voltage/current</li></ul>
+<p>Let there be a transform that gives the complete solution of the differential equation; by definition, the mesh and node equations become algebraic:</p>
+<ul><li>L{f(t)} = ∫₀^∞ f(t)·e^(−st) dt</li><li>F(s) = L{f(t)}</li><li>f(t) = L⁻¹{F(s)}</li></ul>
+<p>The lower limit is chosen according to whether f is continuous or discontinuous at t = 0:</p>
+<ul><li>t = 0⁻ is taken as the lower limit</li><li>t &lt; 0⁻: formation of the initial conditions</li><li>Integral between t = 0⁻ and t = 0⁺: (0)</li><li>Exception: impulse function (Dirac delta)</li></ul>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="The functions e^(−at), continuous at the origin and discontinuous at the origin"><figcaption>Function continuous (a) and discontinuous (b) at the origin</figcaption></figure>
+<h2 id="step-function">Step function</h2>
+<ul><li>Ku(t) = 0, t &lt; 0</li><li>Ku(t) = K, t &gt; 0</li><li>For K = 1, the <strong>unit step function</strong></li></ul>
+<p>The step function is a mathematical model; its counterpart in circuits is switching: applying a DC voltage source to the circuit through a switch. For consistency between theory and practice, Ku(0) = 0.5K is taken.</p>
+<figure class="yazi-gorsel"><img src="../s-07.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Step rising linearly between 0⁻ and 0⁺: Ku(0) = 0.5K"><figcaption>Consistency between theory and practice: Ku(0) = 0.5K</figcaption></figure>
+<p>Shifted step:</p>
+<ul><li>Ku(t − a) = 0, t &lt; a; Ku(t − a) = K, t &gt; a</li><li>Ku(a − t) = K, t &lt; a; Ku(a − t) = 0, t &gt; a</li></ul>
+<p><strong>Example:</strong> The triangular wave in the figure is written in terms of step functions as follows:</p>
+<p>f(t) = 2t[u(t) − u(t−1)] + (−2t + 4)[u(t−1) − u(t−3)] + (2t − 8)[u(t−3) − u(t−4)]</p>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Example: triangular wave between 0–4 s and the lines 2t, −2t+4 and 2t−8 that form it"><figcaption>Step function example</figcaption></figure>
+<h2 id="impulse-function">Impulse function</h2>
+<p>f′(0) = δ(t), ε → 0. Function δ(t) with a variable parameter: as the variable parameter tends to 0,</p>
+<ul><li>the function tends to infinity at t = 0,</li><li>the interval over which the function varies tends to 0,</li><li>the area under the function is 1.</li></ul>
+<figure class="yazi-gorsel"><img src="../s-10.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Definition of the impulse function as a limit: pulse of width 2ε and height 1/2ε"><figcaption>Impulse function: limit of a function with a variable parameter</figcaption></figure>
+<ul><li>∫ Kδ(t) dt = K (from −∞ to ∞), δ(t) = 0, t ≠ 0; K: strength</li><li>Shifting (sifting) property of the Dirac delta function: if f(t) is continuous at t = a, then ∫ f(t)·δ(t − a) dt = f(a)</li></ul>
+<h2 id="functional-transforms">Functional transforms</h2>
+<ul><li>L{δ(t)} = ∫₀^∞ δ(t)·e^(−st) dt = ∫ δ(t)·1 dt = <strong>1</strong></li><li>L{δ′(t)} = s; in general L{δ⁽ⁿ⁾(t)} = sⁿ</li><li>As ε → 0, f(t) → u(t) and f′(t) → δ(t); that is, δ(t) = du(t)/dt</li></ul>
+<figure class="yazi-gorsel"><img src="../s-14.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="In the limit ε → 0 the ramp becomes a step and its derivative becomes an impulse"><figcaption>f(t) → u(t), f′(t) → δ(t)</figcaption></figure>
+<ul><li>L{u(t)} = ∫₀^∞ e^(−st) dt = [−(1/s)e^(−st)]₀^∞ = −(1/s)(0 − 1) = <strong>1/s</strong></li><li>L{e^(−at)} = <strong>1/(s + a)</strong></li><li>e^(jωt) = cos ωt + j sin ωt, e^(−jωt) = cos ωt − j sin ωt; cos ωt = ½(e^(jωt) + e^(−jωt)), sin ωt = (1/2j)(e^(jωt) − e^(−jωt))</li><li>L{sin ωt} = <strong>ω/(s² + ω²)</strong>, L{cos ωt} = <strong>s/(s² + ω²)</strong></li><li>Ramp: ∫₀^∞ t·e^(−st) dt is evaluated by integration by parts (u = e^(−st), dv = dt) and gives <strong>1/s²</strong>.</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Function</th><th scope="col">f(t)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Impulse</th><td>δ(t)</td><td>1</td></tr><tr><th scope="row">Step</th><td>u(t)</td><td>1/s</td></tr><tr><th scope="row">Ramp</th><td>t</td><td>1/s²</td></tr><tr><th scope="row">Exponential</th><td>e^(−at)</td><td>1/(s+a)</td></tr><tr><th scope="row">Sine</th><td>sin ωt</td><td>ω/(s²+ω²)</td></tr><tr><th scope="row">Cosine</th><td>cos ωt</td><td>s/(s²+ω²)</td></tr><tr><th scope="row">Damped ramp</th><td>t·e^(−at)</td><td>1/(s+a)²</td></tr><tr><th scope="row">Damped sine</th><td>e^(−at) sin ωt</td><td>ω/((s+a)²+ω²)</td></tr><tr><th scope="row">Damped cosine</th><td>e^(−at) cos ωt</td><td>(s+a)/((s+a)²+ω²)</td></tr></tbody></table></div>
+<h2 id="operational-transforms">Operational transforms</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Operation</th><th scope="col">f(t)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Multiplication by a constant</th><td>K·f(t)</td><td>K·F(s)</td></tr><tr><th scope="row">Addition and subtraction</th><td>f₁(t) + f₂(t) − f₃(t)</td><td>F₁(s) + F₂(s) − F₃(s)</td></tr><tr><th scope="row">Differentiation</th><td>df(t)/dt</td><td>sF(s) − f(0⁻)</td></tr><tr><th scope="row">Second-order differentiation</th><td>d²f(t)/dt²</td><td>s²F(s) − s·f(0⁻) − df(0⁻)/dt</td></tr><tr><th scope="row">nth-order differentiation</th><td>dⁿf(t)/dtⁿ</td><td>sⁿF(s) − sⁿ⁻¹f(0⁻) − sⁿ⁻²·df(0⁻)/dt − … − dⁿ⁻¹f(0⁻)/dtⁿ⁻¹</td></tr><tr><th scope="row">Integration</th><td>∫₀ᵗ f(x) dx</td><td>F(s)/s</td></tr><tr><th scope="row">Translation in the time domain</th><td>f(t−a)u(t−a), a &gt; 0</td><td>e^(−as)F(s)</td></tr><tr><th scope="row">Translation in the s domain</th><td>e^(−at)f(t)</td><td>F(s+a)</td></tr><tr><th scope="row">Scale change</th><td>f(at), a &gt; 0</td><td>(1/a)F(s/a)</td></tr><tr><th scope="row">First derivative in the s domain</th><td>t·f(t)</td><td>−dF(s)/ds</td></tr><tr><th scope="row">nth derivative in the s domain</th><td>tⁿf(t)</td><td>(−1)ⁿ dⁿF(s)/dsⁿ</td></tr><tr><th scope="row">Integration in the s domain</th><td>f(t)/t</td><td>∫ₛ^∞ F(u) du</td></tr></tbody></table></div>
+<h2 id="application-of-the-laplace-transform-to-circuits">Application of the Laplace transform to circuits</h2>
+<p>A DC current source I_dc, whose switch is opened at t = 0, feeds parallel R, L, C elements:</p>
+<ul><li>i_dc = I_dc·u(t) → I_dc(s) = I_dc/s</li><li>If the initial conditions are 0: V_L(s) = sL·I_L(s), I_C(s) = sC·V_C(s), V_R(s) = R·I_R(s)</li><li>Result: <strong>v(s) = (I_dc/C) / (s² + (1/RC)s + 1/LC)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-21.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Parallel RLC circuit: current source Idc enters the circuit at t = 0, output v(t)"><figcaption>Application of the Laplace transform to the parallel RLC circuit</figcaption></figure>
+<h2 id="inverse-laplace-transform">Inverse Laplace transform</h2>
+<p>Circuit solutions are rational functions in the s-domain:</p>
+<p>F(s) = N(s)/D(s) = (aₙsⁿ + aₙ₋₁sⁿ⁻¹ + … + a₁s + a₀) / (bₘsᵐ + bₘ₋₁sᵐ⁻¹ + … + b₁s + b₀)</p>
+<ul><li>Proper rational: n &lt; m</li><li>Improper rational: m &lt; n</li></ul>
+<p>Rational functions can be written as a sum of simple fractions (partial fraction expansion). From these simple fractions, one can go to the t domain by using the linearity of the Laplace transform.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Type of root</th><th scope="col">Term</th><th scope="col">Inverse Laplace</th></tr></thead><tbody><tr><th scope="row">Real root</th><td>K/(s+a)</td><td>K·e^(−at)u(t)</td></tr><tr><th scope="row">Repeated real root</th><td>K/(s+a)²</td><td>K·t·e^(−at)u(t)</td></tr><tr><th scope="row">Complex root</th><td>K/(s+α−jβ) + K*/(s+α+jβ)</td><td>2∣K∣e^(−αt) cos(βt+θ)u(t)</td></tr><tr><th scope="row">Repeated complex root</th><td>K/(s+α−jβ)² + K*/(s+α+jβ)²</td><td>2t∣K∣e^(−αt) cos(βt+θ)u(t)</td></tr></tbody></table></div>
+<p>Here K = |K|∠θ. It must not be forgotten that K belongs to the root s = −α + jβ!</p>
+<p>Poles of a rational function:</p>
+<ul><li>if real, the inverse Laplace is exponential,</li><li>if complex, it is an exponentially damped sinusoid,</li><li>if purely imaginary, it is sinusoidal.</li></ul>
+<h3 id="distinct-real-roots">Distinct real roots</h3>
+<p>F(s) = 96(s+5)(s+12) / [s(s+8)(s+6)] = K₁/s + K₂/(s+8) + K₃/(s+6)</p>
+<p>L⁻¹{F(s)} = (120 − 72e^(−8t) + 48e^(−6t))u(t)</p>
+<h3 id="distinct-and-repeated-real-roots">Distinct and repeated real roots</h3>
+<p>s+6 / [s(s+3)(s+1)²] = K₁/s + K₂/(s+3) + K₃/(s+1)² + K₄/(s+1) → (K₁ + K₂e^(−3t) + K₃te^(−t) + K₄e^(−t))u(t)</p>
+<p>Transforms used: L⁻¹{1/(s+a)} = e^(−at), L⁻¹{1/(s+a)²} = te^(−at), and in general L⁻¹{1/(s+a)ⁿ} = tⁿ⁻¹e^(−at)/(n−1)!</p>
+<p>100(s+25) / [s(s+5)³] = K₁/s + K₂/(s+5)³ + K₃/(s+5)² + K₄/(s+5)</p>
+<ul><li>K₁ = 20, K₂ = −400, K₃ = −100, K₄ = −20</li><li>L⁻¹ = [20 − 200t²e^(−5t) − 100te^(−5t) − 20e^(−5t)]u(t)</li></ul>
+<h3 id="complex-conjugate-roots">Complex conjugate roots</h3>
+<p>Distinct complex conjugate roots: L⁻¹{K/(s+α−jβ) + K*/(s+α+jβ)} = 2|K|e^(−αt) cos(βt + θ)u(t)</p>
+<p>Repeated complex conjugate roots: L⁻¹{K/(s+α−jβ)ʳ + K*/(s+α+jβ)ʳ} = [2|K|tʳ⁻¹/(r−1)!]·e^(−αt) cos(βt + θ)u(t), K = |K|e^(jθ)</p>
+<blockquote><p>Comment: Of the complex conjugate roots, it is enough to find the coefficient K belonging to −α+jβ; there is no need to find K*, since the inverse Laplace can be written directly from this data. What if the roots are purely imaginary?</p></blockquote>
+<p><strong>Example (complex conjugate poles):</strong></p>
+<p>F(s) = 100(s+3) / [(s+6)(s² + 6s + 25)], s² + 6s + 25 = (s+3−j4)(s+3+j4)</p>
+<p>F(s) = K₁/(s+6) + K₂/(s+3−j4) + K₃/(s+3+j4)</p>
+<ul><li>K₁ = −12</li><li>K₂ = 6 − j8 = 10e^(−j53°)</li><li>K₃ = 6 + j8 = 10e^(j53°) = K₂*</li><li>L⁻¹{F(s)} = [−12e^(−6t) + 20e^(−3t) cos(4t − 53°)]u(t)</li></ul>
+<p><strong>Example (repeated complex pole):</strong></p>
+<p>F(s) = 768 / (s² + 6s + 25)² = 768 / [(s+3−j4)²(s+3+j4)²] = K₁/(s+3−j4)² + K₂/(s+3−j4) + K₁*/(s+3+j4)² + K₂*/(s+3+j4)</p>
+<ul><li>K₁ = −12, K₂ = −j3 = 3e^(−j90°)</li><li>K₁* = −12, K₂* = j3 = 3e^(j90°)</li><li>f(t) = [−24te^(−3t) cos 4t + 6e^(−3t) cos(4t − 90°)]u(t)</li></ul>
+<h3 id="if-the-degree-of-the-numerator-is-greater-than-that-of-the-denominator">If the degree of the numerator is greater than that of the denominator</h3>
+<ul><li>If the degree of the numerator is greater than that of the denominator, division is performed to convert the function into a polynomial plus a proper rational function.</li><li>The inverse transform of the polynomial yields derivatives of the Dirac delta function and/or the delta function itself.</li><li>The inverse transform of the proper rational function is carried out as before.</li></ul>
+<p><strong>Example:</strong></p>
+<p>F(s) = (s⁴ + 13s³ + 66s² + 200s + 300) / (s² + 9s + 20)</p>
+<p>F(s) = s² + 4s + 10 + (30s + 10)/(s² + 9s + 20) = s² + 4s + 10 − 20/(s+4) + 50/(s+5)</p>
+<p>f(t) = d²δ(t)/dt² + 4·dδ(t)/dt + 10δ(t) − (20e^(−4t) − 50e^(−5t))u(t)</p>
+<p><em>Note: The slide gives the numerator of the remainder term as 30s + 10; the remainder of the division is actually 30s + 100. The expansion −20/(s+4) + 50/(s+5) in the next line and the result f(t) are consistent with 30s + 100.</em></p>
+<h2 id="poles-and-zeros-in-the-s-plane">Poles and zeros in the s-plane</h2>
+<p>F(s) = K(s+z₁)(s+z₂)…(s+zₙ) / [(s+p₁)(s+p₂)…(s+pₙ)]</p>
+<p>Example: F(s) = 10(s+5)(s+3−j4)(s+3+j4) / [s(s+10)(s+6−j8)(s+6+j8)]</p>
+<p>Zeros: −5, −3 ± j4; poles: 0, −10, −6 ± j8.</p>
+<figure class="yazi-gorsel"><img src="../s-32.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Poles (×) and zeros (○) of F(s) in the s-plane"><figcaption>Poles and zeros in the s-plane</figcaption></figure>
+<h2 id="initial-and-final-value-theorems">Initial and final value theorems</h2>
+<ul><li>We can use them to test the results we have found.</li><li>They help us determine the behavior of F(s) and f(t) at 0 and ∞.</li><li>Without taking the inverse transform of F(s), we can check the initial and final values of f(t) against the known circuit behavior and observe whether they agree.</li></ul>
+<p>Initial value theorem: lim(t→0⁺) f(t) = lim(s→∞) sF(s)</p>
+<p>Final value theorem: lim(t→∞) f(t) = lim(s→0) sF(s)</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM202_laplace.pdf" download>EEM202_laplace.pdf</a></p>
+              <p class="kucuk">PDF · 1.9 MB · 33 <span data-i18n="arch.pagesLower"></span> · 14.05.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM202_laplace.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

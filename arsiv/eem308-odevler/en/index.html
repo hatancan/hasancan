@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Signals and Systems II: Homework Assignments (2013–2014), Laplace, z-Transform and MATLAB — hasancan.net</title>
+<meta name="description" content="EEM308 Signals and Systems II homework assignments from 2013 and 2014: inverse Laplace transform, RC circuit, transfer function, system response via the z-transform; MATLAB with laplace/ilaplace, tf2zp, residue, Bode plots and cascaded FIR filters; with notes from student solutions.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-odevler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem308-odevler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem308-odevler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem308-odevler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Signals and Systems II: Homework Assignments (2013–2014), Laplace, z-Transform and MATLAB">
+<meta property="og:description" content="EEM308 Signals and Systems II homework assignments from 2013 and 2014: inverse Laplace transform, RC circuit, transfer function, system response via the z-transform; MATLAB with laplace/ilaplace, tf2zp, residue, Bode plots and cascaded FIR filters; with notes from student solutions.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-odevler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Signals and Systems II: Homework Assignments (2013–2014), Laplace, z-Transform and MATLAB", "description": "EEM308 Signals and Systems II homework assignments from 2013 and 2014: inverse Laplace transform, RC circuit, transfer function, system response via the z-transform; MATLAB with laplace/ilaplace, tf2zp, residue, Bode plots and cascaded FIR filters; with notes from student solutions.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-odevler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem308-odevler.zip", "contentUrl": "https://hasancan.net/arsiv/eem308-odevler/eem308-odevler.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM308 Signals and Systems II: Homework Assignments (2013–2014), Laplace, z-Transform and MATLAB">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.02.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#2013-homework-1-laplace-transform">2013 – Homework 1: Laplace Transform</a></li><li><a href="#2013-homework-2-system-response-via-the-z-transform">2013 – Homework 2: System Response via the z-Transform</a></li><li><a href="#2014-homework-1-4">2014 – Homework 1–4</a></li><li><a href="#2014-matlab-homework-7-questions">2014 – MATLAB Homework (7 Questions)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM308 Signals and Systems II: Homework Assignments (2013–2014), Laplace, z-Transform and MATLAB</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 28.02.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the homework assignments given in the spring semesters of 2013 and 2014 in the <strong>EEM 308 Signals and Systems II</strong> course at Başkent University:</p>
+<ul><li><strong>2013:</strong> <em>Homework No. 1</em> (Laplace transform, due 8 March 2013) and <em>Homework No. 2</em> (z-transform, due 29 March 2013), issued on the department's official homework form; both dated 28 February 2013.</li><li><strong>2014:</strong> Four short handwritten assignments (Homework 1–4, March 2014) and the seven-question, MATLAB-heavy "EEM 308 Homework" given toward the end of the semester (due date: the day of the EEM 308 final exam).</li></ul>
+<p>For the 2014 assignments, there were also photographs of a student's handwritten solutions and MATLAB screenshots; the results from them are presented below with notes (the solutions contain no name or student number; document properties were cleaned). The photographs are kept in the archive and not published; the assignment documents and the MATLAB solution can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="2013-homework-1-laplace-transform">2013 – Homework 1: Laplace Transform</h2>
+<p><strong>Question 1:</strong> Find the time-domain definition x(t) of the function defined in the s-domain, using the inverse Laplace transform.</p>
+<p>X(s) = (5s + 13) / (s(s² + 4s + 13)); region of convergence: Re(s) &gt; 0</p>
+<p><strong>Question 2:</strong> Likewise, find x(t).</p>
+<p>X(s) = (s² + 6s + 7) / (s² + 3s + 2); region of convergence: Re(s) &gt; −1</p>
+<p><strong>Question 3:</strong> Find the voltage V_c(t) for the circuit below using the Laplace transform method.</p>
+<figure class="yazi-gorsel"><img src="../hw1-devre.jpg" width="736" height="190" loading="lazy" decoding="async" alt="Series RC circuit: source V·u(t), resistor R, current i(t) and capacitor with voltage V_c(t)"><figcaption>Homework 1, Question 3: RC circuit</figcaption></figure>
+<p><strong>Question 4:</strong> For the system whose dynamics are given in the time domain, with input x(t) and output y(t), find the transfer function H(s) in the s-domain relating input to output. The initial conditions are zero.</p>
+<p>d²y(t)/dt² + 10 dy/dt + 5y(t) = x(t)</p>
+<p>At the end of the homework sheet, the block representations x(t) → [h(t)] → y(t) and X(s) → [H(s)] → Y(s) are shown.</p>
+<h2 id="2013-homework-2-system-response-via-the-z-transform">2013 – Homework 2: System Response via the z-Transform</h2>
+<p><strong>Question 1:</strong> The input signal x[n] = aⁿ is applied to a discrete-time linear time-invariant system. The impulse response of the system is known to be h[n] = a⁻ⁿ u[−n]. Find the system response y[n] using the z-transform method. (Note: 0 &lt; a &lt; 1)</p>
+<h2 id="2014-homework-1-4">2014 – Homework 1–4</h2>
+<p><strong>Homework 1</strong> (MATLAB: <code>laplace</code>, <code>ilaplace</code>, <code>syms</code>, <code>residue</code>): Find the Laplace transform of the function f(t) = 2e⁻ᵗ cos 10t − t⁴ + 6e^{−(t−10)}.</p>
+<p><strong>Homework 2:</strong> If F(s) = (s² + 9s + 19) / ((s + 1)(s + 2)(s + 4)), what is f(t)?</p>
+<p><strong>Homework 3:</strong> y‴(t) + 4y″(t) + 6y′(t) + 4y(t) = 0, ẏ(0) = 0, ÿ(0) = −1. Find Y(s) by hand.</p>
+<p><strong>Homework 4:</strong> In a circuit consisting of a series-connected source e(t), R, L and C, e(t) = −2v(t), R = 1 Ω, L = 0.5 H, C = 0.2 F, v(0) = 5 V, v̇(0) = 0. Plot v(t) as a function of t; what is v(t)?</p>
+<h3 id="results-from-the-student-solution">Results from the Student Solution</h3>
+<p><strong>Homework 1 (MATLAB):</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>syms t s
+f = 2*exp(-1*t)*cos(10*t) - t^4 + 6*exp(-1*(t-10));
+F = laplace(f, t, s)
+simplify(F)
+pretty(ans)</code></pre>
+<pre class="kod"><code>F =
+(2*(s + 1))/((s + 1)^2 + 100) - 24/s^5 + (6*exp(10))/(s + 1)</code></pre>
+<p>That is, F(s) = 2(s + 1)/((s + 1)² + 100) − 24/s⁵ + 6e¹⁰/(s + 1). The last term is obtained by writing e^{−(t−10)} = e¹⁰·e⁻ᵗ.</p>
+<p><strong>Homework 2 (MATLAB):</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>clear
+syms t s
+F = ( s^2 + 9*s + 19 ) / ((s+1)*(s+2)*(s+4));
+ilaplace(F)</code></pre>
+<pre class="kod"><code>ans =
+(11*exp(-t))/3 - (5*exp(-2*t))/2 - exp(-4*t)/6</code></pre>
+<p>f(t) = (11/3)e⁻ᵗ − (5/2)e⁻²ᵗ − (1/6)e⁻⁴ᵗ, t ≥ 0. Hand check: the residue at s = −1 is (1 − 9 + 19)/(1·3) = 11/3, at s = −2 it is (4 − 18 + 19)/((−1)·2) = −5/2, and at s = −4 it is (16 − 36 + 19)/((−3)(−2)) = −1/6.</p>
+<figure class="yazi-gorsel"><img src="../matlab-laplace.jpg" width="1366" height="768" loading="lazy" decoding="async" alt="MATLAB R2013a: syms t s, laplace(f,t,s), simplify and pretty output"><figcaption>Homework 1: the laplace command</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../matlab-ilaplace.jpg" width="1366" height="768" loading="lazy" decoding="async" alt="MATLAB R2013a: ilaplace(F), simplify and pretty output"><figcaption>Homework 2: the ilaplace command</figcaption></figure>
+<p><strong>Homework 3 (by hand):</strong> Take the Laplace transform of each term:</p>
+<p>[s³Y(s) − s²y(0) − sẏ(0) − ÿ(0)] + 4[s²Y(s) − sy(0) − ẏ(0)] + 6[sY(s) − y(0)] + 4Y(s) = 0</p>
+<p>Substituting ẏ(0) = 0 and ÿ(0) = −1:</p>
+<p><strong>Y(s) = (s²y(0) + 4s·y(0) + 6y(0) − 1) / (s³ + 4s² + 6s + 4)</strong></p>
+<p>Since y(0) is not given, the result depends on y(0); if y(0) = 0 is taken, Y(s) = −1/(s³ + 4s² + 6s + 4).</p>
+<p><em>Note: On the student's first page, Y(s) = 1/(s³ + 4s² + 6s + 4) is written for the case y(0) = 0; since ÿ(0) = −1, the numerator should be −1. The general expression on the second page (above) is correct. The denominator factors as s³ + 4s² + 6s + 4 = (s + 2)(s² + 2s + 2).</em></p>
+<p><strong>Homework 4:</strong> In the student's solution, the condition e(t) = −2v(t) was written like a derivative expression, leading to the result v(t) = (e(t) + 5)/(2s); this result is incorrect.</p>
+<p><em>Note: KVL in the series circuit: e(t) = R·i + L·di/dt + v, i = C·dv/dt. Substituting e = −2v gives LC·v″ + RC·v′ + 3v = 0, i.e. 0.1v″ + 0.2v′ + 3v = 0 ⇒ v″ + 2v′ + 30v = 0. The characteristic roots are s = −1 ± j√29. With v(0) = 5, v̇(0) = 0, the Laplace transform gives V(s) = 5(s + 2)/(s² + 2s + 30) and v(t) = 5e⁻ᵗ [cos(√29 t) + (1/√29) sin(√29 t)], t ≥ 0: an oscillation with amplitude decaying as e⁻ᵗ and angular frequency √29 ≈ 5.39 rad/s.</em></p>
+<h2 id="2014-matlab-homework-7-questions">2014 – MATLAB Homework (7 Questions)</h2>
+<p>The homework, with the points given in circles next to each question:</p>
+<ol><li><strong>(20)</strong> Express the following transfer function in product form, plot its poles and zeros, and state the region of convergence. H(z) = (2z⁴ + 16z³ + 44z² + 56z + 32) / (3z⁴ + 3z³ − 15z² + 18z − 12). Hint: <code>tf2zp</code>, <code>zp2sos</code>, <code>zplane</code> (to be solved in MATLAB).</li><li><strong>(40)</strong> Create a rational transfer function similar to the one above, with numerator and denominator degree equal to the last digit of your student number; repeat what you did in Question 1 for this function (those whose last digit is 0 should use 8).</li><li><strong>(40)</strong> Obtain the transfer function of the system with poles p₁ = −0.45, p₂ = 0.67, p₃ = 0.81 + j0.72, zeros equal to the 5th, 6th and 7th digits of your student number, and gain K = 2.2. Plot the unit impulse and unit step responses.</li><li><strong>(20)</strong> Using MATLAB, expand the function G(z) = 18z³ / (18z³ + 3z² − 4z − 1) in the z-domain into partial fractions.</li><li><strong>(20)</strong> Plot the Bode magnitude and phase diagrams of the signal with discrete-time Fourier transform X(e^{jω}) = (0.008 − 0.033e^{−jω} + 0.05e^{−j2ω} − 0.033e^{−j3ω} + 0.008e^{−j4ω}) / (1 + 2.37e^{−jω} + 2.7e^{−j2ω} + 1.6e^{−j3ω} + 0.41e^{−j4ω}).</li><li><strong>(20)</strong> For the system given by H(z) = (z − 0.2) / (z²(z − 0.7)), if the input x[n] = (0.9)ⁿ u[n] is applied, obtain y[n] (compute by hand).</li><li><strong>(40)</strong> Two filters are connected in cascade. If the unit impulse response of the first filter is h₁[n] = 0.75δ[n] − 1.75δ[n−1] + 1.75δ[n−2] − 0.25δ[n−3] and that of the second is h₂[n] = 0.25δ[n] + 0.25δ[n−1] + 0.25δ[n−2] + 0.25δ[n−3]: a) Find H₁(z) and H₂(z), find their zeros and poles with MATLAB, and determine separately whether each is a low-pass or a high-pass filter. b) Obtain H(z) = H₁(z)H₂(z); plot its zeros, poles, and magnitude and phase responses in MATLAB. State whether the filter is a low-pass, high-pass, band-pass or band-stop filter.</li></ol>
+<h3 id="matlab-results-from-a-student-solution">MATLAB Results from a Student Solution</h3>
+<p><strong>Question 1:</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>pay = [2 16 44 56 32];
+payda = [3 3 -15 18 -12];
+[z,p,k] = tf2zp(pay,payda)
+zplane(pay,payda)</code></pre>
+<pre class="kod"><code>z =
+  -4.0000
+  -2.0000
+  -1.0000 + 1.0000i
+  -1.0000 - 1.0000i
+
+p =
+  -3.2361
+   1.2361
+   0.5000 + 0.8660i
+   0.5000 - 0.8660i
+
+k =
+    0.6667</code></pre>
+<p>In product form: H(z) = (2/3) · (z + 4)(z + 2)(z² + 2z + 2) / ((z² + 2z − 4)(z² − z + 1)). The poles are −1 ± √5 (≈ 1.2361 and −3.2361) and 0.5 ± j0.866 (on the unit circle, e^{±jπ/3}).</p>
+<p><em>Note: The student's solution does not state the ROC. Since the largest pole magnitude is |−3.2361|, if the system is assumed causal, the ROC is |z| &gt; 3.2361; because this ROC does not include the unit circle, the causal system is not stable.</em></p>
+<p><strong>Question 4:</strong></p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>n = [18];
+d = [18 3 -4 -1];
+[r,p,k] = residue(n,d)</code></pre>
+<pre class="kod"><code>r =
+    1.4400
+   -1.4400
+   -1.2000
+p =
+    0.5000
+   -0.3333
+   -0.3333
+k =
+     []</code></pre>
+<p><em>Note: <code>residue(18, [18 3 -4 -1])</code> actually expands 18/(18z³ + 3z² − 4z − 1) = G(z)/z³ in powers of z: 1.44/(z − 0.5) − 1.44/(z + 1/3) − 1.2/(z + 1/3)². For an expansion in terms of z⁻¹, <code>residuez(18, [18 3 -4 -1])</code> should be used; this gives G(z) = 0.36/(1 − 0.5z⁻¹) + 0.24/(1 + ⅓z⁻¹) + 0.4/(1 + ⅓z⁻¹)² (both expansions were verified numerically).</em></p>
+<p><strong>Question 5:</strong> The solution uses <code>x = tf(pay,payda)</code> and <code>bode(x), grid</code>.</p>
+<p><em>Note: The numerator vector in the solution is written as <code>[0.008 -0.033 0.05 -0.033 0.080]</code>; in the question the last coefficient is 0.008. Also, <code>tf(pay,payda)</code> creates a continuous-time (s-domain) system; for the discrete-time Fourier transform, use <code>freqz(pay,payda)</code>, or <code>tf(pay,payda,1,'Variable','z^-1')</code> with a sampling time specified.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem308-odevler.zip" download>eem308-odevler.zip</a></p>
+              <p class="kucuk">ZIP archive · 403 KB · 28.02.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem308-odevler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (403 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

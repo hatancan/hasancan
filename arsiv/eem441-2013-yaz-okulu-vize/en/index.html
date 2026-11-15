@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM441 Communications I: 2013 Summer School Midterm Exam (2 August 2013) and Solutions — hasancan.net</title>
+<meta name="description" content="Başkent University EEM 441 Communication Systems I summer school midterm exam: SSB envelope receiver, envelope and phase of a bandpass signal, FM spectrum, and frequency multiplier design; with handwritten solutions.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM441 Communications I: 2013 Summer School Midterm Exam (2 August 2013) and Solutions">
+<meta property="og:description" content="Başkent University EEM 441 Communication Systems I summer school midterm exam: SSB envelope receiver, envelope and phase of a bandpass signal, FM spectrum, and frequency multiplier design; with handwritten solutions.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM441 Communications I: 2013 Summer School Midterm Exam (2 August 2013) and Solutions", "description": "Başkent University EEM 441 Communication Systems I summer school midterm exam: SSB envelope receiver, envelope and phase of a bandpass signal, FM spectrum, and frequency multiplier design; with handwritten solutions.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem441-2013-yaz-okulu-vize/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM441 – Haberleşme I"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM441 Communications I: 2013 Summer School Midterm Exam (2 August 2013) and Solutions">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem441">EEM441</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM441 – Haberleşme I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>02.08.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#questions">Questions</a></li><li><a href="#bessel-function-formula-sheet">Bessel function formula sheet</a></li><li><a href="#solution-1-adding-a-carrier-to-the-ssb-signal">Solution 1: Adding a carrier to the SSB signal</a></li><li><a href="#solution-2-envelope-and-phase-of-a-bandpass-signal">Solution 2: Envelope and phase of a bandpass signal</a></li><li><a href="#solution-3-fm-1-f-m-20-khz-a-c-100-f-c-40-khz">Solution 3: FM, β = 1, f_m = 20 kHz, A_c = 100, f_c = 40 kHz</a></li><li><a href="#solution-4-frequency-multiplier-chain">Solution 4: Frequency multiplier chain</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM441</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM441 Communications I: 2013 Summer School Midterm Exam (2 August 2013) and Solutions</h1>
+            <p class="kucuk">EEM441 – Haberleşme I · 02.08.2013 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Midterm exam of the Başkent University Department of Electrical and Electronics Engineering course EEM 441 Communication Systems I, summer school, dated 2 August 2013 (duration 2 hours). The exam paper, the Bessel function formula sheet distributed with the exam, and the handwritten solutions are transcribed below. The exam paper and solutions were transcribed from photographed pages; the photographs have not been published. For this reason, there is no downloadable original file. Personal information (student number, name) has been removed.</p>
+<h2 id="questions">Questions</h2>
+<ol><li>In an SSB receiver system, the signal A_LO cos(ω_c t) is added to the tone-modulated SSB signal and the sum is applied to the input of an envelope detector circuit. Assume that there is no frequency error in the local oscillator, only a phase error φ′. Taking A_LO ≫ A_c A_m, calculate the signal at the envelope detector output and draw the phasor diagram. (Figure: s(t) SSB → adder (+ A_LO cos(ω_c t + φ′)) → envelope detector → A(t).)</li><li>In a bandpass communication system, let the in-phase component of the signal at the transmitter output be s_i(t), the quadrature component s_q(t), the envelope A(t) and the phase φ(t). For the signal s_bp(t) = s₁(t) cos(ω_c − 3ω₀)t + s₂(t) cos(ω_c + 3ω₀)t, calculate these using the phasor diagram.</li><li>In a radio transmitter, the parameters of the FM-modulated signal are taken as f_m = 20 kHz, β = 1, A_c = 100, f_c = 40 kHz. Derive the formula for s(t), draw the frequency spectrum, show that S_T &gt; A_c²/2, and calculate the bandwidth of the system.</li><li>An FM radio transmitter with f_c ≫ f_m is designed with parameters f_m = 4 kHz, β = 3, f_c1 = 100 kHz, Δf₁ = 16.5 Hz and f_c = 10 MHz. The frequency multiplier system consists only of triplers; all bandpass filters satisfy the condition 0.01 &lt; B/f_c &lt; 0.1. Calculate all Δf and f_LO values, the filter bandwidths and center frequencies, and draw the system diagram; place the frequency down-converter so that no frequency exceeds 13.5 MHz.</li></ol>
+<h2 id="bessel-function-formula-sheet">Bessel function formula sheet</h2>
+<p>The sheet distributed with the exam contains graphs of the first-kind Bessel functions J_n(β) (n = 0…4, β = 0…18) and the following relations:</p>
+<ul><li>J_n(β) = (1/2π) ∫ exp[j(β sin x − n x)] dx (−π…π)</li><li>J_n(β) = (−1)ⁿ J₋ₙ(β)</li><li>For β → 0, J_n(β) ≈ βⁿ / (2ⁿ n!); J₀ → 1, J₁ → β/2, J₂ → β²/8</li><li>For β → ∞, J_n(β) ≈ √(2/(πβ)) cos(β − π/4 − nπ/2)</li><li>Σ J_n²(β) = 1 (n = −∞…∞)</li><li>J_n(jβ) = jⁿ I_n(β), I_n(β) = (1/2π) ∫ exp[β cos θ] cos(nθ) dθ</li><li>s(t) = A_c Re[Σ J_n(β) exp(j2π(f_c + n f_m)t)] = A_c Σ J_n(β) cos[2π(f_c + n f_m)t]</li><li>SSB: s(t) = (A_c/2) m(t) cos ω_c t ∓ (A_c/2) m̂(t) sin ω_c t</li><li>FM: s(t) = A_c cos[2π f_c t + β sin(2π f_m t)]</li></ul>
+<h2 id="solution-1-adding-a-carrier-to-the-ssb-signal">Solution 1: Adding a carrier to the SSB signal</h2>
+<p>Tone-modulated SSB: s(t) = (A_c/2)(A_m cos ω_m t) cos ω_c t ∓ (A_c/2)(A_m sin ω_m t) sin ω_c t; here x(t) = A_m cos ω_m t, x̂(t) = A_m sin ω_m t. This is a single line at f_c ± f_m with amplitude a = ½ A_c A_m. A_LO cos(ω_c t + φ′) is added at the adder. In the phasor diagram, the A_LO phasor is at angle φ′; the phasor of amplitude a rotating at ±ω_m t is added to it, and the resultant is A(t).</p>
+<p>A²(t) = (A_LO cos φ′ + a cos ω_m t)² + (A_LO sin φ′ ± a sin ω_m t)² = A_LO² + a² + 2 A_LO a (cos ω_m t cos φ′ ± sin ω_m t sin φ′) = A_LO² + a² + 2 A_LO a cos(ω_m t ∓ φ′)</p>
+<p>A(t) = A_LO [1 + (a/A_LO)² + (2a/A_LO) cos(ω_m t ∓ φ′)]^½ ≈ A_LO + ½ A_c A_m cos(ω_m t ∓ φ′).</p>
+<p>That is, when A_LO ≫ a, the envelope detector output is a DC term plus ½ A_c A_m cos(ω_m t ∓ φ′): the information signal is recovered, carrying only a phase shift of φ′ (a delay, not distortion).</p>
+<h2 id="solution-2-envelope-and-phase-of-a-bandpass-signal">Solution 2: Envelope and phase of a bandpass signal</h2>
+<p>The solution on the paper writes the two components with a shift of ω₀ (worked with ω₀ in the source):</p>
+<ul><li>v_i(t) = [v₁(t) + v₂(t)] cos ω₀ t</li><li>v_q(t) = [v₂(t) − v₁(t)] sin ω₀ t</li><li>A(t) = √(v₁²(t) + 2 v₁(t) v₂(t) cos 2ω₀ t + v₂²(t))</li><li>φ(t) = arctan{[v₂(t) − v₁(t)] sin ω₀ t / ([v₁(t) + v₂(t)] cos ω₀ t)}</li></ul>
+<p>In the phasor diagram, v₁ and v₂ are two phasors rotating in opposite directions with ω₀ t; when v₁ ≫ v₂, A(t) ≈ v₁(t) + v₂(t) cos 2ω₀ t and φ(t) ≈ −ω₀ t.</p>
+<p><em>Note: In the exam paper the shift is written as 3ω₀, whereas the solution sheet works with ω₀; the expressions in the solution should be read with 3ω₀ substituted for ω₀ according to the question. In the approximate A(t) expression on the paper, the factor in the second term is illegible; it is written here as v₂(t).</em></p>
+<h2 id="solution-3-fm-1-f-m-20-khz-a-c-100-f-c-40-khz">Solution 3: FM, β = 1, f_m = 20 kHz, A_c = 100, f_c = 40 kHz</h2>
+<p>s(t) = A_c cos[2π f_c t + β sin 2π f_m t] = 100 cos[2π·40·10³ t + 1·sin(2π·20·10³ t)].</p>
+<p>a) Instantaneous frequency: f_i(t) = (1/2π) dθ_i/dt = f_c + β f_m cos ω_m t = 40 + 20 cos ω_m t kHz.</p>
+<p>b) Bessel table J_n(1): J₀ = 0.7652 (≈ 0.77), J₁ = 0.4401 (≈ 0.44), J₂ = 0.1149 (≈ 0.11), J₃ = 0.0196 (≈ 0.02), J₄ ≈ 0.</p>
+<p>Line amplitudes A_c J_n: n = 0 → 77 (40 kHz), n = 1 → 44 (60 kHz), n = 2 → 11 (80 kHz), n = 3 → 2 (100 kHz). Lower sidebands: n = −1 → −44 (20 kHz), n = −2 → +11 (0 Hz, i.e. DC), n = −3 → −2 (−20 kHz). The component falling at negative frequency folds over to 20 kHz: −44 − 2 = −46. The folded components are at |f_c − 3f_m| = 20 kHz and |f_c − 2f_m| = 0.</p>
+<p>Total power (DC component 11² and AC components ½ amplitude²): S_T = 11² + ½[(−46)² + 77² + 44² + 11² + 2²] ≈ 5170 &gt; A_c²/2 = 100²/2 = 5000. Because the folded (aliased) components are added to the total power, S_T comes out larger than the true signal power A_c²/2; this is the inequality shown on the paper. From the spectrum, the bandwidth is read as 2·3·f_m = 120 kHz.</p>
+<p><em>Note: In the source table, J₃(1) is written as "0.196 ≈ 0.2"; the correct value is 0.0196 (consistent with the line amplitude 100×0.0196 ≈ 2). On the paper there is a correction note for the bandwidth reading "read 100 kHz instead of 120 kHz"; by Carson's rule B ≈ 2(β + 1)f_m = 80 kHz, and since lines up to the 3rd sideband were included in the calculation, 120 kHz is written.</em></p>
+<h2 id="solution-4-frequency-multiplier-chain">Solution 4: Frequency multiplier chain</h2>
+<p>n = 3⁶ = 729, Δf = β f_m = 3×4 kHz = 12 kHz. Initial deviation Δf₀ = Δf/n = 12 kHz / 729 = 16.461 Hz (close to the given 16.5 Hz; n = 12 kHz/16.5 Hz ≈ 727 → 729 = 3⁶).</p>
+<p>Filter condition: B_Tk ≤ B_k &lt; (5/3)f_ck − (1/3)f_ck = (4/3) f_ck; that is, 10 B_k ≤ f_ck ≤ 100 B_k. For B/f_c = 0.1, at f_c = 300 kHz, B = 30 kHz, and B_k = 15 kHz is taken.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">k</th><th scope="col">Δf_k</th><th scope="col">β_k = Δf_k/f_m</th><th scope="col">B_Tk</th><th scope="col">f_ck</th><th scope="col">B_k</th></tr></thead><tbody><tr><th scope="row">0</th><td>16.461 Hz</td><td>≪ 1</td><td>8 kHz</td><td>100 kHz</td><td>—</td></tr><tr><th scope="row">1</th><td>49.383 Hz (3×Δf₀)</td><td>0.0123 ≪ 1</td><td>8 kHz</td><td>300 kHz</td><td>15 kHz</td></tr><tr><th scope="row">2</th><td>148.15 Hz (3²×Δf₀)</td><td>0.037 ≪ 1</td><td>8 kHz</td><td>900 kHz</td><td>45 (≈ 50) kHz</td></tr><tr><th scope="row">3</th><td>444.45 Hz (3³×Δf₀)</td><td>0.11</td><td>≈ 9 kHz</td><td>2.7 MHz</td><td>135 (≈ 140) kHz</td></tr><tr><th scope="row">4</th><td>1333.4 Hz (3⁴×Δf₀)</td><td>0.33</td><td>≈ 13 kHz</td><td>8.1 MHz</td><td>405 (≈ 400) kHz</td></tr><tr><th scope="row">5</th><td>4000.2 Hz (3⁵×Δf₀)</td><td>1.0</td><td>20 kHz</td><td>3.333 MHz</td><td>166 (≈ 150) kHz</td></tr><tr><th scope="row">6</th><td>12 kHz (3⁶×Δf₀)</td><td>3.0</td><td>40 kHz</td><td>10 MHz</td><td>500 kHz</td></tr></tbody></table></div>
+<p>After the fourth multiplier, f_c4 = 8.1 MHz; since one more tripler would give 24.3 MHz and exceed the 13.5 MHz limit, a frequency down-converter is placed between the 4th and 5th multipliers: f_LO = 8.1 MHz − 10 MHz/(3×3) = 8.1 − 1.111 = 6.988 MHz. After the mixer, the BPF output is at 1.111 MHz; then two triplers (5 and 6) give 3.333 MHz and 10 MHz.</p>
+<p>System diagram: m(t) → narrowband FM (f_c0 = 100 kHz, β₀ = 16.461/4000 = 0.004 ≪ 1, B_T0 = 2f_m = 8 kHz) → ×3 → ×3 → ×3 → ×3 (8.1 MHz) → mixer (f_LO = 6.988 MHz) → BPF (1.111 MHz) → ×3 → ×3 → output f_c = 10 MHz, Δf = 12 kHz, β = 3. Output bandwidth B_T6 = 2f_m(1 + β) = 2×4×(1 + 3) = 32 kHz ≈ 40 kHz.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

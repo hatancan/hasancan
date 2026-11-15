@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: EEM417 Compensator Design Homework and MATLAB Project (Uraz) – Student Solutions — hasancan.net</title>
+<meta name="description" content="Prof. Dr. Alper Uraz&#x27;s EEM417 homework: lead, lag, PD and PI compensator design with the root locus and Bode methods for the system G(s) = K/s(s+a)(s+b); the homework table distributed to students by a, b and design set, handwritten solutions by two students, and MATLAB output.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: EEM417 Compensator Design Homework and MATLAB Project (Uraz) – Student Solutions">
+<meta property="og:description" content="Prof. Dr. Alper Uraz&#x27;s EEM417 homework: lead, lag, PD and PI compensator design with the root locus and Bode methods for the system G(s) = K/s(s+a)(s+b); the homework table distributed to students by a, b and design set, handwritten solutions by two students, and MATLAB output.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: EEM417 Compensator Design Homework and MATLAB Project (Uraz) – Student Solutions", "description": "Prof. Dr. Alper Uraz's EEM417 homework: lead, lag, PD and PI compensator design with the root locus and Bode methods for the system G(s) = K/s(s+a)(s+b); the homework table distributed to students by a, b and design set, handwritten solutions by two students, and MATLAB output.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-odev-eem417-kompanzator-tasarimi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-odev-eem417-kompanzator-tasarimi/eem322-odev-eem417-kompanzator-tasarimi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: EEM417 Compensator Design Homework and MATLAB Project (Uraz) – Student Solutions">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.11.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#homework">Homework</a></li><li><a href="#first-student-solution-a-1-b-2-set-a">First student solution: a = 1, b = 2 (Set A)</a></li><li><a href="#second-student-solution-a-2-b-3-set-f">Second student solution: a = 2, b = 3 (Set F)</a></li><li><a href="#matlab-output-a-1-2-b-2-set-b">MATLAB output: a = 1.2, b = 2 (Set B)</a></li><li><a href="#solution-fragment-bode-lead-compensator">Solution fragment: Bode lead compensator</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: EEM417 Compensator Design Homework and MATLAB Project (Uraz) – Student Solutions</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.11.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together a <strong>compensator design homework</strong> found in the "Control" subfolder of the EEM322 Control Systems folder, along with the student solutions to it. The title of the homework sheet is "Başkent University: EEM417 Homework"; that is, the document belongs to the advanced control course that follows EEM322, but it is kept here because it was stored in the same folder. The homework was prepared by the course instructor, <strong>Prof. Dr. Alper Uraz</strong>. The folder contained the homework sheet, scanned handwritten solutions by two different students (one on a Bode paper dated 15.11.2007), one student's MATLAB output, and a solution fragment. The students' names do not appear in the documents. All the files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="homework">Homework</h2>
+<p><strong>1.</strong> For a unity-feedback system with open-loop transfer function</p>
+<blockquote><p>G(s) = K / [s(s + a)(s + b)]</p></blockquote>
+<p>where a ∈ [1, 3] and b ∈ [2, 10], design the compensator sets below:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Set</th><th scope="col">Designs</th></tr></thead><tbody><tr><th scope="row">A</th><td>1, 2, 5, 6</td></tr><tr><th scope="row">B</th><td>1, 4, 5, 7</td></tr><tr><th scope="row">C</th><td>2, 3, 5, 6</td></tr><tr><th scope="row">D</th><td>3, 4, 5, 6</td></tr><tr><th scope="row">E</th><td>1, 2, 5, 7</td></tr><tr><th scope="row">F</th><td>1, 4, 5, 6</td></tr><tr><th scope="row">G</th><td>2, 3, 5, 7</td></tr></tbody></table></div>
+<p>Designs: 1 – RL-LEAD (lead compensator via root locus), 2 – RL-LAG (lag compensator via root locus), 3 – RL-PD, 4 – RL-PI, 5 – BODE-LEAD, 6 – BODE-LAG, 7 – BODE-PI. Required specifications (where applicable): <strong>ζ = 0.5, ωn = 4, Kv = 5 and pm = 40°</strong>.</p>
+<p><strong>2.</strong> (a) Sketch the root locus / Bode diagrams by hand, (b) find the unit step responses of the compensated and uncompensated systems.</p>
+<p><strong>3. MATLAB project:</strong> Provide MATLAB code for every step of the design in question 1; include all the plots of the uncompensated and compensated systems requested in question 2. Homework and MATLAB projects are due by Friday of week 11.</p>
+<p>Each student was given a homework number; according to the number, a, b and the set are distributed in the table as follows: for numbers 1–8, a = 1.0; for 9–16, a = 1.2; for 17–24, a = 1.5; for 25–32, a = 1.8; for 33–36, a = 2.0; b increases by one in each group from 2 up to 9 (2, 3, 4, 5 for 33–36), and the sets cycle from A to G in order (1 → A, 2 → B, … 7 → G, 8 → A, …, 36 → A).</p>
+<h2 id="first-student-solution-a-1-b-2-set-a">First student solution: a = 1, b = 2 (Set A)</h2>
+<p>The system is G(s) = K / [s(s + 1)(s + 2)] (homework no. 1, Set A: RL-LEAD, RL-LAG, BODE-LEAD, BODE-LAG). In every design, Kv = lim(s→0) sG(s) = K/2 = 5 ⇒ <strong>K = 10</strong>.</p>
+<h3 id="rl-lead">RL-LEAD</h3>
+<ol><li>Desired closed-loop poles: −ζωn ± jωn√(1 − ζ²) = −2 ± j4√0.75 = <strong>−2 ± j3.46</strong>.</li><li>The solution computes the angle condition as −tan⁻¹(3.46/−2) − tan⁻¹(3.46/−1) − 90° = +60° + 74° − 90° = 44°.</li><li>This 44° is split into two equal parts (22° + 22°) to place the zero and the pole: tan 8° = a/(2√3) ⇒ a = 0.48, tan 52° = b/(2√3) ⇒ b = 4.43.</li><li>Result: 1/T = 2.48 (T = 0.403), 1/(aT) = 6.43, a = 0.38 ⇒ <strong>Gc(s) = (s + 2.48)/(s + 6.43)</strong>.</li></ol>
+<p><em>Note: There is a sign error in the angle condition. At s = −2 + j3.46, the angles of the poles are 120° from 0, 106.1° from −1, and 90° from −2; the total phase is −316.1°, so the required angle contribution is 136° (not 44°). A deficiency this large cannot be supplied by a single-stage lead compensator; the designed (s + 2.48)/(s + 6.43) adds only about 44°.</em></p>
+<h3 id="bode-lead">BODE-LEAD</h3>
+<ol><li>From the plots, gm = 10 dB and pm = 27° were read. The required additional phase is 40° − 27° = 13°; with a 5° safety margin, φm = 18°.</li><li>sin 18° = (1 − a)/(1 + a) = 0.309 ⇒ a = 0.53; 10 log a = −2.75 dB ⇒ ωm = 2.72 rad/s.</li><li>1/T = √a·ωm = 1.98, 1/(aT) = 3.74 ⇒ Gc(s) = a(1 + Ts)/(1 + aTs) = 0.53(1 + 0.5s)/(1 + 0.265s) = (s + 2)/(s + 3.7).</li><li>The new phase margin is computed at ωm = 2.72: pm′ = 180° − 90° − 69.8° − 36.3° = −16.1°; the amplifier gain is Kc = 1/a = 1.89.</li></ol>
+<p><em>Note: With K = 10 the system is already unstable: for s³ + 3s² + 2s + K the critical gain is 6. By exact calculation the phase crossover frequency is √2 rad/s, the gain margin is ≈ −4.4 dB, and the phase margin is negative; the reading "gm = 10 dB, pm = 27°" is wrong. The solution's own result pm′ = −16.1° also shows that a single lead compensator cannot meet these specifications.</em></p>
+<h3 id="bode-lag">BODE-LAG</h3>
+<ol><li>G(s) = 10/[s(s + 1)(s + 2)] = 5/[s(1 + s)(1 + s/2)], 20 log 5 = 13.9 dB.</li><li>pm = 40° + 5° (safety) = 45°. At ωg′ = 0.45 rad/s, 21 dB of attenuation is needed ⇒ b = 10^(21/20) = 11.2.</li><li>1/T = ωg′/10 = 0.045, 1/(bT) = 0.004 ⇒ Gc(s) = (1/11.2)(s + 0.045)/(s + 0.004).</li><li>The solution writes the new phase margin as pm′ = 180° + tan⁻¹(ωg′/0.045) − tan⁻¹(ωg′/0.004) = 180° + 84.3° − 89.5° = 174.8°.</li></ol>
+<p><em>Note: The system's own phase must also be included in the new phase margin: at ωg′ = 0.45, ∠G = −90° − 24.2° − 12.7° = −126.9°, and the compensator's contribution is ≈ −5.2°; hence pm′ ≈ 180° − 126.9° − 5.2° ≈ 48° (which satisfies the required 40°).</em></p>
+<h2 id="second-student-solution-a-2-b-3-set-f">Second student solution: a = 2, b = 3 (Set F)</h2>
+<p>The system is G(s) = K / [s(s + 2)(s + 3)] (Set F: RL-LEAD, RL-PI, BODE-LEAD, BODE-LAG). Kv = K/(2·3) = 5 ⇒ <strong>K = 30</strong>. The solution is annotated in Turkish; the Bode plot was drawn on 15.11.2007 on the semi-logarithmic paper (SemiLogPaper) from the course web page.</p>
+<h3 id="1-rl-lead">1) RL-LEAD</h3>
+<ol><li>Desired poles: −2 ± j2√3. Angle condition: θ = −(180° − 60°) − 90° − 73.9° = −283.9° ⇒ required angle φ = 103.9°.</li><li>Using the bisector construction, the compensator zero is found as −0.6 and the pole as −26.6: C(s) = (s + 0.6)/(s + 26.6).</li><li>Magnitude condition |Kc·G(s)·C(s)| = 1 (at s = −2 + j2√3) ⇒ <strong>Kc = 11</strong>.</li></ol>
+<h3 id="4-rl-pi">4) RL-PI</h3>
+<p>A PI compensator was added to the compensated system obtained with RL-LEAD: Cpi(s) = Kp + Ki/s = Kp(s + Ki/Kp)/s. To keep the angle contribution small, the zero was chosen close to the origin (Ki/Kp = 0.1). From the magnitude condition, Kp = 4942.5/4862.095 ≈ 1.02 ⇒ <strong>Cpi(s) = 1.02(s + 0.1)/s</strong>.</p>
+<h3 id="5-bode-lead">5) BODE-LEAD</h3>
+<ol><li>G(jω) = 30/[jω(jω + 2)(jω + 3)] = 5/[jω(1 + jω/2)(1 + jω/3)], with corner frequencies 2 and 3.</li><li>From the uncompensated Bode diagram, pm = 13.5° and gm = 4 dB were read.</li><li>Step 1: φm = (40° − 13.5°) + 5° = 31.5°; sin φm = (1 − a)/(1 + a) = 0.52 ⇒ a = 0.32.</li><li>Step 2: The frequency at which 10 log a = −5 dB, from the Bode diagram, is ωm = 3.8 rad/s.</li><li>Step 3: 1/T = √a·ωm = 2.15, 1/(aT) = 6.72; C(s) = (s + 2.15)/(s + 6.72).</li><li>Step 5: Kc = 1/a = 3.125 ⇒ Kc·C(s) = 3.125(s + 2.15)/(s + 6.72).</li><li>Step 6: pm′ = 180° + ∠C(jωm)G(jωm) = 180° + 60.5° − 29.5° − 90° − 62.2° − 51.7° ⇒ <strong>pm′ = 7.1°</strong>.</li></ol>
+<figure class="yazi-gorsel"><img src="../bode-lead-dengelenmemis.jpg" width="768" height="558" loading="lazy" decoding="async" alt="Hand-drawn asymptotic Bode diagram of the uncompensated system for Set F: corner frequencies 2 and 3, gm = 4 dB, pm = 13.5°"><figcaption>BODE-LEAD, uncompensated system (15.11.2007)</figcaption></figure>
+<p><em>Note: K = 30 equals the critical gain of this system (Routh for s³ + 5s² + 6s + K: K = 5·6 = 30); by exact calculation, the uncompensated system has pm = gm = 0 and a crossover frequency of √6 ≈ 2.45 rad/s. pm = 13.5° and gm = 4 dB were read from the asymptotic diagram. The resulting pm′ = 7.1° falls well short of the required 40°; that is, a single-stage lead compensator does not meet these specifications.</em></p>
+<h3 id="6-bode-lag">6) BODE-LAG</h3>
+<ol><li>pm′ = 40° + 5° = 45°; the frequency at which the phase on the Bode diagram is −135° was taken as the new gain crossover frequency: ωg′ = 0.72 rad/s. At this frequency, 16 dB was read from the magnitude diagram.</li><li>20 log b = 16 dB ⇒ b = 10^(16/20) = 6.3; 1/T = ωg′/10 = 0.073, 1/(bT) = 0.012.</li><li><strong>C(s) = (1/b)(s + 1/T)/(s + 1/(bT)) = 0.16(s + 0.073)/(s + 0.012)</strong>.</li></ol>
+<p><em>Note: By exact calculation, the frequency at which the phase is −135° satisfies ω² + 5ω − 6 = 0, giving ω = 1 rad/s, where |G| ≈ 12.6 dB; 0.72 rad/s and 16 dB are values read from the asymptotic diagram (the asymptotic magnitude at 0.72 is 16.8 dB).</em></p>
+<h2 id="matlab-output-a-1-2-b-2-set-b">MATLAB output: a = 1.2, b = 2 (Set B)</h2>
+<p>A third student's MATLAB output, exported to Word, belongs to homework no. 9 (a = 1.2, b = 2, Set B: 1, 4, 5, 7). Kv = K/(1.2·2) = 5 ⇒ K = 12:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num=[0,0,0,12];
+&gt;&gt; den=[1,3.2,2.4,0];
+&gt;&gt; G=tf(num,den)
+
+Transfer function:
+          12
+---------------------
+s^3 + 3.2 s^2 + 2.4 s
+
+&gt;&gt; rlocus(G)
+&gt;&gt; grid</code></pre>
+<p>In the root locus (the same plot appears in the 1-RL-lead and 4-RL-PI files), the real-axis poles at −1.2, −2 and 0 are marked. When the same system is plotted with <code>bode(G)</code> (files 5 and 7, both titled "Bode-Lead – Uncompensated"), MATLAB gives the following margins:</p>
+<pre class="kod"><code>Gain Margin (dB): -3.88   At frequency (rad/sec): 1.55   Closed Loop Stable? No
+Phase Margin (deg): -11.7   Delay Margin (sec): 3.17   At frequency (rad/sec): 1.92   Closed Loop Stable? No</code></pre>
+<p>That is, with K = 12 the uncompensated closed loop is unstable (critical gain 3.2 × 2.4 = 7.68).</p>
+<h2 id="solution-fragment-bode-lead-compensator">Solution fragment: Bode lead compensator</h2>
+<p>In the scan named "kontrol1", there is a section of a Bode-lead design for a different system, in the instructor's handwriting:</p>
+<ol><li>Design specifications: pm = 45°, ess ≤ 0.4. ess = lim(s→0) sR(s)·1/(1 + G(s)) = 10/K = 0.4 ⇒ K = 25.</li><li>From the plots, gm = 5 dB, pm = 14°, ωp = 3, ωg = 2.2. The required additional phase is 45° − 14° = 31°; adding 5° gives 36°.</li><li>sin 36° = (1 − a)/(1 + a) = 0.6 ⇒ a = 0.25; 10 log a = −6 dB ⇒ ωm = 3.1 rad/s.</li><li>1/T = √a·ωm = 1.55, 1/(aT) = 6.2.</li><li>Lead compensator: Gc(s) = a(1 + Ts)/(1 + aTs) = 0.25(1 + 0.65s)/(1 + 0.16s) = (s + 1.55)/(s + 6.2).</li></ol>
+<p><em>Note: sin 36° = 0.588; this gives a = (1 − 0.588)/(1 + 0.588) ≈ 0.26, so the 0.6 and 0.25 in the solution are rounded values.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-odev-eem417-kompanzator-tasarimi.zip" download>eem322-odev-eem417-kompanzator-tasarimi.zip</a></p>
+              <p class="kucuk">ZIP archive · 2.4 MB · 15.11.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-odev-eem417-kompanzator-tasarimi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

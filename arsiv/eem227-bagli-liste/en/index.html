@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Data Structures: Linked List in Java (Node Chain) — hasancan.net</title>
+<meta name="description" content="A linked list example from the EEM227 Data Structures course: the Node class, a manually built chain of nodes, MyLinkedList with the addToLast, addToFront and removeFirst methods; and a second version that hides the nodes from the outside.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-bagli-liste/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem227-bagli-liste/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem227-bagli-liste/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem227-bagli-liste/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Data Structures: Linked List in Java (Node Chain)">
+<meta property="og:description" content="A linked list example from the EEM227 Data Structures course: the Node class, a manually built chain of nodes, MyLinkedList with the addToLast, addToFront and removeFirst methods; and a second version that hides the nodes from the outside.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-bagli-liste/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Data Structures: Linked List in Java (Node Chain)", "description": "A linked list example from the EEM227 Data Structures course: the Node class, a manually built chain of nodes, MyLinkedList with the addToLast, addToFront and removeFirst methods; and a second version that hides the nodes from the outside.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-bagli-liste/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "LinkedListNodeChain.7z", "contentUrl": "https://hasancan.net/arsiv/eem227-bagli-liste/LinkedListNodeChain.7z"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM227 Data Structures: Linked List in Java (Node Chain)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem227">EEM227</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.11.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>7z archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#node-node">Node: Node</a></li><li><a href="#manually-built-chain">Manually built chain</a></li><li><a href="#list-class-mylinkedlist">List class: MyLinkedList</a></li><li><a href="#version-that-hides-the-nodes-mylinkedlisthidenodeint">Version that hides the nodes: MyLinkedListHideNodeInt</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM227 Data Structures: Linked List in Java (Node Chain)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 10.11.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the Java code for the linked list example covered in the <strong>EEM227 Data Structures</strong> course at Başkent University (November 2013). The topic corresponds to week 3 of the syllabus, "Linked Lists – Usage in the Java programming language". The example proceeds step by step: first a single node, then a manually linked chain, then a list class that manages this chain. The original BlueJ project can be downloaded as a 7z archive at the end of the post.</p>
+<h2 id="node-node">Node: Node</h2>
+<p>Each node carries a value and a reference pointing to the next node.</p>
+<pre class="kaynak" data-dosya="Node.java - Not Defteri"><code>public class Node
+{
+    private int value;
+    private Node next;
+
+    public int getValue()
+    {
+        return value;
+    }
+    public void setValue(int pValue)
+    {
+        value = pValue;
+    }
+
+    public Node getNext()
+    {
+        return next;
+    }
+
+    public void setNext(Node pNode)
+    {
+        next = pNode;
+    }
+}</code></pre>
+<h2 id="manually-built-chain">Manually built chain</h2>
+<p>Three nodes are created and linked together: 3 → 5 → 7.</p>
+<pre class="kaynak" data-dosya="NodeChainTest1.java - Not Defteri"><code>public class NodeChainTest1
+{
+    public static void main()
+    {
+        Node n1 = new Node();
+        n1.setValue(3);
+
+        Node n2 = new Node();
+        n2.setValue(5);
+
+        Node n3 = new Node();
+        n3.setValue(7);
+
+        n1.setNext(n2);
+        n2.setNext(n3);
+    }
+}</code></pre>
+<h2 id="list-class-mylinkedlist">List class: MyLinkedList</h2>
+<p>A class that keeps track of the head and tail of the chain and counts the number of elements. When adding to the end, the <code>next</code> of the last node is linked to the new node; when adding to the front, the <code>next</code> of the new node is linked to the old first node.</p>
+<pre class="kaynak" data-dosya="MyLinkedList.java - Not Defteri"><code>public class MyLinkedList
+{
+    private Node firstNode;
+    private Node lastNode;
+    private int nodeCount = 0;
+
+    public void addToLast(Node node)
+    {
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+          Node temp = lastNode;
+          temp.setNext(node);
+          lastNode = node;
+          nodeCount++;
+        }
+    }
+
+    public Node getFirstNode()
+    {
+        return firstNode;
+    }
+    public Node getLastNode()
+    {
+        return lastNode;
+    }
+    public int size()
+    {
+        return nodeCount;
+    }
+
+    public void addToFront(Node node)
+    {
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+            Node temp = firstNode;
+            node.setNext(firstNode);
+            firstNode = node;
+            nodeCount++;
+        }
+    }
+}</code></pre>
+<h2 id="version-that-hides-the-nodes-mylinkedlisthidenodeint">Version that hides the nodes: MyLinkedListHideNodeInt</h2>
+<p>In the second version, the list accepts a plain <code>int</code> from the outside rather than a <code>Node</code>; the job of creating nodes is hidden inside the class. The user no longer needs to know the internal structure of the linked list. This version also includes <code>removeFirst</code>, which deletes the first element.</p>
+<pre class="kaynak" data-dosya="MyLinkedListHideNodeInt.java - Not Defteri"><code>public class MyLinkedListHideNodeInt
+{
+    private Node firstNode;
+    private Node lastNode;
+    private int nodeCount = 0;
+
+    public void addToLast(int sayi)
+    {
+        Node node = new Node();
+        node.setValue(sayi);
+
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+          Node temp = lastNode;
+          temp.setNext(node);
+          lastNode = node;
+          nodeCount++;
+        }
+    }
+
+    public int size()
+    {
+        return nodeCount;
+    }
+
+    public void addToFront(int sayi)
+    {
+        Node node = new Node();
+        node.setValue(sayi);
+
+        if (nodeCount == 0)
+        {
+            firstNode = node;
+            lastNode = node;
+            nodeCount++;
+        }
+        else
+        {
+            Node temp = firstNode;
+            node.setNext(firstNode);
+            firstNode = node;
+            nodeCount++;
+        }
+    }
+
+    public void removeFirst()
+    {
+        if (nodeCount == 0)
+        {
+            return;
+        }
+        else if (nodeCount == 1)
+        {
+            nodeCount--;
+            firstNode = null;
+            lastNode = null;
+        }
+        else
+        {
+            Node  newFirstNode = firstNode.getNext();
+            firstNode = newFirstNode;
+            nodeCount--;
+        }
+    }
+}</code></pre>
+<p>To delete the first node, <code>removeFirst</code> simply shifts <code>firstNode</code> to the next one; since no references to the old first node remain, the garbage collector cleans it up. This is exactly how a linked list differs from an array: adding to the front and removing from the front can be done in constant time, independent of the number of elements.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">7Z</span>
+            <div>
+              <p class="indir-ad"><a href="../LinkedListNodeChain.7z" download>LinkedListNodeChain.7z</a></p>
+              <p class="kucuk">7z archive · 3 KB · 10.11.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../LinkedListNodeChain.7z" download>⬇ <span data-i18n="arch.downloadFile"></span> (3 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

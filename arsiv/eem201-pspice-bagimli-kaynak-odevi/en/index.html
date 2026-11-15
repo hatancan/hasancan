@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM201 Circuit Theory I: PSpice Lab Assignment with Dependent Sources — hasancan.net</title>
+<meta name="description" content="Node voltages and branch currents in two DC circuits; PSpice screens and cleaned-up circuit sources.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM201 Circuit Theory I: PSpice Lab Assignment with Dependent Sources">
+<meta property="og:description" content="Node voltages and branch currents in two DC circuits; PSpice screens and cleaned-up circuit sources.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM201 Circuit Theory I: PSpice Lab Assignment with Dependent Sources", "description": "Node voltages and branch currents in two DC circuits; PSpice screens and cleaned-up circuit sources.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM201 – Devre Teorisi I", "associatedMedia": {"@type": "MediaObject", "name": "eem201-pspice-bagimli-kaynak-odevi.zip", "contentUrl": "https://hasancan.net/arsiv/eem201-pspice-bagimli-kaynak-odevi/eem201-pspice-bagimli-kaynak-odevi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM201 Circuit Theory I: PSpice Lab Assignment with Dependent Sources">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem201">EEM201</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM201 – Devre Teorisi I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.10.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#assignment-instructions">Assignment instructions</a></li><li><a href="#1-node-voltage-method">1. Node-voltage method</a></li><li><a href="#2-mesh-current-method">2. Mesh-current method</a></li><li><a href="#download-contents">Download contents</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM201</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM201 Circuit Theory I: PSpice Lab Assignment with Dependent Sources</h1>
+            <p class="kucuk">EEM201 – Devre Teorisi I · 07.10.2015 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Başkent University EEM201 Laboratory PSpice Assignment-1, a question sheet signed by Asst. Prof. Dr. Aysel Şafak and Lecturer Baran Uslu, together with a friend's simulation files. The question sheet was transcribed from an image to text; the sheet itself was not published. Although the files were in the EEM211 folder, the title explicitly points to EEM201, so they were archived under Circuit Theory I. The document carries no date; the file date of 7 October 2015 was used. The circuits and screenshots, cleaned of personal information, are available for download at the end of the post.</p>
+<h2 id="assignment-instructions">Assignment instructions</h2>
+<p>Build and run the two given circuits in PSpice. Compare your results with the theoretical results, that is, those found by hand calculation. Each question is worth 50 points.</p>
+<h2 id="1-node-voltage-method">1. Node-voltage method</h2>
+<p>The first circuit asks for the node voltages V1, V2 and V3. There is a 25 Ω resistor between V1 and V2, a 50 Ω resistor between V2 and V3, and a 20 Ω resistor between V3 and the 38.5 V source. The resistance from V1 to ground is 100 Ω, and that from V2 is 200 Ω. In the V3 branch, a 5 Ω resistor and a 5i₀ dependent voltage source are connected in series. The left dependent current source has the value 2i₀; i₀ is defined in the 50 Ω resistor, from V2 to V3.</p>
+<p>The PSpice screen shows V1=−50 V, V2=−30 V and V3=2.5 V. Verification calculation:</p>
+<ul><li>i₀=(V2−V3)/50=−0.65 A.</li><li>Dependent voltage 5i₀=−3.25 V.</li><li>At node V1: V1/100+(V1−V2)/25−2i₀=−0.5−0.8+1.3=0.</li><li>At node V2: V2/200+(V2−V1)/25+i₀=−0.15+0.8−0.65=0.</li><li>At node V3: (V3−V2)/50+(V3−38.5)/20+(V3−5i₀)/5=0.65−1.8+1.15=0.</li></ul>
+<p><em>Note: These node equations were calculated during the archive transcription to verify the screen results.</em></p>
+<figure class="yazi-gorsel"><img src="../dugum.jpg" width="794" height="354" loading="lazy" decoding="async" alt="Node voltages of the first circuit"><figcaption>Nodes at −50 V, −30 V and 2.5 V in the circuit with dependent sources</figcaption></figure>
+<h2 id="2-mesh-current-method">2. Mesh-current method</h2>
+<p>The second circuit asks for all branch currents to be found using the mesh-current method and compared with PSpice. The circuit contains a 200 V source, two 10 Ω resistors, 25 Ω, 50 Ω and 100 Ω resistors, and a 4.3iₐ dependent current source. iₐ is the current in the 25 Ω branch.</p>
+<p>Current magnitudes in the screenshot:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Branch</th><th scope="col">Current</th></tr></thead><tbody><tr><th scope="row">25 Ω</th><td>1.100 A</td></tr><tr><th scope="row">Dependent source</th><td>4.730 A</td></tr><tr><th scope="row">50 Ω</th><td>3.630 A</td></tr><tr><th scope="row">100 Ω</th><td>970.0 mA</td></tr><tr><th scope="row">Upper 10 Ω</th><td>5.700 A</td></tr><tr><th scope="row">Lower 10 Ω and 200 V source</th><td>4.600 A</td></tr></tbody></table></div>
+<p>This is consistent with the dependent source value 4.3×1.100=4.730 A; with the middle branch current 4.730−1.100=3.630 A; and with the upper resistor current 4.730+0.970=5.700 A. The directions should be read together with the arrows and signs on the source screen.</p>
+<figure class="yazi-gorsel"><img src="../akimlar.jpg" width="447" height="278" loading="lazy" decoding="async" alt="Simulated branch currents of the second circuit"><figcaption>Current labels of the circuit with the 200 V source</figcaption></figure>
+<h2 id="download-contents">Download contents</h2>
+<p>There are two OrCAD/PSpice DSN circuits and three screenshots. The personal file names remaining inside the circuit files were replaced with neutral names of the same length. The sources were not run in this environment; the checks above are based on the saved results.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem201-pspice-bagimli-kaynak-odevi.zip" download>eem201-pspice-bagimli-kaynak-odevi.zip</a></p>
+              <p class="kucuk">ZIP archive · 75 KB · 07.10.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem201-pspice-bagimli-kaynak-odevi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (75 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

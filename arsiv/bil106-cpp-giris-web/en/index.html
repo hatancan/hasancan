@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL106 Introduction to Programming: Introduction to Computers and Programming with C++ (Bilgisayar Dersleri site) — hasancan.net</title>
+<meta name="description" content="&quot;Bilgisayar Dersleri&quot; (bilgisayardersleri.wordpress.com) site&#x27;s introductory C++ post: the units of a computer, generations of programming languages, history of C and C++, first C++ programs, cout/cin, arithmetic, relational and equality operators.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil106-cpp-giris-web/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/bil106-cpp-giris-web/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/bil106-cpp-giris-web/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/bil106-cpp-giris-web/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL106 Introduction to Programming: Introduction to Computers and Programming with C++ (Bilgisayar Dersleri site)">
+<meta property="og:description" content="&quot;Bilgisayar Dersleri&quot; (bilgisayardersleri.wordpress.com) site&#x27;s introductory C++ post: the units of a computer, generations of programming languages, history of C and C++, first C++ programs, cout/cin, arithmetic, relational and equality operators.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil106-cpp-giris-web/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL106 Introduction to Programming: Introduction to Computers and Programming with C++ (Bilgisayar Dersleri site)", "description": "\"Bilgisayar Dersleri\" (bilgisayardersleri.wordpress.com) site's introductory C++ post: the units of a computer, generations of programming languages, history of C and C++, first C++ programs, cout/cin, arithmetic, relational and equality operators.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/bil106-cpp-giris-web/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL106 – Programlamaya Giriş", "associatedMedia": {"@type": "MediaObject", "name": "C++ İLE PROGRAMLAMAYA GİRİŞ | Bilgisayar Dersleri.pdf", "contentUrl": "https://hasancan.net/arsiv/bil106-cpp-giris-web/C++ İLE PROGRAMLAMAYA GİRİŞ | Bilgisayar Dersleri.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="BIL106 Introduction to Programming: Introduction to Computers and Programming with C++ (Bilgisayar Dersleri site)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-1">1. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil106">BIL106</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL106 – Programlamaya Giriş</dd>
+          <dt data-i18n="arch.year"></dt><dd>1. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.08.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#introduction-to-computers-and-programming-with-c">Introduction to computers and programming with C++</a></li><li><a href="#introduction-to-programming-with-c">Introduction to programming with C++</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL106</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>BIL106 Introduction to Programming: Introduction to Computers and Programming with C++ (Bilgisayar Dersleri site)</h1>
+            <p class="kucuk">BIL106 – Programlamaya Giriş · 11.08.2016 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a printout of a web page kept in the BIL106 Introduction to Programming course archive folder: the post titled <em>"Introduction to Programming with C++"</em> from the site named <strong>"Bilgisayar Dersleri"</strong> (<strong>bilgisayardersleri.wordpress.com</strong>). The document does not mention an author; the printout was made in August 2016. The text occasionally contains page references such as <em>"Diagram: p. 15 (Deitel)"</em>; so it appears to be lecture notes based on the introductory chapter of Deitel &amp; Deitel's <em>C++ How to Program</em>. A 15-page PDF printout of the page can be downloaded at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution to the source. It will be removed at the request of the rights holder.</em></p>
+<h2 id="introduction-to-computers-and-programming-with-c">Introduction to computers and programming with C++</h2>
+<h3 id="what-is-a-computer">What is a computer?</h3>
+<p>A computer is a device that performs calculations millions or even billions of times faster than a human can and/or makes logical decisions. Supercomputers can perform hundreds of billions of additions per second, which is the amount of work a person could do in tens of years with a simple calculator.</p>
+<p>Computers process data under the control of sets of instructions called computer programs. The computer programs that run on a computer are called <strong>software</strong>. The people who develop and write them are called <strong>computer programmers</strong>.</p>
+<p>A computer consists of 6 logical units:</p>
+<ol><li>Input unit</li><li>Output unit</li><li>Memory</li><li>Arithmetic logic unit (central processing unit)</li><li>Control unit (central processing unit)</li><li>Secondary storage</li></ol>
+<h3 id="evolution-of-operating-systems">Evolution of operating systems</h3>
+<p>The first computers could do only one job at a time. Programs written on punched cards were fed to the computer through a card reader and run one after another (one job at a time). In this environment, where one job runs at a time, the computer's resources are not used efficiently: while the CPU is working, the input and output units sit idle. For more efficient use of resources, operating systems that allow <strong>"multiprogramming"</strong> were gradually developed. In these environments several jobs run at once, but users still enter their programs into the computer by punching them onto cards.</p>
+<p>In the 1960s, <strong>"timesharing"</strong> operating systems were developed. In a timesharing environment, users access the computer through terminals (a screen and a keyboard). In this way, tens or even hundreds of people can access and use a single computer at the same time.</p>
+<h3 id="personal-distributed-and-client-server-computing">Personal, distributed, and client/server computing</h3>
+<p>In 1977, Apple popularized personal computers. Starting as a hobbyist pursuit, personal computer use became very widespread not only in homes but also in business, when IBM introduced the Personal Computer in 1981.</p>
+<p>However, these computers were stand-alone units. To share the data on a computer, it had to be carried to another computer on removable disks. <strong>Distributed processing</strong> began when stand-alone, independent computers were connected to one another through LANs or larger networks. Today, large amounts of data can be used by client computers through computers on the network called file servers, which store the programs and data to be shared (the <strong>client/server environment</strong>).</p>
+<p>C and C++ are today widely used languages for writing these environments (computer networks, distributed client/server environments, and the operating systems that support them).</p>
+<h3 id="programming-languages">Programming languages</h3>
+<p>In terms of the evolution of programming, we can speak of 4 classes:</p>
+<ol><li><strong>Machine languages (1st generation):</strong> languages made up of numbers, understood only by a particular machine, and highly prone to errors.</li><li><strong>Assembly languages (2nd generation):</strong> languages made up of English-like commands. A program written in assembly language is converted into machine language by a translator and then run. Although it looks fairly understandable, a large number of instructions must be written even for a very simple task.</li><li><strong>High-level languages (3rd generation), "procedural" languages:</strong> languages in which we specify in detail "HOW" something is to be done. They resemble English and use the symbols we use in arithmetic operations; programs are written faster and more easily. C and C++ belong to this group.</li><li><strong>Very high-level languages (4th generation):</strong> languages in which we state "WHAT" is to be done: LISP, SNOBOL, FORTH, SQL…</li></ol>
+<p>Many languages were developed in the 3rd generation. Those that gained wide acceptance:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Language</th><th scope="col">Developed by</th><th scope="col">Year</th><th scope="col">Note</th></tr></thead><tbody><tr><th scope="row">Fortran</th><td>IBM</td><td>1954</td><td>Still widely used in engineering applications.</td></tr><tr><th scope="row">Cobol</th><td></td><td>1959</td><td>Half of today's commercial applications are written in Cobol.</td></tr><tr><th scope="row">Pascal</th><td>Niklaus Wirth</td><td>1971</td><td>For academic use</td></tr></tbody></table></div>
+<h3 id="history-of-c-and-c">History of C and C++</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Language</th><th scope="col">Year</th><th scope="col">Developed by</th><th scope="col">Institution</th></tr></thead><tbody><tr><th scope="row">BCPL</th><td>1967</td><td>Martin Richards</td><td></td></tr><tr><th scope="row">B</th><td>1970</td><td>Ken Thompson</td><td>Bell Laboratories</td></tr><tr><th scope="row">C</th><td>1972</td><td>Dennis Ritchie</td><td>Bell Laboratories</td></tr><tr><th scope="row">C++</th><td>1980</td><td>Bjarne Stroustrup</td><td>AT&amp;T</td></tr></tbody></table></div>
+<p>C was used to write the UNIX operating system; it is a machine-independent language. Between 1983 and 1989, ANSI produced the standard definition of C; the standard was published in 1990: ANSI/ISO 9899:1990.</p>
+<p>C++ brought <strong>object-oriented programming</strong> capabilities, along with a number of additional features, to C. Objects are reusable software components; they make software development much easier (more productive). Other object-oriented languages:</p>
+<ul><li><strong>Smalltalk:</strong> Xerox Palo Alto Research Center</li><li><strong>Java:</strong> Sun Microsystems, James Gosling, 1995 (1993, the popularization of the WWW)</li></ul>
+<p><em>Note: The source reads "James Goslin 995"; it should be James Gosling and 1995.</em></p>
+<h3 id="the-c-standard-library">The C++ standard library</h3>
+<p>C++ programs consist of classes and functions. These are program pieces. Some of them are written by the programmer, and some are readily available in the standard library.</p>
+<h3 id="structured-programming">Structured programming</h3>
+<p>Until the 1960s, programming was very complex, difficult, and costly. <strong>Structured programming</strong> began to emerge in the 1960s. Structured programming is an approach to writing programs that are clearer, more understandable, and easier to read, follow, and test.</p>
+<p>Three basic structures are used: <strong>sequence</strong>, <strong>repetition structure</strong>, and <strong>decision structure</strong>. Goto is not used, or is used as little as possible. One of the first languages suited to this (and we could say the most popular) is Pascal (Niklaus Wirth, 1971). It was developed to teach structured programming in academic settings and was widely used in many schools. However, the fact that it lacked many of the features needed in commercial applications and in applications suited to every kind of business environment prevented it from gaining wide acceptance outside universities.</p>
+<p>Ada: 1970s – early 1980s, US Department of Defense.</p>
+<h3 id="key-software-trend-object-technology">Key software trend: object technology</h3>
+<p>Advances and progress in software technology began with structured programming, structured design, and structured analysis. However, greater progress was achieved with object-oriented analysis, design, and programming. With the object-oriented approach, we model all the objects around us (car, student, course, person, airplane, classroom, etc.). Not only can we reuse these modeled software pieces repeatedly, but software written in this way is also better organized and more understandable, so it is much easier to maintain, saving the programmer a great deal of time and cost (80% of software cost belongs not to the effort at the start of programming and writing, but to the continuous maintenance done afterwards).</p>
+<p>Although C++ is referred to as an object-oriented language, it is a <strong>hybrid</strong> language; that is, it makes it possible to write both structured and object-oriented programs.</p>
+<p>Until the topic of "Classes and Data Abstraction," we will cover "procedural" programming concepts with C++: control structures, functions, data types, input/output, arrays, pointers, and strings. These chapters will cover the C part of C++ and the procedural enhancements C++ makes to C.</p>
+<h3 id="stages-of-executing-a-c-program">Stages of executing a C++ program</h3>
+<p>Executing a C++ program in a Unix environment goes through 6 stages:</p>
+<ol><li><strong>Edit:</strong> writing the source program with an editor program. The extension is .cpp, .cxx, or .c</li><li><strong>Preprocess:</strong> some operations before compilation</li><li><strong>Compile:</strong> the output of compilation is the object program</li><li><strong>Link:</strong> bringing together (linking) the functions found in the standard library or special libraries that we have specified we will use in our program with the object program</li><li><strong>Load:</strong> taking the program and any necessary modules (from shared libraries) from disk and loading them into memory</li><li><strong>Execute</strong></li></ol>
+<p>Diagram: p. 15 (Deitel).</p>
+<h3 id="portability">Portability</h3>
+<p>Although it is possible to write portable programs, some problems arise between different systems and different compilers. Issues related to portability are covered in the ANSI standard document: www.ansi.org. Document title: <em>Information Technology – Programming languages – C++</em>. Document number: ISO/IEC 14882-1998. Older draft version (free): www.cygnus.com/misc/wp/</p>
+<h3 id="good-programming-practices">Good programming practices</h3>
+<ul><li>Write your C++ programs in a simple and straightforward manner: KIS ("Keep It Simple").</li><li>The manual of the C++ version you are using should be at hand.</li><li>The best teacher is your computer. You can learn and gain experience by running the topics and examples covered in books or lectures on the computer, reading the error messages that appear, and trying again.</li></ul>
+<h2 id="introduction-to-programming-with-c">Introduction to programming with C++</h2>
+<h3 id="a-simple-program-printing-a-line-of-text">A simple program: printing a line of text</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// C++ ile ilk programım
+#include &lt;iostream&gt;
+
+int main()
+{
+    std::cout &lt;&lt; "Herkese Merhaba!\n";
+
+    return 0;   // program sonu
+}</code></pre>
+<pre class="kod"><code>Herkese Merhaba!</code></pre>
+<ul><li><code>//</code> is placed at the beginning of a comment line in C++. The compiler does nothing for these lines; they are comment lines that appear as-is in the program listing and are needed for the readability and understandability of the program. A good programmer puts the necessary comments in the necessary places. In C, comments are placed between <code>/*  */</code>.</li><li>Lines that begin with <code>#</code> are for the preprocessor. In our example program, the line beginning with <code>#</code> tells the preprocessor to include the <code>iostream</code> header file, which is related to input/output, in the program.</li><li><code>int main()</code> must be present in every C++ program. Every C++ program consists of one or several functions. The <code>()</code> indicates that main is a function, and the word "main" indicates that it is the main function.</li><li><code>int</code> means integer. The meaning of <code>int main()</code> is: the value this main function returns after it runs is an integer (the zero returned by <code>return 0</code>).</li><li>The body of a function begins with the left brace <code>{</code> and ends with the right brace <code>}</code>.</li><li><code>std::cout</code> is used for output to the screen; we will see it in more detail in later chapters. <code>std::cin</code> is for reading what is entered from the keyboard.</li><li><code>&lt;&lt;</code> is the "stream insertion operator."</li><li>Note that the <code>\n</code> characters do not appear in the output! <code>\</code> is the "escape" character; <code>n</code> tells the cursor to move to the next line.</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Escape sequence</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>\n</code></th><td>new line</td></tr><tr><th scope="row"><code>\t</code></th><td>move forward one "tab"</td></tr><tr><th scope="row"><code>\r</code></th><td>the cursor moves to the beginning of the line being written ("carriage return")</td></tr><tr><th scope="row"><code>\a</code></th><td>alert sound</td></tr></tbody></table></div>
+<p><em>Note: The source calls curly braces "square brackets"; <code>{ }</code> are braces (curly brackets). Also, the code on the page was typed with curly quotes (“ ”); straight quotes (") are used here so that it can compile.</em></p>
+<p>How else could we have printed the sentence "Herkese Merhaba!"?</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>std::cout &lt;&lt; "Herkese ";
+std::cout &lt;&lt; "Merhaba!\n";</code></pre>
+<p>What would the output be if I wrote it as follows?</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>std::cout &lt;&lt; "Herkes\ne\nMerhaba!\n";</code></pre>
+<pre class="kod"><code>Herkes
+e
+Merhaba!</code></pre>
+<h3 id="another-simple-program-adding-two-integers">Another simple program: adding two integers</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// İKİ TAMSAYIYI TOPLAYAN PROGRAM
+#include &lt;iostream&gt;
+
+int main()
+{
+    int tamsayi1, tamsayi2, toplam;   // tanımlamalar
+
+    std::cout &lt;&lt; "Birinci tamsayıyı giriniz\n";
+    std::cin &gt;&gt; tamsayi1;   // klavyeden girilen sayıyı oku
+    std::cout &lt;&lt; "İkinci tamsayıyı giriniz\n";
+    std::cin &gt;&gt; tamsayi2;   // klavyeden girilen sayıyı oku
+    toplam = tamsayi1 + tamsayi2;
+    std::cout &lt;&lt; "Toplam = " &lt;&lt; toplam &lt;&lt; std::endl;
+
+    return 0;   // programın başarıyla bittiğini gösterir
+}</code></pre>
+<p><code>std::endl</code>: endl means "end line." What it does is flush the output buffers after writing the newline (sending it to the screen). As is known, data to be sent to the output is accumulated in output buffers before being sent. We use endl to empty/flush the buffers after the output operation.</p>
+<p><strong>Important notes:</strong></p>
+<ul><li>C++ is a case-sensitive language.</li><li>Statements end with <code>;</code> (semicolon).</li></ul>
+<p><strong>Good programming practices:</strong></p>
+<ol><li>Lines written inside the body of a function are indented by 3 spaces ("indentation").</li><li>Leave a blank line between declarations and executable statements.</li><li>Use meaningful variable names.</li><li>Leave one space on each side of binary operators.</li></ol>
+<h3 id="arithmetic-operators">Arithmetic operators</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">C++ operation</th><th scope="col">Arithmetic operator</th><th scope="col">Algebraic expression</th><th scope="col">C++ expression</th></tr></thead><tbody><tr><th scope="row">Addition</th><td><code>+</code></td><td>f + 7</td><td><code>f + 7</code></td></tr><tr><th scope="row">Subtraction</th><td><code>-</code></td><td>p − c</td><td><code>p - c</code></td></tr><tr><th scope="row">Multiplication</th><td><code>*</code></td><td>bm</td><td><code>b * m</code></td></tr><tr><th scope="row">Division</th><td><code>/</code></td><td>x/y</td><td><code>x / y</code></td></tr><tr><th scope="row">Modulus</th><td><code>%</code></td><td>r mod s</td><td><code>r % s</code></td></tr></tbody></table></div>
+<p>Rules of operator precedence in arithmetic operations in C++:</p>
+<ol><li>Expressions inside parentheses are evaluated first.</li><li>Next, multiplication, division, and modulus operations are performed. If an arithmetic expression contains more than one multiplication, division, or modulus operation, the operators in these operations are applied from <strong>left to right</strong>. Multiplication, division, and modulus operators have the same precedence.</li><li>Addition and subtraction operations are performed last. If an expression contains more than one addition and subtraction operation, their operators are applied from <strong>left to right</strong>.</li></ol>
+<p>Examples: pp. 31–33 (Deitel).</p>
+<p><strong>Good programming practice:</strong> As in algebra, unnecessary parentheses may be omitted. However, especially in long expressions, it is good to increase understandability by enclosing subexpressions in parentheses.</p>
+<h3 id="relational-operators-and-equality-operators">Relational operators and equality operators</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Algebraic operator</th><th scope="col">C++ equivalent</th><th scope="col">C++ example</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row">&gt;</th><td><code>&gt;</code></td><td><code>x &gt; y</code></td><td>x is greater than y</td></tr><tr><th scope="row">&lt;</th><td><code>&lt;</code></td><td><code>x &lt; y</code></td><td>x is less than y</td></tr><tr><th scope="row">≥</th><td><code>&gt;=</code></td><td><code>x &gt;= y</code></td><td>x is greater than or equal to y</td></tr><tr><th scope="row">≤</th><td><code>&lt;=</code></td><td><code>x &lt;= y</code></td><td>x is less than or equal to y</td></tr><tr><th scope="row">=</th><td><code>==</code></td><td><code>x == y</code></td><td>x is equal to y (equality operator)</td></tr><tr><th scope="row">≠</th><td><code>!=</code></td><td><code>x != y</code></td><td>x is not equal to y (equality operator)</td></tr></tbody></table></div>
+<p><em>Note: The symbols ≥, ≤, and ≠ do not appear in the page printout (they were left blank); they were added to the table.</em></p>
+<p><strong>Common errors:</strong></p>
+<ul><li>When writing the operators <code>==</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>, no space should be left between the two characters, and the order of the two characters should not be swapped.</li><li>Do not confuse the equality operator <code>==</code> with <code>=</code>, which is used for assignment.</li></ul>
+<h3 id="a-sample-program-using-equality-and-relational-operators">A sample program using equality and relational operators</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// if cümlesi ile eşitlik ve ilişki/bağıntı operatörlerini kullanan bir program
+#include &lt;iostream&gt;
+
+using std::cout;   // program cout kullanır
+using std::cin;    // program cin kullanır
+using std::endl;   // program endl kullanır
+
+int main()
+{
+    int sayi1, sayi2;
+
+    cout &lt;&lt; "İki tamsayi giriniz.\n"
+         &lt;&lt; "Ben aralarındaki ilişkiyi söyleyeceğim: ";
+    cin &gt;&gt; sayi1 &gt;&gt; sayi2;
+
+    if (sayi1 == sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; sayi2 &lt;&lt; "'ye eşittir." &lt;&lt; endl;
+    if (sayi1 != sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; sayi2 &lt;&lt; "'ye eşit değildir." &lt;&lt; endl;
+    if (sayi1 &lt; sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; ", " &lt;&lt; sayi2 &lt;&lt; "'den küçüktür." &lt;&lt; endl;
+    if (sayi1 &gt; sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; ", " &lt;&lt; sayi2 &lt;&lt; "'den büyüktür." &lt;&lt; endl;
+    if (sayi1 &lt;= sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; ", " &lt;&lt; sayi2 &lt;&lt; "'den küçük veya eşittir." &lt;&lt; endl;
+    if (sayi1 &gt;= sayi2)
+        cout &lt;&lt; sayi1 &lt;&lt; ", " &lt;&lt; sayi2 &lt;&lt; "'den büyük veya eşittir." &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+<p>Sample runs:</p>
+<pre class="kod"><code>İki tamsayı giriniz.
+Ben size aralarındaki ilişkiyi söyleyeceğim: 3 7
+3, 7'ye eşit değildir.
+3, 7'den küçüktür.
+3, 7'den küçük veya eşittir.</code></pre>
+<pre class="kod"><code>İki tamsayı giriniz.
+Ben size aralarındaki ilişkiyi söyleyeceğim: 22 12
+22, 12'ye eşit değildir.
+22, 12'den büyüktür.
+22, 12'den büyük veya eşittir.</code></pre>
+<pre class="kod"><code>İki tamsayı giriniz.
+Ben size aralarındaki ilişkiyi söyleyeceğim: 7 7
+7, 7'ye eşittir.
+7, 7'den küçük veya eşittir.
+7, 7'den büyük veya eşittir.</code></pre>
+<p><em>Note: Because <code>", "</code> is not printed between the two numbers in the first two <code>if</code> lines of the program, this program would actually print "37'ye eşit değildir."; to obtain the output shown, those lines would also need to be of the form <code>cout &lt;&lt; sayi1 &lt;&lt; ", " &lt;&lt; sayi2 &lt;&lt; ...</code>. The phrase "Ben size aralarındaki…" in the sample outputs also differs slightly from the text in the code.</em></p>
+<p><strong>Using statements:</strong> They eliminate the need for <code>std::</code> before <code>cout</code> and <code>cin</code>. As you will recall, we used <code>std::cout</code> in our first simple example. When a lot of input/output will be done, writing <code>std::</code> before every <code>cout</code> and <code>cin</code> would not be very practical. For this reason, it is worthwhile to use <code>using</code>.</p>
+<p><strong>Good programming practices:</strong></p>
+<ol><li>To increase the readability of the program, indent the statements inside an <code>if</code> structure by 3 spaces.</li><li>There should not be more than one statement on a line.</li><li>If a statement does not fit on one line and continues on the next line, take care to break the statement at a meaningful place.</li></ol>
+<p><em>Page tags: c++, c++ lessons, c++ files, what is c++, c++ programming, history of c++, introduction to programming with C++, programming languages.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../C++ İLE PROGRAMLAMAYA GİRİŞ | Bilgisayar Dersleri.pdf" download>C++ İLE PROGRAMLAMAYA GİRİŞ | Bilgisayar Dersleri.pdf</a></p>
+              <p class="kucuk">PDF · 171 KB · 15 <span data-i18n="arch.pagesLower"></span> · 11.08.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../C++ İLE PROGRAMLAMAYA GİRİŞ | Bilgisayar Dersleri.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (171 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

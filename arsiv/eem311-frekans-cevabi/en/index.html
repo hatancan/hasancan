@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Electronics II: Amplifier Frequency Response, Decibels, and the Miller Effect — hasancan.net</title>
+<meta name="description" content="EEM311 Electronics II handwritten lecture notes: decibels and dBm, frequency response of RC-coupled, transformer-coupled, and direct-coupled amplifiers, half-power point, low and high cutoff frequencies of BJT and JFET amplifiers, Miller capacitance, the Giacoletto (hybrid-π) model, fβ and fT, multistage amplifiers, and bandwidth.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-frekans-cevabi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem311-frekans-cevabi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem311-frekans-cevabi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem311-frekans-cevabi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Electronics II: Amplifier Frequency Response, Decibels, and the Miller Effect">
+<meta property="og:description" content="EEM311 Electronics II handwritten lecture notes: decibels and dBm, frequency response of RC-coupled, transformer-coupled, and direct-coupled amplifiers, half-power point, low and high cutoff frequencies of BJT and JFET amplifiers, Miller capacitance, the Giacoletto (hybrid-π) model, fβ and fT, multistage amplifiers, and bandwidth.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-frekans-cevabi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Electronics II: Amplifier Frequency Response, Decibels, and the Miller Effect", "description": "EEM311 Electronics II handwritten lecture notes: decibels and dBm, frequency response of RC-coupled, transformer-coupled, and direct-coupled amplifiers, half-power point, low and high cutoff frequencies of BJT and JFET amplifiers, Miller capacitance, the Giacoletto (hybrid-π) model, fβ and fT, multistage amplifiers, and bandwidth.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-frekans-cevabi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-frekans-cevabi-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-frekans-cevabi/eem311-frekans-cevabi-notlari.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM311 Electronics II: Amplifier Frequency Response, Decibels, and the Miller Effect">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#decibel">Decibel</a></li><li><a href="#examining-the-general-frequency-behavior">Examining the General Frequency Behavior</a></li><li><a href="#low-frequency-analysis">Low-Frequency Analysis</a></li><li><a href="#low-frequency-response-of-bjt-amplifiers">Low-Frequency Response of BJT Amplifiers</a></li><li><a href="#low-frequency-response-of-jfet-amplifiers">Low-Frequency Response of JFET Amplifiers</a></li><li><a href="#miller-effect-capacitance">Miller Effect Capacitance</a></li><li><a href="#high-frequency-response-of-bjt-amplifiers">High-Frequency Response of BJT Amplifiers</a></li><li><a href="#high-frequency-response-of-fet-amplifiers">High-Frequency Response of FET Amplifiers</a></li><li><a href="#multistage-frequency-effect">Multistage Frequency Effect</a></li><li><a href="#total-high-frequency-response">Total High-Frequency Response</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM311 Electronics II: Amplifier Frequency Response, Decibels, and the Miller Effect</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post was prepared from scanned pages of handwritten lecture notes for the <strong>amplifier frequency response</strong> topic of the <strong>EEM311 Electronics II</strong> course at Başkent University. The notes have no author name or date. Headings, definitions, formulas, and results were transcribed into text; page images were added for the graphs, Bode diagrams, and circuit schematics. All of the scanned pages can be downloaded as a PDF at the end of the post.</p>
+<h2 id="decibel">Decibel</h2>
+<p>The decibel is based on the logarithmic relationship between power levels and audio (sound) levels. For example, if the power level increases from 4 W to 16 W, this does not mean the sound level increases by a factor of 4; the sound level increases logarithmically. That is, for the example above the sound level increases as (4² = 16), which is written as: log₄ 16 = 2.</p>
+<p>The bel is defined in terms of the power levels P₁ and P₂ as follows:</p>
+<ul><li><strong>G = log₁₀ (P₂/P₁)</strong> [bel]</li></ul>
+<p>Since the bel is a very large unit of measurement, the decibel (dB) is used in practice; the decibel ratio is a measure of the difference in magnitude between two power levels. 10 dB = 1 bel:</p>
+<ul><li><strong>G_dB = 10 log₁₀ (P₂/P₁)</strong> [dB]</li></ul>
+<p>For a given output power (P₂), a reference power level (P₁) is chosen. This standard level is 1 mW, and the resistance associated with this power level is 600 Ω (the characteristic impedance of transmission lines). Because of this reference level, the dB symbol is written as dBm:</p>
+<ul><li><strong>G_dBm = 10 log₁₀ (P₂ / 1 mW) |₆₀₀ Ω</strong> [dBm]</li></ul>
+<p>In terms of voltage (across the same R):</p>
+<ul><li>G_dB = 10 log₁₀ (P₂/P₁) = 10 log₁₀ ((V₂²/R)/(V₁²/R)) = 10 log₁₀ (V₂/V₁)² = <strong>20 log₁₀ (V₂/V₁)</strong></li></ul>
+<p>For example, for a cascaded system with gain |A_vT| = |A_v1| · |A_v2| · |A_v3| ⋯ |A_vn|:</p>
+<ul><li>G_dB = 20 log₁₀ |A_vT| = 20 log₁₀ |A_v1| + 20 log₁₀ |A_v2| + ⋯</li><li><strong>G_dB = G_dB1 + G_dB2 + G_dB3 + ⋯ + G_dBn</strong></li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Voltage gain V_o/V_i</th><th scope="col">dB level</th></tr></thead><tbody><tr><th scope="row">0.5</th><td>−6</td></tr><tr><th scope="row">0.707</th><td>−3</td></tr><tr><th scope="row">1</th><td>0</td></tr><tr><th scope="row">2</th><td>6</td></tr><tr><th scope="row">10</th><td>20</td></tr><tr><th scope="row">100</th><td>40</td></tr><tr><th scope="row">1000</th><td>60</td></tr></tbody></table></div>
+<p>Logarithm reminder: if a = bˣ then x = log_b a. The common (base-10) logarithm is x = log₁₀ a; the natural logarithm is y = logₑ a.</p>
+<p><strong>Example 1:</strong> A 10 Ω load is connected to the output of an amplifier with an output power of 40 W. a) If the power gain is 25 dB, what must the input power be for full output power? b) If the voltage gain is 40 dB, what is the input voltage for full output power?</p>
+<p><strong>Example 2:</strong> An amplifier has an input power of 10000 W for a 1000 V input. If the output power is 500 W with an output impedance of 20 Ω, find a) the power gain in decibels, b) the voltage gain in decibels.</p>
+<p><em>Note: The notes do not include solutions to these two examples. Example 1: a) P_i = 40 W / 10^2.5 ≈ 126.5 mW; b) V_o = √(40 W · 10 Ω) = 20 V (rms), A_v = 10^(40/20) = 100, V_i = 0.2 V. Example 2 (taking the values as given in the notes): a) G_p = 10 log (500/10000) ≈ −13 dB; b) V_o = √(500 · 20) = 100 V, G_v = 20 log (100/1000) = −20 dB.</em></p>
+<h2 id="examining-the-general-frequency-behavior">Examining the General Frequency Behavior</h2>
+<p>In the response of single-stage or multistage amplifiers, the frequency of the applied signal has a definite effect. While this effect is negligible for mid-frequency values, at low and high frequencies the capacitive elements of the circuit affect the gain.</p>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: frequency response curves of RC-coupled, transformer-coupled, and direct-coupled amplifiers"><figcaption>Frequency response by coupling type</figcaption></figure>
+<ul><li>In <strong>RC-coupled</strong> circuits, the gain drop at low frequencies is caused by the external capacitors in the circuit, and at high frequencies by the internal capacitances.</li><li>In <strong>transformer-coupled</strong> circuits, the drop is caused by the distributed capacitances between the primary and secondary windings, in addition to the causes described for RC coupling.</li><li>In a <strong>direct-coupled</strong> amplifier, since there are no coupling capacitors that would cause a gain drop at low frequencies, there is no gain drop at these frequencies. At high frequencies, the gain drops because of the internal capacitors.</li></ul>
+<p>For logarithmic plotting, the curve can be normalized. In this case the gain at each frequency is divided by the mid-band gain. The level obtained at the half-power points is 0.707 = 1/√2.</p>
+<ul><li><strong>|A_v / A_v,mid|_dB = 20 log₁₀ (A_v / A_v,mid)</strong></li><li>At mid-band frequencies, A_v = A_v,mid → 20 log 1 = 0 dB</li><li>At the cutoff frequencies, A_v = 0.707 A_v,mid → 20 log (1/√2) = −3 dB</li></ul>
+<p>The capacitive effects of amplifiers cause a phase shift between the input and output signals. For example, in a common-emitter or common-source amplifier, the 180° phase difference present at mid-band frequencies rises above 180° at low frequencies (toward 270°) and falls below 180° at high frequencies (toward 90°).</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: normalized gain curve versus frequency, decibel representation, and phase curve of an RC-coupled common-emitter amplifier"><figcaption>Normalized gain and phase curve</figcaption></figure>
+<h3 id="mid-band-gain-cutoff-frequencies-and-bandwidth">Mid-band gain, cutoff frequencies, and bandwidth</h3>
+<p>In amplifiers, the highest gain is obtained at the mid-band level and is called <strong>A_v,mid</strong>. The limits of the high-gain region are fixed by the gains at the level 0.707 · A_v,mid. These frequencies, corresponding to f₁ and f₂, are called the <strong>corner, cutoff, band, break, or half-power (HP) frequencies</strong>.</p>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: external and internal capacitors in a two-stage RC-coupled amplifier"><figcaption>External and internal capacitors</figcaption></figure>
+<p>The half-power point is found with the factor 0.707 because at this level the output power equals half of the mid-band output power:</p>
+<ul><li>P_o,mid = |V_o|² / R_o = |A_v,mid · V_i|² / R_o (A_v,mid = V_o/V_i)</li><li>At the half-power point: P_o,HPF = |0.707 A_v,mid · V_i|² / R_o = 0.5 |A_v,mid · V_i|² / R_o</li><li><strong>P_o,HPF = 0.5 P_o,mid</strong></li></ul>
+<p>The bandwidth of the circuit is <strong>BW = f₂ − f₁</strong>. That is, the amplifier operates as desired within this frequency range.</p>
+<p><em>Note: For the half-power point, the notes say "V_o = 0.707 V_i, the output voltage is 70.7% of the input." What is meant is that the output voltage drops to 0.707 times its mid-band value (V_o = 0.707 · A_v,mid · V_i); the power relation below is written accordingly.</em></p>
+<h2 id="low-frequency-analysis">Low-Frequency Analysis</h2>
+<p>In a circuit consisting of a series C and a parallel R, X_C = 1/(2πfC). At very high frequency X_C ≅ 0 (the capacitor is a short circuit), and at f ≅ 0, X_C → ∞ (open circuit).</p>
+<ul><li>V_o = R·V_i / (R + jX_C) → |V_o| = R·V_i / √(R² + X_C²)</li><li>If X_C = R, then V_o = R·V_i / √(R² + R²) = V_i/√2 → <strong>A_v = V_o/V_i = 1/√2 = 0.707</strong> (half-power point)</li><li>In this case X_C = 1/(2πf₁C) = R → <strong>f₁ = 1/(2πRC)</strong> (low-frequency cutoff frequency, or lower cutoff frequency)</li><li>In logarithmic form: G_v = 20 log₁₀ (1/√2) = −3 dB (half-power point); G_v = 20 log₁₀ 1 = 0 dB (mid-band)</li></ul>
+<p>If the gain equation is expressed using the frequency f₁:</p>
+<ul><li>A_v = V_o/V_i = R/(R − jX_C) = 1/(1 − j(X_C/R)) = 1/(1 − j(1/ωCR))</li><li><strong>A_v = 1 / (1 − j(1/(2πfRC)))</strong>, and since f₁ = 1/(2πRC), <strong>A_v = 1 / (1 − j(f₁/f))</strong></li></ul>
+<p>The magnitude and phase of this gain are:</p>
+<ul><li><strong>A_v = 1 / √(1 + (f₁/f)²) ∠ tan⁻¹(f₁/f)</strong></li><li>If f = f₁ then A_v = 1/√2 = 0.707 → −3 dB</li></ul>
+<p>The gain in dB, in logarithmic form:</p>
+<ul><li>A_v,dB = 20 log₁₀ (1/√(1 + (f₁/f)²)) = −½ · 20 log₁₀ [1 + (f₁/f)²]</li><li><strong>A_v,dB = −10 log₁₀ [1 + (f₁/f)²]</strong></li><li>If f ≪ f₁ or (f₁/f)² ≫ 1: A_v,dB = −10 log₁₀ (f₁/f)² = <strong>−20 log (f₁/f)</strong></li></ul>
+<p>Using this equation without worrying about the f ≪ f₁ condition, we get:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">f</th><th scope="col">f₁/f</th><th scope="col">−20 log₁₀ (f₁/f)</th></tr></thead><tbody><tr><th scope="row">f₁</th><td>1</td><td>0 dB</td></tr><tr><th scope="row">f₁/2</th><td>2</td><td>−6 dB</td></tr><tr><th scope="row">f₁/4</th><td>4</td><td>−12 dB</td></tr><tr><th scope="row">f₁/10</th><td>10</td><td>−20 dB</td></tr><tr><th scope="row">f₁/100</th><td>100</td><td>−40 dB</td></tr></tbody></table></div>
+<p>That is, for every tenfold decrease in frequency, the gain drops by 20 dB (<strong>−20 dB/decade</strong>).</p>
+<figure class="yazi-gorsel"><img src="../s-07.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: asymptotic Bode diagram at low frequency (−20 dB/decade) and input-output phase angle curve"><figcaption>Low-frequency Bode diagram and phase</figcaption></figure>
+<p>The phase angle between input and output: <strong>θ = tan⁻¹ (f₁/f)</strong></p>
+<ul><li>For f ≪ f₁, θ → 90°; if f₁ = 100f then θ = 89.4°</li><li>If f₁ = f then θ = 45°</li><li>For f ≫ f₁, θ → 0°; if f = 100f₁ then θ = 0.573°</li></ul>
+<h2 id="low-frequency-response-of-bjt-amplifiers">Low-Frequency Response of BJT Amplifiers</h2>
+<p>In a common-emitter circuit with voltage-divider bias, the capacitors C_i (input), C_o (output), and C_E (emitter bypass) cause the gain to drop at low frequencies. For the RC analysis, the approximate equivalent resistance (R) seen by each capacitor must be found.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: phase angle curve, BJT amplifier circuit, and low-frequency ac equivalent"><figcaption>BJT amplifier and low-frequency equivalent</figcaption></figure>
+<p><strong>Input RC circuit:</strong> C_i lies between the transistor and the source. In the input RC connection, the equivalent resistance seen by the capacitor is R_s + R_i:</p>
+<ul><li>R_i = R1 // R2 // h_ie</li><li>At mid-band, V_i = V_s·R_i / (R_s + R_i); at low frequency, V_i = R_i·V_s / √((R_s + R_i)² + X_C²)</li><li>X_Ci = R_s + R_i → <strong>f_Ci = 1 / (2π(R_s + R_i)C_i)</strong></li></ul>
+<p><strong>Output RC circuit:</strong> The total series resistance is R_o + R_L. If r_o = 1/h_oe is not neglected, R_o = r_o // R_C.</p>
+<ul><li><strong>f_Co = 1 / (2π(R_o + R_L)C_o)</strong></li></ul>
+<p><strong>Emitter RC circuit:</strong> The effect of C_E on the gain is very large. When the ac current is not to affect the dc voltage across R_E, the bypass capacitor C_E is connected here. This prevents the gain from dropping.</p>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: equivalents and cutoff frequencies of the input, output, and emitter RC circuits"><figcaption>Input, output, and emitter RC circuits</figcaption></figure>
+<ul><li><strong>f_CE = 1 / (2π R_e C_E)</strong></li><li>R_out = r_e + R_th/β = (h_ie + R_th)/h_fe, R_th = R_s // R1 // R2</li><li><strong>R_e = R_out // R_E = (r_e + R_th/β) // R_E</strong></li><li>Effect of R_E on the gain: with C_E shorted, A_v = −h_fe R_C / h_ie; with the effect of R_E, A_v = −h_fe R_C / (h_ie + h_fe R_E) = −R_C / (r_e + R_E)</li></ul>
+<p><strong>Note (from the source):</strong> When examining the effect of each capacitor on the circuit, the others are assumed to be short circuits, as at mid-band frequencies.</p>
+<h3 id="total-low-frequency-response">Total low-frequency response</h3>
+<p>Each of the three RC circuits has a cutoff frequency. These need not be equal. The one with the larger value at low frequency is the <strong>dominant lower cutoff frequency</strong> of the circuit; that is, it is the frequency at which the amplifier's gain drop begins. Each RC circuit causes a gain drop of 20 dB/decade; below the cutoff frequencies the slope becomes 20, 40, and 60 dB/decade, respectively.</p>
+<figure class="yazi-gorsel"><img src="../s-10.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: C_E cutoff frequency, finding R_e, and total low-frequency response with 20/40/60 dB/decade slopes"><figcaption>Total low-frequency response</figcaption></figure>
+<p><strong>Example:</strong> Find the lower cutoff frequency of the circuit below and sketch the Bode diagram (frequency response curve). A_v,mid = ? Circuit: V_CC = 20 V, R1 = 40 kΩ, R2 = 10 kΩ, R_C = 4 kΩ, R_E = 2 kΩ, C_E = 20 µF, R_s = 1 kΩ, C_i = 10 µF, C_o = 1 µF, R_L = 2.2 kΩ, h_fe = 100, r_o = ∞. (No solution in the notes.)</p>
+<h2 id="low-frequency-response-of-jfet-amplifiers">Low-Frequency Response of JFET Amplifiers</h2>
+<figure class="yazi-gorsel"><img src="../s-11.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: BJT example circuit, JFET amplifier, input and output RC circuits, and JFET equivalent circuit"><figcaption>Low-frequency response of the JFET amplifier</figcaption></figure>
+<ul><li><strong>Input RC circuit:</strong> <strong>f_CG = 1 / (2π(R_s + R_i)C_G)</strong>, R_i = R_G</li><li><strong>Output RC circuit:</strong> R_o = r_d // R_D; <strong>f_CD = 1 / (2π(R_o + R_L)C_D)</strong></li><li><strong>Source RC circuit:</strong> <strong>f_CS = 1 / (2π R_eq C_S)</strong>, R_eq = R_S / [1 + R_S(1 + g_m r_d)/(r_d + R_D // R_L)]; if r_d = ∞, <strong>R_eq = R_S // (1/g_m)</strong></li></ul>
+<p><em>Note: In the expression for R_eq, the fraction bar is written ambiguously in the notes; the standard form is given here.</em></p>
+<p><strong>Example:</strong> R_sig = 10 kΩ, C_G = 0.01 µF, R_G = 1 MΩ, R_D = 4.7 kΩ, C_D = 0.5 µF, R_L = 2.2 kΩ, R_S = 1 kΩ, C_S = 2 µF, g_m = 2 mS. a) Find the lower cutoff frequency of the circuit and sketch the Bode diagram. b) Find the mid-band gain of the circuit. (No solution in the notes.)</p>
+<h2 id="miller-effect-capacitance">Miller Effect Capacitance</h2>
+<p>For inverting amplifiers (those with −A_v), the input and output capacitance increases with the interelectrode capacitance of the circuit element and with the circuit gain. This capacitance is defined as the feedback capacitance C_f.</p>
+<p>On the input side: I_i = I₁ + I₂, I_i = V_i/Z_i, I₁ = V_i/R_i, I₂ = (V_i − V_o)/X_Cf = (V_i − A_v V_i)/X_Cf = (1 − A_v)V_i / X_Cf</p>
+<ul><li>1/Z_i = 1/R_i + 1/(X_Cf/(1 − A_v)) = 1/R_i + 1/X_CM</li><li>X_CM = X_Cf/(1 − A_v) = 1/(ω(1 − A_v)C_f)</li><li><strong>Miller effect input capacitance: C_Mi = (1 − A_v) C_f</strong></li></ul>
+<p>According to this expression, for every inverting amplifier the input capacitance increases with the Miller effect capacitance, which depends on the amplifier gain, and with the interelectrode capacitance present between the input and output terminals of the active circuit element (transistor).</p>
+<figure class="yazi-gorsel"><img src="../s-12.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: JFET source RC circuit, example circuit, and derivation of the Miller effect input capacitance"><figcaption>Miller effect input capacitance</figcaption></figure>
+<p>Miller effect at the output: I_o = I₁ + I₂, I₁ = V_o/R_o, I₂ = (V_o − V_i)/X_Cf. Since R_o is large, if I₁ is neglected, I_o ≅ I₂ = (V_o − V_i)/X_Cf.</p>
+<ul><li>I_o = (V_o − V_o/A_v)/X_Cf = V_o(1 − 1/A_v)/X_Cf</li><li>V_o/I_o = X_Cf / (1 − 1/A_v) = 1/(ωC_f(1 − 1/A_v)) = 1/(ωC_Mo)</li><li><strong>Miller effect output capacitance: C_Mo = (1 − 1/A_v) · C_f</strong></li></ul>
+<h2 id="high-frequency-response-of-bjt-amplifiers">High-Frequency Response of BJT Amplifiers</h2>
+<p>In the high-frequency response, the circuit capacitance and h_fe factors are present at the −3 dB point. For a low-pass structure consisting of a series R and a parallel C (f₂: upper cutoff frequency):</p>
+<ul><li><strong>A_v = 1 / (1 + j(f/f₂)) = 1/√(1 + (f/f₂)²) ∠θ</strong></li></ul>
+<p>Since C_bc is the capacitance between the input and output, its effect on the input and output is expressed as C_Mi and C_Mo. C_wi is the wiring capacitance and C_wo is the output wiring (stray) capacitance. C_i includes C_wi, C_be, and the Miller capacitance C_Mi; C_o includes C_wo, C_ce, and the Miller capacitance C_Mo. Except in special applications, C_ce is not taken into account.</p>
+<figure class="yazi-gorsel"><img src="../s-14.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: internal capacitances of the BJT amplifier at high frequency, ac equivalent, and input and output Thevenin circuits"><figcaption>BJT high-frequency equivalent circuit</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Input circuit</th><th scope="col">Output circuit</th></tr></thead><tbody><tr><th scope="row">Thevenin resistance</th><td>R_th1 = R_s // R1 // R2 // R_i</td><td>R_th2 = R_C // R_L // r_o</td></tr><tr><th scope="row">Capacitance</th><td>C_i = C_wi + C_be + C_Mi, C_Mi = (1 − A_v)C_bc</td><td>C_o = C_wo + C_ce + C_Mo, C_Mo = (1 − 1/A_v)C_bc</td></tr><tr><th scope="row">Cutoff frequency</th><td><strong>f_Hi = 1 / (2π R_th1 C_i)</strong></td><td><strong>f_Ho = 1 / (2π R_th2 C_o)</strong></td></tr></tbody></table></div>
+<h3 id="variation-in-h-fe">Variation in h_fe (β)</h3>
+<p>h_fe also varies with frequency: <strong>h_fe = h_fe,mid / (1 + j(f/f_β))</strong></p>
+<p>f_β is found through the parameters of the <strong>"hybrid π"</strong> or <strong>"Giacoletto"</strong> model, which is used to represent the transistor as well as possible in the high-frequency region. The model contains r_bb' (base contact + base bulk + base spreading resistance), r_b'e = 1/g_b'e, C_b'e, r_b'c and C_b'c, r_ce = 1/h_oe, and the current source g_m·V_b'e ≅ h_fe,mid·I_b'. The resistances r_b'e, r_ce, and r_b'c are the resistances seen between the terminals when the device operates in the active region; the same applies to C_b'c and C_b'e.</p>
+<figure class="yazi-gorsel"><img src="../s-15.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: Giacoletto (hybrid-π) high-frequency transistor small-signal ac equivalent circuit and the fβ and fT relations"><figcaption>Giacoletto model, fβ and fT</figcaption></figure>
+<ul><li>In terms of these parameters: <strong>f_β (or f_hfe) = g_b'e / (2π(C_b'e + C_b'c))</strong></li><li>h_fe is related to g_b'e through the equality g_m = h_fe,mid · g_b'e: <strong>f_β = (1/h_fe,mid) · g_m / (2π(C_b'e + C_b'c))</strong></li><li>In terms of the r_e model: <strong>f_β ≅ 1 / (2π β_mid r_e (C_be + C_bc))</strong></li><li>The gain-bandwidth product is f_T: <strong>f_T ≅ 1 / (2π r_e (C_be + C_bc))</strong>, <strong>f_T = f_β · β_mid</strong></li></ul>
+<h2 id="high-frequency-response-of-fet-amplifiers">High-Frequency Response of FET Amplifiers</h2>
+<figure class="yazi-gorsel"><img src="../s-16.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: C_gd, C_gs, and C_ds capacitances in the FET amplifier, high-frequency equivalent, and multistage frequency effect"><figcaption>FET high-frequency response and multistage effect</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Input circuit</th><th scope="col">Output circuit</th></tr></thead><tbody><tr><th scope="row">Thevenin resistance</th><td>R_th1 = R_s // R_G</td><td>R_th2 = R_D // R_L // r_d</td></tr><tr><th scope="row">Capacitance</th><td>C_i = C_wi + C_gs + C_Mi, C_Mi = (1 − A_v)C_gd</td><td>C_o = C_wo + C_ds + C_Mo, C_Mo = (1 − 1/A_v)C_gd</td></tr><tr><th scope="row">Cutoff frequency</th><td><strong>f_Hi = 1 / (2π R_th1 C_i)</strong></td><td><strong>f_Ho = 1 / (2π R_th2 C_o)</strong></td></tr></tbody></table></div>
+<h2 id="multistage-frequency-effect">Multistage Frequency Effect</h2>
+<p>A_v,low = A_v1,low · A_v2,low ⋯ As the number of stages increases, the gain increases but the bandwidth decreases (the lower cutoff frequency rises: f₁ &lt; f₁' &lt; f₁''; the upper cutoff frequency falls: f₂ &gt; f₂' &gt; f₂'').</p>
+<h2 id="total-high-frequency-response">Total High-Frequency Response</h2>
+<p>Of the two cutoff frequencies present at high frequency, the lower one is <strong>dominant</strong>. In the ideal Bode diagram, the plot can be drawn without knowing which of f_c,input and f_c,output is smaller: from the first break (cutoff) frequency onward the gain falls with a slope of −20 dB/decade, and from the second break frequency onward it falls with a slope of −40 dB/decade. In the actual Bode diagram, on the other hand, the −3 dB gain drop at the cutoff frequencies is visible.</p>
+<h3 id="total-amplifier-response">Total amplifier response</h3>
+<p>Of the three cutoff frequencies at low frequency, the largest is the effective one, and of the two cutoff frequencies at high frequency, the smaller is the effective one:</p>
+<ul><li><strong>BW = f_H2 − f_L3</strong> (that is, BW = f_cH − f_cL = f_H − f_L)</li></ul>
+<figure class="yazi-gorsel"><img src="../s-17.jpg" width="1030" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: total high-frequency response (ideal and actual Bode) and total amplifier response with bandwidth"><figcaption>Total high-frequency and amplifier response</figcaption></figure>
+<p>If we assume f_cH ≫ f_cL, then <strong>BW = f_cH − f_cL ≅ f_cH</strong>. The frequency at which the gain falls to 0 dB is f_T:</p>
+<ul><li><strong>f_T = A_v,mid · BW = A_v,mid · f_cH</strong></li></ul>
+<h3 id="example-total-frequency-response">Example: total frequency response</h3>
+<p>Find the total amplifier frequency response of the circuits below and sketch their Bode diagrams. (No solutions in the notes.)</p>
+<ol><li>BJT: V_CC = +9 V, R1 = 12 kΩ, R2 = 5 kΩ, R_C = 200 Ω, R_E = 100 Ω, C_E = 10 µF, C_i = 1 µF, C_o = 1 µF, R_L = 600 Ω; h_fe = 125, r_o = ∞, C_be = 25 pF, C_bc = 10 pF, C_ce = 1 pF, C_wi = 6 pF, C_wo = 8 pF.</li><li>JFET: V_DD = +10 V (can also be read as +12 V in the handwriting), R_sig = 10 kΩ, C_G = 0.01 µF, R_G = 1 MΩ, R_D = 4.7 kΩ, C_D = 0.5 µF, R_S = 1 kΩ, C_S = 2 µF, R_L; g_m = 2 mS, C_gd = 2 pF, C_gs = 4 pF, C_ds = 0.5 pF, C_wi = 5 pF, C_wo = 6 pF.</li></ol>
+<figure class="yazi-gorsel"><img src="../s-18.jpg" width="1198" height="1629" loading="lazy" decoding="async" alt="Handwritten note page: relationship between fT and bandwidth, and BJT and JFET example circuits for the total frequency response"><figcaption>fT and total frequency response examples</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem311-frekans-cevabi-notlari.pdf" download>eem311-frekans-cevabi-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 4.0 MB · 18 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem311-frekans-cevabi-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

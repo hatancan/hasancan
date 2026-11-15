@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: MOS Transistor – Current Relations, Velocity Saturation, Capacitances (UC Berkeley EE141 slides, Jan Rabaey) — hasancan.net</title>
+<meta name="description" content="A MOS transistor presentation distributed in the EEM312 Digital Electronics course, based on Jan Rabaey&#x27;s UC Berkeley EE141 lecture slides: linear and saturation region current, channel length modulation, velocity saturation and VDSAT, subthreshold conduction, the unified hand-analysis model, equivalent resistance Req, gate, diffusion and parasitic capacitances, the hot-carrier effect, threshold variations and latch-up.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: MOS Transistor – Current Relations, Velocity Saturation, Capacitances (UC Berkeley EE141 slides, Jan Rabaey)">
+<meta property="og:description" content="A MOS transistor presentation distributed in the EEM312 Digital Electronics course, based on Jan Rabaey&#x27;s UC Berkeley EE141 lecture slides: linear and saturation region current, channel length modulation, velocity saturation and VDSAT, subthreshold conduction, the unified hand-analysis model, equivalent resistance Req, gate, diffusion and parasitic capacitances, the hot-carrier effect, threshold variations and latch-up.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: MOS Transistor – Current Relations, Velocity Saturation, Capacitances (UC Berkeley EE141 slides, Jan Rabaey)", "description": "A MOS transistor presentation distributed in the EEM312 Digital Electronics course, based on Jan Rabaey's UC Berkeley EE141 lecture slides: linear and saturation region current, channel length modulation, velocity saturation and VDSAT, subthreshold conduction, the unified hand-analysis model, equivalent resistance Req, gate, diffusion and parasitic capacitances, the hot-carrier effect, threshold variations and latch-up.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "dosya_4_EEM312.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-rabaey-mos-transistor/dosya_4_EEM312.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: MOS Transistor – Current Relations, Velocity Saturation, Capacitances (UC Berkeley EE141 slides, Jan Rabaey)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>24.02.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#current-voltage-relation-in-the-long-channel-transistor">Current–voltage relation in the long-channel transistor</a></li><li><a href="#velocity-saturation">Velocity saturation</a></li><li><a href="#subthreshold-conduction">Subthreshold conduction</a></li><li><a href="#summary-current-relations">Summary: current relations</a></li><li><a href="#channel-resistance-and-the-switch-model">Channel resistance and the switch model</a></li><li><a href="#mos-capacitances">MOS capacitances</a></li><li><a href="#hot-carrier-effects-threshold-variations-and-latch-up">Hot-carrier effects, threshold variations and latch-up</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: MOS Transistor – Current Relations, Velocity Saturation, Capacitances (UC Berkeley EE141 slides, Jan Rabaey)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 24.02.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post presents the 41-page MOS transistor presentation that Prof. Dr. Emin Akata distributed in the spring 2006 semester in the <strong>EEM312 Digital Electronics</strong> course at Başkent University. The presentation is largely based on the <strong>UC Berkeley EE141 (Digital Integrated Circuits)</strong> lecture slides by <strong>Jan M. Rabaey</strong>, with the instructor's derivations and explanations added. The slides are in English; the content is written up below with explanations and formulas. The original PDF can be downloaded at the end of the post. Previous part of the series: <a href="/arsiv/eem312-rabaey-diyot/">Introduction to the Diode and the MOS Transistor</a>.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source cited. It will be removed upon the request of the rights holder.</em></p>
+<h2 id="current-voltage-relation-in-the-long-channel-transistor">Current–voltage relation in the long-channel transistor</h2>
+<p><strong>Linear (resistive) region</strong> (L &gt; 0.25 µm, V_DS ≤ V_GS − V_T):</p>
+<ul><li>I_D = k′_n (W/L)[(V_GS − V_T)V_DS − V_DS²/2]</li><li>k′_n = µ_n C_ox = µ_n ε_ox/t_ox: process transconductance parameter (µ_n is the carrier mobility, m²/Vs); k_n = k′_n W/L: the gain factor of the device</li><li>At small V_DS there is a linear relationship between I_D and V_DS; the region takes its name from this.</li></ul>
+<p><strong>Saturation region</strong> (V_DS ≥ V_GS − V_T): V_GS − V_T is substituted for V_DS in the expression above:</p>
+<ul><li>I_D′ = (k′_n/2)(W/L)(V_GS − V_T)²</li><li>Since the voltage between the pinch-off point and the source remains fixed at V_GS − V_T, I_D no longer depends on V_DS. However, because the effective length of the conducting channel changes with V_DS: <strong>I_D = I_D′(1 + λV_DS)</strong>; λ is the channel length modulation coefficient and is inversely proportional to the channel length.</li></ul>
+<p>A transistor in saturation behaves like an ideal current source; but as V_DS increases, the effective channel shortens and the current increases (L is in the denominator). In short transistors, channel length modulation is more pronounced because the depletion region of the drain junction occupies a larger portion of the channel; if a high-impedance current source is needed, choosing a long-channel transistor is recommended.</p>
+<p><strong>Factors that determine the current</strong> (for constant V_DS and V_GS &gt; V_T): the source-drain distance L, the channel width W, the threshold voltage V_T, the SiO₂ thickness t_ox, the dielectric constant of the gate insulator ε_ox, and the carrier mobility (µ_n = 500 cm²/Vs for nFET, µ_p = 180 cm²/Vs for pFET).</p>
+<h2 id="velocity-saturation">Velocity saturation</h2>
+<p>Very short-channel transistors deviate noticeably from the resistive and saturation models. While the carrier velocity is v_n = µ_n ξ(x), the mobility is constant; but when the lateral field reaches a critical value ξ_c, the velocity saturates because of collisions. This condition is easily met in short-channel devices.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Variation of carrier velocity with field: constant mobility up to ξc = 1.5 V/µm, then constant velocity at υsat = 10⁵ m/s"><figcaption>Short-channel effects: velocity saturation</figcaption></figure>
+<p>To reach velocity saturation in an L = 0.25 µm NMOS, a difference of only a few volts between D and S is sufficient; in PMOS, velocity saturation is less pronounced.</p>
+<p><strong>Approximate velocity curve:</strong> v = µ_n ξ/(1 + ξ/ξ_c) (ξ ≤ ξ_c), v = v_sat (ξ ≥ ξ_c). Continuity of the curve at v_sat requires ξ_c = 2v_sat/µ_n. When the current expression is recalculated with this velocity expression:</p>
+<ul><li>Linear (V_DS ≤ V_GS − V_T): I_D = κ(V_DS) k′_n (W/L)[(V_GS − V_T)V_DS − V_DS²/2]</li><li>κ(V) = 1/(1 + V/(ξ_c L)): a measure of the degree of velocity saturation</li><li>Saturation (V_DS = V_DSAT): I_DSAT = κ(V_DSAT) k′_n (W/L)[(V_GS − V_T)V_DSAT − V_DSAT²/2]</li><li>For a long channel or small V_DS, κ → 1; for a short channel, κ &lt; 1 and less current than expected is delivered.</li></ul>
+<p>From the resistive-region expression dq(x) = −C_ox W dx[V_GS − V(x) − V_T], we get I(x) = C_ox W v_n(x)[V_GS − V(x) − V_T], and in saturation I_DSAT = C_ox W v_sat [V_GS − V_DSAT − V_T]; equating these two expressions gives <strong>V_DSAT = κ(V_GT)V_GT</strong>, V_GT = V_GS − V_T.</p>
+<figure class="yazi-gorsel"><img src="../s-12.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="I_D–V_DS curves of long- and short-channel devices: the short-channel device enters saturation at V_DSAT, before V_GS − V_T"><figcaption>Velocity saturation effects</figcaption></figure>
+<p>In a short-channel device and at sufficiently large V_GT, κ(V_GT) is noticeably smaller than 1 and V_DSAT &lt; V_GT: the device enters saturation before V_DS reaches V_GS − V_T and operates mostly in saturation. I_DSAT depends <strong>linearly</strong> on V_GS (in contrast to the quadratic dependence in the long channel); less current is delivered for a given control voltage. At V_GS = V_DS = 2.5 V, the current of the short transistor is only 40% of that of the long one (220 µA versus 540 µA).</p>
+<p>In PMOS, all voltage and current signs are reversed (example: 0.25 µm PMOS, W/L = 1.5, V_DD = 2.5 V, V_T = −0.4 V; at V_GS = −2.5 V, I_D ≈ −1 × 10⁻⁴ A).</p>
+<figure class="yazi-gorsel"><img src="../s-15.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="I_D–V_GS: quadratic dependence in the long channel, linear dependence in the short channel (V_DS = 2.5 V, W/L = 1.5)"><figcaption>MOS I_D–V_GS characteristics</figcaption></figure>
+<h3 id="simplified-model">Simplified model</h3>
+<p>Since the expressions found are too complicated for hand analysis, two assumptions are made:</p>
+<ol><li>The velocity saturates abruptly at ξ_c: v = µ_n ξ (ξ ≤ ξ_c), v = v_sat = µ_n ξ_c (ξ ≥ ξ_c).</li><li>The V_DSAT at which the critical field is reached is constant (reasonable for large V_GT): V_DSAT ≈ Lξ_c = Lv_sat/µ_n.</li></ol>
+<p>V_DSAT = κ(V_GT)V_GT = [ξ_c L/(ξ_c L + V_GT)]V_GT, and for large V_GT it is ≈ ξ_c L. With these assumptions, the resistive-region equations remain the same as in the long-channel model; when V_DSAT is reached, the current saturates abruptly:</p>
+<ul><li>I_DSAT = µ_n C_ox (W/L)[(V_GS − V_T)V_DSAT − V_DSAT²/2], substituting µ_n/L = v_sat/V_DSAT</li><li><strong>I_DSAT = v_sat C_ox W (V_GS − V_T − V_DSAT/2)</strong></li></ul>
+<p>This model is indeed first-order and empirical; it causes deviations in the transition between the linear and velocity-saturated regions.</p>
+<h2 id="subthreshold-conduction">Subthreshold conduction</h2>
+<p>When V_GS &lt; V_T, the transition from conduction to cutoff is gradual rather than abrupt; the current does not drop to zero immediately but decreases exponentially, as in a bipolar transistor. When there is no conducting channel, the source, bulk and drain form a parasitic npn bipolar transistor:</p>
+<ul><li>I_D = I_S e^(qV_GS/(nkT)) (1 − e^(−qV_DS/(kT)))(1 + λV_DS); I_S and n are empirical parameters, with n typically around 1.5 (≥ 1)</li><li>Slope factor S = n(kT/q) ln(10): typically 60 (n = 1) to 100 mV/decade</li><li>The rate at which the current decreases is also affected by temperature increase; subthreshold conduction causes problems in dynamic circuits and in power consumption.</li></ul>
+<h2 id="summary-current-relations">Summary: current relations</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Region</th><th scope="col">Condition</th><th scope="col">I_D</th></tr></thead><tbody><tr><th scope="row">Cutoff</th><td>V_GS ≤ V_T</td><td>0</td></tr><tr><th scope="row">Triode</th><td>V_GS &gt; V_T, V_DS &lt; V_GS − V_T</td><td>k_n[(V_GS − V_T)V_DS − V_DS²/2]</td></tr><tr><th scope="row">Saturation</th><td>V_GS &gt; V_T, V_DS ≥ V_GS − V_T</td><td>(k_n/2)(V_GS − V_T)²(1 + λV_DS)</td></tr><tr><th scope="row">Velocity saturation</th><td>V_GS &gt; V_T, V_DS ≥ V_DSAT, V_DSAT &lt; V_GS − V_T</td><td>k_n[(V_GS − V_T)V_DSAT − V_DSAT²/2] ≈ v_sat C_ox W(V_GS − V_T − V_DSAT/2)</td></tr></tbody></table></div>
+<p>k_n = k′_n W/L, k′_n = µ_n C_ox = µ_n ε_ox/t_ox, V_GT = V_GS − V_T.</p>
+<h3 id="unified-hand-analysis-model">Unified hand-analysis model</h3>
+<ul><li>I_D = 0 (V_GT ≤ 0)</li><li>I_D = k′(W/L)[V_GT V_min − V_min²/2](1 + λV_DS) (V_GT ≥ 0), V_min = min(V_GT, V_DS, V_DSAT)</li><li>V_T = V_T0 + γ(√|−2φ_F + V_SB| − √|−2φ_F|)</li></ul>
+<p>The model is determined by the voltages at the four terminals and five device parameters (V_T0, γ, V_DSAT, k′, λ). In PMOS, all of these parameters are negative and "max" is used instead of "min". Since in digital circuits the device mostly operates in the high-current region (V_GS = V_DS = V_DD), it is important that the model fits well in this region. For 0.25 µm CMOS:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">V_T0 (V)</th><th scope="col">γ (V^0.5)</th><th scope="col">V_DSAT (V)</th><th scope="col">k′ (A/V²)</th><th scope="col">λ (V⁻¹)</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>0.43</td><td>0.4</td><td>0.63</td><td>115 × 10⁻⁶</td><td>0.06</td></tr><tr><th scope="row">PMOS</th><td>−0.4</td><td>−0.4</td><td>−1</td><td>−30 × 10⁻⁶</td><td>−0.1</td></tr></tbody></table></div>
+<p>The presentation also includes a comparison of the simple model with SPICE: the two curves are close in the linear, velocity-saturated and saturated regions; the V_DS = V_DSAT and V_DSAT = V_GT boundaries are marked.</p>
+<h2 id="channel-resistance-and-the-switch-model">Channel resistance and the switch model</h2>
+<p><strong>Drain-source resistance in the linear region</strong> (neglecting channel length modulation and velocity saturation):</p>
+<ul><li>R_DS = (∂I_D/∂V_DS)⁻¹ = 1/[k_n(V_GS − V_T − V_DS)]; as V_DS → V_GS − V_T, R_DS → ∞</li></ul>
+<p><strong>In saturation</strong> (including channel length modulation, neglecting velocity saturation): R_DS = [λ(k_n/2)(V_GS − V_T)²]⁻¹ ≅ (λI_D)⁻¹ (for constant V_GS).</p>
+<p><strong>Switch model:</strong> the transistor is modeled as a switch with infinite off resistance and a finite on resistance R_on. The resistance is inversely proportional to W/L (doubling W halves R_on); for V_DD ≫ V_T + V_DSAT/2, R_on is independent of V_DD; as V_DD approaches V_T, R_on increases rapidly. For W/L = 1 (V_GS = V_DD, V_DS: V_DD → V_DD/2):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_DD (V)</th><th scope="col">1</th><th scope="col">1.5</th><th scope="col">2</th><th scope="col">2.5</th></tr></thead><tbody><tr><th scope="row">NMOS R_eq (kΩ)</th><td>35</td><td>19</td><td>15</td><td>13</td></tr><tr><th scope="row">PMOS R_eq (kΩ)</th><td>115</td><td>55</td><td>38</td><td>31</td></tr></tbody></table></div>
+<p>For larger devices, R_eq is divided by W/L.</p>
+<p>R_on is a time-varying, nonlinear quantity that depends on the operating point; the average resistance R_eq over the end points of the transition is a good constant approximation:</p>
+<ul><li>R_eq = 1/(t₂ − t₁) ∫ R_on(t) dt = 1/(t₂ − t₁) ∫ V_DS(t)/I_D(t) dt ≈ ½[R_on(t₁) + R_on(t₂)]</li></ul>
+<p>By the definition of propagation delay, taking the discharge of a capacitance from V_DD to V_DD/2 through an NMOS in velocity saturation:</p>
+<ul><li><strong>R_eq = (3/4)(V_DD/I_DSAT)(1 − (7/9)λV_DD)</strong>, I_DSAT = k′(W/L)[(V_DD − V_T)V_DSAT − V_DSAT²/2]</li><li>If the resistances at the end points are averaged and simplified with a Taylor expansion, a similar result is obtained: R_eq ≈ (3/4)(V_DD/I_DSAT)(1 − (5/6)λV_DD)</li></ul>
+<h2 id="mos-capacitances">MOS capacitances</h2>
+<p><strong>Overlap capacitance:</strong> because of lateral diffusion x_d, the gate overlaps the source and drain (L_d = L − 2x_d): C_GSO = C_GDO = C_ox x_d W = C_o W.</p>
+<p><strong>Gate-channel capacitance</strong> by region:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Region</th><th scope="col">C_GCB</th><th scope="col">C_GCS</th><th scope="col">C_GCD</th><th scope="col">C_GC</th><th scope="col">C_G</th></tr></thead><tbody><tr><th scope="row">Cutoff</th><td>C_ox WL</td><td>0</td><td>0</td><td>C_ox WL</td><td>C_ox WL + 2C_o W</td></tr><tr><th scope="row">Resistive</th><td>0</td><td>C_ox WL/2</td><td>C_ox WL/2</td><td>C_ox WL</td><td>C_ox WL + 2C_o W</td></tr><tr><th scope="row">Saturation</th><td>0</td><td>(2/3)C_ox WL</td><td>0</td><td>(2/3)C_ox WL</td><td>(2/3)C_ox WL + 2C_o W</td></tr></tbody></table></div>
+<p>In digital design, the most important regions are saturation and cutoff.</p>
+<figure class="yazi-gorsel"><img src="../s-34.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Variation of gate capacitance with V_GS (V_DS = 0) and with the degree of saturation V_DS/(V_GS − V_T)"><figcaption>Gate capacitance</figcaption></figure>
+<p><strong>Diffusion capacitance:</strong> consists of the bottom and side wall junctions of the source/drain region:</p>
+<ul><li>C_j = C_j0/(1 − V_D/φ₀)^m, C_sw = C′_sw x_j (W + 2L_s), C_jsw = C′_sw x_j</li><li>C_diff = C_bottom + C_sw = C_j × area + C_jsw × perimeter = C_j L_s W + C_jsw(2L_s + W)</li></ul>
+<p><strong>MOSFET capacitance model:</strong> C_GS = C_GCS + C_GSO, C_GD = C_GCD + C_GDO, C_GB = C_GCB, C_SB = C_Sdiff, C_DB = C_Ddiff.</p>
+<p>Capacitance parameters in the 0.25 µm CMOS process:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">C_ox (fF/µm²)</th><th scope="col">C_O (fF/µm)</th><th scope="col">C_j (fF/µm²)</th><th scope="col">m_j</th><th scope="col">φ_b (V)</th><th scope="col">C_jsw (fF/µm)</th><th scope="col">m_jsw</th><th scope="col">φ_bsw (V)</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>6</td><td>0.31</td><td>2</td><td>0.5</td><td>0.9</td><td>0.28</td><td>0.44</td><td>0.9</td></tr><tr><th scope="row">PMOS</th><td>6</td><td>0.27</td><td>1.9</td><td>0.48</td><td>0.9</td><td>0.22</td><td>0.32</td><td>0.9</td></tr></tbody></table></div>
+<p><strong>Parasitic resistances:</strong> the series resistances of the source and drain regions, R_S and R_D; the figure shows the effective gate voltage V_GS,eff and the distance L_D between the drain contact and the gate, along with W.</p>
+<h2 id="hot-carrier-effects-threshold-variations-and-latch-up">Hot-carrier effects, threshold variations and latch-up</h2>
+<p><strong>Hot-carrier effects:</strong> a tendency toward drift over time in short-channel devices. While device dimensions keep shrinking, the supply and operating voltages have not scaled down at the same rate; the electric field and electron velocity increase. High-energy electrons enter the gate oxide and become trapped there; this leads to an increase in the threshold voltage (a decrease in PMOS) and is a long-term reliability problem. Solution: specially designed drain and source regions that limit electric field peaks, and reduced supply voltages.</p>
+<p><strong>Threshold variations:</strong> at low V_DS, the threshold voltage drops as the channel length shortens (below the long-channel threshold); at short L, the threshold drops as V_DS increases (<strong>drain-induced barrier lowering</strong>, DIBL). Data-dependent noise: the subthreshold leakage current becomes dependent on the data patterns on the bit line.</p>
+<p><strong>Latch-up:</strong> the last slide shows the source of latch-up: the parasitic pnp and npn transistors formed in the n-well and p-substrate in the CMOS structure (with the resistances R_nwell and R_psubs) and their equivalent circuit.</p>
+<figure class="yazi-gorsel"><img src="../s-41.jpg" width="1684" height="1190" loading="lazy" decoding="async" alt="Source of latch-up: parasitic bipolar transistors in the n-well and p-substrate, and the equivalent circuit"><figcaption>Latch-up</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../dosya_4_EEM312.pdf" download>dosya_4_EEM312.pdf</a></p>
+              <p class="kucuk">PDF · 574 KB · 41 <span data-i18n="arch.pagesLower"></span> · 24.02.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../dosya_4_EEM312.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (574 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

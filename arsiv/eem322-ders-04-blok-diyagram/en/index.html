@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 4 – Block Diagrams, Block Diagram Reduction, Signal-Flow Graphs and Mason&#x27;s Rule — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture note 4 (Hamit Erdem, 2013): series, parallel and feedback connections, the loading effect, moving blocks past summing junctions and pickoff points, block diagram reduction examples, converting a block diagram to a signal-flow graph, and worked examples of Mason&#x27;s gain rule.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 4 – Block Diagrams, Block Diagram Reduction, Signal-Flow Graphs and Mason&#x27;s Rule">
+<meta property="og:description" content="EEM322 Control Systems lecture note 4 (Hamit Erdem, 2013): series, parallel and feedback connections, the loading effect, moving blocks past summing junctions and pickoff points, block diagram reduction examples, converting a block diagram to a signal-flow graph, and worked examples of Mason&#x27;s gain rule.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 4 – Block Diagrams, Block Diagram Reduction, Signal-Flow Graphs and Mason's Rule", "description": "EEM322 Control Systems lecture note 4 (Hamit Erdem, 2013): series, parallel and feedback connections, the loading effect, moving blocks past summing junctions and pickoff points, block diagram reduction examples, converting a block diagram to a signal-flow graph, and worked examples of Mason's gain rule.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "EEM322L4.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-04-blok-diyagram/EEM322L4.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 4 – Block Diagrams, Block Diagram Reduction, Signal-Flow Graphs and Mason&#x27;s Rule">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#block-diagram-or-signal-flow-graph">Block diagram or signal-flow graph?</a></li><li><a href="#elements-of-a-block-diagram">Elements of a block diagram</a></li><li><a href="#basic-connection-types">Basic connection types</a></li><li><a href="#block-diagram-reduction">Block diagram reduction</a></li><li><a href="#signal-flow-graphs">Signal-flow graphs</a></li><li><a href="#mason-s-gain-rule">Mason's gain rule</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 4 – Block Diagrams, Block Diagram Reduction, Signal-Flow Graphs and Mason&#x27;s Rule</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 09.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>4th lecture note</strong> ("EEM322 – Lecture 4") of the <strong>EEM322 Control Systems</strong> course at Başkent University. The notes belong to <strong>Hamit Erdem</strong>; the page headers carry the date 09.07.2013. The lecture note is in English, an 18-page PDF with two slides per page; most of the examples come from Nise's <em>Control Systems Engineering</em>. Below, the content is summarized, the results are written out, and page images are included for the diagrams. The original PDF can be downloaded at the end of the post.</p>
+<p>Topics:</p>
+<ul><li>Representing systems with block diagrams</li><li>Signal-flow graphs</li><li>Block diagram reduction</li><li>Signal-flow graph reduction</li><li>Mason's rule</li></ul>
+<h2 id="block-diagram-or-signal-flow-graph">Block diagram or signal-flow graph?</h2>
+<p>Multiple subsystems are represented in two ways: <strong>block diagrams</strong> (generally in frequency-domain analysis) and <strong>signal-flow graphs</strong> (generally in state-space analysis). Signal-flow graphs represent transfer functions with lines and signals with small circular nodes; summation is implicit. The transfer function of a system can be shown with a single block, but in state space each state variable must be shown separately. In the note's example, showing the state variables of the transfer function 24/(s³ + 9s² + 26s + 24) explicitly requires seven blocks and one summing junction. For this reason, signal-flow graphs are quicker to draw, more compact, and bring the state variables to the foreground.</p>
+<h2 id="elements-of-a-block-diagram">Elements of a block diagram</h2>
+<p>A subsystem is represented by a block that has an input, an output and a transfer function. When subsystems are interconnected, two new elements are added: the <strong>summing junction</strong> and the <strong>pickoff point</strong>. The block diagram of a linear, time-invariant system consists of these four elements: signals, systems (blocks), summing junctions and pickoff points.</p>
+<h2 id="basic-connection-types">Basic connection types</h2>
+<h3 id="series-cascade-connection">Series (cascade) connection</h3>
+<p>The equivalent transfer function is the product of the subsystems' transfer functions: G_e(s) = G₃(s)G₂(s)G₁(s). This result was obtained under the assumption that the subsystems do <strong>not load</strong> one another; that is, the output of a subsystem must stay the same whether or not the next subsystem is connected. If the output changes, the next subsystem loads the previous one, and the equivalent transfer function is not the product of the individual transfer functions.</p>
+<p>The note gives two RC circuits as an example: Each alone has the transfer function G₁(s) = (1/R₁C₁)/(s + 1/R₁C₁) and G₂(s) = (1/R₂C₂)/(s + 1/R₂C₂). When they are connected directly, the correct result, found with loop or node equations, is</p>
+<p>G(s) = (1/R₁C₁R₂C₂) / (s² + (1/R₁C₁ + 1/R₂C₂ + 1/R₂C₁)s + 1/R₁C₁R₂C₂)</p>
+<p>which differs from the product G₁G₂ (the difference is the 1/R₂C₁ term). One way to <strong>prevent loading</strong> is to place an amplifier between the two circuits: Because the amplifier's input impedance is high, it does not load the previous circuit; because its output impedance is low, it appears to the next circuit as an ideal voltage source. In this case the equivalent transfer function is the product of the transfer functions and the amplifier gain K: G(s) = K·G₁(s)G₂(s).</p>
+<h3 id="parallel-connection">Parallel connection</h3>
+<p>Parallel subsystems share a common input; the output is the algebraic sum of all the subsystem outputs: G_e(s) = ±G₁(s) ± G₂(s) ± G₃(s).</p>
+<h3 id="feedback-connection">Feedback connection</h3>
+<p>Writing E(s) = R(s) ∓ C(s)H(s) and C(s) = E(s)G(s) and eliminating E(s) gives:</p>
+<p>C(s)/R(s) = G(s) / (1 ± G(s)H(s))</p>
+<p>The sign in the denominator is + for negative feedback and − for positive feedback. In the general single-input single-output feedback system, R(s) is the reference input, Y(s) is the controlled output, E(s) is the error (actuating) signal, B(s) is the feedback variable, G(s) is the forward-path transfer function (FTF), H(s) is the feedback transfer function, G(s)H(s) is the loop or open-loop transfer function (OLTF), and Y(s)/R(s) is the closed-loop transfer function (CLTF):</p>
+<p>Y(s)/R(s) = G(s)/(1 + G(s)H(s)) = FTF/(1 + OLTF),  characteristic equation: 1 + G(s)H(s) = 0</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Feedback system and general block diagram; moving blocks past summing junctions and pickoff points"><figcaption>Feedback and block-moving rules</figcaption></figure>
+<h2 id="block-diagram-reduction">Block diagram reduction</h2>
+<p>To form familiar configurations (series, parallel, feedback), blocks are moved to the right or left of summing junctions, and in front of or behind pickoff points. The note gives a "block diagram algebra" table: combining cascaded blocks, summing or subtracting in the forward path, moving a pickoff point in front of or behind a block, moving a summing junction in front of or behind a block, eliminating a feedback loop, and eliminating a feedback path.</p>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Example of combining three summing junctions and reducing with parallel feedback functions; block diagram algebra table"><figcaption>Block diagram reduction example and algebra table</figcaption></figure>
+<p><strong>Example 1 (combining summing junctions):</strong> The three summing junctions are combined into a single summing junction; the feedback functions H₁(s), H₂(s) and H₃(s) are parallel because they are fed from a common signal and their outputs are summed; finally the feedback system is reduced:</p>
+<p>C(s)/R(s) = G₃G₂G₁ / (1 + G₃G₂[H₁ − H₂ + H₃])</p>
+<p><strong>Example 2 (moving a pickoff point):</strong> Pickoff point a is moved to c, and the boxed feedback loop is simplified:</p>
+<p>Y/R = G₁G₂ / (1 + G₁ + G₂)</p>
+<p><strong>Example 3 (reduction by moving blocks):</strong> First G₂(s) is moved to the left of the pickoff point to form parallel subsystems, and the feedback system made of G₃(s) and H₃(s) is reduced. Then the parallel pair of 1/G₂(s) and unity is reduced, and G₁(s) is pushed to the right of the summing junction to form parallel subsystems in the feedback path. The result is:</p>
+<p>C(s)/R(s) = G₁G₃[1 + G₂] / ([1 + G₂H₂ + G₁G₂H₁][1 + G₃H₃])</p>
+<p><strong>Closed-loop transfer function (when loops are nested or touch the forward path):</strong></p>
+<p>C(s)/R(s) = (product of the transfer functions in the forward path) / (1 − Σ product of the transfer functions around each loop)</p>
+<p>Note: A positive feedback loop gives a negative term in the denominator.</p>
+<p><strong>Example 4:</strong> A unity-feedback system with 2s + 4 and 1/s² in its forward path:</p>
+<p>T(s) = [(2s + 4)/s²] / [1 + (2s + 4)/s²] = (2s + 4)/(s² + 2s + 4)</p>
+<p><strong>Example 5:</strong> For the system on page 10 of the note, moving the pickoff points gives T(s) = (G₁G₂G₅ + G₁G₆)/(1 − G₁G₃ + G₁G₂G₄).</p>
+<h2 id="signal-flow-graphs">Signal-flow graphs</h2>
+<p>A signal-flow graph consists only of <strong>branches</strong> (which represent systems) and <strong>nodes</strong> (which represent signals). The signal at a node is the sum of the signal × gain of the branches entering that node; for example, V(s) = R₁(s)G₁(s) − R₂(s)G₂(s) + R₃(s)G₃(s).</p>
+<p>Converting a block diagram to a signal-flow graph:</p>
+<ol><li>First the signal nodes (outputs of summing junctions, outputs of blocks, the input and the output) are identified and marked.</li><li>The nodes are connected by branches carrying the transfer functions between them; for subtraction, a minus sign is placed on the branch gain.</li><li>The graph is simplified by removing unnecessary nodes.</li></ol>
+<figure class="yazi-gorsel"><img src="../s-11.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Signal-flow graph equivalents of series, parallel and feedback block diagrams"><figcaption>Converting block diagrams to signal-flow graphs</figcaption></figure>
+<p>The note also includes a homework assignment: simplify the given signal-flow graph and convert the given block diagram to a signal-flow graph.</p>
+<h2 id="mason-s-gain-rule">Mason's gain rule</h2>
+<p>Mason's rule reduces a signal-flow graph to a single transfer function with one formula:</p>
+<p>M = C(s)/R(s) = Σⱼ Mⱼ Δⱼ / Δ</p>
+<ul><li>M: transfer function (gain) of the system</li><li>Mⱼ: gain of the j-th forward path</li><li>j: integer numbering the forward paths</li><li>Δ = 1 − Σ loop gains + Σ gains of non-touching loops taken two at a time − Σ gains of non-touching loops taken three at a time + Σ gains of non-touching loops taken four at a time … </li><li>Δⱼ: Δ formed with the loops remaining after the j-th path is removed; if no loops remain, Δⱼ = 1.</li></ul>
+<p>Definitions:</p>
+<ul><li><strong>Path:</strong> A connection made of consecutive branches in the same direction.</li><li><strong>Loop:</strong> A closed path that passes through no node twice; the loop gain is the product of the branch gains along a path that starts and ends at the same node.</li><li><strong>Forward path:</strong> A path from the input (source) node to the output (sink) node that passes through no node more than once; the forward-path gain is the product of the gains along this path.</li><li><strong>Non-touching loops:</strong> Loops that have no common node. A loop and a path also do not touch if they have no common nodes.</li><li><strong>Non-touching loop gain:</strong> The product of the gains of non-touching loops taken two, three, four … at a time.</li></ul>
+<h3 id="example-1">Example 1</h3>
+<figure class="yazi-gorsel"><img src="../s-13.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Mason&#x27;s rule example: block diagram with two forward paths and five loops"><figcaption>Mason's rule: forward paths and loops</figcaption></figure>
+<p>There are two forward paths: M₁ = G₁G₂G₃ and M₂ = G₄. There are five loops:</p>
+<ul><li>Loop 1 = −G₁G₂H₁</li><li>Loop 2 = −G₂G₃H₂</li><li>Loop 3 = −G₁G₂G₃H₃</li><li>Loop 4 = −G₄H₃</li><li>Loop 5 = G₄H₂G₂H₁</li></ul>
+<p>When either path is removed, no loop remains intact, so Δ₁ = Δ₂ = 1. Since there is no pair of non-touching loops, Δ is simply one minus the sum of the loop gains:</p>
+<p>C(s)/R(s) = (G₁G₂G₃ + G₄) / (1 + G₁G₂H₁ + G₂G₃H₂ + G₁G₂G₃H₃ + G₄H₃ − G₄H₂G₂H₁)</p>
+<h3 id="example-2">Example 2</h3>
+<p>In the signal-flow graph on pages 15–17 of the note, the forward path is G₁G₂G₃G₄G₅; there are four loops: L₁ = G₂H₁, L₂ = G₄H₂, L₃ = G₇H₄, L₄ = G₂G₃G₄G₅G₆G₇G₈. The non-touching loops taken two at a time are L₁L₂, L₁L₃ and L₂L₃; taken three at a time, L₁L₂L₃. Accordingly:</p>
+<p>Δ = 1 − [G₂H₁ + G₄H₂ + G₇H₄ + G₂G₃G₄G₅G₆G₇G₈] + [G₂H₁G₄H₂ + G₂H₁G₇H₄ + G₄H₂G₇H₄] − [G₂H₁G₄H₂G₇H₄]</p>
+<p>Since the only loop that does not touch the forward path is L₃, Δ₁ = 1 − G₇H₄ and C(s)/R(s) = G₁G₂G₃G₄G₅(1 − G₇H₄)/Δ.</p>
+<h3 id="example-3-applying-mason-s-formula">Example 3: Applying Mason's formula</h3>
+<p>For a system with a gain K and a block (s + 1)/(s² + 5s + 8) in the forward path, K₁ feedback in the inner loop and unity feedback in the outer loop, H(s) = Σ forward paths / (1 − Σ closed loops):</p>
+<p>H(s) = K(s + 1)/(s² + 5s + 8) / [1 − (−K(s + 1)/(s² + 5s + 8) − K₁(s + 1)/(s² + 5s + 8))]</p>
+<p>H(s) = (Ks + K) / (s² + (5 + K + K₁)s + (8 + K + K₁))</p>
+<figure class="yazi-gorsel"><img src="../s-17.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Applying Mason&#x27;s formula to a system with K and K₁ feedback"><figcaption>Applying Mason's formula</figcaption></figure>
+<p>In the example on the last page, a disturbance input N(s) is added to the same system, and the output's response to both R(s) and N(s) is found by superposition.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM322L4.pdf" download>EEM322L4.pdf</a></p>
+              <p class="kucuk">PDF · 1.1 MB · 18 <span data-i18n="arch.pagesLower"></span> · 09.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM322L4.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

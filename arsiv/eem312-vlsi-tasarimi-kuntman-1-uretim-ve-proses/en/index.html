@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: VLSI Design Lecture Note 1 – IC Fabrication, Silicon and Basic Process Steps (Ayten Kuntman) — hasancan.net</title>
+<meta name="description" content="The first part of Prof. Dr. Ayten Kuntman&#x27;s VLSI design lecture notes: integrated circuit design and fabrication stages, mask production, testing and packaging, the energy band model, intrinsic and doped silicon, conductivity, diffusion and sheet resistance, thermal oxidation, CVD, ion implantation, epitaxy and lithography.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: VLSI Design Lecture Note 1 – IC Fabrication, Silicon and Basic Process Steps (Ayten Kuntman)">
+<meta property="og:description" content="The first part of Prof. Dr. Ayten Kuntman&#x27;s VLSI design lecture notes: integrated circuit design and fabrication stages, mask production, testing and packaging, the energy band model, intrinsic and doped silicon, conductivity, diffusion and sheet resistance, thermal oxidation, CVD, ion implantation, epitaxy and lithography.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: VLSI Design Lecture Note 1 – IC Fabrication, Silicon and Basic Process Steps (Ayten Kuntman)", "description": "The first part of Prof. Dr. Ayten Kuntman's VLSI design lecture notes: integrated circuit design and fabrication stages, mask production, testing and packaging, the energy band model, intrinsic and doped silicon, conductivity, diffusion and sheet resistance, thermal oxidation, CVD, ion implantation, epitaxy and lithography.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "VLSI_TASARIMI_A_KUNTMAN.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/VLSI_TASARIMI_A_KUNTMAN.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: VLSI Design Lecture Note 1 – IC Fabrication, Silicon and Basic Process Steps (Ayten Kuntman)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.04.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#contents-entire-note">Contents (entire note)</a></li><li><a href="#1-introduction">1. Introduction</a></li><li><a href="#2-stages-of-ic-design-and-fabrication">2. Stages of IC design and fabrication</a></li><li><a href="#3-electrical-properties-of-silicon">3. Electrical properties of silicon</a></li><li><a href="#4-basic-process-steps-used-in-ic-fabrication">4. Basic process steps used in IC fabrication</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: VLSI Design Lecture Note 1 – IC Fabrication, Silicon and Basic Process Steps (Ayten Kuntman)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.04.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the first part of the 158-page lecture note <strong>"VLSI Design"</strong> found in the EEM312 Digital Electronics course folder. The cover of the document states <em>"These notes are a reorganized version of the notes published by Prof. Dr. Ayten Kuntman on 11.03.2009"</em>; the pages carry a "Prof. Dr. Ayten KUNTMAN" watermark. The PDF was created on 28 April 2009; the document does not say who did the reorganization or at which institution the note was taught (Prof. Dr. Ayten Kuntman is a faculty member at İstanbul Technical University).</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<p>Because the note is long, it has been split into four posts: <strong>1) IC fabrication, silicon and process steps</strong> (this post, pp. 1–25), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">2) MOS integrated circuits, the CMOS process and layout rules</a> (pp. 26–75), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">3) bipolar integrated circuits</a> (pp. 76–102), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">4) SPICE, layout examples, questions and references</a> (pp. 103–158). The text, formulas and tables are transcribed below (garbled Turkish characters in the PDF have been corrected); figures that could not be rendered as text are included as cropped images. The <strong>complete note (158 pages)</strong> can be downloaded at the end of the post.</p>
+<h2 id="contents-entire-note">Contents (entire note)</h2>
+<ol><li>Introduction</li><li>Stages of IC design and fabrication: mask production stage, applying the produced masks to the silicon, testing and packaging</li><li>Electrical properties of silicon: silicon as the basic building block in VLSI, semiconductor behavior, intrinsic silicon, doping of silicon, conductivity of doped silicon</li><li>Basic process steps used in IC fabrication: diffusion (electrical properties of the diffused layer), thermal oxidation, polysilicon formation (CVD), ion implantation, epitaxy, lithography</li><li>MOS integrated circuits: basic MOS structures (E-NMOS, D-NMOS, E-PMOS), operating regions, NMOS fabrication process; derivation of the current expression and the current-voltage relationship; model parameters (threshold voltage, body parameter, effective channel length, transconductance, switching speed, output conductance); MOS capacitances; measurement of parameters; CMOS technology (n-well CMOS process)</li><li>Layout design rules: "full-custom" mask layout rules, CMOS inverter layout design, MOS integrated circuit design (NMOS and CMOS inverters)</li><li>Bipolar integrated circuits: junction-isolated technology, integrated npn transistor, breakdown voltage, saturation current, parasitic resistances, collector-base capacitance; passive elements (resistors, capacitors, diodes); linear (analog) integrated circuit design principles; analog processing blocks and bias circuits</li><li>Appendices: the SPICE program, layout examples, problems, references</li></ol>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Integrated circuit technology covers, in terms of content, the design and fabrication of very large scale integration (VLSI) circuits and their preparation for use in the market. The main material in IC fabrication is <strong>silicon</strong>. Silicon, which is abundant in nature in amorphous form, is made suitable for semiconductor circuit fabrication through long metallurgical processes. Silicon crystal is obtained as long shiny rods; these rods are then sliced into thin <strong>wafers</strong> and made ready for use. The sliced wafers are 350–400 µm thick and about 3–5 inches in diameter.</p>
+<p>Microelectronics technology makes it possible to produce a large number of integrated circuits as a result of a series of processes. 100–200 integrated circuits can be formed on a single wafer; if 10 wafers are processed at the same time, 100 × 10 = 1000 integrated circuits may be produced in one process run. Integrated circuits are produced mainly using <strong>bipolar</strong> and <strong>MOS</strong> technologies:</p>
+<ul><li>With <strong>bipolar technology</strong>, analog structures are built: they have high gain, low noise and good precision.</li><li>With <strong>MOS technology</strong>, digital structures are built: it is preferred because it is more convenient in terms of use and layout, and because it is simpler to scale.</li></ul>
+<p>The most basic element in IC fabrication is the transistor. With bipolar technology, npn and pnp transistors are formed; with MOS technology, N-channel and P-channel MOS transistors are formed. In VLSI circuits, device geometry is very important, and circuits generally consist of CMOS.</p>
+<h2 id="2-stages-of-ic-design-and-fabrication">2. Stages of IC design and fabrication</h2>
+<p>The designer designs an integrated circuit that can perform the desired function while trying to minimize device geometry; design is a process that is completed before fabrication begins. IC design and fabrication take place in three main stages:</p>
+<ul><li>Mask production stage</li><li>Applying the masks to the silicon</li><li>Testing and packaging</li></ul>
+<h3 id="2-1-mask-production-stage">2.1. Mask production stage</h3>
+<p>This stage covers the selection of the circuit that will perform the desired function, the determination of the design quantities, the layout, and mask production. Selecting the circuit and determining the design quantities means determining the desired electrical quantity–dimension relationship with suitable simulation programs; the commonly used program for this is <strong>SPICE</strong>.</p>
+<ul><li><strong>Layout:</strong> After the circuit is selected and its dimensions are determined, the placement of the circuit on the chip is created. This is done in a computer environment with programs such as L-EDIT and ORCAD. The physical mask layout is made by special procedures that satisfy certain geometric rules or constraints; these are called <strong>layout design rules</strong>.</li><li><strong>Mask production:</strong> After the layout drawing, masks are prepared for each fabrication step. These masks basically cover the steps of <strong>isolation, diffusion, contact, metallization and bonding pad (terminal) opening</strong>.</li></ul>
+<p>The flow in Figure 2-1(a): design optimization (SPICE) → integrated circuit design → mask preparation and replication (CAD).</p>
+<figure class="yazi-gorsel"><img src="../sekil-2-1.jpg" width="688" height="872" loading="lazy" decoding="async" alt="Figure 2-1 (b) and (c): first to fifth masks (isolation, diffusion, contact, metallization, bonding) and wafer fabrication; electrical test, dicing, testing, die attach, bonding, leak test, visual inspection, final electrical test, marking and shipping"><figcaption>Figure 2-1: Basic steps in integrated circuit fabrication technology: b. wafer fabrication, c. testing, separation and packaging</figcaption></figure>
+<h3 id="2-2-applying-the-produced-masks-to-the-silicon">2.2. Applying the produced masks to the silicon</h3>
+<p>This is the process of transferring the masks prepared for the circuit to be realized onto the silicon; it is the <strong>fabrication</strong> stage of the integrated circuit. Simulation programs such as SUPREM and OSIS are used to extract the process parameters required to transfer the steps onto the wafer. There are five main masks and mask steps: isolation, diffusion, contact, metallization and bonding pad opening. In VLSI circuits, the number of masks may be higher in order to increase yield.</p>
+<h3 id="2-3-testing-and-packaging">2.3. Testing and packaging</h3>
+<p>As a result of applying all the masks to the wafer in sequence, a large number of integrated circuits are formed on the wafer. Testing them, packaging them and making them ready for use is the third important step:</p>
+<ol><li>First, whether all the dice (chips) work is checked using the test transistor placed on each chip during fabrication. Measurements can be made with an instrument called a "prober"; faulty ones are automatically marked with red ink.</li><li>The dice are separated (dicing): the separation lines on the wafer are scribed with a diamond cutter, the back is ground down while the front is protected, and the wafer is broken apart.</li><li>Faulty dice are discarded; good ones are attached to a carrier, and the connection from the die to the carrier is made (<em>bonding</em>). The integrated circuit's connection to the outside world is through the pins on the carrier.</li><li>Electrical measurements are repeated; the good ones are sealed and the integrated circuit is ready for use.</li></ol>
+<h2 id="3-electrical-properties-of-silicon">3. Electrical properties of silicon</h2>
+<h3 id="3-1-the-basic-building-block-in-vlsi-silicon">3.1. The basic building block in VLSI: silicon</h3>
+<p>VLSI circuits generally consist of CMOS. With integration, 10⁶–10⁷ transistors can be placed in 1 cm²; for example, a one-megabit DRAM chip can contain more than 1,000,000 transistors and more than 1,000,000 capacitors. Each individual unit on the wafer is called a <strong>die / chip</strong> (Figure 3-1: identical integrated circuits on a silicon wafer).</p>
+<p><strong>Minimum feature size:</strong> The minimum distance between two lines in an integrated circuit layout. In 1978 the minimum feature size in an integrated circuit was 5 µm, while in 1988 it was 0.5 µm; this is about the size of a bacterium. The point reached in 2004 is 0.1 micron.</p>
+<figure class="yazi-gorsel"><img src="../sekil-3-2.jpg" width="688" height="520" loading="lazy" decoding="async" alt="Figure 3-2: comparison with the dimensions of a human hair, a red blood cell, a yeast cell, a small bacterium, a polio virus and an atom, with design rules of 1978 VLSI 5 µm, 1985 VLSI 1 µm, 1988 VLSI ½ µm, 2001 VLSI 0.1 µm (angstrom scale)"><figcaption>Figure 3-2: Change in device geometry over the years</figcaption></figure>
+<p>The semiconductor widely used in IC-microelectronics technology is silicon; GaAs and Ge can be given as examples of other semiconductors. Germanium has been abandoned. Gallium arsenide is mostly used in optical and RF applications; today GaAs is used in RF-VLSI circuit design.</p>
+<h3 id="3-2-semiconductor-behavior">3.2. Semiconductor behavior</h3>
+<p>In semiconductor electronics, conduction is explained by the <strong>energy band model</strong>. Three bands are defined: the <strong>valence band</strong>, the <strong>conduction band</strong> and the <strong>forbidden band</strong> (band gap). The valence electrons of the elements reside in the valence band.</p>
+<p><strong>Forbidden band:</strong> The energy required for a valence electron to become a free electron is defined as the band gap energy (E_G). Its value is a function of temperature; for silicon:</p>
+<p>E_G = 1.21 − 3.6×10⁻⁴·T   (eV)</p>
+<p><em>Note: In the document the expression is written as "E_G = (1.21 − 3.6×10⁻⁴)T", with the parenthesis in the wrong place; the temperature multiplies only the second term (for T = 300 K, E_G ≈ 1.10 eV).</em></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Material</th><th scope="col">Bands</th><th scope="col">Explanation</th></tr></thead><tbody><tr><th scope="row">Insulator</th><td>E_G &gt; 5 eV</td><td>Valence electrons cannot move to the conduction band, so no conduction occurs (e.g., Teflon, rubber).</td></tr><tr><th scope="row">Semiconductor</th><td>E_G(Si) = 1.1 eV</td><td>In pure form it is close to an insulator; by doping, carriers can be added and additional energy levels created to make it conductive. An electron that gains enough energy can move from the valence band to the conduction band.</td></tr><tr><th scope="row">Conductor (metal)</th><td>No forbidden band</td><td>The valence and conduction bands overlap; there are many electrons in the structure, and conduction is achieved by directing them.</td></tr></tbody></table></div>
+<p>Silicon is made rich in electrons or holes by adding impurities externally, and its conductivity is thereby changed.</p>
+<h3 id="3-3-intrinsic-silicon">3.3. Intrinsic silicon</h3>
+<p><strong>Intrinsic silicon</strong> is silicon to which no impurity atoms have been added. At room temperature, in intrinsic silicon n_i = p_i = 1.5×10¹⁰ /cm³ (n denotes electrons, p denotes holes). In undoped semiconductor the numbers of holes and electrons are equal. Si atoms, which have a valence of +4, are bonded to each other by covalent bonds (Figure 3-4).</p>
+<p><em>Note: In the document, n_i is called the "doping concentration of intrinsic silicon"; n_i is actually the intrinsic carrier (electron/hole) concentration, not a doping concentration.</em></p>
+<h3 id="3-4-doping-of-silicon">3.4. Doping of silicon</h3>
+<p>The process of adding foreign atoms to make silicon conductive is called <strong>doping</strong>, and the dopant atom is called an <em>impurity</em>.</p>
+<ul><li><strong>n-type doping:</strong> Generally +5 valence atoms are added. For example, with phosphorus (P) the structure is made rich in electrons: phosphorus forms 4 covalent bonds with Si; the 5th electron is left free and moves about in the structure, causing an excess of one electron (Figure 3-5).</li><li><strong>p-type doping:</strong> +3 valence atoms (e.g., boron) are added. B and Si together form 3 covalent bonds; a vacancy remains in the 4th bond, which causes an excess of holes in the structure (Figure 3-6).</li></ul>
+<h3 id="3-5-conductivity-of-doped-silicon">3.5. Conductivity of doped silicon</h3>
+<p>The conductivity of doped silicon depends on the concentration of the dopant atoms. Definitions:</p>
+<ul><li>n: equilibrium concentration of electrons in Si (1/cm³)</li><li>p: equilibrium concentration of holes in Si (1/cm³)</li><li>N_D: concentration of n-type dopant atoms; N_A: concentration of p-type dopant atoms</li></ul>
+<p>If the number of dopant atoms is assumed equal to the number of carriers, one can write n ≈ N_D for n-type Si and p ≈ N_A for p-type Si.</p>
+<p>With R the number of recombinations per second and γ the proportionality coefficient:</p>
+<p>R = n·p·γ   (3-1)</p>
+<p>At equilibrium, the generation (G) and recombination of electron-hole pairs are equal to each other:</p>
+<p>G = R = n·p·γ = constant   (3-2)</p>
+<p>Without doping, the numbers of electrons and holes are equal and are a function of temperature: n = p = n_i(T)   (3-3). From this:</p>
+<p><strong>n·p = n_i²(T)</strong>   (3-4)</p>
+<p>That the product of the hole and electron concentrations is constant and equal to the square of the intrinsic concentration is an important finding. The specific conductivity is:</p>
+<p><strong>σ = q·(µ_n·n + µ_p·p)</strong>   (3-5)</p>
+<p>Here σ is the electrical conductivity ((Ω·cm)⁻¹), µ_n and µ_p are the mobilities of electrons and holes (cm²/V·s), and q is the electron charge (1.6×10⁻¹⁹ C).</p>
+<p>Combining with (3-4) for an n-type sample gives σ = q(µ_n·N_D + µ_p·n_i²/N_D); since N_D is sufficiently large, the second term is neglected:</p>
+<p>σ = q·µ_n·N_D   (3-6)</p>
+<p>Similarly, for a p-type sample σ = q(µ_n·n_i²/N_A + µ_p·N_A) and</p>
+<p>σ = q·µ_p·N_A   (3-7)</p>
+<p>In intrinsic semiconductor, σ = q·n_i·(µ_n + µ_p). Conductivity increases with doping concentration and mobility; however, mobility decreases as doping concentration increases: above a doping concentration of 10¹⁸ /cm³, mobility drops considerably.</p>
+<figure class="yazi-gorsel"><img src="../sekil-3-7.jpg" width="716" height="550" loading="lazy" decoding="async" alt="Figure 3-7: variation of electron and hole mobility (10–1000 cm²/V·s) with doping concentration (10¹⁴–10²¹ /cm³) on logarithmic axes; both curves fall between 10¹⁶ and 10¹⁸"><figcaption>Figure 3-7: Variation of hole and electron mobilities as a function of doping concentration</figcaption></figure>
+<p><strong>Table 3-1: Some electrical values for silicon (300 K)</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Quantity</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">ε_r</th><td>11.7</td></tr><tr><th scope="row">E_G</th><td>1.1 eV</td></tr><tr><th scope="row">n_i</th><td>1.5×10¹⁰ 1/cm³</td></tr><tr><th scope="row">µ_n</th><td>1300 cm²/V·s</td></tr><tr><th scope="row">µ_p</th><td>500 cm²/V·s</td></tr></tbody></table></div>
+<h2 id="4-basic-process-steps-used-in-ic-fabrication">4. Basic process steps used in IC fabrication</h2>
+<h3 id="4-1-diffusion">4.1. Diffusion</h3>
+<p>Diffusion is a process carried out to achieve doping; a junction results from it. It is used basically to form the source-drain regions in MOS structures and the emitter-base structures in bipolar structures. For diffusion to the desired depth, the <strong>diffusion source, temperature and time</strong> are the determining factors. The diffusion source can be solid, liquid or gas. Diffusion is carried out at high temperature (1000–1200 °C) in special furnaces. Programs such as SUPREM are used to determine process parameters and for process optimization.</p>
+<p>In Figure 4-1(a), boron atoms are on the silicon surface and diffusion has not yet started; in Figure 4-1(b), diffusion has taken place at a suitable temperature in the diffusion furnace and the doping profile has formed. The maximum depth obtained by doping is 20 µm; the diffusion time ranges from a few tens of minutes to several hours.</p>
+<figure class="yazi-gorsel"><img src="../sekil-4-1.jpg" width="688" height="679" loading="lazy" decoding="async" alt="Figure 4-1: boron atoms on the surface of an n-type sample, their spreading into the sample, and the N_A, N_D doping concentration profiles versus depth (before and after diffusion)"><figcaption>Figure 4-1: Diffusion of silicon with boron and the doping concentration distribution</figcaption></figure>
+<h4 id="4-1-1-electrical-properties-of-the-diffused-layer">4.1.1. Electrical properties of the diffused layer</h4>
+<p>The electrical properties of the diffused layer are defined by the <strong>sheet resistance</strong>. Sheet resistance is a quantity established for the electrical characterization of the doped region, defined as the <strong>resistance per square</strong>.</p>
+<p>For a uniformly diffused rectangular layer (Figure 4-2) of length L, width W and depth T, the resistance is:</p>
+<p>R = ρ·L/A = (1/σ)·L/(W·T)   (4-1)</p>
+<p>Expanding the resistivity:</p>
+<p>R = (1/(q·µ·N))·L/(W·T)   (4-2)</p>
+<p>Taking out L/W gives the sheet resistance:</p>
+<p><strong>R□ = 1/(q·µ·N·T)</strong>   (4-3)</p>
+<p>Its unit is Ω/□ (ohms per square). µ is the mobility and N is the doping concentration. Sheet resistance is also expressed as R□ = ρ/T. Depending on the doping type:</p>
+<ul><li>For p-type silicon: R□ = 1/(q·µ_p·N_A·T)   (4-4)</li><li>For n-type silicon: R□ = 1/(q·µ_n·N_D·T)   (4-5)</li></ul>
+<p>This is a simplified approximation; in reality the doping concentration is a function of depth (Figure 4-3), and with x_j the junction depth:</p>
+<p>R = (L/W) · 1 / ∫₀^xj q·µ_n·N_D(x) dx   (4-6)</p>
+<p>R□ = [∫₀^xj q·µ_n·N_D(x) dx]⁻¹ = [q·µ_n·∫₀^xj N_D(x) dx]⁻¹   (4-7)</p>
+<p>The inverse of resistance gives conductance.</p>
+<h3 id="4-2-thermal-oxidation">4.2. Thermal oxidation</h3>
+<p>Oxidation is the process of forming <strong>SiO₂</strong> on silicon; dielectric and insulating films are formed on silicon. Oxide is used as a mask against dopant diffusion, to form the gate in MOS structures, for passivation of active regions, and as a capacitor dielectric. The local oxidation used in MOS structures, called <strong>field oxide</strong>, is shown in Figure 4-4.</p>
+<figure class="yazi-gorsel"><img src="../sekil-4-4.jpg" width="688" height="700" loading="lazy" decoding="async" alt="Figure 4-4: (a) SiO₂ on Si, (b) SiO₂ with SiN mask, (c) thick SiO₂ in unmasked regions, thin SiO₂ under the mask"><figcaption>Figure 4-4: Local oxidation process</figcaption></figure>
+<p><strong>Table 4-1: Uses of silicon dioxide</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Where the oxide is used</th><th scope="col">Approximate thickness (Å)</th></tr></thead><tbody><tr><th scope="row">As a mask against dopant diffusion</th><td>4000–6000</td></tr><tr><th scope="row">For forming the gate in MOS structures</th><td>50–200</td></tr><tr><th scope="row">For passivation of active regions</th><td>7000–10000</td></tr><tr><th scope="row">For making capacitor dielectric</th><td>600–800</td></tr></tbody></table></div>
+<p>Oxidation is a thermal process and is carried out in special furnaces at 1000–1200 °C. The silicon in the wafer combines with the oxygen in the ambient to form oxide (oxygen advances into the silicon by diffusion). The oxide thickness is determined by temperature, oxygen source and time. There are two types of oxidation:</p>
+<ul><li><strong>Dry oxidation</strong> (oxygen-only ambient): Si + O₂ → SiO₂</li><li><strong>Wet oxidation</strong> (ambient containing oxygen and water vapor): Si + 2H₂O → SiO₂ + 2H₂ — it is faster.</li></ul>
+<h3 id="4-3-chemical-vapor-deposition-cvd">4.3. Chemical vapor deposition (CVD)</h3>
+<p>Chemical vapor deposition is a method of forming a film on the wafer surface through the thermal decomposition of gaseous compounds. Polysilicon, SiO₂, silicon nitride and metal deposition can be done by CVD.</p>
+<ul><li><strong>SiO₂ deposition:</strong> Unlike thermal oxide, it is formed by the deposition of SiO₂ onto Si; its quality is lower, and it is done at low temperature (400–600 °C) and in a shorter time. It is used as inter-metal insulator in the multilevel metallization of very dense circuits. It is generally obtained by burning silane with oxygen: SiH₄ + O₂ → SiO₂ + 2H₂.</li><li><strong>Polysilicon formation:</strong> It is a chemical Si deposition process. Its most important use is as the gate electrode in MOS structures; it is also used in making high-value resistors and in forming ohmic contacts with Si crystal. It occurs by pyrolysis of silane: SiH₄ → Si + 2H₂.</li></ul>
+<p><em>Note: In the document the silane reaction is written as "SiH₄ + O₂ → SiO₂ + H₂"; the balanced form is SiH₄ + O₂ → SiO₂ + 2H₂.</em></p>
+<h3 id="4-4-ion-implantation">4.4. Ion implantation</h3>
+<p>It is a doping method. It allows doping of smaller dimensions than diffusion; doping can be done with high purity. Its advantages are operation at low temperature and the ability to form small-sized structures. Its disadvantages are that it forms shallow junctions and that it is an expensive technique.</p>
+<p><em>Note: The document states that the basis of the technique is "accelerating and sending electrons"; what is accelerated and sent into the silicon in ion implantation is the <strong>ions</strong> of the dopant atoms.</em></p>
+<h3 id="4-5-epitaxy">4.5. Epitaxy</h3>
+<p>It is the process of growing silicon again on silicon while preserving the crystal structure. In bipolar structures it provides isolation of circuit elements from each other. In VLSI structures, to minimize defects that may occur, it is used for doping n on n⁺ and p on p⁺.</p>
+<h3 id="4-6-lithography">4.6. Lithography</h3>
+<p>Lithography enables the transfer of the prepared circuit patterns onto the Si wafer. This requires a <strong>mask, a radiation source and a suitable resist</strong>; devices such as the <em>spinner</em> and <em>mask aligner</em> are used in IC fabrication. UV rays, electron bombardment and X-rays are used as the radiation source; the process is named after the source (photolithography if UV, electron-beam lithography if an electron beam).</p>
+<ul><li><strong>Mask:</strong> The structure that separates the region to be processed at a certain step on the wafer from the others.</li><li><strong>Resist:</strong> A light-sensitive chemical. Since the solubility of the areas that see light and those that do not changes, the pattern on the mask is transferred to the wafer.</li></ul>
+<p>At least 5–8 masks are needed to form a bipolar or MOS transistor; the mask for each region is prepared separately and a lithographic process is applied for each mask.</p>
+<p>The photolithographic process applied while p-type doping an n-type wafer to form a pn junction (Figure 4-5): a) oxide growth, b) photoresist coating, c) exposure, d) oxide etching (forming the window), e) photoresist stripping, f) diffusion into the opened window, g) oxide stripping from the entire surface.</p>
+<ol><li>About 1000 Å of thermal oxide is grown on the n-type wafer to act as a mask for diffusion.</li><li>Photoresist is spread.</li><li>The mask is applied and exposure is carried out in the mask aligner.</li><li>A window is opened in the photoresist with a suitable solvent.</li><li>A window is opened in the oxide.</li><li>Diffusion is carried out in the defined region; then the silicon dioxide is stripped and the p-n junction is obtained.</li></ol>
+<figure class="yazi-gorsel"><img src="../sekil-4-5.jpg" width="688" height="391" loading="lazy" decoding="async" alt="Figure 4-5: steps (a)–(g) showing the n-type wafer, SiO₂, photoresist, mask and light, window opening, and formation of the p-type doped region"><figcaption>Figure 4-5: Photolithographic process sequence applied to form a pn junction</figcaption></figure>
+<p>The processes for positive and negative photoresist are shown in Figure 4-6: in negative resist, the areas exposed to light become insoluble; in positive resist, they become soluble.</p>
+<figure class="yazi-gorsel"><img src="../sekil-4-6.jpg" width="688" height="918" loading="lazy" decoding="async" alt="Figure 4-6: light, mask, photoresist and SiO₂ layers; in negative resist the areas exposed to light become insoluble, in positive resist they become soluble; then the patterns formed on the SiO₂"><figcaption>Figure 4-6: Forming a window in SiO₂</figcaption></figure>
+<p>The continuation of the note (MOS integrated circuits, CMOS technology and layout rules) is in the 2nd post of the series: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">2) MOS integrated circuits, the CMOS process and layout rules</a>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../VLSI_TASARIMI_A_KUNTMAN.pdf" download>VLSI_TASARIMI_A_KUNTMAN.pdf</a></p>
+              <p class="kucuk">PDF · 1.9 MB · 158 <span data-i18n="arch.pagesLower"></span> · 28.04.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../VLSI_TASARIMI_A_KUNTMAN.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

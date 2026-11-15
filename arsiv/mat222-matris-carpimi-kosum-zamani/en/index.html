@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAT222 Differential Equations: Measuring the Run Time of Matrix Multiplication with MATLAB — hasancan.net</title>
+<meta name="description" content="A 2016 matrix multiplication project prepared with two friends: identity matrices in MATLAB, timing with tic/toc, and graph-based comparison of matrix size, step interval, and number of multiplications.">
+<link rel="canonical" href="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAT222 Differential Equations: Measuring the Run Time of Matrix Multiplication with MATLAB">
+<meta property="og:description" content="A 2016 matrix multiplication project prepared with two friends: identity matrices in MATLAB, timing with tic/toc, and graph-based comparison of matrix size, step interval, and number of multiplications.">
+<meta property="og:url" content="https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MAT222 Differential Equations: Measuring the Run Time of Matrix Multiplication with MATLAB", "description": "A 2016 matrix multiplication project prepared with two friends: identity matrices in MATLAB, timing with tic/toc, and graph-based comparison of matrix size, step interval, and number of multiplications.", "inLanguage": "en", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "MAT222 – Diferansiyel Denklemler", "associatedMedia": {"@type": "MediaObject", "name": "matris-carpimi-kosum-zamani-maskeli.pdf", "contentUrl": "https://hasancan.net/arsiv/mat222-matris-carpimi-kosum-zamani/matris-carpimi-kosum-zamani-maskeli.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="MAT222 Differential Equations: Measuring the Run Time of Matrix Multiplication with MATLAB">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-mat222">MAT222</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>MAT222 – Diferansiyel Denklemler</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.05.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#concept-and-operation">Concept and Operation</a></li><li><a href="#work-breakdown-and-implementation-schedule">Work Breakdown and Implementation Schedule</a></li><li><a href="#identity-matrix-and-matrix-multiplication">Identity Matrix and Matrix Multiplication</a></li><li><a href="#experiments-and-graphs">Experiments and Graphs</a></li><li><a href="#research-results">Research Results</a></li><li><a href="#matlab-source-code">MATLAB Source Code</a></li><li><a href="#references-in-the-report">References in the Report</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · MAT222</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>MAT222 Differential Equations: Measuring the Run Time of Matrix Multiplication with MATLAB</h1>
+            <p class="kucuk">MAT222 – Diferansiyel Denklemler · 06.05.2016 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the 2016 project report titled <strong>"Measuring the Run Time of Matrix Multiplication"</strong>, which <strong>I prepared together with two friends</strong> at Başkent University. In the work, which I kept in my MAT222 folder, we examined the multiplication times of identity matrices of different sizes using MATLAB. Personal information has been removed; at the end of the post, only the <strong>masked PDF</strong> can be downloaded.</p>
+<p><em>Note: The report does not state a course code or a submission date. The MAT222 classification is based on the archive folder; the date of 6 May 2016 was taken from the creation information of the original Word file. The last-modified date of the same file is 11 May 2016.</em></p>
+<h2 id="concept-and-operation">Concept and Operation</h2>
+<p>The program takes three values from the user:</p>
+<ul><li>Upper limit of the matrix size: <strong>MAXN</strong></li><li>The increment by which the size grows: <strong>deltaN</strong></li><li>How many times the matrix is multiplied by itself at each size: <strong>KERE</strong></li></ul>
+<p>An identity matrix is always used in the comparisons. A matrix is created for each size; the duration of the multiplication operations is measured, and it depends on the computer's hardware and installed software. With the collected data, the relationship between matrix size and elapsed time is plotted. In preparation, we researched the concepts of the identity matrix and matrix multiplication, and evaluated the algorithm and the graphs using this information.</p>
+<h2 id="work-breakdown-and-implementation-schedule">Work Breakdown and Implementation Schedule</h2>
+<p>The preparation phase consists of researching the concepts, designing the MATLAB algorithm, and relating the research results to the algorithm. The implementation includes creating the variables and graphs, writing the code, testing, and preparing the research results.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Day</th><th scope="col">Task</th></tr></thead><tbody><tr><th scope="row">1</th><td>Completing the preparation phase</td></tr><tr><th scope="row">2</th><td>Creating the MATLAB code</td></tr><tr><th scope="row">3</th><td>Testing the code, fixing errors, and observations</td></tr><tr><th scope="row">4</th><td>Writing the report and submitting the project</td></tr></tbody></table></div>
+<h2 id="identity-matrix-and-matrix-multiplication">Identity Matrix and Matrix Multiplication</h2>
+<p>In the report, the identity matrix is introduced as an n × n square matrix; it is denoted by I_n, or by I if its size is known from context. Figure 1 shows the examples I₁ = [1], I₂ = [1, 0; 0, 1], and I₃ = [1, 0, 0; 0, 1, 0; 0, 0, 1].</p>
+<p><em>Note: The source's definition of the identity matrix is linguistically flawed and does not state the diagonal values explicitly. As seen in the figure, the main diagonal is 1 and the other elements are 0.</em></p>
+<p>Matrix multiplication is described as an operation that produces a new matrix from two matrices. The importance of the numbers of rows and columns and of how the elements are combined is emphasized; linear equations, linear transformations, and applications in physics and engineering are mentioned.</p>
+<p><em>Note: In the report, multiplying every element by the same scalar is called a "dot product." This operation is scalar multiplication; it is not the same as matrix multiplication or the inner product of vectors.</em></p>
+<h2 id="experiments-and-graphs">Experiments and Graphs</h2>
+<p>In the first experiments, the step interval is held fixed at 3 and the largest matrix size at 200, while the number of multiplications is varied. Then, with the number of multiplications fixed at 20, the step interval and the upper size limit are examined.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Figure</th><th scope="col">Step interval</th><th scope="col">Largest size</th><th scope="col">Number of multiplications</th></tr></thead><tbody><tr><th scope="row">2</th><td>3</td><td>200</td><td>1</td></tr><tr><th scope="row">3</th><td>3</td><td>200</td><td>5</td></tr><tr><th scope="row">4</th><td>3</td><td>200</td><td>10</td></tr><tr><th scope="row">5</th><td>3</td><td>200</td><td>20</td></tr><tr><th scope="row">6</th><td>10</td><td>200</td><td>20</td></tr><tr><th scope="row">7</th><td>3</td><td>100</td><td>20</td></tr></tbody></table></div>
+<p>Example program input:</p>
+<pre class="kod"><code>Adim araligini giriniz:3
+Maksimum matris degeriniz giriniz:200
+Kac carpim yapilacagini giriniz:20</code></pre>
+<p>The report states that as the number of repetitions increases, the run time increases; as the step interval grows, fewer samples are taken; and as the largest matrix size is reduced, the range examined in the graph narrows.</p>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Identity matrix examples and run-time graphs for one and five multiplications with step 3 and upper size 200"><figcaption>Second page of the report: Figures 1–3 and the inputs of the first experiment</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="Comparison of ten and twenty multiplications, and run-time graphs of the experiments with step interval 10 and largest size 100"><figcaption>Third page of the report: Figures 4–7</figcaption></figure>
+<p><em>Note: In the converted PDF, the right part of the identity matrix image, the upper parts of the graphs, and some axis scales are cropped; the caption of Figure 6 is also cropped. Compared with the images in the original Word file, these details were not carried over to the PDF completely. For this reason, no exact numerical times were extracted from the graphs. The images above were taken from the masked PDF.</em></p>
+<h2 id="research-results">Research Results</h2>
+<p>The report explains that, in order to isolate the effect of the three variables, we changed one variable in each experiment while keeping the others constant. An identity matrix was used so that the matrix values would not affect the result. It is stated that the times depend on the computer's hardware and software, and that an excessively large size or number of repetitions can cause the program to stop responding.</p>
+<p>In the source's evaluation, it is stated that the run time increases "in direct proportion" to the matrix size.</p>
+<p><em>Note: The increase in the graphs alone is not proof of a linear proportion. Moreover, since the code assigns a t(i) value only at the selected indices and then plots plot(t), the unmeasured indices in between may remain zero; the sawtooth appearance of the graphs should not be interpreted entirely as real measurement fluctuation.</em></p>
+<h2 id="matlab-source-code">MATLAB Source Code</h2>
+<p>The code below was transcribed from the report; comments containing personal information were removed, and introductory texts that were split by the page layout were merged into a single line. The problematic <code>g t = zeros(0,MAXN);</code> line in the report is preserved.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>%% Meta Bilgileri %%
+%Version : sürüm 1
+
+%Not: Grafikleri bilgisayarınızda tam ekran yaparak incelemeniz tavsiye edilir.
+
+%% Parametreler 1%%
+deltaN = input ('Adim araligini giriniz:');
+MAXN = input ('Maksimum matris degeriniz giriniz:');
+KERE = input ('Kac carpim yapilacagini giriniz:');
+
+%% Parametreler 2%%
+g t = zeros(0,MAXN);
+
+%% İşlemleri uygula 2%%
+for i = deltaN:deltaN:MAXN
+    A = eye(i,i);
+    tic;
+    for j = 1:KERE
+        A = A*A;
+    end
+    t(i) = toc;
+end
+
+%% Grafiği Çiz %%
+plot(t)
+title('Geçen Zaman - Matris Boyut')
+xlabel('Matris Boyut')
+ylabel('Gecen Zaman')</code></pre>
+<p><em>Note: "g t = …" is not a valid assignment to t; moreover, zeros(0,MAXN) creates an empty array with zero rows instead of a measurement row. This code was not run; it was preserved as a document example. The operation A = A*A squares the current matrix in each loop iteration. Since the result is again I for an identity matrix, the values do not change in this part of the experiment.</em></p>
+<p><em>Note: For deltaN = 3 and MAXN = 200, the last size tried is 198; for MAXN = 100, it is 99. These are the values reached according to the loop step; the upper limit is not always sampled.</em></p>
+<h2 id="references-in-the-report">References in the Report</h2>
+<p>The report lists Wikipedia, Matlab Akademi, Tureng, Encyclopaedia Britannica, and MathWorks, along with access dates. The last source is given as the book <strong>MATLAB Matrix Algebra</strong> by César Pérez López (Apress, 2013). This post contains the student-era project report; the book's content was not included.</p>
+<p><em>Note: The references contain bibliographic inconsistencies, such as a different domain name written under the Wikipedia entry and phrases like "worst since"; these entries should not be taken as verified source citations.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../matris-carpimi-kosum-zamani-maskeli.pdf" download>matris-carpimi-kosum-zamani-maskeli.pdf</a></p>
+              <p class="kucuk">PDF · 782 KB · 4 <span data-i18n="arch.pagesLower"></span> · 06.05.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../matris-carpimi-kosum-zamani-maskeli.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (782 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

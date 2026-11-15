@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM491 Capstone Project I: Smart Lock System — Door Lock with Bluetooth and Wi-Fi (Arduino, ESP8266, Android) — hasancan.net</title>
+<meta name="description" content="Başkent University EEM491/EEM492 capstone project (2016–2017): a door lock that is opened and locked by phone over Bluetooth at close range and over Wi-Fi through the network. Block diagram, wiring diagrams, Arduino + ESP8266 + HC-06 firmware, App Inventor and Java Android applications, flow diagrams, work schedule, cost and risk analysis; the report, poster and all source code are available for download.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM491 Capstone Project I: Smart Lock System — Door Lock with Bluetooth and Wi-Fi (Arduino, ESP8266, Android)">
+<meta property="og:description" content="Başkent University EEM491/EEM492 capstone project (2016–2017): a door lock that is opened and locked by phone over Bluetooth at close range and over Wi-Fi through the network. Block diagram, wiring diagrams, Arduino + ESP8266 + HC-06 firmware, App Inventor and Java Android applications, flow diagrams, work schedule, cost and risk analysis; the report, poster and all source code are available for download.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM491 Capstone Project I: Smart Lock System — Door Lock with Bluetooth and Wi-Fi (Arduino, ESP8266, Android)", "description": "Başkent University EEM491/EEM492 capstone project (2016–2017): a door lock that is opened and locked by phone over Bluetooth at close range and over Wi-Fi through the network. Block diagram, wiring diagrams, Arduino + ESP8266 + HC-06 firmware, App Inventor and Java Android applications, flow diagrams, work schedule, cost and risk analysis; the report, poster and all source code are available for download.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM491 – Bitirme Projesi I", "associatedMedia": {"@type": "MediaObject", "name": "akilli-kilit-sistemi.zip", "contentUrl": "https://hasancan.net/arsiv/eem491-akilli-kilit-sistemi/akilli-kilit-sistemi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM491 Capstone Project I: Smart Lock System — Door Lock with Bluetooth and Wi-Fi (Arduino, ESP8266, Android)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem491">EEM491</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM491 – Bitirme Projesi I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.05.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#project-objective">Project objective</a></li><li><a href="#system-architecture">System architecture</a></li><li><a href="#hardware-and-connections">Hardware and connections</a></li><li><a href="#firmware">Firmware</a></li><li><a href="#android-application">Android application</a></li><li><a href="#flow-diagrams">Flow diagrams</a></li><li><a href="#end-of-the-first-semester">End of the first semester</a></li><li><a href="#project-management">Project management</a></li><li><a href="#references">References</a></li><li><a href="#contents-of-the-download-package">Contents of the download package</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM491</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM491 Capstone Project I: Smart Lock System — Door Lock with Bluetooth and Wi-Fi (Arduino, ESP8266, Android)</h1>
+            <p class="kucuk">EEM491 – Bitirme Projesi I · 26.05.2017 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post describes the <strong>Smart Lock System</strong> that Hasan Can Öztürk developed together with a project partner during the <strong>EEM491 Capstone Project I</strong> (fall 2016) and <strong>EEM492 Capstone Project II</strong> (spring 2017) courses in the Department of Electrical and Electronics Engineering at Başkent University. Hasan Can Öztürk was the group leader on the project. The advisor was <strong>Asst. Prof. Dr. Alparslan Çağrı Yapıcı</strong>, and the jury members were <strong>Prof. Dr. Murat Emin Akata</strong> and <strong>Assoc. Prof. Dr. Sedat Nazlıbilek</strong>.</p>
+<p>The post was compiled from the capstone report, the presentations from both semesters, the project poster, three firmware versions, two Android applications (MIT App Inventor and Java), and the diagrams in the design folder. The package containing the report (with student numbers, the project partner's name, and the résumé pages covered up), the poster, all the code, and the diagrams can be downloaded at the end of the post.</p>
+<figure class="yazi-gorsel"><img src="../poster.jpg" width="1000" height="1429" loading="lazy" decoding="async" alt="Smart Lock project poster: title, Başkent University Department of Electrical and Electronics Engineering, advisor&#x27;s name; sections titled Keyless access, Block diagram, Just run it with a single battery, and Simple and practical; images of the SmartLock app on a handheld phone, the circuit board placed inside the door lock mechanism, and the lock cover on the door handle"><figcaption>Project poster (2017). The project partner's name and e-mail were removed from the poster.</figcaption></figure>
+<h2 id="project-objective">Project objective</h2>
+<p>In the poster's wording, the objective is <em>"to build a device that, in addition to traditional methods, lets us open and lock the door with smart technologies for the door locks of homes and workplaces"</em>. The mechanism was built with Wi-Fi and Bluetooth technologies. The Concept Definition and Operation Document (KTİD) in the report lists the following expectations of the system:</p>
+<ol><li>When one comes within about <strong>3 meters</strong> of the door, the lock will be opened <strong>automatically</strong> with a mobile phone.</li><li>Until the lock password is changed, it will be enough for the correct password to have been entered once; any smartphone user who knows the password will be able to enter.</li><li>The lock will open in <strong>less than 1 second</strong>.</li><li>At distances greater than 3 meters, the lock will be opened with an <strong>internet connection</strong> and a mobile phone. This will be done through an account assigned to the user, with a username and password.</li><li>The password used for automatic opening at close range can be changed through this account.</li></ol>
+<p>The Project Requirements Specification Document (PİBD) divides this into hardware and software tasks: building a door lock control circuit with contactless communication technologies, making the circuit support Bluetooth and Wi-Fi, developing the software that will run on the circuit, the phone interface, and the server software for control over the internet, and finally integrating the subunits to prepare a first prototype suitable for mass production.</p>
+<h3 id="from-home-automation-to-smart-lock">From home automation to smart lock</h3>
+<p>The project's initial proposal carried a broader title: <strong>"Development of a Home Automation System with Near-Field and Far-Field Communication"</strong>. The proposal presentation describes a structure in which any phone user who knows the password can open the lock when communicating at close range, while the system administrator can open it remotely and assign passwords. For the remote connection, a <strong>MySQL</strong> database on the server, <strong>PHP</strong> for communication with the server, <strong>HTML</strong> for the browser interface, <strong>Java</strong> for Android, and <strong>Swift</strong> for iOS were planned. An <strong>LCD and keypad</strong> for assigning the password in case of connection problems, and a <strong>mechanical key</strong> as an "emergency solution" for situations where all power is cut, were also planned.</p>
+<p>As the project progressed, the scope narrowed to the <strong>door lock</strong>, which is one part of home automation: in the first semester, close-range control over Bluetooth; in the second semester, control through the network over Wi-Fi and driving the actual lock mechanism with a motor.</p>
+<h2 id="system-architecture">System architecture</h2>
+<figure class="yazi-gorsel"><img src="../blok-diyagram.png" width="1200" height="427" loading="lazy" decoding="async" alt="Block diagram: the mobile phone is connected to the Arduino through the Wi-Fi module and the Bluetooth module; the Arduino controls the motor driver, and the motor driver controls the lock"><figcaption>Block diagram (Figure 1 and Figure 4 in the report)</figcaption></figure>
+<p>According to the "Implementation" section of the report, the system consists of four main subunits:</p>
+<ol><li><strong>Door control unit with Bluetooth</strong> — a close-range connection when the phone approaches the lock.</li><li><strong>Door control unit with Wi-Fi</strong> — control with an HTTP request from a phone on the same network.</li><li><strong>Motor control unit</strong> — a driver that moves the motor in two directions on the Arduino's command.</li><li><strong>Physical lock unit</strong> — a motorized mechanism placed inside a mortise door lock.</li></ol>
+<p>The report summarizes the order of work as follows: first the development board, Bluetooth module, and smart device operating system were researched and selected; the Arduino software for the Bluetooth module was completed and the module was tested; then the phone application that would send data to the Bluetooth module was written; finally the motor was driven in order to control the door lock with the motor driver board.</p>
+<h3 id="components-used">Components used</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Component</th><th scope="col">Function</th><th scope="col">Note</th></tr></thead><tbody><tr><th scope="row">Arduino Due (1st semester), Arduino Uno (2nd semester)</th><td>Control center; processes commands coming from Bluetooth and Wi-Fi and drives the motor</td><td>The poster lists the processor as ATmega328P (Uno)</td></tr><tr><th scope="row">HC-06 Bluetooth module</th><td>Short-range serial communication with the phone (SPP), in slave mode</td><td>Bluetooth 2.0 + EDR, 2.4 GHz; configured with AT commands. The wiring diagrams say HC-05</td></tr><tr><th scope="row">ESP8266 Wi-Fi module</th><td>Connects to the network and opens a small web server on port 80</td><td>Managed from the Arduino's serial port with the AT command set</td></tr><tr><th scope="row">Motor driver + geared DC motor</th><td>Moves the lock bolt in both directions</td><td>Driven by Arduino pins 6 and 7</td></tr><tr><th scope="row">Lock mechanism</th><td>The physical door lock</td><td>The largest item in the budget</td></tr><tr><th scope="row">LED</th><td>In the first semester, in place of the lock, to show whether the door is open/closed</td><td>Remained as a status indicator in the second semester too</td></tr><tr><th scope="row">LCD and numeric keypad</th><td>In the first semester, for creating a password and manual entry in an emergency</td><td>In the final presentation, "the keypad used for emergencies"</td></tr><tr><th scope="row">Battery</th><td>Power supply</td><td>On the poster: "Just run it with a single battery"</td></tr></tbody></table></div>
+<p>According to the power section of the poster, the parts of the device that consume power are the ATmega328P processor, the Wi-Fi module, the Bluetooth module, and the DC motor. The total consumption of both modules and the processor in <strong>sleep mode</strong> is below 4 mA. Thanks to the gearbox on the motor, a current of <strong>0.8 A</strong> is drawn when 9 V is applied to the circuit input, and this allows the device to run on one battery for an average of <strong>more than 6 months</strong>. The poster also includes a graph supporting this, "Maximum Output Current vs. Input Voltage Comparison" (9 V and 12 V curves).</p>
+<p><em>Note: None of the firmware versions in the archive contains code that puts the device into sleep mode; the consumption and battery-life values on the poster should be read as a design target.</em></p>
+<h2 id="hardware-and-connections">Hardware and connections</h2>
+<p>Two wiring arrangements were used during the project. In the first semester, thanks to the multiple hardware serial ports of the <strong>Arduino Due</strong>, the Bluetooth and Wi-Fi modules were connected to separate ports:</p>
+<figure class="yazi-gorsel"><img src="../baglanti-semasi-due.jpg" width="1200" height="281" loading="lazy" decoding="async" alt="Arduino Due wiring diagram: the td and tr pins of the HC05 Bluetooth module to the tr1 and td1 pins of the Due; the td and tr pins of the ESP8266 Wi-Fi module to the tr2 and td2 pins of the Due; 3.3V/5V and GRD connections"><figcaption>Wiring diagram with the Arduino Due: the Bluetooth module on the Serial1 side, the Wi-Fi module on the Serial2 side</figcaption></figure>
+<p>In the second semester, the board was changed to the <strong>Arduino Uno</strong>. Since the Uno has only one hardware serial port, the Wi-Fi module was connected to the hardware serial port (0–1) and the Bluetooth module was connected to <strong>pins 10 and 11</strong> using <code>SoftwareSerial</code>:</p>
+<figure class="yazi-gorsel"><img src="../baglanti-semasi-uno.jpg" width="1200" height="281" loading="lazy" decoding="async" alt="Arduino Uno wiring diagram: the HC05 Bluetooth module to pins 10 and 11 of the Uno, the ESP8266 Wi-Fi module to the tr and td pins of the Uno; 3.3V, 5V and GRD connections"><figcaption>Wiring diagram with the Arduino Uno (final version)</figcaption></figure>
+<p>The design folder also contains a <strong>current cut-off circuit</strong> conceived to protect the motor. The schematic shows an Arduino Mega, a 12 V car battery, a 12 V DC motor, a single-channel relay module, a current sensor, and a momentary push button. When the motor drives the lock bolt all the way to its end, the current rises; the circuit was designed to cut the motor current at <strong>3–5 A</strong> ("Max 3A – 5A to cut off").</p>
+<figure class="yazi-gorsel"><img src="../motor-akim-kesme-devresi.jpg" width="900" height="619" loading="lazy" decoding="async" alt="Drawing of the motor current cut-off circuit: wiring between an Arduino Mega 2560, a 12V DC car battery, a 12V DC motor, a 1-channel relay module, a current sensor, and a push button; note reading Max 3A–5A to cut off"><figcaption>Design of the current cut-off circuit for the motor (May 2017)</figcaption></figure>
+<p><em>Note: In the final firmware, the motor is stopped by time (2.5 seconds) rather than by measuring current; the current cut-off circuit remained a design that was not reflected in the code.</em></p>
+<h2 id="firmware">Firmware</h2>
+<p>The archive contains three versions of the Arduino code. All share the same skeleton: connecting the ESP8266 to the network with AT commands and opening a web server, managing the lock according to the characters coming from Bluetooth, and sending a regular "keep-alive" signal to the phone.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Board</th><th scope="col">Lock</th><th scope="col">Difference</th></tr></thead><tbody><tr><th scope="row"><code>SmartKey_ArduinoDue.ino</code></th><td>April 2017</td><td>Arduino Due</td><td>LED</td><td>Bluetooth on <code>Serial2</code> (9600 baud), ESP8266 on <code>Serial1</code> (115200), debug output on <code>Serial3</code>. ON/OFF buttons on the web page</td></tr><tr><th scope="row"><code>SmartKey_ESP8266_v1_LED.ino</code></th><td>April 2017</td><td>Arduino Uno</td><td>LED</td><td>Bluetooth on <code>SoftwareSerial</code> (10, 11; 38400 baud). A signal (<code>ping</code>) to the phone every 500 ms was added</td></tr><tr><th scope="row"><code>SmartKey_ESP8266_v2_Motor.ino</code></th><td>May 2017</td><td>Arduino Uno</td><td>Motor driver (pins 6–7)</td><td>Motor instead of LED: lock opening/locking movements, mechanism test at startup</td></tr></tbody></table></div>
+<h3 id="how-the-final-version-works">How the final version works</h3>
+<p><strong>Startup (<code>setup</code>)</strong></p>
+<ol><li>The serial port for the Wi-Fi module is opened at <strong>115200</strong> baud and the software serial port for Bluetooth at <strong>38400</strong> baud.</li><li><code>AT</code> is sent to the ESP8266; if the module returns <code>OK</code>, it is put into <strong>station (STA)</strong> mode with <code>AT+CWMODE=1</code> and connected to the wireless network with <code>AT+CWJAP_CUR</code>. The LED is on while the connection is in progress and turns off when <code>OK</code> arrives.</li><li>DHCP is turned off with <code>AT+CWDHCP_CUR=1,0</code> and a <strong>static IP (192.168.1.20)</strong> is assigned with <code>AT+CIPSTA_CUR</code>. This way the phone application always finds the lock at the same address.</li><li>Multiple connections are enabled with <code>AT+CIPMUX=1</code> and a <strong>server on port 80</strong> is started with <code>AT+CIPSERVER=1,80</code>.</li><li>The motor makes a short open–close movement (3 s in the opening direction, 200 ms in the closing direction); that the mechanism works can be seen at startup.</li></ol>
+<p><strong>Main loop (<code>loop</code>)</strong></p>
+<ul><li><strong>Wi-Fi:</strong> If <code>+IPD,</code> (an incoming HTTP request) is read from the ESP8266, a short response (<code>&lt;head&gt; Hello World &lt;/head&gt;</code>) is sent to the browser and the rest of the request is read in the <code>led_yakma()</code> function: if it contains <code>pin=on</code>, the lock is <strong>opened</strong>; if it contains <code>pin=off</code>, it is <strong>locked</strong>. The connection is closed with <code>AT+CIPCLOSE=0</code>.</li><li><strong>Bluetooth:</strong> If there is data on the software serial port, <code>kilit_kontrol_bt()</code> examines each incoming character:</li></ul>
+<p>  - <code>t</code> → the LED turns on and a <strong>30-second</strong> counter starts (sent when the phone approaches and connects automatically).   - <code>n</code> → the lock is <strong>opened</strong>.   - <code>f</code> → the lock is <strong>locked</strong> and the counter stops.</p>
+<ul><li><strong>Counter:</strong> While the counter is active, the elapsed seconds are written to the phone over Bluetooth; when 30 seconds are up, the LED turns off.</li><li><strong>Keep-alive signal:</strong> Every 500 ms, <code>500</code> is written to the phone. When the phone application cannot receive this data, it understands that the connection has dropped, that is, that the user has moved away from the door.</li></ul>
+<p><strong>Motor movement:</strong> To open, <code>in2</code> is set HIGH and <code>in1</code> LOW and the motor is turned for <strong>2.5 seconds</strong>, then the direction is reversed for 300 ms and the motor is stopped. To lock, <code>in1</code> is set HIGH and the motor is turned in the opposite direction for 2.5 seconds.</p>
+<h3 id="code-smartkey-esp8266-v2-motor-ino">Code: <code>SmartKey_ESP8266_v2_Motor.ino</code></h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;SoftwareSerial.h&gt;
+SoftwareSerial mySerial(10, 11); // RX, TX
+
+#define ag_ismi "wireless"
+#define ag_sifresi "********"
+#define LED 8
+#define LED1 13
+#define bekleme_suresi 30000
+#define ping_zamani 500
+
+const int in1 = 7;
+const int in2 = 6;
+unsigned long simdikizaman = 0, oncekizaman = 0, ping = 0;
+char sayac_acik = 0;
+int fark = 0;
+
+void setup()
+{
+  // mySerial.begin(115200);   //bluethoot icin
+  Serial.begin(115200); //Seriport'u açıyoruz. Güncellediğimiz Wifi
+  mySerial.begin(38400); //Seriport'u açıyoruz. Güncellediğimiz BT
+
+
+  //ESP modülünün baudRate değeri 115200 olduğu için bizde Seriport'u 115200 şeklinde seçiyoruz
+  Serial.println("AT"); //ESP modülümüz ile bağlantı kurulup kurulmadığını kontrol ediyoruz.
+  pinMode(LED1, OUTPUT);
+  pinMode(LED, OUTPUT);
+  pinMode (in1, OUTPUT);
+  pinMode (in2, OUTPUT);
+  delay(3000); //ESP ile iletişim için 3 saniye bekliyoruz.
+
+  if (Serial.find("OK")) {       //esp modülü ile bağlantıyı kurabilmişsek modül "AT" komutuna "OK" komutu ile geri dönüş yapıyor.
+    Serial.println("AT+CWMODE=1"); //esp modülümüzün WiFi modunu STA şekline getiriyoruz. Bu mod ile modülümüz başka ağlara bağlanabilecek.
+    digitalWrite(LED, HIGH);
+    delay(2000);
+    String baglantiKomutu = String("AT+CWJAP_CUR=\"") + ag_ismi + "\",\"" + ag_sifresi + "\"";
+    Serial.println(baglantiKomutu);
+    delay(5000);
+    if (Serial.find("OK"))
+      digitalWrite(LED, LOW);
+  }
+
+  Serial.println("AT+CWDHCP_CUR=1,0");    //DHCP yi kapat
+  delay(500);
+  Serial.println("AT+CIPSTA_CUR=\"192.168.1.20\",\"192.168.1.1\",\"255.255.255.0\"");   //static IP ata
+  delay(500);
+
+  Serial.println("AT+CIPMUX=1");
+  delay(1000);
+  Serial.println("AT+CIPSERVER=1,80");
+  delay(1000);
+  Serial.println("AT+CIPCLOSE=0");
+
+
+  ping = millis();
+
+  //-----------------------------------------------
+    //Serial.begin(9600);  
+    digitalWrite(in1, LOW); //açar
+    digitalWrite(in2, HIGH);
+    delay(3000);
+    digitalWrite(in2, LOW); //kapar
+    digitalWrite(in1, HIGH);
+    delay(200);
+    digitalWrite(in2, LOW);
+    digitalWrite(in1, LOW);
+    delay(1);
+    //--------------------------------------------------
+}
+
+
+void loop() {
+  if (Serial.available() &gt; 0) {
+    if (Serial.find("+IPD,")) {
+      String metin = "&lt;head&gt; Hello World &lt;/head&gt;";
+      // metin += "&lt;br&gt;&lt;a href=\" ?pin=on\"&gt;&lt;button type='button'&gt;ON&lt;/button&gt;&lt;/a&gt;";
+      // metin += "&lt;br&gt;&lt;a href=\" ?pin=off\"&gt;&lt;button type='button'&gt;OFF&lt;/button&gt;&lt;/a&gt;";
+      String cipsend = "AT+CIPSEND=";
+      cipsend += "0";
+      cipsend += ",";
+      cipsend += metin.length();
+      cipsend += "\r\n";
+      Serial.print(cipsend);
+      delay(500);
+      Serial.println(metin);
+      led_yakma();
+      Serial.println("AT+CIPCLOSE=0");
+
+    }
+  }
+
+  if (mySerial.available() &gt; 0) {
+    kilit_kontrol_bt();
+  }
+
+  if (sayac_acik &amp;&amp; millis() - oncekizaman &gt; bekleme_suresi) {
+    sayac_acik = 0;
+    digitalWrite(LED, LOW);
+  }
+
+  if (sayac_acik &amp;&amp; millis() - oncekizaman &lt;= bekleme_suresi) {
+    fark = (millis () - oncekizaman) / 1000;
+    mySerial.print(fark);
+    mySerial.print("\r");
+  }
+
+  if (millis() - ping &gt;= ping_zamani)
+  {
+    ping = millis();
+    mySerial.print(ping_zamani);
+  }
+}
+
+
+
+void led_yakma() {
+  String gelen = "";
+  char serialdenokunan;
+  int ii = 0;
+
+  while (Serial.available() &gt; 0) {
+    serialdenokunan = Serial.read();
+    gelen += serialdenokunan;
+    ii++;
+  }
+
+  if ((gelen.indexOf("pin=on") &gt; 1)) { //on butonuna basıldığında server adresinde /?pin=on var ise
+    digitalWrite(LED, HIGH);                 //ledi yakar
+     //-----------------------------------------------
+      digitalWrite(in2, HIGH); //kilidi açar
+      digitalWrite(in1, LOW);
+      delay(2500);
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(300);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //----------------------------------------
+
+  }
+  if ((gelen.indexOf("pin=off") &gt; 1)) { // off butonuna basıldığında server adresinde /?pin=off var ise
+    digitalWrite(LED, LOW);                   //ledi söndürür
+    //-----------------------------------------------
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(2500);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //-----------------------------------------------
+
+  }
+}
+
+void kilit_kontrol_bt() {
+  String gelenbt = "";
+  char serialdenokunanbt;
+
+  while (mySerial.available() &gt; 0) {
+    serialdenokunanbt = mySerial.read();
+    gelenbt += serialdenokunanbt;
+
+    if (serialdenokunanbt == 't') { //on butonuna basıldığında server adresinde blu=on var ise
+      digitalWrite(LED, HIGH);                 //ledi yakar
+      oncekizaman = millis();
+      sayac_acik = 1;
+    }
+
+    if (serialdenokunanbt == 'n') { //on butonuna basıldığında server adresinde blu=on var ise
+      digitalWrite(LED, HIGH);                 //ledi yakar
+       //-----------------------------------------------
+      digitalWrite(in2, HIGH); //kilidi açar
+      digitalWrite(in1, LOW);
+      delay(2500);
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(300);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //----------------------------------------
+
+    }
+
+    if (serialdenokunanbt == 'f') { // off butonuna basıldığında server adresinde blu=off var ise
+      digitalWrite(LED, LOW);                   //ledi söndürür
+      //-----------------------------------------------
+      digitalWrite(in2, LOW); //kapar
+      digitalWrite(in1, HIGH);
+      delay(2500);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
+      delay(1);
+      //-----------------------------------------------
+
+      sayac_acik = 0;
+    }
+  }
+
+}</code></pre>
+<p><em>Note: The Wi-Fi password in the code was replaced with <code><strong></em></strong><em>*</em></code> in the published copy. Because commands are processed character by character, any <code>n</code> appearing in a message from Bluetooth opens the lock. The application's <code>1234 blu=on 5678</code> relies on this (the <code>n</code> in <code>on</code>), while <code>1234 blu=off 5678</code> locks thanks to the <code>f</code>. The <code>1234</code> / <code>5678</code> at the beginning and end of the message are not verified in the firmware. On the Wi-Fi side as well, the request is plain HTTP without authentication. The report's security section relies on Bluetooth transferring data only between paired devices and on frequency hopping; the network-side account and password, and encrypted commands, remained steps that were targeted in the KTİD but are not present in the archived code.*</p>
+<h2 id="android-application">Android application</h2>
+<p>There are two separate Android applications in the project.</p>
+<h3 id="first-semester-bluetooth-application-in-java">First semester: Bluetooth application in Java</h3>
+<p>The first version was written in Java in Android Studio (project name <code>deneme39</code>, January 2017). On startup, the application checks the phone's Bluetooth (asks for it to be turned on if it is off), lists the paired devices, and scans the surrounding devices. When the device labeled "(Eslesti)" (Paired) in the list is tapped, an <strong>RFCOMM socket</strong> is opened with <code>ConnectThread</code> (serial port profile UUID <code>00001101-0000-1000-8000-00805F9B34FB</code>); once the connection is established, <code>ConnectedThread</code> reads the incoming data and displays it on the screen. The "Lambayı Aç" (Turn the Lamp On) and "Lambayı Kapat" (Turn the Lamp Off) buttons send the characters <code>1</code> and <code>2</code> to the module, respectively. In this semester there was an LED in place of the lock.</p>
+<pre class="kaynak" data-dosya="ConnectThread.java - Not Defteri"><code>private class ConnectThread extends Thread {
+    private final BluetoothSocket mmSocket;
+    private final BluetoothDevice mmDevice;
+
+    public ConnectThread(BluetoothDevice device) {
+        BluetoothSocket tmp = null;
+        mmDevice = device;
+        try {
+            tmp = device.createRfcommSocketToServiceRecord(mmuuid);
+        } catch (IOException e) {
+        }
+        mmSocket = tmp;
+    }
+
+    public void run() {
+        blt.cancelDiscovery();
+        try {
+            mmSocket.connect();
+        } catch (IOException connectException) {
+            try {
+                mmSocket.close();
+            } catch (IOException closeException) { }
+            return;
+        }
+        mHandler.obtainMessage(baglanti, mmSocket).sendToTarget();
+    }
+}
+
+public void ledon() throws IOException {
+    outstream.write("1".getBytes());
+}
+
+public void ledoff() throws IOException {
+    outstream.write("2".getBytes());
+}</code></pre>
+<p><em>Note: The <code>1</code> / <code>2</code> commands belong to the first semester's LED circuit; the firmware versions in the archive process the characters <code>t</code>, <code>n</code>, <code>f</code>. The first semester's Arduino code is not in the archive. The report's appendices also include this application's code, the interface layout (<code>activity_main.xml</code>), and, under the manifest heading, again the interface layout.</em></p>
+<h3 id="second-semester-smartlock-with-app-inventor">Second semester: SmartLock with App Inventor</h3>
+<p>In the second semester, the application was rebuilt in <strong>MIT App Inventor</strong> (application name <strong>SMARTLOCK</strong>). There are two versions in the archive (April 17 and 18, 2017):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Version</th><th scope="col">Features</th></tr></thead><tbody><tr><th scope="row">v1</th><td>The module is selected manually from the "BT Modül Seç" (Select BT Module) list and connected; Network ON/OFF buttons</td></tr><tr><th scope="row">v2</th><td>The address of the selected module is saved on the phone (<code>TinyDB</code>); the application tries to <strong>connect automatically</strong> to the saved module every time it starts. Separate ON/OFF buttons for Bluetooth and Network, a connection status button, locked/unlocked lock images</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../uygulama-ekrani.png" width="450" height="713" loading="lazy" decoding="async" alt="Screen of the SmartLock application: Smart Lock title, BT Modül Seç button, ON and OFF buttons under the Network heading, the Başkent University logo, and the text EEM492 course phone application"><figcaption>Screen of the application (May 2017)</figcaption></figure>
+<p>The block logic of v2 (transcribed from App Inventor blocks into text):</p>
+<ol><li><strong>Startup:</strong> The status button is orange and reads "Bağlantı yok" (No connection), and the locked image is shown. If there is a saved module address on the phone, it is written on the screen as "Kaydedilen BT adresi" (Saved BT address), the button becomes "Bağlanıyor" (Connecting), and a 1-second <strong>connection timer</strong> (Clock1) starts.</li><li><strong>Connection timer:</strong> If Bluetooth is on and there is no connection, it tries to connect to the saved address. If successful, the button turns green and reads "Bağlandı" (Connected), <strong><code>1234 zxtr 5678</code></strong> is sent to the module (the <code>t</code> in it turns the LED on in the firmware and starts the 30-second counter), the unlocked image is shown, and the <strong>connection monitoring timer</strong> (Clock2) starts. If it fails, the button turns red and reads "Bağlanamadı" (Could not connect) and it retries on the next second. If Bluetooth is off, it gives the warning "BT kapalı! Otomatik bağlantı durduruldu" (BT is off! Automatic connection stopped).</li><li><strong>Connection monitoring timer:</strong> Every second it checks whether data has arrived from the module. Because the firmware sends data every 500 ms, if no data arrives the phone has gone out of range: the connection is closed and the connection timer restarts. Thus, when the user approaches the door, the application reconnects on its own.</li><li><strong>Status button:</strong> If there is no connection, it lists the paired devices (with the warning "Eşleşmiş cihaz yok, eşleme için cihaz ayarlarını kullanın" — No paired devices, use the device settings for pairing), connects to the selected module, and saves its address. If there is a connection, it asks "BT bağlantısını sonlandır" (End the BT connection).</li><li><strong>Bluetooth ON / OFF:</strong> sends <code>1234 blu=on 5678</code> / <code>1234 blu=off 5678</code> to the module and changes the lock image.</li><li><strong>Network ON / OFF:</strong> sends an HTTP PUT request to <code>http://192.168.1.20/pin=on</code> / <code>pin=off</code>; the firmware looks for <code>pin=on</code> / <code>pin=off</code> in the request.</li></ol>
+<h2 id="flow-diagrams">Flow diagrams</h2>
+<p>Four flows of the system were drawn during the design phase (April 2017).</p>
+<p><strong>Lock control over Bluetooth.</strong> The application searches for registered devices; when a registered device is found, it opens the lock, locks it after 10 seconds, and goes into standby. As long as the Bluetooth connection continues, it checks whether the user wants to open the lock; when the connection drops, the flow ends.</p>
+<figure class="yazi-gorsel"><img src="../akis-bluetooth-kilit.png" width="696" height="652" loading="lazy" decoding="async" alt="Bluetooth lock control flow diagram: Start, search for devices registered to the smart lock, was a registered device found, open the lock, have 10 seconds passed, lock; go to standby, is the BT connection continuing, I want to open the lock, lock, end"><figcaption>Lock control flow over Bluetooth</figcaption></figure>
+<p><strong>Lock control over Wi-Fi.</strong> The application connects to the server; while the smart lock is connected to the server and on standby, the user selects "1 – Open the lock" or "2 – Lock". The request is recorded on the server and sent to the smart lock, and the door lock is opened or locked.</p>
+<figure class="yazi-gorsel"><img src="../akis-wifi-kilit.png" width="1200" height="779" loading="lazy" decoding="async" alt="Wi-Fi lock control flow diagram: open the smart lock application, connect to the server, smart lock connected to server on standby, 1 open the lock 2 lock; send lock open request, record on the server, send to the smart lock, open the door lock; the same steps for the lock request and lock the door"><figcaption>Lock control flow over Wi-Fi</figcaption></figure>
+<p><strong>Initial connection over Bluetooth and Wi-Fi.</strong> For Bluetooth, the smart lock and the phone are turned on, the application searches for Bluetooth devices, and the user enters the password; if the password is correct, the lock is saved to the phone. For Wi-Fi, the smart lock, the modem, and the phone are turned on; the username and password are entered, the application searches for Wi-Fi networks, and with the home network and the network password the smart lock is registered to the network.</p>
+<figure class="yazi-gorsel"><img src="../akis-baglanti.png" width="1200" height="894" loading="lazy" decoding="async" alt="Bluetooth and Wi-Fi connection flow diagrams: on the left, turn on the smart lock and the phone, open the Bluetooth application, search for Bluetooth devices, was a BT device found, enter the given password, is the password correct, save the smart lock to the phone; on the right, turn on the smart lock, modem and phone, enter username and password, search for Wi-Fi networks, was the home network found, enter the network password, save the network to the smart lock"><figcaption>Initial connection flows over Bluetooth (left) and Wi-Fi (right)</figcaption></figure>
+<p><strong>Changing the password.</strong> The current password, the new password, and a repeat of the new password are entered; if the current password is correct and the two new passwords are the same, the password is changed.</p>
+<figure class="yazi-gorsel"><img src="../akis-sifre-degistirme.png" width="672" height="890" loading="lazy" decoding="async" alt="Password change flow diagram: open the smartphone application, open password operations, enter the current password, enter the new password, re-enter the new password, is the current password correct, are the new passwords the same, change the password, finish"><figcaption>Password change flow</figcaption></figure>
+<p>In the use-case diagram, the system is divided into four tasks: <strong>initial setup</strong>, <strong>password change</strong>, <strong>registered user</strong>, and <strong>unexpected guest</strong>.</p>
+<figure class="yazi-gorsel"><img src="../kullanim-senaryolari.png" width="1000" height="454" loading="lazy" decoding="async" alt="Use-case diagram: arrows from the Smart Lock System box to the initial setup, password change, registered user, and unexpected guest boxes"><figcaption>Use cases</figcaption></figure>
+<h2 id="end-of-the-first-semester">End of the first semester</h2>
+<p>The final presentation of EEM491 (January 2017) summarizes the state at the end of the first semester as follows: <strong>Arduino Due</strong> was used as the board, <strong>HC-06 Bluetooth</strong> for communication, and a <strong>numeric keypad and LCD</strong> for the password; an <strong>LED</strong> was placed in place of the lock to verify that the interface worked. In the architecture drawing there is a keypad and manual entry for emergencies on the door, and the "inner structure of the lock," made up of the Due and the HC-06, on the inside; the resident and the guest connect with their phones. The "Interface and Circuit Prepared for This Semester" slide of the presentation includes the screen of the Java application and a photograph of the Arduino–HC-06–LED circuit built on a breadboard.</p>
+<p>The goals set for the next semester:</p>
+<ol><li>A lock system will be used in the system instead of the LED.</li><li>In addition to the close-range control of the first semester, remote access to the system will be provided.</li><li>The password will be changeable through remote communication.</li><li>Remote communication will be done with a Wi-Fi kit.</li></ol>
+<p>The "Results" section of the report states the first semester's outcome as follows: <em>"We have completed the first two parts of the smart lock system. A person who approaches the device and has a smart device and the system application can turn the LED on and off when they enter Bluetooth's coverage area, and a password can be created with the LCD and keypad."</em> In the second semester, Wi-Fi control with the ESP8266, the actual lock movement with the motor driver, and the automatically connecting App Inventor application were added on top of this.</p>
+<h2 id="project-management">Project management</h2>
+<h3 id="project-implementation-schedule">Project implementation schedule</h3>
+<p>The first semester's schedule (Table 2 of the report):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Task</th><th scope="col">Week</th></tr></thead><tbody><tr><th scope="row">Determining project topics</th><td>1–4</td></tr><tr><th scope="row">Determining the job description in consultation with the advisor</th><td>5</td></tr><tr><th scope="row">Researching near-field communication for smart homes</th><td>5–6</td></tr><tr><th scope="row">Researching data transfer over Bluetooth</th><td>7–8</td></tr><tr><th scope="row">Researching microcontrollers</th><td>8–9</td></tr><tr><th scope="row">Midterm presentation week</th><td>10</td></tr><tr><th scope="row">Researching secure door lock systems</th><td>11–12</td></tr><tr><th scope="row">Conducting research for the system's software</th><td>12–14</td></tr><tr><th scope="row">Performing Arduino and Bluetooth experiments</th><td>14–15</td></tr><tr><th scope="row">End-of-semester presentation week</th><td>16</td></tr></tbody></table></div>
+<p>The second semester's schedule (April 2017):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Task</th><th scope="col">Week</th></tr></thead><tbody><tr><th scope="row">Resolving Bluetooth connection problems</th><td>1–3</td></tr><tr><th scope="row">Writing the Wi-Fi module</th><td>3–5</td></tr><tr><th scope="row">Writing the smartphone application</th><td>4–7</td></tr><tr><th scope="row">Midterm week</th><td>8</td></tr><tr><th scope="row">Presentation week</th><td>9</td></tr><tr><th scope="row">Designing the mechanical setup</th><td>10–11</td></tr><tr><th scope="row">Preparing the server software</th><td>11–12</td></tr><tr><th scope="row">Developing the phone application</th><td>12–14</td></tr><tr><th scope="row">Integrating the system</th><td>14</td></tr><tr><th scope="row">Final week</th><td>15</td></tr><tr><th scope="row">Presentation week</th><td>16</td></tr></tbody></table></div>
+<h3 id="cost-analysis">Cost analysis</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Material / product</th><th scope="col">Estimated cost</th><th scope="col">Actual cost</th></tr></thead><tbody><tr><th scope="row">Arduino Uno</th><td>30 TL</td><td>35 TL</td></tr><tr><th scope="row">Bluetooth kit</th><td>30 TL</td><td>27 TL</td></tr><tr><th scope="row">Wi-Fi module</th><td>40 TL</td><td>15 TL</td></tr><tr><th scope="row">Motor driver</th><td>50 TL</td><td>20 TL</td></tr><tr><th scope="row">Battery</th><td>20 TL</td><td>10 TL</td></tr><tr><th scope="row">Lock mechanism</th><td>150 TL</td><td>200 TL</td></tr><tr><th scope="row"><strong>Total</strong></th><td><strong>320 TL</strong></td><td><strong>307 TL</strong></td></tr></tbody></table></div>
+<p><em>Note: The total row was added to the table in the report; the table contains only the line items.</em></p>
+<h3 id="risk-analysis">Risk analysis</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Risk</th><th scope="col">Likelihood</th><th scope="col">Impact</th><th scope="col">Mitigation</th><th scope="col">Occurrence status</th></tr></thead><tbody><tr><th scope="row">Delays in delivery of hardware sourced from abroad</th><td>High</td><td>High</td><td>The hardware was sourced from Turkey at a higher cost</td><td>Very low likelihood of occurring</td></tr><tr><th scope="row">Hardware turning out to be faulty</th><td>Low</td><td>High</td><td>Two of each material were purchased</td><td>High likelihood of occurring</td></tr></tbody></table></div>
+<h3 id="standards-constraints-and-disciplines">Standards, constraints, and disciplines</h3>
+<ul><li><strong>Standards:</strong> IEEE 802.15 (Bluetooth), Bluetooth 4.0, SWAP, IEEE 802.11 (Wi-Fi).</li><li><strong>Course knowledge used:</strong> Microprocessors, Circuit Theory I–II, Computer Networks.</li><li><strong>Security:</strong> In Bluetooth, data transfer takes place only between paired devices; communication is established by hopping frequencies 1600 times per second across 79 channels in the frequency band.</li><li><strong>Interdisciplinary work:</strong> Computer Engineering, Mechanical Engineering, and Electrical and Electronics Engineering.</li></ul>
+<h2 id="references">References</h2>
+<p>The report's bibliography:</p>
+<ol><li>802.1X-2004 — Port Based Network Access Control.</li><li>NFC Forum (accessed 22.10.2016).</li><li>"Bluetooth Low Energy", Bluetooth.com (accessed 23.11.2016).</li><li>"Using AT Commands" ("AT Komutlarının Kullanılması"), Maker.robotistan.com (accessed 01.11.2016).</li><li>HC-06 Bluetooth Kit Datasheet.</li><li>K. Y. Lee, J. W. Choi, "Remote-Controlled Home Automation System via Bluetooth Home Network", vol. 3, 2003, pp. 2824–2829.</li><li>T. Tamura, A. Kawarada, M. Nambu, A. Tsukada, K. Sasaki, K. Yamakoshi, "E-Healthcare at an Experimental Welfare Techno House in Japan", <em>The Open Medical Informatics Journal</em>, vol. 1, 2007, pp. 1–7.</li><li>D. J. Cook, M. Youngblood, E. O. Heierman, "MavHome: An Agent Based Smart Home", Arlington, VA: National Science Foundation.</li><li>H. Kanma, N. Wakabayashi, R. Kanazawa, H. Ito, "Home Appliance Control System over Bluetooth with a Cellular Phone", <em>IEEE Transactions on Consumer Electronics</em>, vol. 49, 2003, pp. 1049–1053.</li></ol>
+<p>Documents kept in the project folder for reference (not included in the download package): the ITead Studio <em>HC-05 Bluetooth to Serial Port Module</em> datasheet and the Karadeniz Technical University Department of Computer Engineering design project report <em>Card-Access Door System with Arduino-RFID</em> (2016).</p>
+<h2 id="contents-of-the-download-package">Contents of the download package</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Folder</th><th scope="col">Contents</th></tr></thead><tbody><tr><th scope="row"><code>rapor/</code></th><td>Capstone report, 34 pages (student numbers, the project partner's name, and résumé information covered up)</td></tr><tr><th scope="row"><code>poster/</code></th><td>Project poster</td></tr><tr><th scope="row"><code>firmware/</code></th><td>Three Arduino versions: Due, Uno + ESP8266 (LED), Uno + ESP8266 + motor</td></tr><tr><th scope="row"><code>android/app-inventor/</code></th><td>SmartLock v1 and v2 (<code>.aia</code>, opened with <em>Import project</em> in App Inventor)</td></tr><tr><th scope="row"><code>android/android-studio/</code></th><td>Sources of the first semester's Java Bluetooth application</td></tr><tr><th scope="row"><code>diyagramlar/</code></th><td>Block diagram, two wiring diagrams, motor current cut-off circuit, flow diagrams, use cases</td></tr></tbody></table></div>
+<p><em>Note: The project's promotional videos and installable application files (APK) were not included in the package; the circuit photograph from the final presentation was also not published.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../akilli-kilit-sistemi.zip" download>akilli-kilit-sistemi.zip</a></p>
+              <p class="kucuk">ZIP archive · 5.9 MB · 26.05.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../akilli-kilit-sistemi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (5.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

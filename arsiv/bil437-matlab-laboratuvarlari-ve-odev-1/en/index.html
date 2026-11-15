@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Computer Vision: MATLAB Introduction Handout, Color Image and FFT-Noise Labs, Programming Assignment 1 — hasancan.net</title>
+<meta name="description" content="The MATLAB introduction handout, color image processing and frequency-domain filtering/noise lab code, programming assignment with image reduction and logarithmic/power-law transformation, and a plus-sign detection code for the BIL437 Computer Vision course.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Computer Vision: MATLAB Introduction Handout, Color Image and FFT-Noise Labs, Programming Assignment 1">
+<meta property="og:description" content="The MATLAB introduction handout, color image processing and frequency-domain filtering/noise lab code, programming assignment with image reduction and logarithmic/power-law transformation, and a plus-sign detection code for the BIL437 Computer Vision course.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Computer Vision: MATLAB Introduction Handout, Color Image and FFT-Noise Labs, Programming Assignment 1", "description": "The MATLAB introduction handout, color image processing and frequency-domain filtering/noise lab code, programming assignment with image reduction and logarithmic/power-law transformation, and a plus-sign detection code for the BIL437 Computer Vision course.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-uygulamalar.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-matlab-laboratuvarlari-ve-odev-1/bil437-uygulamalar.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="BIL437 Computer Vision: MATLAB Introduction Handout, Color Image and FFT-Noise Labs, Programming Assignment 1">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>29.07.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#matlab-introduction-handout-437l1-pdf-8-pages">MATLAB introduction handout (437L1.pdf, 8 pages)</a></li><li><a href="#lab-1-color-image-processing-lab-color-pdf">Lab 1: color image processing (lab_color.pdf)</a></li><li><a href="#lab-2-frequency-domain-filtering-and-noise-lab-fft-noise-pdf">Lab 2: frequency-domain filtering and noise (lab_fft_noise.pdf)</a></li><li><a href="#programming-assignment-1-due-july-22-2015-demonstration-in-the-lab">Programming Assignment 1 (due: July 22, 2015, demonstration in the lab)</a></li><li><a href="#plus-sign-detection-arti-isareti-bulma-m">Plus-sign detection (arti-isareti-bulma.m)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>BIL437 Computer Vision: MATLAB Introduction Handout, Color Image and FFT-Noise Labs, Programming Assignment 1</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 29.07.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Practical materials used in the 2015 summer school course <strong>BIL437 Computer Vision</strong> (shared content with "BİL421 Image Processing", according to the title of the lab handouts): a MATLAB introduction handout, two lab handouts, a programming assignment, and a small piece of code I wrote. The original files can be downloaded as a ZIP at the end of the post. The lab handouts and the assignment are the course instructor's material; the author of the MATLAB introduction handout is not stated (it appears to be based on Kermit Sigmon's "MATLAB Primer").</p>
+<h2 id="matlab-introduction-handout-437l1-pdf-8-pages">MATLAB introduction handout (437L1.pdf, 8 pages)</h2>
+<p>The handout introduces MATLAB under 18 headings:</p>
+<ol><li>Accessing MATLAB.</li><li>Entering matrices: <code>A = [1 2 3; 4 5 6; 7 8 9]</code>, complex numbers (<code>1+5i</code>), <code>rand(n)</code>, <code>magic(n)</code>; <code>A(2,3)</code> is the element in the second row, third column.</li><li>Matrix and array (element-by-element) operations: <code>+ - * ^ ' \ /</code>; with a dot, <code>.*</code> and <code>.^</code> operate element by element (<code>[1,2,3,4].^2</code> → <code>[1,4,9,16]</code>). <code>x = A\b</code> is the solution of Ax = b.</li><li>Expressions, variables, saving a session (<code>who</code>, <code>whos</code>, <code>clear</code>, <code>save</code>, <code>load</code>, <code>eps</code>).</li><li>Functions that generate matrices: <code>eye, zeros, ones, diag, triu, tril, rand, hilb, magic, toeplitz</code>.</li><li><code>for</code>, <code>while</code>, <code>if</code> and relational/logical operators (<code>&lt;, &gt;, &lt;=, &gt;=, ==, ~=, &amp;, |, ~</code>).</li><li>Scalar functions (<code>sin, cos, exp, log, abs, round, floor, ceil, rem, sign, sqrt</code>).</li><li>Vector functions (<code>max, min, sort, sum, prod, mean, median, std, any, all</code>) operate column by column; the largest element of a matrix is <code>max(max(A))</code>.</li><li>Matrix functions (<code>eig, chol, svd, inv, lu, qr, det, rank, norm, cond, expm</code> …).</li><li>Command line editing and recall (arrow keys).</li><li>Submatrices and colon notation: <code>1:5</code>, <code>0.2:0.2:1.2</code>, <code>A(:,3)</code>, <code>A(1:4,:)</code>, <code>A(:,[2 4]) = …</code>.</li><li>M-files and function files; example:</li></ol>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function a = randint(m,n,a,b)
+%RANDINT Randomly generated integral matrix.
+if nargin &lt; 3, a = 0 ; b = 9 ; end
+a = floor((b-a+1)*rand(m,n)) + a;</code></pre>
+<p>13. Text strings, <code>disp</code>, <code>error</code>, <code>input</code>. 16. Output format: <code>format short</code>, <code>format long</code>, <code>format rat</code> … 18. Graphics: <code>plot</code>, <code>plot3</code>, <code>mesh</code>, <code>surf</code>; title/axis commands (<code>title</code>, <code>xlabel</code>, <code>ylabel</code>, <code>axis</code>), <code>hold on</code>, line types, marker types, and color codes (<code>plot(x,y,'r--')</code>).</p>
+<h2 id="lab-1-color-image-processing-lab-color-pdf">Lab 1: color image processing (lab_color.pdf)</h2>
+<p>It consists of six exercises on the <code>peppers.png</code> image:</p>
+<ol><li><strong>RGB – HSV</strong>: display the H (hue), S (saturation), and V (value/intensity) components using <code>hsv2rgb</code>/<code>rgb2hsv</code>.</li><li><strong>Conversion to gray level</strong>: compare <code>rgb2gray</code> with the average <code>(R+G+B)/3</code>; the weighted formula is <code>0.2989*R + 0.5870*G + 0.1140*B</code>.</li><li><strong>RGB – CMY</strong>: <code>C = 255 − R</code>, <code>M = 255 − G</code>, <code>Y = 255 − B</code> (cyan = white − red).</li><li><strong>RGB histogram equalization</strong>: each band is equalized separately with <code>histeq</code>.</li><li><strong>Brightness increase</strong>: 128 is added to each band. The handout includes the warning "Apply to each band (R,G,B) separately!"</li><li><strong>RGB filtering</strong>: <code>imfilter(I,H,'replicate')</code> with <code>fspecial('average',7)</code>, and <code>medfilt2(…,[7 7])</code> on each band.</li></ol>
+<h2 id="lab-2-frequency-domain-filtering-and-noise-lab-fft-noise-pdf">Lab 2: frequency-domain filtering and noise (lab_fft_noise.pdf)</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>I = imread('eight.tif');
+fI = fft2(I);
+fS = fftshift(fI);            % shifts the spectrum to the center of the image
+H  = fspecial('average',9);
+fH = fft2(H, x, y);           % FFT of the filter (zero-padded to the image size)
+NI = ifft2(fI .* fH);         % multiplication in the frequency domain = spatial convolution</code></pre>
+<p>It shows that the same result is obtained with <code>imfilter(I,H)</code> (2-D convolution). The second part is noise generation: <code>imnoise(I,'salt &amp; pepper',0.02)</code> (density 0.02) and <code>imnoise(I,'gaussian',0,0.01)</code> (mean 0, variance 0.01).</p>
+<h2 id="programming-assignment-1-due-july-22-2015-demonstration-in-the-lab">Programming Assignment 1 (due: July 22, 2015, demonstration in the lab)</h2>
+<p><strong>Problem 1: image reduction by pixel decimation.</strong> A MATLAB program will be written that shrinks an image by an integer reduction factor X provided by the user; Figure 2.20(a) will be used, and the results will be written to separate files in the original format with <code>imwrite</code>.</p>
+<p><strong>Problem 2: enhancement with intensity transformations.</strong> For Figure 3.8(a), (a) s = c·log(1 + r) and (b) s = c·r^γ transformations will be applied. In (a) there is a single parameter c, and in (b) there are c and γ; the aim is to find the best visual enhancement obtainable with each transformation by experimentation, and to explain the reason for the different results between the two (the explanation can be written as a comment in the program).</p>
+<p>Notes: only .m source files are submitted; no MATLAB library functions are to be used other than for image reading/writing and input/output; adequate comments and meaningful variable names are expected in the code.</p>
+<h2 id="plus-sign-detection-arti-isareti-bulma-m">Plus-sign detection (arti-isareti-bulma.m)</h2>
+<p>A short piece of code that finds "+"-shaped pixels (the center and its four neighbors equal to 1) in a binary image:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function islem1 = islem1(image)
+[x,y]=size(image);
+image2=zeros(x,y);
+for m=1:x-2
+    for n=1:y-2
+        if image(m+1,n+1)==1 &amp;&amp; image(m,n+1)==1 &amp;&amp; image(m+1,n)==1 &amp;&amp; image(m+1,n+2) &amp;&amp; image(m+2,n+1)==1
+            image2(m+1,n+1)=1;
+        end
+    end
+end
+islem1=image2;
+end</code></pre>
+<p><em>Note: The <code>==1</code> is missing from the <code>image(m+1,n+2)</code> comparison; since the condition is treated as true when the numeric value is nonzero, the result does not change for a binary image.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../bil437-uygulamalar.zip" download>bil437-uygulamalar.zip</a></p>
+              <p class="kucuk">ZIP archive · 433 KB · 29.07.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../bil437-uygulamalar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (433 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

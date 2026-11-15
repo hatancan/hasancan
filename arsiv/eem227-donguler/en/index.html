@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Data Structures: Loop Logic in Java (while, do-while, for, break, continue) — hasancan.net</title>
+<meta name="description" content="Java examples from the loops video of the EEM227 Data Structures course: finding the sum from 1 to 10 by hand, with while, with do-while, and with for; the sum of even numbers, continue and break, numbers whose square root is an integer, and a triangle of stars with nested loops.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-donguler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem227-donguler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem227-donguler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem227-donguler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Data Structures: Loop Logic in Java (while, do-while, for, break, continue)">
+<meta property="og:description" content="Java examples from the loops video of the EEM227 Data Structures course: finding the sum from 1 to 10 by hand, with while, with do-while, and with for; the sum of even numbers, continue and break, numbers whose square root is an integer, and a triangle of stars with nested loops.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-donguler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Data Structures: Loop Logic in Java (while, do-while, for, break, continue)", "description": "Java examples from the loops video of the EEM227 Data Structures course: finding the sum from 1 to 10 by hand, with while, with do-while, and with for; the sum of even numbers, continue and break, numbers whose square root is an integer, and a triangle of stars with nested loops.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-donguler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-donguler.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-donguler/eem227-donguler.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM227 Data Structures: Loop Logic in Java (while, do-while, for, break, continue)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem227">EEM227</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>12.11.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#question-list">Question list</a></li><li><a href="#without-a-loop-why-do-we-need-loops">Without a loop: why do we need loops?</a></li><li><a href="#while-do-while-and-for">while, do-while, and for</a></li><li><a href="#sum-of-even-numbers-two-approaches">Sum of even numbers: two approaches</a></li><li><a href="#numbers-whose-square-root-is-an-integer">Numbers whose square root is an integer</a></li><li><a href="#exiting-a-loop-with-break">Exiting a loop with break</a></li><li><a href="#nested-loops-a-triangle-of-stars">Nested loops: a triangle of stars</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM227 Data Structures: Loop Logic in Java (while, do-while, for, break, continue)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 12.11.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the question list of the video in which loops were covered in the Başkent University <strong>EEM227 Data Structures</strong> course (November 2013) and the Java code from the BlueJ project named "Donguler" (Loops). The same problem (the sum from 1 to 10) is solved first without a loop, then with three different loops; <code>continue</code>, <code>break</code>, and nested loops follow. The original files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="question-list">Question list</h2>
+<p>The topics covered in the video, in the order of the original text file:</p>
+<ul><li>Loop logic: the sum of 1..10; while, do while, for</li><li>The sum of the even numbers in 1..10</li><li>Summing the numbers between 1..100 whose square root is an integer (4 → 2, 9 → 3, 16 → 4 …)</li><li>continue, break</li><li>Nested loops: a triangle made of stars</li></ul>
+<pre class="kod"><code>*
+**
+***
+****
+*****
+******</code></pre>
+<h2 id="without-a-loop-why-do-we-need-loops">Without a loop: why do we need loops?</h2>
+<p>The first example writes the sum 1 + 2 + … + 10 = 55 without using any loop. Seeing the same two lines repeated ten times is the shortest way to explain why a loop is needed.</p>
+<pre class="kaynak" data-dosya="DonguMantigi.java - Not Defteri"><code>public class DonguMantigi
+{
+    public static void main()
+    {
+        // toplam = 1+2+3+4+5+6+7+8+9+10 = 55
+        int toplam = 0;
+        int a = 1;
+        toplam = toplam +a; // 1
+        a = a+1; // 2
+        toplam = toplam +a; // 2
+        a = a+1; // 3
+        toplam = toplam +a; // 3
+        // ... the same two lines continue up to 10 ...
+        a = a+1; // 10
+        toplam = toplam +a; // 10
+
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<h2 id="while-do-while-and-for">while, do-while, and for</h2>
+<pre class="kaynak" data-dosya="DonguMantigiWhileLoop.java - Not Defteri"><code>public class DonguMantigiWhileLoop
+{
+    public static void main()
+    {
+        int toplam = 0;
+        int a = 1;
+        while(a &lt;=10)
+        {
+            // runs as long as the control expression is true.
+            toplam = toplam +a;
+            a = a+1;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<pre class="kaynak" data-dosya="DonguMantigiDoWhileLoop.java - Not Defteri"><code>public class DonguMantigiDoWhileLoop
+{
+    public static void main()
+    {
+        int toplam = 0;
+        int a = 1;
+        do
+        {
+            toplam = toplam +a;
+            a = a+1;
+            // runs at least once,
+            // and then as long as the
+            // control expression is true.
+        }while(a &lt;=10);
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<pre class="kaynak" data-dosya="DonguMantigiForLoop.java - Not Defteri"><code>public class DonguMantigiForLoop
+{
+    public static void main()
+    {
+        int toplam = 0;
+        for(int a=1;a &lt;=10;a = a+1)
+        {
+            toplam = toplam +a;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<p>All three produce the same output:</p>
+<pre class="kod"><code>toplam = 55</code></pre>
+<h2 id="sum-of-even-numbers-two-approaches">Sum of even numbers: two approaches</h2>
+<p>The first approach increments the counter by two; the second looks at every number and skips the odd ones with <code>continue</code>.</p>
+<pre class="kaynak" data-dosya="DonguCiftSayilarToplam.java - Not Defteri"><code>public class DonguCiftSayilarToplam
+{
+    public static void main()
+    {
+        int toplam = 0;
+        for(int a=2;a &lt;=10;a = a+2)
+        {
+            toplam = toplam +a;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<pre class="kaynak" data-dosya="DonguCiftSayilarContinue.java - Not Defteri"><code>public class DonguCiftSayilarContinue
+{
+    public static void main()
+    {
+        int toplam = 0;
+        for(int a=1;a &lt;=10;a = a+1)
+        {
+            if (a %2 == 1)
+            {
+                continue;
+            }
+            toplam = toplam +a;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<pre class="kod"><code>toplam = 30</code></pre>
+<h2 id="numbers-whose-square-root-is-an-integer">Numbers whose square root is an integer</h2>
+<pre class="kaynak" data-dosya="DonguKarekokTamsayiOlanlariToplama.java - Not Defteri"><code>public class DonguKarekokTamsayiOlanlariToplama
+{
+    public static void main()
+    {
+        int toplam = 0;
+        for(int sayi=1;sayi &lt;=100;sayi = sayi+1)
+        {
+            int a = (int)Math.sqrt(sayi);
+            if (a*a == sayi)
+            {
+                continue;
+            }
+            toplam = toplam +sayi;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<p><em>Note: The question asks for the sum of the numbers whose square root is an integer (1, 4, 9, …, 100), which is 385. The code, however, skips the perfect squares with <code>continue</code>; that is, it sums the numbers that are not perfect squares and prints 5050 − 385 = 4665. To get the result the question asks for, the opposite of the <code>if</code> condition (<code>a*a != sayi</code>) should be used.</em></p>
+<h2 id="exiting-a-loop-with-break">Exiting a loop with break</h2>
+<p>As soon as the total exceeds 100, the loop is cut short instead of running all the way to 1000.</p>
+<pre class="kaynak" data-dosya="BreakOrnek1.java - Not Defteri"><code>public class BreakOrnek1
+{
+    public static void main()
+    {
+        int toplam = 0;
+        for(int a=1;a &lt;=1000;a = a+1)
+        {
+            if (toplam &gt; 100)
+            {
+                break;
+            }
+            toplam = toplam +a;
+        }
+        System.out.println("toplam = " + toplam);
+    }
+}</code></pre>
+<pre class="kod"><code>toplam = 105</code></pre>
+<p>The sum from 1 to 13 is 91; adding 14 makes it 105, and the loop is broken at the next step.</p>
+<h2 id="nested-loops-a-triangle-of-stars">Nested loops: a triangle of stars</h2>
+<pre class="kaynak" data-dosya="IcIceDongu1UcgenYildiz.java - Not Defteri"><code>public class IcIceDongu1UcgenYildiz
+{
+    public static void main()
+    {
+        for(int i=1;i&lt;10;i++)
+        {
+            for(int j=1;j&lt;=i;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+    }
+}</code></pre>
+<p>Because the outer loop has <code>i &lt; 10</code>, the triangle has 9 rows; row i has i stars.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem227-donguler.zip" download>eem227-donguler.zip</a></p>
+              <p class="kucuk">ZIP archive · 4 KB · 12.11.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem227-donguler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (4 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

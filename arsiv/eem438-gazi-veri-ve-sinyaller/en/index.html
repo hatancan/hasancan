@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Data Communications: Data and Signals (Gazi University, Suat Özdemir) — hasancan.net</title>
+<meta name="description" content="Data Communications lecture slides by Suat Özdemir of Gazi University: analog and digital signals, frequency and bandwidth, attenuation, Nyquist and Shannon limits, performance metrics.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Data Communications: Data and Signals (Gazi University, Suat Özdemir)">
+<meta property="og:description" content="Data Communications lecture slides by Suat Özdemir of Gazi University: analog and digital signals, frequency and bandwidth, attenuation, Nyquist and Shannon limits, performance metrics.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Data Communications: Data and Signals (Gazi University, Suat Özdemir)", "description": "Data Communications lecture slides by Suat Özdemir of Gazi University: analog and digital signals, frequency and bandwidth, attenuation, Nyquist and Shannon limits, performance metrics.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "dc03.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-gazi-veri-ve-sinyaller/dc03.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM438 Data Communications: Data and Signals (Gazi University, Suat Özdemir)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#analog-and-digital-signals">Analog and digital signals</a></li><li><a href="#analog-and-digital-signals-2">Analog and digital signals (2)</a></li><li><a href="#periodic-analog-signals">Periodic analog signals</a></li><li><a href="#periodic-analog-signals-2">Periodic analog signals (2)</a></li><li><a href="#periodic-analog-signals-3">Periodic analog signals (3)</a></li><li><a href="#periodic-analog-signals-4">Periodic analog signals (4)</a></li><li><a href="#periodic-analog-signals-5">Periodic analog signals (5)</a></li><li><a href="#periodic-analog-signals-6">Periodic analog signals (6)</a></li><li><a href="#periodic-analog-signals-7">Periodic analog signals (7)</a></li><li><a href="#periodic-analog-signals-8">Periodic analog signals (8)</a></li><li><a href="#periodic-analog-signals-9">Periodic analog signals (9)</a></li><li><a href="#periodic-analog-signals-10">Periodic analog signals (10)</a></li><li><a href="#periodic-analog-signals-11">Periodic analog signals (11)</a></li><li><a href="#digital-signals">Digital signals</a></li><li><a href="#digital-signals-2">Digital signals (2)</a></li><li><a href="#digital-signals-3">Digital signals (3)</a></li><li><a href="#digital-signals-4">Digital signals (4)</a></li><li><a href="#digital-signals-5">Digital signals (5)</a></li><li><a href="#digital-signals-6">Digital signals (6)</a></li><li><a href="#digital-signals-7">Digital signals (7)</a></li><li><a href="#digital-signals-8">Digital signals (8)</a></li><li><a href="#digital-signals-9">Digital signals (9)</a></li><li><a href="#digital-signals-10">Digital signals (10)</a></li><li><a href="#digital-signals-11">Digital signals (11)</a></li><li><a href="#digital-signals-12">Digital signals (12)</a></li><li><a href="#transmission-impairments">Transmission impairments</a></li><li><a href="#transmission-impairments-2">Transmission impairments (2)</a></li><li><a href="#transmission-impairments-3">Transmission impairments (3)</a></li><li><a href="#transmission-impairments-4">Transmission impairments (4)</a></li><li><a href="#categories-of-noise">Categories of Noise</a></li><li><a href="#categories-of-noise-2">Categories of Noise (2)</a></li><li><a href="#transmission-impairments-5">Transmission impairments (5)</a></li><li><a href="#data-rate-limits">Data rate limits</a></li><li><a href="#data-rate-limits-2">Data rate limits (2)</a></li><li><a href="#data-rate-limits-3">Data rate limits (3)</a></li><li><a href="#data-rate-limits-4">Data rate limits (4)</a></li><li><a href="#performance">Performance</a></li><li><a href="#performance-2">Performance (2)</a></li><li><a href="#performance-3">Performance (3)</a></li><li><a href="#performance-4">Performance (4)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM438 Data Communications: Data and Signals (Gazi University, Suat Özdemir)</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 05.03.2011 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>These are the slides for Chapter 3 (Data and Signals) of the "Data Communications" course prepared by Suat Özdemir of the Computer Engineering Department at Gazi University (slide date 5 March 2011; the footer reads BM 403 Data Communications). They were kept in the EEM438 folder as course material from a second instructor. The slide text is transcribed below; figures and tables taken from the textbook are not published, and slides without text are indicated. The original PDF can be downloaded at the end of the post.</p>
+<p>Scope: analog and digital signals, frequency and bandwidth, attenuation, Nyquist and Shannon limits, performance metrics.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution to the source. It will be removed at the request of the rights holder.</em></p>
+<h2 id="analog-and-digital-signals">Analog and digital signals</h2>
+<ul><li>One of the important functions of the physical layer is to carry data over the transmission medium as signals.</li><li>Analog data represents continuous information; digital data represents information with discrete states.</li><li>An analog signal has an infinite number of values in a given time interval (continuous).</li><li>A digital signal has a limited number of values. It generally represents the values 0 and 1 (discrete).</li></ul>
+<h2 id="analog-and-digital-signals-2">Analog and digital signals (2)</h2>
+<ul><li>A periodic signal continuously repeats the same pattern over a given time interval.</li><li>In a periodic signal, the time interval for one pattern is called the period, and the repeated pattern is called a cycle. Frequency is the number of repetitions in 1 second.</li><li>An aperiodic signal contains no repeating pattern.</li><li>In aperiodic signals, the period is infinite and the frequency is zero.</li></ul>
+<h2 id="periodic-analog-signals">Periodic analog signals</h2>
+<ul><li>Periodic analog signals fall into two groups: simple and composite.</li><li>A simple analog signal, the sine wave, cannot be decomposed into simpler signals.</li><li>Composite analog signals can be built from simple sine waves.</li><li>A sine wave is described by its amplitude, frequency, and phase.</li></ul>
+<h2 id="periodic-analog-signals-2">Periodic analog signals (2)</h2>
+<ul><li>The period is the time a signal takes to complete one cycle, and the frequency is the number of periods in 1 second. f=1/T,T=1/f</li><li>Period is expressed in seconds (s) and frequency in hertz (Hz).</li><li>A signal that never changes has a frequency of 0 and an infinite period.</li><li>A signal that changes instantaneously has a period of 0 and an infinite frequency.</li></ul>
+<h2 id="periodic-analog-signals-3">Periodic analog signals (3)</h2>
+<ul><li>Phase describes the position of the signal at time t=0.</li><li>Signals with phase angles of 0º, 90º, and 180º are shown alongside.</li></ul>
+<h2 id="periodic-analog-signals-4">Periodic analog signals (4)</h2>
+<ul><li>Wavelength is the distance a signal travels in one period. Its unit is the meter. λ = c/f = c·T (c = 3×10⁸ m/s)</li></ul>
+<h2 id="periodic-analog-signals-5">Periodic analog signals (5)</h2>
+<ul><li>The time-domain plot shows the variation of the signal with time.</li><li>The frequency-domain plot shows the relationship between frequency and amplitude.</li></ul>
+<h2 id="periodic-analog-signals-6">Periodic analog signals (6)</h2>
+<ul><li>The figure shows two sine waves and a DC signal in the frequency domain.</li><li>The DC signal in the figure has a frequency of 0 and an amplitude of 15.</li></ul>
+<h2 id="periodic-analog-signals-7">Periodic analog signals (7)</h2>
+<ul><li>A composite signal is formed by combining many sine waves.</li><li>In the 1900s, Jean-Baptiste Fourier showed that any composite signal is a combination of simple sine waves with different amplitudes, frequencies, and phases.</li><li>f is the fundamental frequency or 1st harmonic, 3f is the 3rd harmonic, and 9f is the 9th harmonic.</li></ul>
+<h2 id="periodic-analog-signals-8">Periodic analog signals (8)</h2>
+<ul><li>The figure shows the frequency-domain representation of an aperiodic signal.</li></ul>
+<h2 id="periodic-analog-signals-9">Periodic analog signals (9)</h2>
+<ul><li>The frequency range of the signals that make up a composite signal is called the bandwidth.</li></ul>
+<h2 id="periodic-analog-signals-10">Periodic analog signals (10)</h2>
+<ul><li>Example: Draw the frequency-domain plot of a periodic signal composed of 5 sine waves of 10 V amplitude at frequencies of 100, 300, 500, 700, and 900 Hz.</li></ul>
+<h2 id="periodic-analog-signals-11">Periodic analog signals (11)</h2>
+<ul><li>Example: The bandwidth of a periodic signal is 20 Hz. If the highest frequency is 60 Hz, what is the lowest frequency? Draw the spectrum, given that all components of the signal have the same amplitude.</li></ul>
+<h2 id="digital-signals">Digital signals</h2>
+<ul><li>Information can be represented by a digital signal as well as by an analog signal.</li><li>A 1 can be represented by a positive voltage and a 0 by zero amplitude.</li><li>A digital signal can have more than two amplitude levels. For a signal with L levels, each level represents log₂L bits.</li></ul>
+<h2 id="digital-signals-2">Digital signals (2)</h2>
+<ul><li>Most digital signals are nonperiodic.</li><li>Bit rate is the number of bits sent per second (bps).</li><li>Bit length is the distance one bit occupies on the transmission medium. bit length = propagation speed * bit duration</li><li>Example: A file of 100 pages, with 24 lines and 80 columns on each page, is downloaded in 1 second. Given that each character is 8 bits, what is the bit rate? Bit rate = 100*24*80*8 = 1,536,000 bps = 1.536 Mbps</li><li>Example: What is the bit rate for HDTV? An HDTV screen has a 16:9 aspect ratio. The screen has 1920*1080 pixels. Each pixel is represented by 24 bits, and the screen is refreshed 30 times per second. Bit rate = 1920*1080*30*24 = 1,492,992,000 bps = 1.5 Gbps</li></ul>
+<h2 id="digital-signals-3">Digital signals (3)</h2>
+<ul><li>A digital signal is an analog composite signal with infinite bandwidth.</li><li>The figure shows the bandwidth of periodic and aperiodic digital signals.</li></ul>
+<h2 id="digital-signals-4">Digital signals (4)</h2>
+<ul><li>Digital signals can be transmitted as baseband or broadband (using modulation).</li><li>In baseband communication, the digital signal is sent as is (without converting it to an analog signal).</li><li>Baseband communication uses a low-pass channel. The transmission medium forms only one channel.</li></ul>
+<h2 id="digital-signals-5">Digital signals (5)</h2>
+<ul><li>Baseband communication can be carried out over a low-pass channel with limited bandwidth or wide bandwidth.</li></ul>
+<h2 id="digital-signals-6">Digital signals (6)</h2>
+<ul><li>Two devices can communicate very well over a transmission medium with wide bandwidth.</li><li>In the figure, f1 is close to zero and f2 is a very high frequency.</li><li>In baseband transmission of a digital signal, the original shape is preserved. The low-pass channel must have a bandwidth from 0 up to a high frequency.</li><li>In LANs, a single channel is formed and the entire bandwidth is dedicated to communication between two devices.</li></ul>
+<h2 id="digital-signals-7">Digital signals (7)</h2>
+<ul><li>In communication over a transmission medium with limited bandwidth, the digital signal is approximated by an analog signal.</li><li>How closely the resulting signal resembles the original digital signal depends on the bandwidth.</li><li>In the figure, N denotes the bit rate. The maximum frequency of the analog signal is N/2 for the worst case, 1010 or 0101. For the others it is N/4.</li><li>Bandwidth = N/2 – 0 = N/2</li></ul>
+<h2 id="digital-signals-8">Digital signals (8)</h2>
+<ul><li>To make the analog signal resemble the original digital signal more closely, more harmonics must be used. (The bandwidth must be increased.)</li><li>In baseband communication, the required bandwidth depends on the bit rate.</li><li>In baseband communication, the bandwidth must be increased to send data faster.</li></ul>
+<h2 id="digital-signals-9">Digital signals (9)</h2>
+<ul><li>The table gives the bandwidths (B) required to send data at different rates (N).</li><li>In baseband communication, the required bandwidth depends on the bit rate.</li></ul>
+<h2 id="digital-signals-10">Digital signals (10)</h2>
+<ul><li>Example: What bandwidth is required to send data at 1 Mbps using baseband communication? For a low-pass channel, minimum BW = N / 2 = 1 Mbps / 2 = 500 kHz (1st harmonic only). A better BW = 3 * 500 kHz = 1.5 MHz (1st and 3rd harmonics). If the 5th harmonic is used, BW = 5 * 500 kHz = 2.5 MHz (1st, 3rd, and 5th harmonics)</li><li>Example: What is the maximum bit rate over a low-pass channel with a bandwidth of 100 kHz? The maximum bit rate is obtained using the 1st harmonic. BW = N/2, N (bit rate) = 100 kHz * 2 = 200 kbps</li></ul>
+<h2 id="digital-signals-11">Digital signals (11)</h2>
+<ul><li>In broadband communication, the digital signal is modulated and converted to an analog signal.</li><li>Modulation makes it possible to create a bandpass channel.</li><li>Telephone lines are designed for voice signals with a bandwidth of 0–4 kHz.</li><li>With baseband communication, the maximum bit rate would be 8 kbps.</li></ul>
+<h2 id="digital-signals-12">Digital signals (12)</h2>
+<ul><li>In broadband communication, the digital signal must be converted to an analog signal. A modem (modulator/demodulator) is used for this.</li></ul>
+<h2 id="transmission-impairments">Transmission impairments</h2>
+<ul><li>A signal weakens in the transmission medium and does not remain the same as the one sent.</li><li>Signal impairment has three causes: attenuation, distortion, and noise.</li><li>Attenuation is the loss of signal energy due to the resistance of the medium.</li><li>Signal attenuation and gain are expressed in decibels (dB). dB = 10log₁₀ (P2/P1)</li></ul>
+<h2 id="transmission-impairments-2">Transmission impairments (2)</h2>
+<ul><li>Example: If P2 = ½ P1, what is the attenuation? 10 log₁₀(P2/P1) = 10.log₁₀(0.5 P1/P1) = 10 . (-0.3) = -3 dB</li><li>Example: If P2 = 10P1, what is the attenuation? 10 log₁₀(P2/P1) = 10.log₁₀(10) = 10 . (1) = 10 dB</li></ul>
+<h2 id="transmission-impairments-3">Transmission impairments (3)</h2>
+<ul><li>Distortion is a change in the shape of the signal.</li><li>The components of a signal all travel at different speeds. They arrive at the destination at different times, and the received signal has a different shape from the original.</li></ul>
+<h2 id="transmission-impairments-4">Transmission impairments (4)</h2>
+<ul><li>Noise refers to effects that corrupt the signal. Thermal noise, induced noise, crosstalk, and impulse noise can corrupt the signal.</li><li>Thermal noise is caused by the movement of electrons in the wire.</li><li>Induced noise can come from motors or other devices.</li><li>Crosstalk occurs when one cable affects another.</li><li>Impulse noise consists of unpredictable, sudden effects (lightning, etc.).</li></ul>
+<h2 id="categories-of-noise">Categories of Noise</h2>
+<p><em>This slide contains only figures/tables; the image is in the original PDF.</em></p>
+<h2 id="categories-of-noise-2">Categories of Noise (2)</h2>
+<ul><li>Crosstalk: Impulse Noise:</li></ul>
+<p>  - caused by external electromagnetic interferences   - noncontinuous, consisting of irregular pulses or spikes   - short duration and high amplitude   - minor annoyance for analog signals but a major source of error in digital data   - a signal from one line is picked up by another   - can occur by electrical coupling between nearby twisted pairs or when microwave antennas pick up unwanted signals</p>
+<h2 id="transmission-impairments-5">Transmission impairments (5)</h2>
+<ul><li>Signal-to-noise ratio (SNR) is the ratio of signal power to noise power. The figure shows examples of high and low SNR.</li><li>SNRdB is expressed as SNRdB = 10 log 10 SNR.</li><li>Example: If the signal power is 10 mW and the noise power is 1 μW, what are the SNR and SNRdB? SNR = 10,000 μW/1 μW = 10,000, SNRdB = 10log₁₀SNR = 10log₁₀10,000 = 40 dB</li></ul>
+<h2 id="data-rate-limits">Data rate limits</h2>
+<ul><li>The data rate depends on three factors:</li></ul>
+<p>  - The bandwidth used   - The number of levels in the signal used   - The quality of the channel (the noise level)</p>
+<ul><li>Nyquist determined the data rate for a noiseless channel and Shannon for a noisy channel. Nyquist Bit Rate = 2*BW*log₂L bps BW = Bandwidth, L = Number of signal levels</li><li>As L increases, the reliability of the system decreases.</li></ul>
+<h2 id="data-rate-limits-2">Data rate limits (2)</h2>
+<ul><li>Example: In a system with BW = 3000 Hz, what is the maximum bit rate if L=2? Bit rate = 2 * BW * log₂L = 6000 * log₂ 2 = 6000 bps. If the number of signal levels is 4, Bit rate = 2 * BW * log₂4 = 6000 * 2 = 12000 bps</li><li>Example: For a bit rate of 265 kbps in a noiseless channel with BW=20 kHz, how many signal levels should be used? 265000 = 2*20000*log₂L → 265000/40000 = log₂L → L = 98.7 levels are required.</li></ul>
+<h2 id="data-rate-limits-3">Data rate limits (3)</h2>
+<ul><li>In 1944, Claude Shannon determined the theoretical highest bit rate for a noisy channel. Capacity = BW*log₂(1+SNR) bps</li><li>Capacity characterizes a channel, not the communication method!</li><li>Capacity indicates the maximum bit rate regardless of how many levels are used.</li></ul>
+<h2 id="data-rate-limits-4">Data rate limits (4)</h2>
+<ul><li>Example: What is the capacity of a very noisy channel whose SNR is approximately 0? C = BW*log₂(1+SNR) = BW*log₂1 = 0.</li><li>Example: In telephone lines, BW=3000 Hz (3300–300 Hz). The SNR is usually 3162. What is the channel capacity? C =BW*log₂(1+SNR) = 3000*log₂(1+3162) = 3000*11.62 = 34,860 bps</li><li>Example: What is the theoretical channel capacity of a channel with SNRdB = 36 and BW = 2 MHz? SNRdB = 10log₁₀SNR → SNR = 3981 C = BW * log₂(1+SNR) = 2×10⁶ × log₂(3982) ≈ 24 Mbps</li></ul>
+<h2 id="performance">Performance</h2>
+<ul><li>Bandwidth is one of the metrics that determine network performance.</li><li>Bandwidth indicates either a frequency band in Hz or a rate in bps.</li><li>Throughput is the actual bps value of a connection.</li><li>Latency (delay) is the time from when the first bit leaves the source until the entire message arrives at the destination.</li><li>Latency = PT+TT+QT+PD, PT=Propagation time, TT=Transmission time, QT=Queuing time, PD=Processing delay</li><li>Propagation time is the ratio of distance to propagation speed.</li><li>PT = D/PS, D = distance, PS = Propagation speed</li><li>Transmission time is the ratio of message size to bandwidth.</li><li>TT = MS/BW, MS= Message size</li></ul>
+<h2 id="performance-2">Performance (2)</h2>
+<ul><li>Example: For a 2.5 kbyte e-mail on a network with 1 Gbps bandwidth, what are PT and TT? The distance between sender and receiver is 12000 km and the propagation speed is 2.4×10⁸ m/s. PT = (12000×10³)/(2.4×10⁸) = 50 ms, TT = (2500×8)/10⁹ = 0.02 ms</li></ul>
+<h2 id="performance-3">Performance (3)</h2>
+<ul><li>The bandwidth-delay product indicates the number of bits present on the link at the same time.</li><li>Jitter is the variation in delay among different packets.</li></ul>
+<h2 id="performance-4">Performance (4)</h2>
+<p><em>This slide contains only figures/tables; the image is in the original PDF.</em></p>
+<p><em>Note: In the slide's expression "2*BW*log₂1 = 0", the leading factor 2 does not belong in Shannon's formula; since the result is 0 it does not change, and the text is written as C = BW·log₂(1+SNR). The exponents in the wavelength and calculations (10⁸, 10⁶, 10³, 10⁹) appeared as plain digits in the PDF text and were corrected to superscripts.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../dc03.pdf" download>dc03.pdf</a></p>
+              <p class="kucuk">PDF · 1.7 MB · 21 <span data-i18n="arch.pagesLower"></span> · 05.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../dc03.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

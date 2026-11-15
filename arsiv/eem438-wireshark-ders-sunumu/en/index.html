@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Data Communications: Wireshark Lecture Presentation (Dilara Değerliyurt) — hasancan.net</title>
+<meta name="description" content="Wireshark Lecture Presentation (Dilara Değerliyurt). Questions, explanations, and documents from the course archive.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Data Communications: Wireshark Lecture Presentation (Dilara Değerliyurt)">
+<meta property="og:description" content="Wireshark Lecture Presentation (Dilara Değerliyurt). Questions, explanations, and documents from the course archive.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Data Communications: Wireshark Lecture Presentation (Dilara Değerliyurt)", "description": "Wireshark Lecture Presentation (Dilara Değerliyurt). Questions, explanations, and documents from the course archive.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "wireshark_sunum.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-wireshark-ders-sunumu/wireshark_sunum.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM438 Data Communications: Wireshark Lecture Presentation (Dilara Değerliyurt)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.03.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#research-assistant-slide-1">Research Assistant (slide 1)</a></li><li><a href="#wireshark-slide-2">WIRESHARK (slide 2)</a></li><li><a href="#wireshark-features-slide-3">WIRESHARK FEATURES (slide 3)</a></li><li><a href="#areas-of-use-slide-4">Areas of use; (slide 4)</a></li><li><a href="#main-window-slide-5">Main Window (slide 5)</a></li><li><a href="#main-window-components-slide-6">Main Window Components (slide 6)</a></li><li><a href="#summary-window-slide-7">Summary Window (slide 7)</a></li><li><a href="#summary-window-slide-8">Summary Window (slide 8)</a></li><li><a href="#protocol-tree-window-slide-9">Protocol Tree Window (slide 9)</a></li><li><a href="#protocol-tree-window-slide-10">Protocol Tree Window (slide 10)</a></li><li><a href="#protocol-tree-window-slide-11">Protocol Tree Window (slide 11)</a></li><li><a href="#data-view-window-slide-12">Data View Window (slide 12)</a></li><li><a href="#display-information-field-slide-13">Display Information Field (slide 13)</a></li><li><a href="#file-menu-slide-14">File Menu (slide 14)</a></li><li><a href="#file-menu-slide-15">File Menu (slide 15)</a></li><li><a href="#edit-menu-slide-16">Edit Menu (slide 16)</a></li><li><a href="#edit-menu-slide-17">Edit Menu (slide 17)</a></li><li><a href="#view-menu-slide-18">View Menu (slide 18)</a></li><li><a href="#go-menu-slide-19">Go Menu (slide 19)</a></li><li><a href="#capture-menu-slide-20">Capture Menu (slide 20)</a></li><li><a href="#capture-menu-slide-21">Capture Menu (slide 21)</a></li><li><a href="#analyze-menu-slide-22">Analyze Menu (slide 22)</a></li><li><a href="#analyze-menu-slide-23">Analyze Menu (slide 23)</a></li><li><a href="#statistics-menu-slide-24">Statistics Menu (slide 24)</a></li><li><a href="#statistics-menu-slide-25">Statistics Menu (slide 25)</a></li><li><a href="#statistics-menu-slide-26">Statistics Menu (slide 26)</a></li><li><a href="#statistics-menu-slide-27">Statistics Menu (slide 27)</a></li><li><a href="#statistics-menu-slide-28">Statistics Menu (slide 28)</a></li><li><a href="#statistics-menu-slide-29">Statistics Menu (slide 29)</a></li><li><a href="#statistics-menu-slide-30">Statistics Menu (slide 30)</a></li><li><a href="#help-menu-slide-31">Help Menu (slide 31)</a></li><li><a href="#filtering-slide-32">Filtering (slide 32)</a></li><li><a href="#filtering-slide-33">Filtering (slide 33)</a></li><li><a href="#diagram-slide-34">Diagram (slide 34)</a></li><li><a href="#as-can-be-seen-the-capture-filter-window-presents-a-list-of-rules-that-wireshark-will-follow-during-packet-capture-slide-35">As can be seen, the Capture Filter window presents a list of rules that Wireshark will follow during packet capture (slide 35)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM438 Data Communications: Wireshark Lecture Presentation (Dilara Değerliyurt)</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 10.03.2012 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This is the Wireshark lecture presentation prepared by Research Assistant Dilara Değerliyurt. The document carries no date; the archive date is taken from the creation record of the source file. PDF copies of the documents, prepared for the archive, can be downloaded at the end of the post.</p>
+<h2 id="research-assistant-slide-1">Research Assistant (slide 1)</h2>
+<p>Research Assistant Dilara DEĞERLİYURT</p>
+<h2 id="wireshark-slide-2">WIRESHARK (slide 2)</h2>
+<p>WIRESHARK</p>
+<ul><li>It allows capturing packets that reach the computer and viewing the contents of those packets.</li></ul>
+<ul><li>It is a program that can analyze all TCP/IP messages on any network card connected to the computer.</li></ul>
+<ul><li>The files required for installation can be obtained from http://www.wireshark.org.</li></ul>
+<h2 id="wireshark-features-slide-3">WIRESHARK FEATURES (slide 3)</h2>
+<p>WIRESHARK FEATURES</p>
+<ul><li>It is available for Unix and Windows operating systems.</li></ul>
+<ul><li>It captures packets from the local network interface and displays them in detail together with protocol information.</li></ul>
+<ul><li>It has the ability to save captured packets.</li></ul>
+<ul><li>It searches and filters packets according to various criteria.</li></ul>
+<ul><li>It colors and categorizes sent and received packets based on filtering.</li></ul>
+<ul><li>It presents various statistics to the user according to the configured settings.</li></ul>
+<ul><li>It analyzes more than 750 protocols.</li></ul>
+<h2 id="areas-of-use-slide-4">Areas of use; (slide 4)</h2>
+<p>Areas of use;</p>
+<ul><li>It is used to convert the binary data in packets into a readable format.</li></ul>
+<ul><li>It is used to troubleshoot network problems.</li></ul>
+<ul><li>It is used to analyze network performance.</li></ul>
+<ul><li>It is used to detect network intruders.</li></ul>
+<ul><li>It is used to analyze the operations performed by applications.</li></ul>
+<ul><li>It is used to find faults in the network card.</li></ul>
+<h2 id="main-window-slide-5">Main Window (slide 5)</h2>
+<p>Main Window</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-05.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 5"><figcaption>wireshark presentation, page 5</figcaption></figure>
+<h2 id="main-window-components-slide-6">Main Window Components (slide 6)</h2>
+<p>Main Window Components Window Component Description</p>
+<ul><li>Menu Bar: A classic application containing the graphical interface for the menu items.</li></ul>
+<ul><li>Tool Bar: Contains shortcuts to Wireshark's frequently used functions. It can be customized by the user.</li></ul>
+<ul><li>Filter Bar: Allows the captured packets to be displayed separated as desired.</li></ul>
+<ul><li>Summary Window: Presents a one-line summary for each of the captured packets.</li></ul>
+<ul><li>Protocol Tree Window: Presents the detailed information of the packet selected in the Summary Window, organized in a way users can understand.</li></ul>
+<ul><li>Data View Window: Presents the detailed information of the packet selected in the Summary Window, without any rearrangement.</li></ul>
+<ul><li>Display Information Field: Shows the packet numbers, kept up to date.</li></ul>
+<h2 id="summary-window-slide-7">Summary Window (slide 7)</h2>
+<p>Summary Window</p>
+<h2 id="summary-window-slide-8">Summary Window (slide 8)</h2>
+<p>Summary Window</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-08.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 8"><figcaption>wireshark presentation, page 8</figcaption></figure>
+<h2 id="protocol-tree-window-slide-9">Protocol Tree Window (slide 9)</h2>
+<p>Protocol Tree Window</p>
+<ul><li>Let us visualize the packet as a top-level tree of all protocols. A tree node is created for each protocol. Thanks to these tree nodes, the protocol field can be described in more detail. If a tree node has a subtree, it can be expanded to show more detailed information or collapsed to show only summary information.</li></ul>
+<h2 id="protocol-tree-window-slide-10">Protocol Tree Window (slide 10)</h2>
+<p>Protocol Tree Window</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-10.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 10"><figcaption>wireshark presentation, page 10</figcaption></figure>
+<h2 id="protocol-tree-window-slide-11">Protocol Tree Window (slide 11)</h2>
+<p>Protocol Tree Window</p>
+<h2 id="data-view-window-slide-12">Data View Window (slide 12)</h2>
+<p>Data View Window</p>
+<p>The BGP Message Type field has been selected in the Protocol Tree Window. The offset "0040" highlighted in the Data View Window indicates that the packet is 0x40 hexadecimal, or 64 bytes. The highlighted</p>
+<p><strong>9.</strong> byte shows the value "01". The ASCII table equivalent of this value (the third circle in the figure) is the "." character.</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-12.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 12"><figcaption>wireshark presentation, page 12</figcaption></figure>
+<h2 id="display-information-field-slide-13">Display Information Field (slide 13)</h2>
+<p>Display Information Field</p>
+<h2 id="file-menu-slide-14">File Menu (slide 14)</h2>
+<p>File Menu</p>
+<h2 id="file-menu-slide-15">File Menu (slide 15)</h2>
+<p>File Menu</p>
+<p>Menu Option Description</p>
+<p>Open: Allows us to open a saved Wireshark file. Open Recent: Lists the Wireshark files most recently worked on and helps us open them. Merge: Displays two separate files as if they were a single file. Close: Closes the files we have captured. Save: Save. Save As: Allows us to save changes made to a saved file independently in another location. File Set: A submenu for organizing the information in the file. Export: Allows us to export another file. Print: Prints to the printer. Quit: Exits the Wireshark application.</p>
+<h2 id="edit-menu-slide-16">Edit Menu (slide 16)</h2>
+<p>Edit Menu</p>
+<h2 id="edit-menu-slide-17">Edit Menu (slide 17)</h2>
+<p>Edit Menu</p>
+<p>Menu Option Description</p>
+<p>Find Packet: Searches by the filter used, a hex value, or a string and lists the packets it finds. Find Next: Finds the packet following the packet that matches the search. Find Previous: Finds the packet preceding the packet that matches the search. Mark Packet: Marks the packet selected in the Summary Window. Find Next Mark: Finds the next marked packet among the marked packets. Find Previous Mark: Finds the previous marked packet among the marked packets. Set Time Reference: Takes the selected packet as the time reference, and subsequent packets take their time values relative to it. Preferences: Changes user-defined settings.</p>
+<h2 id="view-menu-slide-18">View Menu (slide 18)</h2>
+<p>View Menu</p>
+<h2 id="go-menu-slide-19">Go Menu (slide 19)</h2>
+<p>Go Menu</p>
+<h2 id="capture-menu-slide-20">Capture Menu (slide 20)</h2>
+<p>Capture Menu</p>
+<h2 id="capture-menu-slide-21">Capture Menu (slide 21)</h2>
+<p>Capture Menu Menu Option Description</p>
+<p>Interfaces: The place in the program where we start the packet capture process. Options: Opens the packet settings menu. Start: Starts the packet capture process. Stop: Stops the packet capture process. Restart: Resumes a stopped packet capture process. Capture Filters: Sets the capture filter.</p>
+<h2 id="analyze-menu-slide-22">Analyze Menu (slide 22)</h2>
+<p>Analyze Menu</p>
+<h2 id="analyze-menu-slide-23">Analyze Menu (slide 23)</h2>
+<p>Analyze Menu Menu Option Description</p>
+<p>Display Filter: Sorts the captured packets according to the specified expressions. Decode As: Decodes packets according to specific protocols. User Specified Decodes: Displays the conversions defined by the user. Follow TCP Stream: Shows all TCP segments of the TCP connection related to the selected packet in a separate window. Expert Info: A log of the events that occur during communication. It classifies captured packets by the criteria errors, notes, warnings, and chats.</p>
+<h2 id="statistics-menu-slide-24">Statistics Menu (slide 24)</h2>
+<p>Statistics Menu</p>
+<h2 id="statistics-menu-slide-25">Statistics Menu (slide 25)</h2>
+<p>Statistics Menu</p>
+<p>Summary: Contains data about the open capture file, including file format, packet count, size, first and last packet capture times, and the filter and capture interface.</p>
+<h2 id="statistics-menu-slide-26">Statistics Menu (slide 26)</h2>
+<p>Statistics Menu</p>
+<p>Protocol Hierarchy: Shows the layer and protocol hierarchy of the captured packets in tree form.</p>
+<h2 id="statistics-menu-slide-27">Statistics Menu (slide 27)</h2>
+<p>Statistics Menu</p>
+<p>Conversations: Gives statistics on the traffic between source and destination endpoints. The total incoming and outgoing packets and byte counts between endpoints are listed by port.</p>
+<h2 id="statistics-menu-slide-28">Statistics Menu (slide 28)</h2>
+<p>Statistics Menu Endpoints: Gives statistics for each endpoint without distinguishing between destination and source addresses. There is a separate tab for each supported protocol. Each tab indicates the number of endpoints captured. For example, ethernet:3 indicates that 3 Ethernet endpoints have been captured so far. If no endpoint has been captured for a protocol, the corresponding tab appears faded. Each row shows the statistical values for one endpoint.</p>
+<h2 id="statistics-menu-slide-29">Statistics Menu (slide 29)</h2>
+<p>Statistics Menu</p>
+<p>IO Graphs: Provides a graph of the packet flow over time for the specified properties. It is a very useful feature for checking the state of the network. With this feature, any anomaly that occurs in the network can be noticed immediately in the normal packet flow diagram.</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-29.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 29"><figcaption>wireshark presentation, page 29</figcaption></figure>
+<h2 id="statistics-menu-slide-30">Statistics Menu (slide 30)</h2>
+<p>Statistics Menu</p>
+<ul><li>Service Response Time: Shows the time between a request and a response.</li></ul>
+<ul><li>WLAN Traffic Statistics: Presents statistics on the captured wireless network traffic.</li></ul>
+<h2 id="help-menu-slide-31">Help Menu (slide 31)</h2>
+<p>Help Menu</p>
+<h2 id="filtering-slide-32">Filtering (slide 32)</h2>
+<p>Filtering</p>
+<p>The Filter Bar is the section that lets us filter the packets we have captured in the Summary Window. When we enter a filter expression in the Filter Bar, only the packets we filtered will be visible in the Summary Window. The color of the Filter Bar indicates the status of the filter.</p>
+<h2 id="filtering-slide-33">Filtering (slide 33)</h2>
+<p>Filtering</p>
+<p>The capture filter specified in the Capture &gt; Options window defines the conditions that Wireshark will follow during packet capture.</p>
+<h2 id="diagram-slide-34">Diagram (slide 34)</h2>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-34.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="wireshark presentation: figure and calculation tables, page 34"><figcaption>wireshark presentation, page 34</figcaption></figure>
+<h2 id="as-can-be-seen-the-capture-filter-window-presents-a-list-of-rules-that-wireshark-will-follow-during-packet-capture-slide-35">As can be seen, the Capture Filter window presents a list of rules that Wireshark will follow during packet capture (slide 35)</h2>
+<p>As can be seen, the Capture Filter window presents a list of rules that Wireshark will follow during packet capture.</p>
+<ul><li>Ethernet address 00:08:15:00:08:15: Captures packets belonging to the specified MAC address in the source or destination addresses under Ethernet II.</li></ul>
+<ul><li>Ethernet type 0x0806 (ARP), 0x0800 (IP), 0x8035 (RARP), 0x6003 (DECNET), 0x6004 (DEC LAT), 0x6002 (MOP RC), 0x6001 (MOP DL)</li></ul>
+<ul><li>not broadcast and not multicast: Does not capture broadcast and multicast packets.</li></ul>
+<ul><li>not arp: Does not capture ARP packets.</li></ul>
+<ul><li>IP address 192.168.0.1: Captures packets that contain the specified IP address in the destination or source address fields.</li></ul>
+<ul><li>IPX only: Captures packets belonging to the relevant protocol.</li></ul>
+<ul><li>TCP only: Captures packets belonging to the relevant protocol.</li></ul>
+<ul><li>UDP only: Captures packets belonging to the relevant protocol.</li></ul>
+<ul><li>TCP or UDP port 80 (http): Captures TCP and UDP packets for port 80.</li></ul>
+<ul><li>HTTP TCP port (80): Captures HTTP and TCP packets for port 80.</li></ul>
+<ul><li>No ARP and no DNS: Captures packets other than DNS and ARP packets.</li></ul>
+<ul><li>NonHTTP and nonSMTP to/from www.wireshark.org: Captures packets other than HTTP and SMTP for the specified address.</li></ul>
+<p><em>Note: The menus and interface screens belong to older Wireshark versions; the statement "more than 750 protocols" in the presentation reflects the information of that period.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../wireshark_sunum.pdf" download>wireshark_sunum.pdf</a></p>
+              <p class="kucuk">PDF · 1.1 MB · 35 <span data-i18n="arch.pagesLower"></span> · 10.03.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../wireshark_sunum.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

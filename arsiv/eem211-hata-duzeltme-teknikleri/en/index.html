@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: Error Correction Techniques – Parity, CRC, ARQ and Hamming Code (Trakya University Project Assignment, 2009) — hasancan.net</title>
+<meta name="description" content="A &quot;Error Correction Techniques&quot; project assignment and presentation prepared in 2009 for the Trakya University BİLM 637 course: parity checking, two-dimensional parity, VRC/LRC, CRC-16, stop-and-wait and sliding window protocols, ARQ, (11,7) and (7,4) Hamming codes, error correction with the G and H matrices, Reed-Solomon and Raptor codes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: Error Correction Techniques – Parity, CRC, ARQ and Hamming Code (Trakya University Project Assignment, 2009)">
+<meta property="og:description" content="A &quot;Error Correction Techniques&quot; project assignment and presentation prepared in 2009 for the Trakya University BİLM 637 course: parity checking, two-dimensional parity, VRC/LRC, CRC-16, stop-and-wait and sliding window protocols, ARQ, (11,7) and (7,4) Hamming codes, error correction with the G and H matrices, Reed-Solomon and Raptor codes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: Error Correction Techniques – Parity, CRC, ARQ and Hamming Code (Trakya University Project Assignment, 2009)", "description": "A \"Error Correction Techniques\" project assignment and presentation prepared in 2009 for the Trakya University BİLM 637 course: parity checking, two-dimensional parity, VRC/LRC, CRC-16, stop-and-wait and sliding window protocols, ARQ, (11,7) and (7,4) Hamming codes, error correction with the G and H matrices, Reed-Solomon and Raptor codes.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "hata_duzeltme_teknikleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-hata-duzeltme-teknikleri/hata_duzeltme_teknikleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: Error Correction Techniques – Parity, CRC, ARQ and Hamming Code (Trakya University Project Assignment, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>31.12.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#introduction">Introduction</a></li><li><a href="#part-i-fundamentals-of-digital-communication-summary">Part I: Fundamentals of digital communication (summary)</a></li><li><a href="#part-ii-error-detection-and-correction-techniques">Part II: Error detection and correction techniques</a></li><li><a href="#error-detection-techniques">Error detection techniques</a></li><li><a href="#hamming-coding-system">Hamming coding system</a></li><li><a href="#reed-solomon-and-raptor-codes-summary">Reed-Solomon and Raptor codes (summary)</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#presentation">Presentation</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: Error Correction Techniques – Parity, CRC, ARQ and Hamming Code (Trakya University Project Assignment, 2009)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 31.12.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a <strong>project assignment</strong> and presentation that is included in the EEM211 Digital Logic Design course folder as a supplementary resource on Hamming codes. The assignment was prepared by a graduate student for the <strong>BİLM 637 Mobile and Wireless Computing</strong> course (Assoc. Prof. Dr. Hasan Hüseyin Balık) at the <strong>Trakya University Institute of Science, Department of Computer Engineering</strong> (Edirne, December 2009). The student's name and number on the cover have been removed. The 36-page report consists of two parts: the fundamentals of digital communication and error detection/correction techniques. Below, the parts of the report most relevant to a digital logic course (parity, CRC, Hamming code) are presented in detail and the other parts in summary. A PDF of the redacted report and the 37-slide presentation can be downloaded as a ZIP at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed upon the request of the rights holder.</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>Packets travelling through a network are subject to certain error risks; in particular, if the network conditions are poor, packets may be lost or corrupted. However, such errors can be corrected. This study focuses on error correction techniques, with emphasis on the most widely used Hamming coding algorithm and ARQ techniques, and also briefly covers the Reed-Solomon and Raptor forward error correction codes.</p>
+<h2 id="part-i-fundamentals-of-digital-communication-summary">Part I: Fundamentals of digital communication (summary)</h2>
+<p>The first part of the report reviews the underlying background of the subject:</p>
+<ul><li><strong>Digital communication:</strong> the transfer of binary (0/1) coded data between systems. Transmission rate is given in bit/s; for example, a 2400 bit/s line using 8-bit codes carries 2400 / 8 = 300 characters per second.</li><li><strong>Data transmission characteristics:</strong> information is carried by varying the amplitude, frequency and phase of an oscillating signal; <strong>baud</strong> is the rate at which the signal on the line changes. If two bits are sent with each signal change, the bit rate is twice the baud rate.</li><li><strong>Bandwidth and Shannon's law:</strong> the maximum information rate a channel can carry is given by C = W·log₂(1 + S/N) (W is the bandwidth, S/N is the signal-to-noise ratio). The report gives the maximum capacity of a voice channel with an S/N ratio of 1000 to 1 as 25,900 bit/s.</li><li><strong>Period and wavelength:</strong> T = 1/F; for example, the period of a 2400 Hz signal is 1/2400 ≈ 0.000416 s. Wavelength WL = S / F (S: propagation speed of the signal).</li><li><strong>Coding:</strong> with n bits, 2ⁿ symbols can be encoded; ASCII is a 7-bit code (128 characters) and EBCDIC is an 8-bit code. An 8th bit (parity) can be added to ASCII to detect errors.</li><li><strong>Parallel and serial transmission:</strong> in parallel transmission each bit travels on a separate path (with data-ready / request signals); serial transmission is divided into three types: asynchronous (start and stop bits for each character), synchronous (clock travels with the data, special codes at the beginning and end of a block) and isochronous (periodic, guaranteed capacity; audio-video).</li><li><strong>Line types:</strong> simplex (one-way, TV broadcasting), half duplex (two-way in turns, walkie-talkie), full duplex (two-way simultaneously, telephone).</li></ul>
+<h2 id="part-ii-error-detection-and-correction-techniques">Part II: Error detection and correction techniques</h2>
+<p>During data transmission, the possibility that some bits become corrupted, however small, cannot be ignored; even a single corrupted bit can render the whole data meaningless. <strong>Error detection</strong> techniques are used to determine whether corruption has occurred, and <strong>error correction</strong> techniques are used to fix it if it has; if the error cannot be corrected, the data packet is retransmitted. These functions belong to the <strong>data link layer</strong> of the OSI model: the layer divides the data into frames and appends a <strong>Frame Check Sequence (FCS)</strong> to the end of each frame; the receiver performs the same calculation and compares the result with the FCS.</p>
+<h3 id="protocols-summary">Protocols (summary)</h3>
+<ul><li><strong>Stop-and-wait (Idle RQ):</strong> an ACK is awaited after each frame. If the frame or the ACK is corrupted, the frame is retransmitted after a timeout; if the receiver sends a NAK for a corrupted frame, retransmission takes place without waiting for the timeout.</li><li><strong>Continuous RQ:</strong> the sender transmits frames back to back without waiting for an ACK and keeps copies of them in a retransmission list.</li><li><strong>Selective repeat:</strong> only the corrupted frame is retransmitted.</li><li><strong>Go-back-N:</strong> when an out-of-sequence frame is received, all frames following the last acknowledged frame are requested again.</li><li><strong>Sliding window:</strong> the number of frames that can be sent without waiting for acknowledgment is limited to K (when K = 1 it behaves like stop-and-wait).</li></ul>
+<p>Two types of errors are seen in data transmission: in a <strong>burst</strong> error, meaningless information arrives at the receiver for a period of time and all the bits during that period may be corrupted; in a <strong>random</strong> error, individual bits are corrupted by noise in the medium. Errors have two causes: <strong>bit errors</strong> (electromagnetic effects, etc.) and <strong>packet losses</strong> (network congestion, excessive delay).</p>
+<h3 id="error-correction-methods">Error correction methods</h3>
+<ol><li><strong>Symbol substitution:</strong> if a human evaluates the data at the receiver, an unused symbol is substituted for a character that was received incorrectly; if the operator cannot make sense of it, retransmission is requested.</li><li><strong>Retransmission (ARQ, Automatic Repeat Request):</strong> a message received in error is automatically requested again. It is the most reliable method, but not always the most efficient; the statistically ideal message block is stated to be 256–512 characters.</li><li><strong>Forward error correction (FEC):</strong> extra bits are added to the message before transmission, and errors are detected and corrected at the receiver without retransmission. The most common example is the <strong>Hamming code</strong>, developed by R. W. Hamming at Bell Laboratories.</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Algorithms used for FEC</th><th scope="col">Algorithms used for ARQ</th></tr></thead><tbody><tr><th scope="row">Convolutional codes</th><td>CRC codes</td></tr><tr><th scope="row">BCH codes</th><td>Serial parity</td></tr><tr><th scope="row">Hamming codes</th><td>Block parity</td></tr><tr><th scope="row">Reed-Solomon codes</th><td>Modular sum</td></tr><tr><th scope="row">Raptor codes</th><td></td></tr></tbody></table></div>
+<h2 id="error-detection-techniques">Error detection techniques</h2>
+<p>Error detection techniques do not say which bit is erroneous; they only determine that an error exists.</p>
+<ul><li><strong>Redundancy:</strong> each character is sent twice; if the two copies are not identical, there is an error.</li><li><strong>Exact count coding:</strong> all characters have the same number of 1s (e.g., three 1s in every character); errors are detected by counting the 1s.</li><li><strong>Echoplex:</strong> the operation performed at the terminal is reported to the host, the host echoes it back, and the user checks its correctness on the screen.</li></ul>
+<h3 id="parity-check">Parity check</h3>
+<p>This is the most frequently used error detection method. In <strong>even parity</strong>, the number of 1s including the parity bit is even; in <strong>odd parity</strong>, it is odd. The even parity bit is found by XORing the data bits; the odd parity bit is found with XNOR. For example, for the data 0110 the even parity bit is 0 and the odd parity bit is 1.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Data</th><th scope="col">Number of 1s</th><th scope="col">Even parity</th><th scope="col">Odd parity</th></tr></thead><tbody><tr><th scope="row">1101</th><td>3 (odd)</td><td>1 → 11011</td><td>0 → 11010</td></tr><tr><th scope="row">1100</th><td>2 (even)</td><td>0 → 11000</td><td>1 → 11001</td></tr></tbody></table></div>
+<p><em>Note: In the odd parity example, the report states that the bit to be appended for 1100 is "0"; the correct value is 1 (the resulting 11001 given as the outcome is correct).</em></p>
+<h3 id="two-dimensional-parity-vrc-and-lrc">Two-dimensional parity, VRC and LRC</h3>
+<p>In two-dimensional parity, in addition to each character's own parity bit, parity bits are also generated by bit position (column); thus, for a single-bit error, the position of the erroneous bit can also be found.</p>
+<ul><li><strong>VRC (vertical redundancy check, character parity):</strong> a parity bit is appended to each character before transmission.</li><li><strong>LRC (longitudinal redundancy check, message parity):</strong> for each bit position, the parity of all characters in the message is calculated and appended to the end of the message like a final character; only even parity is used in LRC.</li></ul>
+<p>Example: for the ASCII message "THE CAT", odd parity for VRC and even parity for LRC:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Character</th><th scope="col">T</th><th scope="col">H</th><th scope="col">E</th><th scope="col">space</th><th scope="col">C</th><th scope="col">A</th><th scope="col">T</th><th scope="col">LRC</th></tr></thead><tbody><tr><th scope="row">Hexadecimal</th><td>54</td><td>48</td><td>45</td><td>20</td><td>43</td><td>41</td><td>54</td><td>2F</td></tr><tr><th scope="row">b0 (LSB)</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">b1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b2</th><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">b3</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b4</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">b5</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">b6 (MSB)</th><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">b7 (VRC)</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>LRC detects 95–98% of all transmission errors, but it cannot detect an error if an even number of characters are corrupted in the same bit position. When VRC and LRC are used together, the position of a single-bit error can be located. The <strong>checksum</strong>, which uses the mod 256 sum of the bytes in the message, also belongs to this family.</p>
+<h3 id="crc-cyclic-redundancy-check">CRC (cyclic redundancy check)</h3>
+<p>CRC is the most reliable and most widely used error detection technique; it detects approximately 99.95% of transmission errors. The data bits are treated as the coefficients of a polynomial. The data polynomial P(x) is multiplied by xᵖ (p zeros are appended to the right of the data) and divided mod 2 (using XOR) by the <strong>generator polynomial G(x)</strong> of degree p:</p>
+<p>xᵖ·P(x) = Q(x)·G(x) + R(x)</p>
+<p>The quotient is discarded, and the <strong>remainder R(x)</strong> is appended to the end of the data and transmitted. The receiver divides the received sequence by the same G(x); if the remainder is zero, the data has arrived without error. The most common code in the USA is <strong>CRC-16</strong>; its generator polynomial is:</p>
+<p>G(x) = x¹⁶ + x¹² + x⁵ + 1</p>
+<p>The number of bits in the CRC code equals the highest power of the generator polynomial (16 here).</p>
+<h3 id="arq-methods">ARQ methods</h3>
+<p>Three methods are used in ARQ: <strong>positive acknowledgment</strong> (the receiver sends an acknowledgment for every frame it receives without error), <strong>retransmission after timeout</strong>, and <strong>retransmission with negative acknowledgment</strong> (the receiver sends a NAK for a corrupted frame). There are two types of ARQ: stop-and-wait ARQ (idle RQ) and continuous RQ (go-back-N, selective repeat).</p>
+<h2 id="hamming-coding-system">Hamming coding system</h2>
+<p>The Hamming code is a linear error control and correction method used in telecommunications: it <strong>detects and corrects single-bit errors</strong>, and can detect but not correct two-bit errors. In the 1940s, Richard Hamming was working at Bell Laboratories on the Bell Model V relay computer, which ran on punched cards; tired of his jobs being aborted by errors on weekends when no operator was present, after years of work he published the method bearing his name in 1950.</p>
+<p>Hamming defined codes using the (n, k) notation: n is the total number of bits and k is the number of data bits. For example, adding one parity bit to 7-bit ASCII is an (8,7) code, and repeating three times is a (3,1) code; the <strong>code rate</strong> is k/n (1/3 for repetition). The number of bits by which two codewords differ from each other was called the <strong>Hamming distance</strong>: the distance of the parity method is 2, and the distance of the (3,1) repetition code is 3. The goal is to increase the distance while keeping the code rate high.</p>
+<p>The algorithm:</p>
+<ol><li>All bit positions that are powers of 2 (1, 2, 4, 8, 16, …) are reserved for parity bits.</li><li>The other positions (3, 5, 6, 7, 9, 10, 11, …) are reserved for data bits.</li><li>The parity bit at position n checks n bits, skips n bits, checks n bits, skips n bits, and so on, starting at its own position. That is, the 1st parity bit checks positions 1, 3, 5, 7, 9, 11…; the 2nd parity bit checks 2, 3, 6, 7, 10, 11…; the 4th parity bit checks 4–7, 12–15…; the 8th parity bit checks 8–15, 24–31….</li></ol>
+<h3 id="11-7-hamming-code-example">(11,7) Hamming code example</h3>
+<p>Let the 7-bit data be "0110001". The data bits d1…d7 are placed at positions 3, 5, 6, 7, 9, 10, 11 and the parity bits (even parity) are calculated:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Position</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">11</th></tr></thead><tbody><tr><th scope="row">Bit</th><td>p1</td><td>p2</td><td>d1</td><td>p3</td><td>d2</td><td>d3</td><td>d4</td><td>p4</td><td>d5</td><td>d6</td><td>d7</td></tr><tr><th scope="row">Data without parity</th><td></td><td></td><td>0</td><td></td><td>1</td><td>1</td><td>0</td><td></td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">Data with parity</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>The transmitted codeword is <strong>00001101001</strong>. Suppose the 3rd bit from the left is corrupted during transmission, and the receiver receives <strong>00101101001</strong>. The receiver rechecks each parity bit; it writes 0 if correct and 1 if wrong:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parity bit</th><th scope="col">Positions checked</th><th scope="col">Result</th><th scope="col">Parity check bit</th></tr></thead><tbody><tr><th scope="row">p1</th><td>1, 3, 5, 7, 9, 11</td><td>Wrong</td><td>1</td></tr><tr><th scope="row">p2</th><td>2, 3, 6, 7, 10, 11</td><td>Wrong</td><td>1</td></tr><tr><th scope="row">p3</th><td>4, 5, 6, 7</td><td>Correct</td><td>0</td></tr><tr><th scope="row">p4</th><td>8, 9, 10, 11</td><td>Correct</td><td>0</td></tr></tbody></table></div>
+<p>Writing these bits in the order p4 p3 p2 p1 gives <strong>0011</strong> = 2 + 1 = <strong>3</strong>: the erroneous bit is at position 3. By flipping the 3rd bit, the data is restored to its original form, 00001101001.</p>
+<p><em>Note: The codeword and the syndrome were checked; the (11,7) Hamming code of the data 0110001 is indeed 00001101001.</em></p>
+<h3 id="7-4-hamming-code-and-hamming-matrices">(7,4) Hamming code and Hamming matrices</h3>
+<p>The first thing that comes to mind today when one says Hamming code is the <strong>(7,4)</strong> code announced in 1950: 3 check bits are added to every 4 data bits; it can correct every single-bit error, or detect all single- and two-bit errors. This code works with two matrices: the <strong>generator matrix G</strong> (7×4) and the <strong>parity-check matrix H</strong> (3×7). In this example the data bits are in the first 4 positions and the parity bits are in the last 3 positions.</p>
+<pre class="kod"><code>G =  1 0 0 0        H =  0 1 1 1 1 0 0
+     0 1 0 0             1 0 1 1 0 1 0
+     0 0 1 0             1 1 0 1 0 0 1
+     0 0 0 1
+     0 1 1 1
+     1 0 1 1
+     1 1 0 1</code></pre>
+<p>The first 4 rows of G form the 4×4 identity matrix (it passes the data through as is), and its last 3 rows show from which data bits the parity bits are calculated. The last 3 columns of H form the 3×3 identity matrix, and its first 4 columns are the same parity relationships.</p>
+<p><strong>Channel coding:</strong> let the data to be sent be "1001", p = (1, 0, 0, 1)ᵀ. The encoded data is obtained by mod 2 multiplication as x = G·p = (1, 0, 0, 1, 1, 0, 0)ᵀ.</p>
+<p><strong>Parity check:</strong> if there is no error, the received r = x and z = H·r = (0, 0, 0)ᵀ.</p>
+<p><strong>Error correction:</strong> if there is a single-bit error, r = x + eᵢ (eᵢ is the zero vector with a 1 at position i) and</p>
+<p>H·r = H·(x + eᵢ) = H·x + H·eᵢ = 0 + H·eᵢ = H·eᵢ</p>
+<p>that is, z equals the i-th column of H and indicates the position of the erroneous bit. For example, if the 3rd bit is corrupted, r = (1, 0, 1, 1, 1, 0, 0)ᵀ and z = H·r = (1, 1, 0)ᵀ; this is the 3rd column of H. When the 3rd bit is flipped, the original data is recovered.</p>
+<h2 id="reed-solomon-and-raptor-codes-summary">Reed-Solomon and Raptor codes (summary)</h2>
+<ul><li><strong>Reed-Solomon</strong> codes are powerful linear error correction codes; they operate over Galois fields (each symbol is 8 bits), and an R-S(n, k) code can correct (n−k)/2 symbol errors. The decoder is complex and has some limitations for packet-level losses; the required processing power increases rapidly with block length.</li><li>In <strong>Raptor</strong> codes, the receiver reconstructs the k source symbols by receiving k' &gt; k symbols; the receiver overhead R = (k' − k)/k is below 1%. They place no limit on data size, and the required processing power increases linearly.</li></ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>When comparing different error correction techniques, the packet loss rate, the required network resources (bandwidth), the processor load at the sender and receiver, and the complexity of the algorithm should be taken into account.</p>
+<h2 id="presentation">Presentation</h2>
+<p>The 37-slide presentation prepared with the assignment summarizes the same topics: digital communication and data transmission, parallel/asynchronous/synchronous serial transmission, transmission line types, real-time and non-real-time communication, the data link layer and FCS, stop-and-wait, continuous RQ, selective repeat, go-back-N and sliding window protocols, error types, error detection techniques (redundancy, exact count, echoplex, two-dimensional parity, LRC, CRC), the three error correction methods, FEC and ARQ algorithms, the Hamming code algorithm, the (11,7) example, the (7,4) code and matrices, and Reed-Solomon and Raptor codes.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../hata_duzeltme_teknikleri.zip" download>hata_duzeltme_teknikleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 7.7 MB · 31.12.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../hata_duzeltme_teknikleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

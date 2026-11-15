@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>END355 Project Management: CPM and PERT Network Models Lecture Notes (Critical Path, Crashing with LP, Beta Distribution) — hasancan.net</title>
+<meta name="description" content="CPM and PERT project network methods: network diagram rules, earliest/latest times via forward and backward passes, critical path and slack, LP model, time-cost (crashing) analysis, PERT three-time estimates and project completion probability; with worked examples.">
+<link rel="canonical" href="https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="END355 Project Management: CPM and PERT Network Models Lecture Notes (Critical Path, Crashing with LP, Beta Distribution)">
+<meta property="og:description" content="CPM and PERT project network methods: network diagram rules, earliest/latest times via forward and backward passes, critical path and slack, LP model, time-cost (crashing) analysis, PERT three-time estimates and project completion probability; with worked examples.">
+<meta property="og:url" content="https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "END355 Project Management: CPM and PERT Network Models Lecture Notes (Critical Path, Crashing with LP, Beta Distribution)", "description": "CPM and PERT project network methods: network diagram rules, earliest/latest times via forward and backward passes, critical path and slack, LP model, time-cost (crashing) analysis, PERT three-time estimates and project completion probability; with worked examples.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "END355 – Proje Yönetimi", "associatedMedia": {"@type": "MediaObject", "name": "end355-cpm-pert-ders-notlari.zip", "contentUrl": "https://hasancan.net/arsiv/end355-cpm-pert-ders-notlari/end355-cpm-pert-ders-notlari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="END355 Project Management: CPM and PERT Network Models Lecture Notes (Critical Path, Crashing with LP, Beta Distribution)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-end355">END355</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>END355 – Proje Yönetimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>19.12.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#what-are-cpm-and-pert">What are CPM and PERT?</a></li><li><a href="#network-diagram-rules">Network diagram rules</a></li><li><a href="#cpm-terminology">CPM terminology</a></li><li><a href="#cpm-with-lp">CPM with LP</a></li><li><a href="#example-1-cpm-with-lp-8-activities">Example 1: CPM with LP (8 activities)</a></li><li><a href="#example-2-design-and-production-of-a-new-electronic-device">Example 2: Design and production of a new electronic device</a></li><li><a href="#example-3-park-landscaping-project-es-ef-ls-lf-table">Example 3: Park landscaping project (ES/EF, LS/LF table)</a></li><li><a href="#time-cost-analysis-crashing-and-acceleration-with-lp">Time–cost analysis (crashing) and acceleration with LP</a></li><li><a href="#pert">PERT</a></li><li><a href="#source-summary-of-the-network-method-second-note">Source: summary of the network method (second note)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · END355</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>END355 Project Management: CPM and PERT Network Models Lecture Notes (Critical Path, Crashing with LP, Beta Distribution)</h1>
+            <p class="kucuk">END355 – Proje Yönetimi · 19.12.2013 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Two lecture notes from the END355 Project Management folder have been combined: the 14-page <strong>"CPM and PERT – Network Models"</strong> presentation and the 12-page <strong>"Project Management"</strong> (network diagram and critical path method) presentation. The notes do not name an author or institution; judging from the content, they belong to civil engineering and operations research courses. The original PDFs can be downloaded at the end of the post.</p>
+<p><em>This content belongs to a third-party source (the author and institution are not stated in the document); it is shared for archival and nostalgic purposes. It will be removed at the request of the rights holder.</em></p>
+<h2 id="what-are-cpm-and-pert">What are CPM and PERT?</h2>
+<p>Questions sought across a project: How long will the project take? When can an activity start? Does a delay in an activity affect the whole project, and by how much? Which activities should be accelerated to finish the project earlier?</p>
+<ul><li><strong>CPM (Critical Path Method):</strong> Developed by DuPont de Nemours in the 1950s; activity durations are deterministic and are obtained from experience with similar projects.</li><li><strong>PERT (Program Evaluation Review Technique):</strong> Developed by the U.S. Navy in 1958; activity durations are probabilistic (stochastic).</li><li>Both show the activities and their dependencies on a network; the main difference is PERT's statistical approach to duration estimation.</li></ul>
+<h2 id="network-diagram-rules">Network diagram rules</h2>
+<p>Arrows represent activities, and nodes represent <strong>events</strong> (the start or finish of one or more activities).</p>
+<ol><li>There is one start node and one finish node.</li><li>Each activity is shown once by a single arrow.</li><li>Two activities cannot share the same start and end event; in this case a <strong>dummy</strong> activity with zero duration is used.</li><li>Precedence relations are determined by these questions: Which activities must be completed before this activity can start? Which activities follow it? Which can be done concurrently with it?</li></ol>
+<h2 id="cpm-terminology">CPM terminology</h2>
+<ul><li><strong>Critical activity:</strong> an activity whose delay delays the completion of the whole project; <strong>critical path:</strong> the longest-duration path in the project, on which every activity has zero slack.</li><li><strong>ES (earliest start)</strong>, <strong>EF (earliest finish)</strong>, <strong>LS (latest start)</strong>, <strong>LF (latest finish)</strong>.</li><li><strong>Slack (TS):</strong> the difference between the latest and earliest start (or finish) times; slack = LF − ES − activity duration.</li><li>Earliest times are computed from start to finish (forward pass), and latest times from finish to start (backward pass). If more than one activity ends at a node, the largest EF is the earliest start of the following activity; in the backward pass, the smallest LS among the activities leaving the node is taken.</li></ul>
+<h2 id="cpm-with-lp">CPM with LP</h2>
+<p>Let t_i be the occurrence time of the event at the i-th node. To minimize the project duration:</p>
+<ul><li>Min Z = t_n − t_1</li><li>Constraints: t_j − t_i ≥ T_ij (for each activity (i,j)), t_i ≥ 0.</li></ul>
+<h2 id="example-1-cpm-with-lp-8-activities">Example 1: CPM with LP (8 activities)</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Activity</th><th scope="col">Predecessor</th><th scope="col">Duration (days)</th></tr></thead><tbody><tr><th scope="row">A</th><td>–</td><td>10</td></tr><tr><th scope="row">B</th><td>–</td><td>12</td></tr><tr><th scope="row">C</th><td>A, B</td><td>15</td></tr><tr><th scope="row">D</th><td>B</td><td>18</td></tr><tr><th scope="row">E</th><td>B</td><td>16</td></tr><tr><th scope="row">F</th><td>C</td><td>11</td></tr><tr><th scope="row">G</th><td>D, E</td><td>10</td></tr><tr><th scope="row">H</th><td>F, G</td><td>8</td></tr></tbody></table></div>
+<p>In the LP solution in the notes, with the constraints t₂−t₁ ≥ 12, t₃−t₂ ≥ 0, t₃−t₁ ≥ 10, t₅−t₂ ≥ 16, t₆−t₂ ≥ 18, t₇−t₆ ≥ 10, t₈−t₇ ≥ 8, the event times are found to be 12, 30, 40, and 48 days. <strong>The critical path is B–D–G–H, and the project duration is 48 days</strong> (the path B→C→F→H takes 46 days, and the path B→E→G→H takes 46 days).</p>
+<h2 id="example-2-design-and-production-of-a-new-electronic-device">Example 2: Design and production of a new electronic device</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Code</th><th scope="col">Activity</th><th scope="col">Predecessor</th><th scope="col">Duration (days)</th></tr></thead><tbody><tr><th scope="row">A</th><td>Determining product specifications</td><td>–</td><td>30</td></tr><tr><th scope="row">B</th><td>Budget and feasibility studies</td><td>A</td><td>8</td></tr><tr><th scope="row">C</th><td>Prototype production</td><td>B</td><td>8</td></tr><tr><th scope="row">D</th><td>Raw material procurement and production preparations</td><td>B</td><td>5</td></tr><tr><th scope="row">E</th><td>Preparing the final design</td><td>H</td><td>2</td></tr><tr><th scope="row">F</th><td>Production</td><td>D, E</td><td>25</td></tr><tr><th scope="row">G</th><td>Personnel training</td><td>A</td><td>10</td></tr><tr><th scope="row">H</th><td>Personnel feedback on the prototype</td><td>C, G</td><td>3</td></tr><tr><th scope="row">I</th><td>Sales training and preparing the user manual</td><td>E</td><td>5</td></tr><tr><th scope="row">J</th><td>Determining the marketing mix</td><td>A</td><td>5</td></tr><tr><th scope="row">K</th><td>Promotion campaign</td><td>I, J</td><td>15</td></tr><tr><th scope="row">L</th><td>Project closure</td><td>F, K</td><td>2</td></tr></tbody></table></div>
+<p><em>Note: When computed, the critical path is A–B–C–H–E–F–L with a duration of 30 + 8 + 8 + 3 + 2 + 25 + 2 = 78 days; the path A–B–C–H–E–I–K–L takes 73 days.</em></p>
+<h2 id="example-3-park-landscaping-project-es-ef-ls-lf-table">Example 3: Park landscaping project (ES/EF, LS/LF table)</h2>
+<p>Converting a wooded site into a park: A grading excavation (4 days), B cut the trees (A; 4), C collect and utilize the trees (B; 5), D open the road and lay stabilized surface (A; 3), E lay stabilized surface for the parking lot (D; 3), F water and electrical installation (D; 4), G build the building and shelters (C, E; 5), H planting flowers and greenery (C, E; 8), I complete the installation and clean up (F, G; 2).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Activity (nodes)</th><th scope="col">Earliest start</th><th scope="col">Earliest finish</th><th scope="col">Latest start</th><th scope="col">Latest finish</th><th scope="col">Slack</th></tr></thead><tbody><tr><th scope="row">1-2 (A)</th><td>0</td><td>4</td><td>0</td><td>4</td><td>0</td></tr><tr><th scope="row">2-3 (B)</th><td>4</td><td>8</td><td>4</td><td>8</td><td>0</td></tr><tr><th scope="row">2-4 (D)</th><td>4</td><td>7</td><td>7</td><td>10</td><td>3</td></tr><tr><th scope="row">3-5 (C)</th><td>8</td><td>13</td><td>8</td><td>13</td><td>0</td></tr><tr><th scope="row">4-5 (E)</th><td>7</td><td>10</td><td>10</td><td>13</td><td>3</td></tr><tr><th scope="row">4-6 (F)</th><td>7</td><td>11</td><td>15</td><td>19</td><td>8</td></tr><tr><th scope="row">5-6 (G)</th><td>13</td><td>18</td><td>14</td><td>19</td><td>1</td></tr><tr><th scope="row">5-7 (H)</th><td>13</td><td>21</td><td>13</td><td>21</td><td>0</td></tr><tr><th scope="row">6-7 (I)</th><td>18</td><td>20</td><td>19</td><td>21</td><td>1</td></tr></tbody></table></div>
+<p><strong>Critical path: A, B, C, H (1-2-3-5-7); project duration 21 days.</strong></p>
+<h2 id="time-cost-analysis-crashing-and-acceleration-with-lp">Time–cost analysis (crashing) and acceleration with LP</h2>
+<p>In basic CPM, the goal is to find the minimum duration; CPM, however, assumes that activity durations can be shortened by a certain amount with additional investment (labor, equipment, materials). The additional expenditure for shortening duration is called the <strong>crash cost</strong>; the additional cost is offset by the benefit gained from shortening the total duration. If the shortening cost is assumed to be linear, with K_ij the unit crash cost of activity (i,j), the LP that minimizes the additional investment for completing the project within T_max is:</p>
+<ul><li>Min Z = Σ K_ij · (NT_ij − T_ij)</li><li>Constraints: t_j − t_i ≥ T_ij; CT_ij ≤ T_ij ≤ NT_ij (shortest ≤ duration ≤ normal duration); t_n − t_1 ≤ T_max; t_i ≥ 0.</li></ul>
+<p>It can also be written with the variable D_ij = NT_ij − T_ij (the amount of shortening). If there is an additional budget limit NEWB, then Σ K_ij·D_ij ≤ NEWB; if there is an indirect unit cost I that depends on total duration, Min Z = Σ K_ij·D_ij + I·(t_n − t_1); if the unit reward for finishing the project earlier than T_set is B (e.g., build-operate-transfer projects), Min Z = Σ K_ij·D_ij − B·(T_set − t_n).</p>
+<h2 id="pert">PERT</h2>
+<p>When there is no experience with an activity, duration uncertainty is taken into account: three duration estimates are made for each activity: <strong>optimistic (a)</strong>, <strong>most likely (m)</strong>, and <strong>pessimistic (b)</strong>. Durations are assumed to be independent and Beta-distributed; the expected duration is t_e = (a + 4m + b)/6 and the variance is σ² = ((b − a)/6)². The expected project duration is the sum of the expected durations on the critical path, and its variance is the sum of the variances on the critical path; the project completion time is approximately Normally distributed with this mean and variance.</p>
+<p><strong>Example:</strong> For a project with E(T) = 29 days and σ = √6 days, the probabilities of finishing (a) 3 days before the expected duration (within 26 days) and (b) at most 2 days after the expected duration (within 31 days) are required.</p>
+<p><em>Note: From the standard normal distribution, P(T ≤ 26) = Φ(−3/√6) = Φ(−1.22) ≈ 0.11 and P(T ≤ 31) = Φ(2/√6) = Φ(0.82) ≈ 0.79. Since the beta formula in the notes appears in a slide image, the t_e and σ² expressions were written as the standard PERT formulas.</em></p>
+<h2 id="source-summary-of-the-network-method-second-note">Source: summary of the network method (second note)</h2>
+<p>The second presentation summarizes the same topics as follows: in CPM, activity times are deterministic, while in PERT they are probabilistic. The network diagram can be drawn in two ways (activity on arrow / activity on node); the first method (activity = arrow, event = node) is more convenient. The critical path is found by computing the earliest/latest start and finish times; activities with zero slack are critical.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../end355-cpm-pert-ders-notlari.zip" download>end355-cpm-pert-ders-notlari.zip</a></p>
+              <p class="kucuk">ZIP archive · 540 KB · 19.12.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../end355-cpm-pert-ders-notlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (540 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

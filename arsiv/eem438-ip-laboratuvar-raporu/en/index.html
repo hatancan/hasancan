@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Data Communications: IP Laboratory: TTL and Fragmentation — hasancan.net</title>
+<meta name="description" content="IP Laboratory: TTL and Fragmentation. Questions, explanations and documents from the course archive.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Data Communications: IP Laboratory: TTL and Fragmentation">
+<meta property="og:description" content="IP Laboratory: TTL and Fragmentation. Questions, explanations and documents from the course archive.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Data Communications: IP Laboratory: TTL and Fragmentation", "description": "IP Laboratory: TTL and Fragmentation. Questions, explanations and documents from the course archive.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "belge-01.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-ip-laboratuvar-raporu/belge-01.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM438 Data Communications: IP Laboratory: TTL and Fragmentation">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>27.04.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#ip-report-a">IP Report A</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM438 Data Communications: IP Laboratory: TTL and Fragmentation</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 27.04.2014 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>These are student laboratory reports from the course archive; student names, numbers and identity details have been removed. Where a document carried no date, the creation or last-modified date of the source file was used. Archive PDF copies of the documents can be downloaded at the end of the post.</p>
+<h2 id="ip-report-a">IP Report A</h2>
+<p>Başkent University, Department of Electrical and Electronics Engineering</p>
+<p>EEM 438</p>
+<p>Experiment No: 4</p>
+<p>We installed our program to send files of a given size.</p>
+<p><strong>1.</strong> Select the first ICMP Echo Request message sent by your computer, and expand the Internet Protocol part of the packet in the packet details window. What is the IP address of your computer?</p>
+<p>The source IP, i.e. my computer's IP address: 10.2.1.95</p>
+<p><strong>2.</strong> Within the IP packet header, what is the value in the upper layer protocol field?</p>
+<p>ICMP (0x01)</p>
+<p>packet size: 56</p>
+<p><strong>3.</strong> How many bytes are in the IP header? How many bytes are in the payload of the IP datagram? Explain how you determined the number of payload bytes.</p>
+<p>Header Length: 20 bytes</p>
+<p>56 - 20 = 36 bytes (for the header)</p>
+<p><strong>4.</strong> Has this IP datagram been fragmented? Explain how you determined whether or not the datagram has been fragmented. Next, sort the traced packets according to IP source address by clicking on the Source column header; a small downward pointing arrow should appear next to the word Source. If the arrow points up, click on the Source column header again. Select the first ICMP Echo Request message sent by your computer, and expand the Internet Protocol portion in the “details of selected packet header” window. In the “listing of captured packets” window, you should see all of the subsequent ICMP messages (perhaps with additional interspersed packets sent my other protocols running on your computer) below this first ICMP. Use the down arrow to move through the ICMP messages sent by your computer.</p>
+<p>“More fragments: Not set”, i.e. it is not fragmented.</p>
+<p><strong>5.</strong> Which fields in the IP datagram always change from one datagram to the next within this series of ICMP messages sent by your computer?</p>
+<p>The fields that change:</p>
+<p>Identification: 0x125a (4698)</p>
+<p>Time to live: 1</p>
+<p>Header checksum: 0x0000</p>
+<p><strong>6.</strong> Which fields stay constant? Which of the fields must stay constant? Which fields must change? Why?</p>
+<p>The fields that stay constant:</p>
+<p>Version: 4</p>
+<p>Header Length: 20 bytes</p>
+<p>Source: 10.2.1.95 (10.2.1.95)</p>
+<p>Destination: 128.119.245.12 (128.119.245.12)</p>
+<p>Differentiated Services Field: 0x00 (DSCP 0x00: Default; ECN: 0x00: Not-ECT (Not ECN-Capable Transport))</p>
+<p>upper layer protocol (Internet Control Message Protocol)</p>
+<p>The fields that change:</p>
+<p>Identification: 0x125a (4698)</p>
+<p>Time to live: 1</p>
+<p>Header checksum: 0x0000</p>
+<p><strong>7.</strong> Describe the pattern you see in the values in the Identification field of the IP datagram Next (with the packets still sorted by source address) find the series of ICMP TTLexceeded replies sent to your computer by the nearest (first hop) router.</p>
+<p>It increases by one with each ping.</p>
+<p><strong>8.</strong> What is the value in the Identification field and the TTL field?</p>
+<p>Time to live: 64</p>
+<p>Identification: 0xe408 (58376)</p>
+<p><strong>9.</strong> Do these values remain unchanged for all of the ICMP TTL-exceeded replies sent to your computer by the nearest (first hop) router? Why?</p>
+<p>When two or more IP datagrams have the same identification value, we understand that these datagrams belong to a single original datagram, and since they belong to the same one, the TTL value remains unchanged.</p>
+<p><strong>10.</strong> Find the first ICMP Echo Request message that was sent by your computer after you changed the Packet Size in pingplotter to be 2000. Has that message been fragmented across more than one IP datagram? [Note: if you find your packet has not been fragmented, you should download the zip file http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip and extract the ipethereal- trace-1packet trace. If your computer has an Ethernet interface, a packet size of 2000 should cause fragmentation.3]</p>
+<p>Yes, it spans more than one IP datagram.</p>
+<p><strong>11.</strong> Print out the first fragment of the fragmented IP datagram. What information in the IP header indicates that the datagram been fragmented? What information in the IP header indicates whether this is the first fragment versus a latter fragment? How long is this IP datagram?</p>
+<p>“..1. .... = More fragments: Set” means that it has been fragmented.</p>
+<p>The size of the first packet is “Total Length: 1500”, and the other is 500.</p>
+<p><strong>12.</strong> Print out the second fragment of the fragmented IP datagram. What information in the IP header indicates that this is not the first datagram fragment? Are the more fragments? How can you tell?</p>
+<p>Fragment offset: 1480</p>
+<p>We also see that it is the last datagram, because</p>
+<p>“..0. .... = More fragments: Not set”.</p>
+<p><strong>13.</strong> What fields change in the IP header between the first and second fragment? Now find the first ICMP Echo Request message that was sent by your computer after you changed the Packet Size in pingplotter to be 3500.</p>
+<p>The total length, the fragment offset, the header checksum, and the Set / Not set states changed.</p>
+<p><strong>14.</strong> How many fragments were created from the original datagram?</p>
+<p>The 3500-byte data was split into 3 fragments.</p>
+<p><strong>15.</strong> What fields change in the IP header among the fragments?</p>
+<p>The fragment offset and the checksum change. In the first packet the total length is 1500 and the flag is 1. In the second packet the length is 540 and the flag is 0. The reason the last packet is 540 rather than 500 is that it includes a header.</p>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-03.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 3"><figcaption>IP Report A, page 3</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-04.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 4"><figcaption>IP Report A, page 4</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-07.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 7"><figcaption>IP Report A, page 7</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-08.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 8"><figcaption>IP Report A, page 8</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-10.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 10"><figcaption>IP Report A, page 10</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-11.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 11"><figcaption>IP Report A, page 11</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-12.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 12"><figcaption>IP Report A, page 12</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../belge-01-sekil-13.jpg" width="990" height="1400" loading="lazy" decoding="async" alt="IP Report A: figures and calculation tables, page 13"><figcaption>IP Report A, page 13</figcaption></figure>
+<p><em>Note: The PDF copy of the same report carries the same content apart from personal cover-page and footer changes; it was not added again. 56−20=36 bytes is the IP payload; the phrase "for the header" in the source is incorrect. The on-the-wire unit of the Fragment Offset field is 8 bytes; the Wireshark display may have been converted to a byte offset.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../belge-01.pdf" download>belge-01.pdf</a></p>
+              <p class="kucuk">PDF · 1.5 MB · 13 <span data-i18n="arch.pagesLower"></span> · 27.04.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../belge-01.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: Handwritten Final Exam Solutions (Gray Code, Hamming, MUX, Mealy Machine, State Reduction, PLA, Counter with T Flip-Flops) — hasancan.net</title>
+<meta name="description" content="Seven handwritten pages of solutions for EEM211 Digital Logic Design final exam preparation: reflected Gray code, Hamming code for the data 1010, XOR parity tree, F = ac&#x27; + bc with NAND gates, function with an 8x1 MUX, A&#x27;B&#x27;(C⊕D) + C&#x27;D&#x27;(A⊕B), analysis of a Mealy circuit with JK flip-flops, state reduction, full adder with a decoder, PLA, and an up-down counter with T flip-flops.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: Handwritten Final Exam Solutions (Gray Code, Hamming, MUX, Mealy Machine, State Reduction, PLA, Counter with T Flip-Flops)">
+<meta property="og:description" content="Seven handwritten pages of solutions for EEM211 Digital Logic Design final exam preparation: reflected Gray code, Hamming code for the data 1010, XOR parity tree, F = ac&#x27; + bc with NAND gates, function with an 8x1 MUX, A&#x27;B&#x27;(C⊕D) + C&#x27;D&#x27;(A⊕B), analysis of a Mealy circuit with JK flip-flops, state reduction, full adder with a decoder, PLA, and an up-down counter with T flip-flops.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: Handwritten Final Exam Solutions (Gray Code, Hamming, MUX, Mealy Machine, State Reduction, PLA, Counter with T Flip-Flops)", "description": "Seven handwritten pages of solutions for EEM211 Digital Logic Design final exam preparation: reflected Gray code, Hamming code for the data 1010, XOR parity tree, F = ac' + bc with NAND gates, function with an 8x1 MUX, A'B'(C⊕D) + C'D'(A⊕B), analysis of a Mealy circuit with JK flip-flops, state reduction, full adder with a decoder, PLA, and an up-down counter with T flip-flops.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "final_cozumleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-final-cozumleri-el-yazisi/final_cozumleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: Handwritten Final Exam Solutions (Gray Code, Hamming, MUX, Mealy Machine, State Reduction, PLA, Counter with T Flip-Flops)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.10.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#page-1-gray-code-hamming-code-and-parity-tree-question-1-a-c">Page 1: Gray Code, Hamming Code, and Parity Tree (Question 1 a–c)</a></li><li><a href="#page-2-nand-implementation-canonical-form-and-8x1-mux-question-1-d-e-2a">Page 2: NAND Implementation, Canonical Form, and 8x1 MUX (Question 1 d–e, 2a)</a></li><li><a href="#page-3-simplification-with-xor-and-analysis-of-a-mealy-circuit-question-2b-3a">Page 3: Simplification with XOR and Analysis of a Mealy Circuit (Question 2b, 3a)</a></li><li><a href="#page-4-state-table-and-diagram-question-3">Page 4: State Table and Diagram (Question 3)</a></li><li><a href="#page-5-state-reduction-and-full-adder-with-a-decoder-question-3b-4a">Page 5: State Reduction and Full Adder with a Decoder (Question 3b, 4a)</a></li><li><a href="#page-6-pla-implementation-question-4b">Page 6: PLA Implementation (Question 4b)</a></li><li><a href="#page-7-up-down-counter-with-t-flip-flops-question-5">Page 7: Up-Down Counter with T Flip-Flops (Question 5)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: Handwritten Final Exam Solutions (Gray Code, Hamming, MUX, Mealy Machine, State Reduction, PLA, Counter with T Flip-Flops)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 07.10.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post compiles seven Word files named "final cozumleri" from the EEM211 Digital Logic Design sample questions folder. Each file contains a scanned page of pencil-written solutions to the questions of a final exam; the files do not say who wrote the question text or the solutions. The headings, main formulas, and results of the solutions are transcribed below as text; a scanned image of each page (with contrast enhanced for readability) is included. The original Word files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="page-1-gray-code-hamming-code-and-parity-tree-question-1-a-c">Page 1: Gray Code, Hamming Code, and Parity Tree (Question 1 a–c)</h2>
+<p><strong>1a) Gray code by reflection.</strong> The 2-bit Gray code (00, 01, 11, 10) is reflected to extend it to the 3-bit code (000, 001, 011, 010, 110, 111, 101, 100), which is then reflected to extend it to the 4-bit code. The 4-bit list on the page:</p>
+<pre class="kod"><code>0000 0001 0011 0010 0110 0111 0101 0100
+1100 1101 1111 1110 1010 1011 1001 1000</code></pre>
+<p><em>Note: On the page, the last four rows of the 3-bit list are written as 100, 101, 111, 110, and the second half of the 4-bit list as 1000, 1001, 1011, 1010, 1100, 1101, 1111, 1110; that is, the lower halves were not reflected but copied straight. In this order, the single-bit difference between adjacent codes breaks down (e.g., from 010 to 100). The correct order according to the reflection method is given above.</em></p>
+<p><strong>1b) Hamming code for the data 1010.</strong> The data bits are placed at positions 3, 5, 6, 7: P1 P2 1 P4 0 1 0.</p>
+<ul><li>P1 = XOR(3, 5, 7) = 1 ⊕ 0 ⊕ 0 = 1</li><li>P2 = XOR(3, 6, 7) = 1 ⊕ 1 ⊕ 0 = 0</li><li>P4 = XOR(5, 6, 7) = 0 ⊕ 1 ⊕ 0 = 1</li></ul>
+<p>Final code: <strong>1011010</strong>.</p>
+<p><strong>1c)</strong> A three-level XOR tree that finds the parity of an 8-bit input: the inputs are XORed in pairs (1-2, 3-4, 5-6, 7-8), the results are again XORed in pairs, and the final XOR gives the output.</p>
+<figure class="yazi-gorsel"><img src="../sayfa-1.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="Gray code reflection lists, computation of the Hamming parity bits for 1010, and the 8-input XOR parity tree"><figcaption>Page 1: Gray code, Hamming code, and XOR tree</figcaption></figure>
+<h2 id="page-2-nand-implementation-canonical-form-and-8x1-mux-question-1-d-e-2a">Page 2: NAND Implementation, Canonical Form, and 8x1 MUX (Question 1 d–e, 2a)</h2>
+<p><strong>1d)</strong> In the truth table, F is 1 for abc = 011, 100, 110, 111. Using a Karnaugh map, <strong>F = ac' + bc</strong>; this expression is implemented with a two-level NAND-NAND circuit (one inverter for c, two NANDs, and a NAND at the output).</p>
+<p><strong>1e)</strong> F'(A, B, C, D) = ∏(1, 2, 3, 12, 13) is given; F = Σ(0, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15).</p>
+<p><strong>2a)</strong> In the truth table, F is 1 for ABCD = 0000, 0101, 0111, 1100, 1111. The function is implemented with an 8x1 MUX with select inputs B, C, D; A, A', or constant 0/1 is connected to the data inputs. From the table, the data inputs are: I0 = A', I1 = I2 = I3 = 0, I4 = A, I5 = A', I6 = 0, I7 = 1.</p>
+<figure class="yazi-gorsel"><img src="../sayfa-2.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="Truth table and Karnaugh map for a, b, c, NAND circuit, F&#x27; and the canonical form of F&#x27;, four-variable function with an 8x1 MUX"><figcaption>Page 2: NAND circuit, canonical form, and 8x1 MUX</figcaption></figure>
+<h2 id="page-3-simplification-with-xor-and-analysis-of-a-mealy-circuit-question-2b-3a">Page 3: Simplification with XOR and Analysis of a Mealy Circuit (Question 2b, 3a)</h2>
+<p><strong>2b)</strong> Z is 1 for ABCD = 0001, 0010, 0100, 1000 (when exactly one input is 1). From the Karnaugh map:</p>
+<p>Z = A'B'C'D + A'B'CD' + A'BC'D' + AB'C'D' = A'B'(C'D + CD') + C'D'(A'B + AB') = <strong>A'B'(C ⊕ D) + C'D'(A ⊕ B)</strong></p>
+<p>Circuit: an AND for A'B', an XOR for C ⊕ D, and the AND of these; an AND for C'D', an XOR for A ⊕ B, and the AND of these; the two results are combined in an OR gate.</p>
+<p><strong>3a)</strong> "Since the output function Z depends on Q1, Q2, and x, our circuit is a Mealy model." The state table of the circuit with two JK flip-flops (present state, next state, Z, and J1 K1 J2 K2) is derived. The relations used: Q(t+1) = J·Q'(t) + K'·Q(t) and Z = (Q1(t) + x)·Q2'(t).</p>
+<figure class="yazi-gorsel"><img src="../sayfa-3.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="Truth table, Karnaugh map, and XOR circuit for question 2b; state table of the Mealy circuit with JK flip-flops for question 3a"><figcaption>Page 3: XOR circuit and Mealy state table</figcaption></figure>
+<h2 id="page-4-state-table-and-diagram-question-3">Page 4: State Table and Diagram (Question 3)</h2>
+<p>The values A = 00, B = 01, C = 10, D = 11 are assigned to the states ("we assign these values arbitrarily"), and the state table and diagram are drawn:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Present state</th><th scope="col">Next (x = 0)</th><th scope="col">Next (x = 1)</th><th scope="col">Z (x = 0)</th><th scope="col">Z (x = 1)</th></tr></thead><tbody><tr><th scope="row">A</th><td>A</td><td>D</td><td>0</td><td>1</td></tr><tr><th scope="row">B</th><td>A</td><td>C</td><td>0</td><td>0</td></tr><tr><th scope="row">C</th><td>B</td><td>D</td><td>1</td><td>1</td></tr><tr><th scope="row">D</th><td>A</td><td>C</td><td>0</td><td>0</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../sayfa-4.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="State table and x/z-labeled state diagram of the Mealy machine with states A, B, C, D"><figcaption>Page 4: State table and diagram</figcaption></figure>
+<h2 id="page-5-state-reduction-and-full-adder-with-a-decoder-question-3b-4a">Page 5: State Reduction and Full Adder with a Decoder (Question 3b, 4a)</h2>
+<p><strong>3b) State reduction.</strong> Table with states q0–q7 (N.S.: next state, output):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">P.S.</th><th scope="col">N.S. (x = 0)</th><th scope="col">N.S. (x = 1)</th><th scope="col">Output (x = 0)</th><th scope="col">Output (x = 1)</th></tr></thead><tbody><tr><th scope="row">q0</th><td>q0</td><td>q4</td><td>1</td><td>0</td></tr><tr><th scope="row">q1</th><td>q0</td><td>q4</td><td>0</td><td>0</td></tr><tr><th scope="row">q2</th><td>q1</td><td>q5</td><td>0</td><td>0</td></tr><tr><th scope="row">q3</th><td>q1</td><td>q5</td><td>0</td><td>0</td></tr><tr><th scope="row">q4</th><td>q2</td><td>q6</td><td>0</td><td>1</td></tr><tr><th scope="row">q5</th><td>q2</td><td>q6</td><td>0</td><td>1</td></tr><tr><th scope="row">q6</th><td>q3</td><td>q7</td><td>0</td><td>1</td></tr><tr><th scope="row">q7</th><td>q3</td><td>q7</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>States with the same outputs and the same next states are equivalent: q6 = q7, q4 = q5, q2 = q3. After substituting these, q4 (→ q2, q6; 0, 1) and q6 (→ q2, q6; 0, 1) also become the same: <strong>q4 = q6</strong>. Reduced table:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">P.S.</th><th scope="col">N.S. (x = 0)</th><th scope="col">N.S. (x = 1)</th><th scope="col">Output (x = 0)</th><th scope="col">Output (x = 1)</th></tr></thead><tbody><tr><th scope="row">q0</th><td>q0</td><td>q4</td><td>1</td><td>0</td></tr><tr><th scope="row">q1</th><td>q0</td><td>q4</td><td>0</td><td>0</td></tr><tr><th scope="row">q2</th><td>q1</td><td>q4</td><td>0</td><td>0</td></tr><tr><th scope="row">q4</th><td>q2</td><td>q4</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p><em>Note: In the reduced table on the page, the next state of q2 for x = 1 is left as q5, and that of q4 as q6; since q5 = q4 and q6 = q4, these should be written as q4. The table has been corrected accordingly above.</em></p>
+<p><strong>4a) Full adder with a 3x8 decoder.</strong> The inputs X, Y, Z are fed to the decoder; the sum and carry are obtained by ORing the relevant outputs:</p>
+<ul><li>S = Σ(1, 2, 4, 7)</li><li>C = Σ(3, 5, 6, 7)</li></ul>
+<figure class="yazi-gorsel"><img src="../sayfa-5.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="Reduction of the q0–q7 state table and a full adder made of a 3x8 decoder and two OR gates"><figcaption>Page 5: State reduction and full adder with a decoder</figcaption></figure>
+<h2 id="page-6-pla-implementation-question-4b">Page 6: PLA Implementation (Question 4b)</h2>
+<p>F1 = Σ(2, 4, 5, 7) and F2 = Σ(0, 1, 2, 4, 6) are implemented with a PLA. From the Karnaugh maps:</p>
+<ul><li>F1 = AB' + AC + A'BC'</li><li>F2' = BC + AC (since F2 = Σ(0, 1, 2, 4, 6), F2' = Σ(3, 5, 7))</li></ul>
+<p>To share the common term AC, the implementation goes through the complement of F2: the PLA has four product terms (A'BC', AB', AC, BC); the OR output of F1 passes through an XOR connected to 0, and the F2' output passes through an XOR connected to 1 (inverting it to give F2).</p>
+<figure class="yazi-gorsel"><img src="../sayfa-6.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="PLA with inputs A, B, C: four AND terms, two ORs, and XOR outputs with inversion; Karnaugh maps of F1 and F2&#x27;"><figcaption>Page 6: F1 and F2 with a PLA</figcaption></figure>
+<h2 id="page-7-up-down-counter-with-t-flip-flops-question-5">Page 7: Up-Down Counter with T Flip-Flops (Question 5)</h2>
+<p>The states are A = 00, B = 01, C = 10, D = 11. When x = 1 the counter counts A → B → C → D → A (up), and when x = 0 it counts A → D → C → B → A (down). From the state table and Karnaugh maps for the two T flip-flops (M and N):</p>
+<ul><li>T_N = 1</li><li>T_M = x'N' + xN = (x ⊕ N)'</li></ul>
+<p>Circuit: the T input of flip-flop N is connected to 1; the T input of flip-flop M is driven by the XNOR of x and Q_N.</p>
+<figure class="yazi-gorsel"><img src="../sayfa-7.jpg" width="1100" height="1513" loading="lazy" decoding="async" alt="State diagram and table of the two-bit up-down counter, T_M and T_N maps, T flip-flop circuit with an XNOR"><figcaption>Page 7: Up-down counter with T flip-flops</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../final_cozumleri.zip" download>final_cozumleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 896 KB · 07.10.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../final_cozumleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (896 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

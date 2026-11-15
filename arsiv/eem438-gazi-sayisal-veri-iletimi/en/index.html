@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM438 Data Communications: Digital Data Transmission: Line Coding and PCM (Gazi University, Suat Özdemir) — hasancan.net</title>
+<meta name="description" content="Data Communications lecture slides by Suat Özdemir of Gazi University: line coding techniques (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), sampling with PCM, parallel and serial transmission.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM438 Data Communications: Digital Data Transmission: Line Coding and PCM (Gazi University, Suat Özdemir)">
+<meta property="og:description" content="Data Communications lecture slides by Suat Özdemir of Gazi University: line coding techniques (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), sampling with PCM, parallel and serial transmission.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM438 Data Communications: Digital Data Transmission: Line Coding and PCM (Gazi University, Suat Özdemir)", "description": "Data Communications lecture slides by Suat Özdemir of Gazi University: line coding techniques (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), sampling with PCM, parallel and serial transmission.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM438 – Veri İletişimi", "associatedMedia": {"@type": "MediaObject", "name": "dc04.pdf", "contentUrl": "https://hasancan.net/arsiv/eem438-gazi-sayisal-veri-iletimi/dc04.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM438 Data Communications: Digital Data Transmission: Line Coding and PCM (Gazi University, Suat Özdemir)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem438">EEM438</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM438 – Veri İletişimi</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#digital-to-digital-conversion">Digital-to-digital conversion</a></li><li><a href="#digital-to-digital-conversion-2">Digital-to-digital conversion (2)</a></li><li><a href="#digital-to-digital-conversion-3">Digital-to-digital conversion (3)</a></li><li><a href="#problems-in-signal-transmission">Problems in signal transmission</a></li><li><a href="#digital-signal-line-coding-techniques">Digital signal line coding techniques</a></li><li><a href="#unipolar-non-return-to-zero">Unipolar (non-return-to-zero)</a></li><li><a href="#polar-non-return-to-zero">Polar (non-return-to-zero)</a></li><li><a href="#polar-return-to-zero">Polar (return-to-zero)</a></li><li><a href="#polar-biphase-manchester-and-differential-manchester">Polar (Biphase: Manchester and Differential Manchester)</a></li><li><a href="#polar-biphase-manchester-and-differential-manchester-2">Polar (Biphase: Manchester and Differential Manchester) (2)</a></li><li><a href="#bipolar-ami-alternate-mark-inversion-and-pseudoternary">Bipolar (AMI – Alternate Mark Inversion and Pseudoternary)</a></li><li><a href="#multilevel-2b1q-8b6t-4d-pam5">Multilevel (2B1Q, 8B6T, 4D-PAM5)</a></li><li><a href="#multilevel-2b1q-8b6t-4d-pam5-2">Multilevel (2B1Q, 8B6T, 4D-PAM5) (2)</a></li><li><a href="#multilevel-2b1q">Multilevel (2B1Q)</a></li><li><a href="#multilevel-8b6t">Multilevel (8B6T)</a></li><li><a href="#multilevel-4d-pam5">Multilevel (4D-PAM5)</a></li><li><a href="#multiline-transmission-mlt-3">Multiline Transmission (MLT-3)</a></li><li><a href="#multiline-transmission-mlt-3-2">Multiline Transmission (MLT-3) (2)</a></li><li><a href="#summary-of-line-coding-methods">Summary of line coding methods</a></li><li><a href="#block-coding">Block coding</a></li><li><a href="#block-coding-2">Block coding (2)</a></li><li><a href="#block-coding-4b-5b">Block coding (4B/5B)</a></li><li><a href="#block-coding-4b-5b-2">Block coding (4B/5B) (2)</a></li><li><a href="#block-coding-8b-10b">Block coding (8B/10B)</a></li><li><a href="#scrambling">Scrambling</a></li><li><a href="#scrambling-b8zs-bipolar-with-8-zero-substitution">Scrambling (B8ZS – Bipolar with 8-zero substitution)</a></li><li><a href="#scrambling-hdb3-high-density-bipolar-3-zero">Scrambling (HDB3 – High-density bipolar 3-zero)</a></li><li><a href="#analog-to-digital-conversion">Analog-to-digital conversion</a></li><li><a href="#analog-to-digital-conversion-2">Analog-to-digital conversion (2)</a></li><li><a href="#sampling">Sampling</a></li><li><a href="#sampling-rate">Sampling rate</a></li><li><a href="#sampling-rate-2">Sampling rate (2)</a></li><li><a href="#quantization">Quantization</a></li><li><a href="#reconstructing-the-original-signal">Reconstructing the original signal</a></li><li><a href="#delta-modulation">Delta modulation</a></li><li><a href="#communication-modes">Communication modes</a></li><li><a href="#parallel-communication">Parallel communication</a></li><li><a href="#serial-communication">Serial communication</a></li><li><a href="#serial-communication-asynchronous">Serial communication – asynchronous</a></li><li><a href="#serial-communication-synchronous">Serial communication – synchronous</a></li><li><a href="#isochronous-communication">Isochronous communication</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM438</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM438 Data Communications: Digital Data Transmission: Line Coding and PCM (Gazi University, Suat Özdemir)</h1>
+            <p class="kucuk">EEM438 – Veri İletişimi · 05.03.2011 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>These are the Chapter 4 (Digital data transmission) slides that Suat Özdemir of the Department of Computer Engineering at Gazi University prepared for the "Veri İletişimi / Data Communications" course (slide date 5 March 2011; the footer reads BM 403 Data Communications). They are kept in the EEM438 folder as the course material of a second instructor. The slide text is transcribed below; figures and tables taken from the textbook are not published, and slides without text are marked. The original PDF can be downloaded at the end of the post.</p>
+<p>Scope: line coding techniques (NRZ, Manchester, AMI, 4B/5B, B8ZS, HDB3), sampling with PCM, parallel and serial transmission.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution to the source. It will be removed at the request of the rights holder.</em></p>
+<h2 id="digital-to-digital-conversion">Digital-to-digital conversion</h2>
+<ul><li>For information to be transmitted between two points, it must be converted into an analog or digital signal.</li><li>In digital-to-digital conversion, digital data is converted into a digital signal.</li><li>In analog-to-digital conversion, analog data is converted into a digital signal.</li><li>The signal obtained from the conversion is transmitted between two points in parallel or serial form.</li></ul>
+<h2 id="digital-to-digital-conversion-2">Digital-to-digital conversion (2)</h2>
+<ul><li>Line coding is the process of converting digital data into a digital signal.</li><li>In data communications, the goal is to transmit pieces of data. The smallest piece is called a bit.</li><li>In the figure, r denotes the number of data pieces carried by one signal piece.</li></ul>
+<h2 id="digital-to-digital-conversion-3">Digital-to-digital conversion (3)</h2>
+<ul><li>Data rate denotes the number of bits transmitted in one second (bps, bit/s).</li><li>Signal rate denotes the number of signals transmitted in one second (baud).</li><li>Data rate is usually expressed as bit rate.</li><li>Signal rate is expressed as baud rate, pulse rate, or modulation rate.</li><li>The goal is to increase the bit rate while reducing the baud rate.</li><li>Bandwidth denotes the frequency bandwidth required to carry the signal.</li><li>Increasing the number of changes in the signal requires a wider frequency band.</li></ul>
+<h2 id="problems-in-signal-transmission">Problems in signal transmission</h2>
+<ul><li>In signal encoding, long runs of 1s and 0s are difficult to decode correctly at the receiver. Precautions must be taken.</li><li>If a digital signal stays constant for a certain period, a DC component arises, which is a problem for systems that do not pass low frequencies. (A telephone line does not pass frequencies below 200 Hz.)</li><li>The bit interval must be the same in both systems (receiver and transmitter).</li><li>A self-synchronizing digital signal is one that carries its own timing information.</li></ul>
+<h2 id="digital-signal-line-coding-techniques">Digital signal line coding techniques</h2>
+<ul><li>They fall into 5 basic groups.</li></ul>
+<h2 id="unipolar-non-return-to-zero">Unipolar (non-return-to-zero)</h2>
+<ul><li>Bit 1 is represented by a positive voltage and bit 0 by a negative voltage or 0 V.</li><li>It is called non-return-to-zero because the signal does not return to 0 in the middle of the bit.</li></ul>
+<h2 id="polar-non-return-to-zero">Polar (non-return-to-zero)</h2>
+<ul><li>A two-level signal is used. There are two types: NRZ-Level and NRZ-Invert.</li><li>In NRZ-L coding, bit 0 is represented by a positive voltage and bit 1 by a negative voltage.</li><li>In NRZ-I, a change in voltage level represents bit 1 and no change represents bit 0.</li><li>Long runs of 1s and 0s are difficult to detect (more so in NRZ-L).</li><li>Both have a synchronization problem (more so NRZ-L).</li></ul>
+<h2 id="polar-return-to-zero">Polar (return-to-zero)</h2>
+<ul><li>The problem with NRZ coding is the lack of receiver–transmitter synchronization.</li><li>Return-to-zero uses positive, zero, and negative voltage levels.</li><li>In RZ, the signal returns to the 0 level in the middle of the bit.</li><li>More transitions are needed per bit (more bandwidth).</li><li>There is no DC component problem.</li></ul>
+<h2 id="polar-biphase-manchester-and-differential-manchester">Polar (Biphase: Manchester and Differential Manchester)</h2>
+<ul><li>In Manchester, the signal has specific transitions for bit 1 and bit 0.</li><li>In Differential Manchester, there is a transition at the start of the bit for bit 0 and no transition for bit 1.</li><li>In both, the level is changed in the middle of the bit (synchronization is provided).</li></ul>
+<h2 id="polar-biphase-manchester-and-differential-manchester-2">Polar (Biphase: Manchester and Differential Manchester) (2)</h2>
+<ul><li>There is no DC component in Manchester and Differential Manchester coding. Each bit has both a positive and a negative voltage.</li><li>The signal rate is twice that of NRZ coding. (The bandwidth is doubled.)</li></ul>
+<h2 id="bipolar-ami-alternate-mark-inversion-and-pseudoternary">Bipolar (AMI – Alternate Mark Inversion and Pseudoternary)</h2>
+<ul><li>In AMI coding, the level for bit 0 is 0, and for bit 1 it alternates continuously between positive and negative.</li><li>In pseudoternary coding, the level for bit 1 is 0, and for bit 0 it alternates continuously between positive and negative.</li><li>There is no DC component in bipolar coding. The level continuously alternates between positive and negative.</li></ul>
+<h2 id="multilevel-2b1q-8b6t-4d-pam5">Multilevel (2B1Q, 8B6T, 4D-PAM5)</h2>
+<ul><li>The main goal of coding is to increase the data rate and reduce the bandwidth.</li><li>Let m denote the number of data pieces and n the number of signal pieces.</li><li>Since binary data is 1 and 0, m data bits can be represented by 2^m different signals.</li><li>If each signal has L levels, L^n different signals are obtained.</li></ul>
+<h2 id="multilevel-2b1q-8b6t-4d-pam5-2">Multilevel (2B1Q, 8B6T, 4D-PAM5) (2)</h2>
+<ul><li>If 2^m = L^n, one signal can be used for each data pattern.</li><li>If 2^m &lt; L^n, all data patterns can be represented by a subset of the signals.</li><li>If 2^m &gt; L^n, not all data patterns can be represented by the available signals.</li><li>This type of coding is called mBnL.</li><li>Here, m is the length of the binary data, B denotes binary data, n is the length of the signal, and L is the number of signal levels.</li><li>B (binary) is used for L=2, T (ternary) for L=3, and Q (quaternary) for L=4.</li><li>The first two characters (mB) denote the data, and the last two (nL) denote the signal.</li></ul>
+<h2 id="multilevel-2b1q">Multilevel (2B1Q)</h2>
+<ul><li>In 2B1Q (two-binary, one-quaternary) coding, the data size encoded by one signal is 2 bits and the total number of levels in the signal is 4.</li><li>2B1Q is used in DSL (digital subscriber line) technology.</li></ul>
+<h2 id="multilevel-8b6t">Multilevel (8B6T)</h2>
+<ul><li>In 8B6T (eight-binary, six-ternary) coding, 8 bits of data are represented by a three-level signal.</li><li>2⁸ = 256 different data patterns and 3⁶ = 729 different signals are used.</li><li>Some of the signals are used for synchronization and error detection.</li><li>The signal group used for each bit group is fixed.</li><li>8B6T is used in 10Base-4T networks.</li></ul>
+<h2 id="multilevel-4d-pam5">Multilevel (4D-PAM5)</h2>
+<ul><li>In 4D-PAM5 (four-dimensional five-level pulse-amplitude modulation) coding, "4D" indicates that the data is transmitted over 4 wires.</li><li>5 different signal levels (-2, -1, 0, 1, 2) are used.</li><li>8 bits are sent with one signal element.</li><li>The signal is represented by 4 parts, each transmitted over one wire.</li><li>4D-PAM5 coding is used in Gigabit LAN networks.</li></ul>
+<h2 id="multiline-transmission-mlt-3">Multiline Transmission (MLT-3)</h2>
+<ul><li>NRZ-I and Differential Manchester apply two transition rules when encoding data.</li><li>MLT-3 (Multiline Transmission, Three Level) coding is used for data with more than two levels; MLT-3 uses a three-level (+V 0 -V) transition rule.</li><li>Because there are fewer transitions, the bandwidth is ¼ of the bit rate. (BW = ¼ bit rate)</li><li>If the next bit is 0, there is no transition.</li><li>If the next bit is 1 and the current level is not 0, the next level is 0.</li><li>If the next bit is 1 and the current level is 0, the next level is the opposite of the last nonzero level.</li></ul>
+<h2 id="multiline-transmission-mlt-3-2">Multiline Transmission (MLT-3) (2)</h2>
+<p><em>This slide contains only a figure/table; the image is in the original PDF.</em></p>
+<h2 id="summary-of-line-coding-methods">Summary of line coding methods</h2>
+<p><em>This slide contains only a figure/table; the image is in the original PDF.</em></p>
+<h2 id="block-coding">Block coding</h2>
+<ul><li>Extra bits are needed for better synchronization and for error detection.</li></ul>
+<h2 id="block-coding-2">Block coding (2)</h2>
+<ul><li>Block coding converts m bits into n bits (mB/nB), where n &gt; m.</li><li>The "/" sign distinguishes block coding from multilevel coding (8B6T).</li><li>An m-bit group is replaced by an n-bit group.</li><li>In 4B/5B, the original bits are divided into 4-bit groups and each 4-bit group is replaced by 5 bits.</li></ul>
+<h2 id="block-coding-4b-5b">Block coding (4B/5B)</h2>
+<ul><li>4B/5B (four binary/five binary) coding is used together with NRZ-I. NRZ-I coding has a synchronization problem with long runs of 0s. A modification is needed before NRZ-I coding so that there are no long runs of 0s. The receiver first recovers the bits with NRZ-I and then discards the redundant extra bit. 4B/5B does not contain more than two consecutive 0s. No group contains more than three 0s.</li><li>The added 1 bit requires 20% more traffic. The DC component is still present.</li></ul>
+<h2 id="block-coding-4b-5b-2">Block coding (4B/5B) (2)</h2>
+<ul><li>Example: We want to send data at 1 Mbps. What is the minimum bandwidth required when using 4B/5B with NRZ-I, and when using Manchester? 4B/5B increases the bit rate to 1.25 Mbps. Since NRZ-I coding requires a bandwidth of N/2, 625 kHz is needed. Manchester coding requires a bandwidth of 1 MHz. NRZ-I has a DC component; Manchester does not.</li></ul>
+<h2 id="block-coding-8b-10b">Block coding (8B/10B)</h2>
+<ul><li>8B/10B (eight binary/ten binary) coding uses 10 bits instead of 8 bits.</li><li>It consists of one 5B/6B (for the left 5 bits) and one 3B/4B (for the right 3 bits).</li><li>A disparity controller performs error detection. 2¹⁰ – 2⁸ = 768 extra groups are produced.</li></ul>
+<h2 id="scrambling">Scrambling</h2>
+<ul><li>The biphase method is suitable between two stations over a short distance (within a LAN), but it is not suitable for long distances because it requires a wide bandwidth.</li><li>Using block coding together with NRZ is also not suitable for long distances because of the DC component.</li><li>Bipolar AMI coding requires a narrow bandwidth and has no DC component. However, there is no synchronization during long runs of 0s.</li><li>A series of a certain number of 0s is replaced with a different sequence.</li></ul>
+<h2 id="scrambling-b8zs-bipolar-with-8-zero-substitution">Scrambling (B8ZS – Bipolar with 8-zero substitution)</h2>
+<ul><li>In place of 8 consecutive zero-voltage levels, 000VB0VB is inserted.</li><li>V denotes a violation, i.e., the same voltage level as the previous one in AMI coding.</li><li>B denotes bipolar, i.e., the opposite of the previous voltage level.</li></ul>
+<h2 id="scrambling-hdb3-high-density-bipolar-3-zero">Scrambling (HDB3 – High-density bipolar 3-zero)</h2>
+<ul><li>4 consecutive zero-voltage levels are replaced with 000V or B00V.</li><li>If the number of nonzero pulses since the last substitution is odd, the 000V pattern is used. This makes the number of nonzero pulses even.</li><li>If the number of nonzero pulses since the last substitution is even, the B00V pattern is used. This makes the number of nonzero pulses even.</li></ul>
+<h2 id="analog-to-digital-conversion">Analog-to-digital conversion</h2>
+<ul><li>In some applications there is an analog signal (produced by a microphone or camera).</li><li>The analog signal is converted into digital data and then converted into a digital signal.</li><li>Pulse code modulation (PCM) is the most commonly used method for converting an analog signal into digital data.</li></ul>
+<h2 id="analog-to-digital-conversion-2">Analog-to-digital conversion (2)</h2>
+<ul><li>Analog-to-digital conversion has 3 stages:</li></ul>
+<p>  - Sampling   - Quantization   - Reconstructing the original signal</p>
+<h2 id="sampling">Sampling</h2>
+<ul><li>The analog signal is sampled at every interval Ts (sampling rate, sampling frequency).</li><li>Three different kinds of sampling are used. Sample and hold (flat-top) is the most common.</li></ul>
+<h2 id="sampling-rate">Sampling rate</h2>
+<ul><li>According to the Nyquist theorem, the sampling rate must be at least twice the highest frequency.</li></ul>
+<h2 id="sampling-rate-2">Sampling rate (2)</h2>
+<ul><li>If the sampling frequency is low, a wheel appears to rotate backwards.</li><li>In a film, 24 frames pass per second. Sampling at fewer than 12 is undersampling.</li></ul>
+<h2 id="quantization">Quantization</h2>
+<ul><li>The sampled values are analog. The range between the minimum and maximum is divided into L levels. The difference between two levels is Δ = (Vmax–Vmin)/L.</li><li>In the example, Vmax = +20 V, Vmin = -20 V, L = 8.</li></ul>
+<h2 id="reconstructing-the-original-signal">Reconstructing the original signal</h2>
+<ul><li>The bit sequence is used to recreate the analog signal.</li></ul>
+<h2 id="delta-modulation">Delta modulation</h2>
+<ul><li>Delta modulation is simpler than PCM.</li><li>If the sampled value is greater than the previous one, an increase is made; if it is smaller, a decrease is made.</li></ul>
+<h2 id="communication-modes">Communication modes</h2>
+<ul><li>Communication is either parallel or serial.</li></ul>
+<h2 id="parallel-communication">Parallel communication</h2>
+<ul><li>n bits are sent at the same time.</li><li>It is costly and fast. It is used over short distances.</li></ul>
+<h2 id="serial-communication">Serial communication</h2>
+<ul><li>1 bit is sent at a time.</li><li>It is low-cost and slow. It is used over long distances.</li></ul>
+<h2 id="serial-communication-asynchronous">Serial communication – asynchronous</h2>
+<ul><li>Information is sent in groups. A group usually consists of 8 bits.</li><li>The start bit tells the receiver that a group is arriving, and the stop bit tells it that the group has ended.</li><li>It is asynchronous at the byte level, but synchronization is still required at the bit level.</li><li>A keyboard and a mouse are examples.</li></ul>
+<h2 id="serial-communication-synchronous">Serial communication – synchronous</h2>
+<ul><li>Bits are sent one after another without start and stop bits.</li><li>Dividing the bits into groups and the timing are handled by the receiver.</li><li>It is faster than asynchronous communication.</li></ul>
+<h2 id="isochronous-communication">Isochronous communication</h2>
+<ul><li>In real-time video and audio applications, delays between frames are not acceptable.</li><li>Isochronous communication provides data transmission at a constant rate.</li></ul>
+<p><em>Note: Superscripts and subscripts in the slides appeared as plain digits in the PDF text (2^m, L^n, 2⁸, 3⁶, 2¹⁰), so they were corrected.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../dc04.pdf" download>dc04.pdf</a></p>
+              <p class="kucuk">PDF · 1.6 MB · 21 <span data-i18n="arch.pagesLower"></span> · 05.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../dc04.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

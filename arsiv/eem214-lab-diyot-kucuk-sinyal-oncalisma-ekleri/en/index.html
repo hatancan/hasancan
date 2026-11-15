@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Electronics I: Zener and Diode Small-Signal Preliminary Work Appendices — hasancan.net</title>
+<meta name="description" content="Handwritten solutions for Zener regulation, the DC and AC equivalents of a diode, small-signal resistance, and resistor design for a 0.7 voltage transfer ratio.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Electronics I: Zener and Diode Small-Signal Preliminary Work Appendices">
+<meta property="og:description" content="Handwritten solutions for Zener regulation, the DC and AC equivalents of a diode, small-signal resistance, and resistor design for a 0.7 voltage transfer ratio.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Electronics I: Zener and Diode Small-Signal Preliminary Work Appendices", "description": "Handwritten solutions for Zener regulation, the DC and AC equivalents of a diode, small-signal resistance, and resistor design for a 0.7 voltage transfer ratio.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-lab-diyot-kucuk-sinyal-oncalisma-ekleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM214 Electronics I: Zener and Diode Small-Signal Preliminary Work Appendices">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>23.03.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#zener-preliminary-work">Zener preliminary work</a></li><li><a href="#dc-operating-point-of-the-diode">DC operating point of the diode</a></li><li><a href="#small-signal-resistance-and-voltage-transfer">Small-signal resistance and voltage transfer</a></li><li><a href="#resistor-design-for-a-0-7-transfer-ratio">Resistor design for a 0.7 transfer ratio</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM214 Electronics I: Zener and Diode Small-Signal Preliminary Work Appendices</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 23.03.2014 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>The Zener and diode small-signal preliminary works prepared for the EEM214 laboratory were transcribed to text from photographed and scanned pages. Student names and numbers have been removed; the source images and the download file are not shared. The archive date of the small-signal work is 23 March 2014.</p>
+<h2 id="zener-preliminary-work">Zener preliminary work</h2>
+<p>The same calculation in the two photographs has been transcribed together. The source explanation compares a Zener diode, which conducts current in the reverse direction beyond a certain threshold, with an ordinary diode, which is not used in the reverse direction; it states that an ordinary diode would burn out in reverse conduction.</p>
+<p><em>Note: Reverse breakdown can also occur in an ordinary diode. Permanent damage depends on current and power limits; "it burns out at any reverse current" is not a general physical rule.</em></p>
+<p>In the circuit, the source V_s is connected to the output through R_s; the Zener and the load R_L are in parallel at the output. The calculations in the source:</p>
+<ul><li>r_z = ΔV_z/ΔI_z = 20 Ω.</li><li>r_z I_zk = 20 Ω × 0.2 mA = 4 mV; the source calls this V_z.</li><li>With the comparison 10 V − 0.5 kΩ × 5 mA = 7.5 V, the Zener is stated to be conducting and V_out = 6.8 V is written.</li><li>For "V_s + 1", 8.5 V and V_out = 6.8 V; for "V_s − 1", 6.5 V and the Zener is stated not to be conducting.</li><li>R_L = 2 kΩ, V_in = 6.5 V and with the Zener in cutoff, V_out = [R_L/(R_s + R_L)]V_in = (2/2.5) × 6.5 V.</li><li>For R_L = 0.5 kΩ, V_out = [0.5/(0.5 + 0.5)]V_in; with V_in = 10 V this gives 5 V.</li></ul>
+<p><em>Note: 4 mV is the voltage change calculated with the given dynamic resistance; it is not the nominal 6.8 V of the Zener. For the 2 kΩ load and 6.5 V input, the divider result is 5.2 V. The "V_s ± 1" lines in the source are values centered on 7.5 V; they should not be confused with a direct ±1 V change of the 10 V source. At the loaded regulation limit, the Zener current should also be checked.</em></p>
+<h2 id="dc-operating-point-of-the-diode">DC operating point of the diode</h2>
+<p>The D1N4148 diode is connected to the +5 V supply through 1 kΩ, and its lower terminal is connected to ground through R. The input is coupled to the upper terminal and the output to the 1 kΩ load at the lower terminal through 10 µF capacitors. The input is written as v_i(t) = V_m cos(ωt).</p>
+<p>In the source model, the threshold is V_γ = 0.6 V, the series resistance is r = 20 Ω, and the ideality factor is n = 2. At DC, the capacitors are open circuits:</p>
+<p>I_DQ = (5 − 0.6)/(1 kΩ + R + 20 Ω).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R</th><th scope="col">Total DC resistance</th><th scope="col">I_DQ</th></tr></thead><tbody><tr><th scope="row">3.9 kΩ</th><td>4920 Ω</td><td>Approximately 894 µA</td></tr><tr><th scope="row">56 kΩ</th><td>57020 Ω</td><td>Approximately 77.1 µA</td></tr></tbody></table></div>
+<p>The source curve shows the operating point and the linearization. For AC, the supply is grounded, the coupling capacitors are treated as short circuits, and the diode is replaced by r_d.</p>
+<h2 id="small-signal-resistance-and-voltage-transfer">Small-signal resistance and voltage transfer</h2>
+<p>r_d = nV_T/I_DQ, V_T = 25 mV:</p>
+<ul><li>For 894 µA, r_d ≈ 56 Ω.</li><li>For 77.1 µA, r_d ≈ 650 Ω.</li></ul>
+<p>The output load is R_eq = R || 1 kΩ and A_V = V_o/V_in = R_eq/(R_eq + r_d).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R</th><th scope="col">Parallel equivalent in the source</th><th scope="col">r_d</th><th scope="col">A_V in the source</th></tr></thead><tbody><tr><th scope="row">3.9 kΩ</th><td>Approximately 800 Ω</td><td>56 Ω</td><td>0.92</td></tr><tr><th scope="row">56 kΩ</th><td>Approximately 980 Ω</td><td>650 Ω</td><td>0.60</td></tr></tbody></table></div>
+<p><em>Note: Since 800/(800 + 56) ≈ 0.935, the result 0.92 in the first row does not agree arithmetically. The second ratio is approximately 0.601. The source did not add the 20 Ω series resistance used at DC to r_d at AC; the results are transcribed with this assumption.</em></p>
+<p>The source writes the small-signal limit as v_d ≪ nV_T = 50 mV.</p>
+<p><em>Note: This inequality applies to the AC voltage across the diode; it does not have to be the same as the input source amplitude.</em></p>
+<h2 id="resistor-design-for-a-0-7-transfer-ratio">Resistor design for a 0.7 transfer ratio</h2>
+<p>The design conditions are 0.67 &lt; A_V &lt; 0.73 and I_DQ &lt; 3 mA. The solution neglects 20 Ω at this stage and uses I_DQ ≈ 4.4 V/(1 kΩ + R). The current condition gives R &gt; 466 Ω.</p>
+<p>With resistances expressed in kΩ, r_d ≈ 0.0113(1 + R), R_eq = R/(1 + R), and the target is:</p>
+<p>0.7 = R_eq/(R_eq + r_d).</p>
+<p>In the source algebra, 7r_d = 3R_eq is written, followed by approximately 8R² − 284R + 8 = 0. The roots are approximately 35.4 kΩ and 28 Ω; the small root is eliminated because of the current limit. 27 kΩ is also written in the first trial line but is not used in the final solution.</p>
+<p>Source check for 35.4 kΩ:</p>
+<ul><li>R_eq ≈ 0.972 kΩ.</li><li>r_d ≈ 0.411 kΩ.</li><li>A_V ≈ 0.972/(0.972 + 0.411) = 0.702.</li></ul>
+<p>With the standard 33 kΩ, R_eq ≈ 0.970 kΩ, r_d ≈ 0.384 kΩ and A_V ≈ 0.716 are written; it is concluded that 33 kΩ can be used.</p>
+<p><em>Note: With unrounded nV_T = 50 mV and 4.4 V, the large root is approximately 35.69 kΩ; 35.4 kΩ results from rounding of intermediate coefficients. For 33 kΩ the same model gives approximately 0.715, which is within the required range. With I_DQ ≈ 0.129 mA, the 3 mA limit is also satisfied.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

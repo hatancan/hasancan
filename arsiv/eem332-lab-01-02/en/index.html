@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Laboratory 1–2: DEBUG and Segment Registers — hasancan.net</title>
+<meta name="description" content="Getting started with DEBUG, the CS/DS/SS/ES and IP registers, memory addresses; handouts and student solutions with personal information removed.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-lab-01-02/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-lab-01-02/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-lab-01-02/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-lab-01-02/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Laboratory 1–2: DEBUG and Segment Registers">
+<meta property="og:description" content="Getting started with DEBUG, the CS/DS/SS/ES and IP registers, memory addresses; handouts and student solutions with personal information removed.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-lab-01-02/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Laboratory 1–2: DEBUG and Segment Registers", "description": "Getting started with DEBUG, the CS/DS/SS/ES and IP registers, memory addresses; handouts and student solutions with personal information removed.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-lab-01-02/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-lab-01-02.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-lab-01-02/eem332-lab-01-02.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Laboratory 1–2: DEBUG and Segment Registers">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.02.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#eem332-lab01">eem332_lab01</a></li><li><a href="#eem332-lab02">eem332_lab02</a></li><li><a href="#calisma-623">calisma-623</a></li><li><a href="#d2-preliminary-work">D2 preliminary work</a></li><li><a href="#calisma-704">calisma-704</a></li><li><a href="#lab1-report-1">lab1_report(1)</a></li><li><a href="#lab1-report">lab1_report</a></li><li><a href="#lab2-prelab">lab2_prelab</a></li><li><a href="#calisma-840">calisma-840</a></li><li><a href="#report-2">report_2</a></li><li><a href="#calisma-1259">calisma-1259</a></li><li><a href="#ucs-eem332-lab-prelab-2">ucs-eem332 lab prelab 2</a></li><li><a href="#calisma-834">calisma-834</a></li><li><a href="#calisma-1231">calisma-1231</a></li><li><a href="#fig2-2">fig2-2</a></li><li><a href="#2010-laboratory-2-experimental-work-template">2010 laboratory 2 experimental work template</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Laboratory 1–2: DEBUG and Segment Registers</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 21.02.2006 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the related notes and exercises from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2006–2015). It covers getting started with DEBUG, the CS/DS/SS/ES and IP registers, and memory addresses; handouts and student solutions with personal information removed. Work prepared by a friend and course documents are presented together; student names, numbers, and group information have been removed. PDF archive copies of the documents and, where available, the source code can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="eem332-lab01">eem332_lab01</h2>
+<p>EEM 332 - Microprocessors</p>
+<p>Experiment Number: 1 Experiment Title: Introduction to Debug, x86 Registers, and Machine Instructions</p>
+<p>Preliminary Work: Research the 8086 registers and DEBUG commands and prepare a summary of at most four pages. Be sure to include the names of the sources you used.</p>
+<p>Experimental Work</p>
+<p>Read the following exercises and apply the given commands. State the answers to the questions in your report.</p>
+<h3 id="to-run-the-debug-program-open-a-dos-window-and-enter-the-following-command">To run the DEBUG program, open a DOS window and enter the following command</h3>
+<pre class="kod"><code>C:\&gt; debug &lt;enter&gt;</code></pre>
+<p>DEBUG responds with a hyphen "-" prompt. The hyphen prompt indicates that the DEBUG program is ready to accept commands interactively. One of the most important commands is the "?" command, which gives a summary of all valid commands. A list of all valid DEBUG commands is given on page 118 of the textbook.</p>
+<p>Now run DEBUG and display the list of all commands;</p>
+<pre class="kod"><code>C:\&gt; debug              &lt;enter&gt;</code></pre>
+<p>-?                      &lt;enter&gt;</p>
+<p>When these commands are applied, a list of valid DEBUG commands is displayed on the screen. All commands consist of a single letter. Some commands require additional arguments.</p>
+<h3 id="arithmetic-operations-in-debug">Arithmetic Operations in DEBUG</h3>
+<p>The "h" command shows the sum and difference of the two arguments given in DEBUG. DEBUG works only in the hexadecimal number system!</p>
+<h3 id="enter-the-following-command-at-the-debug-prompt">Enter the following command at the DEBUG prompt</h3>
+<p>-h 3 2 &lt;enter&gt;</p>
+<h3 id="after-the-command-is-executed-the-following-line-will-be-displayed-on-the-screen">After the command is executed, the following line will be displayed on the screen</h3>
+<p>0005 0001</p>
+<p>Here, the results of the addition and subtraction operations are shown, respectively: 3+2=5 and 3-2=1.</p>
+<h3 id="now-try-the-following-command">Now try the following command</h3>
+<p>-h 2 3 &lt;enter&gt;</p>
+<p>In this case the negative result, 2-3= -1, is given as the two's complement. To identify a number as negative, one checks whether its most significant bit is 1. On the other hand, the most significant bit of a positive number resulting from an addition can also be 1. Interpreting the result correctly</p>
+<h3 id="is-up-to-the-programmer-as-an-example-run-the-following-commands">is up to the PROGRAMMER. As an example, run the following commands</h3>
+<p>-h E1F6 1E09 &lt;enter&gt;</p>
+<h3 id="the-positive-result-of-the-addition-appears-as-ffff-now-run-the-following-command">The positive result of the addition appears as FFFF! Now run the following command</h3>
+<p>-h 5C3F0 4BC6 &lt;enter&gt;</p>
+<p>The error message you see is caused by DEBUG operating on a WORD basis. In the x86 architecture, a word is 16 bits long.</p>
+<h3 id="registers-and-memory">Registers and Memory</h3>
+<p>x86 processors (at least the 8086 version) contain 14 basic registers. To view the contents of the registers</p>
+<h3 id="enter-the-following-command">enter the following command</h3>
+<pre class="kod"><code>-r &lt;enter&gt;</code></pre>
+<p>Note the two-letter abbreviations at the end of the second line. These abbreviations show the values of the special-purpose bits in the FLAGS register. The "r" command, with the name of a register as an argument, can be used to examine and modify the contents of that register. For example, enter the following commands:</p>
+<pre class="kod"><code>-r ax &lt;enter&gt;</code></pre>
+<p>ax    0000 :3A7 &lt;enter&gt;</p>
+<p>Now examine all the registers again using the r command. You will see that the AX register now holds the number 03A7.</p>
+<p>Using the r command, load the value 92A into the BX register. Then observe that the AX and BX registers hold the numbers 3A7 and 92A, respectively.</p>
+<p>Now, instead of using DEBUG commands, we will have the x86 microprocessor perform the operation 3A7+92A in its memory using machine instructions. Here DEBUG will be used only as a tool for loading the instructions into the processor. The "e" command is used to examine and modify the contents of memory.</p>
+<h3 id="apply-the-commands-given-below">Apply the commands given below</h3>
+<pre class="kod"><code>-e 100                          &lt;enter&gt;
+3756:0100       E4.01           &lt;enter&gt;
+-e 101                          &lt;enter&gt;
+3756:0101       85.D8           &lt;enter&gt;</code></pre>
+<p>When entering the commands above, you will most likely see values different from 3756, E4, and 85. These numbers depend on the state of memory before DEBUG was run, and they are unimportant at this stage. You need to enter the values 01 and D8 at the relative locations (offsets) 0100 and 0101. By entering the e 100 command, we instruct DEBUG to load a byte of data at relative location (offset) 0100 in the current code segment. In the example above, the existing byte E4 at address 3756:0100 has been replaced with the byte 01 entered by the user. In the same example, the address of the code segment is 3756. This value may be different on your computers, but that is unimportant for now.</p>
+<p>If you multiply the code segment address by 10 in hexadecimal and add the offset value to the result, you obtain the physical address. X86 systems generally specify memory addresses in segmented form.</p>
+<h3 id="addition-using-x86">Addition Using x86</h3>
+<h3 id="examine-the-register-contents">Examine the register contents</h3>
+<pre class="kod"><code>-r &lt;enter&gt;</code></pre>
+<h3 id="the-screen-display-will-be-similar-to-the-following">The screen display will be similar to the following</h3>
+<pre class="kod"><code>AX=03A7 BX=092A CX=0000 DX=0000 SP=#### BP=#### SI=#### DI=####
+DS=#### ES=#### SS=#### CS=#### IP=0100 NV UP DI PL NZ NA PO NC</code></pre>
+<h3 id="0100-01d8-add-ax-bx">#### : 0100 01D8 ADD AX, BX</h3>
+<p>Here # represents one hexadecimal digit. The last line of the display indicates that the value 01D8 is stored in memory. This is in fact the machine language equivalent of the ADD AX, BX instruction; when this instruction is executed, the contents of the specified registers are added and the result is written to the AX register. Since the x86 architecture is byte-addressable, the information is arranged as follows</p>
+<h3 id="as-follows">as follows</h3>
+<p>3756 : 0100             01</p>
+<h3 id="3756-0101-d8">3756 : 0101             D8</h3>
+<p>Although the instruction is in memory in x86, the location of the instruction must be specified for it to be executed. The method used in x86 systems employs two special registers: CS and IP. These registers hold the segmented address of the next instruction to be executed. In this way, the location in memory of the instruction to be executed is effectively indicated by the code segment value (held in the CS register) and the offset value (held in the IP register). When necessary, the correct offset value is loaded into the IP register using the r command (0100 in the example).</p>
+<p>DEBUG has a trace command, "t", which allows machine language instructions to be executed one at a time. Let us apply the trace command</p>
+<h3 id="to-debug-with-the-current-memory-and-register-contents">to DEBUG with the current memory and register contents</h3>
+<pre class="kod"><code>-t &lt;enter&gt;</code></pre>
+<p>The contents of the AX register is now 0CD1, the sum of the numbers 03A7 and 092A. The contents of the AX register is seen to have changed to the sum obtained as the result of the operation. At the same time, the contents of the IP register changes to 0102. x86 systems automatically change the contents of the IP register according to the address of the next instruction to be executed.</p>
+<p>Now, using your systems, add the value 092A (in the BX register) to the value 0CD1 (in the AX register). Do not forget to set the IP register to the appropriate value using DEBUG's r command!</p>
+<p>To perform the subtraction operation, the machine language instruction required must be added to the code segment. Add the instruction encoded in machine language as 29D8 to the current code segment using the e command, with the offset value set to 0100. Using the r command, observe that the SUB AX, BX instruction has been placed in memory, and then have this operation carried out using the trace command.</p>
+<h3 id="using-dos-functions-in-assembler-language-programs">Using DOS Functions in Assembler Language Programs</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The INT instruction allows access to special programs that are copied into memory from the hard</code></pre>
+<p>disk via DOS during the computer's boot process in x86 systems. For now, the INT instruction can be thought of as a "function caller."</p>
+<p>Using DEBUG, let us load the value 0200 into the AX register and the value 0041 into the DX register. The machine language equivalent of the INT 21 instruction is CD21 (details of the INT instruction and the values assigned to registers can be found at the link given on the web page). Using the offset value 0102, enter CD in the current code segment in memory and 21 at the location indicated by the next offset value. Set the IP register to 0102 and check that the memory and register contents are correct. Then run the instruction by applying the following</p>
+<h3 id="operation">operation</h3>
+<pre class="kod"><code>-g 104 &lt;enter&gt;</code></pre>
+<p>The g command is DEBUG's "go until" command. By applying this line, we cause the x86 to execute all instructions from the current IP value up to the specified IP value. No change occurs in the code segment here (only IP changes in the CS:IP structure). Had we used the trace (t) command, we would have had to use the same command many times, once for each instruction, in order to execute all the instructions within the INT 21 function, and in some cases this would mean running quite long pieces of code line by line. By using the g command, all the necessary instructions are executed until the value CS:0104 is reached.</p>
+<p>At the end of the operation above, we see the character A printed on the screen. The INT function we use here is number 21 among all INT functions. By using this function, access to other DOS functions can be obtained. The value 02 in the AH register (AH is the most significant byte of AX) indicates to DOS that a character will be written to the screen. The character to be printed is specified by the value 41 that we wrote into the DL register (DL is the least significant byte of DX). 41 is the equivalent of the character A in ASCII code.</p>
+<h3 id="terminating-programs">Terminating Programs</h3>
+<p>When assembler or machine language programs finish their work, the x86 system must become controllable by the operating system. One way to accomplish this is to call the INT 20 function. In programs written in high-level programming languages (such as C/C++), the compiler adds this line automatically. In the low-level assembler language we are using, adding the INT 20 line at the end of the program depends on the programmer and their needs.</p>
+<h3 id="now-let-us-write-the-following-2-line-program">Now let us write the following 2-line program</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INT 20
+INT 21</code></pre>
+<h3 id="to-do-this-we-need-to-perform-the-following-operations">To do this, we need to perform the following operations</h3>
+<h3 id="1-using-debug-s-r-command-store-the-values-0200-and-0043-in-the-ax-and-dx-registers">1. Using DEBUG's r command, store the values 0200 and 0043 in the AX and DX registers,</h3>
+<p>respectively</p>
+<h3 id="2-load-the-following-into-memory-in-order">2. Load the following into memory in order</h3>
+<h3 id="cd">CD</h3>
+<h3 id="cd">CD</h3>
+<h3 id="3-load-into-the-ip-and-cs-registers-the-memory-addresses-that-indicate-the-location-of-the-int-21-instruction">3. Load into the IP and CS registers the memory addresses that indicate the location of the INT 21 instruction</h3>
+<h3 id="4-specify-a-valid-ending-offset-value-and-run-these-instructions-using-debug-s-g-command">4. Specify a valid ending offset value and run these instructions using DEBUG's g command</h3>
+<p>Congratulations! You have written and run your first machine language program. Show the program running to the laboratory instructor.</p>
+<p>QUESTION 1: What did you see on the screen when you ran the 2-line program? Explain the reason.</p>
+<h3 id="assemble-disassemble">Assemble/Disassemble</h3>
+<p>Many programs are longer than two lines. To see the mnemonics, which are the human-readable form of the code you wrote, set the value of the IP register to point to the starting location of your 2-line program and enter DEBUG's unassemble command</p>
+<h3 id="as-follows">as follows</h3>
+<pre class="kod"><code>-u &lt;enter&gt;</code></pre>
+<p>You will see that your program is written in mnemonics, and next to each mnemonic there is a hexadecimal machine code stored in memory. What we have done so far involved machine language code. Writing a program using mnemonics is easier in terms of writing and understanding. For this reason, DEBUG includes an assemble command, "a". As an example, consider the 2-line program. Starting from offset value 0100 in the current code segment, let us write the same</p>
+<h3 id="program-as-mnemonics">program as mnemonics</h3>
+<pre class="kod"><code>-a 100          &lt;enter&gt;</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>int 21          &lt;enter&gt;
+int 20          &lt;enter&gt;</code></pre>
+<p>&lt;enter&gt;</p>
+<p>With the commands above, you can express the same program as mnemonics instead of hexadecimal machine code.</p>
+<h3 id="debug-scripts">DEBUG Scripts</h3>
+<p>Assembler language programs can be written using DEBUG alone. In this case there are some limitations. Detailed information will be given when these limitations in DEBUG are encountered. Assembler language programming can be done in DEBUG in two different ways. In the first method, the code is typed and run in the DEBUG window. In the second method, a file containing the assembler language code can be created and run by DEBUG. Do the following exercise, which demonstrates the second method:</p>
+<h3 id="1-using-any-word-processor-or-text-editor-on-your-computer-e-g-notepad">1. Using any word processor or text editor on your computer (e.g., Notepad),</h3>
+<p>create a file named TEMP.DBG. The required contents of this file are given below. You may use any word processor or text editor you wish, but you must save the file as a TEXT or ASCII file!</p>
+<p>a 100</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah, 02
+mov dl, 2a</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>int 21
+int 20</code></pre>
+<p>n temp.com r bx r cx w q</p>
+<p>You must also leave the blank line between the lines above when writing the commands. This line indicates to DEBUG that the assembler code has ended and that the use of DEBUG commands is beginning.</p>
+<h3 id="2-open-the-dos-command-prompt-and-type-the-following-command">2. Open the DOS command prompt and type the following command:</h3>
+<pre class="kod"><code>C:\&gt; DEBUG &lt; TEMP.DBG               &lt;enter&gt;</code></pre>
+<p>After this operation, an executable file named TEMP.COM will be created on your hard disk.</p>
+<p>QUESTION 2: Run the file named TEMP.COM. What does this file do?</p>
+<p>QUESTION 3: Using the information in this document and DEBUG's help menu (the ? command), state what functions the lines in the TEMP.DBG file perform.</p>
+<p>QUESTION 4: Briefly summarize what you learned from this experiment.</p>
+<h2 id="eem332-lab02">eem332_lab02</h2>
+<p>EEM 332 - Microprocessors Experiment Number: 2 Experiment Title: Basic Debug and Assembly Commands</p>
+<p>Preliminary Work: Read the "Introduction to Debug" document.</p>
+<h3 id="1-explain-how-the-segment-registers-cs-ss-ds-es-and-the-instruction-pointer-ip-are-used">1.        Explain how the segment registers (CS, SS, DS, ES) and the instruction pointer (IP) are used.</h3>
+<h3 id="2-explain-the-debug-commands-written-in-capital-letters-that-you-see-in-the-experimental-work-section">2.        Explain the DEBUG commands written in CAPITAL letters that you see in the experimental work section.</h3>
+<p>Experimental Work: Perform the operations given below. State the required command lines and the results you observe in your report.</p>
+<h3 id="1-using-the-register-command">1. Using the REGISTER command:</h3>
+<p>a. display the current contents of the registers, b. change the contents of the IP register to 100₁₆, c. change the contents of the DS register to 1500₁₆, d. change the contents of the CS register to 1600₁₆, e. change the state of the overflow flag to "no overflow" and the state of the parity flag to "even parity".</p>
+<h3 id="2-according-to-the-new-register-states-resulting-from-the-changes-above-calculate">2. According to the new register states resulting from the changes above, calculate</h3>
+<p>the effective address for the following a. DS:BX b. CS:IP c. SS:BP</p>
+<h3 id="3-using-the-fill-command-replace-the-current-values-of-16-storage-locations">3. Using the FILL command, replace the current values of 16 storage locations,</h3>
+<p>starting from address DS:10, with the value 23₁₆.</p>
+<h3 id="4-observe-the-contents-of-the-first-64-bytes-of-the-current-data-segment-using-the-dump">4. Observe the contents of the first 64 bytes of the current data segment using the DUMP</h3>
+<p>command.</p>
+<h3 id="5-using-the-move-command-copy-20-storage-locations-starting-from-address-ds-15">5. Using the MOVE command, copy 20 storage locations starting from address DS:15</h3>
+<p>to the storage locations starting from address CS:100, and observe the changes with the DUMP command.</p>
+<h3 id="6-using-the-search-command-determine-the-locations-where-the-values-86-and">6. Using the SEARCH command, determine the locations where the values 86₁₆ and</h3>
+<p>FF₁₆ are found in the range DS:00 to DS:100.</p>
+<h3 id="7-using-the-compare-command-perform-the-following-operations">7. Using the COMPARE command, perform the following operations</h3>
+<p>a. Compare the contents of 20 locations starting from address DS:15 with the contents of the locations starting from address CS:100,</p>
+<p>b. Repeat step (a) for 32 storage locations.</p>
+<h3 id="8-using-the-assemble-command-enter-the-commands-given-below-and-verify-the">8. Using the ASSEMBLE command, enter the commands given below and verify the</h3>
+<p>machine language codes they produce with the UNASSEMBLE command. How many bytes does each instruction occupy?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,00
+MOV BX,AX
+MOV CX,12
+MOV DX,0101
+OR CX,AX
+OR AX,CX
+ADD BX,AX
+SUB AX,BX
+ROL DX,1
+ROR DX,1
+ROR DX,1
+NOT DX</code></pre>
+<h3 id="9-using-the-trace-command-run-the-program-above-step-by-step">9. Using the TRACE command, run the program above step by step</h3>
+<p>and observe the changes in the register contents.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Note: Numbers in base 16 are indicated with the subscript "16". Since all other</code></pre>
+<p>numbers are given in base 10, you may need to convert them to base 16.</p>
+<p>EEM 332 – Microprocessors Experiment 2 Worksheet</p>
+<h3 id="name">Name</h3>
+<p>1       Translate the following mnemonic instructions into machine language codes. a) MOV AX,BX                              Answer___________ b) MOV AX,0AAAAH                          Answer ___________ c) MOV AX,[BX]                            Answer ___________ d) MOV AX,[0004]                          Answer ___________ e) MOV AX,[BX+SI]                         Answer ___________ f) MOV AX,[SI]+[0004]                     Answer ___________ g) MOV AX,[BX][SI]+[0004]                 Answer ___________</p>
+<p>2       State the number of bytes occupied by each of the codes above. a) Answer ___________ b) Answer ___________ c) Answer ___________ d) Answer ___________ e) Answer ___________ f) Answer ___________ g) Answer ___________</p>
+<p>3       Perform the following operations and observe the results. State the commands you wrote to carry out each operation. Address condition for all operations: DS=200, CS=100.</p>
+<p>a. Load the values ED at address DS:1234, BE at address DS:1235, CD at address DS:1236, and AB at address DS:1237. b. Load the value 1236 into the SI register. c. Display the state of the registers after these changes.</p>
+<h3 id="d-assemble-the-following-instructions-starting-from-address-cs-0000">d. Assemble the following instructions starting from address CS:0000</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 1234
+MOV BX,[1234]
+MOV CX,[SI]</code></pre>
+<p>e. Set the CS and IP register values required to trace the instructions you wrote. f. Trace the program and observe the results. Explain the changes in the AX, BX, and CX registers and the reasons for them.</p>
+<h2 id="calisma-623">calisma-623</h2>
+<p>1.)</p>
+<p>a)</p>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=13FA ES=13FA SS=13FA CS=13FA IP=0100 NV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>13FA:0100 0000      ADD     [BX+SI],AL      DS:0000=CD</code></pre>
+<p>b)</p>
+<pre class="kod"><code>-r ip</code></pre>
+<h3 id="ip-0100">IP 0100</h3>
+<h3 id=""></h3>
+<p>c)</p>
+<pre class="kod"><code>-r ds</code></pre>
+<h3 id="ds-13fa">DS 13FA</h3>
+<p>:1800</p>
+<p>d)</p>
+<pre class="kod"><code>-r cs</code></pre>
+<h3 id="cs-13fa">CS 13FA</h3>
+<p>:2400</p>
+<p>e)</p>
+<pre class="kod"><code>-r f</code></pre>
+<p>NV UP EI PL NZ NA PO NC -pl</p>
+<pre class="kod"><code>-r f</code></pre>
+<p>NV UP EI PL NZ NA PO NC -ov</p>
+<pre class="kod"><code>-r f</code></pre>
+<h3 id="ov-up-ei-pl-nz-na-po-nc">OV UP EI PL NZ NA PO NC -</h3>
+<p>f)</p>
+<pre class="kod"><code>-r</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0100 OV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:0100 0000        ADD    [BX+SI],AL               DS:0000=00</code></pre>
+<p>2.)</p>
+<pre class="kod"><code>-f 20 3d 42</code></pre>
+<p>3.)</p>
+<pre class="kod"><code>-d 20 3d</code></pre>
+<pre class="kod"><code>1800:0020 42 42 42 42 42 42 42 42-42 42 42 42 42 42 42 42 BBBBBBBBBBBBBBBB</code></pre>
+<pre class="kod"><code>1800:0030 42 42 42 42 42 42 42 42-42 42 42 42 42 42         BBBBBBBBBBBBBB</code></pre>
+<p>4.)</p>
+<p>-m ds:20 33 cs:100</p>
+<pre class="kod"><code>-d cs:100 133</code></pre>
+<pre class="kod"><code>2400:0100 42 42 42 42 42 42 42 42-42 42 42 42 42 42 42 42 BBBBBBBBBBBBBBBB</code></pre>
+<pre class="kod"><code>2400:0110 42 42 42 42 00 00 00 00-00 00 00 00 00 00 00 00 BBBB............</code></pre>
+<pre class="kod"><code>2400:0120 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................</code></pre>
+<pre class="kod"><code>2400:0130 00 00 00 00                         ....</code></pre>
+<pre class="kod"><code>-d ds:20 33</code></pre>
+<pre class="kod"><code>1800:0020 42 42 42 42 42 42 42 42-42 42 42 42 42 42 42 42 BBBBBBBBBBBBBBBB</code></pre>
+<pre class="kod"><code>1800:0030 42 42 42 42                         BBBB</code></pre>
+<p>5.)</p>
+<p>a)</p>
+<p>-c ds:20 33 cs:100</p>
+<p>b)</p>
+<p>-c ds:20 47 cs:100</p>
+<pre class="kod"><code>1800:0034 42 00 2400:0114</code></pre>
+<pre class="kod"><code>1800:0035 42 00 2400:0115</code></pre>
+<pre class="kod"><code>1800:0036 42 00 2400:0116</code></pre>
+<pre class="kod"><code>1800:0037 42 00 2400:0117</code></pre>
+<pre class="kod"><code>1800:0038 42 00 2400:0118</code></pre>
+<pre class="kod"><code>1800:0039 42 00 2400:0119</code></pre>
+<pre class="kod"><code>1800:003A 42 00 2400:011A</code></pre>
+<pre class="kod"><code>1800:003B 42 00 2400:011B</code></pre>
+<pre class="kod"><code>1800:003C 42 00 2400:011C</code></pre>
+<pre class="kod"><code>1800:003D 42 00 2400:011D</code></pre>
+<p>6.)</p>
+<p>-s ds:00 30 42</p>
+<pre class="kod"><code>1800:0020</code></pre>
+<pre class="kod"><code>1800:0021</code></pre>
+<pre class="kod"><code>1800:0022</code></pre>
+<pre class="kod"><code>1800:0023</code></pre>
+<pre class="kod"><code>1800:0024</code></pre>
+<pre class="kod"><code>1800:0025</code></pre>
+<pre class="kod"><code>1800:0026</code></pre>
+<pre class="kod"><code>1800:0027</code></pre>
+<pre class="kod"><code>1800:0028</code></pre>
+<pre class="kod"><code>1800:0029</code></pre>
+<pre class="kod"><code>1800:002A</code></pre>
+<pre class="kod"><code>1800:002B</code></pre>
+<pre class="kod"><code>1800:002C</code></pre>
+<pre class="kod"><code>1800:002D</code></pre>
+<pre class="kod"><code>1800:002E</code></pre>
+<pre class="kod"><code>1800:002F</code></pre>
+<pre class="kod"><code>1800:0030</code></pre>
+<p>7.)</p>
+<pre class="kod"><code>-a 100</code></pre>
+<pre class="kod"><code>2400:0100 mov ax,55</code></pre>
+<pre class="kod"><code>2400:0103 mov bx,ax</code></pre>
+<pre class="kod"><code>2400:0105 mov cx,20</code></pre>
+<pre class="kod"><code>2400:0108 mov dx,0110</code></pre>
+<pre class="kod"><code>2400:010B or cx,ax</code></pre>
+<pre class="kod"><code>2400:010D or ax,cx</code></pre>
+<pre class="kod"><code>2400:010F add bx,ax</code></pre>
+<pre class="kod"><code>2400:0111 sub ax,bx</code></pre>
+<pre class="kod"><code>2400:0113 rol dx,1</code></pre>
+<pre class="kod"><code>2400:0115 ror dx,1</code></pre>
+<pre class="kod"><code>2400:0117 ror dx,1</code></pre>
+<pre class="kod"><code>2400:0119 not dx</code></pre>
+<pre class="kod"><code>2400:011B</code></pre>
+<pre class="kod"><code>-u 100</code></pre>
+<pre class="kod"><code>2400:0100 B85500       MOV     AX,0055</code></pre>
+<pre class="kod"><code>2400:0103 89C3        MOV     BX,AX</code></pre>
+<pre class="kod"><code>2400:0105 B92000       MOV     CX,0020</code></pre>
+<pre class="kod"><code>2400:0108 BA1001       MOV     DX,0110</code></pre>
+<pre class="kod"><code>2400:010B 09C1        OR    CX,AX</code></pre>
+<pre class="kod"><code>2400:010D 09C8        OR     AX,CX</code></pre>
+<pre class="kod"><code>2400:010F 01C3        ADD    BX,AX</code></pre>
+<pre class="kod"><code>2400:0111 29D8        SUB    AX,BX</code></pre>
+<pre class="kod"><code>2400:0113 D1C2        ROL    DX,1</code></pre>
+<pre class="kod"><code>2400:0115 D1CA        ROR    DX,1</code></pre>
+<pre class="kod"><code>2400:0117 D1CA        ROR    DX,1</code></pre>
+<pre class="kod"><code>2400:0119 F7D2        NOT    DX</code></pre>
+<pre class="kod"><code>2400:011B 0000        ADD    [BX+SI],AL</code></pre>
+<pre class="kod"><code>2400:011D 0000     ADD    [BX+SI],AL</code></pre>
+<pre class="kod"><code>2400:011F 0000     ADD    [BX+SI],AL</code></pre>
+<p>8.)</p>
+<pre class="kod"><code>-r ip</code></pre>
+<h3 id="ip-0100">IP 0100</h3>
+<p>:100</p>
+<pre class="kod"><code>-t 3</code></pre>
+<pre class="kod"><code>AX=0055 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0103 OV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:0103 89C3     MOV    BX,AX</code></pre>
+<pre class="kod"><code>AX=0055 BX=0055 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0105 OV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:0105 B92000    MOV     CX,0020</code></pre>
+<pre class="kod"><code>AX=0055 BX=0055 CX=0020 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0108 OV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:0108 BA1001    MOV     DX,0110</code></pre>
+<pre class="kod"><code>-t 3</code></pre>
+<pre class="kod"><code>AX=0055 BX=0055 CX=0020 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=010B OV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:010B 09C1     OR    CX,AX</code></pre>
+<pre class="kod"><code>AX=0055 BX=0055 CX=0075 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=010D NV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:010D 09C8    OR    AX,CX</code></pre>
+<pre class="kod"><code>AX=0075 BX=0055 CX=0075 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=010F NV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>2400:010F 01C3    ADD   BX,AX</code></pre>
+<pre class="kod"><code>-t 3</code></pre>
+<pre class="kod"><code>AX=0075 BX=00CA CX=0075 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0111 NV UP EI PL NZ NA PE NC</code></pre>
+<pre class="kod"><code>2400:0111 29D8    SUB   AX,BX</code></pre>
+<pre class="kod"><code>AX=FFAB BX=00CA CX=0075 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0113 NV UP EI NG NZ AC PO CY</code></pre>
+<pre class="kod"><code>2400:0113 D1C2    ROL   DX,1</code></pre>
+<pre class="kod"><code>AX=FFAB BX=00CA CX=0075 DX=0220 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0115 NV UP EI NG NZ AC PO NC</code></pre>
+<pre class="kod"><code>2400:0115 D1CA    ROR    DX,1</code></pre>
+<pre class="kod"><code>-t 3</code></pre>
+<pre class="kod"><code>AX=FFAB BX=00CA CX=0075 DX=0110 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0117 NV UP EI NG NZ AC PO NC</code></pre>
+<pre class="kod"><code>2400:0117 D1CA    ROR    DX,1</code></pre>
+<pre class="kod"><code>AX=FFAB BX=00CA CX=0075 DX=0088 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=0119 NV UP EI NG NZ AC PO NC</code></pre>
+<pre class="kod"><code>2400:0119 F7D2    NOT   DX</code></pre>
+<pre class="kod"><code>AX=FFAB BX=00CA CX=0075 DX=FF77 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1800 ES=13FA SS=13FA CS=2400 IP=011B NV UP EI NG NZ AC PO NC</code></pre>
+<pre class="kod"><code>2400:011B 0000    ADD   [BX+SI],AL          DS:00CA=00</code></pre>
+<h2 id="d2-preliminary-work">D2 preliminary work</h2>
+<h3 id="1">1)</h3>
+<p>a) Code Segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The code segment register, CS, indicates the starting address of the segment containing the program being executed. In other words, machine language instructions reside within the segment addressed by CS. The stack segment register, SS, contains the starting address of the current stack segment. The stack segment is a block of memory in which various data are temporarily stored.</code></pre>
+<p>b) Data Segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The data segment register, DS, is the starting address of the current data segment. This segment is generally used by program variables. In other words, the data subjected to data processing operations reside at locations within the data segment.</code></pre>
+<p>c) Extra Segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The extra segment register, ES, contains the starting address of the current extra segment. The extra segment is generally used for string operations. In systems with sufficient memory, these 4 segments are different parts of memory. In systems without large memory, these segments may overlap.</code></pre>
+<p>d) Stack Segment</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The stack segment register, SS, contains the starting address of the current stack segment. The stack segment is a block of memory in which various data are temporarily stored.</code></pre>
+<p>e) IP: It is used as an address pointer to access data in various memory regions. Two separate address values are used to indicate the address of a location in memory. The first value is the address of the segment containing the indicated location; the segment registers are used at this point. The second address value, which indicates the location's position within the segment, is known as the offset address. Pointer and index registers are used to specify offset addresses.</p>
+<h3 id="2">2)</h3>
+<ul><li>R (Register) : This command is used to determine the current register values and the state of the flags.</li></ul>
+<h3 id="ex">Ex</h3>
+<pre class="kod"><code>-R
+AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=2AF2 ES=2AF2 SS=2AF2 CS=2AF2 IP=0100 NV UP EI PL NZ NA PO NC
+2AF2:0100 8B24   MOV   SP,[SI]           DS:0000=20CD</code></pre>
+<p>-</p>
+<p>With the help of this command, desired values (provided they are hexadecimal) can be given to the registers.</p>
+<h3 id="ex">Ex</h3>
+<pre class="kod"><code>-R AX</code></pre>
+<h3 id="ax-0000">AX 0000</h3>
+<ul><li>F (Fill) : It is used to fill an area whose memory start and end addresses are specified with a specified number.</li></ul>
+<h3 id="ex">Ex</h3>
+<p>-</p>
+<pre class="kod"><code>-F DS:100,120,AB</code></pre>
+<p>Using the F command, the portion of DS between 100H and 120H will be filled with the value ABH. If we then examine from address DS:100H with the D command, we verify that the operation was carried out correctly.</p>
+<ul><li>D (Dump / Display): With this command we can view the information from a desired offset of a desired segment of memory. If we wish, we can also limit the area we want to see.</li></ul>
+<h3 id="ex">Ex</h3>
+<pre class="kod"><code>-D DS:0
+2AF2:0000 CD 20 FF 9F 00 9A EE FE-1D F0 4F 03 5A 25 8A 03 . ........O.Z%..
+2AF2:0010 5A 25 17 03 5A 25 14 24-01 01 01 00 02 FF FF FF Z%..Z%.$........
+2AF2:0020 FF FF FF FF FF FF FF FF-FF FF FF FF 3B 25 4E 01 ............;%N.
+2AF2:0030 16 2A 14 00 18 00 F2 2A-FF FF FF FF 00 00 CE 0B .*.....*........
+2AF2:0040 06 1E 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+2AF2:0050 CD 21 CB 00 00 00 00 00-00 00 00 00 00 20 20 20 .!...........
+2AF2:0060 20 20 20 20 20 20 20 20-00 00 00 00 00 20 20 20             .....
+2AF2:0070 20 20 20 20 20 20 20 20-00 00 00 00 00 00 00 00             ........</code></pre>
+<p>-</p>
+<p>Here, the portion of the data segment starting from offset 0000H is shown. If no range is given, it shows 128 bytes. After giving the memory dump in hexadecimal, the corresponding displayable ASCII characters are also shown alongside.</p>
+<h3 id="ex">Ex</h3>
+<pre class="kod"><code>-D DS:100,115
+2AF2:0100 8B 24 17 5A 18 BA 4A 29-A2 4F F6 C9 07 AE 07 09 .$.Z..J).O......
+2AF2:0110 20 8C 07 BA 4F 80                    ...O.</code></pre>
+<p>-</p>
+<ul><li>M (Move) : It is used to move a block of information from one place to another</li></ul>
+<h3 id="ex">Ex</h3>
+<h3 id="m-ds-100-110-cs-500">- M DS:100,110,CS:500</h3>
+<p>With this command, the information between DS:100H and DS:110H will be placed starting from address CS:500H.</p>
+<ul><li>C (Compare) : It is a command used to compare the information in specified ranges.</li></ul>
+<h3 id="c-100-110-10">-C 100,110,10</h3>
+<pre class="kod"><code>2AF2:0100 AB 5A 2AF2:0010
+2AF2:0101 AB 25 2AF2:0011
+2AF2:0102 AB 17 2AF2:0012
+2AF2:0103 AB 03 2AF2:0013
+2AF2:0104 AB 5A 2AF2:0014
+2AF2:0105 AB 25 2AF2:0015
+2AF2:0106 AB 14 2AF2:0016
+2AF2:0107 AB 24 2AF2:0017
+2AF2:0108 AB 01 2AF2:0018
+2AF2:0109 AB 01 2AF2:0019
+2AF2:010A AB 01 2AF2:001A
+2AF2:010B AB 00 2AF2:001B
+2AF2:010C AB 02 2AF2:001C
+2AF2:010D AB FF 2AF2:001D
+2AF2:010E AB FF 2AF2:001E
+2AF2:010F AB FF 2AF2:001F</code></pre>
+<pre class="kod"><code>2AF2:0110 AB FF 2AF2:0020</code></pre>
+<p>This command compares the information at addresses 100H-110H with the information starting at address 10H and lists those that differ.</p>
+<h3 id="c-100-110-100">-C 100,110,100</h3>
+<p>-</p>
+<p>It compares the contents at 100H-110H with the contents at 100H again. Since no difference is found, no information appears on the screen.</p>
+<p>S (Search) : Searches for a given value in the desired address range of the memory region. If it finds a result, it is displayed on the screen as an address.</p>
+<h3 id="ex">Ex</h3>
+<h3 id="s-cs-100-110-65">-S CS:100,110,65</h3>
+<p>It searches for the value 65 between offsets 0100 and 0110.</p>
+<h2 id="calisma-704">calisma-704</h2>
+<h3 id="cs-bx-15000">CS:BX 15000</h3>
+<h3 id="cs-ip-16000">CS:IP 16000</h3>
+<h3 id="ss-bp-15470">SS:BP 15470</h3>
+<pre class="kod"><code>-r
+AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0100 OV DN DI NG NZ NA PO CY
+1600:0100 0000      ADD [BX+SI],AL                     DS:0000=00
+-f DS:10 1f 23
+-d DS:10
+1500:0010 23 23 23 23 23 23 23 23-23 23 23 23 23 23 23 23 ################
+1500:0020 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0030 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0040 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0050 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0060 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0070 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0080 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................</code></pre>
+<p>-m 15 29 cs:100</p>
+<pre class="kod"><code>-d cs:100
+1600:0100 23 23 23 23 23 23 23 23-23 23 23 00 00 00 00 00 ###########.....
+1600:0110 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0120 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0130 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0140 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0150 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0160 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0170 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................</code></pre>
+<p>-1500:0010 23 23 23 23 23 23 23 23-23 23 23 23 23 23 23 23 ################</p>
+<pre class="kod"><code>1500:0020 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0030 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0040 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0050 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0060 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0070 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1500:0080 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................</code></pre>
+<p>-m 15 29 cs:100</p>
+<pre class="kod"><code>-d cs:100
+1600:0100 23 23 23 23 23 23 23 23-23 23 23 00 00 00 00 00 ###########.....
+1600:0110 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0120 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0130 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0140 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0150 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0160 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
+1600:0170 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................</code></pre>
+<p>-s ds:0000 0100 86 -s ds:0000 0100 ff</p>
+<pre class="kod"><code>1500:00F9</code></pre>
+<p>-c ds:15 29 cs:100 -c ds:15 34 cs:0100 -c ds:0015 0034 cs:0100 --a 100</p>
+<pre class="kod"><code>1600:0100 MOV AX,00
+1600:0103 MOV BX,AX
+1600:0105 MOV CX,12
+1600:0108 MOV DX,0101
+1600:010B OR CX,AX
+1600:010D OR AX,CX
+1600:010F ADD BX,AX
+1600:0111 SUB AX,BX
+1600:0113 ROL DX,1
+1600:0115 ROR DX,1
+1600:0117 ROR DX,1
+1600:0119 NOT DX
+1600:011B</code></pre>
+<pre class="kod"><code>-u
+1600:0100 B80000    MOV AX,0000
+1600:0103 89C3     MOV BX,AX
+1600:0105 B91200    MOV CX,0012
+1600:0108 BA0101    MOV DX,0101
+1600:010B 09C1     OR  CX,AX
+1600:010D 09C8     OR  AX,CX
+1600:010F 01C3     ADD BX,AX
+1600:0111 29D8     SUB AX,BX
+1600:0113 D1C2     ROL DX,1
+1600:0115 D1CA      ROR DX,1
+1600:0117 D1CA      ROR DX,1
+1600:0119 F7D2     NOT DX
+1600:011B 0000     ADD [BX+SI],AL
+1600:011D 0000     ADD [BX+SI],AL
+1600:011F 0000     ADD [BX+SI],AL</code></pre>
+<p>-</p>
+<pre class="kod"><code>1600:0117 ROR DX,1
+1600:0119 NOT DX
+1600:011B
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0103 OV DN DI NG NZ NA PO CY
+1600:0103 89C3   MOV BX,AX</code></pre>
+<p>-</p>
+<pre class="kod"><code>-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0105 OV DN DI NG NZ NA PO CY
+1600:0105 B91200  MOV CX,0012</code></pre>
+<pre class="kod"><code>-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0012 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0108 OV DN DI NG NZ NA PO CY
+1600:0108 BA0101  MOV DX,0101
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=010B OV DN DI NG NZ NA PO CY
+1600:010B 09C1   OR    CX,AX
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=010D NV DN DI PL NZ NA PE NC
+1600:010D 09C8    OR   AX,CX</code></pre>
+<p>--t</p>
+<pre class="kod"><code>AX=0012 BX=0000 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=010F NV DN DI PL NZ NA PE NC
+1600:010F 01C3   ADD BX,AX
+-t</code></pre>
+<pre class="kod"><code>AX=0012 BX=0012 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0111 NV DN DI PL NZ NA PE NC
+1600:0111 29D8   SUB AX,BX
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0012 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0113 NV DN DI PL ZR NA PE NC
+1600:0113 D1C2    ROL DX,1
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0012 CX=0012 DX=0202 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0115 NV DN DI PL ZR NA PE NC
+1600:0115 D1CA    ROR DX,1</code></pre>
+<p>--t</p>
+<pre class="kod"><code>AX=0000 BX=0012 CX=0012 DX=0101 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0117 NV DN DI PL ZR NA PE NC
+1600:0117 D1CA    ROR DX,1
+-t</code></pre>
+<pre class="kod"><code>AX=0000 BX=0012 CX=0012 DX=8080 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=1500 ES=1547 SS=1547 CS=1600 IP=0119 OV DN DI PL ZR NA PE CY
+1600:0119 F7D2   NOT DX</code></pre>
+<h2 id="lab1-report-1">lab1_report(1)</h2>
+<h3 id="question-1">QUESTION 1</h3>
+<h3 id="when-we-ran-the-2-line-program-the-screen-showed">- When we ran the 2-line program, the screen showed</h3>
+<pre class="kod"><code>AX=0200 BX=0000 CX=0000 DX=0043 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=152D ES=152D SS=152D CS=152D IP=0100 NV UP EI PL NZ NA PO NC
+152D:0100 CD21   INT 21</code></pre>
+<h3 id="i-entered-the-g-104-command">- I entered the g 104 command</h3>
+<h3 id="c">“C:\&gt;</h3>
+<h3 id="c">C</h3>
+<p>Program terminated normally</p>
+<pre class="kod"><code>C:\&gt;“</code></pre>
+<p>Here, int 21 is the command for printing text, and int 20 is the command for terminating the program. Thanks to the int 21 command, we see that the value 43 we loaded into the DX register corresponds to the ASCII code of the letter C.</p>
+<h3 id="question-2">QUESTION 2</h3>
+<p>When I ran the TEMP.COM file, the screen showed</p>
+<pre class="kod"><code>C:\&gt;temp.com</code></pre>
+<p>*</p>
+<pre class="kod"><code>C:\&gt;</code></pre>
+<p>As can be understood from this, this file prints * to the screen.</p>
+<h3 id="question-3">QUESTION 3</h3>
+<p>a 100</p>
+<pre class="kod"><code>152D:0100 mov ah,02      (AX-&gt;AH 02)
+152D:0102 mov dl,2a      (DX -&gt;DL2a)
+152D:0104 int 21
+152D:0106 int 20</code></pre>
+<p>n temp.com (Parameter list) r bx         (bx ?)</p>
+<h3 id="bx-0000">BX 0000</h3>
+<p>:0 r cx              (cx ?)</p>
+<h3 id="cx-0000">CX 0000</h3>
+<p>:08 w     (write command) 00008 bytes are written q     (exit the program)</p>
+<h3 id="question-4">QUESTION 4</h3>
+<p>We learned about the 8086 registers and the Debug commands, and we learned how to run the Debug program and perform operations in it. Using Debug commands, we learned how to change the contents of the registers whose locations are shown on the screen and how to perform operations with their help, and we learned how to obtain, in the DOS environment, the output of a Debug program that we wrote in WordPad.</p>
+<h2 id="lab1-report">lab1_report</h2>
+<h3 id="question-1">QUESTION 1</h3>
+<h3 id="screen-output-when-we-ran-the-2-line-program">- Screen output when we ran the 2-line program</h3>
+<pre class="kod"><code>AX=0200 BX=0000 CX=0000 DX=0043 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=0C81 ES=0C81 SS=0C81 CS=0C81 IP=0100 NV UP EI PL NZ NA PO NC
+0C81:0100 CD21   INT 21</code></pre>
+<h3 id="when-we-used-the-g-104-command-the-screen-showed">- When we used the g 104 command, the screen showed</h3>
+<h3 id="c">“C</h3>
+<p>Program terminated normally “ Here, int 21 is the command for printing text, and int 20 is the command for terminating the program. Thanks to the int 21 command, we see that the value 43 we loaded into the DX register corresponds to the ASCII code of the letter C.</p>
+<h3 id="question-2">QUESTION 2</h3>
+<p>The TEMP.COM file displayed the * character on the screen as its output.</p>
+<h3 id="question-3">QUESTION 3</h3>
+<p>a 100</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>mov ah,02    (write 02 into the high part of the AX register)
+mov dl,2a    (write 2a into the low part of the DX register)
+int 21
+int 20</code></pre>
+<p>n temp.com (Parameter list) r bx         (change the contents of the bx register) r cx          (change the contents of the cx register) w     (write command) q     (exit the program)</p>
+<h3 id="question-4">QUESTION 4</h3>
+<p>We learned about the 8086 registers and learned the Debug commands. We learned how to perform arithmetic operations in Debug, how to view and change the functions of the registers, and how to carry out the operations we want on them.</p>
+<h2 id="lab2-prelab">lab2_prelab</h2>
+<h3 id="r-register-command">R Register Command</h3>
+<p>The command is used to view or change the values of the CPU registers. The usage of the R command is given below. - R Register Name The command performs 3 different tasks related to the use of registers. R: If the command is used alone, all the current values of the CPU registers are shown. Besides the registers, the command also shows the values of the Flag register symbolically. At the end of the command, the instruction pointed to by CS:IP is also displayed on the screen. After using the R command, a display similar to the following is obtained.</p>
+<pre class="kod"><code>-R
+AX=0000 BX=0000 CX=0000 DX=0000 SP=FFEE BP=0000 SI=0000 DI=0000
+DS=2054 ES=2054 SS=2054 CS=2054 IP =0100 NV UP EI PL NZ NA PO NC
+2054:0100 IE PUSH DS</code></pre>
+<p>If the letter F is used as a parameter after the R command, the program displays the current flags so that they can be changed and waits for you to change the flags you want. In this case, you can set or reset any flag you want.</p>
+<h3 id="rf">-RF</h3>
+<h3 id="nv-up-ei-pl-nz-na-po-nc-zrup">NV UP EI PL NZ NA PO NC - ZRUP</h3>
+<ul><li>In the example above, the Zero flag is SET and the direction flag is RESET. With the R command, not only the flags but the values of all registers can be changed. To do this, the name of the register to be changed must be typed after the R command. When this is done, the current value of the register is printed on the screen, and the new value of the register is asked for by placing a colon ( : ). The value must be given next to this mark as 4 hexadecimal digits. If no value is given and the Enter key is pressed, the contents of the register will not be changed.</li></ul>
+<h3 id="t-trace-command">T Trace Command</h3>
+<p>The Trace command is used to execute the lines of a program in memory one by one or a certain portion of them. The usage of the command is given below. - T=Address Value The parameters of the command are optional. The first parameter is the Address parameter; if this parameter is to be used, the = sign must be used after the command. The Address parameter is taken as the address of the first instruction to be executed. The Value parameter indicates how many instructions will be executed consecutively. If it is not used, this value is taken as 1. If no parameter is used, 1 instruction is executed starting from the location addressed by CS:IP, and after the instruction is executed, the register values and the instruction to be executed next are displayed on the screen.</p>
+<h3 id="u-unassemble-command">U Unassemble Command</h3>
+<p>The U command is used to list the machine language and assembly equivalents of the program in memory on the screen. The usage of the command is given below. - U Address1 Address2 The Address1 parameter given indicates the start address of the program to be listed. This</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address can be given as segment and offset. When giving this address, care must be taken not to split any instruction</code></pre>
+<p>in the middle. Otherwise, the list displayed on the screen will be a meaningless list. The second parameter given determines the end of the listing. The address given here must be an offset. The segment will be taken as the segment address specified in Address1.</p>
+<h3 id="a-assemble-command">A Assemble Command</h3>
+<p>The A command is used to write assembly programs. The usage of this command is: -- A [segment:offset]. The address, which is the parameter of the command, indicates where in memory the program to be written will be placed. The parameter is optional. If it is not given, the current values of CS and IP are assumed as the parameter of the command. After the command, you may give no parameter at all, or you may give only the offset address. If only a single number is given after the command, the given value is taken as the offset, and by assigning this value to the IP register, the program is written at the default segment and the specified offset. When the command is executed, the default or specified segment and offset address is written at the start of a new line, and the command waits for instruction input next to this address. Each time an instruction is entered and the Enter key is pressed, debug first interprets the entered instruction, and if the entered instruction is correct, the segment and offset addresses are increased by the length of the entered instruction and it waits for a new instruction. If the entered instruction is incorrect, the location of the error is shown and it waits at the same segment and offset addresses for the instruction to be entered again. If Enter is pressed on a line without entering an instruction, debug returns to the command line.</p>
+<ul><li>D (Dump / Display): With this command we can view the information of the memory from any offset of any segment we want. If we wish, we can also limit the area we want to see. If the address of the range to be displayed is given next to the D command, only the values in the specified address range will be displayed on the screen.</li></ul>
+<p>F (Fill): It is used to fill an area of memory whose start and end addresses are specified with a specified number. -</p>
+<pre class="kod"><code>-F DS:100,120,AB</code></pre>
+<p>Using the F command, the part of DS between 100H and 120H will be filled with the value ABH. If we then examine from address DS:100H with the D command, we verify that the operation was performed as intended.</p>
+<ul><li>C (Compare): It is a command used to compare the information in the specified ranges.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Information in different segments can also be compared.</code></pre>
+<ul><li>M (Move): It is used to move a block of information in one place to another place</li></ul>
+<h3 id="m-ds-100-110-cs-500">- M DS:100,110,CS:500</h3>
+<p>With this command, the information between DS:100H and DS:110H will be placed starting from address CS:500H.</p>
+<h3 id="debug-s-search">Debug: s (search)</h3>
+<p>Searches an address range for a pattern of one or more byte values. Syntax</p>
+<p>s Range List, Parameters Range Required. Specifies the start and end addresses of the range you want to search. List Required. Specifies the pattern of one or more byte values, or a string, that you want to search for.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Code segment:</code></pre>
+<p>The part of memory that stores the operators (instructions) is called the code segment, and the start address of this region of memory is held in the CS register. It identifies the beginning of the program instructions. The actual memory address of the next byte to be executed is found by placing the paragraph whose address is specified into the code segment register and adding this value to the instruction pointer (IP).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Data segment:</code></pre>
+<p>Likewise, the part where the operands are stored is called the data segment. The start address of this memory region is held in the DS register. It identifies the beginning of the data section of the program. When the compiler encounters a data declaration, it allocates space within the data segment depending on the size of that data. If the data has a specific type, its initial value is placed in memory. Otherwise, its value consists of the content that was there before the start of the program.</p>
+<h3 id="ds-bx-ds-si">-DS:BX- -DS:SI-</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Extra segment:</code></pre>
+<p>The memory region used for various purposes (for example, string operations) is called the extra segment, and its address is held in the ES register</p>
+<h3 id="es-di">-ES:DI-</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Stack segment:</code></pre>
+<p>It refers to the region in which stack segments are temporarily held in memory; the SS register indicates the start address of this region</p>
+<h3 id="ss-sp">-SS:SP-</h3>
+<h3 id="ss-bp">-SS:BP-</h3>
+<h3 id="ip-instruction-pointer">IP: (Instruction pointer)</h3>
+<p>It contains the address of the next instruction to be executed. The reason for this is that changing the register would adversely affect the program. The instruction pointer cannot be accessed directly or changed.</p>
+<h2 id="calisma-840">calisma-840</h2>
+<p>Başkent University, Department of Electrical and Electronics Engineering</p>
+<p>EEM 332 – Microprocessors Laboratory</p>
+<p>Pre-lab/Report</p>
+<p>Experiment No: # 2 Experiment Title: Basic Debug and Assembler (Assembly) Commands Experiment Date: 10/03/2006</p>
+<h3 id="2">2)</h3>
+<h3 id="ds-15000">DS: 15000</h3>
+<h3 id="cs-16100">CS: 16100</h3>
+<h3 id="ss-13a50">SS: 13A50</h3>
+<h3 id="8">8)</h3>
+<p>Number of Bytes</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,00       B80000     3
+MOV AX,BX       89C3       2
+MOV CX,12       B91200     3
+MOV DX,0101     BA0101     3
+OR CX,AX        09C1       2
+OR AX,CX        09C8       2
+ADD BX,AX       01C3       2
+SUB AX,BX       29D8       2
+ROL DX,1         D1C2       2
+ROR DX,1         D1CA       2
+ROR DX,1         D1CA       2
+NOT DX           F7D2      2</code></pre>
+<h3 id="9">9)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,00:AX=0000 BX=0000 CX=0000 DX=0000</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,BX: AX=0000 BX=0000 CX=0000 DX=0000</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX ,12: AX=0000 BX=0000 CX=0012 DX=0000</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX,0101: AX=0000 BX=0000 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR CX,AX:AX=0000 BX=0000 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AX,CX:AX=0012 BX=0000 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BX,AX: AX=0012 BX=0012 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AX,BX:AX=0000 BX=0012 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL DX,1: AX=0000 BX=0012 CX=0012 DX=0202</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROR DX,1: AX=0000 BX=0012 CX=0012 DX=0101</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROR DX,1: AX=0000 BX=0012 CX=0012 DX=8080</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT DX: AX=0000 BX=0012 CX=0012 DX=7F7F</code></pre>
+<h2 id="report-2">report_2</h2>
+<h3 id="2">2)</h3>
+<h3 id="ds-bx-15000">DS:BX 15000</h3>
+<h3 id="cs-ip-16100">CS:IP 16100</h3>
+<h3 id="ss-bp-15050">SS:BP 15050</h3>
+<h3 id="8">8)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,00       B80000   3
+MOV AX,BX       89C3     2
+MOV CX,12       B91200   3
+MOV DX,0101     BA0101   3
+OR CX,AX        09C1     2
+OR AX,CX        09C8     2
+ADD BX,AX       01C3     2
+SUB AX,BX       29D8     2
+ROL DX,1         D1C2     2
+ROR DX,1         D1CA     2
+ROR DX,1         D1CA     2
+NOT DX           F7D2    2</code></pre>
+<h3 id="9">9)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,00:AX=0000 BX=0000 CX=0000 DX=0000
+MOV AX,BX: AX=0000 BX=0000 CX=0000 DX=0000
+MOV CX ,12: AX=0000 BX=0000 CX=0012 DX=0000
+MOV DX,0101: AX=0000 BX=0000 CX=0012 DX=0101
+OR CX,AX:AX=0000 BX=0000 CX=0012 DX=0101
+OR AX,CX:AX=0012 BX=0000 CX=0012 DX=0101
+ADD BX,AX: AX=0012 BX=0012 CX=0012 DX=0101
+SUB AX,BX:AX=0000 BX=0012 CX=0012 DX=0101
+ROL DX,1: AX=0000 BX=0012 CX=0012 DX=0202
+ROR DX,1: AX=0000 BX=0012 CX=0012 DX=0101
+ROR DX,1: AX=0000 BX=0012 CX=0012 DX=8080
+NOT DX: AX=0000 BX=0012 CX=0012 DX=7F7F</code></pre>
+<h2 id="calisma-1259">calisma-1259</h2>
+<h3 id="eem332-microprocessors">EEM332-MICROPROCESSORS</h3>
+<p>Experiment Number: 2 Experiment Title: Basic DEBUG and Assembler (Assembly) Commands</p>
+<h3 id="pre-lab">PRE-LAB</h3>
+<p>1-) Explain how the segment registers and the Instruction Pointer (IP) are used. Although the 8086 processor has 20 address pins, its largest register is 16 bits. With the value in a single register, it can address only a 64 KB area. In this case, the segmented memory access structure was devised in order to make use of the 1 MB of memory that can be addressed with 20 address pins. In the 8086 family, main memory is divided into 64 KB areas, each starting from an even address. Basically there are 4 types of segments. Accessing any segment is possible only by using the segment register of that area. These basic segment registers are called CS, SS, DS and ES. The data within a segment is reached with intra-segment pointers (IP). Intra-segment pointers are values called relative positions (offsets), which determine the distance from the start of the segment.</p>
+<p>2-) Explain the DEBUG commands written in CAPITAL letters that you saw in the experimental work section.</p>
+<p>a-) REGISTER Command: This command is used to determine the current register values and the state of the flags. With the help of this command, the desired values (provided they are hexadecimal) can be given to the registers.</p>
+<p>b-) FILL Command : It is used to fill an area of memory whose start and end addresses are specified with a specified number.</p>
+<p>c-) DUMP Command : With this command we can view the information of the memory from any offset of any segment we want. If we wish, we can also limit the area we want to see. If the address of the range to be displayed is given next to the D command, only the values in the specified address range will be displayed on the screen.</p>
+<p>d-) MOVE Command : It is used to move a block of information in one place to another place</p>
+<h3 id="e-search-command">e-) SEARCH Command</h3>
+<p>f-) COMPARE Command : It is a command used to compare the information in the specified ranges. Information in different segments can also be compared.</p>
+<p>g-) ASSEMBLE Command : This command makes it possible to write simple programs with the help of Debug. Programs written inside Debug start from offset address 100H, as in programs with the COM extension. For this reason, when the program is to be run, the value of the IP register must be set to 100H with the R command.</p>
+<p>h-) UNASSEMBLE Command : It is a command used to translate the machine code written in CS into mnemonics in a form the user can understand. Each time it is called, it shows the user the mnemonics of 32 bytes of machine code.</p>
+<p>ı-) TRACE Command : The written assembly instructions are executed one by one, and the values taken by the registers and flags are displayed on the screen at the end of the operation. The T command starts running from the point indicated by IP and stops after each instruction is executed. If the user wishes, a number can also be given next to the T command. In this case, the given number of instruction lines are executed back to back, and the register and flag values are written to the screen each time.</p>
+<h2 id="ucs-eem332-lab-prelab-2">ucs-eem332 lab prelab 2</h2>
+<h3 id="1-the-segment-registers-are-all-16-bits-and-are-used-to-address-the-part-of-memory-called-a-segment">1) The segment registers are all 16 bits and are used to address the part of memory called a segment.</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Code Segment Register (CS) : In the MS-DOS operating system, the codes that make up programs
+are loaded into the Code Segment. That is, the instructions are stored in the Code Segment registers. These codes</code></pre>
+<p>are found with the help of the Instruction Pointer (IP). IP stores the address information of the instruction to be executed. Thus, when IP points to the CS to be processed, the instructions there are executed.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Stack Segment Register (SS) : Programs use a memory area called the Stack Segment (SS)</code></pre>
+<p>as a temporary storage area. For example, when a branch or an interrupt occurs, the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>information at that moment is saved to SS. These stacks work with the "Last In First Out" technique. The Stack</code></pre>
+<p>Pointer (SP) holds the address of SS. After the program performs the required interrupt, the files in SS are popped off with the help of SP. The program continues from where it left off.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Data Segment Register (DS) : The data to be used in a program of the .exe type is kept in the Data</code></pre>
+<p>Segment. The start address of the data section of the program is kept in DS.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Extra Segment Register (ES) : The memory area used in various string operations is called the Extra</code></pre>
+<p>Segment. This memory address is kept in DI and ES.</p>
+<p>Instruction Pointer (IP) : It holds the offset address of the instruction following the one currently being executed. It is incremented by 1 by the microprocessor after each code operation, and the process continues in this way. It is possible to change the value of this register indirectly, with the information on the stack.</p>
+<h3 id="2">2)</h3>
+<p>REGISTER : This command is used to view and change the registers used by the CPU. If all registers are to be displayed, a result like the following is obtained;</p>
+<pre class="kod"><code>-R</code></pre>
+<pre class="kod"><code>AX=0000 BX=0000 CX=0000 DP=0000 SP=FFEE BP=0000 SI=0000 DI=0000</code></pre>
+<pre class="kod"><code>DS=1787      ES=1787     SS=1787    CS=1787     IP=0100     NV UP EI PL NZ NA PO NC</code></pre>
+<pre class="kod"><code>1787:01000 0000                      ADD [BX+SI], AL</code></pre>
+<p>If it is for a register to be changed;</p>
+<pre class="kod"><code>-R AX</code></pre>
+<h3 id="ax-0000">AX 0000</h3>
+<p>: 0200         it goes like this.</p>
+<p>FILL : The F command is used to fill a memory region we specify with data we enter. Its usage is as follows;</p>
+<pre class="kod"><code>-F DS:100,110,AB       When this is done, the DS addresses 100 – 110 are filled with AB.</code></pre>
+<p>DUMP : It is used to show the desired portion of a memory region.</p>
+<pre class="kod"><code>-When the D command is entered, the 128 bytes following the last displayed memory region are displayed.</code></pre>
+<p>To narrow this area;</p>
+<pre class="kod"><code>-D (offset) is entered. Thus the start address is taken as the offset and the following 128 bytes are</code></pre>
+<p>displayed.</p>
+<pre class="kod"><code>-When the D (start) (end) command is entered, only the region between the specified points is displayed.</code></pre>
+<p>MOVE : With the help of this command, we can move a certain region to another place in memory. The command can be used as follows;</p>
+<ul><li>M DS:100,110,CS:500            With this command, the region of DS between 100-110 is moved to CS:500.</li></ul>
+<p>SEARCH : It searches for the desired data in a memory region. The following code fragment can be used for this;</p>
+<p>-S (start) (end) (list)</p>
+<p>COMPARE : It is used to compare the data within two specified ranges.</p>
+<p>-C 100,110,10 When this is entered, the data at addresses 100-110 are compared with the information starting from address 10 and the differing ones are listed. If the data are the same, nothing is written to the screen.</p>
+<p>ASSEMBLE : With this code, code can be written in Assembly language.</p>
+<ul><li>A [segment:offset] Code can be written in Assembly language in this form.</li></ul>
+<p>UNASSEMBLE : With this code, code written in Assembly language is translated into machine language. Thus programs can be written in machine language without using a separate compiler</p>
+<h3 id="its-usage-is-as-follows">Its usage is as follows</h3>
+<pre class="kod"><code>-U (start) (end)</code></pre>
+<p>These start and end addresses can be given as segment or offset. The point to note here is that, when selecting the start and end points, a piece of code must be taken without being split.</p>
+<p>TRACE : It is used to run a desired portion of the instructions in memory. We can do this one by one or as a whole. That is;</p>
+<pre class="kod"><code>-T (number of steps) When this code is entered, the number of instructions entered are executed.</code></pre>
+<pre class="kod"><code>-T (start) (number of steps) When this code is entered, the number of steps after the start address</code></pre>
+<p>of instructions are executed.</p>
+<h2 id="calisma-834">calisma-834</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>		.MODEL SMALL
+		.STACK 64
+		.DATA
+		ORG 0010H			
+		SIGN_DATA DB 69,87,96,45,75		;place data definitions here
+		;
+		.CODE
+MAIN		PROC	FAR		;this is the program entry point
+		MOV	AX,@DATA	;load the data segment address
+		MOV	DS,AX		;assign value to DS
+		;
+		MOV CX,5;place code here	
+		MOV BX,OFFSET SIGN_DATA	
+		SUB AL,AL
+AGAIN:		CMP AL,[BX]
+		JA NEXT 
+		MOV AL,[BX]
+NEXT:		INC BX
+		LOOP AGAIN
+		MOV BX,10H
+		MOV AH,02H
+		MOV DL,[BX]
+		INT 21H	
+		;		
+		MOV	AH,4CH	;set up to
+		INT	21H		;return to DOS
+MAIN		ENDP			
+		END	MAIN		;this is the program exit point</code></pre>
+<h2 id="calisma-1231">calisma-1231</h2>
+<pre class="kod"><code>Umut [personal information removed] Sağdıçoğlu
+[personal information removed]
+Experiment 2
+21.03.2011
+
+
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\calisma&gt;debug
+-r
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1524  ES=1524  SS=1524  CS=1524  IP=0100   NV UP EI PL NZ NA PO NC
+1524:0100 0000          ADD     [BX+SI],AL                         DS:0000=CD
+-r ip
+IP 0100
+:
+-r ds
+DS 1524
+:1500
+-r cs
+CS 1524
+:1600
+-r f
+NV UP EI PL NZ NA PO NC  -nv pe
+-f ds:10,1f,23
+-d ds:00,3f
+1500:0000  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0010  23 23 23 23 23 23 23 23-23 23 23 23 23 23 23 23   ################
+1500:0020  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0030  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+-m ds:15,22,cs:100
+-d cs:100
+1600:0100  23 23 23 23 23 23 23 23-23 23 23 00 00 00 00 00   ###########.....
+1600:0110  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0120  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0130  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0140  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0150  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0160  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1600:0170  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+-s ds:00,100,86
+-s ds:00,100,ff
+-c ds:15,22,cs:100
+-c ds:15,2e,cs:100
+-a cs:200
+1600:0200 MOV AX,00
+1600:0203 MOV BX,AX
+1600:0205 MOV CX,12
+1600:0208 MOV DX,0101
+1600:020B OR CX,AX
+1600:020D OR AX,CX
+1600:020F ADD BX,AX
+1600:0211 SUB AX,BX
+1600:0213 ROL DX,1
+1600:0215 ROR DX,1
+1600:0217 ROR DX,1
+1600:0219 NOT DX
+1600:021B
+-u cs:200
+1600:0200 B80000        MOV     AX,0000
+1600:0203 89C3          MOV     BX,AX
+1600:0205 B91200        MOV     CX,0012
+1600:0208 BA0101        MOV     DX,0101
+1600:020B 09C1          OR      CX,AX
+1600:020D 09C8          OR      AX,CX
+1600:020F 01C3          ADD     BX,AX
+1600:0211 29D8          SUB     AX,BX
+1600:0213 D1C2          ROL     DX,1
+1600:0215 D1CA          ROR     DX,1
+1600:0217 D1CA          ROR     DX,1
+1600:0219 F7D2          NOT     DX
+1600:021B 0000          ADD     [BX+SI],AL
+1600:021D 0000          ADD     [BX+SI],AL
+1600:021F 0000          ADD     [BX+SI],AL
+-r
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0100   NV UP EI PL NZ NA PE NC
+1600:0100 2323          AND     SP,[BP+DI]                         SS:0000=20CD
+-r ip
+IP 0100
+:200
+-t
+
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0203   NV UP EI PL NZ NA PE NC
+1600:0203 89C3          MOV     BX,AX
+-t
+
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0205   NV UP EI PL NZ NA PE NC
+1600:0205 B91200        MOV     CX,0012
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0208   NV UP EI PL NZ NA PE NC
+1600:0208 BA0101        MOV     DX,0101
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=020B   NV UP EI PL NZ NA PE NC
+1600:020B 09C1          OR      CX,AX
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=020D   NV UP EI PL NZ NA PE NC
+1600:020D 09C8          OR      AX,CX
+-t
+
+AX=0012  BX=0000  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=020F   NV UP EI PL NZ NA PE NC
+1600:020F 01C3          ADD     BX,AX
+-t
+
+AX=0012  BX=0012  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0211   NV UP EI PL NZ NA PE NC
+1600:0211 29D8          SUB     AX,BX
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0213   NV UP EI PL ZR NA PE NC
+1600:0213 D1C2          ROL     DX,1
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0202  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0215   NV UP EI PL ZR NA PE NC
+1600:0215 D1CA          ROR     DX,1
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0101  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0217   NV UP EI PL ZR NA PE NC
+1600:0217 D1CA          ROR     DX,1
+-t
+
+AX=0000  BX=0012  CX=0012  DX=8080  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=0219   OV UP EI PL ZR NA PE CY
+1600:0219 F7D2          NOT     DX
+-t
+
+AX=0000  BX=0012  CX=0012  DX=7F7F  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=1524  SS=1524  CS=1600  IP=021B   OV UP EI PL ZR NA PE CY
+1600:021B 0000          ADD     [BX+SI],AL                         DS:0012=23
+
+
+-u 200
+1600:0200 B80000        MOV     AX,0000      3 byte
+1600:0203 89C3          MOV     BX,AX	     2 byte	
+1600:0205 B91200        MOV     CX,0012	     3 byte
+1600:0208 BA0101        MOV     DX,0101	     3 byte
+1600:020B 09C1          OR      CX,AX        2 byte
+1600:020D 09C8          OR      AX,CX        2 byte
+1600:020F 01C3          ADD     BX,AX        2 byte
+1600:0211 29D8          SUB     AX,BX        2 byte
+1600:0213 D1C2          ROL     DX,1         2 byte
+1600:0215 D1CA          ROR     DX,1         2 byte
+1600:0217 D1CA          ROR     DX,1         2 byte
+1600:0219 F7D2          NOT     DX           2 byte
+1600:021B 0000          ADD     [BX+SI],AL   
+1600:021D 0000          ADD     [BX+SI],AL
+1600:021F 0000          ADD     [BX+SI],AL
+
+
+///EXPERIMENT 2 WORKSHEET\\\
+
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\calisma&gt;debug
+-a
+1524:0100 MOV AX,BX
+1524:0102 MOV AX,AAAA
+1524:0105 MOV AX,[BX]
+1524:0107 MOV AX,[0004]
+1524:010A MOV AX,[BX+SI]
+1524:010C MOV AX,[SI]+[0004]
+1524:010F MOV AX,[BX][SI]+[0004]
+1524:0112
+-u 100
+1524:0100 89D8          MOV     AX,BX
+1524:0102 B8AAAA        MOV     AX,AAAA
+1524:0105 8B07          MOV     AX,[BX]
+1524:0107 A10400        MOV     AX,[0004]
+1524:010A 8B00          MOV     AX,[BX+SI]
+1524:010C 8B4404        MOV     AX,[SI+04]
+1524:010F 8B4004        MOV     AX,[BX+SI+04]
+1524:0112 0000          ADD     [BX+SI],AL
+1524:0114 0000          ADD     [BX+SI],AL
+1524:0116 0000          ADD     [BX+SI],AL
+1524:0118 0000          ADD     [BX+SI],AL
+1524:011A 0000          ADD     [BX+SI],AL
+1524:011C 3400          XOR     AL,00
+1524:011E 1315          ADC     DX,[DI]
+
+-r ds
+DS 1524
+:200
+-r cs
+CS 1524
+:100
+-f ds:1234,1234,ED
+-f ds:1235,1235,BE
+-f ds:1236,1236,CD
+-f ds:1237,1237,AB
+-r SI
+SI 0000
+:1236
+-r
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=1236  DI=0000
+DS=0200  ES=1524  SS=1524  CS=0100  IP=0100   NV UP EI PL NZ NA PO NC
+0100:0100 0000          ADD     [BX+SI],AL                         DS:1236=CD
+-a 00
+0100:0000 MOV AX,1234
+0100:0003 MOV BX,[1234]
+0100:0007 MOV CX,[SI]
+0100:0009
+-r ip
+IP 0100
+:0000
+-t
+
+AX=1234  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=1236  DI=0000
+DS=0200  ES=1524  SS=1524  CS=0100  IP=0003   NV UP EI PL NZ NA PO NC
+0100:0003 8B1E3412      MOV     BX,[1234]                          DS:1234=BEED
+-t
+
+AX=1234  BX=BEED  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=1236  DI=0000
+DS=0200  ES=1524  SS=1524  CS=0100  IP=0007   NV UP EI PL NZ NA PO NC
+0100:0007 8B0C          MOV     CX,[SI]                            DS:1236=ABCD
+-t
+
+AX=1234  BX=BEED  CX=ABCD  DX=0000  SP=FFEE  BP=0000  SI=1236  DI=0000
+DS=0200  ES=1524  SS=1524  CS=0100  IP=0009   NV UP EI PL NZ NA PO NC
+0100:0009 0000          ADD     [BX+SI],AL                         DS:D123=85</code></pre>
+<h2 id="fig2-2">fig2-2</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;THE FORM OF AN ASSEMBLY LANGUAGE PROGRAM
+ USING SIMPLIFIED SEGMENT DEFINITION
+		.MODEL SMALL
+		.STACK 64
+		.DATA
+		;
+		;place data definitions here
+		;
+		.CODE
+MAIN		PROC	FAR		;this is the program entry point
+		MOV	AX,@DATA	;load the data segment address
+		MOV	DS,AX		;assign value to DS
+		;
+		;place code here	
+		;	
+		MOV	AH,4CH	;set up to
+		INT	21H		;return to DOS
+MAIN		ENDP			
+		END	MAIN		;this is the program exit point</code></pre>
+<h2 id="2010-laboratory-2-experimental-work-template">2010 laboratory 2 experimental work template</h2>
+<p>The DEBUG session in the template demonstrates register setting, physical address, fill, move, search and compare operations.</p>
+<pre class="kod"><code>Parts A, b, c, d, e
+
+-r
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=13B6  ES=13B6  SS=13B6  CS=13B6  IP=0100   NV UP EI PL NZ NA PO NC
+13B6:0100 0000          ADD     [BX+SI],AL                         DS:0000=CD
+
+-r ip
+IP 0100
+:100
+-r ds
+DS 13B6
+:1500
+-r cs
+CS 13B6
+:1600
+-r f
+NV UP EI PL NZ NA PO NC  -nv pe
+-r
+AX=0000  BX=0000  CX=0000  DX=0000  SP=FFEE  BP=0000  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=1600  IP=0100   NV UP EI PL NZ NA PE NC
+1600:0100 0000          ADD     [BX+SI],AL                         DS:0000=00
+
+
+ To write the effective address, we shift the first register left by 4 bits and add the second one. Accordingly;
+
+DS:BX = 15000
+CS:IP = 16100
+SS:BP = 13B60
+
+3)
+
+-f ds:10,1f,23
+
+4)
+-d ds:00,3f
+1500:0000  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0010  23 23 23 23 23 23 23 23-23 23 23 23 23 23 23 23   ################
+1500:0020  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0030  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+
+5)
+-m ds:15,28,cs:100
+-d ds:100
+1500:0100  23 23 23 23 23 23 23 23-23 23 23 00 00 00 00 00   ................
+1500:0110  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0120  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0130  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0140  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0150  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+1500:0160  00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00   ................
+6) 
+-s ds:0000 0100 86
+-s ds:0000 0100 ff
+With the commands above, I searched for 86 and ff in the addresses between 00 and 100.
+Since it found no match, nothing was displayed on the screen.
+
+7)
+
+I carried out parts a and b by entering the following commands.
+-c 15,28,100
+-c 15,34,100
+
+However, since I had previously moved the data starting at ds:15 to the storage locations starting at cs:100, and since everything outside the relevant storage regions contains “00”, it could not find any differing value and displayed no result.
+
+If I had used the compare command as follows, it would have produced a result.
+
+-c 30,36,100
+1500:0030  00  23  1500:0100
+1500:0031  00  23  1500:0101
+1500:0032  00  23  1500:0102
+1500:0033  00  23  1500:0103
+1500:0034  00  23  1500:0104
+1500:0035  00  23  1500:0105
+1500:0036  00  23  1500:0106
+
+Here, since the address starting at c:30 holds 00 and the address starting at c:100 holds 23, it displayed the difference on the screen.
+
+
+8)
+
+-a
+13B6:0100 mov ax,00
+13B6:0103 mov bx,ax
+13B6:0105 mov cx,12
+13B6:0108 mov dx,0101
+13B6:010B or cx,ax
+13B6:010D or ax,cx
+13B6:010F add bx,ax
+13B6:0111 sub ax,bx
+13B6:0113 rol dx,1
+13B6:0115 ror dx,1
+13B6:0117 ror dx,1
+13B6:0119 not dx
+13B6:011B
+
+-u 13b6:0100
+13B6:0100 B80000        MOV     AX,0000
+13B6:0103 89C3          MOV     BX,AX
+13B6:0105 B91200        MOV     CX,0012
+13B6:0108 BA0101        MOV     DX,0101
+13B6:010B 09C1          OR      CX,AX
+13B6:010D 09C8          OR      AX,CX
+13B6:010F 01C3          ADD     BX,AX
+13B6:0111 29D8          SUB     AX,BX
+13B6:0113 D1C2          ROL     DX,1
+13B6:0115 D1CA          ROR     DX,1
+13B6:0117 D1CA          ROR     DX,1
+13B6:0119 F7D2          NOT     DX
+13B6:011B 0034          ADD     [SI],DH
+13B6:011D 00A51300      ADD     [DI+0013],AH
+
+
+9) Since I entered the a command in the previous question without giving an address, it started writing from address cs:13b6:0100. For this reason, I changed the CS value, which was 1600, with
+
+-r cs
+CS 1600
+:13B6 
+and then ran the code.
+
+AX=0000  BX=0000  CX=0000  DX=0000  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0103   NV UP EI PL ZR NA PE NC
+13B6:0103 89C3          MOV     BX,AX
+-t
+
+AX=0000  BX=0000  CX=0000  DX=0000  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0105   NV UP EI PL ZR NA PE NC
+13B6:0105 B91200        MOV     CX,0012
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0000  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0108   NV UP EI PL ZR NA PE NC
+13B6:0108 BA0101        MOV     DX,0101
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=010B   NV UP EI PL ZR NA PE NC
+13B6:010B 09C1          OR      CX,AX
+-t
+
+AX=0000  BX=0000  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=010D   NV UP EI PL NZ NA PE NC
+13B6:010D 09C8          OR      AX,CX
+
+
+AX=0012  BX=0000  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=010F   NV UP EI PL NZ NA PE NC
+13B6:010F 01C3          ADD     BX,AX
+-t
+
+AX=0012  BX=0012  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0111   NV UP EI PL NZ NA PE NC
+13B6:0111 29D8          SUB     AX,BX
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0113   NV UP EI PL ZR NA PE NC
+13B6:0113 D1C2          ROL     DX,1
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0202  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0115   NV UP EI PL ZR NA PE NC
+13B6:0115 D1CA          ROR     DX,1
+-t
+
+AX=0000  BX=0012  CX=0012  DX=0101  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0117   NV UP EI PL ZR NA PE NC
+13B6:0117 D1CA          ROR     DX,1
+-
+
+AX=0000  BX=0012  CX=0012  DX=8080  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0119   OV UP EI PL ZR NA PE CY
+13B6:0119 F7D2          NOT     DX
+-t
+
+AX=0000  BX=0012  CX=0012  DX=7F7F  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=011B   OV UP EI PL ZR NA PE CY
+13B6:011B 0034          ADD     [SI],DH                            DS:0000=00
+-t
+
+AX=0000  BX=0012  CX=0012  DX=7F7F  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=011D   NV UP EI PL NZ NA PO NC
+13B6:011D 00A51300      ADD     [DI+0013],AH                       DS:0013=23
+-t
+
+AX=0000  BX=0012  CX=0012  DX=7F7F  SP=5DB7  BP=20CA  SI=0000  DI=0000
+DS=1500  ES=13B6  SS=13B6  CS=13B6  IP=0121   NV UP EI PL NZ NA PO NC
+13B6:0121 0000          ADD     [BX+SI],AL                         DS:0012=23</code></pre>
+<p><em>Note: Since no prepared PDF version of the .dot file was available, the text was extracted from the text table of the original Word file. A metadata-free TXT dump was included in the download package. The expression "effective address" in the source describes the physical address in the calculations given.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-lab-01-02.zip" download>eem332-lab-01-02.zip</a></p>
+              <p class="kucuk">ZIP archive · 651 KB · 21.02.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-lab-01-02.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (651 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

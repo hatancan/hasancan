@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Circuit Theory II: PSpice Assignments 1–4 (RLC Response, RC-RL, Three-Phase Circuits, Transformers) — hasancan.net</title>
+<meta name="description" content="Four PSpice assignment handouts from the EEM202 Circuit Theory II laboratory: natural and step response of the parallel RLC circuit (underdamped, critically damped, and overdamped), RC and RL circuits driven by a square wave, analysis and simulation of three-phase circuits, and simulation of ideal and linear transformers.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-pspice-odevleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem202-pspice-odevleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem202-pspice-odevleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem202-pspice-odevleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Circuit Theory II: PSpice Assignments 1–4 (RLC Response, RC-RL, Three-Phase Circuits, Transformers)">
+<meta property="og:description" content="Four PSpice assignment handouts from the EEM202 Circuit Theory II laboratory: natural and step response of the parallel RLC circuit (underdamped, critically damped, and overdamped), RC and RL circuits driven by a square wave, analysis and simulation of three-phase circuits, and simulation of ideal and linear transformers.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-pspice-odevleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Circuit Theory II: PSpice Assignments 1–4 (RLC Response, RC-RL, Three-Phase Circuits, Transformers)", "description": "Four PSpice assignment handouts from the EEM202 Circuit Theory II laboratory: natural and step response of the parallel RLC circuit (underdamped, critically damped, and overdamped), RC and RL circuits driven by a square wave, analysis and simulation of three-phase circuits, and simulation of ideal and linear transformers.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-pspice-odevleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "eem202-pspice-odevleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem202-pspice-odevleri/eem202-pspice-odevleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM202 Circuit Theory II: PSpice Assignments 1–4 (RLC Response, RC-RL, Three-Phase Circuits, Transformers)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.04.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#pspice-assignment-1-natural-and-step-response-of-an-rlc-circuit">PSpice Assignment 1: Natural and step response of an RLC circuit</a></li><li><a href="#pspice-assignment-2-rc-and-rl-circuits">PSpice Assignment 2: RC and RL circuits</a></li><li><a href="#pspice-assignment-3-three-phase-circuits">PSpice Assignment 3: Three-phase circuits</a></li><li><a href="#pspice-assignment-4-transformers">PSpice Assignment 4: Transformers</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM202 Circuit Theory II: PSpice Assignments 1–4 (RLC Response, RC-RL, Three-Phase Circuits, Transformers)</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 11.04.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the handouts of four <strong>PSpice assignments</strong> given in the Başkent University Electrical and Electronics Engineering <strong>EEM-202 Circuit Theory II Laboratory</strong>: Assignment 1 covers the natural and step response of an RLC circuit, Assignment 2 covers RC and RL circuits, Assignment 3 covers three-phase circuits, and Assignment 4 covers transformers. The Assignment 3 and Assignment 4 handouts are dated April 2013; the due dates in the handouts also belong to that period. The handout text has been transcribed, and the PSpice schematics have been added as images. The original files of the four handouts can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="pspice-assignment-1-natural-and-step-response-of-an-rlc-circuit">PSpice Assignment 1: Natural and step response of an RLC circuit</h2>
+<figure class="yazi-gorsel"><img src="../odev1-sekil1.jpg" width="792" height="512" loading="lazy" decoding="async" alt="Figure 1: parallel R = 20 kΩ, L = 8 H, C = 0.125 µF circuit; currents iR, iL, iC and voltage v(t)"><figcaption>Assignment 1, Figure 1: parallel RLC circuit</figcaption></figure>
+<h3 id="part-1-natural-response">Part 1: Natural response</h3>
+<p><strong>Question 1.</strong> Using PSpice, build the circuit in Figure 1 with V₀ = 0, I₀ = −12.25 mA (the initial value of the current through the 8 H inductor), C = 0.125 µF, L = 8 H, and R = 20 kΩ.</p>
+<ul><li>a. Plot v(t) versus time over the interval 0 &lt; t &lt; 11 ms.</li><li>b. Plot v(t) versus time over the interval 0 &lt; t &lt; 1 s.</li><li>c. Plot i_L(t) versus time over the interval 0 &lt; t &lt; 11 ms.</li><li>d. By examining the plots and values, state the damping response of the circuit.</li></ul>
+<p><strong>Question 2.</strong> If we want to observe the critically damped case of the same circuit: (a) calculate the new value of R; plot (b) v(t) and (c) i_L(t) over the interval 0 &lt; t &lt; 1 s.</p>
+<p><strong>Question 3.</strong> If we want to observe the overdamped case of the same circuit: (a) calculate the new value of R; plot (b) v(t) and (c) i_L(t) over the interval 0 &lt; t &lt; 1 s.</p>
+<h3 id="part-2-step-response">Part 2: Step response</h3>
+<figure class="yazi-gorsel"><img src="../odev1-sekil2.jpg" width="784" height="488" loading="lazy" decoding="async" alt="Figure 2: the same parallel RLC circuit with a current source I connected"><figcaption>Assignment 1, Figure 2: step response circuit</figcaption></figure>
+<ol><li>In the circuit in Figure 2, a current source of I = 20 mA has been connected to the previous circuit. Obtain the damping responses for R = 20 kΩ, R = 4 Ω, and R = 1 Ω.</li><li>Plot i_R(t), i_L(t), and i_C(t) over an appropriate time interval.</li><li>Compile the results into a report (three different damping responses and three different PSpice plots) and comment on them.</li></ol>
+<p><em>Note: In this circuit, since α = 1/(2RC) and ω₀ = 1/√(LC) = 1000 rad/s, critical damping occurs at R = 4 kΩ (at R = 20 kΩ, α = 200 s⁻¹, which is underdamped). The values "R = 4 Ω and R = 1 Ω" in Part 2 were most likely meant to be 4 kΩ and 1 kΩ; with 4 Ω and 1 Ω, both cases would be heavily overdamped. The handout has been left as it was.</em></p>
+<blockquote><p>Assignment submission: Both sections must submit the assignment by Friday, March 9, at 16:30. Late assignments will be graded lower.</p></blockquote>
+<h2 id="pspice-assignment-2-rc-and-rl-circuits">PSpice Assignment 2: RC and RL circuits</h2>
+<p><strong>Question 1.</strong> Using PSpice, build the circuit in Figure 1 with V_pulse = 12 V (square wave), C = 1 µF, and R = 1 kΩ.</p>
+<ul><li>a. (20 points) Plot V_R(t), V_C(t), and I_C(t) versus time. (At least 5 periods must be observed. Take the value of τ into account for the period. Hint: 5τ)</li><li>b. (15 points) Assign the values 0.5 µF, 1 µF, and 1.5 µF to the capacitor and plot V_o on the same set of axes. Calculate how τ changes.</li><li>c. (15 points) Comment on the plot obtained when the value of C is changed in the previous part.</li></ul>
+<figure class="yazi-gorsel"><img src="../odev2-sekil1.jpg" width="784" height="306" loading="lazy" decoding="async" alt="Figure 1: VPULSE source (V1 = 0, V2 = 12, PW = 6 ms, PER = 10 ms), 1 kΩ resistor, and parametric C1 = {cdeg}"><figcaption>Assignment 2, Figure 1: RC circuit</figcaption></figure>
+<p><strong>Question 2.</strong> Using PSpice, build the circuit in Figure 2 with V_pulse = 12 V (square wave), L = 1 H, and R = 1 kΩ.</p>
+<ul><li>a. (20 points) Plot V_R(t), V_L(t), and I_L(t) versus time.</li><li>b. (15 points) Assign the values 0.5 H, 1 H, and 1.5 H to the inductor and plot V_o on the same set of axes. Calculate how τ changes.</li><li>c. (15 points) By looking at the plots of the inductor voltage and the capacitor current, comment on the similarity between them.</li></ul>
+<figure class="yazi-gorsel"><img src="../odev2-sekil2.jpg" width="704" height="376" loading="lazy" decoding="async" alt="Figure 2: VPULSE source (V1 = 0, V2 = 100, PW = 5 ms, PER = 10 ms), parametric R2 = {rdeg} = 1 kΩ, and L1 = 1 H"><figcaption>Assignment 2, Figure 2: RL circuit</figcaption></figure>
+<p><em>Note: The handout text also gives V_pulse = 12 V for the RL circuit, whereas the PSpice source in Figure 2 shows V2 = 100 V. The handout has been left as it was.</em></p>
+<h2 id="pspice-assignment-3-three-phase-circuits">PSpice Assignment 3: Three-phase circuits</h2>
+<p>For the circuit given below (6 mH and 1.5 Ω per line; 85.5 Ω and 350 mH in the load branches):</p>
+<figure class="yazi-gorsel"><img src="../odev3-devre.jpg" width="992" height="383" loading="lazy" decoding="async" alt="Three-phase circuit: three sources, 6 mH + 1.5 Ω lines, and 85.5 Ω + 350 mH load branches"><figcaption>Assignment 3: three-phase circuit</figcaption></figure>
+<ul><li>a) Analyze it: (1) Is the circuit balanced? (2) How is the source connected? (Wye-delta) (3) How is the load connected? (Wye-delta)</li><li>b) Calculate the phase and line currents.</li><li>c) Draw it in PSpice and simulate it. Find the magnitudes and phases of the phase and line currents (at the load) and the phase and line voltages (at the source).</li><li>d) Find the real, reactive, and complex powers at the load and at the source.</li></ul>
+<blockquote><p>Assignment submission: Both sections must submit the assignment by 17:00 on April 19, 2013. Late assignments will be graded lower.</p></blockquote>
+<h2 id="pspice-assignment-4-transformers">PSpice Assignment 4: Transformers</h2>
+<p><strong>Objective:</strong> The purpose of this assignment is to understand how ideal and linear transformers work by simulating them.</p>
+<h3 id="part-1">Part 1</h3>
+<p><strong>A.</strong> Build the circuit given below with L1 = 20 H, L2 = 2000 H, and k = 1.</p>
+<ol><li>Obtain the signals v₁(t) and v₂(t). Compare their amplitude and phase values.</li><li>Find the currents i₁(t) and i₂(t). Compare them in the same way.</li></ol>
+<figure class="yazi-gorsel"><img src="../odev4-devre.jpg" width="809" height="376" loading="lazy" decoding="async" alt="Transformer circuit: VAMPL = 311 V, FREQ = 50 Hz source, R1 = 100 Ω, transformer TX1, and R2 = 10 kΩ load"><figcaption>Assignment 4: transformer simulation circuit</figcaption></figure>
+<p><strong>B.</strong> This time, build the same circuit with L1 = 10 H, L2 = 1 H, and k = 0.85.</p>
+<ol><li>How did the amplitude and phase of the voltages v₁(t) and v₂(t) change?</li><li>Compare the currents i₁(t) and i₂(t).</li></ol>
+<p>Report your work in detail. Your grade will be determined by the content and organization of your report.</p>
+<blockquote><p>Assignment submission: Both sections must submit the assignment by 17:00 on May 3, 2013. Late assignments will be graded lower.</p></blockquote>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem202-pspice-odevleri.zip" download>eem202-pspice-odevleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 219 KB · 11.04.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem202-pspice-odevleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (219 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

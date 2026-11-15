@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Circuit Theory II: PSpice Assignment 3–4 Reports (Three-Phase Circuit and Transformers) — hasancan.net</title>
+<meta name="description" content="PSpice/Proteus assignment reports from the EEM202 Circuit Theory II laboratory on the three-phase circuit (Assignment 3) and transformers (Assignment 4): Y-source/Δ-load analysis, line and phase currents, powers; v1, v2, i1, i2 for ideal and linear transformers. Calculation errors are corrected in notes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Circuit Theory II: PSpice Assignment 3–4 Reports (Three-Phase Circuit and Transformers)">
+<meta property="og:description" content="PSpice/Proteus assignment reports from the EEM202 Circuit Theory II laboratory on the three-phase circuit (Assignment 3) and transformers (Assignment 4): Y-source/Δ-load analysis, line and phase currents, powers; v1, v2, i1, i2 for ideal and linear transformers. Calculation errors are corrected in notes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Circuit Theory II: PSpice Assignment 3–4 Reports (Three-Phase Circuit and Transformers)", "description": "PSpice/Proteus assignment reports from the EEM202 Circuit Theory II laboratory on the three-phase circuit (Assignment 3) and transformers (Assignment 4): Y-source/Δ-load analysis, line and phase currents, powers; v1, v2, i1, i2 for ideal and linear transformers. Calculation errors are corrected in notes.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "eem202-pspice-odev-3-4-raporlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem202-pspice-odev-3-4-raporlari/eem202-pspice-odev-3-4-raporlari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM202 Circuit Theory II: PSpice Assignment 3–4 Reports (Three-Phase Circuit and Transformers)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>22.04.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#assignment-3-three-phase-circuit">Assignment 3: Three-phase circuit</a></li><li><a href="#assignment-4-transformers">Assignment 4: Transformers</a></li><li><a href="#downloadable-files">Downloadable files</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM202 Circuit Theory II: PSpice Assignment 3–4 Reports (Three-Phase Circuit and Transformers)</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 22.04.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the reports for the last two PSpice assignments of the Başkent University Electrical-Electronics Engineering <strong>EEM-202 Circuit Theory II Laboratory</strong>: <strong>Hasan Can Öztürk's PSpice Assignment 3 (Three-Phase Circuits) report</strong> (April 2015, 4 pages; student number hidden), a one-page graphing exercise by a friend for the same assignment, and a friend's <strong>Assignment 4 (Transformers)</strong> report (name and number removed). The simulations were done in Proteus, and oscilloscope screenshots are included in the reports. The text of the assignment handouts is in a separate post titled <a href="/arsiv/eem202-pspice-odevleri/">PSpice Assignments 1–4</a>. Some calculations in the reports are wrong; the correct values are given in the notes. The files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="assignment-3-three-phase-circuit">Assignment 3: Three-phase circuit</h2>
+<p>The circuit has three positive-sequence sources of 311∠0° V (peak value), f = 50 Hz, connected in wye (Y); each line has a 1.5 Ω resistor and a 6 mH inductor. The load is delta (Δ) connected, with <strong>85.5 Ω + 350 mH</strong> in each branch.</p>
+<figure class="yazi-gorsel"><img src="../odev3-proteus-ve-baglanti.jpg" width="943" height="1360" loading="lazy" decoding="async" alt="Three-phase circuit and oscilloscope view in Proteus; wye-connected sources and delta-connected load branches (85.5 Ω, 350 mH)"><figcaption>Assignment 3: Proteus simulation of the circuit and connection diagrams</figcaption></figure>
+<h3 id="a-analysis-of-the-circuit">A) Analysis of the circuit</h3>
+<ol><li>The circuit is balanced. (The report's justification: the sources and loads are connected in wye or delta.)</li><li>The sources are wye-connected.</li><li>The loads are delta-connected.</li></ol>
+<p><em>Note: The actual condition for a three-phase circuit to be balanced is that the source amplitudes are equal with 120° phase difference between them, and that the impedances of the three phases are equal; both conditions are satisfied in this circuit.</em></p>
+<h3 id="b-line-and-phase-currents-the-report-s-calculation">B) Line and phase currents (the report's calculation)</h3>
+<ul><li>ω = 2π·50 ≈ 314 rad/s, Z_L1 = jωL1 = j1.88 Ω, Z_L2 = jωL2 = j109.9 Ω</li><li>In the report, the single-phase equivalent was built by connecting the line impedance 1.5 + j1.88 Ω in series with the load impedance 85.5 + j109.9 Ω: Z = 141.65∠52.11° Ω</li><li>I_aA = 311∠0° / 141.65∠52.11° = 2.20∠−52.11° A, I_bB = 2.20∠−172.11° A, I_cC = 2.20∠−67.89° A</li><li>I_AB = I_aA/√3 ∠30° = 1.27∠−22.11° A, I_BC = 1.27∠−142.11° A, I_CA = 1.27∠97.89° A</li></ul>
+<figure class="yazi-gorsel"><img src="../odev3-tek-faz-esdegeri.jpg" width="936" height="496" loading="lazy" decoding="async" alt="Single-phase equivalent circuit used in the report: L1 = 6 mH, R1 = 1.5 Ω, R2 = 85.5 Ω, L2 = 350 mH"><figcaption>Assignment 3: single-phase equivalent</figcaption></figure>
+<p><em>Note: When converting the Δ-connected load to the single-phase (Y) equivalent, the impedance must be divided by three: Z_Y = (85.5 + j109.9)/3 = 28.5 + j36.63 Ω. The correct single-phase impedance is Z = 30 + j38.51 = 48.84∠52.10° Ω; accordingly I_aA = 311/48.84 = <strong>6.37∠−52.10° A</strong> (peak), I_AB = I_aA/√3 ∠+30° = <strong>3.68∠−22.10° A</strong>. For the positive sequence, the angle of I_cC should be −52.10° + 120° = <strong>+67.90°</strong> (the report has −67.89°).</em></p>
+<h3 id="c-values-read-from-the-simulation">C) Values read from the simulation</h3>
+<p>According to the Proteus measurements, the report gives V_AN = 216∠0° V and V_AB = √3·V_AN∠30° = 373.68∠30° V (V_BC = 373.68∠−90° V, V_CA = 373.68∠150° V). The voltage across the line impedance was calculated as I_aA(1.5 + j1.88) = 5.302∠−0.97° V and labeled "V_an"; from this V_ab = 9.17∠29.03° V was obtained. The (rms) values read from the ammeters are I_aA = 1.55∠−52.11° A and phase currents of 2.68∠−22.11° A.</p>
+<p><em>Note: 1.55 A is the rms value of the current found with the report's 141.65 Ω impedance (without the Δ→Y conversion) (220/141.65). In a delta-connected load, the phase current is √3 times <strong>smaller</strong> than the line current (I_AB = I_aA/√3); the report has 1.55 × 1.73 = 2.68 A.</em></p>
+<h3 id="d-powers-the-report-s-calculation">D) Powers (the report's calculation)</h3>
+<ul><li>P_load = 1.55² · 85.5 = 250.2 W, total 750.6 W</li><li>Q_load = 1.55² · 109.9 = 263.76 VAr, total 791.28 VAr</li><li>S_load = 250.2 + j263.76 VA, total 750.6 + j791.28 VA</li><li>S_source = 482.05∠52.09° VA = 296.18 + j380.33 VA</li></ul>
+<p><em>Note: With the correct single-phase equivalent (rms phase voltage 220 V), I_aA = 4.51 A (rms); the total power dissipated in the load is P = 3·4.51²·28.5 ≈ <strong>1735 W</strong>, and the reactive power is Q = 3·4.51²·36.63 ≈ <strong>2231 VAr</strong>.</em></p>
+<h2 id="assignment-4-transformers">Assignment 4: Transformers</h2>
+<p>The source is v = 311 cos(314t) V (VAMPL = 311 V, 50 Hz); there is R1 = 100 Ω on the primary side and an R2 = 10 kΩ load on the secondary. Measurements were made in Proteus with a voltmeter/ammeter and an oscilloscope.</p>
+<figure class="yazi-gorsel"><img src="../odev4-trafo-devresi.jpg" width="938" height="900" loading="lazy" decoding="async" alt="Assignment 4 transformer circuit: 311 V, 50 Hz source, R1 = 100 Ω, transformer TX1 and R2 = 10 kΩ load; Proteus oscilloscope view"><figcaption>Assignment 4: transformer circuit and simulation</figcaption></figure>
+<h3 id="a-l1-20-h-l2-2000-h-k-1">A) L1 = 20 H, L2 = 2000 H, k = 1</h3>
+<ul><li>M = k√(L1·L2) = 200 H, jωM = j62800 Ω, Z_L1 = j6280 Ω, Z_L2 = j628000 Ω</li><li>The report's mesh equations: −311 + I1(100 + j6280) − I2(j62800) = 0 and I2(10000 + j628000) − I1(j6280) = 0</li><li>The report's results: I1 = 5.50∠−88.98° A, I2 = 55.01∠−87.98° mA, V1 ≈ 34540 V, V2 ≈ 34546 V</li></ul>
+<p><em>Note: In the second mesh equation, the mutual inductance term should be jωM = j62800 (the report has j6280). With the correct equations, I1 ≈ <strong>1.555∠−0.46° A</strong>, I2 ≈ <strong>155.5 mA</strong>, V1 ≈ <strong>155.5 V</strong>, V2 ≈ <strong>1555 V</strong> (peak) are obtained. Since k = 1 and L2/L1 = 100, the transformer behaves very nearly as an ideal one: the turns ratio is n = √(L2/L1) = 10, V2/V1 = 10, I1/I2 = 10; the 10 kΩ load appears as 10000/10² = 100 Ω from the primary side, and I1 = 311/(100 + 100) ≈ 1.555 A.</em></p>
+<h3 id="b-l1-10-h-l2-1-h-k-0-85">B) L1 = 10 H, L2 = 1 H, k = 0.85</h3>
+<ul><li>M = 0.85·√10 ≈ 2.69 H, jωM ≈ j844.66 Ω, Z_L1 = j3140 Ω, Z_L2 = j314 Ω</li><li>The report's results: I1 = 99.77∠−86.52° mA, I2 = 29.87∠−13.95° mA, v1(t) = 313.28 cos(314t + 3.48°) V, v2(t) = 9.38 cos(314t + 76.05°) V</li></ul>
+<p><em>Note: The report used j314 and j3140 in the mesh equations instead of jωM. Solving with jωM = j844.66 gives I1 ≈ <strong>98.9∠−86.9° mA</strong> (close to the report), I2 ≈ <strong>8.35 mA</strong>, v1 ≈ <strong>310.6 V</strong>, v2 = 10 kΩ·I2 ≈ <strong>83.5 V</strong> (peak). In a linear transformer, since the coil reactances remain small relative to the load resistance (ωL2 = 314 Ω ≪ 10 kΩ), the voltage is transferred at a ratio even below the ideal-transformer ratio √(L2/L1).</em></p>
+<h2 id="downloadable-files">Downloadable files</h2>
+<ul><li><strong>Assignment 3:</strong> Hasan Can Öztürk's report (number hidden) and a friend's one-page work containing the line-current graph and the PSpice circuit drawing.</li><li><strong>Assignment 4:</strong> a friend's transformer report (4 pages; name and number removed).</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem202-pspice-odev-3-4-raporlari.zip" download>eem202-pspice-odev-3-4-raporlari.zip</a></p>
+              <p class="kucuk">ZIP archive · 801 KB · 22.04.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem202-pspice-odev-3-4-raporlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (801 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

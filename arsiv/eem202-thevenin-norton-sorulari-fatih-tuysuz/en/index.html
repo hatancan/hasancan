@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM202 Circuit Theory II: Circuit Solution Methods, Thevenin–Norton, Superposition and Maximum Power (Fatih Tüysüz) — hasancan.net</title>
+<meta name="description" content="&quot;Circuit Solution Methods&quot; note (Fatih Tüysüz): the relationship between Thevenin and Norton equivalents, circuit simplification by source transformation, the superposition method, maximum power transfer, and two worked example problems (the R3 current and the current through the 8.65 Ω resistor).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM202 Circuit Theory II: Circuit Solution Methods, Thevenin–Norton, Superposition and Maximum Power (Fatih Tüysüz)">
+<meta property="og:description" content="&quot;Circuit Solution Methods&quot; note (Fatih Tüysüz): the relationship between Thevenin and Norton equivalents, circuit simplification by source transformation, the superposition method, maximum power transfer, and two worked example problems (the R3 current and the current through the 8.65 Ω resistor).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM202 Circuit Theory II: Circuit Solution Methods, Thevenin–Norton, Superposition and Maximum Power (Fatih Tüysüz)", "description": "\"Circuit Solution Methods\" note (Fatih Tüysüz): the relationship between Thevenin and Norton equivalents, circuit simplification by source transformation, the superposition method, maximum power transfer, and two worked example problems (the R3 current and the current through the 8.65 Ω resistor).", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM202 – Devre Teorisi II", "associatedMedia": {"@type": "MediaObject", "name": "sorular3.pdf", "contentUrl": "https://hasancan.net/arsiv/eem202-thevenin-norton-sorulari-fatih-tuysuz/sorular3.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM202 Circuit Theory II: Circuit Solution Methods, Thevenin–Norton, Superposition and Maximum Power (Fatih Tüysüz)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem202">EEM202</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM202 – Devre Teorisi II</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.05.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#using-thevenin-and-norton-equivalent-circuits">Using Thevenin and Norton equivalent circuits</a></li><li><a href="#superposition">Superposition</a></li><li><a href="#maximum-power-transfer">Maximum power transfer</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#downloadable-file">Downloadable file</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM202</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM202 Circuit Theory II: Circuit Solution Methods, Thevenin–Norton, Superposition and Maximum Power (Fatih Tüysüz)</h1>
+            <p class="kucuk">EEM202 – Devre Teorisi II · 28.05.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains an 11-page note titled <strong>"Circuit Solution Methods"</strong>, stored in the course folder under the name "sorular3" (the PDF is dated May 2007; the PDF metadata lists <strong>Fatih Tüysüz</strong> as the author). The worked examples in the second section contain references such as "Figure 7.3(c)" and "Figure 7.11(b)"; this part may have been compiled from a textbook. The note covers Thevenin–Norton equivalents, superposition, and maximum power transfer using DC circuits, and gives worked examples; it was placed in the folder for review because the same methods are used in the phasor circuits of EEM202. The text and results are reproduced below; the original PDF can be downloaded at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<h2 id="using-thevenin-and-norton-equivalent-circuits">Using Thevenin and Norton equivalent circuits</h2>
+<p>Thevenin circuit: a source V_s with a series resistance R1. Norton circuit: a source I_s with a parallel resistance R2.</p>
+<ul><li>If both circuits are short-circuited: I_t = I_n and V_t = V_n = 0 → V_s = R1·I_t, that is, <strong>V_s/R1 = I_t = I_n</strong>.</li><li>If both circuits are open-circuited: V_t = V_n and I_t = I_n = 0 → <strong>V_t = V_s</strong> and <strong>V_n = I_s·R2</strong>.</li></ul>
+<p>These basic equalities are used both in solving circuits and in simplifying them.</p>
+<h3 id="example-finding-the-voltage-v-by-source-transformations">Example: finding the voltage V by source transformations</h3>
+<p>The circuit contains a 120 V source with 20 Ω, a 60 V source with 5 Ω, a 36 A current source, 6 Ω, and then a series 1.6 Ω and an 8 Ω load; V across the 8 Ω resistor is required.</p>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Source transformation example: branches with 120 V–20 Ω and 60 V–5 Ω, a 36 A current source, 6 Ω, 1.6 Ω and 8 Ω resistors; the 120 V branch converted to its Norton equivalent"><figcaption>Example: finding V by source transformations</figcaption></figure>
+<ol><li>The branch containing the 120 V source is replaced by its Norton equivalent: 120 V/20 Ω = 6 A.</li><li>The second voltage source and its resistor are also converted to a Norton equivalent: 60 V/5 Ω = 12 A (in the opposite direction).</li><li>All current sources and parallel resistors are combined: 6 − 12 + 36 = 30 A; 1/(1/20 + 1/5 + 1/6) = 2.4 Ω.</li><li>The current source is converted to its Thevenin equivalent: 30 A·2.4 Ω = 72 V.</li><li>The series resistors are added (2.4 + 1.6 = 4 Ω) and, using the voltage divider, <strong>V = 72·8/(8 + 4) = 48 V</strong> is obtained.</li></ol>
+<h2 id="superposition">Superposition</h2>
+<p>This is a simple technique that can be used in circuits containing more than one source:</p>
+<ol><li>Select one source in the circuit; replace all other current sources with open circuits and all other voltage sources with short circuits.</li><li>Analyze the circuit like an ordinary circuit.</li><li>Select the next source and return to the first step.</li><li>Add the results obtained for each source.</li></ol>
+<h3 id="example">Example</h3>
+<p>A 100 V source with 20 Ω and a 40 Ω resistor (V is across this resistor), 10 Ω and 2.5 Ω; a 6 A current source between the two nodes where the 20 Ω and 10 Ω meet.</p>
+<ul><li><strong>a) Current source only (voltage source short-circuited):</strong> 20 ∥ 40 = 13.3 Ω; 10 + 13.3 = 23.3 Ω in parallel with 2.5 Ω: 1/(1/2.5 + 1/23.3) = 2.26 Ω. The voltage across the current source is 6·2.26 ≈ 13.5 V; by the voltage divider, V = 13.5·13.3/(10 + 13.3) ≈ <strong>7.73 V</strong>.</li><li><strong>b) Voltage source only (current source open-circuited):</strong> 40 ∥ (10 + 2.5) = 9.52 Ω; V = 100·9.52/(20 + 9.52) = <strong>32.25 V</strong>.</li><li><strong>c) Total:</strong> <strong>V = 7.73 + 32.25 = 40 V</strong></li></ul>
+<p><em>Note: In part (a) the note gives "V_s = 6(2.2) = 7.73 V" and "V = 13.5 V"; the two values are mixed up. The correct values are V_s = 6·2.26 ≈ 13.5 V and V ≈ 7.73 V (the final total of 40 V is correct). In part (b) the note says "the current source is short-circuited"; according to the rule of the method, and as seen in the figure, the current source is <strong>open-circuited</strong>.</em></p>
+<h2 id="maximum-power-transfer">Maximum power transfer</h2>
+<p>When a load is connected to a circuit, the aim is to maximize the power delivered. With V_s and R_s belonging to the source:</p>
+<ul><li>I = V_s/(R_s + R_L), V_L = I·R_L</li><li>P_L = I·V_L = [V_s/(R_s + R_L)]²·R_L</li><li>∂P_L/∂R_L = 0 → <strong>R_L = R_s</strong> (for maximum power transfer)</li></ul>
+<h2 id="worked-examples">Worked examples</h2>
+<h3 id="problem-1-r3-current-superposition">Problem 1: R3 current (superposition)</h3>
+<p>Two sources U1 = 20 V and U2 = 15 V, R1 = R2 = 1 kΩ, R3 = 2.2 kΩ. The current through R3 is found by superposition.</p>
+<ul><li>U1 only: R_T1 = R1 + R2∥R3 = 1 kΩ + (1 kΩ·2.2 kΩ)/3.2 kΩ = 1.69 kΩ; I_T1 = 20 V/1.69 kΩ = 11.8 mA; by the current divider, I_3(1) = (1 kΩ/3.2 kΩ)·11.8 mA = <strong>3.69 mA</strong></li><li>U2 only: R_T2 = R2 + R1∥R3 = 1.69 kΩ; I_T2 = 15 V/1.69 kΩ = 8.88 mA; I_3(2) = (1 kΩ/3.2 kΩ)·8.88 mA = <strong>2.78 mA</strong> (in the opposite direction)</li><li><strong>I_3 = 3.69 − 2.78 = 0.91 mA (910 µA)</strong>; the positive result shows that the current flows in the direction driven by U1.</li></ul>
+<h3 id="problem-2-current-through-the-8-65-resistor-thevenin">Problem 2: Current through the 8.65 Ω resistor (Thevenin)</h3>
+<p>A 20 V source with 5 Ω and 15 Ω; a 10 V source with 2 Ω and 8 Ω; an 8.65 Ω resistor between nodes A and B of the two sides.</p>
+<ul><li>The resistor whose current is sought is removed, and its terminals are labeled A and B. By the voltage divider, U_A = 15/(5 + 15)·20 = 15 V, U_B = 8/(8 + 2)·10 = 8 V → <strong>U_TH = U_A − U_B = 7 V</strong></li><li>R_TH = 5∥15 + 2∥8 = 3.75 + 1.6 = <strong>5.35 Ω</strong></li><li><strong>I = 7 V/(5.35 Ω + 8.65 Ω) = 0.5 A</strong></li></ul>
+<h2 id="downloadable-file">Downloadable file</h2>
+<p>The original 11-page PDF can be downloaded below.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../sorular3.pdf" download>sorular3.pdf</a></p>
+              <p class="kucuk">PDF · 242 KB · 11 <span data-i18n="arch.pagesLower"></span> · 28.05.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../sorular3.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (242 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

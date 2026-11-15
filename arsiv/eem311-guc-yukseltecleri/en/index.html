@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Electronics II: Power Amplifiers (Class A, B, AB, C and D) — hasancan.net</title>
+<meta name="description" content="EEM311 Electronics II handwritten lecture notes: Class A, B, AB, C and D power amplifiers, efficiency calculations (25%, 50%, 78.5%), push-pull circuits and crossover distortion, the Class C tank circuit, harmonic distortion and THD, and thermal effects in power transistors; with worked examples.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Electronics II: Power Amplifiers (Class A, B, AB, C and D)">
+<meta property="og:description" content="EEM311 Electronics II handwritten lecture notes: Class A, B, AB, C and D power amplifiers, efficiency calculations (25%, 50%, 78.5%), push-pull circuits and crossover distortion, the Class C tank circuit, harmonic distortion and THD, and thermal effects in power transistors; with worked examples.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-guc-yukseltecleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Electronics II: Power Amplifiers (Class A, B, AB, C and D)", "description": "EEM311 Electronics II handwritten lecture notes: Class A, B, AB, C and D power amplifiers, efficiency calculations (25%, 50%, 78.5%), push-pull circuits and crossover distortion, the Class C tank circuit, harmonic distortion and THD, and thermal effects in power transistors; with worked examples.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-guc-yukseltecleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-guc-yukselteci-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-guc-yukseltecleri/eem311-guc-yukselteci-notlari.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM311 Electronics II: Power Amplifiers (Class A, B, AB, C and D)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#classes-of-power-amplifiers">Classes of power amplifiers</a></li><li><a href="#class-a-power-amplifiers">Class A power amplifiers</a></li><li><a href="#class-b-power-amplifiers">Class B power amplifiers</a></li><li><a href="#class-c-power-amplifiers">Class C power amplifiers</a></li><li><a href="#class-d-power-amplifiers">Class D power amplifiers</a></li><li><a href="#amplifier-distortion">Amplifier distortion</a></li><li><a href="#thermal-effects-in-power-transistors">Thermal effects in power transistors</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM311 Electronics II: Power Amplifiers (Class A, B, AB, C and D)</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post was prepared from scanned pages of handwritten lecture notes on <strong>power amplifiers</strong> from the <strong>EEM311 Electronics II</strong> course at Başkent University. The notes carry no author name or date; the pages were found together in the course's slide/notes folder. Headings, definitions, formulas, and worked examples have been transcribed into text; page images are included for the circuit diagrams and graphs. All scanned pages can be downloaded as a PDF at the end of the post.</p>
+<h2 id="classes-of-power-amplifiers">Classes of power amplifiers</h2>
+<figure class="yazi-gorsel"><img src="../s-01.jpg" width="1152" height="1643" loading="lazy" decoding="async" alt="Handwritten notes page: output waveforms and dc bias levels of Class A, B, AB and C amplifiers"><figcaption>Output signals for Class A, B, AB and C operation</figcaption></figure>
+<ul><li><strong>Class A:</strong> There is an output signal for the entire input signal (360°). The circuit is biased with dc bias so that the Q point lies at the middle of the dc load line.</li><li><strong>Class B:</strong> There is an output signal for only one half of the input signal's period (180°). The circuit is biased so that the Q point is at the cutoff point.</li><li><strong>Class AB:</strong> There is an output for a portion of the input signal between 180° and 360°. The Q point is close to cutoff on the dc load line.</li><li><strong>Class C:</strong> There is an output signal for less than 180° of the input signal. The circuit is biased so that the Q point is below cutoff.</li><li><strong>Class D:</strong> A Class D amplifier operates and produces output only when a pulse signal is applied.</li></ul>
+<h3 id="amplifier-efficiency">Amplifier efficiency</h3>
+<p>The efficiency of power amplifiers increases from A to D. In other words, the longer the transistor conducts, the more power it dissipates, and so the lower the efficiency of the circuit (efficiency = output power / input power).</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">A</th><th scope="col">AB</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody><tr><th scope="row">Conduction angle</th><td>360°</td><td>180°–360°</td><td>180°</td><td>Less than 180°</td><td>Pulse</td></tr><tr><th scope="row">Efficiency</th><td>25%–50%</td><td>25% (50%) – 78.5%</td><td>78.5%</td><td>&gt; 78.5% (*)</td><td>&gt; 90%</td></tr></tbody></table></div>
+<p>(*) Class C power amplifiers are generally not operated at very high power levels.</p>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="981" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: efficiency table and the Q point on the ac load line with clipping in Class A"><figcaption>Efficiency table and the load line in Class A</figcaption></figure>
+<h2 id="class-a-power-amplifiers">Class A power amplifiers</h2>
+<p>A Class A amplifier is biased to operate in the linear region for the full 360° of the input signal. For maximum output, the Q point must be exactly at the middle of the load line. If the input signal is too large, clipping occurs in the output signal. (The two graphs on the page show the I_C and V_CE swing for a centered Q point, and the clipping that occurs when the Q point shifts.)</p>
+<ul><li><strong>Quiescent power:</strong> The power dissipated in the transistor when no ac signal is applied. The transistor's minimum power rating must be at least this value: <strong>P_DQ = V_CEQ · I_CQ</strong></li><li><strong>Input power:</strong> The power delivered to the circuit by the dc voltage source: <strong>P_i(dc) = V_CC · I_CC = V_CC · I_CQ</strong></li><li><strong>Output power:</strong> The ac power delivered by the circuit to the load:</li></ul>
+<p>  - P_o(ac) = V_CE(rms) · I_C(rms) → if the Q point is at the middle   - P_o(ac) = I_C(rms)² · R_C → if the Q point is close to cutoff   - P_o(ac) = V_CE(rms)² / R_C → if the Q point is close to saturation</p>
+<ul><li><strong>Efficiency:</strong> The ratio of the output power obtained from the amplifier to the input power applied: <strong>%η = (P_o(ac) / P_i(dc)) · 100%</strong></li></ul>
+<h3 id="maximum-efficiency">Maximum efficiency</h3>
+<p>For maximum efficiency, the Q point is exactly at the middle of the load line:</p>
+<ul><li>max V_CE(p-p) = V_CC, max I_C(p-p) = V_CC / R_C</li><li>max P_o(ac) = V_CC · (V_CC/R_C) / 8 = <strong>V_CC² / (8R_C)</strong></li><li>max P_i(dc) = V_CC · max I_C = V_CC · (V_CC/R_C)/2 = <strong>V_CC² / (2R_C)</strong></li><li>max %η = (max P_o(ac) / max P_i(ac)) × 100 → <strong>max %η = 25%</strong></li></ul>
+<p><em>Note: In the denominator of the last line, the notes write "P_i(ac)"; it should be the dc input power P_i(dc). The result (25%) is unchanged.</em></p>
+<h3 id="example-power-and-efficiency-of-a-class-a-amplifier">Example: Power and efficiency of a Class A amplifier</h3>
+<p>For the Class A power amplifier below, find a) the minimum transistor power, b) the ac output power, c) the efficiency. Circuit: V_CC = +24 V, R1 = 5 kΩ, R2 = 1 kΩ, R_C = 300 Ω, R_E = 100 Ω (bypassed by C_E), R_L = 300 Ω, C1 = 10 µF, C2 = 1 µF, C_E = 10 µF.</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="995" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: Class A power amplifier example, circuit diagram and ac load line"><figcaption>Class A amplifier example</figcaption></figure>
+<p><strong>Solution (dc analysis, approximate analysis):</strong></p>
+<ul><li>V_B = 24 V · 1k / (5k + 1k) = 4 V</li><li>V_E = 4 V − 0.7 V = 3.3 V</li><li>I_E = V_E / R_E = 33 mA ≅ I_CQ</li><li>V_C = 24 V − 33 mA · 300 Ω = 14.1 V</li><li>V_CE = V_C − V_E = 10.8 V</li></ul>
+<p>a) Minimum power dissipated in the transistor: P_DQ = V_CEQ · I_CQ = 10.8 V · 33 mA = <strong>0.356 W</strong></p>
+<p>b) To find the ac output power, the ac load line is drawn (to locate the Q point):</p>
+<ul><li>r_C = R_C // R_L = 150 Ω</li><li>I_C(sat) = I_CQ + V_CEQ / r_C = 33 mA + 10.8 V / 150 Ω = 105 mA</li><li>V_CE(cut-off) = V_CEQ + I_CQ · r_C = 15.75 V</li></ul>
+<p>The midpoint of the load line is 52.5 mA / 7.88 V; the actual Q point (33 mA, 10.8 V) is not at the middle but close to cutoff:</p>
+<ul><li>P_o(ac) = 0.5 · I_CQ² · r_C = 0.5 · (33 mA)² · 150 Ω = <strong>81.68 mW</strong></li></ul>
+<p>c) Efficiency: %η = P_o(ac) / P_dc · 100 = 81.68 mW / (24 V · 33 mA) · 100 = <strong>10.3%</strong></p>
+<h3 id="transformer-coupled-class-a">Transformer-coupled Class A</h3>
+<p>If the output of a Class A power amplifier is delivered to the load through a transformer, the efficiency can rise up to 50%.</p>
+<ul><li>V₂/V₁ = I₁/I₂ = N₂/N₁, V₂ = V_o</li><li>Load reflected to the primary: <strong>R_L' = a² · R_L = (N₂/N₁)² · R_L</strong></li></ul>
+<p><em>Note: With the definition a = N₁/N₂ (primary/secondary), the reflected load is R_L' = (N₁/N₂)² · R_L; the ratio is written inverted in the notes.</em></p>
+<h2 id="class-b-power-amplifiers">Class B power amplifiers</h2>
+<p>A Class B amplifier produces output for a 180° portion of the input signal. To obtain a complete sine wave at the output, <strong>push-pull</strong> circuits containing two transistors are used. One of them produces output for the positive alternation and the other for the negative alternation, and the outputs are combined across a load. Both transistors are biased with their Q points at cutoff and are of different types. Push-pull amplifiers can be built with a single or a dual voltage supply.</p>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="981" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: transformer-coupled Class A circuit, push-pull block diagrams, single- and dual-supply structures"><figcaption>Transformer coupling and push-pull block diagrams</figcaption></figure>
+<h3 id="biasing-of-push-pull-amplifiers-and-crossover-distortion">Biasing of push-pull amplifiers and crossover distortion</h3>
+<p>If the transistors in a Class B push-pull amplifier are biased at cutoff, the ac input signal must exceed the V_BE voltages of the transistors in order to bring them into conduction. This appears as <strong>distortion</strong> on the output signal, because there is no output during these intervals (<strong>crossover distortion</strong>). To prevent this, the transistors must be biased slightly above cutoff. Two circuits are used for this: <strong>voltage-divider bias</strong> and the <strong>diode-biased circuit</strong>.</p>
+<figure class="yazi-gorsel"><img src="../s-06.jpg" width="1023" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: complementary push-pull circuit, crossover distortion, transfer characteristic, voltage-divider and diode-biased circuits"><figcaption>Crossover distortion and biasing circuits</figcaption></figure>
+<p>Examining the diode-biased circuit, since it is used more often, and assuming that the voltages across the diodes equal the V_BE voltages, <strong>V_CEQ1 = V_CEQ2 = V_CC/2</strong>. Considering that the transistors are biased close to cutoff, I_CQ ≅ 0.</p>
+<p><strong>dc analysis:</strong> R1 = R2 is chosen; V_A = V_CC/2. If the transistors are at cutoff (on the verge of conduction):</p>
+<ul><li>I = (V_CC − 2V_d) / (R1 + R2)</li><li>V_CEQ1 = V_CEQ2 = V_CC/2</li></ul>
+<p><strong>ac operation:</strong> Each transistor conducts for one half cycle; the peak current in the load is I_C(sat) = V_CEQ / R_L.</p>
+<p><strong>Maximum output power:</strong></p>
+<ul><li>P_out = V_out(rms) · I_out(rms), V_out(rms) = 0.707 V_CEQ, I_out(rms) = 0.707 I_C(sat)</li><li><strong>P_out = 0.5 · V_CEQ · I_C(sat)</strong></li><li>With V_CEQ = V_CC/2, <strong>P_out = 0.25 · V_CC · I_C(sat)</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-07.jpg" width="1152" height="1644" loading="lazy" decoding="async" alt="Handwritten notes page: dc equivalent and ac load line of the diode-biased push-pull circuit"><figcaption>Diode-biased push-pull: dc and ac analysis</figcaption></figure>
+<p><strong>dc input power:</strong></p>
+<ul><li>P_dc = V_CC · I_CC, I_CC = I_C(sat) / π (average value)</li><li><strong>P_dc = V_CC · I_C(sat) / π</strong></li></ul>
+<p><strong>Efficiency:</strong> %η = (P_out / P_dc) · 100</p>
+<p><strong>Maximum efficiency:</strong> %η_max = (0.25 V_CC · I_C(sat)) / (V_CC · I_C(sat)/π) · 100 = 0.25π · 100 = <strong>78.5%</strong></p>
+<h3 id="transformer-coupled-push-pull-circuit">Transformer-coupled push-pull circuit</h3>
+<p>If the bias point is chosen appropriately, Class AB operation is also possible. A transformer is connected at the output to match the impedance. Since both transistors are npn type, the input signals must have different phases; the input transformer provides this. However, using transformers leads to high cost, large size, and poor frequency response. Instead, push-pull circuits using a Darlington pair and a feedback pair, or dual-supply (V_CC1 = V_CC2, R1 = R2, R_E1 = R_E2) loudspeaker driver circuits, can be used.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="987" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: Class B efficiency derivation, transformer-coupled push-pull, Darlington and feedback pair circuits"><figcaption>Transformer-coupled push-pull and Darlington pair</figcaption></figure>
+<h2 id="class-c-power-amplifiers">Class C power amplifiers</h2>
+<p>A Class C amplifier is operated for an interval smaller than 180°; the Q point is below cutoff. The example circuit is biased below cutoff with a −V_BB source. For the transistor to conduct, the ac input signal must exceed V_BB + V_BE. That is, there is output only for the peak values of the input signal. Therefore, the transistor power loss is very low.</p>
+<ul><li>Power dissipated by the transistor while conducting: <strong>P_D(on) = V_CE(sat) · I_C(sat)</strong></li><li>(Average) power dissipated over the signal period: <strong>P_D(avg) = P_D(on) · t_on / T = (t_on / T) · V_CE(sat) · I_C(sat)</strong></li><li>t_on: the time the transistor stays in conduction; T: the period of the input signal.</li></ul>
+<p><strong>Example:</strong> A Class C amplifier is driven at 200 kHz. If the transistor conducts for 1 µs, with I_C(sat) = 100 mA and V_CE(sat) = 0.2 V, what is the average power dissipated by the transistor?</p>
+<p><em>Note: The notes do not contain a solution to this example. One finds T = 1/200 kHz = 5 µs, P_D(on) = 0.2 V · 100 mA = 20 mW, P_D(avg) = 20 mW · (1 µs / 5 µs) = 4 mW.</em></p>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="995" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: Class C amplifier circuit, collector current pulses and average power relations"><figcaption>Class C amplifier and power loss</figcaption></figure>
+<h3 id="clamper-bias">Clamper bias</h3>
+<p>Instead of connecting a second source to the base to bias the transistor below cutoff, a clamper base bias formed by the base–emitter diode and capacitor C1 is used.</p>
+<ul><li>C1 charges to V_p − 0.7 V as the input signal rises toward the positive peak.</li><li>For the rest of the input signal, the capacitor is assumed not to discharge much. That is, the R1C1 time constant must be chosen very large so that the voltage across the capacitor does not change much. The base voltage swings around approximately −(V_p − 0.7 V).</li><li>When the second positive alternation of the signal arrives, the input signal must exceed the capacitor voltage in order to bring the transistor into conduction. Thus the transistor operates only for the positive peaks of the input signal.</li></ul>
+<h3 id="tank-circuit">Tank circuit</h3>
+<p>So that the output signal can be a complete sine wave, Class C amplifiers are used together with a <strong>parallel resonant circuit (tank circuit)</strong>. For the oscillations of the tank circuit to continue uninterrupted, the resonant frequency of the tank circuit must equal the frequency of the ac input signal of the circuit. Maximum output is obtained from the circuit in this case. The resonant frequency of the tank circuit is:</p>
+<p><strong>f_r = 1 / (2π√(LC))</strong></p>
+<figure class="yazi-gorsel"><img src="../s-10.jpg" width="987" height="1400" loading="lazy" decoding="async" alt="Handwritten notes page: clamper bias, base voltage waveform and tank circuit explanation"><figcaption>Clamper bias and tank circuit</figcaption></figure>
+<p>When the transistor conducts, the collector current pulse starts and sustains the oscillation of the tank circuit. Thus a complete sinusoidal signal is obtained at the output; the output swings between approximately +V_CC and −V_CC.</p>
+<p><strong>Maximum output power:</strong> The voltage across the tank circuit is approximately 2V_CC peak-to-peak.</p>
+<ul><li>V_out(p-p) = 2V_CC, V_out(p) = V_CC, V_out(rms) = 0.707 V_CC</li><li><strong>P_out = V_out(rms)² / R_c = 0.5 V_CC² / R_c</strong> (R_c: tank circuit resistance)</li><li>Total power: P_T = P_out + P_D(avg) = 0.5 V_CC² / R_c + (t_on/T) · V_CE(sat) · I_C(sat)</li><li>Efficiency: %η = (P_out / P_T) · 100. If P_out ≫ P_D(avg), %η is approximately 100%.</li></ul>
+<p><strong>Example:</strong> What is the efficiency of a Class C amplifier with P_D(avg) = 2 mW for V_CC = 24 V and R_c = 100 Ω?</p>
+<ul><li>P_out = 0.5 V_CC² / R_c = 0.5 · 24² / 100 Ω = 2.88 W</li><li>%η = 2.88 W / (2.88 W + 2 mW) · 100 = <strong>99.93%</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-11.jpg" width="1152" height="1598" loading="lazy" decoding="async" alt="Handwritten notes page: collector current pulses and sinusoidal output in the tank circuit, maximum power and efficiency example"><figcaption>Tank circuit output and efficiency example</figcaption></figure>
+<h2 id="class-d-power-amplifiers">Class D power amplifiers</h2>
+<p>Class D amplifiers are designed to operate with digital or pulse-type signals. Their efficiency is above 90%. In a Class D amplifier, the ac sinusoidal signal must first be converted into a pulse-type waveform, and the amplifier output must be converted back to its original form before being delivered to the load.</p>
+<p>The input signal is compared with a sawtooth signal; the result is a digital waveform consisting of pulses that vary between 0 and +5 V, with widths that vary according to the input signal. Block diagram of a Class D amplifier: <strong>sawtooth signal generator</strong> and <strong>V_i</strong> → <strong>comparator</strong> → <strong>amplifier</strong> → <strong>low-pass filter</strong> (digital-to-sinusoidal conversion) → <strong>V_o</strong>; there is a <strong>feedback</strong> path from the output to the input.</p>
+<figure class="yazi-gorsel"><img src="../s-12.jpg" width="1137" height="1460" loading="lazy" decoding="async" alt="Handwritten notes page: comparison with a sawtooth in Class D, pulse train and block diagram"><figcaption>Class D amplifier and block diagram</figcaption></figure>
+<h2 id="amplifier-distortion">Amplifier distortion</h2>
+<p>Any signal that varies over an interval of less than 360° has distortion. A sinusoidal signal varying positively and negatively over 360° has a single frequency, whereas a distorted signal has multiple frequency components, each with a different amplitude. These are called <strong>harmonic components</strong> or <strong>harmonics</strong>. For example, a signal that is originally 1000 Hz has, after distortion, a frequency component at 1000 Hz and harmonic components at 2 kHz, 3 kHz, 4 kHz, and so on. The original signal frequency (1 kHz) is called the <strong>fundamental frequency</strong>, and its integer multiples are called <strong>harmonics</strong>: the 2 kHz component is the second harmonic, and the 3 kHz component is the third harmonic.</p>
+<p><strong>Harmonic distortion:</strong> n-th harmonic distortion in % = <strong>%D_n = (|A_n| / |A₁|) × 100%</strong> (A₁: amplitude of the fundamental frequency, A_n: amplitude of the n-th frequency component)</p>
+<p><strong>Total harmonic distortion:</strong> <strong>%THD = √(D₂² + D₃² + D₄² + …) × 100%</strong></p>
+<p><strong>Example:</strong> Calculate the percent harmonic distortions and the THD of a signal whose fundamental amplitude is 2.5 V, second harmonic amplitude is 0.25 V, third harmonic amplitude is 0.1 V, and fourth harmonic amplitude is 0.05 V.</p>
+<ul><li>%D₂ = (0.25 V / 2.5 V) × 100 = 10%; D₃ = 4%; D₄ = 2%</li><li>%THD = √(0.10² + 0.04² + 0.02²) × 100 = <strong>10.95%</strong></li></ul>
+<h3 id="power-of-a-distorted-signal">Power of a distorted signal</h3>
+<ul><li>Power produced by the fundamental frequency across the load resistance (R_C): P₁ = I₁² R_C / 2</li><li>Total power produced by all harmonics: P = (I₁² + I₂² + I₃² + …) R_C / 2</li><li><strong>P = (1 + D₂² + D₃² + …) I₁² R_C / 2 = (1 + THD²) P₁</strong></li></ul>
+<p>A distorted signal with harmonic components can be represented as the combination of the fundamental sinusoidal component V₁ sin ωt, the second harmonic −V₂ cos 2ωt, and the third harmonic V₃ sin 3ωt.</p>
+<figure class="yazi-gorsel"><img src="../s-14.jpg" width="1152" height="1368" loading="lazy" decoding="async" alt="Handwritten notes page: decomposition of a distorted signal into fundamental, second and third harmonic components"><figcaption>Harmonic components of a distorted signal</figcaption></figure>
+<h2 id="thermal-effects-in-power-transistors">Thermal effects in power transistors</h2>
+<p>As the transistor's temperature rises, the amount of power it can dissipate decreases. Typically the maximum junction temperature is 150–200 °C for silicon and 100–110 °C for germanium. The average power dissipation is <strong>P_D = V_CE · I_C</strong>. This power value is the power the transistor can dissipate at its room-temperature (25 °C) operating temperature; as the temperature increases, the power rating decreases:</p>
+<p><strong>P_D(temp₁) = P_D(temp₀) − (temp₁ − temp₀) · (derating factor)</strong></p>
+<p><strong>Example:</strong> A transistor has a maximum power of 80 W at 25 °C. If the derating factor above 25 °C is 0.5 W/°C, find its power rating at 125 °C.</p>
+<ul><li>P_D(125 °C) = P_D(25 °C) − (125 °C − 25 °C) · (0.5 W/°C) = 80 W − 50 W = <strong>30 W</strong></li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem311-guc-yukselteci-notlari.pdf" download>eem311-guc-yukselteci-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 3.2 MB · 15 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem311-guc-yukselteci-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.2 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

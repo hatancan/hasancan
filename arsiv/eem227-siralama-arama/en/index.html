@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Data Structures: Sorting and Searching Algorithms (Week 4) — hasancan.net</title>
+<meta name="description" content="Week 4 lecture notes and programs for EEM227 Data Structures (Lecturer Oğul Göçmen, October 2007): bubble sort, selection sort, quick sort, shell sort, sequential search, binary search, and merge algorithms; with C and vector-template C++ code.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-siralama-arama/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem227-siralama-arama/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem227-siralama-arama/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem227-siralama-arama/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Data Structures: Sorting and Searching Algorithms (Week 4)">
+<meta property="og:description" content="Week 4 lecture notes and programs for EEM227 Data Structures (Lecturer Oğul Göçmen, October 2007): bubble sort, selection sort, quick sort, shell sort, sequential search, binary search, and merge algorithms; with C and vector-template C++ code.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-siralama-arama/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Data Structures: Sorting and Searching Algorithms (Week 4)", "description": "Week 4 lecture notes and programs for EEM227 Data Structures (Lecturer Oğul Göçmen, October 2007): bubble sort, selection sort, quick sort, shell sort, sequential search, binary search, and merge algorithms; with C and vector-template C++ code.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-siralama-arama/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "eem227-siralama-arama.zip", "contentUrl": "https://hasancan.net/arsiv/eem227-siralama-arama/eem227-siralama-arama.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM227 Data Structures: Sorting and Searching Algorithms (Week 4)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem227">EEM227</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#sorting-and-searching-algorithms">Sorting and searching algorithms</a></li><li><a href="#bubble-sort-algorithm">Bubble sort algorithm</a></li><li><a href="#selection-sort-algorithm">Selection sort algorithm</a></li><li><a href="#quick-sort-algorithm">Quick sort algorithm</a></li><li><a href="#shell-sort-algorithm">Shell sort algorithm</a></li><li><a href="#searching-algorithms">Searching algorithms</a></li><li><a href="#merge-algorithm">Merge algorithm</a></li><li><a href="#additional-programs-in-the-folder-with-stl-vector">Additional programs in the folder (with STL vector)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM227 Data Structures: Sorting and Searching Algorithms (Week 4)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 21.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>week 4 lecture note</strong> of the Fall 2007 <strong>EEM227 Data Structures</strong> course at Başkent University: sorting and searching algorithms. Prepared by <strong>Lecturer Oğul Göçmen</strong>, dated 21 October 2007. The text of the note and the example programs are below; at the end there are also additional programs written with the STL (vector) from the same week's folder. The PDF of the lecture note and all source files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="sorting-and-searching-algorithms">Sorting and searching algorithms</h2>
+<p>Various sorting algorithms have been developed to sort the elements of an unordered array from smallest to largest or from largest to smallest, that is, to put them in order. Search operations are also easier on sorted data. The most commonly used sorting algorithms are the following:</p>
+<ol><li>Bubble sort</li><li>Shell sort (sorting by repeated halving)</li><li>Selection sort</li><li>Quick sort</li></ol>
+<h2 id="bubble-sort-algorithm">Bubble sort algorithm</h2>
+<p>Each element in the array is compared in turn with the element that follows it, and they are swapped if necessary. The sorting process continues as long as swaps occur. When analyzing the efficiency of any sorting method, one looks at how many comparisons and swaps (exchanges) are made. In bubble sort the number of comparisons is always the same. Even if the given array is already sorted, the two for loops used repeat the stated number of times. This means that the method makes (n² – n)/2 comparisons. Here n is the number of elements to be sorted. This formula is obtained by considering that the outer loop runs n-1 times and the inner loop runs n/2 times on average.</p>
+<p>Bubble sort is said to be an n² algorithm, because its running time is proportional to the square of the number of elements it sorts. Therefore, it is an algorithm whose processing time grows large when the number of array elements is large. For a completely disordered data structure, that is, for the worst case, the Big-O notation of this algorithm is O(n²).</p>
+<p>(n-1) + (n-2) + … + 2 + 1 = n·(n-1)/2 = O(n²)</p>
+<p><em>Note: In the lecture note this sum is written as n·(n-2)/2; the correct form is n·(n-1)/2 (the same as (n² – n)/2 above).</em></p>
+<p>As a special case, if a certain portion of the data is already sorted, and c of the n data items are not sorted, the complexity of the algorithm is O(cn).</p>
+<h3 id="example-1-1-sorting-an-array-of-random-elements-with-bubble-sort">Example 1.1: sorting an array of random elements with bubble sort</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+//--------------------------- bubbleSort -----------------------------
+//
+// Purpose  : To sort the given values from smallest to largest
+//
+// Input parameter : The vector in which the values are stored
+//
+// Return value : void
+//
+// In this function, the sorting is implemented with the Bubble Sort
+// algorithm.
+//
+//-----------------------------------------------------------------------
+
+void bubbleSort ( int dizi[],int size)
+{
+      int temp;
+// In each iteration, the for loop starts from the first of the unsorted
+// elements and compares each element with its right neighbor. If it has
+// a value greater than its neighbor, it is swapped with it.
+      for (int i = size; i &gt; 2; i --)
+      {
+// Here i indicates the number of unsorted elements, that is,
+// the elements up to the (i-1)th term are not yet sorted.
+// Each of the unsorted elements is compared with its right neighbor.
+// If its value is greater than its neighbor's, it is swapped with it.
+// Since the largest unsorted element is swapped with all elements up
+// to the (i-1)th term, it reaches the beginning of the sorted elements.
+// Since each of the elements that were already sorted has a greater
+// value than this element, this element is now sorted as well.
+            for (int j = 0; j &lt; i - 1; j ++)
+            {
+            // Swaps with its neighbor. (swap)
+                  if (dizi[j] &gt; dizi[j + 1])
+                  {
+                        temp = dizi[j + 1];
+                        dizi[j + 1] = dizi[j];
+                        dizi[j] = temp;
+                  }
+            }
+      }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+     int d[20];
+
+// A random array of 20 elements is created.
+     for (int i = 0; i &lt; 20; i ++)
+     d[i]=(rand () % 1000);
+     bubbleSort (d,20);
+
+     for (int i = 0; i &lt; 20; i ++)
+     cout&lt;&lt;d[i]&lt;&lt;" ";
+     cout&lt;&lt;endl;
+     system("pause");
+     return 0;
+}</code></pre>
+<p><em>Note: Because the outer loop condition is <code>i &gt; 2</code>, the last pass (the i = 2 step, which compares only <code>dizi[0]</code> and <code>dizi[1]</code>) is never performed; the first two elements may remain in reverse order. For example, the array {3, 2, 1} remains {2, 1, 3}. The condition should be <code>i &gt; 1</code>. The same error is also present in Example 1.2 and in BubbleSortSTL.cpp in the folder.</em></p>
+<h3 id="example-1-2-bubble-sort-with-the-vector-template">Example 1.2: bubble sort (with the vector template)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+template &lt;class T&gt;
+void bubbleSort (vector&lt;T&gt;&amp; dizi)
+{     for (int i = dizi.size (); i &gt; 2; i --)
+      { for (int j = 0; j &lt; i - 1; j ++)
+            { if (dizi[j] &gt; dizi[j + 1])
+                  {     T temp = dizi[j + 1];
+                        dizi[j + 1] = dizi[j];
+                        dizi[j] = temp;
+                  }
+            }
+      }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+      vector&lt;int&gt; D;
+
+// A random array of 20 elements is created.
+      for (int i = 0; i &lt; 20; i ++) D.push_back (rand () % 10);
+      bubbleSort (D);
+      return 0;
+}</code></pre>
+<h2 id="selection-sort-algorithm">Selection sort algorithm</h2>
+<p>In selection sort, if the array is to be sorted from smallest to largest, the first element is taken and the smallest-valued element among the rest is searched for; if one is found, it is swapped with the first element. Then the smallest of the remaining n-1 elements is found and swapped with the second element. The process continues in this way. This method also requires (n² – n)/2 comparisons. Even though the number of comparisons is the same as in bubble sort, the average number of swaps is lower.</p>
+<p>T(n) = 2·(n-1) + 2·(n-2) + 2·(n-3) + … + 2·(n-(n-2)) + 2·(n-(n-1)) = 2·((n-1) + (n-2) + (n-3) + … + 2 + 1) (twice the sum of the first n-1 integers) = 2·((n-1)·n/2) = n² – n</p>
+<p>Therefore, the complexity of this algorithm is O(n²).</p>
+<h3 id="example-2-1-sorting-from-smallest-to-largest-with-selection-sort-c">Example 2.1: sorting from smallest to largest with selection sort (C)</h3>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include&lt;stdio.h&gt;
+/* selection sort ile diziyi kucukten buyuye dogru siralar */
+int main(void)
+{
+int d[10];
+int i,j,n,min,yer;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf(" dizi elemanlarini giriniz \n");
+for (i=0;i&lt;n;i++)
+   scanf("%d",&amp;d[i]);
+for(i=0;i&lt;n-1;i++)
+{
+   yer=i;
+   min=d[i];
+     for(j=i+1;j&lt;n;j++)
+         if(d[j]&lt;min)
+         {
+              yer=j;
+              min=d[j];
+          }
+       d[yer]=d[i];
+       d[i]=min;
+     }
+  printf(" sirali dizi \n\n");
+
+for(i=0;i&lt;n;i++)
+printf("%4d",d[i]);
+
+return 0;
+ }</code></pre>
+<h3 id="example-2-2-selection-sort-with-the-vector-template">Example 2.2: selection sort (with the vector template)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+//--------------------------- selectionSort -----------------------------
+//
+// Purpose  : To sort the given values from smallest to largest
+//
+// Input parameter : The vector in which the values are stored
+//
+// Return value : void
+//
+// In this function, the sorting is implemented with the Selection Sort
+// algorithm.
+//
+//-----------------------------------------------------------------------
+template &lt;class T&gt;
+void selectionSort (vector&lt;T&gt;&amp; dizi)
+{
+      int minIndex;
+
+       // In each iteration, the for loop finds the smallest among the
+       // unsorted elements and stores the position of this value in the
+       // vector in the variable named minIndex.
+       for (int i = 0; i &lt; dizi.size () - 1; i ++)
+       {
+             minIndex = i;
+
+              // In the unsorted part of the vector (from i+1 onward),
+              // the smallest-valued element is found. First, the first
+              // element of the unsorted part is assumed to be the
+              // smallest. Starting from this element, the other elements
+              // are examined. If a smaller value is encountered, the
+              // position of this element is now assigned to the variable
+              // minIndex. Thus the smallest element in the unsorted part
+              // is found.
+              for (int j = i + 1; j &lt; dizi.size (); j ++)
+                    if (dizi [minIndex] &gt; dizi [j]) minIndex = j;
+
+              // swap operation
+              // This newly found element is swapped with the first
+              // unsorted element. If both are already the same element,
+              // this exchange is not needed.
+              if (minIndex != i)
+              {
+                    T temp = dizi[i];
+                    dizi[i] = dizi[minIndex];
+                    dizi[minIndex] = temp;
+              }
+       }
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+      vector&lt;int&gt; D;
+
+       // A random array of 20 elements is created.
+       for (int i = 0; i &lt; 20; i ++) D.push_back (rand () % 10);
+
+       selectionSort (D);
+
+       return 0;
+}</code></pre>
+<h2 id="quick-sort-algorithm">Quick sort algorithm</h2>
+<p>This is known as the best of the improved sorting algorithms. In its general operation, a value called the comparand is chosen and then the array is divided into two. Elements greater than or equal to the comparand are placed on one side, and smaller ones on the other side. This process is repeated on each remaining partition. The comparand is either chosen at random or computed as the average of the values of a small number of elements in the array.</p>
+<p>For the quick sort algorithm, the average number of comparisons can be given as n log n and the average number of swaps as n/6 log n. The point to watch in this method is choosing the comparand well. If the value compared against is the largest value in each partition, the method will slow down. Choosing a sorting algorithm suited to the structure of the data will be the right approach. Although quick sort is the most efficient algorithm, it may not be efficient on arrays with few elements because of its repeated calls. For such arrays (100 elements or fewer), bubble sort or selection sort will give better results.</p>
+<h3 id="example-3-1-sorting-strings-with-quick-sort">Example 3.1: sorting strings with quick sort</h3>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include&lt;iomanip&gt;
+/*karakter dizisini quick sort ile siralar */
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+void quick_str(char dizi[][10],int say);
+void qs_string(char dizi[][10],int sol,int sag);
+char str[][10]={"tulay","pelin","aysu","can","beril","ogul"};
+int main(void)
+{
+
+int i;
+quick_str(str,sizeof(str));
+printf("siralanmis dizi\n");
+for (i=0;i&lt;sizeof(str);i++)
+printf("%s\n",str[i]);
+system("pause");
+return 0;
+
+}
+
+void quick_str(char dizi[][10],int say)
+{
+qs_string(dizi,0,say-1);
+}
+
+void qs_string(char dizi[][10],int sol,int sag)
+{
+int i,j;
+char *x;
+char yedek[10];
+i=sol;j=sag;
+x=dizi[(sol+sag)/2];
+do {
+  while((strcmp(dizi[i],x)&lt; 0) &amp;&amp; (i&lt; sag))i++;
+  while((strcmp(dizi[j],x)&gt; 0) &amp;&amp; (j &gt; sol))j--;
+      if(i &lt;= j)
+        {
+       strcpy( yedek,dizi[i]);
+       strcpy( dizi[i],dizi[j]);
+       strcpy( dizi[j],yedek);
+          i++; j--;
+        }
+     }while(i &lt;= j);
+     if(sol &lt; j) qs_string(dizi,sol,j);
+     if(i &lt; sag) qs_string(dizi,i,sag);
+}</code></pre>
+<p>Expected sorted output: aysu, beril, can, ogul, pelin, tulay.</p>
+<p><em>Note: <code>sizeof(str)</code> gives the size of the array in bytes, not the number of elements (6 × 10 = 60). Both in the <code>quick_str</code> call and in the printing loop, <code>sizeof(str)/sizeof(str[0])</code> (that is, 6) should be used as the element count; otherwise the array bounds are exceeded. Also, the pivot <code>x</code> is not a copy but a pointer to a row in the array; since the contents of that row can change during swaps, it is safer to first copy the pivot into a separate array such as <code>yedek</code>.</em></p>
+<h3 id="example-3-2-quick-sort-with-the-vector-template">Example 3.2: quick sort (with the vector template)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+//---------------------------- quickSort --------------------------------
+//
+// Purpose  : To sort the given values from smallest to largest
+//
+// Input parameter : The vector in which the values are stored
+//
+//-----------------------------------------------------------------------
+
+template &lt;class T&gt;
+void quickSort (vector&lt;T&gt;&amp; dizi)
+{
+      quickSort (dizi, 0, dizi.size () - 1);
+}
+
+//---------------------------- quickSort --------------------------------
+//
+// Input parameters : The vector in which the values are stored. Two
+//                    variables named sol and sag that indicate which
+//                    range of this vector we are interested in. A pivot
+//                    will be chosen from within this range, and this
+//                    range will be divided into two parts.
+//
+//-----------------------------------------------------------------------
+
+template &lt;class T&gt;
+void quickSort (vector&lt;T&gt;&amp; dizi, int sol, int sag)
+{
+      int x = sol;
+      int y = sag;
+      T pivot = dizi[x]; // The first element of the given range is chosen as the pivot
+
+       // Elements greater than the pivot are moved to the right side,
+       // and elements smaller than the pivot are moved to the left side.
+       // At the end, the pivot is placed in the middle of the two new
+       // groups formed.
+       while (x &lt; y)
+       {
+             // Find the first element on the right smaller than the pivot
+             while ((dizi[y] &gt;= pivot) &amp;&amp; (x &lt; y)) y --;
+
+              // Move this element to the left
+              if (x != y)
+              {
+                    dizi[x] = dizi[y];
+                    x ++;
+              }
+
+              // Find the first element on the left greater than the pivot
+              while ((dizi[x] &lt;= pivot) &amp;&amp; (x &lt; y)) x ++;
+
+              // move this element to the right
+              if (x != y)
+              {
+                    dizi[y] = dizi[x];
+                    y --;
+              }
+       }
+
+       dizi[x] = pivot; // the pivot has been moved here
+
+       int pivotIndis = x; // the new position of the pivot
+
+       // Elements smaller than the pivot are now in the range [sol,pivotIndis-1].
+       // Elements greater than the pivot are now in the range [pivotIndis+1,sag].
+       // For each of these two ranges, if the length of the range is greater
+       // than one, the quickSort function is called again recursively
+
+       if (sol + 1 &lt; pivotIndis)
+             quickSort (dizi, sol, pivotIndis - 1); // left side of the pivot
+
+       if (sag - 1 &gt; pivotIndis)
+             quickSort (dizi, pivotIndis+1, sag); // right side of the pivot
+}
+
+//------------------------------ main -----------------------------------
+
+int main()
+{
+      vector&lt;int&gt; D;
+
+       // A random array of 100 elements is created.
+       for (unsigned int i = 0; i &lt; 100 ; i ++) D.push_back (rand ()%10);
+
+       quickSort (D);
+
+       return 0;
+}</code></pre>
+<h2 id="shell-sort-algorithm">Shell sort algorithm</h2>
+<p>Although this sort takes its name from D. L. Shell, who developed the algorithm, it is referred to by this name because its way of working resembles seashells (shell) stacked on top of one another. To sort n elements, the running time of the method can be said to be proportional to n^1.2. In this case, shell sort is seen to be an improved algorithm compared with n-squared algorithms.</p>
+<p>There is no code for shell sort in the lecture note; <code>ShellSort.cpp</code> in the folder sorts the array from largest to smallest. The gap (<code>orta</code>) is first taken as (n-1)/2 and is halved in each round; for each gap, elements that far apart are compared and swapped if necessary.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include &lt;stdio.h&gt;
+/* shell sort algoritmasi ile buyukten kucuge siralama yapar */
+int main (void)
+{
+int a[10],i,j,n,orta,k,yedek;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf("Diziyi  giriniz\n");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+orta=(n-1)/2;
+     while(orta &gt;0){
+	  for(i=orta+1;i&lt;n;i++){
+              j=i-orta;
+	      while(j&gt;0){
+                k=(j-1)+orta;
+	        if(a[j-1]&gt;=a[k]) j=0;
+	        else {
+		yedek=a[j-1];
+		a[j-1]=a[k];
+                a[k]=yedek;
+                j=j-orta;
+	       }
+	    }
+	 }
+    orta=orta/2;
+    }
+printf("Siralanmis Dizi\n");
+for(i=0;i&lt;n;i++)
+printf("%3d",a[i]);
+scanf("%d",&amp;n);
+return 0;
+}</code></pre>
+<p><em>Note: Since the initial gap is <code>(n-1)/2</code>, for n = 2 the gap is 0 and the loop never runs; a two-element array is not sorted. The initial gap should be <code>n/2</code>.</em></p>
+<h2 id="searching-algorithms">Searching algorithms</h2>
+<p>Searching for information in an unsorted array is possible in two ways: a sequential search is performed that either ends when an equal element is found, starting from the first element, or ends the search when the end of the array is reached. If a sorted array is used, results can be obtained in a shorter time with the binary search algorithm.</p>
+<h3 id="sequential-search">Sequential search</h3>
+<p>This is a simple algorithm that searches an array with a known number of elements until the desired information is found.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code># include &lt;stdio.h&gt;
+# include &lt;stdlib.h&gt;
+/* sirali arama yapar */
+int sirali_ara (int a[],int n)
+{
+int sonuc,x,j;
+printf("aranacak sayiyi Giriniz:\n");
+scanf("%d",&amp;x);
+for(j=0;j&lt;n;j++){
+if(a[j]==x){
+sonuc=j;
+break;
+}
+else sonuc=-1;
+}
+return(sonuc);
+}
+int main (void)
+{
+int n,i,dizi[10],x,bul;
+printf("dizinin eleman sayisini giriniz &lt; 10:\n");
+scanf("%d",&amp;n);
+printf("dizi elemanlarini Giriniz:\n");
+for (i=0;i&lt;n;i++)
+scanf("%d",&amp;dizi[i]);
+bul=sirali_ara(dizi,n);
+if(bul==-1)printf(" aranan sayi dizide yer almiyor\n");
+else
+printf(" aranan sayi dizinin %d . elemanidir",bul);
+return 0;
+}</code></pre>
+<p><em>Note: In the lecture note, two comparisons are written as <code>= =</code> (with a space in between); this does not compile in C and should be <code>==</code> (the corrected version is shown above).</em></p>
+<h3 id="binary-search">Binary search</h3>
+<p>In this method, the element exactly in the middle of the sorted array is taken first and compared with the number being searched for. If the searched number is greater than the middle element, the middle element of the second half is found and compared again. The process continues until the searched number is found. In binary search, the number of comparisons in the worst case is log₂n.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code>#include &lt;stdio.h&gt;
+/* binary search algoritmasi ile sirali dizide arama yapar */
+int main (void)
+{
+int a[10],i,bas,son,x,orta,bul,n;
+printf(" dizinin eleman sayisini &lt; 10 giriniz \n");
+scanf("%d",&amp;n);
+printf("Diziyi sirali olarak giriniz\n");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+printf("\n aranacak sayıyı giriniz\n");
+scanf("%d",&amp;x);
+     bas=0;son=n;
+     bul=0;
+     while(bas &lt;= son &amp;&amp; bul==0){
+        orta=(bas+son)/2;
+        if(x==a[orta]) bul=1 ;
+        else
+        if(x&gt;a[orta]) bas=orta+1;
+        else
+          son=orta-1;
+        }
+     if(x==a[orta]) printf("aranan sayı%3d dizideki indisi:%3d",x,orta);
+     else printf("bulunamadı");
+scanf("%d",&amp;x); // ekranı durdurma
+return 0;
+}</code></pre>
+<p><em>Note: The last index should be <code>son=n-1</code>, not <code>son=n</code>; if the searched number is greater than the largest element in the array, the program reads the element <code>a[n]</code>, which is outside the array.</em></p>
+<h2 id="merge-algorithm">Merge algorithm</h2>
+<p>This is an algorithm that merges two sorted input arrays.</p>
+<pre class="kaynak" data-dosya="program.c - Not Defteri"><code># include &lt;stdio.h&gt;
+/* merge algoritmasi ile iki sirali diziyi birlestirir */
+// Not Her iki girilen dizide kendi içinde sıralı olmalıdır...
+
+int main (void)
+{
+int a[10],b[10],d[20];
+int n,m,i,j,l;
+printf("ilk dizinin boyutu &lt; 10 ?\n");
+scanf("%d",&amp;n);
+printf("ikinci dizinin boyutu &lt;10 ?\n");
+scanf("%d",&amp;m);
+printf(" birinci dizinin elemanlari\n ");
+for(i=0;i&lt;n;i++)
+scanf("%d",&amp;a[i]);
+printf(" ikinci dizinin elemanlari\n ");
+for(i=0;i&lt;m;i++)
+scanf("%d",&amp;b[i]);
+a[n]=b[m-1];
+b[m]=a[n-1];
+i=0;
+j=0;
+for(l=0;l&lt;n+m;l++)
+   if(a[i]&lt;=b[j]){
+      d[l]=a[i];
+      i++;
+      }
+      else
+      { d[l]=b[j];
+         j++;
+      }
+printf(" birlestirilmis dizi \n\n" );
+for(i=0;i&lt;n+m;i++)
+printf("%5d",d[i]);
+scanf("%d",&amp;n); // ekranı durdurmak için
+return 0; }</code></pre>
+<p>The program places the last (largest) element of the other array at the end of each array as a "sentinel" value; thus, when one of the arrays is exhausted, reading continues from the other without a separate bounds check.</p>
+<p><em>Note: If, when the first array is exhausted, values equal to the sentinel remain in the second array, the sentinel may still be selected and <code>i</code> may advance beyond the array; also, if 10 is entered as the size, <code>a[10]</code>/<code>b[10]</code> overflows. In a safe version, the loop is written with the conditions <code>i&lt;n</code> and <code>j&lt;m</code>.</em></p>
+<h2 id="additional-programs-in-the-folder-with-stl-vector">Additional programs in the folder (with STL vector)</h2>
+<p>In the same week's folder, besides the .cpp files of the programs in the lecture note, there are a few additional programs that use the STL vector.</p>
+<h3 id="stl-and-vector">STL and vector</h3>
+<p>The comment at the beginning of the <code>STL.cpp</code> file:</p>
+<blockquote><p>STL (Standard Template Library) is a general set of routines used to process data. Vector, deque, and list are container classes.</p></blockquote>
+<blockquote><p>Vectors can be thought of as smart arrays. When adding or removing data, vectors perform memory allocation on your behalf by expanding and shrinking the vector size. You can use vectors very much like arrays by accessing vector elements with the [] operator. Such random accesses are very fast with vectors. Adding new elements to the end (back) of a vector is also fast. In such a case, the vector size is automatically increased to hold the new data item.</p></blockquote>
+<blockquote><p>To define the vector D, the vector's default constructor (without arguments) is used. As in all STL containers, the template form is used to specify the variable type the container will hold (the int type in this example). The size of the container is not stated explicitly; therefore the container starts from 0.</p></blockquote>
+<blockquote><p>The push_back() member function adds the parameter it takes to the end of the vector. The back (end) of the vector is where the element with the highest index number is located. The front of the vector is where the index number is 0, and it is not used to add new elements.</p></blockquote>
+<blockquote><p>As soon as the vector starts to contain data, this data becomes accessible for reading and writing by means of the overloaded [] operator, just as if it were in an array. The size() member function returns the number of elements currently in the container.</p></blockquote>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;typename T&gt;
+void foo(vector&lt;T&gt;&amp; dizi)
+{
+  for(int i=0;i&lt;dizi.size();i++)
+    cout&lt;&lt;dizi[i]&lt;&lt;" ";
+}
+
+int main()
+{
+    vector&lt;int&gt; v;
+    v.push_back(10);
+    v.push_back(112);
+    v.push_back(15);
+    v.push_back(56);
+    v.push_back(17);
+    v.push_back(19);
+    v.push_back(33);
+
+    foo(v);
+
+    system("pause");
+    return 0;
+}</code></pre>
+<pre class="kod"><code>10 112 15 56 17 19 33</code></pre>
+<h3 id="sequential-search-with-the-vector-template">Sequential search (with the vector template)</h3>
+<p><code>seqSearch</code> returns the index of the searched value if it finds it in the range [first, last), and returns <code>son</code> (the last value) if it does not.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Sequential Search...
+//-----------------------
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt; // for the setw function
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;class T&gt;
+int seqSearch (vector&lt;T&gt;&amp; dizi,int ilk, int son, int aranan)
+{
+	int i=ilk;
+	while(i != son &amp;&amp; dizi[i] != aranan)
+	i++;
+
+	return i;
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+    vector&lt;int&gt; D;
+    int x;
+
+    // A random array of 20 elements is created.
+	for (int i = 0; i &lt; 10; i ++)
+     D.push_back (rand () % 150);
+
+	for(int i=0;i&lt;D.size();i++)
+	cout&lt;&lt;setw(4)&lt;&lt;'['&lt;&lt;i&lt;&lt;']'&lt;&lt;setw(5)&lt;&lt;D[i]&lt;&lt;"\n";
+	cout&lt;&lt;"Aranacak Deger ? ";
+	cin&gt;&gt;x;
+	cout&lt;&lt;"Indis No : "&lt;&lt; seqSearch(D,0,D.size(),x)&lt;&lt;endl;
+    system("pause");
+	return 0;
+}</code></pre>
+<p>Sample run from the file (10 random values; if not found, it prints "Indis No : 10"):</p>
+<pre class="kod"><code>   [0]   41
+   [1]   17
+   [2]   34
+   [3]  100
+   [4]  119
+   [5]  124
+   [6]   78
+   [7]  108
+   [8]  112
+   [9]   14
+Aranacak Deger ? 119
+Indis No : 4
+Press any key to continue . . .</code></pre>
+<h3 id="binary-search-with-the-vector-template">Binary search (with the vector template)</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Binary  Search...
+// Code for finding the searched value in a sorted array
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt; // for the setw function
+#include &lt;vector&gt;
+
+using namespace std;
+
+template &lt;class T&gt;
+int binSearch (vector&lt;T&gt;&amp; dizi,int ilk, int son, int aranan)
+{
+	int orta; // index of the midpoint
+	T ortadeger; // value to be assigned to dizi[orta]
+	int origSon=son; // save the original value of son
+
+	while(ilk &lt; son)
+	{
+    orta=(ilk+son)/2;
+	ortadeger=dizi[orta];
+
+	if(aranan==ortadeger)
+	   return orta;
+    else if ( aranan &lt; ortadeger)
+       {
+       son=orta; // search in the lower sublist
+       binSearch (dizi,ilk,son,aranan);
+       }
+    if ( aranan &gt; ortadeger)
+       {
+       ilk=orta+1; // search in the upper sublist
+       binSearch (dizi,ilk,son,aranan);
+       }
+    }
+    return origSon; // the searched value was not found...
+}
+
+//------------------------------ main -----------------------------------
+
+int main ()
+{
+    vector&lt;int&gt; D;
+    int x;
+
+    // A sorted array of 20 elements is created.
+	for (int i = 0; i &lt; 20; i ++)
+     D.push_back (i*10-3);
+
+	for(int i=0;i&lt;D.size();i++)
+	cout&lt;&lt;setw(4)&lt;&lt;'['&lt;&lt;i&lt;&lt;']'&lt;&lt;setw(6)&lt;&lt;D[i]&lt;&lt;"\n";
+	cout&lt;&lt;"Aranacak Deger ? ";
+	cin&gt;&gt;x;
+	cout&lt;&lt;"Indis No : "&lt;&lt; binSearch(D,0,D.size(),x)&lt;&lt;endl;
+    system("pause");
+	return 0;
+}</code></pre>
+<p>Sample run from the file (if not found, it prints "Indis No : 20"):</p>
+<pre class="kod"><code>   [0]    -3
+   [1]     7
+   [2]    17
+   [3]    27
+   [4]    37
+   [5]    47
+   [6]    57
+   [7]    67
+   [8]    77
+   [9]    87
+   [10]    97
+   [11]   107
+   [12]   117
+   [13]   127
+   [14]   137
+   [15]   147
+   [16]   157
+   [17]   167
+   [18]   177
+   [19]   187
+Aranacak Deger ? 127
+Indis No : 13
+Press any key to continue . . .</code></pre>
+<p><em>Note: The return values of the recursive <code>binSearch(...)</code> calls inside the function are not used; what actually finds the result is the <code>while</code> loop itself, since <code>ilk</code> and <code>son</code> are updated. These calls needlessly repeat the same search.</em></p>
+<h3 id="other-files">Other files</h3>
+<ul><li><code>BubbleSortSTL.cpp</code>: the vector version of bubble sort; it prints the first 10 elements before and after sorting.</li><li><code>STLSelectionSort.cpp</code>: the vector version of selection sort; while sorting an array decreasing from 10 to 1, it prints the array at the end of each pass.</li><li><code>QuickSortTemplate.cpp</code>: the non-template version of the quick sort in Example 3.2, written with an int array; it sorts 20 random numbers and prints them.</li></ul>
+<p><em>Note: In <code>BubbleSortSTL.cpp</code>, the <code>for(int i=10;i&gt;0;i++)</code> loop that fills the vector never terminates (it should be <code>i--</code>). In this file and in <code>STLSelectionSort.cpp</code>, the functions are declared to return <code>T</code> but have no <code>return</code> (they should be <code>void</code>). In <code>QuickSortTemplate.cpp</code>, the call <code>quickSort(d,0,20)</code> passes 20 as the last index; for a 20-element array the last index is 19.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem227-siralama-arama.zip" download>eem227-siralama-arama.zip</a></p>
+              <p class="kucuk">ZIP archive · 306 KB · 21.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem227-siralama-arama.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (306 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

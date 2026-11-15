@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Introduction to Microprocessors and Simple CPU Design — hasancan.net</title>
+<meta name="description" content="Logic circuits, the instruction cycle, CPU units, and address, data, and control buses; introductory notes from different years.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-islemciye-giris/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-islemciye-giris/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-islemciye-giris/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-islemciye-giris/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Introduction to Microprocessors and Simple CPU Design">
+<meta property="og:description" content="Logic circuits, the instruction cycle, CPU units, and address, data, and control buses; introductory notes from different years.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-islemciye-giris/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Introduction to Microprocessors and Simple CPU Design", "description": "Logic circuits, the instruction cycle, CPU units, and address, data, and control buses; introductory notes from different years.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-islemciye-giris/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-islemciye-giris.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-islemciye-giris/eem332-islemciye-giris.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Introduction to Microprocessors and Simple CPU Design">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.10.2004</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpu0-2013">CPU0_2013</a></li><li><a href="#cpu0-2013">CPU0_2013</a></li><li><a href="#cpu01-2013">CPU01_2013</a></li><li><a href="#cpu01-08">cpu01_08</a></li><li><a href="#cpu01-06">cpu01_06</a></li><li><a href="#what-is-a-microprocessor-and-what-units-does-it-consist-of">What Is a Microprocessor and What Units Does It Consist Of</a></li><li><a href="#microprocessor-course-for-electronics-students">MICROPROCESSOR COURSE FOR ELECTRONICS STUDENTS</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Introduction to Microprocessors and Simple CPU Design</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 28.10.2004 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the related notes and exercises from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2004–2015). Logic circuits, the instruction cycle, CPU units, and address, data, and control buses; introductory notes from different years. PDF archive copies of the documents and, where available, their source code can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="cpu0-2013">CPU0_2013</h2>
+<h3 id="eem332">EEM332</h3>
+<p>Introduction to Microprocessor Review of logic circuits</p>
+<h3 id="combinational-logic">Combinational logic</h3>
+<p>Sequential logic</p>
+<ul><li>Finite state machine (FAM)</li></ul>
+<ul><li>Memory</li></ul>
+<p>Microprocessor based system Instruction cycle Machine cycle</p>
+<h3 id="digital-circuits">Digital circuits</h3>
+<ul><li>Combinational circuit</li></ul>
+<ul><li>Sequential Circuits</li></ul>
+<p>Combinational logic: Example A hall has one lamp, three entrance doors, and a switch next to each door that can turn the lamp on and off (3 switches, one lamp). When a switch is ON (1/high), the lamp turns on (1/high); when a switch is OFF (0/Low), the lamp turns off (0/Low).</p>
+<h3 id="operating-conditions-of-the-circuit">Operating conditions of the circuit</h3>
+<h3 id="1-when-all-3-switches-are-off-the-lamp-is-off-2-when-all-3-switches-are-off-if-any">1) When all 3 switches are OFF, the lamp is off.          2) When all 3 switches are OFF, if any</h3>
+<p>switch is turned ON, the lamp turns on.</p>
+<h3 id="3-while-the-lamp-is-on-turning-the-second-switch-on-turns-the-lamp-off-4-when-all-three-switches">3) While the lamp is on, turning the second switch ON turns the lamp off.           4) When all three switches</h3>
+<p>are ON, the lamp is on.</p>
+<p>Constant switch</p>
+<h3 id="analog-digital-example">Analog‐Digital example</h3>
+<p>In the given circuit, the alarm connected to the output G can be activated depending on the voltage values coming from the sensors s1 and s2. For the alarm to be activated, the output of G must be High. Op‐amp voltage: 0 and 5 volts</p>
+<p>Comparator</p>
+<h3 id="2-57-vs1-3-18">2.57&lt; VS1&lt;3.18</h3>
+<h3 id="vs2-0-65">VS2&lt; 0.65</h3>
+<p>Sequential logic (Flip Flop: Memory element)                   Input Switch : Momentary Switch</p>
+<p>ON                                  Latching with a D-Flip Flop</p>
+<h3 id="set1">SET1</h3>
+<h3 id="u2-a">U2:A</h3>
+<h3 id="74s74">74S74</h3>
+<h3 id="r4-2">R4               2</h3>
+<h3 id="s">S</h3>
+<h3 id="d-q">D          Q</h3>
+<p>470                                                    330</p>
+<h3 id="3-led-red">3                         LED-RED</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK</code></pre>
+<h3 id="q">Q</h3>
+<h3 id="r">R</h3>
+<h3 id="led-green">LED-GREEN</h3>
+<p>10k</p>
+<h3 id="reset1">RESET1</h3>
+<h3 id="off">OFF</h3>
+<p>Elevator Example (FSM) The elevator can be at one of two floors: Ground or First. There is one button that controls the elevator, and it has two values: Up or Down. Also, there are two lights in the elevator that indicate the current floor: Red for Ground, and Green for First. At each time step, the controller checks the current floor and current input, changes floors and lights in the obvious way. FSM diagram</p>
+<h3 id="state-diagram">State diagram</h3>
+<p>State Machines A state machine is a digital circuit composed of "n" flip‐flops that are interconnected to one another and to other inputs, with Boolean logic, in order to generate 2n internal states. The movement from one state to another is determined by a combination of the Boolean logic interconnecting the flip‐flops and the inputs to the state machine. The internal states are then decoded with additional Boolean logic to provide useful outputs at required time intervals. A counter is therefore a very simple state machine.</p>
+<p>Memory</p>
+<h3 id="access-to-memory">Access to memory</h3>
+<p>Adress, Data, control Read cycle, Write cycle</p>
+<p>State machine and Microprocessor State machines are now most commonly used where microprocessor solutions are too expensive ( on very‐high‐volume, very‐low‐cost systems) or where it is necessary to perform very specific functions directly in hardware at a very high speed. The state machine is also of importance to us because it is really the basis of the modern microprocessor. In other words, a microprocessor is a generalised state machine that can be programmed to perform a specific sequence of functions. This is analogous to the PAL which is a generalised Boolean logic device that can be programmed to produce a required logic.</p>
+<p>The design of state machines can become rather complex when a large number of internal states need to be produced and it is fair to say that most modern designers would prefer to apply microprocessors or Digital Signal Processors Microprocessor System: software‐programmable state machine.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In general, we refer to a microprocessor as being a single chip that is used as</code></pre>
+<p>the CPU of a computer or computer‐based system.</p>
+<p>The microprocessor may be considered as a sophisticated state machine, A program instruction is nothing more than a specific bit pattern of ones and zeros that appears at the data port of the microprocessor. The state machine within the microprocessor has been designed to move from one state to another based upon those specific bit patterns.</p>
+<p>The hardware design of the state machine within the microprocessor defines the course of events that will take place whenever a specific bit pattern arrives at the data port of the microprocessor. The hardware "programs" that are developed by the semiconductor manufacturers are known as micro‐code. Micro‐code is the lowest possible form of programming in microprocessors and it is the micro‐code that defines the characteristics of the processor that end‐users would recognise. Micro‐code is analogous to PAL programming in that it instils the logic that defines the operational sequence for a state machine and defines how it will move from one state to another, based upon bit patterns entering via the data bus.</p>
+<p>Each cycle (tick) of the clock causes the microprocessor to jump from one internal state to another. As with other state machines, the "next state" of the microprocessor is determined by a logical combination of its current internal state, together with the condition of all the various input lines connected to it.</p>
+<p>The microprocessor is a device composed of all the other elements of</p>
+<h3 id="the-combinational-and-sequential-logic-these-elements-include">the Combinational and Sequential logic . These elements include</h3>
+<ul><li>State machines</li></ul>
+<ul><li>Counters</li></ul>
+<ul><li>Registers</li></ul>
+<ul><li>Numerical circuits (Addition, Subtraction, etc ALU)</li></ul>
+<ul><li>Boolean logic circuits (OR, AND, etc.)</li></ul>
+<ul><li>Combinational Boolean logic.</li></ul>
+<p>By utilizing these elements, at each cycle of the system clock, a microprocessor can execute a very simple operation ‐ read data in; write data out; store data in an internal register; add data contained in internal registers; compare data in internal registers and so on. So, The number of bits that a microprocessor can handle as data or instructions defines the "bit‐size" of the microprocessor. Typical sizes are 8, 16, 32 and 64 bits. Since both data and program instructions appear at the data bus of the microprocessor as a collection of ones and zeros, the microprocessor cannot differentiate between them in any way other than the sequence in which they arrive.</p>
+<h3 id="the-microprocessor">The microprocessor</h3>
+<p>(i) It is a device based upon a state machine (ii) It contains a number of registers for temporary storage of data (iii) It contains numerical and logical circuits that can perform simple data manipulations between registers (eg: ADD, OR, etc.) (iv) It contains one input port for data (the data bus) and two output ports for data (the data bus and address bus) (v) The state machine has been designed (through micro‐coding) to respond to particular bit patterns entering the data port. The specific bit patterns are the instruction set for the microprocessor (vi) The microprocessor moves from state to state at a speed determined by a "system clock" which is generally provided by another external chip (vii) It takes one or more clock cycles to execute each instruction. The number of</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clock cycles depends upon the architecture of the microprocessor (and its</code></pre>
+<p>micro‐coding) and the complexity of the instructions.</p>
+<p>Points (vi) and (vii) are most important, since they are directly related to the performance of the microprocessor.</p>
+<p>Microprocessor based system                 Address Bus ; Data Bus, Control Bus</p>
+<p>CPU function is to execute (process) information stored in memory. I/O devices, such as keyboard &amp; monitor provide a means of communicating with the</p>
+<h3 id="cpu">CPU.</h3>
+<p>The CPU is connected to memory and I/O through a group of wires called a bus. Allows signals to carry information from place to place.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In every computer there are three types of buses: Address bus; Data bus; Control bus.</code></pre>
+<p>The microcontrollers are typically used for dedicated applications such as automotive systems, home appliances,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and home entertainment systems.</code></pre>
+<p>A microprocessor does not know anything about "C"</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or Assembly Language.</code></pre>
+<ul><li>For a device (memory or I/O) to be recognized by the CPU, it must be assigned</li></ul>
+<p>an address.</p>
+<ul><li>The address assigned to a given device must be unique.</li></ul>
+<ul><li>The CPU puts the address (in binary) on the address bus &amp; decoding circuitry</li></ul>
+<p>finds the device.</p>
+<ul><li>The CPU then uses the data bus either to get data from that device or to</li></ul>
+<p>send data to it.</p>
+<ul><li>Control buses provide device read/write signals.</li></ul>
+<ul><li>To indicate if the CPU is asking for, or sending information.</li></ul>
+<h3 id="adress-bus">Adress bus</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In the address bus, information transfer takes place only in one direction, from the</code></pre>
+<p>microprocessor to the memory or I/O elements. Therefore, this is called a unidirectional bus. This bus is typically 20 to 32 bits long. The size of the address bus determines the total number of memory addresses available in which programs can be executed by the microprocessor. The address bus is specified by the total number of</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address pins on the microprocessor chip. The number of locations of memory</code></pre>
+<p>is equal to to 2x, where x is the number of address lines</p>
+<h3 id="data-bus">Data bus</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In the data bus, data can flow in both directions, that is, to or from the</code></pre>
+<p>microprocessor. Therefore, this is a bidirectional bus. In some microprocessors, the data pins are used to send other information such as address bits in addition to data. This means that the data pins are time‐shared or multiplexed. The Intel 8086 microprocessor is an example where the 20 bits of the address are multiplexed with the 16‐bit data bus and four status lines.</p>
+<h3 id="control-bus">Control bus</h3>
+<p>The control bus consists of a number of signals that are used to synchronize the operation of the individual microcomputer elements. The microprocessor sends some of these control signals to the other elements to indicate the type of operation being performed. Each microcomputer has a unique set of control signals. However, there are some control signals that are common to most microprocessors</p>
+<p>Microprocessor based system</p>
+<p>For the CPU to process information, the data must be stored in RAM or ROM. The CPU cannot get the information from the disk directly because the disk is too slow. RAM &amp; ROM are often referred to as primary memory. Disks are called secondary memory.</p>
+<p>All common microprocessor follows this sequence</p>
+<p>Microprocessor:??? The microprocessor is typically a single VLSI (Very Large‐Scale Integration) chip that contains all the registers, control unit, and arithmetic/ logic circuits of the microcomputer.</p>
+<p>Machine instruction</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Signals</code></pre>
+<p>The system clock signals are contained in the control bus. These signals generate the appropriate clock periods during which instruction executions are carried out by the microprocessor. The clock signals vary from one microprocessor to another. Some microprocessors have an internal clock generator circuit to generate a clock signal.</p>
+<p>A microprocessor chip with the main functional elements</p>
+<p>Register Section The number, size, and types of registers vary from one microprocessor to another. However, the various registers in all microprocessors carry out similar operations. The register structures of microprocessors play a major role in designing the microprocessor architectures. Also, the register structures for a specific microprocessor determine how convenient and easy it is to program this microprocessor.</p>
+<h3 id="basic-microprocessor-registers">Basic Microprocessor Registers</h3>
+<p>Instruction Register (IR). The instruction register stores instructions. The contents of an instruction register are always decoded by the microprocessor as an instruction.</p>
+<p>Program Counter (PC). The program counter contains the address of the instruction</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or operation code (op‐code). The program counter normally contains the address of</code></pre>
+<p>the next instruction to be executed.</p>
+<ul><li>Upon activating the microprocessors RESET input, the address of the first instruction</li></ul>
+<p>to be executed is loaded into the program counter.</p>
+<ul><li>The program counter contents are automatically incremented by the</li></ul>
+<p>microprocessors internal logic.</p>
+<ul><li>The size of the program counter is determined by the size of the address bus.</li></ul>
+<ul><li>Many instructions, such as JUMP and conditional JUMP, change the contents of the</li></ul>
+<p>program counter from its normal sequential address value.</p>
+<p>Memory Address Register (MAR). The memory address register contains the address of data. The microprocessor uses the address, which is stored in the memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address register, as a direct pointer to memory.</code></pre>
+<p>Accumulator (A). For an 8 bit microprocessor, the accumulator is typically an 8bit register. It is used to store the result after most ALU operations.</p>
+<p>Control Unit The main purpose of the control unit is to read and decode instructions from the program memory. To execute an instruction, the control unit steps through the appropriate blocks of the ALU based on the op‐codes contained in the instruction register. The op‐codes define the operations to be performed by the control unit in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>order to execute an instruction. The control unit interprets the contents of the</code></pre>
+<p>instruction register and then responds to the instruction by generating a sequence of enable signals</p>
+<p>RESET. This input is common to all microprocessors. When this input pin is driven to HIGH or LOW (depending on the microprocessor), the program counter is loaded with a predefined address specified by the manufacturer. For example, in the 80486, upon hardware reset, the program counter is loaded with FFFFFFF0</p>
+<p>READ/WRITE: This output line is common to all microprocessors. The status of this line tells the other microcomputer elements whether the microprocessor is performing a READ or a WRITE operation. A HIGH signal on this line indicates a READ operation and a LOW indicates a WRITE operation. Some microprocessors have separate READ and WRITE pins.</p>
+<p>READY. This is an input to the microprocessor. Slow devices (memory and I/O) use this signal to gain extra time to transfer data to or receive data from a microprocessor. The READY signal is usually an active low signal, that is, LOW means that the microprocessor is ready</p>
+<p>Interrupt Request (INT or IRQ). The external I/O devices can interrupt the microprocessor via this input pin on the microprocessor chip. When this signal is activated by the external devices, the microprocessor jumps to a special program, called the interrupt service routine.</p>
+<h3 id="inside-of-microprocessor-arithmetic-and-logic-unit-alu">Inside of Microprocessor : Arithmetic and Logic Unit (ALU)</h3>
+<p>The ALU performs all the data manipulations, such as arithmetic and logic operations, inside the microprocessor. The size of the ALU conforms to the word length of the microcomputer. This means that a 32‐bit microprocessor will have a 32‐bit ALU.</p>
+<h3 id="typically-the-alu-performs-the-following-functions">Typically, the ALU performs the following functions</h3>
+<p>Arithmetic and Logic Unit (ALU)</p>
+<h3 id="1-binary-addition-and-logic-operations">1. Binary addition and logic operations</h3>
+<h3 id="2-finding-the-ones-complement-of-data">2. Finding the ones complement of data</h3>
+<h3 id="3-shifting-or-rotating-the-contents-of-a-general-purpose-register-1-bit-to-the-left-or">3. Shifting or rotating the contents of a general‐purpose register 1 bit to the left or</h3>
+<p>right through carry</p>
+<p>An assembler translates a program written in assembly language into a machine language program. A compiler or interpreter, on the other hand, converts a high‐level language program such as C or C++ into a machine language program. Assembly or high level language programs are called source codes. Machine language programs are known as object codes.</p>
+<p>To increase the programmers efficiency in writing a machine language program, hexadecimal numbers rather than binary numbers are used Assembly Language The next programming level is to use the assembly language. Each line in an assembly</p>
+<h3 id="language-program-includes-four-fields">language program includes four fields</h3>
+<h3 id="1-label-field">1. Label field</h3>
+<h3 id="2-instruction">2. Instruction,</h3>
+<p>mnemonic,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or op‐code field</code></pre>
+<p>3 . Operand field</p>
+<h3 id="4-comment-field">4. Comment field</h3>
+<p>Assembly language</p>
+<p>An Assembly language instruction consists of a mnemonic, optionally followed by one</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or two operands.</code></pre>
+<p>Operands are the data items being manipulated. Mnemonics are commands to the CPU, telling it what to do with those items. Advantages of Assembly Language</p>
+<p>1.Shows how program interfaces with the processor, operating system, and BIOS. 2.Shows how data is represented and stored in memory and on external devices. 3.Clarifies how processor accesses and executes instructions and how instructions access and process data. 4.Clarifies how a program accesses external devices.</p>
+<h3 id="reasons-for-using-assembly-language">Reasons for using Assembly Language</h3>
+<h3 id="1-a-program-written-in-assembly-language-requires-considerably-less-memory">1.    A program written in Assembly Language requires considerably less memory</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and execution time than one written in a high –level language.</code></pre>
+<h3 id="2-assembly-language-gives-a-programmer-the-ability-to-perform-higly-technical">2. Assembly Language gives a programmer the ability to perform higly technical</h3>
+<p>tasks that would be difficult, if not impossible in a high‐level language.</p>
+<h3 id="3-although-most-software-specialists-develop-new-applications-in-high-level">3. Although most software specialists develop new applications in high‐level</h3>
+<p>languages, which are easier to write and maintain, a common practice is to recode in assembly language those sections that are time‐critical.</p>
+<h3 id="4-resident-programs-that-reside-in-memory-while-other-program-execute-and">4. Resident programs (that reside in memory while other program execute) and</h3>
+<p>interrupt service routines (that handle input and output) are almost always develop in Assembly Language.</p>
+<h2 id="cpu0-2013">CPU0_2013</h2>
+<h3 id="eem332">EEM332</h3>
+<p>Introduction to Microprocessors. Review of logic circuits</p>
+<h3 id="combinational-logic">Combinational logic</h3>
+<p>Sequential logic</p>
+<ul><li>Finite state machine (FSM)</li></ul>
+<ul><li>Memory</li></ul>
+<p>Microprocessor-based system. Instruction cycle. Machine cycle</p>
+<h3 id="digital-circuits">Digital circuits</h3>
+<ul><li>Combinational circuits</li></ul>
+<ul><li>Sequential circuits</li></ul>
+<p>Combinational logic: Example. A hall has one lamp and three entrance doors, and next to each door there is a switch that can turn the lamp on and off (3 switches, one lamp). A switch being ON (1/high) turns the lamp on (1/high); a switch being OFF (0/low) turns the lamp off (0/low).</p>
+<h3 id="operating-conditions-of-the-circuit">Operating conditions of the circuit</h3>
+<h3 id="1-when-all-3-switches-are-off-the-lamp-is-off-2-when-all-3-switches-are-off-if-any">1) When all 3 switches are OFF, the lamp is off.          2) When all 3 switches are OFF, if any</h3>
+<p>switch is turned ON, the lamp turns on.</p>
+<h3 id="3-while-the-lamp-is-on-turning-the-second-switch-on-turns-the-lamp-off-4-when-all-three-switches-are">3) While the lamp is on, turning the second switch ON turns the lamp off.           4) When all three switches are</h3>
+<p>ON, the lamp is on.</p>
+<p>Constant switch</p>
+<h3 id="analog-digital-example">Analog-digital example</h3>
+<p>In the given circuit, the alarm connected to output G can be activated depending on the voltage values coming from sensors s1 and s2. For the alarm to be activated, the output of G must be High. Op-amp voltage: 0 and 5 volts</p>
+<p>Comparator</p>
+<h3 id="2-57-vs1-3-18">2.57 &lt; VS1 &lt; 3.18</h3>
+<h3 id="vs2-0-65">VS2 &lt; 0.65</h3>
+<p>Sequential logic (Flip-flop: memory element)                   Input switch: momentary switch</p>
+<p>ON                                  Latching with a D flip-flop</p>
+<h3 id="set1">SET1</h3>
+<h3 id="u2-a">U2:A</h3>
+<h3 id="74s74">74S74</h3>
+<h3 id="r4-2">R4               2</h3>
+<h3 id="s">S</h3>
+<h3 id="d-q">D          Q</h3>
+<p>470                                                    330</p>
+<h3 id="3-led-red">3                         LED-RED</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLK</code></pre>
+<h3 id="q">Q</h3>
+<h3 id="r">R</h3>
+<h3 id="led-green">LED-GREEN</h3>
+<p>10k</p>
+<h3 id="reset1">RESET1</h3>
+<h3 id="off">OFF</h3>
+<p>Elevator Example (FSM) The elevator can be at one of two floors: Ground or First. There is one button that controls the elevator, and it has two values: Up or Down. Also, there are two lights in the elevator that indicate the current floor: Red for Ground, and Green for First. At each time step, the controller checks the current floor and current input, changes floors and lights in the obvious way. FSM diagram</p>
+<h3 id="state-diagram">State diagram</h3>
+<p>State Machines A state machine is a digital circuit composed of "n" flip‐flops that are interconnected to one another and to other inputs, with Boolean logic, in order to generate 2n internal states. The movement from one state to another is determined by a combination of the Boolean logic interconnecting the flip‐flops and the inputs to the state machine. The internal states are then decoded with additional Boolean logic to provide useful outputs at required time intervals. A counter is therefore a very simple state machine.</p>
+<p>Memory</p>
+<h3 id="access-to-memory">Access to memory</h3>
+<p>Address, Data, Control. Read cycle, Write cycle</p>
+<p>State machine and Microprocessor State machines are now most commonly used where microprocessor solutions are too expensive ( on very‐high‐volume, very‐low‐cost systems) or where it is necessary to perform very specific functions directly in hardware at a very high speed. The state machine is also of importance to us because it is really the basis of the modern microprocessor. In other words, a microprocessor is a generalised state machine that can be programmed to perform a specific sequence of functions. This is analogous to the PAL which is a generalised Boolean logic device that can be programmed to produce a required logic.</p>
+<p>The design of state machines can become rather complex when a large number of internal states need to be produced and it is fair to say that most modern designers would prefer to apply microprocessors or Digital Signal Processors Microprocessor System: software‐programmable state machine.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In general, we refer to a microprocessor as being a single chip that is used as</code></pre>
+<p>the CPU of a computer or computer‐based system.</p>
+<p>The microprocessor may be considered as a sophisticated state machine, A program instruction is nothing more than a specific bit pattern of ones and zeros that appears at the data port of the microprocessor. The state machine within the microprocessor has been designed to move from one state to another based upon those specific bit patterns.</p>
+<p>The hardware design of the state machine within the microprocessor defines the course of events that will take place whenever a specific bit pattern arrives at the data port of the microprocessor. The hardware "programs" that are developed by the semiconductor manufacturers are known as micro‐code. Micro‐code is the lowest possible form of programming in microprocessors and it is the micro‐code that defines the characteristics of the processor that end‐users would recognise. Micro‐code is analogous to PAL programming in that it instils the logic that defines the operational sequence for a state machine and defines how it will move from one state to another, based upon bit patterns entering via the data bus.</p>
+<p>Each cycle (tick) of the clock causes the microprocessor to jump from one internal state to another. As with other state machines, the "next state" of the microprocessor is determined by a logical combination of its current internal state, together with the condition of all the various input lines connected to it.</p>
+<p>The microprocessor is a device composed of all the other elements of</p>
+<h3 id="the-combinational-and-sequential-logic-these-elements-include">the Combinational and Sequential logic . These elements include</h3>
+<ul><li>State machines</li></ul>
+<ul><li>Counters</li></ul>
+<ul><li>Registers</li></ul>
+<ul><li>Numerical circuits (Addition, Subtraction, etc ALU)</li></ul>
+<ul><li>Boolean logic circuits (OR, AND, etc.)</li></ul>
+<ul><li>Combinational Boolean logic.</li></ul>
+<p>By utilizing these elements, at each cycle of the system clock, a microprocessor can execute a very simple operation ‐ read data in; write data out; store data in an internal register; add data contained in internal registers; compare data in internal registers and so on. So, The number of bits that a microprocessor can handle as data or instructions defines the "bit‐size" of the microprocessor. Typical sizes are 8, 16, 32 and 64 bits. Since both data and program instructions appear at the data bus of the microprocessor as a collection of ones and zeros, the microprocessor cannot differentiate between them in any way other than the sequence in which they arrive.</p>
+<h3 id="the-microprocessor">The microprocessor</h3>
+<p>(i) It is a device based upon a state machine (ii) It contains a number of registers for temporary storage of data (iii) It contains numerical and logical circuits that can perform simple data manipulations between registers (eg: ADD, OR, etc.) (iv) It contains one input port for data (the data bus) and two output ports for data (the data bus and address bus) (v) The state machine has been designed (through micro‐coding) to respond to particular bit patterns entering the data port. The specific bit patterns are the instruction set for the microprocessor (vi) The microprocessor moves from state to state at a speed determined by a "system clock" which is generally provided by another external chip (vii) It takes one or more clock cycles to execute each instruction. The number of</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>clock cycles depends upon the architecture of the microprocessor (and its</code></pre>
+<p>micro‐coding) and the complexity of the instructions.</p>
+<p>Points (vi) and (vii) are most important, since they are directly related to the performance of the microprocessor.</p>
+<p>Microprocessor based system                 Address Bus ; Data Bus, Control Bus</p>
+<p>CPU function is to execute (process) information stored in memory. I/O devices, such as keyboard &amp; monitor provide a means of communicating with the</p>
+<h3 id="cpu">CPU.</h3>
+<p>The CPU is connected to memory and I/O through a group of wires called a bus. Allows signals to carry information from place to place.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In every computer there are three types of buses: Address bus; Data bus; Control bus.</code></pre>
+<p>The microcontrollers are typically used for dedicated applications such as automotive systems, home appliances,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and home entertainment systems.</code></pre>
+<p>A microprocessor does not know anything about "C"</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or Assembly Language.</code></pre>
+<ul><li>For a device (memory or I/O) to be recognized by the CPU, it must be assigned</li></ul>
+<p>an address.</p>
+<ul><li>The address assigned to a given device must be unique.</li></ul>
+<ul><li>The CPU puts the address (in binary) on the address bus &amp; decoding circuitry</li></ul>
+<p>finds the device.</p>
+<ul><li>The CPU then uses the data bus either to get data from that device or to</li></ul>
+<p>send data to it.</p>
+<ul><li>Control buses provide device read/write signals.</li></ul>
+<ul><li>To indicate if the CPU is asking for, or sending information.</li></ul>
+<h3 id="address-bus">Address bus</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In the address bus, information transfer takes place only in one direction, from the</code></pre>
+<p>microprocessor to the memory or I/O elements. Therefore, this is called a unidirectional bus. This bus is typically 20 to 32 bits long. The size of the address bus determines the total number of memory addresses available in which programs can be executed by the microprocessor. The address bus is specified by the total number of</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address pins on the microprocessor chip. The number of locations of memory</code></pre>
+<p>is equal to to 2x, where x is the number of address lines</p>
+<h3 id="data-bus">Data bus</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In the data bus, data can flow in both directions, that is, to or from the</code></pre>
+<p>microprocessor. Therefore, this is a bidirectional bus. In some microprocessors, the data pins are used to send other information such as address bits in addition to data. This means that the data pins are time‐shared or multiplexed. The Intel 8086 microprocessor is an example where the 20 bits of the address are multiplexed with the 16‐bit data bus and four status lines.</p>
+<h3 id="control-bus">Control bus</h3>
+<p>The control bus consists of a number of signals that are used to synchronize the operation of the individual microcomputer elements. The microprocessor sends some of these control signals to the other elements to indicate the type of operation being performed. Each microcomputer has a unique set of control signals. However, there are some control signals that are common to most microprocessors</p>
+<p>Microprocessor based system</p>
+<p>For the CPU to process information, the data must be stored in RAM or ROM. The CPU cannot get the information from the disk directly because the disk is too slow. RAM &amp; ROM are often referred to as primary memory. Disks are called secondary memory.</p>
+<p>All common microprocessor follows this sequence</p>
+<p>Microprocessor:??? The microprocessor is typically a single VLSI (Very Large‐Scale Integration) chip that contains all the registers, control unit, and arithmetic/ logic circuits of the microcomputer.</p>
+<p>Machine instruction</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Signals</code></pre>
+<p>The system clock signals are contained in the control bus. These signals generate the appropriate clock periods during which instruction executions are carried out by the microprocessor. The clock signals vary from one microprocessor to another. Some microprocessors have an internal clock generator circuit to generate a clock signal.</p>
+<p>A microprocessor chip with the main functional elements</p>
+<p>Register Section The number, size, and types of registers vary from one microprocessor to another. However, the various registers in all microprocessors carry out similar operations. The register structures of microprocessors play a major role in designing the microprocessor architectures. Also, the register structures for a specific microprocessor determine how convenient and easy it is to program this microprocessor.</p>
+<h3 id="basic-microprocessor-registers">Basic Microprocessor Registers</h3>
+<p>Instruction Register (IR). The instruction register stores instructions. The contents of an instruction register are always decoded by the microprocessor as an instruction.</p>
+<p>Program Counter (PC). The program counter contains the address of the instruction</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or operation code (op‐code). The program counter normally contains the address of</code></pre>
+<p>the next instruction to be executed.</p>
+<ul><li>Upon activating the microprocessors RESET input, the address of the first instruction</li></ul>
+<p>to be executed is loaded into the program counter.</p>
+<ul><li>The program counter contents are automatically incremented by the</li></ul>
+<p>microprocessors internal logic.</p>
+<ul><li>The size of the program counter is determined by the size of the address bus.</li></ul>
+<ul><li>Many instructions, such as JUMP and conditional JUMP, change the contents of the</li></ul>
+<p>program counter from its normal sequential address value.</p>
+<p>Memory Address Register (MAR). The memory address register contains the address of data. The microprocessor uses the address, which is stored in the memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address register, as a direct pointer to memory.</code></pre>
+<p>Accumulator (A). For an 8 bit microprocessor, the accumulator is typically an 8bit register. It is used to store the result after most ALU operations.</p>
+<p>Control Unit The main purpose of the control unit is to read and decode instructions from the program memory. To execute an instruction, the control unit steps through the appropriate blocks of the ALU based on the op‐codes contained in the instruction register. The op‐codes define the operations to be performed by the control unit in</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>order to execute an instruction. The control unit interprets the contents of the</code></pre>
+<p>instruction register and then responds to the instruction by generating a sequence of enable signals</p>
+<p>RESET. This input is common to all microprocessors. When this input pin is driven to HIGH or LOW (depending on the microprocessor), the program counter is loaded with a predefined address specified by the manufacturer. For example, in the 80486, upon hardware reset, the program counter is loaded with FFFFFFF0</p>
+<p>READ/WRITE: This output line is common to all microprocessors. The status of this line tells the other microcomputer elements whether the microprocessor is performing a READ or a WRITE operation. A HIGH signal on this line indicates a READ operation and a LOW indicates a WRITE operation. Some microprocessors have separate READ and WRITE pins.</p>
+<p>READY. This is an input to the microprocessor. Slow devices (memory and I/O) use this signal to gain extra time to transfer data to or receive data from a microprocessor. The READY signal is usually an active low signal, that is, LOW means that the microprocessor is ready</p>
+<p>Interrupt Request (INT or IRQ). The external I/O devices can interrupt the microprocessor via this input pin on the microprocessor chip. When this signal is activated by the external devices, the microprocessor jumps to a special program, called the interrupt service routine.</p>
+<h3 id="inside-of-microprocessor-arithmetic-and-logic-unit-alu">Inside of Microprocessor : Arithmetic and Logic Unit (ALU)</h3>
+<p>The ALU performs all the data manipulations, such as arithmetic and logic operations, inside the microprocessor. The size of the ALU conforms to the word length of the microcomputer. This means that a 32‐bit microprocessor will have a 32‐bit ALU.</p>
+<h3 id="typically-the-alu-performs-the-following-functions">Typically, the ALU performs the following functions</h3>
+<p>Arithmetic and Logic Unit (ALU)</p>
+<h3 id="1-binary-addition-and-logic-operations">1. Binary addition and logic operations</h3>
+<h3 id="2-finding-the-ones-complement-of-data">2. Finding the ones complement of data</h3>
+<h3 id="3-shifting-or-rotating-the-contents-of-a-general-purpose-register-1-bit-to-the-left-or">3. Shifting or rotating the contents of a general‐purpose register 1 bit to the left or</h3>
+<p>right through carry</p>
+<p>An assembler translates a program written in assembly language into a machine language program. A compiler or interpreter, on the other hand, converts a high‐level language program such as C or C++ into a machine language program. Assembly or high level language programs are called source codes. Machine language programs are known as object codes.</p>
+<p>To increase the programmers efficiency in writing a machine language program, hexadecimal numbers rather than binary numbers are used Assembly Language The next programming level is to use the assembly language. Each line in an assembly</p>
+<h3 id="language-program-includes-four-fields">language program includes four fields</h3>
+<h3 id="1-label-field">1. Label field</h3>
+<h3 id="2-instruction">2. Instruction,</h3>
+<p>mnemonic,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or op‐code field</code></pre>
+<p>3 . Operand field</p>
+<h3 id="4-comment-field">4. Comment field</h3>
+<p>Assembly language</p>
+<p>An Assembly language instruction consists of a mnemonic, optionally followed by one</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or two operands.</code></pre>
+<p>Operands are the data items being manipulated. Mnemonics are commands to the CPU, telling it what to do with those items. Advantages of Assembly Language</p>
+<p>1.Shows how program interfaces with the processor, operating system, and BIOS. 2.Shows how data is represented and stored in memory and on external devices. 3.Clarifies how processor accesses and executes instructions and how instructions access and process data. 4.Clarifies how a program accesses external devices.</p>
+<h3 id="reasons-for-using-assembly-language">Reasons for using Assembly Language</h3>
+<h3 id="1-a-program-written-in-assembly-language-requires-considerably-less-memory">1.    A program written in Assembly Language requires considerably less memory</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and execution time than one written in a high –level language.</code></pre>
+<h3 id="2-assembly-language-gives-a-programmer-the-ability-to-perform-higly-technical">2. Assembly Language gives a programmer the ability to perform higly technical</h3>
+<p>tasks that would be difficult, if not impossible in a high‐level language.</p>
+<h3 id="3-although-most-software-specialists-develop-new-applications-in-high-level">3. Although most software specialists develop new applications in high‐level</h3>
+<p>languages, which are easier to write and maintain, a common practice is to recode in assembly language those sections that are time‐critical.</p>
+<h3 id="4-resident-programs-that-reside-in-memory-while-other-program-execute-and">4. Resident programs (that reside in memory while other program execute) and</h3>
+<p>interrupt service routines (that handle input and output) are almost always develop in Assembly Language.</p>
+<figure class="yazi-gorsel"><img src="../sekil-1002-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU0_2013: page 2, circuit, table and figures"><figcaption>CPU0_2013, page 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-1002-10.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU0_2013: page 10, circuit, table and figures"><figcaption>CPU0_2013, page 10.</figcaption></figure>
+<h2 id="cpu01-2013">CPU01_2013</h2>
+<p>EEM332 Lecture 1. Design a simple CPU, Read/Write Steps, Machine cycle</p>
+<p>Design a simple CPU</p>
+<p>Instruction execution, step 1: Instruction Fetch</p>
+<ul><li>The MPU outputs the value of the program counter (PC) on the address bus.</li></ul>
+<ul><li>Memory puts the contents at the instruction address on the data bus.</li></ul>
+<ul><li>The instruction is stored in the instruction register (IR).</li></ul>
+<p>Step two: Instruction Decoder. The instruction word stored in the IR is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decoded by internal logic to provide</code></pre>
+<p>control signals to the ALU and other internal circuits inside the MPU. ◆ The program counter value (PC) is pushed onto the address bus, the ALU increments this value by k</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and puts it back into the Program
+Counter.</code></pre>
+<h3 id="step-3-operand-fetch">Step 3: Operand Fetch</h3>
+<p>The instruction register provides the address of the data to be processed (i.e. the operand</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address).</code></pre>
+<p>*Memory supplies the operand data on the data bus to the MPU, ready for processing either by the ALU or the ACC.</p>
+<h3 id="step-4-execute-instruction">Step 4: Execute instruction</h3>
+<p>Processing is performed on the operand by the ALU according to the instruction. ◆ The result is put back into the Accumulator (ACC).</p>
+<p>Step 5: Write‐back</p>
+<h3 id="may-not-exist">(may not exist)</h3>
+<p>The result from the Accumulator is written back into memory.</p>
+<ul><li>A step‐by‐step analysis of the CPU processes to add three numbers, with steps and code</li></ul>
+<p>shown.</p>
+<ul><li>Assume a CPU has registers A, B, C, and D.</li></ul>
+<ul><li>An 8‐bit data bus and a 16‐bit address bus.</li></ul>
+<ul><li>The CPU can access memory addresses 0000 to FFFFH.</li></ul>
+<ul><li>A total of 10000H locations.</li></ul>
+<p>If the program to perform the actions listed above is stored in memory locations starting at 1400H, the following would represent the contents for each memory address location…</p>
+<p>The CPU puts the address 1400H on the address bus and sends it out. Memory finds the location while the CPU activates the READ signal, indicating it wants the byte at 1400H. The content (B0) is put on the data bus and brought to the CPU.</p>
+<p>The CPU decodes the instruction B0 with the help of its instruction decoder dictionary. Bring the byte of the next memory location into CPU Register A.</p>
+<p>From memory location 1401H, the CPU fetches code 21H directly into Register A. After completing the instruction, the program counter points to the address of the next instruction ‐ 1402H. Address 1402H is sent out on the address bus to fetch the next instruction.</p>
+<p>From 1402H, the CPU fetches code 04H. After decoding, the CPU knows it must add the byte at the next address (1403) to the contents of Register A. After it brings the value (42H) into the CPU, it provides the contents of Register A, along with this value, to the ALU to perform the addition. The program counter becomes 1404, the next instruction address.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address 1404H is put on the address bus and the code is fetched, decoded, and</code></pre>
+<p>executed. Again a value is added to Register A. The program counter is updated to</p>
+<h3 id="1406h">1406H</h3>
+<p>The contents of address 1406 (HALT code) are fetched and executed. The HALT instruction tells the CPU to stop incrementing the program counter and asking for the next instruction. Without HALT, the CPU would continue updating the program counter</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and fetching instructions.</code></pre>
+<p>◆ Microprocessors perform operations depending on instruction codes stored in memory.</p>
+<h3 id="an-instruction-usually-has-two-parts">◆ An instruction usually has two parts</h3>
+<p>❖ Opcode ‐ determines what is to be done ❖ Operand ‐ specifies where/what the data is ◆ Program Counter (PC) ‐ address of the current instruction code ◆ The PC is incremented automatically each time it is used. ◆ The number of clock cycles taken by an instruction is the same as the number of memory accesses it makes. Memory contains both program and data. A peek into memory will tell you very little except a bunch of '1's and '0's. ◆ The program area and data area in memory are usually well separated. ◆ The ALU is responsible for arithmetic and logic functions. ◆ There is always at least one register known as the accumulator, where the result from the ALU is stored. ◆ There are usually one or more general purpose registers for storing results or memory addresses. ◆ Fetching data from inside the CPU is much faster than from external memory. ◆ The processor must start from a known state. Therefore, there is always a reset signal to initialise the processor on power‐up.</p>
+<p>A Simplified view of MPU program execution. An MPU program is stored in memory as a sequence of binary values. These binary values represent instructions. Each instruction has a unique binary value. The MPU operation is controlled by reading and executing each instruction one at a time.</p>
+<h3 id="1-the-mpu-places-an-address-on-the">1. The MPU places an address on the</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS BUS.</code></pre>
+<p>The address is a binary value which</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>represents a unique</code></pre>
+<p>memory location.</p>
+<h3 id="2-the-memory-places-the-contents-of-the-addressed">2. The Memory places the contents of the addressed</h3>
+<p>location onto the DATA BUS. The contents is a binary value.</p>
+<h3 id="3-the-mpu-reads-the-binary">3. The MPU reads the binary</h3>
+<p>value from the DATA BUS.</p>
+<h3 id="4-the-mpu-interprets">4. The MPU interprets</h3>
+<p>what operation the BINARY value represents and completes (executes) this operation.</p>
+<h3 id="5-the-mpu-has-completed-its-first-instruction-of-the">5. The MPU has completed its first instruction of the</h3>
+<p>program stored as binary values in the memory.</p>
+<p>The MPU needs to be told what to do next. The next instruction is in the next memory location. Stages</p>
+<h3 id="1-through-4-are-repeated">1. through 4. are repeated,</h3>
+<p>Note. At Stage 1, the MPU places a new binary value onto the ADDRESS BUS. This is the memory location of the next instruction. The binary value on the ADDRESS BUS has only changed by 1.</p>
+<p>How the MPU writes data to Memory</p>
+<p>This instruction is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decoded as</code></pre>
+<h3 id="send-temp2">SEND TEMP2</h3>
+<p>contents to</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS</code></pre>
+<p>The MPU instruction decode logic now needs to execute this instruction: SEND TEMP2 to an ADDRESS</p>
+<h3 id="to-what-address">TO WHAT ADDRESS …</h3>
+<p>This particular MPU instruction decodes as saying that the DESTINATION ADDRESS will be in the next memory location. The MPU then fetches the binary value from the next location, as this will be the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS where TEMP2 contents will be SENT.</code></pre>
+<p>The Destination ADDRESS data has been fetched from memory and stored in a TEMP register.</p>
+<p>The TEMP register holds the DESTINATION ADDRESS where we wish to SEND our DATA (binary value), which is stored in the TEMP2 register.</p>
+<p>We do not try to decode the contents of TEMP because it is not an instruction; it is data associated with a specific operation, known as an OPERAND.</p>
+<p>WHAT HAPPENS NEXT .. Remember we want the TEMP2 contents to be sent to the MEMORY ADDRESS which is currently held in TEMP.</p>
+<p>The contents of the TEMP register are placed on the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS BUS.</code></pre>
+<p>The MEMORY WRITE part of our instruction has started. In this phase, since we are sending DATA to MEMORY, or WRITING TO MEMORY, we must be accessing a MEMORY store which allows us to do so.</p>
+<p>ROM is read only memory, where our program is stored; we cannot write to it. The RAM, random access memory (read/write memory), is where our DATA will be written. Notice the control signal lines on each of the memory types.</p>
+<p>The ADDRESS is a memory location within the RAM, and the TEMP2 register places its contents onto the DATA BUS.</p>
+<p>The RAM reads the DATA BUS value and stores it at the location which the ADDRESS value is accessing. NOTICE THE WR signal is ACTIVE.</p>
+<p>The instruction has now completed executing. The result of this operation is that the contents of the TEMP2 register have been WRITTEN to RAM memory location 11111111.</p>
+<p>Prior to the DATA WRITE, the contents of the RAM location were 00001111. After the MEMORY WRITE, RAM memory location now contains 11110000; the previous DATA value has been overwritten.</p>
+<h3 id="a-quick-review">A Quick Review</h3>
+<p>The MPU fetches instructions one at a time from memory. The instruction is interpreted by the MPU and then this operation is executed. This is called the FETCH-DECODE-EXECUTE CYCLE. The program, a sequence of instructions, is held in consecutive memory locations.</p>
+<p>We have seen that not every binary value read from memory is an instruction. Some of the values can be DATA associated with an instruction.</p>
+<p>Read cycle (Machine cycle)</p>
+<p>Simple Read Cycle</p>
+<h3 id="1-address-onto-address-bus">1. Address onto Address Bus</h3>
+<h3 id="2-read-rd-control-signal-asserted-by-mpu">2. READ (RD) Control Signal Asserted by MPU</h3>
+<h3 id="3-data-placed-from-memory-onto-the-data-bus">3. Data Placed from Memory onto the Data Bus</h3>
+<h3 id="4-rd-signal-de-asserted-data-into-mpu-temp-register">4. RD signal De-Asserted, Data into MPU temp register.</h3>
+<h3 id="5-read-cycle-ends">5. Read Cycle Ends</h3>
+<p>Write Cycle</p>
+<h3 id="1-address-placed-on-address-bus">1. Address placed on ADDRESS BUS</h3>
+<h3 id="2-data-placed-onto-data-bus">2. Data placed onto DATA BUS</h3>
+<h3 id="3-write-wr-control-signal-asserted-by-mpu">3. Write (WR) Control Signal Asserted by MPU</h3>
+<h3 id="4-write-wr-control-signal-de-asserted-and-data">4. Write (WR) Control Signal De-Asserted and Data</h3>
+<p>Written into Memory</p>
+<h3 id="5-write-cycle-completes">5. Write Cycle completes.</h3>
+<p>Write cycle (Machine cycle)</p>
+<p>Pipeline Timing Diagram</p>
+<p>Figure 1‐2 Pipelined vs Nonpipelined Execution</p>
+<p>Abstract</p>
+<ul><li>The CPU clock frequency determines the speed of the microcomputer.</li></ul>
+<ul><li>The number of data and address pins on the microprocessor chip make up the</li></ul>
+<p>microcomputer's word size and maximum memory size. The microcomputer's I/O</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and interfacing capabilities are determined by the control pins on the</code></pre>
+<p>microprocessor chip.</p>
+<ul><li>The microprocessor is a single chip which is capable of processing data and</li></ul>
+<p>controlling all of the components which make up the microcomputer system. It contains all of the circuits needed to create the 'brain of the microcomputer'.</p>
+<ul><li>1. Temporary storage locations in the form of a number</li></ul>
+<ul><li>of registers which can hold binary values (information),</li></ul>
+<ul><li>representing program instructions or data.</li></ul>
+<ul><li>2. The Arithmetic Logic Unit (ALU). This part of the MPU</li></ul>
+<ul><li>performs both arithmetic and logical operations.</li></ul>
+<ul><li>3. Timing and Control Circuits: that keep all of the other</li></ul>
+<ul><li>parts of the system (memory &amp; I/O) working together in the right time sequence.</li></ul>
+<ul><li>A Bus is a common communications pathway used to carry information between</li></ul>
+<p>the various elements of a computer system. The term BUS refers</p>
+<ul><li>to a group of wires or conduction tracks on a printed circuit board (PCB)</li></ul>
+<ul><li>through which binary information is transferred from one part of the microcomputer</li></ul>
+<p>to another.</p>
+<h3 id="data-bus">Data Bus</h3>
+<p>The Data Bus carries the data which is transferred throughout the system (bi‐directional).</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus:</code></pre>
+<p>An address is a binary number that identifies a specific memory storage location or I/O port involved in a data transfer.</p>
+<p>The Address Bus is used to transmit the address of the location to the memory or the I/O port. The Address Bus is unidirectional (one way): addresses are always issued by the</p>
+<h3 id="mpu">MPU.</h3>
+<p>The Control Bus: is another group of signals whose functions are to provide synchronization (timing control) between the MPU and the other system components. Control signals are unidirectional, and are mainly outputs from the MPU. Example Control signals</p>
+<ul><li>Registers ‐ to store information temporarily. 8, 16, or 32 bits, depending on the CPU.</li></ul>
+<ul><li>Program counter ‐ to point to the address of the</li></ul>
+<p>next instruction to be executed.</p>
+<ul><li>In the IBM PC, a register called IP, or instruction pointer.</li></ul>
+<ul><li>Instruction decoder ‐ to interpret the instruction</li></ul>
+<p>fetched into the CPU.</p>
+<p>Bus Sizes: Buses are specified in width, the number of bits. The width of the external Data bus generally gives a very good indication of the internal MPU architecture, particularly the register size and the ALU. The Data Bus width limits the bandwidth of the data that can be transferred per bus operation.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus :</code></pre>
+<p>The MPU Address bus size specifies how many memory and I/O locations may be accessed. Number of locations = 2^N, where N is the number of Address lines. The Address Bus may be specified as follows: 16 Bits Wide (A15 to A0), 16 Address Lines: In this instance 2^N = 2^16 = 65536 locations. Microprocessors are classified by</p>
+<ul><li>The semiconductor technology of their design (TTL, transistor‐transistor logic;</li></ul>
+<p>CMOS, complementary‐metal‐oxide semiconductor; or ECL, emitter‐coupled logic),</p>
+<ul><li>The width of the data format (4‐bit, 8‐bit, 16‐bit, 32‐bit, or 64‐bit) they process; and</li></ul>
+<p>by their</p>
+<ul><li>instruction set (CISC, complex‐instruction‐set computer, or RISC, reduced‐</li></ul>
+<p>instruction‐set computer; see RISC processor). Von Neumann or Harvard (memory usage)</p>
+<p>What is a Microprocessor? It is a program controlled semiconductor device (IC), which fetches,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decodes and executes instructions.</code></pre>
+<p>What is the function of a microprocessor in a system? The microprocessor is the master in the system, which controls all the activity of the system. It issues address and control signals and fetches the instructions</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and data from memory. Then it executes the instruction to take appropriate
+action.</code></pre>
+<p>What are the basic units of a microprocessor? The basic units or blocks of a microprocessor are the ALU, an array of registers and the control unit. What are Software and Hardware? Software is a set of instructions or commands needed for performing a specific task by a programmable device or a computing machine. Without software, the Hardware is an idle machine.</p>
+<p>What is assembly language? The language in which mnemonics (short-hand forms of instructions) are used to write a program is called assembly language. The manufacturers of microprocessors give the mnemonics. What are machine language and assembly language programs? Software developed using 1's and 0's is called machine language programs. Software developed using mnemonics is called assembly language programs. What is the drawback of machine language and assembly language programs? Machine language and assembly language programs are machine dependent. Programs developed using these languages for a particular machine cannot be directly run on another machine. Assembly language is referred to as a low‐level language because it deals directly with the internal structure of the CPU.</p>
+<p>Define opcode and operand. Opcode (operation code) is the part of an instruction / directive that identifies a specific operation. Operand is a part of an instruction / directive that represents a value on which the instruction acts. What is pipelined architecture?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In pipelined architecture the processor will have a number of functional</code></pre>
+<p>units and the execution times of the functional units are overlapped. Each functional unit works independently most of the time. What are the fetch and execute cycles?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In general, the instruction cycle of an instruction can be divided into</code></pre>
+<p>fetch and execute cycles. The fetch cycle is executed to fetch the opcode from memory. The execute cycle is executed to decode the instruction and to perform the work instructed by the instruction. Assembly language is referred to as a low‐level language because it deals directly with the internal structure of the CPU.</p>
+<p>Define machine cycle. A machine cycle is defined as the time required to complete one operation of accessing memory or I/O, or acknowledging an external request. This cycle may consist of three to six T-states. What is the processor cycle (machine cycle)? The processor cycle or machine cycle is the basic operation performed by the processor. To execute an instruction, the processor will run one or more machine cycles in a particular order. What is the Instruction cycle? The sequence of operations that a processor has to carry out while executing an instruction is called the Instruction cycle. Each instruction cycle of a processor consists of a number of machine cycles. What is the opcode fetch cycle? The opcode fetch cycle is a machine cycle executed to fetch the opcode of an instruction stored in memory. Every instruction starts with an opcode fetch machine cycle.</p>
+<p>Why is interfacing needed for I/O devices? Generally, I/O devices are slow devices. Therefore, the speed of I/O devices does not match the speed of the microprocessor, and so an interface is provided between the system bus and I/O devices. What is the need for a Port? I/O devices are generally slow devices and their timing characteristics do not match processor timings. Hence the I/O devices are connected to the system bus through ports. What is a port? A port is a buffered I/O, which is used to hold the data transmitted from the microprocessor to an I/O device or vice-versa. Flip-Flop: A flip‐flop stores one bit of information. Register: When a set of n flip‐flops is used to store n bits of information, such as an n‐bit number, we refer to these flip‐flops as a register. A common clock is used for each flip‐flop in a register. Shift register: A register that provides the ability to shift its contents is called a shift register.</p>
+<figure class="yazi-gorsel"><img src="../sekil-1000-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU01_2013: page 2, circuit, table and figures"><figcaption>CPU01_2013, page 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-1000-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPU01_2013: page 3, circuit, table and figures"><figcaption>CPU01_2013, page 3.</figcaption></figure>
+<h2 id="cpu01-08">cpu01_08</h2>
+<p>Microprocessor based system</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus</code></pre>
+<p>Data Bus Control Bus</p>
+<p>The CPU is a unit that fetches and processes a set of general-purpose instructions</p>
+<p>A microprocessor does not know anything about "C" or Assembly Language.</p>
+<p>Microprocessor based system</p>
+<p>Bus Arbitration</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus</code></pre>
+<p>CPU            Interrupt System Data Bus</p>
+<p>Control Signals                           Status Lines</p>
+<p>All Microcomputers consist of:        Clock         Power Supply</p>
+<h3 id="1-microprocessor-unit-mpu">1. Microprocessor Unit (MPU)</h3>
+<h3 id="2-program-memory-rom">2. Program Memory (ROM)</h3>
+<h3 id="3-data-memory-ram">3. Data Memory (RAM)</h3>
+<h3 id="4-input-output-system">4. Input / Output System</h3>
+<h3 id="5-bus-system">5. Bus System</h3>
+<p>(and Software)</p>
+<p>The microprocessor is a single chip which is capable of processing data and controlling all of the components which make up the microcomputer system. It contains all of the circuits needed to create the ‘brain of the microcomputer’.</p>
+<h3 id="1-temporary-storage-locations-in-the-form-of-a-number">1. Temporary storage locations in the form of a number</h3>
+<p>of registers which can hold binary values (information),</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>representing program instruction or data.</code></pre>
+<h3 id="2-the-arithmetic-logic-unit-alu-this-part-of-the-mpu">2. The Arithmetic Logic unit (ALU). This part of the MPU</h3>
+<p>performs both arithmetic and logical operations</p>
+<h3 id="3-timing-and-control-circuits-that-keep-all-of-the-other">3. Timing and Control Circuits : that keep all of the other</h3>
+<p>parts of system (memory &amp; I/O) working together in the right time sequence.</p>
+<p>A Bus is a common communications pathway used to carry information between the various elements of a computer system The term BUS refers to a group of wires or conduction tracks on a printed circuit board</p>
+<h3 id="pcb">(PCB)</h3>
+<p>though which binary information is transferred from one part of the microcomputer to another</p>
+<p>There are three main bus groups</p>
+<h3 id="1-address-bus">1. ADDRESS BUS</h3>
+<h3 id="2-data-bus">2. DATA BUS</h3>
+<h3 id="3-control-bus">3. CONTROL BUS</h3>
+<h3 id="data-bus">Data Bus</h3>
+<p>The Data Bus carries the data which is transferred throughout the system. ( bi-directional)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus:</code></pre>
+<p>An address is a binary number that identifies a specific memory storage location or I/O port involved in a data transfer</p>
+<p>The Address Bus is used to transmit the address of the location to the memory or the I/O port. The Address Bus is unidirectional ( one way ): addresses are always issued by the MPU.</p>
+<p>The Control Bus: is another group of signals whose functions are to provide synchronization ( timing control ) between the MPU and the other system components. Control signals are unidirectional, and are mainly outputs from the MPU. Example Control signals RD read signal asserted to read data into MPU WR write signal asserted to write data from MPU</p>
+<p>Bus Sizes: Buses are specified in width, number of bits.</p>
+<p>The width of the external Data bus generally gives a very good indication of the internal MPU architecture, particularly the registers size and the ALU.</p>
+<p>The Data Bus width limits the bandwidth of the data that can be transferred per bus operation.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus :</code></pre>
+<p>The MPU Address bus size specifies how much memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and I/O locations may accessed.</code></pre>
+<p>Number of locations = 2N where N is number of Address lines The Address Bus may be specified using the following 16 Bits Wide, ( A15 to A0 ), 16 Address Lines</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this instance 2N = 216 = 65536 locations</code></pre>
+<p>Microprocessors are classified by</p>
+<ul><li>The semiconductor technology of their design (TTL, transistor-</li></ul>
+<p>transistor logic; CMOS, complementary-metal-oxide semiconductor;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>or ECL, emitter-coupled logic),</code></pre>
+<ul><li>The width of the data format (4-bit, 8-bit, 16-bit, 32-bit, or 64-bit)</li></ul>
+<p>they process; and by their</p>
+<ul><li>instruction set (CISC, complex-instruction-set computer, or RISC,</li></ul>
+<p>reduced-instruction-set computer; see RISC processor). von Neumann or Harvard (Memory usage)</p>
+<p>von Neumann</p>
+<p>Harvard architecture</p>
+<p>All common microprocessor follows this sequence</p>
+<p>Get Instruction from memory</p>
+<h3 id="fetch">FETCH</h3>
+<p>Next              Decode Instruction     DECODE Instruction</p>
+<p>Execute       EXECUTE Instruction</p>
+<p>Instruction Main Main Memory Memory                                         Cycle</p>
+<p>Control Unit Fetch             2    Decode</p>
+<p>Execution CPU                     Cycle</p>
+<h3 id="ram">RAM</h3>
+<p>3       Execute 4   Store</p>
+<p>Arithmetic/Logic Unit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Includes Cache</code></pre>
+<p>(very fast memory)</p>
+<p>A Simplified view of MPU program execution A MPU program is stored in memory as a sequence of binary values. These binary values represent instructions. Each instruction has an unique binary value. The MPU operation is controlled by reading and executing each instruction one at a time.</p>
+<h3 id="1-the-mpu-places-an">1. The MPU places an</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address on the ADDRESS
+BUS.</code></pre>
+<p>The address is a binary value which represents a unique memory location.</p>
+<h3 id="2-the-memory-places-the-contents-of-the-addressed">2. The Memory places the contents of the addressed</h3>
+<p>location onto the DATA BUS. The contents is a binary value.</p>
+<h3 id="3-the-mpu-reads-the-binary">3. The MPU reads the binary</h3>
+<p>value from the DATA BUS.</p>
+<h3 id="4-the-mpu-interprets">4. The MPU interprets</h3>
+<p>what operation the BINARY Value represents and completes (executes) this operation</p>
+<h3 id="5-the-mpu-has-completed-its-first-instruction-of-the">5. The MPU has completed its first instruction of the</h3>
+<p>program stored as binary values in the memory.</p>
+<p>The MPU needs to be told what to do next. The next instruction is in the next memory location. Stages</p>
+<h3 id="1-through-4-are-repeated">1. through 4. are repeated,</h3>
+<p>Note. At Stage 1. The MPU places a new binary value onto the ADDRESS BUS. This is the memory location of the next instruction. The binary value on the ADDRESS BUS has only changed by 1.</p>
+<p>How the MPU writes data to Memory</p>
+<p>This instruction is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decoded as</code></pre>
+<h3 id="send-temp2">SEND TEMP2</h3>
+<p>contents to</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS</code></pre>
+<p>The MPU instruction decode logic now need to execute this instruction SEND TEMP2 to an ADDRESS</p>
+<h3 id="to-what-address">TO WHAT ADDRESS …</h3>
+<p>This particular MPU instruction decodes as saying that the DESTINATION ADDRESS will be in the next memory location. The MPU then fetches the binary value from the next location, as this will be the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS where TEMP2 contents will be SENT.</code></pre>
+<p>The Destination ADDRESS data has been fetched from memory and stored in a TEMP register.</p>
+<h3 id="what-happens-next">WHAT HAPPENS NEXT ?</h3>
+<p>The TEMP register holds the DESTINATION ADDRESS where we wish the SEND our DATA (Binary Value) which is stored in TEMP2 register.</p>
+<p>We do not try to decode the contents of TEMP because it is not an instruction, it is data associated with a specific operation, it is known as an OPERAND</p>
+<h3 id="what-happens-next">WHAT HAPPENS NEXT ..</h3>
+<p>Remember we want TEMP2 contents to be sent to the MEMORY ADDRESS which is currently held in</p>
+<h3 id="temp">TEMP.</h3>
+<p>The contents of TEMP register are placed on the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS BUS.</code></pre>
+<p>The MEMORY WRITE part of our instruction has started. In this phase, since we are sending DATA to MEMORY or WRITING TO MEMORY we must be accessing a MEMORY store which allows us to do so.</p>
+<p>ROM is read only memory, where our program is stored, we cannot write to it.</p>
+<p>The RAM random access memory ,(read/write memory) is where our DATA will be written.</p>
+<p>Notice the control signal lines on each of the memory types.</p>
+<p>The ADDRESS is a memory location within the RAM, the TEMP2 register places its contents onto the DATA BUS.</p>
+<p>The RAM reads the DATA BUS value and stores it at the location which the ADDRESS value is accessing. NOTICE THE WR signal is ACTIVE</p>
+<p>The instruction has now completed executing The result of this operation is that the contents of TEMP2 register have been WRITTEN to a RAM Memory location 11111111.</p>
+<p>Prior to the DATA WRITE the contents of RAM location was 00001111. After the MEMORY WRITE RAM Memory location now contains 11110000 the previous DATA value has been overwritten.</p>
+<h3 id="a-quick-review">A Quick Review</h3>
+<p>The MPU fetches instructions one at a time from memory The instruction is interpreted by MPU and then this operation is executed. This called the FETCH DECODE EXECUTE CYCLE. The program, sequence of instructions are held in consecutive memory locations.</p>
+<p>We have seen that not every binary value read from memory is an instruction. Some of the values can be DATA associated with an instruction.</p>
+<p>Read cycle (Machine cycle)</p>
+<p>Simple Read Cycle</p>
+<h3 id="1-address-onto-address-bus">1. Address onto Address Bus</h3>
+<h3 id="2-read-rd-control-signal-asserted-by-mpu">2. READ (RD) Control Signal Asserted by MPU</h3>
+<h3 id="3-data-placed-from-memory-onto-the-data-bus">3. Data Placed from Memory onto the Data Bus</h3>
+<h3 id="4-rd-signal-de-asserted-data-into-mpu-temp-register">4. RD signal De-Asserted, Data into MPU temp register.</h3>
+<h3 id="5-read-cycle-ends">5. Read Cycle Ends</h3>
+<p>Write Cycle</p>
+<h3 id="1-address-placed-on-address-bus">1. Address placed on ADDRESS BUS</h3>
+<h3 id="2-data-placed-onto-data-bus">2. Data placed onto DATA BUS</h3>
+<h3 id="3-write-wr-control-signal-asserted-by-mpu">3. Write (WR) Control Signal Asserted by MPU</h3>
+<h3 id="4-write-wr-control-signal-de-asserted-and-data">4. Write (WR) Control Signal De-Asserted and Data</h3>
+<p>Written into Memory</p>
+<h3 id="5-write-cycles-completes">5. Write Cycles completes.</h3>
+<p>Write cycle (Machine cycle)</p>
+<p>Pipeline Timing Diagram</p>
+<p>Pipeline Stages</p>
+<ul><li>Different architectures use different number of stages</li></ul>
+<ul><li>smaller pipelines have less complexity</li></ul>
+<ul><li>larger pipelines are generally faster</li></ul>
+<ul><li>here, we decompose the fetch-execute cycle into 6 stages:</li></ul>
+<ul><li>FI – fetch instruction</li></ul>
+<ul><li>DI – decode instruction</li></ul>
+<ul><li>CO – calculate operand addresses</li></ul>
+<ul><li>FO – fetch operands (from registers)</li></ul>
+<ul><li>EI – execute instruction (includes computing branch</li></ul>
+<p>results and all ALU operations)</p>
+<ul><li>WO – write or store result in registers (or memory)</li></ul>
+<ul><li>the design of the pipeline stages has a major impact on the</li></ul>
+<p>architecture’s performance</p>
+<p>Levels of Programming Languages</p>
+<h3 id="1-machine-language">1) Machine Language</h3>
+<ul><li>Consists of individual instructions that will be executed by the CPU one at</li></ul>
+<p>a time</p>
+<h3 id="2-assembly-language-low-level-language">2) Assembly Language (Low Level Language)</h3>
+<ul><li>Designed for a specific family of processors (different processor</li></ul>
+<p>groups/family has different Assembly Language)</p>
+<ul><li>Consists of symbolic instructions directly related to machine language</li></ul>
+<p>instructions one-for-one and are assembled into machine language. ) High Level Languages</p>
+<ul><li>e.g. : C, C++ and Vbasic</li></ul>
+<ul><li>Designed to eliminate the technicalities of a particular computer.</li></ul>
+<ul><li>Statements compiled in a high level language typically generate many low-</li></ul>
+<p>level instructions.</p>
+<p>Advantages of Assembly Language</p>
+<h3 id="1-shows-how-program-interfaces-with-the">1. Shows how program interfaces with the</h3>
+<p>processor, operating system, and BIOS.</p>
+<h3 id="2-shows-how-data-is-represented-and-stored">2. Shows how data is represented and stored</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in memory and on external devices.</code></pre>
+<h3 id="3-clarifies-how-processor-accesses-and">3. Clarifies how processor accesses and</h3>
+<p>executes instructions and how instructions access and process data.</p>
+<h3 id="4-clarifies-how-a-program-accesses-external">4. Clarifies how a program accesses external</h3>
+<p>devices.</p>
+<p>Reasons for using Assembly Language</p>
+<h3 id="1-a-program-written-in-assembly-language-requires">1.    A program written in Assembly Language requires</h3>
+<p>considerably less memory and execution time than one written</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in a high –level language.</code></pre>
+<h3 id="2-assembly-language-gives-a-programmer-the-ability-to-perform">2.   Assembly Language gives a programmer the ability to perform</h3>
+<p>higly technical tasks that would be difficult, if not impossible in a high-level language.</p>
+<h3 id="3-although-most-software-specialists-develop-new-applications-in">3.   Although most software specialists develop new applications in</h3>
+<p>high-level languages, which are easier to write and maintain, a common practice is to recode in assembly language those sections that are time-critical.</p>
+<h3 id="4-resident-programs-that-reside-in-memory-while-other-program">4.   Resident programs (that reside in memory while other program</h3>
+<p>execute) and interrupt service routines (that handle input and output) are almost always develop in Assembly Language.</p>
+<p>High Level Language Level Language</p>
+<p>Assembly Language for Language for A:=B+C</p>
+<p>Machine Code for Code for A:=B+C</p>
+<p>Instruction Execution Cycle</p>
+<ul><li>The sequence of steps the processor goes through to</li></ul>
+<p>do the complete instruction and to get ready for the next, until the program is finished or stopped</p>
+<ul><li>Specific steps (simplified)</li></ul>
+<ul><li>IF: instruction fetched</li></ul>
+<ul><li>ID: instruction decoded, control signals asserted</li></ul>
+<ul><li>RT/EX: register transfer and/or execution</li></ul>
+<ul><li>PC: increment program counter</li></ul>
+<ul><li>These steps are repeated for each instruction execution</li></ul>
+<p>cycle until the program is done, or until something is done to make the program stop</p>
+<ul><li>Opcodes are represented by abbreviations,</li></ul>
+<p>called mnemonics, that indicate the</p>
+<h3 id="operation-coomon-examples">operation. Coomon examples</h3>
+<ul><li>ADD Add</li></ul>
+<ul><li>SUB      Subtract</li></ul>
+<ul><li>DIV      Divide</li></ul>
+<ul><li>LOAD Load data from memory</li></ul>
+<ul><li>STOR Store data to memory</li></ul>
+<p>Y = (A-B) / (C+D x E) Instruction             Comment</p>
+<ul><li>SUB Y, A, B           • Y        A-B</li></ul>
+<ul><li>MPY T, D, E           • T        DxE</li></ul>
+<ul><li>ADD T, T, C           • T        T+C</li></ul>
+<ul><li>DIV Y, Y, T           • Y        Y/ T</li></ul>
+<p>Three-address instructions</p>
+<p>Y = (A-B) / (C+D x E)</p>
+<ul><li>MOVE Y, A</li></ul>
+<ul><li>SUB Y, B</li></ul>
+<ul><li>MOVE T, D</li></ul>
+<ul><li>MPY T, E</li></ul>
+<ul><li>ADD T, C</li></ul>
+<ul><li>DIV Y, T</li></ul>
+<p>Two-address instructions</p>
+<p>Y = (A-B) / (C+D x E) iNSTRUCTIONS                  Comment</p>
+<ul><li>LOAD D                      • AC      D</li></ul>
+<ul><li>MPY E</li></ul>
+<ul><li>AC      AC x E</li></ul>
+<ul><li>ADD C</li></ul>
+<ul><li>STOR Y</li></ul>
+<ul><li>AC      AC + C</li></ul>
+<ul><li>LOAD A                      • Y       AC</li></ul>
+<ul><li>SUB B                       • AC      A</li></ul>
+<ul><li>DIV Y                       • AC      AC – B</li></ul>
+<ul><li>STOR Y                      • AC      AC / Y</li></ul>
+<ul><li>Y       AC</li></ul>
+<p>One-address Instructions</p>
+<p>The basic function as stated is to perform logic and maths operations. The Accumulator and the Flags registers play an important role in the operation of the ALU.</p>
+<p>The Accumulator is used in all ALU operations.</p>
+<p>The Flags or Status Register is a group of bits representing the result of the ALU operation. The Flags register contains bits such as (OV) representing an overflow flag. If the result of an</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addition is greater than 255 then the OV is set to indicate</code></pre>
+<p>this condition. More Details to come. The type of functions performed by the ALUs of MPU</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Addition   Shift Left Subtraction             Shift Right</code></pre>
+<p>Logical AND      Decrement Logical OR     Increment Logical XOR</p>
+<p>What is Microprocessor ? It is a program controlled semiconductor device (IC}, which fetches, decode and executes instructions. What is the function of microprocessor in a system? The microprocessor is the master in the system, which controls all the activity of the system. It issues address and control signals and fetches the instruction and data from memory. Then it executes the instruction to take appropriate action.</p>
+<p>What are the basic units of a microprocessor ? The basic units or blocks of a microprocessor are ALU, an array of registers and control unit. what is Software and Hardware? The Software is a set of instructions or commands needed for performing a specific task by a programmable device or a computing machine. Without software the Hardware is an idle machine.</p>
+<p>What is assembly language? The language in which the mnemonics (short -hand form of instructions) are used to write a program is called assembly language. The manufacturers of microprocessor give the mnemonics. What are machine language and assembly language programs? The software developed using 1's and 0's are called machine language, programs. The software developed using mnemonics are called assembly language programs. What is the drawback in machine language and assembly language, programs? The machine language and assembly language programs are machine dependent. The programs developed using these languages for a particular machine cannot be directly run on another machine .</p>
+<p>Define opcode and operand. Opcode (Operation code) is the part of an instruction / directive that identifies a specific operation. Operand is a part of an instruction / directive that represents a value on which the instruction acts. What is pipelined architecture?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In pipelined architecture the processor will have number of functional</code></pre>
+<p>units and the execution time of functional units are overlapped. Each functional unit works independently most of the time. What is fetch and execute cycle?</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In general, the instruction cycle of an instruction can be divided into</code></pre>
+<p>fetch and execute cycles. The fetch cycle is executed to fetch the opcode from memory. The execute cycle is executed to decode the instruction and to perform the work instructed by the instruction.</p>
+<p>Define machine cycle. Machine cycle is defined as the time required to complete one operation of accessing memory, I/O, or acknowledging an external request. This cycle may consist of three to six T-states. What is processor cycle (Machine cycle)? The processor cycle or machine cycle is the basic operation performed by the processor. To execute an instruction, the processor will run one or more machine cycles in a particular order. What is Instruction cycle? The sequence of operations that a processor has to carry out while executing the instruction is called Instruction cycle. Each instructioncycle of a processor indium consists of a number of machine cycles. What is opcode fetch cycle? The opcode fetch cycle is a machine cycle executed to fetch the opcode of an instruction stored in memory. Every instruction starts with opcode fetch machine cycle.</p>
+<p>Why interfacing is needed for 1/0 devices? Generally I/O devices are slow devices. Therefore the speed of I/O devices does not match with the speed of microprocessor. And so an interface is provided between system bus and I/O devices.</p>
+<p>What is the need for Port? The I/O devices are generally slow devices and their timing characteristics do not match with processor timings. Hence the I/O devices are connected to system bus through the ports. .What is a port? The port is a buffered I/O, which is used to hold the data transmitted from the microprocessor to I/O device or vice-versa.</p>
+<h2 id="cpu01-06">cpu01_06</h2>
+<p>Microprocessor based system</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus</code></pre>
+<p>Data Bus Control Bus</p>
+<p>Bus Arbitration</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus</code></pre>
+<p>CPU                Interrupt System Data Bus</p>
+<p>Control Signals                                Status Lines</p>
+<p>All Microcomputers consist of:       Clock         Power Supply</p>
+<h3 id="1-microprocessor-unit-mpu">1. Microprocessor Unit (MPU)</h3>
+<h3 id="2-program-memory-rom">2. Program Memory (ROM)</h3>
+<h3 id="3-data-memory-ram">3. Data Memory (RAM)</h3>
+<h3 id="4-input-output-system">4. Input / Output System</h3>
+<h3 id="5-bus-system">5. Bus System</h3>
+<p>(and Software)</p>
+<p>The microprocessor is a single chip which is capable of processing data and controlling all of the components which make up the microcomputer system. It contains all of the circuits needed to create the ‘brain of the microcomputer’.</p>
+<h3 id="1-temporary-storage-locations-in-the-form-of-a-number">1. Temporary storage locations in the form of a number</h3>
+<p>of registers which can hold binary values (information),</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>representing program instruction or data.</code></pre>
+<h3 id="2-the-arithmetic-logic-unit-alu-this-part-of-the-mpu">2. The Arithmetic Logic unit (ALU). This part of the MPU</h3>
+<p>performs both arithmetic and logical operations</p>
+<h3 id="3-timing-and-control-circuits-that-keep-all-of-the-other">3. Timing and Control Circuits : that keep all of the other</h3>
+<p>parts of system (memory &amp; I/O) working together in the right time sequence.</p>
+<p>A Bus is a common communications pathway used to carry information between the various elements of a computer system The term BUS refers to a group of wires or conduction tracks on a printed circuit board</p>
+<h3 id="pcb">(PCB)</h3>
+<p>though which binary information is transferred from one part of the microcomputer to another</p>
+<p>There are three main bus groups</p>
+<h3 id="1-address-bus">1. ADDRESS BUS</h3>
+<h3 id="2-data-bus">2. DATA BUS</h3>
+<h3 id="3-control-bus">3. CONTROL BUS</h3>
+<h3 id="data-bus">Data Bus</h3>
+<p>The Data Bus carries the data which is transferred throughout the system. ( bi-directional)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus:</code></pre>
+<p>An address is a binary number that identifies a specific memory storage location or I/O port involved in a data transfer</p>
+<p>The Address Bus is used to transmit the address of the location to the memory or the I/O port. The Address Bus is unidirectional ( one way ): addresses are always issued by the MPU.</p>
+<p>The Control Bus: is another group of signals whose functions are to provide synchronization ( timing control ) between the MPU and the other system components. Control signals are unidirectional, and are mainly outputs from the MPU. Example Control signals RD read signal asserted to read data into MPU WR write signal asserted to write data from MPU</p>
+<p>A Simplified view of MPU program execution A MPU program is stored in memory as a sequence of binary values. These binary values represent instructions. Each instruction has an unique binary value. The MPU operation is controlled by reading and executing each instruction one at a time.</p>
+<h3 id="1-the-mpu-places-an">1. The MPU places an</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>address on the ADDRESS
+BUS.</code></pre>
+<p>The address is a binary value which represents a unique memory location.</p>
+<h3 id="2-the-memory-places-the-contents-of-the-addressed">2. The Memory places the contents of the addressed</h3>
+<p>location onto the DATA BUS. The contents is a binary value.</p>
+<h3 id="3-the-mpu-reads-the-binary">3. The MPU reads the binary</h3>
+<p>value from the DATA BUS.</p>
+<h3 id="4-the-mpu-interprets">4. The MPU interprets</h3>
+<p>what operation the BINARY Value represents and completes (executes) this operation</p>
+<h3 id="5-the-mpu-has-completed-its-first-instruction-of-the">5. The MPU has completed its first instruction of the</h3>
+<p>program stored as binary values in the memory.</p>
+<p>The MPU needs to be told what to do next. The next instruction is in the next memory location. Stages</p>
+<h3 id="1-through-4-are-repeated">1. through 4. are repeated,</h3>
+<p>Note. At Stage 1. The MPU places a new binary value onto the ADDRESS BUS. This is the memory location of the next instruction. The binary value on the ADDRESS BUS has only changed by 1.</p>
+<p>All common microprocessor follows this sequence</p>
+<p>Get Instruction from memory</p>
+<h3 id="fetch">FETCH</h3>
+<p>Next                  Decode Instruction      DECODE Instruction</p>
+<p>Execute         EXECUTE Instruction</p>
+<p>Instruction Main Main Memory Memory                                                       Cycle</p>
+<p>Control Unit Fetch                 2    Decode</p>
+<p>Execution CPU                       Cycle</p>
+<h3 id="ram">RAM</h3>
+<p>3       Execute 4   Store</p>
+<p>Arithmetic/Logic Unit</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Includes Cache</code></pre>
+<p>(very fast memory)</p>
+<p>CPU Activities</p>
+<ul><li>CPU is in charge of the fetch-execute cycle to execute all program</li></ul>
+<p>instructions</p>
+<ul><li>This is not quite true, I/O operations are initiated by the CPU but</li></ul>
+<p>the actual sequence of operations is often left up to I/O modules such as I/O channels or I/O processors</p>
+<ul><li>Fetch-execute cycle:</li></ul>
+<ul><li>Fetch instruction – CPU reads next program instruction from</li></ul>
+<p>memory</p>
+<ul><li>Interpret (decode) instruction – control unit determines what</li></ul>
+<p>machine actions are required including what data to fetch</p>
+<ul><li>Fetch data – data is fetched from memory or I/O</li></ul>
+<ul><li>Process data – ALU operation or data movement</li></ul>
+<ul><li>Write data – if needed, result stored in memory or I/O</li></ul>
+<p>Pipeline Timing Diagram</p>
+<p>Pipeline Stages</p>
+<ul><li>Different architectures use different number of stages</li></ul>
+<ul><li>smaller pipelines have less complexity</li></ul>
+<ul><li>larger pipelines are generally faster</li></ul>
+<ul><li>here, we decompose the fetch-execute cycle into 6 stages:</li></ul>
+<ul><li>FI – fetch instruction</li></ul>
+<ul><li>DI – decode instruction</li></ul>
+<ul><li>CO – calculate operand addresses</li></ul>
+<ul><li>FO – fetch operands (from registers)</li></ul>
+<ul><li>EI – execute instruction (includes computing branch results and all ALU</li></ul>
+<p>operations)</p>
+<ul><li>WO – write or store result in registers (or memory)</li></ul>
+<ul><li>the design of the pipeline stages has a major impact on the architecture’s</li></ul>
+<p>performance</p>
+<p>How the MPU writes data to Memory</p>
+<p>This instruction is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decoded as</code></pre>
+<h3 id="send-temp2">SEND TEMP2</h3>
+<p>contents to</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS</code></pre>
+<p>The MPU instruction decode logic now need to execute this instruction SEND TEMP2 to an ADDRESS</p>
+<h3 id="to-what-address">TO WHAT ADDRESS …</h3>
+<p>This particular MPU instruction decodes as saying that the DESTINATION ADDRESS will be in the next memory location. The MPU then fetches the binary value from the next location, as this will be the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS where TEMP2 contents will be SENT.</code></pre>
+<p>The Destination ADDRESS data has been fetched from memory and stored in a TEMP register.</p>
+<h3 id="what-happens-next">WHAT HAPPENS NEXT ?</h3>
+<p>The TEMP register holds the DESTINATION ADDRESS where we wish the SEND our DATA (Binary Value) which is stored in TEMP2 register.</p>
+<p>We do not try to decode the contents of TEMP because it is not an instruction, it is data associated with a specific operation, it is known as an OPERAND</p>
+<h3 id="what-happens-next">WHAT HAPPENS NEXT ..</h3>
+<p>Remember we want TEMP2 contents to be sent to the MEMORY ADDRESS which is currently held in</p>
+<h3 id="temp">TEMP.</h3>
+<p>The contents of TEMP register are placed on the</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDRESS BUS.</code></pre>
+<p>The MEMORY WRITE part of our instruction has started. In this phase, since we are sending DATA to MEMORY or WRITING TO MEMORY we must be accessing a MEMORY store which allows us to do so.</p>
+<p>ROM is read only memory, where our program is stored, we cannot write to it.</p>
+<p>The RAM random access memory ,(read/write memory) is where our DATA will be written.</p>
+<p>Notice the control signal lines on each of the memory types.</p>
+<p>The ADDRESS is a memory location within the RAM, the TEMP2 register places its contents onto the DATA BUS.</p>
+<p>The RAM reads the DATA BUS value and stores it at the location which the ADDRESS value is accessing. NOTICE THE WR signal is ACTIVE</p>
+<p>The instruction has now completed executing The result of this operation is that the contents of TEMP2 register have been WRITTEN to a RAM Memory location 11111111.</p>
+<p>Prior to the DATA WRITE the contents of RAM location was 00001111. After the MEMORY WRITE RAM Memory location now contains 11110000 the previous DATA value has been overwritten.</p>
+<h3 id="a-quick-review">A Quick Review</h3>
+<p>The MPU fetches instructions one at a time from memory The instruction is interpreted by MPU and then this operation is executed. This called the FETCH DECODE EXECUTE CYCLE. The program, sequence of instructions are held in consecutive memory locations.</p>
+<p>We have seen that not every binary value read from memory is an instruction. Some of the values can be DATA associated with an instruction.</p>
+<p>The instructions are known as Operation Codes</p>
+<h3 id="opcodes">OPCODES.</h3>
+<p>The Data and Registers associated with a specific OPCODE are called OPERANDS.</p>
+<p>The format of these OPCODES and OPERANDS are directly related to the internal architecture of the MPU. The question is what does the MPU do next, we have seen that a single instruction can cause several BUS accesses. But we have completed the current instruction. The MPU needs to get the NEXT instruction from memory where our program resides.</p>
+<p>Bus Sizes: Buses are specified in width, number of bits. There are other parameters which can also used to characterise a Bus but for this presentation they are not relevant.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Address Bus :</code></pre>
+<p>The MPU Address bus size specifies how much memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and I/O locations may accessed.</code></pre>
+<p>Number of locations = 2N where N is number of Address lines</p>
+<p>The Address Bus may be specified using the following 16 Bits Wide, ( A15 to A0 ), 16 Address Lines</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>In this instance 2N = 216 = 65536 locations</code></pre>
+<p>The Address Range starts at 0 and ends at a maximum 65535. Notice that the highest address location is one less than the Number of locations given by 2N .</p>
+<p>This is due to the number 0 being a valid memory location.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Addresses are general expressed in the Hexadecimal</code></pre>
+<p>numbering system. Which will be covered later. This number system is base 16. So that a typical 16 bit address will use values such as 1234H or 123416 or FFFFH or FFFF16 more later.</p>
+<p>The Data Bus is similarly characterised by its width, number of bits. The width of the external Data bus generally gives a very good indication of the internal MPU architecture, particularly the registers size and the ALU. However, there are exceptions</p>
+<p>The Data Bus width limits the bandwidth of the data that can be transferred per bus operation.</p>
+<p>Data Bus 8 Bits , tends to represent a 8 bit internal architecture.</p>
+<p>Hi Z means High Impedance or floating bus / signal.</p>
+<p>VALID INFO means either a group of BUS signals or an individual signal is Stable at this time.</p>
+<p>Simple Read Cycle</p>
+<h3 id="1-address-onto-address-bus">1. Address onto Address Bus</h3>
+<h3 id="2-read-rd-control-signal-asserted-by-mpu">2. READ (RD) Control Signal Asserted by MPU</h3>
+<h3 id="3-data-placed-from-memory-onto-the-data-bus">3. Data Placed from Memory onto the Data Bus</h3>
+<h3 id="4-rd-signal-de-asserted-data-into-mpu-temp-register">4. RD signal De-Asserted, Data into MPU temp register.</h3>
+<h3 id="5-read-cycle-ends">5. Read Cycle Ends</h3>
+<p>Write Cycle</p>
+<h3 id="1-address-placed-on-address-bus">1. Address placed on ADDRESS BUS</h3>
+<h3 id="2-data-placed-onto-data-bus">2. Data placed onto DATA BUS</h3>
+<h3 id="3-write-wr-control-signal-asserted-by-mpu">3. Write (WR) Control Signal Asserted by MPU</h3>
+<h3 id="4-write-wr-control-signal-de-asserted-and-data">4. Write (WR) Control Signal De-Asserted and Data</h3>
+<p>Written into Memory</p>
+<h3 id="5-write-cycles-completes">5. Write Cycles completes.</h3>
+<p>–CPU has four key parts that we will examine:                      The MPU architectural The MPU architecture can be viewed both</p>
+<ul><li>Control Unit                  externally or internally. (</li></ul>
+<p>The MPU architecture refers to both its</p>
+<ul><li>Arithmetic &amp; Logic Unit       Hardware and</li></ul>
+<p>Software features</p>
+<ul><li>Registers</li></ul>
+<ul><li>Clock</li></ul>
+<p>—CONTROL UNIT (CU): circuitry for coordinating machine’s activities. —ARITHMETIC &amp; LOGIC UNIT (ALU): circuitry to perform data manipulation (arithmetic &amp; logic). —Registers: Temporary holding places. Holds information applicable to the ___________________ —Clock: Times all CPU operations. (store, retrieve, compare,</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>and mathematical operations)</code></pre>
+<p>The basic function as stated is to perform logic and maths operations. The Accumulator and the Flags registers play an important role in the operation of the ALU.</p>
+<p>The Accumulator is used in all ALU operations.</p>
+<p>The Flags or Status Register is a group of bits representing the result of the ALU operation. The Flags register contains bits such as OV representing an overflow flag. If the result of an</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addition is greater than 255 then the OV is set to indicate</code></pre>
+<p>this condition. More Details to come. The type of functions performed by the ALUs of MPU</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>include</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Addition   Shift Left Subtraction                   Shift Right</code></pre>
+<p>Logical AND       Decrement Logical OR        Increment Logical XOR</p>
+<h2 id="what-is-a-microprocessor-and-what-units-does-it-consist-of">What Is a Microprocessor and What Units Does It Consist Of</h2>
+<p>What is a microprocessor and what units does it consist of?</p>
+<p>When you want to learn a high-level programming language, you can start working without needing to examine the internal structure of the computer you are using. When you want to learn assembly language, however, before going into all the details of the language, you need to learn what a microcomputer is and what its internal structure looks like.</p>
+<p>A microcomputer, which goes by various names such as personal computer, PC, office computer, or desktop computer, is, as its name suggests, a small computer. However, it would be wrong to conclude from this definition that microcomputers are inadequate or have limited capabilities. Today's microcomputers, although still called "micro", have the power of the minicomputers and mainframes of a few years ago. Creating a microcomputer equal in power to the large computers of a few years earlier was made possible by chips containing the functional power of thousands of transistors, namely the chips called the 8088 or 8086 microprocessor.</p>
+<p>A microprocessor is a chip that forms the basic structure of a microcomputer. This basic structure determines the functional power of the computer. The basic components of a microprocessor system are the following.</p>
+<h3 id="1-cpu">1-CPU</h3>
+<p>2-Memory 3-I/O devices 4-Buses The CPU (Central Processing Unit), the central processing unit, is the microprocessor itself. The memory and the input/output units are connected to the CPU through electronic lines called buses. The CPU communicates with all peripheral devices (such as the monitor, disk, keyboard, and printer) and enables the exchange of information among them.</p>
+<p>The instruction set of the 8088 microprocessor consists of 92 basic instruction types. It allows several different addressing methods to be used to access data in various regions of memory. Combining the 92 instruction types, the addressing modes, and the various types of data in different combinations yields thousands of instructions that can be executed by the 8088.</p>
+<p>Whether the 8088 is an 8-bit or a 16-bit microprocessor is debatable. According to standard industry terminology, the 8088 should be called an 8-bit microprocessor, because at any given moment a processor transfers 8 bits of information over 8-bit data lines. However, the internal paths of the 8088 are 16 bits wide, and the numbers it operates on can be 8 or 16 bits long. For this reason, it would not be wrong to call the 8088 a 16-bit processor. The 8088 is a 16-bit processor with 8-bit data lines.</p>
+<p>The INTEL 8086/8088 family</p>
+<p>Intel produced its first commercially manufactured microprocessor in 1972. This processor, which was organized as a calculator, ... The microprocessor named 8080, an upgraded version of its predecessor, was produced in 1973. The 8080 processor has more addresses, I/O ports, and instructions. The execution time of instructions is shorter. The internal</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>organization is more powerful.</code></pre>
+<p>The microprocessor released in 1976 was named the 8085. With the 8085, Intel secured a place in the 8-bit microprocessor market, and in 1978 it made an important leap by producing the 8086. This 16-bit processor is 10 times faster than the 8080. The 8086 and 8080 are software compatible at the assembly language level. The difference between them is small. 8080 programs can be executed on the 8086.</p>
+<p>Intel produced a new processor which it named the 8088. Like the 8086, this processor had 16-bit internal data paths. However, the data lines coming from outside the chip are 8 bits wide. The 8086 and the 8088 are identical. The 8088 microprocessor performs 16-bit data transfers in a longer time, because 16-bit operations are carried out as two separate 8-bit operations.</p>
+<p>The 80186 and 80188 processors are upgraded versions of the 8086 and 8088. These processors include additional hardware features such as timers. They also have 10 new instructions that differ from the 8086 and 8088. Intel's later processors, known as the x86 group, are the 80286, 80386, 80486, the Pentium, the Pentium Pro (with MMX support), and finally the Pentium II series. The CPU chips of these processors are more advanced than those of the other members of the family. The main reason for this advancement is the operations on the memory space, and these improvements allow the microcomputer to be used by more than one user at the same time.</p>
+<p>CPU registers</p>
+<p>The microprocessor contains 14 special locations called registers. We can think of these locations, each 16 bits wide, as special memory units. Registers are used by the microprocessor for special purposes. They are also used to temporarily store various data and to perform operations on this data. Since registers are located on the CPU chip, operations performed with registers are much faster than operations performed on memory locations. The registers of the 8086/8088 microprocessor can be divided into the following groups:</p>
+<p>Segment registers (4) General-purpose registers a) Data registers (4) b) Pointer and index registers (4) Instruction Pointer (1) Program Status Word (1) Of the 14 registers shown above, 4 are the CS, DS, SS, and ES registers, which hold the starting addresses of the CODE, DATA, STACK, and EXTRA segments. These four registers are generally called segment registers. Of the remaining ones, 8 are general-purpose registers, 1 is the instruction pointer register, and the last is known as the program status word (status indicator) register. We will call the program status word register the flag register. The general-purpose registers are divided into two groups among themselves. Each group consists of 4 registers. The first four of these are called data registers, and the other 4 are called pointer and index registers.</p>
+<p>Data registers</p>
+<p>The DATA registers, used mostly for arithmetic operations, are AX, BX, CX, and DX. Unlike the other registers, each DATA register can be used either as a whole or in two parts. A DATA register can be divided into two subfields, so we can use the register either as a single 16-bit register or as two separate 8-bit registers. This feature is shown in the figure. For example, we treat AX as a 16-bit register for 16-bit operations, and AH and AL, which make up AX, for 8-bit operations. The high-order part of any 16-bit data register is denoted by the register name and the first letter of the word "High", and the low-order part is denoted by the register name and the first letter of the word "Low". Thus we obtain the 8-bit registers named AH and AL for AX, BH and BL for BX, CH and CL for CX, and DH and DL for DX. It is clear that changing the value of one of these 8-bit registers will also change the value of the 16-bit register containing it, and vice versa. However, an operation performed on either half of a 16-bit register will not cause any change in the other half. The figure also shows that registers other than the data registers cannot be divided into subfields in this way. For the flag register, however, there is an even different kind of usage.</p>
+<p>Any of the DATA registers can be used for general program purposes. On the other hand, certain data registers must be used as operands during certain operations. In such a case, the programmer has no choice. The AX register, which can be called the accumulator, is used with word length in multiplication, division, input, output, and some string operations. The AL register is byte-length and is used as the counter register of some operations or as the transfer area (destination register) in decimal-oriented arithmetic operations. The AH register is used in byte-length division and multiplication. BX, which can be called the base register, is mostly used for addressing data in memory. CX is the counter register; it is used as the counter register for LOOP instructions or repeated string operations. The CL register can be used as the shift and rotate counter. DX, called the data register, is used in word-length multiplication and division operations, and also to specify the port number for input/output operations.</p>
+<p>Segment registers</p>
+<p>Computers using the 8088 and 8086 processors place programs and data in two separate areas of memory. These program and data areas are at most 64 K in size and are called segments. The 8088 processor can have 4 separate segments at the same time. These segments are called the CODE, DATA, STACK, and EXTRA segments. Four separate registers are used to indicate the first byte of these segments, in other words the starting address of the segment. These are, respectively, CS, DS, SS, and ES, and they are called segment registers. The code segment register, CS, indicates the starting address of the segment containing the program being executed. In other words, machine language instructions are located in the segment addressed by CS. The stack segment register, SS, contains the starting address of the current stack segment. The stack segment is a block of memory in which various data are temporarily stored. The data segment register, DS, is the starting address of the current data segment. This segment is generally used by program variables. In other words, the information subjected to data processing operations is located in locations within the data segment. The extra segment register, ES, contains the starting address of the current extra segment. The extra segment is generally used for string operations. In systems with sufficient memory, these 4 segments are different parts of memory. In systems without large memory, these segments may overlap.</p>
+<p>Pointer and index registers</p>
+<p>As also shown in the figure above, the pointer and index registers are SP, BP, SI, and DI. However, it is also possible to regard the IP and BX registers as pointer or index registers. Pointer and index registers, like the data registers, can be used for arithmetic operations. However, the main purpose of using these registers is to treat them as address pointers in order to access data in various memory regions. To indicate the address of a location in memory, two separate address values are used. The first value is the address of the segment that contains the location being pointed to; here the segment registers are used. The second address value, which indicates the position of the location within the segment, is known as the offset address. The pointer and index registers are used to specify offset addresses.</p>
+<p>The microprocessor uses the CS and IP registers to access locations within the code segment. To access data located in the stack segment, one of the SP or BP registers must be used together with the SS register. To access locations within the data segment, the DS register, which is the start of the data segment, is used, and BX, SI, or DI is used to indicate the offset address of the location. To access locations within the extra segment or an arbitrarily chosen segment, we can make use of CS, DS, and SS. For example, we can transfer the value in ES to SS and the offset address of the location within the extra segment to BP.</p>
+<p>Instruction pointer register</p>
+<p>The IP register, which we can call the instruction pointer, contains the offset address of the next instruction to be executed by the execution unit of the 8088. The memory location whose offset address is indicated by IP is within the code segment, because the instructions that make up programs are located in this segment. Since the IP register is a special-purpose register, it cannot be used directly by the programmer. However, it is possible to change the value of this register indirectly through information on the stack.</p>
+<p>Program status word register</p>
+<p>We can abbreviate the program status word register as PSW. We will call this register the flag register. The flag register is quite different from the other registers. First of all, the notation "PSW" is not an operand; it is only an abbreviation used to refer to this register. The flag register cannot be considered as a whole, or as a 16-bit or 8-bit number, because it is not the numerical value of the flag register that matters, but the value of each of the bits that make it up. However, there is also a restriction here: of the 16 bits that make up the register, only 9 are used. The current value of each of these 9 bits affects how various control instructions are executed or gives information about the result of arithmetic or logical operations. For example, bit 6 of the flag register is called the zero flag. After an operation, by checking the value of this bit, we can check whether the result of the operation was 0. If the value of this bit is 1, the result of the operation is 0; otherwise it is nonzero.</p>
+<p>Memory, Segment, Offset</p>
+<p>Memory is the unit that contains or stores the instructions that make up programs and the data on which the program will perform information processing. Instructions and data are located in the computer's memory as numbers of one byte each. Everything in memory consists of numbers. To prevent instructions from being treated as data, or data as instructions, during execution, a quite orderly memory organization is required. This is normally the responsibility of the programmer.</p>
+<p>We can think of computer memory as consisting of thousands of small cells. Each cell is 8 bits long, and as is known, each 8-bit unit is called a byte. Each byte in memory, in other words each memory location, has an address. These addresses are positive integers starting from 0. The address of the first byte of memory is 0, and the address of the last byte is one less than the number indicating the size of the memory.</p>
+<p>The memory of each computer can be of different sizes. The maximum memory size that can be used with the 8086/8088 microprocessor is 1,048,576 bytes, or simply 1 Megabyte. The figure below can give a rough idea of the cells that make up the memory and their corresponding memory addresses. To address any location in memory, unsigned integers 2 bytes long are used. The smallest unsigned number that can be expressed with 2 bytes is 0, and the largest unsigned number is 65535. Thus, with a number 2 bytes long, only the first 65536 bytes of memory can be addressed. Yet we know that for the 8086/8088 microprocessor, memory can exceed this number and consist of 1,048,576 bytes. It is clear that with numbers 2 bytes long, not all locations of a memory of this size can be addressed.</p>
+<h2 id="microprocessor-course-for-electronics-students">MICROPROCESSOR COURSE FOR ELECTRONICS STUDENTS</h2>
+<p>When talking about the features of the computers we use today, the processor is mentioned in particular, and it is clear that its operating frequency is an important criterion in determining the speed of that computer. The 80286, 80386, 80486 and finally the Pentium series produced by Intel, which are in use today, are all microprocessors. Processors are not very useful on their own and need memory and input/output units. If we bring these three structures (CPU, RAM and I/O) together and enclose them in a single package, the resulting structure is called a microcontroller.</p>
+<p>Microcontrollers, which are designed for use in applications that require computer technology, are simpler and cheaper than microprocessors. Today, microcontrollers are found inside many products. For example, take a close look at newly released air conditioners and refrigerators. They surely have a liquid crystal display, and we control these machines with buttons. Microcontrollers make this control possible. Or, in our cars, especially newer ones, there is certainly a microcontroller. This microcontroller controls the central locking system, the instrument panel and/or the air conditioning, and conveys information about them to us on a screen or through indicators. The examples can be multiplied. We can use microcontrollers for exactly this kind of control and computation. If we wish, we can even build a robot.</p>
+<p>Today there are many microcontroller manufacturers, and they produce different microcontrollers according to the processing needed. But when we get down to basics, there is very little variation in microcontroller architecture, and these microcontrollers are almost the same in structure.</p>
+<p>Before starting a project, when choosing a microcontroller, one must thoroughly understand what features the microcontroller to be used in the application should have. These features include:</p>
+<h3 id="1-number-of-interrupts">1. Number of interrupts</h3>
+<h3 id="2-number-of-i-o-ports">2. Number of I/O ports</h3>
+<h3 id="3-programmable-digital-parallel-input-output">3. Programmable digital parallel input / output</h3>
+<h3 id="4-programmable-analog-input-output">4. Programmable analog input / output</h3>
+<h3 id="5-internal-memory-type-and-capacity">5. Internal memory type and capacity</h3>
+<h3 id="6-floating-point-computation">6. Floating-point computation</h3>
+<p>It is possible to extend this list. I have listed only the basic features.</p>
+<h3 id="a-microcontroller-generally-consists-of-the-following-units">A microcontroller generally consists of the following units</h3>
+<h3 id="1-cpu-central-processing-unit">1. CPU (Central Processing Unit)</h3>
+<h3 id="2-ram-random-access-memory">2. RAM (Random Access Memory)</h3>
+<h3 id="3-eprom-prom-rom-erasable-programmable-read">3. EPROM/PROM/ROM (Erasable Programmable Read</h3>
+<p>Only Memory)</p>
+<h3 id="4-i-o-input-output-serial-and-parallel">4. I/O (Input/Output) - serial and parallel</h3>
+<h3 id="5-timers">5. Timers</h3>
+<h3 id="6-interrupt-controller-interrupts">6. Interrupt controller (Interrupts)</h3>
+<p>Microcontrollers are special-purpose computers and do what they are programmed for in the best possible way. Their general characteristics are:</p>
+<h3 id="1-microcontrollers-are-programmed-for-only-one-task-and-run-only-and-only-that">1. Microcontrollers are programmed for only one task and run only and only that</h3>
+<p>program, and the program they use is kept inside the chip or in a place called program memory.</p>
+<h3 id="2-microcontrollers-consume-only-about-50-mw-of-power">2. Microcontrollers consume only about 50 mW of power.</h3>
+<h3 id="3-microcontrollers-do-not-only-take-input-they-can-also-produce-output-with-led">3. Microcontrollers do not only take input; they can also produce output. With LED</h3>
+<p>displays, liquid crystal displays, warning sounds, etc.</p>
+<h3 id="4-microcontrollers-are-cheap-they-let-you-easily-reduce-a-complex-circuit-made-of-many-parts-to-a-small-size-and-low-cost">4. Microcontrollers are cheap. They let you easily reduce a complex circuit made of many parts to a small size and low cost.</h3>
+<p>PIC is a microcontroller whose name comes from the initial letters of the words in the English phrase Peripheral Interface Controller. If we translate this phrase into Turkish, it means something like "an interface that controls peripheral units". PIC is indeed a chip designed to control I/O elements called peripherals, such as lamps, motors, relays, and temperature and light sensors, very quickly.</p>
+<p>Since they are produced using a method called RISC architecture, the instructions used to program a PIC are quite simple and few in number. The basic idea of the RISC (Reduced Instruction Set Computer) architecture, a design method applied since the early 1980s, is to use simpler and fewer instructions. For example, the PIC16F84 microcontroller can be programmed using a total of 35 instructions.</p>
+<p>For those starting to work with a microcontroller, the most suitable option is the PIC16F84. Because the PIC16F84 has Flash memory, being able to program it, use it in experiments, then erase it and write a new program is a great convenience for those new to PIC. Thus, beginners will not have to throw away the chip because of programming mistakes. Admittedly, it is also possible to rewrite chips with EPROM program memory, but in that case an EPROM eraser is needed. Even if an eraser is available, one has to wait at least 10 - 15 min. to erase the program from memory. This feature of the PIC16F84 makes it an ideal choice for those who are just starting to use microcontrollers.</p>
+<p>Another advantage of using the PIC16F84 is that the programming hardware is very cheap and practical, and can even be built by most hobbyist electronics users.</p>
+<p>Now, let us look at the features of the PIC16F84 microcontroller.</p>
+<h3 id="high-performance-risc-cpu-features">High-Performance RISC CPU Features</h3>
+<ul><li>Only 35 single-word instructions to learn</li></ul>
+<ul><li>All instructions are single-cycle (400 ns @ 10 MHz) except for program branches, which are two-cycle</li></ul>
+<ul><li>Operating speed: DC-10 MHz clock input. DC-400 ns instruction cycle</li></ul>
+<ul><li>14-bit wide instructions</li></ul>
+<ul><li>8-bit wide data bus</li></ul>
+<ul><li>1K*14 EEPROM program memory</li></ul>
+<ul><li>36*8 general-purpose registers (SRAM)</li></ul>
+<ul><li>64*8 on-chip EEPROM data memory</li></ul>
+<ul><li>15 special-function hardware registers · Direct, indirect and relative addressing modes</li></ul>
+<ul><li>Four interrupt sources</li></ul>
+<ul><li>External RB0/INT pin</li></ul>
+<ul><li>TMR0 timer overflow</li></ul>
+<ul><li>PORTB &lt;7:4&gt; interrupt on change</li></ul>
+<ul><li>Data EEPROM write complete</li></ul>
+<ul><li>1,000,000 EEPROM data memory ERASE/WRITE cycles</li></ul>
+<ul><li>EEPROM data retention of more than 40 years</li></ul>
+<ul><li>13 I/O pins with individual direction control</li></ul>
+<ul><li>High current sink/source for direct LED drive</li></ul>
+<ul><li>Max. 25 mA sink per pin</li></ul>
+<ul><li>Max. 20 mA source per pin</li></ul>
+<ul><li>TMR0: 8-bit timer/counter with 8-bit programmable prescaler</li></ul>
+<h3 id="special-microcontroller-features">Special Microcontroller Features</h3>
+<ul><li>Power-on Reset (POR)</li></ul>
+<ul><li>Power-up Timer (PWRT)</li></ul>
+<ul><li>Oscillator Start-up Timer (OST)</li></ul>
+<ul><li>Watchdog Timer (WDT) with on-chip RC oscillator for reliable operation</li></ul>
+<ul><li>Code protection</li></ul>
+<ul><li>Power-saving SLEEP mode</li></ul>
+<ul><li>Selectable oscillator options</li></ul>
+<ul><li>Serial in-circuit programming (via two pins)</li></ul>
+<h3 id="cmos-technology">CMOS Technology</h3>
+<ul><li>Low-power, high-speed CMOS EEPROM technology</li></ul>
+<ul><li>Fully static design</li></ul>
+<ul><li>Wide operating voltage range:</li></ul>
+<ul><li>Commercial: 2.0V-6.0V</li></ul>
+<ul><li>Industrial: 2.0V-6.0V</li></ul>
+<ul><li>Low power consumption</li></ul>
+<p>&lt; 2mA typical @ 5V, 4MHz 60 mA typical @ 2V, 32 kHz 26 mA typical standby current @ 2V</p>
+<p>The PIC is programmed in a programming language called assembler language, which consists of a total of 35 instructions. To write these instructions we can use a simple editor. This can be Notepad in Windows or the edit program in DOS. What really matters is translating the instructions we write into machine language. There are versions of MPASM, which translates assembly language instructions saved as a text file into machine language, that run under both DOS and Windows. This program can be downloaded from http://www.microchip.com. In the MPLAB program we will use, both the text editor and the MPASM assembler program are integrated.</p>
+<p>If you like, let us now start looking at the assembler instructions for the PIC. Before starting, it is worth noting the following. The PIC divides the clock frequency it uses by four and executes the instruction in that time. That is, if the crystal or any oscillator producing the clock pulses for the PIC generates pulses at a frequency of 4 MHz, the PIC executes each instruction in 1 µs (microsecond). Generally, 4 MHz crystals are used for the PIC16F84. After giving this brief information, we can start explaining the assembly instructions.</p>
+<p>For the MPASM assembler program to correctly interpret the instructions written and convert them into hex codes the PIC can understand, the following information must be written into the program in a special format:</p>
+<ul><li>Which PIC16XX the instructions are written for,</li></ul>
+<ul><li>At which memory address the program will start,</li></ul>
+<ul><li>What the instructions and labels are,</li></ul>
+<ul><li>Where the program ends.</li></ul>
+<p>Now let us examine the instructions one by one.</p>
+<h3 id="abbreviations-used">Abbreviations Used</h3>
+<p>Abbreviation         Meaning                                     Example n            Constant value                                such as h'20', d'10', b'00001100'... f            The register we create</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDWF durum1,f ; W ile</code></pre>
+<p>direction (d), the value can be 0 (w) or 1       AND durum1 with W, since it is f, write to the durum1 register. Flags affected in the Status Register</p>
+<h3 id="s-r-e-b">S.R.E.B</h3>
+<p>Flags Carry, borrow bit. Becomes 1 when there is a carry out of bit 7, the last bit.</p>
+<h3 id="c">C</h3>
+<p>Carry, borrow bit. Becomes 1 when there is a carry out of bit 3.</p>
+<h3 id="dc">DC</h3>
+<p>Zero bit. Becomes 1 when the result of an arithmetic or Z          logical instruction is 0 (zero). These bits will be covered when the status register is explained, TO and PD. PIC Programming Instructions...</p>
+<p>Instruction S.R.E.B                                  Meaning</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADDLW n C,DC,Z The value n is added to W. The result is written to W.
+ADDWF    C,CD,Z Adds the f register to the contents of W and places the result in W or the f register depending on the value of destination d.</code></pre>
+<p>f,d              </p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: ADDWF DAT_IN,W
+ANDLW n        Z      The value n is ANDed with the W register and the result is written to the W register.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: ANDLW B'00000011'turns off all bits except the lowest two.
+ANDWF          Z      ANDs W and the f file and places the result in W or the f register depending on the value of destination d.</code></pre>
+<p>f,d                   </p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: ANDWF TEMP W leaves the contents of the TEMP file unchanged and places the result of the AND</code></pre>
+<p>function in the W register.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>BCF f,b        none    Set bit b of the file register at address F to 0.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: BCF STATUS , ZERO
+BSF f,b        none    Set bit b of the file register at address F to 1.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: BSF PORTA , BITO</code></pre>
+<p>BTSFC f,b      none    Test bit b of the register at address F and, if it is 0, skip the next instruction. If it is 1, proceed to the following instruction.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: BTFSC PORTB , SWITCH1
+BTFSS f,b      none    Test bit b of the register at address F and, if it is 1, skip the next instruction. If it is 0, proceed to the following instruction.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: BTFSS STATUS , CARRY
+CALL k         none    A call is made to a subroutine labeled k. The contents of the W register will be transferred for use inside a subroutine when needed.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: CALL TEMP_CONVERT.
+CLRF f      Z   Clear or reset the contents at address f so that they become zero
+CLRW        Z   Clear or reset the contents of the W register so that they become zero
+CLRWDT    TO,PD The watchdog timer register is set to zero.</code></pre>
+<p>COMF f,d    Z   Complements (inverts) the contents of file F and places the result in W or the f register depending on the value of destination d.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECF f,d    Z   Subtracts 1 from file F and places the result in W or the f register depending on the value of destination d.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DECFSZ     none Decrements the contents of file F by one and, if the result is zero, skips the following instruction; the result is placed in W or the f register depending on the value of destination d.</code></pre>
+<p>f,d             </p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>GOTO k     none The program jumps to label / address k.
+INCF f,d    Z   Increments the contents of file F by 1 and places the result in W or the f register depending on the value of destination d.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INCFSZ f,d none Increments the contents of file F by 1 and places the result in W or the f register depending on the value of destination d; if the result is zero, skips the next instruction.</code></pre>
+<p>IORLW n        Z    The value N is ORed with the W register and the result is written to the W register.</p>
+<p>Example: " IORLW h'C4' " IORWF f,d      Z    ORs the contents of the W register and file f and places the result in W or the f register depending on the value of destination d.</p>
+<p>Example: "IORWF COUNT, F" places the result of the function in the COUNT file.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVLW n       none   The value N is moved to W.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: MOVLW 36II
+MOVF f,d       Z    Moves/copies the contents of file F and places the result in W or the f register depending on the value of destination d.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVWF f       none   Copy the contents of the W register to the register at address f.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: MOVWF TEMP
+NOP           none   Do nothing</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: NOP ; consumes 1 clock cycle
+RETFIE        none   Return from an interrupt.
+RETLW n       none   Return from a subroutine with a value n in the W register.</code></pre>
+<p>Example: RTLW 20H; returns to the call address +1 with 20H in the W register.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Example: RETLW 20H; returns to the address the subroutine was called from +1, carrying the value 20H in the W register</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RETURN        none   Returns from a subroutine, leaving the contents of the W register as they are.
+RLF f,d        C    Shift or rotate all bits left by one. Bit 7 goes into the carry bit, and the carry bit becomes bit 0. The result is placed in d.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RRF f,d     C    Shift or rotate all bits right by one. Bit 0 goes into the carry bit, and the carry bit becomes bit 7.</code></pre>
+<p>SLEEP     TO,PD The PIC is put into sleep or standby mode. Register contents are frozen and the PIC draws a fraction of its operating current. When going from sleep mode to run mode, the 16C5x family jumps to the reset vector. The 16Cxx family continues at the following line of code.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUBLW n C,DC,Z The value of W is subtracted from n and the result is placed in W.
+SUBWF f,d C,DC,Z Subtracts the contents of the W register from file F and places the result in W or the f register depending on the value of destination d.</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SWAPF f,d none Swaps the first four bits and the last four bits within the f register.</code></pre>
+<p>The result is written to the W or f register according to the value of d. XORLW        Z   XORs the contents of W with the value. The result is written to W. XORWF f,d    Z   XORs the contents of W and file f and places the result in W or the f register depending on the value of destination d.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-islemciye-giris.zip" download>eem332-islemciye-giris.zip</a></p>
+              <p class="kucuk">ZIP archive · 3.0 MB · 28.10.2004</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-islemciye-giris.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

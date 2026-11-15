@@ -1,0 +1,768 @@
+---
+baslik: EEM312 Digital Electronics: Additional SPICE Netlists for Logic Gates, NAND, NOR and XOR
+ozet: Additional archived SPICE source files for two- and three-input CMOS gates, XOR trials with fixed inputs, and delay studies; with notes on connections and loading.
+---
+
+This post collects additional logic gate netlists prepared by classmates for the Başkent University **EEM312 Digital Electronics** laboratory. Student names and personal folder names have been removed from the archive copies of the 2005–2011 work. Files were selected that differ from the code in the earlier [logic gate reports](/arsiv/eem312-rapor-mantik-kapisi-tasarimi/) in connection, sizing, or analysis settings. The cleaned sources can be downloaded as a ZIP at the end of the post; the code was not run.
+
+## Connections and issues seen in the source
+
+In the three-input NAND network, three PMOS transistors are connected in parallel and three NMOS transistors in series; the NOR network is the reverse. The 200, 400 and 800 ns periods of the input pulses produce the different logic combinations. The transient commands plot the output as a function of time.
+
+*Note: In `grup-a/b.cir`, the NMOS chain ends at node 9, which is not connected to ground. The transistors corresponding to the third pulse source are also missing. The file should not be regarded as a completed three-input NAND; the source was not modified.*
+
+*Note: In `grup-a/a.cir`, `vin3` directly drives node 5, the observed output node. In this case the output will not show only the logic function of the transistor network.*
+
+*Note: Despite its name, `giris-denemeleri/3-NOR.cir` has two inputs; in addition, the waveforms of the two pulse sources are identical. In `grup-c/Nand.cir`, `c1 5 0 1fF` is connected to input node 5 rather than output node 2.*
+
+## Model and file layout
+
+The files use Level 2 MOSN/MOSP models. Generally L = 1.2 µm, NMOS W = 1.8 µm and PMOS W = 5.4 µm; the sizes have been changed in some gates. The model lines are preserved in every file. Files/folders carrying personal names have been replaced with neutral names.
+
+## XOR trial, extra pulse source at the output node
+
+File: `grup-a/a.cir`.
+
+```spice
+* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+*  D G S B
+
+M1 1 2 3 1 MOSP W=3.6u L=1.2u
+M2 2 4 5 2 MOSP W=3.6u L=1.2u
+M3 5 2 4 5 MOSP W=3.6u L=1.2u
+
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+M5 5 4 3 0 MOSN W=1.8u L=1.2u
+M6 4 3 5 5 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+*va 2 0 5V
+*vb 4 0 5V
+
+Vin1 2 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+Vin2 4 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+vin3 5 0 pulse(0V 5V 100ns 0ns 0ns 200ns 500ns)
+.control
+tran 0.05n 500n
+plot v(2) 
+plot v(4)
+plot v(5)
+ 
+.endc
+.end
+```
+
+## XOR with fixed inputs, A=0 and B=1
+
+File: `grup-a/abc.cir`.
+
+```spice
+* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+*  D G S B
+
+M1 3 2 1 1 MOSP W=3.6u L=1.2u
+M2 2 4 5 5 MOSP W=3.6u L=1.2u
+M3 5 2 4 4 MOSP W=3.6u L=1.2u
+
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+M5 5 4 3 3 MOSN W=1.8u L=1.2u
+M6 4 3 5 5 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+v2 2 0 0v
+v4 4 0 5v
+
+*Vin1 2 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+*Vin2 4 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+
+.control
+tran 0.05n 500n
+plot v(2) 
+plot v(4)
+plot v(5)
+ 
+.endc
+.end
+```
+
+## NAND connection trial
+
+File: `grup-a/b.cir`.
+
+```spice
+* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 1 1 MOSP W=5.4u L=1.2u
+M2 5 3 1 1 MOSP W=5.4u L=1.2u
+
+M4 5 2 7 7 MOSN W=1.8u L=1.2u
+M5 7 3 9 9 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 3 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin2 4 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 800n
+plot v(5)
+ 
+.endc
+.end
+```
+
+## Three-input NOR, 800 ns analysis
+
+File: `grup-a/c.cir`.
+
+```spice
+* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 7 2 0 0 MOSN W=1.8u L=1.2u
+M2 7 4 0 0 MOSN W=1.8u L=1.2u
+M3 7 6 0 0 MOSN W=1.8u L=1.2u
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+M6 7 6 5 5 MOSP W=5.4u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+Vin2 6 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 7 0 1fF
+
+.control
+tran 0.05n 800n
+plot v(7) 
+.endc
+.end
+```
+
+## XOR with two pulse inputs
+
+File: `grup-b/xor.cir`.
+
+```spice
+* Arsiv devre kaydi
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+vdd 4 0 5V
+Vin 1 0 pulse(0V 5V 0 0ns 0ns 100ns 200ns)
+Vin1 2 0 pulse(0V 5V 0 0ns 0ns 200ns 400ns)
+
+.control
+tran 0.05n 400n
+plot v(3)
+plot v(1)
+plot v(2)
+ 
+.endc
+.end
+```
+
+## Three-input NAND, 1 fF load
+
+File: `grup-b/nand.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 1 1 MOSP W=5.4u L=1.2u
+
+M2 5 3 1 1 MOSP W=5.4u L=1.2u
+
+M3 5 4 1 1 MOSP W=5.4u L=1.2u
+
+M4 5 2 7 7 MOSN W=1.8u L=1.2u
+
+M5 7 3 9 9 MOSN W=1.8u L=1.2u
+
+M6 9 4 0 0 MOSN W=1.8u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 3 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin2 4 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2) 
+plot v(3)
+plot v(4)
+plot v(5)
+ 
+.endc
+.end
+```
+
+## Three-input NOR, 1600 ns analysis
+
+File: `grup-b/nor.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 7 2 0 0 MOSN W=1.8u L=1.2u
+
+M2 7 4 0 0 MOSN W=1.8u L=1.2u
+
+M3 7 6 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+M6 7 6 5 5 MOSP W=5.4u L=1.2u
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+Vin2 6 0 pulse(5V 0V 0 1ns 1ns 400ns 800ns)
+
+c1 7 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2)
+plot v(4)
+plot v(6)
+plot v(7) 
+.endc
+.end
+```
+
+## Two-input NAND, enlarged NMOS
+
+File: `giris-denemeleri/2-NAND.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 3 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 4 4 MOSP W=5.4u L=1.2u
+M3 3 1 5 5 MOSN W=3.6u L=1.2u
+M6 5 2 0 0 MOSN W=3.6u L=1.2u
+
+vdd 4 0 5V
+Vin1  1 0 pulse(5V 0V 0 10ns 10ns 100ns 200ns)
+Vin2  2 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+
+.control
+tran 0.1n  800n
+plot v(3)
+.endc
+.end
+```
+
+## Two-input NOR, enlarged PMOS
+
+File: `giris-denemeleri/3-NOR.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=10.8u L=1.2u
+M2 3 2 5 5 MOSP W=10.8u L=1.2u
+M3 3 1 0 0 MOSN W=1.8u L=1.2u
+M4 3 2 0 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+Vin1  1 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+Vin2  2 0 pulse(5V 0V 0 10ns 10ns 200ns 400ns)
+
+.control
+tran 0.1n 800n
+plot v(3)
+.endc
+.end
+```
+
+## XOR, 01 inputs
+
+File: `giris-denemeleri/A=0 B=1.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 1 2 3 4 MOSP W=5.4u L=1.2u
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+M6 5 2 3 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 0V 
+vin2 2 0 5V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end
+```
+
+## XOR, 10 inputs
+
+File: `giris-denemeleri/A=1 B=0.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+M3 2 1 3 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 3 5 2 0 MOSN W=1.8u L=1.2u
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 5V 
+vin2 2 0 0V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end
+```
+
+## XOR, 00 inputs
+
+File: `giris-denemeleri/A=B=0.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 1 2 3 4 MOSP W=5.4u L=1.2u
+M3 2 1 3 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 3 5 2 0 MOSN W=1.8u L=1.2u
+M6 5 2 3 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 0V
+vin2 2 0 0V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end
+```
+
+## XOR, 11 inputs
+
+File: `giris-denemeleri/A=B=1.cir`.
+
+```spice
+* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 1 4 4 MOSP W=5.4u L=1.2u
+M2 3 2 1 4 MOSP W=5.4u L=1.2u
+M3 3 1 2 4 MOSP W=5.4u L=1.2u
+M4 5 1 0 0 MOSN W=1.8u L=1.2u
+M5 2 5 3 0 MOSN W=1.8u L=1.2u
+M6 3 2 5 0 MOSN W=1.8u L=1.2u
+
+vdd 4 0 5V
+vin 1 0 5V
+vin2 2 0 5V
+
+.control
+tran 0.1n 1u
+plot v(3) 
+.endc
+.end
+```
+
+## Two-input NAND, two pulse sources
+
+File: `grup-c/Nand.cir`.
+
+```spice
+*nand
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 2 4 1 1 MOSP W=5.4u L=1.2u
+M2 2 5 1 1 MOSP W=5.4u L=1.2u
+
+
+M4 2 5 3 3 MOSN W=1.8u L=1.2u
+M5 3 4 0 0 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  4 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 5 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 1600n
+plot v(2) v(4)+0.05 v(5)+0.1
+ 
+.endc
+.end
+```
+
+## Two-input NAND, one input at 5 V
+
+File: `grup-c/Nand5.cir`.
+
+```spice
+*nand
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 2 4 1 1 MOSP W=5.4u L=1.2u
+M2 2 5 1 1 MOSP W=5.4u L=1.2u
+
+
+M4 2 5 3 3 MOSN W=1.8u L=1.2u
+M5 3 4 0 0 MOSN W=1.8u L=1.2u
+
+
+vdd 1 0 5V
+Vin  4 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 5 0 5V
+
+.control
+tran 0.005n 200n
+plot v(2) v(4)+0.05 v(5)+0.1
+ 
+.endc
+.end
+```
+
+## Two-input NOR, two pulse sources
+
+File: `grup-c/Nor.cir`.
+
+```spice
+*nor
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 0 0 MOSN W=1.8u L=1.2u
+M2 5 4 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 100ns 200ns)
+Vin1 4 0 pulse(5v 0V 0 1ns 1ns 200ns 400ns)
+
+
+c1 5 0 1fF
+
+.control
+tran 0.05n 400n
+plot v(5) v(2)+0.1 v(4)+0.05
+
+.endc
+.end
+```
+
+## Two-input NOR, one input at 0 V
+
+File: `grup-c/Nor5.cir`.
+
+```spice
+*nor
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58 
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+M1 5 2 0 0 MOSN W=1.8u L=1.2u
+M2 5 4 0 0 MOSN W=1.8u L=1.2u
+
+M4 3 2 1 1 MOSP W=5.4u L=1.2u
+M5 5 4 3 3 MOSP W=5.4u L=1.2u
+
+
+vdd 1 0 5V
+Vin  2 0 pulse(5V 0V 0 1ns 1ns 200ns 400ns)
+Vin1 4 0 0V
+
+.control
+tran 0.05n 400n
+plot v(5) v(2)+0.1 v(4)+0.05
+
+.endc
+.end
+```

@@ -1,0 +1,6436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Screen Animation and 5×7 LED Matrix Projects — hasancan.net</title>
+<meta name="description" content="Screen clearing, keyboard control, character streaming and delays using DOS and BIOS interrupts; project versions and flow charts.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-matrix-projesi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-matrix-projesi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-matrix-projesi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-matrix-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Screen Animation and 5×7 LED Matrix Projects">
+<meta property="og:description" content="Screen clearing, keyboard control, character streaming and delays using DOS and BIOS interrupts; project versions and flow charts.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-matrix-projesi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Screen Animation and 5×7 LED Matrix Projects", "description": "Screen clearing, keyboard control, character streaming and delays using DOS and BIOS interrupts; project versions and flow charts.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-matrix-projesi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-matrix-projesi.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-matrix-projesi/eem332-matrix-projesi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Screen Animation and 5×7 LED Matrix Projects">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>19.04.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#1flow">1flow</a></li><li><a href="#flow2-3">flow2-3</a></li><li><a href="#aksam">aksam</a></li><li><a href="#aksam2">aksam2</a></li><li><a href="#aksam">aksam</a></li><li><a href="#aksam2">aksam2</a></li><li><a href="#es">es</a></li><li><a href="#kahson23">kahson23</a></li><li><a href="#kahson231">kahson231</a></li><li><a href="#labproje7">labproje7</a></li><li><a href="#oy">oy</a></li><li><a href="#proje">proje</a></li><li><a href="#kahson">kahson</a></li><li><a href="#karisik">karisik</a></li><li><a href="#oneya">oneya</a></li><li><a href="#secmeyok">secmeyok</a></li><li><a href="#sonden">sonden</a></li><li><a href="#kahson">kahson</a></li><li><a href="#kahson2">kahson2</a></li><li><a href="#project">project</a></li><li><a href="#matrix">matrix</a></li><li><a href="#matrix">matrix</a></li><li><a href="#segment">segment</a></li><li><a href="#short-examples-from-the-screenshots">Short examples from the screenshots</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Screen Animation and 5×7 LED Matrix Projects</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 19.04.2011 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the related notes and applications from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2011–2015). Screen clearing, keyboard control, character streaming and delays using DOS and BIOS interrupts; project versions and flow charts. Works prepared by a friend and course documents are presented together; student names, numbers and group information have been removed. PDF archive copies of the documents and, where available, source code can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="1flow">1flow</h2>
+<p>basla</p>
+<p>mesajYazdir</p>
+<p>tusKontrol</p>
+<p>ekranTemizle</p>
+<p>main</p>
+<p>karakterYaz</p>
+<p>kaydir</p>
+<p>shortDelay                   delay0</p>
+<p>delay1</p>
+<p>rastgele</p>
+<p>devam   tusKontrol2</p>
+<p>Buy SmartDraw!- purchased copies print this document without a watermark . Visit www.smartdraw.com or call 1-800-768-3729.</p>
+<figure class="yazi-gorsel"><img src="../sekil-1233-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="1flow: page 1, circuit, table and figures"><figcaption>1flow, page 1.</figcaption></figure>
+<h2 id="flow2-3">flow2-3</h2>
+<p>basla</p>
+<p>mesajYazdir</p>
+<p>hizAl</p>
+<p>aralikAl</p>
+<p>ekranTemizle</p>
+<p>main</p>
+<p>sutunOnay</p>
+<p>karakterYaz          satirOnay</p>
+<p>kaydir</p>
+<p>delay1</p>
+<p>shortDelay delay2</p>
+<p>delay3</p>
+<p>nextdec1        nextdec2   nextdec3</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>decSi1         decSi2     decSi3</code></pre>
+<p>rastgele</p>
+<p>devam tusKontrol2</p>
+<p>Buy SmartDraw!- purchased copies print this document without a watermark . son            Visit www.smartdraw.com or call 1-800-768-3729.</p>
+<figure class="yazi-gorsel"><img src="../sekil-1236-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="flow2-3: page 1, circuit, table and figures"><figcaption>flow2-3, page 1.</figcaption></figure>
+<h2 id="aksam">aksam</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+	ekranhiz  db 13,10,"hizi belirle"
+	ekranbos  db 13,10,"bosluk belirle"
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;????????????????????????????????????????????????????????????????????????????????????
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h
+	mov al,01h
+	xor bh,bh
+	mov bp, OFFSET KARAKTER
+	mov cx,1
+
+	mov dh,satirNo
+	mov dl,sutunNo
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	MOV DX,	OFFSET ekranhiz
+	MOV AH,	09H; menu line 2
+	INT 	21H
+	MOV AH,	3FH ;get speed
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset hiz 
+	INT 	21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	MOV DX,	OFFSET ekranbos
+	MOV AH,	09H; menu line 3
+	INT 	21H
+	MOV AH,	3FH ;get interval
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset aralik
+	INT 	21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="aksam2">aksam2</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;works depending on the stc in tusKontrol2 (check whether to end or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number??????????
+	mov bp, OFFSET KARAKTER		;section to be written
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (int10 rule)
+	mov dl,sutunNo			;column number is assigned (int10 rule)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="aksam">aksam</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_lenght dup (?)
+	ekranhiz  db 13,10,"hizi belirle"
+	ekranbos  db 13,10,"bosluk belirle"
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;????????????????????????????????????????????????????????????????????????????????????
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h
+	mov al,01h
+	xor bh,bh
+	mov bp, OFFSET KARAKTER
+	mov cx,1
+
+	mov dh,satirNo
+	mov dl,sutunNo
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	MOV DX,	OFFSET ekranhiz
+	MOV AH,	09H; menu line 2
+	INT 	21H
+	MOV AH,	3FH ;get speed
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset hiz 
+	INT 	21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	MOV DX,	OFFSET ekranbos
+	MOV AH,	09H; menu line 3
+	INT 	21H
+	MOV AH,	3FH ;get interval
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset aralik
+	INT 	21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="aksam2">aksam2</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;????????????????????????????????????????????????????????????????????????????????????
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h
+	mov al,01h
+	xor bh,bh
+	mov bp, OFFSET KARAKTER
+	mov cx,1
+
+	mov dh,satirNo
+	mov dl,sutunNo
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	MOV AH,	09H; menu line 2
+	INT 	21H
+	MOV AH,	3FH ;get speed
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset hiz 
+	INT 	21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	MOV AH,	09H; menu line 3
+	INT 	21H
+	MOV AH,	3FH ;get interval
+	MOV BX,	0
+	MOV CX,	max_length
+	MOV DX,	offset aralik
+	INT 	21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="es">es</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;works depending on the stc in tusKontrol2 (check whether to end or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+
+	MOV AL,DL
+	
+	MOV AH,0	;
+	MOV BX,10	;
+	DIV BL		;AX CONVERTED TO DECIMAL
+	OR AX,3030H	;DECIMAL AX CONVERTED TO ASCII
+
+	MOV CX,0
+	MOV CL,AH
+	MOV DL,AL
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h
+	xor bh,bh			;page number??????????
+	mov bp, OFFSET KARAKTER		;section to be written
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (int10 rule)
+	mov dl,sutunNo			;column number is assigned (int10 rule)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="kahson23">kahson23</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;works depending on the stc in tusKontrol2 (check whether to end or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+                                       push dx 
+                                       mov dl, sutunNo 
+                                       mov dh, satirNo
+                                       shr dl,1 
+                                       jnc no_XOR 
+                                       shr dh,1
+                                       jnc no_XOR 
+                                       ;xor varColor,08H 
+                               no_XOR: 
+                                       inc KARAKTER 
+                                       cmp KARAKTER,07 ; BELL 
+                                       jnz not_Bell 
+                                       inc KARAKTER ;skip Bell 
+                       	     not_Bell: 
+                                       pop dx 
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number???????video page
+	mov bp, OFFSET KARAKTER		;section to be written
+	mov bl, varColor           	; attribute 4 - magenta 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (int10 rule)
+	mov dl,sutunNo			;column number is assigned (int10 rule)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="kahson231">kahson231</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;works depending on the stc in tusKontrol2 (check whether to end or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		
+		MOV AH,2CH
+		INT 21H	
+		MOV KARAKTER,DL
+
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number???????video page
+	mov bp, OFFSET KARAKTER		;section to be written
+	mov bl, varColor           	; attribute 4 - magenta 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (int10 rule)
+	mov dl,sutunNo			;column number is assigned (int10 rule)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="labproje7">labproje7</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+	.data
+
+data	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	SATIR 	  db 5
+	SUTUN	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, offset ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ah
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 lines  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+
+	MOV AL,DL
+	
+	MOV AH,0	;
+	MOV BX,10	;
+	DIV BL		;AX CONVERTED TO DECIMAL
+	OR AX,3030H	;DECIMAL AX CONVERTED TO ASCII
+
+	MOV CX,0
+	MOV CL,AH
+	MOV DL,AL
+
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;????????????????????????????????????????????????????????????????????????????????????
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h
+	mov al,01h
+	xor bh,bh
+	mov bp, OFFSET KARAKTER
+	mov cx,1
+
+	mov dh,SATIR
+	mov dl,SUTUN
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="oy">oy</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		; Runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have at hand)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h
+	xor bh,bh			;page number??????????
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="proje">proje</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ah
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have at hand)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+
+	MOV AL,DL
+	
+	MOV AH,0	;
+	MOV BX,10	;
+	DIV BL		;AX WAS CONVERTED TO DECIMAL
+	OR AX,3030H	;DECIMAL AX WAS CONVERTED TO ASCII
+
+	MOV CX,0
+	MOV CL,AH
+	MOV DL,AL
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;????????????????????????????????????????????????????????????????????????????????????
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h
+	mov al,01h
+	xor bh,bh
+	mov bp, OFFSET KARAKTER
+	mov cx,1
+
+	mov dh,satirNo
+	mov dl,sutunNo
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="kahson">kahson</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 			;color setting
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol	;it already starts automatically once the settings are entered
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA	;typical startup operations
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+				;typical termination operations
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23	;maximum number of rows that fit on the screen
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79	;maximum number of columns that fit on the screen
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		
+		MOV AH,2CH	;generates a random number using the clock
+		INT 21H	
+		MOV KARAKTER,DL
+
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di	;delay and density setting according to user settings
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number   ///   video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	;color setting
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="karisik">karisik</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu - hiz(1-2-3) &amp; aralik(1-2-3) girin"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 		;fill color
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol	;canceled, since input is already taken after the values
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+;PROCEDURES START HERE
+
+
+PROC basla
+	mov ax,@DATA	;typical startup operations
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son		
+	push ax
+
+	mov ah,4ch	;typical termination operations
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	mov ah,2ch	;a random value is obtained
+	int 21h
+
+	add satirNo,dl	;random values determine the row and column
+	add sutunNo,dh
+
+	cmp satirNo,23	;compared with the maximum number that fits on the screen
+	jna satirOnay	;jump not above
+	mov satirNo,dl
+satirOnay:
+	cmp sutunNo,79	;compared with the maximum number that fits on the screen
+	jna sutunOnay
+	mov sutunNo,dh
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		
+		MOV AH,2CH		;a random number is generated from the computer clock
+		INT 21H	
+		MOV KARAKTER,DL
+
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di		;speed and density are set according to the user's selection
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h	
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number  ///  video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	;color setting
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="oneya">oneya</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu - hiz(1-2-3) &amp; aralik(1-2-3) girin"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol	;input is already taken after the values
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	mov ah,2ch
+	int 21h
+
+	add satirNo,dl
+	add sutunNo,dh
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		
+		MOV AH,2CH
+		INT 21H	
+		MOV KARAKTER,DL
+
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number???????video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	; attribute 4 - magenta 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="secmeyok">secmeyok</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	varColor  db 027h 	;color setting
+	satirNo	  db 5
+	sutunNo	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA	;typical startup operations
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h		;waits for a key press to start processing
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch	;typical termination operations
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1	;shifting the characters
+	add sutunNo,2
+
+	cmp satirNo,23	;maximum number of rows that fit on the screen
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79	;maximum number of columns that fit on the screen
+	jna sutunOnay	
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		MOV AH,2CH		;generates a random number using the clock
+		INT 21H	
+		MOV KARAKTER,DL
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number   ///   video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	;color setting 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="sonden">sonden</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu - hiz(1-2-3) &amp; aralik(1-2-3) girin"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	varColor  db 027h 
+	satirNo	  db 5
+	sutunNo	  db 10
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol	;CANCELED
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+		MOV AH,2CH
+		INT 21H	
+		MOV KARAKTER,DL
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+ret	
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number???????video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	; attribute 4 - magenta 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="kahson">kahson</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+                                       push dx 
+                                       mov dl, sutunNo 
+                                       mov dh, satirNo
+                                       shr dl,1 
+                                       jnc no_XOR 
+                                       shr dh,1
+                                       jnc no_XOR 
+                                       ;xor varColor,08H 
+                               no_XOR: 
+                                       inc KARAKTER 
+                                       cmp KARAKTER,07 ; BELL 
+                                       jnz not_Bell 
+                                       inc KARAKTER ;skip Bell 
+                       	     not_Bell: 
+                                       pop dx 
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;color (green)
+	xor bh,bh			;page number??????????
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="kahson2">kahson2</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+	max_length equ 100
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+ 	varColor  db 027h 
+	aralik    db max_length dup (?)
+	hiz 	  db max_length dup (?)
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	call hizAl
+	call aralikAl
+	
+	;call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;runs depending on the stc in the tusKontrol2 loop (check whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we have at hand)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+	mov satirNo,dh
+	mov sutunNo,dl
+	
+	
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+		push si di
+		cmp hiz,'1'
+		je delay1
+		cmp hiz,'2'
+		je delay2
+		cmp hiz,'3'
+		je delay3
+delay1:	
+		mov di, 0900h
+		;mov di,0100h		;???????????????
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+
+delay2:	
+		mov di, 2000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik ,'2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+		
+delay3:		
+		mov di, 4000h
+		cmp aralik, '1'
+		jz nextdec1
+		cmp aralik, '2'
+		jz nextdec2
+		cmp aralik,'3'
+		jz nextdec3
+nextDec1:
+		mov si, 2500h
+		jmp decsi1
+decSi1: 		
+		dec si
+		jnz decSi1
+		dec di
+		jnz nextDec1
+		pop di si
+		ret
+
+nextDec2: 	
+		mov si, 5000h
+		jmp decsi2
+decSi2: 
+		dec si
+		jnz decSi2
+		dec di
+		jnz nextDec2
+		pop di si
+		ret		
+
+nextDec3: 
+		mov si, 7000h
+		jmp decsi3
+decSi3: 		
+		dec si
+		jnz decSi3
+		dec di
+		jnz nextDec3
+		pop di si
+		ret		
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result is returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;green color
+	xor bh,bh			;page number???????video page
+	mov bp, OFFSET KARAKTER		;the part to be written
+	mov bl, varColor           	; attribute 4 - magenta 
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+
+PROC hizAl
+	
+	;MOV AH,09H	; menu line 2	do not take for now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get speed
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset hiz 
+	INT 21H
+ret
+ENDP hizAl
+
+
+
+
+
+PROC aralikAl
+	
+	;MOV AH,09H	; menu line 3	do not take for now!!!!!!!!!!!!!!!!!!!!!
+	;INT 21H
+	MOV AH,3FH 	;get interval
+	MOV BX,0
+	MOV CX,max_length
+	MOV DX,offset aralik
+	INT 21H
+ret
+ENDP aralikAl
+
+
+
+
+END Program</code></pre>
+<h2 id="project">project</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>	.model small
+	.stack 100h
+.data
+
+	ekranyazi db 13,10,"matrix ekran koruyucu"
+		  db 13,10,""
+		  db 13,10,"$"
+	KARAKTER  db 'a'
+	satirNo	  db 5
+	sutunNo	  db 10
+
+
+
+.code
+Program:
+	call basla
+	mov dx, OFFSET ekranyazi
+
+	call mesajYazdir
+	
+	call tusKontrol
+	call ekranTemizle
+
+main:	
+	call karakterYaz
+	call kaydir
+	call Shortdelay
+	call rastgele
+	call tusKontrol2
+	jc main		;depends on the stc in tusKontrol2 (checks whether to exit or not)
+	call son
+
+
+
+
+PROC basla
+	mov ax,@DATA
+	mov ds,ax
+	mov es,ax	;extra segment
+ret
+ENDP basla
+
+
+
+PROC mesajYazdir
+	push ax
+	
+	mov ah,09h	;write string to standart output
+	int 21h
+	
+	pop ax
+ret
+ENDP mesajYazdir
+
+
+
+PROC tusKontrol
+	push ax
+	
+	mov ah,01h	;read character from standart input
+	int 21h
+	
+	pop ax
+ret
+ENDP tusKontrol
+
+
+
+
+PROC ekranTemizle
+	push ax bx cx dx
+
+	mov bl,0
+	mov bh,0
+	sub cx,cx
+	mov dx,184fh	;18h = 24 rows  &amp;  4f = 79 columns
+	mov ax,0600h	;scroll all lines up
+	int 10h
+
+	pop dx cx bx ax
+ret
+ENDP ekranTemizle
+
+
+
+
+PROC son
+	push ax
+
+	mov ah,4ch
+	int 21h
+	
+	pop ax
+ret
+ENDP son
+
+
+
+
+PROC kaydir
+	add satirNo,1
+	add sutunNo,2
+
+	cmp satirNo,23
+	jna satirOnay	;jump not above
+	mov satirNo,1
+satirOnay:
+	cmp sutunNo,79
+	jna sutunOnay
+	mov sutunNo,0
+sutunOnay:
+ret
+ENDP kaydir
+
+
+
+
+
+
+
+PROC rastgele
+	MOV AH,2CH
+	INT 21H		;GET SYSTEM TIME	;or would shr work??
+			;CH = HOUR		;(for a value we already have)
+			;CL = MINUTE
+			;DH = SECOND
+			;DL = 1/100 SECONDS
+
+	MOV AL,DL
+	
+	MOV AH,0	;
+	MOV BX,10	;
+	DIV BL		;AX CONVERTED TO DECIMAL
+	OR AX,3030H	;DECIMAL AX CONVERTED TO ASCII
+
+	MOV CX,0
+	MOV CL,AH
+	MOV DL,AL
+ret
+ENDP rastgele
+
+
+
+
+
+
+
+PROC Shortdelay
+	push ax bx cx dx   ; 1 second delay
+	mov cx,10h 
+delay0: 
+	push cx 
+	mov cx, 00fffh 
+delay1: 
+	loop delay1 
+	pop cx 
+	loop delay0 
+	pop dx cx bx ax 
+ret
+ENDP Shortdelay 
+
+
+
+
+
+
+
+PROC tusKontrol2
+	push ax
+	mov ah,0Bh	;Status check, result returned in al as 00 or FF
+	int 21h		;
+	cmp al,0
+	jnz Devam
+	stc		;Carry Flag is set to 1; whether the main loop continues depends on this
+Devam:	pop ax
+ret
+ENDP tusKontrol2
+
+
+
+
+
+
+
+
+PROC karakterYaz
+	push ax bx cx dx bp
+	
+	mov ah,13h			;write string
+	mov al,01h			;color (green)
+	xor bh,bh			;page number??????????
+	mov bp, OFFSET KARAKTER		;section to be written
+	mov cx,1			;number of characters in string
+
+	mov dh,satirNo			;row number is assigned (rule-int10)
+	mov dl,sutunNo			;column number is assigned (rule-int10)
+
+	int 10h
+	pop bp dx cx bx ax
+ret
+ENDP karakterYaz
+
+
+
+
+
+
+END Program</code></pre>
+<h2 id="matrix">matrix</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;-------------------------------------------------------------------------------- 
+.model  small 
+;-------------------------------------------------------------------------------- 
+.data ;DATA + VARIABLES 
+;-------------------------------------------------------------------------------- 
+ 
+       MessageIntroScreen              db      13,10,"This program draws a color character" 
+                                               db      13,10,"on the Screen and causes it to move." 
+                                               db      13,10,"" 
+                                               db      13,10,"Press ANY key to exit." 
+       MessageCRLF                     db      13,10,"$" 
+       varCharacter                    db      'a' 
+       varColor                                db      027h 
+       varRowNumber                    db      5 
+       varColumnNumber         db      10 
+ 
+;-------------------------------------------------------------------------------- 
+.stack  100h  ;256-word stack; 
+;-------------------------------------------------------------------------------- 
+.code    ; START OF CODE 
+Program: 
+               ;------[ Begin main program body ]--------------------------------------------                                                  call initSegs 
+                               call initSegs 
+ 
+                               mov dx, OFFSET MessageIntroScreen 
+                               call printMessage 
+ 
+                               mov dx, OFFSET MessageCRLF 
+                               call printMessage 
+ 
+                               call Wait4KeyPress 
+                               call ClearScreen 
+               main_loop: 
+ 
+                               call PrintChar 
+                               call MoveChar 
+                               call ShortDelay 
+                               call changeChar 
+                               call check4KeyPress 
+                               jc main_loop 
+                               call eXit 
+               ;------[ End main program body ]-------------------------------------------- 
+ 
+               ;------[ Begin PROCedures body ]-------------------------------------------- 
+ 
+                       ;------------[ check4KeyPress ]--------------------------------- 
+                       PROC check4KeyPress 
+                                       push ax 
+                                       mov ah, 0Bh 
+                                       int 21H 
+                                       cmp al,0                        ; is (al == 0) ? 
+                                       jnz NoKey             ;if (al != 0) jump to NoKey label 
+                                       stc                             ; else set carry flag 
+                                                                       ; and return 
+                       NoKey: 
+                                       pop ax 
+                       RET 
+                       ENDP check4KeyPress 
+                       ;------------[ ChangeChar ]--------------------------------- 
+                       Proc changeChar 
+                                       push dx 
+                                       mov dl, varColumnNumber 
+                                       mov dh, varRowNumber 
+                                       shr dl,2 
+                                       jnc no_XOR 
+                                       shr dh,2 
+                                       jnc no_XOR 
+                                       xor varColor,08H 
+                               no_XOR: 
+                                       inc VarCharacter 
+                                       cmp VarCharacter,07 ; BELL 
+                                       jnz not_Bell 
+                                       inc VarCharacter ;skip Bell 
+                       not_Bell: 
+                                       pop dx 
+                       RET 
+                       ENDP ChangeChar 
+                       ;------------[ initSegs ]-------------------------------- 
+                       PROC initSegs 
+                               mov ax, @DATA 
+                               mov ds, ax 
+                               mov es,ax 
+                       ret 
+                       ENDP initSegs 
+                       ;------------[ printMessage ]--------------------------- 
+                       PROC printMessage 
+                               push ax 
+ 
+                               mov ah,09h 
+                               int 21H 
+ 
+                               pop ax 
+                       ret 
+                       ENDP printMessage 
+               ;------------[ wait4KeyPress ]--------------------------------- 
+                       PROC wait4KeyPress 
+                               push ax 
+ 
+                               mov ah, 01h           ;Clear Keyb Buffer 
+                               int 21h                 ;call INT 21 
+ 
+ 
+                               pop ax 
+                       ret 
+                       ENDP wait4KeyPress 
+                       ;-------------------------[ PrintChar ]-------------------------------------- 
+                       PROC PrintChar 
+                               push ax bx cx dx bp 
+ 
+                               mov ah,13h              ; function 13 - write string (Write Char if length =1!) 
+                               mov al,01h              ; attrib in bl,move cursor 
+                               xor bh,bh               ; video page 0 
+                               mov bp, OFFSET varCharacter 
+                               mov bl, varColor           ; attribute 4 - magenta 
+                               mov cx,1               ; length of string (character) 
+ 
+                               mov dh,varRowNumber           ;  row to put string 
+                               mov dl,varColumnNumber            ; column to put string 
+ 
+                               int 10h                 ; call BIOS service 
+                               pop bp dx cx bx ax 
+                               ret                     ; end proc 
+                       ENDP PrintChar 
+                       ;-------------------------[ MoveChar ]-------------------------------------- 
+                       PROC MoveChar 
+                                               add varRowNumber, 1 
+                                               add varColumnNumber, 2 
+                                               cmp VarRowNumber,23 
+                                               jna RowOk 
+                                               mov varRowNumber,1 
+ 
+                                       RowOk: 
+                                               cmp VarColumnNumber,79 
+                                               jna ColOK 
+                                               mov varColumnNumber,0 
+                                       ColOK: 
+ 
+                       RET                     ; end proc 
+                       ENDP MoveChar 
+                       ;-------------------------[ ClearScreen ]-------------------------------------- 
+                       PROC ClearScreen 
+                                              push ax bx cx dx 
+ 
+ 
+                                              mov bl,0 
+                                              mov bh,0 
+                                              sub cx,cx 
+                                              mov dx,184fh       ;18h = 24 rows, 4f = 79 coulums 
+                                              mov ax,0600h 
+                                              int 10h 
+ 
+                                              pop dx cx bx ax 
+                               RET 
+                       ENDP ClearScreen 
+ 
+                       ;-------------------------[ ShortDelay ]-------------------------------------- 
+                       PROC ShortDelay 
+                               push ax bx  cx  dx   ; creates 1 second delay 
+                               mov cx,10h 
+                         delay0: 
+                               push cx 
+                               mov cx, 00fffh 
+                         delay1: 
+                               loop delay1 
+                               pop cx 
+                               loop delay0 
+                               pop dx cx bx ax 
+                       RET 
+                       ENDP Shortdelay 
+                       ;------------[ eXit ]----------------------------------- 
+                       PROC eXit 
+                               push ax 
+ 
+                               mov     ah,4ch         ;ah = code to return to DOS 
+                               int     21h 
+ 
+                               pop ax 
+                       RET 
+                       ENDP eXit 
+                       ;------------[ END of Procedures Body ]--------------------------- 
+;------[ End main program body ]-------------------------------------------- 
+END Program</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;------------------------------------------------------------------------------------;
+;                                      5x7 LED matrix                                ;
+; Klavyeden girilen karakterler, önce paralel veriye dönüştürülür. Veri eğer,        ;
+; gösterilebilecek bir karakterse, PIC'in EEPROM'una TUŞ KODU olarak kaydedilir.     ;
+; Program EEOKU bölümüne geçtiğinde, EEPROM'a kaydedilmiş kodları sırasıyla okur.    ;
+; Okunan kod, çevrim tablosu tarafından karaktere dönüştürülür. Elde edilen yeni     ;
+; veri, LED display'lere gönderilir.	7 KASIM 2003 CUMA                            ;
+;------------------------------------------------------------------------------------;</code></pre>
+<p>Wait — the rules say to keep code blocks unchanged except for translating Turkish comments. Here is the full translation:</p>
+<h2 id="matrix">matrix</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;------------------------------------------------------------------------------------;
+;                                      5x7 LED matrix                                ;
+; Characters typed on the keyboard are first converted to parallel data. If the data ;
+; is a displayable character, it is saved to the PIC's EEPROM as a KEY CODE.         ;
+; When the program reaches the EEOKU section, it reads the codes saved in the EEPROM ;
+; in order. The code that is read is converted to a character by the conversion      ;
+; table. The resulting new data is sent to the LED displays.   FRIDAY, 7 NOVEMBER 2003;
+;------------------------------------------------------------------------------------;
+		LIST	P=16F84A
+		INCLUDE	&lt;P16F84A.INC&gt;
+		__CONFIG	_CP_OFF &amp;_WDT_OFF &amp;_PWRTE_ON &amp;_XT_OSC
+;------------------------------------------------------------------------------------;
+; Register definitions                                                               ;
+;------------------------------------------------------------------------------------;
+
+TEMP		EQU	H'0F'	; Temporary register.
+
+VERI		EQU	H'11'	; File where the serial data is stored in parallel form.
+BIT_N		EQU	H'12'	; Number of bits received from the keyboard.
+CHAR_SUTUN	EQU	H'13'	; Number of columns of the character.
+EEREAD_N	EQU	H'14'	; Maximum number of columns to be read from the EEPROM.
+EEWRITE_N	EQU	H'15'	; Maximum number of columns saved to the EEPROM.
+LINE		EQU	H'16'	; Row number to be accessed in the conversion table.
+
+TIMER_H1	EQU	H'1A'	; Timer HIGH1.
+TIMER_H2	EQU	H'1B'	; Timer HIGH2.
+TIMA		EQU	H'1C'	; TimerA
+TIMB		EQU	H'1D'	; TimerB
+W_TEMP		EQU	H'1E'	; Temporary register where W is stored.
+STATUS_TEMP	EQU	H'1F'	; Temporary register where STATUS is stored.
+
+SUTUN1		EQU	H'21'	; Register where column 1 data is stored.
+SUTUN2		EQU	H'22'	; Register where column 2 data is stored.
+SUTUN3		EQU	H'23'	; Register where column 3 data is stored.
+SUTUN4		EQU	H'24'	; Register where column 4 data is stored.
+SUTUN5		EQU	H'25'	; Register where column 5 data is stored.
+SUTUN6		EQU	H'26'	; Register where column 6 data is stored.
+SUTUN7		EQU	H'27'	; Register where column 7 data is stored.
+SUTUN8		EQU	H'28'	; Register where column 8 data is stored.
+SUTUN9		EQU	H'29'	; Register where column 9 data is stored.
+SUTUN10		EQU	H'2A'	; Register where column 10 data is stored.
+SUTUN11		EQU	H'2B'	; Register where column 11 data is stored.
+SUTUN12		EQU	H'2C'	; Register where column 12 data is stored.
+SUTUN13		EQU	H'2D'	; Register where column 13 data is stored.
+SUTUN14		EQU	H'2E'	; Register where column 14 data is stored.
+SUTUN15		EQU	H'2F'	; Register where column 15 data is stored.
+SUTUN16		EQU	H'30'	; Register where column 16 data is stored.
+SUTUN17		EQU	H'31'	; Register where column 17 data is stored.
+SUTUN18		EQU	H'32'	; Register where column 18 data is stored.
+SUTUN19		EQU	H'33'	; Register where column 19 data is stored.
+SUTUN20		EQU	H'34'	; Register where column 20 data is stored.
+SUTUN21		EQU	H'35'	; Register where column 21 data is stored.
+SUTUN22		EQU	H'36'	; Register where column 22 data is stored.
+SUTUN23		EQU	H'37'	; Register where column 23 data is stored.
+SUTUN24		EQU	H'38'	; Register where column 24 data is stored.
+
+;------------------------------------------------------------------------------------;
+		
+		ORG	H'0000'		; RESET address.
+		GOTO	MAIN		; Go to the main program.
+		
+		ORG	H'0004'		; Interrupt address.
+		GOTO	KLYOKU		; Go to the interrupt subroutine.
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+YUKLE	; Initial settings of PORTA and PORTB.
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+		BSF	STATUS,RP0	; Switch to BANK1.
+		MOVLW	B'00011000'	; Load H'10' into W.
+		MOVWF	PORTA		; Outputs: RA0=CLOCK, RA1=RESET, RA2=PRESET
+					; Inputs: RA3=SCAN_END, RA4=Keyboard DATA
+		MOVLW	B'10000000'	; Load H'7F' into W.
+		MOVWF	PORTB		; RB7 is input (Keyboard CLOCK), the others are outputs.
+		BCF	STATUS,RP0	; Return to BANK0.
+		CLRF	PORTB		; Clear PORTB.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+KLYTIMER	; When the supply voltage is applied, this subroutine provides a     ;
+		; delay of a few seconds so that the identification data coming      ;
+		; from the keyboard can finish.                                      ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+		MOVLW	D'5'		; Load 5 into W.
+		MOVWF	TEMP		; Send it to TEMP.
+		
+BEKLE		CALL	TIMER_HIGH	; Call the delay subroutine.
+		DECFSZ	TEMP,F		; Is TEMP-1 zero?
+		GOTO	BEKLE		; No, keep decrementing TEMP.
+		RETURN			; Exit the subroutine.
+
+;------------------------------------------------------------------------------------;
+MAIN	; Main program.
+;------------------------------------------------------------------------------------;
+
+		CALL	YUKLE		; Perform the initial port settings.
+		CALL	KLYTIMER	; Let the noise from the keyboard die out.
+		
+		CLRF	VERI		; Clear VERI.
+		CLRF	EEREAD_N	; Clear EEREAD_N.
+		CLRF	EEWRITE_N	; Clear EEWRITE_N.
+		CLRF	EEADR		; Clear EEADR.
+		CLRF	PORTB		; Clear PORTB.
+		
+		MOVLW	B'10001000'	; Load B'10001000' into W.
+		MOVWF	INTCON		; Global interrupt enable, PORTB interrupt active.
+		
+;------------------------------------------------------------------------------------;
+		
+START		CLRF	PORTB		; Clear PORTB.
+		BSF	PORTA,0		; CLOCK ready. (Triggered on the falling edge.)
+		BCF	PORTA,1		; RESET=0
+		BSF	PORTA,1		; RESET=1, counters are ready to count.
+		CALL	SUTUN_TEMIZLE	; Clear Column1...Column24.
+		
+KAYIT_SAYISI?	MOVLW	0		; Write 0 to W.
+		MOVWF	EEADR		; Send it to EEADR to read the number of records.
+		CALL	OKU		; Get the number of records and return.	
+		MOVF	EEDATA,W	; Write the number of records to W.
+		BTFSC	STATUS,Z	; Is the number of records different from 0?
+		GOTO	START		; No, the number of saved columns is "0"
+		
+DATA?255	MOVF	EEDATA,W	; Write EEDATA to W.
+		SUBLW	D'255'		; 255-W
+		BTFSC	STATUS,Z	; Is DATA different from 255?
+		GOTO	START		; No, it is 255, start over.
+		MOVF	EEDATA,W	; Write EEDATA to W.
+		MOVWF	EEREAD_N	; Send it to the EEREAD_N register.
+		MOVWF	EEWRITE_N	; Send it to the EEWRITE_N register.
+		
+KAYIT_VARMI?	MOVF	EEREAD_N,W	; Write the number of characters to be read to W.
+		SUBLW	H'FF'		; 255-EEREAD_N
+		BTFSC	STATUS,Z	; Is there a record to be read?
+		GOTO	START		; No, all records have been deleted.
+
+SONRAKI		INCF	EEADR,F		; EEADR+1
+		CALL	OKU		; Get the data saved in the EEPROM and return.
+		MOVF	EEDATA,W	; Write EEDATA to W.
+		MOVWF	VERI		; Send EEDATA to VERI.
+		SUBLW	D'113'		; 113-VERI (Delete key code)
+		BTFSC	STATUS,Z	; Is the pressed key something other than DELETE?
+		GOTO	START		; No, the pressed key is DELETE.
+		
+		CALL	ANALIZ		; Yes, analyze the key and send it out through PORTB.
+				
+		DECFSZ	EEREAD_N,F	; Has the last saved data been read?
+		GOTO	BIR_SUTUN_BOS	; No, leave 1 column blank between characters.
+		MOVLW	D'41'		; Yes.
+		MOVWF	VERI		; Write the code of the space character to W.
+		CALL	BOSLUK1		; Each CALL BOSLUK1...
+		CALL	BOSLUK1		; ...command calls a...
+		CALL	BOSLUK1		; ...subroutine in which 3 columns of...
+		CALL	BOSLUK1		; ...blank are left...This corresponds...
+		CALL	BOSLUK1		; ...in total to...
+		CALL	BOSLUK1		; ...30 columns of blank....When shifted...
+		CALL	BOSLUK1		; ...by 24 columns, the display...
+		CALL	BOSLUK1		; ...goes dark. From this point on, the screen...
+		CALL	BOSLUK1		; ...will stay dark for another 6...
+		CALL	BOSLUK1		; ...columns' worth of shift time.
+		GOTO	START		; And repeat all the operations from the beginning.
+		
+BIR_SUTUN_BOS	MOVLW	H'00'		; Load 0 into W.
+		MOVWF	SUTUN1		; Send it to SUTUN1.
+		MOVWF	PORTB		; Send it out through PORTB.
+		CALL	GOSTER		; Display the column data.
+		CALL	SHIFT		; Shift 1 step to the left.
+		GOTO	SONRAKI		; Read the next column data.
+		
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+SUTUN_TEMIZLE	; Clear the column data.                                             ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+		CLRF	SUTUN1
+		CLRF	SUTUN2
+		CLRF	SUTUN3
+		CLRF	SUTUN4
+		CLRF	SUTUN5
+		CLRF	SUTUN6
+		CLRF	SUTUN7
+		CLRF	SUTUN8
+		CLRF	SUTUN9
+		CLRF	SUTUN10
+		CLRF	SUTUN11
+		CLRF	SUTUN12
+		CLRF	SUTUN13
+		CLRF	SUTUN14
+		CLRF	SUTUN15
+		CLRF	SUTUN16
+		CLRF	SUTUN17
+		CLRF	SUTUN18
+		CLRF	SUTUN19
+		CLRF	SUTUN10
+		CLRF	SUTUN21
+		CLRF	SUTUN22
+		CLRF	SUTUN23
+		CLRF	SUTUN24
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+OKU	; Read the data in the EEPROM.
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+		BSF	STATUS,RP0	; Switch to BANK1.
+		BSF	EECON1,RD	; Read the data at the given address.
+		BCF	STATUS,RP0	; Return to BANK0.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+SHIFT	; Shift the columns 1 step to the left.                                      ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+		
+		MOVF	SUTUN23,W	; Write column 23 to W.
+		MOVWF	SUTUN24		; Send it to column 24.
+		
+		MOVF	SUTUN22,W	; Write column 22 to W.
+		MOVWF	SUTUN23		; Send it to column 23.
+		
+		MOVF	SUTUN21,W	; Write column 21 to W.
+		MOVWF	SUTUN22		; Send it to column 22.
+		
+		MOVF	SUTUN20,W	; Write column 20 to W.
+		MOVWF	SUTUN21		; Send it to column 21.
+		
+		MOVF	SUTUN19,W	; Write column 19 to W.
+		MOVWF	SUTUN20		; Send it to column 20.
+		
+		MOVF	SUTUN18,W	; Write column 18 to W.
+		MOVWF	SUTUN19		; Send it to column 19.
+		
+		MOVF	SUTUN17,W	; Write column 17 to W.
+		MOVWF	SUTUN18		; Send it to column 18.
+		
+		MOVF	SUTUN16,W	; Write column 16 to W.
+		MOVWF	SUTUN17		; Send it to column 17.
+		
+		MOVF	SUTUN15,W	; Write column 15 to W.
+		MOVWF	SUTUN16		; Send it to column 16.
+
+		MOVF	SUTUN14,W	; Write column 14 to W.
+		MOVWF	SUTUN15		; Send it to column 15.
+
+		MOVF	SUTUN13,W	; Write column 13 to W.
+		MOVWF	SUTUN14		; Send it to column 14.
+
+		MOVF	SUTUN12,W	; Write column 12 to W.
+		MOVWF	SUTUN13		; Send it to column 13.
+
+		MOVF	SUTUN11,W	; Write column 11 to W.
+		MOVWF	SUTUN12		; Send it to column 12.
+
+		MOVF	SUTUN10,W	; Write column 10 to W.
+		MOVWF	SUTUN11		; Send it to column 11.
+
+		MOVF	SUTUN9,W	; Write column 9 to W.
+		MOVWF	SUTUN10		; Send it to column 10.
+
+		MOVF	SUTUN8,W	; Write column 8 to W.
+		MOVWF	SUTUN9		; Send it to column 9.
+
+		MOVF	SUTUN7,W	; Write column 7 to W.
+		MOVWF	SUTUN8		; Send it to column 8.
+
+		MOVF	SUTUN6,W	; Write column 6 to W.
+		MOVWF	SUTUN7		; Send it to column 7.
+
+		MOVF	SUTUN5,W	; Write column 5 to W.
+		MOVWF	SUTUN6		; Send it to column 6.
+
+		MOVF	SUTUN4,W	; Write column 4 to W.
+		MOVWF	SUTUN5		; Send it to column 5.
+
+		MOVF	SUTUN3,W	; Write column 3 to W.
+		MOVWF	SUTUN4		; Send it to column 4.
+
+		MOVF	SUTUN2,W	; Write column 2 to W.
+		MOVWF	SUTUN3		; Send it to column 3.
+
+		MOVF	SUTUN1,W	; Write column 1 to W.
+		MOVWF	SUTUN2		; Send it to column 2.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+GOSTER	; Sending the column data taken from the table out through PORTB.           ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+		
+		MOVF	SUTUN1,W	; Write column 1 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN2,W	; Write column 2 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN3,W	; Write column 3 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN4,W	; Write column 4 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN5,W	; Write column 5 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN6,W	; Write column 6 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN7,W	; Write column 7 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN8,W	; Write column 8 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN9,W	; Write column 9 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN10,W	; Write column 10 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN11,W	; Write column 11 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN12,W	; Write column 12 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN13,W	; Write column 13 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN14,W	; Write column 14 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN15,W	; Write column 15 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN16,W	; Write column 16 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN17,W	; Write column 17 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN18,W	; Write column 18 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN19,W	; Write column 19 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN20,W	; Write column 20 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN21,W	; Write column 21 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN22,W	; Write column 22 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN23,W	; Write column 23 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		MOVF	SUTUN24,W	; Write column 24 to W.
+		CALL	GOSTER_ALT	; Call the subroutine for the other operations.
+		
+		RETURN
+		
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+GOSTER_ALT	; This subroutine sends the column data out through PORTB.           ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+		
+		MOVWF	PORTB		; Send the column data out through PORTB.
+		CALL	TIMA_B		; Call the delay subroutine.
+		
+		BCF	PORTA,0		; CLOCK falling edge.
+		BSF	PORTA,0		; CLOCK rising edge.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+TIMA_B	; Duration for which the data sent from PORTB to the LEDs is displayed.     ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+		MOVLW	D'20'		; Write 20 to W.
+		MOVWF	TIMA		; Send it to the TIMA register.
+PAUSE2		MOVLW	D'25'		; Write 25 to W.
+		MOVWF	TIMB		; Send it to the TIMB register.
+PAUSE1		DECFSZ	TIMB,F		; Has TIMB-1 reached 0?
+		GOTO	PAUSE1		; No.
+		DECFSZ	TIMA,F		; Has TIMA-1 reached 0?
+		GOTO	PAUSE2		; No.
+		RETURN			; Yes, exit the subroutine.
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+TIMER_HIGH	; This subroutine provides a delay of approximately 0.2 seconds.     ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+		
+		MOVLW	D'255'		; Write 255 to W.
+		MOVWF	TIMER_H1	; Send it to the TIMER_H1 register.
+		
+DONGU1		MOVLW	D'255'		; Write 255 to W.
+		MOVWF	TIMER_H2	; Send it to the TIMER_H2 register.
+		
+DONGU2		DECFSZ	TIMER_H2,F	; Is TIMER_H2-1 zero?
+		GOTO	DONGU2		; No.
+		DECFSZ	TIMER_H1,F	; Is TIMER_H1-1 zero?
+		GOTO	DONGU1		; No.
+		RETURN			; Yes, exit the subroutine.
+
+
+
+
+
+
+
+
+
+
+;××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××;
+KLYOKU	; Converts the serial data sent from the keyboard into parallel data.        ;
+;××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××;
+		
+		BCF	INTCON,GIE	; All interrupts disabled.
+		BCF	INTCON,RBIE	; Interrupts from PORTB disabled.
+		BCF	INTCON,RBIF	; Clear the PORTB interrupt flag.
+
+		MOVWF	W_TEMP		; Send W to W_TEMP.
+		SWAPF	STATUS,W	; Swap the upper and lower 4 bits.
+		MOVWF	STATUS_TEMP	; Send STATUS to STATUS_TEMP.
+		
+;××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××;
+		
+		CLRF	PORTB		; Clear PORTB.
+		
+BASLA		CLRF	VERI		; Clear VERI for the new data.
+		CALL	KLY_KONTROL	; Bit1 : START bit, will not be evaluated.
+		MOVLW	D'8'		; Load 8 into W.
+		MOVWF	BIT_N		; Send it to the BIT_N register.
+
+BIT_KAYDIR	RRF	VERI,F		; Shift the data in VERI 1 bit to the right.
+		CALL	KLY_KONTROL	; Evaluate the CLOCK and DATA signals.
+		IORWF	VERI,F		; Apply the OR function to W and VERI.
+		IORLW	B'01111111'	; Apply the OR function to W and B'01111111'.
+		ANDWF	VERI,F		; Mask.
+		DECFSZ	BIT_N,F		; Is BIT_N-1 zero?
+		GOTO	BIT_KAYDIR	; No.
+		CALL	KLY_KONTROL	; Bit10 : PARITY bit, will not be evaluated.
+		CALL	KLY_KONTROL	; Bit11 : STOP bit, will not be evaluated.
+		
+		CALL	KLY_KONTROL	; Preventing the second...
+		CALL	KLY_KONTROL	; ...interrupt...
+		CALL	KLY_KONTROL	; ...that occurs...
+		CALL	KLY_KONTROL	; ...when the...
+		CALL	KLY_KONTROL	; ...finger is...
+		CALL	KLY_KONTROL	; ...lifted...
+		CALL	KLY_KONTROL	; ...from the...
+		CALL	KLY_KONTROL	; ...keyboard.
+		CALL	KLY_KONTROL	; Otherwise...
+		CALL	KLY_KONTROL	; ...every character...
+		CALL	KLY_KONTROL	; ...will appear twice.
+		
+		GOTO	KLY_MAIN 	; The serial data has been converted to parallel data.
+
+KLY_KONTROL	BTFSC	PORTB,7		; Is CLOCK 0?
+		GOTO	$ - 1		; No, wait for it to become 0.
+		BTFSS	PORTB,7		; Is CLOCK 1?
+		GOTO	$ - 1		; No, wait for it to become 1.
+		BTFSS	PORTA,4		; Is DATA 1?
+		RETLW	B'00000000'	; No, return with 0.
+		RETLW	B'10000000'	; Yes, return with 1.
+
+;××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××;
+KLY_MAIN	; This subroutine reads the serial data coming from the keyboard.    ;
+;××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××;
+
+DELETE?		MOVF	VERI,W		; Write VERI to W.
+		SUBLW	D'113'		; 113-VERI
+		BTFSS	STATUS,Z	; Was the DELETE key pressed?
+		GOTO	HATAKONTROL	; No, continue.
+		MOVLW	H'00'		; Write 0 to W.
+		MOVWF	EEADR		; Send it to EEADR as the address.
+		MOVWF	EEDATA		; Send it to EEDATA as the data.
+		CALL	EEYAZ		; Write 0 to address 0. (Clear the record count.)
+		CALL	SUTUN_TEMIZLE	; Clear the column data.
+		CLRF	EEREAD_N	; Number of records to read is 0
+		CLRF	EEWRITE_N	; Number of records in the EEPROM is 0
+		GOTO	KLYCIK		; The deletion is complete.
+
+HATAKONTROL	MOVF	VERI,W		; Write VERI to W.
+		SUBLW	B'11110000'	; ERRORCODE-VERI
+		BTFSC	STATUS,Z	; Is the keyboard code error-free?
+		GOTO	KLYCIK		; It is erroneous, exit the subroutine.
+		
+SKIP		MOVF	VERI,W		; Write VERI to W.
+		ANDLW	B'01111111'	; Mask bit 7.		
+		MOVWF	VERI		; Send the masked data back to VERI.
+		
+VERI_KAYDET	MOVF	VERI,W		; Write VERI to W.
+		MOVWF	EEDATA		; Send it to EEDATA.
+		MOVF	EEWRITE_N,W	; Write EEWRITE_N to W.
+		MOVWF	EEADR		; Send it to EEADR as the address.
+		INCF	EEADR,F		; EEADR+1
+		INCF	EEWRITE_N,F	; Increase the number of records written by 1.
+		CALL	EEYAZ		; Write to the EEPROM.		
+
+KAYIT_SAYISI	MOVLW	0		; Address where the record count is kept.
+KAYDET		MOVWF	EEADR		; First address of the EEPROM.
+		MOVF	EEWRITE_N,W	; Write the number of saved memory locations to W.
+		MOVWF	EEDATA		; Send it to EEDATA.
+		CALL	EEYAZ		; Save VERI to the EEPROM.
+		
+KLYCIK		SWAPF	STATUS_TEMP,W	; Write STATUS_TEMP to W.
+		MOVWF	STATUS		; Restore STATUS to its original state.
+		SWAPF	W_TEMP,F	; Apply the swap operation to W_TEMP.
+		SWAPF	W_TEMP,W	; Restore W to its original state.
+
+		BCF	INTCON,RBIF	; Clear the PORTB interrupt flag.
+		BSF	INTCON,GIE	; New interrupts are accepted.
+		BSF	INTCON,RBIE	; Interrupts from PORTB are enabled.
+		
+		RETFIE			; Exit the subroutine.
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+EEYAZ	; Subroutine for saving VERI to the EEPROM.                                  ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+		
+		BSF	STATUS,RP0	; Switch to BANK1.
+		BCF	INTCON,GIE	; GIE inactive.
+		BSF	EECON1,WREN	; Allow the write operation.
+		MOVLW	H'55'		; Standard...
+		MOVWF	EECON2		; ...operations...
+		MOVLW	H'AA'		; ...for the...
+		MOVWF	EECON2		; ...EEPROM.
+		BSF	EECON1,WR	; Start the write operation.
+SIFIRDATUT	BTFSC	EECON1,WR	; Is the write operation finished?
+		GOTO	SIFIRDATUT	; No, wait.
+		BSF	EECON1,WREN	; Yes, set Write Enable to logic "1".
+		BCF	EECON1,EEIF	; Clear EEIF.
+		BCF	STATUS,RP0	; Return to BANK0.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+ANALIZ	; Evaluation of the data taken from the EEDATA register.                     ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+BIR_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'22'		; 22-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "1"?
+		GOTO	IKI_1		; No.
+		MOVLW	D'3'		; Write 3 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'3'		; Write the number of columns to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+BIR_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	BIR_2		; No, read the other columns.
+		RETURN
+
+IKI_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'30'		; 30-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "2"?
+		GOTO	UC_1		; No.
+		MOVLW	D'8'		; Write 8 to W.
+		CALL	COMMON1		; Common operations 1.
+IKI_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	IKI_2		; No, read the other columns.
+		RETURN
+		
+UC_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'38'		; 38-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "3"?
+		GOTO	DORT_1		; No.
+		MOVLW	D'13'		; Write 13 to W.
+		CALL	COMMON1		; Common operations 1.
+UC_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	UC_2		; No, read the other columns.
+		RETURN
+		
+DORT_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'37'		; 37-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "4"?
+		GOTO	BES_1		; No.
+		MOVLW	D'18'		; Write 18 to W.
+		CALL	COMMON1		; Common operations 1.
+DORT_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	DORT_2		; No, read the other columns.
+		RETURN
+		
+BES_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'46'		; 46-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "5"?
+		GOTO	ALTI_1		; No.
+		MOVLW	D'23'		; Write 23 to W.
+		CALL	COMMON1		; Common operations 1.
+BES_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	BES_2		; No, read the other columns.
+		RETURN
+		
+ALTI_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'54'		; 54-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "6"?
+		GOTO	YEDI_1		; No.
+		MOVLW	D'28'		; Write 28 to W.
+		CALL	COMMON1		; Common operations 1.
+ALTI_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	ALTI_2		; No, read the other columns.
+		RETURN
+		
+YEDI_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'61'		; 61-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "7"?
+		GOTO	SEKIZ_1		; No.
+		MOVLW	D'33'		; Write 33 to W.
+		CALL	COMMON1		; Common operations 1.
+YEDI_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	YEDI_2		; No, read the other columns.
+		RETURN
+		
+SEKIZ_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'62'		; 32-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "8"?
+		GOTO	DOKUZ_1		; No.
+		MOVLW	D'38'		; Write 38 to W.
+		CALL	COMMON1		; Common operations 1.
+SEKIZ_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	SEKIZ_2		; No, read the other columns.
+		RETURN
+		
+DOKUZ_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'70'		; 70-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "9"?
+		GOTO	SIFIR_1		; No.
+		MOVLW	D'43'		; Write 43 to W.
+		CALL	COMMON1		; Common operations 1.
+DOKUZ_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	DOKUZ_2		; No, read the other columns.
+		RETURN
+		
+SIFIR_1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'69'		; 69-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "0"?
+		GOTO	A1		; No.
+		MOVLW	D'48'		; Write 48 to W.
+		CALL	COMMON1		; Common operations 1.
+SIFIR_2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	SIFIR_2		; No, read the other columns.
+		RETURN
+
+A1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'28'		; 28-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "A"?
+		GOTO	B1		; No.
+		MOVLW	D'53'		; Write 53 to W.
+		CALL	COMMON1		; Common operations 1.
+A2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	A2		; No, read the other columns.
+		RETURN
+		
+B1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'50'		; 50-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "B"?
+		GOTO	C1		; No.
+		MOVLW	D'58'		; Write 58 to W.
+		CALL	COMMON1		; Common operations 1.
+B2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	B2		; No, send the other columns.
+		RETURN
+
+C1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'33'		; 33-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "C"?
+		GOTO	D1		; No.
+		MOVLW	D'63'		; Write 63 to W.
+		CALL	COMMON1		; Common operations 1.
+C2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	C2		; No, send the other columns.
+		RETURN
+
+D1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'35'		; 35-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "D"?
+		GOTO	E1		; No.
+		MOVLW	D'68'		; Write 73 to W.
+		CALL	COMMON1		; Common operations 1.
+D2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	D2		; No, send the other columns.
+		RETURN
+		
+E1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'36'		; 36-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "E"?
+		GOTO	F1		; No.
+		MOVLW	D'72'		; Write 77 to W.
+		CALL	COMMON4		; Common operations 4.
+E2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	E2		; No, send the other columns.
+		RETURN
+
+F1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'43'		; 43-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "F"?
+		GOTO	G1		; No.
+		MOVLW	D'76'		; Write 81 to W.
+		CALL	COMMON4		; Common operations 4.
+F2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	F2		; No, read the other columns.
+		RETURN
+
+G1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'52'		; 52-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "G"?
+		GOTO	H1		; No.
+		MOVLW	D'81'		; Write 86 to W.
+		CALL	COMMON1		; Common operations 1.
+G2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	G2		; No, read the other columns.
+		RETURN
+
+H1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'51'		; 51-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "H"?
+		GOTO	I1		; No.
+		MOVLW	D'86'		; Write 96 to W.
+		CALL	COMMON1		; Common operations 1.
+H2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	H2		; No, read the other columns.
+		RETURN
+
+I1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'67'		; 67-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "I"?
+		GOTO	J1		; No.
+		MOVLW	D'87'		; Write 97 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'1'		; Write the column count of I to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+I2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	I2		; No, send the other columns.
+		RETURN
+
+J1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'59'		; 59-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "J"?
+		GOTO	K1		; No.
+		MOVLW	D'91'		; Write 102 to W.
+		CALL	COMMON4		; Common operations 4.
+J2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	J2		; No, send the other columns.
+		RETURN
+
+K1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'66'		; 66-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "K"?
+		GOTO	L1		; No.
+		MOVLW	D'96'		; Write 107 to W.
+		CALL	COMMON1		; Common operations 1.
+K2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	K2		; No, send the other columns.
+		RETURN
+
+L1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'75'		; 75-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "L"?
+		GOTO	M1		; No.
+		MOVLW	D'100'		; Write 111 to W.
+		CALL	COMMON4		; Common operations 4.
+L2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	L2		; No, send the other columns.
+		RETURN
+
+M1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'58'		; 58-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "M"?
+		GOTO	N1		; No.
+		MOVLW	D'107'		; Write 118 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'7'		; Write the column count of M to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+M2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	M2		; No, send the other columns.
+		RETURN
+
+N1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'49'		; 49-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "M"?
+		GOTO	O1		; No.
+		MOVLW	D'112'		; Write 123 to W.
+		CALL	COMMON1		; Common operations 1.
+N2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	N2		; No, send the other columns.
+		RETURN
+
+O1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'68'		; 68-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "O"?
+		GOTO	P1		; No.
+		MOVLW	D'117'		; Write 128 to W.
+		CALL	COMMON1		; Common operations 1.
+O2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	O2		; No, send the other columns.
+		RETURN
+
+P1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'77'		; 77-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "P"?
+		GOTO	Q1		; No.
+		MOVLW	D'122'		; Write 138 to W.
+		CALL	COMMON1		; Common operations 1.
+P2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	P2		; No, send the other columns.
+		RETURN
+		
+Q1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'21'		; 21-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "Q"?
+		GOTO	R1		; No.
+		MOVLW	D'127'		; Write 143 to W.
+		CALL	COMMON1		; Common operations 1.
+Q2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	Q2		; No, read the other columns.
+		RETURN
+
+R1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'45'		; 45-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "R"?
+		GOTO	S1		; No.
+		MOVLW	D'132'		; Write 148 to W.
+		CALL	COMMON1		; Common operations 1.
+R2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	R2		; No, send the other columns.
+		RETURN
+
+S1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'27'		; 27-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "S"?
+		GOTO	T1		; No.
+		MOVLW	D'137'		; Write 153 to W.
+		CALL	COMMON1		; Common operations 1.
+S2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	S2		; No, send the other columns.
+		RETURN
+
+T1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'44'		; 44-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "T"?
+		GOTO	U1		; No.
+		MOVLW	D'142'		; Write 163 to W.
+		CALL	COMMON1		; Common operations 1.
+T2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	T2		; No, send the other columns.
+		RETURN
+
+U1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'60'		; 60-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "U"?
+		GOTO	V1		; No.
+		MOVLW	D'147'		; Write 168 to W.
+		CALL	COMMON1		; Common operations 1.
+U2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	U2		; No, send the other columns.
+		RETURN
+
+V1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'42'		; 42-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "V"?
+		GOTO	W1		; No.
+		MOVLW	D'152'		; Write 178 to W.
+		CALL	COMMON1		; Common operations 1.
+V2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	V2		; No, send the other columns.
+		RETURN
+		
+W1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'29'		; 29-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "W"?
+		GOTO	X1		; No.
+		MOVLW	D'159'		; Write 185 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'7'		; Write the column count to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+W2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	W2		; No, read the other columns.
+		RETURN
+		
+X1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'34'		; 34-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "X"?
+		GOTO	Y1		; No.
+		MOVLW	D'164'		; Write 190 to W.
+		CALL	COMMON1		; Common operations 1.
+X2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	X2		; No, read the other columns.
+		RETURN
+
+Y1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'53'		; 53-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "Y"?
+		GOTO	Z1		; No.
+		MOVLW	D'169'		; Write 195 to W.
+		CALL	COMMON1		; Common operations 1.
+Y2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	Y2		; No, send the other columns.
+		RETURN
+
+Z1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'26'		; 67-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "Z"?
+		GOTO	NOKTA1		; No.
+		MOVLW	D'174'		; Write 200 to W.
+		CALL	COMMON1		; Common operations 1.
+Z2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	Z2		; No, send the other columns.
+		RETURN
+
+NOKTA1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'74'		; 74-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "PERIOD"?
+		GOTO	BOSLUK1		; No.
+		MOVLW	D'175'		; Write 201 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'1'		; Write the column count of PERIOD to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+NOKTA2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	NOKTA2		; No, send the other columns.
+		RETURN
+		
+BOSLUK1		MOVF	VERI,W		; Write the code of the character to W.
+		SUBLW	D'41'		; 41-EEDATA
+		BTFSS	STATUS,Z	; Was the pressed key "SPACE"?
+		RETURN			; No.
+CUMLE_SONU	MOVLW	D'178'		; Write 204 to W.
+		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'3'		; Write the column count of SPACE to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+BOSLUK2		MOVLW	B'00000011'	; Write 3 to W.
+		CALL	COMMON2		; Common operations 2.
+		DECFSZ	CHAR_SUTUN,F	; Is the character's column count-1 zero?
+		GOTO	BOSLUK2		; No, send the other columns.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+; The common operations for the characters are gathered in this subroutine.	     ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+COMMON1		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'5'		; Write the column count to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+		RETURN
+
+COMMON2		MOVWF	PCLATH		; Write it as the upper byte to reach the table.
+		MOVF	LINE,W		; Write LINE to W.
+		CALL	TABLE		; Call the conversion table.
+		CLRF	PCLATH		; Reset the upper byte.
+		MOVWF	SUTUN1		; Send the table data to SUTUN.
+		CALL	GOSTER		; Transfer the column data to the LED display.
+		CALL	SHIFT		; Shift the columns 1 step to the left.
+		DECF	LINE,F		; LINE-1
+		RETURN
+
+COMMON4		MOVWF	LINE		; Send it to the LINE register.
+		MOVLW	D'4'		; Write the column count to W.
+		MOVWF	CHAR_SUTUN	; Send it to the CHAR_SUTUN register.
+		RETURN
+
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+TABLE	; Every key pressed on the keyboard is converted into an 8-bit parallel CODE ;
+	; in the KLYOKU subroutine. Since each character has a different number of   ;
+	; columns, the column patterns of the characters are placed in the           ;
+	; subroutine named TABLE below. For example, to build the character "I",     ;
+	; the conversion table is read 3 times. For the character "W" or "M", 7      ;
+	; times.                                                                     ;
+;«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»«»;
+
+	ADDWF	PCL,F	; Program counter + row to be accessed in the table.
+
+	RETLW	H'00'	; 0
+_1	RETLW	H'7F'	; 1
+	RETLW	H'20'	; 2
+	RETLW	H'10'	; 3
+
+_2	RETLW	H'31'	; 4
+	RETLW	H'49'	; 5
+	RETLW	H'49'	; 6
+	RETLW	H'49'	; 7
+	RETLW	H'27'	; 8
+
+_3	RETLW	H'36'	; 9
+	RETLW	H'49'	; 10
+	RETLW	H'49'	; 11
+	RETLW	H'41'	; 12
+	RETLW	H'22'	; 13
+
+_4	RETLW	H'04'	; 14
+	RETLW	H'7F'	; 15
+	RETLW	H'24'	; 16
+	RETLW	H'14'	; 17
+	RETLW	H'0C'	; 18
+
+_5	RETLW	H'46'	; 19
+	RETLW	H'49'	; 20
+	RETLW	H'49'	; 21
+	RETLW	H'49'	; 22
+	RETLW	H'7A'	; 23
+
+_6	RETLW	H'26'	; 24
+	RETLW	H'49'	; 25
+	RETLW	H'49'	; 26
+	RETLW	H'49'	; 27
+	RETLW	H'3E'	; 28
+
+_7	RETLW	H'60'	; 29
+	RETLW	H'50'	; 30
+	RETLW	H'48'	; 31
+	RETLW	H'47'	; 32
+	RETLW	H'40'	; 33
+
+_8	RETLW	H'36'	; 34
+	RETLW	H'49'	; 35
+	RETLW	H'49'	; 36
+	RETLW	H'49'	; 37
+	RETLW	H'36'	; 38
+
+_9	RETLW	H'3E'	; 39
+	RETLW	H'49'	; 40
+	RETLW	H'49'	; 41
+	RETLW	H'49'	; 42
+	RETLW	H'32'	; 43
+
+_0	RETLW	H'3E'	; 44
+	RETLW	H'41'	; 45
+	RETLW	H'41'	; 46
+	RETLW	H'41'	; 47
+	RETLW	H'3E'	; 48
+
+_A	RETLW	H'3F'	; 49
+	RETLW	H'48'	; 50
+	RETLW	H'48'	; 51
+	RETLW	H'48'	; 52
+	RETLW	H'3F'	; 53
+
+_B	RETLW	H'36'	; 54
+	RETLW	H'49'	; 55
+	RETLW	H'49'	; 56
+	RETLW	H'49'	; 57
+	RETLW	H'7F'	; 58
+
+_C	RETLW	H'22'	; 59
+	RETLW	H'41'	; 60
+	RETLW	H'41'	; 61
+	RETLW	H'41'	; 62
+	RETLW	H'3E'	; 63
+
+_D	RETLW	H'3E'	; 64
+	RETLW	H'41'	; 65
+	RETLW	H'41'	; 66
+	RETLW	H'41'	; 67
+	RETLW	H'7F'	; 68
+
+_E	RETLW	H'41'	; 69
+	RETLW	H'49'	; 70
+	RETLW	H'49'	; 71
+	RETLW	H'7F'	; 72
+
+_F	RETLW	H'40'	; 73
+	RETLW	H'48'	; 74
+	RETLW	H'48'	; 75
+	RETLW	H'7F'	; 76
+	
+_G	RETLW	H'2E'	; 77
+	RETLW	H'49'	; 78
+	RETLW	H'49'	; 79
+	RETLW	H'41'	; 80
+	RETLW	H'3E'	; 81
+
+_H	RETLW	H'7F'	; 82
+	RETLW	H'08'	; 83
+	RETLW	H'08'	; 84
+	RETLW	H'08'	; 85
+	RETLW	H'7F'	; 86
+
+_I	RETLW	H'7F'	; 87
+
+_J	RETLW	H'7E'	; 88
+	RETLW	H'01'	; 89
+	RETLW	H'01'	; 90
+	RETLW	H'02'	; 91
+
+_K	RETLW	H'43'	; 92
+	RETLW	H'24'	; 93
+	RETLW	H'18'	; 94
+	RETLW	H'08'	; 95
+	RETLW	H'7F'	; 96
+
+_L	RETLW	H'01'	; 97
+	RETLW	H'01'	; 98
+	RETLW	H'01'	; 99
+	RETLW	H'7F'	; 100
+
+_M	RETLW	H'3F'	; 101
+	RETLW	H'40'	; 102
+	RETLW	H'40'	; 103
+	RETLW	H'3F'	; 104
+	RETLW	H'40'	; 105
+	RETLW	H'40'	; 106
+	RETLW	H'3F'	; 107
+
+_N	RETLW	H'7F'	; 108
+	RETLW	H'02'	; 109
+	RETLW	H'1C'	; 110
+	RETLW	H'20'	; 111
+	RETLW	H'7F'	; 112
+
+_O	RETLW	H'3E'	; 113
+	RETLW	H'41'	; 114
+	RETLW	H'41'	; 115
+	RETLW	H'41'	; 116
+	RETLW	H'3E'	; 117
+
+_P	RETLW	H'30'	; 118
+	RETLW	H'48'	; 119
+	RETLW	H'48'	; 120
+	RETLW	H'48'	; 121
+	RETLW	H'3F'	; 122
+
+_Q	RETLW	H'3F'	; 123
+	RETLW	H'43'	; 124
+	RETLW	H'45'	; 125
+	RETLW	H'41'	; 126
+	RETLW	H'3E'	; 127
+
+_R	RETLW	H'31'	; 128
+	RETLW	H'4A'	; 129
+	RETLW	H'4C'	; 130
+	RETLW	H'48'	; 131
+	RETLW	H'7F'	; 132
+
+_S	RETLW	H'26'	; 133
+	RETLW	H'49'	; 134
+	RETLW	H'49'	; 135
+	RETLW	H'49'	; 136
+	RETLW	H'32'	; 137
+
+_T	RETLW	H'40'	; 138
+	RETLW	H'40'	; 139
+	RETLW	H'7F'	; 140
+	RETLW	H'40'	; 141
+	RETLW	H'40'	; 142
+
+_U	RETLW	H'7E'	; 143
+	RETLW	H'01'	; 144
+	RETLW	H'01'	; 145
+	RETLW	H'01'	; 146
+	RETLW	H'7E'	; 147
+
+_V	RETLW	H'78'	; 148
+	RETLW	H'06'	; 149
+	RETLW	H'01'	; 150
+	RETLW	H'06'	; 151
+	RETLW	H'78'	; 152
+
+_W	RETLW	H'7E'	; 153
+	RETLW	H'01'	; 154
+	RETLW	H'01'	; 155
+	RETLW	H'7E'	; 156
+	RETLW	H'01'	; 157
+	RETLW	H'01'	; 158
+	RETLW	H'7E'	; 159
+
+_X	RETLW	H'41'	; 160
+	RETLW	H'22'	; 161
+	RETLW	H'1C'	; 162
+	RETLW	H'22'	; 163
+	RETLW	H'41'	; 164
+
+_Y	RETLW	H'40'	; 165
+	RETLW	H'20'	; 166
+	RETLW	H'1F'	; 167
+	RETLW	H'20'	; 168
+	RETLW	H'40'	; 169
+
+_Z	RETLW	H'61'	; 170
+	RETLW	H'51'	; 171
+	RETLW	H'49'	; 172
+	RETLW	H'45'	; 173
+	RETLW	H'43'	; 174
+
+_NOKTA	RETLW	H'01'	; 175
+
+_BOSLUK	RETLW	H'00'	; 176
+	RETLW	H'00'	; 177
+	RETLW	H'00'	; 178
+
+;------------------------------------------------------------------------------------;
+		END</code></pre>
+<h2 id="segment">segment</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CODE SEGMENT
+Bu segment çalışan programı içeren segmentin adresini gösterir. Diğer bir deyişle CS ile adreslenen segment içinde makine dili komutları yer almaktadır. Segmentin ilk baytından itibaren program parçası çalıştırılmaya başlanır.
+
+DATA SEGMENT
+Data segmenti register’i olan DS geçerli data segmentinin başlangıç adresini içerir. Bu segment genel olarak program değişkenlerini tarafından kullanılır. Diğer bir deyişle bilgi işlem operasyonlarında tabii tutulan bilgiler Data Segment içindeki lokasyonlara (bölümlerde) yer alır.
+
+STACK SEGMENT
+Bu segment alt programlara giderken dönüş adreslerini saklamak program bitiminde işletim sistemine dönmek için gerekli bölgelerin saklanmasında kullanılır.
+
+EXTRA SEGMENT
+Genel olarak string operasyonları için kullanılır.
+
+
+CPU registerları 
+
+       Mikro işlemci, register adı verilen 14 adet özel lokasyon içerir. Herbiri 16 bit genişliğinde olan bu lokasyonları özel bellek birimleri olarak düşünebiliriz. Registerler, mikro işlemci tarafından özel amaçlar için kullanılır. Ayrıca, çeşitli verilerin geçici süreler için saklanması ve bu veriler üzerinde işlem yapılması için registerlerden yararlanılır. Registerler CPU chip’inin üzerinde yer aldıklarından, registerle yapılan işlemler, bellek bölgeleri üzerinde yapılan işlemlere nazaran çokdahahızlıdır. 
+8086/8088 mikro işlemcisinin sahip olduğu registerleri aşağıdaki gibi guruplara ayırmamız mümkün; 
+
+ 
+
+Segment registerleri (4 adet ) 
+Genel amaçlı registerler 
+a) Data registerleri (4 adet ) 
+b) Pointer ve index registerleri (4 adet ) 
+Instruction Pointer (1 adet ) 
+Program Status word (1 adet ) 
+       Yukarıda gösterilen 14 adet registerin 4 tanesi CODE, DATA, STACK VE EXTRA segmentlerin başlangıç adreslerini saklayan CS,DS,SS ve ES registerleridir. Bu dört registere genel olarak segment registerleri denilmektedir. Geriye kalanlardan 8 tanesi genel amaçlı register, 1 tanesi instruction pointer (komut göstergeci ) registeri ve sonuncusu da program status word (durum göstergeci) registeri olarak bilinmektedir. Program status word registerine flag registeri adını vereceğiz. Genel amaçlı registerler, kendi aralaronda iki guruba ayrılırlar. Her iki gurup, 4 adet registerden oluşur. Bunlardan ilk dört registere data, diğer 4 adet registereise pointer ve index registerleri adı verlir.
+
+ 
+
+Data registerları 
+
+       Daha çok, aritmetiksel işlemler için kullanılan DATA registerleri AX,BX,CX ve DX’dir. Herbir DATA registeri diğer registerlerden farklı olarak, bir bütün halinde veya iki parça halinde kullanılabilmektedir. Bir DATA registerini iki alt alana bölebilir, böylece registeri 16 bitlik birtek register halinde veya 8 bitlik iki ayrı register halinde kullanma imkanına sahip olabiliriz. Bu özellik şekil üzerinde gösterilmiştir. Örneğin AX registerini 16 bitlik işlemler için AX’i oluşturan AH ve AL yi ise 8 bitlik işlemler için ele alırız. 16 bit uzunluğundaki data registerlerinden herhangi birisinin yüksek seviyeli kısmı (high order) register isminin ve ‘High’ kelimesinin ilk harfi ile , alçak seviyeli kısmı (Low order) ise ,yine register isminin ve ‘Low’ kelimesinin ilk harfi ile gösterilir. Böylece AX için AH ve AL, BX için BH ve BL ,CX için CH ve CL, DX için DH ve DL olarak isimlendirilen 8-bitlik registerler elde edilir. Bu 8 bit registerlerden birinin değerinin değiştirilmesi ile, kendisini ihtiva eden 16 bit registerinin değerinin de değişeceği ve bunun tersinin de mümkün olacağı açıktır. Fakat bir 16-bit registerin herhangi bir yarımı üzerinde yapılan işlem diğer yarımı üzerinde değişikliğe yol açmayacaktır. Data registerlerinin dışında kalan registerlerinin dışında kalan registerlerin, bu şekilde alt alanlara bölenemeyeceği şekil üzerinde de gösterilmiştir. Ancak flag registerleri için daha da farklı bir kullanım söz konusudur. 
+
+       DATA registerlerinin herhangibiri genel program amaçları için kullanılabilir. Diğer taraftan belirli data registerlerlerinin belirli işlemler sırasında operand olarak kullanılması zorunludur. Böyle bir durumda, programcının bir seçim yapması söz konusu değildir. Akümülatör olarak isimlendirilebilen AX registeri ; çarpa, bölme, giriş, çıkış, bazı string operasyonlarında word uzunluklu olarak kullanılır. AL registeri byte uzunluklu olup, bazı operasyonların sayaç registeri olarak veya desimal amaçlı aritmetiksel işlemlerde transfer alanı (alıcı alan registeri ) olorak kullanılır. Ah registeri byte uzunluklu bölme ve çarpmalarda kullanılır. Base registerolarak isimlendirilebilen BX , daha çok bellek içindeki verilerin adreslanmesinde kullanılır. CX sayaç registeridir, LOOP komutlarının veya tekrarlı! ; string operasyonlarının sayaç registeri olarak kullanılır. CL registeri shift ve rotate sayacı olarak kullanılabilir. Data registeri ismi verilen DX , word uzunluklu çarpma ve bölme operasyonlarında ,ayrıca giriş çıkış operasyonları için port numarası göstermede kullanılır. 
+
+Segment registerları 
+
+       8088 ve 8086 işlemcisi kullanan bilgisayarlar, programların veya dataların belleğin iki ayrı alanına yerleştirirler. Bu program ve data alanları maximum 64 K büyüklüğnde olup segment olarak isimlendirilir. 8088 işlemcisi aynı anda 4 ayrı segmente sahip olabilir. Bu segmentler CODE, DATA, STACK ve EXTRA segment olarak isimlendirilir. Bu segmentlere ait ilk byte’ın diğer bir deyişle segmentin başlangıç adresinin gösterilmesi için 4 ayrı register kullanılır. Bunlar; sırası ile CS, DS, SS ve ES olup segment registerleri olarak isimlendirilirler. Code segment registeri olan CS icra gören programı içeren segmentin başlangıç adresini gösterir. Diğer bir deyişle, CS ile adreslenen segment içinde makine dili komutları yer almaktadır. Stack segment registeri olan SS, geçerli stack segmentin başlangıç adresini içerir. Stack segmen! t,çeşitli verilerin geçici olarak saklandığı bir bellek bloğudur. Data segment registeri olan DS ,geçerli data segmentinin başlangıç adresidir. Bu segment genel olarak program değişkenleri tarafından kullanılır. Diğer bir deyişle, bilgi işlem operasyonlarına tabi tutulan bilgiler, data segment içindeki lokasyonlarda yer alırlar. Ekstra segment registeri olan ES geçerli ekstra segmentin başlangıç adresini içerir. Ekstra segment, genel olarak string operasyonları için kullanılır. Yeterli bellek büyüklüğüne sahip olan sistemlerde bu 4 segment, belleğin farklı parçalarıdır. Geniş belleğe sahip olmayan sistemlerde ise, bu segmentler üstüste gelebilir.
+
+ 
+
+Pointer ve index registerları 
+
+       Yukardaki şekil üzerinde degösterildiği gibi; pointer ve indeks registerleri SP, BP, SI ve DI ’dir. Ancak, IP ve BX registerlerini de birer pointer ya da indeks registeri olarak kabul etmek mümkündür. Pointer ve indeks registerleri de, data registerleri gibi aritmetiksel işlemler için kullanılabilmektedirler. Fakat bu registerlerin kullanımındaki asıl amaç çeşitli bellek bölgelerindeki verilere ulaşabilmek için adres göstericisi olarak ele alınmalarıdır. Bellek içindeki bir lokasyonun adresini gösterebilmek için, iki ayrı adres değeri kullanılır. İlk değer, işaret edilen lokasyonu içinde barındıran segmentin adresidir . bu noktada segment registerlerinden yararlanılır. Lokasyonun segment içindeki yerini gösteren ikinci adres değeri ise offset adresi olarak bilinir. Offset adreslerinin gösterilmesi için de , pointer ve indeks registerlerinden yararlan! 05;lır. 
+ 
+
+       Mikro işlemci, code segment içindeki lokasyonlara erişebilmek için CS ve IP registerlerini kullanır. Stack segment içinde bulunan bir veriye ulaşmak için SS registeri ile birlikte SP ya da BP registerlerinden birini kullanmak gerekir. Data segment içindeki lokasyonlara erişmek için, data segmentin başlangıcı olan DS registerinden, lokasyonun offset adresini göstermesi için de BX, SI veya DI registerlerinden yararlanılır. Ekstra segment ya da gelişigüzel seçilen bir segment içerisindeki lokasyonlara erişebilmek için CS, DS, SS’ten yararlanabiliriz. Örneğin ES’deki değeri SS’ e ve ekstra segment içindeki lokasyonun offset adreslerini BP’ ye aktarabiliriz. 
+
+ 
+
+Instruction pointer registerı 
+
+       Komut göstergeci olarak isimlendirebileceğimiz IP registeri, 8088’in icra ünitesi tarafundan icra ettirilecek olan bir sonraki komutun offset adresini içerir. Offset adersi IP ile gösterilen bellek bölgesi code segmenti içindedir. Çünkü programları oluşturan komutlar bu segment içinde bulunur. IP registeri özel amaçlı bir register olması nedeniyle, programcı tarafından direkt olarak kullanılamaz. Ancak bu registerin değerini, stack üzerindeki bilgiler ile dolaylı olarak değiştirmek mümkündür. 
+
+ 
+
+Program status word registerı 
+
+       Program status word registeri, kısaca PSW şeklinde gösterebiliriz. Bu registere flag registeri adını vereceğiz. Flag registeri diğer registerlerden oldukça farklıdır. Herşeyden önce, ‘PSW’ gösterimi bir operand değil, sadece bu registerden bahsetmek için kullanılan bir kısaltmadır. Flag registerinin bir bütün olarak veya 16 bitlik, 8 bitlik bir sayı olarak değerlendirilmesi söz konusu değildir. Çünkü flag registerinin sayısal değeri değil, kendisini oluşturan bitlerin herbirinin değeri önem taşımaktadır. Ancak, burada da bir kısıtlama olacak ve registeri oluşturan 16 bitten sadece 9 tanesi kullanılacaktır. Bu 9 bitin herbirinin mevcut değeri çeşitli kontrol komutların icra şekline etki etmekte ya da aritmetiksel veya mantıksal işlemlerin sonucu hakkında bilgi vermektedir. Örneğin ! flag registerinin 6.biti zero flağı olarak isimlendirilir. Bu işlem sonrasında , bu bitin değerini kontrol ederek , işlem sonucunun 0 olup olmadığını kontrol edebiliriz. Bu bitin değeri 1 ise , işlemin sonucu 0 , aksi taktirde 0’dan farklıdır.</code></pre>
+<p><em>Note: The DOS screen animation and the 5×7 LED matrix program for the PIC belong to different hardware targets. Versions and drafts have been kept as separate sources.</em></p>
+<h2 id="short-examples-from-the-screenshots">Short examples from the screenshots</h2>
+<p>To clear the screen, the AL=0 option of the BIOS INT 10H, AH=06H scroll service was used:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,0600H
+MOV BH,07H
+MOV CX,0
+MOV DX,184FH
+INT 10H</code></pre>
+<p>The colored rectangle experiment is labeled "not definitive" in the source:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX,0600H
+MOV CH,1
+MOV CL,1
+MOV DH,24
+MOV DL,78
+MOV BH,100b
+INT 10H</code></pre>
+<p>DOS INT 21H, AH=0BH checks the standard input status: AL=00H means no character is available, AL=FFH means a character is ready. Key-wait example:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AH,1
+INT 21H</code></pre>
+<p>Since the screenshots have been transcribed into the text, they are not included separately in the download file.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-matrix-projesi.zip" download>eem332-matrix-projesi.zip</a></p>
+              <p class="kucuk">ZIP archive · 359 KB · 19.04.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-matrix-projesi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (359 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

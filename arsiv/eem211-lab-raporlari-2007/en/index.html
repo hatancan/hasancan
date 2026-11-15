@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: 2006–2007 Laboratory Reports and Verilog Code (Experiments 4–9, Seven-Segment Display Driver) — hasancan.net</title>
+<meta name="description" content="Experiment 4–9 reports and Verilog code prepared by classmates for the EEM211 laboratory: behavioral and structural 4-bit adders, a full adder with gate delays and carry-lookahead, finding a faulty wire, design with MUXes and decoders, D flip-flops and JK counters, a four-digit seven-segment display driver (SSdriver) with 0–9 and 0–99 counters.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: 2006–2007 Laboratory Reports and Verilog Code (Experiments 4–9, Seven-Segment Display Driver)">
+<meta property="og:description" content="Experiment 4–9 reports and Verilog code prepared by classmates for the EEM211 laboratory: behavioral and structural 4-bit adders, a full adder with gate delays and carry-lookahead, finding a faulty wire, design with MUXes and decoders, D flip-flops and JK counters, a four-digit seven-segment display driver (SSdriver) with 0–9 and 0–99 counters.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-lab-raporlari-2007/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: 2006–2007 Laboratory Reports and Verilog Code (Experiments 4–9, Seven-Segment Display Driver)", "description": "Experiment 4–9 reports and Verilog code prepared by classmates for the EEM211 laboratory: behavioral and structural 4-bit adders, a full adder with gate delays and carry-lookahead, finding a faulty wire, design with MUXes and decoders, D flip-flops and JK counters, a four-digit seven-segment display driver (SSdriver) with 0–9 and 0–99 counters.", "inLanguage": "en", "datePublished": "2026-10-17", "url": "https://hasancan.net/arsiv/eem211-lab-raporlari-2007/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "EEM211_lab_raporlari_2006_2007_maskeli.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-lab-raporlari-2007/EEM211_lab_raporlari_2006_2007_maskeli.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: 2006–2007 Laboratory Reports and Verilog Code (Experiments 4–9, Seven-Segment Display Driver)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>13.12.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#experiment-4-4-bit-adder-verilog">Experiment 4: 4-bit adder (Verilog)</a></li><li><a href="#experiment-6-adders-with-gate-delays">Experiment 6: Adders with gate delays</a></li><li><a href="#experiment-7-faulty-circuit-mux-and-decoder">Experiment 7: Faulty circuit, MUX, and decoder</a></li><li><a href="#experiment-8-d-flip-flop-and-jk-counters">Experiment 8: D flip-flop and JK counters</a></li><li><a href="#experiment-9-latches-flip-flops-and-the-seven-segment-display-driver">Experiment 9: Latches, flip-flops, and the seven-segment display driver</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: 2006–2007 Laboratory Reports and Verilog Code (Experiments 4–9, Seven-Segment Display Driver)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 13.12.2007 · <span data-i18n="arch.addedOn"></span> 17.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the reports and Verilog source code prepared by classmates for the laboratory experiments of the EEM211 Digital Logic Design course, collected in the course folder under the name "ferhat_notlari" (Ferhat's notes), from the <strong>fall semesters of 2006 and 2007</strong>. Student names and numbers in the reports have been masked, and the numbers have been removed from file names (the reports are marked with the letters A, B, C, D as belonging to four different people). The Xilinx intermediate files in the folder (compilation outputs, simulation databases) were not included. The masked reports and Verilog files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="experiment-4-4-bit-adder-verilog">Experiment 4: 4-bit adder (Verilog)</h2>
+<p>Report A contains two solutions. In the second question, the full adder is written behaviorally, using minterms:</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module fadder(s,co,c,a,b);
+output s,co;
+input c,a,b;
+assign co = (~c &amp; a &amp; b) | (c &amp; ~a &amp; b) | (c &amp; a &amp; ~b) | (a &amp; b &amp; c);
+assign s = (~c &amp; ~a &amp; b) | (~c &amp; a &amp; ~b) | (c &amp; ~a &amp; ~b) | (c &amp; a &amp; b);
+endmodule</code></pre>
+<p>In the third question, the AND, OR, and complement (inverter) gates are defined as separate modules (<code>andgate</code>, <code>orgate</code>, <code>invgate</code>), and the full adder (<code>fadderStr</code>) is rebuilt structurally from these gates; in both solutions, four full adders are chained to form <code>fourbitadder1</code> and <code>fourbitadder2</code>.</p>
+<h2 id="experiment-6-adders-with-gate-delays">Experiment 6: Adders with gate delays</h2>
+<p>In Report B, the full adder is defined with gate delays (XOR 17, AND 14, OR 15 units):</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module tamtoplayici(s,cout,a,b,cin);
+input a,b,cin;
+output s,cout;
+wire w1,w2,w3;
+xor #(17)
+  x1(w1,a,b),
+  x2(s,cin,w1);
+and #(14)
+  a1(w2,a,b),
+  a2(w3,w1,cin);
+or #(15) (cout,w3,w2);
+endmodule</code></pre>
+<p>With this, a 4-bit ripple-carry adder was built, along with a 4-bit <strong>carry-lookahead</strong> adder (<code>fourbitscarrylookahead</code>) using the <code>PGgen</code> and <code>carrygen</code> modules.</p>
+<h2 id="experiment-7-faulty-circuit-mux-and-decoder">Experiment 7: Faulty circuit, MUX, and decoder</h2>
+<p>Two reports (B and C) answer the same questions:</p>
+<ol><li>When the incorrect function F of the given circuit is simplified on a Karnaugh map, the <strong>c'd</strong> term of the correct F turns out to be missing; that is, the wire carrying d' to the AND gate that produces the c'd term is faulty (not making contact).</li><li>The function F was written in canonical form, and the four-input, single-output circuit was designed using at most three 2-input MUXes.</li><li>Using a 2x4 decoder and a 4x1 MUX, a circuit that outputs 1 if the two-bit numbers ab and cd are equal: F = a'b'c'd' + a'bc'd + ab'cd' + abcd. It is written in canonical form and placed on a Karnaugh map to perform the equality check.</li></ol>
+<h2 id="experiment-8-d-flip-flop-and-jk-counters">Experiment 8: D flip-flop and JK counters</h2>
+<p>The same questions are answered in three explanation documents:</p>
+<ol><li>The FD block is a D flip-flop triggered on the rising edge; because of the inverter in front of the output, the output is the complement of the input and changes at every clock pulse (the frequency is halved).</li><li>The circuit with four JK flip-flops is an asynchronous <strong>down counter</strong>, with the output of each flip-flop connected to the clock input of the next: it decrements from 1111 to 0000.</li><li>When inverters are placed on all the clock inputs, the flip-flops trigger on the falling edge and the circuit <strong>counts up</strong> from 0000.</li><li>Since the first flip-flop of the counter in Figure 3 passes the complement of its input to the output, the operation in Figure 1 can also be performed with this circuit (by taking the least significant bit).</li></ol>
+<p><em>Note: In one of the explanations, the second state of the down counter is written as "0111, decimal equivalent 14"; the bits were read from Q0 to Q3 (in reverse order). In the order Q3Q2Q1Q0, this state is 1110 = 14.</em></p>
+<h2 id="experiment-9-latches-flip-flops-and-the-seven-segment-display-driver">Experiment 9: Latches, flip-flops, and the seven-segment display driver</h2>
+<p>This experiment uses a four-digit seven-segment display driver (<code>SSdriver</code>). According to Report D (19 December 2006), the module's task is to transfer the four 4-bit pieces of input data (S1–S4) to the four displays in sequence: first the equivalent of S1 is given to the SS output and the common anode (AN) of the first display is driven, then the same is done for S2, S3, and S4. Since this scan is repeated hundreds of times per second, the eye does not notice the flicker and steady digits are seen on the displays.</p>
+<pre class="kaynak" data-dosya="verilog - Not Defteri"><code>module clkdiv(clk,mclk);
+output clk;
+input mclk;
+reg [15:0] cnt;
+assign clk=cnt[15];
+initial cnt=0; // Don't forget!! Otherwise simulator does generate X only
+always @(posedge mclk)
+begin
+cnt = cnt+1;
+end
+endmodule
+
+module SSdriver(SS,AN,mclk,S1,S2,S3,S4);
+input mclk;
+input [3:0] S1,S2,S3,S4;
+output reg [7:0] SS;
+output reg [3:0] AN;
+wire [7:0] w1,w2,w3,w4;
+wire clk;
+wire [3:0] w5;
+reg [1:0] cnt;
+clkdiv cdiv(clk,mclk);
+decoder d1(w1,S1);
+decoder d2(w2,S2);
+decoder d3(w3,S3);
+decoder d4(w4,S4);
+anode_decoder d5(w5,cnt);
+initial cnt=0;
+always @(posedge clk)
+begin
+cnt=cnt+1;
+end
+always @(cnt)
+begin
+AN&lt;=w5;
+case (cnt)
+2'b00 : SS&lt;=w1;
+2'b01 : SS&lt;=w2;
+2'b10 : SS&lt;=w3;
+2'b11 : SS&lt;=w4;
+endcase
+end
+endmodule</code></pre>
+<p>The <code>decoder</code> module converts the digits 0–9 into an 8-bit segment code (e.g., 0 → 10000001, 1 → 10011111; active low), while <code>anode_decoder</code> sets one of the four anodes to 0 according to the 2-bit counter (1110, 1101, 1011, 0111). <code>clkdiv</code> generates the scan clock by dividing the board's clock by 2¹⁶.</p>
+<p>The reports describe the counters built with this driver:</p>
+<ul><li><strong>0–9 counter:</strong> An AND gate connected to the output of an 8-bit binary counter sets the clr input to 1 when the output is 1010 (10) and resets the counter; thus the counter counts only up to 9, and the output is passed to the display.</li><li>If the clr input is tied permanently to 1, the outputs are reset and the display always shows 0.</li><li><strong>0–99 counter:</strong> Each digit is counted by a separate counter; the output of the AND gate that resets the first counter at 10 is connected to the clock input of the second counter. Thus each time the ones digit rolls over from 9 to 0, the tens digit increments by one, and the circuit counts up to 99.</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM211_lab_raporlari_2006_2007_maskeli.zip" download>EEM211_lab_raporlari_2006_2007_maskeli.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.8 MB · 13.12.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM211_lab_raporlari_2006_2007_maskeli.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

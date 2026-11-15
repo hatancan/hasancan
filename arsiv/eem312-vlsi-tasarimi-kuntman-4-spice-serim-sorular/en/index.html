@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: VLSI Design Lecture Note 4 – SPICE, Layout Examples, Questions and References (Ayten Kuntman) — hasancan.net</title>
+<meta name="description" content="Appendix section of Prof. Dr. Ayten Kuntman&#x27;s VLSI design notes: SPICE element, source and analysis commands, diode, BJT and MOSFET model parameter tables, example SPICE files, L-Edit layouts of CMOS NAND and NOR gates, the bipolar process flow, the lab plan, 40 integrated circuit questions and references.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: VLSI Design Lecture Note 4 – SPICE, Layout Examples, Questions and References (Ayten Kuntman)">
+<meta property="og:description" content="Appendix section of Prof. Dr. Ayten Kuntman&#x27;s VLSI design notes: SPICE element, source and analysis commands, diode, BJT and MOSFET model parameter tables, example SPICE files, L-Edit layouts of CMOS NAND and NOR gates, the bipolar process flow, the lab plan, 40 integrated circuit questions and references.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: VLSI Design Lecture Note 4 – SPICE, Layout Examples, Questions and References (Ayten Kuntman)", "description": "Appendix section of Prof. Dr. Ayten Kuntman's VLSI design notes: SPICE element, source and analysis commands, diode, BJT and MOSFET model parameter tables, example SPICE files, L-Edit layouts of CMOS NAND and NOR gates, the bipolar process flow, the lab plan, 40 integrated circuit questions and references.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: VLSI Design Lecture Note 4 – SPICE, Layout Examples, Questions and References (Ayten Kuntman)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.04.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#8-the-spice-program">8. The SPICE program</a></li><li><a href="#9-the-layout-editor-concept">9. The layout editor concept</a></li><li><a href="#10-questions">10. Questions</a></li><li><a href="#11-references">11. References</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: VLSI Design Lecture Note 4 – SPICE, Layout Examples, Questions and References (Ayten Kuntman)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.04.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the fourth and last part of the 158-page <strong>"VLSI Design"</strong> lecture note found in the EEM312 Digital Electronics course folder (pages 103–158 of the note: appendices). The cover of the document states <em>"These notes are a reorganized version of the notes published by Prof. Dr. Ayten Kuntman on 11.03.2009"</em>; the PDF was created on 28 April 2009. The document does not say who did the reorganization or at which institution the note was taught (Prof. Dr. Ayten Kuntman is a faculty member at Istanbul Technical University). Let us also add that, as stated in the document, the information in the SPICE section was taken from the SPICE developers' website and supported with examples.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgia purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<p>Other posts in the series: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">1) integrated circuit fabrication, silicon and process steps</a> (the whole note can be downloaded there), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">2) MOS integrated circuits, the CMOS process and layout rules</a>, <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">3) bipolar integrated circuits</a>. The text, SPICE files, tables and questions of this section have been transcribed below; simulation results and layouts have been added in cropped form. A PDF made up of the pages of this section can be downloaded at the end of the post.</p>
+<h2 id="8-the-spice-program">8. The SPICE program</h2>
+<h3 id="general-structure">General structure</h3>
+<p>SPICE (<em>Simulation Program with Integrated Circuit Emphasis</em>) is a general-purpose electronic circuit simulator developed in the EECS department at the University of California at Berkeley; it is easy to learn and quite practical. A SPICE file consists, in order, of a <strong>title</strong>, the <strong>description of the circuit</strong>, the <strong>analyses to be performed</strong> and the <strong>.end</strong> section.</p>
+<ul><li>When starting a program, an <code>*</code> must always be placed at the start of the first line and the title written after it; otherwise the first line is treated as the title and is not processed.</li><li>Lines beginning with <code>*</code> are not read by the program; comments are written this way.</li><li>The program always ends with the <code>.end</code> command. To see the results, <code>.probe</code> is usually used before <code>.end</code>; if it is not used, the program runs and closes, and the results must be examined from the output files.</li><li>Every active or passive element is denoted by a letter and written together with the nodes it is connected to. Case is not distinguished. If a line is not enough, the statement is continued on the next line by placing a <code>+</code>.</li><li>Semiconductor elements are defined by <strong>model parameters</strong>; the parameters can be redefined for different processes. BSIM, the most advanced version of the model parameters, contains a large number of parameters.</li></ul>
+<h3 id="element-models">Element models</h3>
+<p>After the connections of the element are written, the model parameters are written with the <code>.model</code> command:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.MODEL MNAME TYPE (PNAME1=PVAL1 PNAME2=PVAL2 ...)
+.MODEL MOD1 NPN (BF=50 IS=1E-13 VBF=50)</code></pre>
+<p>MNAME is a name given by the user; TYPE is one of the fixed names indicating the element type:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Type</th><th scope="col">Element</th></tr></thead><tbody><tr><th scope="row">R</th><td>Semiconductor resistor</td></tr><tr><th scope="row">C</th><td>Semiconductor capacitor</td></tr><tr><th scope="row">SW</th><td>Voltage-controlled switch</td></tr><tr><th scope="row">CSW</th><td>Current-controlled switch</td></tr><tr><th scope="row">URC</th><td>Uniform distributed RC model</td></tr><tr><th scope="row">LTRA</th><td>Lossy transmission line</td></tr><tr><th scope="row">D</th><td>Diode</td></tr><tr><th scope="row">NPN / PNP</th><td>NPN / PNP BJT</td></tr><tr><th scope="row">NJF / PJF</th><td>N / P-channel JFET</td></tr><tr><th scope="row">NMOS / PMOS</th><td>N / P-channel MOSFET</td></tr><tr><th scope="row">NMF / PMF</th><td>N / P-channel MESFET</td></tr></tbody></table></div>
+<h3 id="subcircuits">Subcircuits</h3>
+<p>Subcircuits with the same structure can be defined once with <code>.subckt</code> and used repeatedly; the definition ends with <code>.ends</code>. In the circuit, a subcircuit is called with the letter <code>X</code>:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.SUBCKT subname N1 N2 N3 ...
+...
+.ends subname
+
+.SUBCKT OPAMP 1 2 3 4
+...
+.ends OPAMP
+
+XYYYYYYY N1 N2 N3 ... SUBNAME
+X1 2 4 17 3 1 OPAMP</code></pre>
+<h3 id="passive-elements">Passive elements</h3>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Resistor: RXXXXXXX N1 N2 VALUE
+R1 1 2 100
+RC1 12 17 1K
+* Semiconductor resistor: RXXXXXXX N1 N2 &lt;VALUE&gt; &lt;MNAME&gt; &lt;L=LENGTH&gt; &lt;W=WIDTH&gt; &lt;TEMP=T&gt;
+RLOAD 2 10 10K
+RMOD 3 7 RMODEL L=10u W=1u
+* Capacitor: CXXXXXXX N+ N- VALUE &lt;IC=INCOND&gt;
+CBYP 13 0 1UF
+COSC 17 23 10U IC=3V
+* Semiconductor capacitor: CXXXXXXX N1 N2 &lt;VALUE&gt; &lt;MNAME&gt; &lt;L=LENGTH&gt; &lt;W=WIDTH&gt; &lt;IC=VAL&gt;
+CLOAD 2 10 10P
+CMOD 3 7 CMODEL L=10u W=1u
+* Inductor: LYYYYYYY N+ N- VALUE &lt;IC=INCOND&gt;
+LLINK 42 69 1UH
+LSHUNT 23 51 10U IC=15.7MA</code></pre>
+<p>If the value of a semiconductor resistor or capacitor is not given, the model name and the length must be specified.</p>
+<p><strong>Table 8.2: Semiconductor resistor model parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Symbol</th><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Default</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">TC1</th><td>First-order temperature coefficient</td><td>Ω/°C</td><td>0.0</td><td>—</td></tr><tr><th scope="row">TC2</th><td>Second-order temperature coefficient</td><td>Ω/°C²</td><td>0.0</td><td>—</td></tr><tr><th scope="row">RSH</th><td>Sheet resistance</td><td>Ω/□</td><td>—</td><td>50</td></tr><tr><th scope="row">DEFW</th><td>Default width</td><td>m</td><td>1e-6</td><td>2e-6</td></tr><tr><th scope="row">NARROW</th><td>Narrowing due to side etching</td><td>m</td><td>0.0</td><td>1e-7</td></tr><tr><th scope="row">TNOM</th><td>Parameter measurement temperature</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Table 8.3: Semiconductor capacitor model parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Symbol</th><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Default</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">CJ</th><td>Junction bottom capacitance</td><td>F/m²</td><td>—</td><td>5e-5</td></tr><tr><th scope="row">CJSW</th><td>Junction sidewall capacitance</td><td>F/m</td><td>—</td><td>2e-11</td></tr><tr><th scope="row">DEFW</th><td>Default element width</td><td>m</td><td>1e-6</td><td>2e-6</td></tr><tr><th scope="row">NARROW</th><td>Narrowing due to side etching</td><td>m</td><td>0.0</td><td>1e-7</td></tr></tbody></table></div>
+<h3 id="voltage-and-current-sources">Voltage and current sources</h3>
+<p>An independent voltage source is denoted by <code>V</code> and an independent current source by <code>I</code>; the positive terminal is written first, then the negative terminal, followed by the DC/AC type and the value:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>VXXXXXXX N+ N- &lt;DC/AC&gt; &lt;VALUE&gt;
+IYYYYYYY N+ N- &lt;DC/AC&gt; &lt;VALUE&gt;
+VCC 10 0 DC 6
+VIN 13 2 AC 5
+* Pulse source: PULSE(V1 V2 TD TR TF PW PER)
+VIN 3 0 PULSE(-1 1 2NS 2NS 2NS 50NS 100NS)
+* Sinusoidal source: SIN(VO VA FREQ TD THETA)
+VIN 3 0 SIN(0 1 100MEG 1NS 1E10)
+* Exponential source: EXP(V1 V2 TD1 TAU1 TD2 TAU2)
+VIN 3 0 EXP(-4 -1 2NS 30NS 60NS 40NS)</code></pre>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Source</th><th scope="col">Parameter (default value, unit)</th></tr></thead><tbody><tr><th scope="row">PULSE</th><td>V1 initial value (V/A); V2 pulse value (V/A); TD delay (0.0 s); TR rise time (TSTEP); TF fall time (TSTEP); PW pulse width (TSTOP); PER period (TSTOP)</td></tr><tr><th scope="row">SIN</th><td>VO offset (V/A); VA amplitude (V/A); FREQ frequency (1/TSTOP Hz); TD delay (0.0 s); THETA damping factor (0.0 1/s)</td></tr><tr><th scope="row">EXP</th><td>V1 initial value (V/A); V2 pulse value (V/A); TD1 rise delay (0.0 s); TAU1 rise time constant (TSTEP); TD2 fall delay (TD1 + TSTEP); TAU2 fall time constant (TSTEP)</td></tr></tbody></table></div>
+<h3 id="semiconductor-circuit-elements">Semiconductor circuit elements</h3>
+<p>Diodes, BJTs, JFETs, MOSFETs and MESFETs are introduced through model parameters: after the connections are written, the element is given a model name, and this name and the element type (D, NPN/PNP, NMOS/PMOS) are written on the <code>.model</code> line.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Diode: DXXXXXXX N+ N- MNAME  (anode, cathode)
+DBRIDGE 2 10 DIODE1
+.model DIODE1 D (...)
+DCLMP 3 7 DMOD 3.0 IC=0.2
+* BJT: QXXXXXXX NC NB NE MNAME &lt;AREA&gt; &lt;OFF&gt; &lt;IC=VBE,VCE&gt; &lt;TEMP=T&gt;
+Q23 10 24 13 QMOD IC=0.6, 5.0
+Q50A 11 26 4 MOD1
+.model MOD1 npn (...)
+* MOSFET: MXXXXXXX ND NG NS NB MNAME &lt;L=VAL&gt; &lt;W=VAL&gt; &lt;AD=VAL&gt; &lt;AS=VAL&gt;
+* + &lt;PD=VAL&gt; &lt;PS=VAL&gt; &lt;NRD=VAL&gt; &lt;NRS=VAL&gt; &lt;OFF&gt; &lt;IC=VDS,VGS,VBS&gt; &lt;TEMP=T&gt;
+M1 24 2 0 20 TYPE1
+.model TYPE1 NMOS (...)
+M31 2 17 6 10 MODM L=5U W=2U
+.model MODM PMOS (...)
+M1 2 9 3 0 MOD1 L=10U W=5U AD=100P AS=100P PD=40U PS=40U</code></pre>
+<p><strong>Table 8.7: Diode model parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Symbol</th><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Default</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">IS</th><td>Saturation current</td><td>A</td><td>1.0e-14</td><td>1.0e-14</td></tr><tr><th scope="row">RS</th><td>Ohmic resistance</td><td>Ω</td><td>0</td><td>10</td></tr><tr><th scope="row">N</th><td>Emission coefficient</td><td>—</td><td>1</td><td>1.0</td></tr><tr><th scope="row">TT</th><td>Transit time</td><td>s</td><td>0</td><td>0.1 ns</td></tr><tr><th scope="row">CJO</th><td>Junction capacitance at zero bias</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJ</th><td>Junction potential</td><td>V</td><td>1</td><td>0.6</td></tr><tr><th scope="row">M</th><td>Grading coefficient</td><td>—</td><td>0.5</td><td>0.5</td></tr><tr><th scope="row">EG</th><td>Activation energy</td><td>eV</td><td>1.11</td><td>1.11 Si; 0.69 Sbd; 0.67 Ge</td></tr><tr><th scope="row">XTI</th><td>Saturation current temperature exponent</td><td>—</td><td>3.0</td><td>3.0 jn; 2.0 Sbd</td></tr><tr><th scope="row">KF</th><td>Flicker noise coefficient</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">AF</th><td>Flicker noise exponent</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">FC</th><td>Coefficient for the forward-bias depletion capacitance formula</td><td>—</td><td>0.5</td><td>—</td></tr><tr><th scope="row">BV</th><td>Reverse breakdown voltage</td><td>V</td><td>infinite</td><td>40.0</td></tr><tr><th scope="row">IBV</th><td>Current at breakdown voltage</td><td>A</td><td>1.0e-3</td><td>—</td></tr><tr><th scope="row">TNOM</th><td>Parameter measurement temperature</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Table 8.8: BJT model parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Symbol</th><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Default</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">IS</th><td>Transport saturation current</td><td>A</td><td>1.0e-16</td><td>1.0e-15</td></tr><tr><th scope="row">BF</th><td>Ideal maximum forward beta</td><td>—</td><td>100</td><td>100</td></tr><tr><th scope="row">NF</th><td>Forward current emission coefficient</td><td>—</td><td>1.0</td><td>1</td></tr><tr><th scope="row">VAF</th><td>Forward Early voltage</td><td>V</td><td>infinite</td><td>200</td></tr><tr><th scope="row">IKF</th><td>Corner for forward beta high-current roll-off</td><td>A</td><td>infinite</td><td>0.01</td></tr><tr><th scope="row">ISE</th><td>B-E leakage saturation current</td><td>A</td><td>0</td><td>1.0e-13</td></tr><tr><th scope="row">NE</th><td>B-E leakage emission coefficient</td><td>—</td><td>1.5</td><td>2</td></tr><tr><th scope="row">BR</th><td>Ideal maximum reverse beta</td><td>—</td><td>1</td><td>0.1</td></tr><tr><th scope="row">NR</th><td>Reverse current emission coefficient</td><td>—</td><td>1</td><td>1</td></tr><tr><th scope="row">VAR</th><td>Reverse Early voltage</td><td>V</td><td>infinite</td><td>200</td></tr><tr><th scope="row">IKR</th><td>Corner for reverse beta high-current roll-off</td><td>A</td><td>infinite</td><td>0.01</td></tr><tr><th scope="row">ISC</th><td>B-C leakage saturation current</td><td>A</td><td>0</td><td>—</td></tr><tr><th scope="row">NC</th><td>B-C leakage emission coefficient</td><td>—</td><td>2</td><td>1.5</td></tr><tr><th scope="row">RB</th><td>Zero-bias base resistance</td><td>Ω</td><td>0</td><td>100</td></tr><tr><th scope="row">IRB</th><td>Current at which the base resistance falls halfway to its minimum</td><td>A</td><td>infinite</td><td>0.1</td></tr><tr><th scope="row">RBM</th><td>Minimum base resistance at high current</td><td>Ω</td><td>RB</td><td>10</td></tr><tr><th scope="row">RE</th><td>Emitter resistance</td><td>Ω</td><td>0</td><td>1</td></tr><tr><th scope="row">RC</th><td>Collector resistance</td><td>Ω</td><td>0</td><td>10</td></tr><tr><th scope="row">CJE</th><td>B-E zero-bias depletion capacitance</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJE</th><td>B-E built-in potential</td><td>V</td><td>0.75</td><td>0.6</td></tr><tr><th scope="row">MJE</th><td>B-E junction exponential factor</td><td>—</td><td>0.33</td><td>0.33</td></tr><tr><th scope="row">TF</th><td>Ideal forward transit time</td><td>s</td><td>0</td><td>0.1 ns</td></tr><tr><th scope="row">XTF</th><td>Coefficient for bias dependence of TF</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">VTF</th><td>Voltage describing the V_BC dependence of TF</td><td>V</td><td>infinite</td><td>—</td></tr><tr><th scope="row">ITF</th><td>High-current parameter for the effect on TF</td><td>A</td><td>0</td><td>—</td></tr><tr><th scope="row">PTF</th><td>Excess phase at f = 1/(2π·TF) Hz</td><td>degrees</td><td>0</td><td>—</td></tr><tr><th scope="row">CJC</th><td>B-C zero-bias depletion capacitance</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJC</th><td>B-C built-in potential</td><td>V</td><td>0.75</td><td>0.5</td></tr><tr><th scope="row">MJC</th><td>B-C junction exponential factor</td><td>—</td><td>0.33</td><td>0.5</td></tr><tr><th scope="row">XCJC</th><td>Fraction of the B-C capacitance connected to the internal base node</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">TR</th><td>Ideal reverse transit time</td><td>s</td><td>0</td><td>10 ns</td></tr><tr><th scope="row">CJS</th><td>Zero-bias collector-substrate capacitance</td><td>F</td><td>0</td><td>2 pF</td></tr><tr><th scope="row">VJS</th><td>Substrate junction built-in potential</td><td>V</td><td>0.75</td><td>—</td></tr><tr><th scope="row">MJS</th><td>Substrate junction exponential factor</td><td>—</td><td>0</td><td>0.5</td></tr><tr><th scope="row">XTB</th><td>Forward and reverse beta temperature exponent</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">EG</th><td>Energy gap for the IS temperature effect</td><td>eV</td><td>1.11</td><td>—</td></tr><tr><th scope="row">XTI</th><td>Temperature exponent for the IS effect</td><td>—</td><td>3</td><td>—</td></tr><tr><th scope="row">KF</th><td>Flicker noise coefficient</td><td>—</td><td>0</td><td>—</td></tr><tr><th scope="row">AF</th><td>Flicker noise exponent</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">FC</th><td>Coefficient for the forward-bias depletion capacitance formula</td><td>—</td><td>0.5</td><td>—</td></tr><tr><th scope="row">TNOM</th><td>Parameter measurement temperature</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<p><strong>Table 8.9: MOSFET model parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Symbol</th><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Default</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">LEVEL</th><td>Model index</td><td>—</td><td>1</td><td>—</td></tr><tr><th scope="row">VTO</th><td>Zero-bias threshold voltage (V_T0)</td><td>V</td><td>0.0</td><td>1.0</td></tr><tr><th scope="row">KP</th><td>Transconductance parameter</td><td>A/V²</td><td>2.0e-5</td><td>3.1e-5</td></tr><tr><th scope="row">GAMMA</th><td>Bulk threshold parameter (γ)</td><td>V^½</td><td>0.0</td><td>0.37</td></tr><tr><th scope="row">PHI</th><td>Surface potential (2Φ_F)</td><td>V</td><td>0.6</td><td>0.65</td></tr><tr><th scope="row">LAMBDA</th><td>Channel-length modulation (MOS1, MOS2 only)</td><td>1/V</td><td>0.0</td><td>0.02</td></tr><tr><th scope="row">RD</th><td>Drain ohmic resistance</td><td>Ω</td><td>0.0</td><td>1.0</td></tr><tr><th scope="row">RS</th><td>Source ohmic resistance</td><td>Ω</td><td>0.0</td><td>1.0</td></tr><tr><th scope="row">CBD</th><td>Zero-bias B-D junction capacitance</td><td>F</td><td>0.0</td><td>20 fF</td></tr><tr><th scope="row">CBS</th><td>Zero-bias B-S junction capacitance</td><td>F</td><td>0.0</td><td>20 fF</td></tr><tr><th scope="row">IS</th><td>Bulk junction saturation current</td><td>A</td><td>1.0e-14</td><td>1.0e-15</td></tr><tr><th scope="row">PB</th><td>Bulk junction potential</td><td>V</td><td>0.8</td><td>0.87</td></tr><tr><th scope="row">CGSO</th><td>Gate-source overlap capacitance per meter of channel width</td><td>F/m</td><td>0.0</td><td>4.0e-11</td></tr><tr><th scope="row">CGDO</th><td>Gate-drain overlap capacitance per meter of channel width</td><td>F/m</td><td>0.0</td><td>4.0e-11</td></tr><tr><th scope="row">CGBO</th><td>Gate-bulk overlap capacitance per meter of channel length</td><td>F/m</td><td>0.0</td><td>2.0e-10</td></tr><tr><th scope="row">RSH</th><td>Drain and source diffusion sheet resistance</td><td>Ω/□</td><td>0.0</td><td>10.0</td></tr><tr><th scope="row">CJ</th><td>Zero-bias bottom capacitance per m² of junction area</td><td>F/m²</td><td>0.0</td><td>2.0e-4</td></tr><tr><th scope="row">MJ</th><td>Bulk junction bottom grading coefficient</td><td>—</td><td>0.5</td><td>0.5</td></tr><tr><th scope="row">CJSW</th><td>Zero-bias sidewall capacitance per meter of junction perimeter</td><td>F/m</td><td>0.0</td><td>1.0e-9</td></tr><tr><th scope="row">MJSW</th><td>Bulk junction sidewall grading coefficient</td><td>—</td><td>0.50 (level 1); 0.33 (level 2, 3)</td><td>—</td></tr><tr><th scope="row">JS</th><td>Saturation current per m² of junction area</td><td>A/m²</td><td>—</td><td>1.0e-8</td></tr><tr><th scope="row">TOX</th><td>Oxide thickness</td><td>m</td><td>1.0e-7</td><td>1.0e-7</td></tr><tr><th scope="row">NSUB</th><td>Substrate doping</td><td>1/cm³</td><td>0.0</td><td>4.0e15</td></tr><tr><th scope="row">NSS</th><td>Surface state density</td><td>1/cm²</td><td>0.0</td><td>1.0e10</td></tr><tr><th scope="row">NFS</th><td>Fast surface state density</td><td>1/cm²</td><td>0.0</td><td>1.0e10</td></tr><tr><th scope="row">TPG</th><td>Gate material type: +1 opposite to substrate, −1 same as substrate, 0 Al gate</td><td>—</td><td>1.0</td><td>—</td></tr><tr><th scope="row">XJ</th><td>Metallurgical junction depth</td><td>m</td><td>0.0</td><td>1 µ</td></tr><tr><th scope="row">LD</th><td>Lateral diffusion</td><td>m</td><td>0.0</td><td>0.8 µ</td></tr><tr><th scope="row">UO</th><td>Surface mobility</td><td>cm²/V·s</td><td>600</td><td>700</td></tr><tr><th scope="row">UCRIT</th><td>Critical field for mobility degradation (MOS2 only)</td><td>V/cm</td><td>1.0e4</td><td>1.0e4</td></tr><tr><th scope="row">UEXP</th><td>Critical field exponent in mobility degradation (MOS2 only)</td><td>—</td><td>0.0</td><td>0.1</td></tr><tr><th scope="row">UTRA</th><td>Transverse field coefficient (removed in MOS2)</td><td>—</td><td>0.0</td><td>0.3</td></tr><tr><th scope="row">VMAX</th><td>Maximum carrier drift velocity</td><td>m/s</td><td>0.0</td><td>5.0e4</td></tr><tr><th scope="row">NEFF</th><td>Total channel charge (fixed and mobile) coefficient (MOS2 only)</td><td>—</td><td>1.0</td><td>5.0</td></tr><tr><th scope="row">KF</th><td>Flicker noise coefficient</td><td>—</td><td>0.0</td><td>1.0e-26</td></tr><tr><th scope="row">AF</th><td>Flicker noise exponent</td><td>—</td><td>1.0</td><td>1.2</td></tr><tr><th scope="row">FC</th><td>Coefficient for the forward-bias depletion capacitance formula</td><td>—</td><td>0.5</td><td>—</td></tr><tr><th scope="row">DELTA</th><td>Width effect on threshold voltage (MOS2, MOS3)</td><td>—</td><td>0.0</td><td>1.0</td></tr><tr><th scope="row">THETA</th><td>Mobility modulation (MOS3 only)</td><td>1/V</td><td>0.0</td><td>0.1</td></tr><tr><th scope="row">ETA</th><td>Static feedback (MOS3 only)</td><td>—</td><td>0.0</td><td>1.0</td></tr><tr><th scope="row">KAPPA</th><td>Saturation field factor (MOS3 only)</td><td>—</td><td>0.2</td><td>0.5</td></tr><tr><th scope="row">TNOM</th><td>Parameter measurement temperature</td><td>°C</td><td>27</td><td>50</td></tr></tbody></table></div>
+<h3 id="analyses">Analyses</h3>
+<h4 id="ac-analysis">AC analysis</h4>
+<p>After the <code>.ac</code> command, the sweep type (dec/oct/lin), the number of points per decade/octave (or in total), and the start and stop frequencies are written:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.AC DEC ND FSTART FSTOP
+.AC OCT NO FSTART FSTOP
+.AC LIN NP FSTART FSTOP
+.AC DEC 10 1 10K
+.AC DEC 10 1K 100MEG
+.AC LIN 100 1 100HZ</code></pre>
+<p>Example: an RC low-pass filter with R = 1 kΩ, C = 1 µF. By removing the <code>*</code> at the beginning of a line, the desired one of the time, DC, AC, distortion and noise analyses is run:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>**title
+*vs 1 0 sin(0 1 1k)    * input required for time analysis
+vs 1 0 ac 5v
+r1 1 2 1k
+c1 2 0 1u
+*.tran 1n 2m                    *time analysis
+*.dc vs 0 5 0.1                 *dc analysis
+*.ac dec 101 10 10K             *ac analysis
+*.disto DEC 10 10 10k           *distortion analysis
+*.NOISE V(2) Vs DEC 101 10 10K  *noise analysis
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="../alcak-geciren.jpg" width="688" height="260" loading="lazy" decoding="async" alt="Low-pass RC filter circuit: V_in, series R, C to ground at the output"><figcaption>Low-pass filter</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../alcak-geciren-kazanc.jpg" width="673" height="459" loading="lazy" decoding="async" alt="Variation of the V(2)/V(1) gain with frequency from 10 Hz to 10 kHz: 0 dB at low frequency, rolling off after a cutoff frequency of about 160 Hz"><figcaption>Gain-frequency curve of the low-pass filter circuit</figcaption></figure>
+<h4 id="dc-analysis">DC analysis</h4>
+<p>After the <code>.dc</code> command, the name of the source to be swept, the start value, the stop value and the step are written; a second source can be added on the same line:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.DC SRCNAM VSTART VSTOP VINCR [SRC2 START2 STOP2 INCR2]
+.DC VIN 0.25 5.0 0.25
+.DC VDS 0 10 .5 VGS 0 5 1
+.DC VCE 0 10 .25 IB 0 10U 1U</code></pre>
+<p>Extracting the current-voltage characteristic of a MOS transistor (BSIM3 model parameters are used in the example):</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*n-MOS characteristic
+VGS 2 0 dc 0
+VDS 3 0 dc 0
+M1 3 2 0 0 NMOD L=1U W=2U
+.MODEL NMOD NMOS (...)
+.dc Vds 0 3 0.1 vgs 0 3 1
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="../nmos-ozegri.jpg" width="660" height="578" loading="lazy" decoding="async" alt="Variation of the NMOS drain current with V_DS (0–3 V) for V_GS = 0–3 V"><figcaption>Current-voltage characteristic of the MOS transistor</figcaption></figure>
+<h4 id="time-domain-analysis">Time-domain analysis</h4>
+<p>After the <code>.tran</code> command, the time step, the stop time and (optionally) the start time are written; if TSTART is not specified, it is taken as 0:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.TRAN TSTEP TSTOP TSTART
+.TRAN 1NS 100NS
+.TRAN 1NS 1000NS 500NS
+*RLC analysis
+Vin 1 0 pulse(-220 220 0 1ns 1ns 100us 200us)
+R1 1 2 2
+L1 2 3 50uH
+C1 3 0 10uF
+.tran 1u 400u
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="../rlc.jpg" width="688" height="1000" loading="lazy" decoding="async" alt="Oscillatory variation of the resistor current and capacitor voltage from 0 to 400 µs when a ±220 V pulse with a 200 µs period is applied to the RLC circuit"><figcaption>Variation of the resistor current and capacitor voltage with time in the RLC circuit</figcaption></figure>
+<h4 id="distortion-and-noise-analysis">Distortion and noise analysis</h4>
+<p>Distortion analysis computes the small-signal distortion of circuits; its syntax is similar to AC analysis. In noise analysis, after the <code>.noise</code> command, the point at which the output noise is measured, the input source, and the frequency sweep as in AC analysis are written:</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>.DISTO DEC ND FSTART FSTOP
+.DISTO DEC 10 1kHz 100Mhz
+.NOISE V(OUTPUT) V(INPUT) (DEC | LIN | OCT) PTS FSTART FSTOP
+.NOISE V(5) VIN DEC 10 1kHZ 100Mhz
+.NOISE V(5,3) V1 OCT 8 100 10kHz</code></pre>
+<p>Noise analysis of a symmetrical CMOS OTA (TÜBİTAK 3 µ model parameters are used in the example):</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*Symmetrical CMOS OTA
+Vdd 1 0 dc 2.5V
+Vss 3 0 dc -2.5V
+Vn 5 0 dc 2v
+Vp 9 0 dc 0v
+M1 4 5 6 6 NMOD L=1U W=2U
+M2 7 9 6 6 NMOD L=1U W=2U
+M7 2 2 3 3 NMOD L=1U W=2U
+M8 8 2 3 3 NMOD L=1U W=2U
+M3 4 4 1 1 PMOD L=1U W=5U
+M4 7 7 1 1 PMOD L=1U W=5U
+M5 2 4 1 1 PMOD L=1U W=4U
+M6 8 7 1 1 PMOD L=1U W=4U
+IB 6 3 DC 100uA
+*vx 8 0 dc 0V
+.MODEL NMOD NMOS (...)
+.MODEL PMOD PMOS (...)
+*.dc vn -2 2 0.1 ib 10u 100u 20u
+.NOISE V(8) VN OCT 8 100 1000000kHz
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="../ota-gurultu.jpg" width="673" height="449" loading="lazy" decoding="async" alt="Output noise density remaining roughly constant between 100 Hz and 1 GHz and falling at high frequency"><figcaption>Noise analysis of the CMOS OTA</figcaption></figure>
+<h2 id="9-the-layout-editor-concept">9. The layout editor concept</h2>
+<p>According to the definition in the note, which is based on Wikipedia, integrated circuit layout (IC layout, IC mask layout or mask design) is the representation of an integrated circuit's metal, oxide and semiconductor layers as planar geometric shapes. In a standard process, the operation of the integrated circuit depends on the position and connections of these shapes. The layout engineer's task is to place and connect the elements on the chip so as to satisfy all design conditions; the main properties watched are performance, size and manufacturability.</p>
+<p>The layout is put through a series of tests called verification; the two most important steps are <strong>DRC</strong> (<em>Design Rule Checking</em>) and <strong>LVS</strong> (<em>Layout Versus Schematic</em>). After verification, the data are put into a form suitable for industrial processing and production begins. Before computer-aided design, layout was done by hand on opaque films; today it is done with EDA tools (L-Edit, LASI, Electric…).</p>
+<p>The note also gives the flow chart of the bipolar integrated circuit process:</p>
+<ol><li>Thermal oxidation</li><li>Buried collector mask (<strong>mask 1</strong>) → antimony diffusion and oxidation</li><li>Epitaxial layer formation</li><li>Isolation mask (<strong>mask 2</strong>) → boron diffusion and oxidation</li><li>Base mask (<strong>mask 3</strong>) → base diffusion and oxidation</li><li>Emitter mask (<strong>mask 4</strong>) → emitter diffusion (P or As)</li><li>Contact mask (<strong>mask 5</strong>) → metal deposition</li><li>Metal pattern mask (<strong>mask 6</strong>) → metal etching</li><li>SiO₂ passivation layer → opening of the connection paths (pads) (<strong>mask 7</strong>)</li></ol>
+<h3 id="spice-and-layout-examples-cmos-nand-gate">SPICE and layout examples: CMOS NAND gate</h3>
+<p>The PMOSs (W/L = 16/3) are connected in parallel and the NMOSs (W/L = 8/3) in series. Truth table (D, E inputs; C output): C = 1 when D = 0 or E = 0; C = 0 when D = E = 1.</p>
+<figure class="yazi-gorsel"><img src="../nand-devre.jpg" width="688" height="275" loading="lazy" decoding="async" alt="CMOS NAND gate: two pMOS (16/3) in parallel to VDD, two nMOS (8/3) in series to ground, inputs D and E, output C"><figcaption>CMOS NAND gate</figcaption></figure>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nand
+vdd 1 0 dc 5V
+m1 2 4 1 1 pmod W=16u L=3u
+m2 2 5 1 1 pmod W=16u L=3u
+m3 2 4 3 0 nmod W=8u L=3u
+m4 3 5 0 0 nmod W=8u L=3u
+.MODEL NMOD NMOS (... LEVEL=3 model parameters ...)
+.MODEL PMOD PMOS (... LEVEL=3 model parameters ...)
+v1 4 0 pulse(0 5V 1n 0 0 10n 15n)
+v2 5 0 pulse(0 5V 5n 0 0 15n 20n)
+.tran 0.1n 25n
+.probe
+.end</code></pre>
+<figure class="yazi-gorsel"><img src="../nand-cikis.jpg" width="688" height="373" loading="lazy" decoding="async" alt="Output signal of the NAND gate between 0 and 25 ns: the output falls to 0 only when both inputs are at 5 V"><figcaption>Output signal of the NAND gate</figcaption></figure>
+<p>The masks of the NAND gate are drawn in order: 1) formation of the n-well, 2) formation of the gate region, 3) N⁺ diffusion, 4) P⁺ diffusion, 5) contacts, 6) metallization and connections.</p>
+<figure class="yazi-gorsel"><img src="../nand-serim.jpg" width="703" height="688" loading="lazy" decoding="async" alt="CMOS NAND layout in L-Edit: pMOS in the green n-well at the top, nMOS at the bottom, red polysilicon gates (E, D), blue metal VDD, GND and output"><figcaption>NAND gate: 6. metallization and connections</figcaption></figure>
+<h3 id="cmos-nor-gate">CMOS NOR gate</h3>
+<p>The PMOSs (W/L = 10/2) are connected in series and the NMOSs (W/L = 5/2) in parallel. Truth table (G, H inputs; F output): F = 1 only when G = H = 0; F = 0 in all other cases.</p>
+<figure class="yazi-gorsel"><img src="../nor-devre.jpg" width="673" height="428" loading="lazy" decoding="async" alt="CMOS NOR gate: two pMOS (10/2) in series from VDD, two nMOS (5/2) in parallel to ground, inputs G and H, output F"><figcaption>CMOS NOR gate</figcaption></figure>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*nor
+vdd 1 0 dc 5V
+m1 2 4 1 1 pmod W=10u L=2u
+m2 3 5 2 1 pmod W=10u L=2u
+m3 3 4 0 0 nmod W=5u L=2u
+m4 3 5 0 0 nmod W=5u L=2u
+.MODEL NMOD NMOS (LEVEL=3 model parameters)
+.MODEL PMOD PMOS (LEVEL=3 model parameters)
+v1 4 0 pulse(0 5V 2n 0 0 5n 10n)
+v2 5 0 pulse(0 5V 3n 0 0 4n 15n)
+.tran 0.1n 17n
+.probe
+.end</code></pre>
+<p>The same six mask steps (n-well, gate, N⁺, P⁺, contacts, metallization) are drawn for the NOR gate as well.</p>
+<figure class="yazi-gorsel"><img src="../nor-serim.jpg" width="703" height="682" loading="lazy" decoding="async" alt="CMOS NOR layout in L-Edit: series pMOS in the n-well, parallel nMOS at the bottom, gates G and H, VDD, GND and output metal paths"><figcaption>NOR gate: 6. metallization and connections</figcaption></figure>
+<h3 id="integrated-circuit-technology-course-lab-plan">Integrated circuit technology course lab plan</h3>
+<ol><li>Introduction to the SPICE program; extracting the current-voltage curves of basic semiconductor elements (diode, BJT, MOSFET).</li><li>Introduction to the L-Edit program.</li><li>Examination of basic analog processing blocks (current mirror, …) with SPICE.</li><li>Preparing the layout of a bipolar transistor and current mirror with L-Edit.</li><li>Examination of basic analog processing blocks (current mirror, NMOS and CMOS inverters, basic amplifier structures) with SPICE.</li><li>Preparing the layout of a MOS transistor and CMOS inverter with L-Edit.</li><li>Application using SPICE and L-Edit together (NOR gate).</li></ol>
+<h2 id="10-questions">10. Questions</h2>
+<ol><li>When a voltage of 4 V is applied across the terminals of an integrated-circuit resistor, a current of 2 mA flows. Determine the fabrication method of this resistor and find its L/W ratio. Draw its vertical cross-section.</li><li>For a p-n junction with N_A = 5×10¹⁵ atoms/cm³, N_D = 10¹⁶ atoms/cm³, and E_critical = 3×10⁵ V/cm: a) find the breakdown voltage of the junction (ε = 1.04×10⁻¹² F/cm); b) find the depletion region thickness in the p-type region.</li><li>The breakdown voltage of an abrupt p-n junction with N_A = 2×10¹⁵ atoms/cm³ and N_D = 5×10¹⁶ atoms/cm³ is 30 V. Calculate the depletion region thickness in the p-type region.</li><li>Calculate the sheet resistance of a 4 µm-thick diffusion region with an n-type doping density of 10¹⁸ atoms/cm³.</li><li>a) Draw the vertical cross-section along A-A′ of the structure whose layout is given in Figure 1 (p-substrate, n-well, and gate masks). b) Draw the masks and construct the layout of the structure whose vertical cross-section is given in Figure 2 (p-type substrate, n⁺ buried layer, n-epi, p and n diffusions).</li><li>a) Starting from the MOSFET fabrication steps, draw the vertical cross-section along A-A′ of the device whose layout is given (active, polysilicon, and metal layers). b) What is the main purpose of the metallization process in integrated circuit fabrication? c) What is the main purpose of the polysilicon process?</li><li>a) Using the MOSIS layout design rules, calculate the on-chip layout area of a CMOS inverter; draw and show the minimum dimensions used (λ = 0.5 µm). b) Draw and show the contact mask.</li><li>The source and drain regions of a p-channel MOS transistor are doped at 10¹⁹ 1/cm³ and have a diffusion depth of 3 µm. a) Calculate the sheet resistance of this region. b) What L/W ratio gives the region a resistance of 50 Ω? (µ_p = 70 cm²/V·s)</li><li>In a p-channel MOS transistor, the process parameters are N_D = 10¹⁶ 1/cm³, (source-drain) 10²⁰ 1/cm³, N_ox = 4×10¹⁰, t_ox = 0.1 µm, q = 1.6×10⁻¹⁹ C, V_SB = 0, ε_r(SiO₂) = 4, ε_r(Si) = 11.7, ε₀ = 8.86×10⁻¹⁴ F/cm, Φ_GC = −0.2014 V, Q_BO = 4.81×10⁻⁸ C/cm², n_i = 1.5×10¹⁰ 1/cm³. Calculate the threshold voltage of this transistor.</li><li>In a MOS transistor, the source-drain diffusion has a doping density of N_A = 10²⁰ 1/cm³, a junction depth of 3 µm, and a resistance of 100 Ω. Find the W/L ratio of the source-drain region (µ = 500 cm²/V·s, q = 1.6×10⁻¹⁹ C).</li><li>Figures 1 and 2 show the I_D–V_DS curves of the NMOS and PMOS. A CMOS inverter powered by a 5 V supply and driving a 10 pF capacitive load is to be designed with these transistors. Calculate the inverter's a) logic 0 voltage, b) inversion point, c) high-to-low delay, d) low-to-high delay (µ_n·C_ox = 130 µA/V², µ_p·C_ox = 10 µA/V²).</li><li>The variation of √I_D with V_GS for an NMOS transistor is shown in the figure (√I_D = 0.4 mA^½ at V_GS = 2 V, and 0.8 mA^½ at V_GS = 3 V). µC_ox = 60 µA/V² and V_BS = 0. a) What is the threshold voltage? b) In which operating region does it operate? c) Calculate the transistor's β value and W/L ratio.</li><li>The I-V characteristic of the nMOS transistor shown in the figure (V_GS = V_DS) at room temperature under different bias conditions is given below. W/L = 1.0, t_ox = 150 Å, |2Φ_F| = 0.64 V. Find a) the threshold voltage V_TO, b) the electron mobility µ_n, c) the body-effect coefficient γ.</li><li>Calculate the capacitances formed in an N-channel MOS transistor with no applied voltage, and show them on the figure. The drawn channel width is 90 µ, the channel length is 6 µ; L(overlap) = 0.3 µ, t_ox = 100 Å, ε_r(Si) = 11.7, ε_r(SiO₂) = 4, ε₀ = 8.85×10⁻¹⁴ F/cm.</li><li>In a CMOS inverter, K_p = µ_p·C_ox = 10 µA/V², K_n = µ_n·C_ox = 30 µA/V², V_TD = 1 V, V_TL = −2 V; V_inv = V_DD/2 is required. a) What should the (W/L)_D and (W/L)_L ratios be? b) What should the ratio (W/L)_D/(W/L)_L be for the delay times to be equal? (C_L = 5 pF)</li><li>In a current mirror, the supply voltage is 5 V, I_ref = 1 mA, V_T = 26 mV, I_S = 10⁻¹⁵ A, and β ≫ 1 (I_C1 = I_ref = I_S·e^(V_BE/V_T)). a) V_BE = ? b) R1 = ? c) In which process step can resistor R1 be realized?</li><li>a) Calculate the maximum collector-base capacitance that would form in an npn transistor at 40 °C temperature, at zero bias, over an area of 50 µm² (epi doping density 5×10¹⁵ cm⁻³, base doping density 8×10¹⁹ cm⁻³, ε₀ = 8.86×10⁻¹⁴ F/cm, ε_r(Si) = 11.8, n_i = 1.5×10¹⁰ /cm³, q = 1.6×10⁻¹⁹ C, k = 1.38×10⁻²³ J/K). b) How much chip area would be required if the same capacitance were built as a MOS capacitor? (ε_r(SiO₂) = 4, t_ox = 1000 Å)</li><li>In a bipolar npn transistor, the drawn base region dimensions are W = 40 µm, L = 30 µm, the diffusion depth is 4 µm, and the base region resistance is 50 Ω. Calculate the doping density of the region (µ = 120 cm²/V·s, q = 1.6×10⁻¹⁹ C).</li><li>The drawn dimensions of an npn transistor are: emitter 20 µm × 25 µm, buried layer 41 µm × 65 µm, epi region 140 µm × 75 µm, collector contact 18 µm × 49 µm, base 60 µm × 45 µm, isolation diffusion 10 µm × 15 µm. Calculate the area the transistor occupies on the chip.</li><li>For a bipolar npn transistor with V_BE = 550 mV, I_C = 10 µA, and an emitter area of 4 mil × 4 mil, calculate the base region doping density (φ_B). D_n = 13 cm²/s, V_T = 26 mV (300 K), 1 mil = 25.4 µm.</li><li>a) A series base resistance of 200 Ω is required in a bipolar integrated-circuit design; what is the reason for this? b) For a diffusion thickness of 25 µm and a doping density of 5×10¹⁵ atoms/cm³, find the L/W ratio of the base region. c) Find the dimensions of the base region.</li><li>Find the maximum collector-base capacitance per unit area that can occur in a typical npn transistor at zero bias (300 K). Also: calculate the sheet resistance of an n-type diffusion layer with a concentration of 6×10²⁰ atoms/cm³ and a thickness of 2 µm.</li><li>Find the maximum collector-base capacitance of an npn transistor at 45 °C: A = 20 µm², n_i = 1.5×10¹⁰ /cm³, ε = 1.04×10⁻¹² F/cm, k = 1.38×10⁻²³ J/K, q = 1.6×10⁻¹⁹ C, base doping N_A = 8×10¹⁹ atoms/cm³, epi doping N_D = 5×10¹⁵ 1/cm³.</li><li>In a classical npn transistor, doping is carried out with phosphorus atoms at a doping density of 5×10²⁰ atoms/cm³; the depth of the resulting layer is 2 µm. Calculate the sheet resistance. Which region of the transistor does this layer form? Why?</li><li>For a transistor with V_BE = 620 mV, an emitter area of 5 × 5 mm, and a doping density per unit base area of 8×10¹² atoms/cm² at 300 K, calculate the collector current of the transistor (D = 13 cm²/s).</li><li>Calculate the resistance of the base region of a typical npn transistor for an area of 25 × 15 µm; what are the criteria? (N_A = 10¹⁹ 1/cm³, N_D = 10¹⁵ 1/cm³, T = 3 µm, µ_p = 70 cm²/V·s)</li><li>A lateral pnp transistor is formed in an epi layer with a resistivity of 0.5 Ω·cm. Find the collector current at which the current gain begins to drop (D_p = 10 cm²/s, base width 8 µm, perimeter 40 × 40 µm, µ_n = 0.14×10⁴ cm²/V·s, base diffusion depth ≅ 3 µm).</li><li>Find the emitter area of an npn transistor with V_BE = 560 mV, I_C = 11 µA, φ_B = 10¹² atoms/cm², D_n = 13 cm²/s at 300 K.</li><li>A Widlar current source circuit is given. a) Draw the vertical cross-section of the integrated Widlar current source. b) Write the number of masks used in fabrication and the names of the masks. c) Draw the emitter mask. d) Calculate the value of R2 for I_C2 = 10 µA (V_T·ln(I_C1/I_C2) = I_C2·R2). e) In which process step can this resistor be formed? Determine the W/L ratio (V_CC = 15 V, V_BE = 0.7 V, R1 = 14.3 kΩ, T = 300 K).</li><li>a) Given that the base resistance of an npn transistor in standard bipolar structures is 5 kΩ, find the L/W ratio of the base region (µ_n = 1000 cm²/V·s; the graph of doping concentrations can be used). b) Why does the series collector resistance of an npn transistor arise? For emitter dimensions W = 15 µm, L = 34 µm, T = 6 µm, a collector region resistivity of ρ = 5 Ω·cm, and µ_n = 1000 cm²/V·s, calculate the series collector resistance r_c1.</li><li>a) A 10 pF capacitance is to be obtained at 300 K using the collector-base junction; calculate the required chip area (N_D = 10¹⁵, N_A = 10¹⁹ 1/cm³, V_T = 26 mV, n_i = 1.5×10¹⁰ 1/cm³, q = 1.6×10⁻¹⁹ C, ε = 1.04×10⁻¹² F/cm). b) Calculate the depletion region width in the p region.</li><li>(Repeat of question 15) CMOS inverter: K_p = 10 µA/V², K_n = 30 µA/V², V_TD = 1 V, V_TL = −2 V, V_inv = V_DD/2; a) (W/L)_D and (W/L)_L ratios? b) (W/L)_D/(W/L)_L for equal delay? (C_L = 5 pF)</li><li>(Repeat of question 18) W = 40 µm, L = 30 µm, depth 4 µm, base resistance 50 Ω; doping density? (µ = 120 cm²/V·s)</li><li>For a pn junction with N_D = 10¹⁵ 1/cm³ and N_A = 10¹⁶ 1/cm³, calculate a) the breakdown voltage (E_crit = 3×10⁵ V/cm), b) the depletion region thickness on the p side (V_T = 26 mV, n_i = 1.5×10¹⁰ 1/cm³, q = 1.6×10⁻¹⁹ C, ε = 1.04×10⁻¹² F/cm).</li><li>(Repeat of question 16) Current mirror: 5 V, I_ref = 1 mA, V_T = 26 mV, I_S = 10⁻¹⁵ A, β ≫ 1; a) V_BE, b) R1, c) in which process step is R1 made?</li><li>a) Calculate the on-chip area occupied by the npn transistor of question 19 (this time with a buried layer of 41 µm × 85 µm). b) Find the W/L ratio of the source-drain region of a MOS transistor whose source-drain diffusion has a doping density of N_A = 10¹⁹ 1/cm³, a junction depth of 3 µm, and a resistance of 900 Ω (µ = 500 cm²/V·s).</li><li>Calculate the sheet resistance of a 2 µm-thick diffusion region with an n-type doping density of 6×10²⁰ atoms/cm³. Which region of a lateral pnp transistor in an integrated circuit does this diffusion form? Explain.</li><li>The drain current of a MOS transistor operating in saturation is 100 µA at V_GS = 1.5 V and 10 µA at V_GS = 0.8 V. Neglecting subthreshold conduction and assuming that the mobility does not change, determine the threshold voltage of the transistor and the product µ_n·C_ox·(W/L).</li><li>(Repeat of question 10) N_A = 10²⁰ 1/cm³, junction depth 3 µm, resistance 100 Ω; W/L ratio of the source-drain region? (µ = 500 cm²/V·s)</li><li>(Repeat of question 7) CMOS inverter layout area using MOSIS rules (λ = 0.5 µm) and contact mask.</li></ol>
+<p>Measurements for Question 13:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_GS (V)</th><th scope="col">V_DS (V)</th><th scope="col">V_SB (V)</th><th scope="col">I_D (in the document, "mA")</th></tr></thead><tbody><tr><th scope="row">4</th><td>4</td><td>0.0</td><td>256</td></tr><tr><th scope="row">5</th><td>5</td><td>0.0</td><td>441</td></tr><tr><th scope="row">4</th><td>4</td><td>2.6</td><td>144</td></tr><tr><th scope="row">5</th><td>5</td><td>2.6</td><td>256</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../soru-5.jpg" width="688" height="841" loading="lazy" decoding="async" alt="Question 5: layout consisting of p-substrate, n-well, and gate masks, and a vertical cross-section with n-epi, p and n diffusions and an n+ buried layer"><figcaption>Question 5: Figure 1 and Figure 2</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../soru-6.jpg" width="688" height="566" loading="lazy" decoding="async" alt="Question 6: device layout consisting of active, polysilicon, and metal layers, with A-A′ and B-B′ cross-section lines"><figcaption>Question 6: The device whose layout is given</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../soru-11.jpg" width="1376" height="382" loading="lazy" decoding="async" alt="Question 11: I_D–V_DS curves for NMOS and PMOS at V_GS = 1, 2, 3 V (0–5 V)"><figcaption>Question 11: I_D–V_DS curves of the NMOS and PMOS</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../soru-12.jpg" width="688" height="422" loading="lazy" decoding="async" alt="Question 12: √I_D – V_GS line; 0.4 mA^½ at V_GS = 2 V, 0.8 mA^½ at 3 V"><figcaption>Question 12: Variation of √I_D with V_GS</figcaption></figure>
+<p><em>Note: The questions are numbered 1–40 in the document; some are repeated verbatim (15 = 32, 16 = 35, 18 = 33, 10 = 39, 7 = 40), the number "36" is used twice, and a separate sheet-resistance question titled "Question 6" got mixed into question 22; here they are numbered sequentially. In question 8 the mobility unit is written as "cm³/V·s" (it should be cm²/V·s). In question 9, both doping densities are written as "N_D" (the second should be the p⁺ source-drain density), and the unit of the oxide charge density N_ox is given as 1/cm³ (it should be 1/cm² as a surface density). The currents in question 13 cannot be on the order of mA for W/L = 1 and t_ox = 150 Å, and are most likely µA; moreover, the V_SB = 0 data give a √I_D–V_GS slope of 5 and the V_SB = 2.6 V data give 4 (µA^½/V), so the two measurement sets are not consistent with the same β.</em></p>
+<h2 id="11-references">11. References</h2>
+<ol><li>SEGEM, TÜBİTAK Seminar Notes.</li><li>S. M. Kang, Y. Leblebici, <em>CMOS Digital Integrated Circuits</em>, McGraw-Hill, 1999.</li><li>W. Maly, <em>Atlas of IC Technologies</em>, Benjamin/Cummings, Menlo Park, CA, 1987.</li><li>R. L. Geiger, P. E. Allen, N. R. Strader, <em>VLSI Design Techniques for Analog and Digital Circuits</em>, McGraw-Hill, 1990.</li><li>P. R. Gray, R. G. Meyer, <em>Analysis and Design of Analog Integrated Circuits</em>, John Wiley &amp; Sons, 1997.</li><li>D. A. Pucknell, K. Eshraghian, <em>Basic VLSI Design: Systems and Circuits</em>, Prentice Hall, 1988.</li><li>P. Antognetti, G. Massobrio, <em>Semiconductor Device Modeling with SPICE</em>, McGraw-Hill.</li><li>A. B. Grebene, <em>Bipolar and MOS Analog Integrated Circuit Design</em>, John Wiley, 1984.</li></ol>
+<p><em>Note: In the document, the author names in the references were misspelled ("Pischnell, Eshraghair", "Antapnetti, Gossobrio", "Geige") and the Geiger–Allen book appears twice (with the years 1996 and 1990); here the names have been corrected and the duplicates merged.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf" download>VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf</a></p>
+              <p class="kucuk">PDF · 2.3 MB · 56 <span data-i18n="arch.pagesLower"></span> · 28.04.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../VLSI_TASARIMI_A_KUNTMAN_4_SPICE_Serim_Sorular_s103-158.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.3 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

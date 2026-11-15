@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: Homework 2 (Multiplexers and Decoders, 2006) — hasancan.net</title>
+<meta name="description" content="Homework 2 of EEM211 Digital Logic Design, December 2006: the minterm list from a multiplexer (MUX) circuit, implementing a Boolean function and a full adder with MUXes, a 4x16 decoder built from 74138 chips, combinational circuit analysis, and a circuit with a 74154 decoder.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-odev-2/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-odev-2/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-odev-2/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-odev-2/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: Homework 2 (Multiplexers and Decoders, 2006)">
+<meta property="og:description" content="Homework 2 of EEM211 Digital Logic Design, December 2006: the minterm list from a multiplexer (MUX) circuit, implementing a Boolean function and a full adder with MUXes, a 4x16 decoder built from 74138 chips, combinational circuit analysis, and a circuit with a 74154 decoder.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-odev-2/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: Homework 2 (Multiplexers and Decoders, 2006)", "description": "Homework 2 of EEM211 Digital Logic Design, December 2006: the minterm list from a multiplexer (MUX) circuit, implementing a Boolean function and a full adder with MUXes, a 4x16 decoder built from 74138 chips, combinational circuit analysis, and a circuit with a 74154 decoder.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-odev-2/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "EEM211_hw2.pdf", "contentUrl": "https://hasancan.net/arsiv/eem211-odev-2/EEM211_hw2.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: Homework 2 (Multiplexers and Decoders, 2006)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.12.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#submission-information">Submission information</a></li><li><a href="#question-1-16-points">Question 1 (16 points)</a></li><li><a href="#question-2-20-points">Question 2 (20 points)</a></li><li><a href="#question-3-10-points">Question 3 (10 points)</a></li><li><a href="#question-4-20-points">Question 4 (20 points)</a></li><li><a href="#question-5-20-points-6-7-7">Question 5 (20 points: 6, 7, 7)</a></li><li><a href="#question-6-14-points">Question 6 (14 points)</a></li><li><a href="#grading">Grading</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: Homework 2 (Multiplexers and Decoders, 2006)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 08.12.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>Homework 2</strong> sheet of the Başkent University course <strong>EEM 211 Digital Logic Design</strong>, dated December 2006 (the file properties list Evren Ferhat as its author). The homework covers <strong>multiplexers and decoders</strong> and combinational circuit analysis. It consists of six questions; the solutions are not included in this document. The original PDF of the homework can be downloaded at the end of the post.</p>
+<h2 id="submission-information">Submission information</h2>
+<blockquote><p>READ THE INFORMATION PART FIRST!!!</p></blockquote>
+<ul><li>You can hand in your assignments until Monday, December 18th 2006 no later than 17.00 to office A301 (section 01) or C302B (section 02).</li><li>Prepare your assignments on white A4 paper (torn papers from notebooks or any media other than white A4 papers will not be accepted) and indicate your section number. Use staples if needed, plastic pockets will not be accepted.</li><li>SECTION 02: When writing the final draft of your work, write your answers in order. Answers without order will not be graded.</li></ul>
+<h2 id="question-1-16-points">Question 1 (16 points)</h2>
+<blockquote><p>Find the minterm list of the function f(A,B,C,D) realized by the following circuit. Express f(A,B,C,D) in standard and canonical SOP form. (in the 4x1 mux components B and A represents MSB and LSB respectively)</p></blockquote>
+<p>The circuit contains two 4-to-1 multiplexers and one 2-to-1 multiplexer. In the figure, the select inputs (B and A) of the 4-to-1 multiplexers appear to be connected to the circuit's B and C signals. The data inputs are:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Input</th><th scope="col">Upper 4-to-1</th><th scope="col">Lower 4-to-1</th></tr></thead><tbody><tr><th scope="row">D0</th><td>A' ⊕ 0</td><td>A ⊕ A'</td></tr><tr><th scope="row">D1</th><td>A'</td><td>1</td></tr><tr><th scope="row">D2</th><td>A</td><td>0</td></tr><tr><th scope="row">D3</th><td>A ⊕ 1</td><td>1 ⊕ A'</td></tr></tbody></table></div>
+<p>The Y outputs of the two multiplexers are connected to the D0 and D1 inputs of the 2-to-1 multiplexer; the select input of the 2-to-1 multiplexer is S = D, and its output is f(A, B, C, D).</p>
+<figure class="yazi-gorsel"><img src="../soru1-mux-devresi.jpg" width="678" height="601" loading="lazy" decoding="async" alt="Question 1: circuit made up of two 4-to-1 multiplexers and one 2-to-1 multiplexer"><figcaption>Question 1: multiplexer circuit realizing the function f(A, B, C, D)</figcaption></figure>
+<h2 id="question-2-20-points">Question 2 (20 points)</h2>
+<blockquote><p>Implement the Boolean function F(A,B,C,D)=Σ(0,1,3,4,8,9,15) with a multiplexer.</p></blockquote>
+<h2 id="question-3-10-points">Question 3 (10 points)</h2>
+<blockquote><p>Implement a full adder with two 4x1 multiplexers.</p></blockquote>
+<h2 id="question-4-20-points">Question 4 (20 points)</h2>
+<blockquote><p>Design a 4x16 decoder by using 74138 decoders. Designs involving any other decoders than 74138 will not be graded. (HINT: You are expected to search for 74138 datasheet.)</p></blockquote>
+<h2 id="question-5-20-points-6-7-7">Question 5 (20 points: 6, 7, 7)</h2>
+<blockquote><p>Consider the combinatorial circuit given below: a) Derive the Boolean expressions for T1 through T4. Evaluate the outputs F1 and F2 as a function of the four inputs. b) List the truth table with 16 binary combinations of the four input variables. Then list the binary values for T1 through T4 and outputs F1 and F2 in the table. c) Plot the output Boolean functions obtained in part (b) on maps and show that the simplified Boolean expressions are equivalent to the ones obtained in part (a).</p></blockquote>
+<figure class="yazi-gorsel"><img src="../soru5-devre.jpg" width="740" height="296" loading="lazy" decoding="async" alt="Question 5: combinational circuit with inputs A, B, C, D, intermediate outputs T1–T4, and outputs F1 and F2"><figcaption>Question 5: intermediate signals T1–T4 and outputs F1, F2</figcaption></figure>
+<h2 id="question-6-14-points">Question 6 (14 points)</h2>
+<blockquote><p>Given the circuit below, with the decoder having active-low outputs as shown, find the minimum Boolean expressions for f(W,X,Y,Z) in standard and canonical SOP forms.</p></blockquote>
+<p>The circuit uses a 74154 (4-to-16 decoder): Z is connected to input A, Y to B, X to C, and W to D; the enable inputs G1 and G2 are tied to ground. Some of the decoder's active-low outputs feed two AND gates, and the outputs of the two AND gates are combined in a NOR gate to give the output f(W, X, Y, Z).</p>
+<figure class="yazi-gorsel"><img src="../soru6-74154.jpg" width="710" height="501" loading="lazy" decoding="async" alt="Question 6: circuit made up of a 74154 decoder, two AND gates, and a NOR gate"><figcaption>Question 6: f(W, X, Y, Z) with a 74154 4-to-16 decoder</figcaption></figure>
+<h2 id="grading">Grading</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Question</th><th scope="col">Points</th></tr></thead><tbody><tr><th scope="row">Q1</th><td>16</td></tr><tr><th scope="row">Q2</th><td>20</td></tr><tr><th scope="row">Q3</th><td>10</td></tr><tr><th scope="row">Q4</th><td>20</td></tr><tr><th scope="row">Q5</th><td>20 (6, 7, 7)</td></tr><tr><th scope="row">Q6</th><td>14</td></tr></tbody></table></div>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM211_hw2.pdf" download>EEM211_hw2.pdf</a></p>
+              <p class="kucuk">PDF · 260 KB · 2 <span data-i18n="arch.pagesLower"></span> · 08.12.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM211_hw2.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (260 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 5 – Poles, Zeros and Time Response; First- and Second-Order Systems — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture note 5 (Hamit Erdem, 2013): the effect of poles and zeros on time response, time constant, rise time and settling time of a first-order system; overdamped, underdamped, critically damped and undamped responses of second-order systems, natural frequency, damping ratio, peak time, percent overshoot and worked examples.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 5 – Poles, Zeros and Time Response; First- and Second-Order Systems">
+<meta property="og:description" content="EEM322 Control Systems lecture note 5 (Hamit Erdem, 2013): the effect of poles and zeros on time response, time constant, rise time and settling time of a first-order system; overdamped, underdamped, critically damped and undamped responses of second-order systems, natural frequency, damping ratio, peak time, percent overshoot and worked examples.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 5 – Poles, Zeros and Time Response; First- and Second-Order Systems", "description": "EEM322 Control Systems lecture note 5 (Hamit Erdem, 2013): the effect of poles and zeros on time response, time constant, rise time and settling time of a first-order system; overdamped, underdamped, critically damped and undamped responses of second-order systems, natural frequency, damping ratio, peak time, percent overshoot and worked examples.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "EEM322L5.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-05-zaman-yaniti/EEM322L5.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 5 – Poles, Zeros and Time Response; First- and Second-Order Systems">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#test-input-functions">Test input functions</a></li><li><a href="#transfer-function-poles-and-zeros">Transfer function, poles and zeros</a></li><li><a href="#first-order-systems">First-order systems</a></li><li><a href="#second-order-systems">Second-order systems</a></li><li><a href="#general-second-order-system-natural-frequency-and-damping-ratio">General second-order system: natural frequency and damping ratio</a></li><li><a href="#performance-measures-of-the-underdamped-second-order-system">Performance measures of the underdamped second-order system</a></li><li><a href="#relationship-between-pole-location-and-performance-measures">Relationship between pole location and performance measures</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 5 – Poles, Zeros and Time Response; First- and Second-Order Systems</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>5th lecture note</strong> ("EEM322: Lecture 5") of the <strong>EEM322 Control Systems</strong> course at Başkent University. The notes belong to the instructor <strong>Hamit Erdem</strong>; the page headers carry the date 15.07.2013. The lecture note is a 20-page PDF with two slides per page, written in a mix of English and Turkish; some slides cite Prof. Dr. Galip Cansever's lecture notes and Nise's textbook. Below, the content is summarized in English and the numerical examples are written out; page images are included for the response curves. The original PDF can be downloaded at the end of the post.</p>
+<p>Topics: zeros and poles of the transfer function, time response, first- and second-order systems, transient response, rise time, settling time, steady state and test input functions.</p>
+<h2 id="test-input-functions">Test input functions</h2>
+<ul><li><strong>Impulse:</strong> r(t) = aδ(t), a constant</li><li><strong>Step:</strong> r(t) = au(t), a constant</li><li><strong>Ramp:</strong> r(t) = at for t ≥ 0, 0 for t &lt; 0; it is the integral of the step function</li><li><strong>Parabola:</strong> r(t) = at² for t ≥ 0, 0 for t &lt; 0; it is the integral of the ramp function</li></ul>
+<p>Impulse and step inputs are used to examine the transient response (rise time and settling time), and ramp and parabola inputs are used to examine the steady-state error.</p>
+<h2 id="transfer-function-poles-and-zeros">Transfer function, poles and zeros</h2>
+<p>The <strong>transfer function</strong> is the ratio of the Laplace transforms of the response function (output) to the driving function (input) of a system, assuming zero initial conditions. It describes the dynamic characteristics of the system and is a property of the system itself; it gives no information about its physical structure, and different physical systems can have the same transfer function.</p>
+<p>Solving differential equations or taking inverse Laplace transforms is laborious and time-consuming. Using the poles and zeros and their relation to the time response is a much easier method.</p>
+<ul><li><strong>Poles:</strong> The values of s that make the transfer function infinite; the roots of the denominator. Complex poles are the natural frequencies of the system; they represent the frequencies at which energy circulates freely among the system's different internal energy-storage elements.</li><li><strong>Zeros:</strong> The values of s that make the transfer function zero; the roots of the numerator.</li></ul>
+<p>Example: for G(s) = K(s + 1)(s + 15) / (s(s + 3)(s + 5)(s + 8)²), the zeros are −1 and −15, and the poles are 0, −3, −5 and −8 (−8 is a double pole).</p>
+<p><strong>Poles determine the nature of the response:</strong> The poles of the input function determine the form of the <strong>forced response</strong>, and the poles of the transfer function determine the form of the <strong>natural response</strong>.</p>
+<p><strong>Example:</strong> If a unit step is applied to the system G(s) = (s + 2)/(s + 5):</p>
+<p>C(s) = (s + 2)/(s(s + 5)) = (2/5)/s + (3/5)/(s + 5)  →  c(t) = 2/5 + (3/5)e^(−5t)</p>
+<p>Conclusions from this example:</p>
+<ol><li>The pole of the input function generates the form of the forced solution (the unit step pole at the origin produces a step function at the output).</li><li>The pole of the transfer function generates the natural response (the pole at −5 generates e^(−5t)).</li><li>A pole on the real axis generates an exponential response of the form e^(−αt); the farther the pole is to the left of the origin, the faster the exponential transient decays.</li><li>The zero contributes to the formation of the response amplitudes both in the steady state and in the transient regime.</li></ol>
+<h3 id="writing-the-response-from-the-poles">Writing the response from the poles</h3>
+<p>Each system pole on the real axis generates an exponential term that is a component of the natural response; the input pole generates the forced response. For example, if a unit step is applied to the system (s + 3)/((s + 2)(s + 4)(s + 5)), then c(t) ≡ K₁ + K₂e^(−2t) + K₃e^(−4t) + K₄e^(−5t): the first term is the forced response and the others are the natural response.</p>
+<p><strong>Problem:</strong> Write the general form of the unit step response of the system G(s) = 10(s + 4)(s + 6) / ((s + 1)(s + 7)(s + 8)(s + 10)).</p>
+<p><strong>Answer:</strong> c(t) ≡ A + Be^(−t) + Ce^(−7t) + De^(−8t) + Ee^(−10t)</p>
+<h2 id="first-order-systems">First-order systems</h2>
+<p>A first-order system with no zero: G(s) = a/(s + a). Unit step response:</p>
+<p>C(s) = a/(s(s + a))  →  c(t) = c_f(t) + c_n(t) = 1 − e^(−at)</p>
+<p>The input pole at the origin generates the forced response c_f(t) = 1, and the system pole at −a generates the natural response c_n(t) = −e^(−at). The only parameter needed to describe the transient response is a.</p>
+<ul><li><strong>Time constant (τ = 1/a):</strong> At t = 1/a, e^(−at) = e^(−1) = 0.37, so c(t) = 1 − 0.37 = 0.63. The time constant is the time for e^(−at) to decay to 37% of its initial value, or for the step response to rise to 63% of its final value. If a = 1, the system responds on the order of 1 second; if a = 100, on the order of 0.01 second; fast systems have large values of a.</li><li><strong>Rise time (T_r):</strong> The time for the response to go from 0.1 to 0.9 of its final value. For 0.1 = 1 − e^(−at), t₁ = 0.11/a; for 0.9 = 1 − e^(−at), t₂ = 2.31/a; hence T_r = 2.31/a − 0.11/a = <strong>2.2/a</strong>.</li><li><strong>Settling time (T_s):</strong> The time for the response to reach within ±2% of its final value and stay there. For c(t) = 0.98, −at = ln 0.02 = −3.912, hence T_s = <strong>4/a</strong>.</li></ul>
+<p>A first-order system is also commonly written in the form G(s) = K/(τs + 1); K is the system gain and τ is the time constant. If the pole-zero form is G(s) = K_p/(s + a), then K_p = K/τ and a = 1/τ. The total response is split as y(t) = y_forced(t) + y_free(t).</p>
+<h2 id="second-order-systems">Second-order systems</h2>
+<p>Changing the parameter of a first-order system only changes the speed of the response. In a second-order system, however, changing the parameters can change the <strong>form</strong> of the response: the response may resemble that of a first-order system, or, depending on the element values, it may show damped or pure oscillations.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="The four response types of second-order systems: overdamped, underdamped, undamped and critically damped"><figcaption>Response types of second-order systems</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Type</th><th scope="col">Poles</th><th scope="col">Natural response c(t)</th></tr></thead><tbody><tr><th scope="row">Overdamped</th><td>Two distinct real roots: −σ₁, −σ₂</td><td>K₁e^(−σ₁t) + K₂e^(−σ₂t)</td></tr><tr><th scope="row">Underdamped</th><td>Complex conjugates: −σ_d ± jω_d</td><td>Ae^(−σ_d t) cos(ω_d t − φ)</td></tr><tr><th scope="row">Undamped</th><td>On the imaginary axis: ± jω₁</td><td>A cos(ω₁t − φ)</td></tr><tr><th scope="row">Critically damped</th><td>Repeated real root: −σ₁</td><td>K₁e^(−σ₁t) + K₂te^(−σ₁t)</td></tr></tbody></table></div>
+<ul><li><strong>Overdamped:</strong> Occurs when both roots lie on the real axis. In the note's example, the poles of the system 9/(s² + 9s + 9) are −7.854 and −1.146.</li><li><strong>Undamped (oscillatory):</strong> Occurs when both roots lie on the imaginary axis; without damping, a pure sinusoidal response would be obtained. Example: 9/(s² + 9), poles ±j3.</li><li><strong>Critically damped:</strong> There is a double root on the negative real axis. Critically damped responses are the fastest responses that can be obtained without the overshoot characteristic of the underdamped response. Example: 9/(s² + 6s + 9), poles −3 (double).</li><li><strong>Underdamped:</strong> There are complex conjugate poles. The real part of the pole corresponds to the exponential damping frequency of the sinusoid's amplitude, and the imaginary part corresponds to the oscillation frequency of the sinusoid. The frequency of the sinusoid is called the <strong>damped oscillation frequency</strong> ω_d. Example: 9/(s² + 2s + 9).</li></ul>
+<p><strong>Example (form of the underdamped response):</strong> The poles of the system 200/(s² + 10s + 200) are s = −5 ± j13.23. The real part −5 is the exponential frequency of the damping and is the inverse of the damping time constant of the oscillations; the imaginary part 13.23 is the angular frequency of the sinusoidal oscillations. Unit step response:</p>
+<p>c(t) = K₁ + e^(−5t)(K₂ cos 13.23t + K₃ sin 13.23t) = K₁ + K₄e^(−5t) cos(13.23t − φ),  φ = tan⁻¹(K₃/K₂), K₄ = √(K₂² + K₃²)</p>
+<p><strong>Examples (general form of the unit step response):</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Transfer function</th><th scope="col">Form of the response</th></tr></thead><tbody><tr><th scope="row">G(s) = 400/(s² + 12s + 400)</th><td>c(t) = A + Be^(−6t) cos(19.08t + φ)</td></tr><tr><th scope="row">G(s) = 900/(s² + 90s + 900)</th><td>c(t) = A + Be^(−78.54t) + Ce^(−11.46t)</td></tr><tr><th scope="row">G(s) = 225/(s² + 30s + 225)</th><td>c(t) = A + Be^(−15t) + Cte^(−15t)</td></tr><tr><th scope="row">G(s) = 625/(s² + 625)</th><td>c(t) = A + B cos(25t + φ)</td></tr></tbody></table></div>
+<h2 id="general-second-order-system-natural-frequency-and-damping-ratio">General second-order system: natural frequency and damping ratio</h2>
+<p>To describe the second-order transient response, two quantities with physical meaning are defined, analogous to the time constant of a first-order system:</p>
+<ul><li><strong>Natural frequency (ω_n):</strong> The oscillation frequency of the second-order system when there is no damping. For example, the oscillation frequency of a series RLC circuit with its resistance short-circuited is the natural frequency.</li><li><strong>Damping ratio (ζ):</strong> ζ = exponential decay frequency / natural frequency (rad/s) = (1/2π) · natural period / exponential time constant. For underdamped systems, ζ lies between 0 and 1.</li></ul>
+<p>For the general system G(s) = b/(s² + as + b), when there is no damping (a = 0) the poles are at ±j√b, so ω_n = √b, b = ω_n². In the underdamped system the real part of the complex poles is σ = −a/2, so ζ = |σ|/ω_n = (a/2)/ω_n, i.e., a = 2ζω_n. The general second-order transfer function is:</p>
+<p>G(s) = ω_n² / (s² + 2ζω_n s + ω_n²),  s₁,₂ = −ζω_n ± ω_n√(ζ² − 1)</p>
+<figure class="yazi-gorsel"><img src="../s-13.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Cases of the second-order response according to the damping ratio, and pole locations"><figcaption>Response types according to ζ</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ζ</th><th scope="col">Response</th></tr></thead><tbody><tr><th scope="row">ζ = 0</th><td>Undamped</td></tr><tr><th scope="row">0 &lt; ζ &lt; 1</th><td>Underdamped</td></tr><tr><th scope="row">ζ = 1</th><td>Critically damped</td></tr><tr><th scope="row">ζ &gt; 1</th><td>Overdamped</td></tr></tbody></table></div>
+<p><strong>Example:</strong> For G(s) = 36/(s² + 4.2s + 36), ω_n² = 36 → ω_n = 6 and 2ζω_n = 4.2 → ζ = 4.2/(2 × 6) = 0.35.</p>
+<p><strong>Example:</strong> In the system 12/(s² + 8s + 12), ζ = 8/(2√12) = 1.155 &gt; 1, so the response is <strong>overdamped</strong>. In the system 16/(s² + 8s + 16), ζ = 8/(2√16) = 1, so the response is <strong>critically damped</strong>.</p>
+<p><strong>Example:</strong> ζ and ω_n for the following systems:</p>
+<ol><li>400/(s² + 12s + 400): ζ = 0.3, ω_n = 20; underdamped.</li><li>900/(s² + 90s + 900): ζ = 1.5, ω_n = 30; overdamped.</li><li>225/(s² + 30s + 225): ζ = 1, ω_n = 15; critically damped.</li><li>625/(s² + 625): ζ = 0, ω_n = 25; undamped.</li></ol>
+<h2 id="performance-measures-of-the-underdamped-second-order-system">Performance measures of the underdamped second-order system</h2>
+<p>The step response of the general system is found by partial fraction expansion and taking the inverse Laplace transform:</p>
+<p>c(t) = 1 − (1/√(1 − ζ²)) e^(−ζω_n t) cos(ω_n√(1 − ζ²) t − φ),  φ = tan⁻¹(ζ/√(1 − ζ²))</p>
+<p>The smaller ζ is, the more oscillatory the response. Other parameters associated with the underdamped response:</p>
+<ul><li><strong>Rise time T_r:</strong> The time for the response to go from 0.1 to 0.9 of the final value (from 10% to 90% of the system response).</li><li><strong>Peak time T_p:</strong> The time for the response to reach the first (largest) peak.</li><li><strong>Percent overshoot (%OS):</strong> How much the response exceeds the steady-state value at the peak time, as a percentage of the steady-state value.</li><li><strong>Settling time T_s:</strong> The time for the transient damped oscillations to reach within ±2% of the steady-state value and stay there.</li></ul>
+<p>This information is important for the designer to decide whether the speed or quality of the response degrades system performance. For example, the time a CD reader head takes to settle in order to read the information affects the performance of the whole computer.</p>
+<figure class="yazi-gorsel"><img src="../s-17.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="T_r, T_p, %OS and T_s characteristics of the underdamped second-order response, and their formulas"><figcaption>Performance measures of the underdamped response</figcaption></figure>
+<p><strong>Finding T_p:</strong> Differentiate c(t) and find the first zero crossing after t = 0; this is made easier in the frequency domain by "differentiating" (sC(s)):</p>
+<p>ċ(t) = (ω_n/√(1 − ζ²)) e^(−ζω_n t) sin(ω_n√(1 − ζ²) t)</p>
+<p>Setting the derivative to zero gives ω_n√(1 − ζ²) t = nπ, i.e., t = nπ/(ω_n√(1 − ζ²)). Each value of n indicates a local maximum or minimum; n = 0 corresponds to the instant t = 0, where the slope is zero; n = 1 gives the first peak time:</p>
+<p>T_p = π / (ω_n√(1 − ζ²))</p>
+<p><strong>%OS:</strong> %OS = (c_max − c_final)/c_final × 100 = e^(−ζπ/√(1 − ζ²)) × 100. Conversely, ζ = −ln(%OS/100) / √(π² + ln²(%OS/100)).</p>
+<p><strong>T_s:</strong> To find the settling time, calculate the time at which c(t) reaches 2% of the steady-state value; by definition, settling occurs when the envelope of the damped sinusoid reaches 0.02. Result: T_s = 4/(ζω_n).</p>
+<p><strong>T_r:</strong> There is no simple analytical relationship between rise time and damping ratio; the note gives a table and a graph showing the variation of ω_n·T_r with ζ.</p>
+<h3 id="example-g-s-100-s-15s-100">Example: G(s) = 100/(s² + 15s + 100)</h3>
+<p>ω_n = √100 = 10, ζ = 15/(2√100) = 0.75</p>
+<ul><li>T_p = π / (10√(1 − 0.75²)) = 0.475 s</li><li>%OS = e^(−0.75π/√(1 − 0.75²)) × 100 = 2.838</li><li>T_s = 4/(0.75 × 10) = 0.533 s</li><li>From the figure (the normalized rise time graph), T_r = 2.3/10 = 0.23 s</li></ul>
+<h2 id="relationship-between-pole-location-and-performance-measures">Relationship between pole location and performance measures</h2>
+<p>The poles of the underdamped second-order system are s₁,₂ = −σ_d ± jω_d; here σ_d = ζω_n is the <strong>exponential damping frequency</strong> and ω_d = ω_n√(1 − ζ²) is the <strong>damped oscillation frequency</strong>. The radial distance from the origin to the pole equals the natural frequency ω_n, and for the angle θ that the line joining the pole to the origin makes with the negative real axis, cos θ = ζ. Thus:</p>
+<p>T_p = π/ω_d,  T_s = 4/σ_d</p>
+<p>The following conclusions follow: if the poles move parallel to the imaginary axis (σ_d constant), the envelope stays the same and the settling time does not change; if they move parallel to the real axis (ω_d constant), the oscillation frequency and peak time stay the same; if they move along the same line through the origin (ζ constant), the percent overshoot stays the same.</p>
+<figure class="yazi-gorsel"><img src="../s-20.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Effect on the response of pole movement parallel to the imaginary axis, parallel to the real axis and along a constant-damping line; pole plot example"><figcaption>Pole movement and response</figcaption></figure>
+<h3 id="example-system-with-poles-3-j7">Example: system with poles −3 ± j7</h3>
+<ul><li>ζ = cos θ = cos(arctan(7/3)) = 0.394</li><li>ω_n = √(7² + 3²) = 7.616 rad/s</li><li>T_p = π/ω_d = π/7 = 0.449 s</li><li>%OS = e^(−0.394π/√(1 − 0.394²)) × 100 = 26.018%</li><li>T_s = 4/σ_d = 4/3 = 1.33 s</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM322L5.pdf" download>EEM322L5.pdf</a></p>
+              <p class="kucuk">PDF · 1.5 MB · 20 <span data-i18n="arch.pagesLower"></span> · 15.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM322L5.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 2 – Modeling of Systems in the Frequency Domain, Laplace Transform and Transfer Function — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture note 2 (Hamit Erdem, 2013): mathematical model, Laplace and inverse Laplace transforms, partial fractions, transfer function; electrical circuits (mesh/nodal analysis, op-amp), translational and rotational mechanical systems, electrical analogies, gear systems, liquid-level system and DC motor.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-02-modelleme/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-02-modelleme/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-02-modelleme/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-02-modelleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 2 – Modeling of Systems in the Frequency Domain, Laplace Transform and Transfer Function">
+<meta property="og:description" content="EEM322 Control Systems lecture note 2 (Hamit Erdem, 2013): mathematical model, Laplace and inverse Laplace transforms, partial fractions, transfer function; electrical circuits (mesh/nodal analysis, op-amp), translational and rotational mechanical systems, electrical analogies, gear systems, liquid-level system and DC motor.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-02-modelleme/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 2 – Modeling of Systems in the Frequency Domain, Laplace Transform and Transfer Function", "description": "EEM322 Control Systems lecture note 2 (Hamit Erdem, 2013): mathematical model, Laplace and inverse Laplace transforms, partial fractions, transfer function; electrical circuits (mesh/nodal analysis, op-amp), translational and rotational mechanical systems, electrical analogies, gear systems, liquid-level system and DC motor.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-02-modelleme/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322new2.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-02-modelleme/eem322new2.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 2 – Modeling of Systems in the Frequency Domain, Laplace Transform and Transfer Function">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#modeling-and-the-mathematical-model">Modeling and the mathematical model</a></li><li><a href="#modeling-in-the-frequency-domain-and-the-laplace-transform">Modeling in the frequency domain and the Laplace transform</a></li><li><a href="#transfer-function">Transfer function</a></li><li><a href="#transfer-functions-of-electrical-circuits">Transfer functions of electrical circuits</a></li><li><a href="#translational-mechanical-systems">Translational mechanical systems</a></li><li><a href="#rotational-mechanical-systems">Rotational mechanical systems</a></li><li><a href="#gear-systems-and-other-dynamic-elements">Gear systems and other dynamic elements</a></li><li><a href="#liquid-level-systems-and-the-dc-motor">Liquid-level systems and the DC motor</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 2 – Modeling of Systems in the Frequency Domain, Laplace Transform and Transfer Function</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 01.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>2nd lecture note</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University ("Lecture 2: Modeling of Systems – Modeling in Frequency Domain"). The notes belong to the course instructor <strong>Hamit Erdem</strong>; the page headers carry the date 01.07.2013. The lecture note is in English and is a 25-page PDF with two slides per page; a significant portion of the examples are taken from Nise's <em>Control Systems Engineering</em> and Ogata's <em>Modern Control Engineering</em>. Below, the content is summarized in English, the worked examples are written out, and page images are included for the circuit and mechanical diagrams. The original PDF can be downloaded at the end of the post.</p>
+<p>This chapter covers three topics:</p>
+<ul><li>Transfer function</li><li>Laplace transform</li><li>Inverse Laplace transform</li></ul>
+<h2 id="modeling-and-the-mathematical-model">Modeling and the mathematical model</h2>
+<p>To study the behavior of a system, functional relationships must be established between different variables. These relationships are given by a set of equations called the system's <strong>mathematical model</strong>. A mathematical model is a tool for studying a system's behavior without experiments; it describes the relationships among measurable physical quantities in the system (distance, current, flow rate, even the unemployment rate…) as mathematical relations.</p>
+<p>Building a model always involves approximations and simplifying assumptions that are valid for specific operating conditions, because physical reality is too complex for a model that accounts for every detail. The key factors to consider when developing a model are:</p>
+<ul><li>Structure</li><li>Components and the connections between them</li><li>Parameters</li><li>Variables</li><li>Inputs and outputs</li><li>Initial conditions</li></ul>
+<p>A dynamic system can be fully described by known differential equations or by experimental test data. Being able to analyze the system and determine its performance depends on how well its properties are expressed mathematically.</p>
+<p><strong>Analogous systems:</strong> An analysis method developed for a second-order system can be applied to any second-order system, whether it is electrical, mechanical, thermal, or hydraulic. Developing the analysis method according to the type of model makes it possible to study problems in different branches of engineering, and even in biological, economic, and management systems, with a common systems approach.</p>
+<p>A mathematical model is a set of equations that relate the variables in the system to one another and are determined by the physical laws applied to that system (for example, Kirchhoff's laws). In the note, for a series RLC circuit, the equation L·di/dt + Ri + (1/C)∫i dt = E is written from Kirchhoff's voltage law; when the switch is opened after having been closed for some time, the capacitor remains in series with R and L, and the circuit equation changes. Assumption: L is independent of the current, i.e., the inductance is linear.</p>
+<h3 id="example-automobile-suspension-system">Example: automobile suspension system</h3>
+<p>The purpose is to damp the vibrations and shocks that a rough road surface produces in the vehicle and to prevent them from being transmitted to the passengers.</p>
+<ul><li>The mass of the vehicle body and passengers is represented by a mass M,</li><li>the suspension springs are represented by an ideal spring with spring constant K,</li><li>the shock absorber is represented by an ideal damper (dash-pot) with viscous friction coefficient D.</li></ul>
+<p>The system variables are displacement x, velocity u, and acceleration a. The input is the vertical displacement x₁(t) of the axle caused by irregularities of the road surface; the output is the vertical motion x₂(t) of the mass M. The mathematical model must relate these input and output variables; in the note, the mass-spring-damper equation is given as M·d²x/dt² + D·dx/dt + Kx = 0.</p>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Automobile suspension model and a Turkish flow chart showing the modeling stages: physical system, mathematical model, transfer function and state variable models, solution stage"><figcaption>Suspension model and modeling stages</figcaption></figure>
+<p>Summary of the flow chart: The physical system is represented by a physical model consisting of ideal elements, each with known mathematical behavior. After linearization, ordinary differential equations are obtained. From here there are two paths: the <strong>transfer function model</strong> G(s) via the Laplace (or Fourier) transform (complex or frequency domain), or the <strong>state variable model</strong> dX/dt = AX(t) + Bu(t), y = CX(t) + Du(t) (time domain). Conversion between the models is possible. In the solution stage, for the transfer function model the response to a test input is found as Y(s) = G(s)·R(s) and y(t) is obtained by the inverse transform; for the state model, the solution is carried out (iteratively) in the time domain. The time domain and the frequency domain are two different views of the same dynamic system.</p>
+<h2 id="modeling-in-the-frequency-domain-and-the-laplace-transform">Modeling in the frequency domain and the Laplace transform</h2>
+<p>The transfer function describes the relationship between two signals as a function of s. A transfer function in the frequency domain can only describe <strong>linear, time-invariant</strong> elements. The Laplace transform is used in systems theory to make solving differential equations easier. The solution takes three steps:</p>
+<ol><li>The differential equation is converted into an algebraic equation by the Laplace transform.</li><li>The algebraic equation is solved for the Laplace transform of the solution; the solution is separated into its basic components using partial fractions.</li><li>The inverse Laplace transform of each basic component is taken to find the solution in the time domain.</li></ol>
+<p>Definition: L[f(t)] = F(s) = ∫₀^∞ f(t) e^(−st) dt, where s = σ + jω is a complex variable. The <strong>transfer function</strong> is the ratio of the Laplace transform of the output C(s) to the Laplace transform of the input R(s), with initial conditions assumed to be zero. Pages 5 and 6 of the note contain tables of Laplace transform pairs.</p>
+<h3 id="inverse-laplace-examples">Inverse Laplace examples</h3>
+<p><strong>Example 1:</strong> G(s) = (s³ + 5s² + 9s + 7) / ((s + 1)(s + 2)) = s + 2 + (s + 3)/((s + 1)(s + 2)).</p>
+<p>Since the Laplace transform of the unit impulse is 1 and the transform of dδ(t)/dt is s:</p>
+<p>g(t) = dδ(t)/dt + 2δ(t) + 2e^(−t) − e^(−2t),  t ≥ 0⁻</p>
+<p><strong>Example 2:</strong> F(s) = (2s + 12) / (s² + 2s + 5). The denominator is written in the form (s + 1)² + 2², and the pairs L[e^(−at) sin ωt] = ω/((s + a)² + ω²) and L[e^(−at) cos ωt] = (s + a)/((s + a)² + ω²) are used:</p>
+<p>F(s) = [10 + 2(s + 1)] / ((s + 1)² + 2²) = 5·2/((s + 1)² + 2²) + 2·(s + 1)/((s + 1)² + 2²)</p>
+<p>f(t) = 5e^(−t) sin 2t + 2e^(−t) cos 2t,  t ≥ 0</p>
+<p><strong>Example 3 (solving a differential equation):</strong> Solve d²y/dt² + 12 dy/dt + 32y = 32u(t) with zero initial conditions.</p>
+<p>s²Y(s) + 12sY(s) + 32Y(s) = 32/s  →  Y(s) = 32 / (s(s + 4)(s + 8)) = K₁/s + K₂/(s + 4) + K₃/(s + 8)</p>
+<ul><li>K₁ = 32/((s + 4)(s + 8)) |s→0 = 1</li><li>K₂ = 32/(s(s + 8)) |s→−4 = −2</li><li>K₃ = 32/(s(s + 4)) |s→−8 = 1</li></ul>
+<p>y(t) = (1 − 2e^(−4t) + e^(−8t)) u(t)</p>
+<h3 id="partial-fraction-expansion-with-repeated-poles">Partial fraction expansion with repeated poles</h3>
+<p><strong>Example 4:</strong> F(s) = (s² + 2s + 3)/(s + 1)³ = b₁/(s + 1) + b₂/(s + 1)² + b₃/(s + 1)³</p>
+<ul><li>b₃ = [(s + 1)³ F(s)] at s = −1 = (s² + 2s + 3) at s = −1 = 2</li><li>b₂ = d/ds[(s² + 2s + 3)] at s = −1 = (2s + 2) at s = −1 = 0</li><li>b₁ = (1/2!)·d²/ds²[(s² + 2s + 3)] at s = −1 = (1/2)·2 = 1</li></ul>
+<p>f(t) = e^(−t) + 0 + t²e^(−t) = (1 + t²) e^(−t),  t ≥ 0</p>
+<p><strong>Example 5 (roots of the denominator real and repeated):</strong> F(s) = 2/((s + 1)(s + 2)²) = K₁/(s + 1) + K₂/(s + 2)² + K₃/(s + 2)</p>
+<p>K₁ = 2 is found. For K₂, both sides are multiplied by (s + 2)²: 2/(s + 1) = (s + 2)²K₁/(s + 1) + K₂ + (s + 2)K₃; for s → −2, K₂ = −2. For K₃, the derivative of this expression with respect to s is taken: −2/(s + 1)² = (s + 2)s·K₁/(s + 1)² + K₃; for s → −2, K₃ = −2.</p>
+<p>f(t) = 2e^(−t) − 2te^(−2t) − 2e^(−2t)</p>
+<h2 id="transfer-function">Transfer function</h2>
+<p>A general nth-order, linear, time-invariant differential equation (c(t) output, r(t) input):</p>
+<p>aₙ dⁿc/dtⁿ + aₙ₋₁ dⁿ⁻¹c/dtⁿ⁻¹ + … + a₀c(t) = bₘ dᵐr/dtᵐ + bₘ₋₁ dᵐ⁻¹r/dtᵐ⁻¹ + … + b₀r(t)</p>
+<p>If all initial conditions are assumed to be zero:</p>
+<p>G(s) = C(s)/R(s) = (bₘsᵐ + bₘ₋₁sᵐ⁻¹ + … + b₀) / (aₙsⁿ + aₙ₋₁sⁿ⁻¹ + … + a₀),  C(s) = R(s)G(s)</p>
+<p>A transfer function can be represented by a single block with input R(s) and output C(s).</p>
+<p><strong>Example:</strong> The transfer function of the system dc/dt + 2c(t) = r(t): sC(s) + 2C(s) = R(s) → G(s) = 1/(s + 2). If the input is a unit step (r(t) = u(t)), then C(s) = 1/(s(s + 2)) = (1/2)/s − (1/2)/(s + 2) and c(t) = 1/2 − (1/2)e^(−2t).</p>
+<h2 id="transfer-functions-of-electrical-circuits">Transfer functions of electrical circuits</h2>
+<p>Resistors, inductors, and capacitors are passive (no internal energy source) and linear elements. Their impedances are R, Ls, and 1/(Cs), respectively; admittance (Y) is the reciprocal of impedance and is a measure of how easily a circuit passes current.</p>
+<p><strong>Single-loop circuit:</strong> In a series RLC circuit, the transfer function between the capacitor voltage Vc(s) and the input voltage V(s) is:</p>
+<p>Vc(s)/V(s) = (1/LC) / (s² + (R/L)s + 1/LC)</p>
+<p><strong>Complex circuits by mesh analysis:</strong></p>
+<ol><li>Replace passive element values with their impedances.</li><li>Replace all sources and time variables with their Laplace transforms.</li><li>Assume a transform current and direction in each loop.</li><li>Write Kirchhoff's voltage law around each loop.</li><li>Solve the simultaneous equations for the output.</li></ol>
+<p>The mesh equations can be written directly using the pattern "sum of impedances around the loop × that loop's current − common impedances × adjacent loop currents = sum of applied voltages in the loop." In <strong>nodal analysis</strong>, currents leaving a node are taken as positive and currents entering as negative, and the currents are summed; if there is more than one node and there are voltage sources, voltage sources in series with an impedance are converted by Norton's theorem into current sources in parallel with an admittance, and the pattern becomes "sum of admittances connected to the node × node voltage − common admittances × adjacent node voltages = sum of applied currents entering the node."</p>
+<p><strong>Circuits with operational amplifiers:</strong> For the inverting amplifier, V₀(s)/Vi(s) = −Z₂(s)/Z₁(s); for the noninverting amplifier, V₀(s)/Vi(s) = (Z₁(s) + Z₂(s))/Z₁(s). In the note's inverting amplifier example (C₁ = 5.6 µF ∥ R₁ = 360 kΩ at the input, R₂ = 220 kΩ in series with C₂ = 0.1 µF in the feedback path), Z₁(s) = 360×10³/(2.016s + 1), Z₂(s) = 220×10³ + 10⁷/s, and V₀(s)/Vi(s) = −1.232 (s² + 45.95s + 22.55)/s is found. For the noninverting amplifier with finite gain A, V₀/Vi = A/(1 + AZ₁/(Z₁ + Z₂)) is written; for A → ∞ the result above is obtained. In another example, for a circuit consisting of two 1 Ω resistors and three 1 H inductors, VL(s)/V(s) = (s² + 2s + 1)/(s² + 5s + 2) is given.</p>
+<h2 id="translational-mechanical-systems">Translational mechanical systems</h2>
+<p>Mechanical systems are so similar to electrical circuits that analogies can be established between elements and variables. Mechanical systems also have three passive, linear elements: the spring and the mass store energy, and the viscous damper dissipates energy.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Element</th><th scope="col">Force–velocity</th><th scope="col">Force–displacement</th><th scope="col">Impedance Z_M(s) = F(s)/X(s)</th></tr></thead><tbody><tr><th scope="row">Spring (K)</th><td>f(t) = K∫v dτ</td><td>f(t) = Kx(t)</td><td>K</td></tr><tr><th scope="row">Viscous damper (f_v)</th><td>f(t) = f_v·v(t)</td><td>f(t) = f_v·dx/dt</td><td>f_v·s</td></tr><tr><th scope="row">Mass (M)</th><td>f(t) = M·dv/dt</td><td>f(t) = M·d²x/dt²</td><td>Ms²</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../s-16.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Comparison of the force-velocity and voltage-current columns: mechanical-electrical analogies"><figcaption>Electrical and mechanical analogies</figcaption></figure>
+<p><strong>Analogies:</strong> If the force–velocity column is compared with the voltage–current column, and the force–displacement column with the voltage–charge column, force is analogous to voltage, velocity to current, and displacement to charge. The spring corresponds to the capacitor, the viscous damper to the resistor, and the mass to the inductor; sums of forces written in terms of velocity are analogous to mesh equations (<strong>series analogy</strong>). If the force–velocity column is compared with the current–voltage column in reverse order, force corresponds to current and velocity to voltage; the spring corresponds to the inductor, the damper to the resistor, and the mass to the capacitor, and the mechanical equations are analogous to nodal equations (<strong>parallel analogy</strong>).</p>
+<p><strong>Example (single mass):</strong> X(s)/F(s) is found for a mass-spring-damper system. A positive direction of motion (for example, to the right) is chosen; this is similar to choosing a current direction in an electrical circuit. A free-body diagram is drawn: only the applied force points to the right, while the forces from the spring, the damper, and the acceleration oppose the motion and point to the left. The forces are summed by Newton's law and set equal to zero; with zero initial conditions the Laplace transform is taken:</p>
+<p>(Ms² + f_v s + K) X(s) = F(s)  →  G(s) = X(s)/F(s) = 1/(Ms² + f_v s + K)</p>
+<p>General pattern: [Sum of impedances at the point of motion] · X(s) = [Sum of applied forces].</p>
+<h3 id="multiple-degree-of-freedom-systems">Multiple-degree-of-freedom systems</h3>
+<p>The number of equations of motion required in mechanical systems equals the number of linearly independent motions, i.e., the <strong>degrees of freedom</strong>. Linear independence means that a point can still move when all other points of motion are held fixed; this does not mean that the motions are independent of one another, and in general they are coupled (just as the loop currents are coupled in a two-loop circuit).</p>
+<p>For the solution, a free-body diagram is drawn for each point of motion and superposition is used: first, the forces arising from the body's own motion are found with the other points held fixed; then, with the body held fixed, the neighboring points are moved one at a time and the forces these motions exert on the body are added. In the two-mass (M₁, M₂) example the equations of motion are:</p>
+<ul><li>[M₁s² + (f_v1 + f_v3)s + (K₁ + K₂)] X₁(s) − (f_v3 s + K₂) X₂(s) = F(s)</li><li>−(f_v3 s + K₂) X₁(s) + [M₂s² + (f_v2 + f_v3)s + (K₂ + K₃)] X₂(s) = 0</li></ul>
+<p><em>Note: In the first equation in the lecture note, the "+" sign between M₁s² and (f_v1 + f_v3)s is missing; the corrected form is given above.</em></p>
+<p>From these, by Cramer's rule, G(s) = X₂(s)/F(s) = (f_v3 s + K₂)/Δ is found, where Δ is the determinant of the coefficient matrix. These equations are analogous to electrical mesh equations; the note also draws the series and parallel electrical analog circuits of the system.</p>
+<h2 id="rotational-mechanical-systems">Rotational mechanical systems</h2>
+<p>Rotational systems are treated like translational systems; only force is replaced by torque and translational displacement by angular displacement. The torque of a force F applied at a point P is T = F·R (if the force is perpendicular to the radius). The moment of inertia of a rotating body is J = m₁r₁² + m₂r₂² + m₃r₃² + …, and its total kinetic energy is K = (1/2)Jω².</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Element</th><th scope="col">Torque–angular velocity</th><th scope="col">Torque–angular displacement</th><th scope="col">Impedance Z_M(s) = T(s)/θ(s)</th></tr></thead><tbody><tr><th scope="row">Spring (K)</th><td>T(t) = K∫ω dτ</td><td>T(t) = Kθ(t)</td><td>K</td></tr><tr><th scope="row">Viscous damper (D)</th><td>T(t) = Dω(t)</td><td>T(t) = D·dθ/dt</td><td>Ds</td></tr><tr><th scope="row">Inertia (J)</th><td>T(t) = J·dω/dt</td><td>T(t) = J·d²θ/dt²</td><td>Js²</td></tr></tbody></table></div>
+<p>In the two-inertia (J₁, J₂) example, free-body diagrams are likewise drawn by superposition (J₂ held fixed while J₁ rotates, J₁ held fixed while J₂ rotates), and the transfer function is found in the form θ₂(s)/T(s) = K/Δ.</p>
+<h2 id="gear-systems-and-other-dynamic-elements">Gear systems and other dynamic elements</h2>
+<p>Gears provide mechanical advantage to rotational systems. Anyone who has used a 10-speed bicycle knows the effect of gearing: one shifts gears for more torque and less speed going uphill, and for more speed and less torque on level ground. Gears allow matching the driving system to the load, that is, a <strong>trade-off between speed and torque</strong>.</p>
+<p>The distance traveled along the circumference of each gear is the same: r₁θ₁ = r₂θ₂, so θ₂/θ₁ = r₁/r₂ = N₁/N₂. If the gears are assumed lossless (they neither absorb nor store energy), the energy entering Gear 1 equals the energy leaving Gear 2: T₁θ₁ = T₂θ₂, hence T₂/T₁ = θ₁/θ₂ = N₂/N₁.</p>
+<figure class="yazi-gorsel"><img src="../s-24.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Gear system; transfer functions of op-amp integrator and differentiator, potentiometer, rack-and-pinion, and tachometer"><figcaption>Gears and transfer functions of dynamic elements</figcaption></figure>
+<p>Examples of transfer functions of dynamic elements:</p>
+<ul><li>Op-amp integrator: V₂(s)/V₁(s) = −1/(RCs)</li><li>Op-amp differentiator: V₂(s)/V₁(s) = −RCs</li><li>Potentiometer: V₂(s)/V₁(s) = R₂/R = R₂/(R₁ + R₂), R₂/R = θ/θ_max</li><li>Rack-and-pinion: x = rθ</li><li>Tachometer (speed sensor): V₂(s) = K_t ω(s) = K_t s θ(s), K_t constant</li></ul>
+<h2 id="liquid-level-systems-and-the-dc-motor">Liquid-level systems and the DC motor</h2>
+<p>For flow in a short pipe connecting two tanks, the <strong>resistance</strong> R is defined as the change in level difference required to produce a unit change in flow rate. The liquid-level system and the RC circuit are described by a first-order equation of the same form:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Liquid-level system</th><th scope="col">Electrical RC circuit</th></tr></thead><tbody><tr><th scope="row">Input signal</th><td>Flow rate qᵢ(t)</td><td>Input voltage vᵢ(t)</td></tr><tr><th scope="row">Output signal</th><td>Height h(t)</td><td>Output voltage v₀(t)</td></tr><tr><th scope="row">Differential equation</th><td>RA·dh/dt + h(t) = R·qᵢ(t)</td><td>RC·dv₀/dt + v₀(t) = vᵢ(t)</td></tr><tr><th scope="row">General equation</th><td>τ·dy/dt + y(t) = Ku(t)</td><td>τ·dy/dt + y(t) = Ku(t)</td></tr></tbody></table></div>
+<p>For a field-controlled DC motor, θ(s)/V_f(s) = K_m / (s(Js + b)(L_f s + R_f)). For an armature-controlled DC motor, θ(s)/V(s) = K_m / (s[(R_a + L_a s)(Js + b) + K_b K_m]).</p>
+<figure class="yazi-gorsel"><img src="../s-25.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Liquid-level system and its electrical analogy; field-controlled and armature-controlled DC motor models"><figcaption>Liquid-level system and DC motor</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322new2.pdf" download>eem322new2.pdf</a></p>
+              <p class="kucuk">PDF · 1.5 MB · 25 <span data-i18n="arch.pagesLower"></span> · 01.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322new2.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: CMOS Threshold Voltage, Noise, and Inverter Chain, Handwritten Notes — hasancan.net</title>
+<meta name="description" content="The ideal inverter, fan-out, derivation of the CMOS switching threshold, junction capacitance calculation, and the optimal number of stages in an inverter chain. Formulas and results from the handwritten notes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: CMOS Threshold Voltage, Noise, and Inverter Chain, Handwritten Notes">
+<meta property="og:description" content="The ideal inverter, fan-out, derivation of the CMOS switching threshold, junction capacitance calculation, and the optimal number of stages in an inverter chain. Formulas and results from the handwritten notes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: CMOS Threshold Voltage, Noise, and Inverter Chain, Handwritten Notes", "description": "The ideal inverter, fan-out, derivation of the CMOS switching threshold, junction capacitance calculation, and the optimal number of stages in an inverter chain. Formulas and results from the handwritten notes.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem312-cmos-gecikme-el-yazisi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: CMOS Threshold Voltage, Noise, and Inverter Chain, Handwritten Notes">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.04.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#the-ideal-inverter-and-noise-measures">The ideal inverter and noise measures</a></li><li><a href="#fan-in-and-fan-out">Fan-in and fan-out</a></li><li><a href="#cmos-switching-threshold">CMOS switching threshold</a></li><li><a href="#average-value-of-the-junction-capacitance">Average value of the junction capacitance</a></li><li><a href="#equal-stage-ratio-in-an-inverter-chain">Equal stage ratio in an inverter chain</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: CMOS Threshold Voltage, Noise, and Inverter Chain, Handwritten Notes</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 08.04.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains study sheets on CMOS inverters prepared by a friend, taken from the <strong>EEM312 Digital Electronics</strong> folder. They were transcribed to text from photographed pages; personal information has been removed. The pages carry no date, and the files bear an April 2014 archive date. The source photographs are kept in a private archive; the post has no download file.</p>
+<h2 id="the-ideal-inverter-and-noise-measures">The ideal inverter and noise measures</h2>
+<p>The voltage transfer characteristic of the ideal inverter drops from V_DD to zero at the point V_in = V_DD/2:</p>
+<ul><li>V_OL = 0; V_OH = V_DD; V_SW = V_DD.</li><li>V_IL = V_IH = V_DD/2.</li><li>V_NMH = V_OH − V_IH = V_DD/2.</li><li>V_NML = V_IL − V_OL = V_DD/2.</li></ul>
+<p>In a real inverter the transition has finite width. In the page's notation, the undefined region lies between V_IL and V_IH; V_M is the point where the input equals the output.</p>
+<p>Noise sensitivities:</p>
+<p><strong>V_NSH = V_OH − V_M</strong>, <strong>V_NSL = V_M − V_OL</strong>.</p>
+<p>Normalized noise immunities:</p>
+<p><strong>V_NIH = V_NSH/V_SW</strong>, <strong>V_NIL = V_NSL/V_SW</strong>.</p>
+<p>In the ideal symmetric case, both sensitivities are V_DD/2 and both normalized immunities are 1/2.</p>
+<h2 id="fan-in-and-fan-out">Fan-in and fan-out</h2>
+<p>The note defines fan-in as the number of inputs of a gate. For the inputs the output must drive, it writes <strong>I_out = N I′_in</strong>. In the ideal case, R_in → ∞ reduces input loading; R_out → 0 shortens the charging time of the load.</p>
+<p>The separate limits at the high and low logic levels:</p>
+<p>N_high = I_out(high)/I′_in(high),</p>
+<p>N_low = I_out(low)/I′_in(low).</p>
+<p>The maximum fan-out is the integer not exceeding the smaller of these two values.</p>
+<p><em>Note: In one place the source abbreviates fan-out as "number of outputs." The quantity being computed is not the number of physical output terminals, but the number of gate inputs that a single output can drive.</em></p>
+<h2 id="cmos-switching-threshold">CMOS switching threshold</h2>
+<p>At the point V_in = V_out = V_M, the saturation currents of the two transistors are equal. The initial equation the source writes using signed PMOS voltages:</p>
+<p>k_n V_DSATn[V_M − V_Tn − V_DSATn/2]</p>
+<p>+ k_p V_DSATp[V_M − V_DD − V_Tp − V_DSATp/2] = 0.</p>
+<p>Collecting the terms containing V_M:</p>
+<p>V_M(k_nV_DSATn + k_pV_DSATp)</p>
+<p>= k_nV_DSATn(V_Tn + V_DSATn/2)</p>
+<p>+ k_pV_DSATp(V_DD + V_Tp + V_DSATp/2).</p>
+<p>With the definition <strong>r = k_pV_DSATp/(k_nV_DSATn)</strong>:</p>
+<p><strong>V_M = [(V_Tn + V_DSATn/2) + r(V_DD + V_Tp + V_DSATp/2)]/(1 + r)</strong>.</p>
+<p>In the note, using k = μC_ox(W/L):</p>
+<p>r = [μ_p C_ox,p(W_p/L_p)V_DSATp] / [μ_n C_ox,n(W_n/L_n)V_DSATn].</p>
+<h3 id="large-overdrive-approximation">Large-overdrive approximation</h3>
+<p>The expression V_DSAT = E_cL V_GT/(E_cL + V_GT) approaches E_cL for large V_GT. On this page E_cL = Lv_sat/μ is written. Taking C_ox,n = C_ox,p for equal oxide thicknesses, the ratio the note arrives at is:</p>
+<p>r ≈ v_sat,p W_p/(v_sat,n W_n).</p>
+<p>Assuming V_DD is large compared with the threshold and saturation voltages:</p>
+<p>V_M ≈ rV_DD/(1 + r).</p>
+<p>Choosing r = 1 gives V_M ≈ V_DD/2. The corresponding sizing:</p>
+<p>(W_p/L_p) = (W_n/L_n)[V_DSATn k′_n/(V_DSATp k′_p)].</p>
+<p><em>Note: The other page of the MOS velocity saturation derivation uses E_c = 2v_sat/μ; the approximation on this page is not the same as that critical-field definition. The signed PMOS quantities should also not be confused with the absolute-value formulas.</em></p>
+<h3 id="general-w-l-ratio">General W/L ratio</h3>
+<p>The result found on a separate page for a target V_M:</p>
+<p><strong>(W/L)_p/(W/L)_n = k′_n V_DSATn(V_M − V_Tn − V_DSATn/2) / [k′_p V_DSATp(V_DD − V_M + V_Tp + V_DSATp/2)]</strong>.</p>
+<p>This is the initial current-equality equation rearranged for the transistor sizes.</p>
+<h2 id="average-value-of-the-junction-capacitance">Average value of the junction capacitance</h2>
+<p>The example with V_DD = 2.5 V considers the first half-transition of the output. While the reverse-bias voltage changes from 2.5 V to 1.25 V, m = 0.5 and Φ₀ = 0.9 V are used for the bulk junction. The equivalent coefficient on the page:</p>
+<p>K_eq = −Φ₀^m [(Φ₀ + 2.5)^(1−m) − (Φ₀ + 1.25)^(1−m)] / [(-2.5 + 1.25)(1−m)] ≈ <strong>0.57</strong>.</p>
+<p>For the half-transition corresponding to a reverse bias from 0 V to 1.25 V:</p>
+<p>K_eq = −Φ₀^m [(Φ₀ + 1.25)^(1−m) − Φ₀^(1−m)] / [(-1.25)(1−m)] ≈ <strong>0.79</strong>.</p>
+<p>For the 0.25 µm process, 2λ = 0.25 µm, λ = 0.125 µm, and 19λ² ≈ 0.3 µm² are written. The gate-drain overlap contributions:</p>
+<ul><li>NMOS: 2 × 0.31 × 0.375 ≈ 0.23 fF.</li><li>PMOS: 2 × 0.27 × 1.125 ≈ 0.61 fF.</li></ul>
+<p>On the back page, K_eq,n = 0.57, K_eq,sw,n = 0.61, A_D = 0.3 µm², P_D = 1.875 µm are taken:</p>
+<p>C_db1 = K_eq,n A_D C_j + K_eq,sw,n P_D C_jsw</p>
+<p>= 0.57 × 0.3 × 2 + 0.61 × 1.875 × 0.28 ≈ <strong>0.66 fF</strong>.</p>
+<p>In the small sketch in the perimeter calculation, 5λ + 4λ + 4λ + λ + λ = 15λ; 15 × 0.125 = 1.875 µm. The rest of the note says that this load capacitance and R_eq, which scales with W/L, will be used in the inverter transient example; the page does not contain the final delay calculation.</p>
+<h2 id="equal-stage-ratio-in-an-inverter-chain">Equal stage ratio in an inverter chain</h2>
+<p>In the three-stage sketch, the input capacitances are labeled a, b, c and the final load d:</p>
+<p>d/c = c/b = b/a = f.</p>
+<p>Thus b = af, c = af², d = af³; <strong>f = (d/a)^(1/3)</strong>. For the intermediate capacitances, b = √(ac), c = √(bd) are written.</p>
+<p>For a general N stages, F = C_L/C_in and f = F^(1/N). The note's total delay model:</p>
+<p><strong>t_p = Nt_p0[1 + F^(1/N)/γ]</strong>.</p>
+<p>Differentiating with respect to N and setting the result to zero:</p>
+<p>γ + F^(1/N) − F^(1/N)ln(F)/N = 0.</p>
+<p>Substituting F = f^N gives γ + f − f ln f = 0, and therefore:</p>
+<p><strong>f = e^(1 + γ/f)</strong>.</p>
+<p>In the note, the result N = ln F and f = e for the limit γ = 0 is additionally boxed.</p>
+<p><em>Note: The γ = 0 result belongs to the ideal limit of the derivative condition; setting zero directly in the delay expression containing 1/γ is undefined.</em></p>
+<h3 id="example-with-f-64-1">Example with F = 64, γ = 1</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Number of stages N</th><th scope="col">Stage ratio F^(1/N)</th><th scope="col">t_p/t_p0 in the source</th></tr></thead><tbody><tr><th scope="row">1</th><td>64</td><td>65</td></tr><tr><th scope="row">2</th><td>8</td><td>18</td></tr><tr><th scope="row">3</th><td>4</td><td>15</td></tr><tr><th scope="row">4</th><td>About 2.8</td><td>15.3</td></tr></tbody></table></div>
+<p>Among these options, three stages give the smallest total delay. For four stages, the exact calculation is 4(1 + 64^(1/4)) ≈ 15.314, which agrees with the source's result of 15.3.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

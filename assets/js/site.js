@@ -18,6 +18,8 @@
   function dilSec() {
     var p = new URLSearchParams(location.search).get('lang');
     if (DILLER.indexOf(p) > -1) return p;
+    var sabit = document.body && document.body.getAttribute('data-dil');  // ör. arşivdeki İngilizce yazılar
+    if (DILLER.indexOf(sabit) > -1) return sabit;
     var k = kayitliDil();
     if (DILLER.indexOf(k) > -1) return k;
     var t = (navigator.language || '').slice(0, 2).toLowerCase();

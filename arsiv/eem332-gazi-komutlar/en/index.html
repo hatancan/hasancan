@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Data, Arithmetic and Control Instructions (Gazi University, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="Data transfer, arithmetic and logic, branching, macros, BIOS and DOS routines.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-komutlar/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-gazi-komutlar/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-gazi-komutlar/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-gazi-komutlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Data, Arithmetic and Control Instructions (Gazi University, M. Ali Akcayol)">
+<meta property="og:description" content="Data transfer, arithmetic and logic, branching, macros, BIOS and DOS routines.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-komutlar/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Data, Arithmetic and Control Instructions (Gazi University, M. Ali Akcayol)", "description": "Data transfer, arithmetic and logic, branching, macros, BIOS and DOS routines.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-komutlar/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-komutlar.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-komutlar/eem332-gazi-komutlar.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Data, Arithmetic and Control Instructions (Gazi University, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>10.11.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpul5datamovement">CPUL5DataMovement</a></li><li><a href="#cpul6arithmeticlogic">CPUL6ArithmeticLogic</a></li><li><a href="#topics">Topics</a></li><li><a href="#addition">Addition</a></li><li><a href="#cpul7control">CPUL7Control</a></li><li><a href="#cpul8programming">CPUL8Programming</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Data, Arithmetic and Control Instructions (Gazi University, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 10.11.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the relevant notes and applications from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2008–2015). It covers data transfer, arithmetic and logic, branching, macros, BIOS and DOS routines. Source: Gazi University, M. Ali Akcayol; BİL362 lecture notes. PDF archive copies of the documents and, where available, their source code can be downloaded as a ZIP at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution. It will be removed at the request of the rights holder.</em></p>
+<h2 id="cpul5datamovement">CPUL5DataMovement</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Data Movement Instructions</p>
+<ul><li>MOV Instruction</li></ul>
+<ul><li>PUSH / POP Instructions</li></ul>
+<ul><li>LOAD Instructions</li></ul>
+<ul><li>String Data Transfer Instructions</li></ul>
+<ul><li>Other Data Transfer Instructions</li></ul>
+<ul><li>Segment Override Prefix</li></ul>
+<ul><li>Assembler Directives</li></ul>
+<ul><li>Memory Organization</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV</code></pre>
+<ul><li>The MOV instruction transfers data between register and register or between register and memory.</li></ul>
+<p>For 8086-80286 processors it transfers a byte or word; for 80386 and later processors it transfers a byte, word or doubleword.</p>
+<ul><li>The MOV CX,DX instruction transfers the word (16-bit) contents of DX</li></ul>
+<p>to the CX register.</p>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data can be transferred.</li></ul>
+<ul><li>The MOV ECX,EDX instruction transfers the doubleword contents of EDX to the ECX</li></ul>
+<p>register.</p>
+<ul><li>The MOV AL,22H instruction transfers the byte value 22H to the AL</li></ul>
+<p>register.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV</code></pre>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data</li></ul>
+<p>can be transferred.</p>
+<ul><li>The MOV EBX,12345678H instruction copies the doubleword value 12345678H</li></ul>
+<p>to the EBX register.</p>
+<ul><li>The MOV CX,LIST instruction transfers the word contents at memory address LIST</li></ul>
+<p>to the CX register.</p>
+<ul><li>The MOV AX,[BX] instruction transfers a data word at offset address BX</li></ul>
+<p>in the data segment to the AX register.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH / POP</code></pre>
+<ul><li>The PUSH and POP instructions are used to store data to or retrieve data from</li></ul>
+<p>the LIFO stack memory.</p>
+<ul><li>The microprocessor has 6 different PUSH and POP forms: register,</li></ul>
+<p>memory, immediate, segment register, flags and all registers.</p>
+<ul><li>Register addressing allows the contents of any register to be saved to or retrieved from</li></ul>
+<p>the stack.</p>
+<ul><li>Memory addressing allows a memory location to be saved to or retrieved from</li></ul>
+<p>the stack.</p>
+<ul><li>Immediate addressing allows a constant value to be saved to the stack.</li></ul>
+<ul><li>Segment register addressing allows a segment register to be saved to or retrieved from</li></ul>
+<p>the stack. CS can be PUSHed but cannot be POPped.</p>
+<ul><li>With flags addressing, the flags can be saved to or retrieved from</li></ul>
+<p>the stack.</p>
+<ul><li>With all registers addressing, the contents of all registers can be</li></ul>
+<p>PUSHed or POPped.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>On 8086-80286 microprocessors, the PUSH instruction saves 16-bit data to</li></ul>
+<p>or retrieves it from the stack. On 80386 and later processors, 2 or 4 bytes of data are stored on the stack.</p>
+<ul><li>The PUSHA instruction saves all registers except the segment registers</li></ul>
+<p>to the stack.</p>
+<ul><li>The PUSHA (push all) instruction saves the registers to the stack in the order AX,CX,DX,BX,SP,BP,SI</li></ul>
+<p>and DI.</p>
+<ul><li>The PUSHF (push flags) instruction saves the contents of the flag register to</li></ul>
+<p>the stack.</p>
+<ul><li>The PUSHAD and POPAD instructions push to or pop from the stack all</li></ul>
+<p>32-bit registers.</p>
+<ul><li>When a 16-bit push is performed, the left 8 bits are written to address SP-1 and the right</li></ul>
+<p>8 bits to address SP-2.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>The state after the PUSH AX instruction executes is shown below.</li></ul>
+<ul><li>AH is stored at address SP-1 and AL at address SP-2.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>The PUSHA instruction saves all 16-bit registers to the stack.</li></ul>
+<ul><li>The order is AX,CX,DX,BX,SP,BP,SI and DI.</li></ul>
+<ul><li>The PUSHAD instruction saves all 32-bit registers to the stack.</li></ul>
+<ul><li>The PUSH 'A' instruction saves the value 0041H</li></ul>
+<p>to the stack.</p>
+<h3 id="0041h-ascii-a">0041H = ASCII(A)</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH</code></pre>
+<ul><li>The PUSH instructions are shown below.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>The POP instruction takes data from the stack and stores it in a 16-bit register,</li></ul>
+<p>a segment register or a 16-bit memory location.</p>
+<ul><li>On 80386 and later processors, 32-bit data transfer is possible.</li></ul>
+<ul><li>The POPF instruction takes 16 bits from the stack and transfers them to the flags.</li></ul>
+<ul><li>The POPFD instruction takes 32 bits from the stack and transfers them to the extended</li></ul>
+<p>flags.</p>
+<ul><li>The POPA instruction takes 16 bytes of data from the stack and transfers them in order to the</li></ul>
+<p>DI,SI,BP,SP,BX,DX,CX and AX registers.</p>
+<ul><li>The POPAD instruction, on 80386 and later processors, takes values from the stack into the 32-bit</li></ul>
+<p>registers.</p>
+<ul><li>The POP BX instruction transfers the data at stack address SP to BL</li></ul>
+<p>and the data at address SP+1 to BH.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>The figure below shows the state after the POP BX instruction executes.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>POP</code></pre>
+<ul><li>The POP instructions are shown below.</li></ul>
+<h3 id="load">LOAD</h3>
+<ul><li>Used to load any memory location or the offset address of an operand into a</li></ul>
+<p>register.</p>
+<ul><li>The LEA instruction loads the offset address of an operand into a 16-bit register.</li></ul>
+<ul><li>LDS and LES load a memory location into the 16-bit DS and ES registers.</li></ul>
+<ul><li>On 80386 and later processors, the LFS, LGS and LSS instructions load the FS, GS and SS registers</li></ul>
+<p>from a 32-bit offset address.</p>
+<ul><li>The LOAD instructions are shown below.</li></ul>
+<h3 id="load">LOAD</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LEA</code></pre>
+<ul><li>The LEA instruction loads the offset address of the data specified by the operand into 16- or 32-bit</li></ul>
+<p>registers.</p>
+<ul><li>The LEA AX, NUMB instruction loads the address of the NUMB operand into AX.</li></ul>
+<ul><li>The LEA BX,[DI] instruction loads the offset address of the [DI] operand into BX</li></ul>
+<p>(the contents of DI). The MOV BX,[DI] instruction loads into BX the data at the address pointed to by the [DI] operand.</p>
+<h3 id="load">LOAD</h3>
+<ul><li>In the example below, the offset address of the DATA1 operand is first loaded into the SI</li></ul>
+<p>register.</p>
+<ul><li>Then the offset address of the DATA2 operand is loaded into the DI register.</li></ul>
+<ul><li>After the program runs, the contents of the DATA1 and DATA2 memory locations</li></ul>
+<p>are swapped.</p>
+<h3 id="load">LOAD</h3>
+<h3 id="lds-les-lfs-lgs-lss">LDS, LES, LFS, LGS, LSS</h3>
+<ul><li>The LDS, LES, LFS, LGS and LSS instructions load the offset address into one of the</li></ul>
+<p>16- or 32-bit registers and the segment address into one of the DS, ES, FS, GS and SS segment registers.</p>
+<ul><li>These instructions access a 32-bit (16-bit</li></ul>
+<p>segment + 16-bit offset) or 48-bit (32-bit offset + 16-bit segment) memory location containing the segment and offset addresses.</p>
+<ul><li>The LFS, LGS and LSS instructions are available on 80386 and later processors.</li></ul>
+<h3 id="load">LOAD</h3>
+<ul><li>The example below shows how the LDS BX, [DI] instruction works.</li></ul>
+<ul><li>The 32-bit location in the data segment addressed by DI is loaded into BX and DS.</li></ul>
+<ul><li>The offset address is loaded first, followed by the segment address.</li></ul>
+<h3 id="bx-127ah">BX = 127AH</h3>
+<h3 id="ds-3000h">DS = 3000H</h3>
+<p>result.</p>
+<h3 id="load">LOAD</h3>
+<ul><li>The most frequently used one is the LSS instruction. It is available on 80386 and later processors, and the .386</li></ul>
+<p>directive must be used immediately after the .MODEL directive.</p>
+<p>String Data Transfer</p>
+<ul><li>The LODS, STOS, MOVS, INS and OUTS instructions are used. String</li></ul>
+<p>instructions transfer byte, word or doubleword data. Direction Flag</p>
+<ul><li>The D bit in the flag register is used for string operations to make the DI and SI registers</li></ul>
+<p>automatically increment (D=0) or automatically decrement (D=1).</p>
+<ul><li>The direction bit is used only in string operations.</li></ul>
+<ul><li>The CLD instruction clears D (D=0), and the STD instruction sets D (D=1).</li></ul>
+<ul><li>If a string instruction transfers one byte, SI/DI changes by 1; for a word,</li></ul>
+<p>SI/DI changes by 2; for a doubleword, SI/DI changes by 4.</p>
+<ul><li>Each instruction uses one of the DI/SI pair. The STOSB instruction increments or decrements the DI</li></ul>
+<p>register (SI is unchanged), and LODSB increments or decrements the SI register (DI is unchanged).</p>
+<ul><li>All string instructions access the extra segment with the DI offset address and</li></ul>
+<p>the data segment with the SI offset address.</p>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LODS</code></pre>
+<ul><li>The LODS instruction loads into the AL, AX or EAX (80386 and later) register</li></ul>
+<p>the contents of the offset address specified by the SI register in the data segment.</p>
+<ul><li>When AL, AX or EAX is loaded, SI is incremented for D=0 and decremented for D=1.</li></ul>
+<ul><li>It is incremented or decremented by 1 for byte transfers, 2 for word transfers and 4 for doubleword transfers.</li></ul>
+<ul><li>The LODSB (loads a byte) instruction loads a byte into the AL register, LODSW (loads a</li></ul>
+<p>word) loads a word into the AX register and LODSD (loads a doubleword) loads a doubleword into the EAX register.</p>
+<p>String Data Transfer</p>
+<ul><li>The figure below shows how the LODSW instruction works</li></ul>
+<p>for D=0, SI=1000H and DS=1000H.</p>
+<ul><li>11000H and 11001H are loaded into AX.</li></ul>
+<ul><li>Since D=0 and a 16-bit transfer is performed, SI is incremented by 2.</li></ul>
+<ul><li>SI will be 1002.</li></ul>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS</code></pre>
+<ul><li>The STOS instruction copies the AL, AX or EAX (80386 and later) register to the offset</li></ul>
+<p>address specified by the DI register in the extra segment.</p>
+<ul><li>When AL, AX or EAX is transferred, DI is incremented for D=0 and decremented for D=1.</li></ul>
+<ul><li>It is incremented or decremented by 1 for byte transfers, 2 for word transfers and 4 for doubleword transfers.</li></ul>
+<ul><li>The STOSB (stores a byte) instruction copies the AL register, STOSW (stores a word) copies the AX</li></ul>
+<p>register and STOSD (stores a doubleword) copies the EAX register to the offset address specified by DI in the extra segment.</p>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS and REP</code></pre>
+<ul><li>The REP (repeat prefix) is added to string data transfer instructions</li></ul>
+<p>other than LODS.</p>
+<ul><li>Each time the string instruction executes, the REP prefix decrements the CX counter by 1. When CX = 0 the loop ends and the next instruction executes.</li></ul>
+<ul><li>With CX=100, the REP STOSB instruction transfers the contents of the AL register to a 100-address memory block,</li></ul>
+<p>since the DI register is decremented or incremented by 1 in each iteration.</p>
+<ul><li>The STOSB (stores a byte) instruction transfers the AL register, STOSW (stores a</li></ul>
+<p>word) transfers the AX register and STOSD (stores a doubleword) transfers the EAX register to the extra segment location specified by DI.</p>
+<ul><li>The STOSW instruction changes DI by 2, and STOSD changes it by 4.</li></ul>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>STOS and REP</code></pre>
+<ul><li>The example below clears the memory block named Buffer for Count elements.</li></ul>
+<ul><li>The program is written with inline assembler in a C++ environment and is run by calling the</li></ul>
+<p>ClearBuffer function.</p>
+<ul><li>The REP STOSW instruction clears the memory block named Buffer by writing AX=0.</li></ul>
+<p>In each repetition ECX is decremented by 1 and EDI is incremented by 2 (D=0).</p>
+<p>String Data Transfer: Operand Operators</p>
+<ul><li>Any operand can be used together with operators.</li></ul>
+<p>String Data Transfer</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOVS</code></pre>
+<ul><li>The MOVS instruction transfers string data between two memory locations.</li></ul>
+<ul><li>It is the only instruction on 8086-Pentium 4 microprocessors that allows memory-to-memory</li></ul>
+<p>operations.</p>
+<ul><li>The MOVS instruction copies the byte, word or doubleword data addressed by SI in the data segment</li></ul>
+<p>to the extra segment location addressed by DI.</p>
+<ul><li>The increment/decrement of SI and DI is determined by the direction flag.</li></ul>
+<p>String Data Transfer: Block Transfer</p>
+<ul><li>The REP MOVSD instruction copies BlockA to BlockB.</li></ul>
+<p>String Data Transfer</p>
+<h3 id="ins">INS</h3>
+<ul><li>The INS instruction transfers byte, word or doubleword data from an I/O device to the location</li></ul>
+<p>addressed by DI in the extra segment. (Not available on the 8086/8088.)</p>
+<ul><li>The I/O address is taken from the DX register.</li></ul>
+<ul><li>It is effective for block data transfers from an external I/O device to memory.</li></ul>
+<ul><li>INSB transfers byte, INSW word and INSD doubleword data.</li></ul>
+<p>String Data Transfer: INS - example</p>
+<ul><li>In the example below, 50 bytes of data are transferred from the I/O device with address 03ACH</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>to the LISTS array in the extra segment.</code></pre>
+<p>String Data Transfer</p>
+<h3 id="outs">OUTS</h3>
+<ul><li>The OUTS instruction transfers byte, word or doubleword data from the location addressed by SI in the data segment</li></ul>
+<p>to an I/O device. (Not available on the 8086/8088.)</p>
+<ul><li>The I/O address is in the DX register.</li></ul>
+<ul><li>It is effective for transferring a block of data to an external I/O device.</li></ul>
+<ul><li>OUTSB transfers byte, OUTSW word and OUTSD doubleword data.</li></ul>
+<p>String Data Transfer: OUTS - example</p>
+<ul><li>In the example below, 100 bytes of data at address ARRAY in the data segment are transferred to the I/O device with address</li></ul>
+<p>03ACH.</p>
+<p>Other Data Transfer Instructions</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XCHG</code></pre>
+<ul><li>The XCHG instruction exchanges data between two registers or between a register and a memory location.</li></ul>
+<ul><li>The XCHG instruction cannot exchange segment registers or perform memory-to-</li></ul>
+<p>memory exchanges.</p>
+<ul><li>XCHG AL,[DI] and XCHG [DI],AL perform the same operation.</li></ul>
+<p>Other Data Transfer Instructions</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN and OUT</code></pre>
+<ul><li>The IN instruction transfers data from an external I/O device to the AL, AX and EAX registers.</li></ul>
+<ul><li>The OUT instruction transfers data from AL, AX and EAX to an external I/O device.</li></ul>
+<ul><li>The 16-bit I/O port address is carried to the relevant device over the address bus.</li></ul>
+<ul><li>In fixed port addressing, the port address immediately follows the opcode.</li></ul>
+<p>In variable port addressing, the DX register holds the port address.</p>
+<p>Other Data Transfer Instructions</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>IN and OUT - example</code></pre>
+<ul><li>The example below shows how the OUT 19H,AX instruction works.</li></ul>
+<ul><li>The contents of AX are transferred to I/O port address 19H. The address bus has the value 0019H (16-bit),</li></ul>
+<p>the data bus has the contents of AX, and the control bus has the IOCW (I/O write control) signal (logic 0 enables the relevant I/O device).</p>
+<p>Segment Override Prefix</p>
+<ul><li>Allows access to data in a different segment by changing the default register</li></ul>
+<p>for instructions.</p>
+<ul><li>The MOV AX,[DI] instruction accesses the data segment by default. The MOV</li></ul>
+<p>AX,ES:[DI] instruction accesses the extra segment.</p>
+<ul><li>Some instructions are shown below.</li></ul>
+<p>Assembler Directives</p>
+<ul><li>Assembler directives determine how the assembler processes an operand or a part of</li></ul>
+<p>the program.</p>
+<p>Assembler Directives</p>
+<p>Assembler Directives</p>
+<ul><li>DB (define byte), DW (define word) and DD (define</li></ul>
+<p>doubleword) are used to define memory and transfer data.</p>
+<ul><li>With the SEGMENT directive, as many segments with new symbolic names as desired can be</li></ul>
+<p>defined.</p>
+<ul><li>Areas defined with the DB, DW and DD directives can be reserved with ? for later use.</li></ul>
+<ul><li>The DUP (duplicates) directive creates an array. The 10 DUP (?) directive</li></ul>
+<p>reserves 10 memory locations without assigning any value.</p>
+<ul><li>The DATA1 DB 10 DUP (2) directive reserves 10 bytes of memory and assigns</li></ul>
+<p>02H to each of them.</p>
+<p>Assembler Directives: Example</p>
+<p>Assembler Directives: ASSUME, EQU and ORG</p>
+<ul><li>The ASSUME directive is used to specify the names selected for the code, data, extra and stack segments.</li></ul>
+<p>The EQU (equate) directive equates a number, ASCII character or label to another label.</p>
+<ul><li>The ORG (origin) directive is used to change the offset address within the data segment.</li></ul>
+<p>The THIS directive is used as THIS BYTE, THIS WORD or THIS DWORD, and the specified data type can be assigned to the relevant label.</p>
+<p>Assembler Directives: PROC and ENDP</p>
+<ul><li>The PROC and ENDP directives mark the beginning and end of a procedure.</li></ul>
+<ul><li>The PROC and ENDP directives require a label for their beginning and end.</li></ul>
+<ul><li>The PROC directive uses one of two attributes, NEAR or FAR.</li></ul>
+<ul><li>NEAR (local) places the procedure in the same code segment; FAR (global) allows it to be placed</li></ul>
+<p>anywhere in memory.</p>
+<ul><li>In the example below, BX, CX and DX are added and the result is transferred to the AX register.</li></ul>
+<p>Memory Organization</p>
+<ul><li>The assembler uses two different memory organizations. One is the use of models; the other is the definition of all</li></ul>
+<p>segments (full-segment definitions).</p>
+<ul><li>Using models is easy and should be used for simple programs.</li></ul>
+<ul><li>Full-segment definitions provide better control in assembly language and should be used for complex</li></ul>
+<p>programs. Model</p>
+<ul><li>The MASM assembler uses the tiny, small, medium, compact, large, huge and flat models.</li></ul>
+<ul><li>The tiny model fits the entire program into a single 64 KB segment.</li></ul>
+<ul><li>The small model uses one data segment and one code segment, for a total</li></ul>
+<p>size of 128 KB.</p>
+<ul><li>The medium model allows multiple code segments and one data segment.</li></ul>
+<ul><li>The compact model allows one code segment and multiple data segments.</li></ul>
+<ul><li>The large model allows multiple code segments and multiple data segments.</li></ul>
+<p>Arrays larger than 64K cannot be used.</p>
+<ul><li>The huge model allows multiple code segments and multiple data segments.</li></ul>
+<p>Arrays larger than 64K can be used.</p>
+<ul><li>The flat model allows a single segment of up to 4 GB. All data and code can reside in a 32-bit</li></ul>
+<p>segment.</p>
+<p>Memory Organization: Model</p>
+<ul><li>The example below copies a 100-byte memory block named LISTA to the LISTB</li></ul>
+<p>area.</p>
+<p>Memory Organization: Full-Segment Definition</p>
+<ul><li>It is more structured than the model approach. An example is on the next page.</li></ul>
+<ul><li>The area reserved for STACK_SEG lies between SEGMENT and ENDS.</li></ul>
+<ul><li>The DW 100H DUP(?) instruction creates 100H words of space for the stack segment.</li></ul>
+<ul><li>The STACK keyword automatically loads the SS and SP registers.</li></ul>
+<ul><li>For DATA_SEG, LISTA and LISTB are defined as two 100-element arrays, each element being a byte.</li></ul>
+<ul><li>The area between CODE_SEG and ENDS is the code segment.</li></ul>
+<ul><li>The words 'DATA' and 'CODE' are used for debugging with MS CodeView.</li></ul>
+<ul><li>The ASSUME directive indicates that the names STACK_SEG are used for SS, DATA_SEG for DS and CODE_SEG</li></ul>
+<p>for CS.</p>
+<p>Memory Organization</p>
+<p>Homework</p>
+<ul><li>Write a program that copies the elements of a 10-element array named DIZI1, each element a byte, into</li></ul>
+<p>a 100-element array named DIZI2, each element a byte, 10 times in a row. Write comments wherever you consider necessary. The program is to be written in Courier New font at size 12. In the program, it is sufficient to write only the labels, instructions and comments.</p>
+<figure class="yazi-gorsel"><img src="../sekil-649-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL5DataMovement: page 5, circuits, tables and figures"><figcaption>CPUL5DataMovement, page 5.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-649-09.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL5DataMovement: page 9, circuits, tables and figures"><figcaption>CPUL5DataMovement, page 9.</figcaption></figure>
+<h2 id="cpul6arithmeticlogic">CPUL6ArithmeticLogic</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<h2 id="topics">Topics</h2>
+<ul><li>Arithmetic and Logic Instructions</li><li>Addition, Subtraction, and Comparison Instructions</li><li>Multiplication and Division Instructions</li><li>Basic Logic Instructions</li><li>Shift and Rotate Instructions</li><li>String Comparison Instructions</li></ul>
+<h2 id="addition">Addition</h2>
+<ul><li>ADD (Addition) can be used in many ways in the microprocessor.</li><li>Register, immediate, memory-to-register, array, increment, and addition-with-carry operations can be performed.</li><li>Memory-to-memory and segment register additions cannot be performed.</li><li>Segment registers can only be handled with MOV, PUSH, or POP.</li></ul>
+<p>Addition</p>
+<p>Register addition</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Assembly Language Operation
+
+ADD AL,BL AL = AL + BL
+ADD CX,DI CX = CX + DI
+ADD EBP,EAX EBP = EBP + EAX
+ADD CL,44H CL = CL + 44H
+ADD BX,245FH BX = BX + 245FH
+ADD EDX,12345H EDX = EDX + 12345H
+ADD [BX],AL AL adds to the byte contents of the data segment memory location
+addressed by BX with the sum stored in the same memory location
+ADD CL,[BP] The byte contents of the stack segment memory location addressed</code></pre>
+<p>by BP add to CL with the sum stored in CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AL,[EBX] The byte contents of the data segment memory location addressed</code></pre>
+<p>by EBX add to AL with the sum stored in AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BX,[SI+2] The word contents of the data segment memory location addressed</code></pre>
+<p>by SI + 2 add to BX with the sum stored in BX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD CL,TEMP The byte contents of data segment memory location TEMP add to</code></pre>
+<p>CL with the sum stored in CL</p>
+<p>ADD BX,TEMP[DI] The word contents of the data segment memory location addressed by TEMP + DI add to BX with the sum stored in BX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD [BX+DI],DL DL adds to the byte contents of the data segment memory location
+addressed by BX + DI with the sum stored in the same memory
+location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BYTE PTR[DI],3 3 adds to the byte contents of the data segment memory location
+addressed by DI with the sum stored in the same location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD BX,[EAX+2*ECX] The word contents of the data segment memory location addressed</code></pre>
+<p>by EAX plus 2 times ECX add to BX with the sum stored in BX</p>
+<p>Addition</p>
+<p>Example</p>
+<p>In the example, the AX, BX, CX, and DX registers are added, and the result is stored in the 16-bit AX register.</p>
+<p>When an addition is performed, the FLAG register value changes.</p>
+<p>The ADD instruction changes the sign, zero, carry, auxiliary carry, parity, and overflow bits.</p>
+<p>Addition</p>
+<p>Immediate addition</p>
+<p>A constant value is added.</p>
+<h3 id="0000-b2">0000 B2</h3>
+<p>00 80</p>
+<p>First, 12H is loaded into DL. Then 33H is added to the contents of DL. The result of the addition, 45H, is stored in the DL register.</p>
+<p>The FLAG changes resulting from this operation are as follows.</p>
+<p>Z = 0 (result not zero) C = 0 (no carry)</p>
+<p>A = 0 (no half-carry) S = 0 (result positive) P = 0 (odd parity)</p>
+<p>O = 0 (no overflow)</p>
+<p>Addition</p>
+<p>Memory-to-register addition: the desired memory location is added to a register.</p>
+<h3 id="0000-bf-0000-r-mov-di-offset-numb">0000 BF 0000 R MOV DI,OFFSET NUMB</h3>
+<h3 id="0003-bo-00-mov-al-0">0003 BO 00 MOV AL,0</h3>
+<p>0005 02 05 0007 02 45 01</p>
+<p>;clear sum</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADD AL,[DI] ;add NUMB
+ADD AL,[DI+1] ;add NUMB+1</code></pre>
+<ul><li>First, the offset address NUMB is loaded into DI.</li><li>Then the value 0 is loaded into AL.</li><li>The contents of the data segment at offset address DI are added to the AL register.</li><li>Finally, the contents of the data segment at offset address DI+1 are added to the AL register.</li></ul>
+<p>Addition</p>
+<p>Array addition: the array values located in a memory area are added.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;clear sum</code></pre>
+<h3 id="ere">ERE</h3>
+<p>Le oD</p>
+<ul><li>First, 0 is loaded into AL.</li><li>Then the value 3 is loaded into the SI register.</li><li>Since SI = 3, the operand ARRAY[SI] points to the 3rd element of the array.</li><li>The 3rd, 5th, and 7th elements of the array are added, and the result is stored in the AL register.</li></ul>
+<p>Addition</p>
+<p>Increment addition</p>
+<ul><li>The INC instruction adds 1 to a register (except segment registers) or to a memory location.</li><li>In indirect memory increments, the data size must be specified with BYTE PTR, WORD PTR, or DWORD PTR.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Assembly Language Operation
+
+INC BL BL = BL + 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC SP SP = SP + 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC EAX EAX = EAX + 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC BYTE PTR[BX] Adds 1 to the byte contents of the data segment memory location
+addressed by BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC WORD PTR[SI] Adds 1 to the word contents of the data segment memory location
+addressed by SI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC DWORD PTR[ECX] Adds 1 to the doubleword contents of the data segment memory</code></pre>
+<p>location addressed by ECX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>INC DATA1 Adds 1 to the contents of data segment memory location DATA1</code></pre>
+<p>Addition</p>
+<p>Increment addition - example</p>
+<p>0000 BF 0000 R MOV DI,OFFSET NUMB ;address NUMB</p>
+<p>0003 BO 00 MOV AL,0 ;clear sum</p>
+<p>0005 02 05 ADD AL,[DI] ;add NUMB</p>
+<p>0007 47 INC DI ;increment DI</p>
+<p>0008 02 05 ADD AL,[DI] ;add NUMB+1</p>
+<ul><li>First, the contents of the data segment at offset address NUMB are added to AL.</li><li>Then the DI address value is incremented by 1, and the contents of offset address DI+1 are added to AL.</li><li>For word-sized data, DI must be incremented by 2; for doubleword data, by 4.</li></ul>
+<p>Addition</p>
+<p>Addition with carry</p>
+<ul><li>The ADC (addition-with-carry) instruction adds the value of the carry bit to the operand.</li></ul>
+<p>Assembly Language Operation</p>
+<p>ADC AL,AH AL = AL + AH + carry</p>
+<p>ADC CX,BX CX = CX + BX + carry</p>
+<p>ADC EBX,EDX EBX = EBX + EDX + carry</p>
+<p>ADC DH,[BX] The byte contents of the data segment memory location addressed by BX add to DH with the sum stored in DH</p>
+<p>ADC BX,[BP+2] The word contents of the stack segment memory location addressed by BP plus 2 add to BX with the sum stored in BX</p>
+<p>ADC ECX,[EBX] The doubleword contents of the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by EBX add to ECX with the sum stored in ECX</code></pre>
+<p>Addition: addition with carry - example</p>
+<ul><li>Add the 32-bit data in AX and BX to the 32-bit data in CX and DX.</li></ul>
+<p>(ADD) (ADC)</p>
+<h3 id="bx-l-ax">[ BX | | L AX |</h3>
+<p>+ L DX | | [ cx |</p>
+<h3 id="bx-j-ax">[ BX | J AX |</h3>
+<p>000 03 Cl ADD</p>
+<h3 id="2-13-da-adc">2 13 DA ADC</h3>
+<p>Subtraction</p>
+<ul><li>The SUB (subtraction) instruction is used to subtract one operand from another.</li><li>Its special form is the DEC (decrement) instruction, which subtracts 1.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB CL,BL CL = CL - BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AX,SP AX = AX - SP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ECX,EBP ECX = ECX - EBP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB DH,6FH DH = DH - 6FH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AX,0CCCCH AX = AX - 0CCCCH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ESI,2000300H ESI = ESI - 2000300H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB [DI],CH Subtracts CH from the byte contents of the data segment memory
+location addressed by DI and stores the difference in the same memory
+location</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB CH,[BP] Subtracts the byte contents of the stack segment memory location
+addressed by BP from CH and stores the difference in CH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AH,TEMP Subtracts the byte contents of memory location TEMP from AH and</code></pre>
+<p>stores the difference in AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB DI,TEMP[ESI] Subtracts the word contents of the data segment memory location
+addressed by TEMP plus ESI from DI and stores the difference in DI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB ECX,DATA1 Subtracts the doubleword contents of memory location DATA1 from</code></pre>
+<p>ECX and stores the difference in ECX</p>
+<p>Subtraction</p>
+<p>Register subtraction: the value of one register is subtracted from another.</p>
+<h3 id="0000-2b-d9-sub-bx-cx">0000 2B D9 SUB BX,CX</h3>
+<h3 id="0002-2b-da-sub-bx-dx">0002 2B DA SUB BX,DX</h3>
+<ul><li>In the example, the 16-bit CX and DX registers are subtracted from BX, and the result is stored in BX.</li><li>The FLAG bits are modified after each subtraction.</li></ul>
+<p>Subtraction</p>
+<p>Immediate subtraction: a constant value is subtracted from a register. The constant is given together with the instruction.</p>
+<p>)000 BS z MOV H</p>
+<ul><li>In the example, the 8-bit value 22H is loaded into the CH register.</li><li>Then 44H is subtracted from 22H. The result (0DEH) is stored in the CH register. The FLAG states are below.</li></ul>
+<p>Z = 0 (result not zero)</p>
+<p>C = 1 (borrow) A = 1 (half-borrow)</p>
+<p>S = 1 (result negative)</p>
+<p>P = 1 (even parity)</p>
+<p>O = 0 (no overflow)</p>
+<p>Subtraction</p>
+<p>Decrement subtraction</p>
+<ul><li>1 is subtracted from a memory location or a register.</li><li>When the DEC instruction addresses memory, BYTE PTR, WORD PTR, or DWORD PTR must be used.</li><li>Instead of DEC [SI], DEC BYTE PTR [SI], DEC WORD PTR [SI], or DEC DWORD PTR [SI] must be used.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Assembly Language Operation
+
+DEC BH BH = BH - 1
+DEC CX CX = CX - 1
+DEC EDX EDX = EDX - 1</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC BYTE PTR[DI] Subtracts 1 from the byte contents of the data segment memory</code></pre>
+<p>location addressed by DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC WORD PTR[BP] Subtracts 1 from the word contents of the stack segment</code></pre>
+<p>memory location addressed by BP</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC DWORD PTR[EBX] Subtracts 1 from the doubleword contents of the data segment</code></pre>
+<p>memory location addressed by EBX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DEC NUMB Subtracts 1 from the contents of data segment memory</code></pre>
+<p>location NUMB</p>
+<p>Subtraction</p>
+<p>Subtraction with borrow</p>
+<ul><li>With SBB (subtraction-with-borrow), the other operand and the carry bit are subtracted from the destination operand.</li><li>When the SBB instruction addresses memory, BYTE PTR, WORD PTR, or DWORD PTR must be used. Instead of SBB [SI], SBB BYTE PTR [SI], SBB WORD PTR [SI], or SBB DWORD PTR [SI] must be used.</li></ul>
+<p>Assembly Language Operation</p>
+<p>SBB AH,AL AH = AH - AL - carry</p>
+<p>SBB AX,BX AX = AX - BX - carry</p>
+<p>SBB EAX,ECX EAX = EAX - ECX - carry</p>
+<p>SBB CL,2 CL = CL - 2 - carry</p>
+<p>SBB BYTE PTR[DI],3 Both 3 and carry subtract from the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by DI</code></pre>
+<p>SBB [DI],AL Both AL and carry subtract from the data segment memory location</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>addressed by DI</code></pre>
+<p>SBB DI,[BP+2] Both carry and the word contents of the stack segment memory location addressed by BP plus 2 subtract from DI</p>
+<p>SBB AL,[EBX+ECX] Both carry and the byte contents of the data segment memory</p>
+<p>location addressed by EBX plus ECX subtract from AL</p>
+<p>Subtraction</p>
+<p>Subtraction with borrow - example</p>
+<ul><li>The 32-bit number in the BX and AX registers is subtracted from the 32-bit number in SI and DI.</li></ul>
+<p>(SBB) (SUB)</p>
+<h3 id="bx-ax">BX AX</h3>
+<p>— SI DI BX AX</p>
+<h3 id="0000-2b">0000 2B</h3>
+<p>Comparison</p>
+<ul><li>The CMP (compare) instruction performs a subtraction; the destination operand is not changed.</li><li>It is usually followed by a JUMP instruction and checks the FLAGs.</li><li>Memory-to-memory and segment register comparisons cannot be performed.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP CL,BL CL - BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AX,SP AX - SP</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP EBP,ESI EBP - ESI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AX,2000H AX - 2000H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP [DI],CH CH subtracts from the byte contents of the data segment memory</code></pre>
+<p>location addressed by DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP CL,[BP] The byte contents of the stack segment memory location addressed</code></pre>
+<p>by BP subtracts from CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AH,TEMP The byte contents of data segment memory location TEMP subtracts</code></pre>
+<p>from AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP DI,TEMP[BX] The word contents of the data segment memory location addressed</code></pre>
+<p>by TEMP plus BX subtracts from DI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP AL,[EDI+ESI] The byte contents of the data segment memory location addressed</code></pre>
+<p>by EDI plus ESI subtracts from AL</p>
+<p>Comparison</p>
+<ul><li>In the example below, the AL register is compared with 10H.</li><li>The conditional jump instructions JA (jump above) and JB (jump below) perform the jump according to the result of the comparison.</li><li>The JA instruction jumps if the AL register is greater than 10H, and the JB instruction jumps if it is less.</li></ul>
+<p>compare against 10H</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>jump if AL is above or equal</code></pre>
+<p>0000 3c 10 CMP AL,10H ;compare 0002 73 1c JAE SUBER ;if AL</p>
+<ul><li>In the example, the JAE (jump above or equal) instruction jumps the program to the line with the SUBER label if the AL register is 10H or greater than 10H.</li><li>The JBE (jump below or equal) instruction jumps to the relevant line if the AL register is 10H or less than 10H.</li></ul>
+<p>Multiplication and Division</p>
+<p>Multiplication</p>
+<ul><li>Multiplication can be performed with byte, word, or doubleword data.</li><li>Signed integer (IMUL) or unsigned integer (MUL) instructions can be used.</li><li>The product is always twice the width. The product of two 8-bit numbers is 16 bits, the product of two 16-bit numbers is 32 bits, and the product of two 32-bit numbers is 64 bits.</li><li>The O and C flag bits are affected. If the left 8 bits of the result of two 8-bit numbers are 0, then O = 0 and C = 0. C = 1 indicates that the result is 16 bits.</li><li>If the product of two 16-bit numbers gives C = 0 and O = 0, the left 16 bits are 0.</li></ul>
+<p>Multiplication and Division</p>
+<p>8-bit multiplication</p>
+<ul><li>In 8-bit multiplication, the multiplicand is always AL (signed/unsigned).</li><li>The multiplier is an 8-bit register or a memory location.</li><li>The multiplication instruction has 1 operand, and the default multiplicand is the AL register.</li><li>The MUL BL instruction multiplies AL by BL as unsigned numbers. The product is stored in the 16-bit AX register.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL CL AL is multiplied by CL; the unsigned product is in AX</code></pre>
+<p>IMUL DH AL is multiplied by DH; the signed product is in AX</p>
+<p>IMUL BYTE PTR[BX] AL is multiplied by the byte contents of the data segment memory location addressed by BX; the signed product is in AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL TEMP AL is multiplied by the byte contents of data segment memory</code></pre>
+<p>location TEMP; the unsigned product is in AX</p>
+<p>Multiplication and Division</p>
+<p>8-bit multiplication - example</p>
+<ul><li>The 8-bit unsigned numbers in the BL and CL registers are multiplied.</li><li>The 16-bit result is stored in the DX register.</li><li>Since this operation is performed using the AL register, one of the registers must be moved into AL.</li><li>The IMUL instruction is used for signed numbers.</li><li>Two's complement is used for negative numbers, and binary form for positive numbers.</li></ul>
+<p>(6)</p>
+<p>AL,CL ;position data</p>
+<h3 id="0008-8b-do-mov-dx-ax">0008 8B DO MOV DX,AX</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;position product</code></pre>
+<p>Multiplication and Division</p>
+<p>16-bit multiplication</p>
+<ul><li>In 16-bit multiplication, the multiplicand is always AX.</li><li>The multiplier is a 16-bit register or a memory location.</li><li>The product is stored in DX-AX. DX stores the most-significant 16 bits and AX the least-significant 16 bits.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL CX AX is multiplied by CX; the unsigned product is in DX-AX</code></pre>
+<p>IMUL DI AX is multiplied by DI; the signed product is in DX-AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL WORD PTR[SI] AX is multiplied by the word contents of the data segment memory</code></pre>
+<p>location addressed by SI; the unsigned product is in DX-AX</p>
+<p>Multiplication and Division</p>
+<p>32-bit multiplication</p>
+<p>32-bit multiplication can be performed on 80386 and higher processors. 32-bit multiplication can be signed (IMUL) or unsigned (MUL). The EAX register is multiplied by the operand specified by the instruction.</p>
+<p>The result is stored in EDX-EAX. EDX stores the most-significant 32 bits and EAX the least-significant 32 bits.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL ECX EAX is multiplied by ECX; the unsigned product is in EDX-EAX</code></pre>
+<p>IMUL EDI EAX is multiplied by EDI; the signed product is in EDX-EAX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MUL DWORD PTR[ESI] EAX is multiplied by the doubleword contents of the data</code></pre>
+<p>segment memory location address by ESI; the unsigned product is in EDX-EAX</p>
+<p>Multiplication and Division</p>
+<p>Division</p>
+<p>In the 8086-80286 processors, division is performed on 8-bit or 16-bit numbers; in the 80386-Pentium 4 processors, it is performed on 32-bit numbers.</p>
+<p>IDIV performs division on signed numbers, and DIV on unsigned numbers. The dividend is always twice the width.</p>
+<pre class="kod"><code>If AX=3000 and it is divided by 2, the result is 1500 and does not fit
+in the AL register. (1500 = 10111011100)</code></pre>
+<p>In this case an overflow occurs and a divide-error interrupt is generated.</p>
+<p>Multiplication and Division</p>
+<p>8-bit division</p>
+<ul><li>In 8-bit division, the dividend is in the AX register and is divided by an 8-bit register or a value in memory.</li><li>The quotient is stored in the AL register and the remainder in the AH register.</li><li>For signed numbers, the quotient can be negative or positive; the remainder takes the sign of the dividend and is an integer.</li><li>If AX=0010H (+16), BL=FDH (-3), and the IDIV BL instruction is executed,</li></ul>
+<pre class="kod"><code>AX=01FBH. AL=-5 is the quotient and AH=1 is the remainder.</code></pre>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV CL AX is divided by CL; the unsigned quotient is in AL and the unsigned</code></pre>
+<p>remainder is in AH</p>
+<p>IDIV BL AX is divided by BL; the signed quotient is in AL and the signed remainder is in AH</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV BYTE PTR[BP] AX is divided by the byte contents of the stack segment memory</code></pre>
+<p>location addressed by BP; the unsigned quotient is in AL and the unsigned remainder is in AH</p>
+<p>Multiplication and Division</p>
+<p>8-bit division - continued</p>
+<ul><li>In 8-bit division, the numbers are usually 8 bits. The dividend must be converted to word size for the AX register.</li><li>For unsigned numbers, the left 8 bits (AH) are set to 0 (zero-extended). For signed numbers, the sign bit of AL is copied into the AH register (sign-extended).</li><li>The CBW (convert byte to word) instruction converts the contents of the signed AL register to AX size.</li></ul>
+<p>Multiplication and Division</p>
+<p>8-bit division - example</p>
+<ul><li>The unsigned byte number NUMB is divided by the unsigned number NUMB1.</li><li>The quotient and remainder are stored in the memory locations ANSQ and ANSR.</li></ul>
+<h3 id="0000-ao-0000-r">0000 AO 0000 R</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,NUMB</code></pre>
+<p>;get NUMB</p>
+<p>0003 EF MOV AH,O ;zero-extend 0005 DIV B ;divide by NU 0009 A2 MOV ;save quotient</p>
+<p>000C 88 2 MOV ANSR,AH ;save remainder</p>
+<ul><li>Below, signed division is performed and CBW is used for sign extension.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL, NUMB
+cBW</code></pre>
+<h3 id="idiv-numb1">IDIV NUMB1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV ANSQ, AL
+MOV ANSR, AH</code></pre>
+<p>Multiplication and Division</p>
+<p>16-bit division</p>
+<ul><li>In 16-bit division, the 32-bit dividend is in the DX-AX registers and is divided by a 16-bit register or a value in memory.</li><li>The quotient is stored in the AX register and the remainder in the DX register.</li><li>For a 16-bit unsigned dividend, DX=0 is set (zero-extended); for a signed number, DX=sign(AX) is set (sign-extended).</li><li>CWD (convert word to doubleword) performs a 16-bit sign extension.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV CX DX-AX is divided by CX; the unsigned quotient is in AX and the</code></pre>
+<p>unsigned remainder is in DX</p>
+<p>IDIV SI DX-AX is divided by SI; the signed quotient is in AX and the signed remainder is in DX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV NUMB DX-AX is divided by the word contents of data segment memory</code></pre>
+<p>NUMB; the unsigned quotient is in AX and the unsigned remainder is</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>in DX</code></pre>
+<p>Multiplication and Division</p>
+<p>16-bit division - example</p>
+<ul><li>Below, the division of two 16-bit signed numbers is shown.</li><li>AX = -100, CX = +9, and the CWD instruction converts AX = -100 (16-bit) to DX-AX = -100 (32-bit).</li><li>After the division, AX = -11 (quotient) and DX = -1 (remainder).</li></ul>
+<p>0000 0003 0006 0007</p>
+<p>Multiplication and Division</p>
+<p>32-bit division</p>
+<ul><li>On 80386-Pentium 4 processors, 32-bit division is performed on signed or unsigned numbers.</li><li>The 64-bit dividend EDX-EAX is divided by the value specified by the operand. EAX holds the 32-bit quotient and EDX holds the remainder.</li><li>CDQ (convert doubleword to quadword) converts the 32-bit EAX to the 64-bit EDX-EAX.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV ECX EDX-EAX is divided by ECX; the unsigned quotient is in EAX and</code></pre>
+<p>the unsigned remainder is in EDX</p>
+<p>IDIV DATA4 EDX-EAX is divided by the doubleword contents in data segment</p>
+<p>memory location DATA4; the signed quotient is in EAX and the signed remainder is in EDX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DIV DWORD PTR[EDI] EDX-EAX is divided by the doubleword contents of the data</code></pre>
+<p>segment memory location addressed by EDI; the unsigned quotient is in EAX and the unsigned remainder is in EDX</p>
+<p>Multiplication and Division</p>
+<p>32-bit division - example</p>
+<ul><li>In the example, the AX value is divided by BL and the result is rounded.</li><li>With ADD AH,AH, the remainder is multiplied by two, and if it is greater than BL, AL (the quotient) is incremented by 1.</li><li>Values greater than 0.5 are thus rounded up to the next integer.</li></ul>
+<p>Basic Logic Instructions</p>
+<ul><li>AND, OR, XOR, and NOT are the basic logic instructions.</li><li>The TEST and NEG instructions are special forms of the AND and NOT instructions.</li><li>Logic instructions set, clear, and complement bits.</li><li>Logic instructions set the carry and overflow bits to 0. The other FLAG bits take values according to the result of the operation.</li><li>Logic instructions perform bit-level control in software.</li></ul>
+<p>Basic Logic Instructions</p>
+<p>AND</p>
+<ul><li>The AND operation performs logical multiplication. Memory-to-memory and segment register addressing cannot be used. It has the truth table below.</li></ul>
+<h3 id="a-b-t">A B T</h3>
+<p>0 0 0 / 0 1 0 / 1 0 0 / 1 1 1</p>
+<ul><li>The AND operation is used to clear a bit value in a binary number to 0 (masking).</li></ul>
+<p>XXXX XXXX Unknown number</p>
+<p>* 0000 1111 Mask</p>
+<p>0000 XXXX Result</p>
+<h3 id="0000-bb-3135-mov-bx-3135h">0000 BB 3135 MOV BX,3135H</h3>
+<h3 id="0003-81-e3-000f-and-bx-0fh">0003 81 E3 000F AND BX,0FH</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;load ASCII
+;mask BX</code></pre>
+<p>Basic Logic Instructions</p>
+<p>AND - continued</p>
+<ul><li>AND operations are shown in the table below. Memory-to-register, register-to-register, or immediate addressing can be used.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AL,BL AL = AL and BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND CX,DX CX = CX and DX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ECX,EDI ECX = ECX and EDI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND CL,33H CL = CL and 33H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND DI,4FFFH DI = DI and 4FFFH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ESI,34H ESI = ESI and 34H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND AX,[DI] The word contents of the data segment memory location addressed</code></pre>
+<p>by DI are ANDed with AX</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND ARRAY[SI],AL The byte contents of the data segment memory location addressed</code></pre>
+<p>by ARRAY plus SI are ANDed with AL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>AND [EAX],CL CL is ANDed with the byte contents of the data segment memory</code></pre>
+<p>location addressed by ECX</p>
+<p>Basic Logic Instructions</p>
+<p>OR</p>
+<ul><li>The OR operation performs logical addition. Memory-to-memory and segment register addressing cannot be used. It has the truth table below.</li></ul>
+<h3 id="a-b-t">A B T</h3>
+<p>0 0 0 / 0 1 1 / 1 0 1 / 1 1 1</p>
+<ul><li>The OR operation is used to set a bit value in a binary number to 1 (masking).</li></ul>
+<p>XXXX XXXX Unknown number</p>
+<p>* 0000 1111 Mask</p>
+<p>XXXX 1111 Result</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AX,3030H ;convert to ASCII</code></pre>
+<p>Basic Logic Instructions</p>
+<p>OR - continued</p>
+<ul><li>OR operations are shown in the table below. Memory-to-register, register-to-register, or immediate addressing can be used.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR AL,BL AL = AL or BL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR SI,DX SI = SI or DX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR EAX,EBX EAX = EAX or EBX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DH,0A3H DH = DH or 0A3H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR SP,990DH SP = SP or 990DH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR EBP,10 EBP = EBP or 10</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DX,[BX] DX is ORed with the word contents of data segment memory location
+addressed by BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OR DATES[DI+2],AL The byte contents of the data segment memory location addressed</code></pre>
+<p>by DI plus 2 are ORed with AL</p>
+<p>Basic Logic Instructions</p>
+<p>Exclusive-OR (XOR)</p>
+<p>0000 81 0004 83 0007 81</p>
+<p>Unlike the OR operation, in the Exclusive-OR operation the result for inputs 1,1 is 0, not 1. Memory-to-memory and segment register addressing cannot be used. It has the truth table below.</p>
+<h3 id="a-b-t">A B T</h3>
+<p>0 0 0 / 0 1 1 / 1 0 1 / 1 1 0</p>
+<p>The XOR operation is used to invert a bit value in a binary number (masking).</p>
+<p>XXXX XXXX Unknown number</p>
+<p>0000 1111 Mask</p>
+<h3 id="9-0600-or-cx">9 0600 OR CX</h3>
+<h3 id="1-fc-and-cx">1 FC AND CX</h3>
+<h3 id="1-1000-xor-cx">1 1000 XOR CX</h3>
+<p>Basic Logic Instructions</p>
+<p>XOR - continued</p>
+<p>XOR operations are shown in the table below. Memory-to-register, register-to-register, or immediate addressing can be used.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR CH,DL CH = CH xor DL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR SI,BX SI = SI xor BX</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR EBX,EDI EBX = EBX xor EDI</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR AH,0EEH AH = AH xor 0EEH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DI,00DDH DI = DI xor 00DDH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR ESI,100 ESI = ESI xor 100</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DX,[SI] DX is Exclusive-ORed with the word contents of the data segment</code></pre>
+<p>memory location addressed by SI</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>XOR DEAL[BP+2],AH AH is Exclusive-ORed with the byte contents of the stack segment</code></pre>
+<p>memory location addressed by BP plus 2</p>
+<p>Basic Logic Instructions</p>
+<p>TEST and Bit Test Instructions</p>
+<ul><li>The TEST instruction performs an AND operation. TEST does not change the destination operand, whereas AND does.</li><li>The TEST operation changes the FLAG bits and works similarly to the CMP instruction. CMP operates on a byte or word, whereas TEST operates on a bit.</li><li>If the bit being tested is 0, Z = 1; if it is 1, Z = 0. (Z -&gt; Zero Flag)</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>TEST DL,DH DL is ANDed with DH
+TEST CX,BX CX is ANDed with BX
+TEST EDX,ECX EDX is ANDed with ECX
+TEST AH,4 AH is ANDed with 4
+TEST EAX,256 EAX is ANDed with 256</code></pre>
+<p>Basic Logic Instructions</p>
+<p>TEST and Bit Test Instructions - continued</p>
+<ul><li>The JZ (Jump Zero) or JNZ (Jump Not Zero) instructions are usually used immediately after the TEST instruction.</li><li>The destination operand can be tested with an immediate value.</li><li>If the immediate value is 1, the rightmost bit is tested; if it is 2, the second bit from the right is tested.</li><li>In the example below, first the rightmost bit of AL and then the leftmost bit are tested. Depending on the result, a jump is made to the section with the RIGHT or LEFT label.</li></ul>
+<p>Basic Logic Instructions</p>
+<p>TEST and Bit Test Instructions - continued</p>
+<p>80386 and higher processors have instructions used for testing a single bit.</p>
+<p>The result of the test operation is transferred to the Carry Flag bit. The BT AX,4 instruction tests bit 4 of the AX register. If it is 1, C=1; if it is 0, C=0.</p>
+<p>The other three instructions change the value immediately after the test operation.</p>
+<p>Assembly Language Operation</p>
+<p>BT Tests a bit in the destination operand specified by the source operand</p>
+<p>BTC Tests and complements a bit in the destination operand specified by the source operand</p>
+<p>BTR Tests and resets a bit in the destination operand specified by the source operand</p>
+<p>BTS Tests and sets a bit in the destination operand specified by the source operand</p>
+<p>Basic Logic Instructions</p>
+<p>TEST and Bit Test Instructions - continued</p>
+<p>80386 and higher processors have instructions used for testing a single bit.</p>
+<p>The result of the test operation is transferred to the Carry Flag bit. The BT AX,4 instruction tests bit 4 of the AX register. If it is 1, C=1; if it is 0, C=0.</p>
+<p>The other three instructions change the value immediately after the test operation.</p>
+<p>Basic Logic Instructions</p>
+<p>NOT and NEG instructions</p>
+<p>NOT performs logical inversion or one's complement, and NEG performs arithmetic sign inversion or two's complement.</p>
+<p>NOT inverts all bits, NEG inverts the sign.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT CH CH is one's complemented</code></pre>
+<p>NEG CH CH is two's complemented NEG AX AX is two's complemented</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT EBX EBX is one's complemented</code></pre>
+<p>NEG ECX ECX is two's complemented</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>NOT TEMP The contents of data segment memory location TEMP are one's
+complemented
+NOT BYTE PTR[BX] The byte contents of the data segment memory location addressed</code></pre>
+<p>by BX are one's complemented</p>
+<h3 id="s">S</h3>
+<p>SHIFT and ROTATE Instructions</p>
+<p>The SHIFT instruction shifts the contents of a register or memory location right or left. It performs multiplication (shift left) or division (shift right) by powers of 2.</p>
+<p>In a logical shift, the bit shifted out is discarded. It is used with unsigned numbers.</p>
+<p>In an arithmetic shift, the sign bit of the value is kept constant. It is used with signed numbers.</p>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SHL AX,1 AX is logically shifted left 1 place
+SHR BX,12 BX is logically shifted right 12 places
+SHR ECX,10 ECX is logically shifted right 10 places
+SAL DATA1,CL The contents of data segment memory location DATA1 are</code></pre>
+<p>arithmetically shifted left the number of spaces specified by CL</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SAR SI,2 SI is arithmetically shifted right 2 places
+SAR EDX,14 EDX is arithmetically shifted right 14 places</code></pre>
+<ul><li>SHL and SHR perform logical shifts.</li><li>SAL and SAR perform arithmetic shifts.</li></ul>
+<p>SHIFT and ROTATE Instructions</p>
+<p>SHIFT example</p>
+<ul><li>In early processors, multiplication performed with shifts runs faster than the MUL instruction.</li></ul>
+<p>SHIFT and ROTATE Instructions</p>
+<ul><li>ROTATE instructions are used to shift a register or a memory location using the carry flag.</li><li>They are used for shifting large numbers.</li></ul>
+<p>Assembly Language Operation</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL SI,14 SI rotates left 14 places</code></pre>
+<p>RCL BL,6 BL rotates left through carry 6 places</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL ECX,18 ECX rotates left 18 places
+RCR AH,CL AH rotates right through carry the number of places specified by CL
+ROR WORD PTR[BP],2 The word contents of the stack segment memory location addressed</code></pre>
+<p>by BP rotate right 2 places</p>
+<ul><li>In the example below, the 48-bit number DX,BX,AX is shifted left.</li></ul>
+<h3 id="0000-d1-e0-sal-ax-1">0000 D1 E0 SAL AX,1</h3>
+<h3 id="0002-d1-d3-rcl-bx-1">0002 D1 D3 RCL BX,1</h3>
+<h3 id="0004-d1-d2-rcl-dx-1">0004 D1 D2 RCL DX,1</h3>
+<p>SHIFT and ROTATE Instructions</p>
+<p>Target register or memory</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ROL</code></pre>
+<h3 id=""></h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RCR</code></pre>
+<h3 id="c">C</h3>
+<p>String Comparison Instructions</p>
+<ul><li>String data operations are performed with the MOVS, LODS, STOS, INS, and OUTS instructions.</li><li>The SCAS (Scan String) and CMPS (Compare String) instructions are used to compare a block in memory with a constant value or with another memory block.</li></ul>
+<p>SCAS</p>
+<ul><li>The SCAS instruction compares the AL register with a byte block in memory, the AX register with a word block, or the EAX register with a doubleword block.</li><li>The SCAS instruction subtracts the block in memory from the AL, AX, or EAX registers.</li><li>SCASB is used for byte comparison, SCASW for word, and SCASD for doubleword.</li><li>The block compared at offset address DI in memory is in the extra segment.</li></ul>
+<p>String Comparison Instructions</p>
+<p>SCAS - continued</p>
+<ul><li>Suppose there is a 100-byte memory block named BLOCK. The example below tests whether 00H is present in this block.</li><li>The REPNE (Repeat While Not Equal) and REPE (Repeat While Equal) prefixes repeat the loop until CX=0 or until the comparison result becomes equal (REPNE) / not equal (REPE).</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CLD ;auto-increment mode</code></pre>
+<p>String Comparison Instructions</p>
+<p>CMPS</p>
+<p>The CMPS instruction compares two blocks in memory as bytes (CMPSB), words (CMPSW), or doublewords (CMPSD).</p>
+<p>The area specified by SI in the data segment is compared with the area specified by DI in the extra segment.</p>
+<p>CMPS automatically increments or decrements the DI and SI registers.</p>
+<p>It is used with the REPE, REPNE, REPZ (Repeat While Zero), and REPNZ (Repeat While Not Zero) prefixes.</p>
+<p>In the example below, a 10-byte block is compared. The loop continues as long as CX&gt;0 and the blocks are equal.</p>
+<p>MOV SI,OFFSET LINK</p>
+<p>Assignment</p>
+<p>Write a program that, for each element of a 100-element array, computes the sum of that element and all the preceding numbers and stores it in place of the element.</p>
+<p>The largest of the numbers will be stored in the BX register and the smallest in the DX register.</p>
+<p>The program will compute the arithmetic mean of the numbers and store it in the AX register.</p>
+<figure class="yazi-gorsel"><img src="../sekil-650-05.jpg" width="935" height="1210" loading="lazy" decoding="async" alt="CPUL6ArithmeticLogic: page 5, circuit, table and figures"><figcaption>CPUL6ArithmeticLogic, page 5.</figcaption></figure>
+<h2 id="cpul7control">CPUL7Control</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Program Control Instructions</p>
+<ul><li>Unconditional Jump</li></ul>
+<ul><li>Conditional Jump</li></ul>
+<ul><li>Loops</li></ul>
+<ul><li>Assembly Program Flow Control</li></ul>
+<ul><li>While Loops</li></ul>
+<ul><li>Repeat-Until Loops</li></ul>
+<ul><li>Procedures</li></ul>
+<ul><li>Introduction to Interrupts</li></ul>
+<ul><li>Other Instructions</li></ul>
+<p>Unconditional Jump</p>
+<ul><li>Control instructions allow jumping to another part of the program.</li></ul>
+<ul><li>Control instructions perform conditional jumps based on the state of the flag bits.</li></ul>
+<ul><li>Three types of unconditional jump instructions can be used: short jump, near jump, and far jump.</li></ul>
+<p>Unconditional Jump</p>
+<ul><li>The short jump instruction is 2 bytes long and jumps within the address range of +127 and -128 relative to the current location.</li></ul>
+<ul><li>The near jump is 3 bytes long and jumps within a ±32K range inside the current segment.</li></ul>
+<ul><li>The far jump is 5 bytes long and jumps to any location in memory.</li></ul>
+<ul><li>Short and near jumps are intrasegment jumps; the far jump is an intersegment jump.</li></ul>
+<p>Unconditional Jump: Short jump</p>
+<ul><li>Performs a relative jump within the current segment.</li></ul>
+<ul><li>Instead of the address to jump to, the opcode contains the distance from the current location.</li></ul>
+<ul><li>It is used as JMP SHORT NEXT, where NEXT is the jump target.</li></ul>
+<h3 id="0009h-0017h-0020h">0009H + 0017H = 0020H</h3>
+<p>Unconditional Jump: Near jump</p>
+<ul><li>Like the short jump, the near jump jumps within the same segment, but it covers a longer range than the short jump.</li></ul>
+<ul><li>It jumps within a ±32K range inside the current segment. On 80386 and higher processors in protected mode, it jumps within a ±2G range.</li></ul>
+<p>Unconditional Jump: Far jump</p>
+<ul><li>The far jump takes a new segment and offset address and jumps directly to the desired address.</li></ul>
+<ul><li>The far jump is specified with the FAR PTR instruction or with a far label.</li></ul>
+<p>Conditional Jump</p>
+<ul><li>On 8086-80286 processors, conditional jump instructions perform short jumps.</li></ul>
+<p>Conditional Jump</p>
+<ul><li>They jump within the range of +127 to -128. The MASM v.6X assembler adjusts the distance automatically.</li></ul>
+<ul><li>Conditional jump instructions test the S, Z, C, P, and O flag bits.</li></ul>
+<ul><li>If the tested condition is true (1), the jump to the labeled location is taken; if false (0), the next instruction is executed.</li></ul>
+<ul><li>The comparison produces different results for signed and unsigned numbers.</li></ul>
+<ul><li>For unsigned numbers, FFH (255) is greater than 00H (0).</li></ul>
+<ul><li>For signed numbers, FFH (-1) is less than 00H (0).</li></ul>
+<p>Conditional Jump</p>
+<ul><li>For comparisons of signed numbers, the JG, JL, JGE, JLE, JE, and JNE instructions are used.</li></ul>
+<ul><li>For comparisons of unsigned numbers, the JA, JB, JAE, JBE, JE, and JNE instructions are used.</li></ul>
+<ul><li>The other conditional jump instructions test the flag bits.</li></ul>
+<ul><li>The JCXZ and JECXZ instructions test the CX and ECX registers and jump to the desired location if the register is 0.</li></ul>
+<ul><li>The following example searches for the value 0AH within a 100-byte area.</li></ul>
+<p>Loops</p>
+<ul><li>The LOOP instruction is a combination of decrementing CX and the JNZ conditional jump instruction.</li></ul>
+<ul><li>At each step, the CX register is decremented by 1 and the CX value is tested.</li></ul>
+<ul><li>On 8086-80286 processors, CX is decremented and a jump to the specified label is taken as long as CX&lt;&gt;0. If CX=0, execution continues with the next instruction.</li></ul>
+<ul><li>On 80386 and higher processors, either CX or ECX can be used. The LOOPW instruction uses the CX register and the LOOPD instruction uses the ECX register.</li></ul>
+<p>Conditional LOOP</p>
+<ul><li>The LOOPE (Loop while equal) and LOOPNE (Loop while not equal) instructions repeat the loop as long as CX&lt;&gt;0 and the given condition holds.</li></ul>
+<ul><li>On 80386 and higher processors, either CX or ECX can be used.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>LOOPEW/LOOPNEW and LOOPED/LOOPNED instructions use the CX and ECX</code></pre>
+<p>registers.</p>
+<p>Loops</p>
+<ul><li>In the example, the word-sized data in BLOCK1 is added to BLOCK2.</li></ul>
+<p>Assembly Program Flow Control</p>
+<ul><li>The MASM 6.X assembler provides directives such as .IF,</li></ul>
+<h3 id="else-elseif-endif">.ELSE, .ELSEIF, .ENDIF,</h3>
+<h3 id="repeat-until-while">.REPEAT, .UNTIL, .WHILE</h3>
+<p>and .ENDW.</p>
+<ul><li>The example alongside shows how the operation performed with .IF and .ENDIF is carried out with assembly instructions.</li></ul>
+<p>Assembly Program Flow Control</p>
+<ul><li>The relational operators that can be used with the .IF directive are shown below.</li></ul>
+<p>Example</p>
+<p>Assembler generates</p>
+<p>While Loops</p>
+<ul><li>As in high-level languages, MASM 6.X includes a WHILE loop structure.</li></ul>
+<ul><li>The .WHILE statement marks the condition part, and .ENDW marks the end of the loop.</li></ul>
+<ul><li>The loop is repeated as long as the condition in the .WHILE statement is true. The condition is checked again on every iteration.</li></ul>
+<ul><li>When the condition is no longer true, execution continues with the instruction after the .ENDW statement.</li></ul>
+<ul><li>In the example on the next page, all inputs are stored in an array named BUF in the extra segment until 0DH (Enter) is entered from the keyboard.</li></ul>
+<ul><li>The .BREAK and .CONTINUE statements are used in while loops.</li></ul>
+<ul><li>The .BREAK .IF AL == 0DH instruction exits the loop if AL==0DH.</li></ul>
+<ul><li>The .CONTINUE .IF AL==15 instruction skips the rest of the loop body if AL==15 and continues with the next iteration.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Repeat-Until Loops</code></pre>
+<ul><li>As in high-level languages, MASM 6.X includes a REPEAT-UNTIL loop structure.</li></ul>
+<ul><li>The .UNTIL statement marks the condition part, and .REPEAT marks the start of the loop.</li></ul>
+<ul><li>The statements inside the loop are repeated until the condition is true. The condition is checked again on every iteration.</li></ul>
+<ul><li>When the condition is satisfied, execution continues with the instruction after the .UNTIL statement.</li></ul>
+<ul><li>In the example on the next page, all inputs are stored in an array named BUF in the extra segment until 0DH (Enter) is entered from the keyboard.</li></ul>
+<ul><li>The .UNTILCXZ statement is used in repeat loops, and it checks by decrementing the CX register by one on every iteration.</li></ul>
+<h3 id="ds">DS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Repeat-Until Loops</code></pre>
+<ul><li>In the following example, the CX register is checked by decrementing it on every iteration.</li></ul>
+<ul><li>The loop is repeated as long as CX &lt;&gt; 0.</li></ul>
+<p>Procedures</p>
+<ul><li>Procedures are the reusable parts of programs, and they generally perform only a single function.</li></ul>
+<ul><li>The CALL instruction is used to enter a procedure, and the RET instruction is used to return.</li></ul>
+<ul><li>When a procedure is called, the stack stores the return address.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>The CALL instruction pushes the next address (return) onto the stack.</code></pre>
+<ul><li>The RET instruction takes an address from the stack as the return address.</li></ul>
+<ul><li>A procedure begins with the PROC directive and ends with ENDP. The name of the procedure is specified before both.</li></ul>
+<ul><li>After the PROC directive, the type is specified as NEAR (intrasegment) or FAR (intersegment).</li></ul>
+<ul><li>After the NEAR and FAR directives, the USES directive can be used to specify which registers will be used. The specified registers are automatically pushed and popped on the stack.</li></ul>
+<p>Procedures: Example</p>
+<p>Procedures</p>
+<ul><li>The near return instruction takes a 16-bit value from the stack and assigns it to IP as the return address.</li></ul>
+<ul><li>The far return instruction takes a 32-bit value from the stack and assigns it to IP and CS as the return address.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL</code></pre>
+<ul><li>The CALL instruction calls the named procedure and stores the return address on the stack.</li></ul>
+<ul><li>The near CALL instruction is 3 bytes long. The first byte is the opcode, and the second and third bytes are the displacement to the target (±32K).</li></ul>
+<ul><li>On 80386 and higher processors in protected mode, the displacement is 4 bytes (±2G).</li></ul>
+<ul><li>The far CALL instruction is 5 bytes long. The first byte is the opcode, bytes 2-3 are the new value of IP, and bytes 4-5 are the new value of CS.</li></ul>
+<ul><li>The CALL instruction pushes the IP and CS values onto the stack.</li></ul>
+<p>Procedures</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL - example</code></pre>
+<p>Procedures</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL – calling with a register</code></pre>
+<ul><li>CALL instructions can use a register operand (CALL BX).</li></ul>
+<ul><li>IP is pushed onto the stack and execution transfers to the offset address in BX within the same segment.</li></ul>
+<ul><li>In the following example, the DISP procedure is called with CALL BX.</li></ul>
+<ul><li>The same operation can be performed as CALL DISP.</li></ul>
+<p>Procedures</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CALL – calling with an indirect memory address</code></pre>
+<ul><li>CALL instructions can use indirect addressing (CALL [BX]).</li></ul>
+<ul><li>This is generally useful for using different procedures selected from a lookup table.</li></ul>
+<ul><li>In the following example, execution transfers to the ZERO, ONE, or TWO procedure depending on the value of EBX.</li></ul>
+<ul><li>The CALL FAR PTR [4*EBX] instruction performs a far call, or, if the table is defined as doubleword (DD), the CALL TABLE[4*EBX] instruction performs a far call.</li></ul>
+<p>Procedures</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<ul><li>For a near return, the RET instruction takes a 16-bit number from the stack and assigns it to IP. For a far</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>return, it takes a 32-bit number from the stack and assigns it to IP and CS.</code></pre>
+<ul><li>In the following example, SS=A000 and CS=1000. Before the CALL operation, SP=FFFF and IP=0003.</li></ul>
+<ul><li>After the CALL, SP=FFFD and IP=0FFF.</li></ul>
+<ul><li>After the RET operation, SP=FFFF, IP=0003, and the effective address is 11003.</li></ul>
+<p>Procedures</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RET</code></pre>
+<ul><li>After removing the return address from the stack, the RET instruction can add a specified value to SP. In this way, the parameters that were pushed onto the stack when the procedure was called are discarded by adding an amount equal to their size.</li></ul>
+<ul><li>In the example, AX and BX (4 bytes) are pushed onto the stack before the procedure is called. RET 4 adds 4 to SP after the return address, discarding AX and BX.</li></ul>
+<p>Assignment</p>
+<ul><li>Write a program that takes 100 word-sized numbers located in an area of memory and transfers them, sorted from smallest to largest, to a second array in memory.</li></ul>
+<ul><li>Any sorting algorithm may be used.</li></ul>
+<ul><li>The program will be written with emu8086.</li></ul>
+<ul><li>Both the printout of the assignment and its source code will be submitted; the source code will be sent by e-mail to akcayol@gazi.edu.tr.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-651-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL7Control: page 6, circuit, table, and figures"><figcaption>CPUL7Control, page 6.</figcaption></figure>
+<h2 id="cpul8programming">CPUL8Programming</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Microprocessor Programming</p>
+<ul><li>Macros</li></ul>
+<ul><li>BIOS and DOS Functions</li></ul>
+<ul><li>Keyboard Usage</li></ul>
+<ul><li>Reading a character from the keyboard</li></ul>
+<ul><li>Reading a string from the keyboard</li></ul>
+<ul><li>Screen Functions</li></ul>
+<ul><li>Writing a character to the screen</li></ul>
+<ul><li>Writing a string to the screen</li></ul>
+<ul><li>Screen settings</li></ul>
+<ul><li>Mouse Usage</li></ul>
+<p>Macros</p>
+<ul><li>Macros are used to perform a task like procedures.</li></ul>
+<ul><li>Procedures are called with call; macros are called simply by writing their name.</li></ul>
+<ul><li>Procedures are located at the end of the program; macros are located before the place where they are used.</li></ul>
+<ul><li>A macro consists of the instructions between the MACRO directive and the ENDM directive.</li></ul>
+<ul><li>As with procedures, a name must be entered before the MACRO directive.</li></ul>
+<ul><li>After the MACRO directive, parameters can be defined to pass input from outside.</li></ul>
+<p>Macros - Example</p>
+<p>BIOS and DOS Functions</p>
+<ul><li>With the INT instruction, the BIOS and DOS functions required for certain special operations can be used.</li></ul>
+<ul><li>When the INT instruction is executed, it first pushes the CS:IP and flag values onto the stack.</li></ul>
+<ul><li>Before an interrupt is executed, the relevant values must be loaded into the registers it will use.</li></ul>
+<ul><li>Many subfunctions are defined for each interrupt. Which function will run is determined by the value of the AH register.</li></ul>
+<p>Keyboard Usage: Reading a character with echo to the screen</p>
+<ul><li>It is used with the INT 21H / AH=01h subfunction.</li></ul>
+<ul><li>The character read is stored in the AL register.</li></ul>
+<p>Keyboard Usage: Reading a character without echo to the screen</p>
+<ul><li>It is used with the INT 21H / AH=06h subfunction. For the read operation, the value 0FFh is loaded into the DL register.</li></ul>
+<ul><li>The character read is stored in the AL register, but it is not displayed on the screen. Unlike AH=1, it does not wait; the processor can do other work while waiting.</li></ul>
+<p>Keyboard Usage: Reading a character without echo to the screen - continued</p>
+<p>Keyboard Usage: Reading a string from the keyboard</p>
+<ul><li>It is used with the INT 21H / AH=0Ah subfunction. The string read can be at most 255 characters long.</li></ul>
+<ul><li>It stores the string received until Enter is pressed or 255 characters are reached at the address DS:DX. The first byte stores the buffer size and the second byte stores the number of characters entered.</li></ul>
+<p>Keyboard Usage: Checking whether a key has been pressed</p>
+<ul><li>With the INT 16H / AH=01h subfunction, when a key is pressed it is placed into the buffer.</li></ul>
+<ul><li>With the INT 16H / AH=00h subfunction, the character in the buffer is loaded into AL.</li></ul>
+<p>Screen Functions: Writing a character to the screen</p>
+<ul><li>It is used with the INT 21H / AH=02h subfunction. The character to be written is in the DL register.</li></ul>
+<p>Screen Functions: Writing a string to the screen</p>
+<ul><li>It is used with the INT 21H / AH=09h subfunction.</li></ul>
+<ul><li>The offset address of the string to be written is in the DX register.</li></ul>
+<ul><li>The string must end with $.</li></ul>
+<p>Screen Functions: Screen settings – changing the screen size</p>
+<ul><li>It is used with the INT 10H / AH=00h subfunction.</li></ul>
+<ul><li>The desired screen size is in the AL register.</li></ul>
+<p>For AL = 00h: size=40x25, color=16 colors, pages=8. For AL = 03h: size=80x25, color=16 colors, pages=8. For AL = 13h: size=40x25, color=256 colors, 320x200 pixels, 1 page.</p>
+<p>Screen Functions: Screen settings – cursor position</p>
+<ul><li>The cursor position is set with the INT 10H / AH=02h subfunction.</li></ul>
+<ul><li>The cursor position is read with the INT 10H / AH=03h subfunction.</li></ul>
+<ul><li>In both, DH=row, DL=column, and BH=page number.</li></ul>
+<p>Screen Functions: Screen settings – cursor color attribute</p>
+<ul><li>The cursor attribute is set with the INT 10H / AH=09h subfunction.</li></ul>
+<ul><li>AL=character, BL=color, CX=number of times to write, and BH=page number.</li></ul>
+<p>Mouse Usage: Initializing the mouse</p>
+<ul><li>The mouse is initialized with the INT 33H / AX=0000h subfunction.</li></ul>
+<ul><li>If successful, AX=0FFFFH and BX indicates the number of buttons.</li></ul>
+<ul><li>If unsuccessful, AX=0.</li></ul>
+<p>Mouse Usage: Showing the mouse pointer</p>
+<ul><li>The mouse pointer is displayed with the INT 33H / AX=0001h subfunction.</li></ul>
+<p>Hiding the mouse pointer</p>
+<ul><li>The mouse pointer is hidden with the INT 33H / AX=0002h subfunction.</li></ul>
+<p>Mouse Usage: Detecting mouse buttons and position</p>
+<ul><li>Mouse button and position information is obtained with the INT 33H / AX=0003h subfunction.</li></ul>
+<ul><li>If the left button is pressed, BX=1; if the right button is pressed, BX=2; if both are pressed, BX=3.</li></ul>
+<ul><li>The CX register indicates the x position and the DX register indicates the y position.</li></ul>
+<ul><li>For the scroll button, BX=4.</li></ul>
+<ul><li>When the scroll button is pressed together with the left and right buttons, BX=5 and BX=6 respectively.</li></ul>
+<p>Assignment</p>
+<ul><li>Write a program that searches for a string entered from outside (its size may vary – until Enter is pressed) within a 5000-byte (character) block located in memory.</li></ul>
+<ul><li>If the string is found, the program will print the index number of its first character to the screen; if not found, it will give the user a message.</li></ul>
+<ul><li>The SCAS instruction will not be used for the search. The search will be performed with character-by-character checks.</li></ul>
+<ul><li>The Boyer-Moore search algorithm will be used.</li></ul>
+<ul><li>The program will be written with emu8086.</li></ul>
+<ul><li>The printout of the assignment will be submitted, and the source code will be sent by e-mail to akcayol@gazi.edu.tr.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-652-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL8Programming: page 3, circuit, table, and figures"><figcaption>CPUL8Programming, page 3.</figcaption></figure>
+<p><em>Note: Because the text layer of the arithmetic and logic presentation is corrupted, this section was transcribed from the images using OCR. The header text "CHOROCHRONOS Midter Review / Timos Sellis" is a leftover from the template; the cover reads M. Ali Akcayol and Gazi University.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-gazi-komutlar.zip" download>eem332-gazi-komutlar.zip</a></p>
+              <p class="kucuk">ZIP archive · 7.0 MB · 10.11.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-gazi-komutlar.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

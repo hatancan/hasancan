@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: MOS Operating Regions, Velocity Saturation, and Capacitances, Handwritten Notes — hasancan.net</title>
+<meta name="description" content="Channel formation in NMOS/PMOS, body effect, channel-length modulation, derivation of the velocity-saturation voltage, and calculation of MOS capacitances. A readable text transcription from handwritten study sheets.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: MOS Operating Regions, Velocity Saturation, and Capacitances, Handwritten Notes">
+<meta property="og:description" content="Channel formation in NMOS/PMOS, body effect, channel-length modulation, derivation of the velocity-saturation voltage, and calculation of MOS capacitances. A readable text transcription from handwritten study sheets.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: MOS Operating Regions, Velocity Saturation, and Capacitances, Handwritten Notes", "description": "Channel formation in NMOS/PMOS, body effect, channel-length modulation, derivation of the velocity-saturation voltage, and calculation of MOS capacitances. A readable text transcription from handwritten study sheets.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem312-mos-karakteristik-el-yazisi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: MOS Operating Regions, Velocity Saturation, and Capacitances, Handwritten Notes">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.04.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#gate-insulation-and-channel-formation">Gate insulation and channel formation</a></li><li><a href="#triode-and-saturation-regions">Triode and saturation regions</a></li><li><a href="#channel-length-modulation">Channel-length modulation</a></li><li><a href="#body-effect-in-stacked-nmos-devices">Body effect in stacked NMOS devices</a></li><li><a href="#derivation-of-the-velocity-saturation-voltage">Derivation of the velocity-saturation voltage</a></li><li><a href="#saturation-current-and-equivalent-resistance">Saturation current and equivalent resistance</a></li><li><a href="#example-of-mos-capacitances-at-zero-bias">Example of MOS capacitances at zero bias</a></li><li><a href="#sheet-and-contact-resistance">Sheet and contact resistance</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: MOS Operating Regions, Velocity Saturation, and Capacitances, Handwritten Notes</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 08.04.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p><strong>EEM312 Digital Electronics</strong> archive: this study set consists of handwritten notes, in Turkish and English, on MOS transistors prepared by a friend. They were transcribed to text from photographed pages; personal information was removed. The document carries no date; the archive date of the sources is April 2014. The photographs are kept in a private archive, and no downloadable document is provided.</p>
+<h2 id="gate-insulation-and-channel-formation">Gate insulation and channel formation</h2>
+<p>The notes give the following illustrative dimensions and values:</p>
+<ul><li>SiO₂ thickness: 20–100 nm = 0.02–0.1 µm.</li><li>Insulated-gate current: approximately 10⁻¹⁵ A.</li><li>Channel length L ≈ 1–10 µm and width W ≈ 2–500 µm.</li><li>Short-channel example: L ≈ 0.25 µm, W ≈ 0.375 µm.</li><li>Without gate bias, the drain-source path has resistance on the order of 10¹² Ω.</li></ul>
+<p>These are values written in the archived notes, associated with the technologies studied there.</p>
+<p>An induced n-channel is an inversion layer. V_T is the threshold voltage at which inversion occurs; the notes use positive V_T for enhancement NMOS and negative V_T for enhancement PMOS. <strong>V_GS − V_T</strong> is the excess gate voltage or overdrive.</p>
+<p>With V_DS applied, electrons move from source to drain. Channel potential rises from 0 at the source to V_DS at the drain. The gate-to-channel voltage falls from V_GS to V_GS − V_DS, so the channel tapers toward the drain.</p>
+<h2 id="triode-and-saturation-regions">Triode and saturation regions</h2>
+<p>As V_DS increases, the channel narrows at the drain and its resistance increases. The I_D–V_DS curve bends away from its initial nearly linear part. At <strong>V_DS = V_GS − V_T</strong>, the drain end reaches pinch-off.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Device</th><th scope="col">Channel induced</th><th scope="col">Continuous channel / triode</th><th scope="col">Saturation</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>V_GS ≥ V_T</td><td>V_DS &lt; V_GS − V_T</td><td>V_DS ≥ V_GS − V_T</td></tr><tr><th scope="row">PMOS, signed voltages</th><td>V_GS ≤ V_T</td><td>V_DS &gt; V_GS − V_T</td><td>V_DS ≤ V_GS − V_T</td></tr></tbody></table></div>
+<p>Using <strong>V_GS = V_GD + V_DS</strong>, the notes rewrite the saturation condition as V_GD ≤ V_T for NMOS and V_GD ≥ V_T for PMOS.</p>
+<p>The algebra at the region boundary is:</p>
+<p>(V_GS − V_T)(V_GS − V_T) − (V_GS − V_T)²/2 = (V_GS − V_T)²/2.</p>
+<p>The ideal long-channel saturation picture has constant current beyond pinch-off. The next section adds the channel-length effect.</p>
+<h2 id="channel-length-modulation">Channel-length modulation</h2>
+<p>Increasing V_DS beyond pinch-off extends the depleted drain region and shortens the effective conducting channel. The notes write:</p>
+<p><strong>I_D = ½k′_n(W/L)(V_GS − V_T)²(1 + λV_DS)</strong>.</p>
+<p>Extrapolated saturation curves intersect the V_DS axis at −V_A = −1/λ. V_A is compared to the Early voltage of a BJT. The slope is marked <strong>1/r_o</strong>.</p>
+<p>For the intercept, define Z = ½k′_n(W/L)(V_GS − V_T)². Then 0 = Z(1 + λV_DS) gives V_DS = −1/λ.</p>
+<h2 id="body-effect-in-stacked-nmos-devices">Body effect in stacked NMOS devices</h2>
+<p>The drawing contains two stacked NMOS transistors. The lower source is grounded, with V_SB1 = 0; the upper source is above ground, with V_SB2 ≠ 0. The notes indicate:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">V_SB2</th><th scope="col">&gt;</th><th scope="col">V_SB1</th><th scope="col">⇒ V_T2 &gt; V_T1.</th></tr></thead><tbody></tbody></table></div>
+<p>Increasing source-body reverse bias raises the threshold. A separate warning on the page says that V_SB should remain above approximately −0.6 V for the NMOS example; otherwise the source-body diode becomes forward biased.</p>
+<p><em>Note: A second image of the same body-effect drawing was also among the sources; it was transcribed only once.</em></p>
+<h2 id="derivation-of-the-velocity-saturation-voltage">Derivation of the velocity-saturation voltage</h2>
+<p>The note uses the definitions V_GT = V_GS − V_T and K(V) = 1/[1 + V/(E_cL)]. At the saturation point, the two current expressions are equated:</p>
+<p>v_sat C_ox W(V_GT − V_DSAT)</p>
+<p>= K(V_DSAT) μ_n C_ox(W/L)[V_GT V_DSAT − V_DSAT²/2].</p>
+<p>Using the definition <strong>E_c = 2v_sat/μ_n</strong> on this page:</p>
+<p>V_GT − V_DSAT = K(V_DSAT) V_DSAT(2V_GT − V_DSAT)/(LE_c).</p>
+<p>Substituting K(V_DSAT) = E_cL/(E_cL + V_DSAT):</p>
+<p>V_DSAT(2V_GT + E_cL) = V_GT(E_cL + V_DSAT),</p>
+<p>V_DSAT(V_GT + E_cL) = V_GT E_cL.</p>
+<p>Result:</p>
+<p><strong>V_DSAT = V_GT E_cL/(V_GT + E_cL) = V_GT K(V_GT)</strong>.</p>
+<p>For large V_GT, V_DSAT ≈ E_cL.</p>
+<p><em>Note: The CMOS threshold calculation page of the same set of notes uses the approximation E_c = v_sat/μ, whereas here the definition is 2v_sat/μ. Since the critical-field definitions of the two pages differ, the coefficients should not be carried directly from one to the other.</em></p>
+<h2 id="saturation-current-and-equivalent-resistance">Saturation current and equivalent resistance</h2>
+<p>The other approximation given in the note:</p>
+<p>I_DSAT = v_sat C_ox W[V_GS − (V_T + V_DSAT/2)].</p>
+<p>With V_GS = V_DD and the assumption V_DD ≫ V_T + V_DSAT/2:</p>
+<p>I_DSAT ≈ v_sat C_ox W V_DD.</p>
+<p>R_eq = (3/4)(V_DD/I_DSAT)[1 − (7/9)λV_DD].</p>
+<p>Thus V_DD cancels in the first factor. The note states that in this approximation the resistance becomes largely independent of the supply voltage; the remaining small variation comes from channel-length modulation.</p>
+<h2 id="example-of-mos-capacitances-at-zero-bias">Example of MOS capacitances at zero bias</h2>
+<p>Data given in the source:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parameter</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">t_ox</th><td>6 nm</td></tr><tr><th scope="row">L</th><td>0.24 µm</td></tr><tr><th scope="row">W</th><td>0.36 µm</td></tr><tr><th scope="row">L_D = L_S</th><td>0.625 µm</td></tr><tr><th scope="row">C₀</th><td>3 × 10⁻¹⁰ F/m</td></tr><tr><th scope="row">C_j0</th><td>2 × 10⁻³ F/m²</td></tr><tr><th scope="row">C_jsw0</th><td>2.75 × 10⁻¹⁰ F/m</td></tr></tbody></table></div>
+<p>C_ox = ε_ox/t_ox ≈ 5.7 fF/µm².</p>
+<p>C_GC = WL C_ox ≈ 0.49 fF.</p>
+<p>The source and drain overlap capacitances are each calculated as W C₀; the page gives 0.105 fF. The total gate capacitance on the page is <strong>0.49 + 0.105 + 0.105 = 0.7 fF</strong>.</p>
+<p>Base and sidewall components of the diffusion capacitance:</p>
+<ul><li>C_bottom = C_j0 L_D W = 0.45 fF.</li><li>C_sidewall = C_jsw0(2L_D + W) ≈ 0.44 fF.</li><li>Total diffusion capacitance ≈ <strong>0.89 fF</strong>.</li></ul>
+<p><em>Note: With the written W = 0.36 µm and C₀ = 0.3 fF/µm, the overlap capacitance comes out to 0.108 fF; 0.105 fF is a rounded/different intermediate value used in the source. With this data, the total gate capacitance is approximately 0.708 fF.</em></p>
+<h2 id="sheet-and-contact-resistance">Sheet and contact resistance</h2>
+<p>For a uniform conductive strip:</p>
+<p>R = ρL/A, A = tw ⇒ <strong>R = (ρ/t)(L/W) = R_□(L/W)</strong>.</p>
+<p>R_□ is the sheet resistance; its unit is written as Ω/square. If L and W are scaled up by the same ratio, the L/W ratio and the resistance do not change. The source/drain series resistance in the note is:</p>
+<p>R_S,D = (L_S,D/W)R_□ + R_C.</p>
+<p>R_C is the contact resistance. Series resistance reduces the drain current at the same control voltage. The source lists a low-resistivity surface treatment and widening the transistor as ways to reduce the resistance; after the surface treatment, it gives a value on the order of 1–4 Ω/square.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

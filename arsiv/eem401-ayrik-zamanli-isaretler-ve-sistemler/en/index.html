@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Digital Signal Processing: Course Introduction and Classification of Discrete-Time Signals and Systems — hasancan.net</title>
+<meta name="description" content="The first two lectures of Asst. Prof. Dr. Selda Güney&#x27;s EEM401 Digital Signal Processing course: course content and references, signal types (analog, digital, periodic, energy and power), and classification of discrete-time systems (linearity, time invariance, causality, BIBO stability).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Digital Signal Processing: Course Introduction and Classification of Discrete-Time Signals and Systems">
+<meta property="og:description" content="The first two lectures of Asst. Prof. Dr. Selda Güney&#x27;s EEM401 Digital Signal Processing course: course content and references, signal types (analog, digital, periodic, energy and power), and classification of discrete-time systems (linearity, time invariance, causality, BIBO stability).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Digital Signal Processing: Course Introduction and Classification of Discrete-Time Signals and Systems", "description": "The first two lectures of Asst. Prof. Dr. Selda Güney's EEM401 Digital Signal Processing course: course content and references, signal types (analog, digital, periodic, energy and power), and classification of discrete-time systems (linearity, time invariance, causality, BIBO stability).", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "eem401-ayrik-zamanli-isaretler.zip", "contentUrl": "https://hasancan.net/arsiv/eem401-ayrik-zamanli-isaretler-ve-sistemler/eem401-ayrik-zamanli-isaretler.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM401 Digital Signal Processing: Course Introduction and Classification of Discrete-Time Signals and Systems">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>24.09.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#course-introduction">Course introduction</a></li><li><a href="#1-discrete-time-signals-and-their-classification">1. Discrete-time signals and their classification</a></li><li><a href="#2-discrete-time-systems-and-their-classification">2. Discrete-time systems and their classification</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM401 Digital Signal Processing: Course Introduction and Classification of Discrete-Time Signals and Systems</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 24.09.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post summarizes the first two lectures (Lecture 1 and Lecture 2) of the <strong>EEM401 Digital Signal Processing</strong> course I took from <strong>Asst. Prof. Dr. Selda Güney</strong> at Başkent University in the 2014–2015 fall semester. In the course slides the name appears as "EEM 401 Sayısal Sinyal İşleme" (in the PDF properties it is "Sayısal İşaret İşleme"); the folder name "Elektromanyetik Dalgalar" (Electromagnetic Waves) is incorrect. The original presentations can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="course-introduction">Course introduction</h2>
+<p><strong>References:</strong></p>
+<ol><li>A. V. Oppenheim and R. W. Schafer, <em>Discrete-Time Signal Processing</em>, Prentice Hall, 3rd edition, 2009</li><li>S. K. Mitra, <em>Digital Signal Processing: A Computer Based Approach</em>, McGraw-Hill, 4th edition, 2011</li><li>J. G. Proakis and D. G. Manolakis, <em>Digital Signal Processing: Principles, Algorithms and Applications</em>, Pearson/Prentice Hall, 4th edition, 2010</li></ol>
+<p><strong>Content:</strong> discrete-time signals and systems (basic sequences, sampling, fundamental operations); discrete-time systems and their classification; the discrete-time Fourier transform; the discrete-time Fourier series; sampling in the frequency domain; the fast Fourier transform; the system transfer function in the frequency domain; the z-transform and its applications; digital filter design techniques; FIR and IIR filter design methods.</p>
+<p><strong>Digital signal processing</strong> is based on representing a signal as a sequence of numbers on digital computers or special-purpose digital hardware, and extracting the desired information from that sequence by performing various operations on it. Its goals include amplifying signals, filtering, pattern detection, preparing the signal for the communication channel, preventing interference from other signals, and compensating for sensor deficiencies.</p>
+<ul><li><strong>Advantages:</strong> noise control after sampling, high accuracy, complex algorithms, flexibility (parameter changes), and insensitivity to effects such as electromagnetic interference, environmental conditions, and aging.</li><li><strong>Disadvantages:</strong> discrete-time artifacts, higher power requirements, digital clock and switching interference.</li></ul>
+<p>Block diagram of the system: analog input → A/D converter → digital input signal → digital signal processor → digital output → D/A converter → analog output.</p>
+<h2 id="1-discrete-time-signals-and-their-classification">1. Discrete-time signals and their classification</h2>
+<h3 id="signal-types-and-definitions">Signal types and definitions</h3>
+<p>A <strong>signal</strong> is the mathematically formulated form of the relationship between the independent variables present in a physical phenomenon (for example, the variation over time of the voltage across a circuit element, sound intensity, or temperature).</p>
+<p>Classifications: continuous (analog) – discrete; periodic – aperiodic; energy – power; random – deterministic signals.</p>
+<ul><li><strong>Analog signal</strong>: continuous in both time and amplitude (ECG, EMG, EEG, radar, and speech signals). <strong>Digital signal</strong>: a signal that can take discrete amplitude values at discrete times.</li><li><strong>Periodic signal</strong>: f(t) = f(t + T). For a discrete periodic signal, f[n] = f[n + N], where N is a positive integer. ECG and speech are examples of aperiodic signals.</li><li><strong>Energy signal</strong>: if Σ |f[n]|² (or ∫ |f(t)|² dt) is finite. <strong>Power signal</strong>: if P = lim (1/(2M+1)) Σ |f[n]|² is finite and greater than zero.</li><li><strong>Random signals</strong>: present and future values cannot be calculated or predicted from the past. <strong>Deterministic signals</strong>: values can be calculated from past values and expressed with an exact mathematical formula.</li></ul>
+<p>The table of contents also includes the basic discrete signals, simple mathematical operations on signals, and analog-to-digital/digital-to-analog conversion.</p>
+<h2 id="2-discrete-time-systems-and-their-classification">2. Discrete-time systems and their classification</h2>
+<p>A discrete-time system is a combination of software or hardware that transforms an input sequence into an output sequence. Classification:</p>
+<ul><li><strong>Deterministic and stochastic</strong> systems: a system is deterministic if its input and output are deterministic, and stochastic if they are random.</li><li><strong>Static (memoryless) and dynamic</strong> systems: a system is memoryless if the output at time n depends only on the input at the same instant. Examples: y[n] = a·x[n] and y[n] = n·x[n] + b·x³[n] are static and memoryless (there is no need to store past inputs or outputs). Otherwise the system is dynamic (it has memory).</li><li><strong>Time-variant and time-invariant</strong> systems: if x[n] → y[n] and the input x[n − k] produces the output y[n − k], the system is time-invariant. The test is carried out with two experiments: (1) x[n] → y[n]; (2) x[n − k] → y_k[n]; then check whether y_k[n] = y[n − k].</li><li><strong>Linear and nonlinear</strong> systems: a system that satisfies the principles of additivity (T{x1 + x2} = y1 + y2) and scaling (T{a·x1 + b·x2} = a·y1 + b·y2) is linear. y = x² and y = cos x are not linear.</li><li><strong>Causal and noncausal</strong> systems: a system is causal if the output at time n depends only on present and past inputs (x[n], x[n − 2]) and not on future inputs (x[n + 1], x[n + 2]). In real-time applications, since we cannot know the actual value of the signal in advance, a noncausal system cannot be realized.</li><li><strong>Stable and unstable</strong> systems: stability is an important property in practical applications; unstable systems usually exhibit erratic, extreme behavior. A relaxed system is <strong>BIBO (bounded input – bounded output)</strong> stable if every bounded input produces a bounded output: if |x[n]| ≤ Mx &lt; ∞, then |y[n]| ≤ My &lt; ∞. If y[n] is unbounded for some bounded x[n], the system is unstable.</li><li><strong>Feedback and feedforward (non-feedback)</strong> systems.</li></ul>
+<p>Applications of testing stability, causality, and linearity from the exams appear in later posts (quiz 1, midterm).</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem401-ayrik-zamanli-isaretler.zip" download>eem401-ayrik-zamanli-isaretler.zip</a></p>
+              <p class="kucuk">ZIP archive · 851 KB · 24.09.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem401-ayrik-zamanli-isaretler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (851 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

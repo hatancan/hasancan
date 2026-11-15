@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: Logic Circuits II Lecture Slides – Sequential Circuits, Memory Elements, Analysis and Synthesis (Ertuğrul Eriş, 2009) — hasancan.net</title>
+<meta name="description" content="Ertuğrul Eriş&#x27;s Logic Circuits II (EE540) lecture slides: the sequential circuit model, state table and state diagram, SR, D, JK, T latches and flip-flops, master-slave and edge-triggered flip-flops, analysis of Mealy and Moore machines, excitation tables, and the synthesis of a serial adder, a modulo-8 counter, a 0,2,4,7 counter and a 0101 sequence detector.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: Logic Circuits II Lecture Slides – Sequential Circuits, Memory Elements, Analysis and Synthesis (Ertuğrul Eriş, 2009)">
+<meta property="og:description" content="Ertuğrul Eriş&#x27;s Logic Circuits II (EE540) lecture slides: the sequential circuit model, state table and state diagram, SR, D, JK, T latches and flip-flops, master-slave and edge-triggered flip-flops, analysis of Mealy and Moore machines, excitation tables, and the synthesis of a serial adder, a modulo-8 counter, a 0,2,4,7 counter and a 0101 sequence detector.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: Logic Circuits II Lecture Slides – Sequential Circuits, Memory Elements, Analysis and Synthesis (Ertuğrul Eriş, 2009)", "description": "Ertuğrul Eriş's Logic Circuits II (EE540) lecture slides: the sequential circuit model, state table and state diagram, SR, D, JK, T latches and flip-flops, master-slave and edge-triggered flip-flops, analysis of Mealy and Moore machines, excitation tables, and the synthesis of a serial adder, a modulo-8 counter, a 0,2,4,7 counter and a 0101 sequence detector.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "lojik_devreler_II_eris.zip", "contentUrl": "https://hasancan.net/arsiv/eem211-lojik-devreler-ii-sunulari/lojik_devreler_II_eris.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: Logic Circuits II Lecture Slides – Sequential Circuits, Memory Elements, Analysis and Synthesis (Ertuğrul Eriş, 2009)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.10.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#the-read-me-document">The "Read Me" document</a></li><li><a href="#slides-1-sequential-circuit-modeling-and-memory-elements">Slides 1: Sequential circuit modeling and memory elements</a></li><li><a href="#slides-2-sequential-circuit-analysis">Slides 2: Sequential circuit analysis</a></li><li><a href="#slides-3-sequential-circuit-synthesis">Slides 3: Sequential circuit synthesis</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: Logic Circuits II Lecture Slides – Sequential Circuits, Memory Elements, Analysis and Synthesis (Ertuğrul Eriş, 2009)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 08.10.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post presents the <strong>Logic Circuits II</strong> (course code EE540) lecture material by <strong>Ertuğrul Eriş</strong>, found in the EEM211 Digital Logic Design course folder as a supplementary resource. It consists of three slide decks (<em>Sequential Circuit Modeling and Memory Elements</em>, <em>Sequential Circuit Analysis</em>, <em>Sequential Circuit Synthesis</em>; the first deck was last updated on 8 October 2009) and a "Read Me" document written for the course web page (updated September 2010). The documents do not state which university the course was given at. The slides also use figures taken from Mano's <em>Digital Design</em>. The main content of the slides is summarized below as text; the four original files can be downloaded as a ZIP at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<h2 id="the-read-me-document">The "Read Me" document</h2>
+<p>The document explains that the materials on the course web page are grouped under five headings:</p>
+<ol><li><strong>General:</strong> Lecture notes covering the Logic Circuits I–II courses, the learning outcomes of Logic Circuits II (what a student who successfully completes the course will learn and which skills they will gain), and student survey questions. The survey questions fall into three groups: what was learned in the course, the competencies gained, and evaluation of the instructor.</li><li><strong>Slides:</strong> the PowerPoint slides used in class. The purpose of the slides is to minimize writing on the board and in notebooks, so that the class can proceed in a question-and-answer format. Students are advised to use the course textbook alongside the slides, and, rather than studying solved problems, to try to solve a problem on their own with the knowledge they have learned.</li><li><strong>Laboratory:</strong> experiment sheets and reminders about the <strong>Proteus</strong> simulation software used in the laboratory. The correctness of the answer to a question can be checked by simulating the circuit in Proteus.</li><li><strong>Exams:</strong> previously asked questions and their answers (some with Proteus simulations), common mistakes made in exams, and midterm results.</li><li><strong>Higher education:</strong> articles the instructor has written on higher education (the blog address is given in the document).</li></ol>
+<h2 id="slides-1-sequential-circuit-modeling-and-memory-elements">Slides 1: Sequential circuit modeling and memory elements</h2>
+<h3 id="combinational-and-sequential-circuits">Combinational and sequential circuits</h3>
+<p>The slides begin with the example of a <strong>serial adder</strong>: the numbers x1 = 12 (01100) and x2 = 14 (01110) are input bit by bit, starting from the least significant bit, and at each step the carry of the previous step must be remembered; the output is z = 26 (11010). The need to remember the carry makes the circuit <strong>sequential</strong> rather than combinational.</p>
+<p>Sequential circuits are modeled in three ways: a <strong>mathematical model</strong>, a <strong>state table</strong>, and a <strong>state diagram</strong>.</p>
+<figure class="yazi-gorsel"><img src="../ardisil-devre-genel-yapisi.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="General structure of a sequential circuit: the inputs x1…xn and state variables y1…yr enter the combinational circuit, which produces the outputs z1…zm and the memory inputs Y1…Yr"><figcaption>General structure of sequential circuits: combinational circuit and clocked memory elements</figcaption></figure>
+<h3 id="mathematical-model">Mathematical model</h3>
+<ul><li>Independent variables: the inputs (x1, …, xn) and the state variables (y1, …, yr). If N is the number of states and n is the number of state variables, then N = 2ⁿ, n = log₂N.</li><li>Dependent variables: the next-state functions (Y1, …, Yr) and the output functions (z1, …, zm).</li><li>For the serial adder (y is the carry bit): Y = y'x1x2 + y·x1'x2 + y·x1x2' + y·x1x2 (that is, Y = x1x2 + y·x1 + y·x2) and z = x1 ⊕ x2 ⊕ y.</li></ul>
+<h3 id="memory-elements">Memory elements</h3>
+<ul><li><strong>SR memory element:</strong> Y = S + R'y (S = R = 1 is not used). The analysis of the circuit built with two NOR gates shows that if both inputs change simultaneously, two different results (01 or 10) may occur depending on the gate delays, that is, the outcome is indeterminate. The NAND-gate version is called the S*R* latch.</li><li><strong>Problems and solutions:</strong> if both inputs change at the same time (such as from 01 to 10), the unwanted inputs 00 or 11 may be applied as an intermediate state. Solution: apply an intermediate input that does not change the state, or use a level-type clock (enable) input.</li><li><strong>D (delay) latch:</strong> Y = D.</li><li><strong>JK latch:</strong> Y = Jy' + K'y.</li><li><strong>T latch:</strong> Y = Ty' + T'y.</li><li><strong>Continuous toggling problem:</strong> when 1 is applied to a T element or 11 to a JK element, the output keeps changing as long as the clock level persists; a level-type clock does not solve this. The solution is <strong>edge-triggered memory elements</strong>. In synchronous circuits, if a level-type clock is used and the clock pulse is longer than the sum of the memory and combinational circuit delays (ts &gt; tb + tc), two state changes can occur within one clock pulse.</li><li><strong>Difference between latches and flip-flops:</strong> latches either have no clock or have a level-type clock (enable); flip-flops have only edge-triggered clock inputs.</li><li>The remainder of the slides covers characteristic tables, <strong>master-slave</strong> D and SR elements, the analysis of a <strong>positive-edge-triggered D flip-flop</strong> for the four cases of CLK and D, <strong>setup and hold times</strong> (the time interval during which the input must not change), a D flip-flop with asynchronous reset, and a JK integrated circuit with preset/clear inputs in a practical application.</li><li><strong>Classification of sequential circuits:</strong> synchronous and asynchronous machines; asynchronous machines operate in fundamental mode or pulse mode.</li></ul>
+<p>The final slides (developing the curriculum, Bloom's taxonomy, the Turkish Higher Education Qualifications Framework, and the course assessment matrix) are common to all three decks.</p>
+<h2 id="slides-2-sequential-circuit-analysis">Slides 2: Sequential circuit analysis</h2>
+<p>The first slides give Turkish-English term equivalents: sequential circuit (finite state machine), memory element (storage element), level-clocked element (latch), edge-triggered flip-flop, characteristic table, characteristic equation (next-state function), state table, state diagram, excitation table. The number of state variables n needed to encode N states is the smallest integer satisfying n ≥ log₂N.</p>
+<p>Analysis examples:</p>
+<ul><li>A synchronous <strong>Moore</strong> circuit with JK flip-flops, two state variables, and four states: state table, state diagram, Proteus implementation, and timing diagrams.</li><li>A Moore circuit with T flip-flops and another Moore example with D flip-flops.</li><li>A <strong>Mealy</strong> circuit with D flip-flops and two state variables: state table (in two forms), state diagram, timing diagrams, and Proteus simulation.</li><li>The state table and diagram of a Mealy machine with D and JK flip-flops, followed by <strong>erroneous outputs</strong>: since the output of a Mealy machine depends directly on the input, when the input changes between clock edges, brief incorrect values appear at the output. In the timing diagram these pulses are marked as "harmful" and "harmless"; the Proteus implementation of a circuit with erroneous outputs is also given.</li></ul>
+<h2 id="slides-3-sequential-circuit-synthesis">Slides 3: Sequential circuit synthesis</h2>
+<h3 id="steps-of-synthesis">Steps of synthesis</h3>
+<ol><li>Going from the word description to the state diagram.</li><li>State reduction (what is its effect on the resulting circuit?).</li><li>State assignment (what happens if it is chosen arbitrarily?).</li><li>Determining and minimizing the output functions.</li><li>Selecting the memory elements.</li><li>Determining and minimizing the input functions using the memory elements' <strong>excitation tables</strong>.</li><li>Drawing the circuit.</li></ol>
+<h3 id="excitation-tables">Excitation tables</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">y → Y</th><th scope="col">D</th><th scope="col">T</th><th scope="col">SR</th><th scope="col">JK</th></tr></thead><tbody><tr><th scope="row">0 → 0</th><td>0</td><td>0</td><td>0K</td><td>0K</td></tr><tr><th scope="row">0 → 1</th><td>1</td><td>1</td><td>10</td><td>1K</td></tr><tr><th scope="row">1 → 0</th><td>0</td><td>1</td><td>01</td><td>K1</td></tr><tr><th scope="row">1 → 1</th><td>1</td><td>0</td><td>K0</td><td>K0</td></tr></tbody></table></div>
+<p>(K: arbitrary, i.e., "don't care".)</p>
+<h3 id="serial-adder-circuit">Serial adder circuit</h3>
+<p>Two serial inputs (the numbers X and Y to be added, least significant bit first, one clock pulse per bit) and one serial output (the sum). There are two states: carry 0 and carry 1; therefore a single state variable is sufficient. Synthesis with an SR memory element:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">X1</th><th scope="col">X2</th><th scope="col">y</th><th scope="col">Y</th><th scope="col">S</th><th scope="col">R</th><th scope="col">Z</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>K</td><td>0</td></tr><tr><th scope="row">0</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>0</td><td>0</td><td>K</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>1</td><td>K</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>K</td><td>1</td></tr><tr><th scope="row">1</th><td>0</td><td>1</td><td>1</td><td>K</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>K</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>Result: S = x1x2, R = x1'x2', z = y ⊕ x1 ⊕ x2.</p>
+<figure class="yazi-gorsel"><img src="../seri-toplayici-durum-diyagrami.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="State diagram of the serial adder with carry 0 and carry 1 states, and the state table with SR memory element"><figcaption>State diagram of the serial adder and the SR inputs</figcaption></figure>
+<h3 id="modulo-8-counter">Modulo-8 counter</h3>
+<p>A three-bit counter that advances to the next state at each clock pulse when input X is 1 (S0 → S1 → … → S7 → S0) and holds when X = 0. The input functions with T memory elements:</p>
+<p>T1 = x·y2·y3, T2 = x·y3, T3 = x</p>
+<p>To count clock pulses directly (x = 1): T1 = y2y3, T2 = y3, T3 = 1.</p>
+<h3 id="counter-that-counts-0-2-4-7">Counter that counts 0, 2, 4, 7</h3>
+<p>A counter that counts in the sequence 000 → 010 → 100 → 111 → 000 with three JK memory elements (the outputs are the states themselves, a Moore machine). Taking the four unused states as don't-cares (K):</p>
+<p>J1 = y2, K1 = y2; J2 = 1, K2 = 1; J3 = y1, K3 = 1</p>
+<p>The slides also discuss how the same counter could be built with two JK elements (four states A = 00, B = 01, C = 10, D = 11 and an output decoder): is the number of states minimal, Moore or Mealy, which synthesis is better?</p>
+<p><em>Note: The given J/K functions were checked; they correctly produce the sequence 000 → 010 → 100 → 111 → 000.</em></p>
+<h3 id="sequence-detector">Sequence detector</h3>
+<p>Three different definitions for a circuit that detects the sequence 0101, and the outputs for the same input:</p>
+<pre class="kod"><code>Giriş:                       100101010111001000101
+İç içe dizileri de algılasın: 000001010100000000001
+İç içe olanları algılamasın:  000001000100000000001
+Dörtlü paketlere göre:        000000010000000000000</code></pre>
+<p>The Mealy machine that detects overlapping 0101 sequences: A is the initial state, B "0 received", C "01 received", D "010 received"; state assignment A = 00, B = 01, C = 11, D = 10. Transitions: A –0/0→ B, A –1/0→ A; B –0/0→ B, B –1/0→ C; C –0/0→ D, C –1/0→ A; D –1/1→ C, D –0/0→ B. In the non-overlapping version, when a 1 arrives in D the output is 1 and the machine returns to the initial state (A).</p>
+<figure class="yazi-gorsel"><img src="../dizi-detektoru-0101.jpg" width="1100" height="825" loading="lazy" decoding="async" alt="Mealy state diagram with states A, B, C, D that detects overlapping 0101 sequences"><figcaption>State diagram of the 0101 sequence detector</figcaption></figure>
+<p>Finally, the state diagram and logic circuit of a four-state detector (S0 = 00 … S3 = 11) that detects the sequence 111 are given; the slide asks "Would three states have been sufficient for this sequence? Mealy or Moore?"</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../lojik_devreler_II_eris.zip" download>lojik_devreler_II_eris.zip</a></p>
+              <p class="kucuk">ZIP archive · 10.8 MB · 08.10.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../lojik_devreler_II_eris.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (10.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

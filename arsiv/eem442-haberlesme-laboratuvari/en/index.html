@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM442 Communications II Laboratory: Experiment 1 Quantization-PCM, Experiment 2 µ-Law Companding, Experiment 3 Delta Modulation (MATLAB) — hasancan.net</title>
+<meta name="description" content="EEM442/444 Communications II laboratory, May 2017: uniform quantization and PCM, theoretical and measured SQNR values, voice signal with µ-law companding, linear and adaptive delta modulation; experiment reports and MATLAB code.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM442 Communications II Laboratory: Experiment 1 Quantization-PCM, Experiment 2 µ-Law Companding, Experiment 3 Delta Modulation (MATLAB)">
+<meta property="og:description" content="EEM442/444 Communications II laboratory, May 2017: uniform quantization and PCM, theoretical and measured SQNR values, voice signal with µ-law companding, linear and adaptive delta modulation; experiment reports and MATLAB code.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM442 Communications II Laboratory: Experiment 1 Quantization-PCM, Experiment 2 µ-Law Companding, Experiment 3 Delta Modulation (MATLAB)", "description": "EEM442/444 Communications II laboratory, May 2017: uniform quantization and PCM, theoretical and measured SQNR values, voice signal with µ-law companding, linear and adaptive delta modulation; experiment reports and MATLAB code.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM442 – Haberleşme II", "associatedMedia": {"@type": "MediaObject", "name": "eem442-haberlesme-laboratuvari.zip", "contentUrl": "https://hasancan.net/arsiv/eem442-haberlesme-laboratuvari/eem442-haberlesme-laboratuvari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM442 Communications II Laboratory: Experiment 1 Quantization-PCM, Experiment 2 µ-Law Companding, Experiment 3 Delta Modulation (MATLAB)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem442">EEM442</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM442 – Haberleşme II</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.05.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#experiment-1-quantization-pcm">Experiment 1: Quantization – PCM</a></li><li><a href="#experiment-2-law-companding">Experiment 2: µ-Law companding</a></li><li><a href="#experiment-3-delta-modulation-dm">Experiment 3: Delta modulation (DM)</a></li><li><a href="#matlab-code-the-kod-folder-in-the-zip">MATLAB code (the <code>kod/</code> folder in the ZIP)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM442</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM442 Communications II Laboratory: Experiment 1 Quantization-PCM, Experiment 2 µ-Law Companding, Experiment 3 Delta Modulation (MATLAB)</h1>
+            <p class="kucuk">EEM442 – Haberleşme II · 07.05.2017 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>Three experiment reports and MATLAB functions prepared for <strong>EEM 442/444 Communications II – Laboratory</strong> (May 2017) at Başkent University. I prepared Experiments 1 and 2; Experiment 3 is a friend's report (name and number removed). The reports and code, with student numbers masked, can be downloaded as a ZIP at the end of the post. A second copy of a friend's identical Experiment 1 report found in the folder, and the <code>.wav</code> audio files, have not been published.</p>
+<h2 id="experiment-1-quantization-pcm">Experiment 1: Quantization – PCM</h2>
+<p><strong>Objective:</strong> to implement PCM, one of the baseband digital communication modulations, and the quantization process; to measure quantization noise and SNR values.</p>
+<p><strong>Theory.</strong> Analog-to-digital conversion has two steps: discretization in the time domain (sampling) and discretization in the amplitude domain (<strong>quantization</strong>). In this experiment, a uniform quantizer is examined in MATLAB. If the message is the single tone m(t) = A·cos(2πf_m·t) and the quantization error is assumed to have a uniform probability density, then the message power is ⟨x²⟩ = A²/2, the error power is ⟨e²⟩ = a²/12 (a = 2A/2ⁿ is the step size), and</p>
+<p>SQNR_dB = 10·log10((3/2)·2^{2n}) = 1.76 + 6.02·n</p>
+<p>(n: number of bits per sample).</p>
+<p><strong>Procedure.</strong> The function <code>u_pcm.m</code> is used with a single-tone message: a) the quantized signal is plotted for different numbers of quantization levels; as the number of quantization levels increases, precision and closeness to the original increase (with 8-level quantization the same bit value appears at two different times, whereas with 16 levels different values appear); b) the PCM code is generated for different levels:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t = [0:0.01:10];
+a = sin(t);
+[sqnr8,  aquan8,  code8 ] = u_pcm(a, 8);
+[sqnr16, aquan16, code16] = u_pcm(a, 16);
+[sqnr32, aquan32, code32] = u_pcm(a, 32);
+[sqnr64, aquan64, code64] = u_pcm(a, 64);
+subplot(5,1,1), plot(t,a), title('sampled signal');
+subplot(5,1,2), plot(t,aquan8),  title('8-level quantized signal');
+subplot(5,1,3), plot(t,aquan16), title('16-level quantized signal');
+subplot(5,1,4), plot(t,aquan32), title('32-level quantized signal');
+subplot(5,1,5), plot(t,aquan64), title('64-level quantized signal');</code></pre>
+<p>c) The SQNR values are compared with the calculated values:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Quantization level (Q)</th><th scope="col">SQNR (calculated)</th><th scope="col">SQNR (measured)</th></tr></thead><tbody><tr><th scope="row">8</th><td>19.280</td><td>18.9023</td></tr><tr><th scope="row">16</th><td>25.84</td><td>25.1272</td></tr><tr><th scope="row">32</th><td>31.86</td><td>31.3002</td></tr><tr><th scope="row">64</th><td>37.88</td><td>37.4202</td></tr></tbody></table></div>
+<p><em>Note: For Q = 8 (n = 3), 1.76 + 6.02·3 = 19.82 dB; the table lists 19.280, which is a typo. The measured values are slightly below the theoretical values.</em></p>
+<p><strong>Conclusion.</strong> The result closest to the original sampled signal was obtained with 64-level quantization.</p>
+<h2 id="experiment-2-law-companding">Experiment 2: µ-Law companding</h2>
+<p><strong>Objective:</strong> to implement PCM and quantization with the µ-law companding technique; to measure quantization noise and SNR.</p>
+<p><strong>Theory.</strong> Non-uniform PCM can be realized with uniform quantization by means of compressor and expander structures: compressor → uniform quantizer → expander. For a normalized input with |x| ≤ 1, the µ-law compression function is</p>
+<p>y = [ln(1 + µ|x|) / ln(1 + µ)]·sgn(x),</p>
+<p>and its inverse (expansion) is</p>
+<p>x = [((1 + µ)^{|y|} − 1) / µ]·sgn(y).</p>
+<p><strong>Procedure.</strong> The function <code>mulaw_pcm.m</code> is used with a voice signal (µ = 255; Q = 8, 16, 32, 64):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>x = audioread('history.wav');
+x = x(1:50000);
+[sqnrmu8,  aquanmu8,  codemu8 ] = mulaw_pcm(x, 8,  255);
+[sqnrmu16, aquanmu16, codemu16] = mulaw_pcm(x, 16, 255);
+[sqnrmu32, aquanmu32, codemu32] = mulaw_pcm(x, 32, 255);
+[sqnrmu64, aquanmu64, codemu64] = mulaw_pcm(x, 64, 255);</code></pre>
+<p>Measured SQNR (dB): Q = 8 → 8.2776; Q = 16 → 13.4264; Q = 32 → 19.8473; Q = 64 → 25.9201.</p>
+<p><strong>Conclusion.</strong> The result closest to the original voice was obtained at Q = 64 (the original voice is almost audible); as the quantization level decreases, the voice becomes distorted. As the level was increased, precision increased and a result closer to the original voice signal was obtained.</p>
+<h2 id="experiment-3-delta-modulation-dm">Experiment 3: Delta modulation (DM)</h2>
+<p><strong>Objective:</strong> to implement PCM by means of delta modulation and adaptive delta modulation; to measure quantization noise and SNR.</p>
+<p><strong>Theory.</strong> In PCM each sample is sent with multiple bits, which consumes a lot of power and energy; instead, the <em>changes</em> in the signal can be sent: encoding is done according to whether the difference between two samples is positive or negative (delta modulation), so the number of bits per sample is greatly reduced. A <strong>linear DM</strong> transmitter consists of a hard limiter (comparator), a sampler, and an integrator in the feedback path; the receiver has an integrator and a low-pass filter (LPF). Bit pulses are generated according to the sign of the difference between the input and the approximate signal produced by the feedback; the limiter output is sampled at an f_s much higher than the Nyquist frequency. The LPF smooths the discontinuities; the output differs from x(t) because of quantization errors.</p>
+<p>Three undesirable effects can occur in DM:</p>
+<ol><li>At the beginning, x̂(t) needs several steps to catch up with x(t) (<strong>start-up period</strong>).</li><li>When x(t) stays constant, x̂(t) tracks it with alternating plus and minus steps (<strong>idling noise</strong>).</li><li>If x(t) changes quickly, x̂(t) cannot follow it because it can only change by ±Δ (<strong>slope overload</strong>).</li></ol>
+<p><strong>Adaptive DM</strong> was developed for these problems: the step size is adapted at every sampling instant. The quantized difference sequence gives information about the slope of the waveform: if successive signs alternate, the slope is small; if they have the same sign, the slope is steep. According to Jayant's simple rule, Δ(n) = Δ(n − 1)·K^{ε(n)·ε(n−1)} (K: a constant that minimizes local distortion, K &gt; 1).</p>
+<p><strong>Procedure.</strong> The files <code>delta_mod.m</code> and <code>adpt_delta_mod.m</code> are used with a voice signal; linear DM is tried for Δ = 1, 0.1, 0.01, and 0.001. <strong>Conclusion:</strong> SQNR increased as Δ became smaller, but at the last value SQNR dropped again because of slope overload.</p>
+<h2 id="matlab-code-the-kod-folder-in-the-zip">MATLAB code (the <code>kod/</code> folder in the ZIP)</h2>
+<p>The functions are <code>u_pcm.m</code> (uniform PCM), <code>mulaw.m</code>, <code>invmulaw.m</code>, <code>mulaw_pcm.m</code>, <code>delta_mod.m</code>, <code>adpt_delta_mod.m</code>, and example scripts. The two core functions:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [ sqnr, a_quan, code ] = u_pcm( a, n )
+% uniform PCM encoding of a sequence; n = number of quantization levels
+amax = max(abs(a));
+a_quan = a/amax;
+b_quan = a_quan;
+d = 2/n;
+q = d.*[0:n-1];
+q = q-((n-1)/2)*d;
+for i=1:n
+    a_quan(find((q(i)-d/2&lt;=a_quan) &amp; (a_quan&lt;=q(i)+d/2)))= q(i).*ones(1,length(find((q(i)-d/2&lt;=a_quan) &amp; (a_quan&lt;=q(i)+d/2))));
+    b_quan(find( a_quan== q(i) )) = (i-1).*ones(1,length(find( a_quan== q(i) )));
+end
+a_quan = a_quan*amax;
+nu = ceil(log2(n));
+code = zeros(length(a),nu);
+for i = 1:length(a)
+    for j=nu:-1:0
+        if ( fix(b_quan(i)/2^j) == 1)
+            code(i,(nu-j)) = 1;
+            b_quan(i) = b_quan(i) - 2^j;
+        end
+    end
+end
+sqnr = 20*log10(norm(a)/norm(a-a_quan));
+end</code></pre>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [X_quan, sqnr]=delta_mod(X,delta)
+l = size(X,2);
+Y_quan = zeros(1,l);
+X_quan = zeros(1,l);
+if X(1) &gt;= 0, epsi = 1; else epsi = -1; end
+Y_quan(1) = epsi * delta;
+X_quan(1) = Y_quan(1);
+for n = 2:l
+    if X(n) &gt;= X_quan(n-1), epsi = 1; else epsi = -1; end
+    Y_quan(n) = epsi * delta;
+    X_quan(n) = X_quan(n-1) + Y_quan(n);
+end
+sqnr = 20*log10(norm(X)/norm(X-X_quan));</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem442-haberlesme-laboratuvari.zip" download>eem442-haberlesme-laboratuvari.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.7 MB · 07.05.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem442-haberlesme-laboratuvari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

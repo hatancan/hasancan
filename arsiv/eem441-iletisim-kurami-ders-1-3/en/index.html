@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM441 Communications I: Communication Theory Lecture Slides 1–3 (ELK 307, Nihat Kabaoğlu) — hasancan.net</title>
+<meta name="description" content="An overview of communication systems, fundamentals of signals and systems, the Fourier transform, spectral density, the Hilbert transform, and envelopes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM441 Communications I: Communication Theory Lecture Slides 1–3 (ELK 307, Nihat Kabaoğlu)">
+<meta property="og:description" content="An overview of communication systems, fundamentals of signals and systems, the Fourier transform, spectral density, the Hilbert transform, and envelopes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM441 Communications I: Communication Theory Lecture Slides 1–3 (ELK 307, Nihat Kabaoğlu)", "description": "An overview of communication systems, fundamentals of signals and systems, the Fourier transform, spectral density, the Hilbert transform, and envelopes.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM441 – Haberleşme I", "associatedMedia": {"@type": "MediaObject", "name": "iletisim-kurami-ders-1-3.zip", "contentUrl": "https://hasancan.net/arsiv/eem441-iletisim-kurami-ders-1-3/iletisim-kurami-ders-1-3.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM441 Communications I: Communication Theory Lecture Slides 1–3 (ELK 307, Nihat Kabaoğlu)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem441">EEM441</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM441 – Haberleşme I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>02.11.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#lecture-1-overview-of-communication-systems">Lecture 1: Overview of communication systems</a></li><li><a href="#lecture-2-fundamentals-of-signals-and-systems">Lecture 2: Fundamentals of signals and systems</a></li><li><a href="#lecture-3-energy-and-power-spectral-density-linear-systems">Lecture 3: Energy and power spectral density, linear systems</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM441</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM441 Communications I: Communication Theory Lecture Slides 1–3 (ELK 307, Nihat Kabaoğlu)</h1>
+            <p class="kucuk">EEM441 – Haberleşme I · 02.11.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>The first three presentations of the ELK 307 Communication Theory-I course (Nihat Kabaoğlu). The recommended textbook is Simon Haykin, <em>Communication Systems</em> (4th edition, Wiley, 2001); other references include the books by Couch and Ziemer–Tranter, as well as the Turkish-language communication theory book by Haluk Derin and Murat Aşkar. The lecture slides belong to the ELK 307 Communication Theory-I course and to Nihat Kabaoğlu (the institution is not stated in the document); they were added to this course because they were found in the EEM441 folder. PDF copies of the slides are in the ZIP at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution. It will be removed at the request of the rights holder.</em></p>
+<h2 id="lecture-1-overview-of-communication-systems">Lecture 1: Overview of communication systems</h2>
+<h3 id="recommended-books">Recommended Books</h3>
+<p>Simon Haykin, "Communication Systems", Fourth Edition, Wiley, 2001, ISBN: 047117869-1 (to be followed in the course).  Digital &amp; Analog Communication Systems, (7/E, PEARSON), Leon W. Couch, ISBN-10: 0131424920, ISBN-13:  R.E. Ziemer, W.H. Tranter, "Principles of Communication Systems, Modulation and Noise", 5th Edition, ISBN:</p>
+<h3 id="other-useful-resources">Other Useful Resources</h3>
+<p> Haluk Derin, Murat Aşkar, "Communication Theory: Modulation Methods, 2nd edition",  Demir Öner, "Communication Theory-I Course  J.G.Proakis, M.Salehi, "Fundamentals of Communication Systems", Prentice-Hall,</p>
+<h3 id="contents">Contents</h3>
+<p>Overview of Communication Systems; Elements of a Communication System; Limitations of Communication Systems; Analog and Digital Messages; Modulation and the Necessity of Modulation; Advantages of Digital Communication over Analog Communication; Fundamentals of Signals and Systems; Trigonometric and Exponential Fourier Series and the Fourier Transform; Transmission of Signals Through Linear Systems; Energy and Power Spectra, Auto- and Cross-Correlation Functions; The Hilbert Transform and Its Properties, Pre-Envelope and Complex Envelope Concepts; Bandpass Signals and Systems; Phase and Group Delay</p>
+<p>Double-Sideband and Single-Sideband Modulation; Narrowband Frequency Modulation; Wideband Frequency Modulation; Generation and Demodulation of Frequency-Modulated Signals; Sampling and Pulse Modulation; Time-Division Multiplexing; Frequency-Division Multiplexing; Pulse Modulation: PAM, PPM, PWM, PCM; Bandwidth, Information Transmission Rate, Channel Capacity</p>
+<h3 id="introduction">Introduction</h3>
+<p>The purpose of a communication system is to transmit information from a point called the SOURCE to another point called the DESTINATION.  Telephone, radio, and television are the most common examples of communication systems.  Communication systems are classified according to the type of communication.  In design, various factors are considered, such as the number of sources, the number of users, the distance, whether users are stationary or mobile, and the reliability and security of the system.</p>
+<h3 id="elements-of-a-communication-system">Elements of a Communication System</h3>
+<p> A typical communication system is as follows</p>
+<h3 id="elements-of-a-communication-system">Elements of a Communication System</h3>
+<p>Source: Generates messages such as human voice, light, or heat.  Input Transducer: Converts the non-electrical input message into an electrical waveform (baseband signal).  Transmitter: Modifies the baseband signal for efficient transmission.  Transmission Medium (Channel): The medium to which the transmitter output is sent (coaxial cable, waveguide, optical fiber, or  Receiver: Processes the received signal in order to eliminate the effects of the modifications made at the transmitter and in the channel.  Output Transducer: Converts the electrical waveform into the original form needed by the user.  Destination: The unit to which the message is delivered, such as a human or a computer.</p>
+<h3 id="limitations-of-communication-systems">Limitations of Communication Systems</h3>
+<p>The transmitted signal is subject to the following undesired effects caused by the transmission medium: NOISE: Random and unpredictable signals generated by natural processes outside or inside the system. External Noise Sources: Such as switches of electrical devices, automobile ignition radiation, fluorescent lights, solar radiation, and electrical storms. When necessary precautions are taken, external noise can be minimized or even eliminated. Internal Noise Sources: The thermal motion of electrons in conductors (thermal noise), and the random emission, diffusion, or recombination of charge carriers in electronic devices (shot noise). When necessary precautions are taken, internal noise can be reduced, but it can never be eliminated.</p>
+<p>One of the most fundamental factors limiting the communication rate is the Signal-to-Noise Ratio (SNR). As the distance from the transmitter increases, the noise level rises while the signal power decreases. Therefore, the SNR decreases continuously along the channel. Amplifying the received signal in order to counter attenuation also amplifies the noise. Moreover, in such a case, the SNR will deteriorate even further because of the noise generated by the amplifier circuit. Some special filters are used at the receiver to improve the SNR.</p>
+<p>ATTENUATION: Defined as the decrease in signal power as the signal travels through the transmission medium. It is also called transmission loss. It is directly proportional to distance and frequency. When the atmosphere is used as the transmission medium, rain and snow also increase attenuation. Attenuation can be counteracted by using repeaters along the transmission medium and, at the receiver, by using special filters (equalizers) whose amplitude and phase characteristics are the inverse of those of the channel. DISTORTION: Defined as changes in the waveform caused by the imperfect response of the system. Distortion alters the shape of the transmitted signal. Output Signal (Distorted)</p>
+<p>To prevent distortion, the system bandwidth should be chosen within the region where the system response characteristic is constant, and the system bandwidth should be greater than the signal bandwidth. However, it is generally not possible to satisfy these conditions in practical applications. In the case of linear distortion, the distortion can be eliminated or minimized by using an equalizer at the receiver. INTERFERENCE: Occurs due to the combination of two or more signals in the same frequency band. Interference may produce a stronger signal as a result of two signals adding together, or a weaker signal as a result of an interaction in which they reduce each other's power.</p>
+<h3 id="analog-and-digital-messages">Analog and Digital Messages</h3>
+<p> Analog Messages: Characterized by data whose values vary over a continuous range. Examples of Analog Messages: The atmospheric pressure or temperature of a given region, the audio signal at the output of a microphone, etc.  Digital Messages: Composed of a finite number of symbols. Examples of Digital Messages: A telegraph message encoded in Morse code, computer Note: A binary digital message consists of two symbols. An M-ary digital message consists of M symbols.</p>
+<p>The task of the receiver is to recover the message from the noisy and distorted signal at the channel output.  Since digital messages are transmitted using a finite set of electrical signals, extracting the message from digital signals is easier than for analog ones. Received signal (Noise-free) Received signal (Noisy) Signal regenerated at the receiver</p>
+<h3 id="modulation">Modulation</h3>
+<p> It is not always possible to transmit baseband signals generated by various information sources directly over a given channel. Therefore, the baseband signal is used to vary some parameters of a high-frequency carrier signal. This process is known as MODULATION.  At the receiver, in order to recover the baseband signal, the signal undergoes a process that is the inverse of the modulation performed at the transmitter, called DEMODULATION.</p>
+<p>Depending on the type of carrier wave, there are two types  Continuous-Wave Modulation: Here the carrier is a high-frequency sinusoid. One of the parameters of this sinusoid (amplitude, frequency, or phase) is varied in proportion to the amplitude of the baseband signal. Analog Continuous-Wave Modulation: Here the modulating signal is analog. Amplitude Modulation (AM), Frequency Modulation (FM)1 and Phase Modulation (PM)1 1: FM and PM are sometimes also referred to together as Angle Modulation.</p>
+<p>Modulating (baseband) signal; Amplitude-modulated wave; Frequency- or phase-modulated wave</p>
+<p>Digital Continuous-Wave Modulation: Here the modulating signal is digital, and this signal varies the amplitude, frequency, and phase of the sinusoidal carrier in proportion to its own amplitude. Depending on whether the modulating signal is binary or M-ary, there are two types of digital continuous-wave modulation.  Binary Modulation: Here, the modulating signal consists of non-return-to-zero (NRZ) rectangular pulses. The modulated parameter is keyed from one discrete value to another. In this way the following modulation methods are obtained: Amplitude Shift Keying (ASK) or On-Off Keying (OOK); Frequency Shift Keying (FSK); Phase Shift Keying (PSK) or Phase Reversal Keying (PRK)</p>
+<p>Digitally Modulated Waveforms; (a) Baseband signal</p>
+<p>Other binary modulation types are: Differential PSK (DPSK); Minimum Shift Keying (MSK), also known as Fast FSK or Continuous-Phase PSK  Quadrature-Carrier Modulation: A modulation that uses two carriers in phase quadrature. Quadrature Amplitude Modulation (QAM) is a typical example of this modulation type.  M-ary Modulation: A modulation type that uses M symbols for communication. The M symbols are one of the following: M different amplitude levels (multi-amplitude signaling); M different phases (multi-phase signaling); a combination of M different amplitudes and phases (M-ary APK)</p>
+<p>4-ary multi-amplitude alphabet; 4-ary multi-amplitude signal</p>
+<p> Pulse Modulation: Here the carrier is a periodic pulse train. The amplitude, width, and position of the pulses are varied in proportion to the amplitude of the baseband signal, yielding the following modulation types: Pulse Amplitude Modulation (PAM); Pulse Width Modulation (PWM) or Pulse Duration Modulation (PDM); Pulse Position Modulation (PPM). By appropriately encoding the PAM signal:  Pulse Code Modulation (PCM)  Differential Pulse Code Modulation (DPCM)  Adaptive Delta Modulation (ADM)</p>
+<h3 id="the-necessity-of-modulation">The Necessity of Modulation</h3>
+<p>Modulation Provides Efficient Radiation: For electromagnetic energy to be radiated efficiently, the dimensions of the transmitting antenna must be on the order of one-tenth of the wavelength of the radiated signal or larger. Considering the equation λ=c/f (c=3x10^8 m/s), it can be seen that the antenna size decreases as the carrier frequency increases. For example, the wavelength of a voice signal in the band between f = 100 Hz and 3000 Hz is between λ = 3000 km and 100 km. If this voice signal is transmitted by modulating a carrier of f = 100 MHz, the wavelength drops to λ = 3 m. For this reason, modulation is needed in order to shift the frequency components of the baseband signal to the frequency of the carrier signal.</p>
+<p>Modulation Enables Simultaneous Transmission: Modulation is necessary so that many baseband signals can be transmitted simultaneously over the same transmission medium. The following methods are used for simultaneous transmission: Frequency-Division Multiplexing (FDM): Different carrier frequencies are used to modulate each baseband signal. In this method, the carrier frequencies are chosen far enough apart to prevent the spectra of the modulated signals from overlapping and interfering with each other. At the receiver, tunable bandpass filters are used to select the desired station or signal. In this way, the channel bandwidth is shared among various signals without any overlap.</p>
+<p>Time-Division Multiplexing (TDM): Baseband signals are converted into PAM signals consisting of narrow pulses. The spacing between the pulses of one signal is used for the pulses of other signals. In this way, the pulses of various signals are interleaved, and the transmission time is shared among a certain number of signals. At the receiver, the pulse trains are separated from one another according to the order in which they were placed. Modulation Reduces the Effects of Noise and Interference: Frequency and phase modulation make it possible to control the transmission bandwidth and the SNR.</p>
+<h3 id="coding">Coding</h3>
+<p>Coding is a symbol-processing operation required for reliable digital transmission. Encoding converts the digital message into a new sequence of symbols, and decoding converts the encoded sequence back to its original form (the message). During this conversion, a few errors, possibly caused by data corruption during transmission, may also be corrected. Error-control codes are used to eliminate the effects of errors that may occur due to channel noise or other imperfections. By adding extra "check bits" to each binary codeword, it is possible to detect and even correct the vast majority of errors. In fact, with this method redundancy is added to the message and the signal bandwidth is increased, but this also increases communication reliability. Example: If a 1 is appended to the codeword 0001 to make the number of 1s even, the new codeword becomes 00011. The decoder at the receiver checks whether the number of ones is even. If this number is not even, the receiver recognizes that an error occurred during transmission and requests that the message be retransmitted. This method is known as even parity checking.</p>
+<h3 id="advantages-of-digital-communication-over-analog">Advantages of Digital Communication over Analog</h3>
+<p>Communication: Digital communication is more robust against channel noise and distortion. Repeaters used along the transmission path detect the digital signal and retransmit it free of noise. In this way, the accumulation of noise along the transmission path is prevented. This is not possible in analog communication. Digital circuit implementations are flexible and allow the use of microprocessors, digital switching, and large-scale integrated circuits. Digital signals can be transmitted with a very low error rate and high accuracy, and Multiplexing of digital signals is quite easy and more efficient. Digital communication is far superior to analog communication in terms of controlling bandwidth and SNR. For all of the above reasons, digital communication is generally preferred over analog communication.</p>
+<h2 id="lecture-2-fundamentals-of-signals-and-systems">Lecture 2: Fundamentals of signals and systems</h2>
+<h3 id="contents">Contents</h3>
+<p> Fundamentals of Signals and Systems; Trigonometric and Exponential Fourier Series; The Fourier Transform and Its Properties; The Unit Impulse (Dirac Delta) Function; Transmission of Signals Through Linear Systems</p>
+<h3 id="signals">Signals</h3>
+<p> A signal can be defined as a set of information or data. A telephone or television signal. The sales figures of an organization by day of the month  However, in this course we deal with signals that are functions of time.  For a waveform to be physically realizable, it must have finite bandwidth and take finite, real values.</p>
+<h3 id="classification-of-signals">Classification of Signals</h3>
+<p> Continuous-time and discrete-time signals  Analog and digital signals  Deterministic and random signals  Periodic and non-periodic signals  Energy and power signals</p>
+<h3 id="continuous-time-and-discrete-time-signals">Continuous-Time and Discrete-Time Signals</h3>
+<p> Signals specified at every instant of time are defined as continuous-time signals.  Signals specified only at certain instants of time are defined as discrete-time signals. Continuous-Time Signal; Discrete-Time Signal</p>
+<p> A discrete-time signal can be obtained by sampling a continuous-time signal.  In some cases it is also necessary to return from the discrete-time signal to the continuous-time signal.  The continuous-time signal can be recovered after sampling carried out in accordance with the Sampling Theorem.  The sampling theorem states the following: If the highest frequency in the spectrum of the signal is B, it is possible to reconstruct the signal using samples taken from it at a rate of no fewer than 2B samples per second.</p>
+<h3 id="analog-and-digital-signals">Analog and Digital Signals</h3>
+<p> Signals whose amplitude values are taken from a continuous range are called analog signals.  The concepts of analog and digital signals are not the same as those of continuous-time and discrete-time signals.  This is because a signal can be digital and continuous-time, as well as analog and discrete-time.</p>
+<p> It is possible to obtain a digital signal from an analog signal by using a quantizer.  The amplitude of the analog signal is divided into L intervals.  Each sample value is rounded to the value at the midpoint of the interval in which the original value lies.  Quantization is a lossy process. Note: Therefore, a digital discrete-time signal is obtained by sampling and quantizing an analog continuous-time signal. (Encoding is assumed to be performed as well)</p>
+<h3 id="deterministic-and-random-signals">Deterministic and Random Signals</h3>
+<p> A signal whose physical description is completely known is called a deterministic signal.  A signal described only by its statistical properties is called a random signal.</p>
+<h3 id="periodic-and-non-periodic-signals">Periodic and Non-Periodic Signals</h3>
+<p> If, for some constant positive value T0, the following holds, f(t) is said to be periodic.  If it does not satisfy this condition, the signal is said to be non-periodic.  Some commonly known periodic signals</p>
+<p>Non-Periodic Signal</p>
+<h3 id="energy-and-power-signals">Energy and Power Signals</h3>
+<p>The energy of a real signal f (t ) is defined as E f. For a complex-valued signal, If E f &lt; ∞, then the signal f (t ) is an energy signal. Note! The average power of energy signals is zero!</p>
+<p>The necessary condition for the energy to be finite is that the signal amplitude goes to zero as time goes to infinity. When dealing with signals of infinite energy (for example periodic signals), it is more meaningful to deal with the power of the signal rather than its energy. Power signals physically continue forever or suddenly take an infinite value. If a signal satisfies the condition, it is said to be a power signal.  A signal cannot be both an energy signal and a power signal at the same time.</p>
+<p>Example of an energy signal: the energy of the signal whose graph is given above</p>
+<p>Example of a power signal: let us compute the power of g (t ) = A cos (ω0t + θ ).</p>
+<p>A signal is classified as either a power signal or an energy signal. Power signals may or may not be periodic.  Energy signals are not always periodic.</p>
+<h3 id="trigonometric-and-exponential-fourier">Trigonometric and Exponential Fourier</h3>
+<p>A physically realizable signal f(t) that is periodic with period T0 can be expanded into a Fourier series: Trigonometric Fourier Series; Exponential Fourier Series</p>
+<p>Here, ω0 = 2π f 0 = 2π T0 is the fundamental frequency, and nω0 denotes the nth harmonic frequency. a0 , an , bn , C0 , Cn , θn and Gn are constants defined as follows:</p>
+<p>Symmetry in Fourier Series: If f(t) has odd symmetry, then an = 0 for all n = 0, 1, 2, …. That is, the series contains only sine terms. If f(t) has even symmetry, then bn = 0 for all n = 0, 1, 2, …. That is, the series contains only cosine terms.</p>
+<h3 id="example">Example</h3>
+<p>Expand the signal given above into a Fourier series.</p>
+<h3 id="example-continued">Example (continued)</h3>
+<p>Using these data, we can plot:  the variation of amplitude Cn with ω → Amplitude Spectrum  the variation of phase θn with ω → Phase Spectrum. These two plots together constitute the frequency spectrum of f(t)</p>
+<h3 id="example">Example</h3>
+<p>The phase is odd-symmetric, while the amplitude is even-symmetric</p>
+<h3 id="the-fourier-transform">The Fourier Transform</h3>
+<p>Periodic signals were represented by expanding them into Fourier series. Similarly, non-periodic signals can also be expressed in terms of their frequency components using the Fourier transform.  The Fourier transform of a non-periodic signal f(t)</p>
+<p>The inverse Fourier transform is</p>
+<h3 id="example">Example</h3>
+<p>Find the Fourier transform of the signal given below.</p>
+<p>Find the Fourier transform of the signal f (t ) = A cos (ω0t ). Plot the frequency spectrum.</p>
+<h3 id="example-continued">Example (Continued)</h3>
+<p>Two-sided amplitude spectrum; One-sided amplitude spectrum. Note!!! Since f(t) is an even-symmetric function, the phase spectrum is zero.</p>
+<h3 id="properties-of-the-fourier-transform">Properties of the Fourier Transform</h3>
+<p> Linearity (Superposition) Property</p>
+<p> Symmetry or Duality Property</p>
+<p> Time-Shifting Property  Frequency-Shifting Property</p>
+<p> Frequency-Shifting Property</p>
+<p> Area Under g(t) and G(f)</p>
+<p> Complex Conjugate Property</p>
+<h3 id="unit-impulse-function">Unit Impulse Function</h3>
+<p> Fourier Transform of the Unit Impulse Function</p>
+<h3 id="applications-of-t">Applications of δ ( t )</h3>
+<p> Unit Step Signal</p>
+<h3 id="transmission-of-signals-through-time-invariant">Transmission of Signals Through Time-Invariant</h3>
+<p>Linear Systems: If a system is both linear and time-invariant, then the input-output relationship of this system is as follows</p>
+<p>Transmission Through Linear Systems: This expression is called the convolution integral, and the output expression can also be written using the symbolic notation for convolution. The convolution integral defines the relationship between the input time function and the output time function of a linear system in terms of the unit impulse response h (t ) of the system.</p>
+<p>Transmission Through Linear Systems: Convolution of the functions whose graphs are given below</p>
+<h3 id="example-continued">Example (Continued)</h3>
+<p>t &lt; −3 ⇒ no overlap, f (t ) = 0; t &gt; 3 ⇒ no overlap, f (t ) = 0</p>
+<h2 id="lecture-3-energy-and-power-spectral-density-linear-systems">Lecture 3: Energy and power spectral density, linear systems</h2>
+<h3 id="contents">Contents</h3>
+<p> Fundamentals of Signals and Systems; Energy and Power Spectral Density; Auto- and Cross-Correlation Functions; The Hilbert Transform and Its Properties; Pre-Envelope and Complex Envelope Concepts; Bandpass Signals and Systems; Phase and Group Delay</p>
+<h3 id="energy-and-power-spectra">Energy and Power Spectra</h3>
+<p>Both deterministic and non-periodic signals  Periodic signals and random signals are power signals. Energy Spectral Density: This relationship is known as Parseval's theorem and states the following: The total energy of a signal f(t) is equal to the total energy of all the frequency components of f(t).</p>
+<p>F (ω ) is the amplitude spectrum of f (t ). Ψ f (ω ) = F (ω ) is defined as the energy spectral density. The unit of Energy Spectral Density is [Joule / Hz].</p>
+<p>Power Spectral Density: If f(t) is a power signal, it has infinite energy over the interval (-∞,∞). To find the Fourier transform, the truncated version fT(t) of f(t) must be used.</p>
+<p>In this case, the power spectral density of f(t) is: The unit of Power Spectral Density is [Watt / Hz].</p>
+<h3 id="autocorrelation-function">Autocorrelation Function</h3>
+<p> The autocorrelation function is a measure of the similarity or agreement between a signal and a version of itself delayed by a certain amount. For Energy Signals:</p>
+<p>For Power Signals (Periodic):</p>
+<h3 id="cross-correlation-function">Cross-Correlation Function</h3>
+<p> A measure of the similarity or agreement between a signal and a version of another signal delayed by a certain amount.</p>
+<p>For Power Signals (Periodic): If the signals have the same period T0,</p>
+<h3 id="transmission-through-linear-systems">Transmission Through Linear Systems</h3>
+<p>Unit Impulse Response; Relationship Between Input and Output Energy Spectral Densities</p>
+<p>Low-pass system: The frequency range over which the amplitude response drops to 1 2 of its value at zero frequency is called the 3 dB bandwidth.</p>
+<h3 id="distortionless-transmission">Distortionless Transmission</h3>
+<p>More generally, There can be two types of distortion in transmission: 1. Amplitude distortion</p>
+<h3 id="the-hilbert-transform">The Hilbert Transform</h3>
+<p>Inverse Hilbert Transform</p>
+<h3 id="example">Example</h3>
+<p>Similarly, for g ( t ) = sin ( 2π f c t )</p>
+<h3 id="properties-of-the-hilbert-transform">Properties of the Hilbert Transform</h3>
+<p>The spectral densities of gˆ (t ) are the same.  The autocorrelation functions of g (t ) and gˆ (t ) are the same.  The Hilbert transform of gˆ (t ) is −g (t ). Physical Meaning of the Hilbert Transform: This filter performs no amplification or attenuation; the amplitudes of the frequency components do not change. However, this filter shifts the phase of each frequency component by 90°. Giving a 90° phase shift to each frequency component does not mean giving the signal a constant delay. This is because a 90° phase difference corresponds to different delay times for each frequency component.</p>
+<h3 id="complex-envelope">Complex Envelope</h3>
+<p>The baseband form of the pre-envelope of a narrowband signal g(t) is called the Complex Envelope and is denoted by g t. g s ( t ): Quadrature Component g ( t ) = g c ( t ) cos ( 2π f c t ) − g s ( t ) sin ( 2π f c t ) Canonical Form</p>
+<h3 id="overview-of-envelopes">Overview of Envelopes</h3>
+<ul><li>Can be low-pass or bandpass. - Generally complex-valued. - It is a low-pass signal. - It is the shifted version of the pre-envelope. - It is the magnitude of the complex envelope or pre-envelope. - It is always real-valued and low-pass.</li></ul>
+<h3 id="bandpass-systems">Bandpass Systems</h3>
+<p>Bandpass systems, like bandpass signals, are represented in canonical form or in terms of the complex envelope. For a bandpass system with unit impulse response h(t): The response of a bandpass system to a bandpass signal:</p>
+<p>With the help of complex envelopes, it is possible to arrive at the output expression more simply.</p>
+<h3 id="group-and-phase-delay">Group and Phase Delay</h3>
+<p> Consider the following nonlinear system whose phase is β ( f ).</p>
+<p><em>Note: The text was automatically extracted from the slides and edited; equations and figures could not be rendered as text, so the corresponding parts have been omitted. Please see the PDF files at the end of the post for the full version.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../iletisim-kurami-ders-1-3.zip" download>iletisim-kurami-ders-1-3.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.1 MB · 02.11.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../iletisim-kurami-ders-1-3.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

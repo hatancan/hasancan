@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Memory and I/O Interfacing (Gazi University, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="8086/8088 hardware, address decoding, memory devices, and basic input-output interfacing.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-donanim/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-gazi-donanim/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-gazi-donanim/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-gazi-donanim/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Memory and I/O Interfacing (Gazi University, M. Ali Akcayol)">
+<meta property="og:description" content="8086/8088 hardware, address decoding, memory devices, and basic input-output interfacing.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-donanim/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Memory and I/O Interfacing (Gazi University, M. Ali Akcayol)", "description": "8086/8088 hardware, address decoding, memory devices, and basic input-output interfacing.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-donanim/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-donanim.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-donanim/eem332-gazi-donanim.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Memory and I/O Interfacing (Gazi University, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.12.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpul9hardware">CPUL9Hardware</a></li><li><a href="#cpul10memory">CPUL10Memory</a></li><li><a href="#cpul11i-o">CPUL11I_O</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Memory and I/O Interfacing (Gazi University, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 17.12.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the relevant notes and exercises from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2008–2008). It covers 8086/8088 hardware, address decoding, memory devices, and basic input-output interfacing. Source: Gazi University, M. Ali Akcayol; BİL362 lecture notes. PDF archive copies of the documents and, where available, the source code can be downloaded as a ZIP at the end of the post.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution to the source. It will be removed at the request of the rights holder.</em></p>
+<h2 id="cpul9hardware">CPUL9Hardware</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: 8086/8088 Hardware Features</p>
+<ul><li>8086/8088 Pins and Their Functions</li></ul>
+<ul><li>Clock Generator (8284A)</li></ul>
+<ul><li>Bus Buffering and Demultiplexing</li></ul>
+<ul><li>Bus Timing</li></ul>
+<ul><li>Minimum and Maximum Mode</li></ul>
+<ul><li>Bus Controller (8288)</li></ul>
+<ul><li>8088 Connections and Buses</li></ul>
+<p>8086/8088 Pins and Their Functions</p>
+<ul><li>The 8086 and 8088 come in a 40-pin dual-in-line (DIP) package.</li></ul>
+<p>8086/8088 Pins and Their Functions</p>
+<ul><li>The 8086 is a 16-bit microprocessor with a 16-bit data bus; the 8088 is also a 16-bit</li></ul>
+<p>microprocessor but has an 8-bit data bus.</p>
+<ul><li>In the 8086, AD0-AD15 are used for the data bus; in the 8088, AD0-AD7 are used for the data bus. The 8086 performs data transfers more efficiently.</li></ul>
+<ul><li>The 8086 and 8088 processors operate at +5.0V. The 8086 draws a maximum supply current of 360mA and the 8088 draws 340mA.</li></ul>
+<ul><li>In connections to microprocessors, attention must be paid to the current required for an input pin and the output current required for an output pin.</li></ul>
+<ul><li>The voltage and current values for the input and output pins are given below.</li></ul>
+<p>Input</p>
+<p>Output</p>
+<p>8086/8088 Pins and Their Functions: Pin Connections</p>
+<ul><li>AD7-AD0 are used for the address and data bus and contain the rightmost 8 bits.</li></ul>
+<ul><li>A15-A8 are used for address bits 9-16 in the 8088.</li></ul>
+<ul><li>AD15-AD8 are used for address and data for bits 9-16 in the 8086.</li></ul>
+<ul><li>The A19/S6-A16/S3 pins are used (multiplexed) for address and status bits.</li></ul>
+<ul><li>S6 is always 0, S5 shows the state of the IF flag bit, and S4-S3 show which segment is being accessed in the current bus cycle.</li></ul>
+<ul><li>When the RD pin is 0, the data bus receives data from memory or I/O devices.</li></ul>
+<ul><li>The READY pin is used to put the processor into a wait state. When it is 0, the processor enters the wait state; when it is 1, it does not affect the processor's current state. S3 and S4 status bits</li></ul>
+<p>8086/8088 Pins and Their Functions: Pin Connections - continued</p>
+<ul><li>INTR is used for a hardware interrupt request. If INTR=1 while IF=1, the interrupt cycle is entered after the instruction cycle in progress.</li></ul>
+<ul><li>NMI (non-maskable interrupt) works like INTR, but the interrupt cycle is entered without checking the IF flag bit.</li></ul>
+<ul><li>RESET is used to restart the processor. If it is held at 1 for at least 4 clock cycles, the processor is reset.</li></ul>
+<ul><li>CLK is used to input the processor's timing signal. The clock signal must have a duty cycle of at least 33%.</li></ul>
+<ul><li>Vcc is the processor's power supply input and must be +5.0V (±10%).</li></ul>
+<ul><li>MN/MX is used to select between minimum and maximum mode. For minimum mode, it must be connected directly to +5.0V.</li></ul>
+<ul><li>BHE/S7 (bus high enable) is used to enable the D15-D8 data bus bits during read and write operations.</li></ul>
+<p>8086/8088 Pins and Their Functions: Pin Connections – continued – minimum mode pins</p>
+<ul><li>IO/M or M/IO selects memory or I/O in 8088 and 8086 processors, respectively.</li></ul>
+<ul><li>WR indicates that the 8086/8088 processor is sending data to memory or an I/O device. When it is 0, the data bus holds valid data for memory or I/O.</li></ul>
+<ul><li>INTA indicates that the interrupt arriving at the INTR input pin has been acknowledged.</li></ul>
+<ul><li>ALE (address latch enable) selects between address and data on the address/data bus in 8086/8088 processors. When it is 1, it indicates that address information is on the address/data bus.</li></ul>
+<ul><li>DT/R (data transmit/receive) indicates whether data is being transmitted (1) or received (0) on the data bus.</li></ul>
+<ul><li>SS0, together with IO/M and DT/R, is used to decode the function of the current bus cycle (8088).</li></ul>
+<p>8086/8088 Pins and Their Functions: Pin Connections – continued – maximum mode pins</p>
+<ul><li>S2, S1, S0 indicate the function of the current bus cycle. They are decoded by a bus controller (8288).</li></ul>
+<ul><li>RQ/GT1 and RQ/GT0 are used for DMA (direct memory access) requests when operating in maximum mode. They are bidirectional (request and grant are performed).</li></ul>
+<ul><li>QS1 and QS0 (queue status) indicate the status of the instruction queue.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<ul><li>The 8284A clock generator is a support component for 8086/8088 microprocessors.</li></ul>
+<ul><li>It basically performs the functions of clock generation, RESET synchronization, READY synchronization, and generating a peripheral clock signal at TTL (Transistor–Transistor Logic) level.</li></ul>
+<ul><li>It has a total of 18 pins and is designed specifically for use with 8086/8088 processors.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<p>Pin functions</p>
+<ul><li>AEN1 and AEN2 (address enable) are used to qualify the bus ready signals (RDY1 and RDY2).</li></ul>
+<ul><li>RDY1 and RDY2 (bus ready), together with AEN1 and AEN2, are used to put the 8086/8088 processor into a wait state.</li></ul>
+<ul><li>READY is an output pin and is connected to the READY input of the 8086/8088.</li></ul>
+<ul><li>X1 and X2 are used for the crystal oscillator connection.</li></ul>
+<ul><li>EFI (External Frequency Input): when selected, the clock signal is generated by an external input.</li></ul>
+<ul><li>F/C (Frequency/Clock): when 0, the clock signal is generated by the 8284A; when 1, the clock signal is generated by EFI.</li></ul>
+<ul><li>CLK is the clock signal output and is connected to the clock input of the 8086/8088.</li></ul>
+<ul><li>RES (reset input) starts the reset operation when it is 0.</li></ul>
+<ul><li>RESET (reset output) is connected to the RESET input of the 8086/8088.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Clock Üreteci (8284A)</code></pre>
+<p>8284A to 8086/8088 connection</p>
+<ul><li>A 15MHz crystal provides a 5MHz clock to the microprocessor.</li></ul>
+<p>Bus Buffering and Demultiplexing</p>
+<ul><li>The address/data bus pins are multiplexed in order to use fewer pins.</li></ul>
+<ul><li>All computer systems have 3 types of buses: the data bus, the address bus, and the control bus.</li></ul>
+<ul><li>8086/8088 processors must be demultiplexed before being used with memory and I/O interfaces.</li></ul>
+<ul><li>ICs such as the 74LS373 are generally used for demultiplexing.</li></ul>
+<p>Bus Buffering and Demultiplexing</p>
+<ul><li>When LE (latch enable) is 1, it enables the D flip-flops; when OE (output enable) is 1, it puts the output into high impedance.</li></ul>
+<ul><li>The truth table is as follows.</li></ul>
+<p>8088 demultiplexing</p>
+<p>8086 demultiplexing</p>
+<p>8088 buffer</p>
+<p>uni-directional</p>
+<p>bi-directional</p>
+<p>uni-directional</p>
+<p>bi-directional</p>
+<p>8086 buffer</p>
+<p>Bus Timing</p>
+<ul><li>The data, address, and control buses are used in data write and read operations.</li></ul>
+<ul><li>If data is to be written to memory, the data to be written is sent on the data bus, the location to be written is sent on the address bus, and the control signals are sent on the control bus.</li></ul>
+<ul><li>WR (0) and IO/M (0) (for the 8088) or M/IO (1) (for the 8086) must be used as control signals.</li></ul>
+<p>Data Write</p>
+<p>Bus Timing</p>
+<ul><li>If a read is to be performed, the location to be read is sent on the address bus.</li></ul>
+<ul><li>With the RD control signal, the data to be read is received on the data bus.</li></ul>
+<p>Data Read</p>
+<p>Minimum and Maximum Mode</p>
+<ul><li>The 8086/8088 can operate in two modes: minimum and maximum.</li></ul>
+<ul><li>If the MN/MX select pin is connected to +5.0V, minimum mode is selected; if it is connected to ground, maximum mode is selected.</li></ul>
+<ul><li>Maximum mode is designed for systems that use coprocessors.</li></ul>
+<ul><li>Processors from the 80286 onward have no maximum mode.</li></ul>
+<ul><li>In minimum mode, all control signals are generated by the microprocessor, and it is inexpensive in terms of cost.</li></ul>
+<ul><li>In maximum mode, some control signals are generated externally, and the cost is higher.</li></ul>
+<ul><li>In maximum mode, an external bus controller is used and generates the bus control signals.</li></ul>
+<p>8088 minimum mode</p>
+<p>8088 maximum mode</p>
+<p>Bus Controller (8288)</p>
+<ul><li>In maximum mode operation, the control signals are generated by the 8288 instead of the 8086/8088.</li></ul>
+<ul><li>It takes the S0, S1, and S2 outputs as status inputs and generates all the control signals.</li></ul>
+<p>Bus Controller (8288)</p>
+<ul><li>The 8288 controller inputs and the control signals it generates are as follows.</li></ul>
+<ul><li>If the S0, S1, and S2 inputs are all 1, the controller goes to the passive state and no command is generated.</li></ul>
+<p>Bus Controller (8288) Pin functions</p>
+<ul><li>S0, S1, and S2 are the status inputs. They are connected to the 8086/8088 status outputs.</li></ul>
+<ul><li>CLK is the clock input. It is connected to the CLK output pin of the 8284A clock generator.</li></ul>
+<ul><li>ALE (address latch enable) is used for demultiplexing the address/data bus.</li></ul>
+<ul><li>DEN (data bus enable) controls the bi-directional data bus buffer.</li></ul>
+<ul><li>DT/R (data transmit/receive) is used to select write/read on the data bus.</li></ul>
+<ul><li>With the AEN (address enable) input, the 8288 enables the memory control signals.</li></ul>
+<ul><li>With the CEN (control enable) input, the 8288 control output pins are enabled.</li></ul>
+<p>Bus Controller (8288) Pin functions</p>
+<ul><li>IOWC (I/O write command) generates a write command for the I/O device.</li></ul>
+<ul><li>IORC (I/O read command) generates a read command for the I/O device.</li></ul>
+<ul><li>MWTC (memory write command) generates a write command for memory.</li></ul>
+<ul><li>MRDC (memory read command) generates a read command for memory.</li></ul>
+<ul><li>INTA (interrupt acknowledge) is the response to an interrupt arriving at the INTR pin.</li></ul>
+<ul><li>IOB (I/O bus mode) selects between I/O bus mode and system bus mode.</li></ul>
+<p>8088 Connections and Buses</p>
+<ul><li>The 8259 is an interrupt controller.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-655-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL9Hardware: page 3, circuits, tables, and figures"><figcaption>CPUL9Hardware, page 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-655-06.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL9Hardware: page 6, circuits, tables, and figures"><figcaption>CPUL9Hardware, page 6.</figcaption></figure>
+<h2 id="cpul10memory">CPUL10Memory</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Memory Interfacing</p>
+<ul><li>Memory Devices</li></ul>
+<ul><li>Address Decoding</li></ul>
+<ul><li>8088 and 80188 Memory Interface (8-bit)</li></ul>
+<ul><li>8086, 80186, 80286, and 80386SX Memory Interface (16-bit)</li></ul>
+<ul><li>80386DX and 80486 Memory Interface (32-bit)</li></ul>
+<ul><li>Pentium–Pentium 4 Memory Interface (64-bit)</li></ul>
+<p>Memory Devices</p>
+<ul><li>Memory devices are classified as ROM (read-only memory), flash memory (EEPROM), SRAM (Static Random Access Memory), and DRAM (Dynamic Random Access Memory).</li></ul>
+<ul><li>A memory device has address connections, data connections, selection connections, and control connections.</li></ul>
+<ul><li>The number of address pins determines the number of memory rows, and the number of data pins determines the number of bits written to a location. Selection connections (CS, CE, S, etc.) enable the chip for writing/reading. There can be one control pin (R/W) or two or more (WE, OE).</li></ul>
+<p>Memory Devices: ROM (read-only memory)</p>
+<ul><li>It stores programs permanently; its contents are not lost when power is removed (nonvolatile memory).</li></ul>
+<ul><li>PROM (programmable read-only memory) can be programmed once and cannot be erased.</li></ul>
+<ul><li>EPROM (erasable programmable read-only memory) is a type of ROM that can be erased by applying ultraviolet light for about 20 minutes.</li></ul>
+<ul><li>The newer type of RMM (read mostly memory) is called flash memory. Today, the name flash memory is often used for EEPROM (electrically erasable programmable ROM).</li></ul>
+<ul><li>Flash memory is used in many computer systems to store BIOS memory and video card setup information.</li></ul>
+<p>Memory Devices: ROM (read-only memory) - continued</p>
+<ul><li>The 2716 EPROM is shown below. It has 11 inputs and 8 outputs.</li></ul>
+<ul><li>The 2716 is a 2Kx8 read-only memory device.</li></ul>
+<p>Memory Devices: ROM (read-only memory) - continued</p>
+<ul><li>The timing diagram for the 2716 EPROM is as follows.</li></ul>
+<ul><li>First, the address information is sent to the address pins.</li></ul>
+<ul><li>Then the chip is enabled with the CS input (logic 0).</li></ul>
+<ul><li>After a certain delay (at most 120 ns), the data at the corresponding address is read from the output pins.</li></ul>
+<ul><li>The most important criterion is the time elapsed between entering the address information and reading the data. For the 2716, the maximum delay is 450 ns.</li></ul>
+<p>Memory Devices: SRAM (static RAM)</p>
+<ul><li>In static RAMs, information is retained as long as power is supplied. When the DC voltage is removed, the information is lost. These memory devices are called volatile.</li></ul>
+<ul><li>ROMs are programmed before being used in a computer, whereas RAMs can be written to and read from while connected to the computer.</li></ul>
+<ul><li>The 4016 SRAM, with a capacity of 2K x 8, is shown below. The W pin is used in place of WE, the S pin in place of CS, and the G pin in place of OE.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM)</p>
+<ul><li>Dynamic RAMs are larger than SRAMs. Data is stored in capacitors, and the entire memory must be refreshed at intervals of 2-4 ms.</li></ul>
+<ul><li>The refresh operation can be performed while information is being read or written.</li></ul>
+<ul><li>More address pins are needed.</li></ul>
+<ul><li>The TMS4464 (64K x 4) DRAM IC from Texas Instruments is shown below. It stores a total of 64K x 4 = 256 Kbit of data.</li></ul>
+<ul><li>Although 16 address pins would be required for 64K locations, a total of only 8 pins are used.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM) - continued</p>
+<ul><li>Addressing in DRAMs is done in two stages, row and column.</li></ul>
+<ul><li>RAS (row address strobe) is used for row address selection and CAS (column address strobe) for column address selection.</li></ul>
+<ul><li>The 74157 shown alongside performs the two-stage address selection.</li></ul>
+<ul><li>RAS both indicates the row address and determines which part of the address inputs is selected. For RAS=1 the B inputs are selected, and for RAS=0 the A inputs are selected.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM) - continued</p>
+<ul><li>The 41256 DRAM (256K x 1) is shown below. It stores a total of 256K bits and requires 70ns for data access.</li></ul>
+<ul><li>DRAMs are manufactured in larger sizes (1M x 1, 4M x 1, 16M x 1, and 64M x 1).</li></ul>
+<ul><li>DRAM memory devices are placed on small circuit boards and are called SIMMs (Single in-line Memory Modules).</li></ul>
+<ul><li>30-pin SIMM modules are organized as 1M x 8, 1M x 9, 4M x 8, and 4M x 9. 72-pin SIMM modules are organized as 1M x 32, 1M x 36, 2M x 32, 4M x 32, 8M x 32, and 16M x 32.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM) - continued</p>
+<ul><li>A 30-pin SIMM module (4M x 9) is shown below.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM) - continued</p>
+<ul><li>A 72-pin SIMM module (4M x 36) is shown below.</li></ul>
+<p>Memory Devices: DRAM (dynamic RAM) - continued</p>
+<ul><li>64-bit wide DIMMs (Dual in-line Memory Modules) are used in Pentium processors.</li></ul>
+<ul><li>They are generally organized as 16MByte (2M x 64), 32 MByte (4M x 64), 64MByte (8M x 64), and 128 MByte (16M x 64).</li></ul>
+<ul><li>A 168-pin DIMM module is shown below.</li></ul>
+<p>Address Decoding</p>
+<ul><li>Address decoding allows a desired location in memory to be selected using the address generated by the processor.</li></ul>
+<ul><li>The 8088 microprocessor generates a 20-bit address. If a 2716 EPROM is used, 11-bit addressing is needed. Decoding is also used to resolve incompatibilities between the processor and the memory device.</li></ul>
+<ul><li>If a 2K x 8 EPROM is used, the A10-A0 address pins of the 8088 processor are connected to the A10-A0 pins of the EPROM. The remaining address pins (A19-A11) are connected to a NAND gate.</li></ul>
+<p>Address Decoding</p>
+<ul><li>If all of the A19-A11 inputs are 1 and the IO/M input is 0 (M active), the CE input becomes 0 (enabled).</li></ul>
+<ul><li>The processor's RD connection is connected to the OE input and the read operation can begin.</li></ul>
+<ul><li>The address range is (since the pattern is 1111 1111 1XXX XXXX XXXX) 1111 1111 1000 0000 0000-1111 1111 1111 1111 1111 (FF800H-FFFFFH).</li></ul>
+<p>Address Decoding: 3-to-8 decoder</p>
+<ul><li>ICs such as the 74LS138 convert 3 inputs to 8 outputs.</li></ul>
+<ul><li>The G2A (0), G2B (0), and G1 (1) inputs must be active.</li></ul>
+<ul><li>The truth table is shown alongside.</li></ul>
+<p>Address Decoding: Example decoder</p>
+<ul><li>A decoder connected to eight 2764 (8K x 8) EPROMs is shown below.</li></ul>
+<ul><li>When A19-A16 are active (1), it addresses the range F0000H-FFFFFH (64KB).</li></ul>
+<p>8088 and 80188 Memory Interface (8-bit)</p>
+<ul><li>8088/80188 processors have an 8-bit data bus and 8-bit memory is used.</li></ul>
+<ul><li>The processor's RD, WR, and IO/M signals must also be used.</li></ul>
+<ul><li>The connection of a 27256 EPROM (32K x 8) to an 8088 is shown below.</li></ul>
+<ul><li>The address range is E8000H-FFFFFH and the total memory is 96KByte.</li></ul>
+<p>8086, 80186, 80286, and 80386SX Memory Interface (16-bit)</p>
+<ul><li>The address is 20 bits wide in 8086/80186 processors and 24 bits wide in 80286/80386SX processors.</li></ul>
+<ul><li>80286 and 80386SX processors have the MWRC and MRDC control signals instead of RD and WR.</li></ul>
+<ul><li>A memory organization with 2 banks is shown below.</li></ul>
+<p>16-bit data bus and 24-bit address</p>
+<p>Ao</p>
+<p>Using an 80386SX processor</p>
+<h3 id="address-range">Address range</h3>
+<h3 id="000000h-0fffffh">000000H – 0FFFFFH</h3>
+<p>512K x 16 1024K x</p>
+<p>Ao</p>
+<p>80386DX and 80186 Memory Interface (32-bit)</p>
+<ul><li>80386DX and 80486 processors have a 32-bit data bus. Memory is built using 4 banks.</li></ul>
+<ul><li>80386DX and 80486 processors have a 32-bit address width.</li></ul>
+<ul><li>A memory organization with 4 banks is shown below.</li></ul>
+<p>64K x 8</p>
+<p>32-bit data bus 32-bit address 512KByte SRAM</p>
+<p>Pentium–Pentium 4 Memory Interface (64-bit)</p>
+<ul><li>Pentium processors have a 64-bit data bus. 8 banks are used.</li></ul>
+<p>64K x 8</p>
+<p>64-bit data bus 32-bit address 512KByte EPROM</p>
+<figure class="yazi-gorsel"><img src="../sekil-653-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL10Memory: page 4, circuits, tables, and figures"><figcaption>CPUL10Memory, page 4.</figcaption></figure>
+<h2 id="cpul11i-o">CPUL11I_O</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Basic I/O Interfacing</p>
+<ul><li>Introduction to I/O Interfacing</li></ul>
+<ul><li>I/O Port Address Decoding</li></ul>
+<ul><li>Programmable Peripheral Interface</li></ul>
+<ul><li>Analog-to-Digital and Digital-to-Analog Converters</li></ul>
+<p>Introduction to I/O Interfacing</p>
+<ul><li>Microprocessors have an instruction for transferring data to an I/O device (OUT) and an instruction for receiving data from an I/O device (IN).</li></ul>
+<ul><li>In 80186 and higher processors, the OUTS and INS instructions perform string data transfers between memory and I/O devices.</li></ul>
+<ul><li>The IN and OUT instructions transfer data between the I/O device and the microprocessor accumulator (AL, AX, EAX).</li></ul>
+<ul><li>The I/O address is stored as 16 bits in the DX register, or given as an 8-bit immediate immediately after the opcode.</li></ul>
+<p>Introduction to I/O Interfacing</p>
+<ul><li>When data is transferred with the IN and OUT instructions, the I/O address (port number) is sent on the address bus.</li></ul>
+<ul><li>The I/O interface decodes the port number (just as the memory interface decodes the memory address).</li></ul>
+<ul><li>The first 256 port addresses (00H-FFH) are accessed with either an immediate operand or DX, and the port addresses between 0100H-FFFFH are accessed with the DX register.</li></ul>
+<ul><li>For the ISA (industry standard architecture) bus, I/O addresses between 0000H-03FFH are used.</li></ul>
+<h3 id="dx">DX</h3>
+<h3 id="dx">DX</h3>
+<h3 id="dx">DX</h3>
+<p>Introduction to I/O Interfacing: Isolated and memory-mapped I/O</p>
+<ul><li>In the isolated I/O approach, the IN, INS, OUT, and OUTS instructions transfer data between the microprocessor accumulator or memory and the I/O device.</li></ul>
+<ul><li>In the memory-mapped I/O approach, the IN, INS, OUT, and OUTS instructions are not used; instead, any instruction that transfers data between memory and the microprocessor can be used.</li></ul>
+<ul><li>The addresses (ports) of isolated I/O devices lie outside memory, and data transfer between the I/O and the microprocessor is performed with the IN, INS, OUT, and OUTS instructions.</li></ul>
+<ul><li>The IN, INS, OUT, and OUTS instructions are not used to access memory-mapped I/O devices. Instructions that transfer data between memory and the microprocessor are used.</li></ul>
+<ul><li>An area within memory is set aside for I/O devices.</li></ul>
+<p>Introduction to I/O Interfacing</p>
+<p>Isolated I/O           Memory-mapped I/O</p>
+<p>Introduction to I/O Interfacing: I/O map in PCs</p>
+<p>Introduction to I/O Interfacing: Basic Input/Output Interfaces</p>
+<ul><li>A three-state buffer is used for input.</li></ul>
+<p>Introduction to I/O Interfacing: Basic Input/Output Interfaces</p>
+<ul><li>The connection interface for output is as follows.</li></ul>
+<p>Introduction to I/O Interfacing: Input Devices</p>
+<p>Output Devices</p>
+<p>I/O Port Address Decoding</p>
+<ul><li>I/O port address decoding is the same as memory address decoding, especially for memory-mapped I/O.</li></ul>
+<ul><li>The number of address pins used in decoding differs for isolated I/O.</li></ul>
+<ul><li>For memory, 32, 24, or 20 address bits are decoded. For isolated I/O, a 16-bit address is decoded.</li></ul>
+<p>I/O Port Address Decoding: 8-bit I/O address decoding</p>
+<ul><li>I/O instructions that address with an immediate operand perform 8-bit addressing (addresses between 0000H-00FFH).</li></ul>
+<ul><li>If the system will not use more than 256 devices, only the A7-A0 address connections are used.</li></ul>
+<ul><li>The figure below shows a decoder that addresses the range F0H-F7H.</li></ul>
+<p>I/O Port Address Decoding: 16-bit I/O address decoding</p>
+<ul><li>In 16-bit address decoding, all of the bits A15-A0 are used.</li></ul>
+<p>I/O Port Address Decoding: 32-bit</p>
+<h3 id="i-o">I/O</h3>
+<p>Programmable Peripheral Interface</p>
+<ul><li>The 82C55 programmable peripheral interface is the most commonly used component.</li></ul>
+<ul><li>It has a total of 24 I/O pins and can be programmed in groups.</li></ul>
+<ul><li>The 82C55 is used in keyboard and parallel port interfaces.</li></ul>
+<ul><li>It has 3 ports: A, B, and C.</li></ul>
+<ul><li>The A1 and A0 pins are used for port selection.</li></ul>
+<p>Programmable Peripheral Interface</p>
+<ul><li>The connection of an 82C55 to an 80386SX for 8-bit I/O port addressing is shown alongside.</li></ul>
+<ul><li>C0H (port A)</li></ul>
+<ul><li>C2H (port B)</li></ul>
+<ul><li>C4H (port C)</li></ul>
+<ul><li>C6H (command register)</li></ul>
+<p>Analog-to-Digital and Digital-to-Analog Converters</p>
+<ul><li>ADC and DAC devices are used so that the microprocessor can process analog values.</li></ul>
+<ul><li>The DAC0830 digital-to-analog converter is shown below.</li></ul>
+<ul><li>The DAC0830 is an 8-bit converter. It expresses the reference voltage at the VREF input in 255 steps across 256 different levels.</li></ul>
+<ul><li>10-bit DAC devices produce output at 1024 different levels.</li></ul>
+<ul><li>For an input of 1001 0010, it produces an output of +2.862V.</li></ul>
+<p>Analog-to-Digital and Digital-to-Analog Converters</p>
+<ul><li>The ADC0804 8-bit converter is shown below.</li></ul>
+<ul><li>The INTR output is used to indicate that the conversion has finished.</li></ul>
+<ul><li>The analog input is applied at the VI+ and VI- pins.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-654-04.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL11I_O: page 4, circuits, tables, and figures"><figcaption>CPUL11I_O, page 4.</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-gazi-donanim.zip" download>eem332-gazi-donanim.zip</a></p>
+              <p class="kucuk">ZIP archive · 4.9 MB · 17.12.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-gazi-donanim.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (4.9 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

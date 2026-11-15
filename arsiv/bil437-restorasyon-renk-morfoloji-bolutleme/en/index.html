@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Computer Vision: Noise Removal, Color Image Processing, Morphological Processing, and Segmentation — hasancan.net</title>
+<meta name="description" content="Week 4 and 5 lectures of BIL437 Computer Vision: noise models and filters (mean, median, order-statistic), band-reject filter, color models (RGB, HSI), erosion, dilation, edge detection, and thresholding.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Computer Vision: Noise Removal, Color Image Processing, Morphological Processing, and Segmentation">
+<meta property="og:description" content="Week 4 and 5 lectures of BIL437 Computer Vision: noise models and filters (mean, median, order-statistic), band-reject filter, color models (RGB, HSI), erosion, dilation, edge detection, and thresholding.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Computer Vision: Noise Removal, Color Image Processing, Morphological Processing, and Segmentation", "description": "Week 4 and 5 lectures of BIL437 Computer Vision: noise models and filters (mean, median, order-statistic), band-reject filter, color models (RGB, HSI), erosion, dilation, edge detection, and thresholding.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü", "associatedMedia": {"@type": "MediaObject", "name": "bil437-restorasyon-renk-morfoloji-bolutleme.zip", "contentUrl": "https://hasancan.net/arsiv/bil437-restorasyon-renk-morfoloji-bolutleme/bil437-restorasyon-renk-morfoloji-bolutleme.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="BIL437 Computer Vision: Noise Removal, Color Image Processing, Morphological Processing, and Segmentation">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>30.10.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#image-restoration-noise-removal-lecture-4-1">Image restoration: noise removal (Lecture 4_1)</a></li><li><a href="#color-image-processing-lecture-4-2">Color image processing (Lecture 4_2)</a></li><li><a href="#morphological-image-processing-lecture-5-1">Morphological image processing (Lecture 5_1)</a></li><li><a href="#segmentation-1-discontinuities-points-lines-edges-lecture-5-2">Segmentation 1: discontinuities, points, lines, edges (Lecture 5_2)</a></li><li><a href="#segmentation-2-thresholding-lecture-5-3">Segmentation 2: thresholding (Lecture 5_3)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>BIL437 Computer Vision: Noise Removal, Color Image Processing, Morphological Processing, and Segmentation</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 30.10.2012 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This is a summary of the lecture notes from the BIL437 Computer Vision lectures Lecture 4_1, 4_2, 5_1, 5_2, and 5_3 (dated 2012, distributed at Başkent University in the 2015 summer school). The images in the lectures are taken from Gonzalez &amp; Woods, <em>Digital Image Processing</em>; the slides do not name an author, but the PDF document properties list the author as <strong>Brian Mac Namee</strong>. The original lectures can be downloaded as a ZIP at the end of the post.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<h2 id="image-restoration-noise-removal-lecture-4-1">Image restoration: noise removal (Lecture 4_1)</h2>
+<p><strong>Image restoration</strong> tries to correct a degraded image: determining the degradation process and reversing it; it is similar to enhancement but more objective.</p>
+<p>Noise arises during image acquisition (sensors being affected by environmental conditions) and transmission. A noisy image is modeled as:</p>
+<p>g(x, y) = f(x, y) + η(x, y)</p>
+<p>(f: original pixel, η: noise term, g: degraded pixel). Noise models: <strong>Gaussian</strong> (the most common), Rayleigh, Erlang, exponential, uniform, and <strong>impulse (salt-and-pepper)</strong> noise.</p>
+<h3 id="noise-removal-with-spatial-filters">Noise removal with spatial filters</h3>
+<ul><li><strong>Arithmetic mean</strong>: f̂(x, y) = (1/mn) Σ g(s, t); simple smoothing, blurs the image.</li><li><strong>Geometric mean</strong>: smoothing similar to the arithmetic mean, but loses less detail.</li><li><strong>Harmonic mean</strong>: f̂ = mn / Σ (1/g(s, t)); works well for salt noise, fails for pepper noise; it also works well for Gaussian noise.</li><li><strong>Contraharmonic mean</strong>: f̂ = Σ g^(Q+1) / Σ g^Q; Q is the order of the filter. Q &gt; 0 removes pepper noise, Q &lt; 0 removes salt noise (in the example Q = 1.5 and Q = −1.5). If Q is chosen incorrectly, the result can be catastrophic.</li><li><strong>Order-statistic filters</strong>: based on ordering the pixel values in the neighborhood.</li></ul>
+<p>  - <strong>Median</strong>: removes noise very well without a smoothing effect; particularly good for salt-and-pepper noise (improves further with several passes).   - The <strong>max filter</strong> works well for pepper noise, the <strong>min filter</strong> for salt noise.   - <strong>Midpoint</strong>: (max + min) / 2; works well for Gaussian and uniform noise.   - <strong>Alpha-trimmed mean</strong>: the lowest d/2 and highest d/2 intensity levels are discarded and the remaining mn − d pixels are averaged.</p>
+<p>A numerical example is also given: in a 7×5 patch, corrupted pixels with values 204 and 0 (salt and pepper) are removed with the filters.</p>
+<h3 id="periodic-noise-and-band-reject-filters">Periodic noise and band-reject filters</h3>
+<p><strong>Periodic noise</strong>, caused by electrical or electromagnetic interference and producing regular patterns in the image, is best removed in the Fourier domain: a specific frequency range is removed with a <strong>band-reject filter</strong>. The ideal band-reject filter is 1 for D(u, v) &lt; D0 − W/2 and D(u, v) &gt; D0 + W/2, and 0 in the ring of width W in between. Butterworth (order 1) and Gaussian versions also exist; an example is shown on an image with sinusoidal noise and its Fourier spectrum.</p>
+<h3 id="adaptive-filters">Adaptive filters</h3>
+<p>The behavior of adaptive filters changes according to image characteristics within the filter window. On an image with salt-and-pepper probabilities Pa = Pb = 0.25, a 7×7 median filter is compared with an adaptive median filter.</p>
+<p>Summary: Restoration is more objective than enhancement; spatial techniques are more effective for random noise, and frequency-domain techniques for periodic noise.</p>
+<h2 id="color-image-processing-lecture-4-2">Color image processing (Lecture 4_2)</h2>
+<ul><li>In 1666, Isaac Newton discovered that sunlight passed through a glass prism splits into a spectrum of colors.</li><li>The color we perceive in an object depends on the nature of the reflected light (a green object reflects the 500–570 nm range and absorbs the rest). Chromatic light covers roughly the 400–700 nm range; 6–7 million cones in the human eye enable color vision.</li><li>Three quantities describe chromatic light: <strong>radiance</strong>: the total energy emitted from the source (watts); <strong>luminance</strong>: the energy perceived by an observer (lumens), where radiance can be high but luminance low; <strong>brightness</strong>: a subjective, unmeasurable notion of intensity.</li><li><strong>CIE chromaticity diagram</strong>: the x axis shows the proportion of red, the y axis the proportion of green; the proportion of blue is z = 1 − (x + y). Colors on the boundary are fully saturated; the equal-energy point is pure white in the CIE standard. The whole color range cannot be represented by combining three colors; the color gamuts of RGB monitors and high-quality printers appear in the diagram as different triangles/shapes.</li></ul>
+<h3 id="color-models">Color models</h3>
+<ul><li><strong>RGB</strong>: the red, green, and blue components are represented as a cube in a Cartesian coordinate system; black is at the origin, white at the corner farthest from the origin, and cyan-magenta-yellow at the other three corners. A color image consists of three component images; the number of bits per pixel is the color depth. A 24-bit image gives 2^24 = 16,777,216 colors (full color).</li><li><strong>HSI</strong>: hue, saturation, intensity. RGB is suitable for hardware implementation, but humans naturally describe colors by hue, saturation, and brightness: RGB is suited to color generation, HSI to color description.</li></ul>
+<h2 id="morphological-image-processing-lecture-5-1">Morphological image processing (Lecture 5_1)</h2>
+<p>After segmentation is complete, morphological operations are used to remove imperfections in the segmentation and to extract information about the shape/structure of the image. The discussion is for bi-level (binary) images in which object pixels are 1 and background pixels are 0.</p>
+<ul><li>The <strong>structuring element</strong> can be of any size and shape (in the lecture, for convenience, rectangular/cross shapes with the origin at the center).</li><li><strong>Fit</strong>: all "on" pixels in the structuring element fall on on-pixels in the image. <strong>Hit</strong>: any on-pixel in the structuring element coincides with an on-pixel in the image.</li><li><strong>Erosion</strong>: f ⊖ s; for the structuring element, g(x, y) is "1 if s fits f, 0 otherwise". It separates connected objects and removes protrusions, but shrinks objects. Examples are given with 3×3 and 5×5 square elements and discs (radius 5, 10, 20).</li><li><strong>Dilation</strong>: f ⊕ s; "1 if s hits f". It repairs gaps and indentations and enlarges objects.</li><li>The lecture then moves on to operations composed of these (opening, closing, etc.) and to morphological algorithms.</li></ul>
+<h2 id="segmentation-1-discontinuities-points-lines-edges-lecture-5-2">Segmentation 1: discontinuities, points, lines, edges (Lecture 5_2)</h2>
+<p><strong>Segmentation</strong> divides the pixels of an image into groups strongly related to objects; it is usually the first step of automated computer vision applications. Three types of gray-level discontinuities are sought: <strong>points, lines, edges</strong>; they are found with masks and correlation.</p>
+<ul><li><strong>Point detection</strong>: a single mask is applied, and pixels exceeding a threshold in the filtered image are considered points (example on an X-ray of a turbine blade).</li><li><strong>Line detection</strong>: done with masks that extract lines one pixel thick and in a specific direction (horizontal, vertical, +45°, −45°) (wire-bond example).</li><li><strong>Edge</strong>: a connected set of pixels lying on the boundary between two regions. The 1st derivative shows the location of the edge, the 2nd derivative the direction of the edge. Derivative-based edge detectors are very sensitive to noise; therefore it is useful to smooth the image before edge detection. Common 3×3 edge detectors (for a 3×3 region): the horizontal and vertical gradient components are combined.</li><li>The <strong>Laplacian</strong> is not used alone because it is very sensitive to noise; the <strong>Laplacian of Gaussian (LoG, "Mexican hat")</strong> removes noise with a Gaussian and detects edges with the Laplacian.</li></ul>
+<h2 id="segmentation-2-thresholding-lecture-5-3">Segmentation 2: thresholding (Lecture 5_3)</h2>
+<p>Thresholding is the first step of most segmentation approaches. With a single threshold: g = 1 if f(x, y) &gt; T, otherwise 0. If the threshold is chosen incorrectly (too low or too high), the result is poor. A robot playing poker interpreting the cards is given as an example.</p>
+<p><strong>Basic global thresholding algorithm</strong>:</p>
+<ol><li>Choose an initial estimate for T (usually the average gray level of the image).</li><li>Split the image into two groups using T: G1 (gray level &gt; T) and G2 (≤ T).</li><li>Compute the average gray levels μ1 and μ2 of G1 and G2.</li><li>New threshold T = (μ1 + μ2) / 2.</li><li>Repeat steps 2–4 until the change in T is smaller than a predefined limit.</li></ol>
+<p>The algorithm works very well if the histogram is suitable (two-peaked, bimodal). Other histograms cannot be segmented with a single threshold; uneven illumination also breaks a single threshold (example of separating the contents of bottles). Remedy: <strong>adaptive thresholding</strong>: the image is divided into subimages and each is thresholded separately; problematic subimages are subdivided further to obtain a successful result.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../bil437-restorasyon-renk-morfoloji-bolutleme.zip" download>bil437-restorasyon-renk-morfoloji-bolutleme.zip</a></p>
+              <p class="kucuk">ZIP archive · 6.6 MB · 30.10.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../bil437-restorasyon-renk-morfoloji-bolutleme.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (6.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

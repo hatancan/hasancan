@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Data Structures: Operator Overloading — hasancan.net</title>
+<meta name="description" content="EEM227 Data Structures, week 3 C++ lecture note (Lecturer Oğul Göçmen, October 2007): overloading the copy constructor, prefix/postfix ++, +, =, [ ], () and &lt;&lt; &gt;&gt; operators; 15 example programs and screen outputs.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-operator-overloading/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem227-operator-overloading/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem227-operator-overloading/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem227-operator-overloading/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Data Structures: Operator Overloading">
+<meta property="og:description" content="EEM227 Data Structures, week 3 C++ lecture note (Lecturer Oğul Göçmen, October 2007): overloading the copy constructor, prefix/postfix ++, +, =, [ ], () and &lt;&lt; &gt;&gt; operators; 15 example programs and screen outputs.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-operator-overloading/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Data Structures: Operator Overloading", "description": "EEM227 Data Structures, week 3 C++ lecture note (Lecturer Oğul Göçmen, October 2007): overloading the copy constructor, prefix/postfix ++, +, =, [ ], () and << >> operators; 15 example programs and screen outputs.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-operator-overloading/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "Hafta3.pdf", "contentUrl": "https://hasancan.net/arsiv/eem227-operator-overloading/Hafta3.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM227 Data Structures: Operator Overloading">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem227">EEM227</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#what-is-operator-overloading">What is operator overloading?</a></li><li><a href="#copy-constructor">Copy constructor</a></li><li><a href="#overloading-unary-operators">Overloading unary operators</a></li><li><a href="#overloading-the-operator">Overloading the + operator</a></li><li><a href="#overloading-the-assignment-operator">Overloading the assignment operator (=)</a></li><li><a href="#overloading-the-subscript-operator">Overloading the subscript operator ([ ])</a></li><li><a href="#overloading-the-function-call-operator">Overloading the function call operator ( () )</a></li><li><a href="#overloading-the-stream-operators-and">Overloading the Stream Operators (&lt;&lt; and &gt;&gt;)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM227 Data Structures: Operator Overloading</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 05.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the week 3 lecture note of the Başkent University <strong>EEM227 Data Structures</strong> course, fall semester 2007. It was prepared by <strong>Lecturer Oğul Göçmen</strong>, dated 5 October 2007. That year the course was taught in C++ (the 2014 EEM227 posts in the archive belong to the Java era). The topic is <strong>operator overloading</strong> in C++. The explanations and example programs from the notes are given below as text. The original PDF of the lecture note can be downloaded at the end of the post.</p>
+<h2 id="what-is-operator-overloading">What is operator overloading?</h2>
+<p>In C++, you can write functions for the built-in operators (+, -, *, /, !, &lt;&lt;, ++, etc.) so that these operators perform operations you define. Operator functions can also be members of a class. This way, operators that act on objects created from that class are defined. In C++, using an operator corresponds to a function call. Everything that can be done by overloading operators can also be done with ordinary functions. Using operators instead of function names can make a program easier to write and read. For this reason, overloading an operator should be preferred if it will make the program easier to read and understand.</p>
+<h3 id="restrictions">Restrictions</h3>
+<ul><li>Operators that do not exist in C++ cannot be overloaded. For example, no function can be assigned to the <code>^</code> symbol or the <code>**</code> symbol for exponentiation.</li><li>Some of the operators that exist in C++ cannot be overloaded either. These are: the dot operator <code>.</code>, the scope resolution operator <code>::</code>, the conditional operator <code>? :</code> and the size operator <code>sizeof</code>.</li><li>C++ operators can be divided into two groups: unary and binary. Unary operators take a single operand (for example <code>-a</code>, <code>a++</code>, <code>!a</code>); binary operators take two operands (such as <code>a+b</code>, <code>a/b</code>).</li><li>The number of operands cannot be changed when overloading operators.</li><li>The precedence of operators cannot be changed.</li><li>Operators that act on the compiler's built-in data types cannot be overloaded. For example, the + operator that adds two integers cannot be changed.</li><li>At least one operand of a created operator must be of a class type.</li></ul>
+<h3 id="operator-functions-member-or-friend">Operator functions: member or friend?</h3>
+<ul><li>If the <code>( )</code>, <code>[ ]</code>, <code>-&gt;</code> or assignment operators are being overloaded, a member function must be used.</li><li>If a member function is used, the left side of the operator must be an object of its own class. If the left side is not an object of its own class, the operator function cannot be a member.</li><li>If it will not be a member function and it needs to access public or private members, it must be a friend function; it must have the right to access its operands.</li></ul>
+<h2 id="copy-constructor">Copy constructor</h2>
+<p>Before starting on these operations, let us get to know the copy constructor. The copy constructor is another kind of constructor function. Its only difference is that it lets us create a new object of the class using the values of an object created before it; it is a kind of cloning. The rule for overloaded functions defined within a class applies here too: depending on how you create the object, the compiler automatically determines which constructor will run.</p>
+<h3 id="example-1">Example 1</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+// Bu örnek içerisinde copy constructor kullanımı gösterilmiştir...
+using namespace std;
+class deneme
+      {
+      private:
+              int x,y;
+      public:
+              deneme(deneme &amp;); //kopyalama kurucusu (copy constructor)
+              deneme(); // parametresiz kurucu fonksiyon (constructor)
+              deneme(int ,int); // parametreli kurucu fonksiyon
+             ~deneme();// yıkıcı(destructor)
+      };
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+   cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+   x=alias.x;
+   y=alias.y;
+   cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+   cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+      cout&lt;&lt;"d diye bir nesne yaratacagim ve c de onun kopyasi olacak\n";
+      deneme d,c(d); // c nesnesi d nin değerleri ile doğuyor...
+      cout&lt;&lt;"simdi e yi c nesnesini kullanarak kopyaliyoruz...\n";
+      deneme e(c); // e nesnesi kopyalanmış c den doğdu.
+      cout&lt;&lt;"alt kisimda f nesnesini 3 ve 4 ilk degerleri ile yaratiyoruz..\n";
+      deneme f(3,4); // parametre alarak yaratılan f nesnesi
+      cout&lt;&lt;"g nesnesi ise f den kopyalaniyor, klonlaniyor...\n";
+      deneme g(f); // ve görüldüğü gibi bunun kopyası olan g...
+// dikkat ! nesnenin yaşam alanı biterse yıkıcı fonksiyon çalışacak ve
+// nesneyi hafızadan silecektir, kopyalama kurucusunu kullanırken buna
+// dikkat etmeyi unutmayınız...
+      system("pause");
+      return 0;
+      }</code></pre>
+<p>Program output:</p>
+<pre class="kod"><code>d diye bir nesne yaratacagim ve c de onun kopyasi olacak
+Kurucu fonksiyon calisti..
+x=5
+y=10
+Kopyalama kurucusu calisti
+x=5
+y=10
+simdi e yi c nesnesini kullanarak kopyaliyoruz...
+Kopyalama kurucusu calisti
+x=5
+y=10
+alt kisimda f nesnesini 3 ve 4 ilk degerleri ile yaratiyoruz..
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=4
+g nesnesi ise f den kopyalaniyor, klonlaniyor...
+Kopyalama kurucusu calisti
+x=3
+y=4
+Press any key to continue . . .</code></pre>
+<h2 id="overloading-unary-operators">Overloading unary operators</h2>
+<p>Examples of unary operators: increment (<code>++</code>), decrement (<code>--</code>), negation (<code>-5</code>), logical complement (<code>!</code>), etc. When the functions for these operators are written as members of a class, they take no parameters, because they operate on the object on which they are called. These operators normally appear to the left of the object: <code>!n</code>, <code>-n</code>, <code>++n</code>.</p>
+<h3 id="example-2-prefix-that-returns-no-value">Example 2: prefix ++ that returns no value</h3>
+<p>This program increments the value as a prefix, but since the function is void it cannot return a value.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// countpp1.cpp
+// ++ operatörü ile değer arttırma. Ör: ++sayac
+#include &lt;iostream&gt;
+using namespace std;
+////////////////////////////////////////////////////////////////
+class Counter
+   {
+   private:
+      unsigned int count;              //count
+   public:
+      Counter() : count(0)             //constructor
+         { }
+      unsigned int get_count()         //return count
+         { return count; }
+      void operator ++ ()              //arttır ön ek (prefix)
+         {
+         ++count;
+         }
+   };
+////////////////////////////////////////////////////////////////
+int main()
+   {
+   Counter c1, c2;                     //define and initialize
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();             //göster
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                //increment c1
+   ++c2;                                //increment c2
+   ++c2;                                //increment c2
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count(); //tekrar göster
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   system("pause");
+   return 0;
+   }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=1
+c2=2</code></pre>
+<p>One disadvantage of this example is that an assignment such as <code>c2=++c1</code> cannot be performed. Let us see how to solve this.</p>
+<h3 id="example-3-incrementing-with-and-returning-the-value">Example 3: incrementing with ++ and returning the value</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+using namespace std;
+class Counter
+   {
+   private:
+      unsigned int count;               //count
+   public:
+      Counter() : count(0)              //constructor
+           { }
+        unsigned int get_count() //return count
+           { return count; }
+        Counter operator ++ ()           //increment count
+           {
+           ++count;                      //increment count
+           Counter temp;                 //make a temporary Counter
+           temp.count = count;           //give it same value as this obj
+           return temp;                  //return the copy
+           }
+   };
+int main()
+   {
+   Counter c1, c2;                                 //c1=0, c2=0
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();              //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                           //c1=1
+   c2 = ++c1;                                      //c1=2, c2=2 Artık bu tarz işlem OK!
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display again
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   return 0;
+   }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2</code></pre>
+<h3 id="example-4-returning-an-unnamed-temporary-object">Example 4: returning an unnamed temporary object</h3>
+<p>The way to solve this problem at its root is to increment the <code>count</code> variable with the ++ operator, pass the value on, and use unnamed temporary objects. Here, a constructor that takes a value was added as well.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// countpp3.cpp
+#include &lt;iostream&gt;
+using namespace std;
+////////////////////////////////////////////////////////////////
+class Counter
+   {
+   private:
+      unsigned int count;        //count değişkeni
+   public:
+      Counter() : count(0)    //constructor değer almayan {count=0;} ile aynı
+         { }
+      Counter(int c)            //constructor, bir değer alan
+         { count=c; }
+      int get_count()            //return count
+         { return count; }
+      Counter operator ++ ()     //count değerini arttır
+         {
+         ++count;                // count değerini arttır ve
+         return Counter(count); // geçici bir tampon obje döndür
+         }                       // ve objeyi tek değer alan kurucu ile kur
+   };
+////////////////////////////////////////////////////////////////
+int main()
+   {
+   Counter c1, c2;                                    //c1=0, c2=0
+    cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();                //göster
+    cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+    ++c1;                                             //c1=1
+    c2 = ++c1;                                        //c1=2, c2=2
+    cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //tekrar göster
+    cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+    return 0;
+    }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2</code></pre>
+<h3 id="prefix-and-postfix-for-the-operator-i-i">Prefix and postfix for the ++ operator (++i, i++)</h3>
+<p>In the class below, the ++ operator is overloaded as both prefix and postfix and returns the value; assignments such as <code>c2=++c1;</code> or <code>c2=c1++;</code> can be performed.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+using namespace std;
+class Counter
+   {
+   private:
+      unsigned int count;         //count
+   public:
+      Counter() : count(0)        //constructor no args
+         { }
+      Counter(int c) : count(c)   //constructor, one arg
+         { }
+      unsigned int get_count() const //return count
+         { return count; }
+        Counter operator ++ ()      //count değerini arttır (prefix)
+           {
+           return Counter(++count); //isimsiz geçici obje döndür
+           }                        //ve count değerini initialize et
+        Counter operator ++ (int)   //(postfix)
+           {                        //isimsiz geçici obje döndür
+           return Counter(count++); //bu count değeri ile objeyi initialize et
+           }                        //count değerini arttır
+   };
+int main()
+   {
+   Counter c1, c2;                                    //c1=0, c2=0
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();                 //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   ++c1;                                              //c1=1
+   c2 = ++c1;                                         //c1=2, c2=2 (prefix)
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count();
+   c2 = c1++;                            //c1=3, c2=2 (postfix)
+   cout &lt;&lt; "\nc1=" &lt;&lt; c1.get_count();    //display again
+   cout &lt;&lt; "\nc2=" &lt;&lt; c2.get_count() &lt;&lt; endl;
+   return 0;    }</code></pre>
+<pre class="kod"><code>c1=0
+c2=0
+c1=2
+c2=2
+c1=3
+c2=2</code></pre>
+<h3 id="example-5-that-increments-the-real-part-of-a-complex-number">Example 5: ++ that increments the real part of a complex number</h3>
+<p>In the following example, the ++ operator is given the function of increasing the real part of a complex number by 0.1.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>void ComplexT::operator++()
+{
+  re=re+0.1;
+}
+int main()
+{
+ComplexT z(1.2, 0.5);
+++z; // operator++ fonksiyonu canlanir
+z.goster();
+return 0;
+}</code></pre>
+<h3 id="example-6-returning-a-reference-to-the-object">Example 6: returning a reference to the object</h3>
+<p>If this operator is to be used in an assignment statement, the function for the operator must return a reference to the object (in addition to the usage in Example 4, it can also be done this way).</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>  //  ++ operatörüne yeni bir işlev yüklenmesi
+  // Operatör karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+  #include &lt;iostream&gt;
+  using namespace std;
+  // Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+  class ComplexT{
+      double re,im;            // reel ve sanal kısımlar
+   public:
+      ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+          {};                  // Kurucu (gövdesi boş)
+       const ComplexT&amp; operator++( );      // ++ Operatörü
+       void goster() const;
+  };
+  // ++ operatörü
+  // Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+  const ComplexT &amp; ComplexT::operator++()
+  {
+     re=re+0.1;                 // reel kısım arttırılıyor
+     return *this;              // Nesnenin referansı döndürülüyor
+  }
+  // Nesne ile ilgili bilgileri ekrana çıkaran metot
+  void ComplexT::goster() const
+  {
+    cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+  }
+  //---- Ana Program -----
+  int main()
+  {
+    ComplexT z1(1.2,0.5),z2;
+    z1.goster();
+    z2= ++z1;
+    z1.goster();
+    z2.goster();
+    return 0;
+  }</code></pre>
+<pre class="kod"><code>re=1.2 im=0.5
+re=1.3 im=0.5
+re=1.3 im=0.5</code></pre>
+<p>As is well known, the ++ and -- operators can be written either to the left or to the right of their operands. When they are used together with an assignment statement, the way the operators are written matters. Accordingly, they mean pre-increment (decrement) or post-increment (decrement):</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>z2= ++ z1; // önceden arttırma
+z2 = z1++; // sonradan arttırma
+z2= -- z1; // önceden azaltma
+z2 = z1--; // sonradan azaltma</code></pre>
+<p>If the operator function is written without parameters as <code>operator++()</code>, the pre-increment operator is overloaded. To overload the post-increment operator, the function is written with one parameter: <code>operator++(int)</code>. The only purpose of this parameter is to distinguish the two functions from each other. No parameter is passed when the function is called.</p>
+<h3 id="example-7-prefix-and-postfix-for-complex-numbers">Example 7: prefix and postfix ++ for complex numbers</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// ++ operatörünün hem önceden hem de sonradan arttırma için kullanılması
+// Operatör karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+      double re,im;     // reel ve sanal kısımlar
+ public:
+      ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+      {};               // Kurucu (gövdesi boş)
+      const ComplexT&amp; operator++();       // önceden arttırma ++ operatörü
+      ComplexT operator++(int);           // sonradan arttırma ++ operatörü
+      void goster() const;
+};
+// Önceden arttırma ++ operatörü
+// Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+const ComplexT &amp; ComplexT::operator++()
+{
+      re=re+0.1;                    // reel kısım arttırılıyor
+      return *this;                 // Nesnenin referansı döndürülüyor
+}
+// Sonradan arttırma ++ operatörü
+// Karmaşık sayıların reel kısmını 0.1 kadar arttırmaktadır.
+ComplexT ComplexT::operator++(int)     // sonradan arttırma operatörü
+{
+      ComplexT gecici;
+   gecici = *this;      // nesnenin orijinal değeri
+   re=re+0.1;           // reel kısım arttırılıyor
+   return gecici;       // eski (artmamış) değer döndürülüyor
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+      cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+}
+//---- Ana Program -----
+int main()
+{
+      ComplexT z1(1.2,0.5),z2;
+      z2= ++z1;          // operator ++() çalışır
+      z1.goster();
+      z2.goster();
+      z2= z1++;          // operator ++(int) çalışır
+      z1.goster();
+      z2.goster();
+      return 0;
+}</code></pre>
+<pre class="kod"><code>re=1.3 im=0.5
+re=1.3 im=0.5
+re=1.4 im=0.5
+re=1.3 im=0.5</code></pre>
+<p><em>Note: In the screen output of the lecture note there is an additional "re=1.2 im=0.5" line at the very beginning; however, in this program the first <code>goster()</code> call comes after <code>++z1</code>, so that line is not printed (it appears to be left over from the output of Example 6).</em></p>
+<h2 id="overloading-the-operator">Overloading the + operator</h2>
+<h3 id="example-8-adding-two-objects-with">Example 8: adding two objects with +</h3>
+<p>In this example there will be two objects holding integer values, and we will have the + operator add them as if it were adding integers. The copy constructor was also used.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// + operatörüne yeni bir işlev yüklenmesi. Kopyalama kurucusu da kullanıldı…
+#include &lt;iostream&gt;
+using namespace std;
+class deneme
+      {
+      private:
+              int x,y;
+      public:
+              deneme(deneme &amp;); //kopyalama kurucusu (copy constructor)
+              deneme(); // parametresiz kurucu fonksiyon (constructor)
+              deneme(int ,int); // parametreli kurucu fonksiyon
+             ~deneme();// yıkıcı(destructor)
+              deneme&amp; deneme::operator+(deneme&amp;);// + operatorü için overloading
+      };
+// bu sayede nesneleri sanki sayıymış gibi toplayabileceğiz...
+deneme&amp; deneme::operator+(deneme&amp; s)
+{
+  cout&lt;&lt;"+ operatoru calisti"&lt;&lt;endl;
+  int xx,yy;
+  xx=x+s.x;
+  yy=y+s.y;
+  cout&lt;&lt;" xx= "&lt;&lt;xx&lt;&lt;" yy= "&lt;&lt;yy&lt;&lt;endl;
+}
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+    cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+    x=alias.x;
+    y=alias.y;
+    cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+    cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+    deneme d,c(3,2),e; // c nesnesi d nin değerleri ile doğuyor...
+     e=d+c;
+     // aslinda alt kisim ile ust kisim ayni isi yapiyor...
+     e=d.operator+(c);
+     deneme x; // yeni bir nesne oluşturalım
+     // eğer sınıf içerisinde pointer yoksa; eşittir işlemi için
+     // ek olarak operator overload etmenize gerek yoktur...
+     d=c; // gördüğünüz gibi bu işlem nesneleri birbirine sorunsuzca eşitliyor.
+     x=d+c;
+     system("pause");
+     return 0;     }</code></pre>
+<pre class="kod"><code>Kurucu fonksiyon calisti..
+x=5
+y=10
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=2
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+ xx= 8 yy= 12
++ operatoru calisti
+ xx= 8 yy= 12
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+ xx= 6 yy= 4</code></pre>
+<p><em>Note: In this example the <code>operator+</code> function declares that it returns <code>deneme&amp;</code> but contains no <code>return</code> statement; it only prints the sum to the screen. Assigning the result to an object with <code>e=d+c</code> is undefined behavior. Also, the <code>deneme::</code> qualifier in the declaration <code>deneme&amp; deneme::operator+(deneme&amp;);</code> inside the class body is redundant; modern compilers treat it as an error.</em></p>
+<h3 id="example-9-adding-complex-numbers-with">Example 9: adding complex numbers with +</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>//     + operatörüne yeni bir işlev yüklenmesi
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+       double re,im;                                  // reel ve sanal kısımlar
+ public:
+       ComplexT(double re_in=0,double im_in=1);      // Kurucu
+       ComplexT operator+(const ComplexT &amp; ) const; // + operatörünün fonksiyonu
+       void goster() const;
+};
+//Parametresiz çağırılabilen kurucu. Çünkü ilk değerleri var.
+ComplexT::ComplexT(double re_in,double im_in)
+{
+       re=re_in;
+       im=im_in;
+       cout&lt;&lt; endl &lt;&lt; "Kurucu calisti. ";
+}
+// + operatörü
+ComplexT ComplexT::operator+(const ComplexT &amp;c) const
+{
+       double yeni_re, yeni_im;
+       yeni_re=re+c.re;
+       yeni_im=im+c.im;
+       return ComplexT(yeni_re,yeni_im);
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+       cout &lt;&lt; endl &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im;
+}
+int main()
+{
+       ComplexT z1(1,1),z2(2,2),z3;
+       z3=z1+z2;                             // z3=z1.operator+(z2);  yapmakla aynıdır
+       z3.goster();
+       return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti.
+Kurucu calisti.
+Kurucu calisti.
+Kurucu calisti.
+re=3 im=3</code></pre>
+<p>In this example, a method for the + operator has been added to the ComplexT class. In this way the + operator is made to add complex numbers.</p>
+<h2 id="overloading-the-assignment-operator">Overloading the assignment operator (=)</h2>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>void ComplexT::operator=(const ComplexT&amp; z) // Gereksiz
+{
+re = z.re;
+im = z.im;
+}</code></pre>
+<p>If this function had not been written, the function the compiler would supply would do the same job. If a class has an assignment function, the compiler uses this function for all assignments from then on.</p>
+<h3 id="example-10">Example 10</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>//     Atama operatörüne yeni bir işlev yüklenmesi
+// Karmaşık sayılar sınıfı ComplexT'ye = operatörü için bir metot eklenmiştir.
+// Bu sınıf için bu metodun yazılması gereksizdir.
+// Bu fonksiyon sınıftan kaldırılsa da ana program doğru olarak çalışır.
+// Bu program sadece atama fonksiyonunun yazılımını göstermek için hazırlanmıştır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+       double re,im; // reel ve sanal kısımlar
+ public:
+       ComplexT(double re_in=0,double im_in=1): re(re_in),im(im_in)
+       {};    // Kurucu (gövdesi boş)
+       void operator=(const ComplexT &amp; ); // = Operatörü
+       void goster() const;
+};
+// = operatörü
+void ComplexT::operator=(const ComplexT &amp;c)
+{
+       re = c.re;                              // Atamalar yapılıyor
+       im = c.im;
+       cout &lt;&lt; "Atama fonksiyonu calisti" &lt;&lt; endl; // Çalıştığını ekranda görmek için
+}
+// Nesne ile ilgili bilgileri ekrana çıkaran metot
+void ComplexT::goster() const
+{
+       cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl;
+}
+int main()
+{
+       ComplexT z1(1,2),z2;
+       z2.goster(); // Atamadan önceki içerik
+       z2=z1;
+       z2.goster(); // Atamadan sonraki içerik
+       return 0;
+}</code></pre>
+<pre class="kod"><code>re=0 im=1
+Atama fonksiyonu calisti
+re=1 im=2</code></pre>
+<p>Since assignment is used very frequently in programs, the C++ compiler supplies every class with a function for the assignment operator. The function supplied by the compiler copies the data of an object member by member into the data fields of another existing object. If this member-by-member assignment is sufficient for the class, the programmer does not need to write a function for the assignment operator. For classes that contain no pointers, the function supplied by the compiler is generally sufficient. For example, the assignment function shown above is unnecessary for complex numbers.</p>
+<p>However, the assignment function supplied by the compiler may not be sufficient for every class. Especially in classes that contain pointers, the programmer may need to write the function for the assignment operator. There is a problem here similar to the one with the copy constructor. Below, an assignment function is written for an example String class.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String{     // Örnek (karakter katarı) String sınıfı
+   int boy;       // Katarın boyu
+   char *icerik; // Katarın içeriği
+public:
+   String();      // Parametresiz kurucu
+   String(const char *);            // Kurucu
+   String(const String &amp;);          // Kopyalama kurucusu
+   void operator=(const String &amp;); // Atama operatörü
+   void goster();                  // Katarları ekrana çıkaran üye fonksiyon
+ ~String();                        // Yok edici fonksiyon
+};
+// Atama Operatörü
+void String::operator=(const String &amp;gelen_nesne)
+{
+cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+boy = gelen_nesne.boy;
+delete [] icerik;               // Eski içerik belleğe iade ediliyor
+icerik = new char[boy + 1];     // +1 null karakteri icin
+strcpy(icerik, gelen_nesne.icerik);
+}</code></pre>
+<p>This assignment function does not return a value (void). For this reason it is not possible to chain this operator in cascade (like <code>a = b = c</code>). To be able to chain operators in cascade, the function for the operator must return a reference to the object being operated on. If the return type of operator functions is written as void, these operators cannot be chained one after another.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Atama Operatörü
+const String&amp; String::operator=(const String &amp;gelen_nesne)
+{
+cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+boy = gelen_nesne.boy;
+delete [] icerik; // Eski içerik belleğe iade ediliyor
+icerik = new char[boy + 1]; // +1 null karakteri icin
+strcpy(icerik, gelen_nesne.icerik);
+return *this; // Kendi adresini geri gönderiyor
+}</code></pre>
+<p>Although the assignment operator and the copy constructor do similar jobs, they are invoked at different times. The copy constructor is invoked when a new object is being created and copies the information from an old object into the new object. The assignment operator, on the other hand, is invoked when values from another object are being assigned to an existing object.</p>
+<h3 id="example-11-assignment-operator-for-the-string-class">Example 11: assignment operator for the String class</h3>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Atama operatörünün "=" Katar dizileri (String) için yüklenmesi
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;                       // string fonksiyonları için
+using namespace std;
+class String{                  // Örnek (karakter katarı) String sınıfı
+   int boy;              // Katarın boyu
+   char *icerik;         // Katarın içeriği
+ public:
+   String();                    // Parametresiz kurucu
+   String(const char *);        // Kurucu
+   String(const String &amp;);     // Kopyalama kurucusu
+   const String&amp; operator=(const String &amp;);      // Atama operatörü
+   void goster();    // Katarları ekrana çıkaran üye fonksiyon
+   ~String();        // Yok edici fonksiyon
+};
+// Parametresiz Kurucu Fonksiyon
+// Sadece NULL içeren bir boş katar oluşturur
+String::String()
+{
+  cout&lt;&lt; "Parametresiz Kurucu calisti" &lt;&lt; endl;
+  boy = 0;                     // boş katarın boyu sıfır
+  icerik = new char[1];        // icerik için yer ayrıldı, null icin
+  strcpy(icerik, "");          // boş katar
+}
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+boy = strlen(gelen_veri); // gelen katarın boyu hesaplandı
+icerik = new char[boy +1]; // icerik için yer ayrıldı, +1 null icin
+strcpy(icerik, gelen_veri);//gelenveri icerik'in gosterdigi yere kopyalanıyor
+}
+// Kopyalama kurucusu
+String::String(const String &amp;gelen_nesne)
+{
+  cout&lt;&lt; "Kopyalama Kurucusu calisti" &lt;&lt; endl;
+  boy = gelen_nesne.boy;
+  icerik = new char[boy + 1];         // +1 null karakteri icin
+  strcpy(icerik, gelen_nesne.icerik);
+}
+// Atama Operatörü
+const String&amp; String::operator=(const String &amp;gelen_nesne)
+{
+  cout&lt;&lt; "Atama operatoru calisti" &lt;&lt; endl;
+  boy = gelen_nesne.boy;
+  delete [] icerik;      // Eski içerik belleğe iade ediliyor
+  icerik = new char[boy + 1];         // +1 null karakteri icin
+  strcpy(icerik, gelen_nesne.icerik);
+  return *this;          // Kendi adresini geri gönderiyor
+}
+void String::goster()
+{
+  cout&lt;&lt; icerik &lt;&lt; ", " &lt;&lt; boy &lt;&lt; endl;      // Katar ve boyu ekrana yazılıyor
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+       cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+       delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()               // Ana fonksiyon
+{
+   String s1("Katar 1");
+      String s2 = s1;          // Kopyalama kurucusu çalışır
+      s2.goster();
+      String s3 , s4;
+      s3 = s4= s2;             // Atama operatörü 2 defa çalışır
+      s3.goster();
+      s4.goster();
+   return 0;
+ }</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Kopyalama Kurucusu calisti
+Katar 1, 7
+Parametresiz Kurucu calisti
+Parametresiz Kurucu calisti
+Atama operatoru calisti
+Atama operatoru calisti
+Katar 1, 7
+Katar 1, 7</code></pre>
+<h2 id="overloading-the-subscript-operator">Overloading the subscript operator ([ ])</h2>
+<p>Since the same rules apply to all operator functions, there is no need to explain each one separately; however, some operators that may be interesting and useful are explained. One of them is the subscript operator. The function for this operator can have two different forms:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class C{
+dönüş tipi &amp; operator [] (parametre tipi);
+ya da
+const dönüş tipi &amp; operator [] (parametre tipi) const; };</code></pre>
+<p>The first form is used if the object's data will be modified with this operator; in this case the operator can appear to the left of an assignment operator. In the second form the function is defined as constant; in this case the object's data can only be read with the operator. For an object c, the expression <code>c[i]</code> means <code>c.operator[](i)</code>.</p>
+<h3 id="example-12">Example 12</h3>
+<p>A function will be overloaded onto the subscript operator for use in the String class. This operator will provide access to the i-th character of a string. If i is given as less than zero, the first element of the string is accessed; if i is given as greater than the length of the string, the last element of the string is accessed.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// İndis operatörünün "[]" Katar dizileri (String) için yüklenmesi
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;                        // string fonksiyonları için
+using namespace std;
+class String{           // Örnek (karakter katarı) String sınıfı
+        int boy;       // Katarın boyu
+        char *icerik; // Katarın içeriği
+ public:
+        String(const char *);      // Kurucu
+        char &amp; operator[](int i); // İndis operatörü
+        void goster();            // Katarları ekrana çıkaran üye fonksiyon
+        ~String();               // Yok edici fonksiyon
+};
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+        cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+        boy = strlen(gelen_veri); // gelen katarın boyu hesaplandı
+        icerik = new char[boy +1];// icerik için yer ayrıldı, +1 null icin
+        strcpy(icerik, gelen_veri);// gelen veri icerik'in gosterdigi yere kopyalanıyor
+}
+// İndis Operatörü
+char&amp; String::operator[](int i)
+{
+       cout &lt;&lt; "Indis operatoru calisti" &lt;&lt; endl;
+       if(i &lt; 0)
+              return icerik[0];          // İlk eleman gönderiliyor
+       if(i &gt;= boy)
+              return icerik[boy-1];      // Son eleman gönderiliyor
+       return icerik[i];                // i. eleman gönderiliyor
+}
+void String::goster()
+{
+        cout&lt;&lt; icerik &lt;&lt; ", " &lt;&lt; boy &lt;&lt; endl;              // Katar ve boyu ekrana yazılıyor
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+        cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+        delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()                 // Ana fonksiyon
+{
+   String s1("Katar 1");
+       s1[1] = 'X';               // Katarın 2. karakteri 'X' oldu
+       s1.goster();
+       cout &lt;&lt; "Katarin 3 numarali elemani = " &lt;&lt; s1[3] &lt;&lt; endl;
+   return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Indis operatoru calisti
+KXtar 1, 7
+Indis operatoru calisti
+Katarin 3 numarali elemani = a</code></pre>
+<h2 id="overloading-the-function-call-operator">Overloading the function call operator ( () )</h2>
+<p>What distinguishes this operator from the others is that the number of operands can be determined by the programmer. The function for this operator has the following form:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class C
+{
+   dönüş tipi operator () (parametre tipleri);
+};</code></pre>
+<p>For an object c, the expression <code>c(i,j,k)</code> means <code>c.operator()(i,j,k)</code>.</p>
+<h3 id="example-13-operator-without-parameters">Example 13: () operator without parameters</h3>
+<p>In the following example, the function call operator is given the function of printing complex numbers to the screen. In this example the operator takes no parameters.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// () operatörüne yeni bir işlev yüklenmesi
+// Bu örnekte () operatörü karmaşık sayıları ekrana çıkarmak
+// için kullanılmaktadır. Operatörün fonksiyonu parametre almamaktadır.
+#include &lt;iostream&gt;
+using namespace std;
+// Karmaşık (Kompleks) sayıları tanımlamak için oluşturulan sınıf
+class ComplexT{
+      double re,im;           // reel ve sanal kısımlar
+public:
+ ComplexT(double re_in=0,double im_in=0):re(re_in),im(im_in)
+                  {};         // Kurucu, gövdesi boş
+ ComplexT operator+(const ComplexT &amp; ) const;    // + operatörünün fonksiyonu
+ void operator()() const;     // () operatörünün fonksiyonu
+};
+// + operatörü
+ComplexT ComplexT::operator+(const ComplexT &amp;c) const
+{
+      double yeni_re, yeni_im;
+      yeni_re=re+c.re;
+      yeni_im=im+c.im;
+      return ComplexT(yeni_re,yeni_im);
+}
+// () operatörü
+// Parametresiz fonksiyon çağırma operatörü, karmaşık sayıları ekrana yazar
+void ComplexT::operator()() const
+{
+      cout &lt;&lt; "re=" &lt;&lt; re &lt;&lt; " im=" &lt;&lt; im &lt;&lt; endl ;
+}
+int main()
+{
+      ComplexT z1(1,1),z2(2,2),z3;
+      z1();
+      z2();
+      z3=z1+z2;
+      z3();
+      return 0;
+}</code></pre>
+<pre class="kod"><code>re=1 im=1
+re=2 im=2
+re=3 im=3</code></pre>
+<h3 id="example-14-operator-with-two-parameters">Example 14: () operator with two parameters</h3>
+<p>This example shows the use of the function call operator with parameters. The operator in the example copies a desired amount of a character string (String) to a desired memory region; it takes 2 parameters.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>// Fonksiyon çağırma operatörünün "()" Katar dizileri (String) için yüklenmesi
+// Operatör, katarın bir kısmını istenen bir bellek bölgesine kopyalar
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;               // string fonksiyonları için
+using namespace std;
+class String{               // Örnek (karakter katarı) String sınıfı
+         int boy;           // Katarın boyu
+         char *icerik;      // Katarın içeriği
+  public:
+         String();                // Parametresiz kurucu
+         String(const char *);    // Kurucu
+         void operator()(char *, int) const;    // () operatörü
+         ~String();              // Yok edici fonksiyon
+};
+// Parametresiz Kurucu Fonksiyon
+// Sadece NULL içeren bir boş katar oluşturur
+String::String()
+{
+       cout&lt;&lt; "Parametresiz Kurucu calisti" &lt;&lt; endl;
+       boy = 0;                        // boş katarın boyu sıfır
+       icerik = new char[1];           // icerik için yer ayrıldı, null icin
+       strcpy(icerik, "");             // boş katar
+}
+// Kurucu Fonksiyon
+// Parametre olarak aldığı katarı nesnenin içeriğine kopyalar
+String::String(const char *gelen_veri)
+{
+  cout&lt;&lt; "Kurucu calisti" &lt;&lt; endl;
+  boy = strlen(gelen_veri);        // gelen katarın boyu hesaplandı
+  icerik = new char[boy +1];       // icerik için yer ayrıldı, +1 null icin
+  strcpy(icerik, gelen_veri);      // gelen veri icerik'in gosterdigi yere kopyalanıyor
+}
+// Fonksiyon çağırma operatörü(): Bir katarın içeriğinin belli bir kısmını
+// verilen bir bellek bölgesine kopyalar
+// Parametre olarak hedef belleğin adresini ve kopyalanacak karakter sayısını alır
+void String::operator()(char * hedef, int sayi) const
+{
+       if (sayi&gt;boy) sayi=boy;                 // sayi katarın boyundan uzunsa
+       for (int k=0; k&lt; sayi; k++) hedef[k]= icerik[k];
+}
+// Yok edici Fonksiyon
+// icerik tarafından isaret edilen bellek geri veriliyor
+String::~String()
+{
+        cout&lt;&lt; "Yok edici calisti" &lt;&lt; endl;
+        delete[] icerik;
+}
+//-------- Ana Program ----------------
+int main()                 // Ana fonksiyon
+{
+  String s1("Ornek Program");
+  char *c = new char[8];          // Hedef bellek bölgesi
+  s1(c,7);                        // 7 karakter kopyalandı
+  c[7]='\0';                      // Katar sonunu belirtmek için (null)
+  cout &lt;&lt; c &lt;&lt; endl;              // Kopyalanan karakterler ekrana yazılıyor
+  delete c;                       // Alınan bellek bölgesi iade ediliyor
+  return 0;
+}</code></pre>
+<pre class="kod"><code>Kurucu calisti
+Ornek P</code></pre>
+<p><em>Note: The array obtained with <code>new char[8]</code> should be released with <code>delete[] c;</code>; the note has <code>delete c;</code>.</em></p>
+<h2 id="overloading-the-stream-operators-and">Overloading the Stream Operators (&lt;&lt; and &gt;&gt;)</h2>
+<figure class="yazi-gorsel"><img src="../s-20.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Diagram of what the class structure provides and code screenshot of the PhoneNumber class example"><figcaption>Page 20 of the lecture notes: what the class structure provides and the beginning of Example 16</figcaption></figure>
+<p>Before this section, the lecture notes include a diagram: representing real-world objects on a computer with a class (a model). What the class structure provides:</p>
+<ul><li>Ease of modeling</li><li>Programs that are easy to read and understand</li><li>Protection of private data</li><li>Errors remain localized</li><li>Ease of teamwork</li><li>The ability to create new data types</li></ul>
+<p>By overloading the &lt;&lt; and &gt;&gt; operators, we can perform input and output with user-defined types.</p>
+<ul><li>The type of the left operand must be <code>ostream &amp;</code> and <code>istream &amp;</code>.</li><li>Since the left operand is not of our own class, we cannot define them as member functions.</li><li>To access private data members, they must be friend functions.</li><li>If they are not defined as friend functions, they access the private data through the set and get functions defined in the public section. For performance reasons, these functions are made inline.</li></ul>
+<h3 id="example-16-the-phonenumber-class">Example 16: The PhoneNumber class</h3>
+<p>Example 16 is given in the notes as a code screenshot: a <code>PhoneNumber</code> class that stores a telephone number as area code, exchange, and line number. <code>operator&lt;&lt;</code> and <code>operator&gt;&gt;</code> are declared as friend functions; <code>operator&gt;&gt;</code> skips the parenthesis, space, and hyphen in the input with <code>ignore()</code> and reads the parts with <code>setw</code>. The callout boxes in the notes: "Note the function prototypes of the &lt;&lt; and &gt;&gt; operators: they must be friend functions." and "Note that the call is written as <code>cin &gt;&gt; phone;</code>, while the definition is written as <code>operator&gt;&gt;(cin, phone);</code>! Inside the function, cin appears as input and phone appears under the name num in the function definition."</p>
+<figure class="yazi-gorsel"><img src="../s-21.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="The operator&lt;&lt; and operator&gt;&gt; definitions of the PhoneNumber example, the main function, and the screen output"><figcaption>Page 21 of the lecture notes: the rest of Example 16 and the beginning of Example 15</figcaption></figure>
+<pre class="kod"><code>Enter phone number in the form (123) 456-7890:
+(800) 555-1212
+The phone number entered was: (800) 555-1212</code></pre>
+<h3 id="example-15-reading-data-into-an-object-and-printing-it-with-and">Example 15: Reading data into an object and printing it with &lt;&lt; and &gt;&gt;</h3>
+<p>Using the &lt;&lt; and &gt;&gt; operators, we can read data into an object and print the object to the screen as if it were a variable. This example extends the addition example (Example 8); all operations for +, &lt;&lt;, &gt;&gt;, and the copy constructor are demonstrated.</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;iostream&gt;
+// Let's combine the overloading of the &gt;&gt; and &lt;&lt; operators with the other example
+// In this example, all operations for +,&lt;&lt;,&gt;&gt; and the copy constructor are demonstrated.
+using namespace std;
+class deneme
+      {
+      private:
+               int x,y;
+      public:
+               deneme(deneme &amp;); //copy constructor
+               deneme(); // constructor without parameters
+               deneme(int ,int); // constructor with parameters
+              ~deneme();// destructor
+               deneme&amp; deneme::operator+(deneme&amp;);// overloading for the + operator
+/* Note!
+  ------
+  To overload the &lt;&lt; and &gt;&gt; operators, you must define them as friend functions...
+  Depending on the internal structure of the object, the values to be taken
+  as input or shown on the screen during input and output operations are up to the programmer...
+    */
+              friend ostream&amp; operator&lt;&lt;(ostream&amp; yaz, deneme&amp; );
+              friend istream&amp; operator&gt;&gt;(istream&amp; oku, deneme&amp;);
+         };
+istream&amp; operator&gt;&gt;(istream&amp; oku, deneme&amp; nesne)
+{
+oku&gt;&gt;nesne.x&gt;&gt;nesne.y;
+return oku;
+}
+ostream&amp; operator&lt;&lt;(ostream&amp; yaz,deneme&amp; nesne)
+{
+   yaz&lt;&lt;nesne.x&lt;&lt;':'&lt;&lt;nesne.y&lt;&lt;endl;
+   return yaz;
+}
+// this way we will be able to add objects as if they were numbers...
+deneme&amp; deneme::operator+(deneme&amp; s)
+{
+  cout&lt;&lt;"+ operatoru calisti"&lt;&lt;endl;
+  int xx,yy;
+  xx=x+s.x;
+  yy=y+s.y;
+cout&lt;&lt;endl;
+  cout&lt;&lt;" xx= "&lt;&lt;xx&lt;&lt;"   yy= "&lt;&lt;yy&lt;&lt;endl;
+}
+deneme::deneme(int a,int b)
+{
+     cout&lt;&lt;"Parametreli kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=a;
+     y=b;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::deneme()
+   {
+     cout&lt;&lt;"Kurucu fonksiyon calisti.."&lt;&lt;endl;
+     x=5;
+     y=10;
+     cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+     cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+   }
+deneme::deneme(deneme &amp;alias)
+{
+   cout&lt;&lt;"Kopyalama kurucusu calisti"&lt;&lt;endl;
+   x=alias.x;
+   y=alias.y;
+   cout&lt;&lt;"x="&lt;&lt;x&lt;&lt;endl;
+   cout&lt;&lt;"y="&lt;&lt;y&lt;&lt;endl;
+}
+deneme::~deneme()
+{
+   cout&lt;&lt;"Yikici fonksiyon calisti..";
+}
+int main()
+{
+    deneme d,c(3,2),e; // the object c is born with the values of d...
+    e=d+c;
+    // actually the lower part and the upper part do the same job...
+    e=d.operator+(c);
+    deneme x; // let's create a new object
+    // if there is no pointer inside the class, there is no need to
+    // overload an additional operator for the assignment operation...
+    d=c; // as you can see, this operation assigns objects to each other without problems.
+    x=d+c;
+    cout&lt;&lt;c;
+    cin&gt;&gt;c;
+    cout&lt;&lt;c;
+    system("pause");
+    return 0;
+    }</code></pre>
+<p>Screen output (the values 111 and 6789 were entered from the keyboard; a <code>:</code> is inserted between them when printing):</p>
+<pre class="kod"><code>Kurucu fonksiyon calisti..
+x=5
+y=10
+Parametreli kurucu fonksiyon calisti..
+x=3
+y=2
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+
+ xx= 8   yy= 12
++ operatoru calisti
+
+ xx= 8   yy= 12
+Kurucu fonksiyon calisti..
+x=5
+y=10
++ operatoru calisti
+
+ xx= 6   yy= 4
+3:2
+111
+6789
+111:6789
+Press any key to continue . . .</code></pre>
+<p><em>Note: As in Example 8, here too <code>operator+</code> does not return a value (there is no <code>return</code>); it only prints the sum to the screen.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../Hafta3.pdf" download>Hafta3.pdf</a></p>
+              <p class="kucuk">PDF · 546 KB · 23 <span data-i18n="arch.pagesLower"></span> · 05.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../Hafta3.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (546 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

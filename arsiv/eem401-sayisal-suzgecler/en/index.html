@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Digital Signal Processing: Digital Filters (Network Structures, IIR Design, FIR Design) — hasancan.net</title>
+<meta name="description" content="Selda Güney&#x27;s EEM401 Digital Filters I–III presentations: IIR and FIR realizations (direct, canonical, cascade, parallel, transposed), Butterworth/Chebyshev/elliptic analog filters, impulse invariance and the bilinear transformation, windowing, and frequency sampling.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Digital Signal Processing: Digital Filters (Network Structures, IIR Design, FIR Design)">
+<meta property="og:description" content="Selda Güney&#x27;s EEM401 Digital Filters I–III presentations: IIR and FIR realizations (direct, canonical, cascade, parallel, transposed), Butterworth/Chebyshev/elliptic analog filters, impulse invariance and the bilinear transformation, windowing, and frequency sampling.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-sayisal-suzgecler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Digital Signal Processing: Digital Filters (Network Structures, IIR Design, FIR Design)", "description": "Selda Güney's EEM401 Digital Filters I–III presentations: IIR and FIR realizations (direct, canonical, cascade, parallel, transposed), Butterworth/Chebyshev/elliptic analog filters, impulse invariance and the bilinear transformation, windowing, and frequency sampling.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-sayisal-suzgecler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "eem401-sayisal-suzgecler.zip", "contentUrl": "https://hasancan.net/arsiv/eem401-sayisal-suzgecler/eem401-sayisal-suzgecler.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM401 Digital Signal Processing: Digital Filters (Network Structures, IIR Design, FIR Design)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>04.12.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#i-realization-of-digital-filters">I. Realization of digital filters</a></li><li><a href="#ii-design-of-iir-filters">II. Design of IIR filters</a></li><li><a href="#iii-design-of-fir-filters">III. Design of FIR filters</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM401 Digital Signal Processing: Digital Filters (Network Structures, IIR Design, FIR Design)</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 04.12.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>The three December presentations from the EEM401 Digital Signal Processing course (Asst. Prof. Dr. Selda Güney, Fall 2014–2015): <em>Digital Filters I</em> (realization), <em>II</em> (IIR design), and <em>III</em> (FIR design). The original presentations can be downloaded as a ZIP at the end of the post. The course title on the slides is "EEM 401 Digital Signal Processing".</p>
+<h2 id="i-realization-of-digital-filters">I. Realization of digital filters</h2>
+<p><strong>Advantages:</strong> the transfer function can be changed by changing the coefficients; high reliability and accuracy; transfer functions that cannot be realized with analog filters can be realized. <strong>Disadvantages:</strong> cost, need for a continuous power supply.</p>
+<p>By design, there are two types:</p>
+<ol><li><strong>Recursive</strong>: the output is a function of both the input and the output; the phase response is not linear; for stability, the poles of the transfer function must lie inside the unit circle in the z-plane.</li><li><strong>Non-recursive</strong>: the output depends only on the input and the past values of the input; it has a linear phase response and is stable; a large number of delay elements is required for a transfer function with a sharp transition.</li></ol>
+<p>Linear time-invariant (LTI) systems are divided into <strong>FIR</strong> (finite impulse response: y[n] = Σ_{k=0}^{M−1} h(k) x(n − k), generally non-recursive) and <strong>IIR</strong> (infinite impulse response, generally recursive).</p>
+<p>Realization methods: direct, canonical form, series (cascade), parallel, ladder, and lattice realization.</p>
+<p>Constant-coefficient difference equation: y[n] = −Σ_{k=1}^{N} a_k y[n − k] + Σ_{k=0}^{M} b_k x[n − k] and H(z) = Σ b_k z^(−k) / (1 + Σ a_k z^(−k)). Basic elements: adder, multiplier, and unit delay. Example: y[n] = a1·y[n−1] + a2·y[n−2] + b0·x[n].</p>
+<h3 id="network-structures-for-iir-systems">Network structures for IIR systems</h3>
+<ul><li><strong>Direct form I:</strong> H(z) = H2(z)·H1(z); first v[n] = Σ b_k x[n − k], then y[n] = Σ a_k y[n − k] + v[n].</li><li><strong>Direct form II (canonical):</strong> by swapping the order of H1 and H2, w[n] = Σ a_k w[n − k] + x[n] and y[n] = Σ b_k w[n − k]; the number of delay elements is minimal. For example, for a single-pole system, w1[n] = a·w1[n−1] + x[n], y[n] = b0·w1[n] + b1·w1[n−1]. An example shows how to write the wave variables (w1[n], w2[n], …) from the signal flow graph and obtain the unit impulse response using the z-transform.</li><li><strong>Cascade form:</strong> H(z) is the product of first- or second-order sections; second-order sections are practical. Example:</li></ul>
+<p>  H(z) = (1 + 2z⁻¹ + z⁻²) / (1 − 0.75z⁻¹ + 0.125z⁻²) = (1 + z⁻¹)(1 + z⁻¹) / ((1 − 0.5z⁻¹)(1 − 0.25z⁻¹)); realizations in direct form I and II and in cascade form are shown.</p>
+<ul><li><strong>Parallel form:</strong> partial fraction expansion. In the same example, H(z) = 8 + 18/(1 − 0.5z⁻¹) − 25/(1 − 0.25z⁻¹), and with second-order sections H(z) = 8 + (−7 + 8z⁻¹)/(1 − 0.75z⁻¹ + 0.125z⁻²).</li><li><strong>Transposed form:</strong> if the directions of all branches of the signal flow graph are reversed and the input and output are interchanged, the input-output relationship does not change.</li></ul>
+<h3 id="network-structures-for-fir-systems">Network structures for FIR systems</h3>
+<p>Direct form I; direct form II (the transpose of I); cascade form H(z) = Π (b0k + b1k z⁻¹ + b2k z⁻²); the <strong>lattice form</strong> for linear-phase FIR systems (the sequence h[n] must be symmetric; the cases of M even and odd are treated separately).</p>
+<h2 id="ii-design-of-iir-filters">II. Design of IIR filters</h2>
+<p>The goal is to obtain a realizable G(z) that approximates a given frequency response; the course covers only magnitude approximation.</p>
+<p>The impulse responses of the four ideal filters cannot be realized because they are non-causal and infinitely long. In practice, the magnitude response is specified with acceptable tolerances in the passband and stopband; between them lies the <strong>transition band</strong>. For a low-pass filter: ωp is the passband edge, ωs is the stopband edge, δp is the maximum ripple in the passband, and δs is the minimum ripple in the stopband. Loss function A(ω) = −20·log10|G(e^jω)|; αp = −20·log10(1 − δp) and αs = −20·log10(δs). Edge frequencies given in Hz are converted to radians using the sampling frequency F_T (ω = 2πF/F_T).</p>
+<p>The most commonly used method: (1) the digital filter specifications are converted to the specifications of a prototype analog low-pass filter; (2) the analog Ha(s) is determined; (3) Ha(s) is transformed into the digital G(z). The reason: analog filter design is highly developed and has tables.</p>
+<h3 id="types-of-analog-filters">Types of analog filters</h3>
+<ol><li><strong>Butterworth:</strong> |Ha(jΩ)|² = 1 / (1 + (jΩ/jΩc)^(2N)); poles s_k = Ωc·e^(jπ(2k + N + 1)/2N).</li><li><strong>Chebyshev:</strong> |Ha(jΩ)|² = 1 / (1 + ε²·V_N²(Ω/Ωc)), V_N(x) = cos(N·cos⁻¹x).</li><li><strong>Elliptic.</strong></li></ol>
+<h3 id="transformation-from-analog-to-digital-filter">Transformation from analog to digital filter</h3>
+<ul><li><strong>Impulse invariance method:</strong> h[n] = Td·ha(nTd). If Ha(s) = Σ A_k/(s − s_k), then H(z) = Σ Td·A_k / (1 − e^(s_k·Td)·z⁻¹); the poles s_k in the s-plane map to the poles e^(s_k·Td) in the z-plane. Example: for 0.89125 ≤ |H(e^jω)| ≤ 1 (0 ≤ ω ≤ 0.2π) and |H(e^jω)| ≤ 0.17783 (0.3π ≤ ω ≤ π), with Td = 1, the Butterworth design gives N = 5.8858 ≈ <strong>6</strong> and Ωc = 0.70474; the 6th-order Ha(s) = 0.12093 / [(s² + 0.364s + 0.4945)(s² + 0.9945s + 0.4945)(s² + 1.3585s + 0.4945)]; the result is an H(z) consisting of three second-order sections.</li><li><strong>Bilinear transformation (BLT):</strong> it is used more often because of the factors affecting aliasing and stability: s = (2/T)·(1 − z⁻¹)/(1 + z⁻¹). The left half of the s-plane maps to the inside of the unit circle, the right half to the outside, and the jΩ axis to the unit circle; that is, a stable analog function maps to a stable digital function. The frequency relationship Ω = (2/T)·tan(ω/2) is nonlinear and produces <strong>frequency warping</strong>. Design steps: (1) apply prewarping to the edge frequencies (find Ωp, Ωs); (2) design the analog filter; (3) obtain G(z) with the BLT. The BLT can be used only for filters with piecewise-constant magnitude responses and does not preserve the phase response of the analog filter. In the same example, with the BLT, N = 5.305 ≈ 6 and Ωc = 0.766 are found and H(z) = 0.0007378(1 + z⁻¹)⁶ / [(1 − 1.2686z⁻¹ + 0.7051z⁻²)(1 − 1.0106z⁻¹ + 0.3583z⁻²)(1 − 0.9044z⁻¹ + 0.2155z⁻²)] is obtained.</li><li><strong>The matched z-transform</strong> is mentioned as a third method. The presentation ends with a low-pass Butterworth design with ωp = 0.25π, ωs = 0.55π, αp = 0.5 dB, αs = 15 dB.</li></ul>
+<h2 id="iii-design-of-fir-filters">III. Design of FIR filters</h2>
+<p>FIR design is based on direct approximation of the specified magnitude response; linear phase is generally desired. Designing an Nth-order FIR filter means finding the (N + 1)-length impulse response coefficients {h[n]} or (N + 1) samples of the frequency response. Methods: windowed Fourier series, frequency sampling, computer-based optimization (Parks–McClellan).</p>
+<ul><li>FIR design is a discrete-time process; it has no equivalent in the analog domain; definitions are mostly in the time domain.</li><li>Two advantages: <strong>stability</strong> and <strong>linear phase</strong>; the number of coefficients (order) is much larger than for an IIR filter with the same specifications.</li><li>The simplest FIR filter is the <strong>moving average</strong> filter: it is a rather poor low-pass filter in terms of magnitude response, and its bandwidth is controlled only by the order.</li><li>Filter equation y[n] = Σ_{k=0}^{N−1} b_k x[n − k]; if an impulse is applied to the input, the coefficients equal the samples of the impulse response (b_k = h[k]). Causal FIR filters with a symmetric impulse response have linear phase (even symmetry N = 2n + 2, odd symmetry N = 2n + 1).</li></ul>
+<p><strong>Five-step design:</strong> (1) the specifications are determined (passband edge, stopband edge, cutoff frequency, ripples); (2) the coefficients are computed; (3) the structure is determined; (4) (optional) simulation; (5) implementation.</p>
+<h3 id="windowing-method">Windowing method</h3>
+<p>h[n] = h_d[n]·w[n]. First the coefficients of the ideal filter h_d[n] = sin(nω_c)/(nπ) are computed (2f_c for n = 0); the result is the circular convolution of h_d with the window response in the frequency domain. Then the window is chosen:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Window</th><th scope="col">Main lobe width</th><th scope="col">Peak side lobe</th></tr></thead><tbody><tr><th scope="row">Rectangular</th><td>4π/M</td><td>−13 dB</td></tr><tr><th scope="row">Bartlett</th><td>8π/M</td><td>−25 dB</td></tr><tr><th scope="row">Hanning</th><td>8π/M</td><td>−31 dB</td></tr><tr><th scope="row">Hamming</th><td>8π/M</td><td>−41 dB</td></tr><tr><th scope="row">Blackman</th><td>12π/M</td><td>−57 dB</td></tr></tbody></table></div>
+<p>The rectangular window is the simplest (w[n] = 1, 0 ≤ n ≤ M); it has a sharp main lobe but wide side lobes and large oscillation around the discontinuity. Hamming is better than Hanning and Bartlett and simpler than Blackman; Blackman's side lobes are the best but its equation is complex.</p>
+<h3 id="frequency-sampling-method">Frequency sampling method</h3>
+<p>N equally spaced samples H_k are taken from the 0–2π range of the frequency response H(e^jω), and the inverse DFT is taken: h[n] = (1/N) Σ_{k=0}^{N−1} H_k·W_N^(−nk), n = 0, 1, …, N − 1. The presentation works through this method with examples.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem401-sayisal-suzgecler.zip" download>eem401-sayisal-suzgecler.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.7 MB · 04.12.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem401-sayisal-suzgecler.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: LTI Models in MATLAB, Time and Frequency Response (ECEN/MAE 3723 Systems I, MATLAB Lecture 3, 2006) — hasancan.net</title>
+<meta name="description" content="MATLAB Lecture 3 slides from ECEN/MAE 3723 Systems I: continuous- and discrete-time models with tf, zpk and ss, model conversions, series/parallel/feedback, step, impulse and ramp responses, Bode and Nyquist plots, and the control system design workflow.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: LTI Models in MATLAB, Time and Frequency Response (ECEN/MAE 3723 Systems I, MATLAB Lecture 3, 2006)">
+<meta property="og:description" content="MATLAB Lecture 3 slides from ECEN/MAE 3723 Systems I: continuous- and discrete-time models with tf, zpk and ss, model conversions, series/parallel/feedback, step, impulse and ramp responses, Bode and Nyquist plots, and the control system design workflow.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: LTI Models in MATLAB, Time and Frequency Response (ECEN/MAE 3723 Systems I, MATLAB Lecture 3, 2006)", "description": "MATLAB Lecture 3 slides from ECEN/MAE 3723 Systems I: continuous- and discrete-time models with tf, zpk and ss, model conversions, series/parallel/feedback, step, impulse and ramp responses, Bode and Nyquist plots, and the control system design workflow.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "3723-lecture-18.ppt", "contentUrl": "https://hasancan.net/arsiv/eem322-ecen3723-systems-i-matlab-dersi/3723-lecture-18.ppt"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: LTI Models in MATLAB, Time and Frequency Response (ECEN/MAE 3723 Systems I, MATLAB Lecture 3, 2006)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.10.2006</dd>
+          <dt data-i18n="arch.format"></dt><dd>PowerPoint (.ppt)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#building-models-for-lti-systems">Building models for LTI systems</a></li><li><a href="#combining-models">Combining models</a></li><li><a href="#transient-response-analysis">Transient response analysis</a></li><li><a href="#frequency-response-analysis">Frequency response analysis</a></li><li><a href="#stability-analysis-based-on-frequency-response">Stability analysis based on frequency response</a></li><li><a href="#other-information-and-the-design-procedure">Other information and the design procedure</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: LTI Models in MATLAB, Time and Frequency Response (ECEN/MAE 3723 Systems I, MATLAB Lecture 3, 2006)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 11.10.2006 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a <strong>third-party</strong> presentation stored in the EEM322 Control Systems folder under the name "3723-lecture-18.ppt": the slides (41 slides) of <strong>MATLAB Lecture 3</strong> from the course <strong>ECEN/MAE 3723 – Systems I</strong>. The presentation does not state an institution or instructor name; according to the file properties, its author is <strong>"Luwang"</strong> and its date is <strong>October 2006</strong>. The presentation itself states that the model-building part is taken from the material at <strong>http://techteach.no/publications/control_system_toolbox/</strong>. Since the content is in English, it was reproduced in its original language; the original PowerPoint file can be downloaded at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with attribution. It will be removed at the request of the rights holder.</em></p>
+<p>Lecture overview: building models for LTI systems (continuous time and discrete time models), combining models, transient response analysis, frequency response analysis, stability analysis based on frequency response, other information.</p>
+<h2 id="building-models-for-lti-systems">Building models for LTI systems</h2>
+<p>The Control System Toolbox supports continuous time and discrete time models of three types: transfer function, zero-pole-gain and state space.</p>
+<h3 id="continuous-time-models">Continuous time models</h3>
+<p><strong>Transfer function</strong> with <code>tf</code>, e.g. H(s) = (2s + 1)/(s² + 3s + 2):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num = [2 1];
+&gt;&gt; den = [1 3 2];
+&gt;&gt; H = tf(num,den)
+Transfer function:
+   2 s + 1
+-------------
+s^2 + 3 s + 2</code></pre>
+<p>A delay is included with the <code>'inputdelay'</code> property; <code>H=tf(num,den,'inputdelay',2)</code> gives exp(−2s)·(2s + 1)/(s² + 3s + 2).</p>
+<p><strong>Zero-pole-gain</strong> with <code>zpk</code>:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num = [-0.5];
+&gt;&gt; den = [-1 -2];
+&gt;&gt; k = 2;
+&gt;&gt; H = zpk(num,den,k)
+Zero/pole/gain:
+ 2 (s+0.5)
+-----------
+(s+1) (s+2)</code></pre>
+<p><strong>State space</strong> model: ẋ = Ax + Bu, y = Cx + Du, where A is the state matrix, B the input matrix, C the output matrix and D the direct transmission matrix; x is the state vector, u the input vector and y the output vector (only for linear time invariant systems).</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; A = [0 1;-5 -2];
+&gt;&gt; B = [0;3];
+&gt;&gt; C = [0 1];
+&gt;&gt; D = [0];
+&gt;&gt; sys = ss(A,B,C,D)</code></pre>
+<h3 id="conversion-between-models">Conversion between models</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">MATLAB function</th></tr></thead><tbody><tr><th scope="row">Transfer function</th><td>Zero-pole-gain</td><td><code>[z,p,k]=tf2zp(num,den)</code></td></tr><tr><th scope="row">Transfer function</th><td>State space</td><td><code>[A,B,C,D]=tf2ss(num,den)</code></td></tr><tr><th scope="row">Zero-pole-gain</th><td>Transfer function</td><td><code>[num,den]=zp2tf(z,p,k)</code></td></tr><tr><th scope="row">Zero-pole-gain</th><td>State space</td><td><code>[A,B,C,D]=zp2ss(z,p,k)</code></td></tr><tr><th scope="row">State space</th><td>Transfer function</td><td><code>[num,den]=ss2tf(A,B,C,D)</code></td></tr><tr><th scope="row">State space</th><td>Zero-pole-gain</td><td><code>[z,p,k]=ss2zp(A,B,C,D)</code></td></tr></tbody></table></div>
+<h3 id="discrete-time-models">Discrete time models</h3>
+<p>The same functions take a sampling time Ts as the last argument. With Ts = 0.4:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; H = tf([2 1],[1 3 2],0.4)      % (2z + 1)/(z^2 + 3z + 2), Sampling time: 0.4
+&gt;&gt; H = zpk([-0.5],[-1 -2],2,0.4)  % 2(z+0.5)/((z+1)(z+2)), Sampling time: 0.4
+&gt;&gt; sys = ss(A,B,C,D,0.4)</code></pre>
+<p>The discrete state space model is x[n + 1] = Ax[n] + Bu[n], y[n] = Cx[n] + Du[n], where n is the discrete time index.</p>
+<p><em>Note: One of the "MATLAB output" boxes on the discrete state space slide shows a transfer function output copied from the previous slide; the output of the ss command is only the a, b, c, d matrices and the sampling time.</em></p>
+<h2 id="combining-models">Combining models</h2>
+<p>A model can be thought of as a block with inputs and outputs containing a transfer function or a state-space model. Basic block diagram manipulations:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Combination</th><th scope="col">MATLAB command</th></tr></thead><tbody><tr><th scope="row">G1 and G2 in series</th><td><code>sys = series(G1,G2)</code></td></tr><tr><th scope="row">G1 and G2 in parallel (summed)</th><td><code>sys = parallel(G1,G2)</code></td></tr><tr><th scope="row">G1 with G2 in the negative feedback path</th><td><code>sys = feedback(G1,G2)</code></td></tr><tr><th scope="row">Addition</th><td><code>sys = G1+G2;</code></td></tr><tr><th scope="row">Multiplication</th><td><code>sys = G1*G2;</code></td></tr><tr><th scope="row">Inversion</th><td><code>sys = inv(G1);</code></td></tr></tbody></table></div>
+<h2 id="transient-response-analysis">Transient response analysis</h2>
+<p>Transient response is the process from the initial state to the final state; it is used to investigate the time-domain characteristics of dynamic systems. Common responses are step, impulse and ramp responses. Example system: H(s) = 25/(s² + 4s + 25).</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [0 0 25]; den = [1 4 25];
+t = 0:0.1:7;
+step(num,den,t)        % unit step response
+grid
+title('Unit Step Response of H(s)')</code></pre>
+<figure class="yazi-gorsel"><img src="../s-22.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Unit step response of 25/(s²+4s+25): underdamped, about 25% overshoot, settles near 1"><figcaption>Unit step response of H(s) = 25/(s² + 4s + 25)</figcaption></figure>
+<p>Alternatively <code>H=tf(num,den); step(H)</code>, and for a step of height 10, <code>step(10*H)</code>. The impulse response is obtained in the same way with <code>impulse(num,den,t)</code>.</p>
+<p><strong>Ramp response:</strong> there is no ramp function in MATLAB. For a unit ramp U(s) = 1/s², Y(s) = (1/s²)·25/(s² + 4s + 25) = (1/s)·[25/(s(s² + 4s + 25))], i.e. the step response of the new H(s) = 25/(s(s² + 4s + 25)):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [0 0 0 25]; den = [1 4 25 0];
+t = 0:0.1:7;
+y = step(num,den,t);
+plot(t,y,'.',t,t,'b-')
+grid
+title('Unit Ramp Response Curve of H(s)')</code></pre>
+<h2 id="frequency-response-analysis">Frequency response analysis</h2>
+<p>In transient response analysis it can be hard to determine an accurate model (noise, limited input signal size). Alternatively, the frequency response approach characterizes how the system behaves in the frequency domain, and the frequency response can be adjusted by tuning parameters to obtain acceptable transient characteristics. A Bode diagram consists of the log-magnitude plot and the phase-angle plot (degrees):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [0 0 25]; den = [1 4 25];
+bode(num,den)
+title('Bode plot of H(s)')</code></pre>
+<figure class="yazi-gorsel"><img src="../s-32.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Bode magnitude and phase plots of 25/(s²+4s+25)"><figcaption>Bode diagram of H(s) = 25/(s² + 4s + 25)</figcaption></figure>
+<h2 id="stability-analysis-based-on-frequency-response">Stability analysis based on frequency response</h2>
+<p>Stability can also be analysed with a Nyquist plot: it shows whether the system is stable, the degree of stability and how stability may be improved, based on the Nyquist stability criterion. Example for H(s) = 1/(s² + 0.8s + 1):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [0 0 1];
+den = [1 0.8 1];
+nyquist(num,den)
+grid
+title('Nyquist Plot of H(s)')</code></pre>
+<h2 id="other-information-and-the-design-procedure">Other information and the design procedure</h2>
+<p>Use <code>help</code> to learn more about these functions and check the Control System Toolbox for others. The design procedure on the final slides: start from the system and the required design specifications, build a mathematical model, test the system with (1) transient response analysis and (2) frequency response analysis, check how stable or robust it is with stability analysis based on frequency response; if the requirements are satisfied, end; otherwise revisit the design (e.g. combine models).</p>
+<p>Transient response specifications are read from the unit step response: delay time, rise time, peak time, maximum overshoot M_p and settling time. Frequency domain questions: What is the bandwidth of the system? What are the cutoff frequencies and the cutoff rate? Is the system sensitive to disturbance? How does the system behave in the frequency domain?</p>
+<figure class="yazi-gorsel"><img src="../s-40.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Transient response specifications on a unit step response: delay, rise, peak and settling time and overshoot Mp"><figcaption>Transient response specifications</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon ppt" aria-hidden="true">PPT</span>
+            <div>
+              <p class="indir-ad"><a href="../3723-lecture-18.ppt" download>3723-lecture-18.ppt</a></p>
+              <p class="kucuk">PowerPoint (.ppt) · 294 KB · 41 <span data-i18n="arch.slidesLower"></span> · 11.10.2006</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../3723-lecture-18.ppt" download>⬇ <span data-i18n="arch.downloadPpt"></span> (294 KB)</a>
+            <a class="buton" href="../3723-lecture-18.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (393 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Signals and Systems I: Assignment 3, Autocorrelation, Cross-Correlation and White Noise with MATLAB (2016) — hasancan.net</title>
+<meta name="description" content="MATLAB code and plots for EEM301 Signals and Systems I Assignment 3 from 2016: autocorrelation (autocorr) and power spectrum via periodogram for a cosine signal, cross-correlation (xcorr) of two cosines, and power spectral density of white noise.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Signals and Systems I: Assignment 3, Autocorrelation, Cross-Correlation and White Noise with MATLAB (2016)">
+<meta property="og:description" content="MATLAB code and plots for EEM301 Signals and Systems I Assignment 3 from 2016: autocorrelation (autocorr) and power spectrum via periodogram for a cosine signal, cross-correlation (xcorr) of two cosines, and power spectral density of white noise.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Signals and Systems I: Assignment 3, Autocorrelation, Cross-Correlation and White Noise with MATLAB (2016)", "description": "MATLAB code and plots for EEM301 Signals and Systems I Assignment 3 from 2016: autocorrelation (autocorr) and power spectrum via periodogram for a cosine signal, cross-correlation (xcorr) of two cosines, and power spectral density of white noise.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-korelasyon-odevi.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-korelasyon-beyaz-gurultu-odevi/eem301-korelasyon-odevi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM301 Signals and Systems I: Assignment 3, Autocorrelation, Cross-Correlation and White Noise with MATLAB (2016)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.05.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#autocorrelation-and-power-spectrum">Autocorrelation and power spectrum</a></li><li><a href="#cross-correlation">Cross-correlation</a></li><li><a href="#power-spectral-density-of-white-noise">Power spectral density of white noise</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM301 Signals and Systems I: Assignment 3, Autocorrelation, Cross-Correlation and White Noise with MATLAB (2016)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 21.05.2016 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the files for <strong>Assignment 3</strong> of the <strong>EEM301 Signals and Systems I</strong> course folder at Başkent University, dated May 2016: Hasan Can Öztürk's MATLAB code and screenshots, along with code and plots a friend wrote for the same assignment (personal information removed). The topics are autocorrelation, cross-correlation, power spectrum via the periodogram, and the power spectral density (PSD) of white noise. The code and plots are available for download as a ZIP at the end of the post.</p>
+<h2 id="autocorrelation-and-power-spectrum">Autocorrelation and power spectrum</h2>
+<p>The cosine signal is sampled at 50 points over the range 0–100; its autocorrelation is computed with <code>autocorr</code>, and its power spectrum (in dB) is plotted with <code>periodogram</code>:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=linspace(0,100,50);
+x=10*cos(300*t+72);
+figure(1);
+N = length(x);
+xlim([0,N])
+Y=autocorr(x);
+plot(Y)
+figure(2)
+[Pxx,F] = periodogram(x,[],length(x));
+plot(F,10*log10(Pxx));</code></pre>
+<p>In the author's own <code>korelasyon.m</code> file, the same code is set up with x = 10cos(0·t + 0), i.e., a constant signal; the screenshots, however, belong to the cosine version.</p>
+<figure class="yazi-gorsel"><img src="../grafik-1.jpg" width="1028" height="802" loading="lazy" decoding="async" alt="Periodogram: power spectrum over 0–π, with a peak at about 2.8 rad/sample"><figcaption>Periodogram of the cosine signal (dB)</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../grafik-2.jpg" width="1030" height="780" loading="lazy" decoding="async" alt="Autocorrelation computed with autocorr, lags 0–20"><figcaption>Autocorrelation of the cosine signal</figcaption></figure>
+<p><em>Note: Since the sampling interval is 100/49 ≈ 2.04 s, high-frequency signals such as cos(300t) suffer severe aliasing; the peak in the periodogram shows the location of the aliased frequency, not the true frequency. To see the true frequency, the sampling interval must be smaller than π/300.</em></p>
+<h2 id="cross-correlation">Cross-correlation</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=linspace(0,100,50);
+x=10*cos(900*t+0);
+y=5*cos(900*t+0);
+figure(1);
+N = length(x);
+xlim([0,N])
+[acor,lag]=xcorr(x,y);
+plot(lag,acor)</code></pre>
+<p>The cross-correlation of two cosines with the same frequency yields an oscillating sequence that takes its largest value at zero lag and decreases triangularly toward the edges (lags −49…49). In the friend's version the frequencies and phases differ: x = 10cos(900t + 52), y = 5cos(400t + 37).</p>
+<figure class="yazi-gorsel"><img src="../grafik-3.jpg" width="1042" height="778" loading="lazy" decoding="async" alt="Cross-correlation computed with xcorr, lags −50…50, peak of about 1200 at zero"><figcaption>Cross-correlation of two cosines with the same frequency</figcaption></figure>
+<h2 id="power-spectral-density-of-white-noise">Power spectral density of white noise</h2>
+<p>The friend's <code>beyazgurultu.m</code> file computes the PSD of 4372 samples of Gaussian noise with standard deviation σ = 1000 using the FFT, and compares it with the theoretical value σ² and the mean PSD:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>sigma = 1000;
+L = 4372;
+noise= randn(1,L) * sigma;
+PSD = abs(fft(noise)).^2/length(noise);
+vect_freq = linspace(0,pi,length(PSD));
+plot(vect_freq,PSD,'-.g');
+hold on, plot([vect_freq(1) vect_freq(end)],[sigma^2 sigma^2],'r');
+hold on, plot([vect_freq(1) vect_freq(end)],[mean(PSD) mean(PSD)],'-.b');</code></pre>
+<p>The PSD values fluctuate randomly at all frequencies, but their mean sits on the line σ² = 10⁶; the spectrum of white noise is flat.</p>
+<figure class="yazi-gorsel"><img src="../grafik-4.jpg" width="1028" height="800" loading="lazy" decoding="async" alt="PSD of white noise computed with the FFT; the red line is σ² = 10⁶"><figcaption>Power spectral density of white noise</figcaption></figure>
+<p><em>Note: <code>linspace(0,pi,length(PSD))</code> squeezes the entire 0–2π range of the FFT into 0–π; the correct axis should be <code>linspace(0,2*pi,L)</code> (or only the first half should be plotted). For a flat spectrum, this does not change the appearance of the plot.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem301-korelasyon-odevi.zip" download>eem301-korelasyon-odevi.zip</a></p>
+              <p class="kucuk">ZIP archive · 439 KB · 21.05.2016</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem301-korelasyon-odevi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (439 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: VLSI Design Lecture Note 3 – Bipolar Integrated Circuits (Ayten Kuntman) — hasancan.net</title>
+<meta name="description" content="Third part of Prof. Dr. Ayten Kuntman&#x27;s VLSI design notes: fabrication steps of the junction-isolated bipolar npn transistor, doping profiles, breakdown voltage, saturation current, series base and collector resistances, junction capacitance, IC resistors, capacitors and diodes, analog IC design principles, and the current mirror.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: VLSI Design Lecture Note 3 – Bipolar Integrated Circuits (Ayten Kuntman)">
+<meta property="og:description" content="Third part of Prof. Dr. Ayten Kuntman&#x27;s VLSI design notes: fabrication steps of the junction-isolated bipolar npn transistor, doping profiles, breakdown voltage, saturation current, series base and collector resistances, junction capacitance, IC resistors, capacitors and diodes, analog IC design principles, and the current mirror.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: VLSI Design Lecture Note 3 – Bipolar Integrated Circuits (Ayten Kuntman)", "description": "Third part of Prof. Dr. Ayten Kuntman's VLSI design notes: fabrication steps of the junction-isolated bipolar npn transistor, doping profiles, breakdown voltage, saturation current, series base and collector resistances, junction capacitance, IC resistors, capacitors and diodes, analog IC design principles, and the current mirror.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "VLSI_TASARIMI_A_KUNTMAN_3_Bipolar_Tumdevreler_s76-102.pdf", "contentUrl": "https://hasancan.net/arsiv/eem312-vlsi-tasarimi-kuntman-3-bipolar-tumdevreler/VLSI_TASARIMI_A_KUNTMAN_3_Bipolar_Tumdevreler_s76-102.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: VLSI Design Lecture Note 3 – Bipolar Integrated Circuits (Ayten Kuntman)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.04.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#7-bipolar-integrated-circuits">7. Bipolar integrated circuits</a></li><li><a href="#7-1-junction-isolated-bipolar-ic-technology">7.1. Junction-isolated bipolar IC technology</a></li><li><a href="#7-3-active-elements-in-bipolar-analog-integrated-circuits">7.3. Active elements in bipolar analog integrated circuits</a></li><li><a href="#7-4-passive-elements-in-bipolar-integrated-circuits">7.4. Passive elements in bipolar integrated circuits</a></li><li><a href="#7-5-linear-analog-integrated-circuit-design-principles">7.5. Linear (analog) integrated circuit design principles</a></li><li><a href="#7-6-analog-processing-blocks">7.6. Analog processing blocks</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: VLSI Design Lecture Note 3 – Bipolar Integrated Circuits (Ayten Kuntman)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.04.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the third part of the 158-page <strong>"VLSI Design"</strong> lecture note found in the EEM312 Digital Electronics course folder (pages 76–102 of the note). The cover of the document states <em>"These notes are a reorganized version of the notes published by Prof. Dr. Ayten Kuntman on 11.03.2009"</em>; the PDF was created on 28 April 2009. The document does not say who did the reorganization or at which institution the note was used in teaching (Prof. Dr. Ayten Kuntman is a faculty member at Istanbul Technical University).</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<p>Other posts in the series: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-1-uretim-ve-proses/">1) IC fabrication, silicon and process steps</a> (the whole note can be downloaded there), <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-2-mos-tumdevreler/">2) MOS integrated circuits, the CMOS process and layout rules</a>, <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">4) SPICE, layout examples, questions and references</a>. The text, formulas and tables of this part are transcribed below (broken Turkish characters and scrambled formulas were corrected); the figures were cropped and included. A PDF made up of the pages of this part can be downloaded at the end of the post.</p>
+<h2 id="7-bipolar-integrated-circuits">7. Bipolar integrated circuits</h2>
+<p>Although technology in recent years has been dominated by MOS and CMOS, bipolar integrated circuits retain their importance. Bipolar ICs fall into two main groups: <strong>junction-isolated</strong> and <strong>dielectric-isolated</strong>; in standard production, junction-isolated ones are more common. At least 5–8 mask steps are used for bipolar IC fabrication: epitaxy, p-diffusion, n-diffusion, oxidation, contact, metal bonding pads, isolation. Lithography is performed with the appropriate mask for each.</p>
+<h2 id="7-1-junction-isolated-bipolar-ic-technology">7.1. Junction-isolated bipolar IC technology</h2>
+<p>The widely used technology is junction-isolated bipolar IC (JIBT) technology. Each element of the circuit is formed in an <strong>isolation island</strong>; the isolation island is obtained by epitaxy. Isolation is provided by <strong>reverse-biasing</strong> the junction between the island and the substrate.</p>
+<p>In junction-isolated bipolar circuits the most basic element is the <strong>npn transistor</strong>: it has n-type doped emitter and collector regions and a p-type doped base region. The emitter is the region with the highest doping concentration; its bulk resistance is on the order of a few ohms. The collector is the region with the lowest doping concentration; its bulk resistance is fairly high. The base region, whose doping concentration lies between the two, has a bulk resistance on the order of tens of ohms.</p>
+<p>A <strong>p-type</strong> Si wafer, 400 µm thick, 4 inches in diameter, with a doping concentration of 10¹⁶ /cm³, is used as the substrate. Steps (Figure 7-1):</p>
+<ol><li><strong>Buried layer diffusion (1st mask, n⁺ diffusion):</strong> It is part of the collector; it is performed to improve transistor performance and reduce the parasitic collector resistance. The doping concentration is high and the diffusion depth is about 8 µm (Figure 7-1a).</li><li><strong>Epitaxy:</strong> The oxide is stripped and the epitaxial layer is grown. The n-epi region forms the collector of the transistor and the isolation island in which the element will be formed. Its doping concentration is 10¹⁵ /cm³ and its thickness is 15–20 µm. The collector-base breakdown voltage is determined by the thickness and resistivity of the epi region: for a device to operate at a 36 V supply, the epi thickness should be 17 µm and the doping concentration 10¹⁵ /cm³; for a 36 V supply the C-B breakdown voltage should be about 90 V (Figure 7-1b).</li><li><strong>Isolation diffusion (p⁺):</strong> Oxide is grown on the surface and, with the appropriate mask, p⁺ diffusions that will form the isolation islands are made in the epitaxial layer. The pn junction between the collector and the p⁺ diffusion is reverse-biased to isolate the island. The sheet resistance of the isolation diffusion is around 20–40 Ω/□ (Figure 7-1c).</li><li><strong>Base diffusion (4th mask):</strong> The sheet resistance of the boron diffusion is 100–300 Ω/□ (Figure 7-1d).</li><li><strong>Emitter diffusion (5th mask, n⁺):</strong> The emitter region and, at the same time, the collector contact are formed. Its depth is 0.5–2.5 µm and its sheet resistance is 2–10 Ω/□. Since the doping of the n-epi is low, the heavily doped emitter diffusion is used here as well to obtain a good contact to the collector (Figure 7-1e).</li><li><strong>Contact and metallization:</strong> With the contact mask, contact windows are opened in the oxide over the emitter, base and collector regions (and over the passive elements on the chip). The whole wafer is coated with about 1 µm of metal (gold or aluminum), and the interconnections between elements are formed with the metal mask (Figure 7-1f).</li></ol>
+<figure class="yazi-gorsel"><img src="../sekil-7-1.jpg" width="1376" height="887" loading="lazy" decoding="async" alt="Figure 7-1: (a) n+ buried layer on p-type substrate, (b) n-epi growth, (c) p+ isolation diffusion, (d) base diffusion, (e) n+ diffusion for emitter and collector contact, (f) completed npn transistor with contacts and metal interconnects"><figcaption>Figure 7-1: Vertical cross-section of the junction-isolated bipolar npn transistor and the process steps</figcaption></figure>
+<p>A typical diffusion profile for analog circuits is shown in Figure 7-2. For the cross-section along A-A′:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Region</th><th scope="col">Doping concentration (1/cm³)</th><th scope="col">Diffusion depth / thickness</th></tr></thead><tbody><tr><th scope="row">Substrate</th><td>~10¹⁶</td><td>—</td></tr><tr><th scope="row">Epi</th><td>~10¹⁵</td><td>~17 µm</td></tr><tr><th scope="row">Base</th><td>~10¹⁹</td><td>~3 µm</td></tr><tr><th scope="row">Emitter</th><td>~10²¹</td><td>~2.5 µm</td></tr><tr><th scope="row">Buried layer</th><td>—</td><td>~8 µm</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../sekil-7-2.jpg" width="719" height="673" loading="lazy" decoding="async" alt="Figure 7-2: Doping concentration versus depth along the A-A′ cross-section: emitter and base diffusions at the surface, epitaxial layer, n+ buried layer and substrate"><figcaption>Figure 7-2: Doping concentration and diffusion depths in a standard JIBT</figcaption></figure>
+<h2 id="7-3-active-elements-in-bipolar-analog-integrated-circuits">7.3. Active elements in bipolar analog integrated circuits</h2>
+<p>The npn transistor is the basic building block in IC fabrication. Although their current gains and frequency responses are low, there are also pnp transistors that can be formed together with the standard bipolar process. Three structures realized on the same substrate are described: the <strong>npn</strong>, the <strong>lateral pnp</strong> and the <strong>substrate pnp</strong>.</p>
+<h4 id="7-3-1-integrated-npn-transistor">7.3.1. Integrated npn transistor</h4>
+<figure class="yazi-gorsel"><img src="../sekil-7-3.jpg" width="688" height="459" loading="lazy" decoding="async" alt="Figure 7-3: Vertical cross-section of the npn transistor with collector, base and emitter contacts; n+ buried layer at the bottom"><figcaption>Figure 7-3: Vertical cross-section and layout of the npn transistor</figcaption></figure>
+<p>Possible dimensions in a standard integrated bipolar transistor:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Region</th><th scope="col">Dimension</th></tr></thead><tbody><tr><th scope="row">Base region</th><td>60 µm × 45 µm</td></tr><tr><th scope="row">Collector region</th><td>140 µm × 95 µm</td></tr><tr><th scope="row">Collector contact</th><td>18 µm × 49 µm</td></tr><tr><th scope="row">Buried layer</th><td>41 µm × 85 µm</td></tr><tr><th scope="row">Base contact</th><td>18 µm × 30 µm</td></tr><tr><th scope="row">Emitter contact</th><td>18 µm × 25 µm</td></tr></tbody></table></div>
+<h4 id="7-3-2-basic-concepts-important-for-design-in-bipolar-structures">7.3.2. Basic concepts important for design in bipolar structures</h4>
+<p>Junction breakdown voltage, saturation current of the npn transistor, parasitic resistances and parasitic capacitances.</p>
+<h5 id="junction-breakdown-voltage">Junction breakdown voltage</h5>
+<p>It is the maximum voltage a junction can withstand without breaking down; it is a function of the doping concentrations and the critical electric field:</p>
+<p><strong>V_B = [ε·(N_A + N_D) / (2q·N_A·N_D)]·E²_critical</strong>   (7-1)</p>
+<p>Here V_B is the breakdown voltage, ε the dielectric constant of silicon, N_A and N_D the p-type and n-type doping concentrations, q the electron charge (1.6×10⁻¹⁹ C), and E_critical the critical field strength. The maximum field is:</p>
+<p>E_max = E_crit ≅ −q·N_A·W₁/ε   (p-type side)   (7-2)</p>
+<p>E_max = E_crit ≅ −q·N_D·W₂/ε   (n-type side)   (7-3)</p>
+<p>W₁ and W₂ are the thicknesses of the depleted region on the p and n sides:</p>
+<p>W₁ = [2ε(ψ₀ + V_R) / (q·N_A·(1 + N_A/N_D))]^(1/2)   (7-4)</p>
+<p>W₂ = [2ε(ψ₀ + V_R) / (q·N_D·(1 + N_D/N_A))]^(1/2)   (7-5)</p>
+<p>ψ₀ is the voltage that arises (the built-in voltage) even though no external influence is applied to the junction:</p>
+<p>ψ₀ = V_T·ln(N_A·N_D / n_i²)   (7-6)</p>
+<p>V_T = kT/q ≅ 26 mV (300 K)   (thermal voltage)   (7-7)</p>
+<p>V_R is the reverse bias voltage and n_i is the carrier concentration in intrinsic silicon; for silicon ε = 1.04×10⁻¹² F/cm.</p>
+<h5 id="saturation-current-of-the-npn-transistor">Saturation current of the npn transistor</h5>
+<p>The npn transistor has four operating regions (Figure 7-4, horizontal axis V_BE, vertical axis V_BC):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Region</th><th scope="col">V_BE (npn)</th><th scope="col">V_BC (npn)</th><th scope="col">Operation</th></tr></thead><tbody><tr><th scope="row">I. Saturation</th><td>Forward</td><td>Forward</td><td>Switch operation (current flows)</td></tr><tr><th scope="row">II. Reverse operation region</th><td>Reverse</td><td>Forward</td><td>Reverse active</td></tr><tr><th scope="row">III. Cutoff</th><td>Reverse</td><td>Reverse</td><td>Switch operation (no current flows)</td></tr><tr><th scope="row">IV. Forward active</th><td>Forward</td><td>Reverse</td><td>Operates as an amplifier</td></tr></tbody></table></div>
+<p><em>Note: In Figure 7-4 of the document the region descriptions are placed in a mixed-up way (the phrase "no current flows" sits under region IV); in the table the regions are given as they should be according to the bias directions. For the pnp, the axes are V_EB and V_CB.</em></p>
+<p>In the active region, the part that carries the current is the base region under the emitter; for this reason determining the emitter area and doping is important, and the saturation current is used for this purpose. Although the numerical value of the saturation current is very small, it is important for modeling:</p>
+<p><strong>I_S = q·A·D_n·n_i² / Q_B</strong>   (7-8)</p>
+<p>Here A is the emitter-base junction area, n_i is the intrinsic carrier concentration, Q_B is the number of dopant atoms per unit area in the base (1/cm²), and D_n is the diffusion constant of electrons in the base region. The collector current is:</p>
+<p>I_C = I_S·exp(V_BE / V_T)   (7-9)</p>
+<p>Combining the two relations:</p>
+<p>Q_B = A·D_n·(q·n_i² / I_C)·exp(V_BE / V_T)   (7-10)</p>
+<p>Q_B = W_B·N_A   (7-11)</p>
+<p>W_B is the base width and N_A is the doping concentration in the base.</p>
+<h5 id="series-base-resistance">Series base resistance</h5>
+<p>Unwanted series resistances arise because of the different dopings in the base and collector regions; their values and models are important in design.</p>
+<p>The cause of the series base resistance is that the base contact is quite far from the active base region. A series ohmic resistance consisting of two components, r_b1 and r_b2, forms between the base contact and the active base (Figure 7-5). This resistance degrades the noise characteristics of the transistor, reduces the high-frequency gain and has a limiting effect on the collector current.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-5.jpg" width="673" height="336" loading="lazy" decoding="async" alt="Figure 7-5: r_b1 and r_b2 resistance components extending from the base contact to the active base in the npn transistor cross-section"><figcaption>Figure 7-5: Series base resistance components for the npn transistor</figcaption></figure>
+<p>r_b1 is the resistance that forms along the base region from the base contact; it is calculated like a uniformly doped layer (L and W are the length and width of the base contact region, R□ is the base sheet resistance):</p>
+<p>r_b1 = (L/W)·R□   (7-12)</p>
+<p>Calculating r_b2 is difficult because of the different doping distribution. In active operation r_b2 weakens and r_b1 approaches r_b. As seen in Figure 7-7, when the series base resistance rises above 200 Ω, a limitation on the collector current begins. A low base resistance is important for low-noise and high-frequency applications; in design, the series base resistance is kept at around 200 Ω.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-6.jpg" width="673" height="566" loading="lazy" decoding="async" alt="Figure 7-6: Perspective view of the emitter and base contacts; dimensions 10 µ and 25 µ"><figcaption>Figure 7-6: Base resistance components for the npn transistor</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-7-7.jpg" width="688" height="489" loading="lazy" decoding="async" alt="Figure 7-7: Base resistance (Ω) versus collector current (mA, logarithmic) curve; about 400 Ω at low current, about 230 Ω at high current"><figcaption>Figure 7-7: Variation of base resistance with collector current for the npn transistor</figcaption></figure>
+<h5 id="series-collector-resistance-r-c">Series collector resistance (r_c)</h5>
+<p>The series collector resistance is important in low-frequency applications as well as in high-frequency applications. The collector region has a complex structure and three resistances are effective in active operation (Figure 7-8):</p>
+<ul><li>r_c1: the resistance between the buried layer and the base region</li><li>r_c2: the resistance formed by the buried layer</li><li>r_c3: the resistance between the buried layer and the collector contact</li></ul>
+<p>r_c = r_c1 + r_c2 + r_c3   (7-13)</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-8.jpg" width="688" height="342" loading="lazy" decoding="async" alt="Figure 7-8: Resistance components in the npn transistor cross-section, extending from under the base to the buried layer and from the buried layer to the collector contact"><figcaption>Figure 7-8: Collector resistance components</figcaption></figure>
+<p>Calculating r_c1 and r_c3 is more complicated because of the doping differences in the regions; they are solved with a Laplace approach and under certain assumptions. The proposed model (Figure 7-9) is a block in the shape of a truncated pyramid:</p>
+<p>R = (ρ·T / (W·L))·ln(a/b) / (a − b)   (7-14)</p>
+<p>Here ρ is the resistivity, T is the thickness of the region, W and L are the width and length of the top of the block, a is the ratio of the base width of the block to its top width, and b is the ratio of the base length to the top length.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-9.jpg" width="688" height="459" loading="lazy" decoding="async" alt="Figure 7-9: Truncated-pyramid resistor model with a W × L top face and height T, widening toward the base"><figcaption>Figure 7-9: Collector resistance model</figcaption></figure>
+<p>For the model to be applicable to the real structure, the document states that the side walls must make a 60° angle with the vertical, and with this assumption the base dimensions are:</p>
+<p>L_base = L_top + 2T;   W_base = W_top + 2T   (7-15)</p>
+<p><em>Note: The relation L_base = L_top + 2T corresponds to side walls making a <strong>45°</strong> angle with the vertical (an expansion of T on each side); with 60°, the expansion on each side would be T·tan 60° ≈ 1.73T.</em></p>
+<p>The top L and W values are the dimensions of the emitter and collector contact regions for r_c1 and r_c3. r_c2 is calculated like the sheet resistance of a uniformly doped region: r_c2 = R□·L/W.</p>
+<h5 id="collector-base-junction-capacitance">Collector-base junction capacitance</h5>
+<p>C_j = A·[q·ε·N_A·N_D / (2(N_A + N_D))]^(1/2)·1/√(ψ₀ + V_R)   (7-16)</p>
+<p>N_D is the doping concentration of the epi region (~10¹⁵ /cm³) and N_A that of the base region (~10¹⁹ /cm³). If N_A ≫ N_D:</p>
+<p>C_j / A = √(q·ε·N_D / (2(ψ₀ + V_R)))   (7-17)</p>
+<p>This is the <strong>capacitance per unit area for an abrupt junction</strong>. Figure 7-10 shows the variation of the capacitance per unit area and of the depletion region thickness with the applied voltage.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-10.jpg" width="694" height="612" loading="lazy" decoding="async" alt="Figure 7-10: Capacitance per unit area (pF/µm²) and depletion region depth versus reverse voltage (1–100 V) for doping concentrations of 10¹⁴–10¹⁹ /cm³; breakdown region boundary"><figcaption>Figure 7-10: Variation of capacitance per unit area and depletion region with the voltage applied to the pn junction</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-7-11.jpg" width="1345" height="719" loading="lazy" decoding="async" alt="Figure 7-11: Layout of the substrate pnp structure (emitter in the middle, base contacts on both sides) and its vertical cross-section; the collector is the p-type substrate"><figcaption>Figure 7-11: Layout and vertical cross-section of the substrate pnp structure</figcaption></figure>
+<h2 id="7-4-passive-elements-in-bipolar-integrated-circuits">7.4. Passive elements in bipolar integrated circuits</h2>
+<p>These are the resistor, the capacitor and the diode.</p>
+<h4 id="7-4-1-diffused-resistors">7.4.1. Diffused resistors</h4>
+<p>During npn transistor fabrication, resistors can be made in any diffusion step (base diffusion, emitter diffusion, epitaxial layer). The selection is made according to the value of the resistor, its tolerance and its temperature coefficient. For example, the <strong>base-diffused resistor</strong> makes use of the p-type diffusion performed while the base of the npn transistor is formed (Figure 7-12).</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-12.jpg" width="703" height="948" loading="lazy" decoding="async" alt="Figure 7-12: Layout of the base-diffused resistor with its terminals and epi connection, circuit symbol and vertical cross-section"><figcaption>Figure 7-12: Structure, layout and vertical cross-section of the base-diffused resistor</figcaption></figure>
+<p>The resistance of a diffused region (N doping concentration, T diffusion depth):</p>
+<p>R = R□·L/W   (7-18),   R□ = 1/(q·µ·N·T)   (7-19)</p>
+<p><strong>Characteristics of the different resistors used in integrated circuits</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Resistor type</th><th scope="col">Sheet resistance (Ω/□)</th><th scope="col">Absolute tolerance (%)</th><th scope="col">Temperature coefficient (ppm/°C)</th></tr></thead><tbody><tr><th scope="row">Base diffusion</th><td>100–200</td><td>±20</td><td>1500–2000</td></tr><tr><th scope="row">Emitter diffusion</th><td>2–10</td><td>±20</td><td>600</td></tr><tr><th scope="row">Ion implantation</th><td>100–1000</td><td>±3</td><td>100</td></tr><tr><th scope="row">Epitaxy</th><td>2k–5k</td><td>±30</td><td>3000</td></tr><tr><th scope="row">Base pinch</th><td>2k–10k</td><td>±50</td><td>2500</td></tr><tr><th scope="row">Epitaxial pinch</th><td>4k–10k</td><td>±50</td><td>3000</td></tr></tbody></table></div>
+<h4 id="7-4-2-capacitors">7.4.2. Capacitors</h4>
+<p>There are two types of capacitors in ICs: junction capacitors and MOS capacitors.</p>
+<ul><li><strong>Junction capacitors:</strong> They are made using the C-B or B-E junction; their value depends on the applied voltage and the doping concentration. The depletion region formed in the junction forms the capacitance:</li></ul>
+<p>C = A·[q·ε·N_A·N_D / (2(N_A + N_D))]^(1/2)·1/√(ψ₀ + V_R)   (7-20)</p>
+<p>(N_D is the epi and N_A the base doping concentration; A is the C-B junction area; ψ₀ is the built-in potential; V_R is the reverse bias voltage.)</p>
+<ul><li><strong>MOS capacitors:</strong> They are obtained by coating a thin SiO₂ as the dielectric over the emitter diffusion and Al on top of it. The capacitance value is 0.2–0.3 pF/mil² and the breakdown voltage is between 60 and 100 V.</li></ul>
+<p>C = ε·A / t   (ε: dielectric constant of SiO₂, t: dielectric thickness, A: area)   (7-21)</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-13.jpg" width="688" height="336" loading="lazy" decoding="async" alt="Figure 7-13: SiO₂ dielectric and aluminum contact over an n+ emitter diffusion; p substrate"><figcaption>Figure 7-13: MOS capacitor structure</figcaption></figure>
+<h4 id="7-4-3-diodes">7.4.3. Diodes</h4>
+<p>Junction diodes are obtained by connecting npn and pnp transistors in different ways (Figure 7-14). In connections a, b and d the collector-base junction is forward-biased, and in connection c the emitter-base junction is forward-biased, so that the transistors operate as diodes.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-14.jpg" width="688" height="826" loading="lazy" decoding="async" alt="Figure 7-14: Four different (a–d) diode connections of npn (left) and pnp (right) transistors"><figcaption>Figure 7-14: Diode connection configurations for npn and pnp transistors</figcaption></figure>
+<h2 id="7-5-linear-analog-integrated-circuit-design-principles">7.5. Linear (analog) integrated circuit design principles</h2>
+<p>Analog ICs are generally made with bipolar elements. Four basic rules are taken into account in design:</p>
+<ol><li><strong>Avoiding absolute-value tolerances:</strong> The tolerances are very high compared with discrete elements; for example ±30% for diffused resistors and ±50% for the npn transistor (current gain).</li><li><strong>Matching:</strong> It is the agreement and tracking of element values with one another; relying on ratios is important in integrated circuits. Since all elements are formed on the same material, matching and temperature tracking are far better than with discrete elements: diffused resistors track one another within ±2% and npn transistors within ±5%. The temperature difference between two points on the chip surface is around ±0.5 °C; the V_BE voltages of two tracking transistors vary by ±10 µV/°C.</li><li><strong>Using more elements without extra cost:</strong> In an integrated circuit the cost of an active element is very low; adding passive elements requires new steps and takes up a lot of space. For this reason active elements are used as much as possible; some passive elements can also be realized with active elements.</li><li><strong>Avoiding elements that are hard to integrate:</strong> Although capacitors, large-value resistors and transistors drawing high current can be integrated, they are mostly kept off the chip because they enlarge the area.</li></ol>
+<p>Advantages of integrated circuit design: realizing a large number of elements at a small cost difference, close thermal coupling, good matching and tracking of element values, and the ability to control placement and geometry. Disadvantages: large tolerances, limited passive element values, and the inability to make large-value capacitors and inductors.</p>
+<h2 id="7-6-analog-processing-blocks">7.6. Analog processing blocks</h2>
+<p>Analog ICs consist of analog processing blocks: operational amplifiers, power amplifiers, oscillators, analog multiplier circuits, ADCs and DACs, voltage regulators, audio and video circuits. Analog processing blocks in turn consist of <strong>sub-blocks</strong> (sub-blocks → analog processing blocks → systems):</p>
+<ul><li><strong>Biasing circuits:</strong> current-voltage sources, reference generators</li><li><strong>Gain stages:</strong> differential amplifiers, active-load amplifiers, output stages</li></ul>
+<h4 id="biasing-circuits-and-the-current-mirror">Biasing circuits and the current mirror</h4>
+<p>Providing the current or voltage required for a semiconductor element to start conducting is called <strong>biasing</strong>; it is divided into current sources and voltage sources. The current mirror is taken as an example: the circuit in Figure 7-15 consists of two transistors and a resistor; Q1 is the biasing transistor and Q2 is the current source transistor.</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-15.jpg" width="688" height="422" loading="lazy" decoding="async" alt="Figure 7-15: Current mirror consisting of a diode-connected Q1 drawing current I_REF from V_CC through resistor R, and Q2 with its base tied to Q1; output current I_O and current source symbol"><figcaption>Figure 7-15: Current mirror</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-7-16.jpg" width="688" height="306" loading="lazy" decoding="async" alt="Figure 7-16: Vertical cross-section of the current mirror with isolation islands, n+ buried layers and contacts"><figcaption>Figure 7-16: Vertical cross-section of the current mirror layout</figcaption></figure>
+<p>If the transistors are assumed identical, I_C1 = I_C2 and at the Q1 node:</p>
+<p>I_ref − I_C1 − 2·I_C1/β_F = 0   (7-22)</p>
+<p>If the base currents are neglected:</p>
+<p>I_C2 ≅ I_ref = (V_CC − V_BE) / R   (7-23)</p>
+<p>The reference current depends on the resistor R. If the base currents are taken into account:</p>
+<p>I_C1 = I_C2 = I_ref / (1 + 2/β_F)   (7-24)</p>
+<p><em>Note: In the document, the numerator of (7-23) reads "V_CC − ΔV_BE"; the voltage across R is V_CC − V_BE.</em></p>
+<p>Figure 7-17 shows the <strong>Widlar current source</strong> and its vertical cross-section (a current mirror with a resistor R2 added to the emitter of Q2).</p>
+<figure class="yazi-gorsel"><img src="../sekil-7-17.jpg" width="688" height="618" loading="lazy" decoding="async" alt="Figure 7-17: Widlar current source consisting of Q1 drawing I_r through R1 and Q2 with R2 in its emitter, and its vertical cross-section"><figcaption>Figure 7-17: Widlar current source</figcaption></figure>
+<p>The rest of the note (the SPICE program, layout examples, questions and references) is in the 4th post of the series: <a href="/arsiv/eem312-vlsi-tasarimi-kuntman-4-spice-serim-sorular/">4) SPICE, layout examples, questions and references</a>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../VLSI_TASARIMI_A_KUNTMAN_3_Bipolar_Tumdevreler_s76-102.pdf" download>VLSI_TASARIMI_A_KUNTMAN_3_Bipolar_Tumdevreler_s76-102.pdf</a></p>
+              <p class="kucuk">PDF · 1.6 MB · 27 <span data-i18n="arch.pagesLower"></span> · 28.04.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../VLSI_TASARIMI_A_KUNTMAN_3_Bipolar_Tumdevreler_s76-102.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

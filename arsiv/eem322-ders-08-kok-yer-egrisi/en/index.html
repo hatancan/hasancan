@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 8 – Root Locus, Angle and Magnitude Conditions, Plotting Steps — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture notes 8a and 8b (Hamit Erdem, 2013): definition of the root locus, movement of the closed-loop poles with gain K, vector representation of complex numbers, angle and magnitude conditions; number of branches, real-axis branches, asymptotes, breakaway point, departure angles and imaginary-axis crossing via Routh, with worked examples featuring multiple poles, a zero and complex poles.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 8 – Root Locus, Angle and Magnitude Conditions, Plotting Steps">
+<meta property="og:description" content="EEM322 Control Systems lecture notes 8a and 8b (Hamit Erdem, 2013): definition of the root locus, movement of the closed-loop poles with gain K, vector representation of complex numbers, angle and magnitude conditions; number of branches, real-axis branches, asymptotes, breakaway point, departure angles and imaginary-axis crossing via Routh, with worked examples featuring multiple poles, a zero and complex poles.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 8 – Root Locus, Angle and Magnitude Conditions, Plotting Steps", "description": "EEM322 Control Systems lecture notes 8a and 8b (Hamit Erdem, 2013): definition of the root locus, movement of the closed-loop poles with gain K, vector representation of complex numbers, angle and magnitude conditions; number of branches, real-axis branches, asymptotes, breakaway point, departure angles and imaginary-axis crossing via Routh, with worked examples featuring multiple poles, a zero and complex poles.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-ders-08-kok-yer-egrisi.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-08-kok-yer-egrisi/eem322-ders-08-kok-yer-egrisi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 8 – Root Locus, Angle and Magnitude Conditions, Plotting Steps">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#what-is-the-root-locus">What is the root locus?</a></li><li><a href="#complex-numbers-and-vector-representation">Complex numbers and vector representation</a></li><li><a href="#angle-and-magnitude-conditions">Angle and magnitude conditions</a></li><li><a href="#root-locus-plotting-steps">Root locus plotting steps</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 8 – Root Locus, Angle and Magnitude Conditions, Plotting Steps</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 26.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the <strong>lecture 8 notes</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University: "EEM322L8: Root locus" and "EEM322L8b: Root locus – plotting method and steps". The notes belong to the course instructor <strong>Hamit Erdem</strong>; the page headers carry the date 26.07.2013. The first is a 10-page PDF written mostly in English, the second a 15-page PDF in Turkish, both with two slides per page; they continue the <a href="/arsiv/eem322-ders-07-surekli-hal-hatalari/">Lecture 7</a> notes. The content is transcribed below, with the calculations and root locus plots written out. The original PDFs can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="what-is-the-root-locus">What is the root locus?</h2>
+<p>For analysis in the frequency domain there are four basic graphical methods: the root locus, Bode diagrams, Nyquist diagrams and Nichols diagrams. The root locus shows the <strong>variation of the closed-loop poles</strong>: with the characteristic equation of the closed loop being</p>
+<ul><li>1 + K G(s) = 0</li></ul>
+<p>the root locus is the set of paths traced by the roots of this equation as the parameter K is varied from 0 to infinity.</p>
+<p>In a system with K and G(s) in the forward path and H(s) in the feedback path, the open-loop transfer function is T₁(s) = K G(s)H(s) and the closed-loop transfer function is T(s) = KG(s)/(1 + KG(s)H(s)). The essence of the control problem is the following:</p>
+<ul><li>The poles of the open-loop transfer function are easily found by looking at the denominator and are not affected by changes in the system gain.</li><li>The poles of the closed-loop transfer function are harder to find and depend on the gain.</li></ul>
+<p>The root locus is a graphical method that shows the locations of the closed-loop poles as a system parameter varies; it can be applied to first- and second-order systems as well as to higher-order systems. It gives a qualitative description of system performance, a graphical representation of stability, and the ranges of stability/instability.</p>
+<p><strong>Definition:</strong> The root locus is the plot showing the locations of the closed-loop roots in the s-plane as the system parameters vary. The transient response characteristics of closed-loop systems depend on the locations of the closed-loop poles; if the system has variable gain, the poles change with the selected gain. <strong>Goal:</strong> to select suitable poles to obtain the desired system response, and to determine the system gain for those poles.</p>
+<h3 id="example-k-s-s-2">Example: K/(s(s + 2))</h3>
+<p>The closed loop is C(s)/R(s) = K/(s(s + 2) + K), the characteristic equation is s² + 2s + K = 0, and the roots are s = −1 ± √(1 − K).</p>
+<ul><li>At K = 0 the closed-loop poles are at the open-loop poles (0 and −2).</li><li>For 0 &lt; K &lt; 1 the poles are on the real axis.</li><li>For K &gt; 1 the poles are complex; the real part is −1 and the imaginary part grows with K. Step responses are plotted for K = 0.5, 1, 2, 15 and 50: as K increases, the overshoot increases.</li></ul>
+<h3 id="example-k-s-1-s-2-s-3">Example: K/((s + 1)(s + 2)(s + 3))</h3>
+<p>For the unity-feedback system the open-loop G(s) = K/(s³ + 6s² + 11s + 6) and the characteristic equation is s³ + 6s² + 11s + 6 + K = 0. Since the three poles of the plant (−1, −2, −3) are negative, the system without feedback is stable. As K increases, the closed-loop poles are:</p>
+<ol><li>K = 0: s₁ = −1, s₂ = −2, s₃ = −3 (open-loop poles)</li><li>K = 6: s₁,₂ = −1 ± j√2, s₃ = −4</li><li>K = 24: s₁,₂ = −0.5 ± j√23/2, s₃ = −5</li><li>K = 60: s₁,₂ = ±j√11, s₃ = −6</li></ol>
+<figure class="yazi-gorsel"><img src="../kok-yer-ornek-k60.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Movement of the closed-loop poles in the s-plane for K = 6, 24 and 60; at K = 60 the poles cross the imaginary axis at ±j√11"><figcaption>Root locus of the closed-loop poles</figcaption></figure>
+<p>For K &gt; 60 the closed-loop poles move into the right half-plane and the system becomes <strong>unstable</strong>.</p>
+<h3 id="example-the-cameraman-camera-system">Example: The CameraMan camera system</h3>
+<p>In a camera system that automatically tracks a person carrying an infrared sensor, the open loop is G₀(s) = K₁K₂/(s(s + 10)) = K/(s(s + 10)) and the closed loop is G_c(s) = K/(s² + 10s + K). The pole locations as K varies:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">K</th><th scope="col">Pole 1</th><th scope="col">Pole 2</th></tr></thead><tbody><tr><th scope="row">0</th><td>−10</td><td>0</td></tr><tr><th scope="row">5</th><td>−9.47</td><td>−0.53</td></tr><tr><th scope="row">10</th><td>−8.87</td><td>−1.13</td></tr><tr><th scope="row">15</th><td>−8.16</td><td>−1.84</td></tr><tr><th scope="row">20</th><td>−7.24</td><td>−2.76</td></tr><tr><th scope="row">25</th><td>−5</td><td>−5</td></tr><tr><th scope="row">30</th><td>−5 + j2.24</td><td>−5 − j2.24</td></tr><tr><th scope="row">35</th><td>−5 + j3.16</td><td>−5 − j3.16</td></tr><tr><th scope="row">40</th><td>−5 + j3.87</td><td>−5 − j3.87</td></tr><tr><th scope="row">45</th><td>−5 + j4.47</td><td>−5 − j4.47</td></tr><tr><th scope="row">50</th><td>−5 + j5</td><td>−5 − j5</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../kok-yer-kamera.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Root locus of the system K/(s(s + 10)): the poles start at −10 and 0, meet at −5 for K = 25, and then depart vertically"><figcaption>Root locus of the CameraMan system</figcaption></figure>
+<p>Observations: for K &lt; 25 the system is overdamped, at K = 25 it is critically damped, and for K &gt; 25 it is underdamped.</p>
+<h2 id="complex-numbers-and-vector-representation">Complex numbers and vector representation</h2>
+<p>Every complex number σ + jω can be represented by a vector. (s + a) is a complex number and is represented by the vector drawn from the zero of the function at −a to the point s; it can be written in polar form as M∠θ. For example, the function F(s) = s + 7 becomes 12 + j2 at s = 5 + j2.</p>
+<p>For F(s) = ∏(s + zᵢ) / ∏(s + pⱼ) (m zeros, n poles), each factor is a vector, and the value of F(s) at any point s is:</p>
+<ul><li><strong>Magnitude:</strong> M = |F(s)| = ∏|s + zᵢ| / ∏|s + pⱼ| = (product of zero lengths) / (product of pole lengths)</li><li><strong>Angle:</strong> θ = Σ∠(s + zᵢ) − Σ∠(s + pⱼ) = (sum of zero angles) − (sum of pole angles)</li></ul>
+<p><strong>Example:</strong> For F(s) = (s + 1)/(s(s + 2)) at the point s = −3 + j4:</p>
+<ul><li>Zero at −1: √20∠116.6°; pole at the origin: 5∠126.9°; pole at −2: √17∠104.0°</li><li>|F(s)|∠F(s) = √20/(5√17) ∠(116.6° − 126.9° − 104.0°) = <strong>0.217∠−114.3°</strong></li></ul>
+<p><strong>Example:</strong> For F(s) = (s + 2)(s + 4)/(s(s + 3)(s + 6)) at the point s = −7 + j9, computed either by direct substitution or with vectors, F(s) = −0.0339 − j0.0899 = <strong>0.096∠−110.7°</strong>.</p>
+<h2 id="angle-and-magnitude-conditions">Angle and magnitude conditions</h2>
+<p>When the denominator of T(s) = KG(s)/(1 + KG(s)H(s)) is zero:</p>
+<ul><li>KG(s)H(s) = −1 = 1∠(2k + 1)180°, k = 0, ±1, ±2, …</li></ul>
+<p>The closed-loop poles must satisfy two conditions:</p>
+<ul><li><strong>Magnitude condition:</strong> |KG(s)H(s)| = 1 ⇒ K = 1/(|G(s)||H(s)|)</li><li><strong>Angle condition:</strong> ∠KG(s)H(s) = (2k + 1)180°</li></ul>
+<p>Substituting a value of s into KG(s)H(s) gives a complex number; if its angle is an odd multiple of 180°, that s is a pole of the system for a certain K. Since K is a scalar, the angle condition looks only at G(s)H(s); K is the inverse of the magnitude of G(s)H(s) when the pole location is substituted.</p>
+<p><strong>Example:</strong> For KG(s)H(s) = K/(s(s + 10)), at K = 5 the closed-loop poles are at −9.47 and −0.53; substituting s = −9.47 and K = 5 gives KG(s)H(s) = −1 (the same result is obtained for the other points in the table).</p>
+<p><strong>Example:</strong> KG(s)H(s) = K(s + 3)(s + 4)/((s + 1)(s + 2)), with closed loop T(s) = K(s + 3)(s + 4)/[(1 + K)s² + (3 + 7K)s + (2 + 12K)].</p>
+<ul><li>For the point s = −2 + j3, zero angles minus pole angles: θ₁ + θ₂ − θ₃ − θ₄ = 56.31° + 71.57° − 90° − 108.43° = −70.55°. Since this is not an odd multiple of 180°, <strong>−2 + j3 is not a closed-loop pole</strong>.</li><li>The point s = −2 + j(√2/2), on the other hand, lies on the root locus: K = (product of pole lengths)/(product of zero lengths) = L₃L₄/(L₁L₂) = (√2/2)(1.22)/((2.12)(1.22)) = <strong>0.33</strong>.</li></ul>
+<h2 id="root-locus-plotting-steps">Root locus plotting steps</h2>
+<p>The system considered: G(s) = 1/((s + 1)(s + 3)(s + 4)), H(s) = 1. The characteristic equation:</p>
+<ul><li>1 + K/((s + 1)(s + 3)(s + 4)) = 0 ⇒ s³ + 8s² + 19s + (12 + K) = 0</li></ul>
+<p>The notes show the root locations one by one with MATLAB plots for K = 0, 1, 2, 2.11, 5, 15, 45, 140 and 200: two roots meet at −1.78 and leave the real axis, and at K = 140 the locus crosses the imaginary axis at ±j4.36.</p>
+<ol><li><strong>Number of branches:</strong> The degree of the characteristic equation (the number of open-loop poles) gives the number of branches; here <strong>3 branches</strong>.</li><li><strong>Starting and ending points:</strong> The open-loop poles are the starting points (K = 0, marked with "x"), and the zeros are the ending points (K = ∞, marked with "o"). Here there are three poles at −1, −3 and −4, and no zeros.</li><li><strong>Branches on the real axis:</strong> Starting to the left of the leftmost pole or zero on the real axis, test points are chosen; if the total number of poles and zeros to the right of the point is <strong>odd</strong>, the root locus passes through there, and if it is even it does not. Complex poles and zeros are not included in this test. Here the branches lie between −∞ and −4 and between −3 and −1.</li><li><strong>Asymptote angles:</strong> α = 180°(2k + 1)/(n − m); for n = 3, m = 0, α = 60°(2k + 1): 60°, 180°, 300°.</li><li><strong>Point where the asymptotes cross the real axis:</strong> σ = (Σpᵢ − Σzᵢ)/(n − m) = (−1 − 3 − 4)/3 = −8/3 ≈ <strong>−2.66</strong>.</li><li><strong>Breakaway point from the real axis:</strong> K = −(s³ + 8s² + 19s + 12), dK/ds = −(3s² + 16s + 19) = 0 ⇒ s = −1.78 and s = −3.54. Since −3.54 lies in a region where there is no root locus, the breakaway point is <strong>−1.78</strong>.</li><li><strong>Departure angles from the poles:</strong> The angle condition is applied. For the pole at −4, φ₋₁ + φ₋₃ + φ₋₄ = −180°, here −180 − 180 + φ₋₄ = −180 (angles summing to 360° are ignored) ⇒ φ₋₄ = −180°; similarly φ₋₃ = 0° and φ₋₁ = −180°. Curves meeting at a point move in exactly opposite directions.</li><li><strong>Imaginary-axis crossing:</strong> The Routh-Hurwitz criterion is applied:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Row</th><th scope="col">1st column</th><th scope="col">2nd column</th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>19</td></tr><tr><th scope="row">s²</th><td>8</td><td>12 + K</td></tr><tr><th scope="row">s¹</th><td>35/2 − K/8</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>12 + K</td><td>0</td></tr></tbody></table></div>
+<p>The value of <strong>K = 140</strong>, at which the s¹ row is zero, is the stability limit. With this K, 8s² + 152 = 0 ⇒ the locus crosses the imaginary axis at <strong>±j4.36</strong>.</p>
+<figure class="yazi-gorsel"><img src="../kok-yer-ornek1.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Routh table for s³ + 8s² + 19s + 12 + K = 0 and the completed root locus: asymptote centroid −2.66, breakaway point −1.78, imaginary-axis crossing ±j4.36 (K = 140)"><figcaption>Example 1: completed root locus</figcaption></figure>
+<h3 id="multiple-pole-case">Multiple-pole case</h3>
+<p>G(s) = 1/((s + 1)(s + 3)²(s + 4)), H(s) = 1.</p>
+<ol><li>The number of branches is 4 (the number of open-loop poles).</li><li>There are 4 poles: simple poles at −1 and −4, and a double pole at −3.</li><li>The real-axis branches are between −4 and −3 and between −3 and −1.</li><li>α = 180°(2k + 1)/4 = 45°(2k + 1): 45°, 135°, 225°, 315°.</li><li>σ = (−1 − 3 − 3 − 4)/4 = −11/4 = <strong>−2.75</strong>.</li><li>K = −(s⁴ + 11s³ + 43s² + 69s + 36); from dK/ds = 0, s₁ = −3.69, s₂ = −3.00 (the pole itself, not possible), s₃ = −1.56. The breakaway points are <strong>−3.69</strong> and <strong>−1.56</strong>.</li><li>Departure angles: φ₋₁ + φ₋₃₁ + φ₋₃₂ + φ₋₄ = −180 ⇒ φ₋₄ = 0°, φ₋₁ = −180°. At the multiple pole the curves move in opposite directions: φ₋₃₁ = −180°, φ₋₃₂ = 0°.</li><li>Routh table for s⁴ + 11s³ + 43s² + 69s + 36 + K = 0:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Row</th><th scope="col">1st column</th><th scope="col">2nd column</th></tr></thead><tbody><tr><th scope="row">s⁴</th><td>1</td><td>43</td><td>K + 36</td></tr><tr><th scope="row">s³</th><td>11</td><td>69</td><td>0</td></tr><tr><th scope="row">s²</th><td>404/11</td><td>K + 36</td><td>0</td></tr><tr><th scope="row">s¹</th><td>5880/101 − 121K/404</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K + 36</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>From this the stability limit is <strong>K = 194.38</strong>; from the s² row, the values at which the locus crosses the imaginary axis are found to be <strong>±j2.5</strong>.</p>
+<figure class="yazi-gorsel"><img src="../kok-yer-katli-kutup.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Root locus of the system with multiple poles: breakaway points −3.69 and −1.56, asymptote centroid −2.75"><figcaption>Multiple-pole case</figcaption></figure>
+<h3 id="case-with-a-zero">Case with a zero</h3>
+<p>G(s) = (s + 2)/((s + 1)(s + 3)(s + 4)), H(s) = 1.</p>
+<ol><li>The number of branches is again 3.</li><li>There are three poles at −1, −3 and −4 (K = 0), and one zero at −2 (K = ∞).</li><li>The real-axis branches are between −4 and −3 and between −2 and −1.</li><li>For n = 3, m = 1, α = 90°(2k + 1): 90° and 270°.</li><li>σ = (−1 − 3 − 4 − (−2))/(3 − 1) = <strong>−3</strong>.</li><li>K = −(s³ + 8s² + 19s + 12)/(s + 2); from dK/ds = 0, s₁ = −3.47 and s₂,₃ = −1.77 ± j0.79 (not possible). The breakaway point is <strong>−3.47</strong>.</li><li>Departure and arrival angles: φ₋₁ + φ₋₃ + φ₋₄ − θ₋₂ = −180 ⇒ φ₋₄ = −180°; by similar steps φ₋₃ = −180°, θ₋₂ = 0°, φ₋₁ = −180°.</li><li>Since the root locus does not cross the imaginary axis, these points and the K value are not found; the system is stable for every K.</li></ol>
+<figure class="yazi-gorsel"><img src="../kok-yer-sifirli.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Root locus of the system with a zero: vertical branches leaving at −3.47 and the MATLAB rlocus plot"><figcaption>Case with a zero</figcaption></figure>
+<h3 id="complex-pole-case">Complex-pole case</h3>
+<p>G(s) = 1/((s + 0.5)(s² + 4s + 8)(s + 4)), H(s) = 1.</p>
+<ol><li>The number of branches is 4.</li><li>There are 4 poles: simple poles at −0.5 and −4, and complex poles at −2 ± j2.</li><li>On the real axis there is a branch only between −4 and −0.5 (complex poles and zeros are not counted in this determination).</li><li>α = 45°(2k + 1): 45°, 135°, 225°, 315°.</li><li>σ = (Σpᵢ)/4; the notes obtain (−1 − 4 − 2 − 2)/4 = −9/4 = −2.25.</li><li>K = −(s⁴ + 8.5s³ + 28s² + 44s + 16); from dK/ds = 0, s₁ = −2.69, s₂,₃ = −1.84 ± j0.83 (not possible). The breakaway point is <strong>−2.69</strong>.</li><li>Departure angles: for the real poles, φ₋₀.₅ = −180° and φ₋₄ = 0°. For the pole at −2 + j2, by the angle rule: [180 − arctan(2/1.5)] + arctan(2/2) + φ₋₂₁ + arctan(4/0) = −180 ⇒ φ₋₂₁ + 126.87 + 45 + 90 = −180 ⇒ <strong>φ₋₂₁ = −81.87°</strong>, <strong>φ₋₂₂ = +81.87°</strong>.</li><li>Routh table for s⁴ + 8.5s³ + 28s² + 44s + 16 + K = 0:</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Row</th><th scope="col">1st column</th><th scope="col">2nd column</th></tr></thead><tbody><tr><th scope="row">s⁴</th><td>1</td><td>28</td><td>K + 16</td></tr><tr><th scope="row">s³</th><td>17/2</td><td>44</td><td>0</td></tr><tr><th scope="row">s²</th><td>388/17</td><td>K + 16</td><td>0</td></tr><tr><th scope="row">s¹</th><td>3690/97 − 289K/776</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K + 16</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>The stability limit is <strong>K = 102.15</strong>; from the s² row, the imaginary-axis crossing is found to be <strong>±j2.28</strong>.</p>
+<figure class="yazi-gorsel"><img src="../kok-yer-karmasik-kutup.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Root locus of the system with complex poles: branches leaving the poles at −2 ± j2 at −81.87° and +81.87°, breakaway point −2.69"><figcaption>Complex-pole case</figcaption></figure>
+<p><em>Note: In the complex-pole example, the pole at −0.5 is written as −1 in the asymptote centroid calculation. The correct value is σ = (−0.5 − 4 − 2 − 2)/4 = −8.5/4 = −2.125 (this is also consistent with the s³ coefficient 8.5 in the characteristic equation). Also, in the final plot the imaginary-axis crossing is labeled ±2.5j; the value found from the Routh table is ±j2.28 (K + 16 = 118.15 and (388/17)s² + 118.15 = 0 ⇒ s ≈ ±j2.275).</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-ders-08-kok-yer-egrisi.zip" download>eem322-ders-08-kok-yer-egrisi.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.5 MB · 26.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-ders-08-kok-yer-egrisi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.5 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

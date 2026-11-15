@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BİL106 Laboratory Work #5: Character Operations and String Applications — hasancan.net</title>
+<meta name="description" content="BİL106 Introduction to Programming, Laboratory Sheet 5 (2014): converting from a custom number system to decimal, the hangigun function, word chains and farkiSay, and the difference between two times entered as strings. Four C programming problems with sample runs.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil106-lab-05/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/bil106-lab-05/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/bil106-lab-05/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/bil106-lab-05/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BİL106 Laboratory Work #5: Character Operations and String Applications">
+<meta property="og:description" content="BİL106 Introduction to Programming, Laboratory Sheet 5 (2014): converting from a custom number system to decimal, the hangigun function, word chains and farkiSay, and the difference between two times entered as strings. Four C programming problems with sample runs.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil106-lab-05/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BİL106 Laboratory Work #5: Character Operations and String Applications", "description": "BİL106 Introduction to Programming, Laboratory Sheet 5 (2014): converting from a custom number system to decimal, the hangigun function, word chains and farkiSay, and the difference between two times entered as strings. Four C programming problems with sample runs.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/bil106-lab-05/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL106 – Programlamaya Giriş", "associatedMedia": {"@type": "MediaObject", "name": "Bil106_lab5.pdf", "contentUrl": "https://hasancan.net/arsiv/bil106-lab-05/Bil106_lab5.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="BİL106 Laboratory Work #5: Character Operations and String Applications">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-1">1. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil106">BIL106</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL106 – Programlamaya Giriş</dd>
+          <dt data-i18n="arch.year"></dt><dd>1. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.03.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#problem-1-custom-number-system-to-decimal-25-points">Problem 1: Custom number system to decimal (25 points)</a></li><li><a href="#problem-2-which-day-of-the-week-25-points">Problem 2: Which day of the week? (25 points)</a></li><li><a href="#problem-3-word-chain-25-points">Problem 3: Word chain (25 points)</a></li><li><a href="#problem-4-difference-between-two-times-25-points">Problem 4: Difference between two times (25 points)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL106</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>BİL106 Laboratory Work #5: Character Operations and String Applications</h1>
+            <p class="kucuk">BIL106 – Programlamaya Giriş · 18.03.2014 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the 5th laboratory assignment of the <strong>BİL106 Introduction to Programming</strong> course at Başkent University (March 2014). The topic is <strong>character operations and string applications</strong>: four C programming problems, worth 25 points each. The problems are reproduced as they appear on the lab sheet; the sample runs show the output the program is expected to produce on screen. The original PDF of the lab sheet can be downloaded at the end of the post.</p>
+<h2 id="problem-1-custom-number-system-to-decimal-25-points">Problem 1: Custom number system to decimal (25 points)</h2>
+<p>In a custom number system, the symbols <strong>I</strong> are used in place of <strong>1</strong>, <strong>U</strong> in place of <strong>10</strong>, and <strong>Z</strong> in place of <strong>100</strong>. In this system, an integer is written by placing side by side as many I, U or Z symbols as there are units, tens and hundreds in the decimal system we use. Write a program that converts a number of at most 50 digits entered in this custom number system to the decimal system and prints it on the screen.</p>
+<p>Sample run 1:</p>
+<pre class="kod"><code>Özel sayı sistemindeki sayıyı giriniz: ZZUIIII
+-------------------------
+Girilen sayının onluk sistemdeki karşılığı : 214</code></pre>
+<p>Sample run 2:</p>
+<pre class="kod"><code>Özel sayı sistemindeki sayıyı giriniz: ZZZI
+-------------------------
+Girilen sayının onluk sistemdeki karşılığı : 301</code></pre>
+<h2 id="problem-2-which-day-of-the-week-25-points">Problem 2: Which day of the week? (25 points)</h2>
+<p>Write a function named <code>hangigun</code> that returns which day of the week it is, based on the day name passed to it, together with a <code>main</code> function in which the name of the day to be looked up is entered from the keyboard. Reading the input and printing the result must be done in the <code>main</code> function, and no global variables may be used.</p>
+<p>Sample run:</p>
+<pre class="kod"><code>Günün adı : Pazar
+--------------------------------
+Pazar günü haftanın 1. günüdür</code></pre>
+<h2 id="problem-3-word-chain-25-points">Problem 3: Word chain (25 points)</h2>
+<p>Write a program that keeps asking for a new word as long as the words entered from the keyboard form a chain. For a word chain to hold, each word must have been produced from the previous word by changing only one letter (without adding any new letters). The number of differing letters, position by position, between the newly entered word and the previous word must be found by a subfunction named <code>farkiSay</code>. This function takes the words and returns the number of differing letters. All subsequently entered words have the same length as the first word entered. Words can be at most 50 characters long.</p>
+<p>Sample run:</p>
+<pre class="kod"><code>İlk kelimeyi giriniz      : DEMİR
+Sonraki kelimeyi giriniz  : KEMİR
+ (1 harf farklı zincir bozulmadı)
+Sonraki kelimeyi giriniz  : KESİR
+ (1 harf farklı zincir bozulmadı)
+Sonraki kelimeyi giriniz  : MESİR
+ (1 harf farklı zincir bozulmadı)
+Sonraki kelimeyi giriniz  : ZEHİR
+ (2 harf farklı zincir bozuldu)
+Program sona erdi</code></pre>
+<h2 id="problem-4-difference-between-two-times-25-points">Problem 4: Difference between two times (25 points)</h2>
+<p>Write a C program that, given two time values entered from the keyboard, calculates the difference between them in seconds and prints it on the screen. The times must be read as separate <strong>strings</strong>. The time will always be given in the format <code>SS:DD:SS</code> (hours:minutes:seconds).</p>
+<p>Sample run (the times are entered as strings):</p>
+<pre class="kod"><code>Birinci zamanı giriniz: 14:02:55
+İkinci zamanı giriniz: 15:03:00
+-------------------------
+Aradaki fark : 3 saniyedir</code></pre>
+<p><em>Note: In the lab sheet's example the difference is written as 3 seconds; however, the difference between 14:02:55 and 15:03:00 is actually 3605 seconds (1 hour and 5 seconds). The example has been left as it appears in the lab sheet.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../Bil106_lab5.pdf" download>Bil106_lab5.pdf</a></p>
+              <p class="kucuk">PDF · 102 KB · 1 <span data-i18n="arch.pagesLower"></span> · 18.03.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../Bil106_lab5.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (102 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

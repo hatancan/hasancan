@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM474 Power Electronics: Handwritten Course Notes (From Switches to Motors) — hasancan.net</title>
+<meta name="description" content="53 pages of handwritten course notes with numerical examples on switching devices, rectifiers, DC/DC converters, SPWM, AC voltage control, UPS, and DC motors.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM474 Power Electronics: Handwritten Course Notes (From Switches to Motors)">
+<meta property="og:description" content="53 pages of handwritten course notes with numerical examples on switching devices, rectifiers, DC/DC converters, SPWM, AC voltage control, UPS, and DC motors.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM474 Power Electronics: Handwritten Course Notes (From Switches to Motors)", "description": "53 pages of handwritten course notes with numerical examples on switching devices, rectifiers, DC/DC converters, SPWM, AC voltage control, UPS, and DC motors.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM474 – Güç Elektroniği", "associatedMedia": {"@type": "MediaObject", "name": "eem474-el-yazisi-guc-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem474-el-yazisi-guc-elektronigi-notlari/eem474-el-yazisi-guc-notlari.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM474 Power Electronics: Handwritten Course Notes (From Switches to Motors)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem474">EEM474</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM474 – Güç Elektroniği</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.03.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#switching-devices-pages-1-9">Switching Devices (pages 1–9)</a></li><li><a href="#harmonic-power-examples-pages-10-12">Harmonic Power Examples (pages 10–12)</a></li><li><a href="#half-wave-and-full-wave-rectifiers-pages-12-17">Half-Wave and Full-Wave Rectifiers (pages 12–17)</a></li><li><a href="#three-phase-rectifiers-pages-18-20">Three-Phase Rectifiers (pages 18–20)</a></li><li><a href="#dc-to-dc-converters-pages-21-31">DC-to-DC Converters (pages 21–31)</a></li><li><a href="#control-of-dc-dc-converters-pages-32-36">Control of DC/DC Converters (pages 32–36)</a></li><li><a href="#inverter-and-spwm-pages-37-39">Inverter and SPWM (pages 37–39)</a></li><li><a href="#ac-ac-conversion-and-voltage-control-pages-39-47">AC–AC Conversion and Voltage Control (pages 39–47)</a></li><li><a href="#ups-page-49">UPS (page 49)</a></li><li><a href="#motors-pages-50-53">Motors (pages 50–53)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM474</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM474 Power Electronics: Handwritten Course Notes (From Switches to Motors)</h1>
+            <p class="kucuk">EEM474 – Güç Elektroniği · 17.03.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>A scanned copy of the handwritten EEM474 Power Electronics course notes (53 pages) that a friend kept in a grid-paper notebook. Personal information has been removed. Below, the page headings, formulas, and solved examples have been transcribed into text; all the pages, in their original handwritten form, are available in the PDF at the end of the post. The notes follow the order of the course slides: switches, rectifiers, DC/DC converters, inverter, AC voltage control, UPS, and motors.</p>
+<h2 id="switching-devices-pages-1-9">Switching Devices (pages 1–9)</h2>
+<p><strong>Energy recovery.</strong> When the switch is on, energy is stored in the inductor (vL = L·di/dt). When the switch is turned off, the energy in the inductor is returned to the source through diodes.</p>
+<p><strong>Ideal power switch.</strong> When conducting, the internal resistance should be 0; when off, the current should be 0; ton = 0 and toff = 0 are expected; no energy should be required when going from conduction to cutoff. A real switch is not ideal.</p>
+<p><strong>Switches (in terms of control).</strong> 1) Uncontrolled switches (diode). 2) Semi-controlled switches: only turn-on or only turn-off can be controlled (thyristor). 3) Fully controlled switches (transistor). Semiconductor switches: those that require a continuous gate signal (BJT, MOSFET: voltage controlled), those that require a pulse gate signal (once an instantaneous pulse arrives, the device remains on), bipolar voltage, unipolar voltage, bidirectional current, and unidirectional current are among the classes.</p>
+<ul><li><strong>Thyristor:</strong> it is semi-controlled; it controls only its turn-on. Triac: formed by connecting two thyristors in anti-parallel; it conducts current in both directions. GTO: controls both turn-on and turn-off.</li><li><strong>Diode characteristic</strong> and <strong>thyristor characteristic:</strong> common point with the diode: for the thyristor to turn on, forward polarity (anode relative to cathode) is required; difference from the diode: for it to turn on, current must flow from the gate to the cathode for a certain time.</li></ul>
+<p><strong>Comparison of switches.</strong> The device is selected according to voltage, current, and frequency. Thyristors operate at the highest voltage and current; the fastest are MOSFETs (highest frequency). Frequency and operating speed are directly proportional. Thyristor and GTO are pulse controlled: the thyristor turns on with a pulse applied to its gate, and the load voltage continues after the pulse; therefore it controls only turn-on. The GTO controls both turn-on and turn-off, and there is energy saving. Transistor and MOSFET require continuous control. The IGBT is made by combining the good properties of the thyristor, transistor, and MOSFET. If a transistor is to carry current in both directions, an anti-parallel diode is connected next to it.</p>
+<p><strong>Operating region of switches (in the i–v plane).</strong> Diode: in conduction only the positive half of the i axis, in cutoff the negative half of the v axis. BJT: in conduction on the i axis, in cutoff on the positive v axis. Transistor with anti-parallel diode: in conduction (transistor) positive i, (diode) negative i; in cutoff the v axis. If the two are connected in series, voltage is seen in both directions only in the cutoff state.</p>
+<h2 id="harmonic-power-examples-pages-10-12">Harmonic Power Examples (pages 10–12)</h2>
+<p><strong>Example 1.</strong> v(t) = 4 + 8 sin(ω₁t + 10°) + 5 sin(ω₂t + 50°); Vrms = √(4² + (8/√2)² + (5/√2)²) = 7.78 V.</p>
+<p><strong>Example 2.</strong> v(t) = 100 cos(377t) V; i(t) = 8 + 15 cos(377t + 30°) + 6 cos(2·377t + 45°) + 2 cos(3·377t + 60°) A.</p>
+<ul><li>a) Power drawn by the load: P = 0·8 + (100/√2)(15/√2) cos30° + 0 + 0 = 650 W (since the DC component of the voltage is 0, there is no DC power).</li><li>b) PF: Vrms = 100/√2 = 70.7 V; Irms = √(8² + (15/√2)² + (6/√2)² + (2/√2)²) = 14 A; PF = P/S = 650/(70.7·14) ≈ 0.66.</li><li>c) DF = I₁,rms/Irms = (15/√2)/14 ≈ 0.76.</li><li>d) THD = √((Irms² − I₁,rms²)/I₁,rms²) = √((14² − (15/√2)²)/(15/√2)²) ≈ 0.86 (86%). THD is expected to approach 0 and DF to approach 1.</li></ul>
+<p><em>Note: 650 W is a rounded value of 100·15/2·cos 30° = 649.5 W. Since Irms² = 8² + 112.5 + 18 + 2 = 196.5, Irms ≈ 14.02 A, PF = 649.5/(70.71·14.02) ≈ 0.655, and THD ≈ 0.86; the results on the paper are correct.</em></p>
+<h2 id="half-wave-and-full-wave-rectifiers-pages-12-17">Half-Wave and Full-Wave Rectifiers (pages 12–17)</h2>
+<ul><li>If a thyristor is used, the firing point is α (it must be fired at a point before π). If two diodes are used, a (center-tapped) transformer is required; if four diodes (bridge) are used, no transformer is needed. In the two-diode circuit, the inverse voltages are different.</li><li>See the RF, FF, η calculations: efficiency η = Pdc/Pac (half-wave: one diode, full-wave: 2 or 4 diodes; efficiency increases). FF = Vrms/Vdc (form factor), RF = Vac/Vdc (ripple factor); the full-wave rectifier has less ripple than the half-wave, so RF decreases.</li><li><strong>Full-wave bridge:</strong> as in the half-wave case, thyristors can be used instead of diodes; the diagonal thyristors must be fired at the same time. If fired at 90° and 150°, whichever fires later dominates (output between 150° and 180°).</li><li><strong>Half-wave rectifier with RL load.</strong> If the load is R and L, L stores energy while the diode is conducting: vL = L·di/dt. When the current decreases, the polarity changes; that is, the inductor begins to behave like a current path or a voltage source. This effect is the energy stored by the inductor, and the current continues to flow after π (until π + β). The value of α varies with the size of L; as L increases or the source frequency increases, continuity increases. To eliminate this partially negative voltage portion, a freewheeling diode is connected in parallel with R-L; when it is connected, the circuit operates as if connected directly to R, the load voltage always remains positive, and the current becomes continuous.</li><li>Summary: when converting AC to DC, if there is an R-L load, energy accumulates in it; to prevent this from being returned to the source, a parallel diode is connected.</li><li>A DC motor is mathematically composed of R, L, and E: as long as the motor is not rotating, there are only R and L; as the motor begins to rotate, E (back EMF) comes into play. In the four-thyristor rectifier with an RLE (DC motor) circuit, the output carries current between α and α + π.</li></ul>
+<h2 id="three-phase-rectifiers-pages-18-20">Three-Phase Rectifiers (pages 18–20)</h2>
+<p>Unlike a single-phase alternator, a three-phase alternator generates sinusoids in three phases, with 120° between the phases. Characteristics: 1) when single-phase is rectified, there is a lot of ripple; 2) in single-phase the power factor is low; 3) higher power can be drawn in three-phase.</p>
+<ul><li><strong>Half-wave three-phase rectifier:</strong> one diode is connected to each phase; the phases in the source follow one another. While diode 1 is conducting, 2 and 3 are off; then diode 2, with 1 and 3 off; then it returns to the start. Three diodes share one period, and each diode conducts for 120°. The output looks more like DC.</li><li><strong>Three-phase full-wave rectifier:</strong> two diodes for each phase, six diodes in total; the conduction time of each diode is 60°; two diodes are conducting at every instant. The output is even closer to DC.</li></ul>
+<h2 id="dc-to-dc-converters-pages-21-31">DC-to-DC Converters (pages 21–31)</h2>
+<p><strong>Linear and switching.</strong> Linear converter: a transistor or MOSFET operates in the linear region (series or parallel); voltage step-down, e.g., LM7805 (12 V to 5 V). Line regulation: the output voltage remains constant even if the input voltage varies within certain limits; load regulation: the output remains constant even if the load changes. Where there is regulation, feedback is involved.</p>
+<p><strong>Switching type (SMPS).</strong> In the linear type there is no transformer at no load, but in the switching type there is a transformer at no load: AC → DC → AC (high frequency) → DC. Step-up/step-down can be done; volume and size are small (because of the size of the transformer), the capacitors are small; the frequency is around 25 kHz (50 Hz in linear). The ripple is written as ΔV = 1/(2·e·f·C).</p>
+<p><strong>Chopper DC/DC.</strong> Linear: like a variable resistor, the voltage is controlled instantaneously. Switching: the instantaneous value is not considered, the average value is; with a chopper, the voltage can be changed in a DC/DC converter. Vavg = K·Vs, K = ton/(ton + toff) = ton/T (duty cycle or pulse ratio); Vrms = √K·Vs. Vavg and Vrms depend on K; the output voltage changes with K. There are two ways of changing K: 1) PWM: ton is changed, T is constant; 2) frequency modulation: ton is constant, T increases or decreases.</p>
+<p><strong>Example.</strong> 48 V source, 25 kHz switching, 24 Ω load, ton = 1 ms (this value is given on the paper): T = 1/f = 4 ms (the paper writes "T = 1 ms") and K = 1/4 was taken; Vo = (1/4)·48 = 12 V, Vrms = √(1/4)·48 = 24 V.</p>
+<p><em>Note: On the paper the frequency is written as "25 kHz", but the calculation was done with T = 4 ms (250 Hz); for ton = 1 ms and K = 1/4, T = 4 ms is required. At 25 kHz, T = 40 µs. The results (12 V and 24 V) are correct for K = 1/4.</em></p>
+<p><strong>Buck (step-down) converter.</strong> When the switch is closed, the inductor voltage is VL = Vd − Vo = Vin − Vo; when the switch is open, VL = −Vo. With an RL load the current is exponential; ΔImax = Vs/(4fL); a high switching frequency is desired; Vo = K·Vin, 0 ≤ K ≤ 1, Vo ≤ Vin.</p>
+<p><strong>Boost (step-up) converter ("Principle of step-up operation").</strong> When the switch is closed (conducting), VL = Vs, ΔiL = Vs·DT/L; when the switch is open (not conducting), the inductor changes polarity, Vo = Vs + VL: Vo = Vs[1 + t1/t2] = Vs/(1 − K). For K = 0.5, Vo = 2Vs; as K → 1, Vo → ∞ (the way of stepping up voltage). With ΔiL(closed) + ΔiL(open) = 0, Vo = Vd/(1 − D); Vo ≥ Vd. Input power = output power: Vd·Id = Vo²/R. The inductor current is triangular: Imax = IL + ΔiL/2, Imin = IL − ΔiL/2.</p>
+<p><strong>Classification of converters.</strong> 1st-quadrant chopper (only the 1st quadrant in the Vo–Io plane; asolton converter); 2nd-quadrant chopper (motor; with diode); 1st- and 2nd-quadrant chopper.</p>
+<p><strong>Continuous conduction limit.</strong> For Imin ≥ 0, Lmin = D(1 − D)²·T·R/2; "Lmin so that iLmin does not fall to zero". Ripple = ΔVo/Vo, ΔVo/Vo = D/(R·C·f); as the switching frequency increases, the ripple decreases. ΔiL(on) + ΔiL(off) = 0 and the average VL is 0; these two conditions are used in all converters to find Vo/Vd.</p>
+<p><strong>Example (boost).</strong> Vo = 30 V, Vin = 12 V, ripple 1%, R = 50 Ω, f = 25 kHz. D = 1 − Vs/Vo = 1 − 12/30 = 0.6. Lmin = D(1 − D)²R/(2f) = 0.6·(0.4)²·50/(2·25000) = 96 µH. IL = Vs/((1 − D)²R) = 12/(0.16·50) = 1.5 A; ΔiL/2 = Vs·DT/(2L) = 1.2 A; Imax = 2.7 A, Imin = 0.3 A. C &gt; D/(R·f·(ΔVo/Vo)) = 0.6/(50·25·10³·0.01) = 48 µF.</p>
+<p><strong>Buck-boost converter.</strong> For D &gt; 0 it can act as a boost (Vo &gt; Vs) and also as a buck; the polarity of the output voltage is opposite to that of the input. With the switch conducting, VL = Vd, ΔiL(on) = Vd·DT/L; with the switch in cutoff, VL = Vo (in magnitude), ΔiL(off) = Vo(1 − D)T/L; the result is Vo = −Vs·D/(1 − D) (for D = 0.5, Vo = −Vs: only the polarity changes; at D = 0, Vo = 0, as D → 1, Vo → ∞). Selection: if the voltage drops and the polarity changes, buck-boost; if only the voltage drops, buck; if the voltage rises and the polarity is the same, boost; if only a polarity change is desired, buck-boost.</p>
+<p><strong>Ćuk converter.</strong> It works exactly like the buck-boost: Vo = −Vs·D/(1 − D). (See the figures of the buck-boost, buck, and boost converters; it may be asked in the exam.)</p>
+<h2 id="control-of-dc-dc-converters-pages-32-36">Control of DC/DC Converters (pages 32–36)</h2>
+<p>Source → power electronics circuit → load; feedback from the output to the control block (comparison with the reference, regulator). Line regulation: the voltage X remains constant even though the input varies within certain limits; load regulation: the voltage remains constant even if the load changes. Voltage-mode control (VL is monitored) and current-mode control (iL is monitored). To increase Vo, D is increased: Vo = D·Vs (buck). PWM is used to change D: a sawtooth signal is compared with Vc (V₂); if V₂ increases the pulse width increases, if it decreases the pulse narrows; D = ton/T, Vo = D·Vs.</p>
+<p>Control loop: if Vo increases or decreases, V₂ changes → V₃ changes → D changes → Vo = D·Vs. If a transistor is used instead of the switch, it changes BE and CE. In voltage mode, a sample is taken from the voltage across Vo; in current mode, from the current (a low-value resistor is used for the current sample; high wattage, small resistance value).</p>
+<p><strong>Example (buck).</strong> L = 100 µH, Vin = 40 V, D = 0.3, Po = 24 W, fs = 100 kHz, Ts = 10 µs. Vo = D·Vin = 12 V; Io = Po/Vo = 2 A; R = Vo/Io = 6 Ω; IL = Io = 2 A; ΔiL = (Vin − Vo)/L · D·Ts = 0.84 A (peak to peak); Imax = IL + Δi/2 = 2.42 A, Imin = 1.58 A. The inductor voltage is +28 V for 3 µs and −12 V for 7 µs.</p>
+<p><strong>Example (boost).</strong> L = 100 µH, Vin = 12 V, D = 0.4, Po = 30 W, fs = 100 kHz. Vo = Vin/(1 − D) = 20 V; Io = 30/20 = 1.5 A; IL = Iin = 30/12 = 2.5 A; ΔiL = Vs·DT/L = (12/100 µ)·4 µ = 0.48 A; Imax = 2.74 A, Imin = 2.26 A; the inductor voltage is +12 V for 4 µs and −8 V for 6 µs.</p>
+<p><strong>Example (buck-boost).</strong> L = 100 µH, Vin = 12 V, D = 0.6, Po = 36 W, fs = 100 kHz. The inductor voltage is +12 V for 0.6T and −18 V for 0.4T; the average inductor current is 5 A (ΔiL = 0.72 A; Imax = 5.36 A, Imin = 4.64 A).</p>
+<p><strong>PWM and feedback loop.</strong> D = ton/Ts = Vcontrol/Vst; Vcontrol = D·Vst. A portion of Vo (R2/(R1 + R2) = K) is taken from the output through a voltage divider and compared with Vref; the error amplifier (A·(Vref − Vin·D·K)) feeds the PWM; the change in Vo is the change in D (the frequency is constant, the duty cycle changes). Where Vo is concerned, if the load R changes, Vo changes. <strong>Programs that can be used:</strong> PSPICE, PSIM, MATLAB, PSCAD; in PSIM, the connections are made and "run simulation" is used.</p>
+<h2 id="inverter-and-spwm-pages-37-39">Inverter and SPWM (pages 37–39)</h2>
+<p>Single-phase full bridge (switches S1–S4, Vdc source, AC load); the SPWM block is given the inputs ma, mf, and fsin. V₁ = ma·Vdc: 1) the amplitude of the sinusoid, 2) the frequency can be controlled, 3) the harmonics that are present. ma = Vsin/Vtri (modulation index, between 0 and 1); mf = ftri/fsin ≫ 1 (frequency index). The change in ma is related to the change in Vsin.</p>
+<p>SPWM is divided into bipolar and unipolar; they differ in their control sections, but their outputs after the filter are the same. Bipolar SPWM: the triangular wave and the sinusoid are fed to a comparator; the output is applied directly to Q1, Q4 and inverted to Q2, Q3. Unipolar SPWM: two comparators, the sinusoid is sent with a 180° phase difference; the Q1, Q2 and Q3, Q4 pairs. The fundamental difference between these two circuits is the harmonics produced.</p>
+<h2 id="ac-ac-conversion-and-voltage-control-pages-39-47">AC–AC Conversion and Voltage Control (pages 39–47)</h2>
+<p>AC to AC is done in two ways: 1) without using an inverter (amplitude adjustment: the RMS value of the AC voltage is changed, on-off and phase control; frequency adjustment), 2) using an inverter (AC/DC → DC/AC). If amplitude adjustment is desired, a transformer is used.</p>
+<p><strong>RMS control: 1) On-off.</strong> Two anti-parallel thyristors (TR1, TR2); coefficients m and n: n cycles ON (fired at α = 0, acts like a diode), m cycles OFF. Vrms = Vs·√(n/(m + n)) = Vs·√k. As the off time (m) decreases, the PF improves.</p>
+<p><strong>2) Phase control.</strong> The value of α is variable. In the unidirectional (thyristor + diode) circuit, the thyristor is fired at α; if it is fired at the instant π... The maximum value at the output is the value of the source (firing at α = 0); the minimum value is at the instant the thyristor is fired at π, that is, for the negative sinusoid value (diode), −Vm/2 (as written on the paper). The waveform across the thyristor: we cannot see anything after π, because it is a diode, so we cannot see it. If two thyristors are connected in parallel (SCR1, SCR2), the average value of the output is 0, and the same waveform is also obtained with a two-diode bridge: unidirectional current passes through the thyristor, bidirectional current through R. In RL circuits, because of the effect of L, the thyristor remains on for longer than π (π + β). When there was R, it was fired once; when R + L is present, it needs to be fired several times.</p>
+<p><strong>Cycloconverter.</strong> AC/AC with two anti-parallel rectifier groups (1 and 2); if group 1 does this and then group 2 does it, a periodic wave from + to − is formed; the frequency ends up below the source frequency. The disadvantage is the increase in harmonics.</p>
+<p><strong>Triac.</strong> Its greatest advantage is that it conducts current in both directions. Dimmer: a triac (A1, A2, G) with a load (lamp); Vrms is adjusted by changing the firing angle α; as α increases, less voltage than 220 V is obtained and the lamp burns dimmer. The diac behaves like a Zener diode (for AC); it does not allow conduction up to a certain value. The operating region of the thyristor (in the i–v plane) and the operating region of the triac are drawn (the triac in the 1st and 3rd quadrants).</p>
+<p><strong>Question.</strong> Half bridge (two different circuits with thyristor + diodes; D1–D4 and T1): a) the outputs of the two circuits are the same; b) Vout = Vm/π (for α = 90°, cos90° = 0); Vo = (1/π)∫α→π Vm sin(ωt) dωt = (Vm/π)(1 + cos α). In circuit 1, the current through T1 is always in the same direction; in circuit 2, since the triac conducts current in both directions, the current flows in both directions.</p>
+<h2 id="ups-page-49">UPS (page 49)</h2>
+<p>A DC-to-AC converter is used. UPS systems are divided into two groups: 1) online (the inverter runs continuously), 2) offline (the inverter does not run continuously). When the mains is present, the battery is charged; when the mains is absent, energy is supplied from the battery.</p>
+<h2 id="motors-pages-50-53">Motors (pages 50–53)</h2>
+<p><strong>Motor selection:</strong> 1) cost, 2) thermal capacity, 3) efficiency, 4) torque-speed profile. AC motors: induction, synchronous, universal. DC motors: wound-field DC motors, permanent magnet, brushless (an electronic circuit must be present for it to operate).</p>
+<p><strong>Machine efficiency:</strong> η = Po/Pin; expressed in three forms: η = Po/Pi × 100 %, η = Po/(Po + Ploss) × 100 %, η = (Pi − Ploss)/Pi × 100 %.</p>
+<p><strong>Motor and generator.</strong> Electrical energy ↔ mechanical energy. Mechanical → electrical: E = K·Φ·ω (ω angular speed, Φ magnetic flux). Electrical → mechanical: T = K·Φ·I (I current). The same machine can operate as either a motor or a generator depending on the energy supplied. P = E·IA = T·ω. In a motor U &gt; EA, in a generator EA &gt; U. If the motor does not rotate, E = 0. Circuit: V = Ia·Ra + Ea, Ea = KΦω; at DC voltage, L acts as a short circuit.</p>
+<p><strong>Permanent magnet DC motor.</strong> When the angular speed is 0, the torque is at its maximum; when the angular speed is at its maximum, the torque is 0 (there is an inverse relationship). U = E + Ia·Ra, I = T/(KΦ). ω = Vs/(KΦ) − Ra·T/(KΦ)² (the slope is negative); as Vs changes, the slope does not change, but the characteristic shifts in parallel.</p>
+<p><strong>Wound-field DC motor — shunt motor.</strong> The field winding is connected in parallel with the rotor; even if we change the direction of U, the direction of the field and the rotor will change, so the direction of the motor does not change. The speed variation with load is low. <strong>Separately excited motor:</strong> when we change either U_E or U_A, the direction of the motor changes. <strong>Series motor:</strong> the rotor and the winding are connected in series; the direction of the motor does not change, and its torque is very high. <strong>Compound-wound motor:</strong> the direction of the motor changes. The loss dissipated in it is greater in the wound-field DC motor (because of internal resistances).</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem474-el-yazisi-guc-notlari.pdf" download>eem474-el-yazisi-guc-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 6.4 MB · 53 <span data-i18n="arch.pagesLower"></span> · 17.03.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem474-el-yazisi-guc-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (6.4 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

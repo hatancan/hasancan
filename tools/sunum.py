@@ -261,14 +261,88 @@ def parca(kaynak_html, desen):
     return re.sub(r'href="#', 'href="/#', m.group(0))  # ana sayfa bölüm bağlantıları alt sayfalardan da çalışsın
 
 
+# FreshSignal ev reklamlari (REKLAM.md). Metinler assets/lang/{tr,en,de}.js icindeki
+# fsad.* anahtarlarindan gelir; gorseller assets/img/fs-retro-*.webp; stil style.css
+# "FreshSignal reklamlari" bolumu. Olcu .reklam-yer kutusundan gelir, CLS yok.
+FS_LOGO = ('<svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false">'
+           '<rect width="32" height="32" rx="8" fill="#22C55E"/>'
+           '<path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/>'
+           '<path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/>'
+           '<path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/>'
+           '<path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>')
+
+# Dil degisince adres de degisir: data-i18n-attr href'i de ceviriyor (assets/js/site.js).
+# Her alanin ayri fsad.url.<kod> anahtari var, cunku utm_content alana gore degisiyor.
+FS_URL = ('https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net'
+          '&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=')
+
+
+def _fs_bag(kod, ic):
+    return ('<a class="fsr fsr-%s" href="%s%s" data-i18n-attr="href:fsad.url.%s;title:fsad.title"'
+            ' rel="sponsored noopener">%s</a>' % (kod, FS_URL, kod, kod, ic))
+
+
+def _fs_yatay(kod):
+    """728x90 ve 468x60: solda gorsel, sagda marka + metin + dugme."""
+    return _fs_bag(kod,
+        '<span class="fsr-ic">'
+        '<span class="fsr-gorsel" aria-hidden="true"></span>'
+        '<span class="fsr-sol">'
+        '<span class="fsr-marka">' + FS_LOGO + 'FreshSignal</span>'
+        '<span class="fsr-yazi" data-i18n="fsad.' + kod + '"></span>'
+        '</span>'
+        '<span class="fsr-dugme" data-i18n="fsad.cta"></span>'
+        '</span>')
+
+
+def _fs_200():
+    return _fs_bag('200',
+        '<span class="fsr-bas">' + FS_LOGO + 'FreshSignal</span>'
+        '<span class="fsr-gorsel" aria-hidden="true"></span>'
+        '<span class="fsr-govde">'
+        '<span class="fsr-yazi" data-i18n="fsad.200"></span>'
+        '<span class="fsr-dugme" data-i18n="fsad.cta"></span>'
+        '</span>')
+
+
+def _fs_160():
+    return _fs_bag('160',
+        '<span class="fsr-bas">' + FS_LOGO + 'FreshSignal</span>'
+        '<span class="fsr-gorsel" aria-hidden="true"></span>'
+        '<span class="fsr-govde">'
+        '<span class="fsr-yazi" data-i18n="fsad.160"></span>'
+        '<ul class="fsr-liste">'
+        '<li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li>'
+        '<li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li>'
+        '</ul>'
+        '<span class="fsr-alt">'
+        '<span class="fsr-dugme" data-i18n="fsad.cta"></span>'
+        '<span class="fsr-not" data-i18n="fsad.not"></span>'
+        '</span>'
+        '</span>')
+
+
+FS_ICERIK = {
+    'ust-banner': lambda: _fs_yatay('728'),
+    'yazi-sonu': lambda: _fs_yatay('468'),
+    'sag-kare': _fs_200,
+    'sol-dikey': _fs_160,
+}
+
+
 def reklam(ad, olcu):
-    """Boş reklam alanı (yer tutucu). Doldurma kuralları REKLAM.md'de; ad/ölçü değişirse orayı da güncelle."""
-    return (f'<aside class="reklam reklam-{olcu} yer-tutucu" data-reklam="{ad}" data-i18n-attr="aria-label:ad.label">'
-            f'<span class="reklam-etiket" data-i18n="ad.label"></span>'
-            f'<div class="reklam-yer">[<span data-i18n="ad.slot"></span> · {olcu.replace("x", "×")}]</div></aside>')
+    """Reklam alani. Dolu alanda 'yer-tutucu' sinifi YOKTUR (REKLAM.md)."""
+    if ad in FS_ICERIK:
+        return ('<aside class="reklam reklam-%s" data-reklam="%s" data-i18n-attr="aria-label:ad.label">'
+                '<span class="reklam-etiket" data-i18n="ad.label"></span>'
+                '<div class="reklam-yer">%s</div></aside>' % (olcu, ad, FS_ICERIK[ad]()))
+    return ('<aside class="reklam reklam-%s yer-tutucu" data-reklam="%s" data-i18n-attr="aria-label:ad.label">'
+            '<span class="reklam-etiket" data-i18n="ad.label"></span>'
+            '<div class="reklam-yer">[<span data-i18n="ad.slot"></span> &middot; %s]</div></aside>'
+            % (olcu, ad, olcu.replace('x', '&times;')))
 
 
-def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
+def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas='', sekme='arsiv', kanonik=None):
     ana = (KOK / 'index.html').read_text(encoding='utf-8')
     ust = parca(ana, r'<header class="ust">.*?</header>')
     menu = parca(ana, r'<nav class="sekmeler".*?</nav>').replace(' class="aktif"', '')
@@ -283,7 +357,7 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(baslik)} — hasancan.net</title>
 <meta name="description" content="{e(aciklama)}">
-<link rel="canonical" href="{SITE}{yol_url}">
+<link rel="canonical" href="{kanonik or SITE + yol_url}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{e(baslik)}">
 <meta property="og:description" content="{e(aciklama)}">
@@ -293,7 +367,7 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas=''):
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/style.css?v={SURUM}">
 {ek_bas}</head>
-<body data-sekme="arsiv" data-baslik="{e(baslik)}">
+<body data-sekme="{sekme}" data-baslik="{e(baslik)}">
 <!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
 <div id="sayfa">
   {ust}
@@ -482,10 +556,50 @@ def arsiv_dizini(kayitlar):
 
 def site_haritasi(kayitlar):
     adresler = [('/', None), ('/arsiv/', None)] + [(f'/arsiv/{k["slug"]}/', k['eklenme']) for k in kayitlar if k.get('baslik')]
+    adresler += [(f'/arsiv/{k["slug"]}/en/', k['eklenme']) for k in kayitlar
+                 if k.get('baslik') and (ARSIV / k['slug'] / 'yazi.en.md').exists()]
     ogeler = ''.join(f'  <url><loc>{SITE}{u}</loc>' + (f'<lastmod>{t}</lastmod>' if t else '') + '</url>\n' for u, t in adresler)
     (KOK / 'sitemap.xml').write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{ogeler}</urlset>\n',
         encoding='utf-8')
+
+
+def dil_bagla(html_, slug, dil, en_var):
+    """TR ve EN sürümleri birbirine bağlar: hreflang etiketleri ve yazının başında dil bağlantısı."""
+    if not en_var:
+        return html_
+    tr_url, en_url = f'{SITE}/arsiv/{slug}/', f'{SITE}/arsiv/{slug}/en/'
+    alt = (f'<link rel="alternate" hreflang="tr" href="{tr_url}">\n<link rel="alternate" hreflang="en" href="{en_url}">\n'
+           f'<link rel="alternate" hreflang="x-default" href="{tr_url}">\n')
+    html_ = html_.replace('<meta property="og:type"', alt + '<meta property="og:type"', 1)
+    bag = ('<p class="dil-bag kucuk"><a href="en/" hreflang="en" lang="en">Read this post in English »</a></p>' if dil == 'tr'
+           else '<p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>')
+    return html_.replace('<header class="yazi-bas">', bag + '\n          <header class="yazi-bas">', 1)
+
+
+def ingilizce_sayfa(k, hedef):
+    """yazi.en.md varsa /arsiv/<slug>/en/ sayfasını üretir (dosyalar ve görseller üst klasörde kalır)."""
+    f = hedef / 'yazi.en.md'
+    if not f.exists():
+        return None
+    on, govde, icindekiler, _ = yazi_coz(f.read_text(encoding='utf-8'), hedef)
+    if not on.get('baslik') or not on.get('ozet'):
+        return None
+    html_ = yazi_sayfasi(k, on, govde, icindekiler)
+    slug = k['slug']
+    # göreli dosya/görsel yolları bir üst klasöre (en/ alt klasöründen)
+    html_ = re.sub(r'(src|href)="(?!https?:|/|#|\.\./|mailto:|data:|en/)([^"]+)"', r'\1="../\2"', html_)
+    html_ = html_.replace('<html lang="tr">', '<html lang="en">', 1)
+    html_ = html_.replace(f'href="{SITE}/arsiv/{slug}/"', f'href="{SITE}/arsiv/{slug}/en/"')
+    html_ = html_.replace(f'content="{SITE}/arsiv/{slug}/"', f'content="{SITE}/arsiv/{slug}/en/"')
+    html_ = html_.replace('<meta property="og:locale" content="tr_TR">', '<meta property="og:locale" content="en_GB">', 1)
+    html_ = html_.replace('"inLanguage": "tr"', '"inLanguage": "en"').replace(f'"url": "{SITE}/arsiv/{slug}/"', f'"url": "{SITE}/arsiv/{slug}/en/"')
+    html_ = html_.replace('<article class="kutu yazi-sayfa" lang="tr">', '<article class="kutu yazi-sayfa" lang="en">', 1)
+    html_ = html_.replace('<body data-sekme="arsiv"', '<body data-dil="en" data-sekme="arsiv"', 1)
+    for tr_, en_ in (('Fotoğraflardan metin', 'Text from photos'), ('ZIP arşivi', 'ZIP archive'), ('7z arşivi', '7z archive'),
+                     ('<dd>Metin</dd>', '<dd>Text</dd>'), ('<dd>Fotoğraf</dd>', '<dd>Photo</dd>')):
+        html_ = html_.replace(tr_, en_)
+    return dil_bagla(html_, slug, 'en', True)
 
 
 def sayfa(a):
@@ -509,7 +623,11 @@ def _sayfa_yaz(a, hedef, on, govde, icindekiler, gorseller):
     kayitlar = kayitlari_oku()
     k = next(k for k in kayitlar if k['slug'] == a.slug)
     k['baslik'] = on['baslik']
-    (hedef / 'index.html').write_text(yazi_sayfasi(k, on, govde, icindekiler), encoding='utf-8')
+    en_html = ingilizce_sayfa(k, hedef)
+    (hedef / 'index.html').write_text(dil_bagla(yazi_sayfasi(k, on, govde, icindekiler), k['slug'], 'tr', en_html is not None), encoding='utf-8')
+    if en_html:
+        (hedef / 'en').mkdir(exist_ok=True)
+        (hedef / 'en' / 'index.html').write_text(en_html, encoding='utf-8')
     for f in hedef.glob('s-*.jpg'):  # yazıda kullanılmayan slayt görselleri yayına gitmesin
         if f.name not in gorseller:
             f.unlink()

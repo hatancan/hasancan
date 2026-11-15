@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM308 Signals and Systems II: EEM302 MATLAB Assignment (2007) and Student Solutions, Pole-Zero Diagrams — hasancan.net</title>
+<meta name="description" content="The 2007 MATLAB assignment for EEM302 (today&#x27;s EEM308) Signals and Systems II: problems from Buck&#x27;s Computer Explorations book on pole-zero diagrams, the frequency response of a second-order system, the |H(s)| surface, and pole vectors; classmates&#x27; .m solutions, with notes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM308 Signals and Systems II: EEM302 MATLAB Assignment (2007) and Student Solutions, Pole-Zero Diagrams">
+<meta property="og:description" content="The 2007 MATLAB assignment for EEM302 (today&#x27;s EEM308) Signals and Systems II: problems from Buck&#x27;s Computer Explorations book on pole-zero diagrams, the frequency response of a second-order system, the |H(s)| surface, and pole vectors; classmates&#x27; .m solutions, with notes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM308 Signals and Systems II: EEM302 MATLAB Assignment (2007) and Student Solutions, Pole-Zero Diagrams", "description": "The 2007 MATLAB assignment for EEM302 (today's EEM308) Signals and Systems II: problems from Buck's Computer Explorations book on pole-zero diagrams, the frequency response of a second-order system, the |H(s)| surface, and pole vectors; classmates' .m solutions, with notes.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM308 – Sinyaller ve Sistemler II", "associatedMedia": {"@type": "MediaObject", "name": "eem302-matlab-odevleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem308-matlab-odevleri-2007/eem302-matlab-odevleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM308 Signals and Systems II: EEM302 MATLAB Assignment (2007) and Student Solutions, Pole-Zero Diagrams">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem308">EEM308</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM308 – Sinyaller ve Sistemler II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>25.03.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#assignment-rules-and-problem-distribution">Assignment Rules and Problem Distribution</a></li><li><a href="#page-166-a-and-178-i-pole-zero-diagrams">Page 166 (a) and 178 (i): Pole-Zero Diagrams</a></li><li><a href="#page-163-b-damping-ratio-in-a-second-order-system">Page 163 (b): Damping Ratio in a Second-Order System</a></li><li><a href="#page-177-lengths-of-the-pole-vectors">Page 177: Lengths of the Pole Vectors</a></li><li><a href="#page-169-a-2011">Page 169 (a) (2011)</a></li><li><a href="#homework-impulse-response-of-a-band-limited-90-phase-shifter">Homework: Impulse Response of a Band-Limited 90° Phase Shifter</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM308</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM308 Signals and Systems II: EEM302 MATLAB Assignment (2007) and Student Solutions, Pole-Zero Diagrams</h1>
+            <p class="kucuk">EEM308 – Sinyaller ve Sistemler II · 25.03.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the <strong>MATLAB assignment</strong> given by <strong>Asst. Prof. Dr. Mustafa Doğan</strong> in the spring 2007 semester in the <strong>EEM 302 Signals and Systems II</strong> course at Başkent University (the course was later offered under the code EEM 308), along with the MATLAB solutions prepared by classmates for this assignment. The assignment consists of problems selected from the Laplace and z-transform chapters of the book <em>Computer Explorations in Signals and Systems Using MATLAB</em> (Buck, Daniel, Singer; 2nd edition). Two short solutions prepared in 2011 under the same assignment system were also added.</p>
+<p>The solutions are the work of classmates; names and student numbers in file names and code have been removed, and the files were renamed according to problem number. The assignment distribution list (since it contained student names and numbers) and the photographs of the book pages were not published; the problem assignment is given below anonymously. The cleaned <code>.m</code> files can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="assignment-rules-and-problem-distribution">Assignment Rules and Problem Distribution</h2>
+<p>The title of the assignment list: <em>EEM 302 MATLAB HW — "Computer Explorations in Signals and Systems 2nd ed. – BUCK" — Asst. Prof. Dr. Mustafa Doğan</em>. The assignments were to be submitted <strong>by 24:00 on Sunday, March 25</strong> to the upload address on the department's web server. The class was divided into eight groups, and each group was given two problems from the book:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Group</th><th scope="col">From the Laplace chapter</th><th scope="col">From the z-transform chapter</th></tr></thead><tbody><tr><th scope="row">1</th><td>Page 163 (a)</td><td>Page 178 (k)</td></tr><tr><th scope="row">2</th><td>Page 163 (b)</td><td>Page 178 (j)</td></tr><tr><th scope="row">3</th><td>Page 166 (a)</td><td>Page 178 (i)</td></tr><tr><th scope="row">4</th><td>Page 166 (b)</td><td>Page 177 (e)</td></tr><tr><th scope="row">5</th><td>Page 166 (c)</td><td>Page 177 (d)</td></tr><tr><th scope="row">6</th><td>Page 166 (d)</td><td>Page 177 (c)</td></tr><tr><th scope="row">7</th><td>Page 169 (a)</td><td>Page 177 (b)</td></tr><tr><th scope="row">8</th><td>Page 169 (b)</td><td>Page 177 (a)</td></tr></tbody></table></div>
+<p>Points to note for the assignments:</p>
+<ol><li>The single file to be submitted must be named in the form <code>studentNo.m</code>, as in the example. Everything required in the assignment (all parts) must be inside this m-file, and the file must run.</li><li>The explanations and answers to the questions will count for much more in the evaluation. The explanations to be evaluated must be printed to the Command Window with <code>display</code>, as in the example <code>display('verbal answers and explanations...');</code>.</li><li>Outputs that are not meant to be evaluated must not appear in the Command Window (if <code>;</code> is not used, the output appears in the Command Window).</li></ol>
+<h2 id="page-166-a-and-178-i-pole-zero-diagrams">Page 166 (a) and 178 (i): Pole-Zero Diagrams</h2>
+<p><strong>166 (a).</strong> Define the numerator and denominator coefficients of the system function H₁(s) = 4 / (s² + 2s + 17), Re(s) &gt; −1 as the vectors <code>b1</code> and <code>a1</code>, find the poles with <code>roots</code>, and plot them.</p>
+<p><strong>178 (i).</strong> Find and plot the poles and zeros of the system H₃(z) = (0.25 − (√3/2)z⁻¹ + z⁻²) / (1 − (√3/2)z⁻¹ + 0.25z⁻²), |z| &gt; 0.5; explain how the pole and zero locations are related.</p>
+<p>There are two solutions for this group. Both follow the same approach; one version of the second also draws the axes, the ROC boundary, and the unit circle, following the logic of the book's <code>plotpz</code>:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>b1=[4];
+a1=[1 2 17];
+zeros=roots(b1);
+poles=roots(a1);
+
+disp('Soru : 166 (a) için');
+disp('Kutuplar:');
+disp(poles);
+
+figure (1);
+plot(real(zeros),imag(zeros),'o');
+hold on
+plot(real(poles),imag(poles),'x');
+grid
+title('Soru : 166 (a)');
+xlabel('Re');
+ylabel('Im');
+axis([-5 5 -5 5]);
+
+b=[0.25 -(sqrt(3)/2) 1];
+a=[1 -(sqrt(3)/2) 0.25];
+zs=roots(b);
+ps=roots(a);
+disp('Soru : 178 (i) için');
+disp('Sıfırlar:'); disp(zs);
+disp('Kutuplar:'); disp(ps);</code></pre>
+<p>Results: in 166 (a) the poles are at <strong>s = −1 ± j4</strong> (there is no finite zero since the numerator is constant). In 178 (i) the poles are at <strong>z = 0.5·e^(±jπ/6)</strong> (= 0.433 ± j0.25) and the zeros at <strong>z = 2·e^(±jπ/6)</strong> (= 1.732 ± j1).</p>
+<p><em>Note: The solutions only say "2 poles and 2 zeros were found"; the relationship the question actually asks for is this: the zeros are the reflections of the poles with respect to the unit circle (1/p</em>), and the numerator coefficients are those of the denominator in reverse order. Therefore the system is an all-pass filter, with |H₃(e^jω)| = 1 constant (at z = 1 the numerator and denominator are both 0.384). Also, the <code>rsmak('circle')</code> line in the code depends on MATLAB's Spline Toolbox; without this toolbox it gives an error.*</p>
+<h3 id="the-h-s-surface">The |H₁(s)| Surface</h3>
+<p>Another file prepared for the same problem plots |H₁(s)| as a surface in the s-plane: 32 samples of σ from just to the right of −1 up to 3 (σ = −1 + k/8, k = 1…32), and ω in the range [−10, 10] with a step of 0.5; the grid s = σ + jω is built with <code>meshgrid</code>, H₁ = <code>polyval(b1,s)./polyval(a1,s)</code> is computed and plotted with <code>mesh</code>, and the cross-section of the surface along the jω axis is marked with a blue line (<code>plot3</code>). The conclusion in the explanation: the surface grows rapidly as it approaches the poles; how the poles affect the frequency response can be seen in the 3-D plot.</p>
+<h2 id="page-163-b-damping-ratio-in-a-second-order-system">Page 163 (b): Damping Ratio in a Second-Order System</h2>
+<p>The problem asks for examining the poles and frequency response for different values of the damping ratio ζ, taking ωₙ = 1 in the second-order system H(s) = ωₙ² / (s² + 2ζωₙs + ωₙ²). Both solutions use the <code>ord2</code>, <code>printsys</code>, and <code>freqs</code> commands to plot |H(jω)| over ω ∈ [−5, 5] for ζ = 0, 1/4, 1, and 2:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>wn=1
+omega=[-5:0.1:5]
+damping_ratio=1/4
+[num0,den]=ord2(wn,damping_ratio);
+num=wn^2*num0
+printsys(num,den)
+freqs(num,den,omega)
+display('0&lt;damping_ratio&lt;1 olduğunda polinomun kutupları kompleks sayı olur dolayısıyla step response ve impulse responsları salınıma sahip olur...');</code></pre>
+<p>Summary of the explanations in the solutions:</p>
+<ul><li><strong>ζ = 0:</strong> The poles are on the imaginary axis (s = ±jωₙ).</li><li><strong>0 &lt; ζ &lt; 1:</strong> The poles are complex conjugates; the step and impulse responses are oscillatory. As ζ decreases, the poles approach the jω axis and |H(jω)| (according to the solutions) peaks at the frequency ω = ωₙ√(1 − ζ²); the system behaves like a non-ideal band-pass filter.</li><li><strong>ζ = 1:</strong> The poles are on the real axis (double pole); |H(jω)| decreases monotonically as ω increases.</li><li><strong>ζ &gt; 1:</strong> At low ω values, |H(jω)| becomes more sensitive to changes in ω.</li><li>It is stated that at ω = 0, |H(j0)| = 1 for all four systems, because the function reduces to a constant at this point.</li></ul>
+<p><em>Note: A few corrections are needed in the solutions. At ζ = 0 the peak does not "fail to form"; on the contrary, |H| goes to infinity at ω = ωₙ = 1 (since the ω grid includes exactly 1, <code>freqs</code> produces Inf at this point and it does not appear in the plot). The location of the resonance peak is not ωₙ√(1 − ζ²) but ωₙ√(1 − 2ζ²), and it occurs only for ζ &lt; 1/√2; √(1 − ζ²) is the damped oscillation frequency. The poles are real for ζ ≥ 1 (not only at ζ = 1); for ζ &gt; 1 there are two distinct real poles, one approaching the origin while the other moves away to the left.</em></p>
+<h2 id="page-177-lengths-of-the-pole-vectors">Page 177: Lengths of the Pole Vectors</h2>
+<p>The problem asks for computing the lengths and angles of the vectors drawn from 512 points on the unit circle (ω = k·π/256) to the poles of the system H₁(z) = 1 / (1 − 0.9z⁻¹ + 0.81z⁻²), and showing their relationship to the frequency response. The core of the solutions:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>omega=[0:511]*pi/256;
+unitcirc=exp(j*omega);
+num=[1 0 0];
+den=[1 -0.9 0.81];
+ps1=roots(den)
+polevectors1=ones(2,1)*unitcirc-ps1*ones(1,512);
+polelength1=abs(polevectors1);
+poleangle1=atan2(imag(polevectors1),real(polevectors1));
+zerovectors1=ones(2,1)*unitcirc;      % two zeros at z = 0
+zerolength1=abs(zerovectors1);
+plot(omega,polelength1,'r',omega,zerolength1,'g')</code></pre>
+<p>The poles are at <strong>z = 0.9·e^(±jπ/3)</strong> (= 0.45 ± j0.779); since writing H₁(z) = z²/(z² − 0.9z + 0.81) shows two zeros at z = 0, the length of the zero vectors is 1 at every frequency.</p>
+<p><em>Note: The concluding sentence in one solution ("|H₁| is minimum where the pole lengths are maximum and minimum, and maximum where they are 1") is wrong. Since the zero lengths are 1, |H₁(e^jω)| = 1 / (|e^jω − p₁|·|e^jω − p₂|): |H₁| is largest around ω ≈ ±π/3, where the pole vectors become shorter, and smallest around ω = π, where they become longer.</em></p>
+<h2 id="page-169-a-2011">Page 169 (a) (2011)</h2>
+<p>A short solution prepared in 2011 from the same problem set defines the causal system as H(s) = 1/(s + 2) with <code>tf([1],[1 2])</code>, and for its non-causal counterpart sets up a second transfer function starting from the time-reversed equation (−dy(−t)/dt − 2y(−t) = −x(−t)). The 2011 solution to 177 (b) is identical to the pole vector computation above; according to a note in the file, the detailed explanations and the Laplace question were handwritten and submitted separately.</p>
+<h2 id="homework-impulse-response-of-a-band-limited-90-phase-shifter">Homework: Impulse Response of a Band-Limited 90° Phase Shifter</h2>
+<p>The same folder also contained a photograph of a classmate's handwritten "Homework" page dated March 27, 2007 (transcribed to text from the photographed page; the photograph is not published). For the system whose frequency response in the band |ω| &lt; ω_c is</p>
+<p>H(jω) = e^(jπ/2), 0 &lt; ω &lt; ω_c; H(jω) = e^(−jπ/2), −ω_c &lt; ω &lt; 0</p>
+<p>the impulse response is found by the inverse Fourier transform:</p>
+<p>h(t) = (1/2π) ∫₀^ω_c e^(jπ/2) e^(jωt) dω + (1/2π) ∫₋ω_c⁰ e^(−jπ/2) e^(jωt) dω = (1/2πt) (e^(jω_c t) − 1) − (1/2πt) (1 − e^(−jω_c t)) = (cos ω_c t − 1) / (πt)</p>
+<p>and using cos ω_c t = 1 − 2 sin²(ω_c t/2), the result is</p>
+<p><strong>h(t) = −2 sin²(ω_c t / 2) / (πt)</strong></p>
+<p>(We checked the result; it is correct.)</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem302-matlab-odevleri.zip" download>eem302-matlab-odevleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 7 KB · 25.03.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem302-matlab-odevleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (7 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

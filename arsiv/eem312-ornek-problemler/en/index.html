@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: Solved Example Problems – Delay, Logic Gates and Pass Transistor (third-party source) — hasancan.net</title>
+<meta name="description" content="Solved problems in English from a third-party source, distributed as examples in the EEM312 Digital Electronics course: propagation delay between two CMOS inverters, delay in a NAND-NAND adder, the Boolean function of a transistor circuit, transistor operating regions, the delay of a 3-input NAND, and output voltage and energy in pass-transistor circuits.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-ornek-problemler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-ornek-problemler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-ornek-problemler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-ornek-problemler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: Solved Example Problems – Delay, Logic Gates and Pass Transistor (third-party source)">
+<meta property="og:description" content="Solved problems in English from a third-party source, distributed as examples in the EEM312 Digital Electronics course: propagation delay between two CMOS inverters, delay in a NAND-NAND adder, the Boolean function of a transistor circuit, transistor operating regions, the delay of a 3-input NAND, and output voltage and energy in pass-transistor circuits.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-ornek-problemler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: Solved Example Problems – Delay, Logic Gates and Pass Transistor (third-party source)", "description": "Solved problems in English from a third-party source, distributed as examples in the EEM312 Digital Electronics course: propagation delay between two CMOS inverters, delay in a NAND-NAND adder, the Boolean function of a transistor circuit, transistor operating regions, the delay of a 3-input NAND, and output voltage and energy in pass-transistor circuits.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-ornek-problemler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "ORNEKLER_EEM312_02.doc", "contentUrl": "https://hasancan.net/arsiv/eem312-ornek-problemler/ORNEKLER_EEM312_02.doc"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: Solved Example Problems – Delay, Logic Gates and Pass Transistor (third-party source)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>28.05.2009</dd>
+          <dt data-i18n="arch.format"></dt><dd>Word (.doc)</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#problem-1-propagation-delay-between-two-cmos-inverters">Problem 1: Propagation delay between two CMOS inverters</a></li><li><a href="#problem-2-delay-in-a-nand-nand-adder">Problem 2: Delay in a NAND-NAND adder</a></li><li><a href="#problem-3-does-the-circuit-perform-a-logic-operation">Problem 3: Does the circuit perform a logic operation?</a></li><li><a href="#problem-4-operating-regions-of-the-transistors">Problem 4: Operating regions of the transistors</a></li><li><a href="#problem-5-delay-of-a-3-input-nand">Problem 5: Delay of a 3-input NAND</a></li><li><a href="#problem-6-a-faster-3-input-nand">Problem 6: A faster 3-input NAND</a></li><li><a href="#problem-7-pass-transistor-circuits-and-energy">Problem 7: Pass-transistor circuits and energy</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: Solved Example Problems – Delay, Logic Gates and Pass Transistor (third-party source)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 28.05.2009 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post presents the document of solved example problems named <code>ORNEKLER_EEM312_02.doc</code> from the Başkent University <strong>EEM312 Digital Electronics</strong> course folder. The document does not state its source; the questions and handwritten solutions appear to be compiled from homework and exam solutions of a digital integrated circuits course at a foreign university (possibly of UC Berkeley EE141 origin, judging by the topics and notation). A PDF copy of the same content (<code>ornekler.pdf</code>) is dated 28.05.2009. The questions and solutions were transcribed, the circuit figures were added as images, and the calculations were checked. The original Word file can be downloaded at the end of the post.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed upon the request of the rights holder.</em></p>
+<h2 id="problem-1-propagation-delay-between-two-cmos-inverters">Problem 1: Propagation delay between two CMOS inverters</h2>
+<p>The output of CMOS inverter 1 is connected to the input of CMOS inverter 2. Common values for the two inverters:</p>
+<ul><li>µ_N = 500 cm²/Vs, µ_P = 250 cm²/Vs, V_T(N) = −V_T(P) = 1 V</li><li>t_ox = 10 nm (oxide thickness), k_ox = 4 (oxide dielectric constant), V_DD = 5 V</li><li>L_I = 20 µm (interconnect length), W_I = 1 µm (interconnect width), ε₀ = 8.85 × 10⁻¹² F/m</li></ul>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">L_N = L_P</th><th scope="col">W_N</th><th scope="col">W_P</th><th scope="col">C_DB(P) = C_DB(N)</th></tr></thead><tbody><tr><th scope="row">Inverter 1</th><td>2 µm</td><td>6 µm</td><td>24 µm</td><td>50 fF</td></tr><tr><th scope="row">Inverter 2</th><td>2 µm</td><td>8 µm</td><td>16 µm</td><td>75 fF</td></tr></tbody></table></div>
+<p>The input of inverter 1 stays at 0 for a long time and then switches instantly to 1; find the propagation delay at the output of inverter 1.</p>
+<p><strong>Solution:</strong> t_p = 0.69τ, τ = R_N(C_DBN1 + C_DBP1 + C_GBN2 + C_GBP2 + C_I).</p>
+<ul><li>R_N = 0.75V_DD/I_DSAT1 = 0.75V_DD / [(W_N1/2L_N1) µ_n C_ox (V_GS − V_T)²] = 0.75(5) / [(6/(2·2))(500×10⁻⁴)(4 × 8.85×10⁻¹²/10×10⁻⁹)(5 − 1)²] = <strong>883 Ω</strong></li><li>C_GBN2 = C_ox W_N2 L_N2 = 56 fF, C_GBP2 = C_ox W_P2 L_P2 = 112 fF, C_I = C_ox W_I L_I = 70 fF</li><li>t_p = 0.69 × 883 × (56 + 112 + 70 + 50 + 50) × 10⁻¹⁵ = <strong>206 ps</strong></li></ul>
+<h2 id="problem-2-delay-in-a-nand-nand-adder">Problem 2: Delay in a NAND-NAND adder</h2>
+<p>An inverter is connected to one of the inputs of the most significant digit function of a 3-bit adder; with the other inputs fixed (B = 0, C = 1), find the propagation delay from the input to the inverter output when the inverter input A goes from low to high. For all gates, C_DB(P) = C_DB(N) = 50 fF, C_GB(P) = 50 fF, C_GB(N) = 75 fF, C_I = 100 fF per gate, R_N = 3 kΩ, R_P = 2 kΩ.</p>
+<figure class="yazi-gorsel"><img src="../tam-toplayici-nand.jpg" width="1000" height="500" loading="lazy" decoding="async" alt="NAND-NAND implementation consisting of an inverter (0) at input A and NAND gates numbered 1, 2, 3, 4; B = 0, C = 1"><figcaption>Problem 2: NAND-NAND implementation</figcaption></figure>
+<p><strong>Solution:</strong> The delay of the inverter is affected only by gates 1 and 3, which are directly connected to it. One interconnect goes to gate 1 and one to gate 3: for each, two gate capacitances (C_GBN and C_GBP) and two interconnect capacitances C_I are used.</p>
+<ul><li>t_p = 0.69 R_N (C_DBN0 + C_DBP0 + C_GBN1 + C_GBP1 + C_GBN3 + C_GBP3 + 2C_I)</li><li>= 0.69 × 3000 × (50 + 50 + 75 + 50 + 75 + 50 + 2 × 100) × 10⁻¹⁵ = <strong>1.14 ns</strong></li></ul>
+<h2 id="problem-3-does-the-circuit-perform-a-logic-operation">Problem 3: Does the circuit perform a logic operation?</h2>
+<p>Determine whether the circuit below performs a logic operation; if it does, give its Boolean function, and if it does not, find a set of inputs that gives an invalid output. (All PMOS sources are at the top, all NMOS sources at the bottom.)</p>
+<figure class="yazi-gorsel"><img src="../mantik-devresi.jpg" width="406" height="701" loading="lazy" decoding="async" alt="PUN: PMOS B in parallel with series PMOS A and C; PDN: NMOS B in series with parallel NMOS C and A"><figcaption>Problem 3</figcaption></figure>
+<p><strong>Solution:</strong></p>
+<ul><li>From the PMOS half: if B conducts <strong>or</strong> (A conducts <strong>and</strong> C conducts), F = V_DD ⇒ F = B′ + A′C′</li><li>From the NMOS half: if B conducts <strong>and</strong> (A conducts <strong>or</strong> C conducts), F = 0 ⇒ F′ = B(A + C)</li><li>The two agree by De Morgan's law; the circuit is a logic circuit: <strong>F = B′ + A′C′</strong>.</li></ul>
+<h2 id="problem-4-operating-regions-of-the-transistors">Problem 4: Operating regions of the transistors</h2>
+<p>In the CMOS logic circuit below, determine the most likely operating region of each transistor. ε is a very small positive number, and V_DD is much larger in magnitude than both V_TH values; A = V_DD + V_TH(P) − ε, B = V_DD.</p>
+<figure class="yazi-gorsel"><img src="../transistor-calisma-bolgeleri.jpg" width="800" height="629" loading="lazy" decoding="async" alt="Circuit consisting of PMOS1, PMOS2, NMOS1, NMOS2 with inputs A = VDD + VTH(P) − ε and B = VDD"><figcaption>Problem 4</figcaption></figure>
+<p><strong>Solution:</strong></p>
+<ul><li><strong>PMOS₂ is in cutoff</strong> (V_GSP2 = V_DD − V_DD = 0 V).</li><li>PMOS₁ is barely conducting (V_GSP1 = V_DD + V_THP − ε − V_DD = V_THP − ε); the I_D shared by PMOS₁, NMOS₁ and NMOS₂ is small.</li><li>For NMOS₂, V_GSN2 = V_DD + V_THP − ε is not small and is positive (V_DD is much larger than V_THP and ε); NMOS₂ is fully on and I_D is small ⇒ <strong>NMOS₂ is in triode</strong>; therefore V_DSN2 is small.</li><li>V_GSN1 = V_DD − V_DSN2 is also not small; NMOS₁ is fully on and I_D is small ⇒ <strong>NMOS₁ is in triode</strong>; V_DSN1 is also small.</li><li>V_DD = V_DSN1 + V_DSN2 − V_DSP1 (two small terms) ⇒ V_DSP1 is large in magnitude and negative; V_GSP1 is small in magnitude and negative, V_DSP1 is large in magnitude and negative ⇒ <strong>PMOS₁ is in saturation</strong>.</li></ul>
+<h2 id="problem-5-delay-of-a-3-input-nand">Problem 5: Delay of a 3-input NAND</h2>
+<p>A 3-input NAND loaded by an inverter is implemented with two 2-input NANDs and an inverter; find t_p of the 3-input NAND as the sum of the worst-case delays of the gates inside it (NAND₁, NOT₁, NAND₂). R_N = 1 kΩ, R_P = 2 kΩ, C_G = 10 fF per transistor; interconnect capacitance is neglected.</p>
+<figure class="yazi-gorsel"><img src="../uc-girisli-nand.jpg" width="900" height="617" loading="lazy" decoding="async" alt="Implementation of the 3-input NAND with NAND1, NOT1 and NAND2, and the inverter load at the output"><figcaption>Problem 5</figcaption></figure>
+<p><strong>Solution:</strong></p>
+<ul><li>NAND₁: the worst-case resistance is 2R_N or R_P (equal); the load is an inverter, C_out = 2C_G ⇒ t_p = 0.69 R_P (2C_G) = <strong>27.6 ps</strong>; the same holds for NAND₂.</li><li>NOT₁: the worst-case resistance is R_P; the output goes to one input of the NAND (2 of its 4 transistors), C_out = 2C_G ⇒ t_p = <strong>27.6 ps</strong>.</li><li>Total: 3 × 27.6 ps = <strong>82.8 ps</strong>.</li></ul>
+<h2 id="problem-6-a-faster-3-input-nand">Problem 6: A faster 3-input NAND</h2>
+<p>Using only NMOS and PMOS transistors (and the supply), design a 3-input NAND with a shorter worst-case delay than that in Problem 5; the transistor characteristics are the same, and the output is loaded by a single inverter.</p>
+<figure class="yazi-gorsel"><img src="../uc-girisli-nand-tasarim.jpg" width="590" height="720" loading="lazy" decoding="async" alt="Static CMOS 3-input NAND consisting of three parallel PMOS (A, B, C) and three series NMOS"><figcaption>Problem 6: single-stage CMOS NAND3</figcaption></figure>
+<p><strong>Solution:</strong> Single-stage static CMOS NAND3: the worst-case resistance is 3R_N (pull-down); with an inverter load, C_out = 2C_G ⇒ t_p = 0.69(3R_N)(2C_G) = <strong>41.4 ps</strong>, which is half of the solution to Problem 5.</p>
+<h2 id="problem-7-pass-transistor-circuits-and-energy">Problem 7: Pass-transistor circuits and energy</h2>
+<p><strong>a) (4p)</strong> Find the final value of V_o in the circuits of Figures 1.a–1.d when a low-to-high transition is applied to the input. V_TN = |V_TP| = 0.5 V; the capacitor is initially empty; subthreshold conduction and body effect are neglected.</p>
+<figure class="yazi-gorsel"><img src="../gecis-transistoru-sekiller.jpg" width="417" height="700" loading="lazy" decoding="async" alt="Figures 1.a–1.d: single NMOS (Vo = 2 V), two series NMOS (Vo = 1.5 V), NMOS with gate at 2.5 V and a second NMOS (Vo = 1.5 V), PMOS with gate at 0 V (Vo = 2.5 V)"><figcaption>Problem 7: Figures 1.a–1.d</figcaption></figure>
+<p>Answers: Figure 1.a <strong>V_o = 2 V</strong>, Figure 1.b <strong>V_o = 1.5 V</strong>, Figure 1.c <strong>V_o = 1.5 V</strong>, Figure 1.d <strong>V_o = 2.5 V</strong>.</p>
+<p><strong>b) (2p)</strong> When the output reaches its final value, a 2.5 V → 0 step is applied to the input; the energy dissipated in the transistors of Figure 1.c during the transition (symbolic):</p>
+<ul><li>E_dis = ½C(V − 2V_T)², E₁→₀ = ½C(V − 2V_T)²</li></ul>
+<p><strong>c) (6p)</strong> For Figure 1.d, the energy dissipated in the transistor during the first 0→1 transition; then, once the output reaches its final value, a 2.5 V → 0 step is applied, followed by a second 0 → 2.5 V step; the energies dissipated in the transistor during the first 1→0 and the second 0→1 transitions:</p>
+<ul><li>First E₀→₁ = ½CV²</li><li>First E₁→₀ = ½C(V² − V_T²)</li><li>Second E₀→₁ = ½C(V − V_T)²</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon doc" aria-hidden="true">DOC</span>
+            <div>
+              <p class="indir-ad"><a href="../ORNEKLER_EEM312_02.doc" download>ORNEKLER_EEM312_02.doc</a></p>
+              <p class="kucuk">Word (.doc) · 872 KB · 14 <span data-i18n="arch.slidesLower"></span> · 28.05.2009</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../ORNEKLER_EEM312_02.doc" download>⬇ <span data-i18n="arch.downloadFile"></span> (872 KB)</a>
+            <a class="buton" href="../ORNEKLER_EEM312_02.pdf" download>⬇ <span data-i18n="arch.downloadPdf"></span> (540 KB)</a>
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

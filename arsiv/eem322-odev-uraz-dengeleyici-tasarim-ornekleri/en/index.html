@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Worked Compensator Design Examples – Lead/Lag, PD and PI (Uraz, EEM471) — hasancan.net</title>
+<meta name="description" content="Handwritten worked design examples by Prof. Dr. Alper Uraz: lead (RL-lead) and lag (RL-lag) compensators via root locus, lead and lag compensators via Bode; PD and PI controllers via root locus, PI and practical PD controller design via Bode, step by step.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Worked Compensator Design Examples – Lead/Lag, PD and PI (Uraz, EEM471)">
+<meta property="og:description" content="Handwritten worked design examples by Prof. Dr. Alper Uraz: lead (RL-lead) and lag (RL-lag) compensators via root locus, lead and lag compensators via Bode; PD and PI controllers via root locus, PI and practical PD controller design via Bode, step by step.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Worked Compensator Design Examples – Lead/Lag, PD and PI (Uraz, EEM471)", "description": "Handwritten worked design examples by Prof. Dr. Alper Uraz: lead (RL-lead) and lag (RL-lag) compensators via root locus, lead and lag compensators via Bode; PD and PI controllers via root locus, PI and practical PD controller design via Bode, step by step.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-odev-uraz-dengeleyici-tasarim-ornekleri/eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Worked Compensator Design Examples – Lead/Lag, PD and PI (Uraz, EEM471)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.04.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#example-7-lead-design-via-root-locus-rl-lead">Example 7: Lead design via root locus (RL-LEAD)</a></li><li><a href="#example-8-lag-design-via-root-locus-rl-lag">Example 8: Lag design via root locus (RL-LAG)</a></li><li><a href="#example-9-lead-design-via-bode-bode-lead">Example 9: Lead design via Bode (BODE-LEAD)</a></li><li><a href="#example-10-lag-design-via-bode-bode-lag">Example 10: Lag design via Bode (BODE-LAG)</a></li><li><a href="#pd-controller-design-root-locus">PD controller design (root locus)</a></li><li><a href="#pi-controller-design-root-locus-using-the-lag-compensator-approach">PI controller design (root locus, using the lag compensator approach)</a></li><li><a href="#pi-controller-design-bode-using-the-lag-compensator-approach">PI controller design (Bode, using the lag compensator approach)</a></li><li><a href="#pd-controller-via-bode">PD controller via Bode</a></li><li><a href="#appendix-a-student-s-rl-lag-solution">Appendix: A student's RL-LAG solution</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Worked Compensator Design Examples – Lead/Lag, PD and PI (Uraz, EEM471)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 09.04.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the <strong>worked examples of compensator and PD/PI controller design</strong>, handwritten by the course instructor <strong>Prof. Dr. Alper Uraz</strong>, found in the "Control" subfolder of the EEM322 Control Systems folder. The folder containing Examples 7–10 is named "EEM471Ex7-8-9-10"; that is, according to the file name these pages belong to a course coded EEM471, but because they were stored in the EEM322 folder they appear here. The PD and PI design pages carry a note "(p. 174)" in the corner. The documents do not state their dates. The scanned original pages can be downloaded as a ZIP at the end of the post.</p>
+<p>In all examples, a unity-feedback system with open-loop transfer function (OLTF) G(s) is considered. The general formulas used:</p>
+<ul><li>Desired closed-loop poles: s = −ζωn ± jωn√(1 − ζ²); settling time (2%) Ts = 4/(ζωn); overshoot PO = 100·e^(−ζπ/√(1 − ζ²)).</li><li>Lead compensator: Gc(s) = (s + 1/T)/(s + 1/(aT)) or in Bode form Gc(s) = a(1 + Ts)/(1 + aTs), sin φm = (1 − a)/(1 + a), 1/T = √a·ωm.</li><li>Lag compensator: Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)).</li></ul>
+<h2 id="example-7-lead-design-via-root-locus-rl-lead">Example 7: Lead design via root locus (RL-LEAD)</h2>
+<p>OLTF: G(s) = 5 / [s(s + 2)(s + 10)]. Design specifications: Ts ≤ 2 s and PO ≤ 16.3%.</p>
+<ol><li>Ts = 4/(ζωn) = 2 ⇒ ζωn = 2; PO = 100·e^(−ζπ/√(1 − ζ²)) = 16.3 ⇒ ζ = 0.5 ⇒ ωn = 4.</li><li>Desired closed-loop poles: −2 ± j2√3 = −2 ± j3.46.</li><li>Angle condition: ∠5/[s(s + 2)(s + 10)] (at s = −2 + j3.46) = −120° − 90° − 23.4° = −233.4°.</li><li>Angle deficiency φ = 233.4° − 180° = 53.4° ≈ 54°; therefore a lead compensator is required.</li><li>Bisector method: the zero and pole are found by departing 27° to the right and to the left of the bisector of the angle between the ζ = 0.5 line (cos 60° = ζ) and the horizontal. tan 3° = y/(2√3) ⇒ y = 0.18; tan 57° = x/(2√3) ⇒ x = 5.33. Thus the zero is at −2.18 and the pole at −7.33: <strong>Gc(s) = (s + 2.18)/(s + 7.33)</strong>.</li><li>The amplifier gain from the magnitude condition: |Kc·Gc(s)·G(s)| = 1 (at s = −2 + j3.46) ⇒ |Kc × 3.46 × 5 / (6.35 × 4 × 3.46 × 8.71)| = 1 ⇒ <strong>Kc = 44.25</strong>.</li></ol>
+<h2 id="example-8-lag-design-via-root-locus-rl-lag">Example 8: Lag design via root locus (RL-LAG)</h2>
+<p>OLTF: G(s) = 1.06 / [s(s + 1)(s + 2)]. Design specifications: ζ = 0.491, ωn = 0.673 (desired pole sd = −0.331 + j0.586) and ess ≤ 0.5.</p>
+<ol><li>Angle condition: −119.5° − 41.2° − 19.3° = −180°; the desired poles lie on the branches of the root locus.</li><li>Magnitude condition: K₁ = |s(s + 1)(s + 2)/1.06| = 0.673 × 0.889 × 1.769 / 1.06 = 1.</li><li>With the assumption Gc(0) = 1, ess = 0.5 = 1/Kv ⇒ Kv = 2; Kv = lim(s→0) sK·Gc(s)·G(s) = K/2 = 2 ⇒ K₂ = 4. Hence b = K₂/K₁ = 4.</li><li>T = 10 is chosen (1/T = 0.1), 1/(bT) = 0.025.</li><li><strong>Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)) = (1/4)(s + 0.1)/(s + 0.025) = (1 + 10s)/(1 + 40s)</strong>; Kc = 1/b = 0.25 and K = K₂ = 4.</li></ol>
+<h2 id="example-9-lead-design-via-bode-bode-lead">Example 9: Lead design via Bode (BODE-LEAD)</h2>
+<p>OLTF: G(s) = K / [s(s + 1)(s + 5)]. Design specifications: ess ≤ 0.5 and pm ≥ 40°.</p>
+<ol><li>ess = 0.5 = 1/Kv ⇒ Kv = 2; Kv = lim(s→0) sG(s) = K/5 = 2 ⇒ K₁ = 10.</li><li>From the plots, gm = 8 dB, pm = 18°.</li><li>Required additional phase 40° − 18° = 22°; with a 5° safety margin, φm = 27°.</li><li>sin 27° = (1 − a)/(1 + a) = 0.45 ⇒ a = 0.38; 10 log a = −4.2 dB ⇒ ωm = 1.8 rad/s (the frequency at which the magnitude is −4.2 dB).</li><li>1/T = √a·ωm = 1.1 and 1/(aT) = 2.9.</li><li><strong>Gc(s) = a(1 + Ts)/(1 + aTs) = 0.38(1 + 0.9s)/(1 + 0.34s) = (s + 1.1)/(s + 2.9)</strong>.</li><li>New phase margin at ωm = 1.8: pm′ = 180° − 90° − tan⁻¹ωm − tan⁻¹(ωm/2.9) + tan⁻¹(ωm/1.1) − tan⁻¹(ωm/5) = 36.1°.</li><li>Amplifier gain Kc = 1/a = 1/0.38 = 2.63.</li></ol>
+<figure class="yazi-gorsel"><img src="../ornek9-bode.jpg" width="1400" height="992" loading="lazy" decoding="async" alt="Example 9: Hand-drawn Bode diagrams of the uncompensated system and the system compensated with a lead compensator for G(s) = 10/s(s+1)(s+5)"><figcaption>Example 9: Plot for lead design via Bode</figcaption></figure>
+<p><em>Note: The computed pm′ = 36.1° does not fully satisfy the required pm ≥ 40°; the design needs to be repeated once more (with a larger safety margin). The solution contains no comment on this.</em></p>
+<h2 id="example-10-lag-design-via-bode-bode-lag">Example 10: Lag design via Bode (BODE-LAG)</h2>
+<p>OLTF: G(s) = K / [s(s + 2)(s + 8)]. Design specifications: ess ≤ 0.2 and pm ≥ 45°.</p>
+<ol><li>ess = 0.2 = 1/Kv ⇒ Kv = 5; Kv = K/16 = 5 ⇒ K₁ = 80.</li><li>From the plots, a phase margin of 45° + 5° = 50° corresponds to a new gain crossover frequency ωg′ = 1.1 rad/s. An attenuation of 13 dB is needed at ωg′ = 1.1.</li><li>b = 10^(13/20) = 10^0.65 = 4.47.</li><li>One corner frequency is chosen one decade below ωg′: 1/T = 1.1/10 = 0.11 ⇒ 1/(bT) = 0.0246.</li><li><strong>Gc(s) = (1/4.47)(s + 0.11)/(s + 0.0246) = (1 + 9.1s)/(1 + 40.6s)</strong>.</li><li>New phase margin: pm′ = 180° + tan⁻¹(ωg′/0.11) − tan⁻¹(ωg′/0.0246) − 90° − tan⁻¹(ωg′/2) − tan⁻¹(ωg′/8) = 49°.</li></ol>
+<figure class="yazi-gorsel"><img src="../ornek10-bode.jpg" width="1400" height="992" loading="lazy" decoding="async" alt="Example 10: Bode diagram with a lag compensator for G(s) = 80/s(s+2)(s+8); 13 dB attenuation at ωg′ = 1.1 rad/s"><figcaption>Example 10: Plot for lag design via Bode</figcaption></figure>
+<h2 id="pd-controller-design-root-locus">PD controller design (root locus)</h2>
+<p>PD controller: Gc(s) = Kp + Kd·s = Kd(s + Kp/Kd); its zero is at −Kp/Kd.</p>
+<p>OLTF: K·G(s)·H(s) = K / [s(s + 2)]; desired closed-loop poles −2 ± j2.</p>
+<ol><li>Angle condition: ∠K/[s(s + 2)] (at s = −2 + j2) = −∠(−2 + j2) − ∠(−2 + j2 + 2) = −135° − 90° = −225°.</li><li>For the total angle to be 180°, the lead contribution must be 45°; the zero of the PD controller is placed at s = −4, i.e., Kp/Kd = 4.</li><li>Magnitude condition: Kd(s + 4)/[s(s + 2)] = −1 (at s = −2 + j2) ⇒ Kd = 2.</li><li>Thus Kp = 8 and <strong>Gc(s) = 8 + 2s</strong>. The compensated root locus breaks away between −2 and 0 and returns to the real axis, tracing an arc around the zero at −4.</li></ol>
+<h2 id="pi-controller-design-root-locus-using-the-lag-compensator-approach">PI controller design (root locus, using the lag compensator approach)</h2>
+<p>OLTF: G(s) = 1 / [s(s + 5)(s + 10)]; desired closed-loop poles −1.85 ± j1.88 and ess = 0 for a ramp input.</p>
+<ol><li>PI controller: Gc(s) = Kp + Ki/s = Kp(s + Ki/Kp)/s. The zero is chosen close to the origin: Ki/Kp = 0.1.</li><li>Angle condition: ∠Kp(s + 0.1)/[s²(s + 5)(s + 10)] (at s = −1.85 ± j1.88) = 132.9° − 2 × 134.5° − 30.8° − 12.9° = −180°.</li><li>Magnitude condition: |Kp(s + 0.1)/[s²(s + 5)(s + 10)]| = 1 ⇒ Kp = 83.3 ⇒ Ki = 8.33.</li><li><strong>Gc(s) = 83.3 + 8.33/s</strong>. With the PI controller the system becomes type 2, and ess = 0 for a ramp input.</li></ol>
+<p><em>Note: In the scan, the result of the angle sum reads as something like "−120°"; when the terms are added, 132.9° − 269° − 30.8° − 12.9° ≈ −180°, i.e., the desired poles lie on the compensated root locus.</em></p>
+<h2 id="pi-controller-design-bode-using-the-lag-compensator-approach">PI controller design (Bode, using the lag compensator approach)</h2>
+<p>OLTF: G(s) = 4 / [s(s + 1)(s + 2)]; desired phase margin φpm = 50°.</p>
+<ol><li>Step 1: The open-loop gain is set according to the ess condition; here K₁ = 1.</li><li>Step 2: 50° + 5° = 55° ⇒ new gain crossover frequency ωg′ = 0.4 rad/s.</li><li>Step 3: Kp is found from the condition |G(jωg′)| = −20 log Kp = 13.16 dB: Kp = 10^(−13.16/20) = 0.22.</li><li>Step 4: The corner frequency Ki/Kp is placed one decade below ωg′: Ki/Kp = ωg′/10 ⇒ Ki = 0.04 × 0.22 = 0.0088.</li><li>Step 5: <strong>Gc(s) = K₁(Kp + Ki/s) = 0.22 + 0.0088/s</strong>.</li></ol>
+<p>Comparison with the lag compensator: the lag compensator is Gc(s) = (1/b)(s + 1/T)/(s + 1/(bT)) and since b = 10^(|Gp(jωg′)|/20), Kp = 1/b; the PI design is a lag design with its pole moved to the origin.</p>
+<h2 id="pd-controller-via-bode">PD controller via Bode</h2>
+<p>The practical PD controller limits the derivative action with a filter:</p>
+<blockquote><p>Gc(s) = Kp + Kd·s/(1 + (Kd/N)s) = Kp·[1 + ((Kp + N)Kd/(N·Kp))s] / [1 + (Kd/N)s]</p></blockquote>
+<p>This expression is a lead transfer function, Gc(s) = a(1 + Ts)/(1 + aTs); the design steps are the same as those of the lead compensator.</p>
+<h2 id="appendix-a-student-s-rl-lag-solution">Appendix: A student's RL-LAG solution</h2>
+<p>On one page in the folder (transcribed to text from a photographed page), a student applied the same method to the system Gp(s) = K/[s(s + 2)]: ζ = 0.707 and ess ≤ 0.2.</p>
+<ol><li>Desired closed-loop poles s = −1 + j. Angle condition: ∠1/[s(s + 2)] = −135° − 45° = −180°; the poles are on the root locus.</li><li>Magnitude condition: K₁ = 1.4142 × 1.4142 ≈ 2.</li><li>With the assumption Gc(0) = 1, ess = 0.2 = 1/Kv ⇒ Kv = 5; Kv = lim(s→0) sK·Gc(s)·Gp(s) = K/2 ⇒ K₂ = 10; b = K₂/K₁ = 5.</li><li>1/T = 0.1, 1/(bT) = 0.02 ⇒ Gc(s) = (1/5)(s + 0.1)/(s + 0.02); the gain is set to K = K₂ = 10.</li></ol>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip" download>eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 2.8 MB · 09.04.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-odev-uraz-dengeleyici-tasarim-ornekleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (2.8 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

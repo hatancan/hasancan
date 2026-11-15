@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Electronics II: Oscillators, VCO, PLL, and the 555 Timer — hasancan.net</title>
+<meta name="description" content="EEM311 Electronics II handwritten lecture notes: feedback and the Barkhausen criterion, general oscillator analysis, RC phase-shift, Wien bridge, Hartley, Colpitts, and Clapp oscillators, the voltage-controlled oscillator (566), the phase-locked loop (PLL), astable and monostable operation of the 555 timer, and an op-amp square-wave generator.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-osilatorler/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem311-osilatorler/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem311-osilatorler/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem311-osilatorler/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Electronics II: Oscillators, VCO, PLL, and the 555 Timer">
+<meta property="og:description" content="EEM311 Electronics II handwritten lecture notes: feedback and the Barkhausen criterion, general oscillator analysis, RC phase-shift, Wien bridge, Hartley, Colpitts, and Clapp oscillators, the voltage-controlled oscillator (566), the phase-locked loop (PLL), astable and monostable operation of the 555 timer, and an op-amp square-wave generator.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-osilatorler/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Electronics II: Oscillators, VCO, PLL, and the 555 Timer", "description": "EEM311 Electronics II handwritten lecture notes: feedback and the Barkhausen criterion, general oscillator analysis, RC phase-shift, Wien bridge, Hartley, Colpitts, and Clapp oscillators, the voltage-controlled oscillator (566), the phase-locked loop (PLL), astable and monostable operation of the 555 timer, and an op-amp square-wave generator.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-osilatorler/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II", "associatedMedia": {"@type": "MediaObject", "name": "eem311-osilatorler-notlari.pdf", "contentUrl": "https://hasancan.net/arsiv/eem311-osilatorler/eem311-osilatorler-notlari.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM311 Electronics II: Oscillators, VCO, PLL, and the 555 Timer">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>01.10.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#feedback-and-the-oscillation-condition">Feedback and the oscillation condition</a></li><li><a href="#general-oscillator-analysis">General oscillator analysis</a></li><li><a href="#rc-phase-shift-oscillator">RC phase-shift oscillator</a></li><li><a href="#wien-bridge-oscillator">Wien bridge oscillator</a></li><li><a href="#series-and-parallel-hartley-oscillators">Series and parallel Hartley oscillators</a></li><li><a href="#colpitts-and-clapp-oscillators">Colpitts and Clapp oscillators</a></li><li><a href="#voltage-controlled-oscillator-vco">Voltage-controlled oscillator (VCO)</a></li><li><a href="#phase-locked-loop-pll">Phase-locked loop (PLL)</a></li><li><a href="#555-timer-ic">555 timer IC</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM311 Electronics II: Oscillators, VCO, PLL, and the 555 Timer</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 01.10.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post was prepared from the scanned pages of 15 pages of handwritten lecture notes on the <strong>oscillators</strong> topic of the <strong>EEM311 Electronics II</strong> course at Başkent University. The notes carry no author name or date. Definitions, formulas, and worked examples have been transcribed into text; the relevant page images are included for circuit schematics and waveforms. All of the scanned pages can be downloaded as a PDF at the end of the post.</p>
+<h2 id="feedback-and-the-oscillation-condition">Feedback and the oscillation condition</h2>
+<p>In a system consisting of an amplifier with gain A and a feedback network β (A → G, β → H), the feedback is negative if the feedback signal e_f is subtracted, and positive if it is added.</p>
+<p><strong>Closed-loop gain with negative feedback:</strong></p>
+<ul><li>e_o = e · A, e_f = β · e_o, e = e_i − β · e_o</li><li>e_o = (e_i − β e_o) · A ⇒ e_o + Aβ e_o = e_i · A ⇒ e_o (1 + Aβ) = e_i · A</li><li><strong>A_v = e_o/e_i = A / (1 + Aβ)</strong></li></ul>
+<p><strong>Closed-loop gain with positive feedback:</strong> <strong>A_v = A / (1 − Aβ)</strong></p>
+<p>An oscillator circuit consists of an L-C or R-C network that determines the frequency and an amplifier circuit that compensates for the energy these elements lose. For an oscillator to oscillate, it must have positive feedback and satisfy the <strong>Barkhausen criteria</strong>:</p>
+<ol><li>The loop gain must be equal to or greater than one: <strong>β · A ≥ 1</strong> or <strong>H · G ≥ 1</strong></li><li>The loop phase angle must be 360° or a multiple of it: <strong>θ_loop = n · θ</strong> (θ = 360°)</li></ol>
+<figure class="yazi-gorsel"><img src="../s-01.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: block diagram of a system with feedback, closed-loop gain with negative and positive feedback, Barkhausen criteria"><figcaption>Feedback and the Barkhausen criterion</figcaption></figure>
+<h2 id="general-oscillator-analysis">General oscillator analysis</h2>
+<p>Oscillators are named according to the elements in the tuned (tank) circuit. When the loop is open, the input voltage is V_i; when the loop is closed, it is V_i'. The amplifier in an ideal oscillator must have infinite input impedance and zero output impedance. Z_i should be chosen large; choosing R_o small ensures that the entire output voltage drops across the tank circuit.</p>
+<ul><li>Gain of the feedback network: β = V_i'/V_o</li><li>Amplifier gain: V_o/V_i = A_o</li><li>Loop gain: <strong>A_v = β · A_o = V_i'/V_i</strong></li></ul>
+<p>If the current I₃ in the third mesh is taken as zero because Z_i ≫ 0, the first and second mesh equations are:</p>
+<ul><li>A_o · V_i = I₁(R_o + Z₁) − I₂ · Z₁</li><li>0 = −I₁Z₁ + I₂(Z₁ + Z₂ + Z₃)</li></ul>
+<p>Since V_i' = I₂ · Z₂, solving the equations above for I₂ (by Cramer's rule) gives:</p>
+<ul><li>I₂ = A_o V_i Z₁ / (−Z₁² + (R_o + Z₁)(Z₁ + Z₂ + Z₃))</li><li>V_i' = I₂ · Z₂ = A_o V_i Z₁ Z₂ / (−Z₁² + (R_o + Z₁)(Z₁ + Z₂ + Z₃))</li><li><strong>A_v = V_i'/V_i = A_o Z₁ Z₂ / (−Z₁² + (R_o + Z₁)(Z₁ + Z₂ + Z₃))</strong> (the loop gain away from resonance)</li></ul>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: general oscillator block diagram (Z₁, Z₂, Z₃ and the A_o·V_i source) and mesh equations"><figcaption>General oscillator block diagram</figcaption></figure>
+<p>At resonance, Z₁ + Z₂ + Z₃ = 0, so:</p>
+<ul><li>A_v = A_o Z₁ Z₂ / (−Z₁²) ⇒ <strong>A_v = −A_o · Z₂/Z₁</strong> (A_o: open-circuit voltage gain, Z₂/Z₁: feedback ratio)</li><li>For oscillation, A_v = −A_o · (Z₂/Z₁) ≥ 1 is required (A ↔ G, β ↔ H).</li><li>The gain of the feedback network is Z₂/Z₁ = β; the oscillation condition is −Z₁/Z₂ ≥ A_o.</li></ul>
+<p><em>Note: The oscillation condition is written in the notes as "−Z₁/Z₂ ≥ A_o"; from the expression −A_o·Z₂/Z₁ ≥ 1, the resulting condition is |A_o| ≥ |Z₁/Z₂| (the amplifier gain must be greater than the inverse of the feedback ratio).</em></p>
+<p>Z₁, Z₂, and Z₃ change with the type of oscillator:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Oscillator</th><th scope="col">Z₁</th><th scope="col">Z₂</th><th scope="col">Z₃</th><th scope="col">Amplifier</th></tr></thead><tbody><tr><th scope="row">Hartley</th><td>L</td><td>L</td><td>C</td><td>Inverting</td></tr><tr><th scope="row">Hartley</th><td>L</td><td>C</td><td>L</td><td>Follower</td></tr><tr><th scope="row">Colpitts</th><td>C</td><td>C</td><td>L</td><td>Inverting</td></tr><tr><th scope="row">Colpitts</th><td>L</td><td>C</td><td>C</td><td>Follower</td></tr><tr><th scope="row">Clapp</th><td>C</td><td>C</td><td>LC (series)</td><td>Inverting</td></tr><tr><th scope="row">Crystal</th><td>C</td><td>C</td><td>X_TAL</td><td>Inverting</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: closed-loop gain at resonance, oscillation condition, and table of Z₁, Z₂, Z₃ by oscillator type"><figcaption>Table of oscillator types</figcaption></figure>
+<h2 id="rc-phase-shift-oscillator">RC phase-shift oscillator</h2>
+<p>R_F and R_C are bias resistors. C₁, C₂, C₃ and R₁, R₂, R₃ form the phase-shift and feedback network. When the supply voltage is applied, the charging and discharging of the RC networks start and sustain the oscillations. A change in base current appears in the collector current shifted by 180° and amplified. By shifting the phase of the signal fed back to the base by a further 180°, positive feedback is obtained. The output is sinusoidal. Each RC section shifts the phase by 60°. The resistors and capacitors in the phase-shift network shift the phase by 180° at only one frequency. At other frequencies, the capacitive reactances increase or decrease, so the phase shift changes as well and the feedback is no longer in phase; therefore oscillation does not continue. The oscillator frequency depends on the transistor and the elements that sustain oscillation, on the feedback elements, and on the amplifier parameters. Other amplifier circuits (op-amp, JFET) can also be used as the amplifier.</p>
+<ul><li>RC phase-shift oscillator with BJT: <strong>f = 1 / (2π √(6R² + 4R R_C) · C)</strong></li><li>RC phase-shift oscillator with JFET: <strong>f = 1 / (2π √6 · RC)</strong></li></ul>
+<p><em>Note: In the notes, the BJT formula is written without the square-root sign as "1/(2π(6R² + 4RR_C)C²)"; the correct form is the one given above (R_C also appears as R_L in the notes).</em></p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="989" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: RC phase-shift oscillator circuits with BJT and JFET"><figcaption>RC phase-shift oscillator</figcaption></figure>
+<h2 id="wien-bridge-oscillator">Wien bridge oscillator</h2>
+<p>The circuit has two types of feedback: feedback is applied to both inputs of the op-amp. The signal is applied to the + input across the RC (parallel) terminals. The voltage coming through R₁ and R₂ is applied to the inverting input. To ensure amplifier stability, negative feedback is provided in addition to positive feedback. V_a is the positive feedback voltage, and V_b is the negative feedback voltage (bridge-type equivalent circuit).</p>
+<ul><li><strong>f = 1 / (2πRC)</strong></li><li>β = V_a/V_out, K = V_out/V_b, V_b = R₂ · V_out/(R₁ + R₂)</li><li>V_a = (R/(jωC)) V_out / [(R + 1/(jωC))² + R/(jωC)] = (R/(jωC)) V_out / [R² − (1/(ωC))² + 3R/(jωC)]</li><li>Since the oscillation condition is K · β = 1, ωC = 1/R; hence <strong>V_a/V_out = 1/3</strong>.</li><li>Since V_a = V_b, <strong>R₂/(R₁ + R₂) = 1/3</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: Wien bridge oscillator, its bridge-type equivalent, and derivation of the oscillation condition"><figcaption>Wien bridge oscillator</figcaption></figure>
+<h2 id="series-and-parallel-hartley-oscillators">Series and parallel Hartley oscillators</h2>
+<p>The transistor takes its collector bias through R₁, its base bias through R₁–R₂, and its emitter bias through L₁. If the supply voltage is applied while C₂ is absent, a magnetic field builds up in L₁ until the base and collector currents reach the values set by R₁ and R₂. When this magnetic field cuts L₂, a voltage is also induced across L₂. C₁ charges to the voltage across L₁ and L₂. Since C₂ is not in the circuit, after the emitter current reaches its normal value, C₁ begins to be discharged by the coil. This charging and discharging continues until the energy stored in the capacitor is exhausted. Consequently, after some time this oscillation dies out, so a damped oscillation is obtained. If capacitor C₂ is connected to the circuit, the changes in the tank circuit are applied to the amplifier, so the energy the tank circuit loses during energy exchange is fed back, preventing the variation in emitter current and the damping. The frequency of the circuit is determined by L₁, L₂, and C₁. Capacitor C₃ holds the transistor at ground potential in ac terms. Therefore, the variation at the base is effective in the transistor. Because part of the supply current passes through the coil that determines the frequency, this is called a <strong>series Hartley oscillator</strong>. After the coil that determines the frequency is calculated, a tap is taken at 1/3 of it and connected to the emitter, and the other part is connected to ground.</p>
+<ul><li><strong>f = 1 / (2π √((L₁ + L₂) · C₁))</strong></li></ul>
+<p>In the <strong>parallel Hartley oscillator</strong>, the dc current path does not pass through the resonant circuit (the tank circuit is coupled through C₄).</p>
+<figure class="yazi-gorsel"><img src="../s-06.jpg" width="989" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: series Hartley and parallel Hartley oscillator circuits"><figcaption>Hartley oscillator</figcaption></figure>
+<h2 id="colpitts-and-clapp-oscillators">Colpitts and Clapp oscillators</h2>
+<p>The transistor takes its collector bias from V_CC, its base bias through P₁ and L₁, and its emitter bias through P₂. C₁ holds the lower end of L₁ at ground potential in ac terms. For a good result, C₂ should be at least 10 times larger than C₃. When voltage is applied to the circuit, the base current passing through P₁ and L₁ results in an emitter current through P₂. The voltages across P₂ and V_BE charge capacitors C₂ and C₃. When the change in current stops, C₂ and C₃ are discharged by L₁. With the energy it receives, L₁ charges C₂ and C₃ in the opposite direction to the previous one. The base and emitter currents vary depending on L₁, C₂, and C₃. A current begins to flow at the frequency produced by L₁, C₂, and C₃. Since the magnetic field in L₁ cuts L₂, a sinusoidal voltage at the same frequency is obtained across L₂.</p>
+<ul><li>Colpitts with BJT: <strong>C_T = C₂ // C₃</strong> (series connected), <strong>f = 1 / (2π √(L₁ C_T))</strong></li><li>Colpitts with JFET: <strong>C_T = C₁ // C₂</strong>, <strong>f = 1 / (2π √(L₃ C_T))</strong></li><li>Clapp oscillator (C₃ in series with L₃): <strong>C_eq = C₁ // C₂ // C₃</strong>, <strong>f = 1 / (2π √(L₃ C_eq))</strong></li></ul>
+<p><em>Note: In the notes, the "//" symbol is used to mean capacitors connected in series; the equivalent capacitance is calculated as 1/C_T = 1/C₁ + 1/C₂ (+ 1/C₃).</em></p>
+<figure class="yazi-gorsel"><img src="../s-07.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: Colpitts oscillator with BJT and JFET, and Clapp oscillator"><figcaption>Colpitts and Clapp oscillators</figcaption></figure>
+<h2 id="voltage-controlled-oscillator-vco">Voltage-controlled oscillator (VCO)</h2>
+<p>A PUT (programmable unijunction transistor) is connected in parallel with the feedback capacitor of an op-amp integrator; the −V_IN input charges the capacitor linearly and the output rises as a ramp. The PUT turns on the moment the anode (A) voltage exceeds the gate (G) voltage and discharges the capacitor; thus a sawtooth wave is obtained. Therefore, the value of the V_CONT voltage determines the amplitude the output voltage can reach before the PUT turns on to discharge the capacitor, and this variation sets the frequency.</p>
+<h3 id="integrator-type-vco-circuit-566">Integrator-type VCO circuit (566)</h3>
+<p>The 566 is an example of an integrator-type VCO circuit. As seen in the block diagram, it produces square and triangular waves at a frequency set by R₁, C₁, and V_c. Block diagram: V_c (5) → current source (R₁ → 6, C₁ → 7) → Schmitt trigger → buffer amp → square wave (3); capacitor voltage → buffer amp → triangular wave (4). Pin connections: 1 GND, 2 NC, 3 square wave, 4 triangular wave, 5 V_c, 6 R₁, 7 C₁ (timing), 8 V+.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: VCO with PUT, sawtooth output, and 566 block diagram"><figcaption>VCO and 566 block diagram</figcaption></figure>
+<p><strong>Typical 566 connection:</strong> The voltage divider formed by R₂ (1.5 kΩ) and R₃ (10 kΩ) sets the free-running (or center) frequency. The voltage V_c at pin 5 must lie within the following range (V+ is the dc supply voltage):</p>
+<ul><li><strong>0.75 V+ ≤ V_c ≤ V+</strong> ①</li></ul>
+<p>The variable control voltage V_CONT is combined, through C₂, with the voltage variation at pin 5; the generated frequency is then found with the following formula:</p>
+<ul><li><strong>f_o = 2 [(V+) − V_c] / (R₁ C₁ V+)</strong> ②</li></ul>
+<p>Another application is to apply a dc voltage directly to control input 5, within the limits given by equation ①. Every change in the dc voltage causes a change in frequency; if V_c increases, f_o decreases.</p>
+<p><strong>Example:</strong> In a 566 circuit with a +12 V supply, R₁ = 10 kΩ, and C₁ = 1 nF, V_c is varied from 10 V to 11 V. Calculate the change in output frequency.</p>
+<ul><li>V_c = 10 V ⇒ f_o = 2(12 V − 10 V) / (10k · 1·10⁻⁹ · 12 V) = <strong>33.33 kHz</strong></li><li>V_c = 11 V ⇒ f_o = 2(12 V − 11 V) / (10k · 1·10⁻⁹ · 12) = <strong>16.67 kHz</strong></li><li>Change in output frequency: Δf_o = 33.33 kHz − 16.67 kHz = <strong>16.66 kHz</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: typical 566 connection, pin layout, and frequency-change example"><figcaption>566 VCO example</figcaption></figure>
+<h2 id="phase-locked-loop-pll">Phase-locked loop (PLL)</h2>
+<p>A PLL is a feedback circuit consisting of a phase detector, a low-pass filter, and a voltage-controlled oscillator (VCO). It is widely used in communication systems, receivers (TV), demodulators (FM), modems, and decoders. Block diagram: V_i (f_i) → phase detector (V_e: f_i − f_o, f_i + f_o) → low-pass filter (V_d) → amplifier → VCO (V_c) → f_o returns to the phase detector.</p>
+<p>When there is no input signal, the error voltage (V_e) is 0 and the frequency is the fundamental frequency f_o produced by the VCO; this is called the <strong>free-running</strong> or <strong>center frequency</strong>. When an input signal is applied, the phase detector compares the phase and frequency of the input signal with the VCO frequency and produces the error voltage. This error voltage is proportional to the phase and frequency difference between the input frequency and the VCO frequency. The error voltage contains the difference and sum components of the two frequencies being compared: f_i − f_o, f_i + f_o. The low-pass filter passes only the difference frequency (V_d), which is the lower of the two components. This signal is amplified and fed back to the VCO as the control voltage V_c. The VCO frequency is expected to track the frequency f_i. By changing the VCO frequency with V_c, frequencies approaching f_i are produced. This loop continues until f_i = f_o; when f_i = f_o, V_e = 0.</p>
+<ul><li>The range of lower and upper frequency signals within which the VCO begins to be able to track f_i is called the <strong>capture range</strong>.</li><li>The range of lower and upper frequencies within which the VCO can track signal variations after f_i = f_o is reached is called the <strong>lock range</strong>.</li></ul>
+<figure class="yazi-gorsel"><img src="../s-10.jpg" width="989" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: PLL block diagram and operating principle"><figcaption>Phase-locked loop (PLL)</figcaption></figure>
+<h3 id="sum-and-difference-frequencies">Sum and difference frequencies</h3>
+<p>The phase detector, like a multiplier, produces the sum and difference of the input frequency f_i and the VCO frequency f_o. If V = V_p sin 2πft represents a sine wave, the input signal and the VCO voltage are:</p>
+<ul><li>V_i = V_ip sin 2πf_i t, V_o = V_op sin 2πf_o t</li></ul>
+<p>When these two signals are multiplied in the phase detector (sin A · sin B = ½ [cos(A − B) − cos(A + B)]):</p>
+<ul><li>V_out = V_ip V_op (sin 2πf_i t)(sin 2πf_o t)</li><li><strong>V_out = (V_ip V_op/2) cos 2π(f_i − f_o)t − (V_ip V_op/2) cos 2π(f_i + f_o)t</strong></li></ul>
+<p>As can be seen, the output of the phase detector contains the difference frequency component (f_i − f_o) and the sum frequency component (f_i + f_o) (the spectrum shows lines at f_o, f_i − f_o, f_i, and f_i + f_o).</p>
+<h3 id="two-sine-waves-of-equal-frequency">Two sine waves of equal frequency</h3>
+<p>When two sine waves (of equal frequency) are applied as inputs to a phase detector, the output has a dc component proportional to the difference of the signals' phase angles and an ac component at twice the input frequency.</p>
+<ul><li>V₁ = V_p1 sin 2πft, V₂ = V_p2 sin(2πft + φ) (φ: phase difference)</li><li>V_out = V_p1 V_p2 sin(2πft) sin(2πft + φ) = (V_p1 V_p2/2)[cos φ − cos(2π·2f·t + φ)]</li><li><strong>V_out = (V_p1 V_p2/2) cos φ − (V_p1 V_p2/2) cos(2π·2f·t + φ)</strong></li></ul>
+<p>The first term in this equation is the term whose value depends on the phase angle φ:</p>
+<ul><li><strong>V_out(dc) = V_p1 V_p2 cos φ / 2</strong>, <strong>cos φ = 2 V_out(dc) / (V_p1 V_p2)</strong></li></ul>
+<p>Of these two components at the phase detector output, the ac component is filtered out (by the low-pass filter), and the dc component is fed back to the VCO.</p>
+<h2 id="555-timer-ic">555 timer IC</h2>
+<p>Internal structure: three equal 5 kΩ resistors between V_CC (8) and ground (1); comparator K₁ compares the threshold (6) pin with 2/3 V_CC (control voltage, 5), and comparator K₂ compares the trigger (2) pin with 1/3 V_CC; their outputs drive the RS flip-flop. The Q̄ output goes through the output power stage (inverter) to the output (3) and to the discharge transistor (7); the reset pin (4) resets the flip-flop through transistor T₂, which is tied to V_ref = 2V_be.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">R</th><th scope="col">S</th><th scope="col">Q</th><th scope="col">Q̄</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>Q</td><td>Q̄</td></tr><tr><th scope="row">0</th><td>1</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">1</th><td>1</td><td>Indeterminate</td><td></td></tr></tbody></table></div>
+<p>The IC can be supplied with 4.5–16 V. Up to 200 mA of current can be drawn from its output. When used as a timer circuit, timing from µs to minutes can be achieved with the help of an R-C network. The V_CC voltage is divided across three equal resistors. K₁ and K₂ are comparators. Since transistor T₂ operates either in cutoff or saturation depending on the RS F/F output (0–1), the output will be either 0 or 1. The inverter both inverts and provides current gain. In applications, pins 2 and 6 are usually tied together and an RC network is connected to them. Consequently, the voltage across C becomes one of the comparison voltages for the comparators.</p>
+<p>The reset pin (4) resets the timer. T₂ is a PNP transistor. To turn it on, a voltage more negative than 2V_be must be applied to pin 4. When T₂ turns on, T₁ also turns on, so the capacitor connected to pin 7 discharges and the circuit state is reset. If reset is not needed, this pin is connected to V_CC (8) so that T₂ is always kept in cutoff. The voltage values at the inputs can be changed with pin 5. If this pin is not used, it is grounded through a capacitor.</p>
+<p><em>Note: At the start of the paragraph, the notes give "pin 6" for the reset pin; according to the schematic and the rest of the text, the reset pin is pin 4.</em></p>
+<figure class="yazi-gorsel"><img src="../s-13.jpg" width="989" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: internal structure of the 555 timer, RS flip-flop table, and pin descriptions"><figcaption>Internal structure of the 555 timer</figcaption></figure>
+<h3 id="operation-of-the-555-in-astable-multivibrator-mode">Operation of the 555 in astable multivibrator mode</h3>
+<p>In the circuit built with R_A, R_B, and C, the capacitor charges and discharges between 1/3 V_CC and 2/3 V_CC; the output is a square wave.</p>
+<ul><li><strong>T_charge = 0.693 (R_A + R_B) · C</strong></li><li><strong>T_discharge = 0.693 R_B · C</strong></li><li>T = T_charge + T_discharge</li><li><strong>f = 1/T = 1 / ((R_A + 2R_B) · C · 0.693) = 1.44 / ((R_A + 2R_B) C)</strong></li><li>R_A ≫ V_CC/0.2 must hold, that is, the current through R_A must not exceed 200 mA.</li></ul>
+<h3 id="operation-of-the-555-in-monostable-multivibrator-mode">Operation of the 555 in monostable multivibrator mode</h3>
+<p>The trigger signal (2) is negative. While the multivibrator is stable, it gives an output of 0. When a negative trigger arrives, the output becomes 1; after some time it returns to the stable state by itself.</p>
+<ul><li><strong>T_A = 1.1 · R_A · C</strong> (capacitor charging time)</li></ul>
+<figure class="yazi-gorsel"><img src="../s-14.jpg" width="1185" height="1677" loading="lazy" decoding="async" alt="Handwritten note page: astable and monostable multivibrator connections of the 555 and waveforms"><figcaption>555 astable and monostable operation</figcaption></figure>
+<h3 id="pulse-width-modulator-circuit-with-the-555">Pulse-width modulator circuit with the 555</h3>
+<p>The modulating signal V_m is applied to control pin 5 of the monostable-connected 555, and the trigger pulses arrive at pin 2. In the stable state the output is 0. When a pulse is applied, the output goes to 1. It stays there for a duration of (1.1 · R_A · C) and then returns to the stable state. (1.1 R_A C) is the time for the capacitor to reach the reference voltage of 2/3 V_CC; as V_CC (that is, the voltage at pin 5) changes, the coefficient 1.1 here changes. Thus the width of the output pulses varies with V_m.</p>
+<h3 id="square-wave-generator-using-an-op-amp">Square-wave generator using an op-amp</h3>
+<p>Positive feedback is applied from the output to the (+) input through the R₁–R₂ divider, and negative feedback is applied to the (−) input through R to C.</p>
+<ul><li>α = R₂/(R₁ + R₂), V_R = α · V_out</li><li>V_C = V_F + (V_i − V_F) e^(−t/RC)</li><li>0 &lt; t ≤ T/2: V_F = V_out = +|V_sat|, V_i = −α|V_sat| → V_C = |V_sat| + (−α|V_sat| − |V_sat|) e^(−t/RC)</li><li>T/2 &lt; t &lt; T: V_F = V_out = −|V_sat|, V_i = +α|V_sat| → V_C = −|V_sat| + (α|V_sat| + |V_sat|) e^(−(t − T/2)/RC)</li><li>Eliminating the V_sat terms: (1 − α)/(1 + α) = e^(−T/2RC)</li><li><strong>Square-wave period: T = −2RC ln((1 − α)/(1 + α))</strong></li></ul>
+<figure class="yazi-gorsel"><img src="../s-15.jpg" width="963" height="1400" loading="lazy" decoding="async" alt="Handwritten note page: pulse-width modulator with the 555 and op-amp square-wave generator with waveforms"><figcaption>PWM and op-amp square-wave generator</figcaption></figure>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem311-osilatorler-notlari.pdf" download>eem311-osilatorler-notlari.pdf</a></p>
+              <p class="kucuk">PDF · 1.7 MB · 15 <span data-i18n="arch.pagesLower"></span> · 01.10.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem311-osilatorler-notlari.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.7 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

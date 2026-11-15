@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM211 Digital Logic Design: Logic Gates and Integrated Circuits (Presentation 1) — hasancan.net</title>
+<meta name="description" content="Presentation 1 of the EEM211 Digital Logic Design course, dated October 2012: symbols and truth tables of the AND, OR, NOT, NAND, NOR, XOR, and XNOR gates, implementation using only NAND or only NOR gates, diode and transistor gates, pin connections of 7400-series integrated circuits, and the example f = x1x2 + x2&#x27;x3.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem211-sunu-1/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem211-sunu-1/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem211-sunu-1/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem211-sunu-1/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM211 Digital Logic Design: Logic Gates and Integrated Circuits (Presentation 1)">
+<meta property="og:description" content="Presentation 1 of the EEM211 Digital Logic Design course, dated October 2012: symbols and truth tables of the AND, OR, NOT, NAND, NOR, XOR, and XNOR gates, implementation using only NAND or only NOR gates, diode and transistor gates, pin connections of 7400-series integrated circuits, and the example f = x1x2 + x2&#x27;x3.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem211-sunu-1/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM211 Digital Logic Design: Logic Gates and Integrated Circuits (Presentation 1)", "description": "Presentation 1 of the EEM211 Digital Logic Design course, dated October 2012: symbols and truth tables of the AND, OR, NOT, NAND, NOR, XOR, and XNOR gates, implementation using only NAND or only NOR gates, diode and transistor gates, pin connections of 7400-series integrated circuits, and the example f = x1x2 + x2'x3.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem211-sunu-1/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM211 – Sayısal Mantık Tasarımı", "associatedMedia": {"@type": "MediaObject", "name": "Sunu1_eem211.pdf", "contentUrl": "https://hasancan.net/arsiv/eem211-sunu-1/Sunu1_eem211.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM211 Digital Logic Design: Logic Gates and Integrated Circuits (Presentation 1)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem211">EEM211</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM211 – Sayısal Mantık Tasarımı</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>17.10.2012</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#basic-logic-gates">Basic logic gates</a></li><li><a href="#logic-equivalents-using-only-nand-gates">Logic equivalents using only NAND gates</a></li><li><a href="#logic-equivalents-using-only-nor-gates">Logic equivalents using only NOR gates</a></li><li><a href="#diode-gates-and-the-7-segment-display">Diode gates and the 7-segment display</a></li><li><a href="#pin-connections-of-the-74xx-integrated-circuits">Pin connections of the 74xx integrated circuits</a></li><li><a href="#the-not-gate-and-transistor-gates">The NOT gate and transistor gates</a></li><li><a href="#implementing-a-function-with-integrated-circuits">Implementing a function with integrated circuits</a></li><li><a href="#implementation-in-programmable-logic">Implementation in programmable logic</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM211</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM211 Digital Logic Design: Logic Gates and Integrated Circuits (Presentation 1)</h1>
+            <p class="kucuk">EEM211 – Sayısal Mantık Tasarımı · 17.10.2012 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is Presentation 1, dated 17 October 2012, of the <strong>EEM211 Digital Logic Design</strong> course at Başkent University; the PDF's author metadata lists the course instructor Hamit Erdem (hamit). The presentation consists of nine slides and is almost entirely figures: the basic logic gates, NAND/NOR equivalents, how gates are built from diodes and transistors, and the pin connections of the 74xx integrated circuits used in the laboratory. The information contained in the figures is also given below as text. The original PDF of the presentation can be downloaded at the end of the post.</p>
+<h2 id="basic-logic-gates">Basic logic gates</h2>
+<p>The first slide shows the seven basic gates side by side, each with its common symbol and its IEEE symbol. In the IEEE symbol, the function of the gate is indicated by the mark inside the box: <code>&amp;</code> for AND, <code>≥1</code> for OR, <code>1</code> for NOT, and <code>=1</code> for XOR; the small circle at the output denotes inversion (negation).</p>
+<figure class="yazi-gorsel"><img src="../s-01.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Common and IEEE symbols and truth tables of the basic logic gates"><figcaption>AND, OR, NOT, NAND, NOR, XOR, and XNOR: common symbol, IEEE symbol, and truth table</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Gate</th><th scope="col">Output</th><th scope="col">IEEE mark</th></tr></thead><tbody><tr><th scope="row">AND</th><td>f = A·B</td><td>&amp;</td></tr><tr><th scope="row">OR</th><td>f = A + B</td><td>≥1</td></tr><tr><th scope="row">NOT</th><td>f = A'</td><td>1 (circle at output)</td></tr><tr><th scope="row">NAND</th><td>f = (A·B)'</td><td>&amp; (circle at output)</td></tr><tr><th scope="row">NOR</th><td>f = (A + B)'</td><td>≥1 (circle at output)</td></tr><tr><th scope="row">Exclusive-OR (XOR)</th><td>f = A ⊕ B</td><td>=1</td></tr><tr><th scope="row">Exclusive-NOR (XNOR)</th><td>f = (A ⊕ B)'</td><td>=1 (circle at output)</td></tr></tbody></table></div>
+<p>The truth tables on the right of the slide:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">x</th><th scope="col">y</th><th scope="col">AND</th><th scope="col">OR</th><th scope="col">NAND</th><th scope="col">NOR</th><th scope="col">XOR</th><th scope="col">XNOR</th></tr></thead><tbody><tr><th scope="row">0</th><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><th scope="row">0</th><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><th scope="row">1</th><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>For the NOT gate: if x = 0 then F = 1, and if x = 1 then F = 0.</p>
+<h2 id="logic-equivalents-using-only-nand-gates">Logic equivalents using only NAND gates</h2>
+<p>The NAND gate is a "universal" gate: all other gates can be built using NAND gates alone.</p>
+<figure class="yazi-gorsel"><img src="../s-02.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Equivalents of the NOT, OR, and AND gates using only NAND gates"><figcaption>Logic equivalents using NAND gates</figcaption></figure>
+<ul><li><strong>NOT:</strong> The two inputs of the NAND are tied together: (A·A)' = A'</li><li><strong>Two-input OR:</strong> Each input is inverted by a NAND, and the results are then passed through another NAND: (A'·B')' = A + B</li><li><strong>Two-input AND:</strong> The NAND output is inverted by a second NAND: ((A·B)')' = A·B</li><li><strong>Invert-OR:</strong> An OR gate with inverted inputs is simply a NAND gate: A' + B' = (A·B)'</li></ul>
+<h2 id="logic-equivalents-using-only-nor-gates">Logic equivalents using only NOR gates</h2>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Equivalents of the NOT, OR, and AND gates using only NOR gates"><figcaption>Logic equivalents using NOR gates</figcaption></figure>
+<ul><li><strong>NOT:</strong> The two inputs of the NOR are tied together: (A + A)' = A'</li><li><strong>OR:</strong> The NOR output is inverted by a second NOR: ((A + B)')' = A + B</li><li><strong>AND:</strong> Each input is inverted by a NOR, and the results are then passed through another NOR: (A' + B')' = A·B</li><li><strong>Invert-AND:</strong> An AND gate with inverted inputs is simply a NOR gate: A'·B' = (A + B)'</li></ul>
+<h2 id="diode-gates-and-the-7-segment-display">Diode gates and the 7-segment display</h2>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Diode switch model, diode OR and AND gates, and common-cathode and common-anode 7-segment display connections"><figcaption>Diode OR and AND gates; common-cathode and common-anode 7-segment displays</figcaption></figure>
+<ul><li>A diode conducting from anode to cathode can be thought of as a closed switch.</li><li><strong>Diode OR gate:</strong> Inputs A and B are connected to the common output through diodes D1 and D2, and the output is pulled to ground through a resistor R: C = A + B.</li><li><strong>Diode AND operation:</strong> The output is pulled up to +V through a resistor, and inputs A and B are connected to the output through reverse-biased diodes: Y = A·B.</li><li><strong>7-segment display:</strong> Each of the segments a–g is an LED. In the <em>common-cathode</em> type the LED cathodes are connected to ground, and in the <em>common-anode</em> type the anodes are connected to +5 V; each segment is driven through a resistor R.</li></ul>
+<h2 id="pin-connections-of-the-74xx-integrated-circuits">Pin connections of the 74xx integrated circuits</h2>
+<p>In the 14-pin TTL/CMOS integrated circuits used in the laboratory, each package contains four two-input gates; pin 14 is VCC and pin 7 is GND.</p>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Pin diagrams of the 74HC32/74LS32 OR, 74HC08/74LS08 AND, 74HC02/74LS02 NOR, and 74HC00/74LS00 NAND integrated circuits"><figcaption>Pin diagram: 74HC32, 74HC08, 74HC02, 74HC00</figcaption></figure>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Integrated circuit</th><th scope="col">Gate</th></tr></thead><tbody><tr><th scope="row">74HC32 / 74LS32</th><td>4 two-input OR gates</td></tr><tr><th scope="row">74HC08 / 74LS08</th><td>4 two-input AND gates</td></tr><tr><th scope="row">74HC02 / 74LS02</th><td>4 two-input NOR gates, C = (A + B)'</td></tr><tr><th scope="row">74HC00 / 74LS00</th><td>4 two-input NAND gates, C = (A·B)'</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../s-06.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="XOR and XNOR symbols with the pin diagrams of the 74HC86/74LS86 and 74HC266/74LS266"><figcaption>XOR (74HC86) and XNOR (74HC266) integrated circuits</figcaption></figure>
+<ul><li><strong>XOR symbol:</strong> C = A ⊕ B; its integrated circuit is the 74HC86 / 74LS86.</li><li><strong>XNOR gate:</strong> C = (A ⊕ B)'; its integrated circuit is the 74HC266 / 74LS266.</li></ul>
+<h2 id="the-not-gate-and-transistor-gates">The NOT gate and transistor gates</h2>
+<figure class="yazi-gorsel"><img src="../s-07.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Structure of the 7404 integrated circuit, transistor NOT gate, transistor NOR gate, and diode-transistor NAND gate"><figcaption>Not gate: structure of the 7404 and transistor gates</figcaption></figure>
+<ul><li><strong>7404:</strong> One package contains six NOT (inverter) gates.</li><li>Single-transistor inverter: the input V_IN is applied to the base through R_B; the output is taken from the collector (pulled up to VCC through R_C).</li><li>The circuit in which two inputs are connected through resistors to the base of the same transistor gives the NOR function: Y = (A + B)'.</li><li>The circuit that uses a transistor inverter after a diode AND input gives the NAND function: Y = (A·B)'.</li></ul>
+<h2 id="implementing-a-function-with-integrated-circuits">Implementing a function with integrated circuits</h2>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Connection diagram of the function f = x1x2 + x2&#x27;x3 using the 7404, 7408, and 7432 integrated circuits"><figcaption>An implementation of f = x1x2 + x2'x3</figcaption></figure>
+<p>The function f = x1·x2 + x2'·x3 is built with three integrated circuits:</p>
+<ul><li><strong>7404</strong> (NOT): produces x2'.</li><li><strong>7408</strong> (AND): produces the products x1·x2 and x2'·x3.</li><li><strong>7432</strong> (OR): adds the two products to give the output f.</li></ul>
+<h2 id="implementation-in-programmable-logic">Implementation in programmable logic</h2>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1355" height="1022" loading="lazy" decoding="async" alt="Generation of outputs f1 and f2 from product terms P1–P6 using a NOR plane with inputs x1–x4"><figcaption>Implementation in FPGAs: NOR plane</figcaption></figure>
+<p>The last slide ("Implementation in FPGAs") shows the inputs x1–x4 and their complements connected to a programmable <strong>NOR plane</strong>. The plane produces the terms P1–P6; P1–P3 are combined in one gate to form output <strong>f1</strong>, and P4–P6 are combined in another gate to form output <strong>f2</strong>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../Sunu1_eem211.pdf" download>Sunu1_eem211.pdf</a></p>
+              <p class="kucuk">PDF · 241 KB · 9 <span data-i18n="arch.pagesLower"></span> · 17.10.2012</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../Sunu1_eem211.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (241 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

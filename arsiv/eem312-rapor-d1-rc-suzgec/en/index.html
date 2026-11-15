@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: Lab Reports for Experiment D1, RC Low-Pass Filter and Delay Measurements — hasancan.net</title>
+<meta name="description" content="A comparison of three student reports for the first experiment (D1) of the EEM312 Digital Electronics hardware laboratory: computing C from the measured R and cutoff frequency, the variation of gain and phase difference with frequency, and measurements of tr, tf, tpHL, tpLH, and td with a square-wave input.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: Lab Reports for Experiment D1, RC Low-Pass Filter and Delay Measurements">
+<meta property="og:description" content="A comparison of three student reports for the first experiment (D1) of the EEM312 Digital Electronics hardware laboratory: computing C from the measured R and cutoff frequency, the variation of gain and phase difference with frequency, and measurements of tr, tf, tpHL, tpLH, and td with a square-wave input.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: Lab Reports for Experiment D1, RC Low-Pass Filter and Delay Measurements", "description": "A comparison of three student reports for the first experiment (D1) of the EEM312 Digital Electronics hardware laboratory: computing C from the measured R and cutoff frequency, the variation of gain and phase difference with frequency, and measurements of tr, tf, tpHL, tpLH, and td with a square-wave input.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "EEM312_D1_RC_suzgec_raporlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem312-rapor-d1-rc-suzgec/EEM312_D1_RC_suzgec_raporlari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: Lab Reports for Experiment D1, RC Low-Pass Filter and Delay Measurements">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>22.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#part-i-computing-c-from-the-cutoff-frequency">Part I: Computing C from the Cutoff Frequency</a></li><li><a href="#part-ii-variation-of-gain-and-phase-difference-with-frequency">Part II: Variation of Gain and Phase Difference with Frequency</a></li><li><a href="#part-iii-delay-measurements-with-a-square-wave-input">Part III: Delay Measurements with a Square-Wave Input</a></li><li><a href="#part-iv-second-order-effects">Part IV: Second-Order Effects</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: Lab Reports for Experiment D1, RC Low-Pass Filter and Delay Measurements</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 22.03.2011 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post presents together three reports written for the first experiment in the hardware laboratory of the Başkent University course <strong>EEM312 Digital Electronics</strong>, <strong>D1: Use of Basic Laboratory Equipment</strong> (RC low-pass filter). Two belong to the spring 2011 term and one to 2014; all three were prepared by classmates, and <strong>personal information has been removed</strong> (they are referred to as A, B, and C). The experiment handout and its questions are in the post <a href="/arsiv/eem312-donanim-deney-foyleri/">EEM312 hardware lab handouts</a>; here there are only the measurements, calculations, and comments from the reports. The reports with personal information redacted are available as PDFs in the ZIP at the end of the post.</p>
+<h2 id="part-i-computing-c-from-the-cutoff-frequency">Part I: Computing C from the Cutoff Frequency</h2>
+<p>Each student was given a mixed resistor–capacitor pair; R was measured with a multimeter, the circuit was built on a breadboard, a 2 V_pp sine wave was applied to the input, and the frequency at which the output dropped to 1.4 V_pp (gain ≈ 0.7071) was recorded as the <strong>cutoff frequency</strong>. The capacitor is calculated from this frequency:</p>
+<p><strong>ω_c = 1/(RC) → C = 1/(2π·R·f_c)</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Report</th><th scope="col">Measured R</th><th scope="col">Measured f_c</th><th scope="col">Calculated C</th></tr></thead><tbody><tr><th scope="row">A (2011)</th><td>55 kΩ</td><td>23 kHz</td><td>0.125 nF</td></tr><tr><th scope="row">B (2011)</th><td>150 kΩ</td><td>4.673 kHz</td><td>227 pF</td></tr><tr><th scope="row">C (2014)</th><td>27.5 kΩ</td><td>10.40 kHz</td><td>556 pF</td></tr></tbody></table></div>
+<p>All three C values are consistent with the formula (it gives 125.8 pF, 227.1 pF, and 556.5 pF). The common conclusion of the reports: although Equation 1 is sufficient for a single RC, it is inadequate for measuring the internal capacitance of a component once other elements whose parameters vary with frequency, and parasitic capacitances, come into play. Report B also describes the cutoff frequency as "the frequency at which the output loses half of its energy" (−3 dB, the half-power point).</p>
+<h2 id="part-ii-variation-of-gain-and-phase-difference-with-frequency">Part II: Variation of Gain and Phase Difference with Frequency</h2>
+<p>The phase difference was calculated from the time difference Δt between the input and output peaks on the oscilloscope, using <strong>ϕ = 360°·f·Δt</strong>.</p>
+<p><strong>Report A (R = 55 kΩ, f_c = 23 kHz):</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">f</th><th scope="col">V_out</th><th scope="col">V_in</th><th scope="col">Gain</th><th scope="col">Phase difference</th></tr></thead><tbody><tr><th scope="row">10 kHz</th><td>1.78 V</td><td>2.04 V</td><td>0.872</td><td>17.63°</td></tr><tr><th scope="row">50 kHz</th><td>0.960 V</td><td>2.02 V</td><td>0.475</td><td>50.90°</td></tr><tr><th scope="row">100 kHz</th><td>0.520 V</td><td>2.00 V</td><td>0.260</td><td>69.12°</td></tr><tr><th scope="row">150 kHz</th><td>0.360 V</td><td>2.00 V</td><td>0.180</td><td>73.07°</td></tr><tr><th scope="row">200 kHz</th><td>0.280 V</td><td>2.00 V</td><td>0.140</td><td>80.64°</td></tr><tr><th scope="row">250 kHz</th><td>0.232 V</td><td>2.00 V</td><td>0.116</td><td>112.5°</td></tr><tr><th scope="row">300 kHz</th><td>0.192 V</td><td>2.00 V</td><td>0.096</td><td>72.43°</td></tr><tr><th scope="row">400 kHz</th><td>0.160 V</td><td>2.00 V</td><td>0.080</td><td>81.29°</td></tr><tr><th scope="row">500 kHz</th><td>0.128 V</td><td>2.00 V</td><td>0.064</td><td>59.4°</td></tr><tr><th scope="row">1 MHz</th><td>0.080 V</td><td>2.00 V</td><td>0.040</td><td>79.2°</td></tr></tbody></table></div>
+<p><strong>Report B (R = 150 kΩ, f_c = 4.673 kHz):</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">f</th><th scope="col">Gain</th><th scope="col">Phase difference</th></tr></thead><tbody><tr><th scope="row">10 kHz</th><td>0.490</td><td>59.88°</td></tr><tr><th scope="row">50 kHz</th><td>0.130</td><td>76.60°</td></tr><tr><th scope="row">100 kHz</th><td>0.076</td><td>78.41°</td></tr><tr><th scope="row">150 kHz</th><td>0.044</td><td>79.62°</td></tr><tr><th scope="row">200 kHz</th><td>0.032</td><td>87.76°</td></tr><tr><th scope="row">250 kHz</th><td>0.027</td><td>94.33°</td></tr><tr><th scope="row">300 kHz</th><td>0.021</td><td>103.68°</td></tr><tr><th scope="row">400 kHz</th><td>0.016</td><td>117.21°</td></tr></tbody></table></div>
+<p><strong>Report C (R = 27.5 kΩ, f_c = 10.4 kHz):</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">f</th><th scope="col">Gain</th><th scope="col">Δt</th><th scope="col">Phase in report</th></tr></thead><tbody><tr><th scope="row">1 kHz</th><td>0.980</td><td>0 µs</td><td>0°</td></tr><tr><th scope="row">5 kHz</th><td>0.911</td><td>17 µs</td><td>6.12°</td></tr><tr><th scope="row">10 kHz</th><td>0.733</td><td>13 µs</td><td>23.4°</td></tr><tr><th scope="row">15 kHz</th><td>0.56</td><td>10 µs</td><td>36°</td></tr><tr><th scope="row">20 kHz</th><td>0.4615</td><td>7 µs</td><td>37.8°</td></tr><tr><th scope="row">25 kHz</th><td>0.39</td><td>7.2 µs</td><td>51.84°</td></tr><tr><th scope="row">30 kHz</th><td>0.34</td><td>6.8 µs</td><td>73.44°</td></tr><tr><th scope="row">40 kHz</th><td>0.26</td><td>5.2 µs</td><td>74.88°</td></tr><tr><th scope="row">50 kHz</th><td>0.21</td><td>4.8 µs</td><td>86.4°</td></tr><tr><th scope="row">100 kHz</th><td>0.11</td><td>2.4 µs</td><td>86.4°</td></tr></tbody></table></div>
+<p>The three reports' interpretations point in the same direction: because the capacitor's impedance Z_C = 1/(jωC) decreases with frequency, the output voltage, and hence the gain, drops (low-pass filter); since the transfer function is H = 1/(1 + jωRC), the phase angle also grows with increasing frequency as −arctan(ωRC). Report C also built the circuit in Proteus and compared the input and output waveforms at 1 kHz, 25 kHz, and 100 kHz (at 25 kHz, gain ≈ 0.37 and peak difference ≈ 7.8 µs), finding them consistent with the table values.</p>
+<p><em>Note: In a first-order RC filter, the phase difference can approach 90° at most. The values of 112.5° at 250 kHz in Report A and 94°–117° at 250–400 kHz in Report B exceed this limit; they must be measurement errors arising from reading Δt by eye on the oscilloscope at high frequency and from probe/breadboard capacitances. For this reason, the comment in Report A that "the bandwidth ends after 250 kHz" is also not physical.</em></p>
+<p><em>Note: In Report C, the phase values in the 5–25 kHz rows were calculated by multiplying the measured Δt by the frequency of the previous row (e.g., for 5 kHz, 360·1 kHz·17 µs = 6.12°). The correct calculation gives approximately 30.6°, 46.8°, 54°, 50.4°, and 64.8° for 5, 10, 15, 20, and 25 kHz respectively; these are also consistent with the theoretical arctan(f/f_c) values (25.7°, 43.9°, 55.3°, 62.5°, 67.4°). The values from 30 kHz onward were calculated correctly.</em></p>
+<h2 id="part-iii-delay-measurements-with-a-square-wave-input">Part III: Delay Measurements with a Square-Wave Input</h2>
+<p>A square wave was applied to the input, and the 10%–90% rise/fall times (t_r, t_f), the propagation delays between the 50% points (t_pHL, t_pLH), and their average t_d = (t_pHL + t_pLH)/2 were measured.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Report</th><th scope="col">Pulse shape</th><th scope="col">t_r</th><th scope="col">t_f</th><th scope="col">t_pHL</th><th scope="col">t_pLH</th><th scope="col">t_d</th></tr></thead><tbody><tr><th scope="row">A</th><td>50%, 60 kHz</td><td>1.1 µs</td><td>6.7 µs</td><td>3 µs</td><td>2.4 µs</td><td>2.7 µs</td></tr><tr><th scope="row">A</th><td>30%, 60 kHz</td><td>1.0 µs</td><td>6.4 µs</td><td>2.4 µs</td><td>3.4 µs</td><td>2.9 µs</td></tr><tr><th scope="row">B</th><td>50%, 60 kHz</td><td>5.4 µs</td><td>6.4 µs</td><td>3.6 µs</td><td>3.6 µs</td><td>4.8 µs</td></tr><tr><th scope="row">B</th><td>30%, 60 kHz</td><td>8.0 µs</td><td>8.2 µs</td><td>4.8 µs</td><td>4.8 µs</td><td>4.8 µs</td></tr><tr><th scope="row">C</th><td>50%, 6 kHz</td><td>31 µs</td><td>34 µs</td><td>16 µs</td><td>17 µs</td><td>16.5 µs</td></tr><tr><th scope="row">C</th><td>30%, 6 kHz</td><td>37 µs</td><td>36 µs</td><td>14 µs</td><td>14 µs</td><td>14 µs</td></tr></tbody></table></div>
+<p>In Report C, RC ≈ 27.5 kΩ × 556 pF ≈ 15.3 µs; for a first-order circuit the expected t_r ≈ 2.2·RC ≈ 34 µs and t_p ≈ 0.69·RC ≈ 10.6 µs, which are of the same order as the measured values.</p>
+<p>Comments on the questions:</p>
+<ul><li><strong>t_r ≠ t_f, t_pHL ≠ t_pLH:</strong> Ideally they should be equal. The reports attribute the difference to the capacitor's charge and discharge paths being different (charging through R, discharging through the source's internal resistance) and to the 10%, 50%, and 90% points being read by eye on the oscilloscope.</li><li><strong>Effect of pulse width:</strong> As the pulse width decreases, the capacitor's charge–discharge times, and accordingly the measured times, decrease (A and B); Report C observes an effect directly proportional to the pulse width.</li><li><strong>Input t_r:</strong> No matter how fast the rise at the input is, the output t_r remains slower than the input because of the RC time constant.</li></ul>
+<p><em>Note: In Report B's table, t_d is defined as the average of t_pHL and t_pLH, yet in the 50% row 4.8 µs is written instead of (3.6 + 3.6)/2 = 3.6 µs.</em></p>
+<h2 id="part-iv-second-order-effects">Part IV: Second-Order Effects</h2>
+<p>Report A says that when a pulse is applied to the input at high frequency, second-order effects (overshoot, ringing) may appear because of oscillations coming from the signal generator and the inductive/parasitic effects of the cables and components. Report B, on the other hand, writes that since there is only one energy-storing element (the capacitor) in the circuit, no second-order effect is seen, and that the inductive effect of the wires would appear only at very high frequencies that the generator cannot reach.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM312_D1_RC_suzgec_raporlari.zip" download>EEM312_D1_RC_suzgec_raporlari.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.6 MB · 22.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM312_D1_RC_suzgec_raporlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.6 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

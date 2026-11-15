@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Term Project – Kettle (Water Heater) Temperature Control with Arduino and DS18B20 — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems 2015 term project report: an on-off kettle control system built with an Arduino UNO, a DS18B20 1-Wire temperature sensor, a relay and a heating element that heats water up to 90 °C and holds it there; flowchart, hardware, Arduino code and serial port output.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Term Project – Kettle (Water Heater) Temperature Control with Arduino and DS18B20">
+<meta property="og:description" content="EEM322 Control Systems 2015 term project report: an on-off kettle control system built with an Arduino UNO, a DS18B20 1-Wire temperature sensor, a relay and a heating element that heats water up to 90 °C and holds it there; flowchart, hardware, Arduino code and serial port output.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Term Project – Kettle (Water Heater) Temperature Control with Arduino and DS18B20", "description": "EEM322 Control Systems 2015 term project report: an on-off kettle control system built with an Arduino UNO, a DS18B20 1-Wire temperature sensor, a relay and a heating element that heats water up to 90 °C and holds it there; flowchart, hardware, Arduino code and serial port output.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-kettle-kontrol-projesi.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-kettle-kontrol-projesi/eem322-kettle-kontrol-projesi.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Term Project – Kettle (Water Heater) Temperature Control with Arduino and DS18B20">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.05.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#project-description">Project description</a></li><li><a href="#project-components">Project components</a></li><li><a href="#how-the-project-works">How the project works</a></li><li><a href="#system-modeling">System modeling</a></li><li><a href="#simulation-results-serial-port-monitor-output">Simulation results (serial port monitor output)</a></li><li><a href="#arduino-code-appendix-1">Arduino code (APPENDIX-1)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Term Project – Kettle (Water Heater) Temperature Control with Arduino and DS18B20</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 15.05.2015 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the report of one of the projects from the spring 2015 semester of the <strong>EEM322 Control Systems</strong> course at Başkent University. According to the list announced on 11 March 2015 by the course instructor <strong>Assoc. Prof. Dr. Mustafa Doğan</strong>, the projects were prepared in groups and submitted on 15 May 2015 as a report, code, experiment and presentation. This report belongs to the <strong>"Kettle Control"</strong> project prepared by four friends (15/05/2015); the names and student numbers on the cover have been masked, and the manufacturer's datasheet at the end of the report (DS18B20 datasheet, APPENDIX-2) has been removed. The masked report can be downloaded as a PDF at the end of the post.</p>
+<h2 id="project-description">Project description</h2>
+<p>With the kettle control project, the temperature of the water in the tank is measured and the water is kept at a set temperature for a period of time. The system is an example of <strong>on-off control</strong> that switches a 220 V heating element on and off through a relay, based on the measurement of a temperature sensor.</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Flowchart of the kettle control project: is the water in the tank above 5 °C, relay on, water temperature, has the water reached 90 °C, relay off, system on standby"><figcaption>Flowchart</figcaption></figure>
+<h2 id="project-components">Project components</h2>
+<ul><li><strong>Arduino UNO:</strong> A type of Arduino with an ATmega328 processor. It has 14 digital input/output pins (6 of which can be used as PWM outputs), 6 analog inputs, a 16 MHz crystal oscillator, a USB connection, a 2.1 mm power jack, an ICSP header and a reset button. Connecting it to a DC 7–12 V supply is enough; it has 1 kB of EEPROM memory.</li><li><strong>Heating element:</strong> The general name for resistance wires that convert electrical energy into heat energy. It is resistant to high temperatures; it contains nickel, iron, chromium and aluminum alloys.</li><li><strong>Temperature sensor (DS18B20 digital temperature sensor):</strong> A waterproof digital sensor. Its operating voltage is 3.0–5.0 V; it can be read with 12 bits and can measure with 0.5 °C accuracy; its response time is shorter than 750 ms.</li><li><strong>Relay:</strong> An electrical switch that opens and closes another electrical circuit. When a suitable voltage is applied to its coil, the coil becomes magnetized and pulls the metal armature opposite it, connecting the contacts to each other.</li><li><strong>Water tank:</strong> A plastic container.</li><li><strong>Jumpers and cables:</strong> Male-to-female jumpers for connecting the sensor and relay to the Arduino.</li></ul>
+<p><em>Note: The report states that the sensor measures "between −10 °C and 125 °C" with 0.5 °C accuracy. According to the DS18B20 datasheet, the measurement range is −55 °C to +125 °C, and the ±0.5 °C accuracy is valid between −10 °C and +85 °C.</em></p>
+<h2 id="how-the-project-works">How the project works</h2>
+<p>The temperature of the water placed in the tank is measured with the sensor. If the measured temperature is above 0 °C, the signal from the Arduino triggers the relay; the relay applies 220 V mains voltage to the heating element and starts heating the water. The temperature continues to be measured; when the water reaches 90 °C, the Arduino cuts the relay, the heating element turns off, and the word "Kaynama" (boiling) appears on the serial port monitor. The system puts itself on standby for a set time. When the time is up, the water temperature is measured again; if it is below 90 °C, the Arduino switches the relay on and the heating element heats the water again. In this way, the water in the tank is kept hot continuously.</p>
+<h2 id="system-modeling">System modeling</h2>
+<h3 id="software">Software</h3>
+<p>The system software was written as an Arduino program. The <strong>1-Wire</strong> interface was used for the temperature sensor; the waiting times were implemented with <code>delay</code> commands.</p>
+<h3 id="hardware">Hardware</h3>
+<p>The connections of the digital temperature sensor, the relay and the heating element were made. Thanks to the 1-Wire interface, the sensor communication used only a single data pin (digital pin 2), 5 V supply and ground (GND). For the relay, one digital output pin (digital pin 7) and GND were used. The wiring of the heating element was made to operate at 220 V; so that the heating element can be operated by the signal from the Arduino, the relay was connected to one of the phase lines coming from the mains. The relay closes with the signal from the Arduino and delivers 220 V to the heating element. The operations can be monitored from the serial port monitor in the Arduino program.</p>
+<p>After the software and connections were completed, the tank was drilled, the heating element and sensor were placed inside the tank, insulation was applied and the 220 V cable was connected, making the system ready to operate.</p>
+<figure class="yazi-gorsel"><img src="../gorsel-1-arduino.jpg" width="900" height="510" loading="lazy" decoding="async" alt="Arduino UNO pin connections: sensor data line, resistor and relay cables"><figcaption>Figure 1 – Arduino pin connections</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../gorsel-2-role.jpg" width="900" height="510" loading="lazy" decoding="async" alt="Connecting the relay to the phase of the mains cable"><figcaption>Figure 2 – Relay connection</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../gorsel-3-hazne.jpg" width="900" height="512" loading="lazy" decoding="async" alt="Placing the heating element and temperature sensor in the plastic tank"><figcaption>Figure 3 – Placing the heating element and sensor in the tank</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../gorsel-4-yalitim.jpg" width="900" height="512" loading="lazy" decoding="async" alt="Final state of the tank, insulated connections, relay and Arduino"><figcaption>Figure 4 – Insulation process</figcaption></figure>
+<h2 id="simulation-results-serial-port-monitor-output">Simulation results (serial port monitor output)</h2>
+<p>The report gives the output taken from the serial port monitor while the system was running. The temperature first drops from around 82 °C to about 70 °C, then rises once the relay engages and reaches 91.25 °C; at this point the words "Kaynama" (boiling) and "Beklemede" (on standby) appear:</p>
+<pre class="kod"><code>Sicaklik: 81.44
+Sicaklik: 82.44
+Sicaklik: 82.12
+Sicaklik: 81.12
+Sicaklik: 79.75
+Sicaklik: 78.12
+Sicaklik: 76.44
+Sicaklik: 74.75
+Sicaklik: 73.12
+Sicaklik: 72.00
+Sicaklik: 71.62
+Sicaklik: 70.81
+Sicaklik: 70.56
+Sicaklik: 71.06
+Sicaklik: 70.69
+Sicaklik: 70.31
+Sicaklik: 70.44
+Sicaklik: 70.87
+Sicaklik: 70.87
+Sicaklik: 70.62
+Sicaklik: 70.50
+Sicaklik: 71.06
+Sicaklik: 71.19
+Sicaklik: 70.87
+Sicaklik: 70.94
+Sicaklik: 70.69
+Sicaklik: 70.06
+Sicaklik: 69.56
+Sicaklik: 69.56
+Sicaklik: 69.87
+Sicaklik: 70.81
+Sicaklik: 71.19
+Sicaklik: 70.94
+Sicaklik: 70.44
+Sicaklik: 69.87
+Sicaklik: 69.25
+Sicaklik: 69.81
+Sicaklik: 71.94
+Sicaklik: 74.75
+Sicaklik: 79.12
+Sicaklik: 85.25
+Sicaklik: 91.25
+Sicaklik: 91.25
+Kaynama
+Beklemede</code></pre>
+<h2 id="arduino-code-appendix-1">Arduino code (APPENDIX-1)</h2>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>#include &lt;OneWire.h&gt; // We include the OneWire library.
+
+// We set the digital pin to which we connected the temperature sensor as 2.
+int DS18S20_Pin = 2; 
+
+// Temperature Sensor Input-Output
+OneWire ds(DS18S20_Pin);  // On digital pin 2.
+
+// Pin 7 is assigned for the relay.
+int role = 7;
+
+void setup(void) {
+  Serial.begin(9600); // We start the serial communication.
+  pinMode(role,OUTPUT);
+}
+
+void loop(void) {
+  // We bind the temperature variable to the function that gets the temperature value.
+  float temperature = getTemp();
+  // We print the temperature value from the sensor on the Serial monitor.
+  Serial.print("Sicaklik: ");
+  Serial.println(temperature);
+  // We wait 1 second. The monitor will continue to print 1 temperature value per second.
+  delay(1000);
+  
+   if(temperature &gt; 0 &amp;&amp; temperature &lt;= 90) // if the temperature measured by the sensor is greater than 0 degrees and not greater than 90 degrees, we activate the relay.
+  {
+    digitalWrite(role,HIGH); // the relay was activated by setting the relevant pin HIGH.
+  }
+  
+  if(temperature &gt;= 91) // when the water temperature reaches 91 degrees, we keep the relay running for 10 more seconds.
+  {
+    digitalWrite(role,HIGH);
+    Serial.print("Sicaklik: "); // the temperature value is printed on the serial monitor
+    Serial.println(temperature);
+    Serial.print("Kaynama\n");  // ''kaynama'' is printed on the serial monitor.
+    delay(10000);
+    
+    digitalWrite(role,LOW);  // when the set time is over, we turn off the relay and put the system on standby
+    Serial.print("Beklemede\n"); // ''beklemede'' is printed on the serial monitor.
+    delay(60000);    
+  }
+}
+
+//  **We convert the data from the sensor into temperature values in Celsius
+float getTemp(){
+  // we get the water temperature in Celsius from the sensor with this function
+
+  byte data[12];
+  byte addr[8];
+
+  if ( !ds.search(addr)) {
+      // we use a single sensor, at this point we reset the search
+      ds.reset_search();
+      return -1000;
+  }
+
+  if ( OneWire::crc8( addr, 7) != addr[7]) {
+      Serial.println("CRC is not valid!");
+      return -1000;
+  }
+
+  if ( addr[0] != 0x10 &amp;&amp; addr[0] != 0x28) {
+      Serial.print("Device is not recognized");
+      return -1000;
+  }
+
+  ds.reset();
+  ds.select(addr);
+  ds.write(0x44,1); // 
+
+  byte present = ds.reset();
+  ds.select(addr);    
+  ds.write(0xBE); // 
+
+  for (int i = 0; i &lt; 9; i++) { // 9 bytes will be used
+    data[i] = ds.read();
+  }
+
+  ds.reset_search();
+
+  byte MSB = data[1];
+  byte LSB = data[0];
+
+  float tempRead = ((MSB &lt;&lt; 8) | LSB); // we take the two's complement 
+  float TemperatureSum = tempRead / 16;
+
+  return TemperatureSum;
+
+}```
+
+In the code, the `getTemp()` function searches for the sensor on the 1-Wire line, checks the CRC of the address and the device type (0x10 or 0x28), starts the temperature conversion with the 0x44 command, reads the 9-byte scratchpad with the 0xBE command, and returns the temperature in °C by dividing the raw value formed from the first two bytes by 16 (at the DS18B20's 12-bit resolution, 1 LSB = 0.0625 °C).
+
+*Note: There are small differences between the code and the text and flowchart. In the flowchart the first condition is "is the water in the tank above 5 °C?", whereas in the code it is 0 °C. In the text the relay is cut at 90 °C; in the code the relay is kept on up to 90 °C, and when the temperature reaches 91 °C or above the relay is kept running for 10 more seconds, then switched off and the system waits for 60 seconds. For measurements between 90 and 91 °C no condition is met, so the relay keeps its previous state. In the first sentence of the report the project is written as "Cattle control"; the correct form is "Kettle (water heater) control".*
+</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-kettle-kontrol-projesi.pdf" download>eem322-kettle-kontrol-projesi.pdf</a></p>
+              <p class="kucuk">PDF · 1.0 MB · 15 <span data-i18n="arch.pagesLower"></span> · 15.05.2015</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-kettle-kontrol-projesi.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

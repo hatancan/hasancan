@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM301 Signals and Systems I: Introduction to MATLAB, Tutorials 1 and 2 (Başkent EEM417 Handout, Adapted from Control Tutorials for MATLAB) — hasancan.net</title>
+<meta name="description" content="Two introductory MATLAB handouts from the Başkent University EEE Department: creating vectors and matrices, transpose, matrix multiplication, inv, eig, poly, roots, polyval, conv, deconv; writing m-files with function, plot, colors and markers, hold, subplot, axis, title, xlabel, gtext.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem301-matlab-tutorial/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem301-matlab-tutorial/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem301-matlab-tutorial/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem301-matlab-tutorial/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM301 Signals and Systems I: Introduction to MATLAB, Tutorials 1 and 2 (Başkent EEM417 Handout, Adapted from Control Tutorials for MATLAB)">
+<meta property="og:description" content="Two introductory MATLAB handouts from the Başkent University EEE Department: creating vectors and matrices, transpose, matrix multiplication, inv, eig, poly, roots, polyval, conv, deconv; writing m-files with function, plot, colors and markers, hold, subplot, axis, title, xlabel, gtext.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem301-matlab-tutorial/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM301 Signals and Systems I: Introduction to MATLAB, Tutorials 1 and 2 (Başkent EEM417 Handout, Adapted from Control Tutorials for MATLAB)", "description": "Two introductory MATLAB handouts from the Başkent University EEE Department: creating vectors and matrices, transpose, matrix multiplication, inv, eig, poly, roots, polyval, conv, deconv; writing m-files with function, plot, colors and markers, hold, subplot, axis, title, xlabel, gtext.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem301-matlab-tutorial/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM301 – Sinyaller ve Sistemler I", "associatedMedia": {"@type": "MediaObject", "name": "eem301-matlab-tutorial.zip", "contentUrl": "https://hasancan.net/arsiv/eem301-matlab-tutorial/eem301-matlab-tutorial.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM301 Signals and Systems I: Introduction to MATLAB, Tutorials 1 and 2 (Başkent EEM417 Handout, Adapted from Control Tutorials for MATLAB)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem301">EEM301</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM301 – Sinyaller ve Sistemler I</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>29.09.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#tutorial-1-introduction-to-matlab">Tutorial 1: Introduction to MATLAB</a></li><li><a href="#tutorial-2-functions-and-plotting">Tutorial 2: Functions and plotting</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM301</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM301 Signals and Systems I: Introduction to MATLAB, Tutorials 1 and 2 (Başkent EEM417 Handout, Adapted from Control Tutorials for MATLAB)</h1>
+            <p class="kucuk">EEM301 – Sinyaller ve Sistemler I · 29.09.2005 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains two introductory MATLAB handouts kept in the EEM301 Signals and Systems I folder. The handouts were prepared in 2005 for the Başkent University Department of Electrical and Electronics Engineering course <strong>EEM 417 Control System Design</strong> (<strong>Tutorial_1</strong> and <strong>Tutorial_2 – Introduction to MATLAB</strong>); they were also used in the MATLAB assignments of EEM301. The text is in English. The main headings and sample commands are reproduced below. The original Word files can be downloaded as a ZIP at the end of the post.</p>
+<p>The text of the handouts is largely based on the MATLAB basics tutorial of the <strong>Control Tutorials for MATLAB</strong> website of the University of Michigan.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed upon request of the rights holder.</em></p>
+<h2 id="tutorial-1-introduction-to-matlab">Tutorial 1: Introduction to MATLAB</h2>
+<p>MATLAB is an interactive program for numerical computation and data visualization; it is used extensively by control engineers for analysis and design. In these courses the <strong>Control System Toolbox</strong> is used in particular: transfer function, zero-pole-gain and state-space models, continuous- and discrete-time systems, time and frequency responses, root loci.</p>
+<h3 id="getting-started">Getting started</h3>
+<ul><li><code>intro</code>: introduction to MATLAB; <code>helpdesk</code>: documentation; <code>demo</code>: examples</li><li><code>help</code>, <code>help plot</code>, <code>lookfor filter</code> (keyword search)</li><li><code>clc</code> (clears the command window), <code>clear</code> (deletes variables), <code>close</code> (closes the figure)</li><li><code>more on</code>: displays output one screen at a time</li></ul>
+<blockquote><p>When unsure about a command, use help</p></blockquote>
+<p>Typing the name of a variable displays its value; results that are not assigned are stored in the variable <code>ans</code>. Multiple commands on one line can be separated by semicolons or commas.</p>
+<h3 id="number-representation">Number representation</h3>
+<p>The numbers MATLAB can represent range approximately from 10⁻³⁰⁸ to 10³⁰⁸. All of the following notations denote the same number (there must be no space before the exponent):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>12345.6789
+123456.789e-1
+1234.56789E1
+12.3456789e3
+1234567.89E-2</code></pre>
+<h3 id="arrays-vectors-and-matrices">Arrays: vectors and matrices</h3>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>a = [1 2 3 4 5]      % vector
+t = 0:2:20           % time vector from 0 to 20 in steps of 2
+b = a + 2            % adds 2 to every element: 3 4 5 6 7
+c = a + b            % sum of vectors of the same length
+B = [1 2 3 4; 5 6 7 8; 9 10 11 12];   % 3x4 matrix
+size(B)              % 3 4
+length(a)            % 5
+C = B'               % transpose (conjugate transpose for complex; use .' for plain transpose)
+D = B * C            % matrix multiplication (order matters)</code></pre>
+<p>In MATLAB, indexing starts at 1; B(1,1) is the first element of the first row.</p>
+<p>Element-by-element operations and matrix functions:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>E = [1 2;3 4]
+F = [2 3;4 5]
+G = E .* F     % [2 6; 12 20]
+E^3            % [37 54; 81 118]
+E.^3           % [1 8; 27 64]
+X = inv(E)     % [-2 1; 1.5 -0.5]
+eig(E)         % -0.3723, 5.3723
+p = poly(E)    % characteristic polynomial: 1 -5 -2
+roots(p)       % 5.3723, -0.3723 (same as the eigenvalues)</code></pre>
+<h3 id="polynomials">Polynomials</h3>
+<p>A polynomial is a vector whose coefficients are written in descending order of degree. For s⁴ + 3s³ − 15s² − 2s + 9, <code>x = [1 3 -15 -2 9]</code>; missing terms are filled with zeros, for example <code>y = [1 0 0 0 1]</code> for s⁴ + 1.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>z = polyval([1 0 0 0 1],2)   % value at s = 2: 17
+roots([1 3 -15 -2 9])        % -5.5745, 2.5836, -0.7951, 0.7860
+x = [1 2];
+y = [1 4 8];
+z = conv(x,y)                % product: 1 6 16 16
+[xx, R] = deconv(z,y)        % division: xx = 1 2, remainder R = 0 0 0 0</code></pre>
+<h2 id="tutorial-2-functions-and-plotting">Tutorial 2: Functions and plotting</h2>
+<h3 id="functions">Functions</h3>
+<p>MATLAB provides standard functions such as <code>sin</code>, <code>cos</code>, <code>log</code>, <code>exp</code>, <code>sqrt</code> and the constants <code>pi</code>, <code>i</code>, <code>j</code>; <code>sin(pi/4)</code> gives 0.7071. Commands such as <code>roots</code>, <code>plot</code>, <code>step</code> are in fact m-files that have inputs and outputs. You write your own function in a file with the <code>.m</code> extension using <code>function</code>; the first line has the following form:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [output1,output2] = filename(input1,input2,input3)</code></pre>
+<p>The following lines starting with <code>%</code> form the description displayed by <code>help filename</code>. To check the number of inputs, the line <code>error(nargchk(x,y,nargin));</code> is recommended. A simple example, <code>add.m</code>:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>function [var3] = add(var1,var2)
+%add is a function that adds two numbers
+var3 = var1+var2;</code></pre>
+<p>It is used at the command line as <code>y = add(3,8)</code>.</p>
+<h3 id="plotting">Plotting</h3>
+<p><code>plot(x,y)</code> plots the vector x on the horizontal axis and the vector y on the vertical axis; x and y must have the same length. If a single vector is given, its elements are plotted against their indices; for complex numbers, the real part is placed on the horizontal axis and the imaginary part on the vertical axis.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=0:0.25:7;
+y = sin(t);
+plot(t,y)
+
+x = 0:0.1:100;
+y = 3*x;
+plot(x,y,'r:')    % red, dotted line</code></pre>
+<p>The third parameter specifies the color and marker:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Color</th><th scope="col">Marker</th><th scope="col">Line</th></tr></thead><tbody><tr><th scope="row">y yellow, m magenta, c cyan, r red</th><td>. point, o circle, x cross, + plus, * star</td><td>- solid</td></tr><tr><th scope="row">g green, b blue, w white, k black</th><td>s square, d diamond, v ^ &lt; &gt; triangles</td><td>: dotted, -. dash-dot</td></tr><tr><th scope="row"></th><td>p pentagram, h hexagram</td><td>-- dashed</td></tr></tbody></table></div>
+<p>Multiple curves on the same axes:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>x = linspace(0,2*pi,50);
+y = sin(x);
+z = cos(x);
+plot(x,y,'r', x,z,'gx')
+
+% or using hold on / hold off:
+plot(x,y,'r')
+hold on
+plot(x,z,'gx')
+hold off</code></pre>
+<h3 id="subplot">subplot</h3>
+<p><code>subplot(m,n,p)</code> divides the figure into an m-row by n-column grid and makes the p-th plot active; the ordering is like reading a book, left to right, top to bottom.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>x = linspace(0,2*pi,50);
+y = sin(x);
+z = cos(x);
+w = tan(x);
+
+subplot(2,2,1)
+plot(x,y)
+subplot(2,2,2)
+plot(x,z)
+subplot(2,2,3)
+plot(x,w)</code></pre>
+<p>Every subsequent <code>plot</code> command draws over the most recently used subplot; to prevent this, use <code>clf</code> or <code>figure</code>.</p>
+<h3 id="axes-and-text">Axes and text</h3>
+<p><code>axis([xmin, xmax, ymin, ymax])</code> changes the displayed axis range. For example, since the graph of y = e^(5t) − 1 reaches the order of 8·10¹⁰ over the 0–5 s interval, it is more meaningful to look at the first second:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>t=0:0.01:5;
+y=exp(5*t)-1;
+plot(t,y)
+axis([0, 1, 0, 50])
+title('exponential function')
+xlabel('time (sec)')
+ylabel('output')
+gtext('unnecessary labeling')   % places text where you click with the mouse</code></pre>
+<p><code>text(xcor,ycor,'textstring')</code> places the text at the given coordinates. Other useful commands: <code>clf</code>, <code>figure</code>, <code>close</code>, <code>loglog</code>, <code>semilogx</code>, <code>semilogy</code>, <code>grid</code>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem301-matlab-tutorial.zip" download>eem301-matlab-tutorial.zip</a></p>
+              <p class="kucuk">ZIP archive · 47 KB · 29.09.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem301-matlab-tutorial.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (47 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

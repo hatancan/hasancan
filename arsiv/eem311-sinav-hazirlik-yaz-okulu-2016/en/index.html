@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM311 Electronics II: 2016 Summer School Exam Preparation Notes, Active Filters, Oscillators and Feedback — hasancan.net</title>
+<meta name="description" content="Handwritten notes from the EEM311 Electronics II 2016 summer school: Butterworth high-pass and band-pass filter design, quality factor and narrow-band BPF, Hartley, Colpitts, Clapp and crystal oscillators, feedback types and impedance changes, and current and transconductance feedback amplifier examples.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM311 Electronics II: 2016 Summer School Exam Preparation Notes, Active Filters, Oscillators and Feedback">
+<meta property="og:description" content="Handwritten notes from the EEM311 Electronics II 2016 summer school: Butterworth high-pass and band-pass filter design, quality factor and narrow-band BPF, Hartley, Colpitts, Clapp and crystal oscillators, feedback types and impedance changes, and current and transconductance feedback amplifier examples.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM311 Electronics II: 2016 Summer School Exam Preparation Notes, Active Filters, Oscillators and Feedback", "description": "Handwritten notes from the EEM311 Electronics II 2016 summer school: Butterworth high-pass and band-pass filter design, quality factor and narrow-band BPF, Hartley, Colpitts, Clapp and crystal oscillators, feedback types and impedance changes, and current and transconductance feedback amplifier examples.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem311-sinav-hazirlik-yaz-okulu-2016/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM311 – Elektronik II"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM311 Electronics II: 2016 Summer School Exam Preparation Notes, Active Filters, Oscillators and Feedback">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem311">EEM311</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM311 – Elektronik II</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.08.2016</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#butterworth-high-pass-filters-27-07-2016">Butterworth high-pass filters (27.07.2016)</a></li><li><a href="#band-pass-filters">Band-pass filters</a></li><li><a href="#oscillators-1-8-2016">Oscillators (1.8.2016)</a></li><li><a href="#feedback-amplifiers-2-8-2016">Feedback amplifiers (2.8.2016)</a></li><li><a href="#sampling-mixing-and-exam-question-5-8-2016">Sampling-mixing and exam question (5.8.2016)</a></li><li><a href="#transconductance-feedback-amplifier-9-8-2016">Transconductance feedback amplifier (9.8.2016)</a></li><li><a href="#high-frequency-response">High-frequency response</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM311</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM311 Electronics II: 2016 Summer School Exam Preparation Notes, Active Filters, Oscillators and Feedback</h1>
+            <p class="kucuk">EEM311 – Elektronik II · 09.08.2016 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post presents the handwritten lecture notes taken by a friend during the <strong>2016 summer school</strong> (27 July – 9 August 2016) of Başkent University's <strong>EEM 311 Electronics II</strong> course, together with the example problems written on the board in class. The notes were compiled together with past exam questions in preparation for the final exam. Personal information has been removed. The content was transcribed from photographed pages into text; the photographs themselves are not published. Places where the handwriting could not be read are indicated.</p>
+<h2 id="butterworth-high-pass-filters-27-07-2016">Butterworth high-pass filters (27.07.2016)</h2>
+<h3 id="second-order-high-pass-filter-hpf">Second-order high-pass filter (HPF)</h3>
+<p>Circuit: two series capacitors at the input (C₁ = C₂ = C); from the node between them, R₁ = R goes to the op-amp output; from the op-amp's non-inverting input, R₂ = 2R goes to ground; the op-amp is connected as a voltage follower.</p>
+<p>f_c = 1 / (2π √(R₁ R₂ C₁ C₂)) = 1 / (2π R C √2)</p>
+<p>Gain curve: at f_c the gain is 0.707 (−3 dB), and at f_c/10 it is 0.01 (−40 dB); the slope in the transition region is <strong>−40 dB/decade</strong> (as frequency decreases).</p>
+<p><strong>Example:</strong> Design a circuit that attenuates the output by a factor of 1/100 at 1 kHz and passes 10 kHz and above. Let C = 1 nF.</p>
+<p>R = 1 / (2π · 10⁻⁹ · 10 · 10³ · √2) = …</p>
+<p><em>Note: The result is not written in the notes; if calculated, R ≅ 11.25 kΩ (R₂ = 2R ≅ 22.5 kΩ) is obtained.</em></p>
+<h3 id="third-order-hpf">Third-order HPF</h3>
+<p>A first-order HPF stage (C₃ = C, R₃ = R, voltage follower) is added after the second-order HPF stage. At f_c/10 the gain is 0.001 (−60 dB); the slope is <strong>−60 dB/decade</strong>.</p>
+<p><strong>Examples:</strong></p>
+<ul><li>Design a circuit that attenuates signals below 2 kHz with a slope of −60 dB/decade (C = 0.1 µF): of the form R = 1 / (2π · f_c · C) (no value is written in the notes).</li><li>Design a 3-pole filter circuit that passes frequencies above 5 kHz.</li></ul>
+<h2 id="band-pass-filters">Band-pass filters</h2>
+<p>A band-pass filter (BPF) is obtained by cascading a low-pass filter (LPF) with an HPF. The lower cutoff frequency f_L is the cutoff frequency of the HPF; the upper cutoff frequency f_H is the cutoff frequency of the LPF. The bandwidth is BW = f_H − f_L.</p>
+<h3 id="first-order-bpf">First-order BPF</h3>
+<p>A first-order LPF (series R, shunt C to ground, voltage follower) followed by a first-order HPF (series C, shunt R to ground, voltage follower). The slope is −20 dB/decade on both sides.</p>
+<p><strong>Example:</strong> Design a first-order BPF that passes 1 kHz – 10 kHz (C = 0.1 µF). 1 kHz is for the HPF, 10 kHz for the LPF:</p>
+<ul><li>For the LPF: f_c = 1 / (2π · 10 · 10³ · 0.1 · 10⁻⁶ · R)</li><li>For the HPF: f_c = 1 / (2π · 10³ · 0.1 · 10⁻⁶ · R)</li></ul>
+<p><em>Note: From this, R ≅ 159 Ω for the LPF and R ≅ 1.59 kΩ for the HPF (no numerical value in the notes).</em></p>
+<h3 id="second-order-bpf">Second-order BPF</h3>
+<p>A second-order HPF (C₁ = C₂ = C, R₁ = R, R₂ = 2R) followed by a second-order LPF (R₃ = R₄ = R*, C₃ = 2C*, C₄ = C*).</p>
+<p><strong>Example:</strong> Design a filter that passes 300 Hz – 3 kHz.</p>
+<ul><li>For the HPF f_c = 300 Hz = 1 / (2π R C √2), C = 0.01 µF</li><li>For the LPF f_c = 3 kHz = 1 / (2π R C √2), C* = 0.1 µF</li></ul>
+<h3 id="quality-factor">Quality factor</h3>
+<ul><li>Center frequency: f_m = f_L + BW/2 = f_H − BW/2</li><li>Resonant frequency: f_r = √(f_L f_H)</li><li>Quality factor: Q = f_r / BW. The notes state narrow-band for Q ≥ 10 and wide-band for Q &lt; 10; next to it, a separate criterion has also been added: Q ≥ 0.5 narrow band, Q &lt; 0.5 wide band.</li></ul>
+<p><strong>Example:</strong> f_r = √(300 · 3000) = 948.68 Hz, BW = 3000 − 300 = 2700 Hz, Q = 948.68 / 2700 ≅ 0.35 (0.3 in the notes) ⇒ wide-band.</p>
+<h3 id="narrow-band-bpf-multiple-feedback">Narrow-band BPF (multiple feedback)</h3>
+<p>The circuit marked "memorize" in the notes: the input goes through R₁ to a node; from this node, R₃ goes to ground, C₁ to the op-amp output, and C₂ to the op-amp's inverting input; R₂ is between the inverting input and the output.</p>
+<ul><li>f_r = 1 / (2π C √((R₁ ‖ R₃) R₂))</li><li>R₁ = Q / (2π f_r C A_f)</li><li>R₂ = Q / (π f_r C)</li><li>R₃ = Q / (2π f_r C (2Q² − A_f))</li><li>Q = f_r / BW = 2π f_r A_f C R₁ = π f_r C R₂</li></ul>
+<p><em>Note: The gain expression in the notes reads like "A_f = R₂/R₁"; dividing the R₁ and R₂ formulas above gives R₂/R₁ = 2A_f, i.e. A_f = R₂/(2R₁).</em></p>
+<p><strong>Example:</strong> A 10-channel equalizer has resonant frequencies of 1 kHz, 2 kHz, …, 10 kHz. Design the 6th band filter of the equalizer for Q = 10. f_r = 6 kHz, BW = f_r / Q = 6 kHz / 10 = 600 Hz.</p>
+<h2 id="oscillators-1-8-2016">Oscillators (1.8.2016)</h2>
+<p>In LC oscillators, according to the types of the three impedances in the amplifier's feedback network:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Oscillator</th><th scope="col">Z₁</th><th scope="col">Z₂</th><th scope="col">Z₃</th></tr></thead><tbody><tr><th scope="row">Hartley</th><td>L</td><td>L</td><td>C</td></tr><tr><th scope="row">Colpitts</th><td>C</td><td>C</td><td>L</td></tr><tr><th scope="row">Clapp</th><td>C</td><td>C</td><td>L and C (series)</td></tr><tr><th scope="row">Crystal</th><td>C</td><td>C</td><td>X_TAL (crystal)</td></tr></tbody></table></div>
+<ul><li><strong>Hartley oscillator (with op-amp):</strong> Block A is an inverting amplifier built with R₁ and R₂; block β is two inductors with a grounded center tap (Z₂, Z₁) and a capacitor between their ends (Z₃).</li><li><strong>Transistor Hartley oscillator:</strong> a common-emitter BJT with a parallel Z₃ capacitor and a center-tapped Z₁–Z₂ inductor at the collector; the output is taken from a second winding on the inductor (transformer coupled).</li><li><strong>JFET Hartley oscillator:</strong> the same feedback network connected to the input of a JFET amplifier.</li><li><strong>Crystal oscillator (with op-amp):</strong> in block β, two capacitors with a grounded midpoint and a crystal (X_TAL) in parallel with them.</li></ul>
+<h2 id="feedback-amplifiers-2-8-2016">Feedback amplifiers (2.8.2016)</h2>
+<p>Advantages of feedback:</p>
+<ul><li>The larger the input impedance, the better: R_i ↑, R_o ↓</li><li>It improves the amplifier's frequency response (BW ↑)</li><li>It gives more linear operation</li></ul>
+<p>In a single-transistor common-emitter circuit, an unbypassed R_E is also feedback for the circuit.</p>
+<h3 id="feedback-types">Feedback types</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Sampling / mixing</th><th scope="col">Amplifier type</th><th scope="col">A</th><th scope="col">β</th></tr></thead><tbody><tr><th scope="row">Voltage-voltage (series mixing, shunt sampling)</th><td>Voltage amplifier</td><td>V_o / V_i</td><td>V_f / V_o</td></tr><tr><th scope="row">Current-voltage (shunt mixing, shunt sampling)</th><td>Transresistance amplifier</td><td>V_o / I_i</td><td>I_f / V_o</td></tr><tr><th scope="row">Voltage-current (series mixing, series sampling)</th><td>Transconductance amplifier</td><td>I_o / V_i</td><td>V_f / I_o</td></tr><tr><th scope="row">Current-current (shunt mixing, series sampling)</th><td>Current amplifier</td><td>I_o / I_i</td><td>I_f / I_o</td></tr></tbody></table></div>
+<p>In brief in the notes: if the feedback is connected in series at the input and in parallel at the output, it is a voltage amplifier.</p>
+<p><em>Note: In the notes, the output side for the voltage-current and current-current types is written as "parallel sampled"; in these two types the output current is sampled in series, so it is given that way in the table.</em></p>
+<h3 id="input-output-impedance-changes">Input-output impedance changes</h3>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col">Voltage-series (series-shunt)</th><th scope="col">Current-series (series-series)</th><th scope="col">Voltage-shunt (shunt-shunt)</th><th scope="col">Current-shunt (shunt-series)</th></tr></thead><tbody><tr><th scope="row">Z_if</th><td>Z_i (1 + βA)</td><td>Z_i (1 + βA)</td><td>Z_i / (1 + βA)</td><td>Z_i / (1 + βA)</td></tr><tr><th scope="row">Z_of</th><td>Z_o / (1 + βA)</td><td>Z_o (1 + βA)</td><td>Z_o / (1 + βA)</td><td>Z_o (1 + βA)</td></tr></tbody></table></div>
+<p>Rule: if the input is series, multiply by (1 + βA); if the input is shunt, divide by (1 + βA); at the output, divide for voltage sampling and multiply for current sampling.</p>
+<p><strong>Example (series-shunt):</strong> In a non-inverting op-amp amplifier with A = 100,000, R₁ = 1.8 kΩ, R₂ = 200 Ω, find the closed-loop gain of the circuit.</p>
+<p>β = V_f / V_o = R₂ / (R₁ + R₂) = 0.1</p>
+<p>Since A ≫ 1, 1 + Aβ ≅ Aβ ⇒ A_v = A / (Aβ) = 1/β = <strong>10</strong></p>
+<h2 id="sampling-mixing-and-exam-question-5-8-2016">Sampling-mixing and exam question (5.8.2016)</h2>
+<p>Summarized again in the notes:</p>
+<ul><li>Series mixing – series sampling → transconductance amplifier</li><li>Series mixing – shunt sampling → voltage amplifier</li><li>Shunt mixing – shunt sampling → transresistance amplifier</li><li>Shunt mixing – series sampling → current amplifier</li><li>When finding the loading effect of the feedback circuit: open-circuit on the series side, short-circuit on the shunt side.</li></ul>
+<h3 id="exam-question-25-points-feedback-current-gain">Exam question (25 points): feedback current gain</h3>
+<p>The question written on the board: β = 100, r_o = ∞, r_π1 = 13.1 kΩ (= (β+1) r_e), r_π2 = 1.9 kΩ, g_m1 = 7.62 mS, g_m2 = 52.7 mS. Find the closed-loop current gain of the circuit: A_if = I_o / I_s = ?</p>
+<p><em>Circuit:</em> V⁺ = +10 V. The input current source I_s, in parallel with R_S = 10 kΩ, is connected to the base of Q₁. The collector of Q₁ is connected to V⁺ through R_C1 = 40 kΩ, and its emitter to ground. The base of Q₂ is connected to the collector of Q₁; R_C2 = 2 kΩ, and the output goes through C → ∞ to R_L = 0.5 kΩ (I_o is the load current); R_E = 1 kΩ at the emitter of Q₂. The feedback resistor R_F = 10 kΩ (in series with C → ∞) is connected from the emitter of Q₂ (node V_e) to the base of Q₁ (shunt-series, current amplifier).</p>
+<p><strong>Solution (node equations, on the board and in the notes):</strong></p>
+<ol><li>I_s = V_π1 (1/10 + 1/13.1 + 1/10) − V_e (1/10) ⇒ I_s = V_π1 (0.2763) − V_e (0.1)</li><li>(7.62) V_π1 + V_π2 (1/40 + 1/1.9) + V_e (1/40) = 0 ⇒ (7.62) V_π1 + V_π2 (0.5513) + V_e (0.025) = 0</li><li>V_π2 (1/1.9 + 52.7) = V_e (1/1 + 1/10) − V_π1 (1/10) ⇒ V_π2 (53.23) = V_e (1.1) − V_π1 (0.1)</li></ol>
+<p>From (3): V_e = V_π2 (48.39) + V_π1 (0.0909). Substituting into (1):</p>
+<p>I_s = V_π1 (0.2763) − (0.1)[V_π2 (48.39) + V_π1 (0.0909)] ⇒ I_s = V_π1 (0.2672) − V_π2 (4.839)</p>
+<p>Substituting into (2): (7.622) V_π1 + V_π2 (1.761) = 0 ⇒ V_π1 = −V_π2 (0.2310)</p>
+<p>From this, I_s = (0.2672)(−V_π2)(0.2310) − V_π2 (4.839) ⇒ I_s = −V_π2 (4.901)</p>
+<p>I_o = −g_m2 V_π2 [R_C2 / (R_C2 + R_L)] = (−52.7)(2 / 2.5) V_π2 = −42.16 V_π2</p>
+<p>I_o = −(42.16)(−I_s / 4.901) ⇒ <strong>A_if = I_o / I_s ≅ 8.60</strong></p>
+<h2 id="transconductance-feedback-amplifier-9-8-2016">Transconductance feedback amplifier (9.8.2016)</h2>
+<p>A three-transistor circuit whose title ("… Question") cannot be fully read in the notes: r_o = ∞, β = 120, V_T = 26 mV, I_C1 = 0.5 mA, I_C2 = 1 mA, I_C3 = 2 mA. Find the transconductance transfer function of the circuit: A_gf = I_o / V_s = ?</p>
+<ul><li>Feedback circuit: the resistor (R_E) between the emitters of Q₁ and Q₃, and the two emitter resistors (R_E1, R_E2).</li><li>The resistance reflected to the input is R₁₁ = R_E1 (in the notes), and the resistance reflected to the output is R₂₂ = R_E + R_E1.</li><li>In the ac equivalent circuit, each transistor is modeled with a β r_e resistance and a β I_b current source; I_o = β I_b3.</li><li>First equation for the emitter node of Q₁: I_b1 + β I_b1 = V_e1 / R_E1 + (V_e1 − V_e2) / R_E</li></ul>
+<p>The solution in the notes is left at this point. (This question is question 2 of the January 2016 final; the result in the answer key is A_gf ≅ 98 mA/V.)</p>
+<p>On another page, the loading resistances of the feedback network are calculated in the ac equivalent of a three-stage amplifier: R₁₁ = 9 kΩ ‖ 1 kΩ = 0.9 kΩ, R₂₂ = 9 kΩ + 1 kΩ = 10 kΩ, R_i3 = β r_e3 + β[(9 k + 1 k) ‖ R_L].</p>
+<h2 id="high-frequency-response">High-frequency response</h2>
+<p>The high-frequency response is determined by the transistor's internal (hidden) capacitances: C_be, C_bc and C_ce. External capacitances (C_i, C_o coupling capacitors) are not taken into account at high frequencies.</p>
+<ul><li>C_bc is reflected to both sides using Miller's theorem: C_Miller,input = C_bc (1 + |A_v|), C_Miller,output = C_bc (1 + 1/|A_v|)</li><li>Parallel capacitances are summed.</li></ul>
+<p><strong>Frequency response questions (example):</strong> On the low-frequency side, three break frequencies are given as 500 Hz, 700 Hz and 1 kHz; assuming the gain after the highest break is 100, the gains at the break points are calculated in order: A_V(700 Hz) = 100 / √(1 + (1 kHz / 700 Hz)²). On the graph, the gain values are marked as 100, 70.7 and 65. The general rule in the notes is "A_V = previous gain / √(1 + (ratio)²)", written separately for the low-frequency and high-frequency sides; the numerator and denominator of the ratio cannot be made out exactly in the handwriting.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

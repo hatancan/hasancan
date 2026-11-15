@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: Additional Simulation Codes for Diode, MOS, Power, and RC Measurements — hasancan.net</title>
+<meta name="description" content="SPICE simulations of diode transients, MOS sweeps, CMOS power, and ring oscillator experiments; MATLAB plots of RC gain and phase measurements. Additional source codes and notes on source errors.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: Additional Simulation Codes for Diode, MOS, Power, and RC Measurements">
+<meta property="og:description" content="SPICE simulations of diode transients, MOS sweeps, CMOS power, and ring oscillator experiments; MATLAB plots of RC gain and phase measurements. Additional source codes and notes on source errors.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: Additional Simulation Codes for Diode, MOS, Power, and RC Measurements", "description": "SPICE simulations of diode transients, MOS sweeps, CMOS power, and ring oscillator experiments; MATLAB plots of RC gain and phase measurements. Additional source codes and notes on source errors.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "eem312-ek-benzetim-ve-olcum-kodlari.zip", "contentUrl": "https://hasancan.net/arsiv/eem312-ek-benzetim-ve-olcum-kodlari/eem312-ek-benzetim-ve-olcum-kodlari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: Additional Simulation Codes for Diode, MOS, Power, and RC Measurements">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>12.04.2017</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#experiment-conditions">Experiment conditions</a></li><li><a href="#notes-on-the-source-codes">Notes on the source codes</a></li><li><a href="#rc-measurement-series">RC measurement series</a></li><li><a href="#d1n4148-transient-experiment">D1N4148 transient experiment</a></li><li><a href="#instantaneous-and-average-power-input-plot">Instantaneous and average power, input plot</a></li><li><a href="#supply-dc-sweep-at-a-constant-input">Supply DC sweep at a constant input</a></li><li><a href="#power-with-a-0-2-pf-load-and-a-100-ns-period">Power with a 0.2 pF load and a 100 ns period</a></li><li><a href="#level-49-model-w-90-m-and-l-1-m">Level 49 model, W=90 µm and L=1 µm</a></li><li><a href="#gate-and-body-voltage-sweep">Gate and body voltage sweep</a></li><li><a href="#pmos-width-experiment">PMOS width experiment</a></li><li><a href="#gain-frequency-plot">Gain-frequency plot</a></li><li><a href="#phase-frequency-plot">Phase-frequency plot</a></li><li><a href="#nmos-with-resistor-load-and-a-3-v-supply">NMOS with resistor load and a 3 V supply</a></li><li><a href="#ring-of-five-inverters-with-100-ff-loads">Ring of five inverters with 100 fF loads</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: Additional Simulation Codes for Diode, MOS, Power, and RC Measurements</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 12.04.2017 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects various simulation and plotting codes left over from the 2011–2017 laboratory work in the <strong>EEM312 Digital Electronics</strong> archive. Student names and numbers have been removed from the code comments and file names. These versions, which were not included in the appendices of the earlier experiment posts, can be downloaded as a ZIP at the end of the post, with their sources cleaned up. The codes were not run; the explanations below are based on reading the sources.</p>
+<h2 id="experiment-conditions">Experiment conditions</h2>
+<ul><li>The diode model uses BV = 50 V; a 10 kΩ load, a 0–5 V pulse, and a 2 µs transient analysis with a 0.1 ns step. The DC analysis in the file has been left commented out.</li><li>In the power codes, <code>-vdd#branch*v(3)</code> shows the instantaneous power drawn from the supply. <code>1_b.cir</code> also requests the average via <code>mean</code>, for a 5 V supply and a 0.1 pF load.</li><li><code>1a.cir</code> holds the input at 5 V and sweeps the supply over 0–5 V; the widths of both transistors are 1.8 µm.</li><li>The MOS sweeps use the Level 3 and Level 49 models. The long-channel file has W/L = 90/1 µm; in the PMOS file, of the width options 1.8, 3.6, and 7.2 µm, only the first is active.</li><li>The ring file connects five <code>inv</code> subcircuits in a closed chain. Each subcircuit has a 100 fF load and a 3.2 V supply.</li></ul>
+<h2 id="notes-on-the-source-codes">Notes on the source codes</h2>
+<p><em>Note: In <code>nmos2.cir</code>, the <code>VIN 1 0</code> line is missing its source value. Although the file's analysis sweeps VIN, this definition may be incomplete from the simulator's syntax standpoint.</em></p>
+<p><em>Note: The resistor-loaded NMOS file contains <code>C1 2 0 1F</code>. In SPICE suffixes, <code>F</code> means femto; this expression is a value of 1 fF.</em></p>
+<p><em>Note: The ring file requests <code>plot V(6)</code>; node 6 is not defined in the top-level connections. The source line was not changed.</em></p>
+<h2 id="rc-measurement-series">RC measurement series</h2>
+<p>The gain code puts the measured ratios on the x axis and the frequencies on the y axis. The phase code, on the other hand, takes the frequency as the x axis and the phase difference as the y axis.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Frequency (kHz)</th><th scope="col">Gain in code</th><th scope="col">Phase difference</th></tr></thead><tbody><tr><th scope="row">10</th><td>0.872</td><td>17.63</td></tr><tr><th scope="row">50</th><td>0.475</td><td>50.9</td></tr><tr><th scope="row">100</th><td>0.26</td><td>69.12</td></tr><tr><th scope="row">150</th><td>0.18</td><td>73.07</td></tr><tr><th scope="row">200</th><td>0.14</td><td>80.64</td></tr><tr><th scope="row">250</th><td>0.116</td><td>112.5</td></tr><tr><th scope="row">300</th><td>0.096</td><td>72.43</td></tr><tr><th scope="row">400</th><td>0.08</td><td>81.29</td></tr><tr><th scope="row">500</th><td>0.064</td><td>59.4</td></tr><tr><th scope="row">1000</th><td>0.04</td><td>79.2</td></tr></tbody></table></div>
+<p><em>Note: The axis label of the gain code says <code>Vin/Vout</code>. These measurements, which are less than one and decrease with frequency, correspond to the <code>Vout/Vin</code> ratio in the related RC low-pass experiment report. The label was kept as is in the source code. The value 112.5 at 250 kHz in the phase series was also left unchanged.</em></p>
+<h2 id="d1n4148-transient-experiment">D1N4148 transient experiment</h2>
+<p>File: <code>diyot/Deney-4_Kod.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*D1N4148 Diyot Akım - Voltaj Grafiği
+
+.model D1N4148 D(IS=5.84n  N=1.94  RS=.7017  XTI=3  EG=1.11  CJO=.95p 
++ M=.55  VJ=.75  FC=.5  BV=50  IBV=100u  TT=11.07n)
+
+
+VIN 1 0 PULSE(0 5 0 0NS 0NS 500nS 10uS)
+*VIN 1 0 DC 5
+R1 2 0 10k
+D1 1 2 D1N4148
+*.CONTROL
+*DC VIN -300 200 0.1
+*PLOT -VIN#branch vs V(1)-V(2)
+*.ENDC
+.TRAN 0.1nS 2uS
+.PLOT TRAN V(1) V(2)
+.END</code></pre>
+<h2 id="instantaneous-and-average-power-input-plot">Instantaneous and average power, input plot</h2>
+<p>File: <code>guc/1_b.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+vdd 3 0 5
+cl 2 0 0.1p
+Vin 1 0 pulse (0 5 0 10n 10n 100n 200n)
+
+M1 2 1 0 0 MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+M2 2 1 3 3 MOSP W=5.4u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+
+.control 
+tran 0.1ns 800ns
+print mean(-vdd#branch*v(3))
+plot -vdd#branch*v(3) 
+plot v(1)
+.endc
+.end</code></pre>
+<h2 id="supply-dc-sweep-at-a-constant-input">Supply DC sweep at a constant input</h2>
+<p>File: <code>guc/1a.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+1a
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+vdd 3 0 5
+vin 1 0 5
+
+M1 2 1 0 0 MOSN W=1.8u L=1.2u 
+
+M2 2 1 3 3 MOSP W=1.8u L=1.2u 
+
+
+.control 
+
+DC vdd 0 5 0.01
+plot  -vdd#branch*V(3) 
+
+.endc
+.end</code></pre>
+<h2 id="power-with-a-0-2-pf-load-and-a-100-ns-period">Power with a 0.2 pF load and a 100 ns period</h2>
+<p>File: <code>guc/Lab_10_1c1.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+1c
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+vdd 3 0 5
+cl 2 0 0.2p
+Vin 1 0 pulse (0 5 0 1n 1n 50n 100n)
+
+M1 2 1 0 0 MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+
+M2 2 1 3 3 MOSP W=5.4u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+
+.control 
+tran 0.1ns 400ns
+plot -vdd#branch*v(3) 
+
+.endc
+.end</code></pre>
+<h2 id="level-49-model-w-90-m-and-l-1-m">Level 49 model, W=90 µm and L=1 µm</h2>
+<p>File: <code>mos/uzun-kanal-level49.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>*Soru 2 a
+
+.MODEL MOSN NMOS LEVEL = 49
++LINT = 4.E-08 TOX = 4.E-09 VTH0 = 0.3999 RDSW = 250
++LMIN=1.8E-7 LMAX=1.8E-7 WMIN=1.8E-7 WMAX=1.0E-4 TREF=27.0 VERSION =3.1
++XJ= 6.0000000E-08 NCH= 5.9500000E+17
++LLN= 1.0000000 LWN= 1.0000000 WLN= 0.00 WWN= 0.00 LL= 0.00
++LW= 0.00 LWL= 0.00 WINT= 0.00 WL= 0.00 WW= 0.00 WWL= 0.00
++MOBMOD= 1 BINUNIT= 2 XL= 0
++XW= 0 BINFLAG= 0 DWG= 0.00 DWB= 0.00
++K1= 0.5613000 K2= 1.0000000E-02
++K3= 0.00 DVT0= 8.0000000 DVT1= 0.7500000
++DVT2= 8.0000000E-03 DVT0W= 0.00 DVT1W= 0.00
++DVT2W= 0.00 NLX= 1.6500000E-07 W0= 0.00
++K3B= 0.00 NGATE= 5.0000000E+20
++VSAT= 1.3800000E+05 UA= -7.0000000E-10 UB= 3.5000000E-18
++UC= -5.2500000E-11 PRWB= 0.00
++PRWG= 0.00 WR= 1.0000000 U0= 3.5000000E-02
++A0= 1.1000000 KETA= 4.0000000E-02 A1= 0.00
++A2= 1.0000000 AGS= -1.0000000E-02 B0= 0.00 B1= 0.00
++CDSC= 0.00 CDSCB= 0.00 CDSCD= 0.00
++ETA0= 0.2200000 ETAB= 0.00 DSUB= 0.8000000
++PCLM= 5.0000000E-02 PDIBLC1= 1.2000000E-02 PDIBLC2= 7.5000000E-03
++PDIBLCB= -1.3500000E-02 DROUT= 1.7999999E-02 PSCBE1= 8.6600000E+08
++PSCBE2= 1.0000000E-20 PVAG= -0.2800000 DELTA= 1.0000000E-02
++ALPHA0= 0.00 BETA0= 30.0000000
++KT1= -0.3700000 KT2= -4.0000000E-02 AT= 5.5000000E+04
++UTE= -1.4800000 UA1= 9.5829000E-10 UB1= -3.3473000E-19
++UC1= 0.00 KT1L= 4.0000000E-09 PRT= 0.00
++CJ= 0.00365 MJ= 0.54 PB= 0.982
++CJSW= 7.9E-10 MJSW= 0.31 PHP= 0.841
++CTA= 0 CTP= 0 PTA= 0
++PTP= 0 JS=1.50E-08 JSW=2.50E-13
++N=1.0 XTI=3.0 CGDO=2.786E-10
++CGSO=2.786E-10 CGBO=0.0E+00 CAPMOD= 2
++NQSMOD= 0 ELM= 5 XPART= 1
++CGSL= 1.6E-10 CGDL= 1.6E-10 CKAPPA= 2.886
++CF= 1.069E-10 CLC= 0.0000001 CLE= 0.6
++DLC= 4E-08 DWC= 0 VFBCV= -1
+
+M1 3 1 0 2 MOSN W=90u L=1u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+
+
+VIN 1 0 0V pulse(0V 5V 0 1ns 1ns 50ns 100ns)
+VDD 3 0 5V
+VBS 2 0 0V
+
+.control
+
+
+dc VDD 0V 2V 0.1V VIN 0.2V 2V 0.2V 
+plot -VDD#branch vs v(3)
+
+
+.endc</code></pre>
+<h2 id="gate-and-body-voltage-sweep">Gate and body voltage sweep</h2>
+<p>File: <code>mos/nmos2.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL NMOS NMOS LEVEL = 3 
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.5 
++ PHI = 0.7 VTO = 0.8 DELTA = 3.0 
++ UO = 650 ETA = 3.0E-6 THETA = 0.1 
++ KP = 120E-6 VMAX = 1E5 KAPPA = 0.3 
++ RSH = 0 NFS = 1E12 TPG = 1 
++ XJ = 500E-9 LD = 100E-9 
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10 
++ CJ = 400E-6 PB = 1 MJ = 0.5 
++ CJSW = 300E-12 MJSW = 0.5
+
+.MODEL PMOS PMOS LEVEL = 3 
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.6
++ PHI = 0.7 VTO = -0.9 DELTA = 0.1 
++ UO = 250 ETA = 0 THETA = 0.1 
++ KP = 40E-6 VMAX = 5E4 KAPPA = 1 
++ RSH = 0 NFS = 1E12 TPG = -1 
++ XJ = 500E-9 LD = 100E-9 
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10 
++ CJ = 400E-6 PB = 1 MJ = 0.5 
++ CJSW = 300E-12 MJSW = 0.5
+
+M1 2 1 4 3 NMOS W=1.8u L=1.2u NRS=0.333 NRD=0.333 
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+
+*M2 D G S B MOSP W=1.8u L=1.2u NRS=0.333 NRD=0.333 
+*+ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+
+VIN 1 0 
+Vdd 2 0 5
+Vbs 0 3 5
+Vsamp 4 0 0
+
+*Alter M1 L=1u 
+
+.control
+
+dc VIN 0 5 0.1 Vbs 0 5 0.5
+plot vsamp#branch vs V(1)
+.endc</code></pre>
+<h2 id="pmos-width-experiment">PMOS width experiment</h2>
+<p>File: <code>mos/pmos3.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+
+.MODEL NMOS NMOS LEVEL = 3 
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.5 
++ PHI = 0.7 VTO = 0.8 DELTA = 3.0 
++ UO = 650 ETA = 3.0E-6 THETA = 0.1 
++ KP = 120E-6 VMAX = 1E5 KAPPA = 0.3 
++ RSH = 0 NFS = 1E12 TPG = 1 
++ XJ = 500E-9 LD = 100E-9 
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10 
++ CJ = 400E-6 PB = 1 MJ = 0.5 
++ CJSW = 300E-12 MJSW = 0.5
+
+.MODEL PMOS PMOS LEVEL = 3 
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.6
++ PHI = 0.7 VTO = -0.9 DELTA = 0.1 
++ UO = 250 ETA = 0 THETA = 0.1 
++ KP = 40E-6 VMAX = 5E4 KAPPA = 1 
++ RSH = 0 NFS = 1E12 TPG = -1 
++ XJ = 500E-9 LD = 100E-9 
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10 
++ CJ = 400E-6 PB = 1 MJ = 0.5 
++ CJSW = 300E-12 MJSW = 0.5
+
+*M1 2 1 4 3 NMOS W=1.8u L=1.2u NRS=0.333 NRD=0.333 
+*+ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+
+M2 4 1 2 3 PMOS W=1.8u L=1.2u NRS=0.333 NRD=0.333 
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+
+VIN 0 1 2
+Vdd 0 2 5
+Vbs 0 3 0
+Vsamp 4 0 0
+
+.control
+
+Alter M2 W=1.8u
+*Alter M2 W=3.6u
+*Alter M2 W=7.2u
+dc Vdd 0 5 0.1
+plot vsamp#branch vs V(2)
+.endc</code></pre>
+<h2 id="gain-frequency-plot">Gain-frequency plot</h2>
+<p>File: <code>rc/ggg.m</code>.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>x=[0.872 0.475 0.26 0.18 0.14 0.116 0.096 0.08 0.064 0.04]
+y=[10000 50000 100000 150000 200000 250000 300000 400000 500000 1000000]
+plot(x,y,'r',x,y,'s');
+xlabel('Kazanç (Vin/Vout)')
+ylabel('Frekans')</code></pre>
+<h2 id="phase-frequency-plot">Phase-frequency plot</h2>
+<p>File: <code>rc/gggggg.m</code>.</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>y=[17.63 50.9 69.12 73.07 80.64 112.5 72.43 81.29 59.4 79.2]
+x=[10000 50000 100000 150000 200000 250000 300000 400000 500000 1000000]
+plot(x,y,'r',x,y,'s');
+xlabel('Frekans')
+ylabel('FAZ FARKI')</code></pre>
+<h2 id="nmos-with-resistor-load-and-a-3-v-supply">NMOS with resistor load and a 3 V supply</h2>
+<p>File: <code>tersleyici/soru1a.cir</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>* Arsiv devre kaydi
+Soru1a
+
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58
+
+
+
+VDD 3 0 DC 3
+VIN 1 0 PULSE(0 3.1 0 1ns 1ns 5ns 10ns)
+
+M1 2 1 0 0 MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+
+R1 3 2 100K
+C1 2 0 1F
+
+.CONTROL
+DC VIN 0 3.1 0.1
+PLOT V(2) VS V(1)
+.ENDC</code></pre>
+<h2 id="ring-of-five-inverters-with-100-ff-loads">Ring of five inverters with 100 fF loads</h2>
+<p>File: <code>halka/y6-3d.txt</code>.</p>
+<pre class="kaynak" data-dosya="spice - Not Defteri"><code>**
+.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543 
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8 
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585 
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58 
+
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10 
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8 
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279 
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6 
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052 
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+
+.subckt inv 1 3 
+M1 3 1 0 0 MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333 
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+M2 3 1 2 2 MOSP W=5.4u L=1.2u NRS=0.333 NRD=0.333 
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u 
+VDD 2 0 3.2V 
+CL1 3 0 100f
+.ends
+
+
+
+xinv1 1 2 inv
+xinv2 2 3 inv
+xinv3 3 4 inv
+xinv4 4 5 inv
+xinv5 5 1 inv
+
+.control
+TRAN 1NS 200nS
+plot V(2) 
+plot V(3) 
+plot V(4) 
+plot V(6) 
+.endc</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem312-ek-benzetim-ve-olcum-kodlari.zip" download>eem312-ek-benzetim-ve-olcum-kodlari.zip</a></p>
+              <p class="kucuk">ZIP archive · 6 KB · 12.04.2017</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem312-ek-benzetim-ve-olcum-kodlari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (6 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

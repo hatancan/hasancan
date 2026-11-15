@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM441 Communications I: 2013 summer school EEM 442 Communications II final exam and solutions — hasancan.net</title>
+<meta name="description" content="EEM 442 summer school final: QPSK symbol sequence with a raised-cosine filter, choice of M and R for PCM and receiver power, slope overload in delta modulation, TDM-PCM bit rate and bandwidth.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM441 Communications I: 2013 summer school EEM 442 Communications II final exam and solutions">
+<meta property="og:description" content="EEM 442 summer school final: QPSK symbol sequence with a raised-cosine filter, choice of M and R for PCM and receiver power, slope overload in delta modulation, TDM-PCM bit rate and bandwidth.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM441 Communications I: 2013 summer school EEM 442 Communications II final exam and solutions", "description": "EEM 442 summer school final: QPSK symbol sequence with a raised-cosine filter, choice of M and R for PCM and receiver power, slope overload in delta modulation, TDM-PCM bit rate and bandwidth.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem441-2013-yaz-okulu-haberlesme-2-final/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM441 – Haberleşme I"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM441 Communications I: 2013 summer school EEM 442 Communications II final exam and solutions">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem441">EEM441</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM441 – Haberleşme I</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>15.08.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#questions">Questions</a></li><li><a href="#solution-1-raised-cosine-0">Solution 1: Raised-cosine, α = 0</a></li><li><a href="#solution-2-m-r-and-receiver-power-for-pcm">Solution 2: M, R, and receiver power for PCM</a></li><li><a href="#solution-3-delta-modulation-and-slope-overload">Solution 3: Delta modulation and slope overload</a></li><li><a href="#solution-4-8-signal-tdm-pcm">Solution 4: 8-signal TDM-PCM</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM441</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM441 Communications I: 2013 summer school EEM 442 Communications II final exam and solutions</h1>
+            <p class="kucuk">EEM441 – Haberleşme I · 15.08.2013 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This document belongs to the EEM 442 Communications II course; it is published here because it was found in the EEM 441 folder. It is the Başkent University EEM 442 Communications II summer school final exam (the date on the paper reads "…/8/2013", duration 110 minutes; the day is illegible) and its handwritten solutions. The exam paper and solutions were transcribed to text from photographed pages; the photographs are not published. For this reason there is no original file to download. Personal information (student number, name) has been removed. Since the exam papers were sideways-rotated photographs, the transcription was done carefully. The content of a printed solution page from a textbook is summarized in this post by its result only.</p>
+<h2 id="questions">Questions</h2>
+<ol><li>Consider a communication system with a raised-cosine filter with roll-off factor α = 0, operating at a bit rate of 2 Mbps. The modulation is M = 4 phase modulation, using the mapping {00, 01, 11, 10} ⇒ {1+j, −1+j, −1−j, 1−j}. The symbol sequence applied to the input of the raised-cosine filter is s(0), s(T_s), s(2T_s), s(3T_s) = [1+j, −1−j, −1+j, −1+j]. a) Write the impulse response function. b) Calculate the average energy per symbol. c) Calculate the bit duration, the symbol rate, and the symbol duration. d) Using the impulse response function found in part a), and assuming the sampler samples synchronously, find the output at the sampling instants (t = 0, T_s, 2T_s, 3T_s, 4T_s, …) and sketch its graph.</li><li>A signal with bandwidth W = 15 kHz is transmitted as an M-ary PCM signal over a channel with noise power spectral density N₀ = 0.01 µW/Hz and transmission bandwidth B_T = 40 kHz. a) Calculate the smallest M and R values for SNR₀ ≥ 40 dB. b) Assuming the PCM signal uses the entire transmission bandwidth, with P_e &lt; 10⁻⁵ and P_peak/P = 2, what should the minimum received power be in order to operate above the threshold signal-to-noise ratio?</li><li>A ramp signal x(t) = a·t is applied to a delta modulator (DM) with sampling period T_s and step size Δ. a) Determine the conditions under which slope-overload distortion occurs. b) For three step-size values, Δ = 0.75 a T_s, Δ = a T_s, and Δ = 1.25 a T_s, sketch the DM modulator output starting from zero.</li><li>A digital communication system transmits eight message signals, each with a bandwidth of 4 kHz, time-division multiplexed, using a binary uniformly quantized PCM system. The sampling rate must be at least 50 percent above the Nyquist rate; the sampling error must not exceed 1 percent of the peak amplitude. a) Calculate the sampling rate. b) Calculate the number of quantization levels and the number of bits per sample. c) Calculate the total bit rate for the multiplexed message signal. d) Calculate the transmission bandwidth of the digital communication system.</li></ol>
+<p>The exam paper also has a "Useful formulas" page: for the observation vector r(T) = ±A + n(T), P_b = p₁Q((A − λ)/σ) + (1 − p₁)Q((A + λ)/σ); Q(3.09023) = 10⁻³, Q(√20) = 3.87×10⁻⁶; B_T = (R_s/2)(1 + α); SNR₀ = 3×2^(2R)/α, α = peak power/average power; for binary correlated signaling, P_b = Q(√(E_s(1 − ρ)/N₀)); for M-PSK, P_s = 2Q(√(2E_s/N₀) sin(π/M)); sinc(2Wt) ⇔ (1/2W)Π(f/2W); (1/(M/2))Σ(2i − 1)² = (M² − 1)/3; for M-PAM, P_E(M) = [2(M − 1)/M] Q(√(6E_s,av/((M² − 1)N₀))).</p>
+<h2 id="solution-1-raised-cosine-0">Solution 1: Raised-cosine, α = 0</h2>
+<p>Symbol sequence {00, 01, 11, 10} ⇒ {1+j, −1+j, −1−j, 1−j}; in the solution on the paper, s(0), s(T_s), s(2T_s), s(3T_s) = {1+j, −1+j, −1−j, 1−j} is taken in order (for α = 0, W = 1/(2T_s)).</p>
+<p>a) p(t) = sinc(2Wt) = sinc(t/T_s) (α = 0). b) Average energy per symbol: E_s = |1 ± j|² = 2. c) Bit rate R_b = 2 Mbps ⇒ bit duration T_b = 0.5 µs; symbol rate R_s = R_b/2 = 1 Msymbol/s ⇒ symbol duration T_s = 1/R_s = 1 µs. d) Sampling instant = symbol duration: T_s = 1 µs. The output is the sum of shifted sinc pulses, one for each symbol; since at exactly t = kT_s only the pulse of the corresponding symbol is nonzero (no ISI), the output takes the values 00 → 1+j, 01 → −1+j, 11 → −1−j, 10 → 1−j at the instants 0, T_s, 2T_s, 3T_s, respectively.</p>
+<h2 id="solution-2-m-r-and-receiver-power-for-pcm">Solution 2: M, R, and receiver power for PCM</h2>
+<p>SNR₀ = 3L²/α, α = 2 ⇒ (3/2) L² &gt; 10⁴ ⇒ L² = (2/3)10⁴ ⇒ L &gt; 81.6.</p>
+<p>On the paper, the symbol rate is written as R_s = f_s R/log₂M = 2WR/log₂M and B ≥ 1/(2T_s) = R_s/2; from this, B ≈ W R is obtained. With B_T = 40 kHz, R &lt; B_T/W = 40 kHz/15 kHz ⇒ R = 2 (written as 2.5 on the paper). L = M^R &gt; 81.6 ⇒ M² &gt; 81.6 ⇒ M = 10 and L = M² = 100.</p>
+<p>Threshold SNR: SNR_th = (6B/W)(M² − 1) = (6×40 kHz/15 kHz)(100 − 1) = 16 × 99 ≈ 1600. Received power: P_r = N₀ W SNR_th = 10⁻⁸ × 15×10³ × 1.6×10³ = 0.24 W = 240 mW.</p>
+<p><em>Note: The paper writes "R &lt; B/W = 2.5"; 40/15 = 2.67. The result (R = 2) does not change.</em></p>
+<h2 id="solution-3-delta-modulation-and-slope-overload">Solution 3: Delta modulation and slope overload</h2>
+<p>a) In one period T_s, the input signal increases by aT_s, whereas the output of the delta modulator can change by at most Δ. Slope-overload distortion occurs when Δ &lt; aT_s, i.e., when Δ/T_s &lt; a.</p>
+<p>b) Δ = 0.75 aT_s: the output continually lags behind the input (slope overload); Δ = aT_s: the output follows the input step by step (boundary case); Δ = 1.25 aT_s: the output follows the input and exhibits small oscillation between steps, with no slope overload (granular noise).</p>
+<p><em>Note: The photograph for this part is a printed page from the textbook solution manual; therefore only its result is summarized, and the printed drawings have not been transcribed. The printed statement on the paper is read in one place as something like "Δ ≳ aT_s"; the correct condition for slope overload is Δ &lt; aT_s.</em></p>
+<h2 id="solution-4-8-signal-tdm-pcm">Solution 4: 8-signal TDM-PCM</h2>
+<p>W = 4 kHz.</p>
+<p>a) f_s = 1.5 × 2 × W = 1.5 × 2 × 4 kHz = 12000 samples/s. b) Sampling (quantization) error: Δ/2 = m_peak/L ≤ 0.01 m_peak ⇒ L ≥ 100; L = 2^R ≥ 100 ⇒ R = 7 bits/sample, L = 128. c) Each sample is coded with R = 7 bits. The bit rate per signal is R_b = R f_s = 7 × 12000 = 84000 bps; when 8 signals are multiplexed, the total is R_B = 8 × 84000 = 672000 bps = 672 kbps. d) The minimum required transmission bandwidth is B_T = 1/(2T_b) = R_b/2 = 336 kHz.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

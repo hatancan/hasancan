@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM227 Data Structures: Introduction to Data Structures, Data Abstraction and Operator Overloading (Week 3 Supplementary Notes) — hasancan.net</title>
+<meta name="description" content="Supplementary lecture notes for week 3 of EEM227 Data Structures (October 2007): data, structure and algorithm, abstract data types, data abstraction and information hiding, operator overloading rules in C++, type conversion, and worked examples with the Array, String and Date classes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem227-veri-soyutlama/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem227-veri-soyutlama/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem227-veri-soyutlama/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem227-veri-soyutlama/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM227 Data Structures: Introduction to Data Structures, Data Abstraction and Operator Overloading (Week 3 Supplementary Notes)">
+<meta property="og:description" content="Supplementary lecture notes for week 3 of EEM227 Data Structures (October 2007): data, structure and algorithm, abstract data types, data abstraction and information hiding, operator overloading rules in C++, type conversion, and worked examples with the Array, String and Date classes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem227-veri-soyutlama/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM227 Data Structures: Introduction to Data Structures, Data Abstraction and Operator Overloading (Week 3 Supplementary Notes)", "description": "Supplementary lecture notes for week 3 of EEM227 Data Structures (October 2007): data, structure and algorithm, abstract data types, data abstraction and information hiding, operator overloading rules in C++, type conversion, and worked examples with the Array, String and Date classes.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem227-veri-soyutlama/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM227 – Veri Yapıları", "associatedMedia": {"@type": "MediaObject", "name": "Hafta3 Ek DersNotları.pdf", "contentUrl": "https://hasancan.net/arsiv/eem227-veri-soyutlama/Hafta3 Ek DersNotları.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM227 Data Structures: Introduction to Data Structures, Data Abstraction and Operator Overloading (Week 3 Supplementary Notes)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem227">EEM227</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM227 – Veri Yapıları</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.10.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#data-structures">Data structures</a></li><li><a href="#data-abstraction-and-information-hiding">Data abstraction and information hiding</a></li><li><a href="#operator-overloading">Operator overloading</a></li><li><a href="#worked-example-array-class">Worked example: Array class</a></li><li><a href="#type-conversion">Type conversion</a></li><li><a href="#worked-example-string-class">Worked example: String class</a></li><li><a href="#overloading-and">Overloading (++ and --)</a></li><li><a href="#worked-example-date-class">Worked example: Date class</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM227</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM227 Data Structures: Introduction to Data Structures, Data Abstraction and Operator Overloading (Week 3 Supplementary Notes)</h1>
+            <p class="kucuk">EEM227 – Veri Yapıları · 05.10.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the <strong>supplementary lecture notes</strong> for week 3 of the fall 2007 semester of the <strong>EEM227 Data Structures</strong> course at Başkent University (October 5, 2007). The notes are a two-column summary: first the basic concepts of data structures, then data abstraction and operator overloading rules in C++. Since the code for the worked examples (the Array, String and Date classes) appears in the notes as images of book pages, it is given here as page images. For the main lecture notes of the same week, see the post "Adding New Functions to Operators" (Operatörlere Yeni İşlevler Yüklenmesi). The original PDF of the supplementary notes can be downloaded at the end of the post.</p>
+<h2 id="data-structures">Data structures</h2>
+<p>Data structures are structures used for storing and processing data efficiently in a computer environment. In general, the chosen data structure is important for the algorithm to run efficiently.</p>
+<p><strong>Algorithm:</strong> A sequence of instructions used to solve a problem. It is a precise method developed to solve a problem. When an algorithm is expressed in a programming language (such as C or Pascal), it is called a program.</p>
+<p><strong>Data:</strong> The most basic elements processed by algorithms (numerical information, textual information, images, sounds, and other information used as input, output, or in intermediate computations). For an algorithm to be efficient, understandable, and correct, the data it will process must be organized.</p>
+<p><strong>Data structures:</strong> The building blocks that determine how data is organized. Even a program variable can be regarded as a simple data structure. Different algorithms may require data to be organized in data structures such as arrays, stacks, queues, trees, and graphs.</p>
+<h3 id="data-structure-and-algorithm">Data, structure and algorithm</h3>
+<p>In a program, data, structure, and algorithm are inseparable components, and each of them is important. The ways data is organized are important because, when the structure is well designed, it becomes easier to develop an algorithm that is efficient, correct, understandable, fast, and uses few resources.</p>
+<h3 id="from-data-types-to-data-structures">From data types to data structures</h3>
+<ul><li><strong>Data types:</strong> Integer, real number, character...</li><li><strong>Composite data types:</strong> Array, structure (record), ...</li><li><strong>Data structures:</strong> List, stack, queue, tree, graph, etc.</li></ul>
+<p><strong>List:</strong> A data structure consisting of a finite number of elements arranged in linear order. There is no restriction on access to any of its elements.</p>
+<p><strong>Stack:</strong> A list-like data structure with restricted access to its elements. A LIFO list.</p>
+<p><strong>Queue:</strong> A list-like data structure with restricted access to its elements. A FIFO list.</p>
+<p><strong>Database:</strong> Briefly, it can be defined as an information bank made up of data to be processed and data that has been processed. Data structures, that is, the ways data is organized, are also important for databases. For example, the records of the customers of a bank, the faculty members, employees, and courses of a university... are kept and processed in databases.</p>
+<p>Data structures can be <strong>static data structures</strong> or <strong>dynamic data structures</strong>.</p>
+<h3 id="what-is-an-abstract-data-type">What is an abstract data type?</h3>
+<p>Abstract data types are data structures for which what kind of thing they are and which operations are defined on them, and in what way, are specified, but how they will be stored in the computer environment is not. The tree structure or priority queues are examples of this. Others:</p>
+<ul><li>String</li><li>List</li><li>Linked list</li><li>Stack</li><li>Queue</li><li>Binary search tree</li><li>Priority queue</li><li>Complex number</li><li>Associative array</li><li>Multimap</li></ul>
+<h2 id="data-abstraction-and-information-hiding">Data abstraction and information hiding</h2>
+<p>Data abstraction and information hiding make it possible to write programs that do not depend heavily on the contents of classes and functions, and prevent usage errors. Classes and functions are made available for use by showing only the necessary details (the LIFO [last-in, first-out] structure).</p>
+<ul><li>int and float can be given as examples of abstract data types (ADTs).</li><li>For example, int: its meaning in mathematics is different, and the integer in the computer is different.</li><li>C++ is a language that can be extended by creating new data types.</li></ul>
+<h3 id="example-abstract-array-data-type">Example: abstract array data type</h3>
+<p>A programmer can create an ADT array and add new capabilities to the standard array structure:</p>
+<ul><li>Range checking</li><li>Ability for the array to start from any number</li><li>Array-to-array assignment</li><li>Array-to-array comparison</li><li>Array input/output operations</li><li>Knowing its own size</li><li>Ability to grow to hold more elements</li></ul>
+<h3 id="example-abstract-string-data-type">Example: abstract string data type</h3>
+<ul><li>C++ has no built-in string type. This is for maximum performance.</li><li>However, mechanisms exist for creating and completing the string abstract data type.</li><li>C++ also has a string class in the ANSI/ISO standards.</li></ul>
+<h3 id="example-queue-adt">Example: queue ADT</h3>
+<p>It is similar to waiting in a line: first in, first out (FIFO).</p>
+<ul><li><strong>Enqueue:</strong> Puts one element at the back of the queue at a time.</li><li><strong>Dequeue:</strong> Takes one element from the front of the queue at a time.</li><li>The details of the operations are hidden. The data structure cannot be accessed directly while using it.</li><li>Only the queue member functions can access the hidden internal structure.</li></ul>
+<h3 id="what-are-we-aiming-for">What are we aiming for?</h3>
+<p>The most important advantage of object-oriented programming (OOP) is that the written code can be reused to the maximum extent. To achieve this, the general structure is abstracted and information is hidden. People who use the structure cannot write programs tightly bound to your code, even if they want to. This gives the programmers who write the objects the ability to change the entire internal structure whenever they wish without changing the objects' interfaces. In use, it makes programming easier by presenting a standard interface to different objects.</p>
+<h2 id="operator-overloading">Operator overloading</h2>
+<p>Operator overloading gives C++ the ability for operators to work on objects as well. In this way, conventional operators can also work with user-defined objects. However, it requires great care; the program can easily become difficult to understand.</p>
+<p>C++ already has overloaded operators:</p>
+<ul><li><code>&lt;&lt;</code> works both as the stream insertion operator and as the bitwise shift operator.</li><li>Operators such as <code>+</code> and <code>–</code> work with different types.</li></ul>
+<h3 id="how-is-it-done">How is it done?</h3>
+<ul><li>Write a function as you normally would.</li><li>Give the function name as the operator name, attached to the <code>operator</code> keyword. For example, a function named <code>operator+</code> overloads the <code>+</code> operator.</li><li>In use: when working with objects, all operators except <code>=</code> and <code>&amp;</code> must be overloaded.</li></ul>
+<p>At this point the notes include a table of operators that can and cannot be overloaded. The operators that cannot be overloaded are: <code>.</code>, <code>.*</code>, <code>::</code>, <code>?:</code> and <code>sizeof</code>.</p>
+<h3 id="rules">Rules</h3>
+<ul><li>The <code>&amp;</code>, <code>*</code>, <code>+</code>, <code>-</code> operators have unary and binary versions, and they are overloaded separately.</li><li>Operator precedence cannot be changed by overloading.</li><li>The associativity of operators cannot be changed.</li><li>The number of operands cannot be changed: binary operators cannot be made unary, and unary operators cannot be made binary.</li><li>New operators cannot be defined. Only existing ones can be overloaded.</li><li>Operators cannot be overloaded for existing types. For example, the way two integers are added cannot be changed; the compiler gives an error.</li></ul>
+<h3 id="operator-functions-member-or-friend-function">Operator functions: member or friend function?</h3>
+<ul><li>If the <code>( )</code>, <code>[ ]</code>, <code>-&gt;</code> or assignment operators are being overloaded, a member function must be used.</li><li>If a member function is to be used, the left side of the operator must be an object of its own class. If the left side is not an object of its own class, the operator function cannot be a member.</li><li>If it will not be a member function and it needs access to public or private members, it must be a friend function; it must have the right to access its operands.</li></ul>
+<h3 id="overloading-stream-operators">Overloading stream operators</h3>
+<p>By overloading the &lt;&lt; and &gt;&gt; operators, we can perform input and output with user-defined types.</p>
+<ul><li>The type of the left side will be <code>ostream &amp;</code> and <code>istream &amp;</code>.</li><li>Since the left side is not of its own class, we cannot define them as member functions.</li><li>To reach private data members, they must be friend functions.</li><li>If they are not defined as friend functions, they reach the private data through the public set and get functions. For performance reasons, these functions are made inline.</li></ul>
+<p>As an example program, the notes give a <code>PhoneNumber</code> class that reads and writes a phone number in the form <code>(800) 555-1212</code> (this example is also in the main lecture notes).</p>
+<figure class="yazi-gorsel"><img src="../s-04.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Operator table, PhoneNumber class example, and overloading of unary and binary operators"><figcaption>Page 4 of the supplementary notes: PhoneNumber example, unary and binary operators</figcaption></figure>
+<h3 id="overloading-unary-operators">Overloading unary operators</h3>
+<ul><li>They can be defined with one operand or with no operand. In general, overloading should be done with a member function.</li><li>Avoid using a friend function, since it would break the closed architecture of the class contents.</li><li>It is declared as a non-static member function, because it needs to access non-static data.</li></ul>
+<p>Example of declaration as a member function:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String {
+public:
+bool operator!() const;
+...
+};</code></pre>
+<p>Example of declaration with a non-member function:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String {
+friend bool operator!( const String &amp; )
+...
+}</code></pre>
+<h3 id="overloading-binary-operators">Overloading binary operators</h3>
+<p>Let us overload <code>+=</code> as an example of a binary non-static member function:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String
+{
+public:
+    const String &amp;operator+=( const String &amp; );
+...
+};</code></pre>
+<p>Writing <code>y += z</code> is the same as writing <code>y.operator+=( z )</code>. To reach non-static data, <code>operator+=</code> is used as a non-static member function.</p>
+<p>As an example of a binary non-member function, overloading <code>+=</code> (as a non-member):</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>class String
+ { friend const String &amp;operator+=(String &amp;, const String &amp;);
+...
+};</code></pre>
+<p><code>y += z</code> is the same as <code>operator+=( y, z )</code>.</p>
+<h2 id="worked-example-array-class">Worked example: Array class</h2>
+<p>Let us create an Array class. In addition to standard arrays, this class should have the following features:</p>
+<ul><li>Bounds checking</li><li>Array-to-array assignment</li><li>Knowing its own number of elements</li><li>Reading and printing the whole array with <code>&lt;&lt;</code> and <code>&gt;&gt;</code></li><li>Array-to-array comparison with <code>==</code> and <code>!=</code></li></ul>
+<p>In the notes, the header file of the <code>Array</code> class (array1.h), its member functions (array1.cpp), and the driver program (fig08_04.cpp) appear as code images. One of the callout boxes says: "Note: all operators are defined inside the class." The driver program creates two arrays (with 7 and 10 elements) and prints their sizes and contents, reads 17 integers from the keyboard, compares them with <code>!=</code> and <code>==</code>, performs the assignment <code>integers1 = integers2</code>, reads the element <code>integers1[5]</code> and sets it to 1000, and finally shows that when the out-of-range assignment to <code>integers1[15]</code> is attempted, the program terminates with <code>assert</code>.</p>
+<figure class="yazi-gorsel"><img src="../s-05.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Code images of the header and implementation files of the Array class"><figcaption>Page 5 of the supplementary notes: definition and member functions of the Array class</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../s-06.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Comparison, subscript, and input/output operators of the Array class, with the driver program and screen output"><figcaption>Page 6 of the supplementary notes: continuation of the Array class and the driver program</figcaption></figure>
+<h2 id="type-conversion">Type conversion</h2>
+<p><strong>Cast operator:</strong></p>
+<ul><li>Forces conversion to standard types.</li><li>Defines the conversion relationship between standard types and user-defined types.</li><li>The conversion operator (or cast operator) must be a non-static member function; it cannot be a friend.</li><li>It cannot have a return type. The type is the type of the object being converted.</li><li>For a user-defined class A, <code>A::operator char *() const;</code> defines a conversion function that converts an A object to a <code>char *</code>.</li><li>Conversion between built-in data types is done with cast operators; but what happens with user-defined data types?</li><li>User-defined types → built-in types is done with conversion constructors.</li><li><code>A::operator int() const;</code> defines a conversion function that converts an A object to an integer.</li><li><code>A::operator otherClass() const;</code> defines a conversion function that converts an A object to the class otherClass.</li><li>Type conversion can remove the need for overloading.</li></ul>
+<p><em>Note: The direction seems to be mixed up here: it is the conversion operators described right after (such as <code>operator int()</code>) that convert a user-defined type to a built-in type. A conversion constructor does the opposite, that is, it converts from another type (for example <code>char *</code>) to the user-defined type.</em></p>
+<h2 id="worked-example-string-class">Worked example: String class</h2>
+<p>If the object s of type string is used in a place where data of type <code>char *</code> is normally expected, such as <code>cout &lt;&lt; s;</code>, the compiler calls the conversion function (<code>operator char *</code>) to convert s to the <code>char *</code> type and uses it.</p>
+<p>The C++ standard library already has a string class, but we can write our own string class by using overloading.</p>
+<p><strong>Conversion constructor function:</strong> A single-argument constructor that serves to convert an object to another class.</p>
+<p>In the notes, the header file of the <code>String</code> class (string1.h), its member functions (string1.cpp), and the driver program (fig08_05.cpp) appear as code images. The callout boxes read: "Conversion constructor: from String to char *", "The operation of the constructors is printed to the screen", "Note how the operator is defined because of overloading!". The driver program demonstrates the comparison operators (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>) with the strings "happy" and " birthday", the empty-string test (<code>!</code>), concatenation with <code>+=</code>, taking a substring with the <code>()</code> operator, and changing characters with <code>[]</code>; at the end, an attempt to use an out-of-range subscript terminates the program with <code>assert</code>.</p>
+<figure class="yazi-gorsel"><img src="../s-08.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Code image of the header file and constructors of the String class"><figcaption>Page 8 of the supplementary notes: String class</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Operators of the String class, driver program, and screen output"><figcaption>Page 9 of the supplementary notes: continuation of the String class and screen output</figcaption></figure>
+<h2 id="overloading-and">Overloading (++ and --)</h2>
+<p>We can also overload the pre- and post-increment/decrement operators. However, there is a difference between the pre- and post-increment/decrement operators.</p>
+<p>Pre-operation operators are defined like other unary operators:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>d1.operator++(); // for ++d1
+Date &amp;operator++();    // example (member function)</code></pre>
+<p>When the compiler sees post-operation operators, it looks for a function like the following:</p>
+<pre class="kaynak" data-dosya="program.cpp - Not Defteri"><code>d1.operator++( 0 ); // for d1++
+Date operator++( int );    // example (member function)</code></pre>
+<p>The value 0 here is so that the compiler can distinguish between the pre and post versions.</p>
+<h2 id="worked-example-date-class">Worked example: Date class</h2>
+<p>We will create a Date class with the following features:</p>
+<ul><li>The day, month, and year values will change with an overloaded increment operator,</li><li>An overloaded <code>+=</code> operator,</li><li>A function to test for a leap year,</li><li>A function to test whether a day is the last day of any month.</li></ul>
+<p>In the notes, date1.h, date1.cpp and fig08_06.cpp appear as code images. The callout box for the postfix <code>operator++( int )</code> reads: "has a parameter of type int that the increment operator will not use." The leap-year test is performed with the condition <code>y % 400 == 0 || ( y % 100 != 0 &amp;&amp; y % 4 == 0 )</code>.</p>
+<figure class="yazi-gorsel"><img src="../s-11.jpg" width="1224" height="1584" loading="lazy" decoding="async" alt="Code image of the header file, member functions, and driver program of the Date class"><figcaption>Page 11 of the supplementary notes: Date class</figcaption></figure>
+<p>Screen output of the driver program:</p>
+<pre class="kod"><code>d1 is January 1, 1900
+d2 is December 27, 1992
+d3 is January 1, 1900
+
+d2 += 7 is January 3, 1993
+
+  d3 is February 28, 1992
+++d3 is February 29, 1992
+
+Testing the preincrement operator:
+  d4 is March 18, 1969
+++d4 is March 19, 1969
+  d4 is March 19, 1969
+
+Testing the postincrement operator:
+  d4 is March 19, 1969
+d4++ is March 19, 1969
+  d4 is March 20, 1969</code></pre>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../Hafta3 Ek DersNotları.pdf" download>Hafta3 Ek DersNotları.pdf</a></p>
+              <p class="kucuk">PDF · 749 KB · 12 <span data-i18n="arch.pagesLower"></span> · 05.10.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../Hafta3 Ek DersNotları.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (749 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

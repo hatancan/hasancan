@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 9 – Frequency Response, Bode Diagrams, Gain and Phase Margin — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture note 9 (Hamit Erdem, 2013): frequency-domain analysis, sinusoidal steady-state response, decibels, magnitude ratio and phase from the transfer function, Bode diagrams of first- and second-order systems, resonant peak, bandwidth, gain and phase crossover frequencies, gain margin and phase margin.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 9 – Frequency Response, Bode Diagrams, Gain and Phase Margin">
+<meta property="og:description" content="EEM322 Control Systems lecture note 9 (Hamit Erdem, 2013): frequency-domain analysis, sinusoidal steady-state response, decibels, magnitude ratio and phase from the transfer function, Bode diagrams of first- and second-order systems, resonant peak, bandwidth, gain and phase crossover frequencies, gain margin and phase margin.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 9 – Frequency Response, Bode Diagrams, Gain and Phase Margin", "description": "EEM322 Control Systems lecture note 9 (Hamit Erdem, 2013): frequency-domain analysis, sinusoidal steady-state response, decibels, magnitude ratio and phase from the transfer function, Bode diagrams of first- and second-order systems, resonant peak, bandwidth, gain and phase crossover frequencies, gain margin and phase margin.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "EEM322L9soncar.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-09-frekans-yaniti-bode/EEM322L9soncar.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 9 – Frequency Response, Bode Diagrams, Gain and Phase Margin">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.08.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#frequency-domain-analysis">Frequency-domain analysis</a></li><li><a href="#frequency-response-from-the-transfer-function">Frequency response from the transfer function</a></li><li><a href="#bode-diagram">Bode diagram</a></li><li><a href="#frequency-domain-performance-measures">Frequency-domain performance measures</a></li><li><a href="#gain-and-phase-margin">Gain and phase margin</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 9 – Frequency Response, Bode Diagrams, Gain and Phase Margin</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 07.08.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>9th lecture note</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University ("EEM322: Lecture 9 – Frequency Domain Analysis, Frequency Response Techniques, Bode Diagrams"). The notes belong to the course instructor <strong>Hamit Erdem</strong>; the page headers carry the date 07.08.2013. It is a 16-page PDF with two slides per page, mostly in English, and it continues the notes of <a href="/arsiv/eem322-ders-07-surekli-hal-hatalari/">Lecture 7</a> and <a href="/arsiv/eem322-ders-08-kok-yer-egrisi/">Lecture 8</a>. Below, the content is presented in English, with the formulas and examples written out. The original PDF can be downloaded at the end of the post.</p>
+<h2 id="frequency-domain-analysis">Frequency-domain analysis</h2>
+<p>The performance of a control system is usually measured by time-domain specifications; but because there is a relationship between time-domain and frequency-domain performance in linear systems, the same measurement can also be made in the frequency domain, and time-domain specifications can be estimated from frequency analysis. The frequency-domain approach gives an additional viewpoint, complementary to time-domain studies, for complex analysis and design problems. There are four basic graphical methods for analysis in the frequency domain:</p>
+<ol><li>Root locus method</li><li>Bode diagrams</li><li>Nyquist diagrams</li><li>Nichols diagrams</li></ol>
+<p>The <strong>frequency response</strong> of a system is its <strong>steady-state response</strong> to a sinusoidal (harmonic) input. In linear systems the output is also sinusoidal and differs from the input only in <strong>amplitude and phase</strong>: an input A sin(ωt) produces an output βA sin(ωt + φ). β is the amplitude factor (if β &gt; 1 the system amplifies the input, if β &lt; 1 it attenuates it), and φ is the phase shift between input and output. System gain = output amplitude / input amplitude = B/A; phase: φ₂ = φ₁ + phase shift.</p>
+<p>An unstable process has no frequency response, because a sinusoidal input produces an unstable output. Frequency response methods were developed by Nyquist and Bode in the 1930s and predate the root locus method found by Evans in 1948 (Nyquist, 1932; Bode, 1945).</p>
+<h3 id="why-a-sinusoidal-signal">Why a sinusoidal signal?</h3>
+<p>The sinusoid is not chosen simply because it is used everywhere (mains is 60 Hz in the USA, 50 Hz elsewhere). Its importance comes from <strong>Fourier theory</strong>: a signal applied to a circuit can be expressed as a sum of sinusoids of different amplitudes and frequencies so that analysis becomes easy (the note includes an example of the Fourier components of a triangular wave).</p>
+<p><strong>Complex numbers:</strong> z = a + jb, Re(z) = a, Im(z) = b, j = √−1. Exponential/polar form: z = re^(jθ), r = |z| = √(a² + b²), θ = atan(b/a).</p>
+<p><strong>Decibel:</strong> V₂/V₁, I₂/I₁, P₂/P₁ are dimensionless; taking their logarithms gives the decibel (dB) unit:</p>
+<ul><li>20 log₁₀|V₂/V₁|: log-magnitude of voltage gain (dB)</li><li>20 log₁₀|I₂/I₁|: log-magnitude of current gain (dB)</li><li>10 log₁₀|P₂/P₁|: log-magnitude of power gain (dB)</li><li>Gain_dB = 20 log₁₀(Gain); 20 log(K × 10) = 20 log K + 20; 20 log(K × 10ⁿ) = 20 log K + 20n; 20 log K = −20 log(1/K)</li></ul>
+<h2 id="frequency-response-from-the-transfer-function">Frequency response from the transfer function</h2>
+<p>If the transfer function G(s) of a linear system is known, the magnitude characteristic |G(jω)| and the phase characteristic ∠G(jω) completely describe the steady-state performance for a sinusoidal input. The magnitude and phase characteristics of the closed-loop system can be used to estimate time-domain specifications such as overshoot, rise time, and steady-state performance.</p>
+<p><strong>Frequency response of the closed-loop system:</strong> M(s) = Y(s)/R(s) = G(s)/(1 + G(s)H(s)); in the sinusoidal steady state, s = jω:</p>
+<ul><li>M(jω) = G(jω)/(1 + G(jω)H(jω)) = |M(jω)| ∠M(jω)</li><li>|M(jω)| = |G(jω)| / |1 + G(jω)H(jω)|</li><li>∠M(jω) = φ_M(jω) = ∠G(jω) − ∠[1 + G(jω)H(jω)]</li></ul>
+<p>In general s = σ + jω; in a stable system the contribution of the real part dies out in the steady state, so in sinusoidal steady-state analysis only jω is substituted for s: Y(jω) = G(jω)R(jω). From this:</p>
+<ul><li>Magnitude relation: |Y(jω)| = |G(jω)| · |R(jω)|</li><li>Phase relation: ∠Y(jω) = ∠G(jω) + ∠R(jω)</li><li>For an input r(t) = R sin ω₀t, the output is y(t) = Y sin(ω₀t + φ), Y = R|G(jω₀)|, φ = ∠G(jω₀)</li></ul>
+<p><strong>Shortcut:</strong></p>
+<ol><li>Substitute s = jω in G(s) to obtain G(jω).</li><li>Multiply the numerator and denominator by the conjugate of the denominator to put G(jω) into the form G(jω) = R + jI (R and I are functions of ω).</li><li>Amplitude ratio AR = √(R² + I²), phase angle φ = tan⁻¹(I/R).</li></ol>
+<p><em>Note: In the lecture note, the phase angle in step 3 is written as φ = tan⁻¹(R/I); the correct form is φ = tan⁻¹(I/R) (in the first-order example below, φ = tan⁻¹(−ωτ) also follows from this relation).</em></p>
+<h3 id="examples">Examples</h3>
+<p><strong>First-order system:</strong> G(s) = 1/(τs + 1). G(jω) = 1/(jωτ + 1); multiplying numerator and denominator by (−jωτ + 1):</p>
+<ul><li>G(jω) = (1 − jωτ)/(ω²τ² + 1) = 1/(ω²τ² + 1) + j(−ωτ)/(ω²τ² + 1) = R + jI</li></ul>
+<p><strong>Example:</strong> G(s) = 3/(s + 2) ⇒ G(jω) = 3/(jω + 2), |G(jω)| = 3/(ω² + 4)^(1/2), ∠G(jω) = −tan⁻¹(ω/2).</p>
+<p><strong>Example:</strong> G(s) = K/(Ts + 1), input x(t) = X sin ωt:</p>
+<ul><li>|G(jω)| = K/√(1 + T²ω²), φ = ∠G(jω) = −tan⁻¹(Tω)</li><li>y_ss(t) = [XK/√(1 + T²ω²)] sin(ωt − tan⁻¹Tω)</li></ul>
+<p><strong>Example:</strong> G(s) = (s + 1/T₁)/(s + 1/T₂), input x(t) = X sin ωt:</p>
+<ul><li>G(jω) = T₂(1 + T₁jω) / [T₁(1 + T₂jω)], |G(jω)| = T₂√(1 + T₁²ω²) / [T₁√(1 + T₂²ω²)]</li><li>φ = tan⁻¹(T₁ω) − tan⁻¹(T₂ω)</li><li>y_ss(t) = [XT₂√(1 + T₁²ω²) / (T₁√(1 + T₂²ω²))] sin(ωt + tan⁻¹T₁ω − tan⁻¹T₂ω)</li></ul>
+<p><strong>Example (RC circuit):</strong> H(s) = V_o(s)/V_i(s) = 1/(1 + sRC); for R = 1, C = 0.1, H(jω) = 1/(1 + j0.1ω). If the input and the transfer function are written as phasors, multiplication is easy (magnitudes are multiplied, phases are added). For V_i = 3 sin(30t) = 3∠0°:</p>
+<ul><li>H(j30) = 1/(1 + j3) = 0.1 − j0.3 = 0.316∠−71.6°</li><li>V_o = V_i · H = (3∠0°)(0.316∠−71.6°) = 0.95∠−71.6°, i.e. v_o(t) = 0.95 sin(30t − 71.6°)</li></ul>
+<h2 id="bode-diagram">Bode diagram</h2>
+<p>When a sinusoidal input is applied to a stable linear system, the output in the steady state is also sinusoidal; its amplitude is a multiple of the input's, and there may be a phase shift. If the input amplitude is held constant and the frequency is varied, a different output amplitude and phase shift are obtained. In this way gain and phase values can be plotted over a wide frequency range. Gain is used instead of output amplitude because it does not depend on the input amplitude.</p>
+<p>The <strong>Bode diagram</strong> is a graphical representation of the frequency response on semi-logarithmic axes and consists of two plots:</p>
+<ul><li><strong>Gain plot:</strong> system gain (usually in dB) vs. frequency (logarithmic axis)</li><li><strong>Phase plot:</strong> phase shift introduced by the system (degrees, linear axis) vs. frequency (logarithmic axis)</li></ul>
+<p>Since ω is examined over a very wide range, the magnitude also varies enormously; therefore the magnitude is plotted in decibels (dB(x) = 20 log₁₀ x) and the frequency on a logarithmic scale. The note gives the magnitude and phase plots for H(s) = 1/(s + 1) and G(s) = 1/(s + 2) as examples.</p>
+<h3 id="first-order-process">First-order process</h3>
+<p>G(s) = K/(τs + 1); normalized amplitude ratio AR_N = AR/K = 1/√(ω²τ² + 1), φ = −tan⁻¹(ωτ).</p>
+<figure class="yazi-gorsel"><img src="../birinci-derece-bode.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Bode diagram of a first-order process: normalized amplitude ratio and phase angle, break frequency ωb = 1/τ"><figcaption>Bode diagram for a first-order process</figcaption></figure>
+<ul><li>At low frequency (ω → 0): AR_N ≈ 1 (AR ≈ K), φ ≈ 0.</li><li>At high frequency (ω → ∞): AR_N ≈ 1/(ωτ), φ ≈ −90°. log AR_N = log 1 − log ωτ = −log ωτ, i.e. the slope of the asymptote is −1 (−20 dB/decade).</li><li><strong>Break (corner) frequency:</strong> ω_b = 1/τ; AR_N(ω_b) = 1/√2 = 0.707; φ(ω_b) = tan⁻¹(−1) = −45°.</li></ul>
+<p>Plotting steps:</p>
+<ol><li>Find the break frequency ω_b = 1/τ; at this point AR = 0.707K.</li><li>For the low-frequency region (ω ≤ ω_b), draw the horizontal asymptote AR = K.</li><li>Draw the high-frequency asymptote with slope −1 so that it intersects AR = K at ω = ω_b.</li><li>Draw the actual frequency response following this shape.</li><li>Mark the point φ = −45° at ω = ω_b, draw the horizontal asymptotes at φ = 0° and −90°, and draw the phase curve according to the table below.</li></ol>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">ωτ</th><th scope="col">0.01</th><th scope="col">0.1</th><th scope="col">0.5</th><th scope="col">1.0</th><th scope="col">2.0</th><th scope="col">10.0</th><th scope="col">100.0</th></tr></thead><tbody><tr><th scope="row">φ (°)</th><td>−0.6</td><td>−5.7</td><td>−26.6</td><td>−45.0</td><td>−63.4</td><td>−84.3</td><td>−89.4</td></tr></tbody></table></div>
+<p><em>Note: In the first-order slide of the lecture note, the phase is written as φ = tan⁻¹(ωτ); as can be seen from the plot and the table, the correct form is φ = −tan⁻¹(ωτ).</em></p>
+<h3 id="second-order-process">Second-order process</h3>
+<p>G(s) = K/(τ²s² + 2ζτs + 1):</p>
+<ul><li>AR = K / √[(1 − ω²τ²)² + (2ωτζ)²], φ = tan⁻¹[−2ωτζ/(1 − ω²τ²)]</li><li>At low frequency AR ≈ K, φ ≈ 0; at high frequency AR_N ≈ 1/(ωτ)², φ ≈ −180°. log AR_N = −2 log ωτ, i.e. the asymptote slope is −2 (−40 dB/decade).</li><li>For overdamped systems, the normalized amplitude ratio is less than 1 for all ω (attenuation).</li><li>For underdamped systems (0 &lt; ζ &lt; √2/2), the amplitude ratio has a peak at the <strong>resonant frequency</strong>: d(AR_N)/dω = 0 ⇒ ω_r² = (1 − 2ζ²)/τ², ω_r = √(1 − 2ζ²)/τ; for a peak, 1 − 2ζ² &gt; 0, i.e. 0 &lt; ζ &lt; √2/2. <strong>(AR_N)max = 1/(2ζ√(1 − ζ²))</strong>.</li><li>Feedback controllers are tuned to give slight resonance in order to speed up the response of the controlled system.</li></ul>
+<figure class="yazi-gorsel"><img src="../ikinci-derece-az-sonumlu.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Bode diagram of underdamped second-order processes (ζ = 0.2, 0.4, 0.8) and the resonant frequency relations"><figcaption>Bode diagram of underdamped second-order processes</figcaption></figure>
+<p><strong>AR plot for an overdamped system:</strong> (1) draw the low-frequency asymptote at K; (2) at ω_b1 = 1/τ₁ (τ₁ the larger time constant) the slope changes to −1; (3) at ω_b2 = 1/τ₂ the slope changes to −2; (4) compute a few points on the actual curve and plot it with respect to the asymptotes.</p>
+<p><strong>AR plot for an underdamped system:</strong> (1) draw the low-frequency asymptote at K; (2) at ω_b = 1/τ the slope changes to −2; (3) compute a few points and plot. The peak in AR is seen only if 0 &lt; ζ &lt; √2/2.</p>
+<p><strong>Pure integrator:</strong> G(s) = 1/s, G(jω) = 1/(jω) = −j(1/ω); AR = 1/ω, φ = −90°.</p>
+<p><strong>Pure differentiator:</strong> G(s) = s, G(jω) = jω; AR = ω, φ = +90°.</p>
+<h2 id="frequency-domain-performance-measures">Frequency-domain performance measures</h2>
+<ol><li><strong>Resonant peak M_r:</strong> the maximum value of the magnitude M, and a measure of <strong>relative stability</strong>. A large M_r is associated with a large overshoot in the transient response; the recommended value for the closed loop is in the range 1.1–1.5.</li><li><strong>Resonant frequency ω_r:</strong> the frequency at which the peak M_r occurs.</li><li><strong>Bandwidth (BW):</strong> the frequency at which |M(jω)| drops to 70.7% of its zero-frequency value, i.e. 3 dB below. A large bandwidth corresponds to a faster rise time (high-frequency signals pass easily to the output); with a small bandwidth only low frequencies pass and the time response becomes sluggish.</li><li><strong>Cutoff rate:</strong> the slope of M(jω) at the high-frequency end. Two systems may have the same bandwidth but different cutoff rates.</li></ol>
+<p>For a second-order system with ζ &lt; 0.707, the resonant frequency and resonant magnitude can be estimated with the following relations:</p>
+<ul><li>ω_r = ω_n √(1 − 2ζ²)</li><li>M_r = [2ζ√(1 − ζ²)]⁻¹</li></ul>
+<p>These frequency-domain specifications are related to the time-domain behavior: M_r indicates relative stability; a large M_r means low damping, an oscillatory response, and a large overshoot. Systems with large bandwidth respond faster but may be more sensitive to noise; noise sensitivity is determined by the combined effect of the bandwidth and the rate at which the magnitude falls off at high frequencies.</p>
+<p><strong>Signal bandwidth:</strong> for (i) signals with a midband region or a peak and (ii) signals with constant dc gain, it is the frequency range over which the gain is greater than 0.707G; 0.707 = −3 dB.</p>
+<h2 id="gain-and-phase-margin">Gain and phase margin</h2>
+<ul><li><strong>Gain crossover frequency ω_gco:</strong> the frequency at which the gain crosses 0 dB.</li><li><strong>Phase crossover frequency ω_pco:</strong> the frequency at which the phase crosses −180°.</li></ul>
+<figure class="yazi-gorsel"><img src="../kazanc-faz-payi.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Gain crossover point, phase crossover point, gain margin at ωpco and phase margin at ωgco on the Bode diagram"><figcaption>Gain and phase margin shown on the Bode diagram</figcaption></figure>
+<p><strong>Minimum-phase system:</strong> the loop transfer function GH(s) has no zeros or poles in the right half of the s-plane. Systems that have poles or zeros in the right half-plane are called non-minimum-phase systems. The gain and phase margins of a minimum-phase system are found by plotting the Bode diagram of GH(s):</p>
+<ul><li><strong>Gain margin:</strong> GM = 0 dB − |G(jω_pco)| (dB)</li><li><strong>Phase margin:</strong> the additional phase lag required to bring the phase angle to −180° at the frequency where the gain crosses the 0 dB line: PM = φ(ω_gco) − (−180°)</li></ul>
+<p>A minimum-phase system is stable if both margins are positive and unstable if they are negative. Systems with a high degree of stability have large margins, and less stable systems have small margins. If PM is negative or GM is negative, the system is unstable.</p>
+<p><strong>Example:</strong> For GH(s) = 100(s + 2) / [(s + 5)(s + 10)(s² + 2s + 2)], the phase margin is <strong>PM = +68°</strong> (at 2.2 rad/s) and the gain margin is <strong>GM = +17.4 dB</strong> (at 7.15 rad/s); the closed-loop system is stable.</p>
+<p><strong>Example:</strong> From the given Bode plots, find the gain margin, phase margin, 0 dB frequency, and 180° frequency.</p>
+<figure class="yazi-gorsel"><img src="../ornek-bode-payi.jpg" width="724" height="548" loading="lazy" decoding="async" alt="Example Bode diagram from which the gain margin and phase margin are read"><figcaption>Example: gain and phase margin from a Bode plot</figcaption></figure>
+<p>From the Bode plots: gain margin = <strong>14.96 dB</strong>, phase margin = <strong>49.57°</strong>, 0 dB frequency = <strong>2.152 rad/s</strong>, 180° frequency = <strong>6.325 rad/s</strong>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM322L9soncar.pdf" download>EEM322L9soncar.pdf</a></p>
+              <p class="kucuk">PDF · 841 KB · 16 <span data-i18n="arch.pagesLower"></span> · 07.08.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM322L9soncar.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (841 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM312 Digital Electronics: Software Laboratory Handouts Y1–Y3 (NMOS and CMOS Inverters with WinSPICE) — hasancan.net</title>
+<meta name="description" content="EEM312 Digital Electronics software laboratory handouts: resistor-loaded NMOS inverter with WinSPICE/Spice3, VTC curves of four different CMOS inverters, VOH, VOL, VIH, VIL, VM, noise margins and delays; NMOS/PMOS IDS-VDS characteristics with Level 3 and BSIM models.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM312 Digital Electronics: Software Laboratory Handouts Y1–Y3 (NMOS and CMOS Inverters with WinSPICE)">
+<meta property="og:description" content="EEM312 Digital Electronics software laboratory handouts: resistor-loaded NMOS inverter with WinSPICE/Spice3, VTC curves of four different CMOS inverters, VOH, VOL, VIH, VIL, VM, noise margins and delays; NMOS/PMOS IDS-VDS characteristics with Level 3 and BSIM models.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM312 Digital Electronics: Software Laboratory Handouts Y1–Y3 (NMOS and CMOS Inverters with WinSPICE)", "description": "EEM312 Digital Electronics software laboratory handouts: resistor-loaded NMOS inverter with WinSPICE/Spice3, VTC curves of four different CMOS inverters, VOH, VOL, VIH, VIL, VM, noise margins and delays; NMOS/PMOS IDS-VDS characteristics with Level 3 and BSIM models.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM312 – Sayısal Elektronik", "associatedMedia": {"@type": "MediaObject", "name": "EEM312_yazilim_deney_foyleri_Y1-Y3_2011.zip", "contentUrl": "https://hasancan.net/arsiv/eem312-yazilim-deneyleri-y1-y3/EEM312_yazilim_deney_foyleri_Y1-Y3_2011.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM312 Digital Electronics: Software Laboratory Handouts Y1–Y3 (NMOS and CMOS Inverters with WinSPICE)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem312">EEM312</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM312 – Sayısal Elektronik</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>11.03.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#y1-inverter-measurements-with-a-resistor-loaded-nmos">Y1: Inverter measurements with a resistor-loaded NMOS</a></li><li><a href="#y2-cmos-inverter-characteristics">Y2: CMOS inverter characteristics</a></li><li><a href="#y3-characteristics-of-nmos-and-pmos-devices">Y3: Characteristics of NMOS and PMOS devices</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM312</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM312 Digital Electronics: Software Laboratory Handouts Y1–Y3 (NMOS and CMOS Inverters with WinSPICE)</h1>
+            <p class="kucuk">EEM312 – Sayısal Elektronik · 11.03.2011 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains the first three of the 2010-2011 spring semester <strong>software laboratory</strong> handouts for the Başkent University Electrical and Electronics Engineering course <strong>EEM 312 – Digital Electronics</strong>: <strong>Y1</strong> (inverter measurements with a resistor-loaded NMOS), <strong>Y2</strong> (CMOS inverter characteristics), and <strong>Y3</strong> (investigation of the characteristics of NMOS and PMOS devices). The experiments were carried out with the WinSPICE (Spice3) simulator; the handouts are dated March 2011, and the laboratory supervisors were Research Assistants Numan Yavuz and Evren Emekdaş. The original PDFs of the handouts can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="y1-inverter-measurements-with-a-resistor-loaded-nmos">Y1: Inverter measurements with a resistor-loaded NMOS</h2>
+<h3 id="preliminary-work">Preliminary work</h3>
+<ol><li>Using the user manuals and help files that come with WinSPICE, explain how to perform the following operations and write the command patterns: DC analysis; voltage source and pulse-shaped source; transient analysis; MOSFET terminal connections and how it is defined in the circuit; plotting graphs and plotting multiple vectors on the same figure; plotting one vector against another (for example, V_out against V_in).</li><li>Create the Spice3 netlist for the circuit in Figure 1 and the parameters in Table 1. Write the definitions of the following parameters and add the Spice3 commands that obtain them to the file (you can make use of Figure 3): V_OH, V_OL; V_IH, V_IL; V_M; t_f, t_r; t_PHL, t_PLH, t_d; NM_H, NM_L.</li></ol>
+<figure class="yazi-gorsel"><img src="../y1-devre.jpg" width="500" height="420" loading="lazy" decoding="async" alt="Vdc supply, 50k R1 load resistor, M1 NMOS, Vin pulse source and C1 load capacitor at the output"><figcaption>Figure 1: Resistor-loaded NMOS circuit</figcaption></figure>
+<p><strong>Table 1: Circuit parameters</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Parameter</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Vin</th><td>Waveform in Figure 2</td></tr><tr><th scope="row">Vdc</th><td>5 V</td></tr><tr><th scope="row">R1</th><td>50 kΩ</td></tr><tr><th scope="row">C1</th><td>1 pF</td></tr><tr><th scope="row">M1</th><td>L = 5u, W = 10u</td></tr><tr><th scope="row">M1 model</th><td>.MODEL NMOSFET NMOS(VTO=1 KP=20U GAMMA=0.37 PHI=0.6 CBD=3.1E-15 CBS=3.1E-15)</td></tr></tbody></table></div>
+<figure class="yazi-gorsel"><img src="../y1-dalga-vtc.jpg" width="930" height="465" loading="lazy" decoding="async" alt="Figure 2: Pulse rising from 0 to 5 V in 2 ns, lasting 500 ns, falling in 2 ns, with a period of 1 µs; Figure 3: DC characteristic of the inverter showing VOH, VOL, VIL, VIH and the points where the slope is −1"><figcaption>Figure 2: Input waveform and Figure 3: DC characteristic of the inverter</figcaption></figure>
+<p>In Figure 3, V_IL and V_IH are the points where the slope of the voltage transfer curve is dV_out/dV_in = −1; V_M (the switching threshold) is the point where the curve intersects the line V_out = V_in.</p>
+<p><em>Note: In Figure 1, C1 is labeled "1n"; however, Table 1 specifies 1 pF.</em></p>
+<h3 id="laboratory-work">Laboratory work</h3>
+<ol><li>Run the netlist you prepared in the preliminary work in Spice3, obtain the requested graphs, and read the required values from the graphs.</li><li>Reduce V_dc to 3 V and repeat the simulation. What changed compared to the previous results?</li><li>Compare the results. Why do the results differ from the ideal case? What are the advantages of the ideal case? What is the effect of the applied V_in signal on the parameters in the preliminary work?</li></ol>
+<h2 id="y2-cmos-inverter-characteristics">Y2: CMOS inverter characteristics</h2>
+<h3 id="laboratory-work">Laboratory work</h3>
+<p><strong>Item 1.</strong> Figure 1 shows four different inverter structures. For each one, obtain the <strong>VTC</strong> (voltage transfer characteristic) curve by simulation and fill in Table 1. V_dd = 3.1 V, V_ss = 0 V, load 1 fF, R1 = 100 kΩ. For the VTC, a pulse source is connected to the input and a DC analysis is performed on this source.</p>
+<figure class="yazi-gorsel"><img src="../y2-tersleyiciler.jpg" width="620" height="990" loading="lazy" decoding="async" alt="(a) NMOS with R1 load, (b) NMOS with PMOS load whose gate is grounded, (c) PMOS with R1 resistor below it, (d) standard CMOS inverter"><figcaption>Figure 1: CMOS gate (inverter) circuits</figcaption></figure>
+<p>The model and control lines given in the handout as a reminder:</p>
+<pre class="kod"><code>.MODEL MOSN NMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=5.36726E+15 VTO=0.743469 KP=8.00059E-05 GAMMA=0.543
++ PHI=0.6 U0=655.881 UEXP=0.157282 UCRIT=31443.8
++ DELTA=2.39824 VMAX=55260.9 XJ=0.25U LAMBDA=0.0367072
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=1.0 RSH=70.00
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0003 MJ=0.6585
++ CJSW=8.0E-10 MJSW=0.2402 PB=0.58
+.MODEL MOSP PMOS LEVEL=2 LD=0.15U TOX=200.0E-10
++ NSUB=4.3318E+15 VTO=-0.738861 KP=2.70E-05 GAMMA=0.58
++ PHI=0.6 U0=261.977 UEXP=0.323932 UCRIT=65719.8
++ DELTA=1.79192 VMAX=25694 XJ=0.25U LAMBDA=0.0612279
++ NFS=1E+12 NEFF=1.001 NSS=1E+11 TPG=-1.0 RSH=120.6
++ CGDO=4.3E-10 CGSO=4.3E-10 CJ=0.0005 MJ=0.5052
++ CJSW=1.349E-10 MJSW=0.2417 PB=0.64
+* Example equal-size mosfet definitions
+M1 D G S B MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+M1 D G S B MOSP W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+* CAUTION! : Pay attention to the drain and source
+* definitions in the NMOS and PMOS definitions
+* Pulse waveform source applied to the input (fill in according to the values given in item 2)
+VIN N1 N2 pulse (v1 v2 td tr tf pw per)
+....
+.control
+....
+dc VIN Vin- Vin+ step_voltage
+....
+.endc</code></pre>
+<p><strong>Table 1 (DC analysis results):</strong> V_OH, V_OL, V_IH, V_IL, V_M, NM_H, NM_L for circuits (a)–(d).</p>
+<p><strong>Item 2.</strong> Remove the DC analysis and perform a transient analysis; the pulse period is 10 ns, t_r = t_f = 1 ns. <strong>Table 2:</strong> t_r, t_f, t_pLH, t_pHL, t_d for each circuit. <strong>Item 3.</strong> According to Tables 1 and 2: (a) Which circuit is the best inverter, and why? (b) Are the circuits symmetric? If not, which parameters should be changed to make them symmetric? <strong>Item 4.</strong> Below are NMOS and PMOS definitions with unequal sizes. Compare them in terms of L and W, prove with the model parameters why the sizes were chosen this way; update the netlist of Figure 1-d, obtain the VTC again, and evaluate it.</p>
+<pre class="kod"><code>M1 D G S B MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+M1 D G S B MOSP W=5.4u L=1.2u NRS=0.111 NRD=0.111
++ AD=16.2p PD=11.4u AS=16.2p PS=11.4u</code></pre>
+<p>Here, the width of the PMOS is three times that of the NMOS (5.4u / 1.8u). Since in the model KP_n / KP_p = 8.00059E-05 / 2.70E-05 ≈ 2.96, making the PMOS about 3 times wider equalizes the current-driving capability of the two transistors; thus the curve becomes symmetric and the switching threshold V_M approaches V_dd/2.</p>
+<h2 id="y3-characteristics-of-nmos-and-pmos-devices">Y3: Characteristics of NMOS and PMOS devices</h2>
+<h3 id="preliminary-work">Preliminary work</h3>
+<p>Explain the following terms in detail: saturation current, channel length modulation, velocity saturation, hot carrier effect, metal migration, CMOS latchup.</p>
+<h3 id="laboratory-work">Laboratory work</h3>
+<p><strong>Item 1.</strong> For the resistor-loaded NMOS and PMOS circuits in Figure 1, create the Spice netlist using the <strong>1u technology Level 3</strong> models below. The V_dd source in the figure can be used to measure the MOSFET current.</p>
+<figure class="yazi-gorsel"><img src="../y3-devreler.jpg" width="680" height="330" loading="lazy" decoding="async" alt="(a) M1 NMOS with Vin gate source and Vbs body source; (b) the same setup for M2 PMOS"><figcaption>Figure 1: (a) Resistor-loaded NMOS and (b) PMOS</figcaption></figure>
+<pre class="kod"><code>.MODEL NMOS NMOS LEVEL = 3
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.5
++ PHI = 0.7 VTO = 0.8 DELTA = 3.0
++ UO = 650 ETA = 3.0E-6 THETA = 0.1
++ KP = 120E-6 VMAX = 1E5 KAPPA = 0.3
++ RSH = 0 NFS = 1E12 TPG = 1
++ XJ = 500E-9 LD = 100E-9
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10
++ CJ = 400E-6 PB = 1 MJ = 0.5
++ CJSW = 300E-12 MJSW = 0.5
+.MODEL PMOS PMOS LEVEL = 3
++ TOX = 200E-10 NSUB = 1E17 GAMMA = 0.6
++ PHI = 0.7 VTO = -0.9 DELTA = 0.1
++ UO = 250 ETA = 0 THETA = 0.1
++ KP = 40E-6 VMAX = 5E4 KAPPA = 1
++ RSH = 0 NFS = 1E12 TPG = -1
++ XJ = 500E-9 LD = 100E-9
++ CGDO = 200E-12 CGSO = 200E-12 CGBO = 1E-10
++ CJ = 400E-6 PB = 1 MJ = 0.5
++ CJSW = 300E-12 MJSW = 0.5</code></pre>
+<p>Example definitions and control lines:</p>
+<pre class="kod"><code>* Example equal-size MOSFET definitions
+M1 D G S B MOSN W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+M2 D G S B MOSP W=1.8u L=1.2u NRS=0.333 NRD=0.333
++ AD=6.5p PD=9.0u AS=6.5p PS=9.0u
+* V1=0, V2=5V, td=0, tr=tf=1n, pw=50n, per=100n
+VIN N1 N2 pulse (v1 v2 td tr tf pw per)
+....
+.control
+Alter M1 L=1u
+...
+* For each value of Vdd, perform a sweep over the VIN value range
+dc VIN 0 5 0.1 Vdd 0 5 0.5
+...
+.endc</code></pre>
+<p><strong>Table 3: Simulation graphs and questions</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Type</th><th scope="col">Graph</th><th scope="col">Constants / variables</th><th scope="col">Questions</th></tr></thead><tbody><tr><th scope="row">NMOS</th><td>I_DS – V_DS</td><td>V_BS = 0, V_GS = 0–5 V, V_DS = 0–5 V</td><td>Is the effect of channel length modulation observed?</td></tr><tr><th scope="row">NMOS</th><td>I_DS – V_GS</td><td>V_SB = 0–5 V, V_GS = 0–5 V, V_DS = 5 V</td><td>Is the body effect observed? What happens if V_BS becomes positive?</td></tr><tr><th scope="row">NMOS</th><td>I_DS – V_DS</td><td>V_SB = 0, V_GS = 2 V, W = 1.8u / 3.6u / 7.2u (with Alter), V_DS = 0–5 V</td><td>Is the change in current observed?</td></tr><tr><th scope="row">PMOS</th><td>I_DS – V_DS</td><td>V_SB = 0, V_SG = 0–5 V, V_DS = 0–5 V</td><td>Is the effect of channel length modulation observed?</td></tr><tr><th scope="row">PMOS</th><td>I_DS – V_GS</td><td>V_SB = 0–5 V, V_SG = 0–5 V, V_DS = 5 V</td><td>Is the body effect observed? What happens if V_BS becomes positive?</td></tr><tr><th scope="row">PMOS</th><td>I_DS – V_DS</td><td>V_BS = 0, V_SG = 2 V, W = 1.8u / 3.6u / 7.2u, V_DS = 0–5 V</td><td>Why does the current change?</td></tr></tbody></table></div>
+<p><strong>Item 2.</strong> Using the <strong>0.18u technology</strong> NMOS model given in the handout (Table 5; <code>LEVEL = 49</code>, <code>VERSION = 3.1</code>, <code>VTH0 = 0.3999</code>, <code>TOX = 4.E-09</code>, <code>VSAT = 1.38E+05</code> …; the full model is in the handout), perform the simulations in Table 4 for Figure 1(a). Leave the area and perimeter parameters other than L and W empty: what is their effect, and in which analyses do they make a difference?</p>
+<p><strong>Table 4:</strong></p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Model</th><th scope="col">Graph</th><th scope="col">Variables</th><th scope="col">Questions</th></tr></thead><tbody><tr><th scope="row">BSIM3 NMOS, L = 1u, W = 90u</th><td>I_DS – V_DS</td><td>V_BS = 0, V_GS = 0.2–2 V, V_DS = 0–2 V</td><td>Is the velocity saturation effect observed? Why were the MOSFET W values not chosen to be equal?</td></tr><tr><th scope="row">BSIM4 NMOS, L = 0.18u, W = 5u</th><td>I_DS – V_DS</td><td>V_BS = 0, V_GS = 0.2–2 V, V_DS = 0–2 V</td><td>Compare and comment on the results.</td></tr></tbody></table></div>
+<p><em>Note: In the handout, the 0.18u model is referred to as "BSIM4" in the heading; however, <code>LEVEL = 49</code> and <code>VERSION = 3.1</code> in the definition actually correspond to the BSIM3v3 model (the first row of Table 4 also says "BSIM3").</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../EEM312_yazilim_deney_foyleri_Y1-Y3_2011.zip" download>EEM312_yazilim_deney_foyleri_Y1-Y3_2011.zip</a></p>
+              <p class="kucuk">ZIP archive · 517 KB · 11.03.2011</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../EEM312_yazilim_deney_foyleri_Y1-Y3_2011.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (517 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

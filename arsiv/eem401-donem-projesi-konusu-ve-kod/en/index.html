@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Digital Signal Processing: 2014 Term Project (Gaussian Noise and Three Butterworth Filters) and MATLAB Solution — hasancan.net</title>
+<meta name="description" content="The topic of the EEM401 Digital Signal Processing term project of November 2014: adding Gaussian noise to a grayscale image and filtering it in the frequency domain with three Butterworth low-pass filters; a friend&#x27;s MATLAB solution (personal information removed).">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Digital Signal Processing: 2014 Term Project (Gaussian Noise and Three Butterworth Filters) and MATLAB Solution">
+<meta property="og:description" content="The topic of the EEM401 Digital Signal Processing term project of November 2014: adding Gaussian noise to a grayscale image and filtering it in the frequency domain with three Butterworth low-pass filters; a friend&#x27;s MATLAB solution (personal information removed).">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Digital Signal Processing: 2014 Term Project (Gaussian Noise and Three Butterworth Filters) and MATLAB Solution", "description": "The topic of the EEM401 Digital Signal Processing term project of November 2014: adding Gaussian noise to a grayscale image and filtering it in the frequency domain with three Butterworth low-pass filters; a friend's MATLAB solution (personal information removed).", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme", "associatedMedia": {"@type": "MediaObject", "name": "eem401-donem-projesi.zip", "contentUrl": "https://hasancan.net/arsiv/eem401-donem-projesi-konusu-ve-kod/eem401-donem-projesi.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM401 Digital Signal Processing: 2014 Term Project (Gaussian Noise and Three Butterworth Filters) and MATLAB Solution">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>21.11.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#project-topic">Project topic</a></li><li><a href="#matlab-solution">MATLAB solution</a></li><li><a href="#how-does-it-work">How does it work?</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM401 Digital Signal Processing: 2014 Term Project (Gaussian Noise and Three Butterworth Filters) and MATLAB Solution</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 21.11.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>The term project topic of the <strong>EEM401 Digital Signal Processing</strong> course (Asst. Prof. Dr. Selda Güney), dated 21 November 2014, and the MATLAB code a friend of mine wrote for it. Name and student number information was removed from the comment lines in the code; the image file name was changed to <code>girdi.jpg</code>, and the personal photograph used in the project was not shared. The project topic PDF and the code can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="project-topic">Project topic</h2>
+<p>"EEM401-Digital Signal Processing Course Project": The course project will be carried out using MATLAB; ready-made functions from the libraries may be used.</p>
+<p><strong>Objective.</strong> The student's own color image will be loaded into MATLAB and converted to black and white. Gaussian noise with</p>
+<ul><li>a) a mean of 0,</li><li>b) a standard deviation of 0.02·x</li></ul>
+<p>will be added to this image, where x is the last digit of the student number of the student carrying out the project.</p>
+<p>The noisy image will be filtered with <strong>three different Butterworth filters whose order and cutoff frequency are to be determined by the student</strong>, and the results will be compared. Running the project will produce six output images: 1) the original image, 2) the black-and-white image, 3) the noisy image, 4) the output of the first filter, 5) the second filter, 6) the third filter.</p>
+<p><strong>Submission.</strong> The project will be sent by e-mail, with the .m file attached, no later than the date of the course's final exam (subject line "EEM401-Term Project"; the message should include the student's first name, last name, and number). No additional report will be submitted; if necessary, explanatory comments can be written in the source code.</p>
+<h2 id="matlab-solution">MATLAB solution</h2>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>clear all;
+% program resmi okuyor
+resimorg = imread('girdi.jpg');
+% resim siyah-beyaz yapıldı
+resimsiyahbeyaz = rgb2gray(resimorg);
+resimgaus = imnoise(resimsiyahbeyaz,'gaussian',0,0.029);
+% süzgeçler
+cf = fftshift(fft2(resimgaus));
+% butterworth 1
+[x,y] = meshgrid(-128:127,-128:127);
+bl1 = 1./(1+((x.^2+y.^2)/15).^5);
+cfbl1 = cf.*bl1;
+bt1 = ifft2(cfbl1);
+bt1 = uint8(abs(bt1));
+% butterworth 2
+bl2 = 1./(1+((x.^2+y.^2)/15).^2);
+bt2 = uint8(abs(ifft2(cf.*bl2)));
+% butterworth 3
+bl3 = 1./(1+((x.^2+y.^2)/15).^0.25);
+bt3 = uint8(abs(ifft2(cf.*bl3)));
+% çıktılar
+figure;
+subplot(2,3,1), imshow(resimorg), title('Orijinal Resim');
+subplot(2,3,2), imshow(resimsiyahbeyaz), title('Siyah Beyaz Resim');
+subplot(2,3,3), imshow(resimgaus), title('Gürültü Eklenmiş Resim');
+subplot(2,3,4), imshow(bt1), title('Birinci Süzgeç Çıkışı Resim');
+subplot(2,3,5), imshow(bt2), title('İkinci Süzgeç Çıkışı Resim');
+subplot(2,3,6), imshow(bt3), title('Üçüncü Süzgeç Çıkışı Resim');</code></pre>
+<p>(The code has been reproduced from the original file with the repetitions in the three filter blocks shortened for readability; the file inside the ZIP is in its original form.)</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<ol><li>The image is converted to grayscale and zero-mean Gaussian noise is added with <code>imnoise</code>. The last parameter of <code>imnoise</code> is the <em>variance</em>; the project, however, defines the standard deviation as 0.02·x. The value 0.029 was used in the code.</li><li>The 2-D FFT is taken and the zero frequency is moved to the center with <code>fftshift</code>.</li><li>On a 256×256 grid, where the squared distance from the center is D² = x² + y², a Butterworth low-pass filter H = 1 / (1 + (D²/15)ⁿ) is built for three different values of n (5; 2; 0.25). As the order increases, the cutoff becomes sharper; for a small value such as 0.25, the filter is very gentle and suppresses less noise.</li><li>Each filter is multiplied element-wise with the shifted spectrum (multiplication in the frequency domain = convolution in the spatial domain), the result is returned to the image domain with the inverse FFT, and displayed with <code>uint8(abs(·))</code>.</li></ol>
+<p>Note: The meshgrid is fixed at 256×256; if the image has a different size, it must be resized.</p>
+<p>For the 2016 version of this project (masking periodic noise in the FFT magnitude spectrum), see "Spectral Image Filtering Design Project".</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem401-donem-projesi.zip" download>eem401-donem-projesi.zip</a></p>
+              <p class="kucuk">ZIP archive · 125 KB · 21.11.2014</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem401-donem-projesi.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (125 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

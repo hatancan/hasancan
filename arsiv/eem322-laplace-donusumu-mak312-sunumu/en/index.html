@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Laplace Transform Presentation (MAK312 System Dynamics and Control, 2007–2008 Fall) — hasancan.net</title>
+<meta name="description" content="Laplace transform presentation from the MAK312 System Dynamics and Control course: definition, transforms of basic functions, shifting, derivative and integral rules, final and initial value theorems, convolution, periodic functions, partial fraction expansion, MATLAB residue, and solving differential equations.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Laplace Transform Presentation (MAK312 System Dynamics and Control, 2007–2008 Fall)">
+<meta property="og:description" content="Laplace transform presentation from the MAK312 System Dynamics and Control course: definition, transforms of basic functions, shifting, derivative and integral rules, final and initial value theorems, convolution, periodic functions, partial fraction expansion, MATLAB residue, and solving differential equations.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Laplace Transform Presentation (MAK312 System Dynamics and Control, 2007–2008 Fall)", "description": "Laplace transform presentation from the MAK312 System Dynamics and Control course: definition, transforms of basic functions, shifting, derivative and integral rules, final and initial value theorems, convolution, periodic functions, partial fraction expansion, MATLAB residue, and solving differential equations.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "MAK312_04_LaplaceTransform.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-laplace-donusumu-mak312-sunumu/MAK312_04_LaplaceTransform.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Laplace Transform Presentation (MAK312 System Dynamics and Control, 2007–2008 Fall)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>05.03.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#laplace-transform">Laplace transform</a></li><li><a href="#transforms-of-basic-functions">Transforms of basic functions</a></li><li><a href="#transform-rules">Transform rules</a></li><li><a href="#final-value-and-initial-value-theorems">Final value and initial value theorems</a></li><li><a href="#example-doublet-pulse-and-the-limit-a-0">Example: doublet pulse and the limit a → 0</a></li><li><a href="#periodic-functions">Periodic functions</a></li><li><a href="#inverse-laplace-transform-and-partial-fractions">Inverse Laplace transform and partial fractions</a></li><li><a href="#solving-linear-time-invariant-differential-equations">Solving linear time-invariant differential equations</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Laplace Transform Presentation (MAK312 System Dynamics and Control, 2007–2008 Fall)</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 05.03.2008 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a <strong>third-party</strong> presentation stored in the "eem322_kontrol_alper_siteden" subfolder of the EEM322 Control Systems folder: the "Laplace Transform" slides of the <strong>MAK312 System Dynamics and Control</strong> course, <strong>2007–2008 Fall semester</strong>. Judging by the folder name, it was downloaded from a website; the presentation does not name the instructor or the university. The PDF has 31 pages (62 slides) with two slides per page and is dated <strong>5 March 2008</strong>. The slide text and formulas are transcribed below as text; the original PDF can be downloaded at the end of the post.</p>
+<p><em>This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<h2 id="laplace-transform">Laplace transform</h2>
+<p>One of the most important tools for modeling and analyzing linear systems is the Laplace transform. Its power lies in <strong>converting linear differential equations into algebraic equations</strong>; since it is used heavily in system dynamics courses, it is the first topic that should be studied.</p>
+<figure class="yazi-gorsel"><img src="../zaman-frekans.jpg" width="1000" height="760" loading="lazy" decoding="async" alt="Time domain and frequency domain: x(t) → h(t) → y(t) = h(t)∗x(t); Laplace transform gives X(s) → H(s) → Y(s) = H(s)X(s)"><figcaption>Convolution in the time domain, multiplication in the frequency domain</figcaption></figure>
+<p>The Laplace transform of a function f(t) is found by multiplying f(t) by e^(−st) and integrating from t = 0 to ∞. The result is a function of the complex Laplace variable s:</p>
+<blockquote><p>F(s) = L[f(t)] = ∫₀^∞ f(t)·e^(−st) dt</p></blockquote>
+<p><strong>Linearity:</strong> L[a·f(t) + b·g(t)] = a·F(s) + b·G(s).</p>
+<h2 id="transforms-of-basic-functions">Transforms of basic functions</h2>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Function</th><th scope="col">f(t) (t ≥ 0)</th><th scope="col">F(s)</th></tr></thead><tbody><tr><th scope="row">Exponential</th><td>A·e^(−αt)</td><td>A/(s + α)  (s &gt; −α)</td></tr><tr><th scope="row">Unit step</th><td>h(t) = 1(t)</td><td>1/s</td></tr><tr><th scope="row">Shifted unit step</th><td>1(t − t₀)</td><td>e^(−st₀)/s</td></tr><tr><th scope="row">Ramp</th><td>a·t</td><td>a/s²</td></tr><tr><th scope="row">Sine</th><td>A·sin(ωt)</td><td>Aω/(s² + ω²)</td></tr><tr><th scope="row">Cosine</th><td>A·cos(ωt)</td><td>As/(s² + ω²)</td></tr><tr><th scope="row">Pulse, height A/t₀, duration t₀</th><td>(A/t₀)[1(t) − 1(t − t₀)]</td><td>(A/(s·t₀))(1 − e^(−st₀))</td></tr><tr><th scope="row">Impulse</th><td>A·δ(t)</td><td>A</td></tr></tbody></table></div>
+<ul><li><strong>Ramp:</strong> the integral is solved by integration by parts (∫u dv = uv − ∫v du, u = t, dv = e^(−st)dt, v = −e^(−st)/s): L[a·t] = a·∫₀^∞ e^(−st)dt/s = a/s².</li><li><strong>Sine:</strong> writing sin(ωt) = (e^(iωt) − e^(−iωt))/(2i) gives L = (A/2i)[1/(s − iω) − 1/(s + iω)] = Aω/(s² + ω²); the cosine is found similarly.</li><li><strong>Impulse:</strong> take the limit t₀ → 0 in the pulse function; the 0/0 indeterminate form is resolved with L'Hôpital's rule: lim A(1 − e^(−st₀))/(st₀) = As/s = A. If the area underneath is 1, it is called the unit impulse (Dirac delta). The unit impulse at t = t₀, δ(t − t₀), is 0 for t ≠ t₀, ∞ at t = t₀, and ∫δ(t − t₀)dt = 1. The unit impulse is the derivative of the unit step; the unit step is likewise the integral of the unit impulse.</li></ul>
+<p>Computing integrals as in these examples is not always practical; instead, prepared Laplace transform tables are used.</p>
+<h2 id="transform-rules">Transform rules</h2>
+<ul><li><strong>Shifting in the time axis:</strong> for a &gt; 0, L[f(t − a)] = e^(−as)·F(s). (Proof: change of variable τ = t − a; time-dependent functions are taken to be zero for t &lt; 0.)</li><li><strong>Multiplication by e^(−αt):</strong> L[e^(−αt)·f(t)] = F(s + α). Example: L[sin ωt] = ω/(s² + ω²) ⇒ L[e^(−αt) sin ωt] = ω/((s + α)² + ω²).</li><li><strong>Derivatives:</strong> L[df/dt] = sF(s) − f(0); L[d²f/dt²] = s²F(s) − s·f(0) − ḟ(0); in general L[f⁽ⁿ⁾(t)] = sⁿF(s) − s^(n−1)f(0) − s^(n−2)ḟ(0) − … − f⁽ⁿ⁻¹⁾(0).</li><li><strong>Example:</strong> for g(t) = sin ωt, L[ġ(t)]: method I, ġ = ω cos ωt ⇒ sω/(s² + ω²); method II, s·ω/(s² + ω²) − g(0) = sω/(s² + ω²).</li><li><strong>Integral:</strong> L[∫f(t)dt] = F(s)/s + f⁻¹(0)/s, where f⁻¹(0) = (∫f(t)dt) at t = 0; for a definite integral, L[∫₀ᵗ f(t)dt] = F(s)/s.</li><li><strong>Complex differentiation theorem:</strong> L[t·f(t)] = −dF(s)/ds, L[t²f(t)] = d²F(s)/ds², L[tⁿf(t)] = (−1)ⁿ dⁿF(s)/dsⁿ.</li><li><strong>Convolution:</strong> f₁(t)∗f₂(t) = ∫₀ᵗ f₁(t − τ)f₂(τ)dτ = f₂(t)∗f₁(t) and L[f₁∗f₂] = F₁(s)·F₂(s).</li><li><strong>Product of two functions:</strong> L[f(t)·g(t)] = (1/2πj)∫_(c−j∞)^(c+j∞) F(ρ)G(s − ρ)dρ.</li></ul>
+<p><em>Note: In the slide, the derivatives in the complex differentiation theorem are written with d/dt; since F(s) is a function of s, the derivative is with respect to s (d/ds).</em></p>
+<h2 id="final-value-and-initial-value-theorems">Final value and initial value theorems</h2>
+<p>The final value theorem gives the steady-state behavior of a function and is valid only if lim(t→∞) f(t) exists. If all poles of sF(s) lie in the left half of the s-plane, f(t) settles to a bounded value. If the poles are on the imaginary axis or in the right half-plane, f(t) oscillates or grows exponentially and the limit does not exist; for example, for f(t) = sin ωt, F(s) = ω/(s² + ω²), the poles are s = ∓jω, and the final value theorem cannot be applied.</p>
+<blockquote><p><strong>Theorem:</strong> If the Laplace transforms of f(t) and df/dt exist and lim(t→∞) f(t) exists, then lim(t→∞) f(t) = lim(s→0) sF(s).</p></blockquote>
+<p>Proof: taking the limit s → 0 in the derivative rule gives lim ∫₀^∞ (df/dt)e^(−st)dt = lim[sF(s) − f(0)]; since e^(−st) → 1, the left side becomes ∫₀^∞ (df/dt)dt = lim f(t) − f(0), and the result follows from the two equalities.</p>
+<p><strong>Example:</strong> F(s) = 1/(s(s + 1)). sF(s) = 1/(s + 1); the pole s = −1 is in the left half-plane, so the limit exists: lim f(t) = lim(s→0) 1/(s + 1) = 1.</p>
+<p><strong>Initial value theorem:</strong> f(0+) = lim(s→∞) sF(s) (its proof is left as homework).</p>
+<h2 id="example-doublet-pulse-and-the-limit-a-0">Example: doublet pulse and the limit a → 0</h2>
+<figure class="yazi-gorsel"><img src="../cift-darbe.jpg" width="1000" height="330" loading="lazy" decoding="async" alt="Doublet pulse: 1/a² on 0 ≤ t &lt; a, −1/a² on a ≤ t &lt; 2a, zero elsewhere"><figcaption>Doublet pulse function</figcaption></figure>
+<p>f(t) is written as a sum of steps: f(t) = (1/a²)1(t) − (2/a²)1(t − a) + (1/a²)1(t − 2a). Thus</p>
+<blockquote><p>F(s) = (1/(a²s))·(1 − 2e^(−as) + e^(−2as))</p></blockquote>
+<p>The same result is also found by integration (method 2). The limit a → 0 is a 0/0 indeterminate form; applying L'Hôpital's rule twice gives lim F(s) = −s + 2s = s (the transform of the derivative of the unit impulse, i.e., the unit doublet).</p>
+<h2 id="periodic-functions">Periodic functions</h2>
+<p>For an f(t) with period T,</p>
+<blockquote><p>L[f(t)] = (1/(1 − e^(−Ts)))·∫₀ᵀ f(t)e^(−st)dt</p></blockquote>
+<p>Proof: the integral is split into periods, τ = t − nT gives Σ e^(−nTs)·∫₀ᵀ f(τ)e^(−sτ)dτ, and the geometric series Σ e^(−nTs) = 1/(1 − e^(−Ts)) is used.</p>
+<p><strong>Example:</strong> for a square wave that is +1 over 0–T/2 and −1 over T/2–T,</p>
+<blockquote><p>L[f(t)] = (1/(1 − e^(−Ts)))·(1/s)·(1 − e^(−sT/2))² = (1/s)·(1 − e^(−sT/2))/(1 + e^(−sT/2))</p></blockquote>
+<h2 id="inverse-laplace-transform-and-partial-fractions">Inverse Laplace transform and partial fractions</h2>
+<blockquote><p>L⁻¹[F(s)] = f(t) = (1/2πj)∫_(c−j∞)^(c+j∞) F(s)e^(st) ds</p></blockquote>
+<p>Here the constant c is chosen greater than all poles of F(s). This integral is very rarely used; instead, F(s) is decomposed into components whose transforms are known, and each is inverse transformed separately: F(s) = F₁(s) + … + Fₙ(s) ⇒ f(t) = f₁(t) + … + fₙ(t).</p>
+<p><em>Note: In the slide, the exponential term in the inverse transform integral is written as e^(−sτ); the correct form is e^(st).</em></p>
+<p><strong>Partial fraction expansion:</strong> F(s) = B(s)/A(s) must be a proper fraction, i.e., deg A(s) &gt; deg B(s). If not, division is performed first: (s + 1)/s = 1 + 1/s.</p>
+<h3 id="i-distinct-poles">(i) Distinct poles</h3>
+<blockquote><p>F(s) = K(s + z₁)…(s + z_m)/[(s + p₁)…(s + p_n)] = a₁/(s + p₁) + a₂/(s + p₂) + … + aₙ/(s + pₙ), m &lt; n</p></blockquote>
+<p>The constants a_k are called residues. Multiplying both sides of the equality by (s + p_k) and setting s = −p_k gives a_k = [(s + p_k)F(s)] (s = −p_k). Using L⁻¹[a_k/(s + p_k)] = a_k·e^(−p_k t), we obtain f(t) = a₁e^(−p₁t) + a₂e^(−p₂t) + … + aₙe^(−pₙt).</p>
+<p>Exercises: F(s) = 4(s + 1)(s + 2)/[s(s + 1)(s + 2)]; F(s) = (s⁴ + 3s² + 5s + 1)/[s(s + 1)(s + 2)]; F(s) = (s + 4)/(s² + s + 1).</p>
+<h3 id="ii-repeated-poles">(ii) Repeated poles</h3>
+<p>F(s) = (s² + 2s + 3)/(s + 1)³ = b₁/(s + 1) + b₂/(s + 1)² + b₃/(s + 1)³. Multiplying both sides by (s + 1)³ gives (s + 1)³F(s) = (s + 1)²b₁ + (s + 1)b₂ + b₃:</p>
+<ul><li>At s = −1: b₃ = (s² + 2s + 3) = 2</li><li>First derivative at s = −1: b₂ = (2s + 2) = 0</li><li>Second derivative at s = −1: 2b₁ = 2 ⇒ b₁ = 1</li></ul>
+<blockquote><p>F(s) = 1/(s + 1) + 2/(s + 1)³,  L⁻¹[1/(s + a)ⁿ] = tⁿ⁻¹e^(−at)/(n − 1)! f(t) = e^(−t) + 2·t²e^(−t)/2! = e^(−t)(1 + t²)</p></blockquote>
+<h3 id="partial-fractions-with-matlab">Partial fractions with MATLAB</h3>
+<p>For F(s) = B(s)/A(s) = (b(1)s^m + … + b(m))/(a(1)s^n + … + a(n)), with coefficient vectors <code>num</code> and <code>den</code>, <code>[r,p,k] = residue(num,den)</code> returns the residues (r), poles (p), and the direct term (k). Example:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num = [1 -8 17 -6 -2];
+den = [1 -10 31 -30];
+[r,p,k] = residue(num,den)
+% r = 3, 1, 2   p = 5, 3, 2   k = 1 2
+[num,den] = residue([3 1 2],[5 3 2],[1 2])   % reverse direction: from fractions to polynomials</code></pre>
+<blockquote><p>F(s) = (s⁴ − 8s³ + 17s² − 6s − 2)/(s³ − 10s² + 31s − 30) = s + 2 + 3/(s − 5) + 1/(s − 3) + 2/(s − 2)</p></blockquote>
+<p><em>Note: In the slide the result is written as "3/(s + 5) + 1/(s + 3) + 2/(s + 2)"; the poles in the MATLAB screenshot are p = 5, 3, 2, and the denominator factors as (s − 2)(s − 3)(s − 5), so the denominators should be s − 5, s − 3, s − 2.</em></p>
+<h2 id="solving-linear-time-invariant-differential-equations">Solving linear time-invariant differential equations</h2>
+<p>Two steps are followed: (1) the Laplace transform of each term of the differential equation is taken, giving an algebraic equation in s, and the dependent variable X(s) is isolated; (2) the inverse Laplace transform is applied to X(s) to obtain the time function. The transforms of the derivatives are:</p>
+<blockquote><p>L[x(t)] = X(s), L[ẋ(t)] = sX(s) − x(0), L[ẍ(t)] = s²X(s) − s·x(0) − ẋ(0) L[x⁽ⁿ⁾(t)] = sⁿX(s) − Σ(k=1…n) s^(n−k)·x⁽ᵏ⁻¹⁾(0)</p></blockquote>
+<p>Exercises:</p>
+<ul><li>Example 4: y⃛ + 6ÿ + 11ẏ + 6y = 2t, y(0) = ẏ(0) = ÿ(0) = 0</li><li>Example 5: ẍ + 2ẋ + 5x = 1, x(0) = 0, ẋ(0) = 2</li></ul>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../MAK312_04_LaplaceTransform.pdf" download>MAK312_04_LaplaceTransform.pdf</a></p>
+              <p class="kucuk">PDF · 633 KB · 31 <span data-i18n="arch.pagesLower"></span> · 05.03.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../MAK312_04_LaplaceTransform.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (633 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM401 Digital Signal Processing: z-Transform, Region of Convergence, Inverse z-Transform, and Decimation-in-Time FFT (Notebook Notes) — hasancan.net</title>
+<meta name="description" content="Notes from my EEM401 notebook, 27 November 2014: definition of the z-transform and its region of convergence (ROC), stability and causality, inverse z-transform examples, the decimation-in-time (DIT) fast Fourier transform algorithm, and an 8-point example.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM401 Digital Signal Processing: z-Transform, Region of Convergence, Inverse z-Transform, and Decimation-in-Time FFT (Notebook Notes)">
+<meta property="og:description" content="Notes from my EEM401 notebook, 27 November 2014: definition of the z-transform and its region of convergence (ROC), stability and causality, inverse z-transform examples, the decimation-in-time (DIT) fast Fourier transform algorithm, and an 8-point example.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM401 Digital Signal Processing: z-Transform, Region of Convergence, Inverse z-Transform, and Decimation-in-Time FFT (Notebook Notes)", "description": "Notes from my EEM401 notebook, 27 November 2014: definition of the z-transform and its region of convergence (ROC), stability and causality, inverse z-transform examples, the decimation-in-time (DIT) fast Fourier transform algorithm, and an 8-point example.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/eem401-z-donusumu-ve-hfd-el-yazisi/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM401 – Sayısal Sinyal İşleme"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM401 Digital Signal Processing: z-Transform, Region of Convergence, Inverse z-Transform, and Decimation-in-Time FFT (Notebook Notes)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem401">EEM401</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM401 – Sayısal Sinyal İşleme</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>27.11.2014</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#1-fast-fourier-transform-decimation-in-time-dit">1. Fast Fourier transform (decimation in time, DIT)</a></li><li><a href="#2-z-transform">2. z-transform</a></li><li><a href="#3-inverse-z-transform">3. Inverse z-transform</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM401</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM401 Digital Signal Processing: z-Transform, Region of Convergence, Inverse z-Transform, and Decimation-in-Time FFT (Notebook Notes)</h1>
+            <p class="kucuk">EEM401 – Sayısal Sinyal İşleme · 27.11.2014 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a text transcription of 16 pages of handwritten notes that I took in my notebook during the <strong>EEM401 Digital Signal Processing</strong> course (Asst. Prof. Dr. Selda Güney) in the 2014–2015 fall semester, and photographed on 27 November 2014. The photographs have not been published; the content has been rewritten. For the course slides, see the posts "Discrete-Time Signals and Systems" and "Digital Filters".</p>
+<h2 id="1-fast-fourier-transform-decimation-in-time-dit">1. Fast Fourier transform (decimation in time, DIT)</h2>
+<p><strong>Definition.</strong> X(k) = Σ_{n=0}^{N−1} x[n]·W_N^{kn}, W_N = e^{−j2π/N}; W_N^k is periodic: W_N^{k+N} = W_N^k.</p>
+<p><strong>Splitting into even- and odd-indexed samples (N even).</strong> X(k) = Σ_{m=0}^{N/2−1} x[2m]·W_N^{2mk} + Σ_{m=0}^{N/2−1} x[2m+1]·W_N^{(2m+1)k}. Since W_N² = e^{−j(2π/N)·2} = e^{−j4π/N} = W_{N/2}:</p>
+<p>X(k) = F(k) + W_N^k·G(k), k = 0, 1, …, N/2 − 1 X(k + N/2) = F(k) − W_N^k·G(k), k = 0, 1, …, N/2 − 1</p>
+<p>Here F(k) is the N/2-point DFT of the even-indexed samples and G(k) is the N/2-point DFT of the odd-indexed samples; W_N^{k+N/2} = W_N^k·W_N^{N/2} = −W_N^k (because W_N^{N/2} = e^{−jπ} = −1). F(k) and G(k) repeat with period N/2 (F(0) = F(4), F(1) = F(5), … for N = 8).</p>
+<p><strong>N = 4 example and the flow for N = 8.</strong> The same method is applied inside the 4-point DFT: the sequence x[0], x[2], x[4], x[6] enters the F block; the sequence x[1], x[3], x[5], x[7] enters the G block. The 4-point blocks are in turn split into 2-point DFTs: F_a[0] = x[0] + W₈⁰·x[4] = x[0] + x[4], F_a[1] = x[0] − x[4], F_t[0] = x[2] + x[6], F_t[1] = x[2] − x[6]; G_a[0] = x[1] + x[5], G_a[1] = x[1] − x[5], G_t[0] = x[3] + x[7], G_t[1] = x[3] − x[7]. Then, with the factor W₈²:</p>
+<ul><li>F(0) = F_a(0) + F_t(0), F(1) = F_a(1) + W₈²·F_t(1), F(2) = F_a(0) − F_t(0), F(3) = F_a(1) − W₈²·F_t(1);</li><li>G(0), G(1), G(2), G(3) are obtained in the same way; in the last step X(0) … X(3) are found from X(k) = F(k) + W₈^k·G(k) (k = 0 … 3), and X(4) … X(7) from X(k + 4) = F(k) − W₈^k·G(k). In the butterfly diagrams the weights are W₈⁰, W₈¹, W₈², W₈³, and −1 on the opposing branches.</li></ul>
+<p><strong>Numerical example.</strong> x[n] = {1, 1, −1, −1, −1, 1, 1, −1}, N = 8: find X(k) using the decimation-in-time FFT. The rows of the 4-point DFT matrix are taken as (1, 1, 1, 1), (1, −j, −1, j), (1, −1, 1, −1), (1, j, −1, −j) (W₄⁰ = 1, W₄² = −1). The even-indexed samples are f[n] = {1, −1, −1, 1} and the odd-indexed samples are g[n] = {1, −1, 1, −1}. With the 4×4 DFT matrix, F(k) = {0, 2 + j2, 0, 2 − j2}, G(k) = {0, 0, 4, 0}. Result: X(0) = 0, X(1) = 2 + j2, X(2) = W₈²·4 = −j4, X(3) = 2 − j2, X(4) = 0, X(5) = 2 + j2, X(6) = +j4, X(7) = 2 − j2.</p>
+<p>On the unit circle, the points n = 0, 4 → 1; n = 1, 5 → −j; n = 2, 6 → −1; n = 3, 7 → j are drawn, along with the 90° (W₄) and 180° rotations of the columns of the W₈ matrix (the rows of the W₄ matrix). There is also a short power spectrum sketch (P_k: 0.25; 0.5; 0.25; 0.5).</p>
+<h2 id="2-z-transform">2. z-transform</h2>
+<p>The z-transform is a generalization of the Fourier transform. If the sum of a signal diverges (for example x[n] = (0.5)ⁿu[−n] or a growing signal), we cannot take its Fourier transform; that is why we use the z-transform. <strong>The z-transform has a region of convergence (ROC).</strong></p>
+<p><strong>Region of convergence.</strong></p>
+<ul><li>Writing Z = r·e^{jω}, X_r(e^{jω}) = Σ x[n]·r^{−n}·e^{−jωn}; the sum can be made finite by choosing r. Example: for x[n] = 2ⁿu[n], Σ|x[n]| = ∞, i.e. the DTFT does not exist; but with r = 3 (r &gt; 2), Σ 2ⁿ·3^{−n}·e^{−jωn} = Σ (2/3)ⁿ e^{−jωn} converges.</li><li>Geometric series: Σ_{n=0}^{∞} αⁿ = 1/(1 − α), |α| &lt; 1.</li><li>If the unit circle is inside the ROC, the discrete-time Fourier transform exists; if not, it does not.</li><li>If the signal is <strong>right-sided</strong>, the ROC is the exterior of a circle; if it is <strong>left-sided</strong>, the ROC is the interior of a circle. A right-sided signal is causal; a left-sided signal is not causal.</li><li><strong>Properties:</strong> The ROC contains no poles; for stability the ROC must include the unit circle; for the system to be both causal and stable, the poles must lie inside the unit circle (with magnitude less than 1); for the ROC to contain no poles, it must lie inside the smallest pole, outside the largest pole, or between poles. Example: if the poles are at 0.5, 2, 3, 5, the ROC is |z| &lt; 0.5, 0.5 &lt; |z| &lt; 2, 2 &lt; |z| &lt; 3, 3 &lt; |z| &lt; 5, or |z| &gt; 5 (between 2 and 5 "is not allowed", between 2 and 3 is fine, and between 3 and 5 is fine).</li><li>If the degree of the numerator is greater than that of the denominator, the system is not causal (example: H(z) = (z³ − 2z² + z)/(z² + z/4 + 1/8) is not causal).</li></ul>
+<p><strong>Example 1 (left-sided).</strong> x[n] = −(7/8)ⁿ·u[−n−1]. X(z) = Σ_{n=−∞}^{−1} −(7/8)ⁿ z^{−n} = … = 1/(1 − (7/8)z⁻¹), ROC: |z| &lt; 7/8 (for the sum to converge, |(7/8)^{−1}·z| &lt; 1). The notebook also has the note "if the equation were x[n] = (7/8)ⁿu[n], X(z) would be the same, but the ROC would be |z| &gt; 7/8".</p>
+<p><strong>Example 2.</strong> x[n] = 7(1/3)ⁿu[n] − 6(1/2)ⁿu[n]: X(z) = 7/(1 − (1/3)z⁻¹) − 6/(1 − (1/2)z⁻¹) = (1 − (3/2)z⁻¹) / [(1 − (1/3)z⁻¹)(1 − (1/2)z⁻¹)], |z| &gt; 1/2.</p>
+<p><strong>Example 3 (sinusoidal).</strong> x[n] = (1/3)ⁿ·sin(πn/4)·u[n] → X(z) = ((1/3)·(√2/2)·z) / [(z − (1/3)e^{jπ/4})(z − (1/3)e^{−jπ/4})] (|z| &gt; 1/3; the poles lie on the circle of radius 1/3 at ±45°).</p>
+<p>In an example with poles at 1/3 and 1/2, three regions are drawn: |z| &gt; 1/2 is right-sided (causal and stable, contains the unit circle); 1/3 &lt; |z| &lt; 1/2 is two-sided; |z| &lt; 1/3 is left-sided (of the form x[n] = 7(1/3)ⁿu[−n−1] + 6(1/2)ⁿu[−n−1]).</p>
+<h2 id="3-inverse-z-transform">3. Inverse z-transform</h2>
+<p>Some inverse z-transform pairs:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">X(z)</th><th scope="col"></th><th scope="col">z</th><th scope="col">&gt;</th><th scope="col">α</th><th scope="col"></th><th scope="col"></th><th scope="col">z</th><th scope="col">&lt;</th><th scope="col">α</th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">1 / (1 − αz⁻¹)</th><td>αⁿ·u[n]</td><td>−αⁿ·u[−n−1]</td></tr><tr><th scope="row">1 / (1 − αz⁻¹)²</th><td>(n+1)·αⁿ·u[n]</td><td>−(n+1)·αⁿ·u[−n−1]</td></tr><tr><th scope="row">1 / (1 − αz⁻¹)^m</th><td>[(n+1)(n+2)…(n+m−1)/(m−1)!]·αⁿ·u[n]</td><td>−[(n+1)…(n+m−1)/(m−1)!]·αⁿ·u[−n−1]</td></tr></tbody></table></div>
+<p>Notes: αz⁻¹/(1 − αz⁻¹)² = αz/(z − α)²; if the numerator and denominator degrees are equal, they are divided to extract the constant coefficient; for pole/zero locations such as z = 0 and z = −1 and for repeated poles, one more value is given ("we multiplied by 2 and divided by 2" is used to adjust the numerator). A partial-fraction example: X(z) = z⁻¹ / [(1 − az⁻¹)(1 − bz⁻¹)²] = A/(1 − az⁻¹) + B1/(1 − bz⁻¹) + B2/(1 − bz⁻¹)².</p>
+<p><strong>Numerical example (three regions).</strong> The partial-fraction expansion of X(z) yields three different sequences for three different ROCs:</p>
+<ul><li>|z| &lt; 1/2: x[n] = 2δ[n] + 9(1/2)ⁿu[−n−1] − 8u[−n−1],</li><li>1/2 &lt; |z| &lt; 1: x[n] = 2δ[n] − 9(1/2)ⁿu[n] − 8u[−n−1],</li><li>|z| &gt; 1: x[n] = 2δ[n] − 9(1/2)ⁿu[n] + 8u[n].</li></ul>
+<p>Of these three cases, only |z| &gt; 1 is right-sided and causal; 1/2 &lt; |z| &lt; 1, which contains the unit circle, is two-sided and has a Fourier transform.</p>
+<p><em>Note: Because some parts of the notebook (especially the partial-fraction coefficients and the sketches) were written in a hurry, there may be small discrepancies when reading them from the handwriting.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>

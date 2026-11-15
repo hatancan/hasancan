@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Architecture and Addressing (Gazi University, M. Ali Akcayol) — hasancan.net</title>
+<meta name="description" content="Computer architecture, instruction cycle, cache memory, real and protected mode, and addressing modes.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-gazi-mimari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-gazi-mimari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-gazi-mimari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-gazi-mimari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Architecture and Addressing (Gazi University, M. Ali Akcayol)">
+<meta property="og:description" content="Computer architecture, instruction cycle, cache memory, real and protected mode, and addressing modes.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-gazi-mimari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Architecture and Addressing (Gazi University, M. Ali Akcayol)", "description": "Computer architecture, instruction cycle, cache memory, real and protected mode, and addressing modes.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-gazi-mimari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-gazi-mimari.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-gazi-mimari/eem332-gazi-mimari.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Architecture and Addressing (Gazi University, M. Ali Akcayol)">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>26.10.2008</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#cpul1introduction">CPUL1Introduction</a></li><li><a href="#cpul2architecture">CPUL2Architecture</a></li><li><a href="#cpul3architecture8086">CPUL3Architecture8086</a></li><li><a href="#cpul4adressingmodes">CPUL4AdressingModes</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Architecture and Addressing (Gazi University, M. Ali Akcayol)</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 26.10.2008 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post collects the relevant notes and exercises from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2008–2008). It covers computer architecture, the instruction cycle, cache memory, real and protected mode, and addressing modes. Source: Gazi University, M. Ali Akcayol; BİL362 lecture notes. PDF archive copies of the documents and, where available, source code can be downloaded as a ZIP at the end of the post.</p>
+<p><em>Note: This content belongs to a third-party source; it is shared for archival and nostalgic purposes with the source credited. It will be removed at the request of the rights holder.</em></p>
+<h2 id="cpul1introduction">CPUL1Introduction</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol Gazi University Department of Computer Engineering</p>
+<p>General Information Instructor: Assoc. Prof. Dr. M. Ali Akcayol Office: Başkent University, Department of Computer Engineering E-mail: akcayol@gazi.edu.tr Office hours: Mon 16:00-18:00</p>
+<p>Teaching assistant: Res. Asst. Mehmet Dikmen Office: Başkent University, Department of Computer Engineering</p>
+<h3 id="e-mail">E-mail</h3>
+<p>Course web page: http://w3.gazi.edu.tr/~akcayol (\dersler\mikroişlemciler)</p>
+<h3 id="classroom">Classroom</h3>
+<h3 id="lab">Lab</h3>
+<p>General Information Grading Midterm: 25% Lab: 25% Weekly assignments: 10% Attendance: 5% Final: 35%</p>
+<p>Main textbook Barry B. Brey, The Intel Microprocessors 8086/8088, 80186/80188, 80286, 80386, 80486, Pentium, Pentium Pro, Pentium II, Penium III, Pentium 4 Architecture, Programming and Interfacing (7th edition), Prentice Hall, 2006.</p>
+<p>Supplementary textbook</p>
+<h3 id="walter-a-triebel-avtar-singh-the-8088-and-8086-microprocessors">Walter A.Triebel, Avtar Singh, The 8088 and 8086 Microprocessors</h3>
+<p>Programming, Interfacing, Software, Hardware and Applications (4th edition), Prentice Hall, 2002.</p>
+<p>General Information Course topics</p>
+<p>(1)      Introduction to microprocessors and the development of Intel microprocessors (2)      8086 and 8088 microprocessor architectures: Registers, Stack, Physical and Logical addressing (3)      Program development in assembly language (4)      Addressing modes (5)      Data transfer, arithmetic and logic instructions (6)      Flow control, subroutine call and string instructions (7)      8086 programming (8)      8086 memory interfaces (9)      8086 basic input/output interfaces (10)     Interrupts and their types (11)     Introduction to the 80386, 80486 and Pentium processors</p>
+<p>Historical Development Mechanical age</p>
+<ul><li>The abacus, the first mechanical calculating device, was developed</li></ul>
+<p>by the Babylonians in 500 BC.</p>
+<ul><li>In 1642 Blaise Pascal developed a calculating machine made up of</li></ul>
+<p>gears and wheels.</p>
+<ul><li>Each gear has 10 teeth. When one completes a full turn, the next</li></ul>
+<p>advances by one tooth, performing the calculation.</p>
+<ul><li>In 1947 Charles Babbage began developing a calculating machine</li></ul>
+<p>called the Analytical Engine. This machine, developed with the help of Augusta Ada Byron, used punch cards.</p>
+<p>Historical Development Electrical age</p>
+<ul><li>In the 1800s, as a result of advances in electric motors, the</li></ul>
+<p>calculating machine developed mechanically by Pascal came to be driven by motors.</p>
+<ul><li>It was widely used in workplaces until the 1970s.</li></ul>
+<ul><li>In the 1970s the Bomar Brain handheld calculator was developed.</li></ul>
+<ul><li>Konrad Zuse developed a mechanical calculating machine in 1936</li></ul>
+<p>and an electromechanical one in 1941.</p>
+<ul><li>In the 1940s Konrad Zuse developed the first modern computer,</li></ul>
+<p>called the Z3.</p>
+<ul><li>The Z3 had a clock frequency of 5.33 Hz.</li></ul>
+<ul><li>In 1943 an electronic calculating machine called Colossus was</li></ul>
+<p>developed with vacuum tubes by Alan Turing.</p>
+<ul><li>Colossus could not be reprogrammed and is called a special-purpose</li></ul>
+<p>computer.</p>
+<p>Historical Development First generation: Vacuum tubes</p>
+<ul><li>ENIAC (Electronic Numerical Integrator and Computer) was the first</li></ul>
+<p>general-purpose electronic computer.</p>
+<ul><li>ENIAC was completed in 1946. It weighed 30 tons, occupied about</li></ul>
+<p>1500 m2 and consisted of 17000 vacuum tubes.</p>
+<ul><li>ENIAC had a power of 140 kW and could perform 5000 additions per</li></ul>
+<p>second.</p>
+<ul><li>In 1945 John von Neumann put forward the idea of storing both data</li></ul>
+<p>and program in memory and developed a computer called EDVAC (Electronic Discrete Variable Computer). (stored-program)</p>
+<ul><li>In the following years, commercial computers such as UNIVAC</li></ul>
+<p>(Universal Automatic Computer) were developed.</p>
+<p>Historical Development Second generation: Transistors (a computer made up of 10,000 transistors)</p>
+<ul><li>The biggest change in electronic computers was the replacement of</li></ul>
+<p>vacuum tubes with transistors.</p>
+<ul><li>The transistor was invented in 1947 at Bell Laboratories.</li></ul>
+<ul><li>In the late 1950s, computers built entirely from transistors were</li></ul>
+<p>produced. Third generation: Integrated circuits</p>
+<ul><li>Integrated circuits consist of a large number of discrete elements</li></ul>
+<p>(transistors). They are called Small/Medium Scale Integration. Fourth generation</p>
+<ul><li>Large Scale Integration (1,000 transistors in one chip)</li></ul>
+<p>Fifth generation</p>
+<ul><li>Very Large Scale Integration (10,000 transistors in one chip)</li></ul>
+<p>Sixth generation</p>
+<ul><li>Ultra Large Scale Integration (more than 1 million transistors in one chip)</li></ul>
+<p>Historical Development Computer generations</p>
+<p>Historical Development Development of the number of transistors in a microprocessor</p>
+<p>Historical Development Microprocessor age</p>
+<ul><li>In 1971 Intel developed the 4004, the first microprocessor.</li></ul>
+<ul><li>It can address 4096 memory locations.</li></ul>
+<ul><li>Each memory location is 4 bits (a nibble) wide.</li></ul>
+<ul><li>The 4004 microprocessor instruction set has a total of 45 instructions.</li></ul>
+<ul><li>Its speed is 50 KIPs (kilo-instructions per second).</li></ul>
+<ul><li>The 30-ton ENIAC computer, developed in 1946, runs at 100 KIPs.</li></ul>
+<ul><li>The 4004 is slower but much lighter.</li></ul>
+<ul><li>In 1972 Intel developed the 8008 microprocessor.</li></ul>
+<ul><li>It is the 8-bit version of the 4004 microprocessor.</li></ul>
+<ul><li>The 8008 can address 16 KBytes.</li></ul>
+<ul><li>The 8008 instruction set has a total of 48 instructions.</li></ul>
+<p>Historical Development Microprocessor age (continued)</p>
+<ul><li>In 1974 Intel developed the 8080.</li></ul>
+<ul><li>It can address 64 KBytes of memory.</li></ul>
+<ul><li>It is 10 times faster than the 8008 (500 KIPs).</li></ul>
+<ul><li>It was used in the MITS Altair 8800 computer.</li></ul>
+<ul><li>The BASIC language interpreter for the MITS Altair 8800 was</li></ul>
+<p>developed in 1975 by Bill Gates and Paul Allen.</p>
+<ul><li>The assembler program for the MITS Altair 8800 was developed by</li></ul>
+<p>Digital Research Corporation.</p>
+<ul><li>In 1977 Intel developed the 8085 microprocessor.</li></ul>
+<ul><li>It can address 64 KBytes of memory.</li></ul>
+<ul><li>It is Intel's last 8-bit microprocessor.</li></ul>
+<ul><li>Its speed is approximately 769 KIPs.</li></ul>
+<p>Historical Development Modern microprocessors</p>
+<ul><li>In 1978 Intel developed the 8086, and a year later the 8088.</li></ul>
+<ul><li>They are 16-bit microprocessors.</li></ul>
+<ul><li>They can address 1 MByte of memory (16 times more than the 8085).</li></ul>
+<ul><li>Their speed is 2.5 MIPs (one instruction takes 400 ns).</li></ul>
+<ul><li>The 8086/8088 processors were the first to use a 4-6 byte cache, and</li></ul>
+<p>some instructions were prefetched.</p>
+<ul><li>In 1983 Intel developed the 80286 microprocessor.</li></ul>
+<ul><li>It is a 16-bit microprocessor.</li></ul>
+<ul><li>It can address 16 MBytes.</li></ul>
+<ul><li>Its speed is 4 MIPs.</li></ul>
+<p>Historical Development Modern microprocessors (continued)</p>
+<ul><li>In 1986 Intel developed the 80386 microprocessor.</li></ul>
+<ul><li>It is Intel's first 32-bit microprocessor.</li></ul>
+<ul><li>It has a 32-bit data bus and a 32-bit address bus.</li></ul>
+<ul><li>It can address 2^32 = 4 GBytes.</li></ul>
+<ul><li>In 1989 Intel developed the 80486 microprocessor.</li></ul>
+<ul><li>It is a 32-bit microprocessor.</li></ul>
+<ul><li>It contains an 8 KByte cache.</li></ul>
+<ul><li>Its speed is 50 MIPs.</li></ul>
+<ul><li>In 1993 Intel developed the Pentium microprocessor.</li></ul>
+<ul><li>It is a 32-bit microprocessor.</li></ul>
+<ul><li>It can address 4 GBytes.</li></ul>
+<ul><li>It has a 16 KByte split cache (8 KB instruction, 8 KB data).</li></ul>
+<ul><li>There are versions with speeds of 110 MIPs or 150 MIPs.</li></ul>
+<ul><li>The biggest innovation is that it has 2 integer processors.</li></ul>
+<p>Historical Development Modern microprocessors (continued)</p>
+<ul><li>In 1995 Intel developed the Pentium Pro microprocessor.</li></ul>
+<ul><li>It is Intel's first 64-bit microprocessor.</li></ul>
+<ul><li>It has 3 integer units and 1 floating-point unit.</li></ul>
+<ul><li>It can address 2^36 = 64 GBytes. (address bus = 36 bits)</li></ul>
+<ul><li>It has a 16 KB (8K data + 8K instruction) on-chip L1 cache and a</li></ul>
+<p>256 KB L2 cache.</p>
+<ul><li>In 1997 Intel developed the Pentium II microprocessor.</li></ul>
+<ul><li>It is a 64-bit microprocessor.</li></ul>
+<ul><li>In the Pentium processor, the L2 cache runs on a 60-66 MHz system bus.</li></ul>
+<ul><li>The Pentium II and the L2 cache are on a separate board, and the L2</li></ul>
+<p>cache runs at 133 MHz and is 512 KB in size.</p>
+<ul><li>The Pentium II Xeon has a 32 KB L1 cache and 512 KB, 1 MB, 2 MB L2</li></ul>
+<p>cache.</p>
+<p>Historical Development Modern microprocessors (continued)</p>
+<ul><li>In 1999 Intel developed the Pentium III microprocessor.</li></ul>
+<ul><li>It is a 64-bit microprocessor.</li></ul>
+<ul><li>It runs at a clock frequency of 1 GHz.</li></ul>
+<ul><li>It can address 2^36 = 64 GBytes. (address bus = 36 bits)</li></ul>
+<ul><li>It has 512 KB or 256 KB of cache.</li></ul>
+<ul><li>The memory bus speed is 100 MHz.</li></ul>
+<ul><li>Celeron processors have a memory bus clock speed of 66 MHz.</li></ul>
+<ul><li>In 2000 Intel developed the Pentium 4 microprocessor.</li></ul>
+<ul><li>It is a 64-bit microprocessor.</li></ul>
+<ul><li>It runs at a clock frequency of 3.2 GHz.</li></ul>
+<ul><li>L1 cache is 8-32 KB, L2 cache is 256-512 KB.</li></ul>
+<p>Historical Development Development of Intel microprocessors</p>
+<p>Historical Development Change in the complexity of Intel microprocessors</p>
+<p>Historical Development Performance of Intel microprocessors</p>
+<p>Historical Development Development of Intel microprocessors</p>
+<p>Historical Development Development of Intel microprocessors (continued)</p>
+<p>Historical Development General structures of Intel microprocessors</p>
+<p>Historical Development Intel and Motorola microprocessors</p>
+<p>Historical Development Intel and Motorola microprocessors (continued)</p>
+<p>Historical Development Intel iCOMP index</p>
+<p>Historical Development Intel iCOMP2 index</p>
+<p>Historical Development Intel microprocessors with SYSmark 2002</p>
+<p>Assignment</p>
+<ul><li>Prepare a report on microprocessor performance tests and the</li></ul>
+<p>related test software.</p>
+<h2 id="cpul2architecture">CPUL2Architecture</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol Gazi University Department of Computer Engineering</p>
+<p>Topics</p>
+<ul><li>Computer Architecture</li></ul>
+<ul><li>Components of the Computer, CPU and Control Unit</li></ul>
+<ul><li>Instruction Cycle</li></ul>
+<ul><li>Interrupts</li></ul>
+<ul><li>Bus</li></ul>
+<ul><li>Storage Devices</li></ul>
+<ul><li>Cache Memory</li></ul>
+<p>Computer Architecture Computer components</p>
+<p>Peripherals                            Computer</p>
+<p>Main CPU                   Memory</p>
+<p>Computer</p>
+<h3 id="bus">BUS</h3>
+<p>Input / Output Communication Lines</p>
+<p>Computer Architecture CPU components</p>
+<h3 id="cpu">CPU</h3>
+<p>Computer                                          Arithmetic Registers logic G/Ç                            (Registers) unit System      CPU Bus CPU internal Memory                                  connection</p>
+<p>Control Unit</p>
+<p>Computer Architecture Control Unit components</p>
+<p>Control Unit</p>
+<h3 id="cpu">CPU</h3>
+<p>Sequencing ALU                              logic Control Internal Unit Bus Control unit Registers                                     registers and                                        decoder</p>
+<p>Control Memory</p>
+<p>Computer Architecture General view of the computer</p>
+<p>Computer Architecture</p>
+<h3 id="two-step-instruction-cycle">Two-step instruction cycle</h3>
+<ul><li>Fetch: bringing the instruction (command) from memory</li></ul>
+<ul><li>Execute: the instruction carrying out its function</li></ul>
+<p>Computer Architecture Fetch stage</p>
+<ul><li>The Program Counter (PC) holds the address of the next instruction</li></ul>
+<p>to be fetched</p>
+<ul><li>The processor fetches the instruction from the memory location</li></ul>
+<p>indicated by the PC.</p>
+<ul><li>The PC value is incremented</li></ul>
+<ul><li>Unless there are operations such as Jump, Call, etc.</li></ul>
+<ul><li>The instruction is stored in the Instruction Register (IR).</li></ul>
+<ul><li>The processor interprets the instruction and performs the required</li></ul>
+<p>operation.</p>
+<p>Computer Architecture Execute stage</p>
+<ul><li>Processor-memory</li></ul>
+<ul><li>Data transfer between the CPU and main memory</li></ul>
+<ul><li>Processor I/O</li></ul>
+<ul><li>Data transfer between the CPU and an I/O unit</li></ul>
+<ul><li>Data processing</li></ul>
+<ul><li>Performing arithmetic and logic operations on data</li></ul>
+<ul><li>Control</li></ul>
+<ul><li>Changing the order of operations</li></ul>
+<ul><li>e.g. jump, call</li></ul>
+<ul><li>A combination of the above</li></ul>
+<p>Computer Architecture Example program execution</p>
+<h3 id="1940-load-mem-ac-mem">1940 LOAD MEM   ; AC &lt;- MEM</h3>
+<p>0001 1001 0100 0000</p>
+<h3 id="2941-store-mem-mem-ac">2941 STORE MEM   ; MEM &lt;- AC</h3>
+<p>0010 1001 0100 0001</p>
+<h3 id="5941-add-mem-ac-mem-ac">5941 ADD MEM   ; AC &lt;- MEM + AC</h3>
+<p>0101 1001 0100 0001</p>
+<p>Opcode        Operand 0001      1001 0100 0000</p>
+<p>Computer Architecture Instruction cycle state diagram</p>
+<p>Computer Architecture Interrupts</p>
+<ul><li>An interrupt is the interruption of the normal sequence of a</li></ul>
+<p>program by other modules.</p>
+<ul><li>Program interrupts</li></ul>
+<ul><li>overflow, division by zero, …</li></ul>
+<ul><li>Timer interrupts</li></ul>
+<ul><li>Generated by the processor's internal clock</li></ul>
+<ul><li>I/O interrupts</li></ul>
+<ul><li>Generated by the I/O controller.</li></ul>
+<ul><li>Hardware failure interrupts</li></ul>
+<ul><li>memory parity error, HDD read error</li></ul>
+<p>Computer Architecture Program flow control</p>
+<p>Computer Architecture Program flow control</p>
+<p>Computer Architecture Instruction cycle state diagram (with interrupt control)</p>
+<p>Computer Architecture Nested multiple interrupts</p>
+<p>Computer Architecture All units must be connected Memory</p>
+<ul><li>receives and sends data</li></ul>
+<ul><li>receives address information</li></ul>
+<ul><li>receives control signals (write, read, timing)</li></ul>
+<p>I/O unit</p>
+<ul><li>receives data from the CPU</li></ul>
+<ul><li>receives data from peripherals</li></ul>
+<ul><li>sends data to the CPU</li></ul>
+<ul><li>sends data to peripherals</li></ul>
+<ul><li>receives control signals from the CPU</li></ul>
+<ul><li>sends control signals to peripherals</li></ul>
+<p>(spin the disk, eject the CD, etc.)</p>
+<ul><li>receives addresses from the CPU (peripheral port number)</li></ul>
+<ul><li>sends interrupt signals to the CPU</li></ul>
+<p>Computer Architecture All units must be connected CPU connection</p>
+<ul><li>reads instructions and data from memory</li></ul>
+<ul><li>writes the data resulting from an operation to the relevant place</li></ul>
+<ul><li>sends control signals to other units</li></ul>
+<ul><li>receives incoming interrupts and performs the required operation</li></ul>
+<p>Computer Architecture What is a BUS?</p>
+<ul><li>It is a communication path connecting two or more devices.</li></ul>
+<ul><li>It generally works in a broadcast manner.</li></ul>
+<ul><li>There are control, data and address buses.</li></ul>
+<p>Data bus</p>
+<ul><li>Carries data (instructions or data)</li></ul>
+<ul><li>Data bus width (number of connections) greatly affects computer</li></ul>
+<p>performance (8, 16, 32, 64 bits) Address bus</p>
+<ul><li>Carries the address of the destination or source data.</li></ul>
+<ul><li>Address bus width determines the maximum memory capacity of the</li></ul>
+<p>system. (8086 address bus 16 bits, maximum memory 64 KB) Control bus</p>
+<ul><li>Memory write and read signals.</li></ul>
+<ul><li>Interrupt request</li></ul>
+<ul><li>Clock signals</li></ul>
+<p>Computer Architecture Bus connection diagram</p>
+<p>Computer Architecture Data storage units by access method</p>
+<ul><li>Sequential</li></ul>
+<ul><li>Starts from the beginning and reads in order</li></ul>
+<ul><li>Access time depends on where the data is located</li></ul>
+<ul><li>e.g. tape</li></ul>
+<ul><li>Direct</li></ul>
+<ul><li>Each block has its own address</li></ul>
+<ul><li>Access is made by direct jumping, and a sequential search is made</li></ul>
+<p>within the block</p>
+<ul><li>Access time depends on the previous position and where the data is</li></ul>
+<p>located</p>
+<ul><li>e.g. disk</li></ul>
+<p>Computer Architecture Data storage units by access method</p>
+<ul><li>Random</li></ul>
+<ul><li>Access time does not depend on the previous position</li></ul>
+<ul><li>e.g. RAM</li></ul>
+<ul><li>Associative</li></ul>
+<ul><li>Data can be stored in a block area and is reached by comparison</li></ul>
+<ul><li>Access time does not depend on the previous position or access</li></ul>
+<ul><li>e.g. cache</li></ul>
+<p>Computer Architecture Memory hierarchy                                   Unit cost increases Access time decreases Size decreases Gets closer to the CPU Frequency of use increases</p>
+<p>Computer Architecture Memory performance</p>
+<ul><li>Access time</li></ul>
+<ul><li>The time between specifying the address and retrieving the data</li></ul>
+<ul><li>Memory cycle time</li></ul>
+<ul><li>The time between two accesses</li></ul>
+<ul><li>Transfer rate</li></ul>
+<ul><li>The rate of data transfer per unit time</li></ul>
+<p>Computer Architecture Cache Memory</p>
+<ul><li>It is located between the CPU and main memory.</li></ul>
+<ul><li>It can be placed inside the CPU.</li></ul>
+<p>Computer Architecture Cache Memory</p>
+<ul><li>The CPU requests the contents of a memory address</li></ul>
+<ul><li>First, it is checked whether this data is in the cache memory</li></ul>
+<ul><li>If it is, it is taken from the cache (fast)</li></ul>
+<ul><li>If not, the data is read from memory and transferred into the</li></ul>
+<p>cache memory</p>
+<ul><li>It is then transferred from the cache memory to the CPU</li></ul>
+<p>Computer Architecture Cache Memory Organization</p>
+<p>Computer Architecture Pentium 4 Architecture</p>
+<p>Assignment</p>
+<ul><li>Prepare a report on pipelining.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-658-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL2Architecture: page 2, circuits, tables and figures"><figcaption>CPUL2Architecture, page 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-658-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL2Architecture: page 5, circuits, tables and figures"><figcaption>CPUL2Architecture, page 5.</figcaption></figure>
+<h2 id="cpul3architecture8086">CPUL3Architecture8086</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol Gazi University Department of Computer Engineering</p>
+<p>Topics</p>
+<ul><li>Internal microprocessor architecture</li></ul>
+<ul><li>Real mode addressing</li></ul>
+<ul><li>Protected mode addressing</li></ul>
+<p>Internal Microprocessor Architecture</p>
+<ul><li>Before writing a program, it is essential to know the internal</li></ul>
+<p>structure of the microprocessor.</p>
+<ul><li>The program visible model refers to the registers that can be</li></ul>
+<p>modified by instructions in all microprocessors from the 8086 to the Pentium.</p>
+<ul><li>The program invisible model refers to all the registers found in</li></ul>
+<p>80286 and later microprocessors that cannot be directly addressed by an application program.</p>
+<ul><li>Program-invisible registers are used for tasks such as controlling</li></ul>
+<p>the protected memory system.</p>
+<ul><li>The 8086, 8088 and 80286 processors have a 16-bit internal</li></ul>
+<p>architecture. From the 80386 to the Pentium 4, the internal architecture has 32-bit registers.</p>
+<p>Internal Microprocessor Architecture</p>
+<ul><li>The dark gray registers are present in the 80386 - Pentium 4 processors.</li></ul>
+<p>Internal Microprocessor Architecture</p>
+<ul><li>A program can contain 8-, 16- and 32-bit registers.</li></ul>
+<ul><li>The 8-bit registers are AH, AL, BH, BL, CH, CL, DH and DL.</li></ul>
+<p>(The ADD AL, AH instruction adds the AH register to the AL register. Only AL changes value.)</p>
+<ul><li>The 16-bit registers are AX, BX, CX, DX, SP, BP, DI, SI, IP,</li></ul>
+<p>FLAGS, CS, DS, ES, SS, FS and GS. (The ADD DX, CX instruction adds the CX register to the DX register. Only DX changes value.)</p>
+<ul><li>The 32-bit registers are EAX, EBX, ECX, EDX, ESP, EBP, EDI, ESI,</li></ul>
+<p>EIP and EFLAGS.</p>
+<ul><li>The 32-bit extended registers and the 16-bit FS and GS registers</li></ul>
+<p>are found only in the 80386 and later processors. (The ADD ECX, EBX instruction adds the EBX register to the ECX register. Only ECX changes value.)</p>
+<p>Internal Microprocessor Architecture</p>
+<ul><li>Some registers are general or multipurpose, while others are</li></ul>
+<p>special purpose. General-purpose registers EAX (Accumulator)</p>
+<ul><li>It is written as EAX when used as 32 bits, AX when used as 16 bits</li></ul>
+<p>and AH or AL when used as 8 bits.</p>
+<ul><li>When used as 8 or 16 bits, only the lower 8 or 16 bits change</li></ul>
+<p>value; the rest remains unchanged.</p>
+<ul><li>It is used as the accumulator in operations such as multiplication</li></ul>
+<p>and division.</p>
+<ul><li>In the 80386 and later processors, EAX can be used to hold an</li></ul>
+<p>offset address in memory. EBX (Base index)</p>
+<ul><li>It can be used as EBX, BX, BH and BL.</li></ul>
+<ul><li>In all microprocessors it can also hold an offset address in memory.</li></ul>
+<p>Internal Microprocessor Architecture General-purpose registers (continued) ECX (Count)</p>
+<ul><li>In the 80386 and later processors it holds an offset address in memory.</li></ul>
+<ul><li>Instructions such as string, loop, shift and rotate use the count value.</li></ul>
+<ul><li>Shift and rotate instructions use CL, string repeat instructions (REP,</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>REPE, REPNE) CX and loop instructions (LOOP) CX veya ECX kullanır.</code></pre>
+<p>EDX (Data)</p>
+<ul><li>It holds part of the result of a multiplication or part of the</li></ul>
+<p>dividend in a division.</p>
+<ul><li>In the 80386 and later processors it can be used to address data in memory.</li></ul>
+<p>EBP (Base pointer)</p>
+<ul><li>In all processors it is used to address a location in memory.</li></ul>
+<ul><li>It can be used as BP or EBP.</li></ul>
+<p>Internal Microprocessor Architecture General-purpose registers (continued) EDI (Destination index)</p>
+<ul><li>It is generally used in string instructions to address the</li></ul>
+<p>destination string.</p>
+<ul><li>It can be used as DI (16 bits) or EDI (32 bits).</li></ul>
+<p>ESI (Source index)</p>
+<ul><li>It is generally used in string instructions to address the source</li></ul>
+<p>string.</p>
+<ul><li>It can be used as SI (16 bits) or ESI (32 bits).</li></ul>
+<p>Internal Microprocessor Architecture Special-purpose registers EIP (Instruction pointer)</p>
+<ul><li>It addresses the next instruction within the code segment.</li></ul>
+<ul><li>When the microprocessor is running in real mode, IP (16 bits) is</li></ul>
+<p>used; when running in protected mode, EIP (32 bits) is used.</p>
+<ul><li>The instruction pointer can be changed by call and jump instructions.</li></ul>
+<p>ESP (Stack pointer)</p>
+<ul><li>It is used to address the stack area in memory.</li></ul>
+<ul><li>It can be used as SP (16 bits) or ESP (32 bits).</li></ul>
+<p>Internal Microprocessor Architecture Special-purpose registers (continued)</p>
+<h3 id="eflags">EFLAGS</h3>
+<ul><li>It indicates the state of the microprocessor or is used to control it.</li></ul>
+<ul><li>FLAGS is upward compatible from the 8086/8088 to the Pentium 4.</li></ul>
+<p>C (Carry)</p>
+<ul><li>It holds the carry bit in addition and subtraction.</li></ul>
+<p>Internal Microprocessor Architecture Special-purpose registers (continued) P (Parity)</p>
+<ul><li>It takes the value 0 for odd parity and 1 for even parity.</li></ul>
+<ul><li>Parity is the number of 1s in a series of bits. It is used for error</li></ul>
+<p>checking in data communication.</p>
+<ul><li>In the first Intel processors, error checking was done in the</li></ul>
+<p>microprocessor. Today, the parity check is done in network cards. A (Auxiliary carry)</p>
+<ul><li>It is used in BCD addition and subtraction.</li></ul>
+<p>Z (Zero)</p>
+<ul><li>It indicates that the result of an arithmetic or logic operation is</li></ul>
+<p>zero (for Z = 1). Otherwise (Z = 0) the result is nonzero. S (Sign)</p>
+<ul><li>It holds the sign of the result of an arithmetic or logic operation.</li></ul>
+<p>(For S = 1 the result is negative, for S = 0 the sign is positive)</p>
+<p>Internal Microprocessor Architecture Special-purpose registers (continued) T (Trap)</p>
+<ul><li>It makes the microprocessor run in debug mode (for T = 1).</li></ul>
+<p>I (Interrupt)</p>
+<ul><li>The interrupt bit controls the INTR input pin.</li></ul>
+<ul><li>It can be changed with the STI (Set I flag) and CLI (Clear I flag)</li></ul>
+<p>instructions.</p>
+<p>D (Direction)</p>
+<ul><li>It controls whether the DI and SI registers are in increment or</li></ul>
+<p>decrement mode.</p>
+<ul><li>For D = 1 the registers automatically decrement, for D = 0 they increment.</li></ul>
+<ul><li>The STD (Set direction) and CLD (Clear direction) instructions change it.</li></ul>
+<p>O (Overflow)</p>
+<ul><li>In signed numbers, overflow occurs if the result of an addition or</li></ul>
+<p>subtraction is larger than the capacity of the machine.</p>
+<ul><li>7FH (+127) + 01H (+1) = 80H (-128)        8-bit addition</li></ul>
+<ul><li>01111111 + 00000001 = 10000000</li></ul>
+<p>Internal Microprocessor Architecture Segment registers CS (Code)</p>
+<ul><li>The code segment is the part that holds the code used by the</li></ul>
+<p>microprocessor.</p>
+<ul><li>CS holds the starting address of the code segment.</li></ul>
+<ul><li>The size of CS is 64 KBytes in real mode; in protected mode, the</li></ul>
+<p>starting address and size are determined by a descriptor.</p>
+<ul><li>It is 64 KBytes for the 8088 and 80286, and for the 80386 and later</li></ul>
+<p>it can be 4 GBytes when the microprocessor is running in protected mode. DS (Data)</p>
+<ul><li>The data segment holds the data used by the program.</li></ul>
+<ul><li>DS holds the starting address of the data segment.</li></ul>
+<ul><li>It is 64 KBytes for the 8088 and 80286, and for the 80386 and later</li></ul>
+<p>it can be 4 GBytes when the microprocessor is running in protected mode.</p>
+<p>Internal Microprocessor Architecture Segment registers (continued) ES (Extra)</p>
+<ul><li>The extra segment is used by some string instructions to reach the</li></ul>
+<p>destination data. SS (Stack)</p>
+<ul><li>The stack segment holds the part of memory used as the stack.</li></ul>
+<ul><li>Addressing within the stack segment can be done with BP.</li></ul>
+<p>FS and GS</p>
+<ul><li>They are used in the 80386 and later processors.</li></ul>
+<ul><li>They are used by Windows.</li></ul>
+<p>Real Mode Memory Addressing</p>
+<ul><li>The 80286 and later processors can run in real mode or protected mode.</li></ul>
+<ul><li>The 8086/8088 processors run directly in real mode.</li></ul>
+<ul><li>In real mode operation, only 1 MB of memory can be addressed. (Even</li></ul>
+<p>if the processor is a Pentium)</p>
+<ul><li>This 1 MB of memory is called real memory, conventional memory or</li></ul>
+<p>DOS memory.</p>
+<ul><li>All computers run in real mode when first powered on.</li></ul>
+<p>Real Mode Memory Addressing Segment and Offset</p>
+<ul><li>In real mode, the desired memory location is reached by combining</li></ul>
+<p>the segment address and the offset address.</p>
+<ul><li>The segment address is in one of the segment registers and holds the</li></ul>
+<p>starting address of the 64 KB segment.</p>
+<ul><li>The offset address specifies an address within the 64 KB segment.</li></ul>
+<ul><li>In real mode, the segment size is always 64 KB.</li></ul>
+<ul><li>In real mode, the 20-bit address for the segment starting address</li></ul>
+<p>is obtained by appending 0H to the right end of the segment register value.</p>
+<ul><li>If the segment register = 1200H, the segment starting address is</li></ul>
+<p>12000H.</p>
+<ul><li>Since 0H is always appended at the right end, segments can start at</li></ul>
+<p>16-byte intervals. (paragraph)</p>
+<p>Real Mode Memory Addressing Segment and Offset (continued)</p>
+<ul><li>The segment ending address is found by adding FFFFH to the starting address.</li></ul>
+<ul><li>If the segment register value = 3000H, the segment starting address is</li></ul>
+<p>30000H and the ending address is 30000H + FFFFH = 3FFFFH.</p>
+<p>Real Mode Memory Addressing Segment and Offset (continued)</p>
+<ul><li>The desired memory location is found by adding the offset address to</li></ul>
+<p>the segment starting address.</p>
+<ul><li>If the segment starting address = 1000H and the offset address =</li></ul>
+<p>2000H, the microprocessor addresses memory location 12000H.</p>
+<ul><li>The segment and offset address is written as 1000:2000.</li></ul>
+<p>(Segment start = 1000H and offset address = 2000H)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Default Segment and Offset Registers</code></pre>
+<ul><li>The microprocessor calculates a segment and offset address by</li></ul>
+<p>applying certain rules.</p>
+<ul><li>CS is always used together with IP. CS holds the code segment</li></ul>
+<p>starting address and IP holds the address within the segment (the address of the next instruction to be executed).</p>
+<ul><li>The combination is shown as CS:IP or CS:EIP.</li></ul>
+<ul><li>CS = 1400H, IP/EIP = 1200H, CS:IP = 14000H+1200H = 15200H</li></ul>
+<p>Real Mode Memory Addressing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Default Segment and Offset Registers (continued)</code></pre>
+<p>16-bit</p>
+<ul><li>Data in the stack is indicated by the stack segment and the stack</li></ul>
+<p>pointer or base pointer registers.</p>
+<ul><li>The combination is SS:SP (SS:ESP) or SS:BP (SS:EBP).</li></ul>
+<ul><li>SS = 2000H, BP = 3000H, SS:BP = 20000H+3000H = 23000H</li></ul>
+<p>Real Mode Memory Addressing</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>Default Segment and Offset Registers (continued)</code></pre>
+<p>32-bit</p>
+<ul><li>The 80386 and later processors have more segment and offset address</li></ul>
+<p>selection options.</p>
+<p>Real Mode Memory Addressing Example placement of segments</p>
+<p>Real Mode Memory Addressing Placement of an application program in memory</p>
+<ul><li>The code, data and stack segments do not use the full 64 KB.</li></ul>
+<ul><li>Segments can overlap.</li></ul>
+<p>Protected Mode Memory Addressing</p>
+<ul><li>In the 80286 and later processors, it allows access to areas above</li></ul>
+<p>the 1 MB memory area. (Windows runs in protected mode)</p>
+<ul><li>In protected mode as well, the offset address specifies the desired</li></ul>
+<p>address within the segment.</p>
+<ul><li>The segment register stores a selector and selects a descriptor in</li></ul>
+<p>the descriptor table.</p>
+<ul><li>The descriptor specifies the segment starting address, its size and</li></ul>
+<p>access rights.</p>
+<ul><li>In the 80386 and later, the offset address is 32 bits and the</li></ul>
+<p>segment size can be 4 GB.</p>
+<p>Protected Mode Memory Addressing</p>
+<p>Protected Mode Memory Addressing Selectors and Descriptors</p>
+<ul><li>Selectors are stored in segment registers and select one of the 8192</li></ul>
+<p>descriptors found in two tables.</p>
+<ul><li>The global descriptor table holds information about the segments</li></ul>
+<p>that will be used by all programs.</p>
+<ul><li>The local descriptor table holds information about the segments that</li></ul>
+<p>will be used by one application.</p>
+<ul><li>A total of 16384 segments can be created in the two descriptor tables.</li></ul>
+<ul><li>The size of one segment can be 4 GB. Total addressable memory =</li></ul>
+<p>4 GB x 16384 = 64 TB.</p>
+<ul><li>Each descriptor is 8 bytes. The space occupied by each descriptor</li></ul>
+<p>table = 8192 x 8 = 64 KB.</p>
+<ul><li>The 80386-Pentium 4 descriptors have a different structure.</li></ul>
+<p>Protected Mode Memory Addressing Selectors and Descriptors (continued)</p>
+<ul><li>The base address part holds the starting address of the segment.</li></ul>
+<ul><li>The limit part holds the last offset address of the segment.</li></ul>
+<p>Protected Mode Memory Addressing Selectors and Descriptors (continued)</p>
+<ul><li>G (Granularity bit) enlarges the segment limit by multiplying it by 4K.</li></ul>
+<p>Base = Start = 10000000H</p>
+<h3 id="g-0">G = 0</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End = Base + Limit = 10000000H + 001FFH = 100001FFH</code></pre>
+<p>Base = Start = 10000000H</p>
+<h3 id="g-1">G = 1</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>End = Base + Limit = 10000000H + 001FFFFFH = 101FFFFFH</code></pre>
+<ul><li>In the 80386 and later, AV (Available) specifies whether the segment</li></ul>
+<p>is available for use.</p>
+<ul><li>AV = 1 available, AV = 0 not available</li></ul>
+<p>Protected Mode Memory Addressing Selectors and Descriptors (continued)</p>
+<ul><li>For the 80386 and later, the D bit determines the operating mode.</li></ul>
+<p>(real / protected mode)</p>
+<ul><li>D = 0, 16-bit instructions, 16-bit offset address, 16-bit register.</li></ul>
+<ul><li>D = 1, 32-bit instructions, 32-bit offset address, 32-bit register.</li></ul>
+<ul><li>The access rights byte controls access to the protected mode segment.</li></ul>
+<p>Protected Mode Memory Addressing Selectors and Descriptors (continued) Segment access rights</p>
+<p>Protected Mode Memory Addressing Selectors and Descriptors (continued)</p>
+<ul><li>The descriptor is selected with the segment register.</li></ul>
+<ul><li>13 bits of the segment register select one of the 8192 descriptors.</li></ul>
+<ul><li>TI = 0 selects from the global descriptor table, TI = 1 from the local</li></ul>
+<p>descriptor table.</p>
+<ul><li>RPL (Requested Privilege Level), 00 highest, 11 lowest.</li></ul>
+<ul><li>If the RPL has priority over the DPL in the descriptor, access is</li></ul>
+<p>granted. (RPL = 10, DPL = 11)</p>
+<ul><li>Windows uses 00 for kernel operations and 11 for driver programs.</li></ul>
+<p>.</p>
+<p>Protected Mode Memory Addressing Selectors Descriptors (continued)</p>
+<p>access rights</p>
+<p>base</p>
+<p>limit</p>
+<p>DS = 8 = 0000000000001000, TI = 0(global), RPL = 00(highest), Selector = 0000000000001 (Descriptor 1)</p>
+<p>Protected Mode Memory Addressing Program-Invisible Registers</p>
+<ul><li>The global and local descriptor tables are present in the 80286-Pentium 4</li></ul>
+<p>processors.</p>
+<ul><li>Program-invisible registers are used to access and address these tables.</li></ul>
+<ul><li>Program-invisible registers are used only in protected mode.</li></ul>
+<ul><li>GDTR (Global Descriptor Table Register) and IDTR (Interrupt</li></ul>
+<p>Descriptor Table Register) hold the base addresses and limits of the tables.</p>
+<ul><li>LDTR (Local Descriptor Table Register) is used to access the local</li></ul>
+<p>descriptor table.</p>
+<ul><li>TR (Task Register) enables switching between tasks (a program or</li></ul>
+<p>procedure) in approximately 17µs.</p>
+<ul><li>Multitasking is realized by sequential switching by the TR.</li></ul>
+<p>Protected Mode Memory Addressing Program-Invisible Registers (continued)</p>
+<p>Assignment</p>
+<ul><li>Prepare a report on memory swapping, partitioning and paging.</li></ul>
+<figure class="yazi-gorsel"><img src="../sekil-659-02.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL3Architecture8086: page 2, circuits, tables and figures"><figcaption>CPUL3Architecture8086, page 2.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-659-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL3Architecture8086: page 5, circuits, tables and figures"><figcaption>CPUL3Architecture8086, page 5.</figcaption></figure>
+<h2 id="cpul4adressingmodes">CPUL4AdressingModes</h2>
+<p>BIL 362 Microprocessors</p>
+<p>M. Ali Akcayol, Gazi University, Department of Computer Engineering</p>
+<p>Topics: Addressing Modes</p>
+<ul><li>Data addressing modes</li></ul>
+<ul><li>Register addressing</li></ul>
+<ul><li>Immediate addressing</li></ul>
+<ul><li>Direct addressing</li></ul>
+<ul><li>Register indirect addressing</li></ul>
+<ul><li>Base-plus-index addressing</li></ul>
+<ul><li>Register relative addressing</li></ul>
+<ul><li>Base relative-plus-index addressing</li></ul>
+<ul><li>Scaled-index addressing</li></ul>
+<ul><li>Program memory addressing modes</li></ul>
+<ul><li>Direct program memory addressing</li></ul>
+<ul><li>Relative program memory addressing</li></ul>
+<ul><li>Indirect program memory addressing</li></ul>
+<ul><li>Stack memory addressing modes</li></ul>
+<p>Addressing Modes</p>
+<ul><li>To develop software effectively, the addressing modes available for each</li></ul>
+<p>instruction in the microprocessor must be known.</p>
+<ul><li>Because of its flexibility, the MOV instruction is used as the example for all</li></ul>
+<p>addressing modes in this section.</p>
+<ul><li>The MOV instruction transfers data between register-register or register-memory:</li></ul>
+<p>bytes or words for the 8086-80286 processors, and bytes, words, or doublewords for the 80386 and later processors.</p>
+<ul><li>For program memory addressing, the examples use the CALL and JUMP</li></ul>
+<p>instructions to show how the program flow is changed.</p>
+<ul><li>The PUSH and POP instructions are used for stack memory addressing.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>The general form of the MOV instruction is as follows.</li></ul>
+<ul><li>In all instructions, the rightmost item is the source, the one to its left is the</li></ul>
+<p>destination, and the leftmost is the opcode.</p>
+<ul><li>Memory-to-memory transfer is not allowed (except for MOVS).</li></ul>
+<ul><li>The MOV instruction above transfers one word. It transfers the contents of the</li></ul>
+<p>BX register to the AX register.</p>
+<ul><li>The contents of the BX register do not change; it is only copied.</li></ul>
+<ul><li>The contents of the destination register (AX) change. (In instructions such as</li></ul>
+<p>CMP and TEST, the destination does not change.)</p>
+<p>8086-Pentium 4 data addressing modes</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register addressing</li></ul>
+<ul><li>Transfers a byte or word of data from a source register or</li></ul>
+<p>memory to a destination register or memory.</p>
+<ul><li>The MOV CX,DX instruction transfers the contents of DX, which is word</li></ul>
+<p>(16-bit) in size, to the CX register.</p>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data can be</li></ul>
+<p>transferred.</p>
+<ul><li>The MOV ECX,EDX instruction transfers the doubleword contents of EDX to</li></ul>
+<p>the ECX register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Immediate addressing</li></ul>
+<ul><li>Transfers a byte or word of data to a destination register or</li></ul>
+<p>memory.</p>
+<ul><li>The MOV AL,22H instruction transfers the byte-sized value 22H to the AL</li></ul>
+<p>register.</p>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data can be</li></ul>
+<p>transferred.</p>
+<ul><li>The MOV EBX,12345678H instruction copies the doubleword value</li></ul>
+<p>12345678H to the EBX register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Direct addressing</li></ul>
+<ul><li>Transfers a byte or word of data between a register and</li></ul>
+<p>memory.</p>
+<ul><li>The instruction set does not allow memory-to-memory transfers.</li></ul>
+<p>(Except for MOVS.)</p>
+<ul><li>The MOV CX,LIST instruction transfers the word-sized contents at memory</li></ul>
+<p>address LIST to the CX register.</p>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data can be</li></ul>
+<p>transferred.</p>
+<ul><li>The MOV ESI,LIST instruction transfers the doubleword-sized contents at</li></ul>
+<p>memory address LIST to the ESI register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register Indirect addressing</li></ul>
+<ul><li>Transfers a byte or word of data between a register and the</li></ul>
+<p>memory location addressed by an index register or base register.</p>
+<ul><li>The index or base register can be SI, DI, BP, or BX.</li></ul>
+<ul><li>The MOV AX,[BX] instruction transfers the word at offset address BX in</li></ul>
+<p>the data segment to the AX register.</p>
+<ul><li>On 80386 and later processors, doubleword (32-bit) data can be</li></ul>
+<p>transferred. EAX, EBX, ECX, EDX, EBP, EDI, or ESI can be used for addressing.</p>
+<ul><li>The MOV AL,[ECX] instruction transfers the byte at offset address ECX in</li></ul>
+<p>the data segment to the AL register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Base-plus-index addressing</li></ul>
+<ul><li>Transfers a byte or word of data between a register and the</li></ul>
+<p>memory location addressed by a base register (BP, BX) + an index register (DI, SI).</p>
+<ul><li>The MOV [BX+DI],CL instruction transfers the byte in CL to offset address</li></ul>
+<p>BX+DI in the data segment.</p>
+<ul><li>On 80386 and later processors, the address can be formed by using the</li></ul>
+<p>EAX, EBX, ECX, EDX, EBP, EDI, or ESI registers together.</p>
+<ul><li>The MOV [EAX+EBX],CL instruction transfers the byte in CL to offset</li></ul>
+<p>address EAX+EBX in the data segment.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register relative addressing</li></ul>
+<ul><li>Transfers a byte or word of data between a register and the</li></ul>
+<p>memory location addressed by a base register (BP, BX) or index register (DI, SI) + a displacement.</p>
+<ul><li>The MOV AX,[BX+4] instruction transfers the contents of offset address</li></ul>
+<p>BX+4 in the data segment to the AX register.</p>
+<ul><li>The MOV AX,ARRAY[BX] instruction transfers the contents of offset</li></ul>
+<p>address ARRAY+BX in the data segment to the AX register.</p>
+<ul><li>On 80386 and later processors, any register can be used for</li></ul>
+<p>addressing.</p>
+<ul><li>It can be used as MOV AX,[ECX+4] or MOV AX,ARRAY[EBX].</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base relative-plus-index addressing</li></ul>
+<ul><li>Transfers a byte or word of data between a register and the</li></ul>
+<p>memory location addressed by a base register (BP, BX) + an index register (DI, SI) + a displacement.</p>
+<ul><li>The MOV AX,ARRAY[BX+DI] instruction transfers the contents of offset</li></ul>
+<p>address ARRAY+BX+DI in the data segment to the AX register.</p>
+<ul><li>The MOV AX,[BX+DI+4] instruction transfers the contents of offset address</li></ul>
+<p>BX+DI+4 in the data segment to the AX register.</p>
+<ul><li>On 80386 and later processors, any register can be used for</li></ul>
+<p>addressing.</p>
+<ul><li>The MOV EAX,ARRAY[EBX+ECX] instruction transfers the contents of</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>offset address ARRAY+EBX+ECX in the data segment</code></pre>
+<p>to the EAX register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Scaled-index addressing</li></ul>
+<ul><li>Available on 80386 and later processors.</li></ul>
+<ul><li>The second register used for the offset address is modified by a scale</li></ul>
+<p>factor of 2x, 4x, or 8x.</p>
+<ul><li>The MOV EDX,[EAX+4*EBX] instruction transfers the contents of offset</li></ul>
+<p>address EAX+4*EBX in the data segment to the EDX register.</p>
+<ul><li>Scaling makes it possible to access word (2x), doubleword (4x), or</li></ul>
+<p>quadword (8x) contents.</p>
+<ul><li>The MOV EAX,ARRAY[EBX+ECX] instruction transfers the contents of</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>offset address ARRAY+EBX+ECX in the data segment</code></pre>
+<p>to the EAX register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register addressing - details</li></ul>
+<ul><li>It is the most commonly used form of data addressing. Knowing the</li></ul>
+<p>register names is sufficient.</p>
+<ul><li>The AH, AL, BH, BL, CH, CL, DH, and DL registers are used for 8-bit</li></ul>
+<p>register addressing.</p>
+<ul><li>The AX, BX, CX, DX, SP, BP, SI, and DI registers are used for 16-bit</li></ul>
+<p>register addressing.</p>
+<ul><li>The EAX, EBX, ECX, EDX, ESP, EBP, ESI, and EDI registers are used for</li></ul>
+<p>32-bit register addressing.</p>
+<ul><li>Some MOV instructions, as well as PUSH and POP, use the CS, ES, DS,</li></ul>
+<p>SS, FS, and GS registers.</p>
+<ul><li>Registers of different sizes cannot be used together. (MOV</li></ul>
+<p>AX, AL or MOV EAX, AL). Some instructions, such as SHL, can use registers of different sizes.</p>
+<ul><li>MOV does not affect the flag bits.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Register addressing - details</li></ul>
+<ul><li>Example instructions for register addressing</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Register addressing - details</li></ul>
+<ul><li>The MOV instruction changes only the destination register. (CMP and</li></ul>
+<p>TEST do not change the destination register.)</p>
+<ul><li>The MOV BX, CX instruction copies the value 1234H from the CX register</li></ul>
+<p>to the BX register.</p>
+<ul><li>The leftmost 16 bits of the EBX register do not change.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Register addressing - details</li></ul>
+<ul><li>The following instructions transfer 8-bit, 16-bit, or 32-bit data.</li></ul>
+<ul><li>The leftmost 16 bits of the EBX register do not change.</li></ul>
+<p>3 bytes                          2 bytes</p>
+<p>Data Addressing Modes</p>
+<ul><li>Immediate addressing - details</li></ul>
+<ul><li>The data immediately follows the opcode and is constant.</li></ul>
+<ul><li>Immediate addressing operates on 8- or 16-bit data.</li></ul>
+<ul><li>On 80386 – Pentium 4 processors, doubleword (32-bit) data can be</li></ul>
+<p>used.</p>
+<ul><li>The following instruction copies the value 13456H (located in memory</li></ul>
+<p>immediately after the opcode) to the EAX register.</p>
+<p>0 0 0 1   3 4    5 6</p>
+<ul><li>Some assemblers perform immediate addressing as MOV AX, #13456H</li></ul>
+<p>(using the # sign).</p>
+<ul><li>Intel ASM, Microsoft MASM, and Borland TASM do not use #.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Immediate addressing - details</li></ul>
+<ul><li>Example instructions for immediate addressing</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Immediate addressing - details</li></ul>
+<ul><li>The .MODEL TINY directive makes the assembler place the program in a</li></ul>
+<p>single code segment.</p>
+<ul><li>The .CODE directive marks the start of the code segment.</li></ul>
+<ul><li>The .STARTUP directive marks the starting instruction of the program.</li></ul>
+<ul><li>The .EXIT directive ends the program and returns to DOS.</li></ul>
+<ul><li>The END directive marks the end of the program file.</li></ul>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AX, 0 komutunun</code></pre>
+<p>is the offset address.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Immediate addressing - details</li></ul>
+<ul><li>Each statement consists of 4 parts.</li></ul>
+<ul><li>The label is at the far left. It assigns a symbolic name to the memory</li></ul>
+<p>location where it is placed.</p>
+<ul><li>The second field is the opcode.</li></ul>
+<ul><li>The third field(s) are the operands to the right of the opcode.</li></ul>
+<ul><li>The last field is the comment field at the far right. A comment always</li></ul>
+<p>starts with ;.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Direct addressing - details</li></ul>
+<ul><li>In direct addressing, the MOV instruction transfers data between a memory</li></ul>
+<p>location in the data segment and a register (AL, AX, EAX, …).</p>
+<ul><li>The MOV AL,DATA instruction transfers 8 bits from the memory location</li></ul>
+<p>indicated by DATA (e.g., 1234H) in the data segment to AL.</p>
+<ul><li>Some assemblers write this as MOV AL,DS:[1234H] or MOV AL,DS:[DATA].</li></ul>
+<ul><li>If DS = 1000H, the data at physical address 11234H in the data segment</li></ul>
+<p>is transferred to the AL register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Direct addressing</li></ul>
+<p>examples</p>
+<p>Data Addressing Modes</p>
+<ul><li>Direct addressing example program</li></ul>
+<p>offset    machine label address     code   (label)          operand opcode</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>.DATA indicates the start of the data segment and that a SMALL model, with one data segment and one code</code></pre>
+<p>segment, will be used.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register indirect addressing - details</li></ul>
+<ul><li>Register indirect addressing addresses the memory location at the offset</li></ul>
+<p>given by the value of a register (BP, BX, SI, DI) in the data segment.</p>
+<ul><li>If the BX contents are 1000H, the MOV AX,[BX] instruction copies the data at</li></ul>
+<p>offset address 1000H in the data segment to the AX register.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Register indirect addressing - details</li></ul>
+<p>* When addressing data with BP or EBP, the default segment is the stack segment. With the others, it is the data segment.</p>
+<p>Data Addressing Modes</p>
+<ul><li>Base-plus-Index addressing - details</li></ul>
+<ul><li>A base register (BP, BX) is used together with an index register (DI, SI).</li></ul>
+<ul><li>The base register usually holds the starting address of an array, and the</li></ul>
+<p>index register holds the position of an element in the array.</p>
+<ul><li>How the MOV DX, [BX+DI] instruction works.</li></ul>
+<ul><li>DS = 0100H, BX = 1000H, DI = 0010H, MEM = 2010H</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base-plus-Index addressing - details</li></ul>
+<ul><li>Example instructions.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base-plus-Index addressing - details</li></ul>
+<ul><li>BX holds the starting address of the array, and DI holds the index of the element.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base-plus-Index addressing - details</li></ul>
+<ul><li>In the following example, the array element at address 10H is copied to</li></ul>
+<p>address 20H.</p>
+<ul><li>BX holds the starting address of the array, and DI holds the index of the element.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Register relative addressing - details</li></ul>
+<ul><li>Memory is addressed by adding a displacement value to a base or index</li></ul>
+<p>register (BP, BX, SI, DI).</p>
+<ul><li>Below is how the MOV AX,[BX+1000H] instruction works.</li></ul>
+<ul><li>BX = 0100H, DS = 0200H.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Register relative addressing - details</li></ul>
+<ul><li>Below are examples of register relative addressing.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base relative plus index addressing - details</li></ul>
+<ul><li>Similar to base plus index, except that it adds a displacement.</li></ul>
+<ul><li>Below is how the MOV AX,[BX+SI+100H] instruction works.</li></ul>
+<ul><li>BX = 0020H, SI = 0010H, DS = 1000H.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Base relative plus index addressing - details</li></ul>
+<ul><li>Below are examples of base relative plus index addressing.</li></ul>
+<p>Data Addressing Modes</p>
+<ul><li>Scaled index addressing - details</li></ul>
+<ul><li>Found on the 80386 and Pentium 4 microprocessors.</li></ul>
+<ul><li>Addressing is performed with a 32-bit base register and an index register.</li></ul>
+<ul><li>The index register is multiplied by a scale factor (1X, 2X, 4X, or 8X).</li></ul>
+<ul><li>2X is used to access an array whose elements are words, 4X for an array of</li></ul>
+<p>doublewords, and 8X for an array of quadwords.</p>
+<ul><li>For MOV AX,[EDI+2*ECX] the factor is 2; MOV EAX,[4*EDI] uses only one</li></ul>
+<p>register, and the factor is set to 4.</p>
+<ul><li>Example instructions are shown below.</li></ul>
+<p>Program Memory Addressing Modes</p>
+<ul><li>There are three program memory addressing modes: direct, relative, and</li></ul>
+<p>indirect.</p>
+<ul><li>They are used with the JMP and CALL instructions.</li></ul>
+<ul><li>An intersegment jump allows a jump to any location in memory.</li></ul>
+<ul><li>An intrasegment jump allows a jump to a location within the current code</li></ul>
+<p>segment.</p>
+<p>Direct program memory addressing</p>
+<ul><li>Direct program memory addressing is also used in high-level languages</li></ul>
+<h3 id="goto-gosub">(GOTO, GOSUB)</h3>
+<ul><li>In direct addressing, the address of the next instruction is stored together</li></ul>
+<p>with the opcode.</p>
+<ul><li>In the figure below, the program jumps to address 10000H for the next</li></ul>
+<p>instruction.</p>
+<ul><li>The instruction is 5 bytes in total.</li></ul>
+<p>Program Memory Addressing Modes</p>
+<ul><li>Relative program memory addressing</li></ul>
+<ul><li>Provides a jump relative to the IP value.</li></ul>
+<ul><li>If the JMP is to jump forward 2 addresses, 2 is added to the IP value.</li></ul>
+<ul><li>The JMP and CALL instructions use an 8-bit or 16-bit signed displacement</li></ul>
+<p>value. (This allows both forward and backward jumps.)</p>
+<ul><li>The assembler calculates the displacement value according to the address</li></ul>
+<p>to be jumped to. If the jump is to a very distant address, direct addressing is chosen.</p>
+<ul><li>With an 8-bit displacement, jumps of +127 to -128 are possible; with a</li></ul>
+<p>16-bit displacement, ±32K; and with a 32-bit displacement, ±2G (protected mode only).</p>
+<p>Program Memory Addressing Modes</p>
+<ul><li>Indirect program memory addressing</li></ul>
+<ul><li>The JMP and CALL instructions can use many different kinds of indirect</li></ul>
+<p>addressing.</p>
+<ul><li>If BX = 1000H, the JMP BX instruction jumps to offset address 1000H in the</li></ul>
+<p>current code segment.</p>
+<ul><li>The JMP [BX] instruction uses the value in the location at offset address BX</li></ul>
+<p>in the data segment as the jump target. (This is called double indirect or indirect-indirect.)</p>
+<p>Stack Memory Addressing Modes</p>
+<ul><li>The stack works in LIFO fashion and organizes the return addresses of</li></ul>
+<p>methods and the passing and receiving of parameters.</p>
+<ul><li>Data is added to the stack with the PUSH instruction and removed from the</li></ul>
+<p>stack with the POP instruction.</p>
+<ul><li>Stack memory is formed by the SP (ESP) and SS registers.</li></ul>
+<ul><li>Below is the situation after the PUSH BX operation.</li></ul>
+<ul><li>The left 8 bits are written to address SP-1 and the right 8 bits to address SP-2.</li></ul>
+<p>Stack Memory Addressing Modes</p>
+<ul><li>Below is the situation after the POP CX operation.</li></ul>
+<ul><li>The right 8 bits of the 16-bit register are written to address SP, and the</li></ul>
+<p>left 8 bits to address SP+1.</p>
+<p>Stack Memory Addressing Modes</p>
+<ul><li>Below are the PUSH and POP instructions.</li></ul>
+<p>Stack Memory Addressing Modes</p>
+<ul><li>Example program for the PUSH and POP instructions.</li></ul>
+<ul><li>The values of the AX, BX, and CX registers are swapped.</li></ul>
+<p>Assignment</p>
+<ul><li>Research the Pentium 4 addressing modes and prepare a</li></ul>
+<p>report.</p>
+<figure class="yazi-gorsel"><img src="../sekil-648-03.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL4AdressingModes: page 3, circuit, tables and figures"><figcaption>CPUL4AdressingModes, page 3.</figcaption></figure>
+<figure class="yazi-gorsel"><img src="../sekil-648-05.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="CPUL4AdressingModes: page 5, circuit, tables and figures"><figcaption>CPUL4AdressingModes, page 5.</figcaption></figure>
+<p><em>Note: The history slide gives 1947 for Charles Babbage; this date is wrong. The Analytical Engine work dates from the 1830s. The source wording has been kept unchanged.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-gazi-mimari.zip" download>eem332-gazi-mimari.zip</a></p>
+              <p class="kucuk">ZIP archive · 3.0 MB · 26.10.2008</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-gazi-mimari.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (3.0 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

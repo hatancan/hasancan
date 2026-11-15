@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: Laboratory 7–9: SKC-86, ADC and DAC — hasancan.net</title>
+<meta name="description" content="Input-output on the SKC-86 trainer, ADC reading, sawtooth wave generation with the DAC, and lab reports.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-lab-07-09/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-lab-07-09/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-lab-07-09/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-lab-07-09/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: Laboratory 7–9: SKC-86, ADC and DAC">
+<meta property="og:description" content="Input-output on the SKC-86 trainer, ADC reading, sawtooth wave generation with the DAC, and lab reports.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-lab-07-09/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: Laboratory 7–9: SKC-86, ADC and DAC", "description": "Input-output on the SKC-86 trainer, ADC reading, sawtooth wave generation with the DAC, and lab reports.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-lab-07-09/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler", "associatedMedia": {"@type": "MediaObject", "name": "eem332-lab-07-09.zip", "contentUrl": "https://hasancan.net/arsiv/eem332-lab-07-09/eem332-lab-07-09.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: Laboratory 7–9: SKC-86, ADC and DAC">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>09.05.2005</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#eem332-lab07">eem332_lab07</a></li><li><a href="#eem332-lab08">eem332_lab08</a></li><li><a href="#eem332-lab09">eem332_lab09</a></li><li><a href="#mikro-deney-7-rapor">mikro deney 7 rapor</a></li><li><a href="#rapor8">rapor8</a></li><li><a href="#on-calisma-8">ön çalışma 8</a></li><li><a href="#rap">rap</a></li><li><a href="#lab81">lab81</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: Laboratory 7–9: SKC-86, ADC and DAC</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 09.05.2005 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the related notes and exercises from the Başkent University <strong>EEM332 Microprocessors</strong> course archive (2005–2015). It covers input-output on the SKC-86 trainer, ADC reading, sawtooth wave generation with the DAC, and lab reports. Work prepared by a friend and course documents are presented together; student names, numbers and group information have been removed. PDF archive copies of the documents and, where available, source codes can be downloaded as a ZIP at the end of the post.</p>
+<h2 id="eem332-lab07">eem332_lab07</h2>
+<p>EEM 332 - Microprocessors Experiment Number: 8 Experiment Title: SKC-86 Input and Programming</p>
+<p>Preliminary Work: The preliminary work will not be collected during the laboratory session.</p>
+<h3 id="1-read-the-document-titled-skc-86-guide-provided-on-the-website">1) Read the document titled “SKC-86 Guide” provided on the website.</h3>
+<h3 id="2-examine-the-program-below-this-program-first-turns-off-all-the-leds-on-the-skc-86-set">2) Examine the program below. This program first turns off all the LEDs on the SKC-86 set,</h3>
+<p>and then, when the user presses the relevant button, lights the LED associated with that button.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>;==========================================
+;===== 8BIT Input/Output TEST PROGRAM =====
+;=====         FOR SKC - 86           =====
+;==========================================</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CNT3                 EQU     3FD6H
+APORT3               EQU     3FD0H
+BPORT3               EQU     3FD2H
+CPORT3               EQU     3FD4H
+RAME                 EQU     0FFFFH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CODE          SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME         CS:CODE, DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG    0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>START:        MOV    SP,RAME
+MOV    AL,90H
+MOV    DX,CNT3
+OUT    DX,AL</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>J1:           MOV    DX,APORT3
+IN     AL,DX
+NOT    AL
+MOV    DX,BPORT3
+OUT    DX,AL
+JMP    J1</code></pre>
+<h3 id="code-ends">CODE          ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END START</code></pre>
+<p>Experimental Work</p>
+<h3 id="1-load-the-example1-program-located-at-cs-f000-0000-on-the-skc-86-to-do-this">1) Load the Example1 program located at CS=F000:0000 on the SKC-86. To do this,</h3>
+<h3 id="follow-the-steps-below">follow the steps below</h3>
+<p>Press the “2/GO” key, enter F000:0, press the “.” key.</p>
+<p>Observe what the program does.</p>
+<h3 id="2-similarly-load-the-example2-program-located-at-cs-f000-0040">2) Similarly, load the Example2 program located at CS=F000:0040.</h3>
+<h3 id="3-load-the-example3-program-by-following-the-steps-below">3) Load the Example3 program by following the steps below:</h3>
+<p>Press the “OB” key, enter 3F08, press the “,” key, then “0”, then the “.” key in that order. Press “IB”, then “3F08”, then the “,” key in that order.</p>
+<p>Note the values you see on the display. Repeat the above steps after changing the position of the potentiometer. Note the values.</p>
+<h3 id="4-using-the-turbo-debugger-program-obtain-the-machine-language-codes-of-the-program">4) Using the Turbo Debugger program, obtain the machine language codes of the program</h3>
+<p>given in the preliminary work. Load this program onto the SKC-86 using the keypad.</p>
+<p>Note the operation that the program performs.</p>
+<h3 id="5-make-the-necessary-changes-to-the-program-given-in-the-preliminary-work-so-that-it-performs">5) Make the necessary changes to the program given in the preliminary work so that it performs</h3>
+<p>the inverse of the operation (when first run, all LEDs are on, and they turn off when the relevant keys are pressed). Obtain the machine language codes of the program and load it onto the trainer.</p>
+<p>State your program, your comments, and your observations from the previous exercises in your report.</p>
+<h2 id="eem332-lab08">eem332_lab08</h2>
+<p>EEM 332 - Microprocessors Experiment Number: 8 Experiment Title: Analog-to-Digital Conversion</p>
+<p>Preliminary Work</p>
+<h3 id="1-examine-the-program-given-below-and-try-to-understand-how-it-works">1.   Examine the program given below and try to understand how it works.</h3>
+<p>Comment on how the program works.</p>
+<h3 id="2-assemble-the-given-program-and-obtain-its-machine-language-codes">2.     Assemble the given program and obtain its machine language codes.</h3>
+<p>Experimental Work</p>
+<h3 id="1-load-the-machine-language-codes-you-created-in-item-2-of-the-preliminary-work-onto-the">1.     Load the machine language codes you created in item 2 of the preliminary work onto the</h3>
+<p>trainer and repeat for the input methods given below. Verify the results and explain the operation of the program in detail. a. Potentiometer b. Temperature sensor c. Light sensor</p>
+<h3 id="2-write-the-algorithm-of-the-program-and-calculate-the-resolution-step-size-for-the">2.   Write the algorithm of the program and calculate the resolution (step size) for the</h3>
+<p>potentiometer.</p>
+<figure class="yazi-gorsel"><img src="../sekil-855-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="eem332_lab08: page 1, circuit, table and figures"><figcaption>eem332_lab08, page 1.</figcaption></figure>
+<h2 id="eem332-lab09">eem332_lab09</h2>
+<p>EEM 332 - Microprocessors Experiment Number: 9 Experiment Title: Digital-to-Analog Conversion</p>
+<p>Experimental Work</p>
+<h3 id="1-convert-the-sawtooth-signal-generator-program-given-below-into-machine-language">1.     Convert the sawtooth signal generator program given below into machine language</h3>
+<p>codes.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DAC      EQU   3FD8H
+RAME     EQU   0FFFFH
+CODE     SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME      CS:CODE, DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 0
+START:   MOV   AL,00
+MOV   DX,DAC
+J1:            OUT   DX,AL
+INC   AL
+JMP   J1</code></pre>
+<h3 id="code-ends">CODE     ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END   START</code></pre>
+<p>Load the program onto the trainer and run it. Observe the output signal at the DAC pin on the JMP5 output of the trainer.</p>
+<h3 id="2-simplify-the-program-given-below-and-obtain-its-machine-language-codes">2.     Simplify the program given below and obtain its machine language codes.</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DAC        EQU     3FD8H
+RAME       EQU     0FFFFH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CODE       SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME         CS:CODE,DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 0</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>START:     MOV     AL,00
+MOV     DX,DAC
+J1:                OUT   DX,AL
+MOV     AL,128
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,192
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,238
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,255
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,238
+MOV     CX,0FFFH
+LOOP    $</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>OUT     DX,AL
+MOV     AL,192
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,128
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,64
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,17
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,0
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,17
+MOV     CX,0FFFH
+LOOP    $
+OUT     DX,AL
+MOV     AL,64
+MOV     CX,0FFFH
+LOOP    $
+JMP     J1</code></pre>
+<h3 id="code-ends">CODE       ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END     START</code></pre>
+<p>Load the program onto the trainer and run it. Observe the output signal at the DAC pin on the JMP5 output of the trainer. Explain what the program does. Include the simplified code in your report.</p>
+<h3 id="3-what-can-be-done-to-change-the-frequency-of-the-generated-signals">3.   What can be done to change the frequency of the generated signals?</h3>
+<h2 id="mikro-deney-7-rapor">mikro deney 7 rapor</h2>
+<p>Başkent University Department of Electrical and Electronics Engineering</p>
+<p>EEM 332 – Microprocessors Laboratory</p>
+<h3 id="report">REPORT</h3>
+<p>Experiment No:# 7 Experiment Title: SKC-86 Input and Programming Experiment Date: 05/05/2006</p>
+<p>1-) In the first experiment we ran a sample program. To do this, we pressed the 2/go key to select which address's program would be run. We entered the address by typing F000:0. When we pressed the . key, the program started running.</p>
+<h3 id="the-program-output-after-doing-these">The program output after doing these</h3>
+<p>The LEDs light up one after another. After this process finishes, the LEDs start lighting in groups of four: first the first four, then the second four, and then the process returns to the beginning.</p>
+<p>2-) We did the above procedure for the sample program at address F000:0040. This time, when we pressed the button under the LED we wanted to light, the LED connected to that button started to light.</p>
+<p>4-)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV SP,RAME                  CS:0000           BCFFFF
+MOV AL,90H                   CS:0003           B090
+MOV DX,CNT3                  CS:0005           BAD63F
+OUT DX,AL                    CS:0008           EE</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX,APORT3                CS:0009           BAD03F
+IN AL,DX                     CS:000C           EC
+NOT AL                       CS:000D           F6D0
+MOV DX,BPORT3                CS:000F           BAD23F
+OUT DX,AL                    CS:0012           EE
+JMP J1                       CS:0013           EBF4</code></pre>
+<p>We entered the hex codes above in order. First we pressed 1, then pressed 8 to set the code segment to 400, and pressed the period. We pressed 0 to set the offset to 0, then entered the hex codes byte by byte separated by commas, and pressed the period to finish. When we pressed 2, we again entered the start and end addresses of the program to be run, and ran it. Initially all of the LEDs are off. If we press the button of the LED we want to light, that LED lights up. This is the operation the program performs.</p>
+<p>5-) In the program above we deleted the not instruction. The result was a program that turns the LEDs off when the buttons are pressed. When a button was pressed, the LED associated with that button went off.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CNT3                               EQU 3FD6H
+APORT3                             EQU 3FD0H
+BPORT3                             EQU 3FD2H
+CPORT3                             EQU 3FD4H
+RAME                               EQU 0FFFFH</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CODE                             SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME CS:CODE, DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 0
+START:                           MOV SP,RAME
+MOV AL,90H
+MOV DX,CNT3
+OUT DX,AL
+J1:                              MOV DX,APORT3
+IN AL,DX
+MOV DX,BPORT3
+OUT DX,AL
+JMP J1</code></pre>
+<h3 id="code-ends">CODE                             ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END START</code></pre>
+<h3 id="machine-code">Machine code</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV SP,RAME                      CS:0000          BCFFFF
+MOV AL,90H                       CS:0003          B090
+MOV DX,CNT3                      CS:0005          BAD63F
+OUT DX,AL                        CS:0008          EE
+MOV DX,APORT3                    CS:0009          BAD03F
+IN AL,DX                         CS:000C          EC
+MOV DX,BPORT3                    CS:000D          BAD23F
+OUT DX,AL                        CS:0010          EE
+JMP J1                           CS:0011          EBF6</code></pre>
+<h2 id="rapor8">rapor8</h2>
+<p>Başkent University Department of Electrical and Electronics Engineering</p>
+<p>EEM 332 – Microprocessors Laboratory</p>
+<p>Report</p>
+<p>Experiment No: #8 Experiment Title: Analog-to-Digital Conversion Experiment Date: 05/05/06</p>
+<h3 id="1-algorithm-of-the-program">1) ALGORITHM OF THE PROGRAM</h3>
+<p>The program sends the values of the different ADCs entered through their addresses to the LEDs. The 8 LEDs represent 8 bits. Since the ADC0 address is 3FC8, the output of the ADC for the voltage set with the potentiometer is read and used to light the LEDs. The potentiometer is used to set a voltage between 0 and 5 volts. When the ADC input is set to 0 volts with the potentiometer, no LEDs light; when it is raised to 5 volts, all LEDs light; and at other voltage values the LEDs light according to the voltage. Since the ADC2 address is 3FCC, the LEDs light according to the digital version of the analog signal taken from the temperature sensor. As the temperature value of the temperature sensor increases, the value shown by the 8 bits increases and the LEDs light accordingly. Since the ADC1 address is 3FCA, the LEDs light according to the digital version of the analog signal taken from the light sensor. The lighting state of the LEDs changes according to the intensity of the light.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADC0 EQU 3FC8H                       ; The addresses of the ADCs are defined
+ADC1 EQU 3FCAH
+ADC2 EQU 3FCCH
+ADC3 EQU 3FCEH
+CNT3 EQU 3FD6H
+BPORT3 EQU 3FD2H                     ;Address of the port that drives the LEDs</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>RAME EQU 0FFFFH
+CODE SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME CS:CODE, DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 300H</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>START:        MOV DX,CNT3
+MOV AL,91H
+OUT DX,AL
+J1:           MOV AX,0
+MOV DX,ADC1
+OUT DX,AL              ;The ADC1 address is selected
+MOV CX,300H            ;Wait for the signal from the ADC1 address to stabilize
+LOOP $
+MOV DX,ADC1
+IN AL,DX               ;The signal from the ADC1 address is loaded into AL
+MOV DX,BPORT3
+OUT DX,AL              ;The LEDs are lit via BPORT3 according to AL
+MOV CX,9FFFH
+LOOP $
+JMP J1                 ;Go to J1</code></pre>
+<h3 id="code-ends">CODE ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END START</code></pre>
+<h3 id="2-flowchart">2) FLOWCHART</h3>
+<h2 id="on-calisma-8">ön çalışma 8</h2>
+<h3 id="comment-on-how-the-program-works">Comment on how the program works</h3>
+<p>This program displays the values of the different ADCs entered through the given addresses as bits on the LEDs. Output to the LEDs is provided from BPORT3. Since the ADC0 address is 3FC8, the voltage set with the potentiometer is taken from the ADC output and used to light the LEDs; since the ADC1 address is 3FCA, the digitized form of the analog signal from the light sensor is taken and used to light the LEDs; and since the ADC2 address is 3FCC, the digitized form of the analog signal from the temperature sensor is taken and used to light the LEDs.</p>
+<h3 id="2-machine-code-of-the-given-program">2) MACHINE CODE OF THE GIVEN PROGRAM:</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV DX,CNT3        CS:0300          BAD63F
+MOV AL,91H         CS:0303          B091
+OUT DX,AL          CS:0305          EE
+MOV AX,0           CS:0306          B80000
+MOV DX,ADC1        CS:0309          BACA3F
+OUT DX,AL          CS:030C          EE
+MOV DX,300H        CS:030D          B90003
+LOOP $             CS:0310          E2FE
+MOV DX,ADC1        CS:0312          BACA3F
+IN AL,DX           CS:0315          EC
+MOV DX,BPORT3      CS:0316          BAD23F
+OUT DX,AL          CS:0319          EE
+MOV CX,9FFFH       CS:031A          B9FF9F
+LOOP $             CS:031D          E2FE
+JMP J1             CS:031F          EBES</code></pre>
+<figure class="yazi-gorsel"><img src="../sekil-858-01.jpg" width="910" height="1287" loading="lazy" decoding="async" alt="ön çalışma 8: page 1, circuit, table and figures"><figcaption>ön çalışma 8, page 1.</figcaption></figure>
+<h2 id="rap">rap</h2>
+<p>Başkent University Department of Electrical and Electronics Engineering</p>
+<p>EEM 332 – Microprocessors Laboratory</p>
+<p>Preliminary Work / Report</p>
+<p>Experiment No: # 9 Experiment Title: Digital-to-Analog Conversion Experiment Date: 12/05/2006</p>
+<p>1-)</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DAC            EQU       3FD8H
+RAME           EQU       0FFFFH
+CODE          SEGMENT</code></pre>
+<h3 id="assume-cs-code-ds-code">ASSUME        CS:CODE, DS:CODE</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ORG 0
+START:        MOV AL,00
+MOV DX,DAC
+J1:           OUT DX,AL
+INC AL
+JMP J1</code></pre>
+<h3 id="code-ends">CODE          ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END START</code></pre>
+<h3 id="the-machine-language-codes-are">The machine language codes are</h3>
+<p>cs:0000 B000               mov al,00 cs:0002 BAD83F             mov dx,3FD8 cs:0005 EE                 out dx,al cs:0006 FEC0               inc al cs:0008 EBFB               jmp 0005</p>
+<p>When we loaded the program onto the trainer, ran it, and observed the output signal at the DAC pin on the JMP5 output of the trainer, we saw that the program produces a sawtooth-like signal. In the program, AL is initially assigned 0 and this value is then incremented. These increasing AL values are sent to the output. AL can reach a maximum value of FF, after which it drops back to 0. For this reason, the output signal appears as a sawtooth.</p>
+<p>2-) The simplified version of the given program;</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>DATA       DB 128,192,238,255,238,192,128,64,17,00,17,64
+START:
+MOV       AL,00
+MOV       SI,OFFSET DATA
+MOV       DX,DAC
+J2:       MOV       BL,00
+MOV       BH,0CH
+J1:       OUT       DX,AL
+MOV       AL,[SI]
+INC       SI
+MOV       CX,0FFFH
+LOOP $</code></pre>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>CMP          BL,BH
+JE J2
+JMP J1</code></pre>
+<h3 id="code-ends">CODE          ENDS</h3>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>END           START</code></pre>
+<h3 id="the-machine-language-codes-are">The machine language codes are</h3>
+<p>cs:000C B000                    mov al,00 cs:000E BE0000                  mov si,0000 cs:0011 BAD83F                  mov dx,3FD8 cs:0014 B300                    mov bl,00 cs:0016 B70C                    mov bh,0C cs:0018 EE                      out dx,al cs:0019 8A04                    mov al,[si] cs:001B 46                      inc si cs:001C B9FF0F                  mov cx,0FFF cs:001F E2FE               loop 001F cs:0021 3ADF               cmp bl,bh cs:0023 74EF                    je  0014 cs:0025 EBF1               jmp 0018</p>
+<p>When we loaded the program onto the trainer, ran it, and observed the output signal at the DAC pin on the JMP5 output of the trainer, we observed that the program produces a digital sine signal at the output. We transferred the values given in the experiment to AL one after another through SI. We kept incrementing SI inside the loop. We observed the contents of AL at the output through DX. When BH was given the value 12, that is, the total number of data entered, and compared with BL, it was checked whether the entered data had run out. With the value we gave to CX, we determined how long the signal would stay at each value. In other words, the digital signal was obtained by making waits of CX (the frequency it shows) at the output sine signal.</p>
+<p>3-) To change the frequency of the generated signal, it is possible to change the values given to CX. Since the value we give to CX determines how long the signal stays at each value, we can change the frequency by changing this parameter. In other words, the output sine signal makes waits of CX (the frequency it shows).</p>
+<h2 id="lab81">lab81</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>ADC0  EQU 3FC8H
+ADC1 EQU 3FCAH
+ADC2 EQU 3FCCH
+ADC3 EQU 3FCEH
+CNT3 EQU 3FD6H
+BPORT3 EQU 3FD2H
+
+RAME EQU 0FFFFH
+CODE SEGMENT 
+ASSUME CS:CODE,DS:CODE
+
+ORG 300H
+
+START:  MOV DX,CNT3
+	MOV AL,91H
+	OUT DX,AL
+J1:	MOV AX,0
+	MOV DX,ADC1
+	OUT DX,AL
+	MOV CX,300H
+	LOOP $
+	MOV DX,ADC1
+	IN AL,DX
+	MOV DX,BPORT3
+	OUT DX,AL
+	MOV CX,9FFFH
+	LOOP $
+	JMP J1
+CODE 	ENDS
+	END START</code></pre>
+<p><em>Note: Although the file name of the SKC-86 handout is experiment 7, the document states “Experiment Number: 8”. The title in the file has been preserved.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem332-lab-07-09.zip" download>eem332-lab-07-09.zip</a></p>
+              <p class="kucuk">ZIP archive · 911 KB · 09.05.2005</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem332-lab-07-09.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (911 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: MATLAB Assignments 2005–2013 – Root Locus, Bode and Nyquist Plots, margin and step Commands — hasancan.net</title>
+<meta name="description" content="Student work from different years for the EEM322 MATLAB project: Ogata B-6 root locus plots (rlocus), B-8-29 and B-8-30 Bode diagrams, Uraz 6.2(a) and 6.4(a) Nyquist plots, margin output for HW+MATPRO 12, and a help note explaining the use of step, bode, and rlocus.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: MATLAB Assignments 2005–2013 – Root Locus, Bode and Nyquist Plots, margin and step Commands">
+<meta property="og:description" content="Student work from different years for the EEM322 MATLAB project: Ogata B-6 root locus plots (rlocus), B-8-29 and B-8-30 Bode diagrams, Uraz 6.2(a) and 6.4(a) Nyquist plots, margin output for HW+MATPRO 12, and a help note explaining the use of step, bode, and rlocus.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: MATLAB Assignments 2005–2013 – Root Locus, Bode and Nyquist Plots, margin and step Commands", "description": "Student work from different years for the EEM322 MATLAB project: Ogata B-6 root locus plots (rlocus), B-8-29 and B-8-30 Bode diagrams, Uraz 6.2(a) and 6.4(a) Nyquist plots, margin output for HW+MATPRO 12, and a help note explaining the use of step, bode, and rlocus.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322-matlab-odev-cizimleri.zip", "contentUrl": "https://hasancan.net/arsiv/eem322-matlab-odev-cizimleri/eem322-matlab-odev-cizimleri.zip"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: MATLAB Assignments 2005–2013 – Root Locus, Bode and Nyquist Plots, margin and step Commands">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>25.05.2007</dd>
+          <dt data-i18n="arch.format"></dt><dd>ZIP archive</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#matlab-help-note-2004-2005">MATLAB help note (2004–2005)</a></li><li><a href="#ogata-b-6-root-locus-plots-2005">Ogata B-6 root locus plots (2005)</a></li><li><a href="#2006-uraz-5-6-b-5-6-d-and-ogata-b-5-problems">2006: Uraz 5.6(b), 5.6(d) and Ogata B-5 problems</a></li><li><a href="#2007-root-locus-bode-and-nyquist-plots">2007: Root locus, Bode and Nyquist plots</a></li><li><a href="#2008-bode-and-nyquist-for-three-k-values">2008: Bode and Nyquist for three K values</a></li><li><a href="#2012-2013-hw-matpro-12">2012–2013: HW+MATPRO 12</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: MATLAB Assignments 2005–2013 – Root Locus, Bode and Nyquist Plots, margin and step Commands</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 25.05.2007 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post brings together the Word documents prepared for the <strong>MATLAB project</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University. The documents come from different students between 2005 and 2013. Personal information (names, numbers, document author metadata) has been removed: each document was re-converted to PDF from page images, the cover line containing the name and number was covered, and the file names were changed to year and problem number. All of the documents are in the ZIP file at the end of the post.</p>
+<p>In the course, each student was given problems from Ogata's <em>Modern Control Engineering</em> and Uraz's <em>Control Systems</em>. For the MATLAB project, the solution steps of these problems were to be accompanied by MATLAB code and all time response, root locus, Bode, and Nyquist plots (the assignment distribution is in the <a href="/arsiv/eem322-izlence/">syllabus post</a>). Starting in 2012, the assignment was given over a single parametric system (<a href="/arsiv/eem322-odev-cozumleri-hw-matpro/">HW+MATPRO</a>).</p>
+<h2 id="matlab-help-note-2004-2005">MATLAB help note (2004–2005)</h2>
+<p>The "EEM322 homework help" document that circulated among students summarizes the use of three basic commands. A step function is an input that jumps from zero to a finite value at t = 0; the <code>step</code> command plots the unit step response by default.</p>
+<p>Example 1, step response of a state-space model:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>A = [0 1 ; 0 -.05];
+B = [0 ; 0.001];
+C = [0 1];
+D = [ 0];
+sys = ss(A,B,C,D);
+step(sys); % the time axis is not specified; as in the second example, the time range and
+           % resolution can be set by defining a t vector and using the command step(sys,t).
+title('Birim Basamak Yaniti');
+xlabel(' Time');
+ylabel(' y(t) ');
+grid on;</code></pre>
+<p>Example 2, closed-loop transfer function T(s) = (s + 1)/(2s² + s + 3):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num=[1 1];
+den=[2 1 3];
+t=0:0.1:50; % time vector: start 0, step 0.1, end 50
+y=tf(num,den);
+step(y,t);
+title('Birim Basamak Yanıtı');
+xlabel(' Time');
+ylabel(' y(t) ');
+grid on;</code></pre>
+<p>Short scripts for the Bode plot and the root locus that ask the user for the numerator and denominator:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num=input(' Açık Döngü Transfer Fonksiyonun Payını Girin: ');
+den=input(' Açık Döngü Transfer Fonksiyonun Paydasını Girin: ');
+bode(num, den);
+grid on;</code></pre>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>num=input(' Açık Döngü Transfer Fonksiyonun Payını Girin: ');
+den=input(' Açık Döngü Transfer Fonksiyonun Paydasını Girin: ');
+rlocus(num, den);</code></pre>
+<h2 id="ogata-b-6-root-locus-plots-2005">Ogata B-6 root locus plots (2005)</h2>
+<p>In two documents dated May 2005, the root loci for Ogata Chapter 6 problems are computed with <code>rlocus</code> and plotted with markers using <code>plot</code>. K is swept from 0 to 1000 in steps of 0.2:</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>% Soru 6-8
+num=[0 0 1 0.5]
+den=[1 1 0 1]
+K=[0:0.2:1000]
+r=rlocus(num,den,K)
+plot(r,'o')
+v=[-5 1 -8 8]; axis(v)
+grid
+title('Root-Locus Plot of problem 6-8')
+xlabel('Real Axis')
+ylabel('Imag Axis')</code></pre>
+<p>The same pattern is repeated for B-6-10 with <code>num=[0 0 0 2 2]</code>, <code>den=[1 7 10 0 0]</code> (that is, 2(s + 1)/[s²(s + 2)(s + 5)], axes [−5 5 −10 10]) and for B-6-12 with <code>num=[0 0 0 1 1]</code>, <code>den=[1 4 11 14 10]</code> (axes [−5 1 −5 5]). In a separate document for B-6-10, only <code>rlocus(num,den)</code> is used.</p>
+<h2 id="2006-uraz-5-6-b-5-6-d-and-ogata-b-5-problems">2006: Uraz 5.6(b), 5.6(d) and Ogata B-5 problems</h2>
+<p>In one student's "EEM322 HW – MATLAB" document, each problem has a root locus, step response, Nyquist, and Bode plot, in that order. Points read from the Bode plots with MATLAB's data cursor:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Problem</th><th scope="col">Magnitude point read</th><th scope="col">Phase point read</th></tr></thead><tbody><tr><th scope="row">Uraz 5.6(b)</th><td>30.7 dB at 0.491 rad/s</td><td>−109° at 0.493 rad/s</td></tr><tr><th scope="row">Uraz 5.6(d)</th><td>−28.2 dB at 2.97 rad/s</td><td>−148° at 2.96 rad/s</td></tr><tr><th scope="row">Ogata B-5-26 (K = 1)</th><td>−27.9 dB at 4.25 rad/s</td><td>−36.2° at 4.24 rad/s</td></tr><tr><th scope="row">Ogata B-5-13</th><td>−6.51 dB at 0.56 rad/s</td><td>18.4° at 0.559 rad/s</td></tr><tr><th scope="row">Ogata B-5-27(a)</th><td>−4.28 dB at 2.56 rad/s</td><td>−180° at 2.56 rad/s</td></tr><tr><th scope="row">Ogata B-5-27(b)</th><td>−8.69 dB at 2.55 rad/s</td><td>−180° at 2.55 rad/s</td></tr></tbody></table></div>
+<p>For B-5-13, the unit impulse, unit step, and unit ramp responses are plotted separately. Another document dated 2008 (titled 5.4(d) and 5.6(h)) was not added to the archive because it is a copy of the same plots.</p>
+<p>In a second "Matlab Assignment" document from the same year, there are root locus, Nyquist, Bode, and step response plots for Ogata B-8-29 and Uraz 6.4(a). In the Bode plot of B-8-29, −0.0144 dB at 0.645 rad/s (gain crossover) and −179° at 41.5 rad/s (near the phase crossover) were read; for Uraz 6.4(a), 0.0533 dB at 0.866 rad/s and −317° at 0.925 rad/s.</p>
+<h2 id="2007-root-locus-bode-and-nyquist-plots">2007: Root locus, Bode and Nyquist plots</h2>
+<p>Root loci for Uraz B.6.2 and B.6.3 (the document has a note: "I did Ogata B.6.2 in place of the problem I could not do"):</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; num=[0 1 4];
+&gt;&gt; den=[1 2 1];
+&gt;&gt; g=tf(num,den)
+
+Transfer function:
+    s+4
+-------------
+s^2 + 2 s + 1
+
+&gt;&gt; rlocus(g)</code></pre>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>&gt;&gt; numm=[0 0 0 0 1];
+&gt;&gt; denn=[1 5 9 5 0];
+&gt;&gt; f=tf(numm,denn)
+
+Transfer function:
+           1
+-------------------------
+s^4 + 5 s^3 + 9 s^2 + 5 s
+
+&gt;&gt; rlocus(f)</code></pre>
+<p>In the Bode diagrams of Ogata B-8-29 and B-8-30, MATLAB's stability margin cursors were used:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Problem</th><th scope="col">Gain margin</th><th scope="col">Phase margin</th><th scope="col">Note</th></tr></thead><tbody><tr><th scope="row">Ogata B-8-29</th><td>1.26 dB (2 rad/s)</td><td>50.8° (1.48 rad/s), delay margin 0.6 s</td><td>Closed loop stable</td></tr><tr><th scope="row">Ogata B-8-30</th><td>–</td><td>84.2° (0.673 rad/s), delay margin 2.18 s</td><td>Closed loop stable</td></tr></tbody></table></div>
+<p>In the Nyquist plot of Uraz 6.2(a), a gain margin of −14 dB (at 0 rad/s) and a phase margin of 22.8° (at 2.1 rad/s, delay margin 0.189 s) were read, and the closed loop was shown to be stable.</p>
+<h2 id="2008-bode-and-nyquist-for-three-k-values">2008: Bode and Nyquist for three K values</h2>
+<p>In a two-page document, the Bode and Nyquist plots of the same system are overlaid for K = 0.2, 0.5, and 2. In the Bode plot, the magnitude curves shift upward with K, while the phase curve is a single curve rising from −180° to −90° ("the K values are the same for all phase curves"). In the Nyquist plot, the curves start on the real axis at −0.8, −2, and −8 and proceed to the origin along a semicircle; that is, the zero-frequency gain of the plotted system is −4K.</p>
+<h2 id="2012-2013-hw-matpro-12">2012–2013: HW+MATPRO 12</h2>
+<p>The last two documents belong to parameter set 12 of the HW+MATPRO assignment (n = 1, a = 1, b = 3, c = 4, d = 16): G(s) = (s + 1)/[s(s + 3)(s² + 4s + 16)] = (s + 1)/(s⁴ + 7s³ + 28s² + 48s).</p>
+<pre class="kaynak" data-dosya="matlab - Not Defteri"><code>sys=tf([1,1],[1,7,28,48,0])
+rlocusplot(sys)
+bode(sys)
+stepplot(sys)
+figure,nyquist(sys)
+[Gm,Pm,Wg,Wp] = margin(sys)</code></pre>
+<pre class="kod"><code>Gm = 113.5587
+
+Pm = 90.4973
+
+Wg = 4.8041
+
+Wp = 0.0208</code></pre>
+<p>In the <code>margin</code> output, Gm is the absolute value (20 log 113.56 ≈ 41.1 dB), Wg is the phase crossover frequency (where the phase is −180°), and Wp is the gain crossover frequency. The phase crosses −180° at 4.80 rad/s and |G| ≈ 1/113.6 there; since the gain at low frequencies is |G| ≈ 1/(48ω), it drops to 1 at 0.0208 rad/s. The documents include Bode, Nyquist (with dB circles), root locus, and step response plots. Since the step response is plotted for the open-loop G(s) (there is a pole at the origin), it keeps increasing like a ramp.</p>
+<p><em>Note: The calculation was checked: at ω = 4.804 rad/s the phase of G(jω) is −180° and 1/|G| = 113.57.</em></p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon zip" aria-hidden="true">ZIP</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322-matlab-odev-cizimleri.zip" download>eem322-matlab-odev-cizimleri.zip</a></p>
+              <p class="kucuk">ZIP archive · 1.1 MB · 25.05.2007</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322-matlab-odev-cizimleri.zip" download>⬇ <span data-i18n="arch.downloadFile"></span> (1.1 MB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

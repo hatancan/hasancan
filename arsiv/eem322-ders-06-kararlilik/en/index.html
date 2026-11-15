@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM322 Control Systems: Lecture 6 – Stability, Hurwitz Test, and the Routh-Hurwitz Criterion — hasancan.net</title>
+<meta name="description" content="EEM322 Control Systems lecture note 6 (Hamit Erdem, 2013): definitions of stable, unstable, and marginally stable systems, BIBO stability, pole locations, the Hurwitz test, the Routh table, the special cases where the first element is zero and where an entire row is zero, the range of gain K for stability, and stability in state space.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM322 Control Systems: Lecture 6 – Stability, Hurwitz Test, and the Routh-Hurwitz Criterion">
+<meta property="og:description" content="EEM322 Control Systems lecture note 6 (Hamit Erdem, 2013): definitions of stable, unstable, and marginally stable systems, BIBO stability, pole locations, the Hurwitz test, the Routh table, the special cases where the first element is zero and where an entire row is zero, the range of gain K for stability, and stability in state space.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem322-ders-06-kararlilik/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM322 Control Systems: Lecture 6 – Stability, Hurwitz Test, and the Routh-Hurwitz Criterion", "description": "EEM322 Control Systems lecture note 6 (Hamit Erdem, 2013): definitions of stable, unstable, and marginally stable systems, BIBO stability, pole locations, the Hurwitz test, the Routh table, the special cases where the first element is zero and where an entire row is zero, the range of gain K for stability, and stability in state space.", "inLanguage": "en", "datePublished": "2026-10-16", "url": "https://hasancan.net/arsiv/eem322-ders-06-kararlilik/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM322 – Denetim Sistemleri", "associatedMedia": {"@type": "MediaObject", "name": "eem322L6.pdf", "contentUrl": "https://hasancan.net/arsiv/eem322-ders-06-kararlilik/eem322L6.pdf"}}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM322 Control Systems: Lecture 6 – Stability, Hurwitz Test, and the Routh-Hurwitz Criterion">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem322">EEM322</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM322 – Denetim Sistemleri</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>18.07.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>PDF</dd>
+        </dl>
+        <div class="kutu-ic"><a class="buton turuncu indir-yan" href="#indir">⬇ <span data-i18n="arch.download"></span></a></div>
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#why-is-stability-the-most-important-property">Why is stability the most important property?</a></li><li><a href="#pole-locations-and-stability">Pole locations and stability</a></li><li><a href="#the-hurwitz-test">The Hurwitz test</a></li><li><a href="#the-routh-hurwitz-criterion">The Routh-Hurwitz criterion</a></li><li><a href="#special-cases-in-the-routh-hurwitz-criterion">Special cases in the Routh-Hurwitz criterion</a></li><li><a href="#range-of-gain-k-for-stability">Range of gain K for stability</a></li><li><a href="#summary">Summary</a></li><li><a href="#stability-in-state-space">Stability in state space</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM322</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM322 Control Systems: Lecture 6 – Stability, Hurwitz Test, and the Routh-Hurwitz Criterion</h1>
+            <p class="kucuk">EEM322 – Denetim Sistemleri · 18.07.2013 · <span data-i18n="arch.addedOn"></span> 16.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is the <strong>6th lecture note</strong> of the <strong>EEM322 Control Systems</strong> course at Başkent University ("EEM322: Lecture 6 – Stability"). The notes belong to the course instructor <strong>Hamit Erdem</strong>; the page headers carry the date 18.07.2013. The lecture note is a 13-page PDF written in a mix of English and Turkish, with two slides per page. Below, the content is summarized in English and the Routh tables are written out. The original PDF can be downloaded at the end of the post.</p>
+<p>Topics: closed-loop system stability; pole locations; the Hurwitz method; the Routh-Hurwitz criterion.</p>
+<h2 id="why-is-stability-the-most-important-property">Why is stability the most important property?</h2>
+<p>Three requirements enter the design of a control system: <strong>transient response</strong>, <strong>stability</strong>, and <strong>steady-state error</strong>. Stability is the most important of these: if the system is unstable, the transient response and steady-state error are not even worth discussing; an unstable system cannot be designed for a specific transient response or steady-state error.</p>
+<p>The total response of the system is the sum of the forced and natural responses: c(t) = c_forced(t) + c_natural(t).</p>
+<ul><li>A linear, time-invariant system is <strong>stable</strong> if its natural response goes to zero as time goes to infinity. In this case, since the natural solution approaches zero, the total response equals the forced response.</li><li>If the natural response grows without bound as time goes to infinity, the system is <strong>unstable</strong>.</li><li>If the natural response neither decays nor grows, but stays constant or oscillates, the system is <strong>marginally stable</strong>. Since these systems are sensitive to parameter changes, they are regarded as unstable in practice.</li></ul>
+<p>Physically, unstable systems with an unbounded natural response can harm themselves, nearby equipment, or people. In linear systems, stability is an intrinsic property of the system: if a disturbance acts on the equilibrium point of a stable linear system, the system returns to the equilibrium point on its own over time. The note has a figure illustrating this: a ball resting at the peaks of a curve is unstable, one resting in the valleys is stable, and one resting on a flat region is neutrally stable.</p>
+<p><strong>BIBO definition:</strong> A system is stable if the output remains bounded for all bounded input signals applied to the system; if any bounded input produces an unbounded output, the system is unstable.</p>
+<h2 id="pole-locations-and-stability">Pole locations and stability</h2>
+<ul><li>If the closed-loop poles are in the left half-plane (their real parts are negative), the system is <strong>stable</strong>.</li><li>Poles in the right half-plane produce natural responses that are either purely exponentially increasing or exponentially increasing sinusoids; these go to infinity over time and the system is <strong>unstable</strong>.</li><li>Simple (single-order) poles on the imaginary axis produce pure sinusoidal oscillations whose amplitude neither increases nor decreases; systems that have only simple poles on the imaginary axis together with poles in the left half-plane are <strong>marginally stable</strong>.</li><li>For a system to be unstable, it is sufficient that at least one of its poles is in the right half-plane or that it has a repeated root on the imaginary axis. A repeated root on the imaginary axis produces a response of the form At^n cos(ωt + φ), which goes to infinity over time.</li></ul>
+<p><strong>Example:</strong> For a unity-feedback system with open-loop transfer function 7/(s(s + 1)(s + 2)), the closed-loop transfer function is 7/(s³ + 3s² + 2s + 7). The poles are s₁ = −3.087 and s₂,₃ = 0.0434 ± j1.505; since two poles are in the right half-plane, the system is <strong>unstable</strong> and its step response shows oscillations of growing amplitude.</p>
+<figure class="yazi-gorsel"><img src="../s-03.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Example of an unstable system with poles in the right half-plane, and its step response"><figcaption>Unstable system example</figcaption></figure>
+<h2 id="the-hurwitz-test">The Hurwitz test</h2>
+<p>If all poles of the closed-loop transfer function are in the left half-plane, the polynomial in the denominator of the system, i.e., the characteristic equation, can be factored in the form (s + aᵢ); the aᵢ are positive numbers or complex numbers with positive real parts. Multiplying these factors yields a polynomial whose coefficients are all positive; in addition, all powers of s must be present.</p>
+<p>From this: a negative coefficient alone is enough to say that the system is unstable. If one of the powers of s is missing, the system is either unstable or marginally stable.</p>
+<p><strong>In brief, the Hurwitz test:</strong> All coefficients of the characteristic polynomial of a stable system must exist and be positive. This condition is <strong>necessary but not sufficient</strong> for stability.</p>
+<h2 id="the-routh-hurwitz-criterion">The Routh-Hurwitz criterion</h2>
+<p>This method (the Routh-Hurwitz criterion, 1905) consists of two steps: generating the Routh table and interpreting the table. With this method, information about the stability of the system is obtained without solving for the closed-loop poles; it can also be determined how many poles of the system lie in the left half-plane, how many in the right half-plane, and how many on the imaginary axis.</p>
+<p>For the closed-loop transfer function N(s)/(a₄s⁴ + a₃s³ + a₂s² + a₁s + a₀), the table is constructed as follows:</p>
+<ul><li>The powers of s, from the highest power down to s⁰, are written in the first column.</li><li>In the first row, the coefficient of the highest-order term is written, followed by the other coefficients, skipping every other one (a₄, a₂, a₀).</li><li>In the second row, the coefficient of the second-highest-order term is written, followed by the others, skipping every other one (a₃, a₁, 0).</li><li>Each subsequent element is found as the negative of the 2×2 determinant taken from the two rows above, divided by the first element of the row immediately above. For example, b₁ = −(a₄a₁ − a₂a₃)/a₃ = −det[a₄ a₂; a₃ a₁]/a₃.</li></ul>
+<p><strong>Interpretation:</strong> The number of roots of the polynomial in the right half-plane is equal to the <strong>number of sign changes in the first column</strong> of the table. If there are no sign changes in the first column, the system is stable.</p>
+<h3 id="example-1">Example 1</h3>
+<p>For a unity-feedback system with forward path 1000/((s + 2)(s + 3)(s + 5)), C(s)/R(s) = 1000/(s³ + 10s² + 31s + 1030). For convenience, the s² row can be divided by 10 (multiplying or dividing a row by a positive number does not change the result):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>31</td></tr><tr><th scope="row">s²</th><td>10 → 1</td><td>1030 → 103</td></tr><tr><th scope="row">s¹</th><td>−72</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>103</td><td>0</td></tr></tbody></table></div>
+<p>The first column is 1, 1, −72, 103: there are two sign changes, so the system has two poles in the right half-plane and is <strong>unstable</strong>.</p>
+<h2 id="special-cases-in-the-routh-hurwitz-criterion">Special cases in the Routh-Hurwitz criterion</h2>
+<h3 id="1-the-first-element-of-a-row-is-zero">1. The first element of a row is zero</h3>
+<p>To avoid division by zero, a small ε is written in place of the zero. <strong>Example:</strong> T(s) = 10/(s⁵ + 2s⁴ + 3s³ + 6s² + 5s + 3)</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁵</th><td>1</td><td>3</td><td>5</td></tr><tr><th scope="row">s⁴</th><td>2</td><td>6</td><td>3</td></tr><tr><th scope="row">s³</th><td>0 → ε</td><td>7/2</td><td>0</td></tr><tr><th scope="row">s²</th><td>(6ε − 7)/ε</td><td>3</td><td>0</td></tr><tr><th scope="row">s¹</th><td>(42ε − 49 − 6ε²)/(12ε − 14)</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>3</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>If ε is chosen positive, the signs in the first column are +, +, +, −, +, +, and there are two sign changes. If ε is chosen negative, two sign changes again result; that is, the system is <strong>unstable</strong> in either case (two poles in the right half-plane).</p>
+<p>The note also shows another approach: a polynomial is written whose roots are the reciprocals of the roots of the denominator (the coefficients in reverse order). The first column of the Routh table of the polynomial D(s) = 3s⁵ + 5s⁴ + 6s³ + 3s² + 2s + 1 is 3, 5, 4.2, 1.33, −1.75, 1; since the sign changes twice, the system is unstable (two poles in the right half-plane).</p>
+<h3 id="2-an-entire-row-is-zero">2. An entire row is zero</h3>
+<ul><li>Go back to the previous row and form the <strong>auxiliary polynomial</strong>.</li><li>The polynomial begins with the s power of that row and continues, skipping every other power.</li><li>Then the derivative of the polynomial with respect to s is taken.</li><li>The coefficients of this derivative are used in the row that was entirely zero.</li></ul>
+<p><strong>Example:</strong> T(s) = 10/(s⁵ + 7s⁴ + 6s³ + 42s² + 8s + 56)</p>
+<p>The s⁴ row (7, 42, 56) is divided by 7 to become (1, 6, 8), and the s³ row comes out entirely zero. The auxiliary polynomial is P(s) = s⁴ + 6s² + 8, whose derivative is dP/ds = 4s³ + 12s; 4, 12 (or, dividing by 4, 1, 3) are written in the s³ row:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁵</th><td>1</td><td>6</td><td>8</td></tr><tr><th scope="row">s⁴</th><td>7 → 1</td><td>42 → 6</td><td>56 → 8</td></tr><tr><th scope="row">s³</th><td>0 → 4 → 1</td><td>0 → 12 → 3</td><td>0</td></tr><tr><th scope="row">s²</th><td>3</td><td>8</td><td>0</td></tr><tr><th scope="row">s¹</th><td>1/3</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>8</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p><strong>Note:</strong> An entire row of zeros in the Routh table arises from the polynomial having a factor consisting only of odd-order or only of even-order terms (for example, s⁴ + s² + 7). The roots of an even polynomial are symmetric about the origin; this symmetry can be (a) symmetric about the real axis, (b) symmetric about the imaginary axis, or (c) four-quadrant. A zero row indicates the existence of an even polynomial whose roots are symmetric about the origin.</p>
+<h3 id="example-eighth-order-system">Example: eighth-order system</h3>
+<p>Determine the stability of the closed-loop system T(s) = 20/(s⁸ + s⁷ + 12s⁶ + 22s⁵ + 39s⁴ + 59s³ + 48s² + 38s + 20) using the Routh table.</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s⁸</th><td>1</td><td>12</td><td>39</td><td>48</td><td>20</td></tr><tr><th scope="row">s⁷</th><td>1</td><td>22</td><td>59</td><td>38</td><td>0</td></tr><tr><th scope="row">s⁶</th><td>−10 → −1</td><td>−20 → −2</td><td>10 → 1</td><td>20 → 2</td><td>0</td></tr><tr><th scope="row">s⁵</th><td>20 → 1</td><td>60 → 3</td><td>40 → 2</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁴</th><td>1</td><td>3</td><td>2</td><td>0</td><td>0</td></tr><tr><th scope="row">s³</th><td>0 → 4 → 2</td><td>0 → 6 → 3</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s²</th><td>3/2 → 3</td><td>2 → 4</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s¹</th><td>1/3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>Since the s³ row is entirely zero, the auxiliary polynomial P(s) = s⁴ + 3s² + 2 and its derivative dP/ds = 4s³ + 6s are used.</p>
+<p>Interpretation: since there is no sign change from s⁴ down to s⁰, the auxiliary polynomial (the fourth-order even polynomial) has no roots in the right half-plane; if it had roots in the right half-plane, by symmetry it would also have to have roots in the left half-plane. From this it follows that four roots lie on the jω axis. The other poles are in the rows from s⁸ to s⁴: there are two sign changes among these rows, so there are two roots in the right half-plane. As a result, the transfer function has two left half-plane poles, two right half-plane poles, and four imaginary-axis poles; at least one pole in the right half-plane is enough to say that the system is <strong>unstable</strong>.</p>
+<figure class="yazi-gorsel"><img src="../s-09.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Routh table of the eighth-order system, completed using the auxiliary polynomial"><figcaption>Zero-row special case</figcaption></figure>
+<h2 id="range-of-gain-k-for-stability">Range of gain K for stability</h2>
+<p><strong>Example:</strong> Find the ranges of K (K &gt; 0) for which a unity-feedback system with forward path K/(s(s + 7)(s + 11)) is stable, unstable, and marginally stable.</p>
+<p>T(s) = K/(s³ + 18s² + 77s + K)</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col"></th><th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr><th scope="row">s³</th><td>1</td><td>77</td></tr><tr><th scope="row">s²</th><td>18</td><td>K</td></tr><tr><th scope="row">s¹</th><td>(1386 − K)/18</td><td>0</td></tr><tr><th scope="row">s⁰</th><td>K</td><td>0</td></tr></tbody></table></div>
+<ul><li><strong>K &lt; 1386:</strong> All terms in the first column are positive, with no sign changes; all three poles are in the left half-plane, and the system is <strong>stable</strong>.</li><li><strong>K &gt; 1386:</strong> Two sign changes; two poles are in the right half-plane, one pole is in the left half-plane, and the system is <strong>unstable</strong>.</li><li><strong>K = 1386:</strong> All elements of the s¹ row become zero. The auxiliary polynomial is P(s) = 18s² + 1386, with derivative dP/ds = 36s. Since there is no sign change after the s² term, the roots of the even polynomial are on the jω axis (s = ±j√77); since there is also no sign change above the s² term, the other root is in the left half-plane. The system is <strong>marginally stable</strong>.</li></ul>
+<figure class="yazi-gorsel"><img src="../s-11.jpg" width="1191" height="1684" loading="lazy" decoding="async" alt="Finding the stability range of gain K using the Routh table"><figcaption>Stability range of K</figcaption></figure>
+<h2 id="summary">Summary</h2>
+<p>Stability definitions for linear, time-invariant systems:</p>
+<p><strong>Based on the natural response:</strong></p>
+<ol><li>If the natural response goes to zero as time goes to infinity, the system is stable.</li><li>If the natural response goes to infinity as time goes to infinity, the system is unstable.</li><li>If the natural response neither decays nor grows, but stays constant or oscillates, the system is marginally stable.</li></ol>
+<p><strong>Based on the total response (BIBO):</strong></p>
+<ol><li>If every bounded input gives a bounded output, the system is stable.</li><li>If any bounded input gives an unbounded output, the system is unstable.</li></ol>
+<p>The stability of linear closed-loop systems is determined by the locations of their poles in the s-plane. If any of the poles is in the right half-plane, the transient response either increases monotonically or oscillates with increasing amplitude. When an unstable system is operated, the output grows over time; unless there is a saturation function or a mechanical limit, the physical system may be damaged. For this reason, closed-loop poles in the right half-plane are avoided. If all poles are to the left of the jω axis, every kind of transient decays and reaches the equilibrium point.</p>
+<p>Stability is a property of the system itself and is independent of the input function; the input cannot affect whether the system is stable or unstable, but it shows itself in the solution. Mathematically, poles on the jω axis lead to oscillations whose amplitude neither increases nor decreases; in practice, that is, in a noisy environment, the amplitude of the oscillation grows depending on the noise level. For this reason, a control system should not contain poles on the jω axis.</p>
+<h2 id="stability-in-state-space">Stability in state space</h2>
+<p>The roots of the equation det(sI − A) = 0 are the <strong>eigenvalues</strong> of the system matrix A and equal the poles of the system's transfer function. This equation is the characteristic equation of matrix A; its n roots λᵢ (i = 1 … n) are the eigenvalues.</p>
+<p><strong>Example:</strong> For A = [0, 1; −6, −5], |λI − A| = (λ + 2)(λ + 3) = 0, hence λ₁ = −2 and λ₂ = −3.</p>
+<p><strong>Problem:</strong> For the system A = [0, 3, 1; 2, 8, 1; −10, −5, −2], B = [10; 0; 0], y = [1 0 0]x, find how many poles lie in the left half-plane, in the right half-plane, and on the jω axis.</p>
+<p>sI − A = [s, −3, −1; −2, s − 8, −1; 10, 5, s + 2] and det(sI − A) = s³ − 6s² − 7s − 52. Since this polynomial cannot be factored easily, the Routh-Hurwitz criterion is applied. There is one sign change in the first column of the Routh table; the system has one right half-plane pole and two left half-plane poles, and is therefore <strong>unstable</strong>.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir">
+        <h2 class="turuncu" data-i18n="arch.download"></h2>
+        <div class="kutu-ic">
+          <div class="dosya-ust">
+            <span class="dosya-ikon pdf" aria-hidden="true">PDF</span>
+            <div>
+              <p class="indir-ad"><a href="../eem322L6.pdf" download>eem322L6.pdf</a></p>
+              <p class="kucuk">PDF · 767 KB · 13 <span data-i18n="arch.pagesLower"></span> · 18.07.2013</p>
+            </div>
+          </div>
+          <p class="indir-satir">
+            <a class="buton turuncu" href="../eem322L6.pdf" download>⬇ <span data-i18n="arch.downloadFile"></span> (767 KB)</a>
+            
+          </p>
+          <p class="telif" data-i18n="arch.copyright"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

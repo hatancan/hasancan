@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM332 Microprocessors: 8086 Hardware and Assembly Handwritten Notes — hasancan.net</title>
+<meta name="description" content="Addressing, stack, flags, loops, and memory connections from the 2011 course pages archived in 2014.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM332 Microprocessors: 8086 Hardware and Assembly Handwritten Notes">
+<meta property="og:description" content="Addressing, stack, flags, loops, and memory connections from the 2011 course pages archived in 2014.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem332-el-yazisi-notlar/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM332 Microprocessors: 8086 Hardware and Assembly Handwritten Notes", "description": "Addressing, stack, flags, loops, and memory connections from the 2011 course pages archived in 2014.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem332-el-yazisi-notlar/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM332 – Mikroişlemciler"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM332 Microprocessors: 8086 Hardware and Assembly Handwritten Notes">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-3">3. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem332">EEM332</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM332 – Mikroişlemciler</dd>
+          <dt data-i18n="arch.year"></dt><dd>3. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>06.04.2011</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#a-software-and-hardware-view-of-the-microprocessor">A Software and Hardware View of the Microprocessor</a></li><li><a href="#control-signals-and-clock">Control Signals and Clock</a></li><li><a href="#memory-capacity-and-address-decoding">Memory Capacity and Address Decoding</a></li><li><a href="#segment-and-physical-address">Segment and Physical Address</a></li><li><a href="#mov-and-addressing-examples">MOV and Addressing Examples</a></li><li><a href="#registers-and-debug-flags">Registers and DEBUG Flags</a></li><li><a href="#stack">Stack</a></li><li><a href="#counting-zero-bits">Counting Zero Bits</a></li><li><a href="#adding-five-bytes">Adding Five Bytes</a></li><li><a href="#adding-five-to-every-element-of-an-array">Adding Five to Every Element of an Array</a></li><li><a href="#signed-sum">Signed Sum</a></li><li><a href="#comparison-and-conditional-jumps">Comparison and Conditional Jumps</a></li><li><a href="#flag-transfer-and-control">Flag Transfer and Control</a></li><li><a href="#string-instructions-and-nested-loops">String Instructions and Nested Loops</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM332</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM332 Microprocessors: 8086 Hardware and Assembly Handwritten Notes</h1>
+            <p class="kucuk">EEM332 – Mikroişlemciler · 06.04.2011 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This content from the Başkent University EEM332 Microprocessors course archive was transcribed from photographed pages. It covers addressing, stack, flags, loops, and memory connections from the 2011 course pages archived in 2014. Student names and numbers have been removed. The photographs are kept in a private archive; this post has no download file.</p>
+<h2 id="a-software-and-hardware-view-of-the-microprocessor">A Software and Hardware View of the Microprocessor</h2>
+<p>The notes dated April 6, 2011 treat the processor from two perspectives: on the software side, the registers and instruction set; on the hardware side, the pins, data bus, and control signals. A 40-pin package is shown for the 8086 and 8088, with 16-bit and 8-bit external data buses respectively. Minimum mode is described for single-processor connections, and maximum mode for larger system connections.</p>
+<p><em>Note: The statement in the source that "the only difference between the 8086 and the 8088 is the data bus" is a simplification; the instruction queue and some pin functions also differ.</em></p>
+<h2 id="control-signals-and-clock">Control Signals and Clock</h2>
+<p>RD and WR determine the read/write direction, and the memory/port selection determines the relevant control signal. ALE causes the address on the multiplexed address/data lines to be held in a latch; data can then be carried over the same pins. NMI is shown as the non-maskable interrupt; it is not blocked by IF. Reset puts the processor into its initial execution state.</p>
+<p>Clock pulses determine the timing of operations. In the notes, a memory read/write cycle is shown as taking four clock pulses; a single instruction may require more than one cycle.</p>
+<p><em>Note: The four-clock depiction is the basic bus cycle without added wait states. For dynamic RAM, the word "reset" in the note describes the refresh operation. When an NMI arrives, all data is not saved automatically; the necessary saving is done by the interrupt routine.</em></p>
+<h2 id="memory-capacity-and-address-decoding">Memory Capacity and Address Decoding</h2>
+<p>For k address lines and an N-bit data width, the capacity is 2ᵏ×N bits. A 32 KiB×8-bit organization requires 15 address lines, and a 2 KiB memory requires 11 address lines. The upper address bits are connected to the decoder, and the lower bits to the memory's own address inputs. The 16 KiB block with A19–A14=111100 is the range F0000H–F3FFFH.</p>
+<h2 id="segment-and-physical-address">Segment and Physical Address</h2>
+<p>Physical address = segment×10H + offset. A segment start lies on a 16-byte boundary; the 16-bit offset addresses a 64 KiB area within a segment. CS:IP is used for instructions, DS for data, and SS:SP for the stack. LEA loads the effective address, not the data in memory.</p>
+<p>In the example with CS=3489H and IP=2500H, the last digits of the addition result in the note are garbled.</p>
+<p><em>Note: The calculation should be 34890H+2500H=36D90H. The offsets 0000H–FFFFH of this segment correspond to the range 34890H–4488FH.</em></p>
+<h2 id="mov-and-addressing-examples">MOV and Addressing Examples</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV AL,BL
+MOV AL,0005H
+MOV [1234H],AL
+MOV CX,DX
+MOV AX,857AH</code></pre>
+<p>In the notes, direct memory-to-memory MOV and MOV AL,CX with mismatched widths are crossed out as invalid. A register must be used as an intermediate step. The basic addressing modes are immediate, register, direct memory, register indirect, indexed, and base+index+displacement.</p>
+<p>In the MOV AX,[BX+4] example, with DS=0100H and BX=0600H, the physical address is 01604H. If this address holds B0H and the next address holds C0H, then AX=C0B0H. In the MOV [BP][SI],AH example, the default segment is SS; for SS=2000H, BP=4000H, SI=0800H, the address is 24800H. AH=07H is written to this address.</p>
+<h2 id="registers-and-debug-flags">Registers and DEBUG Flags</h2>
+<p>AX/BX/CX/DX can be split into high and low bytes such as AH/AL. SP is the stack pointer, BP is the base pointer, and SI and DI are the index registers. The laboratory photograph shows DEBUG's flag abbreviations:</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">Flag</th><th scope="col">1</th><th scope="col">0</th></tr></thead><tbody><tr><th scope="row">OF</th><td>OV</td><td>NV</td></tr><tr><th scope="row">DF</th><td>DN</td><td>UP</td></tr><tr><th scope="row">IF</th><td>EI</td><td>DI</td></tr><tr><th scope="row">SF</th><td>NG</td><td>PL</td></tr><tr><th scope="row">ZF</th><td>ZR</td><td>NZ</td></tr><tr><th scope="row">AF</th><td>AC</td><td>NA</td></tr><tr><th scope="row">PF</th><td>PE</td><td>PO</td></tr><tr><th scope="row">CF</th><td>CY</td><td>NC</td></tr></tbody></table></div>
+<p>CF denotes unsigned carry/borrow, OF signed overflow, ZF zero, SF sign, and PF even parity of the low byte. In BCD operations, each decimal digit is represented by four bits; appropriate BCD adjust instructions are needed after arithmetic.</p>
+<h2 id="stack">Stack</h2>
+<p>On the 8086, a word PUSH decrements SP by 2; POP increments it by 2. SS does not change. For SS=0000H, SP=2000H, and AX=1234H, after PUSH AX, SP=1FFEH; [1FFE]=34H and [1FFF]=12H.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>PUSH AX
+PUSH BX
+POP AX
+POP BX</code></pre>
+<p>This sequence swaps the contents of the two registers. In subroutines used with CALL/RET, the necessary registers can be preserved with PUSH/POP.</p>
+<h2 id="counting-zero-bits">Counting Zero Bits</h2>
+<p>Source example for NUM=F0E0H:</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CX,16
+SUB BX,BX
+MOV AX,NUM
+Back: SHR AX,1
+      JC SON
+      INC BX
+SON: LOOP Back
+MOV Count,BX</code></pre>
+<p>F0E0H contains seven 1s and nine 0s; Count=9. The bit shifted out by SHR goes into CF. JC skips the increment when the bit is 1.</p>
+<h2 id="adding-five-bytes">Adding Five Bytes</h2>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>SUB AL,AL
+MOV CX,5
+MOV BX,200H
+NEXT: ADD AL,[BX]
+      INC BX
+      LOOP NEXT</code></pre>
+<p>The bytes at DS:0200H–0204H are summed in AL. Since the result is eight bits, overflow must be tracked separately.</p>
+<h2 id="adding-five-to-every-element-of-an-array">Adding Five to Every Element of an Array</h2>
+<p>For the 16 bytes in the range DS:1000H–100FH, the note contains CX=16, a start of DI=1000H, and a loop of ADD [DI],5, INC DI, and LOOP.</p>
+<p><em>Note: The source does not specify the width of the memory operand; for the assembler to determine it, the form ADD BYTE PTR [DI],5 is needed. The handwritten statement that the LOOP instruction sets ZF to 1 because CX=0 is incorrect: LOOP does not modify the flags.</em></p>
+<h2 id="signed-sum">Signed Sum</h2>
+<p>For DATA1=+80 and DATA2=+85, the eight-bit sum is A5H; OF=1, CF=0, SF=1. If each operand is separately extended to a word with CBW and then added, the result is 00A5H, that is, +165.</p>
+<h2 id="comparison-and-conditional-jumps">Comparison and Conditional Jumps</h2>
+<p>CMP sets the flags without storing the result of the subtraction. JE/JZ tests equality, JNE/JNZ tests inequality, JNC tests for no carry, and JS tests for a negative sign. JA/JAE are for unsigned magnitude comparison. AND AL,04H is an example of testing by masking bit 2.</p>
+<pre class="kaynak" data-dosya="asm - Not Defteri"><code>MOV CL,03H
+SHR AL,CL
+JC BIT2_ONE</code></pre>
+<p>After three right shifts, the original bit 2 is in CF. Another counter loop in the notes uses DEC CL and JNZ.</p>
+<h2 id="flag-transfer-and-control">Flag Transfer and Control</h2>
+<p>LAHF transfers some of the status flags to AH, and SAHF transfers from AH to those flags. CLC clears the carry flag and STC sets it; CLI and STI control maskable interrupts. CLD sets DF=0 so that string operations proceed toward increasing addresses.</p>
+<h2 id="string-instructions-and-nested-loops">String Instructions and Nested Loops</h2>
+<p>MOVSB moves one byte from DS:SI to ES:DI; MOVSW moves one word. LODS transfers the source value to AL/AX, and STOS transfers AL/AX to the destination. SCAS compares AL/AX with the value at ES:DI. The REP counter is CX. In the STOS example in the notes, the value AL=42 is written to consecutive destination locations. LODS and STOS do not perform comparisons and do not change the arithmetic status flags.</p>
+<p>LOOPE requires CX to be nonzero and ZF=1; LOOPNE requires CX to be nonzero and ZF=0. In nested loops, the stack can be used to preserve the outer CX value. HLT halts processor execution until an appropriate interrupt or reset condition.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

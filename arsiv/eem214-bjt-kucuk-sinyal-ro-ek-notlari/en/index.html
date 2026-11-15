@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEM214 Electronics I: BJT Small-Signal Model and the Effect of rₒ on Input Resistance — hasancan.net</title>
+<meta name="description" content="Common-base and common-emitter configurations, the hybrid-π model, a 12 V BJT amplifier example; the effect of finite output resistance in the emitter-resistor configuration and in the emitter follower.">
+<link rel="canonical" href="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EEM214 Electronics I: BJT Small-Signal Model and the Effect of rₒ on Input Resistance">
+<meta property="og:description" content="Common-base and common-emitter configurations, the hybrid-π model, a 12 V BJT amplifier example; the effect of finite output resistance in the emitter-resistor configuration and in the emitter follower.">
+<meta property="og:url" content="https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151007">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EEM214 Electronics I: BJT Small-Signal Model and the Effect of rₒ on Input Resistance", "description": "Common-base and common-emitter configurations, the hybrid-π model, a 12 V BJT amplifier example; the effect of finite output resistance in the emitter-resistor configuration and in the emitter follower.", "inLanguage": "en", "datePublished": "2026-10-18", "url": "https://hasancan.net/arsiv/eem214-bjt-kucuk-sinyal-ro-ek-notlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "EEM214 – Elektronik I"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="EEM214 Electronics I: BJT Small-Signal Model and the Effect of rₒ on Input Resistance">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-2">2. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-eem214">EEM214</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>EEM214 – Elektronik I</dd>
+          <dt data-i18n="arch.year"></dt><dd>2. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>08.04.2013</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#common-base-configuration-and-the-hybrid-model">Common-base configuration and the hybrid-π model</a></li><li><a href="#common-emitter-amplifier-example">Common-emitter amplifier example</a></li><li><a href="#supplement-1-finite-r-in-the-common-emitter-with-emitter-resistor">Supplement 1: Finite rₒ in the common emitter with emitter resistor</a></li><li><a href="#supplement-2-finite-r-in-the-emitter-follower">Supplement 2: Finite rₒ in the emitter follower</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · EEM214</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>EEM214 Electronics I: BJT Small-Signal Model and the Effect of rₒ on Input Resistance</h1>
+            <p class="kucuk">EEM214 – Elektronik I · 08.04.2013 · <span data-i18n="arch.addedOn"></span> 18.10.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post contains a friend's lecture notes from the EEM214 Electronics I folder, dated <strong>April 8, 2013</strong>, along with two handwritten supplementary derivations. It was transcribed from photographed pages; personal information has been removed. Because the source images are kept in a private archive, this post contains no images or downloadable files.</p>
+<h2 id="common-base-configuration-and-the-hybrid-model">Common-base configuration and the hybrid-π model</h2>
+<p>In the common-base configuration, the input is between the emitter and the base, and the output is between the collector and the base. In the small-signal equivalent, the emitter input resistance is r_e, and the collector current source is represented by αi_e:</p>
+<p>Z_E = v_i/i_e = r_e.</p>
+<p>In the hybrid-π model of the BJT, r_π lies between the base and the emitter, and the g_m v_be dependent current source and r_o lie between the collector and the emitter. The r_μ between the base and the collector is assumed to be very large and is neglected.</p>
+<ul><li>g_m = I_C/V_T, in siemens.</li><li>V_T is approximately 25–26 mV.</li><li>r_π = v_be/i_b = β/g_m = V_T/I_B.</li><li>i_b = i_c/β = (g_m/β)v_be.</li><li>r_e = V_T/I_E.</li><li>With the approximation I_C ≈ I_E, r_e ≈ 1/g_m and r_π ≈ βr_e.</li></ul>
+<p><em>Note: The equality r_π = βr_e is used in the notes under the approximation I_C ≈ I_E. If the definition r_e = V_T/I_E is applied exactly, then r_π = (β + 1)r_e.</em></p>
+<h2 id="common-emitter-amplifier-example">Common-emitter amplifier example</h2>
+<p>In the given circuit, <strong>V_CC = 12 V, R_B = 470 kΩ, R_C = 3 kΩ, β = 100, r_o = 50 kΩ</strong>; the emitter is grounded. The quantities requested are the input/output resistances and the voltage/current gains.</p>
+<h3 id="dc-operating-point">DC operating point</h3>
+<p>I_B = (12 − 0.7)/470 kΩ = <strong>24.04 µA</strong>.</p>
+<p>I_E = (β + 1)I_B ≈ <strong>2.428 mA</strong>.</p>
+<p>r_e = 26 mV/2.428 mA ≈ <strong>10.71 Ω</strong>.</p>
+<p>The note, using I_C ≈ 2.4 mA, finds:</p>
+<p>V_CEQ = 12 − 2.4 mA·3 kΩ = <strong>4.8 V</strong>.</p>
+<p>The endpoints of the load line are I_C,sat = 4 mA and V_CE,cutoff = 12 V. Since the smaller swing margin of the Q point is 4.8 V, the largest symmetric output swing drawn with ideal limits is given as <strong>9.6 V_pp</strong>.</p>
+<p><em>Note: The 9.6 V_pp calculation assumes V_CE at saturation is zero; the actual saturation voltage and the limits of linear operation reduce the usable swing.</em></p>
+<h3 id="input-and-output-resistance">Input and output resistance</h3>
+<p>In the AC equivalent, the supply is at ground and the coupling capacitors are short circuits:</p>
+<ul><li>Z_i = R_B ∥ βr_e = 470 kΩ ∥ 1071 Ω ≈ <strong>1.07 kΩ</strong>.</li><li>Z_o = R_C ∥ r_o = 3 kΩ ∥ 50 kΩ ≈ <strong>2.83 kΩ</strong>.</li><li>If r_o is neglected, Z_o ≈ R_C.</li></ul>
+<p>In calculating the output resistance, the independent signal source at the input is set to zero. If a load is connected, the total parallel resistance at the output node is R_C ∥ r_o ∥ R_L.</p>
+<h3 id="voltage-gain">Voltage gain</h3>
+<p>In the notes, using current division:</p>
+<ul><li>i_RC = βi_b·r_o/(r_o + R_C).</li><li>i_ro = βi_b·R_C/(r_o + R_C).</li><li>v_o = −βi_b(R_C ∥ r_o).</li></ul>
+<p>From this:</p>
+<p>A_v ≈ −(R_C ∥ r_o)/r_e.</p>
+<p>For r_o → ∞, A_v ≈ −R_C/r_e = −3000/10.71 ≈ <strong>−280.11</strong>. The negative sign indicates phase inversion. With a load, A_v ≈ −(R_C ∥ r_o ∥ R_L)/r_e.</p>
+<h3 id="current-gain">Current gain</h3>
+<p>The division of the input current between the base resistor and the transistor input:</p>
+<p>i_b/i_i = R_B/(R_B + βr_e).</p>
+<p>Taking the output current direction according to the arrows in the notes:</p>
+<p>A_i = [βr_o/(r_o + R_C)]·[R_B/(R_B + βr_e)].</p>
+<p>For r_o → ∞, A_i = βR_B/(R_B + βr_e).</p>
+<h2 id="supplement-1-finite-r-in-the-common-emitter-with-emitter-resistor">Supplement 1: Finite rₒ in the common emitter with emitter resistor</h2>
+<p>In the circuit, the resistance from the base to ground is R_B, the resistance from the emitter to ground is R_E, and the resistance from the collector to ground is R_C. The base-emitter resistance of the transistor is taken as βr_e, and the collector-emitter resistance as r_o.</p>
+<p>Using dependent source transformations, the note first defines:</p>
+<p>R′ = R_E ∥ (r_o + R_C) = R_E(r_o + R_C)/(R_E + r_o + R_C).</p>
+<p>The base voltage is:</p>
+<p>v_b = i_b(βr_e + R′) + [βi_b r_o/(r_o + R_C)]R′.</p>
+<p>Thus:</p>
+<p>Z_b = v_b/i_b = βr_e + R′ + βr_oR′/(r_o + R_C)</p>
+<p>= βr_e + R_E[(β + 1)r_o + R_C]/(R_E + r_o + R_C)</p>
+<p>= <strong>βr_e + R_E[(β + 1) + R_C/r_o]/[1 + (R_E + R_C)/r_o]</strong>.</p>
+<p>The input resistance of the amplifier is <strong>Z_i = R_B ∥ Z_b</strong>. Finite r_o changes the contribution of the emitter resistor reflected to the base.</p>
+<h2 id="supplement-2-finite-r-in-the-emitter-follower">Supplement 2: Finite rₒ in the emitter follower</h2>
+<p>Since the collector is at AC ground, the resistance seen by the emitter is R_E ∥ r_o. From the equivalent in the note:</p>
+<p>v_b = i_b[βr_e + (R_E ∥ r_o)] + βi_b(R_E ∥ r_o).</p>
+<p>Z_b = βr_e + (β + 1)(R_E ∥ r_o)</p>
+<p>= <strong>βr_e + R_E(β + 1)/(1 + R_E/r_o)</strong>.</p>
+<p>The total input is again <strong>Z_i = R_B ∥ Z_b</strong>. The drawings on the two supplementary pages show step by step the source transformations that lead to these results; here, the description of the connections and the intermediate relations are preserved in text.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151007"></script>
+<script src="/assets/lang/en.js?v=202611151007"></script>
+<script src="/assets/lang/de.js?v=202611151007"></script>
+<script src="/assets/js/site.js?v=202611151007"></script>
+</body>
+</html>

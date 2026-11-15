@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIL437 Computer Vision: Quiz 1 (Histogram and Transformation) and Handwritten Exam Study Notes — hasancan.net</title>
+<meta name="description" content="A transcription of the BIL437 Computer Vision 2015 summer school quiz (image matrix, histogram plotting, piecewise transformation function) and the handwritten list of question topics noted before the exam.">
+<link rel="canonical" href="https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/en/">
+<link rel="alternate" hreflang="tr" href="https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/">
+<link rel="alternate" hreflang="en" href="https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/en/">
+<link rel="alternate" hreflang="x-default" href="https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIL437 Computer Vision: Quiz 1 (Histogram and Transformation) and Handwritten Exam Study Notes">
+<meta property="og:description" content="A transcription of the BIL437 Computer Vision 2015 summer school quiz (image matrix, histogram plotting, piecewise transformation function) and the handwritten list of question topics noted before the exam.">
+<meta property="og:url" content="https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/en/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#3b5998">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css?v=202611151008">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BIL437 Computer Vision: Quiz 1 (Histogram and Transformation) and Handwritten Exam Study Notes", "description": "A transcription of the BIL437 Computer Vision 2015 summer school quiz (image matrix, histogram plotting, piecewise transformation function) and the handwritten list of question topics noted before the exam.", "inLanguage": "en", "datePublished": "2026-11-14", "url": "https://hasancan.net/arsiv/bil437-quiz-ve-sinav-calisma-notlari/en/", "author": {"@type": "Person", "name": "Hasan Can Öztürk", "url": "https://hasancan.net/"}, "isPartOf": {"@type": "CollectionPage", "name": "Başkent Üniversitesi Arşivi", "url": "https://hasancan.net/arsiv/"}, "about": "BIL437 – Bilgisayarlı Görü"}</script>
+</head>
+<body data-dil="en" data-sekme="arsiv" data-baslik="BIL437 Computer Vision: Quiz 1 (Histogram and Transformation) and Handwritten Exam Study Notes">
+<!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
+<div id="sayfa">
+  <header class="ust">
+    <a class="logo" href="/#ana" aria-label="hasancan.net">
+      <span class="logo-yazi">hasancan<span class="logo-net">.net</span></span>
+      <span class="beta" aria-hidden="true">BETA</span>
+    </a>
+    <p class="slogan" data-i18n="site.slogan"></p>
+    <div class="dil-secimi" role="group" data-i18n-attr="aria-label:lang.label">
+      <button type="button" data-dil="tr" title="Türkçe">
+        <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><polygon fill="#fff" points="14.5,10 19.02,8.53 16.23,12.38 16.23,7.62 19.02,11.47"/></svg>
+        <span>TR</span>
+      </button>
+      <button type="button" data-dil="en" title="English">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M0 0v30h60V0z"/></clipPath><g clip-path="url(#uk)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" stroke="#c8102e" stroke-width="2"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></svg>
+        <span>EN</span>
+      </button>
+      <button type="button" data-dil="de" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>
+        <span>DE</span>
+      </button>
+    </div>
+  </header>
+  <nav class="sekmeler" data-i18n-attr="aria-label:nav.label">
+    <ul>
+      <li><a href="/#ana" data-i18n="nav.home"></a></li>
+      <li><a href="/#projeler" data-i18n="nav.projects"></a></li>
+      <li><a href="/#gunluk" data-i18n="nav.blog"></a></li>
+      <li><a href="/arsiv/" data-sekme="arsiv" data-i18n="nav.archive"></a></li>
+      <li><a href="/buzanittin/" data-sekme="buzanittin" data-i18n="nav.buzanittin"></a></li>
+      <li><a href="/freshsignal-blog/" data-sekme="fsblog" data-i18n="nav.fsblog"></a></li>
+      <li><a href="/#defter" data-i18n="nav.guestbook"></a></li>
+      <li><a href="/#iletisim" data-i18n="nav.contact"></a></li>
+    </ul>
+  </nav>
+  <nav class="yol" data-i18n-attr="aria-label:arch.crumbs"><a href="/"><span data-i18n="nav.home"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/"><span data-i18n="nav.archive"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#sinif-4">4. <span data-i18n="arch.yearSuffix"></span></a> <span aria-hidden="true">»</span> <a href="/arsiv/#ders-bil437">BIL437</a></nav>
+  <aside class="reklam reklam-728x90" data-reklam="ust-banner" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="osr osr-728" href="https://origshare.com/?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=origshare-ev-reklami&amp;utm_content=728" data-i18n-attr="title:osad.title" rel="sponsored noopener"><span class="osr-marka"><svg class="osr-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="#fff"><path d="M32 4a28 28 0 1 0 25.8 38.9l-6.5-2.7A21 21 0 1 1 32 11a20.9 20.9 0 0 1 14.8 6.2l5-5A27.9 27.9 0 0 0 32 4Z"/><circle cx="25" cy="39" r="5"/><path d="M31.5 32.5 46.8 17.2H38v-6.8h20.3v20.3h-6.8V22L36.4 37.4Z"/></g></svg>OrigShare</span><span class="osr-yazi" data-i18n="osad.728"></span><span class="osr-dugme" data-i18n="osad.cta"></span></a></div></aside>
+  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi" data-i18n="arch.fileInfo"></h2>
+        <dl class="bilgiler">
+          <dt data-i18n="arch.course"></dt><dd>BIL437 – Bilgisayarlı Görü</dd>
+          <dt data-i18n="arch.year"></dt><dd>4. <span data-i18n="arch.yearSuffix"></span></dd>
+          <dt data-i18n="arch.date"></dt><dd>07.07.2015</dd>
+          <dt data-i18n="arch.format"></dt><dd>Text from photos</dd>
+        </dl>
+        
+      </section>
+      <nav class="kutu" aria-labelledby="icindekiler-baslik">
+        <h2 class="mavi" id="icindekiler-baslik" data-i18n="arch.toc"></h2>
+        <ol class="icindekiler"><li><a href="#quiz-1-duration-15-minutes">Quiz 1 (duration 15 minutes)</a></li><li><a href="#pre-exam-study-note-handwritten">Pre-exam study note (handwritten)</a></li></ol>
+      </nav>
+      <aside class="reklam reklam-160x600" data-reklam="sol-dikey" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-160" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=160" data-i18n-attr="href:fsad.url.160;title:fsad.title" rel="sponsored noopener"><span class="fsr-bas"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-govde"><span class="fsr-yazi" data-i18n="fsad.160"></span><ul class="fsr-liste"><li data-i18n="fsad.160.l1"></li><li data-i18n="fsad.160.l2"></li><li data-i18n="fsad.160.l3"></li><li data-i18n="fsad.160.l4"></li></ul><span class="fsr-alt"><span class="fsr-dugme" data-i18n="fsad.cta"></span><span class="fsr-not" data-i18n="fsad.not"></span></span></span></a></div></aside>
+    </aside>
+    <main class="orta">
+      <article class="kutu yazi-sayfa" lang="en">
+        <h2 class="mavi"><span data-i18n="arch.post"></span> · BIL437</h2>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="../" hreflang="tr" lang="tr">Bu yazının Türkçe aslı »</a></p>
+          <header class="yazi-bas">
+            <h1>BIL437 Computer Vision: Quiz 1 (Histogram and Transformation) and Handwritten Exam Study Notes</h1>
+            <p class="kucuk">BIL437 – Bilgisayarlı Görü · 07.07.2015 · <span data-i18n="arch.addedOn"></span> 14.11.2026</p>
+          </header>
+          <div class="yazi-govde-metin">
+<p>This post is a text transcription, from photographed pages, of a quiz from the <strong>BIL437 Computer Vision</strong> course I took in the 2015 summer school, together with the topic list I noted down to prepare for the exam. The photographs themselves have not been published.</p>
+<h2 id="quiz-1-duration-15-minutes">Quiz 1 (duration 15 minutes)</h2>
+<p>At the top of the exam paper it reads "BİL-437 Computer Vision – Quiz-1, duration: 15 minutes"; the date printed on the paper is 09.07.2014 (since the photograph is dated 7 July 2015, the year is most likely a typo).</p>
+<p><strong>Question.</strong> The image f(x, y) is given below (6 rows × 5 columns):</p>
+<div class="tablo-kap"><table class="yazi-tablo"><thead><tr><th scope="col">10</th><th scope="col">12</th><th scope="col">14</th><th scope="col">17</th><th scope="col">17</th></tr></thead><tbody><tr><th scope="row">12</th><td>12</td><td>14</td><td>18</td><td>19</td></tr><tr><th scope="row">14</th><td>12</td><td>24</td><td>10</td><td>21</td></tr><tr><th scope="row">12</th><td>12</td><td>18</td><td>18</td><td>18</td></tr><tr><th scope="row">14</th><td>17</td><td>18</td><td>18</td><td>18</td></tr><tr><th scope="row">12</th><td>14</td><td>17</td><td>17</td><td>18</td></tr></tbody></table></div>
+<p>Accordingly:</p>
+<ol><li>Plot the histogram of the image f(x, y).</li><li>Compute the new pixel values of the image that results when the following transformation function T(x, y) is applied to f(x, y) (round fractional numbers up to the next integer).</li></ol>
+<p>The transformation function is given as a graph: the horizontal axis marks the old values (0, 10, 12, 14, 16, 18, 20, 24), and the vertical axis marks the new values (around 8, 11, 12, 13, 14, 16); it is a piecewise linear curve that increases up to 16, then stays constant until 20, drops sharply at 20, and then increases again. Because the graph was an unreadable screenshot in the photograph, the exact values of the curve could not be transcribed.</p>
+<p><strong>Histogram (my calculation).</strong> The counts of the gray levels in the image: 10 → 2 pixels, 12 → 7, 14 → 5, 17 → 5, 18 → 8, 19 → 1, 21 → 1, 24 → 1 (30 pixels in total). The handwritten note on the paper also seems to read "professor, in this question write the frequency of all pixels of f(x,y) for each of the values 10 through 12" (the handwriting is hard to read); that is, the histogram is expected to show the pixel count of each level.</p>
+<p>The handwritten answer matrix on the paper (the new image with fractional values rounded up) is a 6×5 table whose first row is 8 9 11 13 13; the rows are: 8 9 11 13 13 / 9 9 11 14 14 / 11 9 18 8 16 / 9 9 14 14 14 / 11 13 14 14 14 / 9 11 13 13 14 (the reading of the handwriting is not entirely certain).</p>
+<h2 id="pre-exam-study-note-handwritten">Pre-exam study note (handwritten)</h2>
+<p>The list below is a handwritten short note of the question types I thought might appear on the exam (the same note appears in two photographs):</p>
+<ol><li><strong>Question 1</strong></li></ol>
+<p>   - a) Apply an RGB → CMY transformation and prepare a poster; compute HSI and I (color image processing).    - b) Transition from the spatial domain to the frequency domain: the spatial-domain convolution formula for a 2nd-order filter, write out the processing steps. 2. An image and its histogram are given: plot the histogram; inverse brightness, darker/lighter transformations. 3. Intensity slicing (gray): an 8×8 matrix is given (half black, half white, plus a grid drawing); <strong>apply an average filter</strong>. 4. An image with salt-and-pepper noise is given; among six options, find which filter corresponds to which image. 5. (Item number drawn as 6) A graph of a piecewise T(r) function (with breaks around 80 and 100, including a linear portion); write the MATLAB code that performs this transformation.</p>
+<p>All of these topics match the subjects covered in the course: color models, histograms and transformations, average/median filters. See the other posts in the series.</p>
+          </div>
+        </div>
+      </article>
+      <aside class="reklam reklam-468x60" data-reklam="yazi-sonu" data-i18n-attr="aria-label:ad.label"><span class="reklam-etiket" data-i18n="ad.label"></span><div class="reklam-yer"><a class="fsr fsr-468" href="https://freshsignal.net/tr/turkiye-firma-listesi?utm_source=hasancan.net&amp;utm_medium=house&amp;utm_campaign=fs-ev-reklami&amp;utm_content=468" data-i18n-attr="href:fsad.url.468;title:fsad.title" rel="sponsored noopener"><span class="fsr-ic"><span class="fsr-gorsel" aria-hidden="true"></span><span class="fsr-sol"><span class="fsr-marka"><svg class="fsr-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#22C55E"/><path d="M8 22 L8 18" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M13 22 L13 14" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 22 L18 10" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M23 22 L23 6" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>FreshSignal</span><span class="fsr-yazi" data-i18n="fsad.468"></span></span><span class="fsr-dugme" data-i18n="fsad.cta"></span></span></a></div></aside>
+      <section class="kutu indir-kutu" id="indir"><h2 class="mavi" data-i18n="arch.source"></h2><div class="kutu-ic"><p class="telif" data-i18n="arch.photoSource"></p></div></section>
+    </main>
+  </div>
+  <footer class="alt">
+    <div class="rozetler" aria-hidden="true">
+      <span class="rozet r-caddy"><b>Powered by</b><i>Caddy</i></span>
+      <span class="rozet r-web2"><b>Web</b><i>2.0</i></span>
+      <span class="rozet r-1024"><b>best viewed</b><i>1024×768</i></span>
+      <span class="rozet r-rss"><b>RSS</b><i>soon</i></span>
+      <span class="rozet r-msn"><b>MSN</b><i>online</i></span>
+    </div>
+    <p data-i18n="footer.best"></p>
+    <p>© <span id="yil">2026</span> hasancan.net · <span data-i18n="footer.rights"></span></p>
+    <p class="kucuk" id="olusturma" data-i18n="footer.gen"></p>
+  </footer>
+</div>
+<script src="/assets/lang/tr.js?v=202611151008"></script>
+<script src="/assets/lang/en.js?v=202611151008"></script>
+<script src="/assets/lang/de.js?v=202611151008"></script>
+<script src="/assets/js/site.js?v=202611151008"></script>
+</body>
+</html>
