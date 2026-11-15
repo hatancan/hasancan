@@ -1,7 +1,22 @@
 # Reklam alanları
 
-Sitedeki reklam alanları boş yer tutucu olarak açıldı; içerikleri (FreshSignal reklamları) ayrı bir
-oturumda yerleştirilecek. Bu dosya o iş için başvuru kaynağıdır. Tasarım çerçevesi için önce `DESIGN.md`'yi oku.
+15.11.2026: üst banner **OrigShare**, ana sayfa sağ kare **Origmark**; sol dikey ve yazı sonu **FreshSignal** (26.10.2026'dan beri). Bu dosya o işin başvuru kaynağıdır.
+OrigShare/Origmark: metinler `assets/lang/{tr,en,de}.js` → `osad.*` / `omad.*`; işaretleme `index.html` (arşiv sayfaları üst bannerı oradan kopyalar); stil `style.css` → "OrigShare ve Origmark ev reklamları".
+Tasarım çerçevesi için önce `DESIGN.md`'yi oku. Reklam kuralları (metin onayı, kanıtsız iddia yasağı) FreshSignal
+deposundaki `docs/REKLAM_YONETIMI.md` dosyasındadır — **metni değiştirmeden önce orayı oku**.
+
+## Dolu alanların kaynağı (26.10.2026)
+
+| Ne | Nerede |
+|---|---|
+| Metinler (3 dil) | `assets/lang/{tr,en,de}.js` → `fsad.*` anahtarları. Adres de dile göre değişir (`fsad.url.<kod>`), çünkü utm_content alana göre farklı. |
+| İşaretleme | `tools/sunum.py` → `reklam()` / `FS_ICERIK`. Ana sayfadaki iki alan `index.html` içinde, aynı çıktı. |
+| Stil | `assets/css/style.css` → "FreshSignal reklamları" bölümü. Dönem dili: parlak jel düğme, lacivert başlık şeridi, bevel. |
+| Görseller | `assets/img/fs-retro-{yatay,200,160}.webp` — Codex (`image_gen`) ile üretildi, **yazısız**. Bütün yazı HTML/CSS ile basılır; görselde harf yok, üç dil de net çıkar. |
+| Bağlantı | `rel="sponsored noopener"` + UTM. Kendi sitemizden kendi ürünümüze bağlantı Google'da reklam bağlantısı sayılır. |
+
+Metin ya da işaretleme değişirse: `index.html` elle, arşiv için `tools/sunum.py` güncellenip 541 sayfa yeniden üretilir
+(komut aşağıda), sonra `./deploy.sh`.
 
 ## Alanlar
 

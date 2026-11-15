@@ -444,6 +444,8 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
 .ikon.x { background: linear-gradient(#444, #000); }
 .ikon.in { background: linear-gradient(#2a8bc6, #0a66a8); }
 .ikon.at { background: linear-gradient(#ffa25a, #e05a00); }
+.ikon.om { background: linear-gradient(#7d7cc4, #5b5aa7); }
+.ikon.bs { background: linear-gradient(#3fa3ff, #0a7aff); }
 
 /* ---------- Ziyaretçi sayacı ---------- */
 
@@ -573,6 +575,103 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
 .reklam-160x600 .reklam-yer { width: 160px; height: 600px; }
 .reklam-200x200 .reklam-yer { width: 200px; height: 200px; }
 
+/* ---------- FreshSignal reklamları (REKLAM.md) ----------
+   Dönem dili: parlak (glossy) gradyan, 1px iç beyaz çizgi, bevel, 4–5px yuvarlak köşe.
+   Görseller Codex ile üretildi, yazısızdır; bütün metin burada HTML/CSS ile basılır
+   (üç dil, net yazı, CLS yok). Ölçüler .reklam-yer kutusundan gelir. */
+
+.fsr {
+  display: block; width: 100%; height: 100%; position: relative;
+  box-sizing: border-box; text-decoration: none; color: #1f2d3d;
+  font-family: Tahoma, Verdana, "Lucida Grande", sans-serif; text-align: left;
+  border: 1px solid #c3cddf; border-radius: 5px; overflow: hidden;
+  background: #eef3fb center/cover no-repeat;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(31,45,61,.12);
+}
+.fsr:hover { border-color: #3b5998; }
+.fsr:focus-visible { outline: 2px solid #059669; outline-offset: 1px; }
+
+/* Parlak yeşil düğme — dönemin Aqua/Vista jel düğmesi */
+.fsr-dugme {
+  display: inline-block; align-self: flex-start; padding: 4px 10px; border: 1px solid #046c4e; border-radius: 4px;
+  background: linear-gradient(#34d399, #059669 48%, #047857);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 1px 1px rgba(0,0,0,.18);
+  color: #fff; font-weight: bold; font-size: 11px; line-height: 1.4; white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+.fsr:hover .fsr-dugme { background: linear-gradient(#4ade80, #059669 48%, #065f46); }
+
+/* Lacivert parlak başlık şeridi — Facebook 2007 */
+.fsr-bas {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 8px; color: #fff; font-weight: bold; font-size: 12px; letter-spacing: .2px;
+  background: linear-gradient(#5b78b8, #3b5998 55%, #2f4b88);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.28);
+}
+.fsr-logo { display: block; width: 16px; height: 16px; border-radius: 4px; flex: none; }
+.fsr-govde { padding: 7px 9px; }
+.fsr-yazi { display: block; margin: 0; font-size: 11px; line-height: 1.45; color: #2b3b53; }
+.fsr-vurgu { color: #046c4e; font-weight: bold; }
+.fsr-not { display: block; margin-top: 3px; font-size: 10px; color: #6b7a90; }
+.fsr-liste { margin: 0 0 7px; padding: 0; list-style: none; }
+.fsr-liste li { position: relative; padding-left: 13px; font-size: 11px; line-height: 1.55; color: #2b3b53; }
+.fsr-liste li::before {
+  content: ""; position: absolute; left: 0; top: .5em; width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(#34d399, #059669); box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* 728×90 — solda görsel alanı, sağda metin ve düğme */
+.fsr-728 .fsr-ic, .fsr-468 .fsr-ic { display: flex; align-items: center; height: 100%; }
+.fsr-728 .fsr-gorsel, .fsr-468 .fsr-gorsel {
+  flex: none; align-self: stretch; border-right: 1px solid #d5deec;
+  background: #eef3fb url(/assets/img/fs-retro-yatay.webp) center/cover no-repeat;
+}
+.fsr-728 .fsr-ic { gap: 12px; padding-right: 12px; }
+.fsr-728 .fsr-gorsel { width: 216px; margin-right: 4px; }
+.fsr-728 .fsr-sol { flex: 1; min-width: 0; }
+.fsr-728 .fsr-marka { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; font-weight: bold; font-size: 14px; color: #1b2a44; }
+.fsr-728 .fsr-marka .fsr-logo { width: 20px; height: 20px; }
+.fsr-728 .fsr-dugme { font-size: 12px; padding: 6px 14px; }
+
+/* 468×60 — tek satır, dar */
+.fsr-468 .fsr-ic { gap: 9px; padding-right: 9px; }
+.fsr-468 .fsr-gorsel { width: 128px; margin-right: 3px; }
+.fsr-468 .fsr-sol { flex: 1; min-width: 0; }
+.fsr-468 .fsr-marka { display: flex; align-items: center; gap: 5px; font-weight: bold; font-size: 12px; color: #1b2a44; }
+.fsr-468 .fsr-yazi { font-size: 10px; line-height: 1.35; }
+
+/* 200×200 — üstte başlık şeridi, ortada görsel, altta metin */
+.fsr-200 { display: flex; flex-direction: column; }
+.fsr-200 .fsr-gorsel {
+  flex: 1; min-height: 0; background: #eef3fb url(/assets/img/fs-retro-200.webp) center/cover no-repeat;
+  border-bottom: 1px solid #d5deec;
+}
+.fsr-200 .fsr-govde { background: #f7fafd; }
+
+/* 160×600 — dikey kule */
+.fsr-160 { display: flex; flex-direction: column; }
+.fsr-160 .fsr-gorsel {
+  height: 190px; flex: none; background: #eef3fb url(/assets/img/fs-retro-160.webp) center top/cover no-repeat;
+  border-bottom: 1px solid #d5deec;
+}
+.fsr-160 .fsr-govde { flex: 1; display: flex; flex-direction: column; background: #f7fafd; }
+.fsr-160 .fsr-yazi { margin-bottom: 8px; }
+.fsr-160 .fsr-alt { margin-top: auto; }
+.fsr-160 .fsr-dugme { display: block; text-align: center; }
+
+/* Telefon: 728 ve 468 alanları 320×100'e iner — görsel kalkar, iki satır olur */
+@media (max-width: 640px) {
+  .fsr-728 .fsr-gorsel, .fsr-468 .fsr-gorsel { display: none; }
+  .fsr-728 .fsr-ic, .fsr-468 .fsr-ic {
+    flex-wrap: wrap; align-content: center; gap: 6px; padding: 7px 9px; background: #f7fafd;
+  }
+  .fsr-728 .fsr-sol, .fsr-468 .fsr-sol { flex-basis: 100%; }
+  .fsr-468 .fsr-marka { font-size: 13px; }
+  .fsr-468 .fsr-yazi { font-size: 11px; }
+  .fsr-728 .fsr-dugme, .fsr-468 .fsr-dugme { font-size: 11px; padding: 4px 11px; }
+}
+
 /* ---------- Duyarlı yerleşim ---------- */
 
 @media (max-width: 920px) {
@@ -599,6 +698,8 @@ h2.altin   { background: linear-gradient(#5a4a26 0%, #3d321a 50%, #2b2312 51%, #
     box-shadow: inset 0 1px 0 #fff;
   }
   .sekmeler a.aktif { border-color: #2f4b88; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+  .sekmeler li:last-child:nth-child(3n+1) { grid-column: 1 / -1; }  /* 7. sekme tek kalırsa satırı doldursun */
+  .sekmeler li:last-child:nth-child(3n+2) { grid-column: span 2; }  /* son satırda iki sekme kalırsa */
   .reklam { margin: 8px 8px 0; }
   .reklam-728x90 .reklam-yer, .reklam-468x60 .reklam-yer { width: 320px; height: 100px; }
   .reklam-160x600 { display: none; }  /* dikey reklam telefonda içeriğin önüne düşmesin */
@@ -825,3 +926,66 @@ h1.mavi { background: linear-gradient(#7d97cf 0%, #5675b5 50%, #3b5998 51%, #345
 .anket.sonuclu label {
   background: linear-gradient(90deg, #d7ecc1 var(--oran, 0%), transparent var(--oran, 0%));
 }
+
+/* ---------- FreshSignal Blog (tools/fsblog.py) ---------- */
+
+.fsb-kaynak { margin: 0 0 12px; font-size: 12px; }
+.fsb-kapak { margin: 0 0 14px; }
+.fsb-kapak img { width: 100%; height: auto; border: 1px solid var(--cerceve); }
+.yazi-gorsel figcaption { margin-top: 4px; font-size: 11px; color: #666; text-align: center; }
+.fsb-not { margin: 0 0 14px; padding: 8px 10px; border: 1px solid #c3cddf; border-left: 4px solid var(--fb); background: #f2f5fb; }
+.fsb-not-tip { border-left-color: #5a8f29; background: #f3f8ec; }
+.fsb-not-warning { border-left-color: #e0a800; background: #fffbe0; }
+.fsb-not-bas { display: block; margin-bottom: 3px; font-family: var(--baslik-font); }
+.fsb-not p { margin: 0; }
+.yazi-govde-metin blockquote cite { display: block; margin-top: 4px; font-size: 11px; color: #666; }
+.fsb-sss details { margin: 0 0 6px; border: 1px solid #c3cddf; background: #fff; }
+.fsb-sss summary { padding: 6px 10px; cursor: pointer; font-weight: bold; color: var(--fb); background: linear-gradient(#fff, #eef2f8); }
+.fsb-sss details p { margin: 0; padding: 8px 10px; }
+.fsb-liste { margin: 0; padding: 0; list-style: none; }
+.fsb-liste-oge { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-top: 1px dotted #c3cddf; }
+.fsb-liste-oge h3 { margin: 2px 0 4px; font: bold 14px var(--baslik-font); }
+.fsb-liste-oge p { margin: 0 0 4px; }
+.fsb-liste-gorsel img { display: block; width: 100%; height: auto; border: 1px solid var(--cerceve); }
+@media (max-width: 640px) { .fsb-liste-oge { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- OrigShare ve Origmark ev reklamları (REKLAM.md) ----------
+   Aynı dönem dili: parlak mor başlık, jel düğme, bevel. Bütün yazı HTML/CSS; görsel yok. */
+.osr {
+  display: flex; width: 100%; height: 100%; box-sizing: border-box; align-items: center; gap: 12px;
+  padding: 8px 12px; text-decoration: none; color: #1f1d3a; text-align: left;
+  font-family: Tahoma, Verdana, "Lucida Grande", sans-serif;
+  border: 1px solid #c9c8e6; border-radius: 5px; overflow: hidden;
+  background: linear-gradient(#ffffff, #eeeefa);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(31,29,58,.12);
+}
+.osr:hover { border-color: #5b5aa7; }
+.osr:focus-visible { outline: 2px solid #5b5aa7; outline-offset: 1px; }
+.osr-marka {
+  display: flex; align-items: center; gap: 6px; flex: none; align-self: stretch;
+  margin: -8px 0 -8px -12px; padding: 0 12px; color: #fff; font-weight: bold; font-size: 15px; letter-spacing: .2px;
+  background: linear-gradient(#7e7dc6, #5b5aa7 55%, #4a4994); text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+.osr-logo { width: 22px; height: 22px; flex: none; }
+.osr-yazi { flex: 1; font-size: 12px; line-height: 1.35; }
+.osr-vurgu { color: #4a4994; }
+.osr-dugme {
+  flex: none; padding: 5px 12px; border: 1px solid #3f3e82; border-radius: 4px; white-space: nowrap;
+  background: linear-gradient(#8f8ed3, #5b5aa7 48%, #4a4994); color: #fff; font-weight: bold; font-size: 11px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 1px rgba(0,0,0,.18); text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+.osr:hover .osr-dugme { background: linear-gradient(#a09fe0, #5b5aa7 48%, #3f3e82); }
+/* kare (200×200) ve telefon (320×100): dikey düzen */
+.omr { flex-direction: column; align-items: stretch; gap: 8px; padding: 0 10px 10px; }
+.omr .osr-marka { margin: 0 -10px; padding: 7px 10px; align-self: auto; }
+.omr .osr-yazi { font-size: 12px; }
+.omr .osr-dugme { align-self: flex-start; }
+@media (max-width: 640px) {
+  .osr-728 { flex-wrap: wrap; gap: 4px 8px; padding: 0 8px 6px; align-content: flex-start; }
+  .osr-728 .osr-marka { margin: 0 -8px; padding: 4px 8px; width: calc(100% + 16px); box-sizing: border-box; font-size: 12px; align-self: auto; }
+  .osr-728 .osr-logo { width: 16px; height: 16px; }
+  .osr-728 .osr-yazi { font-size: 10.5px; line-height: 1.3; }
+  .osr-728 .osr-dugme { padding: 3px 8px; font-size: 10px; align-self: center; }
+}
+.mor-disket { background: linear-gradient(135deg, #7e7dc6, #4a4994); }
