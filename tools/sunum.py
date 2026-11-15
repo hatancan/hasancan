@@ -497,6 +497,87 @@ def ders_kimligi(ders):
     return 'ders-' + kimlik(ders.split(' ')[0])
 
 
+def _en_on(slug):
+    f = ARSIV / slug / 'yazi.en.md'
+    if not f.exists():
+        return None
+    m = re.match(r'---\n(.*?)\n---', f.read_text(encoding='utf-8'), re.S)
+    return dict(re.findall(r'^(baslik|ozet):\s*(.*)$', m.group(1), re.M)) if m else None
+
+
+def arsiv_dizini_en(kayitlar):
+    """İngilizce dizin (/arsiv/en/): yalnız İngilizcesi olan yazılar; ders adları İngilizce başlıklardan çıkarılır."""
+    hazir = []
+    for k in kayitlar:
+        on = _en_on(k['slug']) if k.get('baslik') else None
+        if on and on.get('baslik'):
+            hazir.append(dict(k, baslik=on['baslik']))
+    adlar = {}
+    for k in hazir:
+        kod = k['ders'].split(' ')[0]
+        m = re.match(r'^' + re.escape(kod) + r'\s+([^:]+):', k['baslik'])
+        if m:
+            adlar.setdefault(kod, {}).setdefault(m.group(1).strip(), 0)
+            adlar[kod][m.group(1).strip()] += 1
+    ad_en = {kod: max(v, key=v.get) for kod, v in adlar.items()}
+    ad_en.setdefault('EEM101', 'Introduction to Electrical and Electronics Engineering')
+    satir = lambda k: f'''<tr><td><span class="mini-ikon {ikon_sinifi(k)}" aria-hidden="true"></span><a href="/arsiv/{k['slug']}/en/">{e(k['baslik'].split(': ', 1)[-1])}</a></td>
+                <td class="gizle-mobil">{tarih_yaz(k['tarih'])}</td><td class="gizle-mobil">{boyut_yaz(k['boyut']) if k.get('dosya') else '–'}</td></tr>'''
+    bolumler = []
+    for sinif in sorted({k['sinif'] for k in hazir}):
+        dersler = {}
+        for k in hazir:
+            if k['sinif'] == sinif:
+                dersler.setdefault(k['ders'].split(' ')[0], []).append(k)
+        ders_html = []
+        for kod in sorted(dersler):
+            liste = sorted(dersler[kod], key=lambda k: (k['tarih'], k['slug']))
+            ad = ad_en.get(kod) or (liste[0]['ders'].split('–', 1)[-1].strip() if '–' in liste[0]['ders'] else liste[0]['ders'])
+            ders_html.append(f'''<details class="ders-akordiyon" id="{ders_kimligi(liste[0]['ders'])}">
+            <summary><span class="ders-kod">{e(kod)}</span> <span class="ders-ad">{e(ad)}</span> <span class="ders-adet">{len(liste)} post{'s' if len(liste) != 1 else ''}</span></summary>
+            <table class="dosya-tablo"><thead><tr><th>File</th><th class="gizle-mobil">Date</th><th class="gizle-mobil">Size</th></tr></thead>
+            <tbody>{''.join(satir(k) for k in liste)}</tbody></table>
+          </details>''')
+        bolumler.append(f'''<h3 class="sinif-baslik" id="sinif-{sinif}">Year {sinif} <small>({sum(len(v) for v in dersler.values())} posts, {len(dersler)} courses)</small></h3>
+          {''.join(ders_html)}''')
+    govde = f'''  <div class="kolonlar iki" id="ust">
+    <aside class="sol">
+      <section class="kutu">
+        <h2 class="mavi">About this archive</h2>
+        <div class="kutu-ic"><p class="kucuk">Course notes, exams, lab reports and slides from my years studying Electrical and Electronics Engineering at Başkent University, Ankara. Each post was written in Turkish and translated into English; the original files are linked at the end of each post.</p></div>
+      </section>
+      <section class="kutu">
+        <h2 class="yesil">Statistics</h2>
+        <dl class="bilgiler">
+          <dt>Posts</dt><dd>{len(hazir)}</dd>
+          <dt>Courses</dt><dd>{len({k['ders'].split(' ')[0] for k in hazir})}</dd>
+        </dl>
+      </section>
+      {reklam('sol-dikey', '160x600')}
+    </aside>
+    <main class="orta">
+      <section class="kutu">
+        <h1 class="kutu-h1 mavi">Course Notes — Başkent University</h1>
+        <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="/arsiv/" hreflang="tr" lang="tr">Türkçe dizin »</a></p>
+          <p>Notes from four years of Electrical and Electronics Engineering, grouped by year and course. Open a course to see its posts.</p>
+          <p class="akordiyon-dugmeler"><button type="button" class="buton kucuk-buton" data-akordiyon="ac">Expand all</button>
+            <button type="button" class="buton kucuk-buton" data-akordiyon="kapat">Collapse all</button></p>
+          {''.join(bolumler)}
+        </div>
+      </section>
+    </main>
+  </div>'''
+    yol = [('<span data-i18n="nav.home"></span>', '/'), ('<span data-i18n="nav.archive"></span>', '/arsiv/en/'), ('English', '')]
+    html_ = kabuk('Course Notes — Başkent University Electrical and Electronics Engineering',
+                  'Course notes, exams, lab reports and slides from Hasan Can Öztürk\'s Electrical and Electronics Engineering studies at Başkent University, in English.',
+                  '/arsiv/en/', yol, govde)
+    alt = (f'<link rel="alternate" hreflang="tr" href="{SITE}/arsiv/">\n<link rel="alternate" hreflang="en" href="{SITE}/arsiv/en/">\n')
+    html_ = html_.replace('<html lang="tr">', '<html lang="en">', 1).replace('<meta property="og:locale" content="tr_TR">', '<meta property="og:locale" content="en_GB">', 1)
+    html_ = html_.replace('<meta property="og:type"', alt + '<meta property="og:type"', 1).replace('<body data-sekme="arsiv"', '<body data-dil="en" data-sekme="arsiv"', 1)
+    return html_
+
+
 def arsiv_dizini(kayitlar):
     """Sınıf → ders akordeonu (<details>); ders başlığında yazı sayısı."""
     hazir = [k for k in kayitlar if k.get('baslik')]
@@ -540,6 +621,7 @@ def arsiv_dizini(kayitlar):
       <section class="kutu">
         <h1 class="kutu-h1 mavi" data-i18n="arch.title"></h1>
         <div class="kutu-ic">
+          <p class="dil-bag kucuk"><a href="/arsiv/en/" hreflang="en" lang="en">Course notes in English »</a></p>
           <p data-i18n="arch.intro"></p>
           <p class="akordiyon-dugmeler"><button type="button" class="buton kucuk-buton" data-akordiyon="ac" data-i18n="arch.expandAll"></button>
             <button type="button" class="buton kucuk-buton" data-akordiyon="kapat" data-i18n="arch.collapseAll"></button></p>
@@ -555,7 +637,7 @@ def arsiv_dizini(kayitlar):
 
 
 def site_haritasi(kayitlar):
-    adresler = [('/', None), ('/arsiv/', None)] + [(f'/arsiv/{k["slug"]}/', k['eklenme']) for k in kayitlar if k.get('baslik')]
+    adresler = [('/', None), ('/arsiv/', None), ('/arsiv/en/', None)] + [(f'/arsiv/{k["slug"]}/', k['eklenme']) for k in kayitlar if k.get('baslik')]
     adresler += [(f'/arsiv/{k["slug"]}/en/', k['eklenme']) for k in kayitlar
                  if k.get('baslik') and (ARSIV / k['slug'] / 'yazi.en.md').exists()]
     ogeler = ''.join(f'  <url><loc>{SITE}{u}</loc>' + (f'<lastmod>{t}</lastmod>' if t else '') + '</url>\n' for u, t in adresler)
@@ -633,7 +715,10 @@ def _sayfa_yaz(a, hedef, on, govde, icindekiler, gorseller):
             f.unlink()
     (hedef / 'slaytlar.txt').unlink(missing_ok=True)
     kayitlari_yaz(kayitlar)
-    (ARSIV / 'index.html').write_text(arsiv_dizini(kayitlar), encoding='utf-8')
+    tr_dizin = arsiv_dizini(kayitlar).replace('<meta property="og:type"', f'<link rel="alternate" hreflang="tr" href="{SITE}/arsiv/">\n<link rel="alternate" hreflang="en" href="{SITE}/arsiv/en/">\n<meta property="og:type"', 1)
+    (ARSIV / 'index.html').write_text(tr_dizin, encoding='utf-8')
+    (ARSIV / 'en').mkdir(exist_ok=True)
+    (ARSIV / 'en' / 'index.html').write_text(arsiv_dizini_en(kayitlar), encoding='utf-8')
     site_haritasi(kayitlar)
     print(f'arsiv/{a.slug}/index.html · {len(icindekiler)} bölüm · {len(gorseller)} görsel')
 
