@@ -366,7 +366,8 @@ def kabuk(baslik, aciklama, yol_url, yol, govde, ek_bas='', sekme='arsiv', kanon
 <meta name="theme-color" content="#3b5998">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/style.css?v={SURUM}">
-{ek_bas}</head>
+{ek_bas}<script src="https://verify.origmark.com/muhur.js?h=did:plc:vtjsyvuqnq3y6pcmoti2zuti" async></script>
+</head>
 <body data-sekme="{sekme}" data-baslik="{e(baslik)}">
 <!-- Bu sayfa tools/sunum.py ile üretildi; elle düzenleme, yazi.md'yi değiştirip betiği yeniden çalıştır. -->
 <div id="sayfa">
